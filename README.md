@@ -542,7 +542,7 @@ import (
 
 func main() {
     // 注册消息处理器
-    handler := dispatcher.NewEventDispatcher("verificationToken", "eventEncryptKey").OnP2MessageReceiveV1(func(ctx context.Context, event *larkim.P2MessageReceiveV1) error {
+    handler := dispatcher.NewEventDispatcher("这里替换成自己应用后台里的verificationToken，没有配置就填空字符串", "这里替换成自己应用后台里的eventEncryptKey，没有配置就填空字符串").OnP2MessageReceiveV1(func(ctx context.Context, event *larkim.P2MessageReceiveV1) error {
         // 处理消息 event，这里简单打印消息的内容 
         fmt.Println(larkcore.Prettify(event))
         fmt.Println(event.RequestId())
@@ -613,7 +613,7 @@ func main() {
 	var cli = lark.NewClient(appID, appSecret, lark.WithLogReqAtDebug(true), lark.WithLogLevel(larkcore.LogLevelDebug))
 
 	// 注册消息处理器
-	handler := dispatcher.NewEventDispatcher("verificationToken", "eventEncryptKey").OnP2MessageReceiveV1(func(ctx context.Context, event *larkim.P2MessageReceiveV1) error {
+	handler := dispatcher.NewEventDispatcher("这里替换成自己应用后台里的verificationToken，没有配置就填空字符串", "这里替换成自己应用后台里的eventEncryptKey，没有配置就填空字符串").OnP2MessageReceiveV1(func(ctx context.Context, event *larkim.P2MessageReceiveV1) error {
 		// 处理消息 event，这里简单打印消息的内容
 		fmt.Println(larkcore.Prettify(event))
 		fmt.Println(event.RequestId())
@@ -682,7 +682,7 @@ import (
 
 func main() {
 	// 注册消息处理器
-	handler := dispatcher.NewEventDispatcher("verificationToken", "eventEncryptKey").OnP2MessageReceiveV1(func(ctx context.Context, event *larkim.P2MessageReceiveV1) error {
+	handler := dispatcher.NewEventDispatcher("这里替换成自己应用后台里的verificationToken，没有配置就填空字符串", "这里替换成自己应用后台里的eventEncryptKey，没有配置就填空字符串").OnP2MessageReceiveV1(func(ctx context.Context, event *larkim.P2MessageReceiveV1) error {
 		fmt.Println(larkcore.Prettify(event))
 		fmt.Println(event.RequestId())
 		return nil
@@ -729,7 +729,7 @@ import (
 
 func main() {
 	// 创建 card 处理器
-	cardHandler := larkcard.NewCardActionHandler("v", "", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
+	cardHandler := larkcard.NewCardActionHandler("这里替换成自己应用后台里的verificationToken，没有配置就填空字符串", "这里替换成自己应用后台里的eventEncryptKey，没有配置就填空字符串", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
 		// 处理 cardAction, 这里简单打印卡片内容
 		fmt.Println(larkcore.Prettify(cardAction))
 	    fmt.Println(cardAction.RequestId())
@@ -771,7 +771,7 @@ import (
 
 func main() {
 	// 创建card处理器
-	cardHandler := larkcard.NewCardActionHandler("v", "", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
+	cardHandler := larkcard.NewCardActionHandler("这里替换成自己应用后台里的verificationToken，没有配置就填空字符串", "这里替换成自己应用后台里的eventEncryptKey，没有配置就填空字符串", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
 		fmt.Println(larkcore.Prettify(cardAction))
 	    fmt.Println(cardAction.RequestId())
 		
@@ -817,7 +817,7 @@ import (
 
 func main() {
 	// 创建 card 处理器
-	cardHandler := larkcard.NewCardActionHandler("v", "", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
+	cardHandler := larkcard.NewCardActionHandler("这里替换成自己应用后台里的verificationToken，没有配置就填空字符串", "这里替换成自己应用后台里的eventEncryptKey，没有配置就填空字符串", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
 		fmt.Println(larkcore.Prettify(cardAction))
 	    fmt.Println(cardAction.RequestId())
 		
@@ -872,7 +872,7 @@ import (
 
 func main() {
 	// 创建 card 处理器
-	cardHandler := larkcard.NewCardActionHandler("v", "", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
+	cardHandler := larkcard.NewCardActionHandler("这里替换成自己应用后台里的verificationToken，没有配置就填空字符串", "这里替换成自己应用后台里的eventEncryptKey，没有配置就填空字符串", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
         
         // 处理 cardAction, 这里简单打印卡片内容  
         fmt.Println(larkcore.Prettify(cardAction))
@@ -939,7 +939,7 @@ import (
 
 func main() {
       // 创建 card 处理器
-      cardHandler := larkcard.NewCardActionHandler("v", "", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
+      cardHandler := larkcard.NewCardActionHandler("这里替换成自己应用后台里的verificationToken，没有配置就填空字符串", "这里替换成自己应用后台里的eventEncryptKey，没有配置就填空字符串", func(ctx context.Context, cardAction *larkcard.CardAction) (interface{}, error) {
       fmt.Println(larkcore.Prettify(cardAction))
       fmt.Println(cardAction.RequestId())
     
