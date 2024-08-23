@@ -17,6 +17,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/larksuite/oapi-sdk-go/v3/event/dispatcher/callback"
 	"io/ioutil"
 	"net/http"
 
@@ -825,6 +826,44 @@ func mockAppOrderPaidEventV1() []byte {
 	return body1
 }
 
+func mockEncryptCardActionEvent(encrypteKey string) []byte {
+	cardEvent := callback.CardActionTriggerEvent{
+		EventV2Base: &larkevent.EventV2Base{
+			Schema: "2.0",
+			Header: &larkevent.EventHeader{
+				EventID:    "f7984f25108f8137722bb63cee927e66",
+				EventType:  "card.action.trigger",
+				AppID:      "cli_xxxxxxxx",
+				TenantKey:  "xxxxxxx",
+				CreateTime: "1603977298000000",
+				Token:      "v",
+			},
+		},
+		Event: &callback.CardActionTriggerRequest{
+			Operator: &callback.Operator{
+				OpenID:    "ou_12",
+				UserID:    larkcore.StringPtr("user_id"),
+				TenantKey: larkcore.StringPtr("xxxxxxx"),
+			},
+			Token: "fasdfafd",
+			Action: &callback.CallBackAction{
+				Value: map[string]interface{}{
+					"key": "value",
+				},
+				Tag: "select_static",
+			},
+		},
+	}
+
+	en, _ := larkcore.EncryptedEventMsg(context.Background(), cardEvent, encrypteKey)
+	fmt.Println(encrypteKey)
+
+	encrypt := larkevent.EventEncryptMsg{Encrypt: en}
+	body1, _ := json.Marshal(encrypt)
+
+	return body1
+}
+
 func main() {
 
 	//mock body
@@ -833,7 +872,8 @@ func main() {
 	//body := mockAppTicketEvent()
 	//body := mockMessageReceiveEventV1()
 	//body := mockAppTicketEvent()
-	body := mockEncryptedBody(encryptedKey)
+	//body := mockEncryptedBody(encryptedKey)
+	body := mockEncryptCardActionEvent(encryptedKey)
 
 	// 创建http req
 	req, err := http.NewRequest(http.MethodPost, "http://127.0.0.1:7777/webhook/event", bytes.NewBuffer(body))

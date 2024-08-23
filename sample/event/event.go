@@ -23,6 +23,7 @@ import (
 	"github.com/larksuite/oapi-sdk-go/v3/core/httpserverext"
 	"github.com/larksuite/oapi-sdk-go/v3/event"
 	"github.com/larksuite/oapi-sdk-go/v3/event/dispatcher"
+	"github.com/larksuite/oapi-sdk-go/v3/event/dispatcher/callback"
 	"github.com/larksuite/oapi-sdk-go/v3/service/application/v6"
 	"github.com/larksuite/oapi-sdk-go/v3/service/approval/v4"
 	"github.com/larksuite/oapi-sdk-go/v3/service/contact/v3"
@@ -167,6 +168,13 @@ func main() {
 	}).OnP2TicketUpdatedV1(func(ctx context.Context, event *larkhelpdesk.P2TicketUpdatedV1) error {
 		fmt.Println(event)
 		return nil
+	}).OnP2CardActionTrigger(func(ctx context.Context, event *callback.CardActionTriggerEvent) (*callback.CardActionTriggerReponse, error) {
+		fmt.Println("receive card action")
+		fmt.Println(larkcore.Prettify(event))
+		return nil, nil
+	}).OnP2CardURLPreviewGet(func(ctx context.Context, event *callback.URLPreviewGetEvent) (*callback.URLPreviewGetResponse, error) {
+		fmt.Println(event)
+		return nil, nil
 	})
 
 	// 注册 http 路由

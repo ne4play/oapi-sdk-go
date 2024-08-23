@@ -26,6 +26,8 @@ import (
 type EventDispatcher struct {
 	// 事件map,key为事件类型，value为事件处理器
 	eventType2EventHandler map[string]larkevent.EventHandler
+	// 事件map,key为事件类型，value为回调处理器
+	callbackType2CallbackHandler map[string]larkevent.CallbackHandler
 	// 事件回调签名token，消息解密key
 	verificationToken string
 	eventEncryptKey   string
@@ -45,10 +47,11 @@ func (dispatcher *EventDispatcher) InitConfig(options ...larkevent.OptionFunc) {
 
 func NewEventDispatcher(verificationToken, eventEncryptKey string) *EventDispatcher {
 	reqDispatcher := &EventDispatcher{
-		eventType2EventHandler: make(map[string]larkevent.EventHandler),
-		verificationToken:      verificationToken,
-		eventEncryptKey:        eventEncryptKey,
-		Config:                 &larkcore.Config{Logger: larkcore.NewEventLogger()},
+		eventType2EventHandler:       make(map[string]larkevent.EventHandler),
+		callbackType2CallbackHandler: make(map[string]larkevent.CallbackHandler),
+		verificationToken:            verificationToken,
+		eventEncryptKey:              eventEncryptKey,
+		Config:                       &larkcore.Config{Logger: larkcore.NewEventLogger()},
 	}
 	// 注册app_ticket事件
 	reqDispatcher.eventType2EventHandler["app_ticket"] = &appTicketEventHandler{}
@@ -279,6 +282,37 @@ func (dispatcher *EventDispatcher) DoHandle(ctx context.Context, reqType larkeve
 	}
 	if resp != nil {
 		return resp, nil
+	}
+
+	// 回调处理器
+	callbackHandler := dispatcher.callbackType2CallbackHandler[eventType]
+	if callbackHandler != nil {
+		// 反序列化
+		eventMsg := callbackHandler.Event()
+		err = json.Unmarshal([]byte(plainEventJsonStr), eventMsg)
+		if err != nil {
+			return nil, err
+		}
+
+		if msg, ok := eventMsg.(larkevent.EventHandlerModel); ok {
+			msg.RawReq(req)
+		}
+
+		// 执行处理器
+		body, err := callbackHandler.Handle(ctx, eventMsg)
+		if err != nil {
+			return nil, err
+		}
+		bodyStr, _ := json.Marshal(body)
+		header := map[string][]string{}
+		header[larkevent.ContentTypeHeader] = []string{larkevent.DefaultContentType}
+		eventResp := &larkevent.EventResp{
+			Header:     header,
+			Body:       bodyStr,
+			StatusCode: http.StatusOK,
+		}
+
+		return eventResp, nil
 	}
 
 	// 查找处理器
