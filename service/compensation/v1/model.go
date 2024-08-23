@@ -23,9 +23,10 @@ import (
 )
 
 const (
-	UserIDTypeUserId  = "user_id"  // 以user_id来识别用户
-	UserIDTypeUnionId = "union_id" // 以union_id来识别用户
-	UserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
+	UserIDTypeUserId         = "user_id"          // 以user_id来识别用户
+	UserIDTypeUnionId        = "union_id"         // 以union_id来识别用户
+	UserIDTypeOpenId         = "open_id"          // 以open_id来识别用户
+	UserIDTypePeopleCorehrId = "people_corehr_id" // 以people_corehr_id来识别用户
 )
 
 type AdjustmentLogic struct {
@@ -1711,6 +1712,1013 @@ func (builder *PlanScopeBuilder) Build() *PlanScope {
 	}
 	if builder.planConditionsFlag {
 		req.PlanConditions = builder.planConditions
+	}
+	return req
+}
+
+type SocialArchive struct {
+	UserId  *string                `json:"user_id,omitempty"` // 员工ID
+	Details []*SocialArchiveDetail `json:"details,omitempty"` // 员工参保档案，包含社保、公积金档案
+}
+
+type SocialArchiveBuilder struct {
+	userId      string // 员工ID
+	userIdFlag  bool
+	details     []*SocialArchiveDetail // 员工参保档案，包含社保、公积金档案
+	detailsFlag bool
+}
+
+func NewSocialArchiveBuilder() *SocialArchiveBuilder {
+	builder := &SocialArchiveBuilder{}
+	return builder
+}
+
+// 员工ID
+//
+// 示例值：
+func (builder *SocialArchiveBuilder) UserId(userId string) *SocialArchiveBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 员工参保档案，包含社保、公积金档案
+//
+// 示例值：
+func (builder *SocialArchiveBuilder) Details(details []*SocialArchiveDetail) *SocialArchiveBuilder {
+	builder.details = details
+	builder.detailsFlag = true
+	return builder
+}
+
+func (builder *SocialArchiveBuilder) Build() *SocialArchive {
+	req := &SocialArchive{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.detailsFlag {
+		req.Details = builder.details
+	}
+	return req
+}
+
+type SocialArchiveAdjustRecord struct {
+	UserId     *string              `json:"user_id,omitempty"`     // 员工ID
+	RecordType *string              `json:"record_type,omitempty"` // 类型，increase: 增员; attrition: 减员
+	Details    *SocialArchiveDetail `json:"details,omitempty"`     // 参保档案
+}
+
+type SocialArchiveAdjustRecordBuilder struct {
+	userId         string // 员工ID
+	userIdFlag     bool
+	recordType     string // 类型，increase: 增员; attrition: 减员
+	recordTypeFlag bool
+	details        *SocialArchiveDetail // 参保档案
+	detailsFlag    bool
+}
+
+func NewSocialArchiveAdjustRecordBuilder() *SocialArchiveAdjustRecordBuilder {
+	builder := &SocialArchiveAdjustRecordBuilder{}
+	return builder
+}
+
+// 员工ID
+//
+// 示例值：
+func (builder *SocialArchiveAdjustRecordBuilder) UserId(userId string) *SocialArchiveAdjustRecordBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 类型，increase: 增员; attrition: 减员
+//
+// 示例值：increase
+func (builder *SocialArchiveAdjustRecordBuilder) RecordType(recordType string) *SocialArchiveAdjustRecordBuilder {
+	builder.recordType = recordType
+	builder.recordTypeFlag = true
+	return builder
+}
+
+// 参保档案
+//
+// 示例值：
+func (builder *SocialArchiveAdjustRecordBuilder) Details(details *SocialArchiveDetail) *SocialArchiveAdjustRecordBuilder {
+	builder.details = details
+	builder.detailsFlag = true
+	return builder
+}
+
+func (builder *SocialArchiveAdjustRecordBuilder) Build() *SocialArchiveAdjustRecord {
+	req := &SocialArchiveAdjustRecord{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.recordTypeFlag {
+		req.RecordType = &builder.recordType
+
+	}
+	if builder.detailsFlag {
+		req.Details = builder.details
+	}
+	return req
+}
+
+type SocialArchiveDetail struct {
+	Description      *I18n                `json:"description,omitempty"`       // 调整说明
+	InsuranceType    *string              `json:"insurance_type,omitempty"`    // 类型。social_insurance: 社保; provident_fund: 公积金
+	InsuranceStatus  *string              `json:"insurance_status,omitempty"`  // 参保状态，非「参保」状态下，基数、险种数据等为空
+	Id               *string              `json:"id,omitempty"`                // 档案时间轴对象ID，仅参保档案对象会包含
+	Tid              *string              `json:"tid,omitempty"`               // 档案时间轴对象版本ID，仅参保档案对象会包含
+	PlanId           *string              `json:"plan_id,omitempty"`           // 参保方案ID，详细信息可通过「查询参保方案」接口获取
+	PlanTid          *string              `json:"plan_tid,omitempty"`          // 参保方案版本ID
+	LocationId       *string              `json:"location_id,omitempty"`       // 参保城市ID，可通过获取地点信息接口查询详细信息
+	CompanyId        *string              `json:"company_id,omitempty"`        // 社保缴纳主体ID，可通过获取公司主体接口查询详细信息
+	AccountType      *string              `json:"account_type,omitempty"`      // 社保账户类型
+	InsuranceAccount *string              `json:"insurance_account,omitempty"` // 社保账号
+	BaseSalary       *string              `json:"base_salary,omitempty"`       // 申报缴纳基数
+	InsuranceDetails []*SocialArchiveItem `json:"insurance_details,omitempty"` // 险种数据详情
+	EffectiveDate    *string              `json:"effective_date,omitempty"`    // 档案生效时间，HHHH-MM-DD
+}
+
+type SocialArchiveDetailBuilder struct {
+	description          *I18n // 调整说明
+	descriptionFlag      bool
+	insuranceType        string // 类型。social_insurance: 社保; provident_fund: 公积金
+	insuranceTypeFlag    bool
+	insuranceStatus      string // 参保状态，非「参保」状态下，基数、险种数据等为空
+	insuranceStatusFlag  bool
+	id                   string // 档案时间轴对象ID，仅参保档案对象会包含
+	idFlag               bool
+	tid                  string // 档案时间轴对象版本ID，仅参保档案对象会包含
+	tidFlag              bool
+	planId               string // 参保方案ID，详细信息可通过「查询参保方案」接口获取
+	planIdFlag           bool
+	planTid              string // 参保方案版本ID
+	planTidFlag          bool
+	locationId           string // 参保城市ID，可通过获取地点信息接口查询详细信息
+	locationIdFlag       bool
+	companyId            string // 社保缴纳主体ID，可通过获取公司主体接口查询详细信息
+	companyIdFlag        bool
+	accountType          string // 社保账户类型
+	accountTypeFlag      bool
+	insuranceAccount     string // 社保账号
+	insuranceAccountFlag bool
+	baseSalary           string // 申报缴纳基数
+	baseSalaryFlag       bool
+	insuranceDetails     []*SocialArchiveItem // 险种数据详情
+	insuranceDetailsFlag bool
+	effectiveDate        string // 档案生效时间，HHHH-MM-DD
+	effectiveDateFlag    bool
+}
+
+func NewSocialArchiveDetailBuilder() *SocialArchiveDetailBuilder {
+	builder := &SocialArchiveDetailBuilder{}
+	return builder
+}
+
+// 调整说明
+//
+// 示例值：
+func (builder *SocialArchiveDetailBuilder) Description(description *I18n) *SocialArchiveDetailBuilder {
+	builder.description = description
+	builder.descriptionFlag = true
+	return builder
+}
+
+// 类型。social_insurance: 社保; provident_fund: 公积金
+//
+// 示例值：
+func (builder *SocialArchiveDetailBuilder) InsuranceType(insuranceType string) *SocialArchiveDetailBuilder {
+	builder.insuranceType = insuranceType
+	builder.insuranceTypeFlag = true
+	return builder
+}
+
+// 参保状态，非「参保」状态下，基数、险种数据等为空
+//
+// 示例值：contribution
+func (builder *SocialArchiveDetailBuilder) InsuranceStatus(insuranceStatus string) *SocialArchiveDetailBuilder {
+	builder.insuranceStatus = insuranceStatus
+	builder.insuranceStatusFlag = true
+	return builder
+}
+
+// 档案时间轴对象ID，仅参保档案对象会包含
+//
+// 示例值：123456
+func (builder *SocialArchiveDetailBuilder) Id(id string) *SocialArchiveDetailBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 档案时间轴对象版本ID，仅参保档案对象会包含
+//
+// 示例值：123456
+func (builder *SocialArchiveDetailBuilder) Tid(tid string) *SocialArchiveDetailBuilder {
+	builder.tid = tid
+	builder.tidFlag = true
+	return builder
+}
+
+// 参保方案ID，详细信息可通过「查询参保方案」接口获取
+//
+// 示例值：123456
+func (builder *SocialArchiveDetailBuilder) PlanId(planId string) *SocialArchiveDetailBuilder {
+	builder.planId = planId
+	builder.planIdFlag = true
+	return builder
+}
+
+// 参保方案版本ID
+//
+// 示例值：123456
+func (builder *SocialArchiveDetailBuilder) PlanTid(planTid string) *SocialArchiveDetailBuilder {
+	builder.planTid = planTid
+	builder.planTidFlag = true
+	return builder
+}
+
+// 参保城市ID，可通过获取地点信息接口查询详细信息
+//
+// 示例值：123456
+func (builder *SocialArchiveDetailBuilder) LocationId(locationId string) *SocialArchiveDetailBuilder {
+	builder.locationId = locationId
+	builder.locationIdFlag = true
+	return builder
+}
+
+// 社保缴纳主体ID，可通过获取公司主体接口查询详细信息
+//
+// 示例值：223456
+func (builder *SocialArchiveDetailBuilder) CompanyId(companyId string) *SocialArchiveDetailBuilder {
+	builder.companyId = companyId
+	builder.companyIdFlag = true
+	return builder
+}
+
+// 社保账户类型
+//
+// 示例值：123456
+func (builder *SocialArchiveDetailBuilder) AccountType(accountType string) *SocialArchiveDetailBuilder {
+	builder.accountType = accountType
+	builder.accountTypeFlag = true
+	return builder
+}
+
+// 社保账号
+//
+// 示例值：ac123456
+func (builder *SocialArchiveDetailBuilder) InsuranceAccount(insuranceAccount string) *SocialArchiveDetailBuilder {
+	builder.insuranceAccount = insuranceAccount
+	builder.insuranceAccountFlag = true
+	return builder
+}
+
+// 申报缴纳基数
+//
+// 示例值：1000.10
+func (builder *SocialArchiveDetailBuilder) BaseSalary(baseSalary string) *SocialArchiveDetailBuilder {
+	builder.baseSalary = baseSalary
+	builder.baseSalaryFlag = true
+	return builder
+}
+
+// 险种数据详情
+//
+// 示例值：
+func (builder *SocialArchiveDetailBuilder) InsuranceDetails(insuranceDetails []*SocialArchiveItem) *SocialArchiveDetailBuilder {
+	builder.insuranceDetails = insuranceDetails
+	builder.insuranceDetailsFlag = true
+	return builder
+}
+
+// 档案生效时间，HHHH-MM-DD
+//
+// 示例值：2024-01-01
+func (builder *SocialArchiveDetailBuilder) EffectiveDate(effectiveDate string) *SocialArchiveDetailBuilder {
+	builder.effectiveDate = effectiveDate
+	builder.effectiveDateFlag = true
+	return builder
+}
+
+func (builder *SocialArchiveDetailBuilder) Build() *SocialArchiveDetail {
+	req := &SocialArchiveDetail{}
+	if builder.descriptionFlag {
+		req.Description = builder.description
+	}
+	if builder.insuranceTypeFlag {
+		req.InsuranceType = &builder.insuranceType
+
+	}
+	if builder.insuranceStatusFlag {
+		req.InsuranceStatus = &builder.insuranceStatus
+
+	}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.tidFlag {
+		req.Tid = &builder.tid
+
+	}
+	if builder.planIdFlag {
+		req.PlanId = &builder.planId
+
+	}
+	if builder.planTidFlag {
+		req.PlanTid = &builder.planTid
+
+	}
+	if builder.locationIdFlag {
+		req.LocationId = &builder.locationId
+
+	}
+	if builder.companyIdFlag {
+		req.CompanyId = &builder.companyId
+
+	}
+	if builder.accountTypeFlag {
+		req.AccountType = &builder.accountType
+
+	}
+	if builder.insuranceAccountFlag {
+		req.InsuranceAccount = &builder.insuranceAccount
+
+	}
+	if builder.baseSalaryFlag {
+		req.BaseSalary = &builder.baseSalary
+
+	}
+	if builder.insuranceDetailsFlag {
+		req.InsuranceDetails = builder.insuranceDetails
+	}
+	if builder.effectiveDateFlag {
+		req.EffectiveDate = &builder.effectiveDate
+
+	}
+	return req
+}
+
+type SocialArchiveItem struct {
+	InsuranceId       *string                `json:"insurance_id,omitempty"`       // 险种ID，详细信息可通过社保险种接口查询
+	InsuranceName     *I18n                  `json:"insurance_name,omitempty"`     // 险种名称
+	CompanyDeduction  *string                `json:"company_deduction,omitempty"`  // 企业缴纳金额
+	CompanySetting    *SocialPlanItemSetting `json:"company_setting,omitempty"`    // 险种缴纳配置
+	PersonalDeduction *string                `json:"personal_deduction,omitempty"` // 企业缴纳金额
+	PersonalSetting   *SocialPlanItemSetting `json:"personal_setting,omitempty"`   // 险种缴纳配置
+	PaymentFrequency  *string                `json:"payment_frequency,omitempty"`  // 缴纳频率
+	PaymentMonths     []int                  `json:"payment_months,omitempty"`     // 缴纳月份
+}
+
+type SocialArchiveItemBuilder struct {
+	insuranceId           string // 险种ID，详细信息可通过社保险种接口查询
+	insuranceIdFlag       bool
+	insuranceName         *I18n // 险种名称
+	insuranceNameFlag     bool
+	companyDeduction      string // 企业缴纳金额
+	companyDeductionFlag  bool
+	companySetting        *SocialPlanItemSetting // 险种缴纳配置
+	companySettingFlag    bool
+	personalDeduction     string // 企业缴纳金额
+	personalDeductionFlag bool
+	personalSetting       *SocialPlanItemSetting // 险种缴纳配置
+	personalSettingFlag   bool
+	paymentFrequency      string // 缴纳频率
+	paymentFrequencyFlag  bool
+	paymentMonths         []int // 缴纳月份
+	paymentMonthsFlag     bool
+}
+
+func NewSocialArchiveItemBuilder() *SocialArchiveItemBuilder {
+	builder := &SocialArchiveItemBuilder{}
+	return builder
+}
+
+// 险种ID，详细信息可通过社保险种接口查询
+//
+// 示例值：111223
+func (builder *SocialArchiveItemBuilder) InsuranceId(insuranceId string) *SocialArchiveItemBuilder {
+	builder.insuranceId = insuranceId
+	builder.insuranceIdFlag = true
+	return builder
+}
+
+// 险种名称
+//
+// 示例值：
+func (builder *SocialArchiveItemBuilder) InsuranceName(insuranceName *I18n) *SocialArchiveItemBuilder {
+	builder.insuranceName = insuranceName
+	builder.insuranceNameFlag = true
+	return builder
+}
+
+// 企业缴纳金额
+//
+// 示例值：2000.20
+func (builder *SocialArchiveItemBuilder) CompanyDeduction(companyDeduction string) *SocialArchiveItemBuilder {
+	builder.companyDeduction = companyDeduction
+	builder.companyDeductionFlag = true
+	return builder
+}
+
+// 险种缴纳配置
+//
+// 示例值：
+func (builder *SocialArchiveItemBuilder) CompanySetting(companySetting *SocialPlanItemSetting) *SocialArchiveItemBuilder {
+	builder.companySetting = companySetting
+	builder.companySettingFlag = true
+	return builder
+}
+
+// 企业缴纳金额
+//
+// 示例值：1000.20
+func (builder *SocialArchiveItemBuilder) PersonalDeduction(personalDeduction string) *SocialArchiveItemBuilder {
+	builder.personalDeduction = personalDeduction
+	builder.personalDeductionFlag = true
+	return builder
+}
+
+// 险种缴纳配置
+//
+// 示例值：
+func (builder *SocialArchiveItemBuilder) PersonalSetting(personalSetting *SocialPlanItemSetting) *SocialArchiveItemBuilder {
+	builder.personalSetting = personalSetting
+	builder.personalSettingFlag = true
+	return builder
+}
+
+// 缴纳频率
+//
+// 示例值：8.00
+func (builder *SocialArchiveItemBuilder) PaymentFrequency(paymentFrequency string) *SocialArchiveItemBuilder {
+	builder.paymentFrequency = paymentFrequency
+	builder.paymentFrequencyFlag = true
+	return builder
+}
+
+// 缴纳月份
+//
+// 示例值：
+func (builder *SocialArchiveItemBuilder) PaymentMonths(paymentMonths []int) *SocialArchiveItemBuilder {
+	builder.paymentMonths = paymentMonths
+	builder.paymentMonthsFlag = true
+	return builder
+}
+
+func (builder *SocialArchiveItemBuilder) Build() *SocialArchiveItem {
+	req := &SocialArchiveItem{}
+	if builder.insuranceIdFlag {
+		req.InsuranceId = &builder.insuranceId
+
+	}
+	if builder.insuranceNameFlag {
+		req.InsuranceName = builder.insuranceName
+	}
+	if builder.companyDeductionFlag {
+		req.CompanyDeduction = &builder.companyDeduction
+
+	}
+	if builder.companySettingFlag {
+		req.CompanySetting = builder.companySetting
+	}
+	if builder.personalDeductionFlag {
+		req.PersonalDeduction = &builder.personalDeduction
+
+	}
+	if builder.personalSettingFlag {
+		req.PersonalSetting = builder.personalSetting
+	}
+	if builder.paymentFrequencyFlag {
+		req.PaymentFrequency = &builder.paymentFrequency
+
+	}
+	if builder.paymentMonthsFlag {
+		req.PaymentMonths = builder.paymentMonths
+	}
+	return req
+}
+
+type SocialInsurance struct {
+	Id            *string `json:"id,omitempty"`             // 险种唯一ID
+	Name          *I18n   `json:"name,omitempty"`           // 险种名称
+	InsuranceType *string `json:"insurance_type,omitempty"` // 险种类型. social_insurance: 社保; provident_fund: 公积金
+	Active        *bool   `json:"active,omitempty"`         // 启用状态
+	IsSystem      *bool   `json:"is_system,omitempty"`      // 是否为系统预置险种。养老保险、医疗保险、失业保险、工伤保险、生育保险、住房公积金为系统预置险种。
+}
+
+type SocialInsuranceBuilder struct {
+	id                string // 险种唯一ID
+	idFlag            bool
+	name              *I18n // 险种名称
+	nameFlag          bool
+	insuranceType     string // 险种类型. social_insurance: 社保; provident_fund: 公积金
+	insuranceTypeFlag bool
+	active            bool // 启用状态
+	activeFlag        bool
+	isSystem          bool // 是否为系统预置险种。养老保险、医疗保险、失业保险、工伤保险、生育保险、住房公积金为系统预置险种。
+	isSystemFlag      bool
+}
+
+func NewSocialInsuranceBuilder() *SocialInsuranceBuilder {
+	builder := &SocialInsuranceBuilder{}
+	return builder
+}
+
+// 险种唯一ID
+//
+// 示例值：i12345
+func (builder *SocialInsuranceBuilder) Id(id string) *SocialInsuranceBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 险种名称
+//
+// 示例值：
+func (builder *SocialInsuranceBuilder) Name(name *I18n) *SocialInsuranceBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 险种类型. social_insurance: 社保; provident_fund: 公积金
+//
+// 示例值：true
+func (builder *SocialInsuranceBuilder) InsuranceType(insuranceType string) *SocialInsuranceBuilder {
+	builder.insuranceType = insuranceType
+	builder.insuranceTypeFlag = true
+	return builder
+}
+
+// 启用状态
+//
+// 示例值：
+func (builder *SocialInsuranceBuilder) Active(active bool) *SocialInsuranceBuilder {
+	builder.active = active
+	builder.activeFlag = true
+	return builder
+}
+
+// 是否为系统预置险种。养老保险、医疗保险、失业保险、工伤保险、生育保险、住房公积金为系统预置险种。
+//
+// 示例值：
+func (builder *SocialInsuranceBuilder) IsSystem(isSystem bool) *SocialInsuranceBuilder {
+	builder.isSystem = isSystem
+	builder.isSystemFlag = true
+	return builder
+}
+
+func (builder *SocialInsuranceBuilder) Build() *SocialInsurance {
+	req := &SocialInsurance{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	if builder.insuranceTypeFlag {
+		req.InsuranceType = &builder.insuranceType
+
+	}
+	if builder.activeFlag {
+		req.Active = &builder.active
+
+	}
+	if builder.isSystemFlag {
+		req.IsSystem = &builder.isSystem
+
+	}
+	return req
+}
+
+type SocialPlan struct {
+	PlanId        *string          `json:"plan_id,omitempty"`        // 参保方案ID
+	PlanTid       *string          `json:"plan_tid,omitempty"`       // 参保方案版本ID
+	Name          *I18n            `json:"name,omitempty"`           // 参保方案名称
+	EffectiveDate *string          `json:"effective_date,omitempty"` // 生效时间，HHHH-MM-DD
+	Active        *bool            `json:"active,omitempty"`         // 是否启用
+	InsuranceType *string          `json:"insurance_type,omitempty"` // 险种类型. social_insurance: 社保; provident_fund: 公积金
+	Scope         *SocialPlanScope `json:"scope,omitempty"`          // 参保方案适用范围
+	ItemDetail    *bool            `json:"item_detail,omitempty"`    // 参保信息
+	Remark        *I18n            `json:"remark,omitempty"`         // 备注
+}
+
+type SocialPlanBuilder struct {
+	planId            string // 参保方案ID
+	planIdFlag        bool
+	planTid           string // 参保方案版本ID
+	planTidFlag       bool
+	name              *I18n // 参保方案名称
+	nameFlag          bool
+	effectiveDate     string // 生效时间，HHHH-MM-DD
+	effectiveDateFlag bool
+	active            bool // 是否启用
+	activeFlag        bool
+	insuranceType     string // 险种类型. social_insurance: 社保; provident_fund: 公积金
+	insuranceTypeFlag bool
+	scope             *SocialPlanScope // 参保方案适用范围
+	scopeFlag         bool
+	itemDetail        bool // 参保信息
+	itemDetailFlag    bool
+	remark            *I18n // 备注
+	remarkFlag        bool
+}
+
+func NewSocialPlanBuilder() *SocialPlanBuilder {
+	builder := &SocialPlanBuilder{}
+	return builder
+}
+
+// 参保方案ID
+//
+// 示例值：11111
+func (builder *SocialPlanBuilder) PlanId(planId string) *SocialPlanBuilder {
+	builder.planId = planId
+	builder.planIdFlag = true
+	return builder
+}
+
+// 参保方案版本ID
+//
+// 示例值：22222
+func (builder *SocialPlanBuilder) PlanTid(planTid string) *SocialPlanBuilder {
+	builder.planTid = planTid
+	builder.planTidFlag = true
+	return builder
+}
+
+// 参保方案名称
+//
+// 示例值：
+func (builder *SocialPlanBuilder) Name(name *I18n) *SocialPlanBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 生效时间，HHHH-MM-DD
+//
+// 示例值：2024-01-01
+func (builder *SocialPlanBuilder) EffectiveDate(effectiveDate string) *SocialPlanBuilder {
+	builder.effectiveDate = effectiveDate
+	builder.effectiveDateFlag = true
+	return builder
+}
+
+// 是否启用
+//
+// 示例值：
+func (builder *SocialPlanBuilder) Active(active bool) *SocialPlanBuilder {
+	builder.active = active
+	builder.activeFlag = true
+	return builder
+}
+
+// 险种类型. social_insurance: 社保; provident_fund: 公积金
+//
+// 示例值：
+func (builder *SocialPlanBuilder) InsuranceType(insuranceType string) *SocialPlanBuilder {
+	builder.insuranceType = insuranceType
+	builder.insuranceTypeFlag = true
+	return builder
+}
+
+// 参保方案适用范围
+//
+// 示例值：
+func (builder *SocialPlanBuilder) Scope(scope *SocialPlanScope) *SocialPlanBuilder {
+	builder.scope = scope
+	builder.scopeFlag = true
+	return builder
+}
+
+// 参保信息
+//
+// 示例值：
+func (builder *SocialPlanBuilder) ItemDetail(itemDetail bool) *SocialPlanBuilder {
+	builder.itemDetail = itemDetail
+	builder.itemDetailFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：
+func (builder *SocialPlanBuilder) Remark(remark *I18n) *SocialPlanBuilder {
+	builder.remark = remark
+	builder.remarkFlag = true
+	return builder
+}
+
+func (builder *SocialPlanBuilder) Build() *SocialPlan {
+	req := &SocialPlan{}
+	if builder.planIdFlag {
+		req.PlanId = &builder.planId
+
+	}
+	if builder.planTidFlag {
+		req.PlanTid = &builder.planTid
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	if builder.effectiveDateFlag {
+		req.EffectiveDate = &builder.effectiveDate
+
+	}
+	if builder.activeFlag {
+		req.Active = &builder.active
+
+	}
+	if builder.insuranceTypeFlag {
+		req.InsuranceType = &builder.insuranceType
+
+	}
+	if builder.scopeFlag {
+		req.Scope = builder.scope
+	}
+	if builder.itemDetailFlag {
+		req.ItemDetail = &builder.itemDetail
+
+	}
+	if builder.remarkFlag {
+		req.Remark = builder.remark
+	}
+	return req
+}
+
+type SocialPlanItemDetail struct {
+	ItemId               *string                `json:"item_id,omitempty"`                 // 险种ID，详细信息可通过社保险种接口查询
+	ItemName             *I18n                  `json:"item_name,omitempty"`               // 险种名
+	ItemSettingOfPerson  *SocialPlanItemSetting `json:"item_setting_of_person,omitempty"`  // 险种缴纳配置
+	ItemSettingOfCompany *SocialPlanItemSetting `json:"item_setting_of_company,omitempty"` // 险种缴纳配置
+	PaymentFrequency     *string                `json:"payment_frequency,omitempty"`       // 缴纳频率
+	PaymentMonths        []int                  `json:"payment_months,omitempty"`          // 缴纳月份
+}
+
+type SocialPlanItemDetailBuilder struct {
+	itemId                   string // 险种ID，详细信息可通过社保险种接口查询
+	itemIdFlag               bool
+	itemName                 *I18n // 险种名
+	itemNameFlag             bool
+	itemSettingOfPerson      *SocialPlanItemSetting // 险种缴纳配置
+	itemSettingOfPersonFlag  bool
+	itemSettingOfCompany     *SocialPlanItemSetting // 险种缴纳配置
+	itemSettingOfCompanyFlag bool
+	paymentFrequency         string // 缴纳频率
+	paymentFrequencyFlag     bool
+	paymentMonths            []int // 缴纳月份
+	paymentMonthsFlag        bool
+}
+
+func NewSocialPlanItemDetailBuilder() *SocialPlanItemDetailBuilder {
+	builder := &SocialPlanItemDetailBuilder{}
+	return builder
+}
+
+// 险种ID，详细信息可通过社保险种接口查询
+//
+// 示例值：123456
+func (builder *SocialPlanItemDetailBuilder) ItemId(itemId string) *SocialPlanItemDetailBuilder {
+	builder.itemId = itemId
+	builder.itemIdFlag = true
+	return builder
+}
+
+// 险种名
+//
+// 示例值：
+func (builder *SocialPlanItemDetailBuilder) ItemName(itemName *I18n) *SocialPlanItemDetailBuilder {
+	builder.itemName = itemName
+	builder.itemNameFlag = true
+	return builder
+}
+
+// 险种缴纳配置
+//
+// 示例值：
+func (builder *SocialPlanItemDetailBuilder) ItemSettingOfPerson(itemSettingOfPerson *SocialPlanItemSetting) *SocialPlanItemDetailBuilder {
+	builder.itemSettingOfPerson = itemSettingOfPerson
+	builder.itemSettingOfPersonFlag = true
+	return builder
+}
+
+// 险种缴纳配置
+//
+// 示例值：
+func (builder *SocialPlanItemDetailBuilder) ItemSettingOfCompany(itemSettingOfCompany *SocialPlanItemSetting) *SocialPlanItemDetailBuilder {
+	builder.itemSettingOfCompany = itemSettingOfCompany
+	builder.itemSettingOfCompanyFlag = true
+	return builder
+}
+
+// 缴纳频率
+//
+// 示例值：8.00
+func (builder *SocialPlanItemDetailBuilder) PaymentFrequency(paymentFrequency string) *SocialPlanItemDetailBuilder {
+	builder.paymentFrequency = paymentFrequency
+	builder.paymentFrequencyFlag = true
+	return builder
+}
+
+// 缴纳月份
+//
+// 示例值：
+func (builder *SocialPlanItemDetailBuilder) PaymentMonths(paymentMonths []int) *SocialPlanItemDetailBuilder {
+	builder.paymentMonths = paymentMonths
+	builder.paymentMonthsFlag = true
+	return builder
+}
+
+func (builder *SocialPlanItemDetailBuilder) Build() *SocialPlanItemDetail {
+	req := &SocialPlanItemDetail{}
+	if builder.itemIdFlag {
+		req.ItemId = &builder.itemId
+
+	}
+	if builder.itemNameFlag {
+		req.ItemName = builder.itemName
+	}
+	if builder.itemSettingOfPersonFlag {
+		req.ItemSettingOfPerson = builder.itemSettingOfPerson
+	}
+	if builder.itemSettingOfCompanyFlag {
+		req.ItemSettingOfCompany = builder.itemSettingOfCompany
+	}
+	if builder.paymentFrequencyFlag {
+		req.PaymentFrequency = &builder.paymentFrequency
+
+	}
+	if builder.paymentMonthsFlag {
+		req.PaymentMonths = builder.paymentMonths
+	}
+	return req
+}
+
+type SocialPlanItemSetting struct {
+	LowerLimit          *string `json:"lower_limit,omitempty"`           // 基数下限，浮点数，保留二位小数
+	UpperLimit          *string `json:"upper_limit,omitempty"`           // 基数上限，浮点数，保留二位小数
+	PaymentRatio        *string `json:"payment_ratio,omitempty"`         // 缴纳比例，浮点数，默认填充到二位小数，支持输入到四位，单位为 %
+	PaymentRoundingRule *string `json:"payment_rounding_rule,omitempty"` // 缴纳金舍入规则。rounding: 四舍五入; round_up: 向上舍入; round_down: 向下舍入
+	PaymentDecimals     *int    `json:"payment_decimals,omitempty"`      // 缴纳金小数位数，0-6之间选择
+	FixedPayment        *string `json:"fixed_payment,omitempty"`         // 附加固定金额，浮点数，保留二位小数
+}
+
+type SocialPlanItemSettingBuilder struct {
+	lowerLimit              string // 基数下限，浮点数，保留二位小数
+	lowerLimitFlag          bool
+	upperLimit              string // 基数上限，浮点数，保留二位小数
+	upperLimitFlag          bool
+	paymentRatio            string // 缴纳比例，浮点数，默认填充到二位小数，支持输入到四位，单位为 %
+	paymentRatioFlag        bool
+	paymentRoundingRule     string // 缴纳金舍入规则。rounding: 四舍五入; round_up: 向上舍入; round_down: 向下舍入
+	paymentRoundingRuleFlag bool
+	paymentDecimals         int // 缴纳金小数位数，0-6之间选择
+	paymentDecimalsFlag     bool
+	fixedPayment            string // 附加固定金额，浮点数，保留二位小数
+	fixedPaymentFlag        bool
+}
+
+func NewSocialPlanItemSettingBuilder() *SocialPlanItemSettingBuilder {
+	builder := &SocialPlanItemSettingBuilder{}
+	return builder
+}
+
+// 基数下限，浮点数，保留二位小数
+//
+// 示例值：1000.00
+func (builder *SocialPlanItemSettingBuilder) LowerLimit(lowerLimit string) *SocialPlanItemSettingBuilder {
+	builder.lowerLimit = lowerLimit
+	builder.lowerLimitFlag = true
+	return builder
+}
+
+// 基数上限，浮点数，保留二位小数
+//
+// 示例值：2000.00
+func (builder *SocialPlanItemSettingBuilder) UpperLimit(upperLimit string) *SocialPlanItemSettingBuilder {
+	builder.upperLimit = upperLimit
+	builder.upperLimitFlag = true
+	return builder
+}
+
+// 缴纳比例，浮点数，默认填充到二位小数，支持输入到四位，单位为 %
+//
+// 示例值：8.00
+func (builder *SocialPlanItemSettingBuilder) PaymentRatio(paymentRatio string) *SocialPlanItemSettingBuilder {
+	builder.paymentRatio = paymentRatio
+	builder.paymentRatioFlag = true
+	return builder
+}
+
+// 缴纳金舍入规则。rounding: 四舍五入; round_up: 向上舍入; round_down: 向下舍入
+//
+// 示例值：8.00
+func (builder *SocialPlanItemSettingBuilder) PaymentRoundingRule(paymentRoundingRule string) *SocialPlanItemSettingBuilder {
+	builder.paymentRoundingRule = paymentRoundingRule
+	builder.paymentRoundingRuleFlag = true
+	return builder
+}
+
+// 缴纳金小数位数，0-6之间选择
+//
+// 示例值：2
+func (builder *SocialPlanItemSettingBuilder) PaymentDecimals(paymentDecimals int) *SocialPlanItemSettingBuilder {
+	builder.paymentDecimals = paymentDecimals
+	builder.paymentDecimalsFlag = true
+	return builder
+}
+
+// 附加固定金额，浮点数，保留二位小数
+//
+// 示例值：200.00
+func (builder *SocialPlanItemSettingBuilder) FixedPayment(fixedPayment string) *SocialPlanItemSettingBuilder {
+	builder.fixedPayment = fixedPayment
+	builder.fixedPaymentFlag = true
+	return builder
+}
+
+func (builder *SocialPlanItemSettingBuilder) Build() *SocialPlanItemSetting {
+	req := &SocialPlanItemSetting{}
+	if builder.lowerLimitFlag {
+		req.LowerLimit = &builder.lowerLimit
+
+	}
+	if builder.upperLimitFlag {
+		req.UpperLimit = &builder.upperLimit
+
+	}
+	if builder.paymentRatioFlag {
+		req.PaymentRatio = &builder.paymentRatio
+
+	}
+	if builder.paymentRoundingRuleFlag {
+		req.PaymentRoundingRule = &builder.paymentRoundingRule
+
+	}
+	if builder.paymentDecimalsFlag {
+		req.PaymentDecimals = &builder.paymentDecimals
+
+	}
+	if builder.fixedPaymentFlag {
+		req.FixedPayment = &builder.fixedPayment
+
+	}
+	return req
+}
+
+type SocialPlanScope struct {
+	IsAll *bool              `json:"is_all,omitempty"` // 是否适用于全部
+	Rules [][]*PlanCondition `json:"rules,omitempty"`  // 适用范围，二维。外层or连接，内层and连接
+}
+
+type SocialPlanScopeBuilder struct {
+	isAll     bool // 是否适用于全部
+	isAllFlag bool
+	rules     [][]*PlanCondition // 适用范围，二维。外层or连接，内层and连接
+	rulesFlag bool
+}
+
+func NewSocialPlanScopeBuilder() *SocialPlanScopeBuilder {
+	builder := &SocialPlanScopeBuilder{}
+	return builder
+}
+
+// 是否适用于全部
+//
+// 示例值：true
+func (builder *SocialPlanScopeBuilder) IsAll(isAll bool) *SocialPlanScopeBuilder {
+	builder.isAll = isAll
+	builder.isAllFlag = true
+	return builder
+}
+
+// 适用范围，二维。外层or连接，内层and连接
+//
+// 示例值：
+func (builder *SocialPlanScopeBuilder) Rules(rules [][]*PlanCondition) *SocialPlanScopeBuilder {
+	builder.rules = rules
+	builder.rulesFlag = true
+	return builder
+}
+
+func (builder *SocialPlanScopeBuilder) Build() *SocialPlanScope {
+	req := &SocialPlanScope{}
+	if builder.isAllFlag {
+		req.IsAll = &builder.isAll
+
+	}
+	if builder.rulesFlag {
+		req.Rules = builder.rules
 	}
 	return req
 }

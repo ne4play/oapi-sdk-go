@@ -27,9 +27,11 @@ func main() {
 	client := lark.NewClient("appID", "appSecret")
 	// 创建请求对象
 	req := larkhire.NewListTalentReqBuilder().
+		Keyword("张三 and 产品经理").
 		UpdateStartTime("1618500278663").
 		UpdateEndTime("1618500278663").
 		PageSize(10).
+		SortBy(1).
 		PageToken("eyJvZmZzZXQiOjEwLCJ0aW1lc3RhbXAiOjE2Mjc1NTUyMjM2NzIsImlkIjpudWxsfQ==").
 		UserIdType("people_admin_id").
 		QueryOption("ignore_empty_error").

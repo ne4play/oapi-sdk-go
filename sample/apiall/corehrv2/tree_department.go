@@ -21,29 +21,23 @@ import (
 	"github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2"
 )
 
-// POST /open-apis/corehr/v2/job_changes/search
+// POST /open-apis/corehr/v2/departments/tree
 func main() {
 	// 创建 Client
 	client := lark.NewClient("appID", "appSecret")
 	// 创建请求对象
-	req := larkcorehr.NewSearchJobChangeReqBuilder().
+	req := larkcorehr.NewTreeDepartmentReqBuilder().
 		PageSize(100).
 		PageToken("6891251722631890445").
-		UserIdType("open_id").
-		DepartmentIdType("open_department_id").
-		Body(larkcorehr.NewSearchJobChangeReqBodyBuilder().
-			EmploymentIds([]string{}).
-			JobChangeIds([]string{}).
-			Statuses([]string{}).
-			EffectiveDateStart("2022-01-01").
-			EffectiveDateEnd("2022-01-01").
-			UpdatedTimeStart("1704084635000").
-			UpdatedTimeEnd("1704084635000").
-			TargetDepartmentIds([]string{}).
+		DepartmentIdType("people_corehr_department_id").
+		Body(larkcorehr.NewTreeDepartmentReqBodyBuilder().
+			DepartmentId("6893014062142064111").
+			NeedInactive(false).
+			EffectiveDate("2024-01-01").
 			Build()).
 		Build()
 	// 发起请求
-	resp, err := client.Corehr.V2.JobChange.Search(context.Background(), req)
+	resp, err := client.Corehr.V2.Department.Tree(context.Background(), req)
 
 	// 处理错误
 	if err != nil {

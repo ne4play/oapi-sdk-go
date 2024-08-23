@@ -894,6 +894,32 @@ func (d *department) SearchByIterator(ctx context.Context, req *SearchDepartment
 		limit:    req.Limit}, nil
 }
 
+// Tree
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=tree&project=corehr&resource=department&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/tree_department.go
+func (d *department) Tree(ctx context.Context, req *TreeDepartmentReq, options ...larkcore.RequestOptionFunc) (*TreeDepartmentResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/departments/tree"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, d.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &TreeDepartmentResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, d.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // BatchGet
 //
 // - 通过员工 ID 批量获取员工信息

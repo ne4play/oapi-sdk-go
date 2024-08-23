@@ -28,7 +28,7 @@ func main() {
 	// 创建请求对象
 	req := larkhire.NewListTodoReqBuilder().
 		PageToken("eyJvZmZzZXQiOjEwLCJ0aW1lc3RhbXAiOjE2Mjc1NTUyMjM2NzIsImlkIjpudWxsfQ==").
-		PageSize("100").
+		PageSize("10").
 		UserId("ou_xxx").
 		UserIdType("people_admin_id").
 		Type("interview").

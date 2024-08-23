@@ -14,14 +14,12 @@
 package larkhire
 
 import (
-	"fmt"
-
 	"context"
 	"errors"
-
-	"github.com/larksuite/oapi-sdk-go/v3/event"
+	"fmt"
 
 	"github.com/larksuite/oapi-sdk-go/v3/core"
+	"github.com/larksuite/oapi-sdk-go/v3/event"
 )
 
 const (
@@ -1090,6 +1088,14 @@ const (
 )
 
 const (
+	SortBy1 = 1 // 按更新日期降序
+	SortBy2 = 2 // 按相关度降序
+	SortBy3 = 3 // 按投递时间降序
+	SortBy4 = 4 // 按入库时间降序
+
+)
+
+const (
 	UserIdTypeListTalentUserId        = "user_id"         // 以 user_id 来识别用户
 	UserIdTypeListTalentUnionId       = "union_id"        // 以 union_id 来识别用户
 	UserIdTypeListTalentOpenId        = "open_id"         // 以 open_id 来识别用户
@@ -1168,6 +1174,7 @@ const (
 	StateUpdateTripartiteAgreementCompleted             = 7 // 已完成
 	StateUpdateTripartiteAgreementTerminationProcessing = 8 // 解约处理中
 	StateUpdateTripartiteAgreementTerminated            = 9 // 已解约
+
 )
 
 const (
@@ -16339,6 +16346,70 @@ func (builder *ExternalBackgroundCheckAttachmentBuilder) Build() *ExternalBackgr
 	return req
 }
 
+type ExternalCommonAttachment struct {
+	Id   *string `json:"id,omitempty"`   // 附件 ID
+	Name *string `json:"name,omitempty"` // 附件名字
+	Size *int    `json:"size,omitempty"` // 附件大小
+}
+
+type ExternalCommonAttachmentBuilder struct {
+	id       string // 附件 ID
+	idFlag   bool
+	name     string // 附件名字
+	nameFlag bool
+	size     int // 附件大小
+	sizeFlag bool
+}
+
+func NewExternalCommonAttachmentBuilder() *ExternalCommonAttachmentBuilder {
+	builder := &ExternalCommonAttachmentBuilder{}
+	return builder
+}
+
+// 附件 ID
+//
+// 示例值：6987954043925432620
+func (builder *ExternalCommonAttachmentBuilder) Id(id string) *ExternalCommonAttachmentBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 附件名字
+//
+// 示例值：test_resume.pdf
+func (builder *ExternalCommonAttachmentBuilder) Name(name string) *ExternalCommonAttachmentBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 附件大小
+//
+// 示例值：126371
+func (builder *ExternalCommonAttachmentBuilder) Size(size int) *ExternalCommonAttachmentBuilder {
+	builder.size = size
+	builder.sizeFlag = true
+	return builder
+}
+
+func (builder *ExternalCommonAttachmentBuilder) Build() *ExternalCommonAttachment {
+	req := &ExternalCommonAttachment{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.nameFlag {
+		req.Name = &builder.name
+
+	}
+	if builder.sizeFlag {
+		req.Size = &builder.size
+
+	}
+	return req
+}
+
 type ExternalGrantRoleInfo struct {
 	RoleId *string `json:"role_id,omitempty"` // 角色ID
 }
@@ -16372,12 +16443,13 @@ func (builder *ExternalGrantRoleInfoBuilder) Build() *ExternalGrantRoleInfo {
 }
 
 type ExternalInterview struct {
-	ExternalId            *string `json:"external_id,omitempty"`             // 外部系统面试主键 （仅用于幂等）
-	ExternalApplicationId *string `json:"external_application_id,omitempty"` // 外部投递 ID
-	Id                    *string `json:"id,omitempty"`                      // 外部面试 ID
-	ParticipateStatus     *int    `json:"participate_status,omitempty"`      // 参与状态
-	BeginTime             *int    `json:"begin_time,omitempty"`              // 开始时间
-	EndTime               *int    `json:"end_time,omitempty"`                // 结束时间
+	ExternalId            *string                        `json:"external_id,omitempty"`             // 外部系统面试主键 （仅用于幂等）
+	ExternalApplicationId *string                        `json:"external_application_id,omitempty"` // 外部投递 ID
+	Id                    *string                        `json:"id,omitempty"`                      // 外部面试 ID
+	ParticipateStatus     *int                           `json:"participate_status,omitempty"`      // 参与状态
+	BeginTime             *int                           `json:"begin_time,omitempty"`              // 开始时间
+	EndTime               *int                           `json:"end_time,omitempty"`                // 结束时间
+	InterviewAssessments  []*ExternalInterviewAssessment `json:"interview_assessments,omitempty"`   // 面试评价列表
 }
 
 type ExternalInterviewBuilder struct {
@@ -16393,6 +16465,8 @@ type ExternalInterviewBuilder struct {
 	beginTimeFlag             bool
 	endTime                   int // 结束时间
 	endTimeFlag               bool
+	interviewAssessments      []*ExternalInterviewAssessment // 面试评价列表
+	interviewAssessmentsFlag  bool
 }
 
 func NewExternalInterviewBuilder() *ExternalInterviewBuilder {
@@ -16454,6 +16528,15 @@ func (builder *ExternalInterviewBuilder) EndTime(endTime int) *ExternalInterview
 	return builder
 }
 
+// 面试评价列表
+//
+// 示例值：
+func (builder *ExternalInterviewBuilder) InterviewAssessments(interviewAssessments []*ExternalInterviewAssessment) *ExternalInterviewBuilder {
+	builder.interviewAssessments = interviewAssessments
+	builder.interviewAssessmentsFlag = true
+	return builder
+}
+
 func (builder *ExternalInterviewBuilder) Build() *ExternalInterview {
 	req := &ExternalInterview{}
 	if builder.externalIdFlag {
@@ -16479,6 +16562,9 @@ func (builder *ExternalInterviewBuilder) Build() *ExternalInterview {
 	if builder.endTimeFlag {
 		req.EndTime = &builder.endTime
 
+	}
+	if builder.interviewAssessmentsFlag {
+		req.InterviewAssessments = builder.interviewAssessments
 	}
 	return req
 }
@@ -16733,6 +16819,151 @@ func (builder *ExternalInterviewAssessmentDimensionBuilder) Build() *ExternalInt
 	if builder.descriptionFlag {
 		req.Description = &builder.description
 
+	}
+	return req
+}
+
+type ExternalOffer struct {
+	Id                    *string `json:"id,omitempty"`                      // 外部 Offer ID
+	ExternalId            *string `json:"external_id,omitempty"`             // 外部系统 Offer 主键（仅用于幂等）
+	ExternalApplicationId *string `json:"external_application_id,omitempty"` // 外部投递 ID
+	BizCreateTime         *string `json:"biz_create_time,omitempty"`         // Offer 创建时间，毫秒时间戳
+	Owner                 *string `json:"owner,omitempty"`                   // Offer 负责人
+
+	OfferStatus      *string                     `json:"offer_status,omitempty"`       // Offer 状态
+	AttachmentIdList []string                    `json:"attachment_id_list,omitempty"` // Offer详情附件ID列表
+	AttachmentList   []*ExternalCommonAttachment `json:"attachment_list,omitempty"`    // Offer 附件列表
+}
+
+type ExternalOfferBuilder struct {
+	id                        string // 外部 Offer ID
+	idFlag                    bool
+	externalId                string // 外部系统 Offer 主键（仅用于幂等）
+	externalIdFlag            bool
+	externalApplicationId     string // 外部投递 ID
+	externalApplicationIdFlag bool
+	bizCreateTime             string // Offer 创建时间，毫秒时间戳
+	bizCreateTimeFlag         bool
+	owner                     string // Offer 负责人
+	ownerFlag                 bool
+
+	offerStatus          string // Offer 状态
+	offerStatusFlag      bool
+	attachmentIdList     []string // Offer详情附件ID列表
+	attachmentIdListFlag bool
+	attachmentList       []*ExternalCommonAttachment // Offer 附件列表
+	attachmentListFlag   bool
+}
+
+func NewExternalOfferBuilder() *ExternalOfferBuilder {
+	builder := &ExternalOfferBuilder{}
+	return builder
+}
+
+// 外部 Offer ID
+//
+// 示例值：6989202908470446380
+func (builder *ExternalOfferBuilder) Id(id string) *ExternalOfferBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 外部系统 Offer 主键（仅用于幂等）
+//
+// 示例值：123
+func (builder *ExternalOfferBuilder) ExternalId(externalId string) *ExternalOfferBuilder {
+	builder.externalId = externalId
+	builder.externalIdFlag = true
+	return builder
+}
+
+// 外部投递 ID
+//
+// 示例值：7395015673275697419
+func (builder *ExternalOfferBuilder) ExternalApplicationId(externalApplicationId string) *ExternalOfferBuilder {
+	builder.externalApplicationId = externalApplicationId
+	builder.externalApplicationIdFlag = true
+	return builder
+}
+
+// Offer 创建时间，毫秒时间戳
+//
+// 示例值：1721899352428
+func (builder *ExternalOfferBuilder) BizCreateTime(bizCreateTime string) *ExternalOfferBuilder {
+	builder.bizCreateTime = bizCreateTime
+	builder.bizCreateTimeFlag = true
+	return builder
+}
+
+// Offer 负责人
+//
+// 示例值：张三
+func (builder *ExternalOfferBuilder) Owner(owner string) *ExternalOfferBuilder {
+	builder.owner = owner
+	builder.ownerFlag = true
+	return builder
+}
+
+// Offer 状态
+//
+// 示例值：已发送
+func (builder *ExternalOfferBuilder) OfferStatus(offerStatus string) *ExternalOfferBuilder {
+	builder.offerStatus = offerStatus
+	builder.offerStatusFlag = true
+	return builder
+}
+
+// Offer详情附件ID列表
+//
+// 示例值：
+func (builder *ExternalOfferBuilder) AttachmentIdList(attachmentIdList []string) *ExternalOfferBuilder {
+	builder.attachmentIdList = attachmentIdList
+	builder.attachmentIdListFlag = true
+	return builder
+}
+
+// Offer 附件列表
+//
+// 示例值：
+func (builder *ExternalOfferBuilder) AttachmentList(attachmentList []*ExternalCommonAttachment) *ExternalOfferBuilder {
+	builder.attachmentList = attachmentList
+	builder.attachmentListFlag = true
+	return builder
+}
+
+func (builder *ExternalOfferBuilder) Build() *ExternalOffer {
+	req := &ExternalOffer{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.externalIdFlag {
+		req.ExternalId = &builder.externalId
+
+	}
+	if builder.externalApplicationIdFlag {
+		req.ExternalApplicationId = &builder.externalApplicationId
+
+	}
+	if builder.bizCreateTimeFlag {
+		req.BizCreateTime = &builder.bizCreateTime
+
+	}
+	if builder.ownerFlag {
+		req.Owner = &builder.owner
+
+	}
+
+	if builder.offerStatusFlag {
+		req.OfferStatus = &builder.offerStatus
+
+	}
+	if builder.attachmentIdListFlag {
+		req.AttachmentIdList = builder.attachmentIdList
+	}
+	if builder.attachmentListFlag {
+		req.AttachmentList = builder.attachmentList
 	}
 	return req
 }
@@ -47607,6 +47838,16 @@ func (builder *ListApplicationReqBuilder) JobId(jobId string) *ListApplicationRe
 	return builder
 }
 
+// 锁定状态
+//
+// 示例值：
+func (builder *ListApplicationReqBuilder) LockStatus(lockStatus []int) *ListApplicationReqBuilder {
+	for _, v := range lockStatus {
+		builder.apiReq.QueryParams.Add("lock_status", fmt.Sprint(v))
+	}
+	return builder
+}
+
 // 查询游标, 由上一页结果返回, 第一页不传
 //
 // 示例值：1
@@ -58812,6 +59053,14 @@ func NewListTalentReqBuilder() *ListTalentReqBuilder {
 	return builder
 }
 
+// 搜索关键词，支持布尔语言（使用 and、or、not 连接关键词）
+//
+// 示例值：张三 and 产品经理
+func (builder *ListTalentReqBuilder) Keyword(keyword string) *ListTalentReqBuilder {
+	builder.apiReq.QueryParams.Set("keyword", fmt.Sprint(keyword))
+	return builder
+}
+
 // 最早更新时间，毫秒级时间戳
 //
 // 示例值：1618500278663
@@ -58833,6 +59082,14 @@ func (builder *ListTalentReqBuilder) UpdateEndTime(updateEndTime string) *ListTa
 // 示例值：10
 func (builder *ListTalentReqBuilder) PageSize(pageSize int) *ListTalentReqBuilder {
 	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 排序规则
+//
+// 示例值：1
+func (builder *ListTalentReqBuilder) SortBy(sortBy int) *ListTalentReqBuilder {
+	builder.apiReq.QueryParams.Set("sort_by", fmt.Sprint(sortBy))
 	return builder
 }
 

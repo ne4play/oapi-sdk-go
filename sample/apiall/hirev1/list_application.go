@@ -32,6 +32,7 @@ func main() {
 		TalentId("6891560630172518670").
 		ActiveStatus("1").
 		JobId("7334134355464633").
+		LockStatus([]int{}).
 		PageToken("1").
 		PageSize(10).
 		UpdateStartTime("1618500278663").

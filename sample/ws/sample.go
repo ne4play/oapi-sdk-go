@@ -19,7 +19,7 @@ func main() {
 			fmt.Printf("[ OnP2MessageReceiveV1 access ], data: %s\n", larkcore.Prettify(event))
 			return nil
 		}).
-		OnCustomizedEvent("message", func(ctx context.Context, event *larkevent.EventReq) error {
+		OnCustomizedEvent("这里填入你要自定义订阅的 event 的 key,例如 out_approval", func(ctx context.Context, event *larkevent.EventReq) error {
 			fmt.Printf("[ OnCustomizedEvent access ], type: message, data: %s\n", string(event.Body))
 			return nil
 		})

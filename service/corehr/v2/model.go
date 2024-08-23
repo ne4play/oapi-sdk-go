@@ -151,6 +151,12 @@ const (
 )
 
 const (
+	DepartmentIdTypeTreeDepartmentOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
+	DepartmentIdTypeTreeDepartmentDepartmentId             = "department_id"               // 以 department_id 来标识部门
+	DepartmentIdTypeTreeDepartmentPeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+)
+
+const (
 	UserIdTypeBatchGetEmployeeUserId         = "user_id"          // 以 user_id 来识别用户
 	UserIdTypeBatchGetEmployeeUnionId        = "union_id"         // 以 union_id 来识别用户
 	UserIdTypeBatchGetEmployeeOpenId         = "open_id"          // 以 open_id 来识别用户
@@ -2404,12 +2410,12 @@ func (builder *BankBranchBuilder) Build() *BankBranch {
 }
 
 type BasicDepartment struct {
-	Id             *string `json:"id,omitempty"`              // 部门 ID
+	Id             *string `json:"id,omitempty"`              // 部门 ID;- 类型与 department_id_type 一致，转换失败时返回空值;- 请使用 id_v2
 	DepartmentName []*I18n `json:"department_name,omitempty"` // 部门名称
 }
 
 type BasicDepartmentBuilder struct {
-	id                 string // 部门 ID
+	id                 string // 部门 ID;- 类型与 department_id_type 一致，转换失败时返回空值;- 请使用 id_v2
 	idFlag             bool
 	departmentName     []*I18n // 部门名称
 	departmentNameFlag bool
@@ -2420,7 +2426,7 @@ func NewBasicDepartmentBuilder() *BasicDepartmentBuilder {
 	return builder
 }
 
-// 部门 ID
+// 部门 ID;- 类型与 department_id_type 一致，转换失败时返回空值;- 请使用 id_v2
 //
 // 示例值：4719456877659520852
 func (builder *BasicDepartmentBuilder) Id(id string) *BasicDepartmentBuilder {
@@ -2451,14 +2457,14 @@ func (builder *BasicDepartmentBuilder) Build() *BasicDepartment {
 }
 
 type BasicEmployee struct {
-	EmploymentId   *string          `json:"employment_id,omitempty"`   // 雇佣 ID
+	EmploymentId   *string          `json:"employment_id,omitempty"`   // 雇佣 ID;- 类型与 user_id_type 一致;- 请使用 employment_id_v2
 	EmployeeNumber *string          `json:"employee_number,omitempty"` // 工号
 	EmailAddress   *string          `json:"email_address,omitempty"`   // 邮箱地址
 	PersonInfo     *BasicPersonInfo `json:"person_info,omitempty"`     // 基本个人信息
 }
 
 type BasicEmployeeBuilder struct {
-	employmentId       string // 雇佣 ID
+	employmentId       string // 雇佣 ID;- 类型与 user_id_type 一致;- 请使用 employment_id_v2
 	employmentIdFlag   bool
 	employeeNumber     string // 工号
 	employeeNumberFlag bool
@@ -2473,7 +2479,7 @@ func NewBasicEmployeeBuilder() *BasicEmployeeBuilder {
 	return builder
 }
 
-// 雇佣 ID
+// 雇佣 ID;- 类型与 user_id_type 一致;- 请使用 employment_id_v2
 //
 // 示例值：6893014062142064135
 func (builder *BasicEmployeeBuilder) EmploymentId(employmentId string) *BasicEmployeeBuilder {
@@ -7295,6 +7301,69 @@ func (builder *DepartmentTimelineBuilder) Build() *DepartmentTimeline {
 	return req
 }
 
+type DepartmentTree struct {
+	Id       *string  `json:"id,omitempty"`       // 部门 ID
+	Level    *int     `json:"level,omitempty"`    // 部门层级
+	Children []string `json:"children,omitempty"` // 下级部门 ID 列表
+}
+
+type DepartmentTreeBuilder struct {
+	id           string // 部门 ID
+	idFlag       bool
+	level        int // 部门层级
+	levelFlag    bool
+	children     []string // 下级部门 ID 列表
+	childrenFlag bool
+}
+
+func NewDepartmentTreeBuilder() *DepartmentTreeBuilder {
+	builder := &DepartmentTreeBuilder{}
+	return builder
+}
+
+// 部门 ID
+//
+// 示例值：4719456877659520852
+func (builder *DepartmentTreeBuilder) Id(id string) *DepartmentTreeBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 部门层级
+//
+// 示例值：1
+func (builder *DepartmentTreeBuilder) Level(level int) *DepartmentTreeBuilder {
+	builder.level = level
+	builder.levelFlag = true
+	return builder
+}
+
+// 下级部门 ID 列表
+//
+// 示例值：
+func (builder *DepartmentTreeBuilder) Children(children []string) *DepartmentTreeBuilder {
+	builder.children = children
+	builder.childrenFlag = true
+	return builder
+}
+
+func (builder *DepartmentTreeBuilder) Build() *DepartmentTree {
+	req := &DepartmentTree{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.levelFlag {
+		req.Level = &builder.level
+
+	}
+	if builder.childrenFlag {
+		req.Children = builder.children
+	}
+	return req
+}
+
 type Dependent struct {
 	Name         *PersonName `json:"name,omitempty"`          // 姓名
 	Relationship *Enum       `json:"relationship,omitempty"`  // 关系
@@ -8956,12 +9025,12 @@ func (builder *EmpCustomOrgListBuilder) Build() *EmpCustomOrgList {
 }
 
 type Employee struct {
-	EmploymentId         *string            `json:"employment_id,omitempty"`          // 雇佣 ID
+	EmploymentId         *string            `json:"employment_id,omitempty"`          // 雇佣 ID;- 类型与 user_id_type 一致;- 请使用 employment_id_v2
 	AtsApplicationId     *string            `json:"ats_application_id,omitempty"`     // 招聘投递 ID ，详细信息可以通过【获取投递信息】接口查询获得
 	PrehireId            *string            `json:"prehire_id,omitempty"`             // 待入职 ID
 	EmployeeNumber       *string            `json:"employee_number,omitempty"`        // 工号
 	EmployeeTypeId       *string            `json:"employee_type_id,omitempty"`       // 人员类型 ID，详细信息可通过【查询单个人员类型】接口获得
-	DepartmentId         *string            `json:"department_id,omitempty"`          // 部门 ID，详细信息可通过【查询单个部门】接口获得
+	DepartmentId         *string            `json:"department_id,omitempty"`          // 部门 ID;- 可通过 [【查询单个部门】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/department/get)获取详细信息;- 类型与 department_id_type 一致;- 请使用 department_id_v2
 	JobLevelId           *string            `json:"job_level_id,omitempty"`           // 职级 ID，详细信息可通过【查询单个职务级别】接口获得
 	JobLevel             *EmployeeJobLevel  `json:"job_level,omitempty"`              // 职级
 	JobGradeId           *string            `json:"job_grade_id,omitempty"`           // 职等 ID
@@ -8981,8 +9050,8 @@ type Employee struct {
 	ProbationPeriod      *int               `json:"probation_period,omitempty"`       // 试用期时长（月）
 	OnProbation          *bool              `json:"on_probation,omitempty"`           // 是否在试用期中
 	ProbationEndDate     *string            `json:"probation_end_date,omitempty"`     // 试用期结束日期（实际结束日期）
-	DirectManagerId      *string            `json:"direct_manager_id,omitempty"`      // 直接上级的雇佣 ID
-	DottedLineManagerId  *string            `json:"dotted_line_manager_id,omitempty"` // 虚线上级的雇佣 ID
+	DirectManagerId      *string            `json:"direct_manager_id,omitempty"`      // 直接上级的雇佣 ID;- 类型与 user_id_type 一致;- 请使用 direct_manager_id_v2
+	DottedLineManagerId  *string            `json:"dotted_line_manager_id,omitempty"` // 虚线上级的雇佣 ID; - 类型与 user_id_type 一致; - 请使用 dotted_line_manager_id_v2
 	EmploymentType       *Enum              `json:"employment_type,omitempty"`        // 雇佣类型，枚举值可通过文档【飞书人事枚举常量】雇佣类型（employment_type）枚举定义获得
 	EmploymentStatus     *Enum              `json:"employment_status,omitempty"`      // 雇佣状态，枚举值可通过文档【飞书人事枚举常量】雇员状态（employment_status）枚举定义获得
 	ExpirationDate       *string            `json:"expiration_date,omitempty"`        // 离职日期，即员工的最后一个工作日，最后一个工作日时员工的雇佣状态仍为“在职”，次日凌晨将更改为“离职”
@@ -9022,7 +9091,7 @@ type Employee struct {
 }
 
 type EmployeeBuilder struct {
-	employmentId             string // 雇佣 ID
+	employmentId             string // 雇佣 ID;- 类型与 user_id_type 一致;- 请使用 employment_id_v2
 	employmentIdFlag         bool
 	atsApplicationId         string // 招聘投递 ID ，详细信息可以通过【获取投递信息】接口查询获得
 	atsApplicationIdFlag     bool
@@ -9032,7 +9101,7 @@ type EmployeeBuilder struct {
 	employeeNumberFlag       bool
 	employeeTypeId           string // 人员类型 ID，详细信息可通过【查询单个人员类型】接口获得
 	employeeTypeIdFlag       bool
-	departmentId             string // 部门 ID，详细信息可通过【查询单个部门】接口获得
+	departmentId             string // 部门 ID;- 可通过 [【查询单个部门】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/department/get)获取详细信息;- 类型与 department_id_type 一致;- 请使用 department_id_v2
 	departmentIdFlag         bool
 	jobLevelId               string // 职级 ID，详细信息可通过【查询单个职务级别】接口获得
 	jobLevelIdFlag           bool
@@ -9072,9 +9141,9 @@ type EmployeeBuilder struct {
 	onProbationFlag          bool
 	probationEndDate         string // 试用期结束日期（实际结束日期）
 	probationEndDateFlag     bool
-	directManagerId          string // 直接上级的雇佣 ID
+	directManagerId          string // 直接上级的雇佣 ID;- 类型与 user_id_type 一致;- 请使用 direct_manager_id_v2
 	directManagerIdFlag      bool
-	dottedLineManagerId      string // 虚线上级的雇佣 ID
+	dottedLineManagerId      string // 虚线上级的雇佣 ID; - 类型与 user_id_type 一致; - 请使用 dotted_line_manager_id_v2
 	dottedLineManagerIdFlag  bool
 	employmentType           *Enum // 雇佣类型，枚举值可通过文档【飞书人事枚举常量】雇佣类型（employment_type）枚举定义获得
 	employmentTypeFlag       bool
@@ -9152,7 +9221,7 @@ func NewEmployeeBuilder() *EmployeeBuilder {
 	return builder
 }
 
-// 雇佣 ID
+// 雇佣 ID;- 类型与 user_id_type 一致;- 请使用 employment_id_v2
 //
 // 示例值：6893014062142064135
 func (builder *EmployeeBuilder) EmploymentId(employmentId string) *EmployeeBuilder {
@@ -9197,7 +9266,7 @@ func (builder *EmployeeBuilder) EmployeeTypeId(employeeTypeId string) *EmployeeB
 	return builder
 }
 
-// 部门 ID，详细信息可通过【查询单个部门】接口获得
+// 部门 ID;- 可通过 [【查询单个部门】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/department/get)获取详细信息;- 类型与 department_id_type 一致;- 请使用 department_id_v2
 //
 // 示例值：6893014062142064135
 func (builder *EmployeeBuilder) DepartmentId(departmentId string) *EmployeeBuilder {
@@ -9377,7 +9446,7 @@ func (builder *EmployeeBuilder) ProbationEndDate(probationEndDate string) *Emplo
 	return builder
 }
 
-// 直接上级的雇佣 ID
+// 直接上级的雇佣 ID;- 类型与 user_id_type 一致;- 请使用 direct_manager_id_v2
 //
 // 示例值：7027024823985411287
 func (builder *EmployeeBuilder) DirectManagerId(directManagerId string) *EmployeeBuilder {
@@ -9386,7 +9455,7 @@ func (builder *EmployeeBuilder) DirectManagerId(directManagerId string) *Employe
 	return builder
 }
 
-// 虚线上级的雇佣 ID
+// 虚线上级的雇佣 ID; - 类型与 user_id_type 一致; - 请使用 dotted_line_manager_id_v2
 //
 // 示例值：7027024823985411782
 func (builder *EmployeeBuilder) DottedLineManagerId(dottedLineManagerId string) *EmployeeBuilder {
@@ -18452,6 +18521,7 @@ type OfferInfo struct {
 	FlowId               *string              `json:"flow_id,omitempty"`                 // 入职流程ID
 	CheckInTime          *string              `json:"check_in_time,omitempty"`           // 签到日期
 	CheckInMethod        *string              `json:"check_in_method,omitempty"`         // 签到方式
+	SeniorityDate        *string              `json:"seniority_date,omitempty"`          // 司龄起算日期
 }
 
 type OfferInfoBuilder struct {
@@ -18543,6 +18613,8 @@ type OfferInfoBuilder struct {
 	checkInTimeFlag          bool
 	checkInMethod            string // 签到方式
 	checkInMethodFlag        bool
+	seniorityDate            string // 司龄起算日期
+	seniorityDateFlag        bool
 }
 
 func NewOfferInfoBuilder() *OfferInfoBuilder {
@@ -18930,7 +19002,7 @@ func (builder *OfferInfoBuilder) FlowId(flowId string) *OfferInfoBuilder {
 
 // 签到日期
 //
-// 示例值：6977976687350924833
+// 示例值：2024-08-01
 func (builder *OfferInfoBuilder) CheckInTime(checkInTime string) *OfferInfoBuilder {
 	builder.checkInTime = checkInTime
 	builder.checkInTimeFlag = true
@@ -18943,6 +19015,15 @@ func (builder *OfferInfoBuilder) CheckInTime(checkInTime string) *OfferInfoBuild
 func (builder *OfferInfoBuilder) CheckInMethod(checkInMethod string) *OfferInfoBuilder {
 	builder.checkInMethod = checkInMethod
 	builder.checkInMethodFlag = true
+	return builder
+}
+
+// 司龄起算日期
+//
+// 示例值：2024-08-01
+func (builder *OfferInfoBuilder) SeniorityDate(seniorityDate string) *OfferInfoBuilder {
+	builder.seniorityDate = seniorityDate
+	builder.seniorityDateFlag = true
 	return builder
 }
 
@@ -19122,6 +19203,10 @@ func (builder *OfferInfoBuilder) Build() *OfferInfo {
 		req.CheckInMethod = &builder.checkInMethod
 
 	}
+	if builder.seniorityDateFlag {
+		req.SeniorityDate = &builder.seniorityDate
+
+	}
 	return req
 }
 
@@ -19166,6 +19251,7 @@ type OfferInfoUpdate struct {
 	WorkLocationId       *string              `json:"work_location_id,omitempty"`       // 工作城市
 	WorkingCalendar      *string              `json:"working_calendar,omitempty"`       // 工作日历
 	WorkingHoursType     *string              `json:"working_hours_type,omitempty"`     // 工时制度
+	SeniorityDate        *string              `json:"seniority_date,omitempty"`         // 司龄起算日期
 }
 
 type OfferInfoUpdateBuilder struct {
@@ -19249,6 +19335,8 @@ type OfferInfoUpdateBuilder struct {
 	workingCalendarFlag      bool
 	workingHoursType         string // 工时制度
 	workingHoursTypeFlag     bool
+	seniorityDate            string // 司龄起算日期
+	seniorityDateFlag        bool
 }
 
 func NewOfferInfoUpdateBuilder() *OfferInfoUpdateBuilder {
@@ -19616,6 +19704,15 @@ func (builder *OfferInfoUpdateBuilder) WorkingHoursType(workingHoursType string)
 	return builder
 }
 
+// 司龄起算日期
+//
+// 示例值：2022-10-08
+func (builder *OfferInfoUpdateBuilder) SeniorityDate(seniorityDate string) *OfferInfoUpdateBuilder {
+	builder.seniorityDate = seniorityDate
+	builder.seniorityDateFlag = true
+	return builder
+}
+
 func (builder *OfferInfoUpdateBuilder) Build() *OfferInfoUpdate {
 	req := &OfferInfoUpdate{}
 	if builder.onboardingDateFlag {
@@ -19773,6 +19870,10 @@ func (builder *OfferInfoUpdateBuilder) Build() *OfferInfoUpdate {
 	}
 	if builder.workingHoursTypeFlag {
 		req.WorkingHoursType = &builder.workingHoursType
+
+	}
+	if builder.seniorityDateFlag {
+		req.SeniorityDate = &builder.seniorityDate
 
 	}
 	return req
@@ -23479,7 +23580,7 @@ type PreHireEmploymentInfo struct {
 	WeeklyWorkingHoursV2            *float64                 `json:"weekly_working_hours_v2,omitempty"`             // 周工作时长v2（单位：小时）
 	OfficeAddress                   *Address                 `json:"office_address,omitempty"`                      // 办公地址
 	WorkingCalendarId               *string                  `json:"working_calendar_id,omitempty"`                 // 工作日历
-	UpdatedAt                       *string                  `json:"updated_at,omitempty"`                          // 更新时间
+	UpdatedAt                       *string                  `json:"updated_at,omitempty"`                          // 待入职信息 更新时间
 	SuspectedRehiring               *bool                    `json:"suspected_rehiring,omitempty"`                  // 是否疑似重聘
 	CustomFields                    []*CustomFieldData       `json:"custom_fields,omitempty"`                       // 自定义字段
 	PositionId                      *string                  `json:"position_id,omitempty"`                         // 岗位 ID
@@ -23490,9 +23591,10 @@ type PreHireEmploymentInfo struct {
 	HasOfferSalary                  *bool                    `json:"has_offer_salary,omitempty"`                    // 是否有 Offer 薪酬
 	RecruitmentProjectId            *string                  `json:"recruitment_project_id,omitempty"`              // 招聘项目 ID
 	WorkShift                       *Enum                    `json:"work_shift,omitempty"`                          // -| 排班类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：work_shift - object_api_name：pre_hire
-	CreatedAt                       *string                  `json:"created_at,omitempty"`                          // 创建时间
+	CreatedAt                       *string                  `json:"created_at,omitempty"`                          // 待入职信息 创建时间
 	CreatedBy                       *string                  `json:"created_by,omitempty"`                          // 待入职信息 创建人
 	UpdatedBy                       *string                  `json:"updated_by,omitempty"`                          // 待入职信息 更新人
+	SeniorityDate                   *string                  `json:"seniority_date,omitempty"`                      // 司龄起算日期
 }
 
 type PreHireEmploymentInfoBuilder struct {
@@ -23548,7 +23650,7 @@ type PreHireEmploymentInfoBuilder struct {
 	officeAddressFlag                   bool
 	workingCalendarId                   string // 工作日历
 	workingCalendarIdFlag               bool
-	updatedAt                           string // 更新时间
+	updatedAt                           string // 待入职信息 更新时间
 	updatedAtFlag                       bool
 	suspectedRehiring                   bool // 是否疑似重聘
 	suspectedRehiringFlag               bool
@@ -23570,12 +23672,14 @@ type PreHireEmploymentInfoBuilder struct {
 	recruitmentProjectIdFlag            bool
 	workShift                           *Enum // -| 排班类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：work_shift - object_api_name：pre_hire
 	workShiftFlag                       bool
-	createdAt                           string // 创建时间
+	createdAt                           string // 待入职信息 创建时间
 	createdAtFlag                       bool
 	createdBy                           string // 待入职信息 创建人
 	createdByFlag                       bool
 	updatedBy                           string // 待入职信息 更新人
 	updatedByFlag                       bool
+	seniorityDate                       string // 司龄起算日期
+	seniorityDateFlag                   bool
 }
 
 func NewPreHireEmploymentInfoBuilder() *PreHireEmploymentInfoBuilder {
@@ -23817,7 +23921,7 @@ func (builder *PreHireEmploymentInfoBuilder) WorkingCalendarId(workingCalendarId
 	return builder
 }
 
-// 更新时间
+// 待入职信息 更新时间
 //
 // 示例值：2023-01-10 10:29
 func (builder *PreHireEmploymentInfoBuilder) UpdatedAt(updatedAt string) *PreHireEmploymentInfoBuilder {
@@ -23916,7 +24020,7 @@ func (builder *PreHireEmploymentInfoBuilder) WorkShift(workShift *Enum) *PreHire
 	return builder
 }
 
-// 创建时间
+// 待入职信息 创建时间
 //
 // 示例值：2023-01-10 10:29
 func (builder *PreHireEmploymentInfoBuilder) CreatedAt(createdAt string) *PreHireEmploymentInfoBuilder {
@@ -23940,6 +24044,15 @@ func (builder *PreHireEmploymentInfoBuilder) CreatedBy(createdBy string) *PreHir
 func (builder *PreHireEmploymentInfoBuilder) UpdatedBy(updatedBy string) *PreHireEmploymentInfoBuilder {
 	builder.updatedBy = updatedBy
 	builder.updatedByFlag = true
+	return builder
+}
+
+// 司龄起算日期
+//
+// 示例值：2023-01-10
+func (builder *PreHireEmploymentInfoBuilder) SeniorityDate(seniorityDate string) *PreHireEmploymentInfoBuilder {
+	builder.seniorityDate = seniorityDate
+	builder.seniorityDateFlag = true
 	return builder
 }
 
@@ -24096,6 +24209,10 @@ func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 	}
 	if builder.updatedByFlag {
 		req.UpdatedBy = &builder.updatedBy
+
+	}
+	if builder.seniorityDateFlag {
+		req.SeniorityDate = &builder.seniorityDate
 
 	}
 	return req
@@ -30464,22 +30581,21 @@ func (builder *QrCodeValueBuilder) Build() *QrCodeValue {
 }
 
 type ReorganizationInfo struct {
-	OriginalDepartmentNames       []*I18n                 `json:"original_department_names,omitempty"`         // 原部门名称
-	TargetDepartmentNames         []*I18n                 `json:"target_department_names,omitempty"`           // 调整后部门名称
-	OriginalDepartmentCode        *string                 `json:"original_department_code,omitempty"`          // 原部门编码
-	TargetDepartmentCode          *string                 `json:"target_department_code,omitempty"`            // 调整后部门编码
-	OriginalSubType               *Enum                   `json:"original_sub_type,omitempty"`                 // 原部门类型，枚举值可通过文档【飞书人事枚举常量】部门子类型（department_sub_type）枚举定义部分获得
-	TargetSubType                 *Enum                   `json:"target_sub_type,omitempty"`                   // 调整后部门类型，枚举值可通过文档【飞书人事枚举常量】部门子类型（department_sub_type）枚举定义部分获得
-	OriginalDepartmentManager     *string                 `json:"original_department_manager,omitempty"`       // 原部门负责人
-	TargetDepartmentManager       *string                 `json:"target_department_manager,omitempty"`         // 调整后部门负责人
-	OriginalDescriptions          []*I18n                 `json:"original_descriptions,omitempty"`             // 原描述
-	TargetDescriptions            []*I18n                 `json:"target_descriptions,omitempty"`               // 调整后描述
-	OriginalCostCenter            *CostCenter             `json:"original_cost_center,omitempty"`              // 原默认成本中心
-	TargetCostCenter              *CostCenter             `json:"target_cost_center,omitempty"`                // 调整后默认成本中心
-	OriginalIsConfidential        *bool                   `json:"original_is_confidential,omitempty"`          // 原是否保密
-	TargetIsConfidential          *bool                   `json:"target_is_confidential,omitempty"`            // 调整后是否保密
-	OriginalStaffingModel         *bool                   `json:"original_staffing_model,omitempty"`           // 原是否使用职务
-	TargetStaffingModel           *bool                   `json:"target_staffing_model,omitempty"`             // 调整后是否使用职务
+	OriginalDepartmentNames   []*I18n     `json:"original_department_names,omitempty"`   // 原部门名称
+	TargetDepartmentNames     []*I18n     `json:"target_department_names,omitempty"`     // 调整后部门名称
+	OriginalDepartmentCode    *string     `json:"original_department_code,omitempty"`    // 原部门编码
+	TargetDepartmentCode      *string     `json:"target_department_code,omitempty"`      // 调整后部门编码
+	OriginalSubType           *Enum       `json:"original_sub_type,omitempty"`           // 原部门类型，枚举值可通过文档【飞书人事枚举常量】部门子类型（department_sub_type）枚举定义部分获得
+	TargetSubType             *Enum       `json:"target_sub_type,omitempty"`             // 调整后部门类型，枚举值可通过文档【飞书人事枚举常量】部门子类型（department_sub_type）枚举定义部分获得
+	OriginalDepartmentManager *string     `json:"original_department_manager,omitempty"` // 原部门负责人
+	TargetDepartmentManager   *string     `json:"target_department_manager,omitempty"`   // 调整后部门负责人
+	OriginalDescriptions      []*I18n     `json:"original_descriptions,omitempty"`       // 原描述
+	TargetDescriptions        []*I18n     `json:"target_descriptions,omitempty"`         // 调整后描述
+	OriginalCostCenter        *CostCenter `json:"original_cost_center,omitempty"`        // 原默认成本中心
+	TargetCostCenter          *CostCenter `json:"target_cost_center,omitempty"`          // 调整后默认成本中心
+	OriginalIsConfidential    *bool       `json:"original_is_confidential,omitempty"`    // 原是否保密
+	TargetIsConfidential      *bool       `json:"target_is_confidential,omitempty"`      // 调整后是否保密
+
 	OriginalParentDepartmentId    *string                 `json:"original_parent_department_id,omitempty"`     // 原上级部门
 	TargetParentDepartmentId      *string                 `json:"target_parent_department_id,omitempty"`       // 调整后上级部门
 	DraftTargetParentDepartmentId *string                 `json:"draft_target_parent_department_id,omitempty"` // 调整后上级部门 ID ，调整审批未生效前会返回格式为 td_xxx 的临时 ID
@@ -30489,38 +30605,35 @@ type ReorganizationInfo struct {
 }
 
 type ReorganizationInfoBuilder struct {
-	originalDepartmentNames           []*I18n // 原部门名称
-	originalDepartmentNamesFlag       bool
-	targetDepartmentNames             []*I18n // 调整后部门名称
-	targetDepartmentNamesFlag         bool
-	originalDepartmentCode            string // 原部门编码
-	originalDepartmentCodeFlag        bool
-	targetDepartmentCode              string // 调整后部门编码
-	targetDepartmentCodeFlag          bool
-	originalSubType                   *Enum // 原部门类型，枚举值可通过文档【飞书人事枚举常量】部门子类型（department_sub_type）枚举定义部分获得
-	originalSubTypeFlag               bool
-	targetSubType                     *Enum // 调整后部门类型，枚举值可通过文档【飞书人事枚举常量】部门子类型（department_sub_type）枚举定义部分获得
-	targetSubTypeFlag                 bool
-	originalDepartmentManager         string // 原部门负责人
-	originalDepartmentManagerFlag     bool
-	targetDepartmentManager           string // 调整后部门负责人
-	targetDepartmentManagerFlag       bool
-	originalDescriptions              []*I18n // 原描述
-	originalDescriptionsFlag          bool
-	targetDescriptions                []*I18n // 调整后描述
-	targetDescriptionsFlag            bool
-	originalCostCenter                *CostCenter // 原默认成本中心
-	originalCostCenterFlag            bool
-	targetCostCenter                  *CostCenter // 调整后默认成本中心
-	targetCostCenterFlag              bool
-	originalIsConfidential            bool // 原是否保密
-	originalIsConfidentialFlag        bool
-	targetIsConfidential              bool // 调整后是否保密
-	targetIsConfidentialFlag          bool
-	originalStaffingModel             bool // 原是否使用职务
-	originalStaffingModelFlag         bool
-	targetStaffingModel               bool // 调整后是否使用职务
-	targetStaffingModelFlag           bool
+	originalDepartmentNames       []*I18n // 原部门名称
+	originalDepartmentNamesFlag   bool
+	targetDepartmentNames         []*I18n // 调整后部门名称
+	targetDepartmentNamesFlag     bool
+	originalDepartmentCode        string // 原部门编码
+	originalDepartmentCodeFlag    bool
+	targetDepartmentCode          string // 调整后部门编码
+	targetDepartmentCodeFlag      bool
+	originalSubType               *Enum // 原部门类型，枚举值可通过文档【飞书人事枚举常量】部门子类型（department_sub_type）枚举定义部分获得
+	originalSubTypeFlag           bool
+	targetSubType                 *Enum // 调整后部门类型，枚举值可通过文档【飞书人事枚举常量】部门子类型（department_sub_type）枚举定义部分获得
+	targetSubTypeFlag             bool
+	originalDepartmentManager     string // 原部门负责人
+	originalDepartmentManagerFlag bool
+	targetDepartmentManager       string // 调整后部门负责人
+	targetDepartmentManagerFlag   bool
+	originalDescriptions          []*I18n // 原描述
+	originalDescriptionsFlag      bool
+	targetDescriptions            []*I18n // 调整后描述
+	targetDescriptionsFlag        bool
+	originalCostCenter            *CostCenter // 原默认成本中心
+	originalCostCenterFlag        bool
+	targetCostCenter              *CostCenter // 调整后默认成本中心
+	targetCostCenterFlag          bool
+	originalIsConfidential        bool // 原是否保密
+	originalIsConfidentialFlag    bool
+	targetIsConfidential          bool // 调整后是否保密
+	targetIsConfidentialFlag      bool
+
 	originalParentDepartmentId        string // 原上级部门
 	originalParentDepartmentIdFlag    bool
 	targetParentDepartmentId          string // 调整后上级部门
@@ -30666,24 +30779,6 @@ func (builder *ReorganizationInfoBuilder) TargetIsConfidential(targetIsConfident
 	return builder
 }
 
-// 原是否使用职务
-//
-// 示例值：true
-func (builder *ReorganizationInfoBuilder) OriginalStaffingModel(originalStaffingModel bool) *ReorganizationInfoBuilder {
-	builder.originalStaffingModel = originalStaffingModel
-	builder.originalStaffingModelFlag = true
-	return builder
-}
-
-// 调整后是否使用职务
-//
-// 示例值：false
-func (builder *ReorganizationInfoBuilder) TargetStaffingModel(targetStaffingModel bool) *ReorganizationInfoBuilder {
-	builder.targetStaffingModel = targetStaffingModel
-	builder.targetStaffingModelFlag = true
-	return builder
-}
-
 // 原上级部门
 //
 // 示例值：6974659700705068581
@@ -30788,14 +30883,7 @@ func (builder *ReorganizationInfoBuilder) Build() *ReorganizationInfo {
 		req.TargetIsConfidential = &builder.targetIsConfidential
 
 	}
-	if builder.originalStaffingModelFlag {
-		req.OriginalStaffingModel = &builder.originalStaffingModel
 
-	}
-	if builder.targetStaffingModelFlag {
-		req.TargetStaffingModel = &builder.targetStaffingModel
-
-	}
 	if builder.originalParentDepartmentIdFlag {
 		req.OriginalParentDepartmentId = &builder.originalParentDepartmentId
 
@@ -31303,6 +31391,7 @@ type SignatureFile struct {
 	ContractCode       *string `json:"contract_code,omitempty"`        // 供应商侧的合同编号，作为幂等key
 	EffectiveDate      *string `json:"effective_date,omitempty"`       // 电子签文件生效日期
 	TemplateId         *string `json:"template_id,omitempty"`          // 电子签模板ID
+	SignUrl            *string `json:"sign_url,omitempty"`             // 签署链接
 }
 
 type SignatureFileBuilder struct {
@@ -31326,6 +31415,8 @@ type SignatureFileBuilder struct {
 	effectiveDateFlag      bool
 	templateId             string // 电子签模板ID
 	templateIdFlag         bool
+	signUrl                string // 签署链接
+	signUrlFlag            bool
 }
 
 func NewSignatureFileBuilder() *SignatureFileBuilder {
@@ -31423,6 +31514,15 @@ func (builder *SignatureFileBuilder) TemplateId(templateId string) *SignatureFil
 	return builder
 }
 
+// 签署链接
+//
+// 示例值：123213
+func (builder *SignatureFileBuilder) SignUrl(signUrl string) *SignatureFileBuilder {
+	builder.signUrl = signUrl
+	builder.signUrlFlag = true
+	return builder
+}
+
 func (builder *SignatureFileBuilder) Build() *SignatureFile {
 	req := &SignatureFile{}
 	if builder.signatureFileIdFlag {
@@ -31461,6 +31561,10 @@ func (builder *SignatureFileBuilder) Build() *SignatureFile {
 	}
 	if builder.templateIdFlag {
 		req.TemplateId = &builder.templateId
+
+	}
+	if builder.signUrlFlag {
+		req.SignUrl = &builder.signUrl
 
 	}
 	return req
@@ -40117,6 +40221,194 @@ func (resp *SearchDepartmentResp) Success() bool {
 	return resp.Code == 0
 }
 
+type TreeDepartmentReqBodyBuilder struct {
+	departmentId      string // 部门 ID，默认根部门
+	departmentIdFlag  bool
+	needInactive      bool // 是否包含失效部门，默认false
+	needInactiveFlag  bool
+	effectiveDate     string // 生效日期，格式yyyy-mm-dd，默认当前日期
+	effectiveDateFlag bool
+}
+
+func NewTreeDepartmentReqBodyBuilder() *TreeDepartmentReqBodyBuilder {
+	builder := &TreeDepartmentReqBodyBuilder{}
+	return builder
+}
+
+// 部门 ID，默认根部门
+//
+// 示例值：6893014062142064111
+func (builder *TreeDepartmentReqBodyBuilder) DepartmentId(departmentId string) *TreeDepartmentReqBodyBuilder {
+	builder.departmentId = departmentId
+	builder.departmentIdFlag = true
+	return builder
+}
+
+// 是否包含失效部门，默认false
+//
+// 示例值：false
+func (builder *TreeDepartmentReqBodyBuilder) NeedInactive(needInactive bool) *TreeDepartmentReqBodyBuilder {
+	builder.needInactive = needInactive
+	builder.needInactiveFlag = true
+	return builder
+}
+
+// 生效日期，格式yyyy-mm-dd，默认当前日期
+//
+// 示例值：2024-01-01
+func (builder *TreeDepartmentReqBodyBuilder) EffectiveDate(effectiveDate string) *TreeDepartmentReqBodyBuilder {
+	builder.effectiveDate = effectiveDate
+	builder.effectiveDateFlag = true
+	return builder
+}
+
+func (builder *TreeDepartmentReqBodyBuilder) Build() *TreeDepartmentReqBody {
+	req := &TreeDepartmentReqBody{}
+	if builder.departmentIdFlag {
+		req.DepartmentId = &builder.departmentId
+	}
+	if builder.needInactiveFlag {
+		req.NeedInactive = &builder.needInactive
+	}
+	if builder.effectiveDateFlag {
+		req.EffectiveDate = &builder.effectiveDate
+	}
+	return req
+}
+
+type TreeDepartmentPathReqBodyBuilder struct {
+	departmentId      string
+	departmentIdFlag  bool
+	needInactive      bool
+	needInactiveFlag  bool
+	effectiveDate     string
+	effectiveDateFlag bool
+}
+
+func NewTreeDepartmentPathReqBodyBuilder() *TreeDepartmentPathReqBodyBuilder {
+	builder := &TreeDepartmentPathReqBodyBuilder{}
+	return builder
+}
+
+// 部门 ID，默认根部门
+//
+// 示例值：6893014062142064111
+func (builder *TreeDepartmentPathReqBodyBuilder) DepartmentId(departmentId string) *TreeDepartmentPathReqBodyBuilder {
+	builder.departmentId = departmentId
+	builder.departmentIdFlag = true
+	return builder
+}
+
+// 是否包含失效部门，默认false
+//
+// 示例值：false
+func (builder *TreeDepartmentPathReqBodyBuilder) NeedInactive(needInactive bool) *TreeDepartmentPathReqBodyBuilder {
+	builder.needInactive = needInactive
+	builder.needInactiveFlag = true
+	return builder
+}
+
+// 生效日期，格式yyyy-mm-dd，默认当前日期
+//
+// 示例值：2024-01-01
+func (builder *TreeDepartmentPathReqBodyBuilder) EffectiveDate(effectiveDate string) *TreeDepartmentPathReqBodyBuilder {
+	builder.effectiveDate = effectiveDate
+	builder.effectiveDateFlag = true
+	return builder
+}
+
+func (builder *TreeDepartmentPathReqBodyBuilder) Build() (*TreeDepartmentReqBody, error) {
+	req := &TreeDepartmentReqBody{}
+	if builder.departmentIdFlag {
+		req.DepartmentId = &builder.departmentId
+	}
+	if builder.needInactiveFlag {
+		req.NeedInactive = &builder.needInactive
+	}
+	if builder.effectiveDateFlag {
+		req.EffectiveDate = &builder.effectiveDate
+	}
+	return req, nil
+}
+
+type TreeDepartmentReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *TreeDepartmentReqBody
+}
+
+func NewTreeDepartmentReqBuilder() *TreeDepartmentReqBuilder {
+	builder := &TreeDepartmentReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 分页大小，最大 100
+//
+// 示例值：100
+func (builder *TreeDepartmentReqBuilder) PageSize(pageSize int) *TreeDepartmentReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：6891251722631890445
+func (builder *TreeDepartmentReqBuilder) PageToken(pageToken string) *TreeDepartmentReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 此次调用中使用的部门 ID 类型
+//
+// 示例值：people_corehr_department_id
+func (builder *TreeDepartmentReqBuilder) DepartmentIdType(departmentIdType string) *TreeDepartmentReqBuilder {
+	builder.apiReq.QueryParams.Set("department_id_type", fmt.Sprint(departmentIdType))
+	return builder
+}
+
+func (builder *TreeDepartmentReqBuilder) Body(body *TreeDepartmentReqBody) *TreeDepartmentReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *TreeDepartmentReqBuilder) Build() *TreeDepartmentReq {
+	req := &TreeDepartmentReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type TreeDepartmentReqBody struct {
+	DepartmentId  *string `json:"department_id,omitempty"`  // 部门 ID，默认根部门
+	NeedInactive  *bool   `json:"need_inactive,omitempty"`  // 是否包含失效部门，默认false
+	EffectiveDate *string `json:"effective_date,omitempty"` // 生效日期，格式yyyy-mm-dd，默认当前日期
+}
+
+type TreeDepartmentReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *TreeDepartmentReqBody `body:""`
+}
+
+type TreeDepartmentRespData struct {
+	Items     []*DepartmentTree `json:"items,omitempty"`      // 部门树节点
+	PageToken *string           `json:"page_token,omitempty"` // 下一页token
+	HasMore   *bool             `json:"has_more,omitempty"`   // 是否有下一页
+}
+
+type TreeDepartmentResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *TreeDepartmentRespData `json:"data"` // 业务数据
+}
+
+func (resp *TreeDepartmentResp) Success() bool {
+	return resp.Code == 0
+}
+
 type BatchGetEmployeeReqBodyBuilder struct {
 	fields            []string // 返回数据的字段列表，填写方式：为空时默认仅返回 ID
 	fieldsFlag        bool
@@ -42045,20 +42337,22 @@ func (resp *ListJobResp) Success() bool {
 }
 
 type SearchJobChangeReqBodyBuilder struct {
-	employmentIds          []string // 雇员 ID 列表
-	employmentIdsFlag      bool
-	jobChangeIds           []string // 异动记录 ID 列表
-	jobChangeIdsFlag       bool
-	statuses               []string // 异动状态，多个状态之间为「或」的关系
-	statusesFlag           bool
-	effectiveDateStart     string // 异动生效日期 - 搜索范围开始，需要与搜索范围结束一同使用
-	effectiveDateStartFlag bool
-	effectiveDateEnd       string // 异动生效日期 - 搜索范围结束
-	effectiveDateEndFlag   bool
-	updatedTimeStart       string // 异动更新时间 - 搜索范围开始，需要与搜索范围结束一同使用
-	updatedTimeStartFlag   bool
-	updatedTimeEnd         string // 异动更新时间 - 搜索范围结束
-	updatedTimeEndFlag     bool
+	employmentIds           []string // 雇员 ID 列表
+	employmentIdsFlag       bool
+	jobChangeIds            []string // 异动记录 ID 列表
+	jobChangeIdsFlag        bool
+	statuses                []string // 异动状态，多个状态之间为「或」的关系
+	statusesFlag            bool
+	effectiveDateStart      string // 异动生效日期 - 搜索范围开始，需要与搜索范围结束一同使用
+	effectiveDateStartFlag  bool
+	effectiveDateEnd        string // 异动生效日期 - 搜索范围结束
+	effectiveDateEndFlag    bool
+	updatedTimeStart        string // 异动更新时间 - 搜索范围开始，需要与搜索范围结束一同使用
+	updatedTimeStartFlag    bool
+	updatedTimeEnd          string // 异动更新时间 - 搜索范围结束
+	updatedTimeEndFlag      bool
+	targetDepartmentIds     []string // 新部门 ID 列表
+	targetDepartmentIdsFlag bool
 }
 
 func NewSearchJobChangeReqBodyBuilder() *SearchJobChangeReqBodyBuilder {
@@ -42129,6 +42423,15 @@ func (builder *SearchJobChangeReqBodyBuilder) UpdatedTimeEnd(updatedTimeEnd stri
 	return builder
 }
 
+// 新部门 ID 列表
+//
+// 示例值：
+func (builder *SearchJobChangeReqBodyBuilder) TargetDepartmentIds(targetDepartmentIds []string) *SearchJobChangeReqBodyBuilder {
+	builder.targetDepartmentIds = targetDepartmentIds
+	builder.targetDepartmentIdsFlag = true
+	return builder
+}
+
 func (builder *SearchJobChangeReqBodyBuilder) Build() *SearchJobChangeReqBody {
 	req := &SearchJobChangeReqBody{}
 	if builder.employmentIdsFlag {
@@ -42152,24 +42455,29 @@ func (builder *SearchJobChangeReqBodyBuilder) Build() *SearchJobChangeReqBody {
 	if builder.updatedTimeEndFlag {
 		req.UpdatedTimeEnd = &builder.updatedTimeEnd
 	}
+	if builder.targetDepartmentIdsFlag {
+		req.TargetDepartmentIds = builder.targetDepartmentIds
+	}
 	return req
 }
 
 type SearchJobChangePathReqBodyBuilder struct {
-	employmentIds          []string
-	employmentIdsFlag      bool
-	jobChangeIds           []string
-	jobChangeIdsFlag       bool
-	statuses               []string
-	statusesFlag           bool
-	effectiveDateStart     string
-	effectiveDateStartFlag bool
-	effectiveDateEnd       string
-	effectiveDateEndFlag   bool
-	updatedTimeStart       string
-	updatedTimeStartFlag   bool
-	updatedTimeEnd         string
-	updatedTimeEndFlag     bool
+	employmentIds           []string
+	employmentIdsFlag       bool
+	jobChangeIds            []string
+	jobChangeIdsFlag        bool
+	statuses                []string
+	statusesFlag            bool
+	effectiveDateStart      string
+	effectiveDateStartFlag  bool
+	effectiveDateEnd        string
+	effectiveDateEndFlag    bool
+	updatedTimeStart        string
+	updatedTimeStartFlag    bool
+	updatedTimeEnd          string
+	updatedTimeEndFlag      bool
+	targetDepartmentIds     []string
+	targetDepartmentIdsFlag bool
 }
 
 func NewSearchJobChangePathReqBodyBuilder() *SearchJobChangePathReqBodyBuilder {
@@ -42240,6 +42548,15 @@ func (builder *SearchJobChangePathReqBodyBuilder) UpdatedTimeEnd(updatedTimeEnd 
 	return builder
 }
 
+// 新部门 ID 列表
+//
+// 示例值：
+func (builder *SearchJobChangePathReqBodyBuilder) TargetDepartmentIds(targetDepartmentIds []string) *SearchJobChangePathReqBodyBuilder {
+	builder.targetDepartmentIds = targetDepartmentIds
+	builder.targetDepartmentIdsFlag = true
+	return builder
+}
+
 func (builder *SearchJobChangePathReqBodyBuilder) Build() (*SearchJobChangeReqBody, error) {
 	req := &SearchJobChangeReqBody{}
 	if builder.employmentIdsFlag {
@@ -42262,6 +42579,9 @@ func (builder *SearchJobChangePathReqBodyBuilder) Build() (*SearchJobChangeReqBo
 	}
 	if builder.updatedTimeEndFlag {
 		req.UpdatedTimeEnd = &builder.updatedTimeEnd
+	}
+	if builder.targetDepartmentIdsFlag {
+		req.TargetDepartmentIds = builder.targetDepartmentIds
 	}
 	return req, nil
 }
@@ -42335,13 +42655,14 @@ func (builder *SearchJobChangeReqBuilder) Build() *SearchJobChangeReq {
 }
 
 type SearchJobChangeReqBody struct {
-	EmploymentIds      []string `json:"employment_ids,omitempty"`       // 雇员 ID 列表
-	JobChangeIds       []string `json:"job_change_ids,omitempty"`       // 异动记录 ID 列表
-	Statuses           []string `json:"statuses,omitempty"`             // 异动状态，多个状态之间为「或」的关系
-	EffectiveDateStart *string  `json:"effective_date_start,omitempty"` // 异动生效日期 - 搜索范围开始，需要与搜索范围结束一同使用
-	EffectiveDateEnd   *string  `json:"effective_date_end,omitempty"`   // 异动生效日期 - 搜索范围结束
-	UpdatedTimeStart   *string  `json:"updated_time_start,omitempty"`   // 异动更新时间 - 搜索范围开始，需要与搜索范围结束一同使用
-	UpdatedTimeEnd     *string  `json:"updated_time_end,omitempty"`     // 异动更新时间 - 搜索范围结束
+	EmploymentIds       []string `json:"employment_ids,omitempty"`        // 雇员 ID 列表
+	JobChangeIds        []string `json:"job_change_ids,omitempty"`        // 异动记录 ID 列表
+	Statuses            []string `json:"statuses,omitempty"`              // 异动状态，多个状态之间为「或」的关系
+	EffectiveDateStart  *string  `json:"effective_date_start,omitempty"`  // 异动生效日期 - 搜索范围开始，需要与搜索范围结束一同使用
+	EffectiveDateEnd    *string  `json:"effective_date_end,omitempty"`    // 异动生效日期 - 搜索范围结束
+	UpdatedTimeStart    *string  `json:"updated_time_start,omitempty"`    // 异动更新时间 - 搜索范围开始，需要与搜索范围结束一同使用
+	UpdatedTimeEnd      *string  `json:"updated_time_end,omitempty"`      // 异动更新时间 - 搜索范围结束
+	TargetDepartmentIds []string `json:"target_department_ids,omitempty"` // 新部门 ID 列表
 }
 
 type SearchJobChangeReq struct {

@@ -28,7 +28,7 @@ func main() {
 	// 创建请求对象
 	req := larkhire.NewListQuestionnaireReqBuilder().
 		PageToken("1231231987").
-		PageSize(1).
+		PageSize(20).
 		ApplicationId("6985833807195212076").
 		InterviewId("7038435261598763308").
 		UpdateStartTime("1638848468868").

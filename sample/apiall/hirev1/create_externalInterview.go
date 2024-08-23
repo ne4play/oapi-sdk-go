@@ -33,6 +33,7 @@ func main() {
 			ParticipateStatus(1).
 			BeginTime(1618500278638).
 			EndTime(1618500278639).
+			InterviewAssessments([]*larkhire.ExternalInterviewAssessment{larkhire.NewExternalInterviewAssessmentBuilder().Build()}).
 			Build()).
 		Build()
 	// 发起请求

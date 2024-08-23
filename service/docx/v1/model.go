@@ -4541,6 +4541,7 @@ type TextStyle struct {
 	Wrap             *bool   `json:"wrap,omitempty"`              // 代码块是否自动换行
 	BackgroundColor  *string `json:"background_color,omitempty"`  // 块背景色
 	IndentationLevel *string `json:"indentation_level,omitempty"` // 首行缩进级别
+	Sequence         *string `json:"sequence,omitempty"`          // 用于确定有序列表项编号，为具体数值或'auto'
 }
 
 type TextStyleBuilder struct {
@@ -4558,6 +4559,8 @@ type TextStyleBuilder struct {
 	backgroundColorFlag  bool
 	indentationLevel     string // 首行缩进级别
 	indentationLevelFlag bool
+	sequence             string // 用于确定有序列表项编号，为具体数值或'auto'
+	sequenceFlag         bool
 }
 
 func NewTextStyleBuilder() *TextStyleBuilder {
@@ -4628,6 +4631,15 @@ func (builder *TextStyleBuilder) IndentationLevel(indentationLevel string) *Text
 	return builder
 }
 
+// 用于确定有序列表项编号，为具体数值或'auto'
+//
+// 示例值："auto"
+func (builder *TextStyleBuilder) Sequence(sequence string) *TextStyleBuilder {
+	builder.sequence = sequence
+	builder.sequenceFlag = true
+	return builder
+}
+
 func (builder *TextStyleBuilder) Build() *TextStyle {
 	req := &TextStyle{}
 	if builder.alignFlag {
@@ -4656,6 +4668,10 @@ func (builder *TextStyleBuilder) Build() *TextStyle {
 	}
 	if builder.indentationLevelFlag {
 		req.IndentationLevel = &builder.indentationLevel
+
+	}
+	if builder.sequenceFlag {
+		req.Sequence = &builder.sequence
 
 	}
 	return req

@@ -1840,6 +1840,131 @@ func (builder *BpmDataengineI18nBuilder) Build() *BpmDataengineI18n {
 	return req
 }
 
+type CalendarDateByDateFilter struct {
+	WkCalendarIds []string `json:"wk_calendar_ids,omitempty"` // 工作日历WKID列表，最多100
+	Dates         []string `json:"dates,omitempty"`           // 日期，格式："2006-01-02"，最多50个
+	BeginDate     *string  `json:"begin_date,omitempty"`      // 日期范围-开始日期，格式："2006-01-02"
+	EndDate       *string  `json:"end_date,omitempty"`        // 日期范围-结束日期(含)，格式："2006-01-02"
+	Offset        *int     `json:"offset,omitempty"`          // 分页
+	Limit         *int     `json:"limit,omitempty"`           // 分页大小
+	Ids           []string `json:"ids,omitempty"`             // 日期id，与其他筛选参数互斥，传了该参数，其他筛选参数不起效
+}
+
+type CalendarDateByDateFilterBuilder struct {
+	wkCalendarIds     []string // 工作日历WKID列表，最多100
+	wkCalendarIdsFlag bool
+	dates             []string // 日期，格式："2006-01-02"，最多50个
+	datesFlag         bool
+	beginDate         string // 日期范围-开始日期，格式："2006-01-02"
+	beginDateFlag     bool
+	endDate           string // 日期范围-结束日期(含)，格式："2006-01-02"
+	endDateFlag       bool
+	offset            int // 分页
+	offsetFlag        bool
+	limit             int // 分页大小
+	limitFlag         bool
+	ids               []string // 日期id，与其他筛选参数互斥，传了该参数，其他筛选参数不起效
+	idsFlag           bool
+}
+
+func NewCalendarDateByDateFilterBuilder() *CalendarDateByDateFilterBuilder {
+	builder := &CalendarDateByDateFilterBuilder{}
+	return builder
+}
+
+// 工作日历WKID列表，最多100
+//
+// 示例值："7390282135276635692"
+func (builder *CalendarDateByDateFilterBuilder) WkCalendarIds(wkCalendarIds []string) *CalendarDateByDateFilterBuilder {
+	builder.wkCalendarIds = wkCalendarIds
+	builder.wkCalendarIdsFlag = true
+	return builder
+}
+
+// 日期，格式："2006-01-02"，最多50个
+//
+// 示例值：
+func (builder *CalendarDateByDateFilterBuilder) Dates(dates []string) *CalendarDateByDateFilterBuilder {
+	builder.dates = dates
+	builder.datesFlag = true
+	return builder
+}
+
+// 日期范围-开始日期，格式："2006-01-02"
+//
+// 示例值："2006-01-02"
+func (builder *CalendarDateByDateFilterBuilder) BeginDate(beginDate string) *CalendarDateByDateFilterBuilder {
+	builder.beginDate = beginDate
+	builder.beginDateFlag = true
+	return builder
+}
+
+// 日期范围-结束日期(含)，格式："2006-01-02"
+//
+// 示例值："2006-01-02"
+func (builder *CalendarDateByDateFilterBuilder) EndDate(endDate string) *CalendarDateByDateFilterBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 分页
+//
+// 示例值：0
+func (builder *CalendarDateByDateFilterBuilder) Offset(offset int) *CalendarDateByDateFilterBuilder {
+	builder.offset = offset
+	builder.offsetFlag = true
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：10
+func (builder *CalendarDateByDateFilterBuilder) Limit(limit int) *CalendarDateByDateFilterBuilder {
+	builder.limit = limit
+	builder.limitFlag = true
+	return builder
+}
+
+// 日期id，与其他筛选参数互斥，传了该参数，其他筛选参数不起效
+//
+// 示例值：
+func (builder *CalendarDateByDateFilterBuilder) Ids(ids []string) *CalendarDateByDateFilterBuilder {
+	builder.ids = ids
+	builder.idsFlag = true
+	return builder
+}
+
+func (builder *CalendarDateByDateFilterBuilder) Build() *CalendarDateByDateFilter {
+	req := &CalendarDateByDateFilter{}
+	if builder.wkCalendarIdsFlag {
+		req.WkCalendarIds = builder.wkCalendarIds
+	}
+	if builder.datesFlag {
+		req.Dates = builder.dates
+	}
+	if builder.beginDateFlag {
+		req.BeginDate = &builder.beginDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
+
+	}
+	if builder.offsetFlag {
+		req.Offset = &builder.offset
+
+	}
+	if builder.limitFlag {
+		req.Limit = &builder.limit
+
+	}
+	if builder.idsFlag {
+		req.Ids = builder.ids
+	}
+	return req
+}
+
 type CommonSchemaConfig struct {
 	TextFieldSetting       *TextFieldSetting       `json:"text_field_setting,omitempty"`       // 文本配置信息
 	NumberFieldSetting     *NumberFieldSetting     `json:"number_field_setting,omitempty"`     // 数字配置信息
@@ -16887,6 +17012,86 @@ func (builder *UserIdBuilder) Build() *UserId {
 	return req
 }
 
+type WkCalendarDate struct {
+	CalendarId *string `json:"calendar_id,omitempty"` // 工作日历WKID
+	Date       *string `json:"date,omitempty"`        // 日期，格式："2006-01-02"
+	DateType   *string `json:"date_type,omitempty"`   // 日期类型
+	Id         *string `json:"id,omitempty"`          // 日期id
+}
+
+type WkCalendarDateBuilder struct {
+	calendarId     string // 工作日历WKID
+	calendarIdFlag bool
+	date           string // 日期，格式："2006-01-02"
+	dateFlag       bool
+	dateType       string // 日期类型
+	dateTypeFlag   bool
+	id             string // 日期id
+	idFlag         bool
+}
+
+func NewWkCalendarDateBuilder() *WkCalendarDateBuilder {
+	builder := &WkCalendarDateBuilder{}
+	return builder
+}
+
+// 工作日历WKID
+//
+// 示例值："7390282135276635692"
+func (builder *WkCalendarDateBuilder) CalendarId(calendarId string) *WkCalendarDateBuilder {
+	builder.calendarId = calendarId
+	builder.calendarIdFlag = true
+	return builder
+}
+
+// 日期，格式："2006-01-02"
+//
+// 示例值："2006-01-02"
+func (builder *WkCalendarDateBuilder) Date(date string) *WkCalendarDateBuilder {
+	builder.date = date
+	builder.dateFlag = true
+	return builder
+}
+
+// 日期类型
+//
+// 示例值："day_off"
+func (builder *WkCalendarDateBuilder) DateType(dateType string) *WkCalendarDateBuilder {
+	builder.dateType = dateType
+	builder.dateTypeFlag = true
+	return builder
+}
+
+// 日期id
+//
+// 示例值："7390282135276635692"
+func (builder *WkCalendarDateBuilder) Id(id string) *WkCalendarDateBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+func (builder *WkCalendarDateBuilder) Build() *WkCalendarDate {
+	req := &WkCalendarDate{}
+	if builder.calendarIdFlag {
+		req.CalendarId = &builder.calendarId
+
+	}
+	if builder.dateFlag {
+		req.Date = &builder.date
+
+	}
+	if builder.dateTypeFlag {
+		req.DateType = &builder.dateType
+
+	}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	return req
+}
+
 type WkCalendarI18n struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文值
 	EnUs *string `json:"en_us,omitempty"` // 英文值
@@ -25781,6 +25986,7 @@ type P2JobDataChangedV1Data struct {
 	JobDataId    *string `json:"job_data_id,omitempty"`    // 主对象ID
 	EmploymentId *string `json:"employment_id,omitempty"`  // 员工雇佣 ID
 	TargetUserId *UserId `json:"target_user_id,omitempty"` // 用户 ID
+	JobChangeId  *string `json:"job_change_id,omitempty"`  // 员工异动 ID
 }
 
 type P2JobDataChangedV1 struct {
