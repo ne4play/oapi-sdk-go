@@ -1806,6 +1806,32 @@ func (j *jobLevel) Patch(ctx context.Context, req *PatchJobLevelReq, options ...
 	return resp, err
 }
 
+// CalendarByScope
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=calendar_by_scope&project=corehr&resource=leave&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv1/calendarByScope_leave.go
+func (l *leave) CalendarByScope(ctx context.Context, req *CalendarByScopeLeaveReq, options ...larkcore.RequestOptionFunc) (*CalendarByScopeLeaveResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v1/leaves/calendar_by_scope"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &CalendarByScopeLeaveResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // LeaveBalances 批量查询员工假期余额
 //
 // - 批量获取员工各个假期的余额数据

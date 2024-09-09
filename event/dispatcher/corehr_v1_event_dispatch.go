@@ -230,6 +230,30 @@ func (dispatcher *EventDispatcher) OnP2JobDataChangedV1(handler func(ctx context
 	return dispatcher
 }
 
+// -
+//
+// - 事件描述文档链接:
+func (dispatcher *EventDispatcher) OnP2JobDataCreatedV1(handler func(ctx context.Context, event *larkcorehr.P2JobDataCreatedV1) error) *EventDispatcher {
+	_, existed := dispatcher.eventType2EventHandler["corehr.job_data.created_v1"]
+	if existed {
+		panic("event: multiple handler registrations for " + "corehr.job_data.created_v1")
+	}
+	dispatcher.eventType2EventHandler["corehr.job_data.created_v1"] = larkcorehr.NewP2JobDataCreatedV1Handler(handler)
+	return dispatcher
+}
+
+// -
+//
+// - 事件描述文档链接:
+func (dispatcher *EventDispatcher) OnP2JobDataDeletedV1(handler func(ctx context.Context, event *larkcorehr.P2JobDataDeletedV1) error) *EventDispatcher {
+	_, existed := dispatcher.eventType2EventHandler["corehr.job_data.deleted_v1"]
+	if existed {
+		panic("event: multiple handler registrations for " + "corehr.job_data.deleted_v1")
+	}
+	dispatcher.eventType2EventHandler["corehr.job_data.deleted_v1"] = larkcorehr.NewP2JobDataDeletedV1Handler(handler)
+	return dispatcher
+}
+
 // 员工完成入职
 //
 // - 在「飞书人事」将待入职员工手动操作“完成入职”后，触发该事件
@@ -241,6 +265,18 @@ func (dispatcher *EventDispatcher) OnP2JobDataEmployedV1(handler func(ctx contex
 		panic("event: multiple handler registrations for " + "corehr.job_data.employed_v1")
 	}
 	dispatcher.eventType2EventHandler["corehr.job_data.employed_v1"] = larkcorehr.NewP2JobDataEmployedV1Handler(handler)
+	return dispatcher
+}
+
+// -
+//
+// - 事件描述文档链接:
+func (dispatcher *EventDispatcher) OnP2JobDataUpdatedV1(handler func(ctx context.Context, event *larkcorehr.P2JobDataUpdatedV1) error) *EventDispatcher {
+	_, existed := dispatcher.eventType2EventHandler["corehr.job_data.updated_v1"]
+	if existed {
+		panic("event: multiple handler registrations for " + "corehr.job_data.updated_v1")
+	}
+	dispatcher.eventType2EventHandler["corehr.job_data.updated_v1"] = larkcorehr.NewP2JobDataUpdatedV1Handler(handler)
 	return dispatcher
 }
 

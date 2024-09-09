@@ -34,6 +34,7 @@ func main() {
 			NameList([]*larkcorehr.PersonName{larkcorehr.NewPersonNameBuilder().Build()}).
 			Gender(larkcorehr.NewEnumBuilder().Build()).
 			DateOfBirth("2020-01-01").
+			NationalityIdV2("6862995757234914821").
 			Race(larkcorehr.NewEnumBuilder().Build()).
 			MaritalStatus(larkcorehr.NewEnumBuilder().Build()).
 			PhoneList([]*larkcorehr.Phone{larkcorehr.NewPhoneBuilder().Build()}).

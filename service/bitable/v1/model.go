@@ -2371,7 +2371,8 @@ type AppTableRecord struct {
 	CreatedTime      *int64                 `json:"created_time,omitempty"`       // 该记录的创建时间
 	LastModifiedBy   *Person                `json:"last_modified_by,omitempty"`   // 该记录最新一次更新的修改人
 	LastModifiedTime *int64                 `json:"last_modified_time,omitempty"` // 该记录最近一次的更新时间
-	RecordUrl        *string                `json:"record_url,omitempty"`         // 记录链接
+	SharedUrl        *string                `json:"shared_url,omitempty"`         // 记录分享链接(批量获取记录接口将返回该字段)
+	RecordUrl        *string                `json:"record_url,omitempty"`         // 记录链接(检索记录接口将返回该字段)
 }
 
 type AppTableRecordBuilder struct {
@@ -2387,7 +2388,9 @@ type AppTableRecordBuilder struct {
 	lastModifiedByFlag   bool
 	lastModifiedTime     int64 // 该记录最近一次的更新时间
 	lastModifiedTimeFlag bool
-	recordUrl            string // 记录链接
+	sharedUrl            string // 记录分享链接(批量获取记录接口将返回该字段)
+	sharedUrlFlag        bool
+	recordUrl            string // 记录链接(检索记录接口将返回该字段)
 	recordUrlFlag        bool
 }
 
@@ -2450,7 +2453,16 @@ func (builder *AppTableRecordBuilder) LastModifiedTime(lastModifiedTime int64) *
 	return builder
 }
 
-// 记录链接
+// 记录分享链接(批量获取记录接口将返回该字段)
+//
+// 示例值：https://www.example.com/record/WVoXrzIaqeorcJcHgzAcg8AQnNd
+func (builder *AppTableRecordBuilder) SharedUrl(sharedUrl string) *AppTableRecordBuilder {
+	builder.sharedUrl = sharedUrl
+	builder.sharedUrlFlag = true
+	return builder
+}
+
+// 记录链接(检索记录接口将返回该字段)
 //
 // 示例值：https://www.example.com/record/WVoXrzIaqeorcJcHgzAcg8AQnNd
 func (builder *AppTableRecordBuilder) RecordUrl(recordUrl string) *AppTableRecordBuilder {
@@ -2480,6 +2492,10 @@ func (builder *AppTableRecordBuilder) Build() *AppTableRecord {
 	}
 	if builder.lastModifiedTimeFlag {
 		req.LastModifiedTime = &builder.lastModifiedTime
+
+	}
+	if builder.sharedUrlFlag {
+		req.SharedUrl = &builder.sharedUrl
 
 	}
 	if builder.recordUrlFlag {

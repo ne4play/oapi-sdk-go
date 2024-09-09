@@ -11,7 +11,7 @@ import (
 type V1 struct {
 	Advertisement                   *advertisement                   // advertisement
 	Agency                          *agency                          // 猎头（灰度租户可见）
-	Application                     *application                     // 入职
+	Application                     *application                     // 投递
 	ApplicationInterview            *applicationInterview            // application.interview
 	Attachment                      *attachment                      // 附件
 	BackgroundCheckOrder            *backgroundCheckOrder            // 背调 （灰度租户可见）
@@ -42,6 +42,7 @@ type V1 struct {
 	InterviewRegistrationSchema     *interviewRegistrationSchema     // interview_registration_schema
 	InterviewRoundType              *interviewRoundType              // 面试轮次类型
 	InterviewTask                   *interviewTask                   // 面试任务
+	Interviewer                     *interviewer                     // interviewer
 	Job                             *job                             // 职位
 	JobManager                      *jobManager                      // job.manager
 	JobFunction                     *jobFunction                     // job_function
@@ -52,6 +53,7 @@ type V1 struct {
 	JobSchema                       *jobSchema                       // job_schema
 	JobType                         *jobType                         // job_type
 	Location                        *location                        // 地址（灰度租户可见）
+	Minutes                         *minutes                         // minutes
 	Note                            *note                            // 备注
 	Offer                           *offer                           // Offer
 	OfferApplicationForm            *offerApplicationForm            // Offer 申请表（灰度租户可见）
@@ -75,6 +77,7 @@ type V1 struct {
 	Test                            *test                            // test
 	Todo                            *todo                            // 待办
 	TripartiteAgreement             *tripartiteAgreement             // tripartite_agreement
+	UserRole                        *userRole                        // 权限
 	Website                         *website                         // 官网（灰度租户可见）
 	WebsiteChannel                  *websiteChannel                  // website.channel
 	WebsiteDelivery                 *websiteDelivery                 // website.delivery
@@ -118,6 +121,7 @@ func New(config *larkcore.Config) *V1 {
 		InterviewRegistrationSchema:     &interviewRegistrationSchema{config: config},
 		InterviewRoundType:              &interviewRoundType{config: config},
 		InterviewTask:                   &interviewTask{config: config},
+		Interviewer:                     &interviewer{config: config},
 		Job:                             &job{config: config},
 		JobManager:                      &jobManager{config: config},
 		JobFunction:                     &jobFunction{config: config},
@@ -128,6 +132,7 @@ func New(config *larkcore.Config) *V1 {
 		JobSchema:                       &jobSchema{config: config},
 		JobType:                         &jobType{config: config},
 		Location:                        &location{config: config},
+		Minutes:                         &minutes{config: config},
 		Note:                            &note{config: config},
 		Offer:                           &offer{config: config},
 		OfferApplicationForm:            &offerApplicationForm{config: config},
@@ -151,6 +156,7 @@ func New(config *larkcore.Config) *V1 {
 		Test:                            &test{config: config},
 		Todo:                            &todo{config: config},
 		TripartiteAgreement:             &tripartiteAgreement{config: config},
+		UserRole:                        &userRole{config: config},
 		Website:                         &website{config: config},
 		WebsiteChannel:                  &websiteChannel{config: config},
 		WebsiteDelivery:                 &websiteDelivery{config: config},
@@ -259,6 +265,9 @@ type interviewRoundType struct {
 type interviewTask struct {
 	config *larkcore.Config
 }
+type interviewer struct {
+	config *larkcore.Config
+}
 type job struct {
 	config *larkcore.Config
 }
@@ -287,6 +296,9 @@ type jobType struct {
 	config *larkcore.Config
 }
 type location struct {
+	config *larkcore.Config
+}
+type minutes struct {
 	config *larkcore.Config
 }
 type note struct {
@@ -356,6 +368,9 @@ type todo struct {
 	config *larkcore.Config
 }
 type tripartiteAgreement struct {
+	config *larkcore.Config
+}
+type userRole struct {
 	config *larkcore.Config
 }
 type website struct {
@@ -2083,6 +2098,66 @@ func (i *interviewTask) ListByIterator(ctx context.Context, req *ListInterviewTa
 		limit:    req.Limit}, nil
 }
 
+// List
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=hire&resource=interviewer&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/hirev1/list_interviewer.go
+func (i *interviewer) List(ctx context.Context, req *ListInterviewerReq, options ...larkcore.RequestOptionFunc) (*ListInterviewerResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/hire/v1/interviewers"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, i.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListInterviewerResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, i.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (i *interviewer) ListByIterator(ctx context.Context, req *ListInterviewerReq, options ...larkcore.RequestOptionFunc) (*ListInterviewerIterator, error) {
+	return &ListInterviewerIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: i.List,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// Patch
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=patch&project=hire&resource=interviewer&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/hirev1/patch_interviewer.go
+func (i *interviewer) Patch(ctx context.Context, req *PatchInterviewerReq, options ...larkcore.RequestOptionFunc) (*PatchInterviewerResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/hire/v1/interviewers/:interviewer_id"
+	apiReq.HttpMethod = http.MethodPatch
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, i.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &PatchInterviewerResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, i.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Close 关闭职位
 //
 // - 支持关闭职位，关闭后，职位将同步从官网、内推、猎头渠道下线
@@ -2725,6 +2800,32 @@ func (l *location) Query(ctx context.Context, req *QueryLocationReq, options ...
 	// 反序列响应结果
 	resp := &QueryLocationResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Get
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=get&project=hire&resource=minutes&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/hirev1/get_minutes.go
+func (m *minutes) Get(ctx context.Context, req *GetMinutesReq, options ...larkcore.RequestOptionFunc) (*GetMinutesResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/hire/v1/minutes"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, m.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &GetMinutesResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, m.config)
 	if err != nil {
 		return nil, err
 	}
@@ -4112,6 +4213,40 @@ func (t *tripartiteAgreement) Update(ctx context.Context, req *UpdateTripartiteA
 		return nil, err
 	}
 	return resp, err
+}
+
+// List 获取用户角色列表
+//
+// - 获取用户角色列表
+//
+// - 官网API文档链接:https://open.feishu.cn/document/ukTMukTMukTM/uMzM1YjLzMTN24yMzUjN/hire-v1/user_role/list
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/hirev1/list_userRole.go
+func (u *userRole) List(ctx context.Context, req *ListUserRoleReq, options ...larkcore.RequestOptionFunc) (*ListUserRoleResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/hire/v1/user_roles"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, u.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListUserRoleResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, u.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (u *userRole) ListByIterator(ctx context.Context, req *ListUserRoleReq, options ...larkcore.RequestOptionFunc) (*ListUserRoleIterator, error) {
+	return &ListUserRoleIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: u.List,
+		options:  options,
+		limit:    req.Limit}, nil
 }
 
 // List 获取自定义官网列表

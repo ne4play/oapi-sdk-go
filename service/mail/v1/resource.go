@@ -20,6 +20,7 @@ type V1 struct {
 	User                      *user                      // 邮箱地址
 	UserMailbox               *userMailbox               // 用户邮箱
 	UserMailboxAlias          *userMailboxAlias          // 用户邮箱别名
+	UserMailboxMessage        *userMailboxMessage        // user_mailbox.message
 }
 
 func New(config *larkcore.Config) *V1 {
@@ -35,6 +36,7 @@ func New(config *larkcore.Config) *V1 {
 		User:                      &user{config: config},
 		UserMailbox:               &userMailbox{config: config},
 		UserMailboxAlias:          &userMailboxAlias{config: config},
+		UserMailboxMessage:        &userMailboxMessage{config: config},
 	}
 }
 
@@ -69,6 +71,9 @@ type userMailbox struct {
 	config *larkcore.Config
 }
 type userMailboxAlias struct {
+	config *larkcore.Config
+}
+type userMailboxMessage struct {
 	config *larkcore.Config
 }
 
@@ -1283,6 +1288,32 @@ func (u *userMailboxAlias) List(ctx context.Context, req *ListUserMailboxAliasRe
 	}
 	// 反序列响应结果
 	resp := &ListUserMailboxAliasResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, u.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Send
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=send&project=mail&resource=user_mailbox.message&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/mailv1/send_userMailboxMessage.go
+func (u *userMailboxMessage) Send(ctx context.Context, req *SendUserMailboxMessageReq, options ...larkcore.RequestOptionFunc) (*SendUserMailboxMessageResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/mail/v1/user_mailboxes/:user_mailbox_id/messages/send"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, u.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &SendUserMailboxMessageResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, u.config)
 	if err != nil {
 		return nil, err

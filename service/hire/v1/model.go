@@ -425,6 +425,24 @@ const (
 )
 
 const (
+	VerifyStatusNotVarified = 1 //
+	VerifyStatusVarified    = 2 //
+
+)
+
+const (
+	UserIdTypeListInterviewerUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeListInterviewerUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeListInterviewerOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
+	UserIdTypePatchInterviewerUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypePatchInterviewerUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypePatchInterviewerOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
 	ExperienceNoLimit         = 1 // 不限
 	ExperienceGraduate        = 2 // 应届毕业生
 	ExperienceUnderOneYear    = 3 // 1年以下
@@ -1178,6 +1196,12 @@ const (
 )
 
 const (
+	UserIdTypeListUserRoleUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeListUserRoleUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeListUserRoleOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
 	UserIdTypeCreateByResumeWebsiteDeliveryUserId  = "user_id"  // 以user_id来识别用户
 	UserIdTypeCreateByResumeWebsiteDeliveryUnionId = "union_id" // 以union_id来识别用户
 	UserIdTypeCreateByResumeWebsiteDeliveryOpenId  = "open_id"  // 以open_id来识别用户
@@ -1515,6 +1539,196 @@ func (builder *AgencyBuilder) Build() *Agency {
 	return req
 }
 
+type AgencyAccount struct {
+	Id         *string            `json:"id,omitempty"`          // 猎头 ID
+	Reason     *string            `json:"reason,omitempty"`      // 禁用原因
+	CreateTime *string            `json:"create_time,omitempty"` // 添加时间，毫秒时间戳
+	Status     *int               `json:"status,omitempty"`      // 猎头状态
+	UserInfo   *AgencyAccountUser `json:"user_info,omitempty"`   // 用户信息
+	Role       *int               `json:"role,omitempty"`        // 角色
+}
+
+type AgencyAccountBuilder struct {
+	id             string // 猎头 ID
+	idFlag         bool
+	reason         string // 禁用原因
+	reasonFlag     bool
+	createTime     string // 添加时间，毫秒时间戳
+	createTimeFlag bool
+	status         int // 猎头状态
+	statusFlag     bool
+	userInfo       *AgencyAccountUser // 用户信息
+	userInfoFlag   bool
+	role           int // 角色
+	roleFlag       bool
+}
+
+func NewAgencyAccountBuilder() *AgencyAccountBuilder {
+	builder := &AgencyAccountBuilder{}
+	return builder
+}
+
+// 猎头 ID
+//
+// 示例值：6995312261554538796
+func (builder *AgencyAccountBuilder) Id(id string) *AgencyAccountBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 禁用原因
+//
+// 示例值：这个猎头很不负责
+func (builder *AgencyAccountBuilder) Reason(reason string) *AgencyAccountBuilder {
+	builder.reason = reason
+	builder.reasonFlag = true
+	return builder
+}
+
+// 添加时间，毫秒时间戳
+//
+// 示例值：1639992265035
+func (builder *AgencyAccountBuilder) CreateTime(createTime string) *AgencyAccountBuilder {
+	builder.createTime = createTime
+	builder.createTimeFlag = true
+	return builder
+}
+
+// 猎头状态
+//
+// 示例值：
+func (builder *AgencyAccountBuilder) Status(status int) *AgencyAccountBuilder {
+	builder.status = status
+	builder.statusFlag = true
+	return builder
+}
+
+// 用户信息
+//
+// 示例值：
+func (builder *AgencyAccountBuilder) UserInfo(userInfo *AgencyAccountUser) *AgencyAccountBuilder {
+	builder.userInfo = userInfo
+	builder.userInfoFlag = true
+	return builder
+}
+
+// 角色
+//
+// 示例值：
+func (builder *AgencyAccountBuilder) Role(role int) *AgencyAccountBuilder {
+	builder.role = role
+	builder.roleFlag = true
+	return builder
+}
+
+func (builder *AgencyAccountBuilder) Build() *AgencyAccount {
+	req := &AgencyAccount{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.reasonFlag {
+		req.Reason = &builder.reason
+
+	}
+	if builder.createTimeFlag {
+		req.CreateTime = &builder.createTime
+
+	}
+	if builder.statusFlag {
+		req.Status = &builder.status
+
+	}
+	if builder.userInfoFlag {
+		req.UserInfo = builder.userInfo
+	}
+	if builder.roleFlag {
+		req.Role = &builder.role
+
+	}
+	return req
+}
+
+type AgencyAccountUser struct {
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+	Name   *I18n   `json:"name,omitempty"`    // 用户名称
+	Email  *string `json:"email,omitempty"`   // 用户邮箱
+	Mobile *string `json:"mobile,omitempty"`  // 用户手机
+}
+
+type AgencyAccountUserBuilder struct {
+	userId     string // 用户ID
+	userIdFlag bool
+	name       *I18n // 用户名称
+	nameFlag   bool
+	email      string // 用户邮箱
+	emailFlag  bool
+	mobile     string // 用户手机
+	mobileFlag bool
+}
+
+func NewAgencyAccountUserBuilder() *AgencyAccountUserBuilder {
+	builder := &AgencyAccountUserBuilder{}
+	return builder
+}
+
+// 用户ID
+//
+// 示例值：7398623155442682156
+func (builder *AgencyAccountUserBuilder) UserId(userId string) *AgencyAccountUserBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 用户名称
+//
+// 示例值：
+func (builder *AgencyAccountUserBuilder) Name(name *I18n) *AgencyAccountUserBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 用户邮箱
+//
+// 示例值：27188272xxxx1.com
+func (builder *AgencyAccountUserBuilder) Email(email string) *AgencyAccountUserBuilder {
+	builder.email = email
+	builder.emailFlag = true
+	return builder
+}
+
+// 用户手机
+//
+// 示例值：1879087xxx8
+func (builder *AgencyAccountUserBuilder) Mobile(mobile string) *AgencyAccountUserBuilder {
+	builder.mobile = mobile
+	builder.mobileFlag = true
+	return builder
+}
+
+func (builder *AgencyAccountUserBuilder) Build() *AgencyAccountUser {
+	req := &AgencyAccountUser{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	if builder.emailFlag {
+		req.Email = &builder.email
+
+	}
+	if builder.mobileFlag {
+		req.Mobile = &builder.mobile
+
+	}
+	return req
+}
+
 type AgencyBasicInfo struct {
 	HunterUserName    *I18n   `json:"hunter_user_name,omitempty"`    // 猎头用户名
 	HunterCompanyName *string `json:"hunter_company_name,omitempty"` // 猎头公司名
@@ -1761,6 +1975,432 @@ func (builder *AgencyProtectionBuilder) Build() *AgencyProtection {
 	}
 	if builder.agencySupplierUserNameFlag {
 		req.AgencySupplierUserName = builder.agencySupplierUserName
+	}
+	return req
+}
+
+type AgencySupplier struct {
+	Id                    *string                          `json:"id,omitempty"`                      // 猎头供应商 ID
+	Name                  *string                          `json:"name,omitempty"`                    // 猎头供应商名称
+	LabelList             []*AgencySupplierLabel           `json:"label_list,omitempty"`              // 标签列表
+	AdminList             []*AgencySupplierAdmin           `json:"admin_list,omitempty"`              // 管理员列表
+	AgencyProtectTime     *AgencySupplierProtectTime       `json:"agency_protect_time,omitempty"`     // 猎头简历保护期
+	CooperationCreateTime *string                          `json:"cooperation_create_time,omitempty"` // 合作创建时间，毫秒时间戳
+	CooperationStartTime  *string                          `json:"cooperation_start_time,omitempty"`  // 合作开始时间，毫秒时间戳
+	CooperationEndTime    *string                          `json:"cooperation_end_time,omitempty"`    // 合作终止时间，毫秒时间戳
+	CooperationStatus     *int                             `json:"cooperation_status,omitempty"`      // 合作状态，毫秒时间戳
+	InviteEmail           *string                          `json:"invite_email,omitempty"`            // 供应商邮箱
+	SupplierArea          *int                             `json:"supplier_area,omitempty"`           // 猎头区域
+	TalentProtectTime     *AgencySupplierTalentProtectTime `json:"talent_protect_time,omitempty"`     // 企业自有简历保护期
+}
+
+type AgencySupplierBuilder struct {
+	id                        string // 猎头供应商 ID
+	idFlag                    bool
+	name                      string // 猎头供应商名称
+	nameFlag                  bool
+	labelList                 []*AgencySupplierLabel // 标签列表
+	labelListFlag             bool
+	adminList                 []*AgencySupplierAdmin // 管理员列表
+	adminListFlag             bool
+	agencyProtectTime         *AgencySupplierProtectTime // 猎头简历保护期
+	agencyProtectTimeFlag     bool
+	cooperationCreateTime     string // 合作创建时间，毫秒时间戳
+	cooperationCreateTimeFlag bool
+	cooperationStartTime      string // 合作开始时间，毫秒时间戳
+	cooperationStartTimeFlag  bool
+	cooperationEndTime        string // 合作终止时间，毫秒时间戳
+	cooperationEndTimeFlag    bool
+	cooperationStatus         int // 合作状态，毫秒时间戳
+	cooperationStatusFlag     bool
+	inviteEmail               string // 供应商邮箱
+	inviteEmailFlag           bool
+	supplierArea              int // 猎头区域
+	supplierAreaFlag          bool
+	talentProtectTime         *AgencySupplierTalentProtectTime // 企业自有简历保护期
+	talentProtectTimeFlag     bool
+}
+
+func NewAgencySupplierBuilder() *AgencySupplierBuilder {
+	builder := &AgencySupplierBuilder{}
+	return builder
+}
+
+// 猎头供应商 ID
+//
+// 示例值：7398493486516799788
+func (builder *AgencySupplierBuilder) Id(id string) *AgencySupplierBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 猎头供应商名称
+//
+// 示例值：北极无敌猎头
+func (builder *AgencySupplierBuilder) Name(name string) *AgencySupplierBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 标签列表
+//
+// 示例值：
+func (builder *AgencySupplierBuilder) LabelList(labelList []*AgencySupplierLabel) *AgencySupplierBuilder {
+	builder.labelList = labelList
+	builder.labelListFlag = true
+	return builder
+}
+
+// 管理员列表
+//
+// 示例值：
+func (builder *AgencySupplierBuilder) AdminList(adminList []*AgencySupplierAdmin) *AgencySupplierBuilder {
+	builder.adminList = adminList
+	builder.adminListFlag = true
+	return builder
+}
+
+// 猎头简历保护期
+//
+// 示例值：
+func (builder *AgencySupplierBuilder) AgencyProtectTime(agencyProtectTime *AgencySupplierProtectTime) *AgencySupplierBuilder {
+	builder.agencyProtectTime = agencyProtectTime
+	builder.agencyProtectTimeFlag = true
+	return builder
+}
+
+// 合作创建时间，毫秒时间戳
+//
+// 示例值：1639992265035
+func (builder *AgencySupplierBuilder) CooperationCreateTime(cooperationCreateTime string) *AgencySupplierBuilder {
+	builder.cooperationCreateTime = cooperationCreateTime
+	builder.cooperationCreateTimeFlag = true
+	return builder
+}
+
+// 合作开始时间，毫秒时间戳
+//
+// 示例值：1639992265035
+func (builder *AgencySupplierBuilder) CooperationStartTime(cooperationStartTime string) *AgencySupplierBuilder {
+	builder.cooperationStartTime = cooperationStartTime
+	builder.cooperationStartTimeFlag = true
+	return builder
+}
+
+// 合作终止时间，毫秒时间戳
+//
+// 示例值：1639992265035
+func (builder *AgencySupplierBuilder) CooperationEndTime(cooperationEndTime string) *AgencySupplierBuilder {
+	builder.cooperationEndTime = cooperationEndTime
+	builder.cooperationEndTimeFlag = true
+	return builder
+}
+
+// 合作状态，毫秒时间戳
+//
+// 示例值：1
+func (builder *AgencySupplierBuilder) CooperationStatus(cooperationStatus int) *AgencySupplierBuilder {
+	builder.cooperationStatus = cooperationStatus
+	builder.cooperationStatusFlag = true
+	return builder
+}
+
+// 供应商邮箱
+//
+// 示例值：28933718393.qq.com
+func (builder *AgencySupplierBuilder) InviteEmail(inviteEmail string) *AgencySupplierBuilder {
+	builder.inviteEmail = inviteEmail
+	builder.inviteEmailFlag = true
+	return builder
+}
+
+// 猎头区域
+//
+// 示例值：1
+func (builder *AgencySupplierBuilder) SupplierArea(supplierArea int) *AgencySupplierBuilder {
+	builder.supplierArea = supplierArea
+	builder.supplierAreaFlag = true
+	return builder
+}
+
+// 企业自有简历保护期
+//
+// 示例值：
+func (builder *AgencySupplierBuilder) TalentProtectTime(talentProtectTime *AgencySupplierTalentProtectTime) *AgencySupplierBuilder {
+	builder.talentProtectTime = talentProtectTime
+	builder.talentProtectTimeFlag = true
+	return builder
+}
+
+func (builder *AgencySupplierBuilder) Build() *AgencySupplier {
+	req := &AgencySupplier{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.nameFlag {
+		req.Name = &builder.name
+
+	}
+	if builder.labelListFlag {
+		req.LabelList = builder.labelList
+	}
+	if builder.adminListFlag {
+		req.AdminList = builder.adminList
+	}
+	if builder.agencyProtectTimeFlag {
+		req.AgencyProtectTime = builder.agencyProtectTime
+	}
+	if builder.cooperationCreateTimeFlag {
+		req.CooperationCreateTime = &builder.cooperationCreateTime
+
+	}
+	if builder.cooperationStartTimeFlag {
+		req.CooperationStartTime = &builder.cooperationStartTime
+
+	}
+	if builder.cooperationEndTimeFlag {
+		req.CooperationEndTime = &builder.cooperationEndTime
+
+	}
+	if builder.cooperationStatusFlag {
+		req.CooperationStatus = &builder.cooperationStatus
+
+	}
+	if builder.inviteEmailFlag {
+		req.InviteEmail = &builder.inviteEmail
+
+	}
+	if builder.supplierAreaFlag {
+		req.SupplierArea = &builder.supplierArea
+
+	}
+	if builder.talentProtectTimeFlag {
+		req.TalentProtectTime = builder.talentProtectTime
+	}
+	return req
+}
+
+type AgencySupplierAdmin struct {
+	UserId *string `json:"user_id,omitempty"` // 管理员 ID
+	Name   *I18n   `json:"name,omitempty"`    // 管理员名称
+	Email  *string `json:"email,omitempty"`   // 管理员邮箱
+}
+
+type AgencySupplierAdminBuilder struct {
+	userId     string // 管理员 ID
+	userIdFlag bool
+	name       *I18n // 管理员名称
+	nameFlag   bool
+	email      string // 管理员邮箱
+	emailFlag  bool
+}
+
+func NewAgencySupplierAdminBuilder() *AgencySupplierAdminBuilder {
+	builder := &AgencySupplierAdminBuilder{}
+	return builder
+}
+
+// 管理员 ID
+//
+// 示例值：7398493486516799788
+func (builder *AgencySupplierAdminBuilder) UserId(userId string) *AgencySupplierAdminBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 管理员名称
+//
+// 示例值：
+func (builder *AgencySupplierAdminBuilder) Name(name *I18n) *AgencySupplierAdminBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 管理员邮箱
+//
+// 示例值：283xxxx2171813@qq.com
+func (builder *AgencySupplierAdminBuilder) Email(email string) *AgencySupplierAdminBuilder {
+	builder.email = email
+	builder.emailFlag = true
+	return builder
+}
+
+func (builder *AgencySupplierAdminBuilder) Build() *AgencySupplierAdmin {
+	req := &AgencySupplierAdmin{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	if builder.emailFlag {
+		req.Email = &builder.email
+
+	}
+	return req
+}
+
+type AgencySupplierLabel struct {
+	Id   *string `json:"id,omitempty"`   // 标签 ID
+	Name *I18n   `json:"name,omitempty"` // 标签名称
+}
+
+type AgencySupplierLabelBuilder struct {
+	id       string // 标签 ID
+	idFlag   bool
+	name     *I18n // 标签名称
+	nameFlag bool
+}
+
+func NewAgencySupplierLabelBuilder() *AgencySupplierLabelBuilder {
+	builder := &AgencySupplierLabelBuilder{}
+	return builder
+}
+
+// 标签 ID
+//
+// 示例值：6887469228283299336
+func (builder *AgencySupplierLabelBuilder) Id(id string) *AgencySupplierLabelBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 标签名称
+//
+// 示例值：
+func (builder *AgencySupplierLabelBuilder) Name(name *I18n) *AgencySupplierLabelBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+func (builder *AgencySupplierLabelBuilder) Build() *AgencySupplierLabel {
+	req := &AgencySupplierLabel{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	return req
+}
+
+type AgencySupplierProtectTime struct {
+	Day        *int  `json:"day,omitempty"`         // 保护时长，单位（天）
+	UseDefault *bool `json:"use_default,omitempty"` // 是否使用统一设置
+}
+
+type AgencySupplierProtectTimeBuilder struct {
+	day            int // 保护时长，单位（天）
+	dayFlag        bool
+	useDefault     bool // 是否使用统一设置
+	useDefaultFlag bool
+}
+
+func NewAgencySupplierProtectTimeBuilder() *AgencySupplierProtectTimeBuilder {
+	builder := &AgencySupplierProtectTimeBuilder{}
+	return builder
+}
+
+// 保护时长，单位（天）
+//
+// 示例值：180
+func (builder *AgencySupplierProtectTimeBuilder) Day(day int) *AgencySupplierProtectTimeBuilder {
+	builder.day = day
+	builder.dayFlag = true
+	return builder
+}
+
+// 是否使用统一设置
+//
+// 示例值：true
+func (builder *AgencySupplierProtectTimeBuilder) UseDefault(useDefault bool) *AgencySupplierProtectTimeBuilder {
+	builder.useDefault = useDefault
+	builder.useDefaultFlag = true
+	return builder
+}
+
+func (builder *AgencySupplierProtectTimeBuilder) Build() *AgencySupplierProtectTime {
+	req := &AgencySupplierProtectTime{}
+	if builder.dayFlag {
+		req.Day = &builder.day
+
+	}
+	if builder.useDefaultFlag {
+		req.UseDefault = &builder.useDefault
+
+	}
+	return req
+}
+
+type AgencySupplierTalentProtectTime struct {
+	Day        *int  `json:"day,omitempty"`         // 保护时长，单位（天）
+	UseDefault *bool `json:"use_default,omitempty"` // 是否使用统一设置
+	Forever    *bool `json:"forever,omitempty"`     // 是否永久保护
+}
+
+type AgencySupplierTalentProtectTimeBuilder struct {
+	day            int // 保护时长，单位（天）
+	dayFlag        bool
+	useDefault     bool // 是否使用统一设置
+	useDefaultFlag bool
+	forever        bool // 是否永久保护
+	foreverFlag    bool
+}
+
+func NewAgencySupplierTalentProtectTimeBuilder() *AgencySupplierTalentProtectTimeBuilder {
+	builder := &AgencySupplierTalentProtectTimeBuilder{}
+	return builder
+}
+
+// 保护时长，单位（天）
+//
+// 示例值：180
+func (builder *AgencySupplierTalentProtectTimeBuilder) Day(day int) *AgencySupplierTalentProtectTimeBuilder {
+	builder.day = day
+	builder.dayFlag = true
+	return builder
+}
+
+// 是否使用统一设置
+//
+// 示例值：true
+func (builder *AgencySupplierTalentProtectTimeBuilder) UseDefault(useDefault bool) *AgencySupplierTalentProtectTimeBuilder {
+	builder.useDefault = useDefault
+	builder.useDefaultFlag = true
+	return builder
+}
+
+// 是否永久保护
+//
+// 示例值：true
+func (builder *AgencySupplierTalentProtectTimeBuilder) Forever(forever bool) *AgencySupplierTalentProtectTimeBuilder {
+	builder.forever = forever
+	builder.foreverFlag = true
+	return builder
+}
+
+func (builder *AgencySupplierTalentProtectTimeBuilder) Build() *AgencySupplierTalentProtectTime {
+	req := &AgencySupplierTalentProtectTime{}
+	if builder.dayFlag {
+		req.Day = &builder.day
+
+	}
+	if builder.useDefaultFlag {
+		req.UseDefault = &builder.useDefault
+
+	}
+	if builder.foreverFlag {
+		req.Forever = &builder.forever
+
 	}
 	return req
 }
@@ -11876,6 +12516,84 @@ func (builder *CommonCityInfoBuilder) Build() *CommonCityInfo {
 	}
 	if builder.nameFlag {
 		req.Name = builder.name
+	}
+	return req
+}
+
+type CommonFilter struct {
+	Key         *string      `json:"key,omitempty"`          // 筛选项 key
+	ValueType   *int         `json:"value_type,omitempty"`   // 筛选项值类型
+	ValueList   []string     `json:"value_list,omitempty"`   // 筛选项值列表
+	RangeFilter *RangeFilter `json:"range_filter,omitempty"` // 范围筛选
+}
+
+type CommonFilterBuilder struct {
+	key             string // 筛选项 key
+	keyFlag         bool
+	valueType       int // 筛选项值类型
+	valueTypeFlag   bool
+	valueList       []string // 筛选项值列表
+	valueListFlag   bool
+	rangeFilter     *RangeFilter // 范围筛选
+	rangeFilterFlag bool
+}
+
+func NewCommonFilterBuilder() *CommonFilterBuilder {
+	builder := &CommonFilterBuilder{}
+	return builder
+}
+
+// 筛选项 key
+//
+// 示例值：degree
+func (builder *CommonFilterBuilder) Key(key string) *CommonFilterBuilder {
+	builder.key = key
+	builder.keyFlag = true
+	return builder
+}
+
+// 筛选项值类型
+//
+// 示例值：1
+func (builder *CommonFilterBuilder) ValueType(valueType int) *CommonFilterBuilder {
+	builder.valueType = valueType
+	builder.valueTypeFlag = true
+	return builder
+}
+
+// 筛选项值列表
+//
+// 示例值：
+func (builder *CommonFilterBuilder) ValueList(valueList []string) *CommonFilterBuilder {
+	builder.valueList = valueList
+	builder.valueListFlag = true
+	return builder
+}
+
+// 范围筛选
+//
+// 示例值：
+func (builder *CommonFilterBuilder) RangeFilter(rangeFilter *RangeFilter) *CommonFilterBuilder {
+	builder.rangeFilter = rangeFilter
+	builder.rangeFilterFlag = true
+	return builder
+}
+
+func (builder *CommonFilterBuilder) Build() *CommonFilter {
+	req := &CommonFilter{}
+	if builder.keyFlag {
+		req.Key = &builder.key
+
+	}
+	if builder.valueTypeFlag {
+		req.ValueType = &builder.valueType
+
+	}
+	if builder.valueListFlag {
+		req.ValueList = builder.valueList
+	}
+	if builder.rangeFilterFlag {
+		req.RangeFilter = builder.rangeFilter
 	}
 	return req
 }
@@ -38103,6 +38821,7 @@ type TalentBatchInfo struct {
 	Email                *string `json:"email,omitempty"`                 // 邮箱
 	IdentificationType   *int    `json:"identification_type,omitempty"`   // 证件类型，可参考招聘枚举常量 IdentificationType 枚举定义
 	IdentificationNumber *string `json:"identification_number,omitempty"` // 证件号
+	IsOnboarded          *bool   `json:"is_onboarded,omitempty"`          // 是否已入职
 }
 
 type TalentBatchInfoBuilder struct {
@@ -38118,6 +38837,8 @@ type TalentBatchInfoBuilder struct {
 	identificationTypeFlag   bool
 	identificationNumber     string // 证件号
 	identificationNumberFlag bool
+	isOnboarded              bool // 是否已入职
+	isOnboardedFlag          bool
 }
 
 func NewTalentBatchInfoBuilder() *TalentBatchInfoBuilder {
@@ -38179,6 +38900,15 @@ func (builder *TalentBatchInfoBuilder) IdentificationNumber(identificationNumber
 	return builder
 }
 
+// 是否已入职
+//
+// 示例值：true
+func (builder *TalentBatchInfoBuilder) IsOnboarded(isOnboarded bool) *TalentBatchInfoBuilder {
+	builder.isOnboarded = isOnboarded
+	builder.isOnboardedFlag = true
+	return builder
+}
+
 func (builder *TalentBatchInfoBuilder) Build() *TalentBatchInfo {
 	req := &TalentBatchInfo{}
 	if builder.talentIdFlag {
@@ -38203,6 +38933,10 @@ func (builder *TalentBatchInfoBuilder) Build() *TalentBatchInfo {
 	}
 	if builder.identificationNumberFlag {
 		req.IdentificationNumber = &builder.identificationNumber
+
+	}
+	if builder.isOnboardedFlag {
+		req.IsOnboarded = &builder.isOnboarded
 
 	}
 	return req
@@ -52742,6 +53476,235 @@ func (resp *ListInterviewTaskResp) Success() bool {
 	return resp.Code == 0
 }
 
+type ListInterviewerReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListInterviewerReqBuilder() *ListInterviewerReqBuilder {
+	builder := &ListInterviewerReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListInterviewerReqBuilder) Limit(limit int) *ListInterviewerReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：
+func (builder *ListInterviewerReqBuilder) PageSize(pageSize int) *ListInterviewerReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：
+func (builder *ListInterviewerReqBuilder) PageToken(pageToken string) *ListInterviewerReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 面试官userID列表
+//
+// 示例值：
+func (builder *ListInterviewerReqBuilder) UserIds(userIds []string) *ListInterviewerReqBuilder {
+	for _, v := range userIds {
+		builder.apiReq.QueryParams.Add("user_ids", fmt.Sprint(v))
+	}
+	return builder
+}
+
+// 认证状态
+//
+// 示例值：1
+func (builder *ListInterviewerReqBuilder) VerifyStatus(verifyStatus int) *ListInterviewerReqBuilder {
+	builder.apiReq.QueryParams.Set("verify_status", fmt.Sprint(verifyStatus))
+	return builder
+}
+
+// 最早更新时间，毫秒时间戳
+//
+// 示例值：1714374796615
+func (builder *ListInterviewerReqBuilder) EarliestUpdateTime(earliestUpdateTime string) *ListInterviewerReqBuilder {
+	builder.apiReq.QueryParams.Set("earliest_update_time", fmt.Sprint(earliestUpdateTime))
+	return builder
+}
+
+// 最晚更新时间，毫秒时间戳
+//
+// 示例值：1714374796616
+func (builder *ListInterviewerReqBuilder) LatestUpdateTime(latestUpdateTime string) *ListInterviewerReqBuilder {
+	builder.apiReq.QueryParams.Set("latest_update_time", fmt.Sprint(latestUpdateTime))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *ListInterviewerReqBuilder) UserIdType(userIdType string) *ListInterviewerReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *ListInterviewerReqBuilder) Build() *ListInterviewerReq {
+	req := &ListInterviewerReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListInterviewerReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListInterviewerRespData struct {
+	Items     []*Interviewer `json:"items,omitempty"`      //
+	PageToken *string        `json:"page_token,omitempty"` //
+	HasMore   *bool          `json:"has_more,omitempty"`   //
+}
+
+type ListInterviewerResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListInterviewerRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListInterviewerResp) Success() bool {
+	return resp.Code == 0
+}
+
+type PatchInterviewerReqBodyBuilder struct {
+	interviewer     *Interviewer // 面试官信息
+	interviewerFlag bool
+}
+
+func NewPatchInterviewerReqBodyBuilder() *PatchInterviewerReqBodyBuilder {
+	builder := &PatchInterviewerReqBodyBuilder{}
+	return builder
+}
+
+// 面试官信息
+//
+// 示例值：
+func (builder *PatchInterviewerReqBodyBuilder) Interviewer(interviewer *Interviewer) *PatchInterviewerReqBodyBuilder {
+	builder.interviewer = interviewer
+	builder.interviewerFlag = true
+	return builder
+}
+
+func (builder *PatchInterviewerReqBodyBuilder) Build() *PatchInterviewerReqBody {
+	req := &PatchInterviewerReqBody{}
+	if builder.interviewerFlag {
+		req.Interviewer = builder.interviewer
+	}
+	return req
+}
+
+type PatchInterviewerPathReqBodyBuilder struct {
+	interviewer     *Interviewer
+	interviewerFlag bool
+}
+
+func NewPatchInterviewerPathReqBodyBuilder() *PatchInterviewerPathReqBodyBuilder {
+	builder := &PatchInterviewerPathReqBodyBuilder{}
+	return builder
+}
+
+// 面试官信息
+//
+// 示例值：
+func (builder *PatchInterviewerPathReqBodyBuilder) Interviewer(interviewer *Interviewer) *PatchInterviewerPathReqBodyBuilder {
+	builder.interviewer = interviewer
+	builder.interviewerFlag = true
+	return builder
+}
+
+func (builder *PatchInterviewerPathReqBodyBuilder) Build() (*PatchInterviewerReqBody, error) {
+	req := &PatchInterviewerReqBody{}
+	if builder.interviewerFlag {
+		req.Interviewer = builder.interviewer
+	}
+	return req, nil
+}
+
+type PatchInterviewerReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *PatchInterviewerReqBody
+}
+
+func NewPatchInterviewerReqBuilder() *PatchInterviewerReqBuilder {
+	builder := &PatchInterviewerReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 面试官userID
+//
+// 示例值：ou_7dab8a3d3cdcc9da365777c7ad535d62
+func (builder *PatchInterviewerReqBuilder) InterviewerId(interviewerId string) *PatchInterviewerReqBuilder {
+	builder.apiReq.PathParams.Set("interviewer_id", fmt.Sprint(interviewerId))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *PatchInterviewerReqBuilder) UserIdType(userIdType string) *PatchInterviewerReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *PatchInterviewerReqBuilder) Body(body *PatchInterviewerReqBody) *PatchInterviewerReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *PatchInterviewerReqBuilder) Build() *PatchInterviewerReq {
+	req := &PatchInterviewerReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type PatchInterviewerReqBody struct {
+	Interviewer *Interviewer `json:"interviewer,omitempty"` // 面试官信息
+}
+
+type PatchInterviewerReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *PatchInterviewerReqBody `body:""`
+}
+
+type PatchInterviewerRespData struct {
+	Interviewer *Interviewer `json:"interviewer,omitempty"` // 面试官信息
+}
+
+type PatchInterviewerResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *PatchInterviewerRespData `json:"data"` // 业务数据
+}
+
+func (resp *PatchInterviewerResp) Success() bool {
+	return resp.Code == 0
+}
+
 type CloseJobReqBuilder struct {
 	apiReq *larkcore.ApiReq
 }
@@ -54938,6 +55901,70 @@ type QueryLocationResp struct {
 }
 
 func (resp *QueryLocationResp) Success() bool {
+	return resp.Code == 0
+}
+
+type GetMinutesReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewGetMinutesReqBuilder() *GetMinutesReqBuilder {
+	builder := &GetMinutesReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 面试ID
+//
+// 示例值：
+func (builder *GetMinutesReqBuilder) InterviewId(interviewId string) *GetMinutesReqBuilder {
+	builder.apiReq.QueryParams.Set("interview_id", fmt.Sprint(interviewId))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该page_token获取查询结果
+//
+// 示例值：
+func (builder *GetMinutesReqBuilder) PageToken(pageToken string) *GetMinutesReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 分页大小，表示本次请求获取的速记中的语句的最大数量
+//
+// 示例值：
+func (builder *GetMinutesReqBuilder) PageSize(pageSize int) *GetMinutesReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+func (builder *GetMinutesReqBuilder) Build() *GetMinutesReq {
+	req := &GetMinutesReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type GetMinutesReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type GetMinutesRespData struct {
+	Minutes   *Minutes `json:"minutes,omitempty"`    //
+	PageToken *string  `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+	HasMore   *bool    `json:"has_more,omitempty"`   // 对应面试是否还有更多项
+}
+
+type GetMinutesResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *GetMinutesRespData `json:"data"` // 业务数据
+}
+
+func (resp *GetMinutesResp) Success() bool {
 	return resp.Code == 0
 }
 
@@ -60603,6 +61630,112 @@ func (resp *UpdateTripartiteAgreementResp) Success() bool {
 	return resp.Code == 0
 }
 
+type ListUserRoleReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListUserRoleReqBuilder() *ListUserRoleReqBuilder {
+	builder := &ListUserRoleReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListUserRoleReqBuilder) Limit(limit int) *ListUserRoleReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// 下一页页码
+//
+// 示例值：eyJvZmZzZXQiOjEwLCJ0aW1lc3RhbXAiOjE2Mjc1NTUyMjM2NzIsImlkIjpudWxsfQ==
+func (builder *ListUserRoleReqBuilder) PageToken(pageToken string) *ListUserRoleReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 每页获取记录数量，最大10
+//
+// 示例值：10
+func (builder *ListUserRoleReqBuilder) PageSize(pageSize int) *ListUserRoleReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 用户 ID
+//
+// 示例值：ou_xxxx
+func (builder *ListUserRoleReqBuilder) UserId(userId string) *ListUserRoleReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id", fmt.Sprint(userId))
+	return builder
+}
+
+// 角色 ID
+//
+// 示例值：101
+func (builder *ListUserRoleReqBuilder) RoleId(roleId string) *ListUserRoleReqBuilder {
+	builder.apiReq.QueryParams.Set("role_id", fmt.Sprint(roleId))
+	return builder
+}
+
+// 最早更新时间，毫秒级时间戳
+//
+// 示例值：1618500278663
+func (builder *ListUserRoleReqBuilder) UpdateStartTime(updateStartTime string) *ListUserRoleReqBuilder {
+	builder.apiReq.QueryParams.Set("update_start_time", fmt.Sprint(updateStartTime))
+	return builder
+}
+
+// 最晚更新时间，毫秒级时间戳
+//
+// 示例值：1618500278663
+func (builder *ListUserRoleReqBuilder) UpdateEndTime(updateEndTime string) *ListUserRoleReqBuilder {
+	builder.apiReq.QueryParams.Set("update_end_time", fmt.Sprint(updateEndTime))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *ListUserRoleReqBuilder) UserIdType(userIdType string) *ListUserRoleReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *ListUserRoleReqBuilder) Build() *ListUserRoleReq {
+	req := &ListUserRoleReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListUserRoleReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListUserRoleRespData struct {
+	Items     []*UserRole `json:"items,omitempty"`      // 用户角色列表
+	HasMore   *bool       `json:"has_more,omitempty"`   // 是否还有下一页数据
+	PageToken *string     `json:"page_token,omitempty"` // 下一页页码
+}
+
+type ListUserRoleResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListUserRoleRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListUserRoleResp) Success() bool {
+	return resp.Code == 0
+}
+
 type ListWebsiteReqBuilder struct {
 	apiReq *larkcore.ApiReq
 	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
@@ -62482,6 +63615,60 @@ func (iterator *ListInterviewTaskIterator) NextPageToken() *string {
 	return iterator.nextPageToken
 }
 
+type ListInterviewerIterator struct {
+	nextPageToken *string
+	items         []*Interviewer
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListInterviewerReq
+	listFunc      func(ctx context.Context, req *ListInterviewerReq, options ...larkcore.RequestOptionFunc) (*ListInterviewerResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListInterviewerIterator) Next() (bool, *Interviewer, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Items) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Items
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListInterviewerIterator) NextPageToken() *string {
+	return iterator.nextPageToken
+}
+
 type ListJobFunctionIterator struct {
 	nextPageToken *string
 	items         []*JobFunction
@@ -63181,6 +64368,60 @@ func (iterator *ListTripartiteAgreementIterator) Next() (bool, *TripartiteAgreem
 }
 
 func (iterator *ListTripartiteAgreementIterator) NextPageToken() *string {
+	return iterator.nextPageToken
+}
+
+type ListUserRoleIterator struct {
+	nextPageToken *string
+	items         []*UserRole
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListUserRoleReq
+	listFunc      func(ctx context.Context, req *ListUserRoleReq, options ...larkcore.RequestOptionFunc) (*ListUserRoleResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListUserRoleIterator) Next() (bool, *UserRole, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Items) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Items
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListUserRoleIterator) NextPageToken() *string {
 	return iterator.nextPageToken
 }
 

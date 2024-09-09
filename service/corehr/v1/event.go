@@ -338,6 +338,46 @@ func (h *P2JobDataChangedV1Handler) Handle(ctx context.Context, event interface{
 }
 
 // 消息处理器定义
+type P2JobDataCreatedV1Handler struct {
+	handler func(context.Context, *P2JobDataCreatedV1) error
+}
+
+func NewP2JobDataCreatedV1Handler(handler func(context.Context, *P2JobDataCreatedV1) error) *P2JobDataCreatedV1Handler {
+	h := &P2JobDataCreatedV1Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2JobDataCreatedV1Handler) Event() interface{} {
+	return &P2JobDataCreatedV1{}
+}
+
+// 回调开发者注册的handle
+func (h *P2JobDataCreatedV1Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2JobDataCreatedV1))
+}
+
+// 消息处理器定义
+type P2JobDataDeletedV1Handler struct {
+	handler func(context.Context, *P2JobDataDeletedV1) error
+}
+
+func NewP2JobDataDeletedV1Handler(handler func(context.Context, *P2JobDataDeletedV1) error) *P2JobDataDeletedV1Handler {
+	h := &P2JobDataDeletedV1Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2JobDataDeletedV1Handler) Event() interface{} {
+	return &P2JobDataDeletedV1{}
+}
+
+// 回调开发者注册的handle
+func (h *P2JobDataDeletedV1Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2JobDataDeletedV1))
+}
+
+// 消息处理器定义
 type P2JobDataEmployedV1Handler struct {
 	handler func(context.Context, *P2JobDataEmployedV1) error
 }
@@ -355,6 +395,26 @@ func (h *P2JobDataEmployedV1Handler) Event() interface{} {
 // 回调开发者注册的handle
 func (h *P2JobDataEmployedV1Handler) Handle(ctx context.Context, event interface{}) error {
 	return h.handler(ctx, event.(*P2JobDataEmployedV1))
+}
+
+// 消息处理器定义
+type P2JobDataUpdatedV1Handler struct {
+	handler func(context.Context, *P2JobDataUpdatedV1) error
+}
+
+func NewP2JobDataUpdatedV1Handler(handler func(context.Context, *P2JobDataUpdatedV1) error) *P2JobDataUpdatedV1Handler {
+	h := &P2JobDataUpdatedV1Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2JobDataUpdatedV1Handler) Event() interface{} {
+	return &P2JobDataUpdatedV1{}
+}
+
+// 回调开发者注册的handle
+func (h *P2JobDataUpdatedV1Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2JobDataUpdatedV1))
 }
 
 // 消息处理器定义

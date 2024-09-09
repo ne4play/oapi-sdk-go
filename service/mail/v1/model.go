@@ -5256,6 +5256,55 @@ func (resp *ListUserMailboxAliasResp) Success() bool {
 	return resp.Code == 0
 }
 
+type SendUserMailboxMessageReqBuilder struct {
+	apiReq  *larkcore.ApiReq
+	message *Message
+}
+
+func NewSendUserMailboxMessageReqBuilder() *SendUserMailboxMessageReqBuilder {
+	builder := &SendUserMailboxMessageReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 用户邮箱地址 或 输入me代表当前调用接口用户
+//
+// 示例值：user@xxx.xx 或 me
+func (builder *SendUserMailboxMessageReqBuilder) UserMailboxId(userMailboxId string) *SendUserMailboxMessageReqBuilder {
+	builder.apiReq.PathParams.Set("user_mailbox_id", fmt.Sprint(userMailboxId))
+	return builder
+}
+
+func (builder *SendUserMailboxMessageReqBuilder) Message(message *Message) *SendUserMailboxMessageReqBuilder {
+	builder.message = message
+	return builder
+}
+
+func (builder *SendUserMailboxMessageReqBuilder) Build() *SendUserMailboxMessageReq {
+	req := &SendUserMailboxMessageReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.Body = builder.message
+	return req
+}
+
+type SendUserMailboxMessageReq struct {
+	apiReq  *larkcore.ApiReq
+	Message *Message `body:""`
+}
+
+type SendUserMailboxMessageResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *SendUserMailboxMessageResp) Success() bool {
+	return resp.Code == 0
+}
+
 type ListMailgroupIterator struct {
 	nextPageToken *string
 	items         []*Mailgroup

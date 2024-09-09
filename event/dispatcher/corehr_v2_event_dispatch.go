@@ -33,6 +33,18 @@ func (dispatcher *EventDispatcher) OnP2EmployeeDomainEventV2(handler func(ctx co
 // -
 //
 // - 事件描述文档链接:
+func (dispatcher *EventDispatcher) OnP2JobChangeStatusUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobChangeStatusUpdatedV2) error) *EventDispatcher {
+	_, existed := dispatcher.eventType2EventHandler["corehr.job_change.status_updated_v2"]
+	if existed {
+		panic("event: multiple handler registrations for " + "corehr.job_change.status_updated_v2")
+	}
+	dispatcher.eventType2EventHandler["corehr.job_change.status_updated_v2"] = larkcorehr.NewP2JobChangeStatusUpdatedV2Handler(handler)
+	return dispatcher
+}
+
+// -
+//
+// - 事件描述文档链接:
 func (dispatcher *EventDispatcher) OnP2JobChangeUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobChangeUpdatedV2) error) *EventDispatcher {
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_change.updated_v2"]
 	if existed {

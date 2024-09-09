@@ -19,6 +19,7 @@ type V6 struct {
 	ApplicationManagement    *applicationManagement    // application.management
 	ApplicationVisibility    *applicationVisibility    // 事件
 	Bot                      *bot                      // 事件
+	Scope                    *scope                    // scope
 }
 
 func New(config *larkcore.Config) *V6 {
@@ -33,6 +34,7 @@ func New(config *larkcore.Config) *V6 {
 		ApplicationManagement:    &applicationManagement{config: config},
 		ApplicationVisibility:    &applicationVisibility{config: config},
 		Bot:                      &bot{config: config},
+		Scope:                    &scope{config: config},
 	}
 }
 
@@ -64,6 +66,9 @@ type applicationVisibility struct {
 	config *larkcore.Config
 }
 type bot struct {
+	config *larkcore.Config
+}
+type scope struct {
 	config *larkcore.Config
 }
 
@@ -585,6 +590,64 @@ func (a *applicationVisibility) Patch(ctx context.Context, req *PatchApplication
 	// 反序列响应结果
 	resp := &PatchApplicationVisibilityResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Apply
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=apply&project=application&resource=scope&version=v6
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/applicationv6/apply_scope.go
+func (s *scope) Apply(ctx context.Context, options ...larkcore.RequestOptionFunc) (*ApplyScopeResp, error) {
+	// 发起请求
+	apiReq := &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	apiReq.ApiPath = "/open-apis/application/v6/scopes/apply"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, s.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ApplyScopeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, s.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// List
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=application&resource=scope&version=v6
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/applicationv6/list_scope.go
+func (s *scope) List(ctx context.Context, options ...larkcore.RequestOptionFunc) (*ListScopeResp, error) {
+	// 发起请求
+	apiReq := &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	apiReq.ApiPath = "/open-apis/application/v6/scopes"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, s.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListScopeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, s.config)
 	if err != nil {
 		return nil, err
 	}

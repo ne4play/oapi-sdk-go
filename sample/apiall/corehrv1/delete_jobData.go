@@ -28,6 +28,7 @@ func main() {
 	// 创建请求对象
 	req := larkcorehr.NewDeleteJobDataReqBuilder().
 		JobDataId("467642764726472").
+		VersionId("1616161616").
 		Build()
 	// 发起请求
 	resp, err := client.Corehr.V1.JobData.Delete(context.Background(), req)

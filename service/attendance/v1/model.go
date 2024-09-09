@@ -61,6 +61,11 @@ const (
 )
 
 const (
+	EmployeeTypeCreateShiftEmployeeId = "employee_id" // 员工employeeId
+	EmployeeTypeCreateShiftEmployeeNo = "employee_no" // 员工工号
+)
+
+const (
 	EmployeeTypeCreateUserApprovalEmployeeId = "employee_id" // 员工employeeId
 	EmployeeTypeCreateUserApprovalEmployeeNo = "employee_no" // 员工工号
 )
@@ -6389,24 +6394,27 @@ func (builder *UserArrangeShiftGroupBuilder) Build() *UserArrangeShiftGroup {
 }
 
 type UserDailyShift struct {
-	GroupId *string `json:"group_id,omitempty"` // 考勤组 ID，获取方式：1）[创建或修改考勤组](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/group/create) 2）[按名称查询考勤组](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/group/search) 3）[获取打卡结果](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/user_task/query)
-	ShiftId *string `json:"shift_id,omitempty"` // 班次 ID，获取方式：1）[按名称查询班次](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/shift/query) 2）[创建班次](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/shift/create)
-	Month   *int    `json:"month,omitempty"`    // 月份
-	UserId  *string `json:"user_id,omitempty"`  // 用户 ID
-	DayNo   *int    `json:"day_no,omitempty"`   // 日期
+	GroupId         *string `json:"group_id,omitempty"`          // 考勤组 ID，获取方式：1）[创建或修改考勤组](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/group/create) 2）[按名称查询考勤组](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/group/search) 3）[获取打卡结果](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/user_task/query)
+	ShiftId         *string `json:"shift_id,omitempty"`          // 班次 ID，获取方式：1）[按名称查询班次](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/shift/query) 2）[创建班次](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/shift/create)
+	Month           *int    `json:"month,omitempty"`             // 月份
+	UserId          *string `json:"user_id,omitempty"`           // 用户 ID
+	DayNo           *int    `json:"day_no,omitempty"`            // 日期
+	IsClearSchedule *bool   `json:"is_clear_schedule,omitempty"` // 是否清空班次 (此字段优先于 shift_id，若为true ，shift_id 将失效)
 }
 
 type UserDailyShiftBuilder struct {
-	groupId     string // 考勤组 ID，获取方式：1）[创建或修改考勤组](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/group/create) 2）[按名称查询考勤组](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/group/search) 3）[获取打卡结果](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/user_task/query)
-	groupIdFlag bool
-	shiftId     string // 班次 ID，获取方式：1）[按名称查询班次](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/shift/query) 2）[创建班次](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/shift/create)
-	shiftIdFlag bool
-	month       int // 月份
-	monthFlag   bool
-	userId      string // 用户 ID
-	userIdFlag  bool
-	dayNo       int // 日期
-	dayNoFlag   bool
+	groupId             string // 考勤组 ID，获取方式：1）[创建或修改考勤组](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/group/create) 2）[按名称查询考勤组](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/group/search) 3）[获取打卡结果](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/user_task/query)
+	groupIdFlag         bool
+	shiftId             string // 班次 ID，获取方式：1）[按名称查询班次](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/shift/query) 2）[创建班次](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/attendance-v1/shift/create)
+	shiftIdFlag         bool
+	month               int // 月份
+	monthFlag           bool
+	userId              string // 用户 ID
+	userIdFlag          bool
+	dayNo               int // 日期
+	dayNoFlag           bool
+	isClearSchedule     bool // 是否清空班次 (此字段优先于 shift_id，若为true ，shift_id 将失效)
+	isClearScheduleFlag bool
 }
 
 func NewUserDailyShiftBuilder() *UserDailyShiftBuilder {
@@ -6459,6 +6467,15 @@ func (builder *UserDailyShiftBuilder) DayNo(dayNo int) *UserDailyShiftBuilder {
 	return builder
 }
 
+// 是否清空班次 (此字段优先于 shift_id，若为true ，shift_id 将失效)
+//
+// 示例值：true
+func (builder *UserDailyShiftBuilder) IsClearSchedule(isClearSchedule bool) *UserDailyShiftBuilder {
+	builder.isClearSchedule = isClearSchedule
+	builder.isClearScheduleFlag = true
+	return builder
+}
+
 func (builder *UserDailyShiftBuilder) Build() *UserDailyShift {
 	req := &UserDailyShift{}
 	if builder.groupIdFlag {
@@ -6479,6 +6496,10 @@ func (builder *UserDailyShiftBuilder) Build() *UserDailyShift {
 	}
 	if builder.dayNoFlag {
 		req.DayNo = &builder.dayNo
+
+	}
+	if builder.isClearScheduleFlag {
+		req.IsClearSchedule = &builder.isClearSchedule
 
 	}
 	return req
@@ -10701,6 +10722,14 @@ func NewCreateShiftReqBuilder() *CreateShiftReqBuilder {
 	return builder
 }
 
+// 用户 ID 的类型 不提供则用户相关字段无效
+//
+// 示例值：
+func (builder *CreateShiftReqBuilder) EmployeeType(employeeType string) *CreateShiftReqBuilder {
+	builder.apiReq.QueryParams.Set("employee_type", fmt.Sprint(employeeType))
+	return builder
+}
+
 // 班次是描述一次考勤任务时间规则的统称，比如一天打多少次卡，每次卡的上下班时间，晚到多长时间算迟到，晚到多长时间算缺卡等。
 func (builder *CreateShiftReqBuilder) Shift(shift *Shift) *CreateShiftReqBuilder {
 	builder.shift = shift
@@ -10710,6 +10739,7 @@ func (builder *CreateShiftReqBuilder) Shift(shift *Shift) *CreateShiftReqBuilder
 func (builder *CreateShiftReqBuilder) Build() *CreateShiftReq {
 	req := &CreateShiftReq{}
 	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
 	req.apiReq.Body = builder.shift
 	return req
 }

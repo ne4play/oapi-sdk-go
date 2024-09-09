@@ -56,6 +56,12 @@ const (
 )
 
 const (
+	UserIdTypeBotTimeSentiveFeedCardOpenId  = "open_id"  // 以open_id来识别用户
+	UserIdTypeBotTimeSentiveFeedCardUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeBotTimeSentiveFeedCardUnionId = "union_id" // 以union_id来识别用户
+)
+
+const (
 	UserIdTypePatchFeedCardOpenId  = "open_id"  // 以open_id来识别用户
 	UserIdTypePatchFeedCardUserId  = "user_id"  // 以user_id来识别用户
 	UserIdTypePatchFeedCardUnionId = "union_id" // 以union_id来识别用户
@@ -4078,6 +4084,149 @@ type UpdateChatButtonResp struct {
 }
 
 func (resp *UpdateChatButtonResp) Success() bool {
+	return resp.Code == 0
+}
+
+type BotTimeSentiveFeedCardReqBodyBuilder struct {
+	timeSensitive     bool // 临时置顶状态，true-打开，false-关闭
+	timeSensitiveFlag bool
+	userIds           []string // 用户id 列表
+	userIdsFlag       bool
+}
+
+func NewBotTimeSentiveFeedCardReqBodyBuilder() *BotTimeSentiveFeedCardReqBodyBuilder {
+	builder := &BotTimeSentiveFeedCardReqBodyBuilder{}
+	return builder
+}
+
+// 临时置顶状态，true-打开，false-关闭
+//
+// 示例值：true
+func (builder *BotTimeSentiveFeedCardReqBodyBuilder) TimeSensitive(timeSensitive bool) *BotTimeSentiveFeedCardReqBodyBuilder {
+	builder.timeSensitive = timeSensitive
+	builder.timeSensitiveFlag = true
+	return builder
+}
+
+// 用户id 列表
+//
+// 示例值：
+func (builder *BotTimeSentiveFeedCardReqBodyBuilder) UserIds(userIds []string) *BotTimeSentiveFeedCardReqBodyBuilder {
+	builder.userIds = userIds
+	builder.userIdsFlag = true
+	return builder
+}
+
+func (builder *BotTimeSentiveFeedCardReqBodyBuilder) Build() *BotTimeSentiveFeedCardReqBody {
+	req := &BotTimeSentiveFeedCardReqBody{}
+	if builder.timeSensitiveFlag {
+		req.TimeSensitive = &builder.timeSensitive
+	}
+	if builder.userIdsFlag {
+		req.UserIds = builder.userIds
+	}
+	return req
+}
+
+type BotTimeSentiveFeedCardPathReqBodyBuilder struct {
+	botId             string
+	botIdFlag         bool
+	timeSensitive     bool
+	timeSensitiveFlag bool
+	userIds           []string
+	userIdsFlag       bool
+}
+
+func NewBotTimeSentiveFeedCardPathReqBodyBuilder() *BotTimeSentiveFeedCardPathReqBodyBuilder {
+	builder := &BotTimeSentiveFeedCardPathReqBodyBuilder{}
+	return builder
+}
+
+// 临时置顶状态，true-打开，false-关闭
+//
+// 示例值：true
+func (builder *BotTimeSentiveFeedCardPathReqBodyBuilder) TimeSensitive(timeSensitive bool) *BotTimeSentiveFeedCardPathReqBodyBuilder {
+	builder.timeSensitive = timeSensitive
+	builder.timeSensitiveFlag = true
+	return builder
+}
+
+// 用户id 列表
+//
+// 示例值：
+func (builder *BotTimeSentiveFeedCardPathReqBodyBuilder) UserIds(userIds []string) *BotTimeSentiveFeedCardPathReqBodyBuilder {
+	builder.userIds = userIds
+	builder.userIdsFlag = true
+	return builder
+}
+
+func (builder *BotTimeSentiveFeedCardPathReqBodyBuilder) Build() (*BotTimeSentiveFeedCardReqBody, error) {
+	req := &BotTimeSentiveFeedCardReqBody{}
+	if builder.timeSensitiveFlag {
+		req.TimeSensitive = &builder.timeSensitive
+	}
+	if builder.userIdsFlag {
+		req.UserIds = builder.userIds
+	}
+	return req, nil
+}
+
+type BotTimeSentiveFeedCardReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *BotTimeSentiveFeedCardReqBody
+}
+
+func NewBotTimeSentiveFeedCardReqBuilder() *BotTimeSentiveFeedCardReqBuilder {
+	builder := &BotTimeSentiveFeedCardReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型 可选值有:	 - open_id: 以open_id来识别用户	 - user_id: 以user_id来识别用户	 - union_id: 以union_id来识别用户
+//
+// 示例值：open_id
+func (builder *BotTimeSentiveFeedCardReqBuilder) UserIdType(userIdType string) *BotTimeSentiveFeedCardReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *BotTimeSentiveFeedCardReqBuilder) Body(body *BotTimeSentiveFeedCardReqBody) *BotTimeSentiveFeedCardReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *BotTimeSentiveFeedCardReqBuilder) Build() *BotTimeSentiveFeedCardReq {
+	req := &BotTimeSentiveFeedCardReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type BotTimeSentiveFeedCardReqBody struct {
+	TimeSensitive *bool    `json:"time_sensitive,omitempty"` // 临时置顶状态，true-打开，false-关闭
+	UserIds       []string `json:"user_ids,omitempty"`       // 用户id 列表
+}
+
+type BotTimeSentiveFeedCardReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *BotTimeSentiveFeedCardReqBody `body:""`
+}
+
+type BotTimeSentiveFeedCardRespData struct {
+	FailedUserReasons []*FailedReason `json:"failed_user_reasons,omitempty"` // 失败原因
+}
+
+type BotTimeSentiveFeedCardResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *BotTimeSentiveFeedCardRespData `json:"data"` // 业务数据
+}
+
+func (resp *BotTimeSentiveFeedCardResp) Success() bool {
 	return resp.Code == 0
 }
 

@@ -234,6 +234,32 @@ func (c *chatButton) Update(ctx context.Context, req *UpdateChatButtonReq, optio
 	return resp, err
 }
 
+// BotTimeSentive
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=bot_time_sentive&project=im&resource=feed_card&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/imv2/botTimeSentive_feedCard.go
+func (f *feedCard) BotTimeSentive(ctx context.Context, req *BotTimeSentiveFeedCardReq, options ...larkcore.RequestOptionFunc) (*BotTimeSentiveFeedCardResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/im/v2/feed_cards/bot_time_sentive"
+	apiReq.HttpMethod = http.MethodPatch
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, f.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BotTimeSentiveFeedCardResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, f.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Patch
 //
 // -

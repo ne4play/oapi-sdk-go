@@ -29,12 +29,10 @@ func main() {
 	req := larkhire.NewUpdateExternalApplicationReqBuilder().
 		ExternalApplicationId("6960663240925956660").
 		ExternalApplication(larkhire.NewExternalApplicationBuilder().
-			ExternalId("123").
 			JobRecruitmentType(1).
 			JobTitle("高级Java").
 			ResumeSource("lagou").
 			Stage("1").
-			TalentId("6960663240925956459").
 			TerminationReason("不合适").
 			DeliveryType(1).
 			ModifyTime(1618500278645).

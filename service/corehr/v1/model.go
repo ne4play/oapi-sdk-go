@@ -21381,10 +21381,19 @@ func (builder *DeleteJobDataReqBuilder) JobDataId(jobDataId string) *DeleteJobDa
 	return builder
 }
 
+// 需要删除的任职记录版本 ID
+//
+// 示例值：1616161616
+func (builder *DeleteJobDataReqBuilder) VersionId(versionId string) *DeleteJobDataReqBuilder {
+	builder.apiReq.QueryParams.Set("version_id", fmt.Sprint(versionId))
+	return builder
+}
+
 func (builder *DeleteJobDataReqBuilder) Build() *DeleteJobDataReq {
 	req := &DeleteJobDataReq{}
 	req.apiReq = &larkcore.ApiReq{}
 	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
 	return req
 }
 
@@ -22187,6 +22196,100 @@ type PatchJobLevelResp struct {
 }
 
 func (resp *PatchJobLevelResp) Success() bool {
+	return resp.Code == 0
+}
+
+type CalendarByScopeLeaveReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewCalendarByScopeLeaveReqBuilder() *CalendarByScopeLeaveReqBuilder {
+	builder := &CalendarByScopeLeaveReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 用户所属部门的ID列表
+//
+// 示例值："6722331851580982798"
+func (builder *CalendarByScopeLeaveReqBuilder) WkDepartmentId(wkDepartmentId string) *CalendarByScopeLeaveReqBuilder {
+	builder.apiReq.QueryParams.Set("wk_department_id", fmt.Sprint(wkDepartmentId))
+	return builder
+}
+
+// 国家/地区 ID
+//
+// 示例值："6722331851580982798"
+func (builder *CalendarByScopeLeaveReqBuilder) WkCountryRegionId(wkCountryRegionId string) *CalendarByScopeLeaveReqBuilder {
+	builder.apiReq.QueryParams.Set("wk_country_region_id", fmt.Sprint(wkCountryRegionId))
+	return builder
+}
+
+// 人员类型
+//
+// 示例值："6722331851580982798"
+func (builder *CalendarByScopeLeaveReqBuilder) WkEmployeeTypeId(wkEmployeeTypeId string) *CalendarByScopeLeaveReqBuilder {
+	builder.apiReq.QueryParams.Set("wk_employee_type_id", fmt.Sprint(wkEmployeeTypeId))
+	return builder
+}
+
+// 工作地点
+//
+// 示例值："6722331851580982798"
+func (builder *CalendarByScopeLeaveReqBuilder) WkWorkLocationId(wkWorkLocationId string) *CalendarByScopeLeaveReqBuilder {
+	builder.apiReq.QueryParams.Set("wk_work_location_id", fmt.Sprint(wkWorkLocationId))
+	return builder
+}
+
+// 工时制度
+//
+// 示例值："11344254"
+func (builder *CalendarByScopeLeaveReqBuilder) WkWorkingHoursTypeId(wkWorkingHoursTypeId string) *CalendarByScopeLeaveReqBuilder {
+	builder.apiReq.QueryParams.Set("wk_working_hours_type_id", fmt.Sprint(wkWorkingHoursTypeId))
+	return builder
+}
+
+// 职务序列
+//
+// 示例值："12345"
+func (builder *CalendarByScopeLeaveReqBuilder) WkJobFamilyId(wkJobFamilyId string) *CalendarByScopeLeaveReqBuilder {
+	builder.apiReq.QueryParams.Set("wk_job_family_id", fmt.Sprint(wkJobFamilyId))
+	return builder
+}
+
+// 公司 ID
+//
+// 示例值："24465434"
+func (builder *CalendarByScopeLeaveReqBuilder) WkCompanyId(wkCompanyId string) *CalendarByScopeLeaveReqBuilder {
+	builder.apiReq.QueryParams.Set("wk_company_id", fmt.Sprint(wkCompanyId))
+	return builder
+}
+
+func (builder *CalendarByScopeLeaveReqBuilder) Build() *CalendarByScopeLeaveReq {
+	req := &CalendarByScopeLeaveReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type CalendarByScopeLeaveReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type CalendarByScopeLeaveRespData struct {
+	CalendarWkId *string `json:"calendar_wk_id,omitempty"` // 工作日历id
+}
+
+type CalendarByScopeLeaveResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *CalendarByScopeLeaveRespData `json:"data"` // 业务数据
+}
+
+func (resp *CalendarByScopeLeaveResp) Success() bool {
 	return resp.Code == 0
 }
 
@@ -25999,6 +26102,34 @@ func (m *P2JobDataChangedV1) RawReq(req *larkevent.EventReq) {
 	m.EventReq = req
 }
 
+type P2JobDataCreatedV1Data struct {
+	JobDataId *string `json:"job_data_id,omitempty"` // ID
+}
+
+type P2JobDataCreatedV1 struct {
+	*larkevent.EventV2Base                         // 事件基础数据
+	*larkevent.EventReq                            // 请求原生数据
+	Event                  *P2JobDataCreatedV1Data `json:"event"` // 事件内容
+}
+
+func (m *P2JobDataCreatedV1) RawReq(req *larkevent.EventReq) {
+	m.EventReq = req
+}
+
+type P2JobDataDeletedV1Data struct {
+	JobDataId *string `json:"job_data_id,omitempty"` // ID
+}
+
+type P2JobDataDeletedV1 struct {
+	*larkevent.EventV2Base                         // 事件基础数据
+	*larkevent.EventReq                            // 请求原生数据
+	Event                  *P2JobDataDeletedV1Data `json:"event"` // 事件内容
+}
+
+func (m *P2JobDataDeletedV1) RawReq(req *larkevent.EventReq) {
+	m.EventReq = req
+}
+
 type P2JobDataEmployedV1Data struct {
 	JobDataId    *string `json:"job_data_id,omitempty"`    // 主对象ID
 	EmploymentId *string `json:"employment_id,omitempty"`  // 员工雇佣 ID
@@ -26012,6 +26143,20 @@ type P2JobDataEmployedV1 struct {
 }
 
 func (m *P2JobDataEmployedV1) RawReq(req *larkevent.EventReq) {
+	m.EventReq = req
+}
+
+type P2JobDataUpdatedV1Data struct {
+	JobDataId *string `json:"job_data_id,omitempty"` // ID
+}
+
+type P2JobDataUpdatedV1 struct {
+	*larkevent.EventV2Base                         // 事件基础数据
+	*larkevent.EventReq                            // 请求原生数据
+	Event                  *P2JobDataUpdatedV1Data `json:"event"` // 事件内容
+}
+
+func (m *P2JobDataUpdatedV1) RawReq(req *larkevent.EventReq) {
 	m.EventReq = req
 }
 

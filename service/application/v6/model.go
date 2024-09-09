@@ -6113,6 +6113,7 @@ func (builder *PlusMenuBuilder) Build() *PlusMenu {
 type Scope struct {
 	ScopeName   *string `json:"scope_name,omitempty"`   // 权限名称，形如 user.phone:readonly
 	GrantStatus *int    `json:"grant_status,omitempty"` // 租户应用权限授予状态
+	ScopeType   *string `json:"scope_type,omitempty"`   // 权限的身份类型，形如 user(用户身份)、tenant(应用身份)
 }
 
 type ScopeBuilder struct {
@@ -6120,6 +6121,8 @@ type ScopeBuilder struct {
 	scopeNameFlag   bool
 	grantStatus     int // 租户应用权限授予状态
 	grantStatusFlag bool
+	scopeType       string // 权限的身份类型，形如 user(用户身份)、tenant(应用身份)
+	scopeTypeFlag   bool
 }
 
 func NewScopeBuilder() *ScopeBuilder {
@@ -6129,7 +6132,7 @@ func NewScopeBuilder() *ScopeBuilder {
 
 // 权限名称，形如 user.phone:readonly
 //
-// 示例值：
+// 示例值：user.phone:readonly
 func (builder *ScopeBuilder) ScopeName(scopeName string) *ScopeBuilder {
 	builder.scopeName = scopeName
 	builder.scopeNameFlag = true
@@ -6145,6 +6148,15 @@ func (builder *ScopeBuilder) GrantStatus(grantStatus int) *ScopeBuilder {
 	return builder
 }
 
+// 权限的身份类型，形如 user(用户身份)、tenant(应用身份)
+//
+// 示例值：
+func (builder *ScopeBuilder) ScopeType(scopeType string) *ScopeBuilder {
+	builder.scopeType = scopeType
+	builder.scopeTypeFlag = true
+	return builder
+}
+
 func (builder *ScopeBuilder) Build() *Scope {
 	req := &Scope{}
 	if builder.scopeNameFlag {
@@ -6153,6 +6165,10 @@ func (builder *ScopeBuilder) Build() *Scope {
 	}
 	if builder.grantStatusFlag {
 		req.GrantStatus = &builder.grantStatus
+
+	}
+	if builder.scopeTypeFlag {
+		req.ScopeType = &builder.scopeType
 
 	}
 	return req
@@ -8771,6 +8787,29 @@ type PatchApplicationVisibilityResp struct {
 }
 
 func (resp *PatchApplicationVisibilityResp) Success() bool {
+	return resp.Code == 0
+}
+
+type ApplyScopeResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *ApplyScopeResp) Success() bool {
+	return resp.Code == 0
+}
+
+type ListScopeRespData struct {
+	Scopes []*Scope `json:"scopes,omitempty"` //
+}
+
+type ListScopeResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListScopeRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListScopeResp) Success() bool {
 	return resp.Code == 0
 }
 
