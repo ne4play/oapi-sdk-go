@@ -415,10 +415,11 @@ func (c *Client) handleDataFrame(ctx context.Context, frame Frame) {
 		type_, msgID, traceID, pl))
 
 	var err error
+	var rsp interface{}
 	start := time.Now().UnixMilli()
 	switch MessageType(type_) {
 	case MessageTypeEvent:
-		err = c.eventHandler.Do(ctx, pl)
+		rsp, err = c.eventHandler.Do(ctx, pl)
 	case MessageTypeCard:
 		return
 	default:
@@ -432,6 +433,15 @@ func (c *Client) handleDataFrame(ctx context.Context, frame Frame) {
 		c.logger.Error(ctx, c.fmtLog("handle message failed, message_type: %s, message_id: %s, trace_id: %s, err: %v",
 			type_, msgID, traceID, err)...)
 		resp = NewResponseByCode(http.StatusInternalServerError)
+	} else {
+		if rsp != nil { // for cardCallback
+			resp.Data, err = json.Marshal(rsp)
+			if err != nil {
+				c.logger.Error(ctx, c.fmtLog("handle message failed, message_type: %s, message_id: %s, trace_id: %s, err: %v",
+					type_, msgID, traceID, err)...)
+				resp = NewResponseByCode(http.StatusInternalServerError)
+			}
+		}
 	}
 
 	p, _ := json.Marshal(resp)

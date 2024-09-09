@@ -29,6 +29,11 @@ type EventHandler interface {
 	Handle(context.Context, interface{}) error // 用于处理事件
 }
 
+type CallbackHandler interface {
+	Event() interface{}
+	Handle(context.Context, interface{}) (interface{}, error) //处理回调
+}
+
 type EventHandlerModel interface {
 	RawReq(req *EventReq)
 }
