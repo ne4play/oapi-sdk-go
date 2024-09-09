@@ -316,7 +316,7 @@ func main() {
 
 	// 服务端错误处理
 	if !resp.Success() {
-           fmt.Println(resp.Code, resp.Msg, resp.RequestId())
+           fmt.Println(resp.Code, resp.Msg, resp.LogId())
 	   return 
 	}
 
@@ -370,7 +370,7 @@ func main() {
 
 	// 服务端错误处理
 	if !resp.Success() {
-	   fmt.Println(resp.Code, resp.Msg, resp.RequestId())
+	   fmt.Println(resp.Code, resp.Msg, resp.LogId())
 	   return
 	}
 
@@ -503,7 +503,7 @@ func main() {
 	}
 
 	// 获取请求 ID
-	fmt.Println(resp.RequestId())
+	fmt.Println(resp.LogId())
 
 	// 处理请求结果
 	fmt.Println(resp.StatusCode)      // http status code

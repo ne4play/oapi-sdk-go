@@ -53,6 +53,10 @@ func (resp ApiResp) RequestId() string {
 	return resp.Header.Get(HttpHeaderKeyRequestId)
 }
 
+func (resp ApiResp) LogId() string {
+	return resp.RequestId()
+}
+
 func (resp ApiResp) String() string {
 	contentType := resp.Header.Get(contentTypeHeader)
 	body := fmt.Sprintf("<binary> len %d", len(resp.RawBody))
@@ -67,9 +71,12 @@ type CodeError struct {
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`
 	Err  *struct {
+		LogID                string                          `json:"log_id,omitempty"`
+		Troubleshooter       string                          `json:"troubleshooter,omitempty"`
 		Details              []*CodeErrorDetail              `json:"details,omitempty"`
 		PermissionViolations []*CodeErrorPermissionViolation `json:"permission_violations,omitempty"`
 		FieldViolations      []*CodeErrorFieldViolation      `json:"field_violations,omitempty"`
+		Helps                []*CodeErrorHelp                `json:"helps,omitempty"`
 	} `json:"error"`
 }
 
@@ -100,6 +107,11 @@ type CodeErrorPermissionViolation struct {
 type CodeErrorFieldViolation struct {
 	Field       string `json:"field,omitempty"`
 	Value       string `json:"value,omitempty"`
+	Description string `json:"description,omitempty"`
+}
+
+type CodeErrorHelp struct {
+	URL         string `json:"url,omitempty"`
 	Description string `json:"description,omitempty"`
 }
 

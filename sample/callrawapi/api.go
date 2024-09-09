@@ -30,7 +30,6 @@ func rawApiUserCallNew() {
 	// 创建 API Client
 	var appID, appSecret = os.Getenv("APP_ID"), os.Getenv("APP_SECRET")
 	var cli = lark.NewClient(appID, appSecret)
-
 	// 发起请求
 	resp, err := cli.Do(context.Background(),
 		&larkcore.ApiReq{
