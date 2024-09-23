@@ -325,7 +325,7 @@ func main() {
 }
 ```
 
-更多 API 调用示例：[./sample/api/im.go](./sample/api/im.go)
+更多 API 调用示例：[./sample/api/im/im.go](./sample/api/im/im.go)
 
 ### 设置请求选项
 
