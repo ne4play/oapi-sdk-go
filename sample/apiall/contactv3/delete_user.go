@@ -38,6 +38,7 @@ func main() {
 			MinutesAcceptorUserId("ou_7dab8a3d3cdcc9da365777c7ad535d62").
 			SurveyAcceptorUserId("ou_7dab8a3d3cdcc9da365777c7ad535d62").
 			EmailAcceptor(larkcontact.NewResourceAcceptorBuilder().Build()).
+			AnycrossAcceptorUserId("").
 			Build()).
 		Build()
 	// 发起请求

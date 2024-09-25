@@ -9550,6 +9550,7 @@ type JobLevel struct {
 	Description  []*I18n            `json:"description,omitempty"`   // 描述
 	Active       *bool              `json:"active,omitempty"`        // 是否启用
 	CustomFields []*ObjectFieldData `json:"custom_fields,omitempty"` // 自定义字段
+	JobGrade     []string           `json:"job_grade,omitempty"`     // 职等 ID 列表
 }
 
 type JobLevelBuilder struct {
@@ -9567,6 +9568,8 @@ type JobLevelBuilder struct {
 	activeFlag       bool
 	customFields     []*ObjectFieldData // 自定义字段
 	customFieldsFlag bool
+	jobGrade         []string // 职等 ID 列表
+	jobGradeFlag     bool
 }
 
 func NewJobLevelBuilder() *JobLevelBuilder {
@@ -9637,6 +9640,15 @@ func (builder *JobLevelBuilder) CustomFields(customFields []*ObjectFieldData) *J
 	return builder
 }
 
+// 职等 ID 列表
+//
+// 示例值：
+func (builder *JobLevelBuilder) JobGrade(jobGrade []string) *JobLevelBuilder {
+	builder.jobGrade = jobGrade
+	builder.jobGradeFlag = true
+	return builder
+}
+
 func (builder *JobLevelBuilder) Build() *JobLevel {
 	req := &JobLevel{}
 	if builder.idFlag {
@@ -9663,6 +9675,9 @@ func (builder *JobLevelBuilder) Build() *JobLevel {
 	}
 	if builder.customFieldsFlag {
 		req.CustomFields = builder.customFields
+	}
+	if builder.jobGradeFlag {
+		req.JobGrade = builder.jobGrade
 	}
 	return req
 }
@@ -15830,6 +15845,8 @@ type TransferInfo struct {
 	TargetJobLevel             *string                  `json:"target_job_level,omitempty"`              // 新级别
 	OriginalWorkforceType      *string                  `json:"original_workforce_type,omitempty"`       // 原人员类型
 	TargetWorkforceType        *string                  `json:"target_workforce_type,omitempty"`         // 新人员类型
+	OriginalEmployeeSubtype    *string                  `json:"original_employee_subtype,omitempty"`     // 原人员子类型
+	TargetEmployeeSubtype      *string                  `json:"target_employee_subtype,omitempty"`       // 新人员子类型
 	OriginalCompany            *string                  `json:"original_company,omitempty"`              // 原公司
 	TargetCompany              *string                  `json:"target_company,omitempty"`                // 新公司
 	OriginalContractNumber     *string                  `json:"original_contract_number,omitempty"`      // 原合同编号
@@ -15909,6 +15926,10 @@ type TransferInfoBuilder struct {
 	originalWorkforceTypeFlag      bool
 	targetWorkforceType            string // 新人员类型
 	targetWorkforceTypeFlag        bool
+	originalEmployeeSubtype        string // 原人员子类型
+	originalEmployeeSubtypeFlag    bool
+	targetEmployeeSubtype          string // 新人员子类型
+	targetEmployeeSubtypeFlag      bool
 	originalCompany                string // 原公司
 	originalCompanyFlag            bool
 	targetCompany                  string // 新公司
@@ -16165,6 +16186,24 @@ func (builder *TransferInfoBuilder) OriginalWorkforceType(originalWorkforceType 
 func (builder *TransferInfoBuilder) TargetWorkforceType(targetWorkforceType string) *TransferInfoBuilder {
 	builder.targetWorkforceType = targetWorkforceType
 	builder.targetWorkforceTypeFlag = true
+	return builder
+}
+
+// 原人员子类型
+//
+// 示例值：6968386026792289828
+func (builder *TransferInfoBuilder) OriginalEmployeeSubtype(originalEmployeeSubtype string) *TransferInfoBuilder {
+	builder.originalEmployeeSubtype = originalEmployeeSubtype
+	builder.originalEmployeeSubtypeFlag = true
+	return builder
+}
+
+// 新人员子类型
+//
+// 示例值：7036268995372303885
+func (builder *TransferInfoBuilder) TargetEmployeeSubtype(targetEmployeeSubtype string) *TransferInfoBuilder {
+	builder.targetEmployeeSubtype = targetEmployeeSubtype
+	builder.targetEmployeeSubtypeFlag = true
 	return builder
 }
 
@@ -16572,6 +16611,14 @@ func (builder *TransferInfoBuilder) Build() *TransferInfo {
 	}
 	if builder.targetWorkforceTypeFlag {
 		req.TargetWorkforceType = &builder.targetWorkforceType
+
+	}
+	if builder.originalEmployeeSubtypeFlag {
+		req.OriginalEmployeeSubtype = &builder.originalEmployeeSubtype
+
+	}
+	if builder.targetEmployeeSubtypeFlag {
+		req.TargetEmployeeSubtype = &builder.targetEmployeeSubtype
 
 	}
 	if builder.originalCompanyFlag {
@@ -22692,6 +22739,97 @@ type LeaveTypesLeaveResp struct {
 }
 
 func (resp *LeaveTypesLeaveResp) Success() bool {
+	return resp.Code == 0
+}
+
+type WorkCalendarLeaveReqBuilder struct {
+	apiReq             *larkcore.ApiReq
+	workCalendarFilter *WorkCalendarFilter
+}
+
+func NewWorkCalendarLeaveReqBuilder() *WorkCalendarLeaveReqBuilder {
+	builder := &WorkCalendarLeaveReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+func (builder *WorkCalendarLeaveReqBuilder) WorkCalendarFilter(workCalendarFilter *WorkCalendarFilter) *WorkCalendarLeaveReqBuilder {
+	builder.workCalendarFilter = workCalendarFilter
+	return builder
+}
+
+func (builder *WorkCalendarLeaveReqBuilder) Build() *WorkCalendarLeaveReq {
+	req := &WorkCalendarLeaveReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.Body = builder.workCalendarFilter
+	return req
+}
+
+type WorkCalendarLeaveReq struct {
+	apiReq             *larkcore.ApiReq
+	WorkCalendarFilter *WorkCalendarFilter `body:""`
+}
+
+type WorkCalendarLeaveRespData struct {
+	WorkCalendars []*WorkCalendarDetail `json:"work_calendars,omitempty"` // 工作日历列表
+	Count         *int                  `json:"count,omitempty"`          // 入参count=true，则返回符合条件的工作日历总数
+}
+
+type WorkCalendarLeaveResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *WorkCalendarLeaveRespData `json:"data"` // 业务数据
+}
+
+func (resp *WorkCalendarLeaveResp) Success() bool {
+	return resp.Code == 0
+}
+
+type WorkCalendarDateLeaveReqBuilder struct {
+	apiReq                   *larkcore.ApiReq
+	calendarDateByDateFilter *CalendarDateByDateFilter
+}
+
+func NewWorkCalendarDateLeaveReqBuilder() *WorkCalendarDateLeaveReqBuilder {
+	builder := &WorkCalendarDateLeaveReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+func (builder *WorkCalendarDateLeaveReqBuilder) CalendarDateByDateFilter(calendarDateByDateFilter *CalendarDateByDateFilter) *WorkCalendarDateLeaveReqBuilder {
+	builder.calendarDateByDateFilter = calendarDateByDateFilter
+	return builder
+}
+
+func (builder *WorkCalendarDateLeaveReqBuilder) Build() *WorkCalendarDateLeaveReq {
+	req := &WorkCalendarDateLeaveReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.Body = builder.calendarDateByDateFilter
+	return req
+}
+
+type WorkCalendarDateLeaveReq struct {
+	apiReq                   *larkcore.ApiReq
+	CalendarDateByDateFilter *CalendarDateByDateFilter `body:""`
+}
+
+type WorkCalendarDateLeaveRespData struct {
+	CalendarDates []*WkCalendarDate `json:"calendar_dates,omitempty"` // 日期类型列表
+}
+
+type WorkCalendarDateLeaveResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *WorkCalendarDateLeaveRespData `json:"data"` // 业务数据
+}
+
+func (resp *WorkCalendarDateLeaveResp) Success() bool {
 	return resp.Code == 0
 }
 

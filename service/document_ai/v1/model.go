@@ -488,9 +488,6 @@ func (builder *BodyInfoBuilder) Build() *BodyInfo {
 	return req
 }
 
-type BusinessCard struct {
-}
-
 type BusinessEntity struct {
 	Type  *string `json:"type,omitempty"`  // 识别的字段种类
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
@@ -829,6 +826,9 @@ type DocChunkResult struct {
 	Label       *string              `json:"label,omitempty"`        // 段落的语义标签，（以论文为例，会有title, author, abstract, introduction, related works...）
 	BlockId     *string              `json:"block_id,omitempty"`     // 飞书文档的block_id字段
 	TableDetail *DocChunkTableDetail `json:"table_detail,omitempty"` // 如chunk=table，则此字段包含表格信息
+	LlmDetail   *LlmDetail           `json:"llm_detail,omitempty"`   // 多模态返回的详细信息
+	ImageDetail *ImageDetail         `json:"image_detail,omitempty"` // 图片内容详细信息
+	SlideIndex  *string              `json:"slide_index,omitempty"`  // pptx文件里面的页码
 }
 
 type DocChunkResultBuilder struct {
@@ -852,6 +852,12 @@ type DocChunkResultBuilder struct {
 	blockIdFlag     bool
 	tableDetail     *DocChunkTableDetail // 如chunk=table，则此字段包含表格信息
 	tableDetailFlag bool
+	llmDetail       *LlmDetail // 多模态返回的详细信息
+	llmDetailFlag   bool
+	imageDetail     *ImageDetail // 图片内容详细信息
+	imageDetailFlag bool
+	slideIndex      string // pptx文件里面的页码
+	slideIndexFlag  bool
 }
 
 func NewDocChunkResultBuilder() *DocChunkResultBuilder {
@@ -949,6 +955,33 @@ func (builder *DocChunkResultBuilder) TableDetail(tableDetail *DocChunkTableDeta
 	return builder
 }
 
+// 多模态返回的详细信息
+//
+// 示例值：
+func (builder *DocChunkResultBuilder) LlmDetail(llmDetail *LlmDetail) *DocChunkResultBuilder {
+	builder.llmDetail = llmDetail
+	builder.llmDetailFlag = true
+	return builder
+}
+
+// 图片内容详细信息
+//
+// 示例值：
+func (builder *DocChunkResultBuilder) ImageDetail(imageDetail *ImageDetail) *DocChunkResultBuilder {
+	builder.imageDetail = imageDetail
+	builder.imageDetailFlag = true
+	return builder
+}
+
+// pptx文件里面的页码
+//
+// 示例值：1
+func (builder *DocChunkResultBuilder) SlideIndex(slideIndex string) *DocChunkResultBuilder {
+	builder.slideIndex = slideIndex
+	builder.slideIndexFlag = true
+	return builder
+}
+
 func (builder *DocChunkResultBuilder) Build() *DocChunkResult {
 	req := &DocChunkResult{}
 	if builder.idFlag {
@@ -987,6 +1020,16 @@ func (builder *DocChunkResultBuilder) Build() *DocChunkResult {
 	}
 	if builder.tableDetailFlag {
 		req.TableDetail = builder.tableDetail
+	}
+	if builder.llmDetailFlag {
+		req.LlmDetail = builder.llmDetail
+	}
+	if builder.imageDetailFlag {
+		req.ImageDetail = builder.imageDetail
+	}
+	if builder.slideIndexFlag {
+		req.SlideIndex = &builder.slideIndex
+
 	}
 	return req
 }
@@ -1323,9 +1366,6 @@ func (builder *DrivingEntityBuilder) Build() *DrivingEntity {
 
 	}
 	return req
-}
-
-type DrivingLicense struct {
 }
 
 type DrvingLicense struct {
@@ -1740,9 +1780,6 @@ func (builder *ExtractTimeBuilder) Build() *ExtractTime {
 
 	}
 	return req
-}
-
-type FieldExtraction struct {
 }
 
 type FoodManageEntity struct {
@@ -2181,6 +2218,434 @@ func (builder *IdEntityBuilder) Build() *IdEntity {
 	}
 	if builder.valueFlag {
 		req.Value = &builder.value
+
+	}
+	return req
+}
+
+type ImageDetail struct {
+	Base64  *string  `json:"base64,omitempty"`  // 图片完整内容base64字符串
+	Caption *string  `json:"caption,omitempty"` // 图片描述，目前为当前图片的前一段和后一段\n拼接
+	Links   []string `json:"links,omitempty"`   // 图片url
+}
+
+type ImageDetailBuilder struct {
+	base64      string // 图片完整内容base64字符串
+	base64Flag  bool
+	caption     string // 图片描述，目前为当前图片的前一段和后一段\n拼接
+	captionFlag bool
+	links       []string // 图片url
+	linksFlag   bool
+}
+
+func NewImageDetailBuilder() *ImageDetailBuilder {
+	builder := &ImageDetailBuilder{}
+	return builder
+}
+
+// 图片完整内容base64字符串
+//
+// 示例值：MTEx
+func (builder *ImageDetailBuilder) Base64(base64 string) *ImageDetailBuilder {
+	builder.base64 = base64
+	builder.base64Flag = true
+	return builder
+}
+
+// 图片描述，目前为当前图片的前一段和后一段\n拼接
+//
+// 示例值：这是一个示例
+func (builder *ImageDetailBuilder) Caption(caption string) *ImageDetailBuilder {
+	builder.caption = caption
+	builder.captionFlag = true
+	return builder
+}
+
+// 图片url
+//
+// 示例值：
+func (builder *ImageDetailBuilder) Links(links []string) *ImageDetailBuilder {
+	builder.links = links
+	builder.linksFlag = true
+	return builder
+}
+
+func (builder *ImageDetailBuilder) Build() *ImageDetail {
+	req := &ImageDetail{}
+	if builder.base64Flag {
+		req.Base64 = &builder.base64
+
+	}
+	if builder.captionFlag {
+		req.Caption = &builder.caption
+
+	}
+	if builder.linksFlag {
+		req.Links = builder.links
+	}
+	return req
+}
+
+type LlmConfig struct {
+	Model            *string       `json:"model,omitempty"`             // 模型名称
+	Messages         []*LlmMessage `json:"messages,omitempty"`          // 消息
+	MaxTokens        *int          `json:"max_tokens,omitempty"`        // 默认1024，最多生成多少个tokens
+	MessageType      *string       `json:"message_type,omitempty"`      // 消息类型
+	N                *int          `json:"n,omitempty"`                 // 默认1，每个query返回多少个预测结果
+	Temperature      *int          `json:"temperature,omitempty"`       // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
+	PresencePenalty  *int          `json:"presence_penalty,omitempty"`  // 默认0，>0惩罚模型输出已经在输出中出现过的token
+	FrequencyPenalty *int          `json:"frequency_penalty,omitempty"` // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
+}
+
+type LlmConfigBuilder struct {
+	model                string // 模型名称
+	modelFlag            bool
+	messages             []*LlmMessage // 消息
+	messagesFlag         bool
+	maxTokens            int // 默认1024，最多生成多少个tokens
+	maxTokensFlag        bool
+	messageType          string // 消息类型
+	messageTypeFlag      bool
+	n                    int // 默认1，每个query返回多少个预测结果
+	nFlag                bool
+	temperature          int // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
+	temperatureFlag      bool
+	presencePenalty      int // 默认0，>0惩罚模型输出已经在输出中出现过的token
+	presencePenaltyFlag  bool
+	frequencyPenalty     int // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
+	frequencyPenaltyFlag bool
+}
+
+func NewLlmConfigBuilder() *LlmConfigBuilder {
+	builder := &LlmConfigBuilder{}
+	return builder
+}
+
+// 模型名称
+//
+// 示例值：miniCPM
+func (builder *LlmConfigBuilder) Model(model string) *LlmConfigBuilder {
+	builder.model = model
+	builder.modelFlag = true
+	return builder
+}
+
+// 消息
+//
+// 示例值：
+func (builder *LlmConfigBuilder) Messages(messages []*LlmMessage) *LlmConfigBuilder {
+	builder.messages = messages
+	builder.messagesFlag = true
+	return builder
+}
+
+// 默认1024，最多生成多少个tokens
+//
+// 示例值：1
+func (builder *LlmConfigBuilder) MaxTokens(maxTokens int) *LlmConfigBuilder {
+	builder.maxTokens = maxTokens
+	builder.maxTokensFlag = true
+	return builder
+}
+
+// 消息类型
+//
+// 示例值：single-round
+func (builder *LlmConfigBuilder) MessageType(messageType string) *LlmConfigBuilder {
+	builder.messageType = messageType
+	builder.messageTypeFlag = true
+	return builder
+}
+
+// 默认1，每个query返回多少个预测结果
+//
+// 示例值：1
+func (builder *LlmConfigBuilder) N(n int) *LlmConfigBuilder {
+	builder.n = n
+	builder.nFlag = true
+	return builder
+}
+
+// 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
+//
+// 示例值：0
+func (builder *LlmConfigBuilder) Temperature(temperature int) *LlmConfigBuilder {
+	builder.temperature = temperature
+	builder.temperatureFlag = true
+	return builder
+}
+
+// 默认0，>0惩罚模型输出已经在输出中出现过的token
+//
+// 示例值：0
+func (builder *LlmConfigBuilder) PresencePenalty(presencePenalty int) *LlmConfigBuilder {
+	builder.presencePenalty = presencePenalty
+	builder.presencePenaltyFlag = true
+	return builder
+}
+
+// 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
+//
+// 示例值：0
+func (builder *LlmConfigBuilder) FrequencyPenalty(frequencyPenalty int) *LlmConfigBuilder {
+	builder.frequencyPenalty = frequencyPenalty
+	builder.frequencyPenaltyFlag = true
+	return builder
+}
+
+func (builder *LlmConfigBuilder) Build() *LlmConfig {
+	req := &LlmConfig{}
+	if builder.modelFlag {
+		req.Model = &builder.model
+
+	}
+	if builder.messagesFlag {
+		req.Messages = builder.messages
+	}
+	if builder.maxTokensFlag {
+		req.MaxTokens = &builder.maxTokens
+
+	}
+	if builder.messageTypeFlag {
+		req.MessageType = &builder.messageType
+
+	}
+	if builder.nFlag {
+		req.N = &builder.n
+
+	}
+	if builder.temperatureFlag {
+		req.Temperature = &builder.temperature
+
+	}
+	if builder.presencePenaltyFlag {
+		req.PresencePenalty = &builder.presencePenalty
+
+	}
+	if builder.frequencyPenaltyFlag {
+		req.FrequencyPenalty = &builder.frequencyPenalty
+
+	}
+	return req
+}
+
+type LlmContent struct {
+	Type    *string `json:"type,omitempty"`    // 内容类型：text, image_zip
+	Content *string `json:"content,omitempty"` // 内容：text类型就是对应的输入文本， image_zip是文件的相对路径
+}
+
+type LlmContentBuilder struct {
+	type_       string // 内容类型：text, image_zip
+	typeFlag    bool
+	content     string // 内容：text类型就是对应的输入文本， image_zip是文件的相对路径
+	contentFlag bool
+}
+
+func NewLlmContentBuilder() *LlmContentBuilder {
+	builder := &LlmContentBuilder{}
+	return builder
+}
+
+// 内容类型：text, image_zip
+//
+// 示例值：text
+func (builder *LlmContentBuilder) Type(type_ string) *LlmContentBuilder {
+	builder.type_ = type_
+	builder.typeFlag = true
+	return builder
+}
+
+// 内容：text类型就是对应的输入文本， image_zip是文件的相对路径
+//
+// 示例值：输入图片按顺序描述了一件什么事情
+func (builder *LlmContentBuilder) Content(content string) *LlmContentBuilder {
+	builder.content = content
+	builder.contentFlag = true
+	return builder
+}
+
+func (builder *LlmContentBuilder) Build() *LlmContent {
+	req := &LlmContent{}
+	if builder.typeFlag {
+		req.Type = &builder.type_
+
+	}
+	if builder.contentFlag {
+		req.Content = &builder.content
+
+	}
+	return req
+}
+
+type LlmDetail struct {
+	QueryId      *int      `json:"query_id,omitempty"`      // query在原始输入batch中的序号，从0开始
+	Usage        *LlmUsage `json:"usage,omitempty"`         // 统计输入和输出的token个数
+	FinishReason *string   `json:"finish_reason,omitempty"` // 表明模型停止生成的原因，如'length', 'stop'
+}
+
+type LlmDetailBuilder struct {
+	queryId          int // query在原始输入batch中的序号，从0开始
+	queryIdFlag      bool
+	usage            *LlmUsage // 统计输入和输出的token个数
+	usageFlag        bool
+	finishReason     string // 表明模型停止生成的原因，如'length', 'stop'
+	finishReasonFlag bool
+}
+
+func NewLlmDetailBuilder() *LlmDetailBuilder {
+	builder := &LlmDetailBuilder{}
+	return builder
+}
+
+// query在原始输入batch中的序号，从0开始
+//
+// 示例值：0
+func (builder *LlmDetailBuilder) QueryId(queryId int) *LlmDetailBuilder {
+	builder.queryId = queryId
+	builder.queryIdFlag = true
+	return builder
+}
+
+// 统计输入和输出的token个数
+//
+// 示例值：
+func (builder *LlmDetailBuilder) Usage(usage *LlmUsage) *LlmDetailBuilder {
+	builder.usage = usage
+	builder.usageFlag = true
+	return builder
+}
+
+// 表明模型停止生成的原因，如'length', 'stop'
+//
+// 示例值：stop
+func (builder *LlmDetailBuilder) FinishReason(finishReason string) *LlmDetailBuilder {
+	builder.finishReason = finishReason
+	builder.finishReasonFlag = true
+	return builder
+}
+
+func (builder *LlmDetailBuilder) Build() *LlmDetail {
+	req := &LlmDetail{}
+	if builder.queryIdFlag {
+		req.QueryId = &builder.queryId
+
+	}
+	if builder.usageFlag {
+		req.Usage = builder.usage
+	}
+	if builder.finishReasonFlag {
+		req.FinishReason = &builder.finishReason
+
+	}
+	return req
+}
+
+type LlmMessage struct {
+	Role     *string       `json:"role,omitempty"`     // 角色名
+	Contents []*LlmContent `json:"contents,omitempty"` // 内容信息，如果同时输入多张图片和多段文本，默认将所有图片置于开头，取第一段文本作为输入的prompt；如果是图片，目前1个query (dict)最多输入3张图片，每张图片大小不超过3000*3000
+}
+
+type LlmMessageBuilder struct {
+	role         string // 角色名
+	roleFlag     bool
+	contents     []*LlmContent // 内容信息，如果同时输入多张图片和多段文本，默认将所有图片置于开头，取第一段文本作为输入的prompt；如果是图片，目前1个query (dict)最多输入3张图片，每张图片大小不超过3000*3000
+	contentsFlag bool
+}
+
+func NewLlmMessageBuilder() *LlmMessageBuilder {
+	builder := &LlmMessageBuilder{}
+	return builder
+}
+
+// 角色名
+//
+// 示例值：user
+func (builder *LlmMessageBuilder) Role(role string) *LlmMessageBuilder {
+	builder.role = role
+	builder.roleFlag = true
+	return builder
+}
+
+// 内容信息，如果同时输入多张图片和多段文本，默认将所有图片置于开头，取第一段文本作为输入的prompt；如果是图片，目前1个query (dict)最多输入3张图片，每张图片大小不超过3000*3000
+//
+// 示例值：
+func (builder *LlmMessageBuilder) Contents(contents []*LlmContent) *LlmMessageBuilder {
+	builder.contents = contents
+	builder.contentsFlag = true
+	return builder
+}
+
+func (builder *LlmMessageBuilder) Build() *LlmMessage {
+	req := &LlmMessage{}
+	if builder.roleFlag {
+		req.Role = &builder.role
+
+	}
+	if builder.contentsFlag {
+		req.Contents = builder.contents
+	}
+	return req
+}
+
+type LlmUsage struct {
+	PromptTokens     *int `json:"prompt_tokens,omitempty"`     // 当前输入token的个数
+	CompletionTokens *int `json:"completion_tokens,omitempty"` // 当前输出token的个数
+	TotalTokens      *int `json:"total_tokens,omitempty"`      // 输入+输出token的总个数
+}
+
+type LlmUsageBuilder struct {
+	promptTokens         int // 当前输入token的个数
+	promptTokensFlag     bool
+	completionTokens     int // 当前输出token的个数
+	completionTokensFlag bool
+	totalTokens          int // 输入+输出token的总个数
+	totalTokensFlag      bool
+}
+
+func NewLlmUsageBuilder() *LlmUsageBuilder {
+	builder := &LlmUsageBuilder{}
+	return builder
+}
+
+// 当前输入token的个数
+//
+// 示例值：226
+func (builder *LlmUsageBuilder) PromptTokens(promptTokens int) *LlmUsageBuilder {
+	builder.promptTokens = promptTokens
+	builder.promptTokensFlag = true
+	return builder
+}
+
+// 当前输出token的个数
+//
+// 示例值：115
+func (builder *LlmUsageBuilder) CompletionTokens(completionTokens int) *LlmUsageBuilder {
+	builder.completionTokens = completionTokens
+	builder.completionTokensFlag = true
+	return builder
+}
+
+// 输入+输出token的总个数
+//
+// 示例值：341
+func (builder *LlmUsageBuilder) TotalTokens(totalTokens int) *LlmUsageBuilder {
+	builder.totalTokens = totalTokens
+	builder.totalTokensFlag = true
+	return builder
+}
+
+func (builder *LlmUsageBuilder) Build() *LlmUsage {
+	req := &LlmUsage{}
+	if builder.promptTokensFlag {
+		req.PromptTokens = &builder.promptTokens
+
+	}
+	if builder.completionTokensFlag {
+		req.CompletionTokens = &builder.completionTokens
+
+	}
+	if builder.totalTokensFlag {
+		req.TotalTokens = &builder.totalTokens
 
 	}
 	return req

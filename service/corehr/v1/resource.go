@@ -1910,6 +1910,58 @@ func (l *leave) LeaveTypes(ctx context.Context, req *LeaveTypesLeaveReq, options
 	return resp, err
 }
 
+// WorkCalendar
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=work_calendar&project=corehr&resource=leave&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv1/workCalendar_leave.go
+func (l *leave) WorkCalendar(ctx context.Context, req *WorkCalendarLeaveReq, options ...larkcore.RequestOptionFunc) (*WorkCalendarLeaveResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v1/leaves/work_calendar"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &WorkCalendarLeaveResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// WorkCalendarDate
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=work_calendar_date&project=corehr&resource=leave&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv1/workCalendarDate_leave.go
+func (l *leave) WorkCalendarDate(ctx context.Context, req *WorkCalendarDateLeaveReq, options ...larkcore.RequestOptionFunc) (*WorkCalendarDateLeaveResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v1/leaves/work_calendar_date"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &WorkCalendarDateLeaveResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Create 创建假期授予记录
 //
 // - 向飞书人事休假系统写入假期授予记录

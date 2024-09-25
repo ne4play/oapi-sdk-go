@@ -46,7 +46,7 @@ type Context struct {
 	OpenChatID    string `json:"open_chat_id,omitempty"`
 }
 
-type CardActionTriggerReponse struct {
+type CardActionTriggerResponse struct {
 	Toast *Toast `json:"toast,omitempty"`
 	Card  *Card  `json:"card,omitempty"`
 }

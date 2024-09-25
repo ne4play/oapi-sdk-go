@@ -548,6 +548,9 @@ type Task struct {
 	CommitTime     *int           `json:"commit_time,omitempty"`     // 提交时间时间戳
 	FormContents   []*FormContent `json:"form_contents,omitempty"`   // 汇报表单内容
 	RuleId         *string        `json:"rule_id,omitempty"`         // 汇报规则ID
+	DepartmentIds  []string       `json:"department_ids,omitempty"`  // 部门id
+	ToUserIds      []string       `json:"to_user_ids,omitempty"`     // 汇报给谁
+	ToUserNames    []string       `json:"to_user_names,omitempty"`   // 汇报给谁的名字
 }
 
 type TaskBuilder struct {
@@ -567,6 +570,12 @@ type TaskBuilder struct {
 	formContentsFlag   bool
 	ruleId             string // 汇报规则ID
 	ruleIdFlag         bool
+	departmentIds      []string // 部门id
+	departmentIdsFlag  bool
+	toUserIds          []string // 汇报给谁
+	toUserIdsFlag      bool
+	toUserNames        []string // 汇报给谁的名字
+	toUserNamesFlag    bool
 }
 
 func NewTaskBuilder() *TaskBuilder {
@@ -646,6 +655,33 @@ func (builder *TaskBuilder) RuleId(ruleId string) *TaskBuilder {
 	return builder
 }
 
+// 部门id
+//
+// 示例值：
+func (builder *TaskBuilder) DepartmentIds(departmentIds []string) *TaskBuilder {
+	builder.departmentIds = departmentIds
+	builder.departmentIdsFlag = true
+	return builder
+}
+
+// 汇报给谁
+//
+// 示例值：
+func (builder *TaskBuilder) ToUserIds(toUserIds []string) *TaskBuilder {
+	builder.toUserIds = toUserIds
+	builder.toUserIdsFlag = true
+	return builder
+}
+
+// 汇报给谁的名字
+//
+// 示例值：
+func (builder *TaskBuilder) ToUserNames(toUserNames []string) *TaskBuilder {
+	builder.toUserNames = toUserNames
+	builder.toUserNamesFlag = true
+	return builder
+}
+
 func (builder *TaskBuilder) Build() *Task {
 	req := &Task{}
 	if builder.taskIdFlag {
@@ -678,6 +714,15 @@ func (builder *TaskBuilder) Build() *Task {
 	if builder.ruleIdFlag {
 		req.RuleId = &builder.ruleId
 
+	}
+	if builder.departmentIdsFlag {
+		req.DepartmentIds = builder.departmentIds
+	}
+	if builder.toUserIdsFlag {
+		req.ToUserIds = builder.toUserIds
+	}
+	if builder.toUserNamesFlag {
+		req.ToUserNames = builder.toUserNames
 	}
 	return req
 }

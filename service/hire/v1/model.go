@@ -14,12 +14,14 @@
 package larkhire
 
 import (
-	"context"
-	"errors"
 	"fmt"
 
-	"github.com/larksuite/oapi-sdk-go/v3/core"
+	"context"
+	"errors"
+
 	"github.com/larksuite/oapi-sdk-go/v3/event"
+
+	"github.com/larksuite/oapi-sdk-go/v3/core"
 )
 
 const (
@@ -1022,6 +1024,18 @@ const (
 )
 
 const (
+	UserIdTypeCreateReferralAccountUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeCreateReferralAccountUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeCreateReferralAccountOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
+	UserIdTypeDeactivateReferralAccountUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeDeactivateReferralAccountUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeDeactivateReferralAccountOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
 	UserIdTypeGetReferralWebsiteJobPostUserId  = "user_id"  // 以 user_id 来识别用户
 	UserIdTypeGetReferralWebsiteJobPostUnionId = "union_id" // 以 union_id 来识别用户
 	UserIdTypeGetReferralWebsiteJobPostOpenId  = "open_id"  // 以 open_id 来识别用户
@@ -1401,6 +1415,7 @@ type Account struct {
 	AccountId *string `json:"account_id,omitempty"` // 账户ID
 	Assets    *Assets `json:"assets,omitempty"`     // 账户资产
 	Status    *int    `json:"status,omitempty"`     // 账号状态
+
 }
 
 type AccountBuilder struct {
@@ -1455,6 +1470,86 @@ func (builder *AccountBuilder) Build() *Account {
 	}
 	if builder.statusFlag {
 		req.Status = &builder.status
+
+	}
+
+	return req
+}
+
+type AccountReferrer struct {
+	Id     *string `json:"id,omitempty"`     // 内推人 ID
+	Name   *I18n   `json:"name,omitempty"`   // 内推人名称
+	Email  *string `json:"email,omitempty"`  // 用户邮箱
+	Mobile *string `json:"mobile,omitempty"` // 用户手机
+}
+
+type AccountReferrerBuilder struct {
+	id         string // 内推人 ID
+	idFlag     bool
+	name       *I18n // 内推人名称
+	nameFlag   bool
+	email      string // 用户邮箱
+	emailFlag  bool
+	mobile     string // 用户手机
+	mobileFlag bool
+}
+
+func NewAccountReferrerBuilder() *AccountReferrerBuilder {
+	builder := &AccountReferrerBuilder{}
+	return builder
+}
+
+// 内推人 ID
+//
+// 示例值：7413952589321914668
+func (builder *AccountReferrerBuilder) Id(id string) *AccountReferrerBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 内推人名称
+//
+// 示例值：
+func (builder *AccountReferrerBuilder) Name(name *I18n) *AccountReferrerBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 用户邮箱
+//
+// 示例值：27188272xxxx1.com
+func (builder *AccountReferrerBuilder) Email(email string) *AccountReferrerBuilder {
+	builder.email = email
+	builder.emailFlag = true
+	return builder
+}
+
+// 用户手机
+//
+// 示例值：1879087xxx8
+func (builder *AccountReferrerBuilder) Mobile(mobile string) *AccountReferrerBuilder {
+	builder.mobile = mobile
+	builder.mobileFlag = true
+	return builder
+}
+
+func (builder *AccountReferrerBuilder) Build() *AccountReferrer {
+	req := &AccountReferrer{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	if builder.emailFlag {
+		req.Email = &builder.email
+
+	}
+	if builder.mobileFlag {
+		req.Mobile = &builder.mobile
 
 	}
 	return req
@@ -11055,11 +11150,15 @@ func (builder *BasicUserInfoBuilder) Build() *BasicUserInfo {
 type BonusAmount struct {
 	PointBonus *int `json:"point_bonus,omitempty"` // 积分奖励
 
+	CashBonus []*Cash `json:"cash_bonus,omitempty"` // 现金奖励
 }
 
 type BonusAmountBuilder struct {
 	pointBonus     int // 积分奖励
 	pointBonusFlag bool
+
+	cashBonus     []*Cash // 现金奖励
+	cashBonusFlag bool
 }
 
 func NewBonusAmountBuilder() *BonusAmountBuilder {
@@ -11076,6 +11175,15 @@ func (builder *BonusAmountBuilder) PointBonus(pointBonus int) *BonusAmountBuilde
 	return builder
 }
 
+// 现金奖励
+//
+// 示例值：
+func (builder *BonusAmountBuilder) CashBonus(cashBonus []*Cash) *BonusAmountBuilder {
+	builder.cashBonus = cashBonus
+	builder.cashBonusFlag = true
+	return builder
+}
+
 func (builder *BonusAmountBuilder) Build() *BonusAmount {
 	req := &BonusAmount{}
 
@@ -11084,6 +11192,9 @@ func (builder *BonusAmountBuilder) Build() *BonusAmount {
 
 	}
 
+	if builder.cashBonusFlag {
+		req.CashBonus = builder.cashBonus
+	}
 	return req
 }
 
@@ -12525,6 +12636,7 @@ type CommonFilter struct {
 	ValueType   *int         `json:"value_type,omitempty"`   // 筛选项值类型
 	ValueList   []string     `json:"value_list,omitempty"`   // 筛选项值列表
 	RangeFilter *RangeFilter `json:"range_filter,omitempty"` // 范围筛选
+	UserIdList  []string     `json:"user_id_list,omitempty"` // 筛选项值列表
 }
 
 type CommonFilterBuilder struct {
@@ -12536,6 +12648,8 @@ type CommonFilterBuilder struct {
 	valueListFlag   bool
 	rangeFilter     *RangeFilter // 范围筛选
 	rangeFilterFlag bool
+	userIdList      []string // 筛选项值列表
+	userIdListFlag  bool
 }
 
 func NewCommonFilterBuilder() *CommonFilterBuilder {
@@ -12579,6 +12693,15 @@ func (builder *CommonFilterBuilder) RangeFilter(rangeFilter *RangeFilter) *Commo
 	return builder
 }
 
+// 筛选项值列表
+//
+// 示例值：
+func (builder *CommonFilterBuilder) UserIdList(userIdList []string) *CommonFilterBuilder {
+	builder.userIdList = userIdList
+	builder.userIdListFlag = true
+	return builder
+}
+
 func (builder *CommonFilterBuilder) Build() *CommonFilter {
 	req := &CommonFilter{}
 	if builder.keyFlag {
@@ -12594,6 +12717,9 @@ func (builder *CommonFilterBuilder) Build() *CommonFilter {
 	}
 	if builder.rangeFilterFlag {
 		req.RangeFilter = builder.rangeFilter
+	}
+	if builder.userIdListFlag {
+		req.UserIdList = builder.userIdList
 	}
 	return req
 }
@@ -29346,6 +29472,54 @@ func (builder *ObjectAttributeBuilder) Build() *ObjectAttribute {
 	return req
 }
 
+type ObjectIdName struct {
+	Id   *string `json:"id,omitempty"`   // 内推职位 ID
+	Name *string `json:"name,omitempty"` // 内推职位名称
+}
+
+type ObjectIdNameBuilder struct {
+	id       string // 内推职位 ID
+	idFlag   bool
+	name     string // 内推职位名称
+	nameFlag bool
+}
+
+func NewObjectIdNameBuilder() *ObjectIdNameBuilder {
+	builder := &ObjectIdNameBuilder{}
+	return builder
+}
+
+// 内推职位 ID
+//
+// 示例值：7410744543304468773
+func (builder *ObjectIdNameBuilder) Id(id string) *ObjectIdNameBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 内推职位名称
+//
+// 示例值：上海后端研发
+func (builder *ObjectIdNameBuilder) Name(name string) *ObjectIdNameBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+func (builder *ObjectIdNameBuilder) Build() *ObjectIdName {
+	req := &ObjectIdName{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.nameFlag {
+		req.Name = &builder.name
+
+	}
+	return req
+}
+
 type Offer struct {
 	Id                   *string                         `json:"id,omitempty"`                     // Offer ID
 	ApplicationId        *string                         `json:"application_id,omitempty"`         // 投递 ID
@@ -35017,6 +35191,442 @@ func (builder *ResumeSourceBuilder) Build() *ResumeSource {
 		req.ResumeSourceType = &builder.resumeSourceType
 
 	}
+	return req
+}
+
+type Reward struct {
+	Id             *string          `json:"id,omitempty"`              // 内推奖励 ID
+	Referrer       *RewardUser      `json:"referrer,omitempty"`        // 内推人
+	Candidate      *RewardCandidate `json:"candidate,omitempty"`       // 候选人
+	ReferralJob    *ObjectIdName    `json:"referral_job,omitempty"`    // 内推职位
+	Reason         *I18n            `json:"reason,omitempty"`          //
+	Bonus          *BonusAmount     `json:"bonus,omitempty"`           // 奖励额度
+	CreateTime     *string          `json:"create_time,omitempty"`     // 奖励产生时间，毫秒时间戳
+	Rule           *ObjectIdName    `json:"rule,omitempty"`            // 奖励规则
+	RewardType     *int             `json:"reward_type,omitempty"`     // 奖励类型
+	JobManager     *RewardUser      `json:"job_manager,omitempty"`     // 职位负责人
+	OfferManager   *RewardUser      `json:"offer_manager,omitempty"`   // Offer 负责人
+	OnboradTime    *string          `json:"onborad_time,omitempty"`    // 入职时间，毫秒时间戳
+	ConversionTime *string          `json:"conversion_time,omitempty"` // 转正时间，毫秒时间戳
+	ConfirmUser    *RewardUser      `json:"confirm_user,omitempty"`    // 确认人
+	ConfirmTime    *string          `json:"confirm_time,omitempty"`    // 确认时间，毫秒时间戳
+	PayUser        *RewardUser      `json:"pay_user,omitempty"`        // 发放人
+	PayTime        *string          `json:"pay_time,omitempty"`        // 发放时间，毫秒时间戳
+	Stage          *int             `json:"stage,omitempty"`           // 奖励阶段
+	IsImport       *bool            `json:"is_import,omitempty"`       // 是否导入
+}
+
+type RewardBuilder struct {
+	id                 string // 内推奖励 ID
+	idFlag             bool
+	referrer           *RewardUser // 内推人
+	referrerFlag       bool
+	candidate          *RewardCandidate // 候选人
+	candidateFlag      bool
+	referralJob        *ObjectIdName // 内推职位
+	referralJobFlag    bool
+	reason             *I18n //
+	reasonFlag         bool
+	bonus              *BonusAmount // 奖励额度
+	bonusFlag          bool
+	createTime         string // 奖励产生时间，毫秒时间戳
+	createTimeFlag     bool
+	rule               *ObjectIdName // 奖励规则
+	ruleFlag           bool
+	rewardType         int // 奖励类型
+	rewardTypeFlag     bool
+	jobManager         *RewardUser // 职位负责人
+	jobManagerFlag     bool
+	offerManager       *RewardUser // Offer 负责人
+	offerManagerFlag   bool
+	onboradTime        string // 入职时间，毫秒时间戳
+	onboradTimeFlag    bool
+	conversionTime     string // 转正时间，毫秒时间戳
+	conversionTimeFlag bool
+	confirmUser        *RewardUser // 确认人
+	confirmUserFlag    bool
+	confirmTime        string // 确认时间，毫秒时间戳
+	confirmTimeFlag    bool
+	payUser            *RewardUser // 发放人
+	payUserFlag        bool
+	payTime            string // 发放时间，毫秒时间戳
+	payTimeFlag        bool
+	stage              int // 奖励阶段
+	stageFlag          bool
+	isImport           bool // 是否导入
+	isImportFlag       bool
+}
+
+func NewRewardBuilder() *RewardBuilder {
+	builder := &RewardBuilder{}
+	return builder
+}
+
+// 内推奖励 ID
+//
+// 示例值：7410744543304468773
+func (builder *RewardBuilder) Id(id string) *RewardBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 内推人
+//
+// 示例值：
+func (builder *RewardBuilder) Referrer(referrer *RewardUser) *RewardBuilder {
+	builder.referrer = referrer
+	builder.referrerFlag = true
+	return builder
+}
+
+// 候选人
+//
+// 示例值：
+func (builder *RewardBuilder) Candidate(candidate *RewardCandidate) *RewardBuilder {
+	builder.candidate = candidate
+	builder.candidateFlag = true
+	return builder
+}
+
+// 内推职位
+//
+// 示例值：
+func (builder *RewardBuilder) ReferralJob(referralJob *ObjectIdName) *RewardBuilder {
+	builder.referralJob = referralJob
+	builder.referralJobFlag = true
+	return builder
+}
+
+// 示例值：
+func (builder *RewardBuilder) Reason(reason *I18n) *RewardBuilder {
+	builder.reason = reason
+	builder.reasonFlag = true
+	return builder
+}
+
+// 奖励额度
+//
+// 示例值：
+func (builder *RewardBuilder) Bonus(bonus *BonusAmount) *RewardBuilder {
+	builder.bonus = bonus
+	builder.bonusFlag = true
+	return builder
+}
+
+// 奖励产生时间，毫秒时间戳
+//
+// 示例值：1704720275000
+func (builder *RewardBuilder) CreateTime(createTime string) *RewardBuilder {
+	builder.createTime = createTime
+	builder.createTimeFlag = true
+	return builder
+}
+
+// 奖励规则
+//
+// 示例值：
+func (builder *RewardBuilder) Rule(rule *ObjectIdName) *RewardBuilder {
+	builder.rule = rule
+	builder.ruleFlag = true
+	return builder
+}
+
+// 奖励类型
+//
+// 示例值：1
+func (builder *RewardBuilder) RewardType(rewardType int) *RewardBuilder {
+	builder.rewardType = rewardType
+	builder.rewardTypeFlag = true
+	return builder
+}
+
+// 职位负责人
+//
+// 示例值：
+func (builder *RewardBuilder) JobManager(jobManager *RewardUser) *RewardBuilder {
+	builder.jobManager = jobManager
+	builder.jobManagerFlag = true
+	return builder
+}
+
+// Offer 负责人
+//
+// 示例值：
+func (builder *RewardBuilder) OfferManager(offerManager *RewardUser) *RewardBuilder {
+	builder.offerManager = offerManager
+	builder.offerManagerFlag = true
+	return builder
+}
+
+// 入职时间，毫秒时间戳
+//
+// 示例值：
+func (builder *RewardBuilder) OnboradTime(onboradTime string) *RewardBuilder {
+	builder.onboradTime = onboradTime
+	builder.onboradTimeFlag = true
+	return builder
+}
+
+// 转正时间，毫秒时间戳
+//
+// 示例值：
+func (builder *RewardBuilder) ConversionTime(conversionTime string) *RewardBuilder {
+	builder.conversionTime = conversionTime
+	builder.conversionTimeFlag = true
+	return builder
+}
+
+// 确认人
+//
+// 示例值：
+func (builder *RewardBuilder) ConfirmUser(confirmUser *RewardUser) *RewardBuilder {
+	builder.confirmUser = confirmUser
+	builder.confirmUserFlag = true
+	return builder
+}
+
+// 确认时间，毫秒时间戳
+//
+// 示例值：
+func (builder *RewardBuilder) ConfirmTime(confirmTime string) *RewardBuilder {
+	builder.confirmTime = confirmTime
+	builder.confirmTimeFlag = true
+	return builder
+}
+
+// 发放人
+//
+// 示例值：
+func (builder *RewardBuilder) PayUser(payUser *RewardUser) *RewardBuilder {
+	builder.payUser = payUser
+	builder.payUserFlag = true
+	return builder
+}
+
+// 发放时间，毫秒时间戳
+//
+// 示例值：
+func (builder *RewardBuilder) PayTime(payTime string) *RewardBuilder {
+	builder.payTime = payTime
+	builder.payTimeFlag = true
+	return builder
+}
+
+// 奖励阶段
+//
+// 示例值：1
+func (builder *RewardBuilder) Stage(stage int) *RewardBuilder {
+	builder.stage = stage
+	builder.stageFlag = true
+	return builder
+}
+
+// 是否导入
+//
+// 示例值：true
+func (builder *RewardBuilder) IsImport(isImport bool) *RewardBuilder {
+	builder.isImport = isImport
+	builder.isImportFlag = true
+	return builder
+}
+
+func (builder *RewardBuilder) Build() *Reward {
+	req := &Reward{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.referrerFlag {
+		req.Referrer = builder.referrer
+	}
+	if builder.candidateFlag {
+		req.Candidate = builder.candidate
+	}
+	if builder.referralJobFlag {
+		req.ReferralJob = builder.referralJob
+	}
+	if builder.reasonFlag {
+		req.Reason = builder.reason
+	}
+	if builder.bonusFlag {
+		req.Bonus = builder.bonus
+	}
+	if builder.createTimeFlag {
+		req.CreateTime = &builder.createTime
+
+	}
+	if builder.ruleFlag {
+		req.Rule = builder.rule
+	}
+	if builder.rewardTypeFlag {
+		req.RewardType = &builder.rewardType
+
+	}
+	if builder.jobManagerFlag {
+		req.JobManager = builder.jobManager
+	}
+	if builder.offerManagerFlag {
+		req.OfferManager = builder.offerManager
+	}
+	if builder.onboradTimeFlag {
+		req.OnboradTime = &builder.onboradTime
+
+	}
+	if builder.conversionTimeFlag {
+		req.ConversionTime = &builder.conversionTime
+
+	}
+	if builder.confirmUserFlag {
+		req.ConfirmUser = builder.confirmUser
+	}
+	if builder.confirmTimeFlag {
+		req.ConfirmTime = &builder.confirmTime
+
+	}
+	if builder.payUserFlag {
+		req.PayUser = builder.payUser
+	}
+	if builder.payTimeFlag {
+		req.PayTime = &builder.payTime
+
+	}
+	if builder.stageFlag {
+		req.Stage = &builder.stage
+
+	}
+	if builder.isImportFlag {
+		req.IsImport = &builder.isImport
+
+	}
+	return req
+}
+
+type RewardCandidate struct {
+	ApplicationId *string `json:"application_id,omitempty"` // 投递 ID
+	TalentId      *string `json:"talent_id,omitempty"`      // 人才 ID
+	Name          *string `json:"name,omitempty"`           // 候选人名称
+}
+
+type RewardCandidateBuilder struct {
+	applicationId     string // 投递 ID
+	applicationIdFlag bool
+	talentId          string // 人才 ID
+	talentIdFlag      bool
+	name              string // 候选人名称
+	nameFlag          bool
+}
+
+func NewRewardCandidateBuilder() *RewardCandidateBuilder {
+	builder := &RewardCandidateBuilder{}
+	return builder
+}
+
+// 投递 ID
+//
+// 示例值：7169521778904221965
+func (builder *RewardCandidateBuilder) ApplicationId(applicationId string) *RewardCandidateBuilder {
+	builder.applicationId = applicationId
+	builder.applicationIdFlag = true
+	return builder
+}
+
+// 人才 ID
+//
+// 示例值：7169521778904221965
+func (builder *RewardCandidateBuilder) TalentId(talentId string) *RewardCandidateBuilder {
+	builder.talentId = talentId
+	builder.talentIdFlag = true
+	return builder
+}
+
+// 候选人名称
+//
+// 示例值：张三
+func (builder *RewardCandidateBuilder) Name(name string) *RewardCandidateBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+func (builder *RewardCandidateBuilder) Build() *RewardCandidate {
+	req := &RewardCandidate{}
+	if builder.applicationIdFlag {
+		req.ApplicationId = &builder.applicationId
+
+	}
+	if builder.talentIdFlag {
+		req.TalentId = &builder.talentId
+
+	}
+	if builder.nameFlag {
+		req.Name = &builder.name
+
+	}
+	return req
+}
+
+type RewardUser struct {
+	Id         *string              `json:"id,omitempty"`         // 人员 ID
+	Name       *I18n                `json:"name,omitempty"`       // 名称
+	Department *BasicDepartmentInfo `json:"department,omitempty"` // 部门
+
+}
+
+type RewardUserBuilder struct {
+	id             string // 人员 ID
+	idFlag         bool
+	name           *I18n // 名称
+	nameFlag       bool
+	department     *BasicDepartmentInfo // 部门
+	departmentFlag bool
+}
+
+func NewRewardUserBuilder() *RewardUserBuilder {
+	builder := &RewardUserBuilder{}
+	return builder
+}
+
+// 人员 ID
+//
+// 示例值：ou_efk39117c300506837def50545420c6a
+func (builder *RewardUserBuilder) Id(id string) *RewardUserBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 名称
+//
+// 示例值：
+func (builder *RewardUserBuilder) Name(name *I18n) *RewardUserBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 部门
+//
+// 示例值：
+func (builder *RewardUserBuilder) Department(department *BasicDepartmentInfo) *RewardUserBuilder {
+	builder.department = department
+	builder.departmentFlag = true
+	return builder
+}
+
+func (builder *RewardUserBuilder) Build() *RewardUser {
+	req := &RewardUser{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	if builder.departmentFlag {
+		req.Department = builder.department
+	}
+
 	return req
 }
 
@@ -57619,6 +58229,14 @@ func NewCreateReferralAccountReqBuilder() *CreateReferralAccountReqBuilder {
 	return builder
 }
 
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *CreateReferralAccountReqBuilder) UserIdType(userIdType string) *CreateReferralAccountReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
 func (builder *CreateReferralAccountReqBuilder) Body(body *CreateReferralAccountReqBody) *CreateReferralAccountReqBuilder {
 	builder.body = body
 	return builder
@@ -57627,6 +58245,7 @@ func (builder *CreateReferralAccountReqBuilder) Body(body *CreateReferralAccount
 func (builder *CreateReferralAccountReqBuilder) Build() *CreateReferralAccountReq {
 	req := &CreateReferralAccountReq{}
 	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
 	req.apiReq.Body = builder.body
 	return req
 }
@@ -57676,10 +58295,19 @@ func (builder *DeactivateReferralAccountReqBuilder) ReferralAccountId(referralAc
 	return builder
 }
 
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *DeactivateReferralAccountReqBuilder) UserIdType(userIdType string) *DeactivateReferralAccountReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
 func (builder *DeactivateReferralAccountReqBuilder) Build() *DeactivateReferralAccountReq {
 	req := &DeactivateReferralAccountReq{}
 	req.apiReq = &larkcore.ApiReq{}
 	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
 	return req
 }
 

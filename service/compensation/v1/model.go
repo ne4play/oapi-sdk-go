@@ -1764,9 +1764,9 @@ func (builder *SocialArchiveBuilder) Build() *SocialArchive {
 }
 
 type SocialArchiveAdjustRecord struct {
-	UserId     *string              `json:"user_id,omitempty"`     // 员工ID
-	RecordType *string              `json:"record_type,omitempty"` // 类型，increase: 增员; attrition: 减员
-	Details    *SocialArchiveDetail `json:"details,omitempty"`     // 参保档案
+	UserId     *string                `json:"user_id,omitempty"`     // 员工ID
+	RecordType *string                `json:"record_type,omitempty"` // 类型，increase: 增员; attrition: 减员
+	Details    []*SocialArchiveDetail `json:"details,omitempty"`     // 员工增减员记录，包括社保、公积金记录
 }
 
 type SocialArchiveAdjustRecordBuilder struct {
@@ -1774,7 +1774,7 @@ type SocialArchiveAdjustRecordBuilder struct {
 	userIdFlag     bool
 	recordType     string // 类型，increase: 增员; attrition: 减员
 	recordTypeFlag bool
-	details        *SocialArchiveDetail // 参保档案
+	details        []*SocialArchiveDetail // 员工增减员记录，包括社保、公积金记录
 	detailsFlag    bool
 }
 
@@ -1801,10 +1801,10 @@ func (builder *SocialArchiveAdjustRecordBuilder) RecordType(recordType string) *
 	return builder
 }
 
-// 参保档案
+// 员工增减员记录，包括社保、公积金记录
 //
 // 示例值：
-func (builder *SocialArchiveAdjustRecordBuilder) Details(details *SocialArchiveDetail) *SocialArchiveAdjustRecordBuilder {
+func (builder *SocialArchiveAdjustRecordBuilder) Details(details []*SocialArchiveDetail) *SocialArchiveAdjustRecordBuilder {
 	builder.details = details
 	builder.detailsFlag = true
 	return builder
@@ -2300,15 +2300,15 @@ func (builder *SocialInsuranceBuilder) Build() *SocialInsurance {
 }
 
 type SocialPlan struct {
-	PlanId        *string          `json:"plan_id,omitempty"`        // 参保方案ID
-	PlanTid       *string          `json:"plan_tid,omitempty"`       // 参保方案版本ID
-	Name          *I18n            `json:"name,omitempty"`           // 参保方案名称
-	EffectiveDate *string          `json:"effective_date,omitempty"` // 生效时间，HHHH-MM-DD
-	Active        *bool            `json:"active,omitempty"`         // 是否启用
-	InsuranceType *string          `json:"insurance_type,omitempty"` // 险种类型. social_insurance: 社保; provident_fund: 公积金
-	Scope         *SocialPlanScope `json:"scope,omitempty"`          // 参保方案适用范围
-	ItemDetail    *bool            `json:"item_detail,omitempty"`    // 参保信息
-	Remark        *I18n            `json:"remark,omitempty"`         // 备注
+	PlanId        *string                 `json:"plan_id,omitempty"`        // 参保方案ID
+	PlanTid       *string                 `json:"plan_tid,omitempty"`       // 参保方案版本ID
+	Name          *I18n                   `json:"name,omitempty"`           // 参保方案名称
+	EffectiveDate *string                 `json:"effective_date,omitempty"` // 生效时间，HHHH-MM-DD
+	Active        *bool                   `json:"active,omitempty"`         // 是否启用
+	InsuranceType *string                 `json:"insurance_type,omitempty"` // 险种类型. social_insurance: 社保; provident_fund: 公积金
+	Scope         *SocialPlanScope        `json:"scope,omitempty"`          // 参保方案适用范围
+	ItemDetail    []*SocialPlanItemDetail `json:"item_detail,omitempty"`    // 参保信息
+	Remark        *I18n                   `json:"remark,omitempty"`         // 备注
 }
 
 type SocialPlanBuilder struct {
@@ -2326,7 +2326,7 @@ type SocialPlanBuilder struct {
 	insuranceTypeFlag bool
 	scope             *SocialPlanScope // 参保方案适用范围
 	scopeFlag         bool
-	itemDetail        bool // 参保信息
+	itemDetail        []*SocialPlanItemDetail // 参保信息
 	itemDetailFlag    bool
 	remark            *I18n // 备注
 	remarkFlag        bool
@@ -2403,7 +2403,7 @@ func (builder *SocialPlanBuilder) Scope(scope *SocialPlanScope) *SocialPlanBuild
 // 参保信息
 //
 // 示例值：
-func (builder *SocialPlanBuilder) ItemDetail(itemDetail bool) *SocialPlanBuilder {
+func (builder *SocialPlanBuilder) ItemDetail(itemDetail []*SocialPlanItemDetail) *SocialPlanBuilder {
 	builder.itemDetail = itemDetail
 	builder.itemDetailFlag = true
 	return builder
@@ -2447,11 +2447,73 @@ func (builder *SocialPlanBuilder) Build() *SocialPlan {
 		req.Scope = builder.scope
 	}
 	if builder.itemDetailFlag {
-		req.ItemDetail = &builder.itemDetail
-
+		req.ItemDetail = builder.itemDetail
 	}
 	if builder.remarkFlag {
 		req.Remark = builder.remark
+	}
+	return req
+}
+
+type SocialPlanCondition struct {
+	LeftType    *int     `json:"left_type,omitempty"`    // 适用范围左值
+	Operator    *int     `json:"operator,omitempty"`     // 适用范围操作
+	RightValues []string `json:"right_values,omitempty"` // 适用范围右值
+}
+
+type SocialPlanConditionBuilder struct {
+	leftType        int // 适用范围左值
+	leftTypeFlag    bool
+	operator        int // 适用范围操作
+	operatorFlag    bool
+	rightValues     []string // 适用范围右值
+	rightValuesFlag bool
+}
+
+func NewSocialPlanConditionBuilder() *SocialPlanConditionBuilder {
+	builder := &SocialPlanConditionBuilder{}
+	return builder
+}
+
+// 适用范围左值
+//
+// 示例值：1
+func (builder *SocialPlanConditionBuilder) LeftType(leftType int) *SocialPlanConditionBuilder {
+	builder.leftType = leftType
+	builder.leftTypeFlag = true
+	return builder
+}
+
+// 适用范围操作
+//
+// 示例值：1
+func (builder *SocialPlanConditionBuilder) Operator(operator int) *SocialPlanConditionBuilder {
+	builder.operator = operator
+	builder.operatorFlag = true
+	return builder
+}
+
+// 适用范围右值
+//
+// 示例值：
+func (builder *SocialPlanConditionBuilder) RightValues(rightValues []string) *SocialPlanConditionBuilder {
+	builder.rightValues = rightValues
+	builder.rightValuesFlag = true
+	return builder
+}
+
+func (builder *SocialPlanConditionBuilder) Build() *SocialPlanCondition {
+	req := &SocialPlanCondition{}
+	if builder.leftTypeFlag {
+		req.LeftType = &builder.leftType
+
+	}
+	if builder.operatorFlag {
+		req.Operator = &builder.operator
+
+	}
+	if builder.rightValuesFlag {
+		req.RightValues = builder.rightValues
 	}
 	return req
 }
@@ -2677,14 +2739,14 @@ func (builder *SocialPlanItemSettingBuilder) Build() *SocialPlanItemSetting {
 }
 
 type SocialPlanScope struct {
-	IsAll *bool              `json:"is_all,omitempty"` // 是否适用于全部
-	Rules [][]*PlanCondition `json:"rules,omitempty"`  // 适用范围，二维。外层or连接，内层and连接
+	IsAll *bool                    `json:"is_all,omitempty"` // 是否适用于全部
+	Rules [][]*SocialPlanCondition `json:"rules,omitempty"`  // 适用范围，二维。外层or连接，内层and连接
 }
 
 type SocialPlanScopeBuilder struct {
 	isAll     bool // 是否适用于全部
 	isAllFlag bool
-	rules     [][]*PlanCondition // 适用范围，二维。外层or连接，内层and连接
+	rules     [][]*SocialPlanCondition // 适用范围，二维。外层or连接，内层and连接
 	rulesFlag bool
 }
 
@@ -2705,7 +2767,7 @@ func (builder *SocialPlanScopeBuilder) IsAll(isAll bool) *SocialPlanScopeBuilder
 // 适用范围，二维。外层or连接，内层and连接
 //
 // 示例值：
-func (builder *SocialPlanScopeBuilder) Rules(rules [][]*PlanCondition) *SocialPlanScopeBuilder {
+func (builder *SocialPlanScopeBuilder) Rules(rules [][]*SocialPlanCondition) *SocialPlanScopeBuilder {
 	builder.rules = rules
 	builder.rulesFlag = true
 	return builder

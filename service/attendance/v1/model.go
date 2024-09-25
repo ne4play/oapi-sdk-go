@@ -7057,6 +7057,9 @@ type UserOut struct {
 	ApprovePassTime  *string    `json:"approve_pass_time,omitempty"`  // 审批通过时间
 	ApproveApplyTime *string    `json:"approve_apply_time,omitempty"` // 审批申请时间
 	IdempotentId     *string    `json:"idempotent_id,omitempty"`      // 唯一幂等键
+	CorrectProcessId []string   `json:"correct_process_id,omitempty"` // 更正流程实例 ID
+	CancelProcessId  []string   `json:"cancel_process_id,omitempty"`  // 撤销流程实例 ID
+	ProcessId        []string   `json:"process_id,omitempty"`         // 发起流程实例 ID
 }
 
 type UserOutBuilder struct {
@@ -7084,6 +7087,12 @@ type UserOutBuilder struct {
 	approveApplyTimeFlag bool
 	idempotentId         string // 唯一幂等键
 	idempotentIdFlag     bool
+	correctProcessId     []string // 更正流程实例 ID
+	correctProcessIdFlag bool
+	cancelProcessId      []string // 撤销流程实例 ID
+	cancelProcessIdFlag  bool
+	processId            []string // 发起流程实例 ID
+	processIdFlag        bool
 }
 
 func NewUserOutBuilder() *UserOutBuilder {
@@ -7199,6 +7208,33 @@ func (builder *UserOutBuilder) IdempotentId(idempotentId string) *UserOutBuilder
 	return builder
 }
 
+// 更正流程实例 ID
+//
+// 示例值：
+func (builder *UserOutBuilder) CorrectProcessId(correctProcessId []string) *UserOutBuilder {
+	builder.correctProcessId = correctProcessId
+	builder.correctProcessIdFlag = true
+	return builder
+}
+
+// 撤销流程实例 ID
+//
+// 示例值：
+func (builder *UserOutBuilder) CancelProcessId(cancelProcessId []string) *UserOutBuilder {
+	builder.cancelProcessId = cancelProcessId
+	builder.cancelProcessIdFlag = true
+	return builder
+}
+
+// 发起流程实例 ID
+//
+// 示例值：
+func (builder *UserOutBuilder) ProcessId(processId []string) *UserOutBuilder {
+	builder.processId = processId
+	builder.processIdFlag = true
+	return builder
+}
+
 func (builder *UserOutBuilder) Build() *UserOut {
 	req := &UserOut{}
 	if builder.approvalIdFlag {
@@ -7248,40 +7284,58 @@ func (builder *UserOutBuilder) Build() *UserOut {
 		req.IdempotentId = &builder.idempotentId
 
 	}
+	if builder.correctProcessIdFlag {
+		req.CorrectProcessId = builder.correctProcessId
+	}
+	if builder.cancelProcessIdFlag {
+		req.CancelProcessId = builder.cancelProcessId
+	}
+	if builder.processIdFlag {
+		req.ProcessId = builder.processId
+	}
 	return req
 }
 
 type UserOvertimeWork struct {
-	ApprovalId   *string  `json:"approval_id,omitempty"`   // 审批实例 ID
-	Duration     *float64 `json:"duration,omitempty"`      // 加班时长
-	Unit         *int     `json:"unit,omitempty"`          // 加班时长单位
-	Category     *int     `json:"category,omitempty"`      // 加班日期类型
-	Type         *int     `json:"type,omitempty"`          // 加班规则类型
-	StartTime    *string  `json:"start_time,omitempty"`    // 开始时间，时间格式为 yyyy-MM-dd HH:mm:ss
-	EndTime      *string  `json:"end_time,omitempty"`      // 结束时间，时间格式为 yyyy-MM-dd HH:mm:ss
-	Reason       *string  `json:"reason,omitempty"`        // 加班事由
-	IdempotentId *string  `json:"idempotent_id,omitempty"` // 唯一幂等键
+	ApprovalId       *string  `json:"approval_id,omitempty"`        // 审批实例 ID
+	Duration         *float64 `json:"duration,omitempty"`           // 加班时长
+	Unit             *int     `json:"unit,omitempty"`               // 加班时长单位
+	Category         *int     `json:"category,omitempty"`           // 加班日期类型
+	Type             *int     `json:"type,omitempty"`               // 加班规则类型
+	StartTime        *string  `json:"start_time,omitempty"`         // 开始时间，时间格式为 yyyy-MM-dd HH:mm:ss
+	EndTime          *string  `json:"end_time,omitempty"`           // 结束时间，时间格式为 yyyy-MM-dd HH:mm:ss
+	Reason           *string  `json:"reason,omitempty"`             // 加班事由
+	IdempotentId     *string  `json:"idempotent_id,omitempty"`      // 唯一幂等键
+	CorrectProcessId []string `json:"correct_process_id,omitempty"` // 更正流程实例 ID
+	CancelProcessId  []string `json:"cancel_process_id,omitempty"`  // 撤销流程实例 ID
+	ProcessId        []string `json:"process_id,omitempty"`         // 发起流程实例 ID
 }
 
 type UserOvertimeWorkBuilder struct {
-	approvalId       string // 审批实例 ID
-	approvalIdFlag   bool
-	duration         float64 // 加班时长
-	durationFlag     bool
-	unit             int // 加班时长单位
-	unitFlag         bool
-	category         int // 加班日期类型
-	categoryFlag     bool
-	type_            int // 加班规则类型
-	typeFlag         bool
-	startTime        string // 开始时间，时间格式为 yyyy-MM-dd HH:mm:ss
-	startTimeFlag    bool
-	endTime          string // 结束时间，时间格式为 yyyy-MM-dd HH:mm:ss
-	endTimeFlag      bool
-	reason           string // 加班事由
-	reasonFlag       bool
-	idempotentId     string // 唯一幂等键
-	idempotentIdFlag bool
+	approvalId           string // 审批实例 ID
+	approvalIdFlag       bool
+	duration             float64 // 加班时长
+	durationFlag         bool
+	unit                 int // 加班时长单位
+	unitFlag             bool
+	category             int // 加班日期类型
+	categoryFlag         bool
+	type_                int // 加班规则类型
+	typeFlag             bool
+	startTime            string // 开始时间，时间格式为 yyyy-MM-dd HH:mm:ss
+	startTimeFlag        bool
+	endTime              string // 结束时间，时间格式为 yyyy-MM-dd HH:mm:ss
+	endTimeFlag          bool
+	reason               string // 加班事由
+	reasonFlag           bool
+	idempotentId         string // 唯一幂等键
+	idempotentIdFlag     bool
+	correctProcessId     []string // 更正流程实例 ID
+	correctProcessIdFlag bool
+	cancelProcessId      []string // 撤销流程实例 ID
+	cancelProcessIdFlag  bool
+	processId            []string // 发起流程实例 ID
+	processIdFlag        bool
 }
 
 func NewUserOvertimeWorkBuilder() *UserOvertimeWorkBuilder {
@@ -7370,6 +7424,33 @@ func (builder *UserOvertimeWorkBuilder) IdempotentId(idempotentId string) *UserO
 	return builder
 }
 
+// 更正流程实例 ID
+//
+// 示例值：
+func (builder *UserOvertimeWorkBuilder) CorrectProcessId(correctProcessId []string) *UserOvertimeWorkBuilder {
+	builder.correctProcessId = correctProcessId
+	builder.correctProcessIdFlag = true
+	return builder
+}
+
+// 撤销流程实例 ID
+//
+// 示例值：
+func (builder *UserOvertimeWorkBuilder) CancelProcessId(cancelProcessId []string) *UserOvertimeWorkBuilder {
+	builder.cancelProcessId = cancelProcessId
+	builder.cancelProcessIdFlag = true
+	return builder
+}
+
+// 发起流程实例 ID
+//
+// 示例值：
+func (builder *UserOvertimeWorkBuilder) ProcessId(processId []string) *UserOvertimeWorkBuilder {
+	builder.processId = processId
+	builder.processIdFlag = true
+	return builder
+}
+
 func (builder *UserOvertimeWorkBuilder) Build() *UserOvertimeWork {
 	req := &UserOvertimeWork{}
 	if builder.approvalIdFlag {
@@ -7407,6 +7488,15 @@ func (builder *UserOvertimeWorkBuilder) Build() *UserOvertimeWork {
 	if builder.idempotentIdFlag {
 		req.IdempotentId = &builder.idempotentId
 
+	}
+	if builder.correctProcessIdFlag {
+		req.CorrectProcessId = builder.correctProcessId
+	}
+	if builder.cancelProcessIdFlag {
+		req.CancelProcessId = builder.cancelProcessId
+	}
+	if builder.processIdFlag {
+		req.ProcessId = builder.processId
 	}
 	return req
 }
@@ -8429,13 +8519,16 @@ func (builder *UserTmpDailyShiftBuilder) Build() *UserTmpDailyShift {
 }
 
 type UserTrip struct {
-	ApprovalId       *string `json:"approval_id,omitempty"`        // 审批实例 ID
-	StartTime        *string `json:"start_time,omitempty"`         // 开始时间，时间格式为 yyyy-MM-dd HH:mm:ss
-	EndTime          *string `json:"end_time,omitempty"`           // 结束时间，时间格式为 yyyy-MM-dd HH:mm:ss
-	Reason           *string `json:"reason,omitempty"`             // 出差理由
-	ApprovePassTime  *string `json:"approve_pass_time,omitempty"`  // 审批通过时间，时间格式为 yyyy-MM-dd HH:mm:ss
-	ApproveApplyTime *string `json:"approve_apply_time,omitempty"` // 审批申请时间，时间格式为 yyyy-MM-dd HH:mm:ss
-	IdempotentId     *string `json:"idempotent_id,omitempty"`      // 唯一幂等键
+	ApprovalId       *string  `json:"approval_id,omitempty"`        // 审批实例 ID
+	StartTime        *string  `json:"start_time,omitempty"`         // 开始时间，时间格式为 yyyy-MM-dd HH:mm:ss
+	EndTime          *string  `json:"end_time,omitempty"`           // 结束时间，时间格式为 yyyy-MM-dd HH:mm:ss
+	Reason           *string  `json:"reason,omitempty"`             // 出差理由
+	ApprovePassTime  *string  `json:"approve_pass_time,omitempty"`  // 审批通过时间，时间格式为 yyyy-MM-dd HH:mm:ss
+	ApproveApplyTime *string  `json:"approve_apply_time,omitempty"` // 审批申请时间，时间格式为 yyyy-MM-dd HH:mm:ss
+	IdempotentId     *string  `json:"idempotent_id,omitempty"`      // 唯一幂等键
+	CorrectProcessId []string `json:"correct_process_id,omitempty"` // 更正流程实例 ID
+	CancelProcessId  []string `json:"cancel_process_id,omitempty"`  // 撤销流程实例 ID
+	ProcessId        []string `json:"process_id,omitempty"`         // 发起流程实例 ID
 }
 
 type UserTripBuilder struct {
@@ -8453,6 +8546,12 @@ type UserTripBuilder struct {
 	approveApplyTimeFlag bool
 	idempotentId         string // 唯一幂等键
 	idempotentIdFlag     bool
+	correctProcessId     []string // 更正流程实例 ID
+	correctProcessIdFlag bool
+	cancelProcessId      []string // 撤销流程实例 ID
+	cancelProcessIdFlag  bool
+	processId            []string // 发起流程实例 ID
+	processIdFlag        bool
 }
 
 func NewUserTripBuilder() *UserTripBuilder {
@@ -8523,6 +8622,33 @@ func (builder *UserTripBuilder) IdempotentId(idempotentId string) *UserTripBuild
 	return builder
 }
 
+// 更正流程实例 ID
+//
+// 示例值：
+func (builder *UserTripBuilder) CorrectProcessId(correctProcessId []string) *UserTripBuilder {
+	builder.correctProcessId = correctProcessId
+	builder.correctProcessIdFlag = true
+	return builder
+}
+
+// 撤销流程实例 ID
+//
+// 示例值：
+func (builder *UserTripBuilder) CancelProcessId(cancelProcessId []string) *UserTripBuilder {
+	builder.cancelProcessId = cancelProcessId
+	builder.cancelProcessIdFlag = true
+	return builder
+}
+
+// 发起流程实例 ID
+//
+// 示例值：
+func (builder *UserTripBuilder) ProcessId(processId []string) *UserTripBuilder {
+	builder.processId = processId
+	builder.processIdFlag = true
+	return builder
+}
+
 func (builder *UserTripBuilder) Build() *UserTrip {
 	req := &UserTrip{}
 	if builder.approvalIdFlag {
@@ -8552,6 +8678,15 @@ func (builder *UserTripBuilder) Build() *UserTrip {
 	if builder.idempotentIdFlag {
 		req.IdempotentId = &builder.idempotentId
 
+	}
+	if builder.correctProcessIdFlag {
+		req.CorrectProcessId = builder.correctProcessId
+	}
+	if builder.cancelProcessIdFlag {
+		req.CancelProcessId = builder.cancelProcessId
+	}
+	if builder.processIdFlag {
+		req.ProcessId = builder.processId
 	}
 	return req
 }

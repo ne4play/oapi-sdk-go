@@ -128,6 +128,118 @@ const (
 	UserIdTypeResetPasswordUserId  = "user_id"  // user_id
 )
 
+type AdminDeptExtContactStat struct {
+	Date              *string `json:"date,omitempty"`                 // 日期
+	DepartmentId      *string `json:"department_id,omitempty"`        // 部门ID
+	DepartmentName    *string `json:"department_name,omitempty"`      // 部门名
+	HasRefContactUcnt *string `json:"has_ref_contact_ucnt,omitempty"` // 拥有外部联系人的成员数
+	RefContactUcnt    *int    `json:"ref_contact_ucnt,omitempty"`     // 外部联系人总数
+	RefContactTcnt    *string `json:"ref_contact_tcnt,omitempty"`     // 外部联系人所属租户数
+}
+
+type AdminDeptExtContactStatBuilder struct {
+	date                  string // 日期
+	dateFlag              bool
+	departmentId          string // 部门ID
+	departmentIdFlag      bool
+	departmentName        string // 部门名
+	departmentNameFlag    bool
+	hasRefContactUcnt     string // 拥有外部联系人的成员数
+	hasRefContactUcntFlag bool
+	refContactUcnt        int // 外部联系人总数
+	refContactUcntFlag    bool
+	refContactTcnt        string // 外部联系人所属租户数
+	refContactTcntFlag    bool
+}
+
+func NewAdminDeptExtContactStatBuilder() *AdminDeptExtContactStatBuilder {
+	builder := &AdminDeptExtContactStatBuilder{}
+	return builder
+}
+
+// 日期
+//
+// 示例值：2024-08-15
+func (builder *AdminDeptExtContactStatBuilder) Date(date string) *AdminDeptExtContactStatBuilder {
+	builder.date = date
+	builder.dateFlag = true
+	return builder
+}
+
+// 部门ID
+//
+// 示例值：od-382e2793cfc9471f892e8a672987654c
+func (builder *AdminDeptExtContactStatBuilder) DepartmentId(departmentId string) *AdminDeptExtContactStatBuilder {
+	builder.departmentId = departmentId
+	builder.departmentIdFlag = true
+	return builder
+}
+
+// 部门名
+//
+// 示例值：部门A
+func (builder *AdminDeptExtContactStatBuilder) DepartmentName(departmentName string) *AdminDeptExtContactStatBuilder {
+	builder.departmentName = departmentName
+	builder.departmentNameFlag = true
+	return builder
+}
+
+// 拥有外部联系人的成员数
+//
+// 示例值：100
+func (builder *AdminDeptExtContactStatBuilder) HasRefContactUcnt(hasRefContactUcnt string) *AdminDeptExtContactStatBuilder {
+	builder.hasRefContactUcnt = hasRefContactUcnt
+	builder.hasRefContactUcntFlag = true
+	return builder
+}
+
+// 外部联系人总数
+//
+// 示例值：200
+func (builder *AdminDeptExtContactStatBuilder) RefContactUcnt(refContactUcnt int) *AdminDeptExtContactStatBuilder {
+	builder.refContactUcnt = refContactUcnt
+	builder.refContactUcntFlag = true
+	return builder
+}
+
+// 外部联系人所属租户数
+//
+// 示例值：10
+func (builder *AdminDeptExtContactStatBuilder) RefContactTcnt(refContactTcnt string) *AdminDeptExtContactStatBuilder {
+	builder.refContactTcnt = refContactTcnt
+	builder.refContactTcntFlag = true
+	return builder
+}
+
+func (builder *AdminDeptExtContactStatBuilder) Build() *AdminDeptExtContactStat {
+	req := &AdminDeptExtContactStat{}
+	if builder.dateFlag {
+		req.Date = &builder.date
+
+	}
+	if builder.departmentIdFlag {
+		req.DepartmentId = &builder.departmentId
+
+	}
+	if builder.departmentNameFlag {
+		req.DepartmentName = &builder.departmentName
+
+	}
+	if builder.hasRefContactUcntFlag {
+		req.HasRefContactUcnt = &builder.hasRefContactUcnt
+
+	}
+	if builder.refContactUcntFlag {
+		req.RefContactUcnt = &builder.refContactUcnt
+
+	}
+	if builder.refContactTcntFlag {
+		req.RefContactTcnt = &builder.refContactTcnt
+
+	}
+	return req
+}
+
 type AdminDeptStat struct {
 	Date                 *string `json:"date,omitempty"`                    // 日期
 	DepartmentId         *string `json:"department_id,omitempty"`           // 部门的department_id 或者open_department_id
@@ -811,6 +923,118 @@ func (builder *AdminDeptStatBuilder) Build() *AdminDeptStat {
 	}
 	if builder.tabSearchCountFlag {
 		req.TabSearchCount = &builder.tabSearchCount
+
+	}
+	return req
+}
+
+type AdminUserExtContactStat struct {
+	Date           *string `json:"date,omitempty"`             // 日期
+	UserId         *string `json:"user_id,omitempty"`          // 用户ID
+	UserName       *string `json:"user_name,omitempty"`        // 成员姓名
+	DepartmentName *string `json:"department_name,omitempty"`  // 部门名
+	RefContactUcnt *int    `json:"ref_contact_ucnt,omitempty"` // 外部联系人数量
+	RefContactTcnt *string `json:"ref_contact_tcnt,omitempty"` // 外部联系人所属企业数量
+}
+
+type AdminUserExtContactStatBuilder struct {
+	date               string // 日期
+	dateFlag           bool
+	userId             string // 用户ID
+	userIdFlag         bool
+	userName           string // 成员姓名
+	userNameFlag       bool
+	departmentName     string // 部门名
+	departmentNameFlag bool
+	refContactUcnt     int // 外部联系人数量
+	refContactUcntFlag bool
+	refContactTcnt     string // 外部联系人所属企业数量
+	refContactTcntFlag bool
+}
+
+func NewAdminUserExtContactStatBuilder() *AdminUserExtContactStatBuilder {
+	builder := &AdminUserExtContactStatBuilder{}
+	return builder
+}
+
+// 日期
+//
+// 示例值：2024-08-15
+func (builder *AdminUserExtContactStatBuilder) Date(date string) *AdminUserExtContactStatBuilder {
+	builder.date = date
+	builder.dateFlag = true
+	return builder
+}
+
+// 用户ID
+//
+// 示例值：ou_7dab8a3d3cdcc9da365777c7ad535d62
+func (builder *AdminUserExtContactStatBuilder) UserId(userId string) *AdminUserExtContactStatBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 成员姓名
+//
+// 示例值：路人甲A
+func (builder *AdminUserExtContactStatBuilder) UserName(userName string) *AdminUserExtContactStatBuilder {
+	builder.userName = userName
+	builder.userNameFlag = true
+	return builder
+}
+
+// 部门名
+//
+// 示例值：部门A
+func (builder *AdminUserExtContactStatBuilder) DepartmentName(departmentName string) *AdminUserExtContactStatBuilder {
+	builder.departmentName = departmentName
+	builder.departmentNameFlag = true
+	return builder
+}
+
+// 外部联系人数量
+//
+// 示例值：200
+func (builder *AdminUserExtContactStatBuilder) RefContactUcnt(refContactUcnt int) *AdminUserExtContactStatBuilder {
+	builder.refContactUcnt = refContactUcnt
+	builder.refContactUcntFlag = true
+	return builder
+}
+
+// 外部联系人所属企业数量
+//
+// 示例值：10
+func (builder *AdminUserExtContactStatBuilder) RefContactTcnt(refContactTcnt string) *AdminUserExtContactStatBuilder {
+	builder.refContactTcnt = refContactTcnt
+	builder.refContactTcntFlag = true
+	return builder
+}
+
+func (builder *AdminUserExtContactStatBuilder) Build() *AdminUserExtContactStat {
+	req := &AdminUserExtContactStat{}
+	if builder.dateFlag {
+		req.Date = &builder.date
+
+	}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.userNameFlag {
+		req.UserName = &builder.userName
+
+	}
+	if builder.departmentNameFlag {
+		req.DepartmentName = &builder.departmentName
+
+	}
+	if builder.refContactUcntFlag {
+		req.RefContactUcnt = &builder.refContactUcnt
+
+	}
+	if builder.refContactTcntFlag {
+		req.RefContactTcnt = &builder.refContactTcnt
 
 	}
 	return req

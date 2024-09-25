@@ -96,7 +96,7 @@ func (t *task) Query(ctx context.Context, req *QueryTaskReq, options ...larkcore
 	apiReq := req.apiReq
 	apiReq.ApiPath = "/open-apis/report/v1/tasks/query"
 	apiReq.HttpMethod = http.MethodPost
-	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
 	apiResp, err := larkcore.Request(ctx, apiReq, t.config, options...)
 	if err != nil {
 		return nil, err

@@ -34,6 +34,7 @@ func main() {
 		Body(larkcorehr.NewSearchPreHireReqBodyBuilder().
 			WorkerIds([]string{}).
 			PreHireIds([]string{}).
+			PersonIds([]string{}).
 			OnboardingDateStart("2006-01-02").
 			OnboardingDateEnd("2006-01-02").
 			UpdatedDateStart("2006-01-02").
@@ -43,6 +44,7 @@ func main() {
 			DepartmentIds([]string{}).
 			DirectManagerIds([]string{}).
 			EmployeeTypeIds([]string{}).
+			EmployeeSubtypeIds([]string{}).
 			JobFamilyIds([]string{}).
 			KeyWord("张三").
 			Rehire("张三").

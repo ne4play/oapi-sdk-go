@@ -21,25 +21,21 @@ import (
 	"github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1"
 )
 
-// POST /open-apis/corehr/v1/job_levels
+// POST /open-apis/corehr/v1/leaves/work_calendar
 func main() {
 	// 创建 Client
 	client := lark.NewClient("appID", "appSecret")
 	// 创建请求对象
-	req := larkcorehr.NewCreateJobLevelReqBuilder().
-		ClientToken("12454646").
-		JobLevel(larkcorehr.NewJobLevelBuilder().
-			LevelOrder(9999).
-			Code("VQzo/BSonp8l6PmcZ+VlDhkd2595LMkhyBAGX6HAlCY=").
-			Name([]*larkcorehr.I18n{larkcorehr.NewI18nBuilder().Build()}).
-			Description([]*larkcorehr.I18n{larkcorehr.NewI18nBuilder().Build()}).
-			Active(true).
-			CustomFields([]*larkcorehr.ObjectFieldData{larkcorehr.NewObjectFieldDataBuilder().Build()}).
-			JobGrade([]string{}).
+	req := larkcorehr.NewWorkCalendarLeaveReqBuilder().
+		WorkCalendarFilter(larkcorehr.NewWorkCalendarFilterBuilder().
+			WkCalendarIds([]string{}).
+			WkCalendarIdGt("12344").
+			WkOption(larkcorehr.NewWkOptionBuilder().Build()).
+			OnlyEnable(true).
 			Build()).
 		Build()
 	// 发起请求
-	resp, err := client.Corehr.V1.JobLevel.Create(context.Background(), req)
+	resp, err := client.Corehr.V1.Leave.WorkCalendar(context.Background(), req)
 
 	// 处理错误
 	if err != nil {

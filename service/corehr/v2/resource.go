@@ -42,6 +42,7 @@ type V2 struct {
 	ProcessCc                         *processCc                         // process.cc
 	ProcessFormVariableData           *processFormVariableData           // process.form_variable_data
 	ProcessNode                       *processNode                       // process.node
+	WorkforcePlanDetail               *workforcePlanDetail               // workforce_plan_detail
 }
 
 func New(config *larkcore.Config) *V2 {
@@ -79,6 +80,7 @@ func New(config *larkcore.Config) *V2 {
 		ProcessCc:                         &processCc{config: config},
 		ProcessFormVariableData:           &processFormVariableData{config: config},
 		ProcessNode:                       &processNode{config: config},
+		WorkforcePlanDetail:               &workforcePlanDetail{config: config},
 	}
 }
 
@@ -179,6 +181,9 @@ type processFormVariableData struct {
 	config *larkcore.Config
 }
 type processNode struct {
+	config *larkcore.Config
+}
+type workforcePlanDetail struct {
 	config *larkcore.Config
 }
 
@@ -879,6 +884,32 @@ func (d *department) QueryMultiTimeline(ctx context.Context, req *QueryMultiTime
 	}
 	// 反序列响应结果
 	resp := &QueryMultiTimelineDepartmentResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, d.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// QueryRecentChange
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=query_recent_change&project=corehr&resource=department&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/queryRecentChange_department.go
+func (d *department) QueryRecentChange(ctx context.Context, req *QueryRecentChangeDepartmentReq, options ...larkcore.RequestOptionFunc) (*QueryRecentChangeDepartmentResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/departments/query_recent_change"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, d.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &QueryRecentChangeDepartmentResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, d.config)
 	if err != nil {
 		return nil, err
@@ -1872,6 +1903,32 @@ func (p *processFormVariableData) Get(ctx context.Context, req *GetProcessFormVa
 	// 反序列响应结果
 	resp := &GetProcessFormVariableDataResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Batch
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batch&project=corehr&resource=workforce_plan_detail&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/batch_workforcePlanDetail.go
+func (w *workforcePlanDetail) Batch(ctx context.Context, req *BatchWorkforcePlanDetailReq, options ...larkcore.RequestOptionFunc) (*BatchWorkforcePlanDetailResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/workforce_plan_details/batch"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, w.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchWorkforcePlanDetailResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, w.config)
 	if err != nil {
 		return nil, err
 	}

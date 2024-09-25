@@ -13,6 +13,7 @@
 package larkcore
 
 import (
+	"encoding/json"
 	"fmt"
 	"mime"
 	"net/http"
@@ -82,6 +83,14 @@ type CodeError struct {
 
 func (ce CodeError) Error() string {
 	return ce.String()
+}
+
+func (ce CodeError) ErrorResp() string {
+	str, err := json.Marshal(ce)
+	if err != nil {
+		return ce.String()
+	}
+	return string(str)
 }
 
 func (ce CodeError) String() string {

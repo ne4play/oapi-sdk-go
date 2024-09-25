@@ -4,10 +4,10 @@ import "context"
 
 // 消息处理器定义
 type CardActionTriggerEventHandler struct {
-	handler func(context.Context, *CardActionTriggerEvent) (*CardActionTriggerReponse, error)
+	handler func(context.Context, *CardActionTriggerEvent) (*CardActionTriggerResponse, error)
 }
 
-func NewCardActionTriggerEventHandler(handler func(context.Context, *CardActionTriggerEvent) (*CardActionTriggerReponse, error)) *CardActionTriggerEventHandler {
+func NewCardActionTriggerEventHandler(handler func(context.Context, *CardActionTriggerEvent) (*CardActionTriggerResponse, error)) *CardActionTriggerEventHandler {
 	h := &CardActionTriggerEventHandler{handler: handler}
 	return h
 }

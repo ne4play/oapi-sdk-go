@@ -54,7 +54,7 @@ func (p *post) Get(ctx context.Context, req *GetPostReq, options ...larkcore.Req
 	apiReq := req.apiReq
 	apiReq.ApiPath = "/open-apis/moments/v1/posts/:post_id"
 	apiReq.HttpMethod = http.MethodGet
-	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
 	apiResp, err := larkcore.Request(ctx, apiReq, p.config, options...)
 	if err != nil {
 		return nil, err

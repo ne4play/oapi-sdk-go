@@ -6,7 +6,7 @@ import (
 	"github.com/larksuite/oapi-sdk-go/v3/event/dispatcher/callback"
 )
 
-func (dispatcher *EventDispatcher) OnP2CardActionTrigger(handler func(ctx context.Context, event *callback.CardActionTriggerEvent) (*callback.CardActionTriggerReponse, error)) *EventDispatcher {
+func (dispatcher *EventDispatcher) OnP2CardActionTrigger(handler func(ctx context.Context, event *callback.CardActionTriggerEvent) (*callback.CardActionTriggerResponse, error)) *EventDispatcher {
 	_, existed := dispatcher.callbackType2CallbackHandler["card.action.trigger"]
 	if existed {
 		panic("event: multiple handler registrations for " + "card.action.trigger")

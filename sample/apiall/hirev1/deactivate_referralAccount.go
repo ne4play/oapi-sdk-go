@@ -28,6 +28,7 @@ func main() {
 	// 创建请求对象
 	req := larkhire.NewDeactivateReferralAccountReqBuilder().
 		ReferralAccountId("6942778198054125570").
+		UserIdType("user_id").
 		Build()
 	// 发起请求
 	resp, err := client.Hire.V1.ReferralAccount.Deactivate(context.Background(), req)

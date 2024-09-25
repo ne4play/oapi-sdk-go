@@ -168,7 +168,7 @@ func main() {
 	}).OnP2TicketUpdatedV1(func(ctx context.Context, event *larkhelpdesk.P2TicketUpdatedV1) error {
 		fmt.Println(event)
 		return nil
-	}).OnP2CardActionTrigger(func(ctx context.Context, event *callback.CardActionTriggerEvent) (*callback.CardActionTriggerReponse, error) {
+	}).OnP2CardActionTrigger(func(ctx context.Context, event *callback.CardActionTriggerEvent) (*callback.CardActionTriggerResponse, error) {
 		fmt.Println("receive card action")
 		fmt.Println(larkcore.Prettify(event))
 		return nil, nil

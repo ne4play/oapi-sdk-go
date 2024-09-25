@@ -33,7 +33,7 @@ type Category struct {
 	Description      *string `json:"description,omitempty"`       // 板块描述
 	CreateTime       *string `json:"create_time,omitempty"`       // 板块创建时间
 	PostCount        *int    `json:"post_count,omitempty"`        // 板块下帖子总数
-	ParticipantCount *int    `json:"participant_count,omitempty"` //
+	ParticipantCount *int    `json:"participant_count,omitempty"` // 板块参与人数
 }
 
 type CategoryBuilder struct {
@@ -47,7 +47,7 @@ type CategoryBuilder struct {
 	createTimeFlag       bool
 	postCount            int // 板块下帖子总数
 	postCountFlag        bool
-	participantCount     int //
+	participantCount     int // 板块参与人数
 	participantCountFlag bool
 }
 
@@ -58,7 +58,7 @@ func NewCategoryBuilder() *CategoryBuilder {
 
 // 板块的ID
 //
-// 示例值：
+// 示例值：6560906191909683220
 func (builder *CategoryBuilder) Id(id string) *CategoryBuilder {
 	builder.id = id
 	builder.idFlag = true
@@ -67,7 +67,7 @@ func (builder *CategoryBuilder) Id(id string) *CategoryBuilder {
 
 // 板块名
 //
-// 示例值：
+// 示例值：示例板块
 func (builder *CategoryBuilder) Name(name string) *CategoryBuilder {
 	builder.name = name
 	builder.nameFlag = true
@@ -76,7 +76,7 @@ func (builder *CategoryBuilder) Name(name string) *CategoryBuilder {
 
 // 板块描述
 //
-// 示例值：
+// 示例值：一个有趣的板块描述
 func (builder *CategoryBuilder) Description(description string) *CategoryBuilder {
 	builder.description = description
 	builder.descriptionFlag = true
@@ -85,7 +85,7 @@ func (builder *CategoryBuilder) Description(description string) *CategoryBuilder
 
 // 板块创建时间
 //
-// 示例值：
+// 示例值：2022-05-23T00:00:00+08:00
 func (builder *CategoryBuilder) CreateTime(createTime string) *CategoryBuilder {
 	builder.createTime = createTime
 	builder.createTimeFlag = true
@@ -94,14 +94,16 @@ func (builder *CategoryBuilder) CreateTime(createTime string) *CategoryBuilder {
 
 // 板块下帖子总数
 //
-// 示例值：
+// 示例值：5
 func (builder *CategoryBuilder) PostCount(postCount int) *CategoryBuilder {
 	builder.postCount = postCount
 	builder.postCountFlag = true
 	return builder
 }
 
-// 示例值：
+// 板块参与人数
+//
+// 示例值：10
 func (builder *CategoryBuilder) ParticipantCount(participantCount int) *CategoryBuilder {
 	builder.participantCount = participantCount
 	builder.participantCountFlag = true
@@ -882,14 +884,14 @@ func (builder *ReactionBuilder) Build() *Reaction {
 }
 
 type ReactionList struct {
-	Type  *string `json:"type,omitempty"`  //
-	Count *int    `json:"count,omitempty"` //
+	Type  *string `json:"type,omitempty"`  // 表情类型
+	Count *int    `json:"count,omitempty"` // 回复该表情的人数
 }
 
 type ReactionListBuilder struct {
-	type_     string //
+	type_     string // 表情类型
 	typeFlag  bool
-	count     int //
+	count     int // 回复该表情的人数
 	countFlag bool
 }
 
@@ -898,14 +900,18 @@ func NewReactionListBuilder() *ReactionListBuilder {
 	return builder
 }
 
-// 示例值：
+// 表情类型
+//
+// 示例值：OK
 func (builder *ReactionListBuilder) Type(type_ string) *ReactionListBuilder {
 	builder.type_ = type_
 	builder.typeFlag = true
 	return builder
 }
 
-// 示例值：
+// 回复该表情的人数
+//
+// 示例值：3
 func (builder *ReactionListBuilder) Count(count int) *ReactionListBuilder {
 	builder.count = count
 	builder.countFlag = true
@@ -926,14 +932,14 @@ func (builder *ReactionListBuilder) Build() *ReactionList {
 }
 
 type ReactionSet struct {
-	Reactions  []*ReactionList `json:"reactions,omitempty"`   //
-	TotalCount *int            `json:"total_count,omitempty"` //
+	Reactions  []*ReactionList `json:"reactions,omitempty"`   // 表情列表
+	TotalCount *int            `json:"total_count,omitempty"` // 全部表情计数
 }
 
 type ReactionSetBuilder struct {
-	reactions      []*ReactionList //
+	reactions      []*ReactionList // 表情列表
 	reactionsFlag  bool
-	totalCount     int //
+	totalCount     int // 全部表情计数
 	totalCountFlag bool
 }
 
@@ -942,6 +948,8 @@ func NewReactionSetBuilder() *ReactionSetBuilder {
 	return builder
 }
 
+// 表情列表
+//
 // 示例值：
 func (builder *ReactionSetBuilder) Reactions(reactions []*ReactionList) *ReactionSetBuilder {
 	builder.reactions = reactions
@@ -949,7 +957,9 @@ func (builder *ReactionSetBuilder) Reactions(reactions []*ReactionList) *Reactio
 	return builder
 }
 
-// 示例值：
+// 全部表情计数
+//
+// 示例值：20
 func (builder *ReactionSetBuilder) TotalCount(totalCount int) *ReactionSetBuilder {
 	builder.totalCount = totalCount
 	builder.totalCountFlag = true

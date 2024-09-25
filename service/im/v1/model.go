@@ -1761,6 +1761,7 @@ type ChatTabContent struct {
 	Url           *string `json:"url,omitempty"`            // URL类型
 	Doc           *string `json:"doc,omitempty"`            // Doc链接
 	MeetingMinute *string `json:"meeting_minute,omitempty"` // 会议纪要
+	Task          *string `json:"task,omitempty"`           // 任务
 }
 
 type ChatTabContentBuilder struct {
@@ -1770,6 +1771,8 @@ type ChatTabContentBuilder struct {
 	docFlag           bool
 	meetingMinute     string // 会议纪要
 	meetingMinuteFlag bool
+	task              string // 任务
+	taskFlag          bool
 }
 
 func NewChatTabContentBuilder() *ChatTabContentBuilder {
@@ -1804,6 +1807,15 @@ func (builder *ChatTabContentBuilder) MeetingMinute(meetingMinute string) *ChatT
 	return builder
 }
 
+// 任务
+//
+// 示例值：https://bytedance.feishu.cn/client/todo/task_list?guid=fa03fb6d-344b-47d9-83e3-049e3b3da931
+func (builder *ChatTabContentBuilder) Task(task string) *ChatTabContentBuilder {
+	builder.task = task
+	builder.taskFlag = true
+	return builder
+}
+
 func (builder *ChatTabContentBuilder) Build() *ChatTabContent {
 	req := &ChatTabContent{}
 	if builder.urlFlag {
@@ -1816,6 +1828,10 @@ func (builder *ChatTabContentBuilder) Build() *ChatTabContent {
 	}
 	if builder.meetingMinuteFlag {
 		req.MeetingMinute = &builder.meetingMinute
+
+	}
+	if builder.taskFlag {
+		req.Task = &builder.task
 
 	}
 	return req

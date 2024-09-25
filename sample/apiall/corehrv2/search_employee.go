@@ -54,6 +54,7 @@ func main() {
 			PhoneNumberList([]string{}).
 			EmailAddressList([]string{}).
 			DepartmentIdListIncludeSub([]string{}).
+			CostCenterIdList([]string{}).
 			Build()).
 		Build()
 	// 发起请求

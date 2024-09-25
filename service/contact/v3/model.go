@@ -10919,6 +10919,8 @@ type DeleteUserReqBodyBuilder struct {
 	surveyAcceptorUserIdFlag         bool
 	emailAcceptor                    *ResourceAcceptor // 用户邮件资源处理方式。用户被删除时，根据传递的操作指令对其拥有的邮件资源做对应处理。未传递指令时默认将邮件资源转让给直属上级，如果无直属上级则保留邮件资源在该用户名下。
 	emailAcceptorFlag                bool
+	anycrossAcceptorUserId           string // 用户集成平台资源接收者
+	anycrossAcceptorUserIdFlag       bool
 }
 
 func NewDeleteUserReqBodyBuilder() *DeleteUserReqBodyBuilder {
@@ -10998,6 +11000,15 @@ func (builder *DeleteUserReqBodyBuilder) EmailAcceptor(emailAcceptor *ResourceAc
 	return builder
 }
 
+// 用户集成平台资源接收者
+//
+// 示例值：
+func (builder *DeleteUserReqBodyBuilder) AnycrossAcceptorUserId(anycrossAcceptorUserId string) *DeleteUserReqBodyBuilder {
+	builder.anycrossAcceptorUserId = anycrossAcceptorUserId
+	builder.anycrossAcceptorUserIdFlag = true
+	return builder
+}
+
 func (builder *DeleteUserReqBodyBuilder) Build() *DeleteUserReqBody {
 	req := &DeleteUserReqBody{}
 	if builder.departmentChatAcceptorUserIdFlag {
@@ -11024,6 +11035,9 @@ func (builder *DeleteUserReqBodyBuilder) Build() *DeleteUserReqBody {
 	if builder.emailAcceptorFlag {
 		req.EmailAcceptor = builder.emailAcceptor
 	}
+	if builder.anycrossAcceptorUserIdFlag {
+		req.AnycrossAcceptorUserId = &builder.anycrossAcceptorUserId
+	}
 	return req
 }
 
@@ -11044,6 +11058,8 @@ type DeleteUserPathReqBodyBuilder struct {
 	surveyAcceptorUserIdFlag         bool
 	emailAcceptor                    *ResourceAcceptor
 	emailAcceptorFlag                bool
+	anycrossAcceptorUserId           string
+	anycrossAcceptorUserIdFlag       bool
 }
 
 func NewDeleteUserPathReqBodyBuilder() *DeleteUserPathReqBodyBuilder {
@@ -11123,6 +11139,15 @@ func (builder *DeleteUserPathReqBodyBuilder) EmailAcceptor(emailAcceptor *Resour
 	return builder
 }
 
+// 用户集成平台资源接收者
+//
+// 示例值：
+func (builder *DeleteUserPathReqBodyBuilder) AnycrossAcceptorUserId(anycrossAcceptorUserId string) *DeleteUserPathReqBodyBuilder {
+	builder.anycrossAcceptorUserId = anycrossAcceptorUserId
+	builder.anycrossAcceptorUserIdFlag = true
+	return builder
+}
+
 func (builder *DeleteUserPathReqBodyBuilder) Build() (*DeleteUserReqBody, error) {
 	req := &DeleteUserReqBody{}
 	if builder.departmentChatAcceptorUserIdFlag {
@@ -11148,6 +11173,9 @@ func (builder *DeleteUserPathReqBodyBuilder) Build() (*DeleteUserReqBody, error)
 	}
 	if builder.emailAcceptorFlag {
 		req.EmailAcceptor = builder.emailAcceptor
+	}
+	if builder.anycrossAcceptorUserIdFlag {
+		req.AnycrossAcceptorUserId = &builder.anycrossAcceptorUserId
 	}
 	return req, nil
 }
@@ -11206,6 +11234,7 @@ type DeleteUserReqBody struct {
 	MinutesAcceptorUserId        *string           `json:"minutes_acceptor_user_id,omitempty"`         // 妙记接收者。用户被删除时，其拥有的妙记资源转让给接收者。如果不指定接收者，则默认转让给直属上级。如果无直属上级则将妙记保留在该用户名下。
 	SurveyAcceptorUserId         *string           `json:"survey_acceptor_user_id,omitempty"`          // 飞书问卷接收者。用户被删除时，其拥有的飞书问卷资源转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除飞书问卷资源。
 	EmailAcceptor                *ResourceAcceptor `json:"email_acceptor,omitempty"`                   // 用户邮件资源处理方式。用户被删除时，根据传递的操作指令对其拥有的邮件资源做对应处理。未传递指令时默认将邮件资源转让给直属上级，如果无直属上级则保留邮件资源在该用户名下。
+	AnycrossAcceptorUserId       *string           `json:"anycross_acceptor_user_id,omitempty"`        // 用户集成平台资源接收者
 }
 
 type DeleteUserReq struct {

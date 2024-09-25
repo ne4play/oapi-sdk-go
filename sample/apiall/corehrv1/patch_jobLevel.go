@@ -36,6 +36,7 @@ func main() {
 			Description([]*larkcorehr.I18n{larkcorehr.NewI18nBuilder().Build()}).
 			Active(true).
 			CustomFields([]*larkcorehr.ObjectFieldData{larkcorehr.NewObjectFieldDataBuilder().Build()}).
+			JobGrade([]string{}).
 			Build()).
 		Build()
 	// 发起请求
