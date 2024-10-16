@@ -9,16 +9,18 @@ import (
 )
 
 type V1 struct {
-	Document              *document              // 文档
-	DocumentBlock         *documentBlock         // 块
-	DocumentBlockChildren *documentBlockChildren // document.block.children
+	Document                *document                // 文档
+	DocumentBlock           *documentBlock           // 块
+	DocumentBlockChildren   *documentBlockChildren   // document.block.children
+	DocumentBlockDescendant *documentBlockDescendant // document.block.descendant
 }
 
 func New(config *larkcore.Config) *V1 {
 	return &V1{
-		Document:              &document{config: config},
-		DocumentBlock:         &documentBlock{config: config},
-		DocumentBlockChildren: &documentBlockChildren{config: config},
+		Document:                &document{config: config},
+		DocumentBlock:           &documentBlock{config: config},
+		DocumentBlockChildren:   &documentBlockChildren{config: config},
+		DocumentBlockDescendant: &documentBlockDescendant{config: config},
 	}
 }
 
@@ -29,6 +31,9 @@ type documentBlock struct {
 	config *larkcore.Config
 }
 type documentBlockChildren struct {
+	config *larkcore.Config
+}
+type documentBlockDescendant struct {
 	config *larkcore.Config
 }
 
@@ -346,4 +351,30 @@ func (d *documentBlockChildren) GetByIterator(ctx context.Context, req *GetDocum
 		listFunc: d.Get,
 		options:  options,
 		limit:    req.Limit}, nil
+}
+
+// Create
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=create&project=docx&resource=document.block.descendant&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/docxv1/create_documentBlockDescendant.go
+func (d *documentBlockDescendant) Create(ctx context.Context, req *CreateDocumentBlockDescendantReq, options ...larkcore.RequestOptionFunc) (*CreateDocumentBlockDescendantResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/docx/v1/documents/:document_id/blocks/:block_id/descendant"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, d.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &CreateDocumentBlockDescendantResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, d.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
 }

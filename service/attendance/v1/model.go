@@ -5318,60 +5318,66 @@ func (builder *ScopeValueBuilder) Build() *ScopeValue {
 }
 
 type Shift struct {
-	ShiftId                  *string               `json:"shift_id,omitempty"`                     // 班次 ID
-	ShiftName                *string               `json:"shift_name,omitempty"`                   // 班次名称
-	PunchTimes               *int                  `json:"punch_times,omitempty"`                  // 打卡次数
-	SubShiftLeaderIds        []string              `json:"sub_shift_leader_ids,omitempty"`         // 排班组子负责人id列表
-	IsFlexible               *bool                 `json:"is_flexible,omitempty"`                  // 是否弹性打卡
-	FlexibleMinutes          *int                  `json:"flexible_minutes,omitempty"`             // 弹性打卡时间，设置【上班最多可晚到】与【下班最多可早走】时间，如果不设置flexible_rule则生效
-	FlexibleRule             []*FlexibleRule       `json:"flexible_rule,omitempty"`                // 弹性打卡时间设置
-	NoNeedOff                *bool                 `json:"no_need_off,omitempty"`                  // 不需要打下班卡
-	PunchTimeRule            []*PunchTimeRule      `json:"punch_time_rule,omitempty"`              // 打卡规则
-	LateOffLateOnRule        []*LateOffLateOnRule  `json:"late_off_late_on_rule,omitempty"`        // 晚走晚到规则
-	RestTimeRule             []*RestRule           `json:"rest_time_rule,omitempty"`               // 休息规则
-	OvertimeRule             []*OvertimeRule       `json:"overtime_rule,omitempty"`                // 打卡规则
-	DayType                  *int                  `json:"day_type,omitempty"`                     // 日期类型，【是否弹性打卡 = ture】时，不可设置为“休息日”  可选值：1：工作日 2：休息日	 示例值：（默认值）1
-	OvertimeRestTimeRule     []*RestRule           `json:"overtime_rest_time_rule,omitempty"`      // 班外休息规则
-	LateMinutesAsSeriousLate *int                  `json:"late_minutes_as_serious_late,omitempty"` // 晚到多久记为严重迟到（优先级比原有字段高）
-	ShiftMiddleTimeRule      *ShiftMiddleTimeRule  `json:"shift_middle_time_rule,omitempty"`       // 半天分割规则
-	LateOffLateOnSetting     *LateOffLateOnSetting `json:"late_off_late_on_setting,omitempty"`     // 晚走次日晚到配置规则
+	ShiftId                   *string                    `json:"shift_id,omitempty"`                     // 班次 ID
+	ShiftName                 *string                    `json:"shift_name,omitempty"`                   // 班次名称
+	PunchTimes                *int                       `json:"punch_times,omitempty"`                  // 打卡次数
+	SubShiftLeaderIds         []string                   `json:"sub_shift_leader_ids,omitempty"`         // 排班组子负责人id列表
+	IsFlexible                *bool                      `json:"is_flexible,omitempty"`                  // 是否弹性打卡
+	FlexibleMinutes           *int                       `json:"flexible_minutes,omitempty"`             // 弹性打卡时间，设置【上班最多可晚到】与【下班最多可早走】时间，如果不设置flexible_rule则生效
+	FlexibleRule              []*FlexibleRule            `json:"flexible_rule,omitempty"`                // 弹性打卡时间设置
+	NoNeedOff                 *bool                      `json:"no_need_off,omitempty"`                  // 不需要打下班卡
+	PunchTimeRule             []*PunchTimeRule           `json:"punch_time_rule,omitempty"`              // 打卡规则
+	LateOffLateOnRule         []*LateOffLateOnRule       `json:"late_off_late_on_rule,omitempty"`        // 晚走晚到规则
+	RestTimeRule              []*RestRule                `json:"rest_time_rule,omitempty"`               // 休息规则
+	OvertimeRule              []*OvertimeRule            `json:"overtime_rule,omitempty"`                // 打卡规则
+	DayType                   *int                       `json:"day_type,omitempty"`                     // 日期类型，【是否弹性打卡 = ture】时，不可设置为“休息日”  可选值：1：工作日 2：休息日	 示例值：（默认值）1
+	OvertimeRestTimeRule      []*RestRule                `json:"overtime_rest_time_rule,omitempty"`      // 班外休息规则
+	LateMinutesAsSeriousLate  *int                       `json:"late_minutes_as_serious_late,omitempty"` // 晚到多久记为严重迟到（优先级比原有字段高）
+	ShiftMiddleTimeRule       *ShiftMiddleTimeRule       `json:"shift_middle_time_rule,omitempty"`       // 半天分割规则
+	ShiftAttendanceTimeConfig *ShiftAttendanceTimeConfig `json:"shift_attendance_time_config,omitempty"` // 应出勤配置
+	LateOffLateOnSetting      *LateOffLateOnSetting      `json:"late_off_late_on_setting,omitempty"`     // 晚走次日晚到配置规则
+	Id                        *string                    `json:"id,omitempty"`                           // 班次id(更新班次时需要传递)
 }
 
 type ShiftBuilder struct {
-	shiftId                      string // 班次 ID
-	shiftIdFlag                  bool
-	shiftName                    string // 班次名称
-	shiftNameFlag                bool
-	punchTimes                   int // 打卡次数
-	punchTimesFlag               bool
-	subShiftLeaderIds            []string // 排班组子负责人id列表
-	subShiftLeaderIdsFlag        bool
-	isFlexible                   bool // 是否弹性打卡
-	isFlexibleFlag               bool
-	flexibleMinutes              int // 弹性打卡时间，设置【上班最多可晚到】与【下班最多可早走】时间，如果不设置flexible_rule则生效
-	flexibleMinutesFlag          bool
-	flexibleRule                 []*FlexibleRule // 弹性打卡时间设置
-	flexibleRuleFlag             bool
-	noNeedOff                    bool // 不需要打下班卡
-	noNeedOffFlag                bool
-	punchTimeRule                []*PunchTimeRule // 打卡规则
-	punchTimeRuleFlag            bool
-	lateOffLateOnRule            []*LateOffLateOnRule // 晚走晚到规则
-	lateOffLateOnRuleFlag        bool
-	restTimeRule                 []*RestRule // 休息规则
-	restTimeRuleFlag             bool
-	overtimeRule                 []*OvertimeRule // 打卡规则
-	overtimeRuleFlag             bool
-	dayType                      int // 日期类型，【是否弹性打卡 = ture】时，不可设置为“休息日”  可选值：1：工作日 2：休息日	 示例值：（默认值）1
-	dayTypeFlag                  bool
-	overtimeRestTimeRule         []*RestRule // 班外休息规则
-	overtimeRestTimeRuleFlag     bool
-	lateMinutesAsSeriousLate     int // 晚到多久记为严重迟到（优先级比原有字段高）
-	lateMinutesAsSeriousLateFlag bool
-	shiftMiddleTimeRule          *ShiftMiddleTimeRule // 半天分割规则
-	shiftMiddleTimeRuleFlag      bool
-	lateOffLateOnSetting         *LateOffLateOnSetting // 晚走次日晚到配置规则
-	lateOffLateOnSettingFlag     bool
+	shiftId                       string // 班次 ID
+	shiftIdFlag                   bool
+	shiftName                     string // 班次名称
+	shiftNameFlag                 bool
+	punchTimes                    int // 打卡次数
+	punchTimesFlag                bool
+	subShiftLeaderIds             []string // 排班组子负责人id列表
+	subShiftLeaderIdsFlag         bool
+	isFlexible                    bool // 是否弹性打卡
+	isFlexibleFlag                bool
+	flexibleMinutes               int // 弹性打卡时间，设置【上班最多可晚到】与【下班最多可早走】时间，如果不设置flexible_rule则生效
+	flexibleMinutesFlag           bool
+	flexibleRule                  []*FlexibleRule // 弹性打卡时间设置
+	flexibleRuleFlag              bool
+	noNeedOff                     bool // 不需要打下班卡
+	noNeedOffFlag                 bool
+	punchTimeRule                 []*PunchTimeRule // 打卡规则
+	punchTimeRuleFlag             bool
+	lateOffLateOnRule             []*LateOffLateOnRule // 晚走晚到规则
+	lateOffLateOnRuleFlag         bool
+	restTimeRule                  []*RestRule // 休息规则
+	restTimeRuleFlag              bool
+	overtimeRule                  []*OvertimeRule // 打卡规则
+	overtimeRuleFlag              bool
+	dayType                       int // 日期类型，【是否弹性打卡 = ture】时，不可设置为“休息日”  可选值：1：工作日 2：休息日	 示例值：（默认值）1
+	dayTypeFlag                   bool
+	overtimeRestTimeRule          []*RestRule // 班外休息规则
+	overtimeRestTimeRuleFlag      bool
+	lateMinutesAsSeriousLate      int // 晚到多久记为严重迟到（优先级比原有字段高）
+	lateMinutesAsSeriousLateFlag  bool
+	shiftMiddleTimeRule           *ShiftMiddleTimeRule // 半天分割规则
+	shiftMiddleTimeRuleFlag       bool
+	shiftAttendanceTimeConfig     *ShiftAttendanceTimeConfig // 应出勤配置
+	shiftAttendanceTimeConfigFlag bool
+	lateOffLateOnSetting          *LateOffLateOnSetting // 晚走次日晚到配置规则
+	lateOffLateOnSettingFlag      bool
+	id                            string // 班次id(更新班次时需要传递)
+	idFlag                        bool
 }
 
 func NewShiftBuilder() *ShiftBuilder {
@@ -5523,12 +5529,30 @@ func (builder *ShiftBuilder) ShiftMiddleTimeRule(shiftMiddleTimeRule *ShiftMiddl
 	return builder
 }
 
+// 应出勤配置
+//
+// 示例值：
+func (builder *ShiftBuilder) ShiftAttendanceTimeConfig(shiftAttendanceTimeConfig *ShiftAttendanceTimeConfig) *ShiftBuilder {
+	builder.shiftAttendanceTimeConfig = shiftAttendanceTimeConfig
+	builder.shiftAttendanceTimeConfigFlag = true
+	return builder
+}
+
 // 晚走次日晚到配置规则
 //
 // 示例值：
 func (builder *ShiftBuilder) LateOffLateOnSetting(lateOffLateOnSetting *LateOffLateOnSetting) *ShiftBuilder {
 	builder.lateOffLateOnSetting = lateOffLateOnSetting
 	builder.lateOffLateOnSettingFlag = true
+	return builder
+}
+
+// 班次id(更新班次时需要传递)
+//
+// 示例值：6919358778597097404
+func (builder *ShiftBuilder) Id(id string) *ShiftBuilder {
+	builder.id = id
+	builder.idFlag = true
 	return builder
 }
 
@@ -5590,8 +5614,79 @@ func (builder *ShiftBuilder) Build() *Shift {
 	if builder.shiftMiddleTimeRuleFlag {
 		req.ShiftMiddleTimeRule = builder.shiftMiddleTimeRule
 	}
+	if builder.shiftAttendanceTimeConfigFlag {
+		req.ShiftAttendanceTimeConfig = builder.shiftAttendanceTimeConfig
+	}
 	if builder.lateOffLateOnSettingFlag {
 		req.LateOffLateOnSetting = builder.lateOffLateOnSetting
+	}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	return req
+}
+
+type ShiftAttendanceTimeConfig struct {
+	AttendanceTime    *float64 `json:"attendance_time,omitempty"`     // 应出勤时长
+	OnAttendanceTime  *float64 `json:"on_attendance_time,omitempty"`  // 上半天应出勤时长
+	OffAttendanceTime *float64 `json:"off_attendance_time,omitempty"` // 下半天应出勤时长
+}
+
+type ShiftAttendanceTimeConfigBuilder struct {
+	attendanceTime        float64 // 应出勤时长
+	attendanceTimeFlag    bool
+	onAttendanceTime      float64 // 上半天应出勤时长
+	onAttendanceTimeFlag  bool
+	offAttendanceTime     float64 // 下半天应出勤时长
+	offAttendanceTimeFlag bool
+}
+
+func NewShiftAttendanceTimeConfigBuilder() *ShiftAttendanceTimeConfigBuilder {
+	builder := &ShiftAttendanceTimeConfigBuilder{}
+	return builder
+}
+
+// 应出勤时长
+//
+// 示例值：1
+func (builder *ShiftAttendanceTimeConfigBuilder) AttendanceTime(attendanceTime float64) *ShiftAttendanceTimeConfigBuilder {
+	builder.attendanceTime = attendanceTime
+	builder.attendanceTimeFlag = true
+	return builder
+}
+
+// 上半天应出勤时长
+//
+// 示例值：1
+func (builder *ShiftAttendanceTimeConfigBuilder) OnAttendanceTime(onAttendanceTime float64) *ShiftAttendanceTimeConfigBuilder {
+	builder.onAttendanceTime = onAttendanceTime
+	builder.onAttendanceTimeFlag = true
+	return builder
+}
+
+// 下半天应出勤时长
+//
+// 示例值：1
+func (builder *ShiftAttendanceTimeConfigBuilder) OffAttendanceTime(offAttendanceTime float64) *ShiftAttendanceTimeConfigBuilder {
+	builder.offAttendanceTime = offAttendanceTime
+	builder.offAttendanceTimeFlag = true
+	return builder
+}
+
+func (builder *ShiftAttendanceTimeConfigBuilder) Build() *ShiftAttendanceTimeConfig {
+	req := &ShiftAttendanceTimeConfig{}
+	if builder.attendanceTimeFlag {
+		req.AttendanceTime = &builder.attendanceTime
+
+	}
+	if builder.onAttendanceTimeFlag {
+		req.OnAttendanceTime = &builder.onAttendanceTime
+
+	}
+	if builder.offAttendanceTimeFlag {
+		req.OffAttendanceTime = &builder.offAttendanceTime
+
 	}
 	return req
 }
@@ -10972,23 +11067,25 @@ type GetShiftReq struct {
 }
 
 type GetShiftRespData struct {
-	ShiftId                  *string               `json:"shift_id,omitempty"`                     // 班次Id
-	ShiftName                *string               `json:"shift_name,omitempty"`                   // 班次名称
-	PunchTimes               *int                  `json:"punch_times,omitempty"`                  // 打卡次数
-	SubShiftLeaderIds        []string              `json:"sub_shift_leader_ids,omitempty"`         // 排班组子负责人id列表
-	IsFlexible               *bool                 `json:"is_flexible,omitempty"`                  // 是否弹性打卡
-	FlexibleMinutes          *int                  `json:"flexible_minutes,omitempty"`             // 弹性打卡时间，设置【上班最多可晚到】与【下班最多可早走】时间，如果不设置flexible_rule则生效
-	FlexibleRule             []*FlexibleRule       `json:"flexible_rule,omitempty"`                // 弹性打卡时间设置
-	NoNeedOff                *bool                 `json:"no_need_off,omitempty"`                  // 不需要打下班卡
-	PunchTimeRule            []*PunchTimeRule      `json:"punch_time_rule,omitempty"`              // 打卡规则
-	LateOffLateOnRule        []*LateOffLateOnRule  `json:"late_off_late_on_rule,omitempty"`        // 晚走晚到规则
-	RestTimeRule             []*RestRule           `json:"rest_time_rule,omitempty"`               // 休息规则
-	OvertimeRule             []*OvertimeRule       `json:"overtime_rule,omitempty"`                // 打卡规则
-	DayType                  *int                  `json:"day_type,omitempty"`                     // 日期类型，【是否弹性打卡 = ture】时，不可设置为“休息日”  可选值：1：工作日 2：休息日	 示例值：（默认值）1
-	OvertimeRestTimeRule     []*RestRule           `json:"overtime_rest_time_rule,omitempty"`      // 班外休息规则
-	LateMinutesAsSeriousLate *int                  `json:"late_minutes_as_serious_late,omitempty"` // 晚到多久记为严重迟到（优先级比原有字段高）
-	ShiftMiddleTimeRule      *ShiftMiddleTimeRule  `json:"shift_middle_time_rule,omitempty"`       // 半天分割规则
-	LateOffLateOnSetting     *LateOffLateOnSetting `json:"late_off_late_on_setting,omitempty"`     // 晚走次日晚到配置规则
+	ShiftId                   *string                    `json:"shift_id,omitempty"`                     // 班次Id
+	ShiftName                 *string                    `json:"shift_name,omitempty"`                   // 班次名称
+	PunchTimes                *int                       `json:"punch_times,omitempty"`                  // 打卡次数
+	SubShiftLeaderIds         []string                   `json:"sub_shift_leader_ids,omitempty"`         // 排班组子负责人id列表
+	IsFlexible                *bool                      `json:"is_flexible,omitempty"`                  // 是否弹性打卡
+	FlexibleMinutes           *int                       `json:"flexible_minutes,omitempty"`             // 弹性打卡时间，设置【上班最多可晚到】与【下班最多可早走】时间，如果不设置flexible_rule则生效
+	FlexibleRule              []*FlexibleRule            `json:"flexible_rule,omitempty"`                // 弹性打卡时间设置
+	NoNeedOff                 *bool                      `json:"no_need_off,omitempty"`                  // 不需要打下班卡
+	PunchTimeRule             []*PunchTimeRule           `json:"punch_time_rule,omitempty"`              // 打卡规则
+	LateOffLateOnRule         []*LateOffLateOnRule       `json:"late_off_late_on_rule,omitempty"`        // 晚走晚到规则
+	RestTimeRule              []*RestRule                `json:"rest_time_rule,omitempty"`               // 休息规则
+	OvertimeRule              []*OvertimeRule            `json:"overtime_rule,omitempty"`                // 打卡规则
+	DayType                   *int                       `json:"day_type,omitempty"`                     // 日期类型，【是否弹性打卡 = ture】时，不可设置为“休息日”  可选值：1：工作日 2：休息日	 示例值：（默认值）1
+	OvertimeRestTimeRule      []*RestRule                `json:"overtime_rest_time_rule,omitempty"`      // 班外休息规则
+	LateMinutesAsSeriousLate  *int                       `json:"late_minutes_as_serious_late,omitempty"` // 晚到多久记为严重迟到（优先级比原有字段高）
+	ShiftMiddleTimeRule       *ShiftMiddleTimeRule       `json:"shift_middle_time_rule,omitempty"`       // 半天分割规则
+	ShiftAttendanceTimeConfig *ShiftAttendanceTimeConfig `json:"shift_attendance_time_config,omitempty"` // 应出勤配置
+	LateOffLateOnSetting      *LateOffLateOnSetting      `json:"late_off_late_on_setting,omitempty"`     // 晚走次日晚到配置规则
+	Id                        *string                    `json:"id,omitempty"`                           // 班次id(更新班次时需要传递)
 }
 
 type GetShiftResp struct {
@@ -11100,23 +11197,25 @@ type QueryShiftReq struct {
 }
 
 type QueryShiftRespData struct {
-	ShiftId                  *string               `json:"shift_id,omitempty"`                     // 班次Id
-	ShiftName                *string               `json:"shift_name,omitempty"`                   // 班次名称
-	PunchTimes               *int                  `json:"punch_times,omitempty"`                  // 打卡次数
-	SubShiftLeaderIds        []string              `json:"sub_shift_leader_ids,omitempty"`         // 排班组子负责人id列表
-	IsFlexible               *bool                 `json:"is_flexible,omitempty"`                  // 是否弹性打卡
-	FlexibleMinutes          *int                  `json:"flexible_minutes,omitempty"`             // 弹性打卡时间，设置【上班最多可晚到】与【下班最多可早走】时间，如果不设置flexible_rule则生效
-	FlexibleRule             []*FlexibleRule       `json:"flexible_rule,omitempty"`                // 弹性打卡时间设置
-	NoNeedOff                *bool                 `json:"no_need_off,omitempty"`                  // 不需要打下班卡
-	PunchTimeRule            []*PunchTimeRule      `json:"punch_time_rule,omitempty"`              // 打卡规则
-	LateOffLateOnRule        []*LateOffLateOnRule  `json:"late_off_late_on_rule,omitempty"`        // 晚走晚到规则
-	RestTimeRule             []*RestRule           `json:"rest_time_rule,omitempty"`               // 休息规则
-	OvertimeRule             []*OvertimeRule       `json:"overtime_rule,omitempty"`                // 打卡规则
-	DayType                  *int                  `json:"day_type,omitempty"`                     // 日期类型，【是否弹性打卡 = ture】时，不可设置为“休息日”  可选值：1：工作日 2：休息日	 示例值：（默认值）1
-	OvertimeRestTimeRule     []*RestRule           `json:"overtime_rest_time_rule,omitempty"`      // 班外休息规则
-	LateMinutesAsSeriousLate *int                  `json:"late_minutes_as_serious_late,omitempty"` // 晚到多久记为严重迟到（优先级比原有字段高）
-	ShiftMiddleTimeRule      *ShiftMiddleTimeRule  `json:"shift_middle_time_rule,omitempty"`       // 半天分割规则
-	LateOffLateOnSetting     *LateOffLateOnSetting `json:"late_off_late_on_setting,omitempty"`     // 晚走次日晚到配置规则
+	ShiftId                   *string                    `json:"shift_id,omitempty"`                     // 班次Id
+	ShiftName                 *string                    `json:"shift_name,omitempty"`                   // 班次名称
+	PunchTimes                *int                       `json:"punch_times,omitempty"`                  // 打卡次数
+	SubShiftLeaderIds         []string                   `json:"sub_shift_leader_ids,omitempty"`         // 排班组子负责人id列表
+	IsFlexible                *bool                      `json:"is_flexible,omitempty"`                  // 是否弹性打卡
+	FlexibleMinutes           *int                       `json:"flexible_minutes,omitempty"`             // 弹性打卡时间，设置【上班最多可晚到】与【下班最多可早走】时间，如果不设置flexible_rule则生效
+	FlexibleRule              []*FlexibleRule            `json:"flexible_rule,omitempty"`                // 弹性打卡时间设置
+	NoNeedOff                 *bool                      `json:"no_need_off,omitempty"`                  // 不需要打下班卡
+	PunchTimeRule             []*PunchTimeRule           `json:"punch_time_rule,omitempty"`              // 打卡规则
+	LateOffLateOnRule         []*LateOffLateOnRule       `json:"late_off_late_on_rule,omitempty"`        // 晚走晚到规则
+	RestTimeRule              []*RestRule                `json:"rest_time_rule,omitempty"`               // 休息规则
+	OvertimeRule              []*OvertimeRule            `json:"overtime_rule,omitempty"`                // 打卡规则
+	DayType                   *int                       `json:"day_type,omitempty"`                     // 日期类型，【是否弹性打卡 = ture】时，不可设置为“休息日”  可选值：1：工作日 2：休息日	 示例值：（默认值）1
+	OvertimeRestTimeRule      []*RestRule                `json:"overtime_rest_time_rule,omitempty"`      // 班外休息规则
+	LateMinutesAsSeriousLate  *int                       `json:"late_minutes_as_serious_late,omitempty"` // 晚到多久记为严重迟到（优先级比原有字段高）
+	ShiftMiddleTimeRule       *ShiftMiddleTimeRule       `json:"shift_middle_time_rule,omitempty"`       // 半天分割规则
+	ShiftAttendanceTimeConfig *ShiftAttendanceTimeConfig `json:"shift_attendance_time_config,omitempty"` // 应出勤配置
+	LateOffLateOnSetting      *LateOffLateOnSetting      `json:"late_off_late_on_setting,omitempty"`     // 晚走次日晚到配置规则
+	Id                        *string                    `json:"id,omitempty"`                           // 班次id(更新班次时需要传递)
 }
 
 type QueryShiftResp struct {

@@ -816,7 +816,7 @@ func (builder *ReactionBuilder) EntityId(entityId string) *ReactionBuilder {
 
 // Reaction的ID
 //
-// 示例值："248381243"
+// 示例值："MS8yL1NPQg=="
 func (builder *ReactionBuilder) Id(id string) *ReactionBuilder {
 	builder.id = id
 	builder.idFlag = true

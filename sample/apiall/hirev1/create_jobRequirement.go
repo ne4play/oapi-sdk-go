@@ -58,6 +58,7 @@ func main() {
 			CustomizedDataList([]*larkhire.JobRequirementCustomizedData{larkhire.NewJobRequirementCustomizedDataBuilder().Build()}).
 			ProcessType(1).
 			JobTypeId("6930815272790114324").
+			JobIdList([]string{}).
 			Build()).
 		Build()
 	// 发起请求

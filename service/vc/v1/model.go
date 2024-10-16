@@ -1162,6 +1162,133 @@ func (builder *DisableInformConfigBuilder) Build() *DisableInformConfig {
 	return req
 }
 
+type KeyPoint struct {
+	Name        *string `json:"name,omitempty"`        // 关键点
+	Description *string `json:"description,omitempty"` // 关键点描述
+}
+
+type KeyPointBuilder struct {
+	name            string // 关键点
+	nameFlag        bool
+	description     string // 关键点描述
+	descriptionFlag bool
+}
+
+func NewKeyPointBuilder() *KeyPointBuilder {
+	builder := &KeyPointBuilder{}
+	return builder
+}
+
+// 关键点
+//
+// 示例值：飞书
+func (builder *KeyPointBuilder) Name(name string) *KeyPointBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 关键点描述
+//
+// 示例值：字节跳动的IM软件
+func (builder *KeyPointBuilder) Description(description string) *KeyPointBuilder {
+	builder.description = description
+	builder.descriptionFlag = true
+	return builder
+}
+
+func (builder *KeyPointBuilder) Build() *KeyPoint {
+	req := &KeyPoint{}
+	if builder.nameFlag {
+		req.Name = &builder.name
+
+	}
+	if builder.descriptionFlag {
+		req.Description = &builder.description
+
+	}
+	return req
+}
+
+type KeyPointMatchDetail struct {
+	StartTimestamp *string `json:"start_timestamp,omitempty"` // 开始时间戳
+	MatchedText    *string `json:"matched_text,omitempty"`    // 匹配到的文本
+}
+
+type KeyPointMatchDetailBuilder struct {
+	startTimestamp     string // 开始时间戳
+	startTimestampFlag bool
+	matchedText        string // 匹配到的文本
+	matchedTextFlag    bool
+}
+
+func NewKeyPointMatchDetailBuilder() *KeyPointMatchDetailBuilder {
+	builder := &KeyPointMatchDetailBuilder{}
+	return builder
+}
+
+// 开始时间戳
+//
+// 示例值：1
+func (builder *KeyPointMatchDetailBuilder) StartTimestamp(startTimestamp string) *KeyPointMatchDetailBuilder {
+	builder.startTimestamp = startTimestamp
+	builder.startTimestampFlag = true
+	return builder
+}
+
+// 匹配到的文本
+//
+// 示例值：1
+func (builder *KeyPointMatchDetailBuilder) MatchedText(matchedText string) *KeyPointMatchDetailBuilder {
+	builder.matchedText = matchedText
+	builder.matchedTextFlag = true
+	return builder
+}
+
+func (builder *KeyPointMatchDetailBuilder) Build() *KeyPointMatchDetail {
+	req := &KeyPointMatchDetail{}
+	if builder.startTimestampFlag {
+		req.StartTimestamp = &builder.startTimestamp
+
+	}
+	if builder.matchedTextFlag {
+		req.MatchedText = &builder.matchedText
+
+	}
+	return req
+}
+
+type KeyPointMatchDetails struct {
+	KeyPointMatchDetails []*KeyPointMatchDetail `json:"key_point_match_details,omitempty"` // detail列表
+}
+
+type KeyPointMatchDetailsBuilder struct {
+	keyPointMatchDetails     []*KeyPointMatchDetail // detail列表
+	keyPointMatchDetailsFlag bool
+}
+
+func NewKeyPointMatchDetailsBuilder() *KeyPointMatchDetailsBuilder {
+	builder := &KeyPointMatchDetailsBuilder{}
+	return builder
+}
+
+// detail列表
+//
+// 示例值：
+func (builder *KeyPointMatchDetailsBuilder) KeyPointMatchDetails(keyPointMatchDetails []*KeyPointMatchDetail) *KeyPointMatchDetailsBuilder {
+	builder.keyPointMatchDetails = keyPointMatchDetails
+	builder.keyPointMatchDetailsFlag = true
+	return builder
+}
+
+func (builder *KeyPointMatchDetailsBuilder) Build() *KeyPointMatchDetails {
+	req := &KeyPointMatchDetails{}
+	if builder.keyPointMatchDetailsFlag {
+		req.KeyPointMatchDetails = builder.keyPointMatchDetails
+	}
+	return req
+}
+
 type Material struct {
 	Name           *string `json:"name,omitempty"`            // 素材名称
 	FileToken      *string `json:"file_token,omitempty"`      // 文件上传drive后的token
@@ -1875,6 +2002,84 @@ func (builder *MeetingAbilityBuilder) Build() *MeetingAbility {
 	if builder.usePstnFlag {
 		req.UsePstn = &builder.usePstn
 
+	}
+	return req
+}
+
+type MeetingAnalyzeOutput struct {
+	MeetingId             *string                `json:"meeting_id,omitempty"`              // 会议号
+	CheckStatusCode       *int                   `json:"check_status_code,omitempty"`       // 状态码
+	ObjectiveCheckOutput  *ObjectiveCheckOutput  `json:"objective_check_output,omitempty"`  // 客观分析结果
+	SubjectiveCheckOutput *SubjectiveCheckOutput `json:"subjective_check_output,omitempty"` // 主观分析结果
+}
+
+type MeetingAnalyzeOutputBuilder struct {
+	meetingId                 string // 会议号
+	meetingIdFlag             bool
+	checkStatusCode           int // 状态码
+	checkStatusCodeFlag       bool
+	objectiveCheckOutput      *ObjectiveCheckOutput // 客观分析结果
+	objectiveCheckOutputFlag  bool
+	subjectiveCheckOutput     *SubjectiveCheckOutput // 主观分析结果
+	subjectiveCheckOutputFlag bool
+}
+
+func NewMeetingAnalyzeOutputBuilder() *MeetingAnalyzeOutputBuilder {
+	builder := &MeetingAnalyzeOutputBuilder{}
+	return builder
+}
+
+// 会议号
+//
+// 示例值：1
+func (builder *MeetingAnalyzeOutputBuilder) MeetingId(meetingId string) *MeetingAnalyzeOutputBuilder {
+	builder.meetingId = meetingId
+	builder.meetingIdFlag = true
+	return builder
+}
+
+// 状态码
+//
+// 示例值：0
+func (builder *MeetingAnalyzeOutputBuilder) CheckStatusCode(checkStatusCode int) *MeetingAnalyzeOutputBuilder {
+	builder.checkStatusCode = checkStatusCode
+	builder.checkStatusCodeFlag = true
+	return builder
+}
+
+// 客观分析结果
+//
+// 示例值：
+func (builder *MeetingAnalyzeOutputBuilder) ObjectiveCheckOutput(objectiveCheckOutput *ObjectiveCheckOutput) *MeetingAnalyzeOutputBuilder {
+	builder.objectiveCheckOutput = objectiveCheckOutput
+	builder.objectiveCheckOutputFlag = true
+	return builder
+}
+
+// 主观分析结果
+//
+// 示例值：
+func (builder *MeetingAnalyzeOutputBuilder) SubjectiveCheckOutput(subjectiveCheckOutput *SubjectiveCheckOutput) *MeetingAnalyzeOutputBuilder {
+	builder.subjectiveCheckOutput = subjectiveCheckOutput
+	builder.subjectiveCheckOutputFlag = true
+	return builder
+}
+
+func (builder *MeetingAnalyzeOutputBuilder) Build() *MeetingAnalyzeOutput {
+	req := &MeetingAnalyzeOutput{}
+	if builder.meetingIdFlag {
+		req.MeetingId = &builder.meetingId
+
+	}
+	if builder.checkStatusCodeFlag {
+		req.CheckStatusCode = &builder.checkStatusCode
+
+	}
+	if builder.objectiveCheckOutputFlag {
+		req.ObjectiveCheckOutput = builder.objectiveCheckOutput
+	}
+	if builder.subjectiveCheckOutputFlag {
+		req.SubjectiveCheckOutput = builder.subjectiveCheckOutput
 	}
 	return req
 }
@@ -4730,6 +4935,130 @@ func (builder *MyAiVcRoomScenarioContextBuilder) Build() *MyAiVcRoomScenarioCont
 	}
 	if builder.extraFlag {
 		req.Extra = builder.extra
+	}
+	return req
+}
+
+type ObjectiveCheck struct {
+	ObjectiveCheckTypes  []int                  `json:"objective_check_types,omitempty"`  // 客观分析类型
+	ObjectiveCheckParams []*ObjectiveCheckParam `json:"objective_check_params,omitempty"` // 客观分析参数
+}
+
+type ObjectiveCheckBuilder struct {
+	objectiveCheckTypes      []int // 客观分析类型
+	objectiveCheckTypesFlag  bool
+	objectiveCheckParams     []*ObjectiveCheckParam // 客观分析参数
+	objectiveCheckParamsFlag bool
+}
+
+func NewObjectiveCheckBuilder() *ObjectiveCheckBuilder {
+	builder := &ObjectiveCheckBuilder{}
+	return builder
+}
+
+// 客观分析类型
+//
+// 示例值：
+func (builder *ObjectiveCheckBuilder) ObjectiveCheckTypes(objectiveCheckTypes []int) *ObjectiveCheckBuilder {
+	builder.objectiveCheckTypes = objectiveCheckTypes
+	builder.objectiveCheckTypesFlag = true
+	return builder
+}
+
+// 客观分析参数
+//
+// 示例值：
+func (builder *ObjectiveCheckBuilder) ObjectiveCheckParams(objectiveCheckParams []*ObjectiveCheckParam) *ObjectiveCheckBuilder {
+	builder.objectiveCheckParams = objectiveCheckParams
+	builder.objectiveCheckParamsFlag = true
+	return builder
+}
+
+func (builder *ObjectiveCheckBuilder) Build() *ObjectiveCheck {
+	req := &ObjectiveCheck{}
+	if builder.objectiveCheckTypesFlag {
+		req.ObjectiveCheckTypes = builder.objectiveCheckTypes
+	}
+	if builder.objectiveCheckParamsFlag {
+		req.ObjectiveCheckParams = builder.objectiveCheckParams
+	}
+	return req
+}
+
+type ObjectiveCheckOutput struct {
+	FailedLists []int `json:"failed_lists,omitempty"` // 失败列表
+	StatusCode  *int  `json:"status_code,omitempty"`  // 状态码
+}
+
+type ObjectiveCheckOutputBuilder struct {
+	failedLists     []int // 失败列表
+	failedListsFlag bool
+	statusCode      int // 状态码
+	statusCodeFlag  bool
+}
+
+func NewObjectiveCheckOutputBuilder() *ObjectiveCheckOutputBuilder {
+	builder := &ObjectiveCheckOutputBuilder{}
+	return builder
+}
+
+// 失败列表
+//
+// 示例值：
+func (builder *ObjectiveCheckOutputBuilder) FailedLists(failedLists []int) *ObjectiveCheckOutputBuilder {
+	builder.failedLists = failedLists
+	builder.failedListsFlag = true
+	return builder
+}
+
+// 状态码
+//
+// 示例值：0
+func (builder *ObjectiveCheckOutputBuilder) StatusCode(statusCode int) *ObjectiveCheckOutputBuilder {
+	builder.statusCode = statusCode
+	builder.statusCodeFlag = true
+	return builder
+}
+
+func (builder *ObjectiveCheckOutputBuilder) Build() *ObjectiveCheckOutput {
+	req := &ObjectiveCheckOutput{}
+	if builder.failedListsFlag {
+		req.FailedLists = builder.failedLists
+	}
+	if builder.statusCodeFlag {
+		req.StatusCode = &builder.statusCode
+
+	}
+	return req
+}
+
+type ObjectiveCheckParam struct {
+	Params []int `json:"params,omitempty"` // 主观分析参数
+}
+
+type ObjectiveCheckParamBuilder struct {
+	params     []int // 主观分析参数
+	paramsFlag bool
+}
+
+func NewObjectiveCheckParamBuilder() *ObjectiveCheckParamBuilder {
+	builder := &ObjectiveCheckParamBuilder{}
+	return builder
+}
+
+// 主观分析参数
+//
+// 示例值：
+func (builder *ObjectiveCheckParamBuilder) Params(params []int) *ObjectiveCheckParamBuilder {
+	builder.params = params
+	builder.paramsFlag = true
+	return builder
+}
+
+func (builder *ObjectiveCheckParamBuilder) Build() *ObjectiveCheckParam {
+	req := &ObjectiveCheckParam{}
+	if builder.paramsFlag {
+		req.Params = builder.params
 	}
 	return req
 }
@@ -8680,6 +9009,129 @@ func (builder *ScopeConfigBuilder) Build() *ScopeConfig {
 	}
 	if builder.scopeConfigFlag {
 		req.ScopeConfig = builder.scopeConfig
+	}
+	return req
+}
+
+type SubjectiveCheck struct {
+	KeyPoints        []*KeyPoint `json:"key_points,omitempty"`         // 关键点
+	UserInputPrompts []string    `json:"user_input_prompts,omitempty"` // 用户输入prompt
+}
+
+type SubjectiveCheckBuilder struct {
+	keyPoints            []*KeyPoint // 关键点
+	keyPointsFlag        bool
+	userInputPrompts     []string // 用户输入prompt
+	userInputPromptsFlag bool
+}
+
+func NewSubjectiveCheckBuilder() *SubjectiveCheckBuilder {
+	builder := &SubjectiveCheckBuilder{}
+	return builder
+}
+
+// 关键点
+//
+// 示例值：
+func (builder *SubjectiveCheckBuilder) KeyPoints(keyPoints []*KeyPoint) *SubjectiveCheckBuilder {
+	builder.keyPoints = keyPoints
+	builder.keyPointsFlag = true
+	return builder
+}
+
+// 用户输入prompt
+//
+// 示例值：
+func (builder *SubjectiveCheckBuilder) UserInputPrompts(userInputPrompts []string) *SubjectiveCheckBuilder {
+	builder.userInputPrompts = userInputPrompts
+	builder.userInputPromptsFlag = true
+	return builder
+}
+
+func (builder *SubjectiveCheckBuilder) Build() *SubjectiveCheck {
+	req := &SubjectiveCheck{}
+	if builder.keyPointsFlag {
+		req.KeyPoints = builder.keyPoints
+	}
+	if builder.userInputPromptsFlag {
+		req.UserInputPrompts = builder.userInputPrompts
+	}
+	return req
+}
+
+type SubjectiveCheckOutput struct {
+	Keypoints            []string                `json:"keypoints,omitempty"`               // 关键点
+	KeyPointMatchDetails []*KeyPointMatchDetails `json:"key_point_match_details,omitempty"` // 关键点详情
+	UserPromptOutputs    []string                `json:"user_prompt_outputs,omitempty"`     // 用户prompt输出
+	StatusCode           *int                    `json:"status_code,omitempty"`             // 状态码
+}
+
+type SubjectiveCheckOutputBuilder struct {
+	keypoints                []string // 关键点
+	keypointsFlag            bool
+	keyPointMatchDetails     []*KeyPointMatchDetails // 关键点详情
+	keyPointMatchDetailsFlag bool
+	userPromptOutputs        []string // 用户prompt输出
+	userPromptOutputsFlag    bool
+	statusCode               int // 状态码
+	statusCodeFlag           bool
+}
+
+func NewSubjectiveCheckOutputBuilder() *SubjectiveCheckOutputBuilder {
+	builder := &SubjectiveCheckOutputBuilder{}
+	return builder
+}
+
+// 关键点
+//
+// 示例值：
+func (builder *SubjectiveCheckOutputBuilder) Keypoints(keypoints []string) *SubjectiveCheckOutputBuilder {
+	builder.keypoints = keypoints
+	builder.keypointsFlag = true
+	return builder
+}
+
+// 关键点详情
+//
+// 示例值：
+func (builder *SubjectiveCheckOutputBuilder) KeyPointMatchDetails(keyPointMatchDetails []*KeyPointMatchDetails) *SubjectiveCheckOutputBuilder {
+	builder.keyPointMatchDetails = keyPointMatchDetails
+	builder.keyPointMatchDetailsFlag = true
+	return builder
+}
+
+// 用户prompt输出
+//
+// 示例值：
+func (builder *SubjectiveCheckOutputBuilder) UserPromptOutputs(userPromptOutputs []string) *SubjectiveCheckOutputBuilder {
+	builder.userPromptOutputs = userPromptOutputs
+	builder.userPromptOutputsFlag = true
+	return builder
+}
+
+// 状态码
+//
+// 示例值：0
+func (builder *SubjectiveCheckOutputBuilder) StatusCode(statusCode int) *SubjectiveCheckOutputBuilder {
+	builder.statusCode = statusCode
+	builder.statusCodeFlag = true
+	return builder
+}
+
+func (builder *SubjectiveCheckOutputBuilder) Build() *SubjectiveCheckOutput {
+	req := &SubjectiveCheckOutput{}
+	if builder.keypointsFlag {
+		req.Keypoints = builder.keypoints
+	}
+	if builder.keyPointMatchDetailsFlag {
+		req.KeyPointMatchDetails = builder.keyPointMatchDetails
+	}
+	if builder.userPromptOutputsFlag {
+		req.UserPromptOutputs = builder.userPromptOutputs
+	}
+	if builder.statusCodeFlag {
+		req.StatusCode = &builder.statusCode
+
 	}
 	return req
 }

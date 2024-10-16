@@ -220,6 +220,7 @@ type MaskSession struct {
 	CreateTime   *string `json:"create_time,omitempty"`   // 创建时间
 	TerminalType *int    `json:"terminal_type,omitempty"` // 客户端类型
 	UserId       *string `json:"user_id,omitempty"`       // 用户ID
+	Sid          *string `json:"sid,omitempty"`           // 需要登出的 session 标识符
 }
 
 type MaskSessionBuilder struct {
@@ -229,6 +230,8 @@ type MaskSessionBuilder struct {
 	terminalTypeFlag bool
 	userId           string // 用户ID
 	userIdFlag       bool
+	sid              string // 需要登出的 session 标识符
+	sidFlag          bool
 }
 
 func NewMaskSessionBuilder() *MaskSessionBuilder {
@@ -238,7 +241,7 @@ func NewMaskSessionBuilder() *MaskSessionBuilder {
 
 // 创建时间
 //
-// 示例值：
+// 示例值：1724233829
 func (builder *MaskSessionBuilder) CreateTime(createTime string) *MaskSessionBuilder {
 	builder.createTime = createTime
 	builder.createTimeFlag = true
@@ -247,7 +250,7 @@ func (builder *MaskSessionBuilder) CreateTime(createTime string) *MaskSessionBui
 
 // 客户端类型
 //
-// 示例值：
+// 示例值：2
 func (builder *MaskSessionBuilder) TerminalType(terminalType int) *MaskSessionBuilder {
 	builder.terminalType = terminalType
 	builder.terminalTypeFlag = true
@@ -256,10 +259,19 @@ func (builder *MaskSessionBuilder) TerminalType(terminalType int) *MaskSessionBu
 
 // 用户ID
 //
-// 示例值：
+// 示例值：ou_7dab8a3d3cdcc9da365777c7ad535d62
 func (builder *MaskSessionBuilder) UserId(userId string) *MaskSessionBuilder {
 	builder.userId = userId
 	builder.userIdFlag = true
+	return builder
+}
+
+// 需要登出的 session 标识符
+//
+// 示例值：AAAAAAAAAANll6nQoIAAFA==
+func (builder *MaskSessionBuilder) Sid(sid string) *MaskSessionBuilder {
+	builder.sid = sid
+	builder.sidFlag = true
 	return builder
 }
 
@@ -275,6 +287,10 @@ func (builder *MaskSessionBuilder) Build() *MaskSession {
 	}
 	if builder.userIdFlag {
 		req.UserId = &builder.userId
+
+	}
+	if builder.sidFlag {
+		req.Sid = &builder.sid
 
 	}
 	return req
@@ -348,6 +364,8 @@ func NewQuerySessionReqBuilder() *QuerySessionReqBuilder {
 	return builder
 }
 
+// 用户id类型
+//
 // 示例值：open_id
 func (builder *QuerySessionReqBuilder) UserIdType(userIdType string) *QuerySessionReqBuilder {
 	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))

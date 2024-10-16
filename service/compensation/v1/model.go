@@ -29,6 +29,12 @@ const (
 	UserIDTypePeopleCorehrId = "people_corehr_id" // 以people_corehr_id来识别用户
 )
 
+const (
+	ItemTypeSalary           = "salary"            // 基本薪资
+	ItemTypeBonus            = "bonus"             // 一次性支付
+	ItemTypeRecurringPayment = "recurring_payment" // 经常性支付
+)
+
 type AdjustmentLogic struct {
 	Fixed   *string  `json:"fixed,omitempty"`   // 固定值
 	Formula *Formula `json:"formula,omitempty"` // 公式配置
@@ -442,17 +448,17 @@ func (builder *ArchiveIndicatorBuilder) Build() *ArchiveIndicator {
 }
 
 type ArchiveItem struct {
-	ItemId            *string `json:"item_id,omitempty"`             // 薪资项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
-	ItemResult        *string `json:"item_result,omitempty"`         // 档案关联薪资项数值
-	ItemResultRegular *string `json:"item_result_regular,omitempty"` // 档案关联薪资项转正后数值
+	ItemId            *string `json:"item_id,omitempty"`             // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+	ItemResult        *string `json:"item_result,omitempty"`         // 档案关联薪酬项数值
+	ItemResultRegular *string `json:"item_result_regular,omitempty"` // 档案关联薪酬项转正后数值
 }
 
 type ArchiveItemBuilder struct {
-	itemId                string // 薪资项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+	itemId                string // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
 	itemIdFlag            bool
-	itemResult            string // 档案关联薪资项数值
+	itemResult            string // 档案关联薪酬项数值
 	itemResultFlag        bool
-	itemResultRegular     string // 档案关联薪资项转正后数值
+	itemResultRegular     string // 档案关联薪酬项转正后数值
 	itemResultRegularFlag bool
 }
 
@@ -461,7 +467,7 @@ func NewArchiveItemBuilder() *ArchiveItemBuilder {
 	return builder
 }
 
-// 薪资项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+// 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
 //
 // 示例值：213423144
 func (builder *ArchiveItemBuilder) ItemId(itemId string) *ArchiveItemBuilder {
@@ -470,7 +476,7 @@ func (builder *ArchiveItemBuilder) ItemId(itemId string) *ArchiveItemBuilder {
 	return builder
 }
 
-// 档案关联薪资项数值
+// 档案关联薪酬项数值
 //
 // 示例值：15000
 func (builder *ArchiveItemBuilder) ItemResult(itemResult string) *ArchiveItemBuilder {
@@ -479,7 +485,7 @@ func (builder *ArchiveItemBuilder) ItemResult(itemResult string) *ArchiveItemBui
 	return builder
 }
 
-// 档案关联薪资项转正后数值
+// 档案关联薪酬项转正后数值
 //
 // 示例值：18000
 func (builder *ArchiveItemBuilder) ItemResultRegular(itemResultRegular string) *ArchiveItemBuilder {
@@ -946,28 +952,29 @@ func (builder *IndicatorBuilder) Build() *Indicator {
 }
 
 type Item struct {
-	Id                  *string        `json:"id,omitempty"`                     // 薪资项ID
-	Name                *string        `json:"name,omitempty"`                   // 薪资项名称
-	Description         *string        `json:"description,omitempty"`            // 薪资项描述
-	CategoryId          *string        `json:"category_id,omitempty"`            // 薪资项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
-	ValueType           *string        `json:"value_type,omitempty"`             // 薪资项数值类型
+	Id                  *string        `json:"id,omitempty"`                     // 薪酬项ID
+	Name                *string        `json:"name,omitempty"`                   // 薪酬项名称
+	Description         *string        `json:"description,omitempty"`            // 薪酬项描述
+	CategoryId          *string        `json:"category_id,omitempty"`            // 薪酬项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
+	ValueType           *string        `json:"value_type,omitempty"`             // 薪酬项数值类型
 	PayOffFrequencyType *string        `json:"pay_off_frequency_type,omitempty"` // 发放频率
 	DecimalPlaces       *int           `json:"decimal_places,omitempty"`         // 小数位数
 	ActiveStatus        *int           `json:"active_status,omitempty"`          // 启用状态
 	I18nNames           []*I18nContent `json:"i18n_names,omitempty"`             // 多语言名称
 	I18nDescriptions    []*I18nContent `json:"i18n_descriptions,omitempty"`      // 多语言描述
+	ItemType            *string        `json:"item_type,omitempty"`              // 薪酬项类型
 }
 
 type ItemBuilder struct {
-	id                      string // 薪资项ID
+	id                      string // 薪酬项ID
 	idFlag                  bool
-	name                    string // 薪资项名称
+	name                    string // 薪酬项名称
 	nameFlag                bool
-	description             string // 薪资项描述
+	description             string // 薪酬项描述
 	descriptionFlag         bool
-	categoryId              string // 薪资项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
+	categoryId              string // 薪酬项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
 	categoryIdFlag          bool
-	valueType               string // 薪资项数值类型
+	valueType               string // 薪酬项数值类型
 	valueTypeFlag           bool
 	payOffFrequencyType     string // 发放频率
 	payOffFrequencyTypeFlag bool
@@ -979,6 +986,8 @@ type ItemBuilder struct {
 	i18nNamesFlag           bool
 	i18nDescriptions        []*I18nContent // 多语言描述
 	i18nDescriptionsFlag    bool
+	itemType                string // 薪酬项类型
+	itemTypeFlag            bool
 }
 
 func NewItemBuilder() *ItemBuilder {
@@ -986,7 +995,7 @@ func NewItemBuilder() *ItemBuilder {
 	return builder
 }
 
-// 薪资项ID
+// 薪酬项ID
 //
 // 示例值：7196951947268589113
 func (builder *ItemBuilder) Id(id string) *ItemBuilder {
@@ -995,7 +1004,7 @@ func (builder *ItemBuilder) Id(id string) *ItemBuilder {
 	return builder
 }
 
-// 薪资项名称
+// 薪酬项名称
 //
 // 示例值：基本月薪
 func (builder *ItemBuilder) Name(name string) *ItemBuilder {
@@ -1004,7 +1013,7 @@ func (builder *ItemBuilder) Name(name string) *ItemBuilder {
 	return builder
 }
 
-// 薪资项描述
+// 薪酬项描述
 //
 // 示例值：每月份的薪酬
 func (builder *ItemBuilder) Description(description string) *ItemBuilder {
@@ -1013,7 +1022,7 @@ func (builder *ItemBuilder) Description(description string) *ItemBuilder {
 	return builder
 }
 
-// 薪资项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
+// 薪酬项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
 //
 // 示例值：7196951947268589223
 func (builder *ItemBuilder) CategoryId(categoryId string) *ItemBuilder {
@@ -1022,7 +1031,7 @@ func (builder *ItemBuilder) CategoryId(categoryId string) *ItemBuilder {
 	return builder
 }
 
-// 薪资项数值类型
+// 薪酬项数值类型
 //
 // 示例值：money
 func (builder *ItemBuilder) ValueType(valueType string) *ItemBuilder {
@@ -1076,6 +1085,15 @@ func (builder *ItemBuilder) I18nDescriptions(i18nDescriptions []*I18nContent) *I
 	return builder
 }
 
+// 薪酬项类型
+//
+// 示例值：bonus
+func (builder *ItemBuilder) ItemType(itemType string) *ItemBuilder {
+	builder.itemType = itemType
+	builder.itemTypeFlag = true
+	return builder
+}
+
 func (builder *ItemBuilder) Build() *Item {
 	req := &Item{}
 	if builder.idFlag {
@@ -1116,21 +1134,25 @@ func (builder *ItemBuilder) Build() *Item {
 	if builder.i18nDescriptionsFlag {
 		req.I18nDescriptions = builder.i18nDescriptions
 	}
+	if builder.itemTypeFlag {
+		req.ItemType = &builder.itemType
+
+	}
 	return req
 }
 
 type ItemCategory struct {
-	Id        *string        `json:"id,omitempty"`         // 薪资项分类ID
-	Name      *string        `json:"name,omitempty"`       // 薪资项分类名称
-	I18nNames []*I18nContent `json:"i18n_names,omitempty"` // 薪资项多语言分类
+	Id        *string        `json:"id,omitempty"`         // 薪酬项分类ID
+	Name      *string        `json:"name,omitempty"`       // 薪酬项分类名称
+	I18nNames []*I18nContent `json:"i18n_names,omitempty"` // 薪酬项多语言分类
 }
 
 type ItemCategoryBuilder struct {
-	id            string // 薪资项分类ID
+	id            string // 薪酬项分类ID
 	idFlag        bool
-	name          string // 薪资项分类名称
+	name          string // 薪酬项分类名称
 	nameFlag      bool
-	i18nNames     []*I18nContent // 薪资项多语言分类
+	i18nNames     []*I18nContent // 薪酬项多语言分类
 	i18nNamesFlag bool
 }
 
@@ -1139,7 +1161,7 @@ func NewItemCategoryBuilder() *ItemCategoryBuilder {
 	return builder
 }
 
-// 薪资项分类ID
+// 薪酬项分类ID
 //
 // 示例值：4532312334
 func (builder *ItemCategoryBuilder) Id(id string) *ItemCategoryBuilder {
@@ -1148,7 +1170,7 @@ func (builder *ItemCategoryBuilder) Id(id string) *ItemCategoryBuilder {
 	return builder
 }
 
-// 薪资项分类名称
+// 薪酬项分类名称
 //
 // 示例值：基本薪资类
 func (builder *ItemCategoryBuilder) Name(name string) *ItemCategoryBuilder {
@@ -1157,7 +1179,7 @@ func (builder *ItemCategoryBuilder) Name(name string) *ItemCategoryBuilder {
 	return builder
 }
 
-// 薪资项多语言分类
+// 薪酬项多语言分类
 //
 // 示例值：
 func (builder *ItemCategoryBuilder) I18nNames(i18nNames []*I18nContent) *ItemCategoryBuilder {
@@ -1178,6 +1200,994 @@ func (builder *ItemCategoryBuilder) Build() *ItemCategory {
 	}
 	if builder.i18nNamesFlag {
 		req.I18nNames = builder.i18nNames
+	}
+	return req
+}
+
+type LumpSumPayment struct {
+	Id                 *string                 `json:"id,omitempty"`                   // 一次性支付记录id
+	UniqueId           *string                 `json:"unique_id,omitempty"`            // 外部幂等id，由上游业务决定
+	UserId             *string                 `json:"user_id,omitempty"`              // 员工id，具体类型由入参中的 user_id_type 指定
+	TotalAmount        *string                 `json:"total_amount,omitempty"`         // 总金额，字符串表达的数字
+	BindingPeriod      *int                    `json:"binding_period,omitempty"`       // 绑定期，单位为月
+	CurrencyId         *string                 `json:"currency_id,omitempty"`          // 币种id
+	IssuanceFrequency  *int                    `json:"issuance_frequency,omitempty"`   // 发放次数
+	GrantDate          *string                 `json:"grant_date,omitempty"`           // 授予日期
+	ItemId             *string                 `json:"item_id,omitempty"`              // 薪酬项id
+	Remark             *string                 `json:"remark,omitempty"`               // 备注
+	IssuanceDetailText *I18n                   `json:"issuance_detail_text,omitempty"` // 发放规则描述文本
+	ApplySource        *int                    `json:"apply_source,omitempty"`         // 申请来源
+	CreateTime         *string                 `json:"create_time,omitempty"`          // 创建时间
+	ModifyTime         *string                 `json:"modify_time,omitempty"`          // 更新时间
+	Details            []*LumpSumPaymentDetail `json:"details,omitempty"`              // 发放明细列表
+}
+
+type LumpSumPaymentBuilder struct {
+	id                     string // 一次性支付记录id
+	idFlag                 bool
+	uniqueId               string // 外部幂等id，由上游业务决定
+	uniqueIdFlag           bool
+	userId                 string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag             bool
+	totalAmount            string // 总金额，字符串表达的数字
+	totalAmountFlag        bool
+	bindingPeriod          int // 绑定期，单位为月
+	bindingPeriodFlag      bool
+	currencyId             string // 币种id
+	currencyIdFlag         bool
+	issuanceFrequency      int // 发放次数
+	issuanceFrequencyFlag  bool
+	grantDate              string // 授予日期
+	grantDateFlag          bool
+	itemId                 string // 薪酬项id
+	itemIdFlag             bool
+	remark                 string // 备注
+	remarkFlag             bool
+	issuanceDetailText     *I18n // 发放规则描述文本
+	issuanceDetailTextFlag bool
+	applySource            int // 申请来源
+	applySourceFlag        bool
+	createTime             string // 创建时间
+	createTimeFlag         bool
+	modifyTime             string // 更新时间
+	modifyTimeFlag         bool
+	details                []*LumpSumPaymentDetail // 发放明细列表
+	detailsFlag            bool
+}
+
+func NewLumpSumPaymentBuilder() *LumpSumPaymentBuilder {
+	builder := &LumpSumPaymentBuilder{}
+	return builder
+}
+
+// 一次性支付记录id
+//
+// 示例值：7397033607132351532
+func (builder *LumpSumPaymentBuilder) Id(id string) *LumpSumPaymentBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 外部幂等id，由上游业务决定
+//
+// 示例值：7402510801304718380_7309316347007764012_7402523725868058156_1726070400000_10000
+func (builder *LumpSumPaymentBuilder) UniqueId(uniqueId string) *LumpSumPaymentBuilder {
+	builder.uniqueId = uniqueId
+	builder.uniqueIdFlag = true
+	return builder
+}
+
+// 员工id，具体类型由入参中的 user_id_type 指定
+//
+// 示例值：7337149697626801708
+func (builder *LumpSumPaymentBuilder) UserId(userId string) *LumpSumPaymentBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 总金额，字符串表达的数字
+//
+// 示例值：2000.00
+func (builder *LumpSumPaymentBuilder) TotalAmount(totalAmount string) *LumpSumPaymentBuilder {
+	builder.totalAmount = totalAmount
+	builder.totalAmountFlag = true
+	return builder
+}
+
+// 绑定期，单位为月
+//
+// 示例值：2
+func (builder *LumpSumPaymentBuilder) BindingPeriod(bindingPeriod int) *LumpSumPaymentBuilder {
+	builder.bindingPeriod = bindingPeriod
+	builder.bindingPeriodFlag = true
+	return builder
+}
+
+// 币种id
+//
+// 示例值：6863329932261459464
+func (builder *LumpSumPaymentBuilder) CurrencyId(currencyId string) *LumpSumPaymentBuilder {
+	builder.currencyId = currencyId
+	builder.currencyIdFlag = true
+	return builder
+}
+
+// 发放次数
+//
+// 示例值：3
+func (builder *LumpSumPaymentBuilder) IssuanceFrequency(issuanceFrequency int) *LumpSumPaymentBuilder {
+	builder.issuanceFrequency = issuanceFrequency
+	builder.issuanceFrequencyFlag = true
+	return builder
+}
+
+// 授予日期
+//
+// 示例值：2024-08-01
+func (builder *LumpSumPaymentBuilder) GrantDate(grantDate string) *LumpSumPaymentBuilder {
+	builder.grantDate = grantDate
+	builder.grantDateFlag = true
+	return builder
+}
+
+// 薪酬项id
+//
+// 示例值：7411039006180312620
+func (builder *LumpSumPaymentBuilder) ItemId(itemId string) *LumpSumPaymentBuilder {
+	builder.itemId = itemId
+	builder.itemIdFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：备注
+func (builder *LumpSumPaymentBuilder) Remark(remark string) *LumpSumPaymentBuilder {
+	builder.remark = remark
+	builder.remarkFlag = true
+	return builder
+}
+
+// 发放规则描述文本
+//
+// 示例值：
+func (builder *LumpSumPaymentBuilder) IssuanceDetailText(issuanceDetailText *I18n) *LumpSumPaymentBuilder {
+	builder.issuanceDetailText = issuanceDetailText
+	builder.issuanceDetailTextFlag = true
+	return builder
+}
+
+// 申请来源
+//
+// 示例值：1
+func (builder *LumpSumPaymentBuilder) ApplySource(applySource int) *LumpSumPaymentBuilder {
+	builder.applySource = applySource
+	builder.applySourceFlag = true
+	return builder
+}
+
+// 创建时间
+//
+// 示例值：2024-08-01 12:34:56
+func (builder *LumpSumPaymentBuilder) CreateTime(createTime string) *LumpSumPaymentBuilder {
+	builder.createTime = createTime
+	builder.createTimeFlag = true
+	return builder
+}
+
+// 更新时间
+//
+// 示例值：2024-08-01 12:34:56
+func (builder *LumpSumPaymentBuilder) ModifyTime(modifyTime string) *LumpSumPaymentBuilder {
+	builder.modifyTime = modifyTime
+	builder.modifyTimeFlag = true
+	return builder
+}
+
+// 发放明细列表
+//
+// 示例值：
+func (builder *LumpSumPaymentBuilder) Details(details []*LumpSumPaymentDetail) *LumpSumPaymentBuilder {
+	builder.details = details
+	builder.detailsFlag = true
+	return builder
+}
+
+func (builder *LumpSumPaymentBuilder) Build() *LumpSumPayment {
+	req := &LumpSumPayment{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.uniqueIdFlag {
+		req.UniqueId = &builder.uniqueId
+
+	}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.totalAmountFlag {
+		req.TotalAmount = &builder.totalAmount
+
+	}
+	if builder.bindingPeriodFlag {
+		req.BindingPeriod = &builder.bindingPeriod
+
+	}
+	if builder.currencyIdFlag {
+		req.CurrencyId = &builder.currencyId
+
+	}
+	if builder.issuanceFrequencyFlag {
+		req.IssuanceFrequency = &builder.issuanceFrequency
+
+	}
+	if builder.grantDateFlag {
+		req.GrantDate = &builder.grantDate
+
+	}
+	if builder.itemIdFlag {
+		req.ItemId = &builder.itemId
+
+	}
+	if builder.remarkFlag {
+		req.Remark = &builder.remark
+
+	}
+	if builder.issuanceDetailTextFlag {
+		req.IssuanceDetailText = builder.issuanceDetailText
+	}
+	if builder.applySourceFlag {
+		req.ApplySource = &builder.applySource
+
+	}
+	if builder.createTimeFlag {
+		req.CreateTime = &builder.createTime
+
+	}
+	if builder.modifyTimeFlag {
+		req.ModifyTime = &builder.modifyTime
+
+	}
+	if builder.detailsFlag {
+		req.Details = builder.details
+	}
+	return req
+}
+
+type LumpSumPaymentDetail struct {
+	Id             *string `json:"id,omitempty"`              // 一次性支付记录明细id
+	RecordId       *string `json:"record_id,omitempty"`       // 一次性支付记录id
+	UserId         *string `json:"user_id,omitempty"`         // 员工id，具体类型由入参中的 user_id_type 指定
+	IssuanceAmount *string `json:"issuance_amount,omitempty"` // 一次性支付明细发放金额，可转数字的字符串
+	IssuanceStatus *string `json:"issuance_status,omitempty"` // 发放状态
+	IssuanceWay    *string `json:"issuance_way,omitempty"`    // 发放方式
+	IssuanceTime   *string `json:"issuance_time,omitempty"`   // 发放时间
+	CurrencyId     *string `json:"currency_id,omitempty"`     // 币种id
+	CreateTime     *string `json:"create_time,omitempty"`     // 创建时间
+	ModifyTime     *string `json:"modify_time,omitempty"`     // 更新时间
+}
+
+type LumpSumPaymentDetailBuilder struct {
+	id                 string // 一次性支付记录明细id
+	idFlag             bool
+	recordId           string // 一次性支付记录id
+	recordIdFlag       bool
+	userId             string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag         bool
+	issuanceAmount     string // 一次性支付明细发放金额，可转数字的字符串
+	issuanceAmountFlag bool
+	issuanceStatus     string // 发放状态
+	issuanceStatusFlag bool
+	issuanceWay        string // 发放方式
+	issuanceWayFlag    bool
+	issuanceTime       string // 发放时间
+	issuanceTimeFlag   bool
+	currencyId         string // 币种id
+	currencyIdFlag     bool
+	createTime         string // 创建时间
+	createTimeFlag     bool
+	modifyTime         string // 更新时间
+	modifyTimeFlag     bool
+}
+
+func NewLumpSumPaymentDetailBuilder() *LumpSumPaymentDetailBuilder {
+	builder := &LumpSumPaymentDetailBuilder{}
+	return builder
+}
+
+// 一次性支付记录明细id
+//
+// 示例值：7395133551102200876
+func (builder *LumpSumPaymentDetailBuilder) Id(id string) *LumpSumPaymentDetailBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 一次性支付记录id
+//
+// 示例值：7395133551102168108
+func (builder *LumpSumPaymentDetailBuilder) RecordId(recordId string) *LumpSumPaymentDetailBuilder {
+	builder.recordId = recordId
+	builder.recordIdFlag = true
+	return builder
+}
+
+// 员工id，具体类型由入参中的 user_id_type 指定
+//
+// 示例值：7337149697626801708
+func (builder *LumpSumPaymentDetailBuilder) UserId(userId string) *LumpSumPaymentDetailBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 一次性支付明细发放金额，可转数字的字符串
+//
+// 示例值：2000.00
+func (builder *LumpSumPaymentDetailBuilder) IssuanceAmount(issuanceAmount string) *LumpSumPaymentDetailBuilder {
+	builder.issuanceAmount = issuanceAmount
+	builder.issuanceAmountFlag = true
+	return builder
+}
+
+// 发放状态
+//
+// 示例值：to_be_issued
+func (builder *LumpSumPaymentDetailBuilder) IssuanceStatus(issuanceStatus string) *LumpSumPaymentDetailBuilder {
+	builder.issuanceStatus = issuanceStatus
+	builder.issuanceStatusFlag = true
+	return builder
+}
+
+// 发放方式
+//
+// 示例值：with_salary
+func (builder *LumpSumPaymentDetailBuilder) IssuanceWay(issuanceWay string) *LumpSumPaymentDetailBuilder {
+	builder.issuanceWay = issuanceWay
+	builder.issuanceWayFlag = true
+	return builder
+}
+
+// 发放时间
+//
+// 示例值：2024-08-01
+func (builder *LumpSumPaymentDetailBuilder) IssuanceTime(issuanceTime string) *LumpSumPaymentDetailBuilder {
+	builder.issuanceTime = issuanceTime
+	builder.issuanceTimeFlag = true
+	return builder
+}
+
+// 币种id
+//
+// 示例值：6863329932261459464
+func (builder *LumpSumPaymentDetailBuilder) CurrencyId(currencyId string) *LumpSumPaymentDetailBuilder {
+	builder.currencyId = currencyId
+	builder.currencyIdFlag = true
+	return builder
+}
+
+// 创建时间
+//
+// 示例值：2024-08-01 12:34:56
+func (builder *LumpSumPaymentDetailBuilder) CreateTime(createTime string) *LumpSumPaymentDetailBuilder {
+	builder.createTime = createTime
+	builder.createTimeFlag = true
+	return builder
+}
+
+// 更新时间
+//
+// 示例值：2024-08-01 12:34:56
+func (builder *LumpSumPaymentDetailBuilder) ModifyTime(modifyTime string) *LumpSumPaymentDetailBuilder {
+	builder.modifyTime = modifyTime
+	builder.modifyTimeFlag = true
+	return builder
+}
+
+func (builder *LumpSumPaymentDetailBuilder) Build() *LumpSumPaymentDetail {
+	req := &LumpSumPaymentDetail{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.recordIdFlag {
+		req.RecordId = &builder.recordId
+
+	}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.issuanceAmountFlag {
+		req.IssuanceAmount = &builder.issuanceAmount
+
+	}
+	if builder.issuanceStatusFlag {
+		req.IssuanceStatus = &builder.issuanceStatus
+
+	}
+	if builder.issuanceWayFlag {
+		req.IssuanceWay = &builder.issuanceWay
+
+	}
+	if builder.issuanceTimeFlag {
+		req.IssuanceTime = &builder.issuanceTime
+
+	}
+	if builder.currencyIdFlag {
+		req.CurrencyId = &builder.currencyId
+
+	}
+	if builder.createTimeFlag {
+		req.CreateTime = &builder.createTime
+
+	}
+	if builder.modifyTimeFlag {
+		req.ModifyTime = &builder.modifyTime
+
+	}
+	return req
+}
+
+type LumpSumPaymentDetailForCreate struct {
+	IssuanceAmount *string `json:"issuance_amount,omitempty"` // 一次性支付明细发放金额，可转数字的字符串
+	IssuanceStatus *string `json:"issuance_status,omitempty"` // 发放状态
+	IssuanceWay    *string `json:"issuance_way,omitempty"`    // 发放方式
+	IssuanceTime   *string `json:"issuance_time,omitempty"`   // 发放时间
+}
+
+type LumpSumPaymentDetailForCreateBuilder struct {
+	issuanceAmount     string // 一次性支付明细发放金额，可转数字的字符串
+	issuanceAmountFlag bool
+	issuanceStatus     string // 发放状态
+	issuanceStatusFlag bool
+	issuanceWay        string // 发放方式
+	issuanceWayFlag    bool
+	issuanceTime       string // 发放时间
+	issuanceTimeFlag   bool
+}
+
+func NewLumpSumPaymentDetailForCreateBuilder() *LumpSumPaymentDetailForCreateBuilder {
+	builder := &LumpSumPaymentDetailForCreateBuilder{}
+	return builder
+}
+
+// 一次性支付明细发放金额，可转数字的字符串
+//
+// 示例值：2000.00
+func (builder *LumpSumPaymentDetailForCreateBuilder) IssuanceAmount(issuanceAmount string) *LumpSumPaymentDetailForCreateBuilder {
+	builder.issuanceAmount = issuanceAmount
+	builder.issuanceAmountFlag = true
+	return builder
+}
+
+// 发放状态
+//
+// 示例值：to_be_issued
+func (builder *LumpSumPaymentDetailForCreateBuilder) IssuanceStatus(issuanceStatus string) *LumpSumPaymentDetailForCreateBuilder {
+	builder.issuanceStatus = issuanceStatus
+	builder.issuanceStatusFlag = true
+	return builder
+}
+
+// 发放方式
+//
+// 示例值：with_salary
+func (builder *LumpSumPaymentDetailForCreateBuilder) IssuanceWay(issuanceWay string) *LumpSumPaymentDetailForCreateBuilder {
+	builder.issuanceWay = issuanceWay
+	builder.issuanceWayFlag = true
+	return builder
+}
+
+// 发放时间
+//
+// 示例值：2024-08-01
+func (builder *LumpSumPaymentDetailForCreateBuilder) IssuanceTime(issuanceTime string) *LumpSumPaymentDetailForCreateBuilder {
+	builder.issuanceTime = issuanceTime
+	builder.issuanceTimeFlag = true
+	return builder
+}
+
+func (builder *LumpSumPaymentDetailForCreateBuilder) Build() *LumpSumPaymentDetailForCreate {
+	req := &LumpSumPaymentDetailForCreate{}
+	if builder.issuanceAmountFlag {
+		req.IssuanceAmount = &builder.issuanceAmount
+
+	}
+	if builder.issuanceStatusFlag {
+		req.IssuanceStatus = &builder.issuanceStatus
+
+	}
+	if builder.issuanceWayFlag {
+		req.IssuanceWay = &builder.issuanceWay
+
+	}
+	if builder.issuanceTimeFlag {
+		req.IssuanceTime = &builder.issuanceTime
+
+	}
+	return req
+}
+
+type LumpSumPaymentDetailForUpdate struct {
+	Id             *string `json:"id,omitempty"`              // 一次性支付记录明细id。传入已有的id代表直接在原明细上进行更新，不传则代表创建新的明细
+	IssuanceAmount *string `json:"issuance_amount,omitempty"` // 一次性支付明细发放金额，可转数字的字符串
+	IssuanceStatus *string `json:"issuance_status,omitempty"` // 发放状态
+	IssuanceWay    *string `json:"issuance_way,omitempty"`    // 发放方式
+	IssuanceTime   *string `json:"issuance_time,omitempty"`   // 发放时间
+}
+
+type LumpSumPaymentDetailForUpdateBuilder struct {
+	id                 string // 一次性支付记录明细id。传入已有的id代表直接在原明细上进行更新，不传则代表创建新的明细
+	idFlag             bool
+	issuanceAmount     string // 一次性支付明细发放金额，可转数字的字符串
+	issuanceAmountFlag bool
+	issuanceStatus     string // 发放状态
+	issuanceStatusFlag bool
+	issuanceWay        string // 发放方式
+	issuanceWayFlag    bool
+	issuanceTime       string // 发放时间
+	issuanceTimeFlag   bool
+}
+
+func NewLumpSumPaymentDetailForUpdateBuilder() *LumpSumPaymentDetailForUpdateBuilder {
+	builder := &LumpSumPaymentDetailForUpdateBuilder{}
+	return builder
+}
+
+// 一次性支付记录明细id。传入已有的id代表直接在原明细上进行更新，不传则代表创建新的明细
+//
+// 示例值：7395133551102200876
+func (builder *LumpSumPaymentDetailForUpdateBuilder) Id(id string) *LumpSumPaymentDetailForUpdateBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 一次性支付明细发放金额，可转数字的字符串
+//
+// 示例值：2000.00
+func (builder *LumpSumPaymentDetailForUpdateBuilder) IssuanceAmount(issuanceAmount string) *LumpSumPaymentDetailForUpdateBuilder {
+	builder.issuanceAmount = issuanceAmount
+	builder.issuanceAmountFlag = true
+	return builder
+}
+
+// 发放状态
+//
+// 示例值：to_be_issued
+func (builder *LumpSumPaymentDetailForUpdateBuilder) IssuanceStatus(issuanceStatus string) *LumpSumPaymentDetailForUpdateBuilder {
+	builder.issuanceStatus = issuanceStatus
+	builder.issuanceStatusFlag = true
+	return builder
+}
+
+// 发放方式
+//
+// 示例值：with_salary
+func (builder *LumpSumPaymentDetailForUpdateBuilder) IssuanceWay(issuanceWay string) *LumpSumPaymentDetailForUpdateBuilder {
+	builder.issuanceWay = issuanceWay
+	builder.issuanceWayFlag = true
+	return builder
+}
+
+// 发放时间
+//
+// 示例值：2024-08-01
+func (builder *LumpSumPaymentDetailForUpdateBuilder) IssuanceTime(issuanceTime string) *LumpSumPaymentDetailForUpdateBuilder {
+	builder.issuanceTime = issuanceTime
+	builder.issuanceTimeFlag = true
+	return builder
+}
+
+func (builder *LumpSumPaymentDetailForUpdateBuilder) Build() *LumpSumPaymentDetailForUpdate {
+	req := &LumpSumPaymentDetailForUpdate{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.issuanceAmountFlag {
+		req.IssuanceAmount = &builder.issuanceAmount
+
+	}
+	if builder.issuanceStatusFlag {
+		req.IssuanceStatus = &builder.issuanceStatus
+
+	}
+	if builder.issuanceWayFlag {
+		req.IssuanceWay = &builder.issuanceWay
+
+	}
+	if builder.issuanceTimeFlag {
+		req.IssuanceTime = &builder.issuanceTime
+
+	}
+	return req
+}
+
+type LumpSumPaymentForCreate struct {
+	UniqueId          *string                          `json:"unique_id,omitempty"`          // 外部幂等id，由上游业务决定
+	UserId            *string                          `json:"user_id,omitempty"`            // 员工id，具体类型由入参中的 user_id_type 指定
+	TotalAmount       *string                          `json:"total_amount,omitempty"`       // 总金额，字符串表达的数字
+	BindingPeriod     *int                             `json:"binding_period,omitempty"`     // 绑定期，单位为月
+	CurrencyId        *string                          `json:"currency_id,omitempty"`        // 币种id
+	IssuanceFrequency *int                             `json:"issuance_frequency,omitempty"` // 发放次数，必须与 details 的长度一致
+	GrantDate         *string                          `json:"grant_date,omitempty"`         // 授予日期
+	ItemId            *string                          `json:"item_id,omitempty"`            // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+	Details           []*LumpSumPaymentDetailForCreate `json:"details,omitempty"`            // 发放明细列表
+	Remark            *string                          `json:"remark,omitempty"`             // 备注
+}
+
+type LumpSumPaymentForCreateBuilder struct {
+	uniqueId              string // 外部幂等id，由上游业务决定
+	uniqueIdFlag          bool
+	userId                string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag            bool
+	totalAmount           string // 总金额，字符串表达的数字
+	totalAmountFlag       bool
+	bindingPeriod         int // 绑定期，单位为月
+	bindingPeriodFlag     bool
+	currencyId            string // 币种id
+	currencyIdFlag        bool
+	issuanceFrequency     int // 发放次数，必须与 details 的长度一致
+	issuanceFrequencyFlag bool
+	grantDate             string // 授予日期
+	grantDateFlag         bool
+	itemId                string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+	itemIdFlag            bool
+	details               []*LumpSumPaymentDetailForCreate // 发放明细列表
+	detailsFlag           bool
+	remark                string // 备注
+	remarkFlag            bool
+}
+
+func NewLumpSumPaymentForCreateBuilder() *LumpSumPaymentForCreateBuilder {
+	builder := &LumpSumPaymentForCreateBuilder{}
+	return builder
+}
+
+// 外部幂等id，由上游业务决定
+//
+// 示例值：7402510801304718380_7309316347007764012_7402523725868058156_1726070400000_10000
+func (builder *LumpSumPaymentForCreateBuilder) UniqueId(uniqueId string) *LumpSumPaymentForCreateBuilder {
+	builder.uniqueId = uniqueId
+	builder.uniqueIdFlag = true
+	return builder
+}
+
+// 员工id，具体类型由入参中的 user_id_type 指定
+//
+// 示例值：7337149697626801708
+func (builder *LumpSumPaymentForCreateBuilder) UserId(userId string) *LumpSumPaymentForCreateBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 总金额，字符串表达的数字
+//
+// 示例值：2000.00
+func (builder *LumpSumPaymentForCreateBuilder) TotalAmount(totalAmount string) *LumpSumPaymentForCreateBuilder {
+	builder.totalAmount = totalAmount
+	builder.totalAmountFlag = true
+	return builder
+}
+
+// 绑定期，单位为月
+//
+// 示例值：2
+func (builder *LumpSumPaymentForCreateBuilder) BindingPeriod(bindingPeriod int) *LumpSumPaymentForCreateBuilder {
+	builder.bindingPeriod = bindingPeriod
+	builder.bindingPeriodFlag = true
+	return builder
+}
+
+// 币种id
+//
+// 示例值：6863329932261459464
+func (builder *LumpSumPaymentForCreateBuilder) CurrencyId(currencyId string) *LumpSumPaymentForCreateBuilder {
+	builder.currencyId = currencyId
+	builder.currencyIdFlag = true
+	return builder
+}
+
+// 发放次数，必须与 details 的长度一致
+//
+// 示例值：3
+func (builder *LumpSumPaymentForCreateBuilder) IssuanceFrequency(issuanceFrequency int) *LumpSumPaymentForCreateBuilder {
+	builder.issuanceFrequency = issuanceFrequency
+	builder.issuanceFrequencyFlag = true
+	return builder
+}
+
+// 授予日期
+//
+// 示例值：2024-08-01
+func (builder *LumpSumPaymentForCreateBuilder) GrantDate(grantDate string) *LumpSumPaymentForCreateBuilder {
+	builder.grantDate = grantDate
+	builder.grantDateFlag = true
+	return builder
+}
+
+// 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+//
+// 示例值：7411039006180312620
+func (builder *LumpSumPaymentForCreateBuilder) ItemId(itemId string) *LumpSumPaymentForCreateBuilder {
+	builder.itemId = itemId
+	builder.itemIdFlag = true
+	return builder
+}
+
+// 发放明细列表
+//
+// 示例值：
+func (builder *LumpSumPaymentForCreateBuilder) Details(details []*LumpSumPaymentDetailForCreate) *LumpSumPaymentForCreateBuilder {
+	builder.details = details
+	builder.detailsFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：备注
+func (builder *LumpSumPaymentForCreateBuilder) Remark(remark string) *LumpSumPaymentForCreateBuilder {
+	builder.remark = remark
+	builder.remarkFlag = true
+	return builder
+}
+
+func (builder *LumpSumPaymentForCreateBuilder) Build() *LumpSumPaymentForCreate {
+	req := &LumpSumPaymentForCreate{}
+	if builder.uniqueIdFlag {
+		req.UniqueId = &builder.uniqueId
+
+	}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.totalAmountFlag {
+		req.TotalAmount = &builder.totalAmount
+
+	}
+	if builder.bindingPeriodFlag {
+		req.BindingPeriod = &builder.bindingPeriod
+
+	}
+	if builder.currencyIdFlag {
+		req.CurrencyId = &builder.currencyId
+
+	}
+	if builder.issuanceFrequencyFlag {
+		req.IssuanceFrequency = &builder.issuanceFrequency
+
+	}
+	if builder.grantDateFlag {
+		req.GrantDate = &builder.grantDate
+
+	}
+	if builder.itemIdFlag {
+		req.ItemId = &builder.itemId
+
+	}
+	if builder.detailsFlag {
+		req.Details = builder.details
+	}
+	if builder.remarkFlag {
+		req.Remark = &builder.remark
+
+	}
+	return req
+}
+
+type LumpSumPaymentForUpdate struct {
+	Id                *string                          `json:"id,omitempty"`                 // 一次性支付记录id
+	TotalAmount       *string                          `json:"total_amount,omitempty"`       // 总金额，字符串表达的数字
+	BindingPeriod     *int                             `json:"binding_period,omitempty"`     // 绑定期，单位为月
+	CurrencyId        *string                          `json:"currency_id,omitempty"`        // 币种id
+	IssuanceFrequency *int                             `json:"issuance_frequency,omitempty"` // 发放次数，必须与details的长度一致
+	Remark            *string                          `json:"remark,omitempty"`             // 备注
+	Details           []*LumpSumPaymentDetailForUpdate `json:"details,omitempty"`            // 发放明细列表
+}
+
+type LumpSumPaymentForUpdateBuilder struct {
+	id                    string // 一次性支付记录id
+	idFlag                bool
+	totalAmount           string // 总金额，字符串表达的数字
+	totalAmountFlag       bool
+	bindingPeriod         int // 绑定期，单位为月
+	bindingPeriodFlag     bool
+	currencyId            string // 币种id
+	currencyIdFlag        bool
+	issuanceFrequency     int // 发放次数，必须与details的长度一致
+	issuanceFrequencyFlag bool
+	remark                string // 备注
+	remarkFlag            bool
+	details               []*LumpSumPaymentDetailForUpdate // 发放明细列表
+	detailsFlag           bool
+}
+
+func NewLumpSumPaymentForUpdateBuilder() *LumpSumPaymentForUpdateBuilder {
+	builder := &LumpSumPaymentForUpdateBuilder{}
+	return builder
+}
+
+// 一次性支付记录id
+//
+// 示例值：7397033607132351532
+func (builder *LumpSumPaymentForUpdateBuilder) Id(id string) *LumpSumPaymentForUpdateBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 总金额，字符串表达的数字
+//
+// 示例值：2000.00
+func (builder *LumpSumPaymentForUpdateBuilder) TotalAmount(totalAmount string) *LumpSumPaymentForUpdateBuilder {
+	builder.totalAmount = totalAmount
+	builder.totalAmountFlag = true
+	return builder
+}
+
+// 绑定期，单位为月
+//
+// 示例值：2
+func (builder *LumpSumPaymentForUpdateBuilder) BindingPeriod(bindingPeriod int) *LumpSumPaymentForUpdateBuilder {
+	builder.bindingPeriod = bindingPeriod
+	builder.bindingPeriodFlag = true
+	return builder
+}
+
+// 币种id
+//
+// 示例值：6863329932261459464
+func (builder *LumpSumPaymentForUpdateBuilder) CurrencyId(currencyId string) *LumpSumPaymentForUpdateBuilder {
+	builder.currencyId = currencyId
+	builder.currencyIdFlag = true
+	return builder
+}
+
+// 发放次数，必须与details的长度一致
+//
+// 示例值：3
+func (builder *LumpSumPaymentForUpdateBuilder) IssuanceFrequency(issuanceFrequency int) *LumpSumPaymentForUpdateBuilder {
+	builder.issuanceFrequency = issuanceFrequency
+	builder.issuanceFrequencyFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：备注
+func (builder *LumpSumPaymentForUpdateBuilder) Remark(remark string) *LumpSumPaymentForUpdateBuilder {
+	builder.remark = remark
+	builder.remarkFlag = true
+	return builder
+}
+
+// 发放明细列表
+//
+// 示例值：
+func (builder *LumpSumPaymentForUpdateBuilder) Details(details []*LumpSumPaymentDetailForUpdate) *LumpSumPaymentForUpdateBuilder {
+	builder.details = details
+	builder.detailsFlag = true
+	return builder
+}
+
+func (builder *LumpSumPaymentForUpdateBuilder) Build() *LumpSumPaymentForUpdate {
+	req := &LumpSumPaymentForUpdate{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.totalAmountFlag {
+		req.TotalAmount = &builder.totalAmount
+
+	}
+	if builder.bindingPeriodFlag {
+		req.BindingPeriod = &builder.bindingPeriod
+
+	}
+	if builder.currencyIdFlag {
+		req.CurrencyId = &builder.currencyId
+
+	}
+	if builder.issuanceFrequencyFlag {
+		req.IssuanceFrequency = &builder.issuanceFrequency
+
+	}
+	if builder.remarkFlag {
+		req.Remark = &builder.remark
+
+	}
+	if builder.detailsFlag {
+		req.Details = builder.details
+	}
+	return req
+}
+
+type LumpSumPaymentOperateResult struct {
+	Id       *string `json:"id,omitempty"`        // 操作的记录的 id
+	UniqueId *string `json:"unique_id,omitempty"` // 操作的记录的 unique_id
+	Code     *int    `json:"code,omitempty"`      // 操作结果状态码
+	Message  *string `json:"message,omitempty"`   // 操作结果描述
+}
+
+type LumpSumPaymentOperateResultBuilder struct {
+	id           string // 操作的记录的 id
+	idFlag       bool
+	uniqueId     string // 操作的记录的 unique_id
+	uniqueIdFlag bool
+	code         int // 操作结果状态码
+	codeFlag     bool
+	message      string // 操作结果描述
+	messageFlag  bool
+}
+
+func NewLumpSumPaymentOperateResultBuilder() *LumpSumPaymentOperateResultBuilder {
+	builder := &LumpSumPaymentOperateResultBuilder{}
+	return builder
+}
+
+// 操作的记录的 id
+//
+// 示例值：7390583861280556588
+func (builder *LumpSumPaymentOperateResultBuilder) Id(id string) *LumpSumPaymentOperateResultBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 操作的记录的 unique_id
+//
+// 示例值：7390583861280556588
+func (builder *LumpSumPaymentOperateResultBuilder) UniqueId(uniqueId string) *LumpSumPaymentOperateResultBuilder {
+	builder.uniqueId = uniqueId
+	builder.uniqueIdFlag = true
+	return builder
+}
+
+// 操作结果状态码
+//
+// 示例值：21270202
+func (builder *LumpSumPaymentOperateResultBuilder) Code(code int) *LumpSumPaymentOperateResultBuilder {
+	builder.code = code
+	builder.codeFlag = true
+	return builder
+}
+
+// 操作结果描述
+//
+// 示例值：uqniue id conflict
+func (builder *LumpSumPaymentOperateResultBuilder) Message(message string) *LumpSumPaymentOperateResultBuilder {
+	builder.message = message
+	builder.messageFlag = true
+	return builder
+}
+
+func (builder *LumpSumPaymentOperateResultBuilder) Build() *LumpSumPaymentOperateResult {
+	req := &LumpSumPaymentOperateResult{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.uniqueIdFlag {
+		req.UniqueId = &builder.uniqueId
+
+	}
+	if builder.codeFlag {
+		req.Code = &builder.code
+
+	}
+	if builder.messageFlag {
+		req.Message = &builder.message
+
 	}
 	return req
 }
@@ -1576,7 +2586,7 @@ func (builder *PlanIndicatorBuilder) Build() *PlanIndicator {
 
 type PlanItem struct {
 	AdjustmentType             *string          `json:"adjustment_type,omitempty"`              // 定薪方式
-	ItemId                     *string          `json:"item_id,omitempty"`                      // 薪资项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+	ItemId                     *string          `json:"item_id,omitempty"`                      // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
 	PlanItemLogic              *AdjustmentLogic `json:"plan_item_logic,omitempty"`              // 方案关联薪资项逻辑配置
 	ProbationDiscountType      *string          `json:"probation_discount_type,omitempty"`      // 试用期薪酬类型
 	ProbationDiscountPercentum *string          `json:"probation_discount_percentum,omitempty"` // 试用期薪酬百分比
@@ -1585,7 +2595,7 @@ type PlanItem struct {
 type PlanItemBuilder struct {
 	adjustmentType                 string // 定薪方式
 	adjustmentTypeFlag             bool
-	itemId                         string // 薪资项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+	itemId                         string // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
 	itemIdFlag                     bool
 	planItemLogic                  *AdjustmentLogic // 方案关联薪资项逻辑配置
 	planItemLogicFlag              bool
@@ -1609,7 +2619,7 @@ func (builder *PlanItemBuilder) AdjustmentType(adjustmentType string) *PlanItemB
 	return builder
 }
 
-// 薪资项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+// 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
 //
 // 示例值：21341234
 func (builder *PlanItemBuilder) ItemId(itemId string) *PlanItemBuilder {
@@ -3141,6 +4151,14 @@ func (builder *ListItemReqBuilder) PageToken(pageToken string) *ListItemReqBuild
 	return builder
 }
 
+// 薪酬项类型（不传则认为查询所有类型薪酬项）
+//
+// 示例值：bonus
+func (builder *ListItemReqBuilder) ItemType(itemType string) *ListItemReqBuilder {
+	builder.apiReq.QueryParams.Set("item_type", fmt.Sprint(itemType))
+	return builder
+}
+
 func (builder *ListItemReqBuilder) Build() *ListItemReq {
 	req := &ListItemReq{}
 	req.apiReq = &larkcore.ApiReq{}
@@ -3156,7 +4174,7 @@ type ListItemReq struct {
 }
 
 type ListItemRespData struct {
-	Items     []*Item `json:"items,omitempty"`      // 薪资项信息列表
+	Items     []*Item `json:"items,omitempty"`      // 薪酬项信息列表
 	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
 	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有更多项
 }
@@ -3222,7 +4240,7 @@ type ListItemCategoryReq struct {
 }
 
 type ListItemCategoryRespData struct {
-	Items     []*ItemCategory `json:"items,omitempty"`      // 薪资项分类信息列表
+	Items     []*ItemCategory `json:"items,omitempty"`      // 薪酬项分类信息列表
 	PageToken *string         `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
 	HasMore   *bool           `json:"has_more,omitempty"`   // 是否还有更多项
 }

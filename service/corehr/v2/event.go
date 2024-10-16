@@ -18,6 +18,126 @@ import (
 )
 
 // 消息处理器定义
+type P2CompanyCreatedV2Handler struct {
+	handler func(context.Context, *P2CompanyCreatedV2) error
+}
+
+func NewP2CompanyCreatedV2Handler(handler func(context.Context, *P2CompanyCreatedV2) error) *P2CompanyCreatedV2Handler {
+	h := &P2CompanyCreatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2CompanyCreatedV2Handler) Event() interface{} {
+	return &P2CompanyCreatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2CompanyCreatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2CompanyCreatedV2))
+}
+
+// 消息处理器定义
+type P2CompanyDeletedV2Handler struct {
+	handler func(context.Context, *P2CompanyDeletedV2) error
+}
+
+func NewP2CompanyDeletedV2Handler(handler func(context.Context, *P2CompanyDeletedV2) error) *P2CompanyDeletedV2Handler {
+	h := &P2CompanyDeletedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2CompanyDeletedV2Handler) Event() interface{} {
+	return &P2CompanyDeletedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2CompanyDeletedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2CompanyDeletedV2))
+}
+
+// 消息处理器定义
+type P2CompanyUpdatedV2Handler struct {
+	handler func(context.Context, *P2CompanyUpdatedV2) error
+}
+
+func NewP2CompanyUpdatedV2Handler(handler func(context.Context, *P2CompanyUpdatedV2) error) *P2CompanyUpdatedV2Handler {
+	h := &P2CompanyUpdatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2CompanyUpdatedV2Handler) Event() interface{} {
+	return &P2CompanyUpdatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2CompanyUpdatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2CompanyUpdatedV2))
+}
+
+// 消息处理器定义
+type P2CostCenterCreatedV2Handler struct {
+	handler func(context.Context, *P2CostCenterCreatedV2) error
+}
+
+func NewP2CostCenterCreatedV2Handler(handler func(context.Context, *P2CostCenterCreatedV2) error) *P2CostCenterCreatedV2Handler {
+	h := &P2CostCenterCreatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2CostCenterCreatedV2Handler) Event() interface{} {
+	return &P2CostCenterCreatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2CostCenterCreatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2CostCenterCreatedV2))
+}
+
+// 消息处理器定义
+type P2CostCenterDeletedV2Handler struct {
+	handler func(context.Context, *P2CostCenterDeletedV2) error
+}
+
+func NewP2CostCenterDeletedV2Handler(handler func(context.Context, *P2CostCenterDeletedV2) error) *P2CostCenterDeletedV2Handler {
+	h := &P2CostCenterDeletedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2CostCenterDeletedV2Handler) Event() interface{} {
+	return &P2CostCenterDeletedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2CostCenterDeletedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2CostCenterDeletedV2))
+}
+
+// 消息处理器定义
+type P2CostCenterUpdatedV2Handler struct {
+	handler func(context.Context, *P2CostCenterUpdatedV2) error
+}
+
+func NewP2CostCenterUpdatedV2Handler(handler func(context.Context, *P2CostCenterUpdatedV2) error) *P2CostCenterUpdatedV2Handler {
+	h := &P2CostCenterUpdatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2CostCenterUpdatedV2Handler) Event() interface{} {
+	return &P2CostCenterUpdatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2CostCenterUpdatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2CostCenterUpdatedV2))
+}
+
+// 消息处理器定义
 type P2EmployeeDomainEventV2Handler struct {
 	handler func(context.Context, *P2EmployeeDomainEventV2) error
 }
@@ -138,6 +258,66 @@ func (h *P2JobFamilyUpdatedV2Handler) Handle(ctx context.Context, event interfac
 }
 
 // 消息处理器定义
+type P2JobGradeCreatedV2Handler struct {
+	handler func(context.Context, *P2JobGradeCreatedV2) error
+}
+
+func NewP2JobGradeCreatedV2Handler(handler func(context.Context, *P2JobGradeCreatedV2) error) *P2JobGradeCreatedV2Handler {
+	h := &P2JobGradeCreatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2JobGradeCreatedV2Handler) Event() interface{} {
+	return &P2JobGradeCreatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2JobGradeCreatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2JobGradeCreatedV2))
+}
+
+// 消息处理器定义
+type P2JobGradeDeletedV2Handler struct {
+	handler func(context.Context, *P2JobGradeDeletedV2) error
+}
+
+func NewP2JobGradeDeletedV2Handler(handler func(context.Context, *P2JobGradeDeletedV2) error) *P2JobGradeDeletedV2Handler {
+	h := &P2JobGradeDeletedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2JobGradeDeletedV2Handler) Event() interface{} {
+	return &P2JobGradeDeletedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2JobGradeDeletedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2JobGradeDeletedV2))
+}
+
+// 消息处理器定义
+type P2JobGradeUpdatedV2Handler struct {
+	handler func(context.Context, *P2JobGradeUpdatedV2) error
+}
+
+func NewP2JobGradeUpdatedV2Handler(handler func(context.Context, *P2JobGradeUpdatedV2) error) *P2JobGradeUpdatedV2Handler {
+	h := &P2JobGradeUpdatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2JobGradeUpdatedV2Handler) Event() interface{} {
+	return &P2JobGradeUpdatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2JobGradeUpdatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2JobGradeUpdatedV2))
+}
+
+// 消息处理器定义
 type P2JobLevelCreatedV2Handler struct {
 	handler func(context.Context, *P2JobLevelCreatedV2) error
 }
@@ -195,6 +375,66 @@ func (h *P2JobLevelUpdatedV2Handler) Event() interface{} {
 // 回调开发者注册的handle
 func (h *P2JobLevelUpdatedV2Handler) Handle(ctx context.Context, event interface{}) error {
 	return h.handler(ctx, event.(*P2JobLevelUpdatedV2))
+}
+
+// 消息处理器定义
+type P2LocationCreatedV2Handler struct {
+	handler func(context.Context, *P2LocationCreatedV2) error
+}
+
+func NewP2LocationCreatedV2Handler(handler func(context.Context, *P2LocationCreatedV2) error) *P2LocationCreatedV2Handler {
+	h := &P2LocationCreatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2LocationCreatedV2Handler) Event() interface{} {
+	return &P2LocationCreatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2LocationCreatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2LocationCreatedV2))
+}
+
+// 消息处理器定义
+type P2LocationDeletedV2Handler struct {
+	handler func(context.Context, *P2LocationDeletedV2) error
+}
+
+func NewP2LocationDeletedV2Handler(handler func(context.Context, *P2LocationDeletedV2) error) *P2LocationDeletedV2Handler {
+	h := &P2LocationDeletedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2LocationDeletedV2Handler) Event() interface{} {
+	return &P2LocationDeletedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2LocationDeletedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2LocationDeletedV2))
+}
+
+// 消息处理器定义
+type P2LocationUpdatedV2Handler struct {
+	handler func(context.Context, *P2LocationUpdatedV2) error
+}
+
+func NewP2LocationUpdatedV2Handler(handler func(context.Context, *P2LocationUpdatedV2) error) *P2LocationUpdatedV2Handler {
+	h := &P2LocationUpdatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2LocationUpdatedV2Handler) Event() interface{} {
+	return &P2LocationUpdatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2LocationUpdatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2LocationUpdatedV2))
 }
 
 // 消息处理器定义
@@ -375,4 +615,24 @@ func (h *P2ProcessNodeUpdatedV2Handler) Event() interface{} {
 // 回调开发者注册的handle
 func (h *P2ProcessNodeUpdatedV2Handler) Handle(ctx context.Context, event interface{}) error {
 	return h.handler(ctx, event.(*P2ProcessNodeUpdatedV2))
+}
+
+// 消息处理器定义
+type P2ProcessStatusUpdateV2Handler struct {
+	handler func(context.Context, *P2ProcessStatusUpdateV2) error
+}
+
+func NewP2ProcessStatusUpdateV2Handler(handler func(context.Context, *P2ProcessStatusUpdateV2) error) *P2ProcessStatusUpdateV2Handler {
+	h := &P2ProcessStatusUpdateV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2ProcessStatusUpdateV2Handler) Event() interface{} {
+	return &P2ProcessStatusUpdateV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2ProcessStatusUpdateV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2ProcessStatusUpdateV2))
 }

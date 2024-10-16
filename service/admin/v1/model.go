@@ -133,7 +133,7 @@ type AdminDeptExtContactStat struct {
 	DepartmentId      *string `json:"department_id,omitempty"`        // 部门ID
 	DepartmentName    *string `json:"department_name,omitempty"`      // 部门名
 	HasRefContactUcnt *string `json:"has_ref_contact_ucnt,omitempty"` // 拥有外部联系人的成员数
-	RefContactUcnt    *int    `json:"ref_contact_ucnt,omitempty"`     // 外部联系人总数
+	RefContactUcnt    *string `json:"ref_contact_ucnt,omitempty"`     // 外部联系人总数
 	RefContactTcnt    *string `json:"ref_contact_tcnt,omitempty"`     // 外部联系人所属租户数
 }
 
@@ -146,7 +146,7 @@ type AdminDeptExtContactStatBuilder struct {
 	departmentNameFlag    bool
 	hasRefContactUcnt     string // 拥有外部联系人的成员数
 	hasRefContactUcntFlag bool
-	refContactUcnt        int // 外部联系人总数
+	refContactUcnt        string // 外部联系人总数
 	refContactUcntFlag    bool
 	refContactTcnt        string // 外部联系人所属租户数
 	refContactTcntFlag    bool
@@ -196,7 +196,7 @@ func (builder *AdminDeptExtContactStatBuilder) HasRefContactUcnt(hasRefContactUc
 // 外部联系人总数
 //
 // 示例值：200
-func (builder *AdminDeptExtContactStatBuilder) RefContactUcnt(refContactUcnt int) *AdminDeptExtContactStatBuilder {
+func (builder *AdminDeptExtContactStatBuilder) RefContactUcnt(refContactUcnt string) *AdminDeptExtContactStatBuilder {
 	builder.refContactUcnt = refContactUcnt
 	builder.refContactUcntFlag = true
 	return builder
@@ -933,7 +933,7 @@ type AdminUserExtContactStat struct {
 	UserId         *string `json:"user_id,omitempty"`          // 用户ID
 	UserName       *string `json:"user_name,omitempty"`        // 成员姓名
 	DepartmentName *string `json:"department_name,omitempty"`  // 部门名
-	RefContactUcnt *int    `json:"ref_contact_ucnt,omitempty"` // 外部联系人数量
+	RefContactUcnt *string `json:"ref_contact_ucnt,omitempty"` // 外部联系人数量
 	RefContactTcnt *string `json:"ref_contact_tcnt,omitempty"` // 外部联系人所属企业数量
 }
 
@@ -946,7 +946,7 @@ type AdminUserExtContactStatBuilder struct {
 	userNameFlag       bool
 	departmentName     string // 部门名
 	departmentNameFlag bool
-	refContactUcnt     int // 外部联系人数量
+	refContactUcnt     string // 外部联系人数量
 	refContactUcntFlag bool
 	refContactTcnt     string // 外部联系人所属企业数量
 	refContactTcntFlag bool
@@ -996,7 +996,7 @@ func (builder *AdminUserExtContactStatBuilder) DepartmentName(departmentName str
 // 外部联系人数量
 //
 // 示例值：200
-func (builder *AdminUserExtContactStatBuilder) RefContactUcnt(refContactUcnt int) *AdminUserExtContactStatBuilder {
+func (builder *AdminUserExtContactStatBuilder) RefContactUcnt(refContactUcnt string) *AdminUserExtContactStatBuilder {
 	builder.refContactUcnt = refContactUcnt
 	builder.refContactUcntFlag = true
 	return builder

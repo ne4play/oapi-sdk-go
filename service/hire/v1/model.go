@@ -14,14 +14,12 @@
 package larkhire
 
 import (
-	"fmt"
-
 	"context"
 	"errors"
-
-	"github.com/larksuite/oapi-sdk-go/v3/event"
+	"fmt"
 
 	"github.com/larksuite/oapi-sdk-go/v3/core"
+	"github.com/larksuite/oapi-sdk-go/v3/event"
 )
 
 const (
@@ -4896,6 +4894,7 @@ type ApplicationOffer struct {
 	JobInfo              *OfferJobInfo                   `json:"job_info,omitempty"`               // 职位信息
 	CustomizedModuleList []*ApplicationOfferCustomModule `json:"customized_module_list,omitempty"` // offer自定义模块列表
 	JobRequirementId     *string                         `json:"job_requirement_id,omitempty"`     // 招聘需求 ID
+	OfferSendRecordList  []*OfferSendRecord              `json:"offer_send_record_list,omitempty"` // offer 发送记录列表
 }
 
 type ApplicationOfferBuilder struct {
@@ -4917,6 +4916,8 @@ type ApplicationOfferBuilder struct {
 	customizedModuleListFlag bool
 	jobRequirementId         string // 招聘需求 ID
 	jobRequirementIdFlag     bool
+	offerSendRecordList      []*OfferSendRecord // offer 发送记录列表
+	offerSendRecordListFlag  bool
 }
 
 func NewApplicationOfferBuilder() *ApplicationOfferBuilder {
@@ -5005,6 +5006,15 @@ func (builder *ApplicationOfferBuilder) JobRequirementId(jobRequirementId string
 	return builder
 }
 
+// offer 发送记录列表
+//
+// 示例值：
+func (builder *ApplicationOfferBuilder) OfferSendRecordList(offerSendRecordList []*OfferSendRecord) *ApplicationOfferBuilder {
+	builder.offerSendRecordList = offerSendRecordList
+	builder.offerSendRecordListFlag = true
+	return builder
+}
+
 func (builder *ApplicationOfferBuilder) Build() *ApplicationOffer {
 	req := &ApplicationOffer{}
 	if builder.idFlag {
@@ -5038,6 +5048,9 @@ func (builder *ApplicationOfferBuilder) Build() *ApplicationOffer {
 	if builder.jobRequirementIdFlag {
 		req.JobRequirementId = &builder.jobRequirementId
 
+	}
+	if builder.offerSendRecordListFlag {
+		req.OfferSendRecordList = builder.offerSendRecordList
 	}
 	return req
 }
@@ -12636,7 +12649,7 @@ type CommonFilter struct {
 	ValueType   *int         `json:"value_type,omitempty"`   // 筛选项值类型
 	ValueList   []string     `json:"value_list,omitempty"`   // 筛选项值列表
 	RangeFilter *RangeFilter `json:"range_filter,omitempty"` // 范围筛选
-	UserIdList  []string     `json:"user_id_list,omitempty"` // 筛选项值列表
+
 }
 
 type CommonFilterBuilder struct {
@@ -12648,8 +12661,6 @@ type CommonFilterBuilder struct {
 	valueListFlag   bool
 	rangeFilter     *RangeFilter // 范围筛选
 	rangeFilterFlag bool
-	userIdList      []string // 筛选项值列表
-	userIdListFlag  bool
 }
 
 func NewCommonFilterBuilder() *CommonFilterBuilder {
@@ -12693,15 +12704,6 @@ func (builder *CommonFilterBuilder) RangeFilter(rangeFilter *RangeFilter) *Commo
 	return builder
 }
 
-// 筛选项值列表
-//
-// 示例值：
-func (builder *CommonFilterBuilder) UserIdList(userIdList []string) *CommonFilterBuilder {
-	builder.userIdList = userIdList
-	builder.userIdListFlag = true
-	return builder
-}
-
 func (builder *CommonFilterBuilder) Build() *CommonFilter {
 	req := &CommonFilter{}
 	if builder.keyFlag {
@@ -12718,9 +12720,7 @@ func (builder *CommonFilterBuilder) Build() *CommonFilter {
 	if builder.rangeFilterFlag {
 		req.RangeFilter = builder.rangeFilter
 	}
-	if builder.userIdListFlag {
-		req.UserIdList = builder.userIdList
-	}
+
 	return req
 }
 
@@ -26258,6 +26258,7 @@ type JobRequirement struct {
 	CustomizedDataList    []*JobRequirementCustomizedData `json:"customized_data_list,omitempty"`      // 自定义字段
 	ProcessType           *int                            `json:"process_type,omitempty"`              // 支持的招聘类型列表
 	JobTypeId             *string                         `json:"job_type_id,omitempty"`               // 招聘需求中的职位类别
+	JobIdList             []string                        `json:"job_id_list,omitempty"`               // 关联的职位 ID 列表
 }
 
 type JobRequirementBuilder struct {
@@ -26311,6 +26312,8 @@ type JobRequirementBuilder struct {
 	processTypeFlag           bool
 	jobTypeId                 string // 招聘需求中的职位类别
 	jobTypeIdFlag             bool
+	jobIdList                 []string // 关联的职位 ID 列表
+	jobIdListFlag             bool
 }
 
 func NewJobRequirementBuilder() *JobRequirementBuilder {
@@ -26543,6 +26546,15 @@ func (builder *JobRequirementBuilder) JobTypeId(jobTypeId string) *JobRequiremen
 	return builder
 }
 
+// 关联的职位 ID 列表
+//
+// 示例值：
+func (builder *JobRequirementBuilder) JobIdList(jobIdList []string) *JobRequirementBuilder {
+	builder.jobIdList = jobIdList
+	builder.jobIdListFlag = true
+	return builder
+}
+
 func (builder *JobRequirementBuilder) Build() *JobRequirement {
 	req := &JobRequirement{}
 	if builder.shortCodeFlag {
@@ -26640,6 +26652,9 @@ func (builder *JobRequirementBuilder) Build() *JobRequirement {
 	if builder.jobTypeIdFlag {
 		req.JobTypeId = &builder.jobTypeId
 
+	}
+	if builder.jobIdListFlag {
+		req.JobIdList = builder.jobIdList
 	}
 	return req
 }

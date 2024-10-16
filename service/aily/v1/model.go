@@ -22,6 +22,67 @@ import (
 	"github.com/larksuite/oapi-sdk-go/v3/core"
 )
 
+type AilyKnowledgeAskProcessData struct {
+	ChartDsls []string `json:"chart_dsls,omitempty"` // 有数据分析时，根据数据生成的图表描述，按markdown语义描述
+	Chunks    []string `json:"chunks,omitempty"`     // 召回的知识视图切片的文本数据
+	SqlData   []string `json:"sql_data,omitempty"`   // 有数据分析时，查询到数据结果，每个元素为 json 序列化后的数据结果
+}
+
+type AilyKnowledgeAskProcessDataBuilder struct {
+	chartDsls     []string // 有数据分析时，根据数据生成的图表描述，按markdown语义描述
+	chartDslsFlag bool
+	chunks        []string // 召回的知识视图切片的文本数据
+	chunksFlag    bool
+	sqlData       []string // 有数据分析时，查询到数据结果，每个元素为 json 序列化后的数据结果
+	sqlDataFlag   bool
+}
+
+func NewAilyKnowledgeAskProcessDataBuilder() *AilyKnowledgeAskProcessDataBuilder {
+	builder := &AilyKnowledgeAskProcessDataBuilder{}
+	return builder
+}
+
+// 有数据分析时，根据数据生成的图表描述，按markdown语义描述
+//
+// 示例值：
+func (builder *AilyKnowledgeAskProcessDataBuilder) ChartDsls(chartDsls []string) *AilyKnowledgeAskProcessDataBuilder {
+	builder.chartDsls = chartDsls
+	builder.chartDslsFlag = true
+	return builder
+}
+
+// 召回的知识视图切片的文本数据
+//
+// 示例值：
+func (builder *AilyKnowledgeAskProcessDataBuilder) Chunks(chunks []string) *AilyKnowledgeAskProcessDataBuilder {
+	builder.chunks = chunks
+	builder.chunksFlag = true
+	return builder
+}
+
+// 有数据分析时，查询到数据结果，每个元素为 json 序列化后的数据结果
+//
+// 示例值：
+func (builder *AilyKnowledgeAskProcessDataBuilder) SqlData(sqlData []string) *AilyKnowledgeAskProcessDataBuilder {
+	builder.sqlData = sqlData
+	builder.sqlDataFlag = true
+	return builder
+}
+
+func (builder *AilyKnowledgeAskProcessDataBuilder) Build() *AilyKnowledgeAskProcessData {
+	req := &AilyKnowledgeAskProcessData{}
+	if builder.chartDslsFlag {
+		req.ChartDsls = builder.chartDsls
+	}
+	if builder.chunksFlag {
+		req.Chunks = builder.chunks
+	}
+	if builder.sqlDataFlag {
+		req.SqlData = builder.sqlData
+	}
+	return req
+}
+
 type AilyKnowledgeDataset struct {
 	ApiName *string `json:"api_name,omitempty"` // 分析表ID
 	Title   *string `json:"title,omitempty"`    // 分析表标题
@@ -193,6 +254,54 @@ func (builder *AilyKnowledgeDocsBuilder) Build() *AilyKnowledgeDocs {
 	}
 	if builder.urlFlag {
 		req.Url = &builder.url
+
+	}
+	return req
+}
+
+type AilyKnowledgeFaq struct {
+	Question *string `json:"question,omitempty"` // 匹配问题
+	Answer   *string `json:"answer,omitempty"`   // 匹配描述
+}
+
+type AilyKnowledgeFaqBuilder struct {
+	question     string // 匹配问题
+	questionFlag bool
+	answer       string // 匹配描述
+	answerFlag   bool
+}
+
+func NewAilyKnowledgeFaqBuilder() *AilyKnowledgeFaqBuilder {
+	builder := &AilyKnowledgeFaqBuilder{}
+	return builder
+}
+
+// 匹配问题
+//
+// 示例值：问题
+func (builder *AilyKnowledgeFaqBuilder) Question(question string) *AilyKnowledgeFaqBuilder {
+	builder.question = question
+	builder.questionFlag = true
+	return builder
+}
+
+// 匹配描述
+//
+// 示例值：答案
+func (builder *AilyKnowledgeFaqBuilder) Answer(answer string) *AilyKnowledgeFaqBuilder {
+	builder.answer = answer
+	builder.answerFlag = true
+	return builder
+}
+
+func (builder *AilyKnowledgeFaqBuilder) Build() *AilyKnowledgeFaq {
+	req := &AilyKnowledgeFaq{}
+	if builder.questionFlag {
+		req.Question = &builder.question
+
+	}
+	if builder.answerFlag {
+		req.Answer = &builder.answer
 
 	}
 	return req
@@ -385,6 +494,38 @@ func (builder *AilyKnowledgeHelpdeskBuilder) Build() *AilyKnowledgeHelpdesk {
 	}
 	if builder.titleFlag {
 		req.Title = &builder.title
+
+	}
+	return req
+}
+
+type AilyKnowledgeMessage struct {
+	Content *string `json:"content,omitempty"` // 消息内容
+}
+
+type AilyKnowledgeMessageBuilder struct {
+	content     string // 消息内容
+	contentFlag bool
+}
+
+func NewAilyKnowledgeMessageBuilder() *AilyKnowledgeMessageBuilder {
+	builder := &AilyKnowledgeMessageBuilder{}
+	return builder
+}
+
+// 消息内容
+//
+// 示例值：推荐一部电影
+func (builder *AilyKnowledgeMessageBuilder) Content(content string) *AilyKnowledgeMessageBuilder {
+	builder.content = content
+	builder.contentFlag = true
+	return builder
+}
+
+func (builder *AilyKnowledgeMessageBuilder) Build() *AilyKnowledgeMessage {
+	req := &AilyKnowledgeMessage{}
+	if builder.contentFlag {
+		req.Content = &builder.content
 
 	}
 	return req
@@ -1356,6 +1497,351 @@ func (builder *BuiltinActionBuilder) Build() *BuiltinAction {
 	}
 	if builder.extraFlag {
 		req.Extra = &builder.extra
+
+	}
+	return req
+}
+
+type Channel struct {
+	Variables *string `json:"variables,omitempty"` // 自定义传入的变量
+}
+
+type ChannelBuilder struct {
+	variables     string // 自定义传入的变量
+	variablesFlag bool
+}
+
+func NewChannelBuilder() *ChannelBuilder {
+	builder := &ChannelBuilder{}
+	return builder
+}
+
+// 自定义传入的变量
+//
+// 示例值：{"custom_key": "custom_value"}
+func (builder *ChannelBuilder) Variables(variables string) *ChannelBuilder {
+	builder.variables = variables
+	builder.variablesFlag = true
+	return builder
+}
+
+func (builder *ChannelBuilder) Build() *Channel {
+	req := &Channel{}
+	if builder.variablesFlag {
+		req.Variables = &builder.variables
+
+	}
+	return req
+}
+
+type DataAsset struct {
+	DataAssetId    *string           `json:"data_asset_id,omitempty"`    // 数据知识ID
+	Label          map[string]string `json:"label,omitempty"`            // 数据知识标题
+	Description    map[string]string `json:"description,omitempty"`      // 数据知识描述
+	DataSourceType *string           `json:"data_source_type,omitempty"` // 数据资源类型
+	ConnectStatus  *string           `json:"connect_status,omitempty"`   // 数据连接状态
+	Tags           []*DataAssetTag   `json:"tags,omitempty"`             // 数据知识分类列表
+	Items          []*DataAssetItem  `json:"items,omitempty"`            // 数据知识项列表
+}
+
+type DataAssetBuilder struct {
+	dataAssetId        string // 数据知识ID
+	dataAssetIdFlag    bool
+	label              map[string]string // 数据知识标题
+	labelFlag          bool
+	description        map[string]string // 数据知识描述
+	descriptionFlag    bool
+	dataSourceType     string // 数据资源类型
+	dataSourceTypeFlag bool
+	connectStatus      string // 数据连接状态
+	connectStatusFlag  bool
+	tags               []*DataAssetTag // 数据知识分类列表
+	tagsFlag           bool
+	items              []*DataAssetItem // 数据知识项列表
+	itemsFlag          bool
+}
+
+func NewDataAssetBuilder() *DataAssetBuilder {
+	builder := &DataAssetBuilder{}
+	return builder
+}
+
+// 数据知识ID
+//
+// 示例值：asset_aadg3mcgvpybu
+func (builder *DataAssetBuilder) DataAssetId(dataAssetId string) *DataAssetBuilder {
+	builder.dataAssetId = dataAssetId
+	builder.dataAssetIdFlag = true
+	return builder
+}
+
+// 数据知识标题
+//
+// 示例值：
+func (builder *DataAssetBuilder) Label(label map[string]string) *DataAssetBuilder {
+	builder.label = label
+	builder.labelFlag = true
+	return builder
+}
+
+// 数据知识描述
+//
+// 示例值：
+func (builder *DataAssetBuilder) Description(description map[string]string) *DataAssetBuilder {
+	builder.description = description
+	builder.descriptionFlag = true
+	return builder
+}
+
+// 数据资源类型
+//
+// 示例值：excel
+func (builder *DataAssetBuilder) DataSourceType(dataSourceType string) *DataAssetBuilder {
+	builder.dataSourceType = dataSourceType
+	builder.dataSourceTypeFlag = true
+	return builder
+}
+
+// 数据连接状态
+//
+// 示例值：successful
+func (builder *DataAssetBuilder) ConnectStatus(connectStatus string) *DataAssetBuilder {
+	builder.connectStatus = connectStatus
+	builder.connectStatusFlag = true
+	return builder
+}
+
+// 数据知识分类列表
+//
+// 示例值：
+func (builder *DataAssetBuilder) Tags(tags []*DataAssetTag) *DataAssetBuilder {
+	builder.tags = tags
+	builder.tagsFlag = true
+	return builder
+}
+
+// 数据知识项列表
+//
+// 示例值：
+func (builder *DataAssetBuilder) Items(items []*DataAssetItem) *DataAssetBuilder {
+	builder.items = items
+	builder.itemsFlag = true
+	return builder
+}
+
+func (builder *DataAssetBuilder) Build() *DataAsset {
+	req := &DataAsset{}
+	if builder.dataAssetIdFlag {
+		req.DataAssetId = &builder.dataAssetId
+
+	}
+	if builder.labelFlag {
+		req.Label = builder.label
+	}
+	if builder.descriptionFlag {
+		req.Description = builder.description
+	}
+	if builder.dataSourceTypeFlag {
+		req.DataSourceType = &builder.dataSourceType
+
+	}
+	if builder.connectStatusFlag {
+		req.ConnectStatus = &builder.connectStatus
+
+	}
+	if builder.tagsFlag {
+		req.Tags = builder.tags
+	}
+	if builder.itemsFlag {
+		req.Items = builder.items
+	}
+	return req
+}
+
+type DataAssetItem struct {
+	DataAssetItemId *string              `json:"data_asset_item_id,omitempty"` // 数据知识项ID
+	ApiName         *string              `json:"api_name,omitempty"`           // 数据知识项标识
+	Label           map[string]string    `json:"label,omitempty"`              // 数据知识项标题
+	Description     map[string]string    `json:"description,omitempty"`        // 数据知识项描述
+	Resources       []*DataAssetResource `json:"resources,omitempty"`          // 数据知识资源
+}
+
+type DataAssetItemBuilder struct {
+	dataAssetItemId     string // 数据知识项ID
+	dataAssetItemIdFlag bool
+	apiName             string // 数据知识项标识
+	apiNameFlag         bool
+	label               map[string]string // 数据知识项标题
+	labelFlag           bool
+	description         map[string]string // 数据知识项描述
+	descriptionFlag     bool
+	resources           []*DataAssetResource // 数据知识资源
+	resourcesFlag       bool
+}
+
+func NewDataAssetItemBuilder() *DataAssetItemBuilder {
+	builder := &DataAssetItemBuilder{}
+	return builder
+}
+
+// 数据知识项ID
+//
+// 示例值：asset_item_aadg3mcgvpydu
+func (builder *DataAssetItemBuilder) DataAssetItemId(dataAssetItemId string) *DataAssetItemBuilder {
+	builder.dataAssetItemId = dataAssetItemId
+	builder.dataAssetItemIdFlag = true
+	return builder
+}
+
+// 数据知识项标识
+//
+// 示例值：movie
+func (builder *DataAssetItemBuilder) ApiName(apiName string) *DataAssetItemBuilder {
+	builder.apiName = apiName
+	builder.apiNameFlag = true
+	return builder
+}
+
+// 数据知识项标题
+//
+// 示例值：
+func (builder *DataAssetItemBuilder) Label(label map[string]string) *DataAssetItemBuilder {
+	builder.label = label
+	builder.labelFlag = true
+	return builder
+}
+
+// 数据知识项描述
+//
+// 示例值：
+func (builder *DataAssetItemBuilder) Description(description map[string]string) *DataAssetItemBuilder {
+	builder.description = description
+	builder.descriptionFlag = true
+	return builder
+}
+
+// 数据知识资源
+//
+// 示例值：
+func (builder *DataAssetItemBuilder) Resources(resources []*DataAssetResource) *DataAssetItemBuilder {
+	builder.resources = resources
+	builder.resourcesFlag = true
+	return builder
+}
+
+func (builder *DataAssetItemBuilder) Build() *DataAssetItem {
+	req := &DataAssetItem{}
+	if builder.dataAssetItemIdFlag {
+		req.DataAssetItemId = &builder.dataAssetItemId
+
+	}
+	if builder.apiNameFlag {
+		req.ApiName = &builder.apiName
+
+	}
+	if builder.labelFlag {
+		req.Label = builder.label
+	}
+	if builder.descriptionFlag {
+		req.Description = builder.description
+	}
+	if builder.resourcesFlag {
+		req.Resources = builder.resources
+	}
+	return req
+}
+
+type DataAssetResource struct {
+	ResourceId  *string `json:"resource_id,omitempty"`  // 数据知识资源ID
+	ResouceType *string `json:"resouce_type,omitempty"` // 数据知识资源类型
+}
+
+type DataAssetResourceBuilder struct {
+	resourceId      string // 数据知识资源ID
+	resourceIdFlag  bool
+	resouceType     string // 数据知识资源类型
+	resouceTypeFlag bool
+}
+
+func NewDataAssetResourceBuilder() *DataAssetResourceBuilder {
+	builder := &DataAssetResourceBuilder{}
+	return builder
+}
+
+// 数据知识资源ID
+//
+// 示例值：spring_5862e4fea8__c__dataset_aadg3lxm4j6mg
+func (builder *DataAssetResourceBuilder) ResourceId(resourceId string) *DataAssetResourceBuilder {
+	builder.resourceId = resourceId
+	builder.resourceIdFlag = true
+	return builder
+}
+
+// 数据知识资源类型
+//
+// 示例值：dataset
+func (builder *DataAssetResourceBuilder) ResouceType(resouceType string) *DataAssetResourceBuilder {
+	builder.resouceType = resouceType
+	builder.resouceTypeFlag = true
+	return builder
+}
+
+func (builder *DataAssetResourceBuilder) Build() *DataAssetResource {
+	req := &DataAssetResource{}
+	if builder.resourceIdFlag {
+		req.ResourceId = &builder.resourceId
+
+	}
+	if builder.resouceTypeFlag {
+		req.ResouceType = &builder.resouceType
+
+	}
+	return req
+}
+
+type DataAssetTag struct {
+	DataAssetTagId *string `json:"data_asset_tag_id,omitempty"` // 数据知识分类名称
+	Name           *string `json:"name,omitempty"`              // 数据知识分类ID
+}
+
+type DataAssetTagBuilder struct {
+	dataAssetTagId     string // 数据知识分类名称
+	dataAssetTagIdFlag bool
+	name               string // 数据知识分类ID
+	nameFlag           bool
+}
+
+func NewDataAssetTagBuilder() *DataAssetTagBuilder {
+	builder := &DataAssetTagBuilder{}
+	return builder
+}
+
+// 数据知识分类名称
+//
+// 示例值：spring_5862e4fea8__c__asset_tag_aadg2b5ql4gbs
+func (builder *DataAssetTagBuilder) DataAssetTagId(dataAssetTagId string) *DataAssetTagBuilder {
+	builder.dataAssetTagId = dataAssetTagId
+	builder.dataAssetTagIdFlag = true
+	return builder
+}
+
+// 数据知识分类ID
+//
+// 示例值：电影
+func (builder *DataAssetTagBuilder) Name(name string) *DataAssetTagBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+func (builder *DataAssetTagBuilder) Build() *DataAssetTag {
+	req := &DataAssetTag{}
+	if builder.dataAssetTagIdFlag {
+		req.DataAssetTagId = &builder.dataAssetTagId
+
+	}
+	if builder.nameFlag {
+		req.Name = &builder.name
 
 	}
 	return req
@@ -3684,6 +4170,117 @@ func (builder *SessionBuilder) Build() *Session {
 	return req
 }
 
+type Skill struct {
+	Id           *string  `json:"id,omitempty"`            // 技能 ID
+	Label        *string  `json:"label,omitempty"`         // 技能名称
+	Description  *string  `json:"description,omitempty"`   // 技能描述
+	Samples      []string `json:"samples,omitempty"`       // 用户提问示例
+	InputSchema  *string  `json:"input_schema,omitempty"`  // 技能入参定义
+	OutputSchema *string  `json:"output_schema,omitempty"` // 技能出参定义
+}
+
+type SkillBuilder struct {
+	id               string // 技能 ID
+	idFlag           bool
+	label            string // 技能名称
+	labelFlag        bool
+	description      string // 技能描述
+	descriptionFlag  bool
+	samples          []string // 用户提问示例
+	samplesFlag      bool
+	inputSchema      string // 技能入参定义
+	inputSchemaFlag  bool
+	outputSchema     string // 技能出参定义
+	outputSchemaFlag bool
+}
+
+func NewSkillBuilder() *SkillBuilder {
+	builder := &SkillBuilder{}
+	return builder
+}
+
+// 技能 ID
+//
+// 示例值：skill_6cc6166178ca
+func (builder *SkillBuilder) Id(id string) *SkillBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 技能名称
+//
+// 示例值：数据分析和问答
+func (builder *SkillBuilder) Label(label string) *SkillBuilder {
+	builder.label = label
+	builder.labelFlag = true
+	return builder
+}
+
+// 技能描述
+//
+// 示例值：理解用户提出的问题，对当前助手已经配置的数据资产进行知识搜索、数据分析、文档阅读，总结并返回答案。
+func (builder *SkillBuilder) Description(description string) *SkillBuilder {
+	builder.description = description
+	builder.descriptionFlag = true
+	return builder
+}
+
+// 用户提问示例
+//
+// 示例值：
+func (builder *SkillBuilder) Samples(samples []string) *SkillBuilder {
+	builder.samples = samples
+	builder.samplesFlag = true
+	return builder
+}
+
+// 技能入参定义
+//
+// 示例值：[{"name":"custom_s","type":"String","required":true,"defaultValue":"qwert","description":"自定义字符串"},{"name":"custom_i","type":"Integer","required":true,"defaultValue":null,"description":""},{"name":"custom_b","type":"Boolean","required":true,"defaultValue":true,"description":""},{"name":"custom_f","type":"Float","required":true,"defaultValue":2.1,"description":""}]
+func (builder *SkillBuilder) InputSchema(inputSchema string) *SkillBuilder {
+	builder.inputSchema = inputSchema
+	builder.inputSchemaFlag = true
+	return builder
+}
+
+// 技能出参定义
+//
+// 示例值：[{"name":"input","type":"String","required":false,"defaultValue":null},{"name":"custom","type":"Boolean","required":false,"defaultValue":null}]
+func (builder *SkillBuilder) OutputSchema(outputSchema string) *SkillBuilder {
+	builder.outputSchema = outputSchema
+	builder.outputSchemaFlag = true
+	return builder
+}
+
+func (builder *SkillBuilder) Build() *Skill {
+	req := &Skill{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.labelFlag {
+		req.Label = &builder.label
+
+	}
+	if builder.descriptionFlag {
+		req.Description = &builder.description
+
+	}
+	if builder.samplesFlag {
+		req.Samples = builder.samples
+	}
+	if builder.inputSchemaFlag {
+		req.InputSchema = &builder.inputSchema
+
+	}
+	if builder.outputSchemaFlag {
+		req.OutputSchema = &builder.outputSchema
+
+	}
+	return req
+}
+
 type SkillBaseInfo struct {
 	Name        *string `json:"name,omitempty"`         // 技能名称
 	SkillId     *string `json:"skill_id,omitempty"`     // 技能 id
@@ -3840,6 +4437,68 @@ func (builder *SkillCallBuilder) Build() *SkillCall {
 	if builder.inputDslFlag {
 		req.InputDsl = &builder.inputDsl
 
+	}
+	return req
+}
+
+type SkillGlobalVariable struct {
+	Query   *string  `json:"query,omitempty"`   // 触发技能的消息文本
+	Files   []string `json:"files,omitempty"`   // 触发技能的消息文件
+	Channel *Channel `json:"channel,omitempty"` // 渠道信息
+}
+
+type SkillGlobalVariableBuilder struct {
+	query       string // 触发技能的消息文本
+	queryFlag   bool
+	files       []string // 触发技能的消息文件
+	filesFlag   bool
+	channel     *Channel // 渠道信息
+	channelFlag bool
+}
+
+func NewSkillGlobalVariableBuilder() *SkillGlobalVariableBuilder {
+	builder := &SkillGlobalVariableBuilder{}
+	return builder
+}
+
+// 触发技能的消息文本
+//
+// 示例值：你好
+func (builder *SkillGlobalVariableBuilder) Query(query string) *SkillGlobalVariableBuilder {
+	builder.query = query
+	builder.queryFlag = true
+	return builder
+}
+
+// 触发技能的消息文件
+//
+// 示例值：
+func (builder *SkillGlobalVariableBuilder) Files(files []string) *SkillGlobalVariableBuilder {
+	builder.files = files
+	builder.filesFlag = true
+	return builder
+}
+
+// 渠道信息
+//
+// 示例值：
+func (builder *SkillGlobalVariableBuilder) Channel(channel *Channel) *SkillGlobalVariableBuilder {
+	builder.channel = channel
+	builder.channelFlag = true
+	return builder
+}
+
+func (builder *SkillGlobalVariableBuilder) Build() *SkillGlobalVariable {
+	req := &SkillGlobalVariable{}
+	if builder.queryFlag {
+		req.Query = &builder.query
+
+	}
+	if builder.filesFlag {
+		req.Files = builder.files
+	}
+	if builder.channelFlag {
+		req.Channel = builder.channel
 	}
 	return req
 }

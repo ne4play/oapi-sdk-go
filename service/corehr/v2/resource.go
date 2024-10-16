@@ -16,7 +16,9 @@ type V2 struct {
 	BasicInfoCountryRegionSubdivision *basicInfoCountryRegionSubdivision // basic_info.country_region_subdivision
 	BasicInfoCurrency                 *basicInfoCurrency                 // basic_info.currency
 	BasicInfoDistrict                 *basicInfoDistrict                 // basic_info.district
+	BasicInfoLanguage                 *basicInfoLanguage                 // basic_info.language
 	BasicInfoNationality              *basicInfoNationality              // basic_info.nationality
+	BasicInfoTimeZone                 *basicInfoTimeZone                 // basic_info.time_zone
 	Bp                                *bp                                // bp
 	Company                           *company                           // company
 	Contract                          *contract                          // contract
@@ -42,6 +44,7 @@ type V2 struct {
 	ProcessCc                         *processCc                         // process.cc
 	ProcessFormVariableData           *processFormVariableData           // process.form_variable_data
 	ProcessNode                       *processNode                       // process.node
+	ProcessStatus                     *processStatus                     // process.status
 	WorkforcePlanDetail               *workforcePlanDetail               // workforce_plan_detail
 }
 
@@ -54,7 +57,9 @@ func New(config *larkcore.Config) *V2 {
 		BasicInfoCountryRegionSubdivision: &basicInfoCountryRegionSubdivision{config: config},
 		BasicInfoCurrency:                 &basicInfoCurrency{config: config},
 		BasicInfoDistrict:                 &basicInfoDistrict{config: config},
+		BasicInfoLanguage:                 &basicInfoLanguage{config: config},
 		BasicInfoNationality:              &basicInfoNationality{config: config},
+		BasicInfoTimeZone:                 &basicInfoTimeZone{config: config},
 		Bp:                                &bp{config: config},
 		Company:                           &company{config: config},
 		Contract:                          &contract{config: config},
@@ -80,6 +85,7 @@ func New(config *larkcore.Config) *V2 {
 		ProcessCc:                         &processCc{config: config},
 		ProcessFormVariableData:           &processFormVariableData{config: config},
 		ProcessNode:                       &processNode{config: config},
+		ProcessStatus:                     &processStatus{config: config},
 		WorkforcePlanDetail:               &workforcePlanDetail{config: config},
 	}
 }
@@ -105,7 +111,13 @@ type basicInfoCurrency struct {
 type basicInfoDistrict struct {
 	config *larkcore.Config
 }
+type basicInfoLanguage struct {
+	config *larkcore.Config
+}
 type basicInfoNationality struct {
+	config *larkcore.Config
+}
+type basicInfoTimeZone struct {
 	config *larkcore.Config
 }
 type bp struct {
@@ -181,6 +193,9 @@ type processFormVariableData struct {
 	config *larkcore.Config
 }
 type processNode struct {
+	config *larkcore.Config
+}
+type processStatus struct {
 	config *larkcore.Config
 }
 type workforcePlanDetail struct {
@@ -429,6 +444,40 @@ func (b *basicInfoDistrict) SearchByIterator(ctx context.Context, req *SearchBas
 //
 // -
 //
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=search&project=corehr&resource=basic_info.language&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/search_basicInfoLanguage.go
+func (b *basicInfoLanguage) Search(ctx context.Context, req *SearchBasicInfoLanguageReq, options ...larkcore.RequestOptionFunc) (*SearchBasicInfoLanguageResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/basic_info/languages/search"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, b.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &SearchBasicInfoLanguageResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, b.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (b *basicInfoLanguage) SearchByIterator(ctx context.Context, req *SearchBasicInfoLanguageReq, options ...larkcore.RequestOptionFunc) (*SearchBasicInfoLanguageIterator, error) {
+	return &SearchBasicInfoLanguageIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: b.Search,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// Search
+//
+// -
+//
 // - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=search&project=corehr&resource=basic_info.nationality&version=v2
 //
 // - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/search_basicInfoNationality.go
@@ -452,6 +501,40 @@ func (b *basicInfoNationality) Search(ctx context.Context, req *SearchBasicInfoN
 }
 func (b *basicInfoNationality) SearchByIterator(ctx context.Context, req *SearchBasicInfoNationalityReq, options ...larkcore.RequestOptionFunc) (*SearchBasicInfoNationalityIterator, error) {
 	return &SearchBasicInfoNationalityIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: b.Search,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// Search
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=search&project=corehr&resource=basic_info.time_zone&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/search_basicInfoTimeZone.go
+func (b *basicInfoTimeZone) Search(ctx context.Context, req *SearchBasicInfoTimeZoneReq, options ...larkcore.RequestOptionFunc) (*SearchBasicInfoTimeZoneResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/basic_info/time_zones/search"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, b.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &SearchBasicInfoTimeZoneResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, b.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (b *basicInfoTimeZone) SearchByIterator(ctx context.Context, req *SearchBasicInfoTimeZoneReq, options ...larkcore.RequestOptionFunc) (*SearchBasicInfoTimeZoneIterator, error) {
+	return &SearchBasicInfoTimeZoneIterator{
 		ctx:      ctx,
 		req:      req,
 		listFunc: b.Search,
@@ -1272,6 +1355,84 @@ func (j *jobFamily) BatchGet(ctx context.Context, req *BatchGetJobFamilyReq, opt
 	}
 	// 反序列响应结果
 	resp := &BatchGetJobFamilyResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, j.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Create
+//
+// - 创建职等数据
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=create&project=corehr&resource=job_grade&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/create_jobGrade.go
+func (j *jobGrade) Create(ctx context.Context, req *CreateJobGradeReq, options ...larkcore.RequestOptionFunc) (*CreateJobGradeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/job_grades"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, j.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &CreateJobGradeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, j.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Delete
+//
+// - 删除职等信息
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=delete&project=corehr&resource=job_grade&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/delete_jobGrade.go
+func (j *jobGrade) Delete(ctx context.Context, req *DeleteJobGradeReq, options ...larkcore.RequestOptionFunc) (*DeleteJobGradeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/job_grades/:job_grade_id"
+	apiReq.HttpMethod = http.MethodDelete
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, j.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &DeleteJobGradeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, j.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Patch
+//
+// - 更新职等信息
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=patch&project=corehr&resource=job_grade&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/patch_jobGrade.go
+func (j *jobGrade) Patch(ctx context.Context, req *PatchJobGradeReq, options ...larkcore.RequestOptionFunc) (*PatchJobGradeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/job_grades/:job_grade_id"
+	apiReq.HttpMethod = http.MethodPatch
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, j.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &PatchJobGradeResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, j.config)
 	if err != nil {
 		return nil, err

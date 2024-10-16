@@ -44,7 +44,9 @@ func main() {
 			OvertimeRestTimeRule([]*larkattendance.RestRule{larkattendance.NewRestRuleBuilder().Build()}).
 			LateMinutesAsSeriousLate(40).
 			ShiftMiddleTimeRule(larkattendance.NewShiftMiddleTimeRuleBuilder().Build()).
+			ShiftAttendanceTimeConfig(larkattendance.NewShiftAttendanceTimeConfigBuilder().Build()).
 			LateOffLateOnSetting(larkattendance.NewLateOffLateOnSettingBuilder().Build()).
+			Id("6919358778597097404").
 			Build()).
 		Build()
 	// 发起请求

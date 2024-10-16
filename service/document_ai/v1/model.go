@@ -2431,13 +2431,13 @@ func (builder *LlmConfigBuilder) Build() *LlmConfig {
 
 type LlmContent struct {
 	Type    *string `json:"type,omitempty"`    // 内容类型：text, image_zip
-	Content *string `json:"content,omitempty"` // 内容：text类型就是对应的输入文本， image_zip是文件的相对路径
+	Content *string `json:"content,omitempty"` // 内容：text类型就是对应的输入文本， image_zip是文件的相对路径，文件需要以zip格式输入
 }
 
 type LlmContentBuilder struct {
 	type_       string // 内容类型：text, image_zip
 	typeFlag    bool
-	content     string // 内容：text类型就是对应的输入文本， image_zip是文件的相对路径
+	content     string // 内容：text类型就是对应的输入文本， image_zip是文件的相对路径，文件需要以zip格式输入
 	contentFlag bool
 }
 
@@ -2455,7 +2455,7 @@ func (builder *LlmContentBuilder) Type(type_ string) *LlmContentBuilder {
 	return builder
 }
 
-// 内容：text类型就是对应的输入文本， image_zip是文件的相对路径
+// 内容：text类型就是对应的输入文本， image_zip是文件的相对路径，文件需要以zip格式输入
 //
 // 示例值：输入图片按顺序描述了一件什么事情
 func (builder *LlmContentBuilder) Content(content string) *LlmContentBuilder {

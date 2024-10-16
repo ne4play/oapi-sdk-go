@@ -65,6 +65,12 @@ const (
 	UserIdTypeGetDocumentBlockChildrenOpenId  = "open_id"  // 以open_id来识别用户
 )
 
+const (
+	UserIdTypeCreateDocumentBlockDescendantUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeCreateDocumentBlockDescendantUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeCreateDocumentBlockDescendantOpenId  = "open_id"  // 以open_id来识别用户
+)
+
 type AddOns struct {
 	ComponentId     *string `json:"component_id,omitempty"`      // 团队互动应用唯一ID
 	ComponentTypeId *string `json:"component_type_id,omitempty"` // 团队互动应用类型，比如问答互动"blk_636a0a6657db8001c8df5488"
@@ -6508,6 +6514,212 @@ type GetDocumentBlockChildrenResp struct {
 }
 
 func (resp *GetDocumentBlockChildrenResp) Success() bool {
+	return resp.Code == 0
+}
+
+type CreateDocumentBlockDescendantReqBodyBuilder struct {
+	childrenId      []string // 添加的孩子 BlockID 列表
+	childrenIdFlag  bool
+	index           int // 当前 Block 在 Children 中的插入位置，起始值为 0，最大值为原 Children 长度
+	indexFlag       bool
+	descendants     []*Block // 添加的子孙列表，包括孩子
+	descendantsFlag bool
+}
+
+func NewCreateDocumentBlockDescendantReqBodyBuilder() *CreateDocumentBlockDescendantReqBodyBuilder {
+	builder := &CreateDocumentBlockDescendantReqBodyBuilder{}
+	return builder
+}
+
+// 添加的孩子 BlockID 列表
+//
+// 示例值：
+func (builder *CreateDocumentBlockDescendantReqBodyBuilder) ChildrenId(childrenId []string) *CreateDocumentBlockDescendantReqBodyBuilder {
+	builder.childrenId = childrenId
+	builder.childrenIdFlag = true
+	return builder
+}
+
+// 当前 Block 在 Children 中的插入位置，起始值为 0，最大值为原 Children 长度
+//
+// 示例值：0
+func (builder *CreateDocumentBlockDescendantReqBodyBuilder) Index(index int) *CreateDocumentBlockDescendantReqBodyBuilder {
+	builder.index = index
+	builder.indexFlag = true
+	return builder
+}
+
+// 添加的子孙列表，包括孩子
+//
+// 示例值：
+func (builder *CreateDocumentBlockDescendantReqBodyBuilder) Descendants(descendants []*Block) *CreateDocumentBlockDescendantReqBodyBuilder {
+	builder.descendants = descendants
+	builder.descendantsFlag = true
+	return builder
+}
+
+func (builder *CreateDocumentBlockDescendantReqBodyBuilder) Build() *CreateDocumentBlockDescendantReqBody {
+	req := &CreateDocumentBlockDescendantReqBody{}
+	if builder.childrenIdFlag {
+		req.ChildrenId = builder.childrenId
+	}
+	if builder.indexFlag {
+		req.Index = &builder.index
+	}
+	if builder.descendantsFlag {
+		req.Descendants = builder.descendants
+	}
+	return req
+}
+
+type CreateDocumentBlockDescendantPathReqBodyBuilder struct {
+	childrenId      []string
+	childrenIdFlag  bool
+	index           int
+	indexFlag       bool
+	descendants     []*Block
+	descendantsFlag bool
+}
+
+func NewCreateDocumentBlockDescendantPathReqBodyBuilder() *CreateDocumentBlockDescendantPathReqBodyBuilder {
+	builder := &CreateDocumentBlockDescendantPathReqBodyBuilder{}
+	return builder
+}
+
+// 添加的孩子 BlockID 列表
+//
+// 示例值：
+func (builder *CreateDocumentBlockDescendantPathReqBodyBuilder) ChildrenId(childrenId []string) *CreateDocumentBlockDescendantPathReqBodyBuilder {
+	builder.childrenId = childrenId
+	builder.childrenIdFlag = true
+	return builder
+}
+
+// 当前 Block 在 Children 中的插入位置，起始值为 0，最大值为原 Children 长度
+//
+// 示例值：0
+func (builder *CreateDocumentBlockDescendantPathReqBodyBuilder) Index(index int) *CreateDocumentBlockDescendantPathReqBodyBuilder {
+	builder.index = index
+	builder.indexFlag = true
+	return builder
+}
+
+// 添加的子孙列表，包括孩子
+//
+// 示例值：
+func (builder *CreateDocumentBlockDescendantPathReqBodyBuilder) Descendants(descendants []*Block) *CreateDocumentBlockDescendantPathReqBodyBuilder {
+	builder.descendants = descendants
+	builder.descendantsFlag = true
+	return builder
+}
+
+func (builder *CreateDocumentBlockDescendantPathReqBodyBuilder) Build() (*CreateDocumentBlockDescendantReqBody, error) {
+	req := &CreateDocumentBlockDescendantReqBody{}
+	if builder.childrenIdFlag {
+		req.ChildrenId = builder.childrenId
+	}
+	if builder.indexFlag {
+		req.Index = &builder.index
+	}
+	if builder.descendantsFlag {
+		req.Descendants = builder.descendants
+	}
+	return req, nil
+}
+
+type CreateDocumentBlockDescendantReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *CreateDocumentBlockDescendantReqBody
+}
+
+func NewCreateDocumentBlockDescendantReqBuilder() *CreateDocumentBlockDescendantReqBuilder {
+	builder := &CreateDocumentBlockDescendantReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 文档的唯一标识
+//
+// 示例值：Ew13dgs8BoZSetxd0CNbr0h3c8e
+func (builder *CreateDocumentBlockDescendantReqBuilder) DocumentId(documentId string) *CreateDocumentBlockDescendantReqBuilder {
+	builder.apiReq.PathParams.Set("document_id", fmt.Sprint(documentId))
+	return builder
+}
+
+// Block 的唯一标识
+//
+// 示例值：Ew13dgs8BoZSetxd0CNbr0h3c8e
+func (builder *CreateDocumentBlockDescendantReqBuilder) BlockId(blockId string) *CreateDocumentBlockDescendantReqBuilder {
+	builder.apiReq.PathParams.Set("block_id", fmt.Sprint(blockId))
+	return builder
+}
+
+// 操作的文档版本，-1 表示文档最新版本。若此时操作的版本为文档最新版本，则需要持有文档的阅读权限；若此时操作的版本为文档的历史版本，则需要持有文档的编辑权限
+//
+// 示例值：-1
+func (builder *CreateDocumentBlockDescendantReqBuilder) DocumentRevisionId(documentRevisionId int) *CreateDocumentBlockDescendantReqBuilder {
+	builder.apiReq.QueryParams.Set("document_revision_id", fmt.Sprint(documentRevisionId))
+	return builder
+}
+
+// 操作的唯一标识，与接口返回值的 client_token 相对应，用于幂等的进行更新操作。此值为空表示将发起一次新的请求，此值非空表示幂等的进行更新操作
+//
+// 示例值：8aac2291-bc9e-4b12-a162-b3cf15bb06bd
+func (builder *CreateDocumentBlockDescendantReqBuilder) ClientToken(clientToken string) *CreateDocumentBlockDescendantReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *CreateDocumentBlockDescendantReqBuilder) UserIdType(userIdType string) *CreateDocumentBlockDescendantReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *CreateDocumentBlockDescendantReqBuilder) Body(body *CreateDocumentBlockDescendantReqBody) *CreateDocumentBlockDescendantReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *CreateDocumentBlockDescendantReqBuilder) Build() *CreateDocumentBlockDescendantReq {
+	req := &CreateDocumentBlockDescendantReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type CreateDocumentBlockDescendantReqBody struct {
+	ChildrenId  []string `json:"children_id,omitempty"` // 添加的孩子 BlockID 列表
+	Index       *int     `json:"index,omitempty"`       // 当前 Block 在 Children 中的插入位置，起始值为 0，最大值为原 Children 长度
+	Descendants []*Block `json:"descendants,omitempty"` // 添加的子孙列表，包括孩子
+}
+
+type CreateDocumentBlockDescendantReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *CreateDocumentBlockDescendantReqBody `body:""`
+}
+
+type CreateDocumentBlockDescendantRespData struct {
+	Children           []*Block           `json:"children,omitempty"`             // 所添加的孩子的 Block 信息
+	DocumentRevisionId *int               `json:"document_revision_id,omitempty"` // 当前提交的 Block 创建成功后文档的版本号
+	ClientToken        *string            `json:"client_token,omitempty"`         // 操作的唯一标识，更新请求中使用此值表示幂等的进行此次更新
+	BlockIdRelations   []*BlockIdRelation `json:"block_id_relations,omitempty"`   // 传入的临时 BlockID 与真实 BlockID 映射关系
+}
+
+type CreateDocumentBlockDescendantResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *CreateDocumentBlockDescendantRespData `json:"data"` // 业务数据
+}
+
+func (resp *CreateDocumentBlockDescendantResp) Success() bool {
 	return resp.Code == 0
 }
 
