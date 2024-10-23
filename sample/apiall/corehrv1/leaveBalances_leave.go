@@ -33,6 +33,7 @@ func main() {
 		EmploymentIdList([]string{}).
 		UserIdType("people_corehr_id").
 		TimeZone("Asia/Shanghai").
+		IncludeOffboard(true).
 		Build()
 	// 发起请求
 	resp, err := client.Corehr.V1.Leave.LeaveBalances(context.Background(), req)

@@ -8704,7 +8704,7 @@ func (builder *JobCategoryBuilder) Build() *JobCategory {
 type JobChange struct {
 	JobChangeId                    *string       `json:"job_change_id,omitempty"`                     // 异动记录 id
 	EmploymentId                   *string       `json:"employment_id,omitempty"`                     // 雇员 id
-	Status                         *string       `json:"status,omitempty"`                            // 异动状态
+	Status                         *int          `json:"status,omitempty"`                            // 异动状态
 	TransferTypeUniqueIdentifier   *string       `json:"transfer_type_unique_identifier,omitempty"`   // 异动类型唯一标识
 	TransferReasonUniqueIdentifier *string       `json:"transfer_reason_unique_identifier,omitempty"` // 异动原因唯一标识
 	ProcessId                      *string       `json:"process_id,omitempty"`                        // 异动发起后审批流程 id
@@ -8719,7 +8719,7 @@ type JobChangeBuilder struct {
 	jobChangeIdFlag                    bool
 	employmentId                       string // 雇员 id
 	employmentIdFlag                   bool
-	status                             string // 异动状态
+	status                             int // 异动状态
 	statusFlag                         bool
 	transferTypeUniqueIdentifier       string // 异动类型唯一标识
 	transferTypeUniqueIdentifierFlag   bool
@@ -8763,7 +8763,7 @@ func (builder *JobChangeBuilder) EmploymentId(employmentId string) *JobChangeBui
 // 异动状态
 //
 // 示例值：4
-func (builder *JobChangeBuilder) Status(status string) *JobChangeBuilder {
+func (builder *JobChangeBuilder) Status(status int) *JobChangeBuilder {
 	builder.status = status
 	builder.statusFlag = true
 	return builder
@@ -8906,6 +8906,8 @@ type JobData struct {
 	WorkShift            *Enum    `json:"work_shift,omitempty"`              // 排班类型
 	CompensationType     *Enum    `json:"compensation_type,omitempty"`       // 薪资类型
 	ServiceCompany       *string  `json:"service_company,omitempty"`         // 任职公司
+	EmployeeSubtypeId    *string  `json:"employee_subtype_id,omitempty"`     // 人员子类型 ID
+	PositionId           *string  `json:"position_id,omitempty"`             // 岗位 ID，枚举值及详细信息可通过【查询单个岗位】接口查询获得
 }
 
 type JobDataBuilder struct {
@@ -8966,6 +8968,10 @@ type JobDataBuilder struct {
 	compensationTypeFlag     bool
 	serviceCompany           string // 任职公司
 	serviceCompanyFlag       bool
+	employeeSubtypeId        string // 人员子类型 ID
+	employeeSubtypeIdFlag    bool
+	positionId               string // 岗位 ID，枚举值及详细信息可通过【查询单个岗位】接口查询获得
+	positionIdFlag           bool
 }
 
 func NewJobDataBuilder() *JobDataBuilder {
@@ -9225,6 +9231,24 @@ func (builder *JobDataBuilder) ServiceCompany(serviceCompany string) *JobDataBui
 	return builder
 }
 
+// 人员子类型 ID
+//
+// 示例值：6890452208593372680
+func (builder *JobDataBuilder) EmployeeSubtypeId(employeeSubtypeId string) *JobDataBuilder {
+	builder.employeeSubtypeId = employeeSubtypeId
+	builder.employeeSubtypeIdFlag = true
+	return builder
+}
+
+// 岗位 ID，枚举值及详细信息可通过【查询单个岗位】接口查询获得
+//
+// 示例值：6890452208593372679
+func (builder *JobDataBuilder) PositionId(positionId string) *JobDataBuilder {
+	builder.positionId = positionId
+	builder.positionIdFlag = true
+	return builder
+}
+
 func (builder *JobDataBuilder) Build() *JobData {
 	req := &JobData{}
 	if builder.idFlag {
@@ -9332,6 +9356,14 @@ func (builder *JobDataBuilder) Build() *JobData {
 	}
 	if builder.serviceCompanyFlag {
 		req.ServiceCompany = &builder.serviceCompany
+
+	}
+	if builder.employeeSubtypeIdFlag {
+		req.EmployeeSubtypeId = &builder.employeeSubtypeId
+
+	}
+	if builder.positionIdFlag {
+		req.PositionId = &builder.positionId
 
 	}
 	return req
@@ -9683,30 +9715,51 @@ func (builder *JobLevelBuilder) Build() *JobLevel {
 }
 
 type LeaveBalance struct {
-	LeaveTypeId          *string `json:"leave_type_id,omitempty"`          // 假期类型ID
-	LeaveTypeName        []*I18n `json:"leave_type_name,omitempty"`        // 假期类型名称
-	HistoricalCyclesLeft *string `json:"historical_cycles_left,omitempty"` // 结转的历史周期授予时长
-	ThisCycleTotal       *string `json:"this_cycle_total,omitempty"`       // 本周期授予时长
-	ThisCycleTaken       *string `json:"this_cycle_taken,omitempty"`       // 本周期已休时长
-	LeaveBalance         *string `json:"leave_balance,omitempty"`          // 假期余额
-	LeaveDurationUnit    *int    `json:"leave_duration_unit,omitempty"`    // 假期时长单位;;可选值有：;;- 1: 天;;- 2: 小时
+	LeaveTypeId           *string `json:"leave_type_id,omitempty"`            // 假期类型ID
+	LeaveTypeName         []*I18n `json:"leave_type_name,omitempty"`          // 假期类型名称
+	HistoricalCyclesLeft  *string `json:"historical_cycles_left,omitempty"`   // 结转的历史周期授予时长
+	ThisCycleTotal        *string `json:"this_cycle_total,omitempty"`         // 本周期授予时长
+	ThisCycleTaken        *string `json:"this_cycle_taken,omitempty"`         // 本周期已休时长
+	LeaveBalance          *string `json:"leave_balance,omitempty"`            // 假期余额
+	LeaveDurationUnit     *int    `json:"leave_duration_unit,omitempty"`      // 假期时长单位;;可选值有：;;- 1: 天;;- 2: 小时
+	HistoryCycleAccrual   *string `json:"history_cycle_accrual,omitempty"`    // 历史结转发放
+	BalanceInCurrentCycle *string `json:"balance_in_current_cycle,omitempty"` // 当前周期余额
+	Taken                 *string `json:"taken,omitempty"`                    // 已休时长
+	TakenHistoryCycle     *string `json:"taken_history_cycle,omitempty"`      // 历史周期已休时长
+	OffboardingBalance    *string `json:"offboarding_balance,omitempty"`      // 余额（离职折算）
+	TakenCurrentDate      *string `json:"taken_current_date,omitempty"`       // 已休时长（截止当日）
+	OffboardingGranted    *string `json:"offboarding_granted,omitempty"`      // 本周期授予时长（离职折算）
 }
 
 type LeaveBalanceBuilder struct {
-	leaveTypeId              string // 假期类型ID
-	leaveTypeIdFlag          bool
-	leaveTypeName            []*I18n // 假期类型名称
-	leaveTypeNameFlag        bool
-	historicalCyclesLeft     string // 结转的历史周期授予时长
-	historicalCyclesLeftFlag bool
-	thisCycleTotal           string // 本周期授予时长
-	thisCycleTotalFlag       bool
-	thisCycleTaken           string // 本周期已休时长
-	thisCycleTakenFlag       bool
-	leaveBalance             string // 假期余额
-	leaveBalanceFlag         bool
-	leaveDurationUnit        int // 假期时长单位;;可选值有：;;- 1: 天;;- 2: 小时
-	leaveDurationUnitFlag    bool
+	leaveTypeId               string // 假期类型ID
+	leaveTypeIdFlag           bool
+	leaveTypeName             []*I18n // 假期类型名称
+	leaveTypeNameFlag         bool
+	historicalCyclesLeft      string // 结转的历史周期授予时长
+	historicalCyclesLeftFlag  bool
+	thisCycleTotal            string // 本周期授予时长
+	thisCycleTotalFlag        bool
+	thisCycleTaken            string // 本周期已休时长
+	thisCycleTakenFlag        bool
+	leaveBalance              string // 假期余额
+	leaveBalanceFlag          bool
+	leaveDurationUnit         int // 假期时长单位;;可选值有：;;- 1: 天;;- 2: 小时
+	leaveDurationUnitFlag     bool
+	historyCycleAccrual       string // 历史结转发放
+	historyCycleAccrualFlag   bool
+	balanceInCurrentCycle     string // 当前周期余额
+	balanceInCurrentCycleFlag bool
+	taken                     string // 已休时长
+	takenFlag                 bool
+	takenHistoryCycle         string // 历史周期已休时长
+	takenHistoryCycleFlag     bool
+	offboardingBalance        string // 余额（离职折算）
+	offboardingBalanceFlag    bool
+	takenCurrentDate          string // 已休时长（截止当日）
+	takenCurrentDateFlag      bool
+	offboardingGranted        string // 本周期授予时长（离职折算）
+	offboardingGrantedFlag    bool
 }
 
 func NewLeaveBalanceBuilder() *LeaveBalanceBuilder {
@@ -9777,6 +9830,69 @@ func (builder *LeaveBalanceBuilder) LeaveDurationUnit(leaveDurationUnit int) *Le
 	return builder
 }
 
+// 历史结转发放
+//
+// 示例值：0
+func (builder *LeaveBalanceBuilder) HistoryCycleAccrual(historyCycleAccrual string) *LeaveBalanceBuilder {
+	builder.historyCycleAccrual = historyCycleAccrual
+	builder.historyCycleAccrualFlag = true
+	return builder
+}
+
+// 当前周期余额
+//
+// 示例值：0
+func (builder *LeaveBalanceBuilder) BalanceInCurrentCycle(balanceInCurrentCycle string) *LeaveBalanceBuilder {
+	builder.balanceInCurrentCycle = balanceInCurrentCycle
+	builder.balanceInCurrentCycleFlag = true
+	return builder
+}
+
+// 已休时长
+//
+// 示例值：0
+func (builder *LeaveBalanceBuilder) Taken(taken string) *LeaveBalanceBuilder {
+	builder.taken = taken
+	builder.takenFlag = true
+	return builder
+}
+
+// 历史周期已休时长
+//
+// 示例值：0
+func (builder *LeaveBalanceBuilder) TakenHistoryCycle(takenHistoryCycle string) *LeaveBalanceBuilder {
+	builder.takenHistoryCycle = takenHistoryCycle
+	builder.takenHistoryCycleFlag = true
+	return builder
+}
+
+// 余额（离职折算）
+//
+// 示例值：0
+func (builder *LeaveBalanceBuilder) OffboardingBalance(offboardingBalance string) *LeaveBalanceBuilder {
+	builder.offboardingBalance = offboardingBalance
+	builder.offboardingBalanceFlag = true
+	return builder
+}
+
+// 已休时长（截止当日）
+//
+// 示例值：0
+func (builder *LeaveBalanceBuilder) TakenCurrentDate(takenCurrentDate string) *LeaveBalanceBuilder {
+	builder.takenCurrentDate = takenCurrentDate
+	builder.takenCurrentDateFlag = true
+	return builder
+}
+
+// 本周期授予时长（离职折算）
+//
+// 示例值：0
+func (builder *LeaveBalanceBuilder) OffboardingGranted(offboardingGranted string) *LeaveBalanceBuilder {
+	builder.offboardingGranted = offboardingGranted
+	builder.offboardingGrantedFlag = true
+	return builder
+}
+
 func (builder *LeaveBalanceBuilder) Build() *LeaveBalance {
 	req := &LeaveBalance{}
 	if builder.leaveTypeIdFlag {
@@ -9804,6 +9920,34 @@ func (builder *LeaveBalanceBuilder) Build() *LeaveBalance {
 	}
 	if builder.leaveDurationUnitFlag {
 		req.LeaveDurationUnit = &builder.leaveDurationUnit
+
+	}
+	if builder.historyCycleAccrualFlag {
+		req.HistoryCycleAccrual = &builder.historyCycleAccrual
+
+	}
+	if builder.balanceInCurrentCycleFlag {
+		req.BalanceInCurrentCycle = &builder.balanceInCurrentCycle
+
+	}
+	if builder.takenFlag {
+		req.Taken = &builder.taken
+
+	}
+	if builder.takenHistoryCycleFlag {
+		req.TakenHistoryCycle = &builder.takenHistoryCycle
+
+	}
+	if builder.offboardingBalanceFlag {
+		req.OffboardingBalance = &builder.offboardingBalance
+
+	}
+	if builder.takenCurrentDateFlag {
+		req.TakenCurrentDate = &builder.takenCurrentDate
+
+	}
+	if builder.offboardingGrantedFlag {
+		req.OffboardingGranted = &builder.offboardingGranted
 
 	}
 	return req
@@ -21317,7 +21461,7 @@ type CreateJobChangeReq struct {
 type CreateJobChangeRespData struct {
 	JobChangeId                    *string       `json:"job_change_id,omitempty"`                     // 异动记录 id
 	EmploymentId                   *string       `json:"employment_id,omitempty"`                     // 雇员 id
-	Status                         *string       `json:"status,omitempty"`                            // 异动状态
+	Status                         *int          `json:"status,omitempty"`                            // 异动状态
 	TransferTypeUniqueIdentifier   *string       `json:"transfer_type_unique_identifier,omitempty"`   // 异动类型
 	TransferReasonUniqueIdentifier *string       `json:"transfer_reason_unique_identifier,omitempty"` // 异动原因
 	ProcessId                      *string       `json:"process_id,omitempty"`                        // 异动流程 id
@@ -22400,6 +22544,14 @@ func (builder *LeaveBalancesLeaveReqBuilder) UserIdType(userIdType string) *Leav
 // 示例值：Asia/Shanghai
 func (builder *LeaveBalancesLeaveReqBuilder) TimeZone(timeZone string) *LeaveBalancesLeaveReqBuilder {
 	builder.apiReq.QueryParams.Set("time_zone", fmt.Sprint(timeZone))
+	return builder
+}
+
+// 是否获取离职折算字段
+//
+// 示例值：true
+func (builder *LeaveBalancesLeaveReqBuilder) IncludeOffboard(includeOffboard bool) *LeaveBalancesLeaveReqBuilder {
+	builder.apiReq.QueryParams.Set("include_offboard", fmt.Sprint(includeOffboard))
 	return builder
 }
 

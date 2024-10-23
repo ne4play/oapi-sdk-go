@@ -17,11 +17,12 @@ import (
 	"context"
 	"github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2"
 )
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2CompanyCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2CompanyCreatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2CompanyCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2CompanyCreatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.company.created_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.company.created_v2")
@@ -29,11 +30,12 @@ func (dispatcher *EventDispatcher) OnP2CompanyCreatedV2(handler func(ctx context
 	dispatcher.eventType2EventHandler["corehr.company.created_v2"] = larkcorehr.NewP2CompanyCreatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2CompanyDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2CompanyDeletedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2CompanyDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2CompanyDeletedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.company.deleted_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.company.deleted_v2")
@@ -41,11 +43,12 @@ func (dispatcher *EventDispatcher) OnP2CompanyDeletedV2(handler func(ctx context
 	dispatcher.eventType2EventHandler["corehr.company.deleted_v2"] = larkcorehr.NewP2CompanyDeletedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2CompanyUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2CompanyUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2CompanyUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2CompanyUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.company.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.company.updated_v2")
@@ -53,11 +56,12 @@ func (dispatcher *EventDispatcher) OnP2CompanyUpdatedV2(handler func(ctx context
 	dispatcher.eventType2EventHandler["corehr.company.updated_v2"] = larkcorehr.NewP2CompanyUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2CostCenterCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2CostCenterCreatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2CostCenterCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2CostCenterCreatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.cost_center.created_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.cost_center.created_v2")
@@ -65,11 +69,12 @@ func (dispatcher *EventDispatcher) OnP2CostCenterCreatedV2(handler func(ctx cont
 	dispatcher.eventType2EventHandler["corehr.cost_center.created_v2"] = larkcorehr.NewP2CostCenterCreatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2CostCenterDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2CostCenterDeletedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2CostCenterDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2CostCenterDeletedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.cost_center.deleted_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.cost_center.deleted_v2")
@@ -77,11 +82,12 @@ func (dispatcher *EventDispatcher) OnP2CostCenterDeletedV2(handler func(ctx cont
 	dispatcher.eventType2EventHandler["corehr.cost_center.deleted_v2"] = larkcorehr.NewP2CostCenterDeletedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2CostCenterUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2CostCenterUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2CostCenterUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2CostCenterUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.cost_center.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.cost_center.updated_v2")
@@ -89,11 +95,12 @@ func (dispatcher *EventDispatcher) OnP2CostCenterUpdatedV2(handler func(ctx cont
 	dispatcher.eventType2EventHandler["corehr.cost_center.updated_v2"] = larkcorehr.NewP2CostCenterUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2EmployeeDomainEventV2(handler func(ctx context.Context, event *larkcorehr.P2EmployeeDomainEventV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2EmployeeDomainEventV2(handler func(ctx context.Context, event *larkcorehr.P2EmployeeDomainEventV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.employee.domain_event_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.employee.domain_event_v2")
@@ -101,11 +108,12 @@ func (dispatcher *EventDispatcher) OnP2EmployeeDomainEventV2(handler func(ctx co
 	dispatcher.eventType2EventHandler["corehr.employee.domain_event_v2"] = larkcorehr.NewP2EmployeeDomainEventV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobChangeStatusUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobChangeStatusUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobChangeStatusUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobChangeStatusUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_change.status_updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_change.status_updated_v2")
@@ -113,11 +121,12 @@ func (dispatcher *EventDispatcher) OnP2JobChangeStatusUpdatedV2(handler func(ctx
 	dispatcher.eventType2EventHandler["corehr.job_change.status_updated_v2"] = larkcorehr.NewP2JobChangeStatusUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobChangeUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobChangeUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobChangeUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobChangeUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_change.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_change.updated_v2")
@@ -125,11 +134,12 @@ func (dispatcher *EventDispatcher) OnP2JobChangeUpdatedV2(handler func(ctx conte
 	dispatcher.eventType2EventHandler["corehr.job_change.updated_v2"] = larkcorehr.NewP2JobChangeUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobFamilyCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobFamilyCreatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobFamilyCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobFamilyCreatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_family.created_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_family.created_v2")
@@ -137,11 +147,12 @@ func (dispatcher *EventDispatcher) OnP2JobFamilyCreatedV2(handler func(ctx conte
 	dispatcher.eventType2EventHandler["corehr.job_family.created_v2"] = larkcorehr.NewP2JobFamilyCreatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobFamilyDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2JobFamilyDeletedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobFamilyDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2JobFamilyDeletedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_family.deleted_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_family.deleted_v2")
@@ -149,11 +160,12 @@ func (dispatcher *EventDispatcher) OnP2JobFamilyDeletedV2(handler func(ctx conte
 	dispatcher.eventType2EventHandler["corehr.job_family.deleted_v2"] = larkcorehr.NewP2JobFamilyDeletedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobFamilyUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobFamilyUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobFamilyUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobFamilyUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_family.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_family.updated_v2")
@@ -161,11 +173,12 @@ func (dispatcher *EventDispatcher) OnP2JobFamilyUpdatedV2(handler func(ctx conte
 	dispatcher.eventType2EventHandler["corehr.job_family.updated_v2"] = larkcorehr.NewP2JobFamilyUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobGradeCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobGradeCreatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobGradeCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobGradeCreatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_grade.created_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_grade.created_v2")
@@ -173,11 +186,12 @@ func (dispatcher *EventDispatcher) OnP2JobGradeCreatedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.job_grade.created_v2"] = larkcorehr.NewP2JobGradeCreatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobGradeDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2JobGradeDeletedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobGradeDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2JobGradeDeletedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_grade.deleted_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_grade.deleted_v2")
@@ -185,11 +199,12 @@ func (dispatcher *EventDispatcher) OnP2JobGradeDeletedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.job_grade.deleted_v2"] = larkcorehr.NewP2JobGradeDeletedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobGradeUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobGradeUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobGradeUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobGradeUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_grade.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_grade.updated_v2")
@@ -197,11 +212,12 @@ func (dispatcher *EventDispatcher) OnP2JobGradeUpdatedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.job_grade.updated_v2"] = larkcorehr.NewP2JobGradeUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobLevelCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobLevelCreatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobLevelCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobLevelCreatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_level.created_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_level.created_v2")
@@ -209,11 +225,12 @@ func (dispatcher *EventDispatcher) OnP2JobLevelCreatedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.job_level.created_v2"] = larkcorehr.NewP2JobLevelCreatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobLevelDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2JobLevelDeletedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobLevelDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2JobLevelDeletedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_level.deleted_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_level.deleted_v2")
@@ -221,11 +238,12 @@ func (dispatcher *EventDispatcher) OnP2JobLevelDeletedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.job_level.deleted_v2"] = larkcorehr.NewP2JobLevelDeletedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2JobLevelUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobLevelUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2JobLevelUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2JobLevelUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.job_level.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.job_level.updated_v2")
@@ -233,11 +251,12 @@ func (dispatcher *EventDispatcher) OnP2JobLevelUpdatedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.job_level.updated_v2"] = larkcorehr.NewP2JobLevelUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2LocationCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2LocationCreatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2LocationCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2LocationCreatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.location.created_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.location.created_v2")
@@ -245,11 +264,12 @@ func (dispatcher *EventDispatcher) OnP2LocationCreatedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.location.created_v2"] = larkcorehr.NewP2LocationCreatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2LocationDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2LocationDeletedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2LocationDeletedV2(handler func(ctx context.Context, event *larkcorehr.P2LocationDeletedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.location.deleted_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.location.deleted_v2")
@@ -257,11 +277,12 @@ func (dispatcher *EventDispatcher) OnP2LocationDeletedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.location.deleted_v2"] = larkcorehr.NewP2LocationDeletedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2LocationUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2LocationUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2LocationUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2LocationUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.location.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.location.updated_v2")
@@ -269,11 +290,12 @@ func (dispatcher *EventDispatcher) OnP2LocationUpdatedV2(handler func(ctx contex
 	dispatcher.eventType2EventHandler["corehr.location.updated_v2"] = larkcorehr.NewP2LocationUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2OffboardingChecklistUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2OffboardingChecklistUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2OffboardingChecklistUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2OffboardingChecklistUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.offboarding.checklist_updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.offboarding.checklist_updated_v2")
@@ -281,11 +303,12 @@ func (dispatcher *EventDispatcher) OnP2OffboardingChecklistUpdatedV2(handler fun
 	dispatcher.eventType2EventHandler["corehr.offboarding.checklist_updated_v2"] = larkcorehr.NewP2OffboardingChecklistUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2OffboardingStatusUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2OffboardingStatusUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2OffboardingStatusUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2OffboardingStatusUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.offboarding.status_updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.offboarding.status_updated_v2")
@@ -293,11 +316,12 @@ func (dispatcher *EventDispatcher) OnP2OffboardingStatusUpdatedV2(handler func(c
 	dispatcher.eventType2EventHandler["corehr.offboarding.status_updated_v2"] = larkcorehr.NewP2OffboardingStatusUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2OffboardingUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2OffboardingUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2OffboardingUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2OffboardingUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.offboarding.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.offboarding.updated_v2")
@@ -305,11 +329,12 @@ func (dispatcher *EventDispatcher) OnP2OffboardingUpdatedV2(handler func(ctx con
 	dispatcher.eventType2EventHandler["corehr.offboarding.updated_v2"] = larkcorehr.NewP2OffboardingUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2PreHireOnboardingTaskChangedV2(handler func(ctx context.Context, event *larkcorehr.P2PreHireOnboardingTaskChangedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2PreHireOnboardingTaskChangedV2(handler func(ctx context.Context, event *larkcorehr.P2PreHireOnboardingTaskChangedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.pre_hire.onboarding_task_changed_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.pre_hire.onboarding_task_changed_v2")
@@ -317,11 +342,12 @@ func (dispatcher *EventDispatcher) OnP2PreHireOnboardingTaskChangedV2(handler fu
 	dispatcher.eventType2EventHandler["corehr.pre_hire.onboarding_task_changed_v2"] = larkcorehr.NewP2PreHireOnboardingTaskChangedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2ProbationUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProbationUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2ProbationUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProbationUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.probation.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.probation.updated_v2")
@@ -329,11 +355,12 @@ func (dispatcher *EventDispatcher) OnP2ProbationUpdatedV2(handler func(ctx conte
 	dispatcher.eventType2EventHandler["corehr.probation.updated_v2"] = larkcorehr.NewP2ProbationUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2ProcessUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2ProcessUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.process.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.process.updated_v2")
@@ -341,11 +368,12 @@ func (dispatcher *EventDispatcher) OnP2ProcessUpdatedV2(handler func(ctx context
 	dispatcher.eventType2EventHandler["corehr.process.updated_v2"] = larkcorehr.NewP2ProcessUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2ProcessApproverUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessApproverUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2ProcessApproverUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessApproverUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.process.approver.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.process.approver.updated_v2")
@@ -353,11 +381,12 @@ func (dispatcher *EventDispatcher) OnP2ProcessApproverUpdatedV2(handler func(ctx
 	dispatcher.eventType2EventHandler["corehr.process.approver.updated_v2"] = larkcorehr.NewP2ProcessApproverUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2ProcessCcUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessCcUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2ProcessCcUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessCcUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.process.cc.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.process.cc.updated_v2")
@@ -365,11 +394,12 @@ func (dispatcher *EventDispatcher) OnP2ProcessCcUpdatedV2(handler func(ctx conte
 	dispatcher.eventType2EventHandler["corehr.process.cc.updated_v2"] = larkcorehr.NewP2ProcessCcUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2ProcessNodeUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessNodeUpdatedV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2ProcessNodeUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessNodeUpdatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.process.node.updated_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.process.node.updated_v2")
@@ -377,11 +407,12 @@ func (dispatcher *EventDispatcher) OnP2ProcessNodeUpdatedV2(handler func(ctx con
 	dispatcher.eventType2EventHandler["corehr.process.node.updated_v2"] = larkcorehr.NewP2ProcessNodeUpdatedV2Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2ProcessStatusUpdateV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessStatusUpdateV2) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2ProcessStatusUpdateV2(handler func(ctx context.Context, event *larkcorehr.P2ProcessStatusUpdateV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.process.status.update_v2"]
 	if existed {
 		panic("event: multiple handler registrations for " + "corehr.process.status.update_v2")

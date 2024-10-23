@@ -38,6 +38,8 @@ func main() {
 			EffectiveDateEnd("2020-01-01").
 			DepartmentId("6891251722631890445").
 			EmploymentIds([]string{}).
+			PrimaryJobData(true).
+			AssignmentStartReasons([]string{}).
 			Build()).
 		Build()
 	// 发起请求

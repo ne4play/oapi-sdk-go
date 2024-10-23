@@ -30,6 +30,7 @@ func main() {
 		AppId("cli_a3a3d00b40b8d01b").
 		UserIdType("open_id").
 		DepartmentIdType("department_id").
+
 		Body(larkapplication.NewCheckWhiteBlackListApplicationVisibilityReqBodyBuilder().
 			UserIds([]string{}).
 			DepartmentIds([]string{}).

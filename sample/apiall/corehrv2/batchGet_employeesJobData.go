@@ -35,6 +35,8 @@ func main() {
 			EffectiveDateStart("2020-01-01").
 			EffectiveDateEnd("2020-01-01").
 			DataDate("2020-01-01").
+			PrimaryJobData(true).
+			AssignmentStartReasons([]string{}).
 			Build()).
 		Build()
 	// 发起请求

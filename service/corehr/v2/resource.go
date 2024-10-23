@@ -9,6 +9,7 @@ import (
 )
 
 type V2 struct {
+	Approver                          *approver                          // approver
 	BasicInfoBank                     *basicInfoBank                     // basic_info.bank
 	BasicInfoBankBranch               *basicInfoBankBranch               // basic_info.bank_branch
 	BasicInfoCity                     *basicInfoCity                     // basic_info.city
@@ -50,6 +51,7 @@ type V2 struct {
 
 func New(config *larkcore.Config) *V2 {
 	return &V2{
+		Approver:                          &approver{config: config},
 		BasicInfoBank:                     &basicInfoBank{config: config},
 		BasicInfoBankBranch:               &basicInfoBankBranch{config: config},
 		BasicInfoCity:                     &basicInfoCity{config: config},
@@ -90,6 +92,9 @@ func New(config *larkcore.Config) *V2 {
 	}
 }
 
+type approver struct {
+	config *larkcore.Config
+}
 type basicInfoBank struct {
 	config *larkcore.Config
 }
@@ -200,6 +205,40 @@ type processStatus struct {
 }
 type workforcePlanDetail struct {
 	config *larkcore.Config
+}
+
+// List
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=corehr&resource=approver&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/list_approver.go
+func (a *approver) List(ctx context.Context, req *ListApproverReq, options ...larkcore.RequestOptionFunc) (*ListApproverResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/approvers"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListApproverResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (a *approver) ListByIterator(ctx context.Context, req *ListApproverReq, options ...larkcore.RequestOptionFunc) (*ListApproverIterator, error) {
+	return &ListApproverIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: a.List,
+		options:  options,
+		limit:    req.Limit}, nil
 }
 
 // Search
@@ -621,6 +660,32 @@ func (c *company) BatchGet(ctx context.Context, req *BatchGetCompanyReq, options
 	}
 	// 反序列响应结果
 	resp := &BatchGetCompanyResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// QueryRecentChange
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=query_recent_change&project=corehr&resource=company&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/queryRecentChange_company.go
+func (c *company) QueryRecentChange(ctx context.Context, req *QueryRecentChangeCompanyReq, options ...larkcore.RequestOptionFunc) (*QueryRecentChangeCompanyResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/companies/query_recent_change"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &QueryRecentChangeCompanyResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, c.config)
 	if err != nil {
 		return nil, err

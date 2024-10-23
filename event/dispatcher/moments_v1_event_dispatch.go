@@ -17,11 +17,12 @@ import (
 	"context"
 	"github.com/larksuite/oapi-sdk-go/v3/service/moments/v1"
 )
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2CommentCreatedV1(handler func(ctx context.Context, event *larkmoments.P2CommentCreatedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2CommentCreatedV1(handler func(ctx context.Context, event *larkmoments.P2CommentCreatedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.comment.created_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.comment.created_v1")
@@ -29,11 +30,12 @@ func (dispatcher *EventDispatcher) OnP2CommentCreatedV1(handler func(ctx context
 	dispatcher.eventType2EventHandler["moments.comment.created_v1"] = larkmoments.NewP2CommentCreatedV1Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2CommentDeletedV1(handler func(ctx context.Context, event *larkmoments.P2CommentDeletedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2CommentDeletedV1(handler func(ctx context.Context, event *larkmoments.P2CommentDeletedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.comment.deleted_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.comment.deleted_v1")
@@ -41,11 +43,12 @@ func (dispatcher *EventDispatcher) OnP2CommentDeletedV1(handler func(ctx context
 	dispatcher.eventType2EventHandler["moments.comment.deleted_v1"] = larkmoments.NewP2CommentDeletedV1Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2DislikeCreatedV1(handler func(ctx context.Context, event *larkmoments.P2DislikeCreatedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2DislikeCreatedV1(handler func(ctx context.Context, event *larkmoments.P2DislikeCreatedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.dislike.created_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.dislike.created_v1")
@@ -53,11 +56,12 @@ func (dispatcher *EventDispatcher) OnP2DislikeCreatedV1(handler func(ctx context
 	dispatcher.eventType2EventHandler["moments.dislike.created_v1"] = larkmoments.NewP2DislikeCreatedV1Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2DislikeDeletedV1(handler func(ctx context.Context, event *larkmoments.P2DislikeDeletedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2DislikeDeletedV1(handler func(ctx context.Context, event *larkmoments.P2DislikeDeletedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.dislike.deleted_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.dislike.deleted_v1")
@@ -65,11 +69,12 @@ func (dispatcher *EventDispatcher) OnP2DislikeDeletedV1(handler func(ctx context
 	dispatcher.eventType2EventHandler["moments.dislike.deleted_v1"] = larkmoments.NewP2DislikeDeletedV1Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2PostCreatedV1(handler func(ctx context.Context, event *larkmoments.P2PostCreatedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2PostCreatedV1(handler func(ctx context.Context, event *larkmoments.P2PostCreatedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.post.created_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.post.created_v1")
@@ -77,11 +82,12 @@ func (dispatcher *EventDispatcher) OnP2PostCreatedV1(handler func(ctx context.Co
 	dispatcher.eventType2EventHandler["moments.post.created_v1"] = larkmoments.NewP2PostCreatedV1Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2PostDeletedV1(handler func(ctx context.Context, event *larkmoments.P2PostDeletedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2PostDeletedV1(handler func(ctx context.Context, event *larkmoments.P2PostDeletedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.post.deleted_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.post.deleted_v1")
@@ -89,11 +95,12 @@ func (dispatcher *EventDispatcher) OnP2PostDeletedV1(handler func(ctx context.Co
 	dispatcher.eventType2EventHandler["moments.post.deleted_v1"] = larkmoments.NewP2PostDeletedV1Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2PostStatisticsUpdatedV1(handler func(ctx context.Context, event *larkmoments.P2PostStatisticsUpdatedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2PostStatisticsUpdatedV1(handler func(ctx context.Context, event *larkmoments.P2PostStatisticsUpdatedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.post_statistics.updated_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.post_statistics.updated_v1")
@@ -101,11 +108,12 @@ func (dispatcher *EventDispatcher) OnP2PostStatisticsUpdatedV1(handler func(ctx 
 	dispatcher.eventType2EventHandler["moments.post_statistics.updated_v1"] = larkmoments.NewP2PostStatisticsUpdatedV1Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2ReactionCreatedV1(handler func(ctx context.Context, event *larkmoments.P2ReactionCreatedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2ReactionCreatedV1(handler func(ctx context.Context, event *larkmoments.P2ReactionCreatedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.reaction.created_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.reaction.created_v1")
@@ -113,11 +121,12 @@ func (dispatcher *EventDispatcher) OnP2ReactionCreatedV1(handler func(ctx contex
 	dispatcher.eventType2EventHandler["moments.reaction.created_v1"] = larkmoments.NewP2ReactionCreatedV1Handler(handler)
 	return dispatcher
 }
-
-// -
+// 
+//
+// - 
 //
 // - 事件描述文档链接:
-func (dispatcher *EventDispatcher) OnP2ReactionDeletedV1(handler func(ctx context.Context, event *larkmoments.P2ReactionDeletedV1) error) *EventDispatcher {
+func ( dispatcher * EventDispatcher ) OnP2ReactionDeletedV1(handler func(ctx context.Context, event *larkmoments.P2ReactionDeletedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["moments.reaction.deleted_v1"]
 	if existed {
 		panic("event: multiple handler registrations for " + "moments.reaction.deleted_v1")
