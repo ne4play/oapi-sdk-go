@@ -54,6 +54,8 @@ func main() {
 			PhoneNumberList([]string{}).
 			EmailAddressList([]string{}).
 			DepartmentIdListIncludeSub([]string{}).
+			AdditionalNationalIdNumberList([]string{}).
+			CitizenshipStatusList([]string{}).
 			CostCenterIdList([]string{}).
 			Build()).
 		Build()

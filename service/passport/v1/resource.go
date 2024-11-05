@@ -22,6 +22,32 @@ type session struct {
 	config *larkcore.Config
 }
 
+// Logout
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=logout&project=passport&resource=session&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/passportv1/logout_session.go
+func (s *session) Logout(ctx context.Context, req *LogoutSessionReq, options ...larkcore.RequestOptionFunc) (*LogoutSessionResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/passport/v1/sessions/logout"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, s.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &LogoutSessionResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, s.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Query 批量获取用户登录信息（脱敏）
 //
 // - 该接口用于查询用户的登录信息

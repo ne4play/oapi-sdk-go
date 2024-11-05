@@ -160,3 +160,16 @@ func ( dispatcher * EventDispatcher ) OnP2TalentDeletedV1(handler func(ctx conte
 	dispatcher.eventType2EventHandler["hire.talent.deleted_v1"] = larkhire.NewP2TalentDeletedV1Handler(handler)
 	return dispatcher
 }
+// 
+//
+// - 
+//
+// - 事件描述文档链接:
+func ( dispatcher * EventDispatcher ) OnP2TalentTagSubscriptionV1(handler func(ctx context.Context, event *larkhire.P2TalentTagSubscriptionV1) error) * EventDispatcher{
+	_, existed := dispatcher.eventType2EventHandler["hire.talent.tag_subscription_v1"]
+	if existed {
+		panic("event: multiple handler registrations for " + "hire.talent.tag_subscription_v1")
+	}
+	dispatcher.eventType2EventHandler["hire.talent.tag_subscription_v1"] = larkhire.NewP2TalentTagSubscriptionV1Handler(handler)
+	return dispatcher
+}

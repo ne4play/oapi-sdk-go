@@ -28,7 +28,6 @@ func main() {
 	// 创建请求对象
 	req := larkpersonal_settings.NewPatchSystemStatusReqBuilder().
 		SystemStatusId("7101214603622940633").
-
 		Body(larkpersonal_settings.NewPatchSystemStatusReqBodyBuilder().
 			SystemStatus(larkpersonal_settings.NewSystemStatusBuilder().Build()).
 			UpdateFields([]string{}).

@@ -35,6 +35,7 @@ type V2 struct {
 	JobGrade                          *jobGrade                          // job_grade
 	JobLevel                          *jobLevel                          // job_level
 	Location                          *location                          // location
+	LocationAddress                   *locationAddress                   // location.address
 	Offboarding                       *offboarding                       // offboarding
 	Person                            *person                            // person
 	PreHire                           *preHire                           // 待入职
@@ -46,6 +47,7 @@ type V2 struct {
 	ProcessFormVariableData           *processFormVariableData           // process.form_variable_data
 	ProcessNode                       *processNode                       // process.node
 	ProcessStatus                     *processStatus                     // process.status
+	WorkforcePlan                     *workforcePlan                     // workforce_plan
 	WorkforcePlanDetail               *workforcePlanDetail               // workforce_plan_detail
 }
 
@@ -77,6 +79,7 @@ func New(config *larkcore.Config) *V2 {
 		JobGrade:                          &jobGrade{config: config},
 		JobLevel:                          &jobLevel{config: config},
 		Location:                          &location{config: config},
+		LocationAddress:                   &locationAddress{config: config},
 		Offboarding:                       &offboarding{config: config},
 		Person:                            &person{config: config},
 		PreHire:                           &preHire{config: config},
@@ -88,6 +91,7 @@ func New(config *larkcore.Config) *V2 {
 		ProcessFormVariableData:           &processFormVariableData{config: config},
 		ProcessNode:                       &processNode{config: config},
 		ProcessStatus:                     &processStatus{config: config},
+		WorkforcePlan:                     &workforcePlan{config: config},
 		WorkforcePlanDetail:               &workforcePlanDetail{config: config},
 	}
 }
@@ -170,6 +174,9 @@ type jobLevel struct {
 type location struct {
 	config *larkcore.Config
 }
+type locationAddress struct {
+	config *larkcore.Config
+}
 type offboarding struct {
 	config *larkcore.Config
 }
@@ -201,6 +208,9 @@ type processNode struct {
 	config *larkcore.Config
 }
 type processStatus struct {
+	config *larkcore.Config
+}
+type workforcePlan struct {
 	config *larkcore.Config
 }
 type workforcePlanDetail struct {
@@ -639,6 +649,32 @@ func (b *bp) ListByIterator(ctx context.Context, req *ListBpReq, options ...lark
 		listFunc: b.List,
 		options:  options,
 		limit:    req.Limit}, nil
+}
+
+// Active
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=active&project=corehr&resource=company&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/active_company.go
+func (c *company) Active(ctx context.Context, req *ActiveCompanyReq, options ...larkcore.RequestOptionFunc) (*ActiveCompanyResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/companies/active"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ActiveCompanyResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
 }
 
 // BatchGet
@@ -1557,6 +1593,32 @@ func (j *jobLevel) BatchGet(ctx context.Context, req *BatchGetJobLevelReq, optio
 	return resp, err
 }
 
+// Active
+//
+// - 启停/停用地点
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=active&project=corehr&resource=location&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/active_location.go
+func (l *location) Active(ctx context.Context, req *ActiveLocationReq, options ...larkcore.RequestOptionFunc) (*ActiveLocationResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/locations/active"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ActiveLocationResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // BatchGet
 //
 // - 通过地点 ID 批量获取地点信息
@@ -1576,6 +1638,110 @@ func (l *location) BatchGet(ctx context.Context, req *BatchGetLocationReq, optio
 	}
 	// 反序列响应结果
 	resp := &BatchGetLocationResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Patch
+//
+// - 更新地点
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=patch&project=corehr&resource=location&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/patch_location.go
+func (l *location) Patch(ctx context.Context, req *PatchLocationReq, options ...larkcore.RequestOptionFunc) (*PatchLocationResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/locations/:location_id"
+	apiReq.HttpMethod = http.MethodPatch
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &PatchLocationResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Create
+//
+// - 添加地点地址
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=create&project=corehr&resource=location.address&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/create_locationAddress.go
+func (l *locationAddress) Create(ctx context.Context, req *CreateLocationAddressReq, options ...larkcore.RequestOptionFunc) (*CreateLocationAddressResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/locations/:location_id/addresses"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &CreateLocationAddressResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Delete
+//
+// - 删除地点地址
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=delete&project=corehr&resource=location.address&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/delete_locationAddress.go
+func (l *locationAddress) Delete(ctx context.Context, req *DeleteLocationAddressReq, options ...larkcore.RequestOptionFunc) (*DeleteLocationAddressResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/locations/:location_id/addresses/:address_id"
+	apiReq.HttpMethod = http.MethodDelete
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &DeleteLocationAddressResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Patch
+//
+// - 更新地点地址
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=patch&project=corehr&resource=location.address&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/patch_locationAddress.go
+func (l *locationAddress) Patch(ctx context.Context, req *PatchLocationAddressReq, options ...larkcore.RequestOptionFunc) (*PatchLocationAddressResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/locations/:location_id/addresses/:address_id"
+	apiReq.HttpMethod = http.MethodPatch
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &PatchLocationAddressResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, l.config)
 	if err != nil {
 		return nil, err
@@ -2129,6 +2295,32 @@ func (p *processFormVariableData) Get(ctx context.Context, req *GetProcessFormVa
 	// 反序列响应结果
 	resp := &GetProcessFormVariableDataResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// List
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=corehr&resource=workforce_plan&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/list_workforcePlan.go
+func (w *workforcePlan) List(ctx context.Context, req *ListWorkforcePlanReq, options ...larkcore.RequestOptionFunc) (*ListWorkforcePlanResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/workforce_plans"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, w.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListWorkforcePlanResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, w.config)
 	if err != nil {
 		return nil, err
 	}

@@ -3654,6 +3654,54 @@ func (builder *ExternalApprovalBuilder) Build() *ExternalApproval {
 	return req
 }
 
+type ExternalApprovalItem struct {
+	ApprovalCode       *string `json:"approval_code,omitempty"`        // 审批定义code
+	ApprovalExternalId *string `json:"approval_external_id,omitempty"` // 三方审批定义ID
+}
+
+type ExternalApprovalItemBuilder struct {
+	approvalCode           string // 审批定义code
+	approvalCodeFlag       bool
+	approvalExternalId     string // 三方审批定义ID
+	approvalExternalIdFlag bool
+}
+
+func NewExternalApprovalItemBuilder() *ExternalApprovalItemBuilder {
+	builder := &ExternalApprovalItemBuilder{}
+	return builder
+}
+
+// 审批定义code
+//
+// 示例值：C30381C8-7A5F-4717-A9CF-C233BF0202D4
+func (builder *ExternalApprovalItemBuilder) ApprovalCode(approvalCode string) *ExternalApprovalItemBuilder {
+	builder.approvalCode = approvalCode
+	builder.approvalCodeFlag = true
+	return builder
+}
+
+// 三方审批定义ID
+//
+// 示例值：permission_test
+func (builder *ExternalApprovalItemBuilder) ApprovalExternalId(approvalExternalId string) *ExternalApprovalItemBuilder {
+	builder.approvalExternalId = approvalExternalId
+	builder.approvalExternalIdFlag = true
+	return builder
+}
+
+func (builder *ExternalApprovalItemBuilder) Build() *ExternalApprovalItem {
+	req := &ExternalApprovalItem{}
+	if builder.approvalCodeFlag {
+		req.ApprovalCode = &builder.approvalCode
+
+	}
+	if builder.approvalExternalIdFlag {
+		req.ApprovalExternalId = &builder.approvalExternalId
+
+	}
+	return req
+}
+
 type ExternalInstance struct {
 	ApprovalCode           *string                         `json:"approval_code,omitempty"`            // 审批定义 code， 创建审批定义返回的值，表示该实例属于哪个流程；该字段会影响到列表中该实例的标题，标题取自对应定义的 name 字段
 	Status                 *string                         `json:"status,omitempty"`                   // 审批实例状态
@@ -3679,6 +3727,7 @@ type ExternalInstance struct {
 	TrusteeshipUserIdType  *string                         `json:"trusteeship_user_id_type,omitempty"` // 用户的类型，会影响请求参数用户标识域的选择，包括加签操作回传的目标用户， 目前仅支持 "user_id"
 	TrusteeshipUrls        *TrusteeshipUrls                `json:"trusteeship_urls,omitempty"`         // 单据托管回调接入方的接口的URL地址
 	TrusteeshipCacheConfig *TrusteeshipInstanceCacheConfig `json:"trusteeship_cache_config,omitempty"` // 托管预缓存策略
+	ResourceRegion         *string                         `json:"resource_region,omitempty"`          // 资源所在地区， 内部统计用字段， 不需要填
 }
 
 type ExternalInstanceBuilder struct {
@@ -3730,6 +3779,8 @@ type ExternalInstanceBuilder struct {
 	trusteeshipUrlsFlag        bool
 	trusteeshipCacheConfig     *TrusteeshipInstanceCacheConfig // 托管预缓存策略
 	trusteeshipCacheConfigFlag bool
+	resourceRegion             string // 资源所在地区， 内部统计用字段， 不需要填
+	resourceRegionFlag         bool
 }
 
 func NewExternalInstanceBuilder() *ExternalInstanceBuilder {
@@ -3953,6 +4004,15 @@ func (builder *ExternalInstanceBuilder) TrusteeshipCacheConfig(trusteeshipCacheC
 	return builder
 }
 
+// 资源所在地区， 内部统计用字段， 不需要填
+//
+// 示例值：""
+func (builder *ExternalInstanceBuilder) ResourceRegion(resourceRegion string) *ExternalInstanceBuilder {
+	builder.resourceRegion = resourceRegion
+	builder.resourceRegionFlag = true
+	return builder
+}
+
 func (builder *ExternalInstanceBuilder) Build() *ExternalInstance {
 	req := &ExternalInstance{}
 	if builder.approvalCodeFlag {
@@ -4043,6 +4103,10 @@ func (builder *ExternalInstanceBuilder) Build() *ExternalInstance {
 	}
 	if builder.trusteeshipCacheConfigFlag {
 		req.TrusteeshipCacheConfig = builder.trusteeshipCacheConfig
+	}
+	if builder.resourceRegionFlag {
+		req.ResourceRegion = &builder.resourceRegion
+
 	}
 	return req
 }
@@ -4208,6 +4272,7 @@ type ExternalInstanceTaskNode struct {
 	ExcludeStatistics *bool                 `json:"exclude_statistics,omitempty"` // 三方任务支持不纳入效率统计。;false：纳入效率统计。;true：不纳入效率统计
 	NodeId            *string               `json:"node_id,omitempty"`            // 节点id：必须同时满足;- 一个流程内，每个节点id唯一。如一个流程下「直属上级」、「隔级上级」等每个节点的Node_id均不一样;- 同一个流程定义内，不同审批实例中的相同节点，Node_id要保持不变。例如张三和李四分别发起了请假申请，这2个审批实例中的「直属上级」节点的node_id应该保持一致
 	NodeName          *string               `json:"node_name,omitempty"`          // 节点名称，如「财务审批」「法务审批」，支持中英日三种语言。示例：i18n@name。需要在i18n_resources中传该名称对应的国际化文案
+	GenerateType      *string               `json:"generate_type,omitempty"`      // 任务生成类型
 }
 
 type ExternalInstanceTaskNodeBuilder struct {
@@ -4243,6 +4308,8 @@ type ExternalInstanceTaskNodeBuilder struct {
 	nodeIdFlag            bool
 	nodeName              string // 节点名称，如「财务审批」「法务审批」，支持中英日三种语言。示例：i18n@name。需要在i18n_resources中传该名称对应的国际化文案
 	nodeNameFlag          bool
+	generateType          string // 任务生成类型
+	generateTypeFlag      bool
 }
 
 func NewExternalInstanceTaskNodeBuilder() *ExternalInstanceTaskNodeBuilder {
@@ -4394,6 +4461,15 @@ func (builder *ExternalInstanceTaskNodeBuilder) NodeName(nodeName string) *Exter
 	return builder
 }
 
+// 任务生成类型
+//
+// 示例值：EXTERNAL_CONSIGN
+func (builder *ExternalInstanceTaskNodeBuilder) GenerateType(generateType string) *ExternalInstanceTaskNodeBuilder {
+	builder.generateType = generateType
+	builder.generateTypeFlag = true
+	return builder
+}
+
 func (builder *ExternalInstanceTaskNodeBuilder) Build() *ExternalInstanceTaskNode {
 	req := &ExternalInstanceTaskNode{}
 	if builder.taskIdFlag {
@@ -4456,6 +4532,10 @@ func (builder *ExternalInstanceTaskNodeBuilder) Build() *ExternalInstanceTaskNod
 	}
 	if builder.nodeNameFlag {
 		req.NodeName = &builder.nodeName
+
+	}
+	if builder.generateTypeFlag {
+		req.GenerateType = &builder.generateType
 
 	}
 	return req

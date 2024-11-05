@@ -2726,6 +2726,566 @@ func (builder *PlanScopeBuilder) Build() *PlanScope {
 	return req
 }
 
+type RecurringPayment struct {
+	Id             *string `json:"id,omitempty"`              // 经常性支付记录id
+	UniqueId       *string `json:"unique_id,omitempty"`       // 外部幂等id，由上游业务决定
+	UserId         *string `json:"user_id,omitempty"`         // 员工id，具体类型由入参中的 user_id_type 指定
+	ItemId         *string `json:"item_id,omitempty"`         // 薪酬项id
+	IssuanceType   *string `json:"issuance_type,omitempty"`   // 发放方式
+	EachAmount     *string `json:"each_amount,omitempty"`     // 单次发放金额
+	StartDate      *string `json:"start_date,omitempty"`      // 发放开始日期
+	EndDate        *string `json:"end_date,omitempty"`        // 发放结束日期
+	IssuancePeriod *string `json:"issuance_period,omitempty"` // 发放频率
+	CurrencyId     *string `json:"currency_id,omitempty"`     // 币种id
+	Remark         *string `json:"remark,omitempty"`          // 备注
+}
+
+type RecurringPaymentBuilder struct {
+	id                 string // 经常性支付记录id
+	idFlag             bool
+	uniqueId           string // 外部幂等id，由上游业务决定
+	uniqueIdFlag       bool
+	userId             string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag         bool
+	itemId             string // 薪酬项id
+	itemIdFlag         bool
+	issuanceType       string // 发放方式
+	issuanceTypeFlag   bool
+	eachAmount         string // 单次发放金额
+	eachAmountFlag     bool
+	startDate          string // 发放开始日期
+	startDateFlag      bool
+	endDate            string // 发放结束日期
+	endDateFlag        bool
+	issuancePeriod     string // 发放频率
+	issuancePeriodFlag bool
+	currencyId         string // 币种id
+	currencyIdFlag     bool
+	remark             string // 备注
+	remarkFlag         bool
+}
+
+func NewRecurringPaymentBuilder() *RecurringPaymentBuilder {
+	builder := &RecurringPaymentBuilder{}
+	return builder
+}
+
+// 经常性支付记录id
+//
+// 示例值：7397033607132351532
+func (builder *RecurringPaymentBuilder) Id(id string) *RecurringPaymentBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 外部幂等id，由上游业务决定
+//
+// 示例值：7402510801304718380_7309316347007764012_7402523725868058156_1726070400000_10000
+func (builder *RecurringPaymentBuilder) UniqueId(uniqueId string) *RecurringPaymentBuilder {
+	builder.uniqueId = uniqueId
+	builder.uniqueIdFlag = true
+	return builder
+}
+
+// 员工id，具体类型由入参中的 user_id_type 指定
+//
+// 示例值：7337149697626801708
+func (builder *RecurringPaymentBuilder) UserId(userId string) *RecurringPaymentBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 薪酬项id
+//
+// 示例值：7411039006180312620
+func (builder *RecurringPaymentBuilder) ItemId(itemId string) *RecurringPaymentBuilder {
+	builder.itemId = itemId
+	builder.itemIdFlag = true
+	return builder
+}
+
+// 发放方式
+//
+// 示例值：with_salary
+func (builder *RecurringPaymentBuilder) IssuanceType(issuanceType string) *RecurringPaymentBuilder {
+	builder.issuanceType = issuanceType
+	builder.issuanceTypeFlag = true
+	return builder
+}
+
+// 单次发放金额
+//
+// 示例值：24.00
+func (builder *RecurringPaymentBuilder) EachAmount(eachAmount string) *RecurringPaymentBuilder {
+	builder.eachAmount = eachAmount
+	builder.eachAmountFlag = true
+	return builder
+}
+
+// 发放开始日期
+//
+// 示例值：2024-01-10
+func (builder *RecurringPaymentBuilder) StartDate(startDate string) *RecurringPaymentBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 发放结束日期
+//
+// 示例值：2025-01-20
+func (builder *RecurringPaymentBuilder) EndDate(endDate string) *RecurringPaymentBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 发放频率
+//
+// 示例值：year
+func (builder *RecurringPaymentBuilder) IssuancePeriod(issuancePeriod string) *RecurringPaymentBuilder {
+	builder.issuancePeriod = issuancePeriod
+	builder.issuancePeriodFlag = true
+	return builder
+}
+
+// 币种id
+//
+// 示例值：6863329932261459464
+func (builder *RecurringPaymentBuilder) CurrencyId(currencyId string) *RecurringPaymentBuilder {
+	builder.currencyId = currencyId
+	builder.currencyIdFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：这是个备注
+func (builder *RecurringPaymentBuilder) Remark(remark string) *RecurringPaymentBuilder {
+	builder.remark = remark
+	builder.remarkFlag = true
+	return builder
+}
+
+func (builder *RecurringPaymentBuilder) Build() *RecurringPayment {
+	req := &RecurringPayment{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.uniqueIdFlag {
+		req.UniqueId = &builder.uniqueId
+
+	}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.itemIdFlag {
+		req.ItemId = &builder.itemId
+
+	}
+	if builder.issuanceTypeFlag {
+		req.IssuanceType = &builder.issuanceType
+
+	}
+	if builder.eachAmountFlag {
+		req.EachAmount = &builder.eachAmount
+
+	}
+	if builder.startDateFlag {
+		req.StartDate = &builder.startDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
+
+	}
+	if builder.issuancePeriodFlag {
+		req.IssuancePeriod = &builder.issuancePeriod
+
+	}
+	if builder.currencyIdFlag {
+		req.CurrencyId = &builder.currencyId
+
+	}
+	if builder.remarkFlag {
+		req.Remark = &builder.remark
+
+	}
+	return req
+}
+
+type RecurringPaymentForCreate struct {
+	UniqueId     *string `json:"unique_id,omitempty"`     // 外部幂等id，由上游业务决定
+	UserId       *string `json:"user_id,omitempty"`       // 员工id，具体类型由入参中的 user_id_type 指定
+	ItemId       *string `json:"item_id,omitempty"`       // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+	EachAmount   *string `json:"each_amount,omitempty"`   // 每次发放金额
+	StartDate    *string `json:"start_date,omitempty"`    // 发放开始时间
+	EndDate      *string `json:"end_date,omitempty"`      // 发放结束时间
+	CurrencyId   *string `json:"currency_id,omitempty"`   // 币种id
+	IssuanceType *string `json:"issuance_type,omitempty"` // 发放方式
+	Remark       *string `json:"remark,omitempty"`        // 备注
+}
+
+type RecurringPaymentForCreateBuilder struct {
+	uniqueId         string // 外部幂等id，由上游业务决定
+	uniqueIdFlag     bool
+	userId           string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag       bool
+	itemId           string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+	itemIdFlag       bool
+	eachAmount       string // 每次发放金额
+	eachAmountFlag   bool
+	startDate        string // 发放开始时间
+	startDateFlag    bool
+	endDate          string // 发放结束时间
+	endDateFlag      bool
+	currencyId       string // 币种id
+	currencyIdFlag   bool
+	issuanceType     string // 发放方式
+	issuanceTypeFlag bool
+	remark           string // 备注
+	remarkFlag       bool
+}
+
+func NewRecurringPaymentForCreateBuilder() *RecurringPaymentForCreateBuilder {
+	builder := &RecurringPaymentForCreateBuilder{}
+	return builder
+}
+
+// 外部幂等id，由上游业务决定
+//
+// 示例值：7402510801304718380_7309316347007764012_7402523725868058156_1726070400000_10000
+func (builder *RecurringPaymentForCreateBuilder) UniqueId(uniqueId string) *RecurringPaymentForCreateBuilder {
+	builder.uniqueId = uniqueId
+	builder.uniqueIdFlag = true
+	return builder
+}
+
+// 员工id，具体类型由入参中的 user_id_type 指定
+//
+// 示例值：7337149697626801708
+func (builder *RecurringPaymentForCreateBuilder) UserId(userId string) *RecurringPaymentForCreateBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+//
+// 示例值：7411039006180312620
+func (builder *RecurringPaymentForCreateBuilder) ItemId(itemId string) *RecurringPaymentForCreateBuilder {
+	builder.itemId = itemId
+	builder.itemIdFlag = true
+	return builder
+}
+
+// 每次发放金额
+//
+// 示例值：20.00
+func (builder *RecurringPaymentForCreateBuilder) EachAmount(eachAmount string) *RecurringPaymentForCreateBuilder {
+	builder.eachAmount = eachAmount
+	builder.eachAmountFlag = true
+	return builder
+}
+
+// 发放开始时间
+//
+// 示例值：2024-08-01
+func (builder *RecurringPaymentForCreateBuilder) StartDate(startDate string) *RecurringPaymentForCreateBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 发放结束时间
+//
+// 示例值：2025-08-01
+func (builder *RecurringPaymentForCreateBuilder) EndDate(endDate string) *RecurringPaymentForCreateBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 币种id
+//
+// 示例值：6863329932261459464
+func (builder *RecurringPaymentForCreateBuilder) CurrencyId(currencyId string) *RecurringPaymentForCreateBuilder {
+	builder.currencyId = currencyId
+	builder.currencyIdFlag = true
+	return builder
+}
+
+// 发放方式
+//
+// 示例值：with_salary
+func (builder *RecurringPaymentForCreateBuilder) IssuanceType(issuanceType string) *RecurringPaymentForCreateBuilder {
+	builder.issuanceType = issuanceType
+	builder.issuanceTypeFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：这是个备注
+func (builder *RecurringPaymentForCreateBuilder) Remark(remark string) *RecurringPaymentForCreateBuilder {
+	builder.remark = remark
+	builder.remarkFlag = true
+	return builder
+}
+
+func (builder *RecurringPaymentForCreateBuilder) Build() *RecurringPaymentForCreate {
+	req := &RecurringPaymentForCreate{}
+	if builder.uniqueIdFlag {
+		req.UniqueId = &builder.uniqueId
+
+	}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.itemIdFlag {
+		req.ItemId = &builder.itemId
+
+	}
+	if builder.eachAmountFlag {
+		req.EachAmount = &builder.eachAmount
+
+	}
+	if builder.startDateFlag {
+		req.StartDate = &builder.startDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
+
+	}
+	if builder.currencyIdFlag {
+		req.CurrencyId = &builder.currencyId
+
+	}
+	if builder.issuanceTypeFlag {
+		req.IssuanceType = &builder.issuanceType
+
+	}
+	if builder.remarkFlag {
+		req.Remark = &builder.remark
+
+	}
+	return req
+}
+
+type RecurringPaymentForUpdate struct {
+	Id           *string `json:"id,omitempty"`            // 经常性支付记录id
+	EachAmount   *string `json:"each_amount,omitempty"`   // 每次发放金额
+	StartDate    *string `json:"start_date,omitempty"`    // 发放开始时间
+	EndDate      *string `json:"end_date,omitempty"`      // 发放结束时间
+	CurrencyId   *string `json:"currency_id,omitempty"`   // 币种id
+	IssuanceType *string `json:"issuance_type,omitempty"` // 发放方式
+	Remark       *string `json:"remark,omitempty"`        // 原因
+}
+
+type RecurringPaymentForUpdateBuilder struct {
+	id               string // 经常性支付记录id
+	idFlag           bool
+	eachAmount       string // 每次发放金额
+	eachAmountFlag   bool
+	startDate        string // 发放开始时间
+	startDateFlag    bool
+	endDate          string // 发放结束时间
+	endDateFlag      bool
+	currencyId       string // 币种id
+	currencyIdFlag   bool
+	issuanceType     string // 发放方式
+	issuanceTypeFlag bool
+	remark           string // 原因
+	remarkFlag       bool
+}
+
+func NewRecurringPaymentForUpdateBuilder() *RecurringPaymentForUpdateBuilder {
+	builder := &RecurringPaymentForUpdateBuilder{}
+	return builder
+}
+
+// 经常性支付记录id
+//
+// 示例值：7397033607132351532
+func (builder *RecurringPaymentForUpdateBuilder) Id(id string) *RecurringPaymentForUpdateBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 每次发放金额
+//
+// 示例值：10.00
+func (builder *RecurringPaymentForUpdateBuilder) EachAmount(eachAmount string) *RecurringPaymentForUpdateBuilder {
+	builder.eachAmount = eachAmount
+	builder.eachAmountFlag = true
+	return builder
+}
+
+// 发放开始时间
+//
+// 示例值：2024-10-20
+func (builder *RecurringPaymentForUpdateBuilder) StartDate(startDate string) *RecurringPaymentForUpdateBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 发放结束时间
+//
+// 示例值：2025-03-20
+func (builder *RecurringPaymentForUpdateBuilder) EndDate(endDate string) *RecurringPaymentForUpdateBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 币种id
+//
+// 示例值：6863329932261459464
+func (builder *RecurringPaymentForUpdateBuilder) CurrencyId(currencyId string) *RecurringPaymentForUpdateBuilder {
+	builder.currencyId = currencyId
+	builder.currencyIdFlag = true
+	return builder
+}
+
+// 发放方式
+//
+// 示例值：with_salary
+func (builder *RecurringPaymentForUpdateBuilder) IssuanceType(issuanceType string) *RecurringPaymentForUpdateBuilder {
+	builder.issuanceType = issuanceType
+	builder.issuanceTypeFlag = true
+	return builder
+}
+
+// 原因
+//
+// 示例值：这是个备注
+func (builder *RecurringPaymentForUpdateBuilder) Remark(remark string) *RecurringPaymentForUpdateBuilder {
+	builder.remark = remark
+	builder.remarkFlag = true
+	return builder
+}
+
+func (builder *RecurringPaymentForUpdateBuilder) Build() *RecurringPaymentForUpdate {
+	req := &RecurringPaymentForUpdate{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.eachAmountFlag {
+		req.EachAmount = &builder.eachAmount
+
+	}
+	if builder.startDateFlag {
+		req.StartDate = &builder.startDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
+
+	}
+	if builder.currencyIdFlag {
+		req.CurrencyId = &builder.currencyId
+
+	}
+	if builder.issuanceTypeFlag {
+		req.IssuanceType = &builder.issuanceType
+
+	}
+	if builder.remarkFlag {
+		req.Remark = &builder.remark
+
+	}
+	return req
+}
+
+type RecurringPaymentOperateResult struct {
+	Id       *string `json:"id,omitempty"`        // 操作记录的id
+	UniqueId *string `json:"unique_id,omitempty"` // 操作的记录的 unique_id
+	Code     *int    `json:"code,omitempty"`      // 操作结果状态码
+	Message  *string `json:"message,omitempty"`   // 操作结果描述
+}
+
+type RecurringPaymentOperateResultBuilder struct {
+	id           string // 操作记录的id
+	idFlag       bool
+	uniqueId     string // 操作的记录的 unique_id
+	uniqueIdFlag bool
+	code         int // 操作结果状态码
+	codeFlag     bool
+	message      string // 操作结果描述
+	messageFlag  bool
+}
+
+func NewRecurringPaymentOperateResultBuilder() *RecurringPaymentOperateResultBuilder {
+	builder := &RecurringPaymentOperateResultBuilder{}
+	return builder
+}
+
+// 操作记录的id
+//
+// 示例值：7390583861280556588
+func (builder *RecurringPaymentOperateResultBuilder) Id(id string) *RecurringPaymentOperateResultBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 操作的记录的 unique_id
+//
+// 示例值：7390583861280556588
+func (builder *RecurringPaymentOperateResultBuilder) UniqueId(uniqueId string) *RecurringPaymentOperateResultBuilder {
+	builder.uniqueId = uniqueId
+	builder.uniqueIdFlag = true
+	return builder
+}
+
+// 操作结果状态码
+//
+// 示例值：21270202
+func (builder *RecurringPaymentOperateResultBuilder) Code(code int) *RecurringPaymentOperateResultBuilder {
+	builder.code = code
+	builder.codeFlag = true
+	return builder
+}
+
+// 操作结果描述
+//
+// 示例值：uqniue id conflict
+func (builder *RecurringPaymentOperateResultBuilder) Message(message string) *RecurringPaymentOperateResultBuilder {
+	builder.message = message
+	builder.messageFlag = true
+	return builder
+}
+
+func (builder *RecurringPaymentOperateResultBuilder) Build() *RecurringPaymentOperateResult {
+	req := &RecurringPaymentOperateResult{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.uniqueIdFlag {
+		req.UniqueId = &builder.uniqueId
+
+	}
+	if builder.codeFlag {
+		req.Code = &builder.code
+
+	}
+	if builder.messageFlag {
+		req.Message = &builder.message
+
+	}
+	return req
+}
+
 type SocialArchive struct {
 	UserId  *string                `json:"user_id,omitempty"` // 员工ID
 	Details []*SocialArchiveDetail `json:"details,omitempty"` // 员工参保档案，包含社保、公积金档案

@@ -1143,6 +1143,12 @@ const (
 )
 
 const (
+	OperationTagTalent1 = 1 // 新增
+	OperationTagTalent2 = 2 // 删除
+
+)
+
+const (
 	UserIdTypeListTalentFolderUserId        = "user_id"         // 以user_id来识别用户
 	UserIdTypeListTalentFolderUnionId       = "union_id"        // 以union_id来识别用户
 	UserIdTypeListTalentFolderOpenId        = "open_id"         // 以open_id来识别用户
@@ -1158,6 +1164,12 @@ const (
 const (
 	AddTypeOnlyAdd                = 1 // 仅加入指定人才库
 	AddTypeAddAndRemoveFromOrigin = 2 // 加入指定人才库并从所有原库移除
+
+)
+
+const (
+	TypeListTalentTag1 = 1 // 手动标签
+	TypeListTalentTag2 = 2 // 自动标签
 
 )
 
@@ -26259,6 +26271,7 @@ type JobRequirement struct {
 	ProcessType           *int                            `json:"process_type,omitempty"`              // 支持的招聘类型列表
 	JobTypeId             *string                         `json:"job_type_id,omitempty"`               // 招聘需求中的职位类别
 	JobIdList             []string                        `json:"job_id_list,omitempty"`               // 关联的职位 ID 列表
+	EmploymentJobId       *string                         `json:"employment_job_id,omitempty"`         // 职务 ID
 }
 
 type JobRequirementBuilder struct {
@@ -26314,6 +26327,8 @@ type JobRequirementBuilder struct {
 	jobTypeIdFlag             bool
 	jobIdList                 []string // 关联的职位 ID 列表
 	jobIdListFlag             bool
+	employmentJobId           string // 职务 ID
+	employmentJobIdFlag       bool
 }
 
 func NewJobRequirementBuilder() *JobRequirementBuilder {
@@ -26555,6 +26570,15 @@ func (builder *JobRequirementBuilder) JobIdList(jobIdList []string) *JobRequirem
 	return builder
 }
 
+// 职务 ID
+//
+// 示例值：123
+func (builder *JobRequirementBuilder) EmploymentJobId(employmentJobId string) *JobRequirementBuilder {
+	builder.employmentJobId = employmentJobId
+	builder.employmentJobIdFlag = true
+	return builder
+}
+
 func (builder *JobRequirementBuilder) Build() *JobRequirement {
 	req := &JobRequirement{}
 	if builder.shortCodeFlag {
@@ -26655,6 +26679,10 @@ func (builder *JobRequirementBuilder) Build() *JobRequirement {
 	}
 	if builder.jobIdListFlag {
 		req.JobIdList = builder.jobIdList
+	}
+	if builder.employmentJobIdFlag {
+		req.EmploymentJobId = &builder.employmentJobId
+
 	}
 	return req
 }
@@ -27020,6 +27048,7 @@ type JobRequirementDto struct {
 	CreateTime         *string                            `json:"create_time,omitempty"`          // 创建时间,毫秒级时间戳
 	CreatorId          *string                            `json:"creator_id,omitempty"`           // 创建人ID
 	UpdateTime         *string                            `json:"update_time,omitempty"`          // 更新时间,毫秒级时间戳
+	EmploymentJobId    *string                            `json:"employment_job_id,omitempty"`    // 职务 ID
 }
 
 type JobRequirementDtoBuilder struct {
@@ -27083,6 +27112,8 @@ type JobRequirementDtoBuilder struct {
 	creatorIdFlag          bool
 	updateTime             string // 更新时间,毫秒级时间戳
 	updateTimeFlag         bool
+	employmentJobId        string // 职务 ID
+	employmentJobIdFlag    bool
 }
 
 func NewJobRequirementDtoBuilder() *JobRequirementDtoBuilder {
@@ -27360,6 +27391,15 @@ func (builder *JobRequirementDtoBuilder) UpdateTime(updateTime string) *JobRequi
 	return builder
 }
 
+// 职务 ID
+//
+// 示例值：123
+func (builder *JobRequirementDtoBuilder) EmploymentJobId(employmentJobId string) *JobRequirementDtoBuilder {
+	builder.employmentJobId = employmentJobId
+	builder.employmentJobIdFlag = true
+	return builder
+}
+
 func (builder *JobRequirementDtoBuilder) Build() *JobRequirementDto {
 	req := &JobRequirementDto{}
 	if builder.idFlag {
@@ -27467,6 +27507,10 @@ func (builder *JobRequirementDtoBuilder) Build() *JobRequirementDto {
 	}
 	if builder.updateTimeFlag {
 		req.UpdateTime = &builder.updateTime
+
+	}
+	if builder.employmentJobIdFlag {
+		req.EmploymentJobId = &builder.employmentJobId
 
 	}
 	return req
@@ -60979,6 +61023,142 @@ func (resp *OnboardStatusTalentResp) Success() bool {
 	return resp.Code == 0
 }
 
+type TagTalentReqBodyBuilder struct {
+	operation     int // 操作类型
+	operationFlag bool
+	tagIdList     []string // 标签 ID 列表
+	tagIdListFlag bool
+}
+
+func NewTagTalentReqBodyBuilder() *TagTalentReqBodyBuilder {
+	builder := &TagTalentReqBodyBuilder{}
+	return builder
+}
+
+// 操作类型
+//
+// 示例值：1
+func (builder *TagTalentReqBodyBuilder) Operation(operation int) *TagTalentReqBodyBuilder {
+	builder.operation = operation
+	builder.operationFlag = true
+	return builder
+}
+
+// 标签 ID 列表
+//
+// 示例值：
+func (builder *TagTalentReqBodyBuilder) TagIdList(tagIdList []string) *TagTalentReqBodyBuilder {
+	builder.tagIdList = tagIdList
+	builder.tagIdListFlag = true
+	return builder
+}
+
+func (builder *TagTalentReqBodyBuilder) Build() *TagTalentReqBody {
+	req := &TagTalentReqBody{}
+	if builder.operationFlag {
+		req.Operation = &builder.operation
+	}
+	if builder.tagIdListFlag {
+		req.TagIdList = builder.tagIdList
+	}
+	return req
+}
+
+type TagTalentPathReqBodyBuilder struct {
+	operation     int
+	operationFlag bool
+	tagIdList     []string
+	tagIdListFlag bool
+}
+
+func NewTagTalentPathReqBodyBuilder() *TagTalentPathReqBodyBuilder {
+	builder := &TagTalentPathReqBodyBuilder{}
+	return builder
+}
+
+// 操作类型
+//
+// 示例值：1
+func (builder *TagTalentPathReqBodyBuilder) Operation(operation int) *TagTalentPathReqBodyBuilder {
+	builder.operation = operation
+	builder.operationFlag = true
+	return builder
+}
+
+// 标签 ID 列表
+//
+// 示例值：
+func (builder *TagTalentPathReqBodyBuilder) TagIdList(tagIdList []string) *TagTalentPathReqBodyBuilder {
+	builder.tagIdList = tagIdList
+	builder.tagIdListFlag = true
+	return builder
+}
+
+func (builder *TagTalentPathReqBodyBuilder) Build() (*TagTalentReqBody, error) {
+	req := &TagTalentReqBody{}
+	if builder.operationFlag {
+		req.Operation = &builder.operation
+	}
+	if builder.tagIdListFlag {
+		req.TagIdList = builder.tagIdList
+	}
+	return req, nil
+}
+
+type TagTalentReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *TagTalentReqBody
+}
+
+func NewTagTalentReqBuilder() *TagTalentReqBuilder {
+	builder := &TagTalentReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 人才 ID
+//
+// 示例值：6960663240925956661
+func (builder *TagTalentReqBuilder) TalentId(talentId string) *TagTalentReqBuilder {
+	builder.apiReq.PathParams.Set("talent_id", fmt.Sprint(talentId))
+	return builder
+}
+
+func (builder *TagTalentReqBuilder) Body(body *TagTalentReqBody) *TagTalentReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *TagTalentReqBuilder) Build() *TagTalentReq {
+	req := &TagTalentReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type TagTalentReqBody struct {
+	Operation *int     `json:"operation,omitempty"`   // 操作类型
+	TagIdList []string `json:"tag_id_list,omitempty"` // 标签 ID 列表
+}
+
+type TagTalentReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *TagTalentReqBody `body:""`
+}
+
+type TagTalentResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *TagTalentResp) Success() bool {
+	return resp.Code == 0
+}
+
 type CreateTalentExternalInfoReqBodyBuilder struct {
 	externalCreateTime     string // 人才在外部系统创建时间
 	externalCreateTimeFlag bool
@@ -61697,6 +61877,106 @@ type SearchTalentPoolResp struct {
 }
 
 func (resp *SearchTalentPoolResp) Success() bool {
+	return resp.Code == 0
+}
+
+type ListTalentTagReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListTalentTagReqBuilder() *ListTalentTagReqBuilder {
+	builder := &ListTalentTagReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListTalentTagReqBuilder) Limit(limit int) *ListTalentTagReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// 搜索关键词
+//
+// 示例值：测试
+func (builder *ListTalentTagReqBuilder) Keyword(keyword string) *ListTalentTagReqBuilder {
+	builder.apiReq.QueryParams.Set("keyword", fmt.Sprint(keyword))
+	return builder
+}
+
+// ID 列表
+//
+// 示例值：
+func (builder *ListTalentTagReqBuilder) IdList(idList []string) *ListTalentTagReqBuilder {
+	for _, v := range idList {
+		builder.apiReq.QueryParams.Add("id_list", fmt.Sprint(v))
+	}
+	return builder
+}
+
+// 标签类型
+//
+// 示例值：1
+func (builder *ListTalentTagReqBuilder) Type(type_ int) *ListTalentTagReqBuilder {
+	builder.apiReq.QueryParams.Set("type", fmt.Sprint(type_))
+	return builder
+}
+
+// 包含停用
+//
+// 示例值：true
+func (builder *ListTalentTagReqBuilder) IncludeInactive(includeInactive bool) *ListTalentTagReqBuilder {
+	builder.apiReq.QueryParams.Set("include_inactive", fmt.Sprint(includeInactive))
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：20
+func (builder *ListTalentTagReqBuilder) PageSize(pageSize int) *ListTalentTagReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：eyJvZmZzZXQiOjEwLCJ0aW1lc3RhbXAiOjE2Mjc1NTUyMjM2NzIsImlkIjpudWxsfQ==
+func (builder *ListTalentTagReqBuilder) PageToken(pageToken string) *ListTalentTagReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+func (builder *ListTalentTagReqBuilder) Build() *ListTalentTagReq {
+	req := &ListTalentTagReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListTalentTagReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListTalentTagRespData struct {
+	Items     []*TalentTag `json:"items,omitempty"`      // 标签列表
+	HasMore   *bool        `json:"has_more,omitempty"`   // 是否还有更多项
+	PageToken *string      `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+}
+
+type ListTalentTagResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListTalentTagRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListTalentTagResp) Success() bool {
 	return resp.Code == 0
 }
 
@@ -63826,6 +64106,25 @@ func (m *P2TalentDeletedV1) RawReq(req *larkevent.EventReq) {
 	m.EventReq = req
 }
 
+type P2TalentTagSubscriptionV1Data struct {
+	TalentId         *string               `json:"talent_id,omitempty"`         // 人才 ID
+	ApplicationId    *string               `json:"application_id,omitempty"`    // 投递 ID
+	Type             *int                  `json:"type,omitempty"`              // 变更类型
+	Tag              *TalentTag            `json:"tag,omitempty"`               // 标签
+	LockStatus       *int                  `json:"lock_status,omitempty"`       // 锁定状态
+	ApplicationStage *ApplicationStageInfo `json:"application_stage,omitempty"` // 投递阶段
+}
+
+type P2TalentTagSubscriptionV1 struct {
+	*larkevent.EventV2Base                                // 事件基础数据
+	*larkevent.EventReq                                   // 请求原生数据
+	Event                  *P2TalentTagSubscriptionV1Data `json:"event"` // 事件内容
+}
+
+func (m *P2TalentTagSubscriptionV1) RawReq(req *larkevent.EventReq) {
+	m.EventReq = req
+}
+
 type ListEvaluationIterator struct {
 	nextPageToken *string
 	items         []*Evaluation
@@ -64795,6 +65094,60 @@ func (iterator *SearchTalentPoolIterator) Next() (bool, *TalentPool, error) {
 }
 
 func (iterator *SearchTalentPoolIterator) NextPageToken() *string {
+	return iterator.nextPageToken
+}
+
+type ListTalentTagIterator struct {
+	nextPageToken *string
+	items         []*TalentTag
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListTalentTagReq
+	listFunc      func(ctx context.Context, req *ListTalentTagReq, options ...larkcore.RequestOptionFunc) (*ListTalentTagResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListTalentTagIterator) Next() (bool, *TalentTag, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Items) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Items
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListTalentTagIterator) NextPageToken() *string {
 	return iterator.nextPageToken
 }
 

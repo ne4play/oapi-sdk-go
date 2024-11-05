@@ -21,49 +21,20 @@ import (
 	"github.com/larksuite/oapi-sdk-go/v3/service/hire/v1"
 )
 
-// POST /open-apis/hire/v1/job_requirements
+// POST /open-apis/hire/v1/talents/:talent_id/tag
 func main() {
 	// 创建 Client
 	client := lark.NewClient("appID", "appSecret")
 	// 创建请求对象
-	req := larkhire.NewCreateJobRequirementReqBuilder().
-		UserIdType("open_id").
-		DepartmentIdType("open_department_id").
-		JobLevelIdType("people_admin_job_level_id").
-		JobFamilyIdType("people_admin_job_category_id").
-		EmployeeTypeIdType("people_admin_employee_type_id").
-		JobRequirement(larkhire.NewJobRequirementBuilder().
-			ShortCode("xx1").
-			Name("test").
-			DisplayProgress(1).
-			HeadCount(11).
-			RecruitmentTypeId("1618209327096").
-			EmployeeTypeId("6807409776231254285").
-			MaxLevelId("123").
-			MinLevelId("11").
-			SequenceId("111").
-			Category(1).
-			DepartmentId("1111").
-			RecruiterIdList([]string{}).
-			JrHiringManagerIdList([]string{}).
-			DirectLeaderIdList([]string{}).
-			StartTime("1625729379000").
-			Deadline("1625729379000").
-			Priority(1).
-			RequiredDegree(1).
-			MaxSalary("123").
-			MinSalary("11").
-			AddressId("11").
-			Description("11").
-			CustomizedDataList([]*larkhire.JobRequirementCustomizedData{larkhire.NewJobRequirementCustomizedDataBuilder().Build()}).
-			ProcessType(1).
-			JobTypeId("6930815272790114324").
-			JobIdList([]string{}).
-			EmploymentJobId("123").
+	req := larkhire.NewTagTalentReqBuilder().
+		TalentId("6960663240925956661").
+		Body(larkhire.NewTagTalentReqBodyBuilder().
+			Operation(1).
+			TagIdList([]string{}).
 			Build()).
 		Build()
 	// 发起请求
-	resp, err := client.Hire.V1.JobRequirement.Create(context.Background(), req)
+	resp, err := client.Hire.V1.Talent.Tag(context.Background(), req)
 
 	// 处理错误
 	if err != nil {

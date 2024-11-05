@@ -8817,6 +8817,54 @@ func (builder *DimensionBuilder) Build() *Dimension {
 	return req
 }
 
+type DimensionEntity struct {
+	DimensionKey   *string `json:"dimension_key,omitempty"`   // 维度key
+	DimensionValue *string `json:"dimension_value,omitempty"` // 维度值
+}
+
+type DimensionEntityBuilder struct {
+	dimensionKey       string // 维度key
+	dimensionKeyFlag   bool
+	dimensionValue     string // 维度值
+	dimensionValueFlag bool
+}
+
+func NewDimensionEntityBuilder() *DimensionEntityBuilder {
+	builder := &DimensionEntityBuilder{}
+	return builder
+}
+
+// 维度key
+//
+// 示例值："department"
+func (builder *DimensionEntityBuilder) DimensionKey(dimensionKey string) *DimensionEntityBuilder {
+	builder.dimensionKey = dimensionKey
+	builder.dimensionKeyFlag = true
+	return builder
+}
+
+// 维度值
+//
+// 示例值："7322790168290739756"
+func (builder *DimensionEntityBuilder) DimensionValue(dimensionValue string) *DimensionEntityBuilder {
+	builder.dimensionValue = dimensionValue
+	builder.dimensionValueFlag = true
+	return builder
+}
+
+func (builder *DimensionEntityBuilder) Build() *DimensionEntity {
+	req := &DimensionEntity{}
+	if builder.dimensionKeyFlag {
+		req.DimensionKey = &builder.dimensionKey
+
+	}
+	if builder.dimensionValueFlag {
+		req.DimensionValue = &builder.dimensionValue
+
+	}
+	return req
+}
+
 type DimensionIdInData struct {
 	DimensionKey *string  `json:"dimension_key,omitempty"` // 维度 key
 	DimensionIds []string `json:"dimension_ids,omitempty"` // 维度 ids
@@ -13870,13 +13918,13 @@ type EmployeesInternationalAssignmentReq struct {
 	WorkLocationId                         *string            `json:"work_location_id,omitempty"`                           // 外派工作地点 ID;  - 可通过[【批量查询地点】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/location/list)获取
 	ServiceCompany                         *string            `json:"service_company,omitempty"`                            // 外派任职公司 ID;- 可通过[【批量查询公司】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/company/list)获取
 	WorkShift                              *string            `json:"work_shift,omitempty"`                                 // 排班类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：job_data;  - custom_api_name：work_shift
-	WeeklyWorkingHoursV2                   *float64           `json:"weekly_working_hours_v2,omitempty"`                    // 周工作时长
+	WeeklyWorkingHoursV2                   *float64           `json:"weekly_working_hours_v2,omitempty"`                    // 周工作时长;- 限制两位小数
 	WorkingHoursTypeId                     *string            `json:"working_hours_type_id,omitempty"`                      // 工时制度ID;-  可通过[【批量查询工时制度】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/working_hours_type/list)获取
 	EmployeeTypeId                         *string            `json:"employee_type_id,omitempty"`                           // 人员类型ID;- 可通过[【批量查询人员类型】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/employee_type/list)获取
 	DepartmentId                           *string            `json:"department_id,omitempty"`                              // 部门 ID;- 可通过[【批量查询部门】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/department/batch_get)获取;- 类型与 department_id_type 一致
 	JobId                                  *string            `json:"job_id,omitempty"`                                     // 职务 ID;- 可通过[【批量查询职务】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/job/list)获取
 	JobFamilyId                            *string            `json:"job_family_id,omitempty"`                              // 序列 ID;- 可通过[【批量查询序列】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_family/list)获取
-	JobLevelId                             *string            `json:"job_level_id,omitempty"`                               // 职级 ID;- 可通过[【批量查询职级】](https://open.feishu.cn/document//uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_level/list)获取
+	JobLevelId                             *string            `json:"job_level_id,omitempty"`                               // 职级 ID;- 可通过[【批量查询职级】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_level/list)获取
 	JobGradeId                             *string            `json:"job_grade_id,omitempty"`                               // 职等 ID;- 可通过[【查询职等】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/job_grade/query)获取
 	CompensationType                       *string            `json:"compensation_type,omitempty"`                          // 薪资类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：job_data;  - custom_api_name：compensation_type
 	DirectManagerId                        *string            `json:"direct_manager_id,omitempty"`                          // 直属上级雇佣 ID;- 可通过[【批量查询员工信息】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get)获取;- 类型与 user_id_type 一致
@@ -13888,7 +13936,6 @@ type EmployeesInternationalAssignmentReq struct {
 	InternationalAssignmentReason          *string            `json:"international_assignment_reason,omitempty"`            // 外派原因说明
 	Description                            *string            `json:"description,omitempty"`                                // 备注
 	InternationalAssignmentExpectedEndDate *string            `json:"international_assignment_expected_end_date,omitempty"` // 预计结束日期;- 格式：yyyy-mm-dd
-	InternationalAssignmentStatus          *string            `json:"international_assignment_status,omitempty"`            // 外派状态;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：international_assignment;  - custom_api_name：international_assignment_status
 	InternationalAssignmentType            *string            `json:"international_assignment_type,omitempty"`              // 外派类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：international_assignment;  - custom_api_name：international_assignment_type
 	EffectiveTime                          *string            `json:"effective_time,omitempty"`                             // 开始日期;- 格式：yyyy-mm-dd
 	ExpirationTime                         *string            `json:"expiration_time,omitempty"`                            // 结束日期;- 格式：yyyy-mm-dd
@@ -13901,7 +13948,7 @@ type EmployeesInternationalAssignmentReqBuilder struct {
 	serviceCompanyFlag                         bool
 	workShift                                  string // 排班类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：job_data;  - custom_api_name：work_shift
 	workShiftFlag                              bool
-	weeklyWorkingHoursV2                       float64 // 周工作时长
+	weeklyWorkingHoursV2                       float64 // 周工作时长;- 限制两位小数
 	weeklyWorkingHoursV2Flag                   bool
 	workingHoursTypeId                         string // 工时制度ID;-  可通过[【批量查询工时制度】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/working_hours_type/list)获取
 	workingHoursTypeIdFlag                     bool
@@ -13913,7 +13960,7 @@ type EmployeesInternationalAssignmentReqBuilder struct {
 	jobIdFlag                                  bool
 	jobFamilyId                                string // 序列 ID;- 可通过[【批量查询序列】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_family/list)获取
 	jobFamilyIdFlag                            bool
-	jobLevelId                                 string // 职级 ID;- 可通过[【批量查询职级】](https://open.feishu.cn/document//uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_level/list)获取
+	jobLevelId                                 string // 职级 ID;- 可通过[【批量查询职级】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_level/list)获取
 	jobLevelIdFlag                             bool
 	jobGradeId                                 string // 职等 ID;- 可通过[【查询职等】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/job_grade/query)获取
 	jobGradeIdFlag                             bool
@@ -13937,8 +13984,6 @@ type EmployeesInternationalAssignmentReqBuilder struct {
 	descriptionFlag                            bool
 	internationalAssignmentExpectedEndDate     string // 预计结束日期;- 格式：yyyy-mm-dd
 	internationalAssignmentExpectedEndDateFlag bool
-	internationalAssignmentStatus              string // 外派状态;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：international_assignment;  - custom_api_name：international_assignment_status
-	internationalAssignmentStatusFlag          bool
 	internationalAssignmentType                string // 外派类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：international_assignment;  - custom_api_name：international_assignment_type
 	internationalAssignmentTypeFlag            bool
 	effectiveTime                              string // 开始日期;- 格式：yyyy-mm-dd
@@ -13979,7 +14024,7 @@ func (builder *EmployeesInternationalAssignmentReqBuilder) WorkShift(workShift s
 	return builder
 }
 
-// 周工作时长
+// 周工作时长;- 限制两位小数
 //
 // 示例值：8
 func (builder *EmployeesInternationalAssignmentReqBuilder) WeeklyWorkingHoursV2(weeklyWorkingHoursV2 float64) *EmployeesInternationalAssignmentReqBuilder {
@@ -14033,7 +14078,7 @@ func (builder *EmployeesInternationalAssignmentReqBuilder) JobFamilyId(jobFamily
 	return builder
 }
 
-// 职级 ID;- 可通过[【批量查询职级】](https://open.feishu.cn/document//uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_level/list)获取
+// 职级 ID;- 可通过[【批量查询职级】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_level/list)获取
 //
 // 示例值：7127921432117937708
 func (builder *EmployeesInternationalAssignmentReqBuilder) JobLevelId(jobLevelId string) *EmployeesInternationalAssignmentReqBuilder {
@@ -14138,15 +14183,6 @@ func (builder *EmployeesInternationalAssignmentReqBuilder) Description(descripti
 func (builder *EmployeesInternationalAssignmentReqBuilder) InternationalAssignmentExpectedEndDate(internationalAssignmentExpectedEndDate string) *EmployeesInternationalAssignmentReqBuilder {
 	builder.internationalAssignmentExpectedEndDate = internationalAssignmentExpectedEndDate
 	builder.internationalAssignmentExpectedEndDateFlag = true
-	return builder
-}
-
-// 外派状态;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：international_assignment;  - custom_api_name：international_assignment_status
-//
-// 示例值：on_assignment
-func (builder *EmployeesInternationalAssignmentReqBuilder) InternationalAssignmentStatus(internationalAssignmentStatus string) *EmployeesInternationalAssignmentReqBuilder {
-	builder.internationalAssignmentStatus = internationalAssignmentStatus
-	builder.internationalAssignmentStatusFlag = true
 	return builder
 }
 
@@ -14260,10 +14296,6 @@ func (builder *EmployeesInternationalAssignmentReqBuilder) Build() *EmployeesInt
 	}
 	if builder.internationalAssignmentExpectedEndDateFlag {
 		req.InternationalAssignmentExpectedEndDate = &builder.internationalAssignmentExpectedEndDate
-
-	}
-	if builder.internationalAssignmentStatusFlag {
-		req.InternationalAssignmentStatus = &builder.internationalAssignmentStatus
 
 	}
 	if builder.internationalAssignmentTypeFlag {
@@ -20262,94 +20294,161 @@ func (builder *LeaveGrantingRecordBuilder) Build() *LeaveGrantingRecord {
 	return req
 }
 
+type LeaveProcessInfo struct {
+	ProcessId        *string `json:"process_id,omitempty"`         // 流程id
+	ProcessStatus    *string `json:"process_status,omitempty"`     // 流程状态
+	ProcessApplyTime *string `json:"process_apply_time,omitempty"` // 流程发起时间
+}
+
+type LeaveProcessInfoBuilder struct {
+	processId            string // 流程id
+	processIdFlag        bool
+	processStatus        string // 流程状态
+	processStatusFlag    bool
+	processApplyTime     string // 流程发起时间
+	processApplyTimeFlag bool
+}
+
+func NewLeaveProcessInfoBuilder() *LeaveProcessInfoBuilder {
+	builder := &LeaveProcessInfoBuilder{}
+	return builder
+}
+
+// 流程id
+//
+// 示例值：4718803945687580505
+func (builder *LeaveProcessInfoBuilder) ProcessId(processId string) *LeaveProcessInfoBuilder {
+	builder.processId = processId
+	builder.processIdFlag = true
+	return builder
+}
+
+// 流程状态
+//
+// 示例值：passed
+func (builder *LeaveProcessInfoBuilder) ProcessStatus(processStatus string) *LeaveProcessInfoBuilder {
+	builder.processStatus = processStatus
+	builder.processStatusFlag = true
+	return builder
+}
+
+// 流程发起时间
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *LeaveProcessInfoBuilder) ProcessApplyTime(processApplyTime string) *LeaveProcessInfoBuilder {
+	builder.processApplyTime = processApplyTime
+	builder.processApplyTimeFlag = true
+	return builder
+}
+
+func (builder *LeaveProcessInfoBuilder) Build() *LeaveProcessInfo {
+	req := &LeaveProcessInfo{}
+	if builder.processIdFlag {
+		req.ProcessId = &builder.processId
+
+	}
+	if builder.processStatusFlag {
+		req.ProcessStatus = &builder.processStatus
+
+	}
+	if builder.processApplyTimeFlag {
+		req.ProcessApplyTime = &builder.processApplyTime
+
+	}
+	return req
+}
+
 type LeaveRequest struct {
-	LeaveRequestId        *string               `json:"leave_request_id,omitempty"`         // 请假记录ID
-	EmploymentId          *string               `json:"employment_id,omitempty"`            // 雇佣信息ID
-	EmploymentName        []*I18n               `json:"employment_name,omitempty"`          // 员工姓名
-	LeaveTypeId           *string               `json:"leave_type_id,omitempty"`            // 假期类型ID
-	LeaveTypeName         []*I18n               `json:"leave_type_name,omitempty"`          // 假期类型名称
-	StartTime             *string               `json:"start_time,omitempty"`               // 假期开始时间
-	EndTime               *string               `json:"end_time,omitempty"`                 // 假期结束时间
-	LeaveDuration         *string               `json:"leave_duration,omitempty"`           // 假期时长
-	LeaveDurationUnit     *int                  `json:"leave_duration_unit,omitempty"`      // 假期时长的单位
-	LeaveRequestStatus    *int                  `json:"leave_request_status,omitempty"`     // 请假记录的状态
-	GrantSource           *string               `json:"grant_source,omitempty"`             // 数据来源
-	ReturnTime            *string               `json:"return_time,omitempty"`              // 返岗时间
-	SubmittedAt           *string               `json:"submitted_at,omitempty"`             // 发起时间
-	SubmittedBy           *string               `json:"submitted_by,omitempty"`             // 发起人
-	Notes                 *string               `json:"notes,omitempty"`                    // 备注
-	ApprovalDate          *string               `json:"approval_date,omitempty"`            // 审批通过日期
-	IsDeducted            *bool                 `json:"is_deducted,omitempty"`              // 是否带薪
-	Detail                []*LeaveRequestDetail `json:"detail,omitempty"`                   // 请假详情
-	LeaveTypeCode         *string               `json:"leave_type_code,omitempty"`          // 假期类型枚举
-	ActualEndDate         *string               `json:"actual_end_date,omitempty"`          // 实际结束日期
-	EstimatedEndDate      *string               `json:"estimated_end_date,omitempty"`       // 预估结束日期
-	TimeZone              *string               `json:"time_zone,omitempty"`                // 时区
-	DataSource            *int                  `json:"data_source,omitempty"`              // 请假记录数据来源
-	LeaveProcessId        []string              `json:"leave_process_id,omitempty"`         // 请假申请流程ID
-	LeaveCorrectProcessId []string              `json:"leave_correct_process_id,omitempty"` // 请假更正流程ID
-	LeaveCancelProcessId  []string              `json:"leave_cancel_process_id,omitempty"`  // 请假取消流程ID
-	LeaveReturnProcessId  []string              `json:"leave_return_process_id,omitempty"`  // 请假返岗流程ID
-	WdPaidType            *int                  `json:"wd_paid_type,omitempty"`             // workDay算薪类型
+	LeaveRequestId          *string               `json:"leave_request_id,omitempty"`           // 请假记录ID
+	EmploymentId            *string               `json:"employment_id,omitempty"`              // 雇佣信息ID
+	EmploymentName          []*I18n               `json:"employment_name,omitempty"`            // 员工姓名
+	LeaveTypeId             *string               `json:"leave_type_id,omitempty"`              // 假期类型ID
+	LeaveTypeName           []*I18n               `json:"leave_type_name,omitempty"`            // 假期类型名称
+	StartTime               *string               `json:"start_time,omitempty"`                 // 假期开始时间
+	EndTime                 *string               `json:"end_time,omitempty"`                   // 假期结束时间
+	LeaveDuration           *string               `json:"leave_duration,omitempty"`             // 假期时长
+	LeaveDurationUnit       *int                  `json:"leave_duration_unit,omitempty"`        // 假期时长的单位
+	LeaveRequestStatus      *int                  `json:"leave_request_status,omitempty"`       // 请假记录的状态
+	GrantSource             *string               `json:"grant_source,omitempty"`               // 数据来源
+	ReturnTime              *string               `json:"return_time,omitempty"`                // 返岗时间
+	SubmittedAt             *string               `json:"submitted_at,omitempty"`               // 发起时间
+	SubmittedBy             *string               `json:"submitted_by,omitempty"`               // 发起人
+	Notes                   *string               `json:"notes,omitempty"`                      // 备注
+	ApprovalDate            *string               `json:"approval_date,omitempty"`              // 审批通过日期
+	IsDeducted              *bool                 `json:"is_deducted,omitempty"`                // 是否带薪
+	Detail                  []*LeaveRequestDetail `json:"detail,omitempty"`                     // 请假详情
+	LeaveTypeCode           *string               `json:"leave_type_code,omitempty"`            // 假期类型枚举
+	ActualEndDate           *string               `json:"actual_end_date,omitempty"`            // 实际结束日期
+	EstimatedEndDate        *string               `json:"estimated_end_date,omitempty"`         // 预估结束日期
+	TimeZone                *string               `json:"time_zone,omitempty"`                  // 时区
+	DataSource              *int                  `json:"data_source,omitempty"`                // 请假记录数据来源
+	LeaveProcessId          []string              `json:"leave_process_id,omitempty"`           // 请假申请流程ID
+	LeaveCorrectProcessId   []string              `json:"leave_correct_process_id,omitempty"`   // 请假更正流程ID
+	LeaveCancelProcessId    []string              `json:"leave_cancel_process_id,omitempty"`    // 请假取消流程ID
+	LeaveReturnProcessId    []string              `json:"leave_return_process_id,omitempty"`    // 请假返岗流程ID
+	WdPaidType              *int                  `json:"wd_paid_type,omitempty"`               // workDay算薪类型
+	LeaveCorrectProcessInfo []*LeaveProcessInfo   `json:"leave_correct_process_info,omitempty"` // 请假更正流程信息
 }
 
 type LeaveRequestBuilder struct {
-	leaveRequestId            string // 请假记录ID
-	leaveRequestIdFlag        bool
-	employmentId              string // 雇佣信息ID
-	employmentIdFlag          bool
-	employmentName            []*I18n // 员工姓名
-	employmentNameFlag        bool
-	leaveTypeId               string // 假期类型ID
-	leaveTypeIdFlag           bool
-	leaveTypeName             []*I18n // 假期类型名称
-	leaveTypeNameFlag         bool
-	startTime                 string // 假期开始时间
-	startTimeFlag             bool
-	endTime                   string // 假期结束时间
-	endTimeFlag               bool
-	leaveDuration             string // 假期时长
-	leaveDurationFlag         bool
-	leaveDurationUnit         int // 假期时长的单位
-	leaveDurationUnitFlag     bool
-	leaveRequestStatus        int // 请假记录的状态
-	leaveRequestStatusFlag    bool
-	grantSource               string // 数据来源
-	grantSourceFlag           bool
-	returnTime                string // 返岗时间
-	returnTimeFlag            bool
-	submittedAt               string // 发起时间
-	submittedAtFlag           bool
-	submittedBy               string // 发起人
-	submittedByFlag           bool
-	notes                     string // 备注
-	notesFlag                 bool
-	approvalDate              string // 审批通过日期
-	approvalDateFlag          bool
-	isDeducted                bool // 是否带薪
-	isDeductedFlag            bool
-	detail                    []*LeaveRequestDetail // 请假详情
-	detailFlag                bool
-	leaveTypeCode             string // 假期类型枚举
-	leaveTypeCodeFlag         bool
-	actualEndDate             string // 实际结束日期
-	actualEndDateFlag         bool
-	estimatedEndDate          string // 预估结束日期
-	estimatedEndDateFlag      bool
-	timeZone                  string // 时区
-	timeZoneFlag              bool
-	dataSource                int // 请假记录数据来源
-	dataSourceFlag            bool
-	leaveProcessId            []string // 请假申请流程ID
-	leaveProcessIdFlag        bool
-	leaveCorrectProcessId     []string // 请假更正流程ID
-	leaveCorrectProcessIdFlag bool
-	leaveCancelProcessId      []string // 请假取消流程ID
-	leaveCancelProcessIdFlag  bool
-	leaveReturnProcessId      []string // 请假返岗流程ID
-	leaveReturnProcessIdFlag  bool
-	wdPaidType                int // workDay算薪类型
-	wdPaidTypeFlag            bool
+	leaveRequestId              string // 请假记录ID
+	leaveRequestIdFlag          bool
+	employmentId                string // 雇佣信息ID
+	employmentIdFlag            bool
+	employmentName              []*I18n // 员工姓名
+	employmentNameFlag          bool
+	leaveTypeId                 string // 假期类型ID
+	leaveTypeIdFlag             bool
+	leaveTypeName               []*I18n // 假期类型名称
+	leaveTypeNameFlag           bool
+	startTime                   string // 假期开始时间
+	startTimeFlag               bool
+	endTime                     string // 假期结束时间
+	endTimeFlag                 bool
+	leaveDuration               string // 假期时长
+	leaveDurationFlag           bool
+	leaveDurationUnit           int // 假期时长的单位
+	leaveDurationUnitFlag       bool
+	leaveRequestStatus          int // 请假记录的状态
+	leaveRequestStatusFlag      bool
+	grantSource                 string // 数据来源
+	grantSourceFlag             bool
+	returnTime                  string // 返岗时间
+	returnTimeFlag              bool
+	submittedAt                 string // 发起时间
+	submittedAtFlag             bool
+	submittedBy                 string // 发起人
+	submittedByFlag             bool
+	notes                       string // 备注
+	notesFlag                   bool
+	approvalDate                string // 审批通过日期
+	approvalDateFlag            bool
+	isDeducted                  bool // 是否带薪
+	isDeductedFlag              bool
+	detail                      []*LeaveRequestDetail // 请假详情
+	detailFlag                  bool
+	leaveTypeCode               string // 假期类型枚举
+	leaveTypeCodeFlag           bool
+	actualEndDate               string // 实际结束日期
+	actualEndDateFlag           bool
+	estimatedEndDate            string // 预估结束日期
+	estimatedEndDateFlag        bool
+	timeZone                    string // 时区
+	timeZoneFlag                bool
+	dataSource                  int // 请假记录数据来源
+	dataSourceFlag              bool
+	leaveProcessId              []string // 请假申请流程ID
+	leaveProcessIdFlag          bool
+	leaveCorrectProcessId       []string // 请假更正流程ID
+	leaveCorrectProcessIdFlag   bool
+	leaveCancelProcessId        []string // 请假取消流程ID
+	leaveCancelProcessIdFlag    bool
+	leaveReturnProcessId        []string // 请假返岗流程ID
+	leaveReturnProcessIdFlag    bool
+	wdPaidType                  int // workDay算薪类型
+	wdPaidTypeFlag              bool
+	leaveCorrectProcessInfo     []*LeaveProcessInfo // 请假更正流程信息
+	leaveCorrectProcessInfoFlag bool
 }
 
 func NewLeaveRequestBuilder() *LeaveRequestBuilder {
@@ -20609,6 +20708,15 @@ func (builder *LeaveRequestBuilder) WdPaidType(wdPaidType int) *LeaveRequestBuil
 	return builder
 }
 
+// 请假更正流程信息
+//
+// 示例值：
+func (builder *LeaveRequestBuilder) LeaveCorrectProcessInfo(leaveCorrectProcessInfo []*LeaveProcessInfo) *LeaveRequestBuilder {
+	builder.leaveCorrectProcessInfo = leaveCorrectProcessInfo
+	builder.leaveCorrectProcessInfoFlag = true
+	return builder
+}
+
 func (builder *LeaveRequestBuilder) Build() *LeaveRequest {
 	req := &LeaveRequest{}
 	if builder.leaveRequestIdFlag {
@@ -20715,6 +20823,9 @@ func (builder *LeaveRequestBuilder) Build() *LeaveRequest {
 	if builder.wdPaidTypeFlag {
 		req.WdPaidType = &builder.wdPaidType
 
+	}
+	if builder.leaveCorrectProcessInfoFlag {
+		req.LeaveCorrectProcessInfo = builder.leaveCorrectProcessInfo
 	}
 	return req
 }
@@ -29613,135 +29724,165 @@ func (builder *PreHireContractInfoBuilder) Build() *PreHireContractInfo {
 }
 
 type PreHireEmploymentInfo struct {
-	DepartmentId                    *string                  `json:"department_id,omitempty"`                       // 部门 ID ，可以通过【搜索部门信息】接口获取
-	CostCenterRates                 []*JobDataCostCenter     `json:"cost_center_rates,omitempty"`                   // 成本中心分摊信息
-	OfficeLocationId                *string                  `json:"office_location_id,omitempty"`                  // 办公地点id ，详细信息可通过【批量查询地点】接口获得
-	WorkLocationId                  *string                  `json:"work_location_id,omitempty"`                    // 工作地点id ，详细信息可通过【批量查询地点】接口获得
-	WorkStation                     *string                  `json:"work_station,omitempty"`                        // 工位
-	WorkerId                        *string                  `json:"worker_id,omitempty"`                           // 工号
-	CompensationType                *Enum                    `json:"compensation_type,omitempty"`                   // -| 薪资类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：compensation_type - object_api_name：pre_hire
-	DirectLeaderId                  *string                  `json:"direct_leader_id,omitempty"`                    // 直属上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
-	JobId                           *string                  `json:"job_id,omitempty"`                              // 职务 ID ,可以通过【批量查询职务】接口获取
-	JobFamilyId                     *string                  `json:"job_family_id,omitempty"`                       // 序列 ID，可以通过【批量查询职务序列】接口获取
-	JobLevelId                      *string                  `json:"job_level_id,omitempty"`                        // 职级 ID，可以通过【批量查询职务级别】接口获取
-	JobGradeId                      *string                  `json:"job_grade_id,omitempty"`                        // 职等 ID
-	JobTitle                        *string                  `json:"job_title,omitempty"`                           // 职务头衔
-	EmployeeTypeId                  *string                  `json:"employee_type_id,omitempty"`                    // 人员类型 ID ，可以通过招聘【批量查询人员类型】接口获取
-	EmployeeSubtypeId               *string                  `json:"employee_subtype_id,omitempty"`                 // 人员子类型 ID
-	EmploymentType                  *string                  `json:"employment_type,omitempty"`                     // -| 雇佣类型， 枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - object_api_name = "pre_hire" - custom_api_name = "employment_type"
-	WorkEmail                       *string                  `json:"work_email,omitempty"`                          // 工作邮箱
-	CompanyId                       *string                  `json:"company_id,omitempty"`                          // 公司 ID , 详细信息可通过【批量查询公司】接口获得
-	SocialSecurityCityId            *string                  `json:"social_security_city_id,omitempty"`             // 社保城市 ID ，详细信息可通过【批量查询地点】接口获得
-	NonCompeteCovenant              *bool                    `json:"non_compete_covenant,omitempty"`                // 是否包含竞业条款
-	WeeklyWorkingHours              *int                     `json:"weekly_working_hours,omitempty"`                // 周工作时长（单位：小时）
-	Rehire                          *string                  `json:"rehire,omitempty"`                              // 是否离职重聘
-	RehireEmploymentId              *string                  `json:"rehire_employment_id,omitempty"`                // -| 历史雇佣信息 ID ，雇佣信息详细信息可以通过「查询单个雇佣信息」API 获得，系统会检验当前雇佣信息的合法性，要求： - 雇佣信息为该人员最后一次雇佣记录 - 雇佣信息的雇员状态 = "terminated" - 该人员不存在其他待入职记录
-	WorkingHoursType                *string                  `json:"working_hours_type,omitempty"`                  // -| 工时制度 ID ，可通过【查询单个工时制度】接口获取
-	WeeklyWorkingHoursV2            *float64                 `json:"weekly_working_hours_v2,omitempty"`             // 周工作时长v2（单位：小时）
-	OfficeAddress                   *Address                 `json:"office_address,omitempty"`                      // 办公地址
-	WorkingCalendarId               *string                  `json:"working_calendar_id,omitempty"`                 // 工作日历
-	UpdatedAt                       *string                  `json:"updated_at,omitempty"`                          // 待入职信息 更新时间
-	SuspectedRehiring               *bool                    `json:"suspected_rehiring,omitempty"`                  // 是否疑似重聘
-	CustomFields                    []*CustomFieldData       `json:"custom_fields,omitempty"`                       // 自定义字段
-	PositionId                      *string                  `json:"position_id,omitempty"`                         // 岗位 ID
-	CompanyManualUpdated            *bool                    `json:"company_manual_updated,omitempty"`              // 公司主体是否被手动修改
-	PayGroup                        *PreHirePayGroupInfo     `json:"pay_group,omitempty"`                           // 薪资组信息
-	WhetherTheInformationIsAbnormal *bool                    `json:"whether_the_information_is_abnormal,omitempty"` // 是否信息异常
-	AbnormalReason                  []*PreHireAbnormalReason `json:"abnormal_reason,omitempty"`                     // 异常原因列表
-	HasOfferSalary                  *bool                    `json:"has_offer_salary,omitempty"`                    // 是否有 Offer 薪酬
-	RecruitmentProjectId            *string                  `json:"recruitment_project_id,omitempty"`              // 招聘项目 ID
-	WorkShift                       *Enum                    `json:"work_shift,omitempty"`                          // -| 排班类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：work_shift - object_api_name：pre_hire
-	CreatedAt                       *string                  `json:"created_at,omitempty"`                          // 待入职信息 创建时间
-	CreatedBy                       *string                  `json:"created_by,omitempty"`                          // 待入职信息 创建人
-	UpdatedBy                       *string                  `json:"updated_by,omitempty"`                          // 待入职信息 更新人
-	SeniorityDate                   *string                  `json:"seniority_date,omitempty"`                      // 司龄起算日期
+	DepartmentId                     *string                  `json:"department_id,omitempty"`                        // 部门 ID ，可以通过【搜索部门信息】接口获取
+	CostCenterRates                  []*JobDataCostCenter     `json:"cost_center_rates,omitempty"`                    // 成本中心分摊信息
+	OfficeLocationId                 *string                  `json:"office_location_id,omitempty"`                   // 办公地点id ，详细信息可通过【批量查询地点】接口获得
+	WorkLocationId                   *string                  `json:"work_location_id,omitempty"`                     // 工作地点id ，详细信息可通过【批量查询地点】接口获得
+	WorkStation                      *string                  `json:"work_station,omitempty"`                         // 工位
+	WorkerId                         *string                  `json:"worker_id,omitempty"`                            // 工号
+	CompensationType                 *Enum                    `json:"compensation_type,omitempty"`                    // -| 薪资类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：compensation_type - object_api_name：pre_hire
+	DirectLeaderId                   *string                  `json:"direct_leader_id,omitempty"`                     // 直属上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
+	DottedLineManagerId              *string                  `json:"dotted_line_manager_id,omitempty"`               // 虚线上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
+	JobId                            *string                  `json:"job_id,omitempty"`                               // 职务 ID ,可以通过【批量查询职务】接口获取
+	JobFamilyId                      *string                  `json:"job_family_id,omitempty"`                        // 序列 ID，可以通过【批量查询职务序列】接口获取
+	JobLevelId                       *string                  `json:"job_level_id,omitempty"`                         // 职级 ID，可以通过【批量查询职务级别】接口获取
+	JobGradeId                       *string                  `json:"job_grade_id,omitempty"`                         // 职等 ID
+	JobTitle                         *string                  `json:"job_title,omitempty"`                            // 职务头衔
+	EmployeeTypeId                   *string                  `json:"employee_type_id,omitempty"`                     // 人员类型 ID ，可以通过招聘【批量查询人员类型】接口获取
+	EmployeeSubtypeId                *string                  `json:"employee_subtype_id,omitempty"`                  // 人员子类型 ID
+	EmploymentType                   *string                  `json:"employment_type,omitempty"`                      // -| 雇佣类型， 枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - object_api_name = "pre_hire" - custom_api_name = "employment_type"
+	WorkEmail                        *string                  `json:"work_email,omitempty"`                           // 工作邮箱
+	CompanyId                        *string                  `json:"company_id,omitempty"`                           // 公司 ID , 详细信息可通过【批量查询公司】接口获得
+	SocialSecurityCityId             *string                  `json:"social_security_city_id,omitempty"`              // 社保城市 ID ，详细信息可通过【批量查询地点】接口获得
+	NonCompeteCovenant               *bool                    `json:"non_compete_covenant,omitempty"`                 // 是否包含竞业条款
+	WeeklyWorkingHours               *int                     `json:"weekly_working_hours,omitempty"`                 // 周工作时长（单位：小时）
+	Rehire                           *string                  `json:"rehire,omitempty"`                               // 是否离职重聘
+	RehireEmploymentId               *string                  `json:"rehire_employment_id,omitempty"`                 // -| 历史雇佣信息 ID ，雇佣信息详细信息可以通过「查询单个雇佣信息」API 获得，系统会检验当前雇佣信息的合法性，要求： - 雇佣信息为该人员最后一次雇佣记录 - 雇佣信息的雇员状态 = "terminated" - 该人员不存在其他待入职记录
+	WorkingHoursType                 *string                  `json:"working_hours_type,omitempty"`                   // -| 工时制度 ID ，可通过【查询单个工时制度】接口获取
+	WeeklyWorkingHoursV2             *float64                 `json:"weekly_working_hours_v2,omitempty"`              // 周工作时长v2（单位：小时）
+	OfficeAddress                    *Address                 `json:"office_address,omitempty"`                       // 办公地址
+	WorkingCalendarId                *string                  `json:"working_calendar_id,omitempty"`                  // 工作日历
+	UpdatedAt                        *string                  `json:"updated_at,omitempty"`                           // 待入职信息 更新时间
+	SuspectedRehiring                *bool                    `json:"suspected_rehiring,omitempty"`                   // 是否疑似重聘
+	CustomFields                     []*CustomFieldData       `json:"custom_fields,omitempty"`                        // 自定义字段
+	PositionId                       *string                  `json:"position_id,omitempty"`                          // 岗位 ID
+	CompanyManualUpdated             *bool                    `json:"company_manual_updated,omitempty"`               // 公司主体是否被手动修改
+	PayGroup                         *PreHirePayGroupInfo     `json:"pay_group,omitempty"`                            // 薪资组信息
+	WhetherTheInformationIsAbnormal  *bool                    `json:"whether_the_information_is_abnormal,omitempty"`  // 是否信息异常
+	AbnormalReason                   []*PreHireAbnormalReason `json:"abnormal_reason,omitempty"`                      // 异常原因列表
+	HasOfferSalary                   *bool                    `json:"has_offer_salary,omitempty"`                     // 是否有 Offer 薪酬
+	RecruitmentProjectId             *string                  `json:"recruitment_project_id,omitempty"`               // 招聘项目 ID
+	WorkShift                        *Enum                    `json:"work_shift,omitempty"`                           // -| 排班类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：work_shift - object_api_name：pre_hire
+	CreatedAt                        *string                  `json:"created_at,omitempty"`                           // 待入职信息 创建时间
+	CreatedBy                        *string                  `json:"created_by,omitempty"`                           // 待入职信息 创建人
+	UpdatedBy                        *string                  `json:"updated_by,omitempty"`                           // 待入职信息 更新人
+	SeniorityDate                    *string                  `json:"seniority_date,omitempty"`                       // 司龄起算日期
+	BackgroundCheckOrderId           *string                  `json:"background_check_order_id,omitempty"`            // 背调订单ID
+	BackgroundCheckOrderName         *string                  `json:"background_check_order_name,omitempty"`          // 背调名称
+	BackgroundCheckOrderPackageName  *string                  `json:"background_check_order_package_name,omitempty"`  // 背调套餐
+	BackgroundCheckOrderResult       *string                  `json:"background_check_order_result,omitempty"`        // 背调结果
+	BackgroundCheckOrderSupplierName *string                  `json:"background_check_order_supplier_name,omitempty"` // 背调供应商
+	BackgroundCheckOrderAccountName  *string                  `json:"background_check_order_account_name,omitempty"`  // 背调账号名称
+	BackgroundCheckOrderStartTime    *string                  `json:"background_check_order_start_time,omitempty"`    // 背调开始时间
+	BackgroundCheckOrderCompleteTime *string                  `json:"background_check_order_complete_time,omitempty"` // 背调完成时间
+	BackgroundCheckOrderStatus       *Enum                    `json:"background_check_order_status,omitempty"`        // -| 背调状态，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：background_check_order_status - object_api_name：pre_hire
 }
 
 type PreHireEmploymentInfoBuilder struct {
-	departmentId                        string // 部门 ID ，可以通过【搜索部门信息】接口获取
-	departmentIdFlag                    bool
-	costCenterRates                     []*JobDataCostCenter // 成本中心分摊信息
-	costCenterRatesFlag                 bool
-	officeLocationId                    string // 办公地点id ，详细信息可通过【批量查询地点】接口获得
-	officeLocationIdFlag                bool
-	workLocationId                      string // 工作地点id ，详细信息可通过【批量查询地点】接口获得
-	workLocationIdFlag                  bool
-	workStation                         string // 工位
-	workStationFlag                     bool
-	workerId                            string // 工号
-	workerIdFlag                        bool
-	compensationType                    *Enum // -| 薪资类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：compensation_type - object_api_name：pre_hire
-	compensationTypeFlag                bool
-	directLeaderId                      string // 直属上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
-	directLeaderIdFlag                  bool
-	jobId                               string // 职务 ID ,可以通过【批量查询职务】接口获取
-	jobIdFlag                           bool
-	jobFamilyId                         string // 序列 ID，可以通过【批量查询职务序列】接口获取
-	jobFamilyIdFlag                     bool
-	jobLevelId                          string // 职级 ID，可以通过【批量查询职务级别】接口获取
-	jobLevelIdFlag                      bool
-	jobGradeId                          string // 职等 ID
-	jobGradeIdFlag                      bool
-	jobTitle                            string // 职务头衔
-	jobTitleFlag                        bool
-	employeeTypeId                      string // 人员类型 ID ，可以通过招聘【批量查询人员类型】接口获取
-	employeeTypeIdFlag                  bool
-	employeeSubtypeId                   string // 人员子类型 ID
-	employeeSubtypeIdFlag               bool
-	employmentType                      string // -| 雇佣类型， 枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - object_api_name = "pre_hire" - custom_api_name = "employment_type"
-	employmentTypeFlag                  bool
-	workEmail                           string // 工作邮箱
-	workEmailFlag                       bool
-	companyId                           string // 公司 ID , 详细信息可通过【批量查询公司】接口获得
-	companyIdFlag                       bool
-	socialSecurityCityId                string // 社保城市 ID ，详细信息可通过【批量查询地点】接口获得
-	socialSecurityCityIdFlag            bool
-	nonCompeteCovenant                  bool // 是否包含竞业条款
-	nonCompeteCovenantFlag              bool
-	weeklyWorkingHours                  int // 周工作时长（单位：小时）
-	weeklyWorkingHoursFlag              bool
-	rehire                              string // 是否离职重聘
-	rehireFlag                          bool
-	rehireEmploymentId                  string // -| 历史雇佣信息 ID ，雇佣信息详细信息可以通过「查询单个雇佣信息」API 获得，系统会检验当前雇佣信息的合法性，要求： - 雇佣信息为该人员最后一次雇佣记录 - 雇佣信息的雇员状态 = "terminated" - 该人员不存在其他待入职记录
-	rehireEmploymentIdFlag              bool
-	workingHoursType                    string // -| 工时制度 ID ，可通过【查询单个工时制度】接口获取
-	workingHoursTypeFlag                bool
-	weeklyWorkingHoursV2                float64 // 周工作时长v2（单位：小时）
-	weeklyWorkingHoursV2Flag            bool
-	officeAddress                       *Address // 办公地址
-	officeAddressFlag                   bool
-	workingCalendarId                   string // 工作日历
-	workingCalendarIdFlag               bool
-	updatedAt                           string // 待入职信息 更新时间
-	updatedAtFlag                       bool
-	suspectedRehiring                   bool // 是否疑似重聘
-	suspectedRehiringFlag               bool
-	customFields                        []*CustomFieldData // 自定义字段
-	customFieldsFlag                    bool
-	positionId                          string // 岗位 ID
-	positionIdFlag                      bool
-	companyManualUpdated                bool // 公司主体是否被手动修改
-	companyManualUpdatedFlag            bool
-	payGroup                            *PreHirePayGroupInfo // 薪资组信息
-	payGroupFlag                        bool
-	whetherTheInformationIsAbnormal     bool // 是否信息异常
-	whetherTheInformationIsAbnormalFlag bool
-	abnormalReason                      []*PreHireAbnormalReason // 异常原因列表
-	abnormalReasonFlag                  bool
-	hasOfferSalary                      bool // 是否有 Offer 薪酬
-	hasOfferSalaryFlag                  bool
-	recruitmentProjectId                string // 招聘项目 ID
-	recruitmentProjectIdFlag            bool
-	workShift                           *Enum // -| 排班类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：work_shift - object_api_name：pre_hire
-	workShiftFlag                       bool
-	createdAt                           string // 待入职信息 创建时间
-	createdAtFlag                       bool
-	createdBy                           string // 待入职信息 创建人
-	createdByFlag                       bool
-	updatedBy                           string // 待入职信息 更新人
-	updatedByFlag                       bool
-	seniorityDate                       string // 司龄起算日期
-	seniorityDateFlag                   bool
+	departmentId                         string // 部门 ID ，可以通过【搜索部门信息】接口获取
+	departmentIdFlag                     bool
+	costCenterRates                      []*JobDataCostCenter // 成本中心分摊信息
+	costCenterRatesFlag                  bool
+	officeLocationId                     string // 办公地点id ，详细信息可通过【批量查询地点】接口获得
+	officeLocationIdFlag                 bool
+	workLocationId                       string // 工作地点id ，详细信息可通过【批量查询地点】接口获得
+	workLocationIdFlag                   bool
+	workStation                          string // 工位
+	workStationFlag                      bool
+	workerId                             string // 工号
+	workerIdFlag                         bool
+	compensationType                     *Enum // -| 薪资类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：compensation_type - object_api_name：pre_hire
+	compensationTypeFlag                 bool
+	directLeaderId                       string // 直属上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
+	directLeaderIdFlag                   bool
+	dottedLineManagerId                  string // 虚线上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
+	dottedLineManagerIdFlag              bool
+	jobId                                string // 职务 ID ,可以通过【批量查询职务】接口获取
+	jobIdFlag                            bool
+	jobFamilyId                          string // 序列 ID，可以通过【批量查询职务序列】接口获取
+	jobFamilyIdFlag                      bool
+	jobLevelId                           string // 职级 ID，可以通过【批量查询职务级别】接口获取
+	jobLevelIdFlag                       bool
+	jobGradeId                           string // 职等 ID
+	jobGradeIdFlag                       bool
+	jobTitle                             string // 职务头衔
+	jobTitleFlag                         bool
+	employeeTypeId                       string // 人员类型 ID ，可以通过招聘【批量查询人员类型】接口获取
+	employeeTypeIdFlag                   bool
+	employeeSubtypeId                    string // 人员子类型 ID
+	employeeSubtypeIdFlag                bool
+	employmentType                       string // -| 雇佣类型， 枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - object_api_name = "pre_hire" - custom_api_name = "employment_type"
+	employmentTypeFlag                   bool
+	workEmail                            string // 工作邮箱
+	workEmailFlag                        bool
+	companyId                            string // 公司 ID , 详细信息可通过【批量查询公司】接口获得
+	companyIdFlag                        bool
+	socialSecurityCityId                 string // 社保城市 ID ，详细信息可通过【批量查询地点】接口获得
+	socialSecurityCityIdFlag             bool
+	nonCompeteCovenant                   bool // 是否包含竞业条款
+	nonCompeteCovenantFlag               bool
+	weeklyWorkingHours                   int // 周工作时长（单位：小时）
+	weeklyWorkingHoursFlag               bool
+	rehire                               string // 是否离职重聘
+	rehireFlag                           bool
+	rehireEmploymentId                   string // -| 历史雇佣信息 ID ，雇佣信息详细信息可以通过「查询单个雇佣信息」API 获得，系统会检验当前雇佣信息的合法性，要求： - 雇佣信息为该人员最后一次雇佣记录 - 雇佣信息的雇员状态 = "terminated" - 该人员不存在其他待入职记录
+	rehireEmploymentIdFlag               bool
+	workingHoursType                     string // -| 工时制度 ID ，可通过【查询单个工时制度】接口获取
+	workingHoursTypeFlag                 bool
+	weeklyWorkingHoursV2                 float64 // 周工作时长v2（单位：小时）
+	weeklyWorkingHoursV2Flag             bool
+	officeAddress                        *Address // 办公地址
+	officeAddressFlag                    bool
+	workingCalendarId                    string // 工作日历
+	workingCalendarIdFlag                bool
+	updatedAt                            string // 待入职信息 更新时间
+	updatedAtFlag                        bool
+	suspectedRehiring                    bool // 是否疑似重聘
+	suspectedRehiringFlag                bool
+	customFields                         []*CustomFieldData // 自定义字段
+	customFieldsFlag                     bool
+	positionId                           string // 岗位 ID
+	positionIdFlag                       bool
+	companyManualUpdated                 bool // 公司主体是否被手动修改
+	companyManualUpdatedFlag             bool
+	payGroup                             *PreHirePayGroupInfo // 薪资组信息
+	payGroupFlag                         bool
+	whetherTheInformationIsAbnormal      bool // 是否信息异常
+	whetherTheInformationIsAbnormalFlag  bool
+	abnormalReason                       []*PreHireAbnormalReason // 异常原因列表
+	abnormalReasonFlag                   bool
+	hasOfferSalary                       bool // 是否有 Offer 薪酬
+	hasOfferSalaryFlag                   bool
+	recruitmentProjectId                 string // 招聘项目 ID
+	recruitmentProjectIdFlag             bool
+	workShift                            *Enum // -| 排班类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：work_shift - object_api_name：pre_hire
+	workShiftFlag                        bool
+	createdAt                            string // 待入职信息 创建时间
+	createdAtFlag                        bool
+	createdBy                            string // 待入职信息 创建人
+	createdByFlag                        bool
+	updatedBy                            string // 待入职信息 更新人
+	updatedByFlag                        bool
+	seniorityDate                        string // 司龄起算日期
+	seniorityDateFlag                    bool
+	backgroundCheckOrderId               string // 背调订单ID
+	backgroundCheckOrderIdFlag           bool
+	backgroundCheckOrderName             string // 背调名称
+	backgroundCheckOrderNameFlag         bool
+	backgroundCheckOrderPackageName      string // 背调套餐
+	backgroundCheckOrderPackageNameFlag  bool
+	backgroundCheckOrderResult           string // 背调结果
+	backgroundCheckOrderResultFlag       bool
+	backgroundCheckOrderSupplierName     string // 背调供应商
+	backgroundCheckOrderSupplierNameFlag bool
+	backgroundCheckOrderAccountName      string // 背调账号名称
+	backgroundCheckOrderAccountNameFlag  bool
+	backgroundCheckOrderStartTime        string // 背调开始时间
+	backgroundCheckOrderStartTimeFlag    bool
+	backgroundCheckOrderCompleteTime     string // 背调完成时间
+	backgroundCheckOrderCompleteTimeFlag bool
+	backgroundCheckOrderStatus           *Enum // -| 背调状态，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：background_check_order_status - object_api_name：pre_hire
+	backgroundCheckOrderStatusFlag       bool
 }
 
 func NewPreHireEmploymentInfoBuilder() *PreHireEmploymentInfoBuilder {
@@ -29818,6 +29959,15 @@ func (builder *PreHireEmploymentInfoBuilder) CompensationType(compensationType *
 func (builder *PreHireEmploymentInfoBuilder) DirectLeaderId(directLeaderId string) *PreHireEmploymentInfoBuilder {
 	builder.directLeaderId = directLeaderId
 	builder.directLeaderIdFlag = true
+	return builder
+}
+
+// 虚线上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
+//
+// 示例值：7032210902531327521
+func (builder *PreHireEmploymentInfoBuilder) DottedLineManagerId(dottedLineManagerId string) *PreHireEmploymentInfoBuilder {
+	builder.dottedLineManagerId = dottedLineManagerId
+	builder.dottedLineManagerIdFlag = true
 	return builder
 }
 
@@ -30127,6 +30277,87 @@ func (builder *PreHireEmploymentInfoBuilder) SeniorityDate(seniorityDate string)
 	return builder
 }
 
+// 背调订单ID
+//
+// 示例值：123
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderId(backgroundCheckOrderId string) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderId = backgroundCheckOrderId
+	builder.backgroundCheckOrderIdFlag = true
+	return builder
+}
+
+// 背调名称
+//
+// 示例值：xxx
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderName(backgroundCheckOrderName string) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderName = backgroundCheckOrderName
+	builder.backgroundCheckOrderNameFlag = true
+	return builder
+}
+
+// 背调套餐
+//
+// 示例值：xxx
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderPackageName(backgroundCheckOrderPackageName string) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderPackageName = backgroundCheckOrderPackageName
+	builder.backgroundCheckOrderPackageNameFlag = true
+	return builder
+}
+
+// 背调结果
+//
+// 示例值：通过
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderResult(backgroundCheckOrderResult string) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderResult = backgroundCheckOrderResult
+	builder.backgroundCheckOrderResultFlag = true
+	return builder
+}
+
+// 背调供应商
+//
+// 示例值：xxx
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderSupplierName(backgroundCheckOrderSupplierName string) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderSupplierName = backgroundCheckOrderSupplierName
+	builder.backgroundCheckOrderSupplierNameFlag = true
+	return builder
+}
+
+// 背调账号名称
+//
+// 示例值：xxx
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderAccountName(backgroundCheckOrderAccountName string) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderAccountName = backgroundCheckOrderAccountName
+	builder.backgroundCheckOrderAccountNameFlag = true
+	return builder
+}
+
+// 背调开始时间
+//
+// 示例值：2023-01-10 10:29
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderStartTime(backgroundCheckOrderStartTime string) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderStartTime = backgroundCheckOrderStartTime
+	builder.backgroundCheckOrderStartTimeFlag = true
+	return builder
+}
+
+// 背调完成时间
+//
+// 示例值：2023-01-10 10:29
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderCompleteTime(backgroundCheckOrderCompleteTime string) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderCompleteTime = backgroundCheckOrderCompleteTime
+	builder.backgroundCheckOrderCompleteTimeFlag = true
+	return builder
+}
+
+// -| 背调状态，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：background_check_order_status - object_api_name：pre_hire
+//
+// 示例值：
+func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderStatus(backgroundCheckOrderStatus *Enum) *PreHireEmploymentInfoBuilder {
+	builder.backgroundCheckOrderStatus = backgroundCheckOrderStatus
+	builder.backgroundCheckOrderStatusFlag = true
+	return builder
+}
+
 func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 	req := &PreHireEmploymentInfo{}
 	if builder.departmentIdFlag {
@@ -30157,6 +30388,10 @@ func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 	}
 	if builder.directLeaderIdFlag {
 		req.DirectLeaderId = &builder.directLeaderId
+
+	}
+	if builder.dottedLineManagerIdFlag {
+		req.DottedLineManagerId = &builder.dottedLineManagerId
 
 	}
 	if builder.jobIdFlag {
@@ -30289,6 +30524,41 @@ func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 	if builder.seniorityDateFlag {
 		req.SeniorityDate = &builder.seniorityDate
 
+	}
+	if builder.backgroundCheckOrderIdFlag {
+		req.BackgroundCheckOrderId = &builder.backgroundCheckOrderId
+
+	}
+	if builder.backgroundCheckOrderNameFlag {
+		req.BackgroundCheckOrderName = &builder.backgroundCheckOrderName
+
+	}
+	if builder.backgroundCheckOrderPackageNameFlag {
+		req.BackgroundCheckOrderPackageName = &builder.backgroundCheckOrderPackageName
+
+	}
+	if builder.backgroundCheckOrderResultFlag {
+		req.BackgroundCheckOrderResult = &builder.backgroundCheckOrderResult
+
+	}
+	if builder.backgroundCheckOrderSupplierNameFlag {
+		req.BackgroundCheckOrderSupplierName = &builder.backgroundCheckOrderSupplierName
+
+	}
+	if builder.backgroundCheckOrderAccountNameFlag {
+		req.BackgroundCheckOrderAccountName = &builder.backgroundCheckOrderAccountName
+
+	}
+	if builder.backgroundCheckOrderStartTimeFlag {
+		req.BackgroundCheckOrderStartTime = &builder.backgroundCheckOrderStartTime
+
+	}
+	if builder.backgroundCheckOrderCompleteTimeFlag {
+		req.BackgroundCheckOrderCompleteTime = &builder.backgroundCheckOrderCompleteTime
+
+	}
+	if builder.backgroundCheckOrderStatusFlag {
+		req.BackgroundCheckOrderStatus = builder.backgroundCheckOrderStatus
 	}
 	return req
 }
@@ -33820,6 +34090,54 @@ func (builder *ProfileSettingCareerBuilder) Build() *ProfileSettingCareer {
 	return req
 }
 
+type ProfileSettingCitizenshipStatus struct {
+	CountryRegion     *string `json:"country_region,omitempty"`     // 国家/地区ID
+	CitizenshipStatus *string `json:"citizenship_status,omitempty"` // 公民身份类型
+}
+
+type ProfileSettingCitizenshipStatusBuilder struct {
+	countryRegion         string // 国家/地区ID
+	countryRegionFlag     bool
+	citizenshipStatus     string // 公民身份类型
+	citizenshipStatusFlag bool
+}
+
+func NewProfileSettingCitizenshipStatusBuilder() *ProfileSettingCitizenshipStatusBuilder {
+	builder := &ProfileSettingCitizenshipStatusBuilder{}
+	return builder
+}
+
+// 国家/地区ID
+//
+// 示例值：7324333990030034476
+func (builder *ProfileSettingCitizenshipStatusBuilder) CountryRegion(countryRegion string) *ProfileSettingCitizenshipStatusBuilder {
+	builder.countryRegion = countryRegion
+	builder.countryRegionFlag = true
+	return builder
+}
+
+// 公民身份类型
+//
+// 示例值：公民
+func (builder *ProfileSettingCitizenshipStatusBuilder) CitizenshipStatus(citizenshipStatus string) *ProfileSettingCitizenshipStatusBuilder {
+	builder.citizenshipStatus = citizenshipStatus
+	builder.citizenshipStatusFlag = true
+	return builder
+}
+
+func (builder *ProfileSettingCitizenshipStatusBuilder) Build() *ProfileSettingCitizenshipStatus {
+	req := &ProfileSettingCitizenshipStatus{}
+	if builder.countryRegionFlag {
+		req.CountryRegion = &builder.countryRegion
+
+	}
+	if builder.citizenshipStatusFlag {
+		req.CitizenshipStatus = &builder.citizenshipStatus
+
+	}
+	return req
+}
+
 type ProfileSettingCostCenter struct {
 	Id   *string `json:"id,omitempty"`   // 100
 	Rate *int    `json:"rate,omitempty"` // 分摊比例
@@ -36004,72 +36322,75 @@ func (builder *ProfileSettingNationalBuilder) Build() *ProfileSettingNational {
 }
 
 type ProfileSettingPersonalBasicInfo struct {
-	LegalName            *ProfileSettingName          `json:"legal_name,omitempty"`             // 法定姓名
-	PreferredName        *ProfileSettingName          `json:"preferred_name,omitempty"`         // 常用姓名
-	Gender               *string                      `json:"gender,omitempty"`                 // 性别，枚举值 。可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "gender"
-	NationalityV2        *string                      `json:"nationality_v2,omitempty"`         // 国籍ID
-	EthnicityRace        *string                      `json:"ethnicity_race,omitempty"`         // 民族 / 种族，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "ethnicity_race"
-	Phone                *ProfileSettingPhone         `json:"phone,omitempty"`                  // 个人电话
-	Email                *string                      `json:"email,omitempty"`                  // 个人邮箱
-	DateOfBirth          *string                      `json:"date_of_birth,omitempty"`          // 出生日期
-	MaritalStatus        *string                      `json:"marital_status,omitempty"`         // 婚姻状况，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "marital_status"
-	IsDisabled           *bool                        `json:"is_disabled,omitempty"`            // 是否残疾
-	DisableCardNumber    *string                      `json:"disable_card_number,omitempty"`    // 残疾证号，is_disabled 为 true 时必填
-	IsMartyrFamily       *bool                        `json:"is_martyr_family,omitempty"`       // 是否为烈属
-	MartyrCardNumber     *string                      `json:"martyr_card_number,omitempty"`     // 烈属证号，is_martyr_family 为 true 时必填
-	IsOldAlone           *bool                        `json:"is_old_alone,omitempty"`           // 是否为孤老
-	BornCountryRegion    *string                      `json:"born_country_region,omitempty"`    // 出生国家/地区
-	PoliticalAffiliation *string                      `json:"political_affiliation,omitempty"`  // 政治面貌，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person_info_chn" custom_api_name = "political_affiliation"
-	NativeRegion         *string                      `json:"native_region,omitempty"`          // 籍贯(省份/行政区ID）
-	DateEnteredWorkforce *string                      `json:"date_entered_workforce,omitempty"` // 参加工作日期
-	FirstEntryTime       *string                      `json:"first_entry_time,omitempty"`       // 首次入境日期
-	LeaveTime            *string                      `json:"leave_time,omitempty"`             // 预计离境日期
-	CustomFields         []*ProfileSettingCustomField `json:"custom_fields,omitempty"`          // 自定义字段
+	LegalName               *ProfileSettingName          `json:"legal_name,omitempty"`               // 法定姓名
+	PreferredName           *ProfileSettingName          `json:"preferred_name,omitempty"`           // 常用姓名
+	Gender                  *string                      `json:"gender,omitempty"`                   // 性别，枚举值 。可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "gender"
+	NationalityV2           *string                      `json:"nationality_v2,omitempty"`           // 国籍ID
+	EthnicityRace           *string                      `json:"ethnicity_race,omitempty"`           // 民族 / 种族，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "ethnicity_race"
+	Phone                   *ProfileSettingPhone         `json:"phone,omitempty"`                    // 个人电话
+	Email                   *string                      `json:"email,omitempty"`                    // 个人邮箱
+	DateOfBirth             *string                      `json:"date_of_birth,omitempty"`            // 出生日期
+	MaritalStatus           *string                      `json:"marital_status,omitempty"`           // 婚姻状况，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "marital_status"
+	IsDisabled              *bool                        `json:"is_disabled,omitempty"`              // 是否残疾
+	DisableCardNumber       *string                      `json:"disable_card_number,omitempty"`      // 残疾证号，is_disabled 为 true 时必填
+	IsMartyrFamily          *bool                        `json:"is_martyr_family,omitempty"`         // 是否为烈属
+	MartyrCardNumber        *string                      `json:"martyr_card_number,omitempty"`       // 烈属证号，is_martyr_family 为 true 时必填
+	IsOldAlone              *bool                        `json:"is_old_alone,omitempty"`             // 是否为孤老
+	BornCountryRegion       *string                      `json:"born_country_region,omitempty"`      // 出生国家/地区
+	PoliticalAffiliation    *string                      `json:"political_affiliation,omitempty"`    // 政治面貌，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person_info_chn" custom_api_name = "political_affiliation"
+	NativeRegion            *string                      `json:"native_region,omitempty"`            // 籍贯(省份/行政区ID）
+	DateEnteredWorkforce    *string                      `json:"date_entered_workforce,omitempty"`   // 参加工作日期
+	FirstEntryTime          *string                      `json:"first_entry_time,omitempty"`         // 首次入境日期
+	LeaveTime               *string                      `json:"leave_time,omitempty"`               // 预计离境日期
+	CustomFields            []*ProfileSettingCustomField `json:"custom_fields,omitempty"`            // 自定义字段
+	AdditionalNationalities []string                     `json:"additional_nationalities,omitempty"` // 其他国籍（地区）ID
 }
 
 type ProfileSettingPersonalBasicInfoBuilder struct {
-	legalName                *ProfileSettingName // 法定姓名
-	legalNameFlag            bool
-	preferredName            *ProfileSettingName // 常用姓名
-	preferredNameFlag        bool
-	gender                   string // 性别，枚举值 。可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "gender"
-	genderFlag               bool
-	nationalityV2            string // 国籍ID
-	nationalityV2Flag        bool
-	ethnicityRace            string // 民族 / 种族，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "ethnicity_race"
-	ethnicityRaceFlag        bool
-	phone                    *ProfileSettingPhone // 个人电话
-	phoneFlag                bool
-	email                    string // 个人邮箱
-	emailFlag                bool
-	dateOfBirth              string // 出生日期
-	dateOfBirthFlag          bool
-	maritalStatus            string // 婚姻状况，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "marital_status"
-	maritalStatusFlag        bool
-	isDisabled               bool // 是否残疾
-	isDisabledFlag           bool
-	disableCardNumber        string // 残疾证号，is_disabled 为 true 时必填
-	disableCardNumberFlag    bool
-	isMartyrFamily           bool // 是否为烈属
-	isMartyrFamilyFlag       bool
-	martyrCardNumber         string // 烈属证号，is_martyr_family 为 true 时必填
-	martyrCardNumberFlag     bool
-	isOldAlone               bool // 是否为孤老
-	isOldAloneFlag           bool
-	bornCountryRegion        string // 出生国家/地区
-	bornCountryRegionFlag    bool
-	politicalAffiliation     string // 政治面貌，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person_info_chn" custom_api_name = "political_affiliation"
-	politicalAffiliationFlag bool
-	nativeRegion             string // 籍贯(省份/行政区ID）
-	nativeRegionFlag         bool
-	dateEnteredWorkforce     string // 参加工作日期
-	dateEnteredWorkforceFlag bool
-	firstEntryTime           string // 首次入境日期
-	firstEntryTimeFlag       bool
-	leaveTime                string // 预计离境日期
-	leaveTimeFlag            bool
-	customFields             []*ProfileSettingCustomField // 自定义字段
-	customFieldsFlag         bool
+	legalName                   *ProfileSettingName // 法定姓名
+	legalNameFlag               bool
+	preferredName               *ProfileSettingName // 常用姓名
+	preferredNameFlag           bool
+	gender                      string // 性别，枚举值 。可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "gender"
+	genderFlag                  bool
+	nationalityV2               string // 国籍ID
+	nationalityV2Flag           bool
+	ethnicityRace               string // 民族 / 种族，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "ethnicity_race"
+	ethnicityRaceFlag           bool
+	phone                       *ProfileSettingPhone // 个人电话
+	phoneFlag                   bool
+	email                       string // 个人邮箱
+	emailFlag                   bool
+	dateOfBirth                 string // 出生日期
+	dateOfBirthFlag             bool
+	maritalStatus               string // 婚姻状况，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "marital_status"
+	maritalStatusFlag           bool
+	isDisabled                  bool // 是否残疾
+	isDisabledFlag              bool
+	disableCardNumber           string // 残疾证号，is_disabled 为 true 时必填
+	disableCardNumberFlag       bool
+	isMartyrFamily              bool // 是否为烈属
+	isMartyrFamilyFlag          bool
+	martyrCardNumber            string // 烈属证号，is_martyr_family 为 true 时必填
+	martyrCardNumberFlag        bool
+	isOldAlone                  bool // 是否为孤老
+	isOldAloneFlag              bool
+	bornCountryRegion           string // 出生国家/地区
+	bornCountryRegionFlag       bool
+	politicalAffiliation        string // 政治面貌，枚举值。 可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person_info_chn" custom_api_name = "political_affiliation"
+	politicalAffiliationFlag    bool
+	nativeRegion                string // 籍贯(省份/行政区ID）
+	nativeRegionFlag            bool
+	dateEnteredWorkforce        string // 参加工作日期
+	dateEnteredWorkforceFlag    bool
+	firstEntryTime              string // 首次入境日期
+	firstEntryTimeFlag          bool
+	leaveTime                   string // 预计离境日期
+	leaveTimeFlag               bool
+	customFields                []*ProfileSettingCustomField // 自定义字段
+	customFieldsFlag            bool
+	additionalNationalities     []string // 其他国籍（地区）ID
+	additionalNationalitiesFlag bool
 }
 
 func NewProfileSettingPersonalBasicInfoBuilder() *ProfileSettingPersonalBasicInfoBuilder {
@@ -36266,6 +36587,15 @@ func (builder *ProfileSettingPersonalBasicInfoBuilder) CustomFields(customFields
 	return builder
 }
 
+// 其他国籍（地区）ID
+//
+// 示例值：6862995757234914827
+func (builder *ProfileSettingPersonalBasicInfoBuilder) AdditionalNationalities(additionalNationalities []string) *ProfileSettingPersonalBasicInfoBuilder {
+	builder.additionalNationalities = additionalNationalities
+	builder.additionalNationalitiesFlag = true
+	return builder
+}
+
 func (builder *ProfileSettingPersonalBasicInfoBuilder) Build() *ProfileSettingPersonalBasicInfo {
 	req := &ProfileSettingPersonalBasicInfo{}
 	if builder.legalNameFlag {
@@ -36348,40 +36678,46 @@ func (builder *ProfileSettingPersonalBasicInfoBuilder) Build() *ProfileSettingPe
 	if builder.customFieldsFlag {
 		req.CustomFields = builder.customFields
 	}
+	if builder.additionalNationalitiesFlag {
+		req.AdditionalNationalities = builder.additionalNationalities
+	}
 	return req
 }
 
 type ProfileSettingPersonalInfo struct {
-	PersonalBasicInfo *ProfileSettingPersonalBasicInfo  `json:"personal_basic_info,omitempty"` // 基本信息
-	EmergencyContacts []*ProfileSettingEmergencyContact `json:"emergency_contacts,omitempty"`  // 紧急联系人
-	BankAccounts      []*ProfileSettingBankAccount      `json:"bank_accounts,omitempty"`       // 银行账户
-	Nationals         []*ProfileSettingNational         `json:"nationals,omitempty"`           // 证件
-	ResidentTaxes     []*ProfileSettingResidentTax      `json:"resident_taxes,omitempty"`      // 居民身份信息
-	Dependents        []*ProfileSettingDependent        `json:"dependents,omitempty"`          // 家庭成员
-	Hukou             *ProfileSettingHukou              `json:"hukou,omitempty"`               // 户口
-	ContactAddresses  []*ProfileSettingAddress          `json:"contact_addresses,omitempty"`   // 联系地址
-	CustomGroups      []*ProfileSettingCustomGroup      `json:"custom_groups,omitempty"`       // 自定义分组
+	PersonalBasicInfo   *ProfileSettingPersonalBasicInfo   `json:"personal_basic_info,omitempty"`  // 基本信息
+	EmergencyContacts   []*ProfileSettingEmergencyContact  `json:"emergency_contacts,omitempty"`   // 紧急联系人
+	BankAccounts        []*ProfileSettingBankAccount       `json:"bank_accounts,omitempty"`        // 银行账户
+	Nationals           []*ProfileSettingNational          `json:"nationals,omitempty"`            // 证件
+	ResidentTaxes       []*ProfileSettingResidentTax       `json:"resident_taxes,omitempty"`       // 居民身份信息
+	Dependents          []*ProfileSettingDependent         `json:"dependents,omitempty"`           // 家庭成员
+	Hukou               *ProfileSettingHukou               `json:"hukou,omitempty"`                // 户口
+	ContactAddresses    []*ProfileSettingAddress           `json:"contact_addresses,omitempty"`    // 联系地址
+	CustomGroups        []*ProfileSettingCustomGroup       `json:"custom_groups,omitempty"`        // 自定义分组
+	CitizenshipStatuses []*ProfileSettingCitizenshipStatus `json:"citizenship_statuses,omitempty"` // 公民身份列表
 }
 
 type ProfileSettingPersonalInfoBuilder struct {
-	personalBasicInfo     *ProfileSettingPersonalBasicInfo // 基本信息
-	personalBasicInfoFlag bool
-	emergencyContacts     []*ProfileSettingEmergencyContact // 紧急联系人
-	emergencyContactsFlag bool
-	bankAccounts          []*ProfileSettingBankAccount // 银行账户
-	bankAccountsFlag      bool
-	nationals             []*ProfileSettingNational // 证件
-	nationalsFlag         bool
-	residentTaxes         []*ProfileSettingResidentTax // 居民身份信息
-	residentTaxesFlag     bool
-	dependents            []*ProfileSettingDependent // 家庭成员
-	dependentsFlag        bool
-	hukou                 *ProfileSettingHukou // 户口
-	hukouFlag             bool
-	contactAddresses      []*ProfileSettingAddress // 联系地址
-	contactAddressesFlag  bool
-	customGroups          []*ProfileSettingCustomGroup // 自定义分组
-	customGroupsFlag      bool
+	personalBasicInfo       *ProfileSettingPersonalBasicInfo // 基本信息
+	personalBasicInfoFlag   bool
+	emergencyContacts       []*ProfileSettingEmergencyContact // 紧急联系人
+	emergencyContactsFlag   bool
+	bankAccounts            []*ProfileSettingBankAccount // 银行账户
+	bankAccountsFlag        bool
+	nationals               []*ProfileSettingNational // 证件
+	nationalsFlag           bool
+	residentTaxes           []*ProfileSettingResidentTax // 居民身份信息
+	residentTaxesFlag       bool
+	dependents              []*ProfileSettingDependent // 家庭成员
+	dependentsFlag          bool
+	hukou                   *ProfileSettingHukou // 户口
+	hukouFlag               bool
+	contactAddresses        []*ProfileSettingAddress // 联系地址
+	contactAddressesFlag    bool
+	customGroups            []*ProfileSettingCustomGroup // 自定义分组
+	customGroupsFlag        bool
+	citizenshipStatuses     []*ProfileSettingCitizenshipStatus // 公民身份列表
+	citizenshipStatusesFlag bool
 }
 
 func NewProfileSettingPersonalInfoBuilder() *ProfileSettingPersonalInfoBuilder {
@@ -36470,6 +36806,15 @@ func (builder *ProfileSettingPersonalInfoBuilder) CustomGroups(customGroups []*P
 	return builder
 }
 
+// 公民身份列表
+//
+// 示例值：
+func (builder *ProfileSettingPersonalInfoBuilder) CitizenshipStatuses(citizenshipStatuses []*ProfileSettingCitizenshipStatus) *ProfileSettingPersonalInfoBuilder {
+	builder.citizenshipStatuses = citizenshipStatuses
+	builder.citizenshipStatusesFlag = true
+	return builder
+}
+
 func (builder *ProfileSettingPersonalInfoBuilder) Build() *ProfileSettingPersonalInfo {
 	req := &ProfileSettingPersonalInfo{}
 	if builder.personalBasicInfoFlag {
@@ -36498,6 +36843,9 @@ func (builder *ProfileSettingPersonalInfoBuilder) Build() *ProfileSettingPersona
 	}
 	if builder.customGroupsFlag {
 		req.CustomGroups = builder.customGroups
+	}
+	if builder.citizenshipStatusesFlag {
+		req.CitizenshipStatuses = builder.citizenshipStatuses
 	}
 	return req
 }
@@ -37548,6 +37896,69 @@ func (builder *ReorganizationInfoBuilder) Build() *ReorganizationInfo {
 	}
 	if builder.customFieldsFlag {
 		req.CustomFields = builder.customFields
+	}
+	return req
+}
+
+type ReportDetailReq struct {
+	WokforcePlanId                *string                   `json:"wokforce_plan_id,omitempty"`                 // 编制规划id
+	CentralizedReportingProjectId *string                   `json:"centralized_reporting_project_id,omitempty"` // 集中填报id
+	Items                         []*WorkforcePlanDetailRow `json:"items,omitempty"`                            // 集中填报的一些填报行
+}
+
+type ReportDetailReqBuilder struct {
+	wokforcePlanId                    string // 编制规划id
+	wokforcePlanIdFlag                bool
+	centralizedReportingProjectId     string // 集中填报id
+	centralizedReportingProjectIdFlag bool
+	items                             []*WorkforcePlanDetailRow // 集中填报的一些填报行
+	itemsFlag                         bool
+}
+
+func NewReportDetailReqBuilder() *ReportDetailReqBuilder {
+	builder := &ReportDetailReqBuilder{}
+	return builder
+}
+
+// 编制规划id
+//
+// 示例值：7430330781544564268
+func (builder *ReportDetailReqBuilder) WokforcePlanId(wokforcePlanId string) *ReportDetailReqBuilder {
+	builder.wokforcePlanId = wokforcePlanId
+	builder.wokforcePlanIdFlag = true
+	return builder
+}
+
+// 集中填报id
+//
+// 示例值："7430470688844023340"
+func (builder *ReportDetailReqBuilder) CentralizedReportingProjectId(centralizedReportingProjectId string) *ReportDetailReqBuilder {
+	builder.centralizedReportingProjectId = centralizedReportingProjectId
+	builder.centralizedReportingProjectIdFlag = true
+	return builder
+}
+
+// 集中填报的一些填报行
+//
+// 示例值：
+func (builder *ReportDetailReqBuilder) Items(items []*WorkforcePlanDetailRow) *ReportDetailReqBuilder {
+	builder.items = items
+	builder.itemsFlag = true
+	return builder
+}
+
+func (builder *ReportDetailReqBuilder) Build() *ReportDetailReq {
+	req := &ReportDetailReq{}
+	if builder.wokforcePlanIdFlag {
+		req.WokforcePlanId = &builder.wokforcePlanId
+
+	}
+	if builder.centralizedReportingProjectIdFlag {
+		req.CentralizedReportingProjectId = &builder.centralizedReportingProjectId
+
+	}
+	if builder.itemsFlag {
+		req.Items = builder.items
 	}
 	return req
 }
@@ -42796,6 +43207,115 @@ func (builder *WorkforcePlanDetailBuilder) Build() *WorkforcePlanDetail {
 	return req
 }
 
+type WorkforcePlanDetailReq struct {
+	WorkforePlanId *string                   `json:"workfore_plan_id,omitempty"` // 编制规划id
+	Items          []*WorkforcePlanDetailRow `json:"items,omitempty"`            // 编制规划的多个明细行
+}
+
+type WorkforcePlanDetailReqBuilder struct {
+	workforePlanId     string // 编制规划id
+	workforePlanIdFlag bool
+	items              []*WorkforcePlanDetailRow // 编制规划的多个明细行
+	itemsFlag          bool
+}
+
+func NewWorkforcePlanDetailReqBuilder() *WorkforcePlanDetailReqBuilder {
+	builder := &WorkforcePlanDetailReqBuilder{}
+	return builder
+}
+
+// 编制规划id
+//
+// 示例值："7430330781544564268"
+func (builder *WorkforcePlanDetailReqBuilder) WorkforePlanId(workforePlanId string) *WorkforcePlanDetailReqBuilder {
+	builder.workforePlanId = workforePlanId
+	builder.workforePlanIdFlag = true
+	return builder
+}
+
+// 编制规划的多个明细行
+//
+// 示例值：
+func (builder *WorkforcePlanDetailReqBuilder) Items(items []*WorkforcePlanDetailRow) *WorkforcePlanDetailReqBuilder {
+	builder.items = items
+	builder.itemsFlag = true
+	return builder
+}
+
+func (builder *WorkforcePlanDetailReqBuilder) Build() *WorkforcePlanDetailReq {
+	req := &WorkforcePlanDetailReq{}
+	if builder.workforePlanIdFlag {
+		req.WorkforePlanId = &builder.workforePlanId
+
+	}
+	if builder.itemsFlag {
+		req.Items = builder.items
+	}
+	return req
+}
+
+type WorkforcePlanDetailRow struct {
+	Dimensions []*DimensionEntity      `json:"dimensions,omitempty"` // 维度信息
+	EaiDetail  *WorkforcePlanEaiDetail `json:"eai_detail,omitempty"` // 预估在职人数
+	PlanValue  *string                 `json:"plan_value,omitempty"` // 编制规划值
+}
+
+type WorkforcePlanDetailRowBuilder struct {
+	dimensions     []*DimensionEntity // 维度信息
+	dimensionsFlag bool
+	eaiDetail      *WorkforcePlanEaiDetail // 预估在职人数
+	eaiDetailFlag  bool
+	planValue      string // 编制规划值
+	planValueFlag  bool
+}
+
+func NewWorkforcePlanDetailRowBuilder() *WorkforcePlanDetailRowBuilder {
+	builder := &WorkforcePlanDetailRowBuilder{}
+	return builder
+}
+
+// 维度信息
+//
+// 示例值：
+func (builder *WorkforcePlanDetailRowBuilder) Dimensions(dimensions []*DimensionEntity) *WorkforcePlanDetailRowBuilder {
+	builder.dimensions = dimensions
+	builder.dimensionsFlag = true
+	return builder
+}
+
+// 预估在职人数
+//
+// 示例值：
+func (builder *WorkforcePlanDetailRowBuilder) EaiDetail(eaiDetail *WorkforcePlanEaiDetail) *WorkforcePlanDetailRowBuilder {
+	builder.eaiDetail = eaiDetail
+	builder.eaiDetailFlag = true
+	return builder
+}
+
+// 编制规划值
+//
+// 示例值："12"
+func (builder *WorkforcePlanDetailRowBuilder) PlanValue(planValue string) *WorkforcePlanDetailRowBuilder {
+	builder.planValue = planValue
+	builder.planValueFlag = true
+	return builder
+}
+
+func (builder *WorkforcePlanDetailRowBuilder) Build() *WorkforcePlanDetailRow {
+	req := &WorkforcePlanDetailRow{}
+	if builder.dimensionsFlag {
+		req.Dimensions = builder.dimensions
+	}
+	if builder.eaiDetailFlag {
+		req.EaiDetail = builder.eaiDetail
+	}
+	if builder.planValueFlag {
+		req.PlanValue = &builder.planValue
+
+	}
+	return req
+}
+
 type WorkforcePlanDetailV2 struct {
 	WorkforcePlanDetailId *string              `json:"workforce_plan_detail_id,omitempty"` // 编制规划明细 ID
 	DimensionInfoDatas    []*DimensionInfoData `json:"dimension_info_datas,omitempty"`     // 维度信息
@@ -45143,6 +45663,191 @@ type ListBpResp struct {
 }
 
 func (resp *ListBpResp) Success() bool {
+	return resp.Code == 0
+}
+
+type ActiveCompanyReqBodyBuilder struct {
+	companyId           string // 公司ID
+	companyIdFlag       bool
+	effectiveTime       string // 生效时间
+	effectiveTimeFlag   bool
+	active              bool // 启用停用状态
+	activeFlag          bool
+	operationReason     string // 操作原因
+	operationReasonFlag bool
+}
+
+func NewActiveCompanyReqBodyBuilder() *ActiveCompanyReqBodyBuilder {
+	builder := &ActiveCompanyReqBodyBuilder{}
+	return builder
+}
+
+// 公司ID
+//
+// 示例值：1616161616
+func (builder *ActiveCompanyReqBodyBuilder) CompanyId(companyId string) *ActiveCompanyReqBodyBuilder {
+	builder.companyId = companyId
+	builder.companyIdFlag = true
+	return builder
+}
+
+// 生效时间
+//
+// 示例值：2020-01-01
+func (builder *ActiveCompanyReqBodyBuilder) EffectiveTime(effectiveTime string) *ActiveCompanyReqBodyBuilder {
+	builder.effectiveTime = effectiveTime
+	builder.effectiveTimeFlag = true
+	return builder
+}
+
+// 启用停用状态
+//
+// 示例值：true
+func (builder *ActiveCompanyReqBodyBuilder) Active(active bool) *ActiveCompanyReqBodyBuilder {
+	builder.active = active
+	builder.activeFlag = true
+	return builder
+}
+
+// 操作原因
+//
+// 示例值：业务操作
+func (builder *ActiveCompanyReqBodyBuilder) OperationReason(operationReason string) *ActiveCompanyReqBodyBuilder {
+	builder.operationReason = operationReason
+	builder.operationReasonFlag = true
+	return builder
+}
+
+func (builder *ActiveCompanyReqBodyBuilder) Build() *ActiveCompanyReqBody {
+	req := &ActiveCompanyReqBody{}
+	if builder.companyIdFlag {
+		req.CompanyId = &builder.companyId
+	}
+	if builder.effectiveTimeFlag {
+		req.EffectiveTime = &builder.effectiveTime
+	}
+	if builder.activeFlag {
+		req.Active = &builder.active
+	}
+	if builder.operationReasonFlag {
+		req.OperationReason = &builder.operationReason
+	}
+	return req
+}
+
+type ActiveCompanyPathReqBodyBuilder struct {
+	companyId           string
+	companyIdFlag       bool
+	effectiveTime       string
+	effectiveTimeFlag   bool
+	active              bool
+	activeFlag          bool
+	operationReason     string
+	operationReasonFlag bool
+}
+
+func NewActiveCompanyPathReqBodyBuilder() *ActiveCompanyPathReqBodyBuilder {
+	builder := &ActiveCompanyPathReqBodyBuilder{}
+	return builder
+}
+
+// 公司ID
+//
+// 示例值：1616161616
+func (builder *ActiveCompanyPathReqBodyBuilder) CompanyId(companyId string) *ActiveCompanyPathReqBodyBuilder {
+	builder.companyId = companyId
+	builder.companyIdFlag = true
+	return builder
+}
+
+// 生效时间
+//
+// 示例值：2020-01-01
+func (builder *ActiveCompanyPathReqBodyBuilder) EffectiveTime(effectiveTime string) *ActiveCompanyPathReqBodyBuilder {
+	builder.effectiveTime = effectiveTime
+	builder.effectiveTimeFlag = true
+	return builder
+}
+
+// 启用停用状态
+//
+// 示例值：true
+func (builder *ActiveCompanyPathReqBodyBuilder) Active(active bool) *ActiveCompanyPathReqBodyBuilder {
+	builder.active = active
+	builder.activeFlag = true
+	return builder
+}
+
+// 操作原因
+//
+// 示例值：业务操作
+func (builder *ActiveCompanyPathReqBodyBuilder) OperationReason(operationReason string) *ActiveCompanyPathReqBodyBuilder {
+	builder.operationReason = operationReason
+	builder.operationReasonFlag = true
+	return builder
+}
+
+func (builder *ActiveCompanyPathReqBodyBuilder) Build() (*ActiveCompanyReqBody, error) {
+	req := &ActiveCompanyReqBody{}
+	if builder.companyIdFlag {
+		req.CompanyId = &builder.companyId
+	}
+	if builder.effectiveTimeFlag {
+		req.EffectiveTime = &builder.effectiveTime
+	}
+	if builder.activeFlag {
+		req.Active = &builder.active
+	}
+	if builder.operationReasonFlag {
+		req.OperationReason = &builder.operationReason
+	}
+	return req, nil
+}
+
+type ActiveCompanyReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *ActiveCompanyReqBody
+}
+
+func NewActiveCompanyReqBuilder() *ActiveCompanyReqBuilder {
+	builder := &ActiveCompanyReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+func (builder *ActiveCompanyReqBuilder) Body(body *ActiveCompanyReqBody) *ActiveCompanyReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *ActiveCompanyReqBuilder) Build() *ActiveCompanyReq {
+	req := &ActiveCompanyReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type ActiveCompanyReqBody struct {
+	CompanyId       *string `json:"company_id,omitempty"`       // 公司ID
+	EffectiveTime   *string `json:"effective_time,omitempty"`   // 生效时间
+	Active          *bool   `json:"active,omitempty"`           // 启用停用状态
+	OperationReason *string `json:"operation_reason,omitempty"` // 操作原因
+}
+
+type ActiveCompanyReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *ActiveCompanyReqBody `body:""`
+}
+
+type ActiveCompanyResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *ActiveCompanyResp) Success() bool {
 	return resp.Code == 0
 }
 
@@ -48470,10 +49175,14 @@ type SearchEmployeeReqBodyBuilder struct {
 	emailAddressList                  []string // 工作邮箱地址列表，精确匹配查询
 	emailAddressListFlag              bool
 
-	departmentIdListIncludeSub     []string // 部门 ID 列表，查询属于该部门及下级部门的员工
-	departmentIdListIncludeSubFlag bool
-	costCenterIdList               []string // 成本中心ID;- 可通过 [【搜索成本中心信息】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/cost_center/search) 获取
-	costCenterIdListFlag           bool
+	departmentIdListIncludeSub         []string // 部门 ID 列表，查询属于该部门及下级部门的员工
+	departmentIdListIncludeSubFlag     bool
+	additionalNationalIdNumberList     []string // 其他国籍ID列表，精准匹配查询
+	additionalNationalIdNumberListFlag bool
+	citizenshipStatusList              []string // 公民身份类型列表，精确匹配查询
+	citizenshipStatusListFlag          bool
+	costCenterIdList                   []string // 成本中心ID;- 可通过 [【搜索成本中心信息】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/cost_center/search) 获取
+	costCenterIdListFlag               bool
 }
 
 func NewSearchEmployeeReqBodyBuilder() *SearchEmployeeReqBodyBuilder {
@@ -48679,6 +49388,24 @@ func (builder *SearchEmployeeReqBodyBuilder) DepartmentIdListIncludeSub(departme
 	return builder
 }
 
+// 其他国籍ID列表，精准匹配查询
+//
+// 示例值：
+func (builder *SearchEmployeeReqBodyBuilder) AdditionalNationalIdNumberList(additionalNationalIdNumberList []string) *SearchEmployeeReqBodyBuilder {
+	builder.additionalNationalIdNumberList = additionalNationalIdNumberList
+	builder.additionalNationalIdNumberListFlag = true
+	return builder
+}
+
+// 公民身份类型列表，精确匹配查询
+//
+// 示例值：
+func (builder *SearchEmployeeReqBodyBuilder) CitizenshipStatusList(citizenshipStatusList []string) *SearchEmployeeReqBodyBuilder {
+	builder.citizenshipStatusList = citizenshipStatusList
+	builder.citizenshipStatusListFlag = true
+	return builder
+}
+
 // 成本中心ID;- 可通过 [【搜索成本中心信息】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/cost_center/search) 获取
 //
 // 示例值：
@@ -48756,6 +49483,12 @@ func (builder *SearchEmployeeReqBodyBuilder) Build() *SearchEmployeeReqBody {
 	if builder.departmentIdListIncludeSubFlag {
 		req.DepartmentIdListIncludeSub = builder.departmentIdListIncludeSub
 	}
+	if builder.additionalNationalIdNumberListFlag {
+		req.AdditionalNationalIdNumberList = builder.additionalNationalIdNumberList
+	}
+	if builder.citizenshipStatusListFlag {
+		req.CitizenshipStatusList = builder.citizenshipStatusList
+	}
 	if builder.costCenterIdListFlag {
 		req.CostCenterIdList = builder.costCenterIdList
 	}
@@ -48763,54 +49496,58 @@ func (builder *SearchEmployeeReqBodyBuilder) Build() *SearchEmployeeReqBody {
 }
 
 type SearchEmployeePathReqBodyBuilder struct {
-	fields                            []string
-	fieldsFlag                        bool
-	employmentIdList                  []string
-	employmentIdListFlag              bool
-	employeeNumberList                []string
-	employeeNumberListFlag            bool
-	workEmail                         string
-	workEmailFlag                     bool
-	phoneNumber                       string
-	phoneNumberFlag                   bool
-	keyWord                           string
-	keyWordFlag                       bool
-	employmentStatus                  string
-	employmentStatusFlag              bool
-	employeeTypeId                    string
-	employeeTypeIdFlag                bool
-	departmentIdList                  []string
-	departmentIdListFlag              bool
-	directManagerIdList               []string
-	directManagerIdListFlag           bool
-	dottedLineManagerIdList           []string
-	dottedLineManagerIdListFlag       bool
-	regularEmployeeStartDateStart     string
-	regularEmployeeStartDateStartFlag bool
-	regularEmployeeStartDateEnd       string
-	regularEmployeeStartDateEndFlag   bool
-	effectiveTimeStart                string
-	effectiveTimeStartFlag            bool
-	effectiveTimeEnd                  string
-	effectiveTimeEndFlag              bool
-	workLocationIdListIncludeSub      []string
-	workLocationIdListIncludeSubFlag  bool
-	preferredEnglishFullNameList      []string
-	preferredEnglishFullNameListFlag  bool
-	preferredLocalFullNameList        []string
-	preferredLocalFullNameListFlag    bool
-	nationalIdNumberList              []string
-	nationalIdNumberListFlag          bool
-	phoneNumberList                   []string
-	phoneNumberListFlag               bool
-	emailAddressList                  []string
-	emailAddressListFlag              bool
-	userName                          string
-	userNameFlag                      bool
-	departmentIdListIncludeSub        []string
-	departmentIdListIncludeSubFlag    bool
-	costCenterIdList                  []string
-	costCenterIdListFlag              bool
+	fields                             []string
+	fieldsFlag                         bool
+	employmentIdList                   []string
+	employmentIdListFlag               bool
+	employeeNumberList                 []string
+	employeeNumberListFlag             bool
+	workEmail                          string
+	workEmailFlag                      bool
+	phoneNumber                        string
+	phoneNumberFlag                    bool
+	keyWord                            string
+	keyWordFlag                        bool
+	employmentStatus                   string
+	employmentStatusFlag               bool
+	employeeTypeId                     string
+	employeeTypeIdFlag                 bool
+	departmentIdList                   []string
+	departmentIdListFlag               bool
+	directManagerIdList                []string
+	directManagerIdListFlag            bool
+	dottedLineManagerIdList            []string
+	dottedLineManagerIdListFlag        bool
+	regularEmployeeStartDateStart      string
+	regularEmployeeStartDateStartFlag  bool
+	regularEmployeeStartDateEnd        string
+	regularEmployeeStartDateEndFlag    bool
+	effectiveTimeStart                 string
+	effectiveTimeStartFlag             bool
+	effectiveTimeEnd                   string
+	effectiveTimeEndFlag               bool
+	workLocationIdListIncludeSub       []string
+	workLocationIdListIncludeSubFlag   bool
+	preferredEnglishFullNameList       []string
+	preferredEnglishFullNameListFlag   bool
+	preferredLocalFullNameList         []string
+	preferredLocalFullNameListFlag     bool
+	nationalIdNumberList               []string
+	nationalIdNumberListFlag           bool
+	phoneNumberList                    []string
+	phoneNumberListFlag                bool
+	emailAddressList                   []string
+	emailAddressListFlag               bool
+	userName                           string
+	userNameFlag                       bool
+	departmentIdListIncludeSub         []string
+	departmentIdListIncludeSubFlag     bool
+	additionalNationalIdNumberList     []string
+	additionalNationalIdNumberListFlag bool
+	citizenshipStatusList              []string
+	citizenshipStatusListFlag          bool
+	costCenterIdList                   []string
+	costCenterIdListFlag               bool
 }
 
 func NewSearchEmployeePathReqBodyBuilder() *SearchEmployeePathReqBodyBuilder {
@@ -49016,6 +49753,24 @@ func (builder *SearchEmployeePathReqBodyBuilder) DepartmentIdListIncludeSub(depa
 	return builder
 }
 
+// 其他国籍ID列表，精准匹配查询
+//
+// 示例值：
+func (builder *SearchEmployeePathReqBodyBuilder) AdditionalNationalIdNumberList(additionalNationalIdNumberList []string) *SearchEmployeePathReqBodyBuilder {
+	builder.additionalNationalIdNumberList = additionalNationalIdNumberList
+	builder.additionalNationalIdNumberListFlag = true
+	return builder
+}
+
+// 公民身份类型列表，精确匹配查询
+//
+// 示例值：
+func (builder *SearchEmployeePathReqBodyBuilder) CitizenshipStatusList(citizenshipStatusList []string) *SearchEmployeePathReqBodyBuilder {
+	builder.citizenshipStatusList = citizenshipStatusList
+	builder.citizenshipStatusListFlag = true
+	return builder
+}
+
 // 成本中心ID;- 可通过 [【搜索成本中心信息】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/cost_center/search) 获取
 //
 // 示例值：
@@ -49092,6 +49847,12 @@ func (builder *SearchEmployeePathReqBodyBuilder) Build() (*SearchEmployeeReqBody
 	}
 	if builder.departmentIdListIncludeSubFlag {
 		req.DepartmentIdListIncludeSub = builder.departmentIdListIncludeSub
+	}
+	if builder.additionalNationalIdNumberListFlag {
+		req.AdditionalNationalIdNumberList = builder.additionalNationalIdNumberList
+	}
+	if builder.citizenshipStatusListFlag {
+		req.CitizenshipStatusList = builder.citizenshipStatusList
 	}
 	if builder.costCenterIdListFlag {
 		req.CostCenterIdList = builder.costCenterIdList
@@ -49190,8 +49951,10 @@ type SearchEmployeeReqBody struct {
 	PhoneNumberList               []string `json:"phone_number_list,omitempty"`                 // 个人电话列表，精确匹配查询
 	EmailAddressList              []string `json:"email_address_list,omitempty"`                // 工作邮箱地址列表，精确匹配查询
 
-	DepartmentIdListIncludeSub []string `json:"department_id_list_include_sub,omitempty"` // 部门 ID 列表，查询属于该部门及下级部门的员工
-	CostCenterIdList           []string `json:"cost_center_id_list,omitempty"`            // 成本中心ID;- 可通过 [【搜索成本中心信息】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/cost_center/search) 获取
+	DepartmentIdListIncludeSub     []string `json:"department_id_list_include_sub,omitempty"`     // 部门 ID 列表，查询属于该部门及下级部门的员工
+	AdditionalNationalIdNumberList []string `json:"additional_national_id_number_list,omitempty"` // 其他国籍ID列表，精准匹配查询
+	CitizenshipStatusList          []string `json:"citizenship_status_list,omitempty"`            // 公民身份类型列表，精确匹配查询
+	CostCenterIdList               []string `json:"cost_center_id_list,omitempty"`                // 成本中心ID;- 可通过 [【搜索成本中心信息】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/cost_center/search) 获取
 }
 
 type SearchEmployeeReq struct {
@@ -51008,6 +51771,192 @@ func (resp *BatchGetJobLevelResp) Success() bool {
 	return resp.Code == 0
 }
 
+type ActiveLocationReqBodyBuilder struct {
+	locationId          string // 地点 ID
+	locationIdFlag      bool
+	effectiveTime       string // 生效时间
+	effectiveTimeFlag   bool
+	active              bool // 启用停用状态
+	activeFlag          bool
+	operationReason     string // 操作原因
+	operationReasonFlag bool
+}
+
+func NewActiveLocationReqBodyBuilder() *ActiveLocationReqBodyBuilder {
+	builder := &ActiveLocationReqBodyBuilder{}
+	return builder
+}
+
+// 地点 ID
+//
+// 示例值：1616161616
+func (builder *ActiveLocationReqBodyBuilder) LocationId(locationId string) *ActiveLocationReqBodyBuilder {
+	builder.locationId = locationId
+	builder.locationIdFlag = true
+	return builder
+}
+
+// 生效时间
+//
+// 示例值：2020-01-01
+func (builder *ActiveLocationReqBodyBuilder) EffectiveTime(effectiveTime string) *ActiveLocationReqBodyBuilder {
+	builder.effectiveTime = effectiveTime
+	builder.effectiveTimeFlag = true
+	return builder
+}
+
+// 启用停用状态
+//
+// 示例值：true
+func (builder *ActiveLocationReqBodyBuilder) Active(active bool) *ActiveLocationReqBodyBuilder {
+	builder.active = active
+	builder.activeFlag = true
+	return builder
+}
+
+// 操作原因
+//
+// 示例值：业务操作
+func (builder *ActiveLocationReqBodyBuilder) OperationReason(operationReason string) *ActiveLocationReqBodyBuilder {
+	builder.operationReason = operationReason
+	builder.operationReasonFlag = true
+	return builder
+}
+
+func (builder *ActiveLocationReqBodyBuilder) Build() *ActiveLocationReqBody {
+	req := &ActiveLocationReqBody{}
+	if builder.locationIdFlag {
+		req.LocationId = &builder.locationId
+	}
+	if builder.effectiveTimeFlag {
+		req.EffectiveTime = &builder.effectiveTime
+	}
+	if builder.activeFlag {
+		req.Active = &builder.active
+	}
+	if builder.operationReasonFlag {
+		req.OperationReason = &builder.operationReason
+	}
+	return req
+}
+
+type ActiveLocationPathReqBodyBuilder struct {
+	locationId          string
+	locationIdFlag      bool
+	effectiveTime       string
+	effectiveTimeFlag   bool
+	active              bool
+	activeFlag          bool
+	operationReason     string
+	operationReasonFlag bool
+}
+
+func NewActiveLocationPathReqBodyBuilder() *ActiveLocationPathReqBodyBuilder {
+	builder := &ActiveLocationPathReqBodyBuilder{}
+	return builder
+}
+
+// 地点 ID
+//
+// 示例值：1616161616
+func (builder *ActiveLocationPathReqBodyBuilder) LocationId(locationId string) *ActiveLocationPathReqBodyBuilder {
+	builder.locationId = locationId
+	builder.locationIdFlag = true
+	return builder
+}
+
+// 生效时间
+//
+// 示例值：2020-01-01
+func (builder *ActiveLocationPathReqBodyBuilder) EffectiveTime(effectiveTime string) *ActiveLocationPathReqBodyBuilder {
+	builder.effectiveTime = effectiveTime
+	builder.effectiveTimeFlag = true
+	return builder
+}
+
+// 启用停用状态
+//
+// 示例值：true
+func (builder *ActiveLocationPathReqBodyBuilder) Active(active bool) *ActiveLocationPathReqBodyBuilder {
+	builder.active = active
+	builder.activeFlag = true
+	return builder
+}
+
+// 操作原因
+//
+// 示例值：业务操作
+func (builder *ActiveLocationPathReqBodyBuilder) OperationReason(operationReason string) *ActiveLocationPathReqBodyBuilder {
+	builder.operationReason = operationReason
+	builder.operationReasonFlag = true
+	return builder
+}
+
+func (builder *ActiveLocationPathReqBodyBuilder) Build() (*ActiveLocationReqBody, error) {
+	req := &ActiveLocationReqBody{}
+	if builder.locationIdFlag {
+		req.LocationId = &builder.locationId
+	}
+	if builder.effectiveTimeFlag {
+		req.EffectiveTime = &builder.effectiveTime
+	}
+	if builder.activeFlag {
+		req.Active = &builder.active
+	}
+	if builder.operationReasonFlag {
+		req.OperationReason = &builder.operationReason
+	}
+	return req, nil
+}
+
+type ActiveLocationReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *ActiveLocationReqBody
+}
+
+func NewActiveLocationReqBuilder() *ActiveLocationReqBuilder {
+	builder := &ActiveLocationReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 启停/停用地点
+func (builder *ActiveLocationReqBuilder) Body(body *ActiveLocationReqBody) *ActiveLocationReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *ActiveLocationReqBuilder) Build() *ActiveLocationReq {
+	req := &ActiveLocationReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type ActiveLocationReqBody struct {
+	LocationId      *string `json:"location_id,omitempty"`      // 地点 ID
+	EffectiveTime   *string `json:"effective_time,omitempty"`   // 生效时间
+	Active          *bool   `json:"active,omitempty"`           // 启用停用状态
+	OperationReason *string `json:"operation_reason,omitempty"` // 操作原因
+}
+
+type ActiveLocationReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *ActiveLocationReqBody `body:""`
+}
+
+type ActiveLocationResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *ActiveLocationResp) Success() bool {
+	return resp.Code == 0
+}
+
 type BatchGetLocationReqBodyBuilder struct {
 	locationIds     []string // 地点 ID 列表
 	locationIdsFlag bool
@@ -51109,6 +52058,245 @@ type BatchGetLocationResp struct {
 }
 
 func (resp *BatchGetLocationResp) Success() bool {
+	return resp.Code == 0
+}
+
+type PatchLocationReqBuilder struct {
+	apiReq         *larkcore.ApiReq
+	locationUpdate *LocationUpdate
+}
+
+func NewPatchLocationReqBuilder() *PatchLocationReqBuilder {
+	builder := &PatchLocationReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 地点 ID
+//
+// 示例值：1616161616
+func (builder *PatchLocationReqBuilder) LocationId(locationId string) *PatchLocationReqBuilder {
+	builder.apiReq.PathParams.Set("location_id", fmt.Sprint(locationId))
+	return builder
+}
+
+// 根据 client_token 是否一致来判断是否为同一请求
+//
+// 示例值：12454646
+func (builder *PatchLocationReqBuilder) ClientToken(clientToken string) *PatchLocationReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 更新地点
+func (builder *PatchLocationReqBuilder) LocationUpdate(locationUpdate *LocationUpdate) *PatchLocationReqBuilder {
+	builder.locationUpdate = locationUpdate
+	return builder
+}
+
+func (builder *PatchLocationReqBuilder) Build() *PatchLocationReq {
+	req := &PatchLocationReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.locationUpdate
+	return req
+}
+
+type PatchLocationReq struct {
+	apiReq         *larkcore.ApiReq
+	LocationUpdate *LocationUpdate `body:""`
+}
+
+type PatchLocationResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *PatchLocationResp) Success() bool {
+	return resp.Code == 0
+}
+
+type CreateLocationAddressReqBuilder struct {
+	apiReq                *larkcore.ApiReq
+	locationAddressCreate *LocationAddressCreate
+}
+
+func NewCreateLocationAddressReqBuilder() *CreateLocationAddressReqBuilder {
+	builder := &CreateLocationAddressReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 地点 ID
+//
+// 示例值：1616161616
+func (builder *CreateLocationAddressReqBuilder) LocationId(locationId string) *CreateLocationAddressReqBuilder {
+	builder.apiReq.PathParams.Set("location_id", fmt.Sprint(locationId))
+	return builder
+}
+
+// 根据 client_token 是否一致来判断是否为同一请求
+//
+// 示例值：12454646
+func (builder *CreateLocationAddressReqBuilder) ClientToken(clientToken string) *CreateLocationAddressReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 添加地点地址
+func (builder *CreateLocationAddressReqBuilder) LocationAddressCreate(locationAddressCreate *LocationAddressCreate) *CreateLocationAddressReqBuilder {
+	builder.locationAddressCreate = locationAddressCreate
+	return builder
+}
+
+func (builder *CreateLocationAddressReqBuilder) Build() *CreateLocationAddressReq {
+	req := &CreateLocationAddressReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.locationAddressCreate
+	return req
+}
+
+type CreateLocationAddressReq struct {
+	apiReq                *larkcore.ApiReq
+	LocationAddressCreate *LocationAddressCreate `body:""`
+}
+
+type CreateLocationAddressRespData struct {
+	AddressId *string `json:"address_id,omitempty"` // 地址 ID
+}
+
+type CreateLocationAddressResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *CreateLocationAddressRespData `json:"data"` // 业务数据
+}
+
+func (resp *CreateLocationAddressResp) Success() bool {
+	return resp.Code == 0
+}
+
+type DeleteLocationAddressReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewDeleteLocationAddressReqBuilder() *DeleteLocationAddressReqBuilder {
+	builder := &DeleteLocationAddressReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 地点 ID
+//
+// 示例值：1616161616
+func (builder *DeleteLocationAddressReqBuilder) LocationId(locationId string) *DeleteLocationAddressReqBuilder {
+	builder.apiReq.PathParams.Set("location_id", fmt.Sprint(locationId))
+	return builder
+}
+
+// 地址 ID
+//
+// 示例值：1515151515
+func (builder *DeleteLocationAddressReqBuilder) AddressId(addressId string) *DeleteLocationAddressReqBuilder {
+	builder.apiReq.PathParams.Set("address_id", fmt.Sprint(addressId))
+	return builder
+}
+
+func (builder *DeleteLocationAddressReqBuilder) Build() *DeleteLocationAddressReq {
+	req := &DeleteLocationAddressReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	return req
+}
+
+type DeleteLocationAddressReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type DeleteLocationAddressResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *DeleteLocationAddressResp) Success() bool {
+	return resp.Code == 0
+}
+
+type PatchLocationAddressReqBuilder struct {
+	apiReq                *larkcore.ApiReq
+	locationAddressUpdate *LocationAddressUpdate
+}
+
+func NewPatchLocationAddressReqBuilder() *PatchLocationAddressReqBuilder {
+	builder := &PatchLocationAddressReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 地点 ID
+//
+// 示例值：1616161616
+func (builder *PatchLocationAddressReqBuilder) LocationId(locationId string) *PatchLocationAddressReqBuilder {
+	builder.apiReq.PathParams.Set("location_id", fmt.Sprint(locationId))
+	return builder
+}
+
+// 地址 ID
+//
+// 示例值：1515151515
+func (builder *PatchLocationAddressReqBuilder) AddressId(addressId string) *PatchLocationAddressReqBuilder {
+	builder.apiReq.PathParams.Set("address_id", fmt.Sprint(addressId))
+	return builder
+}
+
+// 根据 client_token 是否一致来判断是否为同一请求
+//
+// 示例值：12454646
+func (builder *PatchLocationAddressReqBuilder) ClientToken(clientToken string) *PatchLocationAddressReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 更新地点地址
+func (builder *PatchLocationAddressReqBuilder) LocationAddressUpdate(locationAddressUpdate *LocationAddressUpdate) *PatchLocationAddressReqBuilder {
+	builder.locationAddressUpdate = locationAddressUpdate
+	return builder
+}
+
+func (builder *PatchLocationAddressReqBuilder) Build() *PatchLocationAddressReq {
+	req := &PatchLocationAddressReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.locationAddressUpdate
+	return req
+}
+
+type PatchLocationAddressReq struct {
+	apiReq                *larkcore.ApiReq
+	LocationAddressUpdate *LocationAddressUpdate `body:""`
+}
+
+type PatchLocationAddressResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *PatchLocationAddressResp) Success() bool {
 	return resp.Code == 0
 }
 
@@ -53945,6 +55133,7 @@ type GetProcessFormVariableDataReq struct {
 
 type GetProcessFormVariableDataRespData struct {
 	FieldVariableValues []*FieldVariableValue `json:"field_variable_values,omitempty"` // 表单数据
+	ProcessId           *string               `json:"process_id,omitempty"`            // 流程实例id
 }
 
 type GetProcessFormVariableDataResp struct {
@@ -53954,6 +55143,82 @@ type GetProcessFormVariableDataResp struct {
 }
 
 func (resp *GetProcessFormVariableDataResp) Success() bool {
+	return resp.Code == 0
+}
+
+type ListWorkforcePlanReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListWorkforcePlanReqBuilder() *ListWorkforcePlanReqBuilder {
+	builder := &ListWorkforcePlanReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 是否获取所有编制规划方案，true 所有编制规划方案列表，false 为仅获取当前生效的编制规划方案，默认为 false示例值：false
+//
+// 示例值：
+func (builder *ListWorkforcePlanReqBuilder) GetAllPlan(getAllPlan bool) *ListWorkforcePlanReqBuilder {
+	builder.apiReq.QueryParams.Set("get_all_plan", fmt.Sprint(getAllPlan))
+	return builder
+}
+
+// 是否只获取已启用的方案，true 获取已启用编制规划方案，false 获取所有编制规划方案，默认为 true示例值：true
+//
+// 示例值：
+func (builder *ListWorkforcePlanReqBuilder) Active(active bool) *ListWorkforcePlanReqBuilder {
+	builder.apiReq.QueryParams.Set("active", fmt.Sprint(active))
+	return builder
+}
+
+// 分页标识
+//
+// 示例值：34523459
+func (builder *ListWorkforcePlanReqBuilder) PageToken(pageToken string) *ListWorkforcePlanReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 每页数量
+//
+// 示例值：100
+func (builder *ListWorkforcePlanReqBuilder) PageSize(pageSize int) *ListWorkforcePlanReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+func (builder *ListWorkforcePlanReqBuilder) Build() *ListWorkforcePlanReq {
+	req := &ListWorkforcePlanReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListWorkforcePlanReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListWorkforcePlanRespData struct {
+	Items []*WorkforcePlan `json:"items,omitempty"` // 方案列表
+	Total *int             `json:"total,omitempty"` // 方案总数
+
+}
+
+type ListWorkforcePlanResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListWorkforcePlanRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListWorkforcePlanResp) Success() bool {
 	return resp.Code == 0
 }
 

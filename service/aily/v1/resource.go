@@ -12,6 +12,10 @@ type V1 struct {
 	AilySession            *ailySession            // aily_session
 	AilySessionAilyMessage *ailySessionAilyMessage // aily_session.aily_message
 	AilySessionRun         *ailySessionRun         // aily_session.run
+	AppDataAsset           *appDataAsset           // app.data_asset
+	AppDataAssetTag        *appDataAssetTag        // app.data_asset_tag
+	AppKnowledge           *appKnowledge           // app.knowledge
+	AppSkill               *appSkill               // app.skill
 }
 
 func New(config *larkcore.Config) *V1 {
@@ -19,6 +23,10 @@ func New(config *larkcore.Config) *V1 {
 		AilySession:            &ailySession{config: config},
 		AilySessionAilyMessage: &ailySessionAilyMessage{config: config},
 		AilySessionRun:         &ailySessionRun{config: config},
+		AppDataAsset:           &appDataAsset{config: config},
+		AppDataAssetTag:        &appDataAssetTag{config: config},
+		AppKnowledge:           &appKnowledge{config: config},
+		AppSkill:               &appSkill{config: config},
 	}
 }
 
@@ -29,6 +37,18 @@ type ailySessionAilyMessage struct {
 	config *larkcore.Config
 }
 type ailySessionRun struct {
+	config *larkcore.Config
+}
+type appDataAsset struct {
+	config *larkcore.Config
+}
+type appDataAssetTag struct {
+	config *larkcore.Config
+}
+type appKnowledge struct {
+	config *larkcore.Config
+}
+type appSkill struct {
 	config *larkcore.Config
 }
 
@@ -332,4 +352,184 @@ func (a *ailySessionRun) ListByIterator(ctx context.Context, req *ListAilySessio
 		listFunc: a.List,
 		options:  options,
 		limit:    req.Limit}, nil
+}
+
+// List
+//
+// - 获取数据与知识列表
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=aily&resource=app.data_asset&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/ailyv1/list_appDataAsset.go
+func (a *appDataAsset) List(ctx context.Context, req *ListAppDataAssetReq, options ...larkcore.RequestOptionFunc) (*ListAppDataAssetResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/aily/v1/apps/:app_id/data_assets"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeUser, larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListAppDataAssetResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (a *appDataAsset) ListByIterator(ctx context.Context, req *ListAppDataAssetReq, options ...larkcore.RequestOptionFunc) (*ListAppDataAssetIterator, error) {
+	return &ListAppDataAssetIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: a.List,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// List
+//
+// - 获取数据与知识分类列表
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=aily&resource=app.data_asset_tag&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/ailyv1/list_appDataAssetTag.go
+func (a *appDataAssetTag) List(ctx context.Context, req *ListAppDataAssetTagReq, options ...larkcore.RequestOptionFunc) (*ListAppDataAssetTagResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/aily/v1/apps/:app_id/data_asset_tags"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeUser, larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListAppDataAssetTagResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (a *appDataAssetTag) ListByIterator(ctx context.Context, req *ListAppDataAssetTagReq, options ...larkcore.RequestOptionFunc) (*ListAppDataAssetTagIterator, error) {
+	return &ListAppDataAssetTagIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: a.List,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// Ask
+//
+// - 执行一次数据知识问答
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=ask&project=aily&resource=app.knowledge&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/ailyv1/ask_appKnowledge.go
+func (a *appKnowledge) Ask(ctx context.Context, req *AskAppKnowledgeReq, options ...larkcore.RequestOptionFunc) (*AskAppKnowledgeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/aily/v1/apps/:app_id/knowledges/ask"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeUser, larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &AskAppKnowledgeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Get
+//
+// - 该 API 用于获取某个飞书智能伙伴应用的技能（Skill）的详细信息。
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=get&project=aily&resource=app.skill&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/ailyv1/get_appSkill.go
+func (a *appSkill) Get(ctx context.Context, req *GetAppSkillReq, options ...larkcore.RequestOptionFunc) (*GetAppSkillResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/aily/v1/apps/:app_id/skills/:skill_id"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeUser, larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &GetAppSkillResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// List
+//
+// - 该 API 用于批量获取飞书智能伙伴应用的技能（Skill）的详细信息
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=aily&resource=app.skill&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/ailyv1/list_appSkill.go
+func (a *appSkill) List(ctx context.Context, req *ListAppSkillReq, options ...larkcore.RequestOptionFunc) (*ListAppSkillResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/aily/v1/apps/:app_id/skills"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeUser, larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListAppSkillResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (a *appSkill) ListByIterator(ctx context.Context, req *ListAppSkillReq, options ...larkcore.RequestOptionFunc) (*ListAppSkillIterator, error) {
+	return &ListAppSkillIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: a.List,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// Start
+//
+// - 该 API 用于执行飞书智能伙伴应用的技能（Skill）获取输出
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=start&project=aily&resource=app.skill&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/ailyv1/start_appSkill.go
+func (a *appSkill) Start(ctx context.Context, req *StartAppSkillReq, options ...larkcore.RequestOptionFunc) (*StartAppSkillResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/aily/v1/apps/:app_id/skills/:skill_id/start"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeUser, larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &StartAppSkillResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
 }

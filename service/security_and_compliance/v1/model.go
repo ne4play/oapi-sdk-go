@@ -161,6 +161,133 @@ func (builder *AdminLogBuilder) Build() *AdminLog {
 	return req
 }
 
+type ApiAuditCommonDrawers struct {
+	CommonDrawInfoList []*ApiAuditDrawerInfo `json:"common_draw_info_list,omitempty"` // 扩展字段信息
+}
+
+type ApiAuditCommonDrawersBuilder struct {
+	commonDrawInfoList     []*ApiAuditDrawerInfo // 扩展字段信息
+	commonDrawInfoListFlag bool
+}
+
+func NewApiAuditCommonDrawersBuilder() *ApiAuditCommonDrawersBuilder {
+	builder := &ApiAuditCommonDrawersBuilder{}
+	return builder
+}
+
+// 扩展字段信息
+//
+// 示例值：
+func (builder *ApiAuditCommonDrawersBuilder) CommonDrawInfoList(commonDrawInfoList []*ApiAuditDrawerInfo) *ApiAuditCommonDrawersBuilder {
+	builder.commonDrawInfoList = commonDrawInfoList
+	builder.commonDrawInfoListFlag = true
+	return builder
+}
+
+func (builder *ApiAuditCommonDrawersBuilder) Build() *ApiAuditCommonDrawers {
+	req := &ApiAuditCommonDrawers{}
+	if builder.commonDrawInfoListFlag {
+		req.CommonDrawInfoList = builder.commonDrawInfoList
+	}
+	return req
+}
+
+type ApiAuditDrawerInfo struct {
+	InfoKey    *string `json:"info_key,omitempty"`     // key信息
+	InfoVal    *string `json:"info_val,omitempty"`     // val值
+	KeyI18nKey *string `json:"key_i18n_key,omitempty"` // key对应的i18nkey
+	ValType    *string `json:"val_type,omitempty"`     // val类型
+	ValI18nKey *string `json:"val_i18n_key,omitempty"` // val对应的i18nkey
+}
+
+type ApiAuditDrawerInfoBuilder struct {
+	infoKey        string // key信息
+	infoKeyFlag    bool
+	infoVal        string // val值
+	infoValFlag    bool
+	keyI18nKey     string // key对应的i18nkey
+	keyI18nKeyFlag bool
+	valType        string // val类型
+	valTypeFlag    bool
+	valI18nKey     string // val对应的i18nkey
+	valI18nKeyFlag bool
+}
+
+func NewApiAuditDrawerInfoBuilder() *ApiAuditDrawerInfoBuilder {
+	builder := &ApiAuditDrawerInfoBuilder{}
+	return builder
+}
+
+// key信息
+//
+// 示例值：k
+func (builder *ApiAuditDrawerInfoBuilder) InfoKey(infoKey string) *ApiAuditDrawerInfoBuilder {
+	builder.infoKey = infoKey
+	builder.infoKeyFlag = true
+	return builder
+}
+
+// val值
+//
+// 示例值：v
+func (builder *ApiAuditDrawerInfoBuilder) InfoVal(infoVal string) *ApiAuditDrawerInfoBuilder {
+	builder.infoVal = infoVal
+	builder.infoValFlag = true
+	return builder
+}
+
+// key对应的i18nkey
+//
+// 示例值：
+func (builder *ApiAuditDrawerInfoBuilder) KeyI18nKey(keyI18nKey string) *ApiAuditDrawerInfoBuilder {
+	builder.keyI18nKey = keyI18nKey
+	builder.keyI18nKeyFlag = true
+	return builder
+}
+
+// val类型
+//
+// 示例值：1
+func (builder *ApiAuditDrawerInfoBuilder) ValType(valType string) *ApiAuditDrawerInfoBuilder {
+	builder.valType = valType
+	builder.valTypeFlag = true
+	return builder
+}
+
+// val对应的i18nkey
+//
+// 示例值：
+func (builder *ApiAuditDrawerInfoBuilder) ValI18nKey(valI18nKey string) *ApiAuditDrawerInfoBuilder {
+	builder.valI18nKey = valI18nKey
+	builder.valI18nKeyFlag = true
+	return builder
+}
+
+func (builder *ApiAuditDrawerInfoBuilder) Build() *ApiAuditDrawerInfo {
+	req := &ApiAuditDrawerInfo{}
+	if builder.infoKeyFlag {
+		req.InfoKey = &builder.infoKey
+
+	}
+	if builder.infoValFlag {
+		req.InfoVal = &builder.infoVal
+
+	}
+	if builder.keyI18nKeyFlag {
+		req.KeyI18nKey = &builder.keyI18nKey
+
+	}
+	if builder.valTypeFlag {
+		req.ValType = &builder.valType
+
+	}
+	if builder.valI18nKeyFlag {
+		req.ValI18nKey = &builder.valI18nKey
+
+	}
+	return req
+}
+
 type AppDlpExecuteLog struct {
 	EventName   *string             `json:"event_name,omitempty"`   // 事件名称
 	UserId      *string             `json:"user_id,omitempty"`      // 用户的open_id
@@ -283,6 +410,1849 @@ func (builder *AppDlpExecuteLogBuilder) Build() *AppDlpExecuteLog {
 	}
 	if builder.evidencesFlag {
 		req.Evidences = builder.evidences
+	}
+	return req
+}
+
+type AuditAndroidContext struct {
+	Udid            *string `json:"udid,omitempty"`              // UDID
+	Did             *string `json:"did,omitempty"`               // 设备ID
+	AppVer          *string `json:"app_ver,omitempty"`           // app的版本
+	Ver             *string `json:"ver,omitempty"`               // SecSDK版本
+	Region          *string `json:"region,omitempty"`            // 设备语言
+	IdI             *string `json:"id_i,omitempty"`              // 安卓版本号
+	IdR             *string `json:"id_r,omitempty"`              // 安卓版本
+	HwBrand         *string `json:"hw_brand,omitempty"`          // Brand
+	HwManuf         *string `json:"hw_manuf,omitempty"`          // 制造商
+	Wifip           *string `json:"wifip,omitempty"`             // wifi ip
+	RouteIip        *string `json:"route_iip,omitempty"`         // 路由IP
+	RouteGip        *string `json:"route_gip,omitempty"`         // 路由网关IP
+	EnvSu           *string `json:"env_su,omitempty"`            // 表示当前是否root
+	EnvTz           *string `json:"env_tz,omitempty"`            // 手机系统时区
+	EnvMl           *string `json:"env_ml,omitempty"`            // 手机系统语言
+	Location        *string `json:"location,omitempty"`          // GPS经纬度
+	ActiveIp        *string `json:"active_ip,omitempty"`         // 当前设备活跃ip
+	ActiveIpDetail  *string `json:"active_ip_detail,omitempty"`  // 当前设备活跃ip对应网卡类型
+	CellBaseStation *string `json:"cell_base_station,omitempty"` // 基站信息
+	IP              *string `json:"IP,omitempty"`                // 公网ip
+}
+
+type AuditAndroidContextBuilder struct {
+	udid                string // UDID
+	udidFlag            bool
+	did                 string // 设备ID
+	didFlag             bool
+	appVer              string // app的版本
+	appVerFlag          bool
+	ver                 string // SecSDK版本
+	verFlag             bool
+	region              string // 设备语言
+	regionFlag          bool
+	idI                 string // 安卓版本号
+	idIFlag             bool
+	idR                 string // 安卓版本
+	idRFlag             bool
+	hwBrand             string // Brand
+	hwBrandFlag         bool
+	hwManuf             string // 制造商
+	hwManufFlag         bool
+	wifip               string // wifi ip
+	wifipFlag           bool
+	routeIip            string // 路由IP
+	routeIipFlag        bool
+	routeGip            string // 路由网关IP
+	routeGipFlag        bool
+	envSu               string // 表示当前是否root
+	envSuFlag           bool
+	envTz               string // 手机系统时区
+	envTzFlag           bool
+	envMl               string // 手机系统语言
+	envMlFlag           bool
+	location            string // GPS经纬度
+	locationFlag        bool
+	activeIp            string // 当前设备活跃ip
+	activeIpFlag        bool
+	activeIpDetail      string // 当前设备活跃ip对应网卡类型
+	activeIpDetailFlag  bool
+	cellBaseStation     string // 基站信息
+	cellBaseStationFlag bool
+	iP                  string // 公网ip
+	iPFlag              bool
+}
+
+func NewAuditAndroidContextBuilder() *AuditAndroidContextBuilder {
+	builder := &AuditAndroidContextBuilder{}
+	return builder
+}
+
+// UDID
+//
+// 示例值：
+func (builder *AuditAndroidContextBuilder) Udid(udid string) *AuditAndroidContextBuilder {
+	builder.udid = udid
+	builder.udidFlag = true
+	return builder
+}
+
+// 设备ID
+//
+// 示例值：7204623689634104876
+func (builder *AuditAndroidContextBuilder) Did(did string) *AuditAndroidContextBuilder {
+	builder.did = did
+	builder.didFlag = true
+	return builder
+}
+
+// app的版本
+//
+// 示例值：7.26.0-beta3
+func (builder *AuditAndroidContextBuilder) AppVer(appVer string) *AuditAndroidContextBuilder {
+	builder.appVer = appVer
+	builder.appVerFlag = true
+	return builder
+}
+
+// SecSDK版本
+//
+// 示例值：3.0.0.0
+func (builder *AuditAndroidContextBuilder) Ver(ver string) *AuditAndroidContextBuilder {
+	builder.ver = ver
+	builder.verFlag = true
+	return builder
+}
+
+// 设备语言
+//
+// 示例值：zh_CN
+func (builder *AuditAndroidContextBuilder) Region(region string) *AuditAndroidContextBuilder {
+	builder.region = region
+	builder.regionFlag = true
+	return builder
+}
+
+// 安卓版本号
+//
+// 示例值：33
+func (builder *AuditAndroidContextBuilder) IdI(idI string) *AuditAndroidContextBuilder {
+	builder.idI = idI
+	builder.idIFlag = true
+	return builder
+}
+
+// 安卓版本
+//
+// 示例值：13
+func (builder *AuditAndroidContextBuilder) IdR(idR string) *AuditAndroidContextBuilder {
+	builder.idR = idR
+	builder.idRFlag = true
+	return builder
+}
+
+// Brand
+//
+// 示例值：Xiaomi
+func (builder *AuditAndroidContextBuilder) HwBrand(hwBrand string) *AuditAndroidContextBuilder {
+	builder.hwBrand = hwBrand
+	builder.hwBrandFlag = true
+	return builder
+}
+
+// 制造商
+//
+// 示例值：Xiaomi
+func (builder *AuditAndroidContextBuilder) HwManuf(hwManuf string) *AuditAndroidContextBuilder {
+	builder.hwManuf = hwManuf
+	builder.hwManufFlag = true
+	return builder
+}
+
+// wifi ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditAndroidContextBuilder) Wifip(wifip string) *AuditAndroidContextBuilder {
+	builder.wifip = wifip
+	builder.wifipFlag = true
+	return builder
+}
+
+// 路由IP
+//
+// 示例值：1.1.1.1
+func (builder *AuditAndroidContextBuilder) RouteIip(routeIip string) *AuditAndroidContextBuilder {
+	builder.routeIip = routeIip
+	builder.routeIipFlag = true
+	return builder
+}
+
+// 路由网关IP
+//
+// 示例值：1.1.1.1
+func (builder *AuditAndroidContextBuilder) RouteGip(routeGip string) *AuditAndroidContextBuilder {
+	builder.routeGip = routeGip
+	builder.routeGipFlag = true
+	return builder
+}
+
+// 表示当前是否root
+//
+// 示例值：0
+func (builder *AuditAndroidContextBuilder) EnvSu(envSu string) *AuditAndroidContextBuilder {
+	builder.envSu = envSu
+	builder.envSuFlag = true
+	return builder
+}
+
+// 手机系统时区
+//
+// 示例值：GMT+8:00
+func (builder *AuditAndroidContextBuilder) EnvTz(envTz string) *AuditAndroidContextBuilder {
+	builder.envTz = envTz
+	builder.envTzFlag = true
+	return builder
+}
+
+// 手机系统语言
+//
+// 示例值：zh_CN
+func (builder *AuditAndroidContextBuilder) EnvMl(envMl string) *AuditAndroidContextBuilder {
+	builder.envMl = envMl
+	builder.envMlFlag = true
+	return builder
+}
+
+// GPS经纬度
+//
+// 示例值：
+func (builder *AuditAndroidContextBuilder) Location(location string) *AuditAndroidContextBuilder {
+	builder.location = location
+	builder.locationFlag = true
+	return builder
+}
+
+// 当前设备活跃ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditAndroidContextBuilder) ActiveIp(activeIp string) *AuditAndroidContextBuilder {
+	builder.activeIp = activeIp
+	builder.activeIpFlag = true
+	return builder
+}
+
+// 当前设备活跃ip对应网卡类型
+//
+// 示例值：wlan0
+func (builder *AuditAndroidContextBuilder) ActiveIpDetail(activeIpDetail string) *AuditAndroidContextBuilder {
+	builder.activeIpDetail = activeIpDetail
+	builder.activeIpDetailFlag = true
+	return builder
+}
+
+// 基站信息
+//
+// 示例值：
+func (builder *AuditAndroidContextBuilder) CellBaseStation(cellBaseStation string) *AuditAndroidContextBuilder {
+	builder.cellBaseStation = cellBaseStation
+	builder.cellBaseStationFlag = true
+	return builder
+}
+
+// 公网ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditAndroidContextBuilder) IP(iP string) *AuditAndroidContextBuilder {
+	builder.iP = iP
+	builder.iPFlag = true
+	return builder
+}
+
+func (builder *AuditAndroidContextBuilder) Build() *AuditAndroidContext {
+	req := &AuditAndroidContext{}
+	if builder.udidFlag {
+		req.Udid = &builder.udid
+
+	}
+	if builder.didFlag {
+		req.Did = &builder.did
+
+	}
+	if builder.appVerFlag {
+		req.AppVer = &builder.appVer
+
+	}
+	if builder.verFlag {
+		req.Ver = &builder.ver
+
+	}
+	if builder.regionFlag {
+		req.Region = &builder.region
+
+	}
+	if builder.idIFlag {
+		req.IdI = &builder.idI
+
+	}
+	if builder.idRFlag {
+		req.IdR = &builder.idR
+
+	}
+	if builder.hwBrandFlag {
+		req.HwBrand = &builder.hwBrand
+
+	}
+	if builder.hwManufFlag {
+		req.HwManuf = &builder.hwManuf
+
+	}
+	if builder.wifipFlag {
+		req.Wifip = &builder.wifip
+
+	}
+	if builder.routeIipFlag {
+		req.RouteIip = &builder.routeIip
+
+	}
+	if builder.routeGipFlag {
+		req.RouteGip = &builder.routeGip
+
+	}
+	if builder.envSuFlag {
+		req.EnvSu = &builder.envSu
+
+	}
+	if builder.envTzFlag {
+		req.EnvTz = &builder.envTz
+
+	}
+	if builder.envMlFlag {
+		req.EnvMl = &builder.envMl
+
+	}
+	if builder.locationFlag {
+		req.Location = &builder.location
+
+	}
+	if builder.activeIpFlag {
+		req.ActiveIp = &builder.activeIp
+
+	}
+	if builder.activeIpDetailFlag {
+		req.ActiveIpDetail = &builder.activeIpDetail
+
+	}
+	if builder.cellBaseStationFlag {
+		req.CellBaseStation = &builder.cellBaseStation
+
+	}
+	if builder.iPFlag {
+		req.IP = &builder.iP
+
+	}
+	return req
+}
+
+type AuditContext struct {
+	TerminalType   *int                 `json:"terminal_type,omitempty"`   // 终端类型
+	IosContext     *AuditIosContext     `json:"ios_context,omitempty"`     // ios的环境信息
+	PcContext      *AuditPcContext      `json:"pc_context,omitempty"`      // pc的环境信息
+	WebContext     *AuditWebContext     `json:"web_context,omitempty"`     // web的环境信息
+	AndroidContext *AuditAndroidContext `json:"android_context,omitempty"` // android的环境信息
+}
+
+type AuditContextBuilder struct {
+	terminalType       int // 终端类型
+	terminalTypeFlag   bool
+	iosContext         *AuditIosContext // ios的环境信息
+	iosContextFlag     bool
+	pcContext          *AuditPcContext // pc的环境信息
+	pcContextFlag      bool
+	webContext         *AuditWebContext // web的环境信息
+	webContextFlag     bool
+	androidContext     *AuditAndroidContext // android的环境信息
+	androidContextFlag bool
+}
+
+func NewAuditContextBuilder() *AuditContextBuilder {
+	builder := &AuditContextBuilder{}
+	return builder
+}
+
+// 终端类型
+//
+// 示例值：
+func (builder *AuditContextBuilder) TerminalType(terminalType int) *AuditContextBuilder {
+	builder.terminalType = terminalType
+	builder.terminalTypeFlag = true
+	return builder
+}
+
+// ios的环境信息
+//
+// 示例值：
+func (builder *AuditContextBuilder) IosContext(iosContext *AuditIosContext) *AuditContextBuilder {
+	builder.iosContext = iosContext
+	builder.iosContextFlag = true
+	return builder
+}
+
+// pc的环境信息
+//
+// 示例值：
+func (builder *AuditContextBuilder) PcContext(pcContext *AuditPcContext) *AuditContextBuilder {
+	builder.pcContext = pcContext
+	builder.pcContextFlag = true
+	return builder
+}
+
+// web的环境信息
+//
+// 示例值：
+func (builder *AuditContextBuilder) WebContext(webContext *AuditWebContext) *AuditContextBuilder {
+	builder.webContext = webContext
+	builder.webContextFlag = true
+	return builder
+}
+
+// android的环境信息
+//
+// 示例值：
+func (builder *AuditContextBuilder) AndroidContext(androidContext *AuditAndroidContext) *AuditContextBuilder {
+	builder.androidContext = androidContext
+	builder.androidContextFlag = true
+	return builder
+}
+
+func (builder *AuditContextBuilder) Build() *AuditContext {
+	req := &AuditContext{}
+	if builder.terminalTypeFlag {
+		req.TerminalType = &builder.terminalType
+
+	}
+	if builder.iosContextFlag {
+		req.IosContext = builder.iosContext
+	}
+	if builder.pcContextFlag {
+		req.PcContext = builder.pcContext
+	}
+	if builder.webContextFlag {
+		req.WebContext = builder.webContext
+	}
+	if builder.androidContextFlag {
+		req.AndroidContext = builder.androidContext
+	}
+	return req
+}
+
+type AuditDetail struct {
+	Mc          *string `json:"mc,omitempty"`           // mac地址
+	DeviceModel *string `json:"device_model,omitempty"` // 设备模型
+	Os          *string `json:"os,omitempty"`           // 操作系统
+	City        *string `json:"city,omitempty"`         // ip属地
+}
+
+type AuditDetailBuilder struct {
+	mc              string // mac地址
+	mcFlag          bool
+	deviceModel     string // 设备模型
+	deviceModelFlag bool
+	os              string // 操作系统
+	osFlag          bool
+	city            string // ip属地
+	cityFlag        bool
+}
+
+func NewAuditDetailBuilder() *AuditDetailBuilder {
+	builder := &AuditDetailBuilder{}
+	return builder
+}
+
+// mac地址
+//
+// 示例值：08:00:20:0A:8C:6D
+func (builder *AuditDetailBuilder) Mc(mc string) *AuditDetailBuilder {
+	builder.mc = mc
+	builder.mcFlag = true
+	return builder
+}
+
+// 设备模型
+//
+// 示例值：iphone14
+func (builder *AuditDetailBuilder) DeviceModel(deviceModel string) *AuditDetailBuilder {
+	builder.deviceModel = deviceModel
+	builder.deviceModelFlag = true
+	return builder
+}
+
+// 操作系统
+//
+// 示例值：mac os
+func (builder *AuditDetailBuilder) Os(os string) *AuditDetailBuilder {
+	builder.os = os
+	builder.osFlag = true
+	return builder
+}
+
+// ip属地
+//
+// 示例值：北京
+func (builder *AuditDetailBuilder) City(city string) *AuditDetailBuilder {
+	builder.city = city
+	builder.cityFlag = true
+	return builder
+}
+
+func (builder *AuditDetailBuilder) Build() *AuditDetail {
+	req := &AuditDetail{}
+	if builder.mcFlag {
+		req.Mc = &builder.mc
+
+	}
+	if builder.deviceModelFlag {
+		req.DeviceModel = &builder.deviceModel
+
+	}
+	if builder.osFlag {
+		req.Os = &builder.os
+
+	}
+	if builder.cityFlag {
+		req.City = &builder.city
+
+	}
+	return req
+}
+
+type AuditEventExtend struct {
+	CommentType                 *string `json:"comment_type,omitempty"`                     // 评论类型
+	AppDetail                   *string `json:"app_detail,omitempty"`                       // app信息
+	TwoStepValidation           *bool   `json:"two_step_validation,omitempty"`              // 是否两步验证
+	LoginMethod                 *string `json:"login_method,omitempty"`                     // 登录方式
+	NewPeopleNumInVideo         *int    `json:"new_people_num_in_video,omitempty"`          // 创建新的{x}人会议/通话
+	ExternalPeopleNumInVideo    *int    `json:"external_people_num_in_video,omitempty"`     // 将{x}名外部用户加入/退出通话
+	ExternalPeopleNumInChat     *int    `json:"external_people_num_in_chat,omitempty"`      // 将{x}名外部用户加入/退出群组
+	JoinGroup                   *int    `json:"join_group,omitempty"`                       // 创建{x}人数的群组
+	QuitGroup                   *int    `json:"quit_group,omitempty"`                       // 解散{x}人数的群组
+	ExternalPeopleNumInDocShare *int    `json:"external_people_num_in_doc_share,omitempty"` // 分享文档给{x}名外部用户
+}
+
+type AuditEventExtendBuilder struct {
+	commentType                     string // 评论类型
+	commentTypeFlag                 bool
+	appDetail                       string // app信息
+	appDetailFlag                   bool
+	twoStepValidation               bool // 是否两步验证
+	twoStepValidationFlag           bool
+	loginMethod                     string // 登录方式
+	loginMethodFlag                 bool
+	newPeopleNumInVideo             int // 创建新的{x}人会议/通话
+	newPeopleNumInVideoFlag         bool
+	externalPeopleNumInVideo        int // 将{x}名外部用户加入/退出通话
+	externalPeopleNumInVideoFlag    bool
+	externalPeopleNumInChat         int // 将{x}名外部用户加入/退出群组
+	externalPeopleNumInChatFlag     bool
+	joinGroup                       int // 创建{x}人数的群组
+	joinGroupFlag                   bool
+	quitGroup                       int // 解散{x}人数的群组
+	quitGroupFlag                   bool
+	externalPeopleNumInDocShare     int // 分享文档给{x}名外部用户
+	externalPeopleNumInDocShareFlag bool
+}
+
+func NewAuditEventExtendBuilder() *AuditEventExtendBuilder {
+	builder := &AuditEventExtendBuilder{}
+	return builder
+}
+
+// 评论类型
+//
+// 示例值：
+func (builder *AuditEventExtendBuilder) CommentType(commentType string) *AuditEventExtendBuilder {
+	builder.commentType = commentType
+	builder.commentTypeFlag = true
+	return builder
+}
+
+// app信息
+//
+// 示例值：
+func (builder *AuditEventExtendBuilder) AppDetail(appDetail string) *AuditEventExtendBuilder {
+	builder.appDetail = appDetail
+	builder.appDetailFlag = true
+	return builder
+}
+
+// 是否两步验证
+//
+// 示例值：false
+func (builder *AuditEventExtendBuilder) TwoStepValidation(twoStepValidation bool) *AuditEventExtendBuilder {
+	builder.twoStepValidation = twoStepValidation
+	builder.twoStepValidationFlag = true
+	return builder
+}
+
+// 登录方式
+//
+// 示例值：NormalLogin
+func (builder *AuditEventExtendBuilder) LoginMethod(loginMethod string) *AuditEventExtendBuilder {
+	builder.loginMethod = loginMethod
+	builder.loginMethodFlag = true
+	return builder
+}
+
+// 创建新的{x}人会议/通话
+//
+// 示例值：1
+func (builder *AuditEventExtendBuilder) NewPeopleNumInVideo(newPeopleNumInVideo int) *AuditEventExtendBuilder {
+	builder.newPeopleNumInVideo = newPeopleNumInVideo
+	builder.newPeopleNumInVideoFlag = true
+	return builder
+}
+
+// 将{x}名外部用户加入/退出通话
+//
+// 示例值：1
+func (builder *AuditEventExtendBuilder) ExternalPeopleNumInVideo(externalPeopleNumInVideo int) *AuditEventExtendBuilder {
+	builder.externalPeopleNumInVideo = externalPeopleNumInVideo
+	builder.externalPeopleNumInVideoFlag = true
+	return builder
+}
+
+// 将{x}名外部用户加入/退出群组
+//
+// 示例值：1
+func (builder *AuditEventExtendBuilder) ExternalPeopleNumInChat(externalPeopleNumInChat int) *AuditEventExtendBuilder {
+	builder.externalPeopleNumInChat = externalPeopleNumInChat
+	builder.externalPeopleNumInChatFlag = true
+	return builder
+}
+
+// 创建{x}人数的群组
+//
+// 示例值：1
+func (builder *AuditEventExtendBuilder) JoinGroup(joinGroup int) *AuditEventExtendBuilder {
+	builder.joinGroup = joinGroup
+	builder.joinGroupFlag = true
+	return builder
+}
+
+// 解散{x}人数的群组
+//
+// 示例值：1
+func (builder *AuditEventExtendBuilder) QuitGroup(quitGroup int) *AuditEventExtendBuilder {
+	builder.quitGroup = quitGroup
+	builder.quitGroupFlag = true
+	return builder
+}
+
+// 分享文档给{x}名外部用户
+//
+// 示例值：1
+func (builder *AuditEventExtendBuilder) ExternalPeopleNumInDocShare(externalPeopleNumInDocShare int) *AuditEventExtendBuilder {
+	builder.externalPeopleNumInDocShare = externalPeopleNumInDocShare
+	builder.externalPeopleNumInDocShareFlag = true
+	return builder
+}
+
+func (builder *AuditEventExtendBuilder) Build() *AuditEventExtend {
+	req := &AuditEventExtend{}
+	if builder.commentTypeFlag {
+		req.CommentType = &builder.commentType
+
+	}
+	if builder.appDetailFlag {
+		req.AppDetail = &builder.appDetail
+
+	}
+	if builder.twoStepValidationFlag {
+		req.TwoStepValidation = &builder.twoStepValidation
+
+	}
+	if builder.loginMethodFlag {
+		req.LoginMethod = &builder.loginMethod
+
+	}
+	if builder.newPeopleNumInVideoFlag {
+		req.NewPeopleNumInVideo = &builder.newPeopleNumInVideo
+
+	}
+	if builder.externalPeopleNumInVideoFlag {
+		req.ExternalPeopleNumInVideo = &builder.externalPeopleNumInVideo
+
+	}
+	if builder.externalPeopleNumInChatFlag {
+		req.ExternalPeopleNumInChat = &builder.externalPeopleNumInChat
+
+	}
+	if builder.joinGroupFlag {
+		req.JoinGroup = &builder.joinGroup
+
+	}
+	if builder.quitGroupFlag {
+		req.QuitGroup = &builder.quitGroup
+
+	}
+	if builder.externalPeopleNumInDocShareFlag {
+		req.ExternalPeopleNumInDocShare = &builder.externalPeopleNumInDocShare
+
+	}
+	return req
+}
+
+type AuditInfo struct {
+	EventName       *string                 `json:"event_name,omitempty"`        // 事件名称
+	DepartmentIds   []string                `json:"department_ids,omitempty"`    // 用户所属部门的ID列表
+	EventModule     *int                    `json:"event_module,omitempty"`      // 模块
+	OperatorType    *int                    `json:"operator_type,omitempty"`     // 操作人类型
+	OperatorValue   *string                 `json:"operator_value,omitempty"`    // 操作人id
+	Objects         []*AuditObjectEntity    `json:"objects,omitempty"`           // 操作对象列表
+	Recipients      []*AuditRecipientEntity `json:"recipients,omitempty"`        // 接收者对象列表
+	EventTime       *int                    `json:"event_time,omitempty"`        // 事件时间
+	Ip              *string                 `json:"ip,omitempty"`                // ip信息
+	OperatorApp     *string                 `json:"operator_app,omitempty"`      // 第三方isvID
+	AuditContext    *AuditContext           `json:"audit_context,omitempty"`     // 环境信息
+	Extend          *AuditEventExtend       `json:"extend,omitempty"`            // 事件级别的扩展
+	EventId         *string                 `json:"event_id,omitempty"`          // 事件id
+	OperatorAppName *string                 `json:"operator_app_name,omitempty"` // 第三方isv名称
+	UniqueId        *string                 `json:"unique_id,omitempty"`         // 唯一id
+	CommonDrawers   *ApiAuditCommonDrawers  `json:"common_drawers,omitempty"`    // 扩展字段信息
+	AuditDetail     *AuditDetail            `json:"audit_detail,omitempty"`      // 日志扩展信息
+	OperatorTenant  *string                 `json:"operator_tenant,omitempty"`   // 操作人企业编号
+}
+
+type AuditInfoBuilder struct {
+	eventName           string // 事件名称
+	eventNameFlag       bool
+	departmentIds       []string // 用户所属部门的ID列表
+	departmentIdsFlag   bool
+	eventModule         int // 模块
+	eventModuleFlag     bool
+	operatorType        int // 操作人类型
+	operatorTypeFlag    bool
+	operatorValue       string // 操作人id
+	operatorValueFlag   bool
+	objects             []*AuditObjectEntity // 操作对象列表
+	objectsFlag         bool
+	recipients          []*AuditRecipientEntity // 接收者对象列表
+	recipientsFlag      bool
+	eventTime           int // 事件时间
+	eventTimeFlag       bool
+	ip                  string // ip信息
+	ipFlag              bool
+	operatorApp         string // 第三方isvID
+	operatorAppFlag     bool
+	auditContext        *AuditContext // 环境信息
+	auditContextFlag    bool
+	extend              *AuditEventExtend // 事件级别的扩展
+	extendFlag          bool
+	eventId             string // 事件id
+	eventIdFlag         bool
+	operatorAppName     string // 第三方isv名称
+	operatorAppNameFlag bool
+	uniqueId            string // 唯一id
+	uniqueIdFlag        bool
+	commonDrawers       *ApiAuditCommonDrawers // 扩展字段信息
+	commonDrawersFlag   bool
+	auditDetail         *AuditDetail // 日志扩展信息
+	auditDetailFlag     bool
+	operatorTenant      string // 操作人企业编号
+	operatorTenantFlag  bool
+}
+
+func NewAuditInfoBuilder() *AuditInfoBuilder {
+	builder := &AuditInfoBuilder{}
+	return builder
+}
+
+// 事件名称
+//
+// 示例值：space_read_doc
+func (builder *AuditInfoBuilder) EventName(eventName string) *AuditInfoBuilder {
+	builder.eventName = eventName
+	builder.eventNameFlag = true
+	return builder
+}
+
+// 用户所属部门的ID列表
+//
+// 示例值：
+func (builder *AuditInfoBuilder) DepartmentIds(departmentIds []string) *AuditInfoBuilder {
+	builder.departmentIds = departmentIds
+	builder.departmentIdsFlag = true
+	return builder
+}
+
+// 模块
+//
+// 示例值：1
+func (builder *AuditInfoBuilder) EventModule(eventModule int) *AuditInfoBuilder {
+	builder.eventModule = eventModule
+	builder.eventModuleFlag = true
+	return builder
+}
+
+// 操作人类型
+//
+// 示例值：
+func (builder *AuditInfoBuilder) OperatorType(operatorType int) *AuditInfoBuilder {
+	builder.operatorType = operatorType
+	builder.operatorTypeFlag = true
+	return builder
+}
+
+// 操作人id
+//
+// 示例值：4a3b8541
+func (builder *AuditInfoBuilder) OperatorValue(operatorValue string) *AuditInfoBuilder {
+	builder.operatorValue = operatorValue
+	builder.operatorValueFlag = true
+	return builder
+}
+
+// 操作对象列表
+//
+// 示例值：
+func (builder *AuditInfoBuilder) Objects(objects []*AuditObjectEntity) *AuditInfoBuilder {
+	builder.objects = objects
+	builder.objectsFlag = true
+	return builder
+}
+
+// 接收者对象列表
+//
+// 示例值：
+func (builder *AuditInfoBuilder) Recipients(recipients []*AuditRecipientEntity) *AuditInfoBuilder {
+	builder.recipients = recipients
+	builder.recipientsFlag = true
+	return builder
+}
+
+// 事件时间
+//
+// 示例值：1669046400
+func (builder *AuditInfoBuilder) EventTime(eventTime int) *AuditInfoBuilder {
+	builder.eventTime = eventTime
+	builder.eventTimeFlag = true
+	return builder
+}
+
+// ip信息
+//
+// 示例值：192.168.168.1
+func (builder *AuditInfoBuilder) Ip(ip string) *AuditInfoBuilder {
+	builder.ip = ip
+	builder.ipFlag = true
+	return builder
+}
+
+// 第三方isvID
+//
+// 示例值：example_value
+func (builder *AuditInfoBuilder) OperatorApp(operatorApp string) *AuditInfoBuilder {
+	builder.operatorApp = operatorApp
+	builder.operatorAppFlag = true
+	return builder
+}
+
+// 环境信息
+//
+// 示例值：
+func (builder *AuditInfoBuilder) AuditContext(auditContext *AuditContext) *AuditInfoBuilder {
+	builder.auditContext = auditContext
+	builder.auditContextFlag = true
+	return builder
+}
+
+// 事件级别的扩展
+//
+// 示例值：
+func (builder *AuditInfoBuilder) Extend(extend *AuditEventExtend) *AuditInfoBuilder {
+	builder.extend = extend
+	builder.extendFlag = true
+	return builder
+}
+
+// 事件id
+//
+// 示例值：7126195947859656705
+func (builder *AuditInfoBuilder) EventId(eventId string) *AuditInfoBuilder {
+	builder.eventId = eventId
+	builder.eventIdFlag = true
+	return builder
+}
+
+// 第三方isv名称
+//
+// 示例值：example_value
+func (builder *AuditInfoBuilder) OperatorAppName(operatorAppName string) *AuditInfoBuilder {
+	builder.operatorAppName = operatorAppName
+	builder.operatorAppNameFlag = true
+	return builder
+}
+
+// 唯一id
+//
+// 示例值：7126195947859656705
+func (builder *AuditInfoBuilder) UniqueId(uniqueId string) *AuditInfoBuilder {
+	builder.uniqueId = uniqueId
+	builder.uniqueIdFlag = true
+	return builder
+}
+
+// 扩展字段信息
+//
+// 示例值：
+func (builder *AuditInfoBuilder) CommonDrawers(commonDrawers *ApiAuditCommonDrawers) *AuditInfoBuilder {
+	builder.commonDrawers = commonDrawers
+	builder.commonDrawersFlag = true
+	return builder
+}
+
+// 日志扩展信息
+//
+// 示例值：
+func (builder *AuditInfoBuilder) AuditDetail(auditDetail *AuditDetail) *AuditInfoBuilder {
+	builder.auditDetail = auditDetail
+	builder.auditDetailFlag = true
+	return builder
+}
+
+// 操作人企业编号
+//
+// 示例值：F2823442
+func (builder *AuditInfoBuilder) OperatorTenant(operatorTenant string) *AuditInfoBuilder {
+	builder.operatorTenant = operatorTenant
+	builder.operatorTenantFlag = true
+	return builder
+}
+
+func (builder *AuditInfoBuilder) Build() *AuditInfo {
+	req := &AuditInfo{}
+	if builder.eventNameFlag {
+		req.EventName = &builder.eventName
+
+	}
+	if builder.departmentIdsFlag {
+		req.DepartmentIds = builder.departmentIds
+	}
+	if builder.eventModuleFlag {
+		req.EventModule = &builder.eventModule
+
+	}
+	if builder.operatorTypeFlag {
+		req.OperatorType = &builder.operatorType
+
+	}
+	if builder.operatorValueFlag {
+		req.OperatorValue = &builder.operatorValue
+
+	}
+	if builder.objectsFlag {
+		req.Objects = builder.objects
+	}
+	if builder.recipientsFlag {
+		req.Recipients = builder.recipients
+	}
+	if builder.eventTimeFlag {
+		req.EventTime = &builder.eventTime
+
+	}
+	if builder.ipFlag {
+		req.Ip = &builder.ip
+
+	}
+	if builder.operatorAppFlag {
+		req.OperatorApp = &builder.operatorApp
+
+	}
+	if builder.auditContextFlag {
+		req.AuditContext = builder.auditContext
+	}
+	if builder.extendFlag {
+		req.Extend = builder.extend
+	}
+	if builder.eventIdFlag {
+		req.EventId = &builder.eventId
+
+	}
+	if builder.operatorAppNameFlag {
+		req.OperatorAppName = &builder.operatorAppName
+
+	}
+	if builder.uniqueIdFlag {
+		req.UniqueId = &builder.uniqueId
+
+	}
+	if builder.commonDrawersFlag {
+		req.CommonDrawers = builder.commonDrawers
+	}
+	if builder.auditDetailFlag {
+		req.AuditDetail = builder.auditDetail
+	}
+	if builder.operatorTenantFlag {
+		req.OperatorTenant = &builder.operatorTenant
+
+	}
+	return req
+}
+
+type AuditIosContext struct {
+	Udid            *string `json:"udid,omitempty"`              // UDID
+	Did             *string `json:"did,omitempty"`               // 设备ID
+	AppVer          *string `json:"app_ver,omitempty"`           // app的版本
+	Ver             *string `json:"ver,omitempty"`               // SecSDK版本
+	Os              *string `json:"os,omitempty"`                // 系统类型及版本
+	STZone          *string `json:"STZone,omitempty"`            // 系统时区
+	ML              *string `json:"ML,omitempty"`                // 当前语言
+	Sjd             *string `json:"sjd,omitempty"`               // 是否越狱
+	Proxyip         *string `json:"proxyip,omitempty"`           // 代理ip
+	Wifip           *string `json:"wifip,omitempty"`             // wifi ip
+	Location        *string `json:"location,omitempty"`          // GPS经纬度
+	ActiveIp        *string `json:"active_ip,omitempty"`         // 当前设备活跃ip
+	ActiveIpDetail  *string `json:"active_ip_detail,omitempty"`  // 当前设备活跃ip对应网卡类型
+	CellBaseStation *string `json:"cell_base_station,omitempty"` // 基站信息
+	IP              *string `json:"IP,omitempty"`                // 公网ip
+}
+
+type AuditIosContextBuilder struct {
+	udid                string // UDID
+	udidFlag            bool
+	did                 string // 设备ID
+	didFlag             bool
+	appVer              string // app的版本
+	appVerFlag          bool
+	ver                 string // SecSDK版本
+	verFlag             bool
+	os                  string // 系统类型及版本
+	osFlag              bool
+	sTZone              string // 系统时区
+	sTZoneFlag          bool
+	mL                  string // 当前语言
+	mLFlag              bool
+	sjd                 string // 是否越狱
+	sjdFlag             bool
+	proxyip             string // 代理ip
+	proxyipFlag         bool
+	wifip               string // wifi ip
+	wifipFlag           bool
+	location            string // GPS经纬度
+	locationFlag        bool
+	activeIp            string // 当前设备活跃ip
+	activeIpFlag        bool
+	activeIpDetail      string // 当前设备活跃ip对应网卡类型
+	activeIpDetailFlag  bool
+	cellBaseStation     string // 基站信息
+	cellBaseStationFlag bool
+	iP                  string // 公网ip
+	iPFlag              bool
+}
+
+func NewAuditIosContextBuilder() *AuditIosContextBuilder {
+	builder := &AuditIosContextBuilder{}
+	return builder
+}
+
+// UDID
+//
+// 示例值：
+func (builder *AuditIosContextBuilder) Udid(udid string) *AuditIosContextBuilder {
+	builder.udid = udid
+	builder.udidFlag = true
+	return builder
+}
+
+// 设备ID
+//
+// 示例值：7396893949735993363
+func (builder *AuditIosContextBuilder) Did(did string) *AuditIosContextBuilder {
+	builder.did = did
+	builder.didFlag = true
+	return builder
+}
+
+// app的版本
+//
+// 示例值：7.23.7-ci
+func (builder *AuditIosContextBuilder) AppVer(appVer string) *AuditIosContextBuilder {
+	builder.appVer = appVer
+	builder.appVerFlag = true
+	return builder
+}
+
+// SecSDK版本
+//
+// 示例值：3.0.0.0
+func (builder *AuditIosContextBuilder) Ver(ver string) *AuditIosContextBuilder {
+	builder.ver = ver
+	builder.verFlag = true
+	return builder
+}
+
+// 系统类型及版本
+//
+// 示例值：iOS 16.5
+func (builder *AuditIosContextBuilder) Os(os string) *AuditIosContextBuilder {
+	builder.os = os
+	builder.osFlag = true
+	return builder
+}
+
+// 系统时区
+//
+// 示例值：Asia/Shanghai
+func (builder *AuditIosContextBuilder) STZone(sTZone string) *AuditIosContextBuilder {
+	builder.sTZone = sTZone
+	builder.sTZoneFlag = true
+	return builder
+}
+
+// 当前语言
+//
+// 示例值：zh-Hans
+func (builder *AuditIosContextBuilder) ML(mL string) *AuditIosContextBuilder {
+	builder.mL = mL
+	builder.mLFlag = true
+	return builder
+}
+
+// 是否越狱
+//
+// 示例值：
+func (builder *AuditIosContextBuilder) Sjd(sjd string) *AuditIosContextBuilder {
+	builder.sjd = sjd
+	builder.sjdFlag = true
+	return builder
+}
+
+// 代理ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditIosContextBuilder) Proxyip(proxyip string) *AuditIosContextBuilder {
+	builder.proxyip = proxyip
+	builder.proxyipFlag = true
+	return builder
+}
+
+// wifi ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditIosContextBuilder) Wifip(wifip string) *AuditIosContextBuilder {
+	builder.wifip = wifip
+	builder.wifipFlag = true
+	return builder
+}
+
+// GPS经纬度
+//
+// 示例值：
+func (builder *AuditIosContextBuilder) Location(location string) *AuditIosContextBuilder {
+	builder.location = location
+	builder.locationFlag = true
+	return builder
+}
+
+// 当前设备活跃ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditIosContextBuilder) ActiveIp(activeIp string) *AuditIosContextBuilder {
+	builder.activeIp = activeIp
+	builder.activeIpFlag = true
+	return builder
+}
+
+// 当前设备活跃ip对应网卡类型
+//
+// 示例值：
+func (builder *AuditIosContextBuilder) ActiveIpDetail(activeIpDetail string) *AuditIosContextBuilder {
+	builder.activeIpDetail = activeIpDetail
+	builder.activeIpDetailFlag = true
+	return builder
+}
+
+// 基站信息
+//
+// 示例值：
+func (builder *AuditIosContextBuilder) CellBaseStation(cellBaseStation string) *AuditIosContextBuilder {
+	builder.cellBaseStation = cellBaseStation
+	builder.cellBaseStationFlag = true
+	return builder
+}
+
+// 公网ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditIosContextBuilder) IP(iP string) *AuditIosContextBuilder {
+	builder.iP = iP
+	builder.iPFlag = true
+	return builder
+}
+
+func (builder *AuditIosContextBuilder) Build() *AuditIosContext {
+	req := &AuditIosContext{}
+	if builder.udidFlag {
+		req.Udid = &builder.udid
+
+	}
+	if builder.didFlag {
+		req.Did = &builder.did
+
+	}
+	if builder.appVerFlag {
+		req.AppVer = &builder.appVer
+
+	}
+	if builder.verFlag {
+		req.Ver = &builder.ver
+
+	}
+	if builder.osFlag {
+		req.Os = &builder.os
+
+	}
+	if builder.sTZoneFlag {
+		req.STZone = &builder.sTZone
+
+	}
+	if builder.mLFlag {
+		req.ML = &builder.mL
+
+	}
+	if builder.sjdFlag {
+		req.Sjd = &builder.sjd
+
+	}
+	if builder.proxyipFlag {
+		req.Proxyip = &builder.proxyip
+
+	}
+	if builder.wifipFlag {
+		req.Wifip = &builder.wifip
+
+	}
+	if builder.locationFlag {
+		req.Location = &builder.location
+
+	}
+	if builder.activeIpFlag {
+		req.ActiveIp = &builder.activeIp
+
+	}
+	if builder.activeIpDetailFlag {
+		req.ActiveIpDetail = &builder.activeIpDetail
+
+	}
+	if builder.cellBaseStationFlag {
+		req.CellBaseStation = &builder.cellBaseStation
+
+	}
+	if builder.iPFlag {
+		req.IP = &builder.iP
+
+	}
+	return req
+}
+
+type AuditObjectDetail struct {
+	CloneSource                  *string `json:"clone_source,omitempty"`                    // 克隆来源
+	TextDetail                   *string `json:"text_detail,omitempty"`                     // 其他文本
+	FileName                     *string `json:"file_name,omitempty"`                       // 文件名称
+	ThirdPartyAppID              *string `json:"third_party_appID,omitempty"`               // 第三方APPID
+	ContainFileNum               *int    `json:"contain_file_num,omitempty"`                // 文件或文件夹数量
+	PermissionSettingType        *string `json:"permission_setting_type,omitempty"`         // 链接分享设置
+	PermissionExternalAccessType *bool   `json:"permission_external_access_Type,omitempty"` // 是否开启外部访问设置
+	PermissionShareType          *string `json:"permission_share_type,omitempty"`           // 分享设置
+	FileServiceSource            *string `json:"file_service_source,omitempty"`             // file上传业务来源
+	OkrDownloadContent           *string `json:"okr_download_content,omitempty"`            // 下载OKR时的内容范围
+	ContainerType                *string `json:"container_type,omitempty"`                  // 容器类型,标识是否wiki
+	ContainerId                  *string `json:"container_id,omitempty"`                    // 容器id,wiki标识字段
+	CurrentPage                  *string `json:"current_page,omitempty"`                    // 截屏、录制的开始页面
+}
+
+type AuditObjectDetailBuilder struct {
+	cloneSource                      string // 克隆来源
+	cloneSourceFlag                  bool
+	textDetail                       string // 其他文本
+	textDetailFlag                   bool
+	fileName                         string // 文件名称
+	fileNameFlag                     bool
+	thirdPartyAppID                  string // 第三方APPID
+	thirdPartyAppIDFlag              bool
+	containFileNum                   int // 文件或文件夹数量
+	containFileNumFlag               bool
+	permissionSettingType            string // 链接分享设置
+	permissionSettingTypeFlag        bool
+	permissionExternalAccessType     bool // 是否开启外部访问设置
+	permissionExternalAccessTypeFlag bool
+	permissionShareType              string // 分享设置
+	permissionShareTypeFlag          bool
+	fileServiceSource                string // file上传业务来源
+	fileServiceSourceFlag            bool
+	okrDownloadContent               string // 下载OKR时的内容范围
+	okrDownloadContentFlag           bool
+	containerType                    string // 容器类型,标识是否wiki
+	containerTypeFlag                bool
+	containerId                      string // 容器id,wiki标识字段
+	containerIdFlag                  bool
+	currentPage                      string // 截屏、录制的开始页面
+	currentPageFlag                  bool
+}
+
+func NewAuditObjectDetailBuilder() *AuditObjectDetailBuilder {
+	builder := &AuditObjectDetailBuilder{}
+	return builder
+}
+
+// 克隆来源
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) CloneSource(cloneSource string) *AuditObjectDetailBuilder {
+	builder.cloneSource = cloneSource
+	builder.cloneSourceFlag = true
+	return builder
+}
+
+// 其他文本
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) TextDetail(textDetail string) *AuditObjectDetailBuilder {
+	builder.textDetail = textDetail
+	builder.textDetailFlag = true
+	return builder
+}
+
+// 文件名称
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) FileName(fileName string) *AuditObjectDetailBuilder {
+	builder.fileName = fileName
+	builder.fileNameFlag = true
+	return builder
+}
+
+// 第三方APPID
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) ThirdPartyAppID(thirdPartyAppID string) *AuditObjectDetailBuilder {
+	builder.thirdPartyAppID = thirdPartyAppID
+	builder.thirdPartyAppIDFlag = true
+	return builder
+}
+
+// 文件或文件夹数量
+//
+// 示例值：1
+func (builder *AuditObjectDetailBuilder) ContainFileNum(containFileNum int) *AuditObjectDetailBuilder {
+	builder.containFileNum = containFileNum
+	builder.containFileNumFlag = true
+	return builder
+}
+
+// 链接分享设置
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) PermissionSettingType(permissionSettingType string) *AuditObjectDetailBuilder {
+	builder.permissionSettingType = permissionSettingType
+	builder.permissionSettingTypeFlag = true
+	return builder
+}
+
+// 是否开启外部访问设置
+//
+// 示例值：false
+func (builder *AuditObjectDetailBuilder) PermissionExternalAccessType(permissionExternalAccessType bool) *AuditObjectDetailBuilder {
+	builder.permissionExternalAccessType = permissionExternalAccessType
+	builder.permissionExternalAccessTypeFlag = true
+	return builder
+}
+
+// 分享设置
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) PermissionShareType(permissionShareType string) *AuditObjectDetailBuilder {
+	builder.permissionShareType = permissionShareType
+	builder.permissionShareTypeFlag = true
+	return builder
+}
+
+// file上传业务来源
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) FileServiceSource(fileServiceSource string) *AuditObjectDetailBuilder {
+	builder.fileServiceSource = fileServiceSource
+	builder.fileServiceSourceFlag = true
+	return builder
+}
+
+// 下载OKR时的内容范围
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) OkrDownloadContent(okrDownloadContent string) *AuditObjectDetailBuilder {
+	builder.okrDownloadContent = okrDownloadContent
+	builder.okrDownloadContentFlag = true
+	return builder
+}
+
+// 容器类型,标识是否wiki
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) ContainerType(containerType string) *AuditObjectDetailBuilder {
+	builder.containerType = containerType
+	builder.containerTypeFlag = true
+	return builder
+}
+
+// 容器id,wiki标识字段
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) ContainerId(containerId string) *AuditObjectDetailBuilder {
+	builder.containerId = containerId
+	builder.containerIdFlag = true
+	return builder
+}
+
+// 截屏、录制的开始页面
+//
+// 示例值：
+func (builder *AuditObjectDetailBuilder) CurrentPage(currentPage string) *AuditObjectDetailBuilder {
+	builder.currentPage = currentPage
+	builder.currentPageFlag = true
+	return builder
+}
+
+func (builder *AuditObjectDetailBuilder) Build() *AuditObjectDetail {
+	req := &AuditObjectDetail{}
+	if builder.cloneSourceFlag {
+		req.CloneSource = &builder.cloneSource
+
+	}
+	if builder.textDetailFlag {
+		req.TextDetail = &builder.textDetail
+
+	}
+	if builder.fileNameFlag {
+		req.FileName = &builder.fileName
+
+	}
+	if builder.thirdPartyAppIDFlag {
+		req.ThirdPartyAppID = &builder.thirdPartyAppID
+
+	}
+	if builder.containFileNumFlag {
+		req.ContainFileNum = &builder.containFileNum
+
+	}
+	if builder.permissionSettingTypeFlag {
+		req.PermissionSettingType = &builder.permissionSettingType
+
+	}
+	if builder.permissionExternalAccessTypeFlag {
+		req.PermissionExternalAccessType = &builder.permissionExternalAccessType
+
+	}
+	if builder.permissionShareTypeFlag {
+		req.PermissionShareType = &builder.permissionShareType
+
+	}
+	if builder.fileServiceSourceFlag {
+		req.FileServiceSource = &builder.fileServiceSource
+
+	}
+	if builder.okrDownloadContentFlag {
+		req.OkrDownloadContent = &builder.okrDownloadContent
+
+	}
+	if builder.containerTypeFlag {
+		req.ContainerType = &builder.containerType
+
+	}
+	if builder.containerIdFlag {
+		req.ContainerId = &builder.containerId
+
+	}
+	if builder.currentPageFlag {
+		req.CurrentPage = &builder.currentPage
+
+	}
+	return req
+}
+
+type AuditObjectEntity struct {
+	ObjectType   *string            `json:"object_type,omitempty"`   // 操作对象类型
+	ObjectValue  *string            `json:"object_value,omitempty"`  // 操作对象值，可能存在 department_id、user_id 等，需要进行 lark_id 的转换
+	ObjectDetail *AuditObjectDetail `json:"object_detail,omitempty"` // object 详情
+	ObjectName   *string            `json:"object_name,omitempty"`   // 操作对象名称，如会话名、文档名等
+	ObjectOwner  *string            `json:"object_owner,omitempty"`  // 操作对象的所有者
+}
+
+type AuditObjectEntityBuilder struct {
+	objectType       string // 操作对象类型
+	objectTypeFlag   bool
+	objectValue      string // 操作对象值，可能存在 department_id、user_id 等，需要进行 lark_id 的转换
+	objectValueFlag  bool
+	objectDetail     *AuditObjectDetail // object 详情
+	objectDetailFlag bool
+	objectName       string // 操作对象名称，如会话名、文档名等
+	objectNameFlag   bool
+	objectOwner      string // 操作对象的所有者
+	objectOwnerFlag  bool
+}
+
+func NewAuditObjectEntityBuilder() *AuditObjectEntityBuilder {
+	builder := &AuditObjectEntityBuilder{}
+	return builder
+}
+
+// 操作对象类型
+//
+// 示例值：1
+func (builder *AuditObjectEntityBuilder) ObjectType(objectType string) *AuditObjectEntityBuilder {
+	builder.objectType = objectType
+	builder.objectTypeFlag = true
+	return builder
+}
+
+// 操作对象值，可能存在 department_id、user_id 等，需要进行 lark_id 的转换
+//
+// 示例值：47d74411
+func (builder *AuditObjectEntityBuilder) ObjectValue(objectValue string) *AuditObjectEntityBuilder {
+	builder.objectValue = objectValue
+	builder.objectValueFlag = true
+	return builder
+}
+
+// object 详情
+//
+// 示例值：
+func (builder *AuditObjectEntityBuilder) ObjectDetail(objectDetail *AuditObjectDetail) *AuditObjectEntityBuilder {
+	builder.objectDetail = objectDetail
+	builder.objectDetailFlag = true
+	return builder
+}
+
+// 操作对象名称，如会话名、文档名等
+//
+// 示例值：xxx
+func (builder *AuditObjectEntityBuilder) ObjectName(objectName string) *AuditObjectEntityBuilder {
+	builder.objectName = objectName
+	builder.objectNameFlag = true
+	return builder
+}
+
+// 操作对象的所有者
+//
+// 示例值：47d74411
+func (builder *AuditObjectEntityBuilder) ObjectOwner(objectOwner string) *AuditObjectEntityBuilder {
+	builder.objectOwner = objectOwner
+	builder.objectOwnerFlag = true
+	return builder
+}
+
+func (builder *AuditObjectEntityBuilder) Build() *AuditObjectEntity {
+	req := &AuditObjectEntity{}
+	if builder.objectTypeFlag {
+		req.ObjectType = &builder.objectType
+
+	}
+	if builder.objectValueFlag {
+		req.ObjectValue = &builder.objectValue
+
+	}
+	if builder.objectDetailFlag {
+		req.ObjectDetail = builder.objectDetail
+	}
+	if builder.objectNameFlag {
+		req.ObjectName = &builder.objectName
+
+	}
+	if builder.objectOwnerFlag {
+		req.ObjectOwner = &builder.objectOwner
+
+	}
+	return req
+}
+
+type AuditPcContext struct {
+	Udid   *string `json:"udid,omitempty"`    // UDID
+	Did    *string `json:"did,omitempty"`     // 设备ID
+	AppVer *string `json:"app_ver,omitempty"` // app的版本
+	Ver    *string `json:"ver,omitempty"`     // SecSDK版本
+	Os     *string `json:"os,omitempty"`      // 客户端类型
+	Wifip  *string `json:"wifip,omitempty"`   // wifi ip
+	Region *string `json:"region,omitempty"`  // 设备区域
+	IP     *string `json:"IP,omitempty"`      // 公网ip
+}
+
+type AuditPcContextBuilder struct {
+	udid       string // UDID
+	udidFlag   bool
+	did        string // 设备ID
+	didFlag    bool
+	appVer     string // app的版本
+	appVerFlag bool
+	ver        string // SecSDK版本
+	verFlag    bool
+	os         string // 客户端类型
+	osFlag     bool
+	wifip      string // wifi ip
+	wifipFlag  bool
+	region     string // 设备区域
+	regionFlag bool
+	iP         string // 公网ip
+	iPFlag     bool
+}
+
+func NewAuditPcContextBuilder() *AuditPcContextBuilder {
+	builder := &AuditPcContextBuilder{}
+	return builder
+}
+
+// UDID
+//
+// 示例值：
+func (builder *AuditPcContextBuilder) Udid(udid string) *AuditPcContextBuilder {
+	builder.udid = udid
+	builder.udidFlag = true
+	return builder
+}
+
+// 设备ID
+//
+// 示例值：7204623689634104876
+func (builder *AuditPcContextBuilder) Did(did string) *AuditPcContextBuilder {
+	builder.did = did
+	builder.didFlag = true
+	return builder
+}
+
+// app的版本
+//
+// 示例值：7.26.0
+func (builder *AuditPcContextBuilder) AppVer(appVer string) *AuditPcContextBuilder {
+	builder.appVer = appVer
+	builder.appVerFlag = true
+	return builder
+}
+
+// SecSDK版本
+//
+// 示例值：3.0.0.0
+func (builder *AuditPcContextBuilder) Ver(ver string) *AuditPcContextBuilder {
+	builder.ver = ver
+	builder.verFlag = true
+	return builder
+}
+
+// 客户端类型
+//
+// 示例值：
+func (builder *AuditPcContextBuilder) Os(os string) *AuditPcContextBuilder {
+	builder.os = os
+	builder.osFlag = true
+	return builder
+}
+
+// wifi ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditPcContextBuilder) Wifip(wifip string) *AuditPcContextBuilder {
+	builder.wifip = wifip
+	builder.wifipFlag = true
+	return builder
+}
+
+// 设备区域
+//
+// 示例值：zh_CN
+func (builder *AuditPcContextBuilder) Region(region string) *AuditPcContextBuilder {
+	builder.region = region
+	builder.regionFlag = true
+	return builder
+}
+
+// 公网ip
+//
+// 示例值：1.1.1.1
+func (builder *AuditPcContextBuilder) IP(iP string) *AuditPcContextBuilder {
+	builder.iP = iP
+	builder.iPFlag = true
+	return builder
+}
+
+func (builder *AuditPcContextBuilder) Build() *AuditPcContext {
+	req := &AuditPcContext{}
+	if builder.udidFlag {
+		req.Udid = &builder.udid
+
+	}
+	if builder.didFlag {
+		req.Did = &builder.did
+
+	}
+	if builder.appVerFlag {
+		req.AppVer = &builder.appVer
+
+	}
+	if builder.verFlag {
+		req.Ver = &builder.ver
+
+	}
+	if builder.osFlag {
+		req.Os = &builder.os
+
+	}
+	if builder.wifipFlag {
+		req.Wifip = &builder.wifip
+
+	}
+	if builder.regionFlag {
+		req.Region = &builder.region
+
+	}
+	if builder.iPFlag {
+		req.IP = &builder.iP
+
+	}
+	return req
+}
+
+type AuditRecipientDetail struct {
+	PermissionActionType *string `json:"permission_action_type,omitempty"` // 修改权限协作者
+}
+
+type AuditRecipientDetailBuilder struct {
+	permissionActionType     string // 修改权限协作者
+	permissionActionTypeFlag bool
+}
+
+func NewAuditRecipientDetailBuilder() *AuditRecipientDetailBuilder {
+	builder := &AuditRecipientDetailBuilder{}
+	return builder
+}
+
+// 修改权限协作者
+//
+// 示例值：
+func (builder *AuditRecipientDetailBuilder) PermissionActionType(permissionActionType string) *AuditRecipientDetailBuilder {
+	builder.permissionActionType = permissionActionType
+	builder.permissionActionTypeFlag = true
+	return builder
+}
+
+func (builder *AuditRecipientDetailBuilder) Build() *AuditRecipientDetail {
+	req := &AuditRecipientDetail{}
+	if builder.permissionActionTypeFlag {
+		req.PermissionActionType = &builder.permissionActionType
+
+	}
+	return req
+}
+
+type AuditRecipientEntity struct {
+	RecipientType   *string               `json:"recipient_type,omitempty"`   // 接收者对象类型
+	RecipientValue  *string               `json:"recipient_value,omitempty"`  // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+	RecipientDetail *AuditRecipientDetail `json:"recipient_detail,omitempty"` // recipient 详情
+}
+
+type AuditRecipientEntityBuilder struct {
+	recipientType       string // 接收者对象类型
+	recipientTypeFlag   bool
+	recipientValue      string // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+	recipientValueFlag  bool
+	recipientDetail     *AuditRecipientDetail // recipient 详情
+	recipientDetailFlag bool
+}
+
+func NewAuditRecipientEntityBuilder() *AuditRecipientEntityBuilder {
+	builder := &AuditRecipientEntityBuilder{}
+	return builder
+}
+
+// 接收者对象类型
+//
+// 示例值：
+func (builder *AuditRecipientEntityBuilder) RecipientType(recipientType string) *AuditRecipientEntityBuilder {
+	builder.recipientType = recipientType
+	builder.recipientTypeFlag = true
+	return builder
+}
+
+// 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+//
+// 示例值：3d7d922
+func (builder *AuditRecipientEntityBuilder) RecipientValue(recipientValue string) *AuditRecipientEntityBuilder {
+	builder.recipientValue = recipientValue
+	builder.recipientValueFlag = true
+	return builder
+}
+
+// recipient 详情
+//
+// 示例值：
+func (builder *AuditRecipientEntityBuilder) RecipientDetail(recipientDetail *AuditRecipientDetail) *AuditRecipientEntityBuilder {
+	builder.recipientDetail = recipientDetail
+	builder.recipientDetailFlag = true
+	return builder
+}
+
+func (builder *AuditRecipientEntityBuilder) Build() *AuditRecipientEntity {
+	req := &AuditRecipientEntity{}
+	if builder.recipientTypeFlag {
+		req.RecipientType = &builder.recipientType
+
+	}
+	if builder.recipientValueFlag {
+		req.RecipientValue = &builder.recipientValue
+
+	}
+	if builder.recipientDetailFlag {
+		req.RecipientDetail = builder.recipientDetail
+	}
+	return req
+}
+
+type AuditWebContext struct {
+	UserAgent *string `json:"user_agent,omitempty"` // UA信息
+	IP        *string `json:"IP,omitempty"`         // 本机IP
+}
+
+type AuditWebContextBuilder struct {
+	userAgent     string // UA信息
+	userAgentFlag bool
+	iP            string // 本机IP
+	iPFlag        bool
+}
+
+func NewAuditWebContextBuilder() *AuditWebContextBuilder {
+	builder := &AuditWebContextBuilder{}
+	return builder
+}
+
+// UA信息
+//
+// 示例值：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36
+func (builder *AuditWebContextBuilder) UserAgent(userAgent string) *AuditWebContextBuilder {
+	builder.userAgent = userAgent
+	builder.userAgentFlag = true
+	return builder
+}
+
+// 本机IP
+//
+// 示例值：1.1.1.1
+func (builder *AuditWebContextBuilder) IP(iP string) *AuditWebContextBuilder {
+	builder.iP = iP
+	builder.iPFlag = true
+	return builder
+}
+
+func (builder *AuditWebContextBuilder) Build() *AuditWebContext {
+	req := &AuditWebContext{}
+	if builder.userAgentFlag {
+		req.UserAgent = &builder.userAgent
+
+	}
+	if builder.iPFlag {
+		req.IP = &builder.iP
+
 	}
 	return req
 }

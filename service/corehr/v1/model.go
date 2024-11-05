@@ -10192,94 +10192,161 @@ func (builder *LeaveGrantingRecordBuilder) Build() *LeaveGrantingRecord {
 	return req
 }
 
+type LeaveProcessInfo struct {
+	ProcessId        *string `json:"process_id,omitempty"`         // 流程id
+	ProcessStatus    *string `json:"process_status,omitempty"`     // 流程状态
+	ProcessApplyTime *string `json:"process_apply_time,omitempty"` // 流程发起时间
+}
+
+type LeaveProcessInfoBuilder struct {
+	processId            string // 流程id
+	processIdFlag        bool
+	processStatus        string // 流程状态
+	processStatusFlag    bool
+	processApplyTime     string // 流程发起时间
+	processApplyTimeFlag bool
+}
+
+func NewLeaveProcessInfoBuilder() *LeaveProcessInfoBuilder {
+	builder := &LeaveProcessInfoBuilder{}
+	return builder
+}
+
+// 流程id
+//
+// 示例值：4718803945687580505
+func (builder *LeaveProcessInfoBuilder) ProcessId(processId string) *LeaveProcessInfoBuilder {
+	builder.processId = processId
+	builder.processIdFlag = true
+	return builder
+}
+
+// 流程状态
+//
+// 示例值：passed
+func (builder *LeaveProcessInfoBuilder) ProcessStatus(processStatus string) *LeaveProcessInfoBuilder {
+	builder.processStatus = processStatus
+	builder.processStatusFlag = true
+	return builder
+}
+
+// 流程发起时间
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *LeaveProcessInfoBuilder) ProcessApplyTime(processApplyTime string) *LeaveProcessInfoBuilder {
+	builder.processApplyTime = processApplyTime
+	builder.processApplyTimeFlag = true
+	return builder
+}
+
+func (builder *LeaveProcessInfoBuilder) Build() *LeaveProcessInfo {
+	req := &LeaveProcessInfo{}
+	if builder.processIdFlag {
+		req.ProcessId = &builder.processId
+
+	}
+	if builder.processStatusFlag {
+		req.ProcessStatus = &builder.processStatus
+
+	}
+	if builder.processApplyTimeFlag {
+		req.ProcessApplyTime = &builder.processApplyTime
+
+	}
+	return req
+}
+
 type LeaveRequest struct {
-	LeaveRequestId        *string               `json:"leave_request_id,omitempty"`         // 请假记录ID
-	EmploymentId          *string               `json:"employment_id,omitempty"`            // 雇佣信息ID
-	EmploymentName        []*I18n               `json:"employment_name,omitempty"`          // 员工姓名
-	LeaveTypeId           *string               `json:"leave_type_id,omitempty"`            // 假期类型ID
-	LeaveTypeName         []*I18n               `json:"leave_type_name,omitempty"`          // 假期类型名称
-	StartTime             *string               `json:"start_time,omitempty"`               // 假期开始时间，格式可能为：;; - 字符串日期：如 "2022-09-09";; - 字符串日期加 morning/afternoon：如 "2022-09-09 morning""
-	EndTime               *string               `json:"end_time,omitempty"`                 // 假期结束时间，格式可能为：;; - 字符串日期：如 "2022-09-09";; - 字符串日期加 morning/afternoon：如 "2022-09-09 morning""
-	LeaveDuration         *string               `json:"leave_duration,omitempty"`           // 假期时长
-	LeaveDurationUnit     *int                  `json:"leave_duration_unit,omitempty"`      // 假期时长单位;;可选值有：;;- 1: 天;;- 2: 小时
-	LeaveRequestStatus    *int                  `json:"leave_request_status,omitempty"`     // 请假记录的状态;;可选值有：;;- 1：已通过;;- 2：审批中;;- 3：审批中（更正）;- 4：审批中（取消休假）;- 5：审批中（返岗）;- 6：已返岗;- 7：已拒绝;- 8：已取消;- 9：已撤回
-	GrantSource           *string               `json:"grant_source,omitempty"`             // 数据来源;;可选值有：;;- "manual"：手动创建;;- "system"：系统创建"
-	ReturnTime            *string               `json:"return_time,omitempty"`              // 返岗时间
-	SubmittedAt           *string               `json:"submitted_at,omitempty"`             // 发起时间
-	SubmittedBy           *string               `json:"submitted_by,omitempty"`             // 发起人
-	Notes                 *string               `json:"notes,omitempty"`                    // 备注
-	ApprovalDate          *string               `json:"approval_date,omitempty"`            // 审批通过日期
-	IsDeducted            *bool                 `json:"is_deducted,omitempty"`              // 是否带薪
-	Details               []*LeaveRequestDetail `json:"details,omitempty"`                  // 请假详情
-	LeaveTypeCode         *string               `json:"leave_type_code,omitempty"`          // 假期类型枚举
-	ActualEndDate         *string               `json:"actual_end_date,omitempty"`          // 实际结束日期
-	EstimatedEndDate      *string               `json:"estimated_end_date,omitempty"`       // 预估结束日期
-	TimeZone              *string               `json:"time_zone,omitempty"`                // 时区
-	DataSource            *int                  `json:"data_source,omitempty"`              // 请假记录数据来源
-	LeaveProcessId        []string              `json:"leave_process_id,omitempty"`         // 请假申请流程ID
-	LeaveCorrectProcessId []string              `json:"leave_correct_process_id,omitempty"` // 请假更正流程ID
-	LeaveCancelProcessId  []string              `json:"leave_cancel_process_id,omitempty"`  // 请假取消流程ID
-	LeaveReturnProcessId  []string              `json:"leave_return_process_id,omitempty"`  // 请假返岗流程ID
-	WdPaidType            *int                  `json:"wd_paid_type,omitempty"`             // workDay算薪类型
+	LeaveRequestId          *string               `json:"leave_request_id,omitempty"`           // 请假记录ID
+	EmploymentId            *string               `json:"employment_id,omitempty"`              // 雇佣信息ID
+	EmploymentName          []*I18n               `json:"employment_name,omitempty"`            // 员工姓名
+	LeaveTypeId             *string               `json:"leave_type_id,omitempty"`              // 假期类型ID
+	LeaveTypeName           []*I18n               `json:"leave_type_name,omitempty"`            // 假期类型名称
+	StartTime               *string               `json:"start_time,omitempty"`                 // 假期开始时间，格式可能为：;; - 字符串日期：如 "2022-09-09";; - 字符串日期加 morning/afternoon：如 "2022-09-09 morning""
+	EndTime                 *string               `json:"end_time,omitempty"`                   // 假期结束时间，格式可能为：;; - 字符串日期：如 "2022-09-09";; - 字符串日期加 morning/afternoon：如 "2022-09-09 morning""
+	LeaveDuration           *string               `json:"leave_duration,omitempty"`             // 假期时长
+	LeaveDurationUnit       *int                  `json:"leave_duration_unit,omitempty"`        // 假期时长单位;;可选值有：;;- 1: 天;;- 2: 小时
+	LeaveRequestStatus      *int                  `json:"leave_request_status,omitempty"`       // 请假记录的状态;;可选值有：;;- 1：已通过;;- 2：审批中;;- 3：审批中（更正）;- 4：审批中（取消休假）;- 5：审批中（返岗）;- 6：已返岗;- 7：已拒绝;- 8：已取消;- 9：已撤回
+	GrantSource             *string               `json:"grant_source,omitempty"`               // 数据来源;;可选值有：;;- "manual"：手动创建;;- "system"：系统创建"
+	ReturnTime              *string               `json:"return_time,omitempty"`                // 返岗时间
+	SubmittedAt             *string               `json:"submitted_at,omitempty"`               // 发起时间
+	SubmittedBy             *string               `json:"submitted_by,omitempty"`               // 发起人
+	Notes                   *string               `json:"notes,omitempty"`                      // 备注
+	ApprovalDate            *string               `json:"approval_date,omitempty"`              // 审批通过日期
+	IsDeducted              *bool                 `json:"is_deducted,omitempty"`                // 是否带薪
+	Details                 []*LeaveRequestDetail `json:"details,omitempty"`                    // 请假详情
+	LeaveTypeCode           *string               `json:"leave_type_code,omitempty"`            // 假期类型枚举
+	ActualEndDate           *string               `json:"actual_end_date,omitempty"`            // 实际结束日期
+	EstimatedEndDate        *string               `json:"estimated_end_date,omitempty"`         // 预估结束日期
+	TimeZone                *string               `json:"time_zone,omitempty"`                  // 时区
+	DataSource              *int                  `json:"data_source,omitempty"`                // 请假记录数据来源
+	LeaveProcessId          []string              `json:"leave_process_id,omitempty"`           // 请假申请流程ID
+	LeaveCorrectProcessId   []string              `json:"leave_correct_process_id,omitempty"`   // 请假更正流程ID
+	LeaveCancelProcessId    []string              `json:"leave_cancel_process_id,omitempty"`    // 请假取消流程ID
+	LeaveReturnProcessId    []string              `json:"leave_return_process_id,omitempty"`    // 请假返岗流程ID
+	WdPaidType              *int                  `json:"wd_paid_type,omitempty"`               // workDay算薪类型
+	LeaveCorrectProcessInfo []*LeaveProcessInfo   `json:"leave_correct_process_info,omitempty"` // 请假更正流程信息
 }
 
 type LeaveRequestBuilder struct {
-	leaveRequestId            string // 请假记录ID
-	leaveRequestIdFlag        bool
-	employmentId              string // 雇佣信息ID
-	employmentIdFlag          bool
-	employmentName            []*I18n // 员工姓名
-	employmentNameFlag        bool
-	leaveTypeId               string // 假期类型ID
-	leaveTypeIdFlag           bool
-	leaveTypeName             []*I18n // 假期类型名称
-	leaveTypeNameFlag         bool
-	startTime                 string // 假期开始时间，格式可能为：;; - 字符串日期：如 "2022-09-09";; - 字符串日期加 morning/afternoon：如 "2022-09-09 morning""
-	startTimeFlag             bool
-	endTime                   string // 假期结束时间，格式可能为：;; - 字符串日期：如 "2022-09-09";; - 字符串日期加 morning/afternoon：如 "2022-09-09 morning""
-	endTimeFlag               bool
-	leaveDuration             string // 假期时长
-	leaveDurationFlag         bool
-	leaveDurationUnit         int // 假期时长单位;;可选值有：;;- 1: 天;;- 2: 小时
-	leaveDurationUnitFlag     bool
-	leaveRequestStatus        int // 请假记录的状态;;可选值有：;;- 1：已通过;;- 2：审批中;;- 3：审批中（更正）;- 4：审批中（取消休假）;- 5：审批中（返岗）;- 6：已返岗;- 7：已拒绝;- 8：已取消;- 9：已撤回
-	leaveRequestStatusFlag    bool
-	grantSource               string // 数据来源;;可选值有：;;- "manual"：手动创建;;- "system"：系统创建"
-	grantSourceFlag           bool
-	returnTime                string // 返岗时间
-	returnTimeFlag            bool
-	submittedAt               string // 发起时间
-	submittedAtFlag           bool
-	submittedBy               string // 发起人
-	submittedByFlag           bool
-	notes                     string // 备注
-	notesFlag                 bool
-	approvalDate              string // 审批通过日期
-	approvalDateFlag          bool
-	isDeducted                bool // 是否带薪
-	isDeductedFlag            bool
-	details                   []*LeaveRequestDetail // 请假详情
-	detailsFlag               bool
-	leaveTypeCode             string // 假期类型枚举
-	leaveTypeCodeFlag         bool
-	actualEndDate             string // 实际结束日期
-	actualEndDateFlag         bool
-	estimatedEndDate          string // 预估结束日期
-	estimatedEndDateFlag      bool
-	timeZone                  string // 时区
-	timeZoneFlag              bool
-	dataSource                int // 请假记录数据来源
-	dataSourceFlag            bool
-	leaveProcessId            []string // 请假申请流程ID
-	leaveProcessIdFlag        bool
-	leaveCorrectProcessId     []string // 请假更正流程ID
-	leaveCorrectProcessIdFlag bool
-	leaveCancelProcessId      []string // 请假取消流程ID
-	leaveCancelProcessIdFlag  bool
-	leaveReturnProcessId      []string // 请假返岗流程ID
-	leaveReturnProcessIdFlag  bool
-	wdPaidType                int // workDay算薪类型
-	wdPaidTypeFlag            bool
+	leaveRequestId              string // 请假记录ID
+	leaveRequestIdFlag          bool
+	employmentId                string // 雇佣信息ID
+	employmentIdFlag            bool
+	employmentName              []*I18n // 员工姓名
+	employmentNameFlag          bool
+	leaveTypeId                 string // 假期类型ID
+	leaveTypeIdFlag             bool
+	leaveTypeName               []*I18n // 假期类型名称
+	leaveTypeNameFlag           bool
+	startTime                   string // 假期开始时间，格式可能为：;; - 字符串日期：如 "2022-09-09";; - 字符串日期加 morning/afternoon：如 "2022-09-09 morning""
+	startTimeFlag               bool
+	endTime                     string // 假期结束时间，格式可能为：;; - 字符串日期：如 "2022-09-09";; - 字符串日期加 morning/afternoon：如 "2022-09-09 morning""
+	endTimeFlag                 bool
+	leaveDuration               string // 假期时长
+	leaveDurationFlag           bool
+	leaveDurationUnit           int // 假期时长单位;;可选值有：;;- 1: 天;;- 2: 小时
+	leaveDurationUnitFlag       bool
+	leaveRequestStatus          int // 请假记录的状态;;可选值有：;;- 1：已通过;;- 2：审批中;;- 3：审批中（更正）;- 4：审批中（取消休假）;- 5：审批中（返岗）;- 6：已返岗;- 7：已拒绝;- 8：已取消;- 9：已撤回
+	leaveRequestStatusFlag      bool
+	grantSource                 string // 数据来源;;可选值有：;;- "manual"：手动创建;;- "system"：系统创建"
+	grantSourceFlag             bool
+	returnTime                  string // 返岗时间
+	returnTimeFlag              bool
+	submittedAt                 string // 发起时间
+	submittedAtFlag             bool
+	submittedBy                 string // 发起人
+	submittedByFlag             bool
+	notes                       string // 备注
+	notesFlag                   bool
+	approvalDate                string // 审批通过日期
+	approvalDateFlag            bool
+	isDeducted                  bool // 是否带薪
+	isDeductedFlag              bool
+	details                     []*LeaveRequestDetail // 请假详情
+	detailsFlag                 bool
+	leaveTypeCode               string // 假期类型枚举
+	leaveTypeCodeFlag           bool
+	actualEndDate               string // 实际结束日期
+	actualEndDateFlag           bool
+	estimatedEndDate            string // 预估结束日期
+	estimatedEndDateFlag        bool
+	timeZone                    string // 时区
+	timeZoneFlag                bool
+	dataSource                  int // 请假记录数据来源
+	dataSourceFlag              bool
+	leaveProcessId              []string // 请假申请流程ID
+	leaveProcessIdFlag          bool
+	leaveCorrectProcessId       []string // 请假更正流程ID
+	leaveCorrectProcessIdFlag   bool
+	leaveCancelProcessId        []string // 请假取消流程ID
+	leaveCancelProcessIdFlag    bool
+	leaveReturnProcessId        []string // 请假返岗流程ID
+	leaveReturnProcessIdFlag    bool
+	wdPaidType                  int // workDay算薪类型
+	wdPaidTypeFlag              bool
+	leaveCorrectProcessInfo     []*LeaveProcessInfo // 请假更正流程信息
+	leaveCorrectProcessInfoFlag bool
 }
 
 func NewLeaveRequestBuilder() *LeaveRequestBuilder {
@@ -10539,6 +10606,15 @@ func (builder *LeaveRequestBuilder) WdPaidType(wdPaidType int) *LeaveRequestBuil
 	return builder
 }
 
+// 请假更正流程信息
+//
+// 示例值：
+func (builder *LeaveRequestBuilder) LeaveCorrectProcessInfo(leaveCorrectProcessInfo []*LeaveProcessInfo) *LeaveRequestBuilder {
+	builder.leaveCorrectProcessInfo = leaveCorrectProcessInfo
+	builder.leaveCorrectProcessInfoFlag = true
+	return builder
+}
+
 func (builder *LeaveRequestBuilder) Build() *LeaveRequest {
 	req := &LeaveRequest{}
 	if builder.leaveRequestIdFlag {
@@ -10645,6 +10721,9 @@ func (builder *LeaveRequestBuilder) Build() *LeaveRequest {
 	if builder.wdPaidTypeFlag {
 		req.WdPaidType = &builder.wdPaidType
 
+	}
+	if builder.leaveCorrectProcessInfoFlag {
+		req.LeaveCorrectProcessInfo = builder.leaveCorrectProcessInfo
 	}
 	return req
 }
@@ -26148,6 +26227,20 @@ type PatchWorkingHoursTypeResp struct {
 
 func (resp *PatchWorkingHoursTypeResp) Success() bool {
 	return resp.Code == 0
+}
+
+type P2CommonDataMetaDataUpdatedV1Data struct {
+	ApiName *string `json:"api_name,omitempty"` // 对象 API Name
+}
+
+type P2CommonDataMetaDataUpdatedV1 struct {
+	*larkevent.EventV2Base                                    // 事件基础数据
+	*larkevent.EventReq                                       // 请求原生数据
+	Event                  *P2CommonDataMetaDataUpdatedV1Data `json:"event"` // 事件内容
+}
+
+func (m *P2CommonDataMetaDataUpdatedV1) RawReq(req *larkevent.EventReq) {
+	m.EventReq = req
 }
 
 type P2ContractCreatedV1Data struct {

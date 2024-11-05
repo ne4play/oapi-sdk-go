@@ -30,7 +30,6 @@ func main() {
 		PageSize(100).
 		PageToken("231432433").
 		UserIdType("open_id").
-
 		Body(larkcompensation.NewQueryArchiveReqBodyBuilder().
 			UserIdList([]string{}).
 			EffectiveStartDate("2022-05-10").

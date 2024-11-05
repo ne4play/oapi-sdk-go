@@ -52,6 +52,7 @@ func main() {
 			TrusteeshipUserIdType("user_id").
 			TrusteeshipUrls(larkapproval.NewTrusteeshipUrlsBuilder().Build()).
 			TrusteeshipCacheConfig(larkapproval.NewTrusteeshipInstanceCacheConfigBuilder().Build()).
+			ResourceRegion("").
 			Build()).
 		Build()
 	// 发起请求

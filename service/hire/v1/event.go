@@ -236,3 +236,23 @@ func (h *P2TalentDeletedV1Handler) Event() interface{} {
 func (h *P2TalentDeletedV1Handler) Handle(ctx context.Context, event interface{}) error {
 	return h.handler(ctx, event.(*P2TalentDeletedV1))
 }
+
+// 消息处理器定义
+type P2TalentTagSubscriptionV1Handler struct {
+	handler func(context.Context, *P2TalentTagSubscriptionV1) error
+}
+
+func NewP2TalentTagSubscriptionV1Handler(handler func(context.Context, *P2TalentTagSubscriptionV1) error) *P2TalentTagSubscriptionV1Handler {
+	h := &P2TalentTagSubscriptionV1Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2TalentTagSubscriptionV1Handler) Event() interface{} {
+	return &P2TalentTagSubscriptionV1{}
+}
+
+// 回调开发者注册的handle
+func (h *P2TalentTagSubscriptionV1Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2TalentTagSubscriptionV1))
+}

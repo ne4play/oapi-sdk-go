@@ -18,6 +18,26 @@ import (
 )
 
 // 消息处理器定义
+type P2CommonDataMetaDataUpdatedV1Handler struct {
+	handler func(context.Context, *P2CommonDataMetaDataUpdatedV1) error
+}
+
+func NewP2CommonDataMetaDataUpdatedV1Handler(handler func(context.Context, *P2CommonDataMetaDataUpdatedV1) error) *P2CommonDataMetaDataUpdatedV1Handler {
+	h := &P2CommonDataMetaDataUpdatedV1Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2CommonDataMetaDataUpdatedV1Handler) Event() interface{} {
+	return &P2CommonDataMetaDataUpdatedV1{}
+}
+
+// 回调开发者注册的handle
+func (h *P2CommonDataMetaDataUpdatedV1Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2CommonDataMetaDataUpdatedV1))
+}
+
+// 消息处理器定义
 type P2ContractCreatedV1Handler struct {
 	handler func(context.Context, *P2ContractCreatedV1) error
 }

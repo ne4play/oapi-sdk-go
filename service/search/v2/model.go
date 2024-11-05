@@ -1394,6 +1394,7 @@ type DialogSearchRequest struct {
 	ScenarioContext              *ScenarioContext `json:"scenario_context,omitempty"`                // 场景上下文
 	AgentType                    *int             `json:"agent_type,omitempty"`                      // agent类型
 	ResponseType                 *int             `json:"response_type,omitempty"`                   // 返回结果的数据类型
+	PassageParam                 *PassageParam    `json:"passage_param,omitempty"`                   // passage_param
 }
 
 type DialogSearchRequestBuilder struct {
@@ -1407,6 +1408,8 @@ type DialogSearchRequestBuilder struct {
 	agentTypeFlag                    bool
 	responseType                     int // 返回结果的数据类型
 	responseTypeFlag                 bool
+	passageParam                     *PassageParam // passage_param
+	passageParamFlag                 bool
 }
 
 func NewDialogSearchRequestBuilder() *DialogSearchRequestBuilder {
@@ -1459,6 +1462,15 @@ func (builder *DialogSearchRequestBuilder) ResponseType(responseType int) *Dialo
 	return builder
 }
 
+// passage_param
+//
+// 示例值：
+func (builder *DialogSearchRequestBuilder) PassageParam(passageParam *PassageParam) *DialogSearchRequestBuilder {
+	builder.passageParam = passageParam
+	builder.passageParamFlag = true
+	return builder
+}
+
 func (builder *DialogSearchRequestBuilder) Build() *DialogSearchRequest {
 	req := &DialogSearchRequest{}
 	if builder.toolRawInstructionFlag {
@@ -1479,6 +1491,9 @@ func (builder *DialogSearchRequestBuilder) Build() *DialogSearchRequest {
 	if builder.responseTypeFlag {
 		req.ResponseType = &builder.responseType
 
+	}
+	if builder.passageParamFlag {
+		req.PassageParam = builder.passageParam
 	}
 	return req
 }
@@ -1547,24 +1562,39 @@ func (builder *DocBuilder) Build() *Doc {
 }
 
 type DocPassageParam struct {
-	Searchable        *bool    `json:"searchable,omitempty"`          // 是否要搜索doc
-	DocTokens         []string `json:"doc_tokens,omitempty"`          // 搜索几篇特定doc
-	FolderTokens      []string `json:"folder_tokens,omitempty"`       // 搜索特定的文件夹
-	ObjIds            []string `json:"obj_ids,omitempty"`             // 搜索特定doc（仅限内部使用，有需求请用doc_tokens）
-	DisableSearchLink *bool    `json:"disable_search_link,omitempty"` // 禁用搜索外链文档功能
+	Searchable           *bool    `json:"searchable,omitempty"`             // 是否要搜索doc
+	DocTokens            []string `json:"doc_tokens,omitempty"`             // 搜索几篇特定doc
+	FolderTokens         []string `json:"folder_tokens,omitempty"`          // 搜索特定的文件夹
+	ObjIds               []string `json:"obj_ids,omitempty"`                // 搜索特定doc（仅限内部使用，有需求请用doc_tokens）
+	DisableSearchLink    *bool    `json:"disable_search_link,omitempty"`    // 禁用搜索外链文档功能
+	ExcludedObjIds       []string `json:"excluded_obj_ids,omitempty"`       // 排除文档id
+	ExcludedDocTokens    []string `json:"excluded_doc_tokens,omitempty"`    // 排除文档token
+	ExcludedFolderTokens []string `json:"excluded_folder_tokens,omitempty"` // 排除的文件夹token
+	EnableCrossTenant    *bool    `json:"enable_cross_tenant,omitempty"`    // 是否跨租户
+	OnlySearchPublic     *bool    `json:"only_search_public,omitempty"`     // 是否只搜公开
 }
 
 type DocPassageParamBuilder struct {
-	searchable            bool // 是否要搜索doc
-	searchableFlag        bool
-	docTokens             []string // 搜索几篇特定doc
-	docTokensFlag         bool
-	folderTokens          []string // 搜索特定的文件夹
-	folderTokensFlag      bool
-	objIds                []string // 搜索特定doc（仅限内部使用，有需求请用doc_tokens）
-	objIdsFlag            bool
-	disableSearchLink     bool // 禁用搜索外链文档功能
-	disableSearchLinkFlag bool
+	searchable               bool // 是否要搜索doc
+	searchableFlag           bool
+	docTokens                []string // 搜索几篇特定doc
+	docTokensFlag            bool
+	folderTokens             []string // 搜索特定的文件夹
+	folderTokensFlag         bool
+	objIds                   []string // 搜索特定doc（仅限内部使用，有需求请用doc_tokens）
+	objIdsFlag               bool
+	disableSearchLink        bool // 禁用搜索外链文档功能
+	disableSearchLinkFlag    bool
+	excludedObjIds           []string // 排除文档id
+	excludedObjIdsFlag       bool
+	excludedDocTokens        []string // 排除文档token
+	excludedDocTokensFlag    bool
+	excludedFolderTokens     []string // 排除的文件夹token
+	excludedFolderTokensFlag bool
+	enableCrossTenant        bool // 是否跨租户
+	enableCrossTenantFlag    bool
+	onlySearchPublic         bool // 是否只搜公开
+	onlySearchPublicFlag     bool
 }
 
 func NewDocPassageParamBuilder() *DocPassageParamBuilder {
@@ -1617,6 +1647,51 @@ func (builder *DocPassageParamBuilder) DisableSearchLink(disableSearchLink bool)
 	return builder
 }
 
+// 排除文档id
+//
+// 示例值：true
+func (builder *DocPassageParamBuilder) ExcludedObjIds(excludedObjIds []string) *DocPassageParamBuilder {
+	builder.excludedObjIds = excludedObjIds
+	builder.excludedObjIdsFlag = true
+	return builder
+}
+
+// 排除文档token
+//
+// 示例值：true
+func (builder *DocPassageParamBuilder) ExcludedDocTokens(excludedDocTokens []string) *DocPassageParamBuilder {
+	builder.excludedDocTokens = excludedDocTokens
+	builder.excludedDocTokensFlag = true
+	return builder
+}
+
+// 排除的文件夹token
+//
+// 示例值：
+func (builder *DocPassageParamBuilder) ExcludedFolderTokens(excludedFolderTokens []string) *DocPassageParamBuilder {
+	builder.excludedFolderTokens = excludedFolderTokens
+	builder.excludedFolderTokensFlag = true
+	return builder
+}
+
+// 是否跨租户
+//
+// 示例值：false
+func (builder *DocPassageParamBuilder) EnableCrossTenant(enableCrossTenant bool) *DocPassageParamBuilder {
+	builder.enableCrossTenant = enableCrossTenant
+	builder.enableCrossTenantFlag = true
+	return builder
+}
+
+// 是否只搜公开
+//
+// 示例值：false
+func (builder *DocPassageParamBuilder) OnlySearchPublic(onlySearchPublic bool) *DocPassageParamBuilder {
+	builder.onlySearchPublic = onlySearchPublic
+	builder.onlySearchPublicFlag = true
+	return builder
+}
+
 func (builder *DocPassageParamBuilder) Build() *DocPassageParam {
 	req := &DocPassageParam{}
 	if builder.searchableFlag {
@@ -1634,6 +1709,23 @@ func (builder *DocPassageParamBuilder) Build() *DocPassageParam {
 	}
 	if builder.disableSearchLinkFlag {
 		req.DisableSearchLink = &builder.disableSearchLink
+
+	}
+	if builder.excludedObjIdsFlag {
+		req.ExcludedObjIds = builder.excludedObjIds
+	}
+	if builder.excludedDocTokensFlag {
+		req.ExcludedDocTokens = builder.excludedDocTokens
+	}
+	if builder.excludedFolderTokensFlag {
+		req.ExcludedFolderTokens = builder.excludedFolderTokens
+	}
+	if builder.enableCrossTenantFlag {
+		req.EnableCrossTenant = &builder.enableCrossTenant
+
+	}
+	if builder.onlySearchPublicFlag {
+		req.OnlySearchPublic = &builder.onlySearchPublic
 
 	}
 	return req
@@ -2323,6 +2415,98 @@ func (builder *MemoryMessageBuilder) Build() *MemoryMessage {
 	return req
 }
 
+type MessagePassageParam struct {
+	Searchable         *bool    `json:"searchable,omitempty"`           // searchable
+	ChatIds            []string `json:"chat_ids,omitempty"`             // chat_ids
+	ExcludedPassageIds []string `json:"excluded_passage_ids,omitempty"` // excluded_passage_ids
+	ExcludedChatIds    []string `json:"excluded_chat_ids,omitempty"`    // excluded_chat_ids
+	ExcludedMessageIds []string `json:"excluded_message_ids,omitempty"` // excluded_message_ids
+}
+
+type MessagePassageParamBuilder struct {
+	searchable             bool // searchable
+	searchableFlag         bool
+	chatIds                []string // chat_ids
+	chatIdsFlag            bool
+	excludedPassageIds     []string // excluded_passage_ids
+	excludedPassageIdsFlag bool
+	excludedChatIds        []string // excluded_chat_ids
+	excludedChatIdsFlag    bool
+	excludedMessageIds     []string // excluded_message_ids
+	excludedMessageIdsFlag bool
+}
+
+func NewMessagePassageParamBuilder() *MessagePassageParamBuilder {
+	builder := &MessagePassageParamBuilder{}
+	return builder
+}
+
+// searchable
+//
+// 示例值：false
+func (builder *MessagePassageParamBuilder) Searchable(searchable bool) *MessagePassageParamBuilder {
+	builder.searchable = searchable
+	builder.searchableFlag = true
+	return builder
+}
+
+// chat_ids
+//
+// 示例值：
+func (builder *MessagePassageParamBuilder) ChatIds(chatIds []string) *MessagePassageParamBuilder {
+	builder.chatIds = chatIds
+	builder.chatIdsFlag = true
+	return builder
+}
+
+// excluded_passage_ids
+//
+// 示例值：
+func (builder *MessagePassageParamBuilder) ExcludedPassageIds(excludedPassageIds []string) *MessagePassageParamBuilder {
+	builder.excludedPassageIds = excludedPassageIds
+	builder.excludedPassageIdsFlag = true
+	return builder
+}
+
+// excluded_chat_ids
+//
+// 示例值：
+func (builder *MessagePassageParamBuilder) ExcludedChatIds(excludedChatIds []string) *MessagePassageParamBuilder {
+	builder.excludedChatIds = excludedChatIds
+	builder.excludedChatIdsFlag = true
+	return builder
+}
+
+// excluded_message_ids
+//
+// 示例值：
+func (builder *MessagePassageParamBuilder) ExcludedMessageIds(excludedMessageIds []string) *MessagePassageParamBuilder {
+	builder.excludedMessageIds = excludedMessageIds
+	builder.excludedMessageIdsFlag = true
+	return builder
+}
+
+func (builder *MessagePassageParamBuilder) Build() *MessagePassageParam {
+	req := &MessagePassageParam{}
+	if builder.searchableFlag {
+		req.Searchable = &builder.searchable
+
+	}
+	if builder.chatIdsFlag {
+		req.ChatIds = builder.chatIds
+	}
+	if builder.excludedPassageIdsFlag {
+		req.ExcludedPassageIds = builder.excludedPassageIds
+	}
+	if builder.excludedChatIdsFlag {
+		req.ExcludedChatIds = builder.excludedChatIds
+	}
+	if builder.excludedMessageIdsFlag {
+		req.ExcludedMessageIds = builder.excludedMessageIds
+	}
+	return req
+}
+
 type ModelConfig struct {
 	ModelName *string `json:"model_name,omitempty"` // 模型名称
 }
@@ -2664,6 +2848,8 @@ type PassageParam struct {
 	WikiParam     *WikiPassageParam     `json:"wiki_param,omitempty"`     // 搜wiki的相关参数
 	WebParam      *WebPassageParam      `json:"web_param,omitempty"`      // 搜web的相关参数
 	HelpdeskParam *HelpdeskPassageParam `json:"helpdesk_param,omitempty"` // 搜helpdesk的相关参数
+	LingoParam    *LingoPassageParam    `json:"lingo_param,omitempty"`    // lingo_param
+	MessageParam  *MessagePassageParam  `json:"message_param,omitempty"`  // message_param
 }
 
 type PassageParamBuilder struct {
@@ -2675,6 +2861,10 @@ type PassageParamBuilder struct {
 	webParamFlag      bool
 	helpdeskParam     *HelpdeskPassageParam // 搜helpdesk的相关参数
 	helpdeskParamFlag bool
+	lingoParam        *LingoPassageParam // lingo_param
+	lingoParamFlag    bool
+	messageParam      *MessagePassageParam // message_param
+	messageParamFlag  bool
 }
 
 func NewPassageParamBuilder() *PassageParamBuilder {
@@ -2718,6 +2908,24 @@ func (builder *PassageParamBuilder) HelpdeskParam(helpdeskParam *HelpdeskPassage
 	return builder
 }
 
+// lingo_param
+//
+// 示例值：
+func (builder *PassageParamBuilder) LingoParam(lingoParam *LingoPassageParam) *PassageParamBuilder {
+	builder.lingoParam = lingoParam
+	builder.lingoParamFlag = true
+	return builder
+}
+
+// message_param
+//
+// 示例值：
+func (builder *PassageParamBuilder) MessageParam(messageParam *MessagePassageParam) *PassageParamBuilder {
+	builder.messageParam = messageParam
+	builder.messageParamFlag = true
+	return builder
+}
+
 func (builder *PassageParamBuilder) Build() *PassageParam {
 	req := &PassageParam{}
 	if builder.docParamFlag {
@@ -2731,6 +2939,12 @@ func (builder *PassageParamBuilder) Build() *PassageParam {
 	}
 	if builder.helpdeskParamFlag {
 		req.HelpdeskParam = builder.helpdeskParam
+	}
+	if builder.lingoParamFlag {
+		req.LingoParam = builder.lingoParam
+	}
+	if builder.messageParamFlag {
+		req.MessageParam = builder.messageParam
 	}
 	return req
 }
@@ -3256,15 +3470,21 @@ func (builder *ScenarioContextBuilder) Build() *ScenarioContext {
 }
 
 type ScenarioContextExtra struct {
-	GroundingId *string `json:"grounding_id,omitempty"` // Grounding ID
-	ModelKey    *string `json:"model_key,omitempty"`    // 模型 key
+	GroundingId     *string `json:"grounding_id,omitempty"`      // Grounding ID
+	ModelKey        *string `json:"model_key,omitempty"`         // 模型 key
+	SpecifiedObjIds *string `json:"specified_obj_ids,omitempty"` // 检索时指定的文档 id, 多个 id 以`,`分隔
+	SuggestQueryId  *string `json:"suggest_query_id,omitempty"`  // 推荐问题的 ID
 }
 
 type ScenarioContextExtraBuilder struct {
-	groundingId     string // Grounding ID
-	groundingIdFlag bool
-	modelKey        string // 模型 key
-	modelKeyFlag    bool
+	groundingId         string // Grounding ID
+	groundingIdFlag     bool
+	modelKey            string // 模型 key
+	modelKeyFlag        bool
+	specifiedObjIds     string // 检索时指定的文档 id, 多个 id 以`,`分隔
+	specifiedObjIdsFlag bool
+	suggestQueryId      string // 推荐问题的 ID
+	suggestQueryIdFlag  bool
 }
 
 func NewScenarioContextExtraBuilder() *ScenarioContextExtraBuilder {
@@ -3290,6 +3510,24 @@ func (builder *ScenarioContextExtraBuilder) ModelKey(modelKey string) *ScenarioC
 	return builder
 }
 
+// 检索时指定的文档 id, 多个 id 以`,`分隔
+//
+// 示例值：123,456
+func (builder *ScenarioContextExtraBuilder) SpecifiedObjIds(specifiedObjIds string) *ScenarioContextExtraBuilder {
+	builder.specifiedObjIds = specifiedObjIds
+	builder.specifiedObjIdsFlag = true
+	return builder
+}
+
+// 推荐问题的 ID
+//
+// 示例值：789
+func (builder *ScenarioContextExtraBuilder) SuggestQueryId(suggestQueryId string) *ScenarioContextExtraBuilder {
+	builder.suggestQueryId = suggestQueryId
+	builder.suggestQueryIdFlag = true
+	return builder
+}
+
 func (builder *ScenarioContextExtraBuilder) Build() *ScenarioContextExtra {
 	req := &ScenarioContextExtra{}
 	if builder.groundingIdFlag {
@@ -3298,6 +3536,14 @@ func (builder *ScenarioContextExtraBuilder) Build() *ScenarioContextExtra {
 	}
 	if builder.modelKeyFlag {
 		req.ModelKey = &builder.modelKey
+
+	}
+	if builder.specifiedObjIdsFlag {
+		req.SpecifiedObjIds = &builder.specifiedObjIds
+
+	}
+	if builder.suggestQueryIdFlag {
+		req.SuggestQueryId = &builder.suggestQueryId
 
 	}
 	return req
@@ -4701,27 +4947,42 @@ func (builder *WebPassageParamBuilder) Build() *WebPassageParam {
 }
 
 type WikiPassageParam struct {
-	Searchable        *bool    `json:"searchable,omitempty"`          // 是否要搜索wiki
-	SpaceIds          []string `json:"space_ids,omitempty"`           // 搜索特定空间的wiki
-	ObjIds            []string `json:"obj_ids,omitempty"`             // 在特定的wiki内搜索（仅限内部使用，有需求请用wiki_tokens）
-	WikiTokens        []string `json:"wiki_tokens,omitempty"`         // 在特定的wiki内搜索
-	NodeTokens        []string `json:"node_tokens,omitempty"`         // 在特定的wiki节点范围内搜索
-	DisableSearchLink *bool    `json:"disable_search_link,omitempty"` // 禁用搜索外链文档功能
+	Searchable         *bool    `json:"searchable,omitempty"`           // 是否要搜索wiki
+	SpaceIds           []string `json:"space_ids,omitempty"`            // 搜索特定空间的wiki
+	ObjIds             []string `json:"obj_ids,omitempty"`              // 在特定的wiki内搜索（仅限内部使用，有需求请用wiki_tokens）
+	WikiTokens         []string `json:"wiki_tokens,omitempty"`          // 在特定的wiki内搜索
+	NodeTokens         []string `json:"node_tokens,omitempty"`          // 在特定的wiki节点范围内搜索
+	ExcludedSpaceIds   []string `json:"excluded_space_ids,omitempty"`   // 排除space空间id
+	ExcludedObjIds     []string `json:"excluded_obj_ids,omitempty"`     // 排除文档id
+	ExcludedWikiTokens []string `json:"excluded_wiki_tokens,omitempty"` // 排除wiki的token
+	ExcludedNodeTokens []string `json:"excluded_node_tokens,omitempty"` // 排除wiki的node token
+	EnableCrossTenant  *bool    `json:"enable_cross_tenant,omitempty"`  // 是否跨租户
+	OnlySearchPublic   *bool    `json:"only_search_public,omitempty"`   // 是否只搜公开
 }
 
 type WikiPassageParamBuilder struct {
-	searchable            bool // 是否要搜索wiki
-	searchableFlag        bool
-	spaceIds              []string // 搜索特定空间的wiki
-	spaceIdsFlag          bool
-	objIds                []string // 在特定的wiki内搜索（仅限内部使用，有需求请用wiki_tokens）
-	objIdsFlag            bool
-	wikiTokens            []string // 在特定的wiki内搜索
-	wikiTokensFlag        bool
-	nodeTokens            []string // 在特定的wiki节点范围内搜索
-	nodeTokensFlag        bool
-	disableSearchLink     bool // 禁用搜索外链文档功能
-	disableSearchLinkFlag bool
+	searchable             bool // 是否要搜索wiki
+	searchableFlag         bool
+	spaceIds               []string // 搜索特定空间的wiki
+	spaceIdsFlag           bool
+	objIds                 []string // 在特定的wiki内搜索（仅限内部使用，有需求请用wiki_tokens）
+	objIdsFlag             bool
+	wikiTokens             []string // 在特定的wiki内搜索
+	wikiTokensFlag         bool
+	nodeTokens             []string // 在特定的wiki节点范围内搜索
+	nodeTokensFlag         bool
+	excludedSpaceIds       []string // 排除space空间id
+	excludedSpaceIdsFlag   bool
+	excludedObjIds         []string // 排除文档id
+	excludedObjIdsFlag     bool
+	excludedWikiTokens     []string // 排除wiki的token
+	excludedWikiTokensFlag bool
+	excludedNodeTokens     []string // 排除wiki的node token
+	excludedNodeTokensFlag bool
+	enableCrossTenant      bool // 是否跨租户
+	enableCrossTenantFlag  bool
+	onlySearchPublic       bool // 是否只搜公开
+	onlySearchPublicFlag   bool
 }
 
 func NewWikiPassageParamBuilder() *WikiPassageParamBuilder {
@@ -4774,12 +5035,57 @@ func (builder *WikiPassageParamBuilder) NodeTokens(nodeTokens []string) *WikiPas
 	return builder
 }
 
-// 禁用搜索外链文档功能
+// 排除space空间id
 //
 // 示例值：false
-func (builder *WikiPassageParamBuilder) DisableSearchLink(disableSearchLink bool) *WikiPassageParamBuilder {
-	builder.disableSearchLink = disableSearchLink
-	builder.disableSearchLinkFlag = true
+func (builder *WikiPassageParamBuilder) ExcludedSpaceIds(excludedSpaceIds []string) *WikiPassageParamBuilder {
+	builder.excludedSpaceIds = excludedSpaceIds
+	builder.excludedSpaceIdsFlag = true
+	return builder
+}
+
+// 排除文档id
+//
+// 示例值：true
+func (builder *WikiPassageParamBuilder) ExcludedObjIds(excludedObjIds []string) *WikiPassageParamBuilder {
+	builder.excludedObjIds = excludedObjIds
+	builder.excludedObjIdsFlag = true
+	return builder
+}
+
+// 排除wiki的token
+//
+// 示例值：true
+func (builder *WikiPassageParamBuilder) ExcludedWikiTokens(excludedWikiTokens []string) *WikiPassageParamBuilder {
+	builder.excludedWikiTokens = excludedWikiTokens
+	builder.excludedWikiTokensFlag = true
+	return builder
+}
+
+// 排除wiki的node token
+//
+// 示例值：
+func (builder *WikiPassageParamBuilder) ExcludedNodeTokens(excludedNodeTokens []string) *WikiPassageParamBuilder {
+	builder.excludedNodeTokens = excludedNodeTokens
+	builder.excludedNodeTokensFlag = true
+	return builder
+}
+
+// 是否跨租户
+//
+// 示例值：false
+func (builder *WikiPassageParamBuilder) EnableCrossTenant(enableCrossTenant bool) *WikiPassageParamBuilder {
+	builder.enableCrossTenant = enableCrossTenant
+	builder.enableCrossTenantFlag = true
+	return builder
+}
+
+// 是否只搜公开
+//
+// 示例值：false
+func (builder *WikiPassageParamBuilder) OnlySearchPublic(onlySearchPublic bool) *WikiPassageParamBuilder {
+	builder.onlySearchPublic = onlySearchPublic
+	builder.onlySearchPublicFlag = true
 	return builder
 }
 
@@ -4801,8 +5107,24 @@ func (builder *WikiPassageParamBuilder) Build() *WikiPassageParam {
 	if builder.nodeTokensFlag {
 		req.NodeTokens = builder.nodeTokens
 	}
-	if builder.disableSearchLinkFlag {
-		req.DisableSearchLink = &builder.disableSearchLink
+	if builder.excludedSpaceIdsFlag {
+		req.ExcludedSpaceIds = builder.excludedSpaceIds
+	}
+	if builder.excludedObjIdsFlag {
+		req.ExcludedObjIds = builder.excludedObjIds
+	}
+	if builder.excludedWikiTokensFlag {
+		req.ExcludedWikiTokens = builder.excludedWikiTokens
+	}
+	if builder.excludedNodeTokensFlag {
+		req.ExcludedNodeTokens = builder.excludedNodeTokens
+	}
+	if builder.enableCrossTenantFlag {
+		req.EnableCrossTenant = &builder.enableCrossTenant
+
+	}
+	if builder.onlySearchPublicFlag {
+		req.OnlySearchPublic = &builder.onlySearchPublic
 
 	}
 	return req

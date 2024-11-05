@@ -213,6 +213,102 @@ const (
 	EmployeeTypeQueryUserAllowedRemedysUserTaskRemedyEmployeeNo = "employee_no" // 员工工号
 )
 
+type ApprovalDailyDetail struct {
+	Date             *string `json:"date,omitempty"`               // 日期
+	Duration         *string `json:"duration,omitempty"`           // 加班时长
+	OvertimeUnit     *int    `json:"overtime_unit,omitempty"`      // 加班时长单位
+	OvertimeDateType *int    `json:"overtime_date_type,omitempty"` // 加班日期类型
+	SettleTypeEnum   *int    `json:"settle_type_enum,omitempty"`   // 加班结算方式类型
+}
+
+type ApprovalDailyDetailBuilder struct {
+	date                 string // 日期
+	dateFlag             bool
+	duration             string // 加班时长
+	durationFlag         bool
+	overtimeUnit         int // 加班时长单位
+	overtimeUnitFlag     bool
+	overtimeDateType     int // 加班日期类型
+	overtimeDateTypeFlag bool
+	settleTypeEnum       int // 加班结算方式类型
+	settleTypeEnumFlag   bool
+}
+
+func NewApprovalDailyDetailBuilder() *ApprovalDailyDetailBuilder {
+	builder := &ApprovalDailyDetailBuilder{}
+	return builder
+}
+
+// 日期
+//
+// 示例值：2024-10-21
+func (builder *ApprovalDailyDetailBuilder) Date(date string) *ApprovalDailyDetailBuilder {
+	builder.date = date
+	builder.dateFlag = true
+	return builder
+}
+
+// 加班时长
+//
+// 示例值：5
+func (builder *ApprovalDailyDetailBuilder) Duration(duration string) *ApprovalDailyDetailBuilder {
+	builder.duration = duration
+	builder.durationFlag = true
+	return builder
+}
+
+// 加班时长单位
+//
+// 示例值：
+func (builder *ApprovalDailyDetailBuilder) OvertimeUnit(overtimeUnit int) *ApprovalDailyDetailBuilder {
+	builder.overtimeUnit = overtimeUnit
+	builder.overtimeUnitFlag = true
+	return builder
+}
+
+// 加班日期类型
+//
+// 示例值：
+func (builder *ApprovalDailyDetailBuilder) OvertimeDateType(overtimeDateType int) *ApprovalDailyDetailBuilder {
+	builder.overtimeDateType = overtimeDateType
+	builder.overtimeDateTypeFlag = true
+	return builder
+}
+
+// 加班结算方式类型
+//
+// 示例值：1
+func (builder *ApprovalDailyDetailBuilder) SettleTypeEnum(settleTypeEnum int) *ApprovalDailyDetailBuilder {
+	builder.settleTypeEnum = settleTypeEnum
+	builder.settleTypeEnumFlag = true
+	return builder
+}
+
+func (builder *ApprovalDailyDetailBuilder) Build() *ApprovalDailyDetail {
+	req := &ApprovalDailyDetail{}
+	if builder.dateFlag {
+		req.Date = &builder.date
+
+	}
+	if builder.durationFlag {
+		req.Duration = &builder.duration
+
+	}
+	if builder.overtimeUnitFlag {
+		req.OvertimeUnit = &builder.overtimeUnit
+
+	}
+	if builder.overtimeDateTypeFlag {
+		req.OvertimeDateType = &builder.overtimeDateType
+
+	}
+	if builder.settleTypeEnumFlag {
+		req.SettleTypeEnum = &builder.settleTypeEnum
+
+	}
+	return req
+}
+
 type ApprovalInfo struct {
 	ApprovalId   *string `json:"approval_id,omitempty"`   // 审批实例 ID
 	ApprovalType *string `json:"approval_type,omitempty"` // 审批类型
@@ -4202,6 +4298,101 @@ func (builder *OvertimeApplyDetailBuilder) Build() *OvertimeApplyDetail {
 	if builder.updateTimeFlag {
 		req.UpdateTime = &builder.updateTime
 
+	}
+	return req
+}
+
+type OvertimeApproval struct {
+	UserId               *string                `json:"user_id,omitempty"`                // 用户id
+	StartTime            *string                `json:"start_time,omitempty"`             // 加班开始时间
+	EndTime              *string                `json:"end_time,omitempty"`               // 加班结束时间
+	CreateTime           *int                   `json:"create_time,omitempty"`            // 审批单创建时间
+	ApprovalDailyDetails []*ApprovalDailyDetail `json:"approval_daily_details,omitempty"` // 审批单每日加班详情
+}
+
+type OvertimeApprovalBuilder struct {
+	userId                   string // 用户id
+	userIdFlag               bool
+	startTime                string // 加班开始时间
+	startTimeFlag            bool
+	endTime                  string // 加班结束时间
+	endTimeFlag              bool
+	createTime               int // 审批单创建时间
+	createTimeFlag           bool
+	approvalDailyDetails     []*ApprovalDailyDetail // 审批单每日加班详情
+	approvalDailyDetailsFlag bool
+}
+
+func NewOvertimeApprovalBuilder() *OvertimeApprovalBuilder {
+	builder := &OvertimeApprovalBuilder{}
+	return builder
+}
+
+// 用户id
+//
+// 示例值：
+func (builder *OvertimeApprovalBuilder) UserId(userId string) *OvertimeApprovalBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 加班开始时间
+//
+// 示例值：2024-10-21 15:15
+func (builder *OvertimeApprovalBuilder) StartTime(startTime string) *OvertimeApprovalBuilder {
+	builder.startTime = startTime
+	builder.startTimeFlag = true
+	return builder
+}
+
+// 加班结束时间
+//
+// 示例值：2024-10-22 15:15
+func (builder *OvertimeApprovalBuilder) EndTime(endTime string) *OvertimeApprovalBuilder {
+	builder.endTime = endTime
+	builder.endTimeFlag = true
+	return builder
+}
+
+// 审批单创建时间
+//
+// 示例值：1730119195
+func (builder *OvertimeApprovalBuilder) CreateTime(createTime int) *OvertimeApprovalBuilder {
+	builder.createTime = createTime
+	builder.createTimeFlag = true
+	return builder
+}
+
+// 审批单每日加班详情
+//
+// 示例值：
+func (builder *OvertimeApprovalBuilder) ApprovalDailyDetails(approvalDailyDetails []*ApprovalDailyDetail) *OvertimeApprovalBuilder {
+	builder.approvalDailyDetails = approvalDailyDetails
+	builder.approvalDailyDetailsFlag = true
+	return builder
+}
+
+func (builder *OvertimeApprovalBuilder) Build() *OvertimeApproval {
+	req := &OvertimeApproval{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.startTimeFlag {
+		req.StartTime = &builder.startTime
+
+	}
+	if builder.endTimeFlag {
+		req.EndTime = &builder.endTime
+
+	}
+	if builder.createTimeFlag {
+		req.CreateTime = &builder.createTime
+
+	}
+	if builder.approvalDailyDetailsFlag {
+		req.ApprovalDailyDetails = builder.approvalDailyDetails
 	}
 	return req
 }

@@ -2292,9 +2292,9 @@ type LlmConfig struct {
 	MaxTokens        *int          `json:"max_tokens,omitempty"`        // 默认1024，最多生成多少个tokens
 	MessageType      *string       `json:"message_type,omitempty"`      // 消息类型
 	N                *int          `json:"n,omitempty"`                 // 默认1，每个query返回多少个预测结果
-	Temperature      *int          `json:"temperature,omitempty"`       // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
-	PresencePenalty  *int          `json:"presence_penalty,omitempty"`  // 默认0，>0惩罚模型输出已经在输出中出现过的token
-	FrequencyPenalty *int          `json:"frequency_penalty,omitempty"` // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
+	Temperature      *float64      `json:"temperature,omitempty"`       // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
+	PresencePenalty  *float64      `json:"presence_penalty,omitempty"`  // 默认0，>0惩罚模型输出已经在输出中出现过的token
+	FrequencyPenalty *float64      `json:"frequency_penalty,omitempty"` // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
 }
 
 type LlmConfigBuilder struct {
@@ -2308,11 +2308,11 @@ type LlmConfigBuilder struct {
 	messageTypeFlag      bool
 	n                    int // 默认1，每个query返回多少个预测结果
 	nFlag                bool
-	temperature          int // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
+	temperature          float64 // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
 	temperatureFlag      bool
-	presencePenalty      int // 默认0，>0惩罚模型输出已经在输出中出现过的token
+	presencePenalty      float64 // 默认0，>0惩罚模型输出已经在输出中出现过的token
 	presencePenaltyFlag  bool
-	frequencyPenalty     int // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
+	frequencyPenalty     float64 // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
 	frequencyPenaltyFlag bool
 }
 
@@ -2368,8 +2368,8 @@ func (builder *LlmConfigBuilder) N(n int) *LlmConfigBuilder {
 
 // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
 //
-// 示例值：0
-func (builder *LlmConfigBuilder) Temperature(temperature int) *LlmConfigBuilder {
+// 示例值：0.0
+func (builder *LlmConfigBuilder) Temperature(temperature float64) *LlmConfigBuilder {
 	builder.temperature = temperature
 	builder.temperatureFlag = true
 	return builder
@@ -2377,8 +2377,8 @@ func (builder *LlmConfigBuilder) Temperature(temperature int) *LlmConfigBuilder 
 
 // 默认0，>0惩罚模型输出已经在输出中出现过的token
 //
-// 示例值：0
-func (builder *LlmConfigBuilder) PresencePenalty(presencePenalty int) *LlmConfigBuilder {
+// 示例值：0.0
+func (builder *LlmConfigBuilder) PresencePenalty(presencePenalty float64) *LlmConfigBuilder {
 	builder.presencePenalty = presencePenalty
 	builder.presencePenaltyFlag = true
 	return builder
@@ -2386,8 +2386,8 @@ func (builder *LlmConfigBuilder) PresencePenalty(presencePenalty int) *LlmConfig
 
 // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
 //
-// 示例值：0
-func (builder *LlmConfigBuilder) FrequencyPenalty(frequencyPenalty int) *LlmConfigBuilder {
+// 示例值：0.0
+func (builder *LlmConfigBuilder) FrequencyPenalty(frequencyPenalty float64) *LlmConfigBuilder {
 	builder.frequencyPenalty = frequencyPenalty
 	builder.frequencyPenaltyFlag = true
 	return builder

@@ -20,9 +20,22 @@ import (
 )
 
 const (
-	UserIdTypeOpenId  = "open_id"  // 用户的 open id
-	UserIdTypeUnionId = "union_id" // 用户的 union id
-	UserIdTypeUserId  = "user_id"  // 用户的 user id
+	KiteUserID          = 1 // UserID
+	KiteIdpCredentialID = 2 // IdpCredentialID
+	KiteSessionUUID     = 3 // Session 标识符
+
+)
+
+const (
+	UserIdTypeOpenId  = "open_id"  // open_id
+	UserIdTypeUnionId = "union_id" // union_id
+	UserIdTypeUserId  = "user_id"  // user_id
+)
+
+const (
+	UserIdTypeQuerySessionOpenId  = "open_id"  // 用户的 open id
+	UserIdTypeQuerySessionUnionId = "union_id" // 用户的 union id
+	UserIdTypeQuerySessionUserId  = "user_id"  // 用户的 user id
 )
 
 type Credentials struct {
@@ -294,6 +307,258 @@ func (builder *MaskSessionBuilder) Build() *MaskSession {
 
 	}
 	return req
+}
+
+type LogoutSessionReqBodyBuilder struct {
+	idpCredentialId     string // idp 侧的唯一标识
+	idpCredentialIdFlag bool
+	logoutType          int // 登出的方式
+	logoutTypeFlag      bool
+	terminalType        []int // 登出的客户端类型，默认全部登出，1-桌面端，2-网页端，3-安卓移动端，4-Apple移动端 5-服务端 6-旧版小程序端 8-其他移动端
+	terminalTypeFlag    bool
+	userId              string // user_id
+	userIdFlag          bool
+	logoutReason        int // 登出原因
+	logoutReasonFlag    bool
+	sid                 string // 需要精确登出的 session 标识符
+	sidFlag             bool
+}
+
+func NewLogoutSessionReqBodyBuilder() *LogoutSessionReqBodyBuilder {
+	builder := &LogoutSessionReqBodyBuilder{}
+	return builder
+}
+
+// idp 侧的唯一标识
+//
+// 示例值：1
+func (builder *LogoutSessionReqBodyBuilder) IdpCredentialId(idpCredentialId string) *LogoutSessionReqBodyBuilder {
+	builder.idpCredentialId = idpCredentialId
+	builder.idpCredentialIdFlag = true
+	return builder
+}
+
+// 登出的方式
+//
+// 示例值：1
+func (builder *LogoutSessionReqBodyBuilder) LogoutType(logoutType int) *LogoutSessionReqBodyBuilder {
+	builder.logoutType = logoutType
+	builder.logoutTypeFlag = true
+	return builder
+}
+
+// 登出的客户端类型，默认全部登出，1-桌面端，2-网页端，3-安卓移动端，4-Apple移动端 5-服务端 6-旧版小程序端 8-其他移动端
+//
+// 示例值：
+func (builder *LogoutSessionReqBodyBuilder) TerminalType(terminalType []int) *LogoutSessionReqBodyBuilder {
+	builder.terminalType = terminalType
+	builder.terminalTypeFlag = true
+	return builder
+}
+
+// user_id
+//
+// 示例值：1
+func (builder *LogoutSessionReqBodyBuilder) UserId(userId string) *LogoutSessionReqBodyBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 登出原因
+//
+// 示例值：34: 修改密码；35: 登陆态失效；36: 密码过期
+func (builder *LogoutSessionReqBodyBuilder) LogoutReason(logoutReason int) *LogoutSessionReqBodyBuilder {
+	builder.logoutReason = logoutReason
+	builder.logoutReasonFlag = true
+	return builder
+}
+
+// 需要精确登出的 session 标识符
+//
+// 示例值：AAAAAAAAAANll6nQoIAAFA==
+func (builder *LogoutSessionReqBodyBuilder) Sid(sid string) *LogoutSessionReqBodyBuilder {
+	builder.sid = sid
+	builder.sidFlag = true
+	return builder
+}
+
+func (builder *LogoutSessionReqBodyBuilder) Build() *LogoutSessionReqBody {
+	req := &LogoutSessionReqBody{}
+	if builder.idpCredentialIdFlag {
+		req.IdpCredentialId = &builder.idpCredentialId
+	}
+	if builder.logoutTypeFlag {
+		req.LogoutType = &builder.logoutType
+	}
+	if builder.terminalTypeFlag {
+		req.TerminalType = builder.terminalType
+	}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+	}
+	if builder.logoutReasonFlag {
+		req.LogoutReason = &builder.logoutReason
+	}
+	if builder.sidFlag {
+		req.Sid = &builder.sid
+	}
+	return req
+}
+
+type LogoutSessionPathReqBodyBuilder struct {
+	idpCredentialId     string
+	idpCredentialIdFlag bool
+	logoutType          int
+	logoutTypeFlag      bool
+	terminalType        []int
+	terminalTypeFlag    bool
+	userId              string
+	userIdFlag          bool
+	logoutReason        int
+	logoutReasonFlag    bool
+	sid                 string
+	sidFlag             bool
+}
+
+func NewLogoutSessionPathReqBodyBuilder() *LogoutSessionPathReqBodyBuilder {
+	builder := &LogoutSessionPathReqBodyBuilder{}
+	return builder
+}
+
+// idp 侧的唯一标识
+//
+// 示例值：1
+func (builder *LogoutSessionPathReqBodyBuilder) IdpCredentialId(idpCredentialId string) *LogoutSessionPathReqBodyBuilder {
+	builder.idpCredentialId = idpCredentialId
+	builder.idpCredentialIdFlag = true
+	return builder
+}
+
+// 登出的方式
+//
+// 示例值：1
+func (builder *LogoutSessionPathReqBodyBuilder) LogoutType(logoutType int) *LogoutSessionPathReqBodyBuilder {
+	builder.logoutType = logoutType
+	builder.logoutTypeFlag = true
+	return builder
+}
+
+// 登出的客户端类型，默认全部登出，1-桌面端，2-网页端，3-安卓移动端，4-Apple移动端 5-服务端 6-旧版小程序端 8-其他移动端
+//
+// 示例值：
+func (builder *LogoutSessionPathReqBodyBuilder) TerminalType(terminalType []int) *LogoutSessionPathReqBodyBuilder {
+	builder.terminalType = terminalType
+	builder.terminalTypeFlag = true
+	return builder
+}
+
+// user_id
+//
+// 示例值：1
+func (builder *LogoutSessionPathReqBodyBuilder) UserId(userId string) *LogoutSessionPathReqBodyBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 登出原因
+//
+// 示例值：34: 修改密码；35: 登陆态失效；36: 密码过期
+func (builder *LogoutSessionPathReqBodyBuilder) LogoutReason(logoutReason int) *LogoutSessionPathReqBodyBuilder {
+	builder.logoutReason = logoutReason
+	builder.logoutReasonFlag = true
+	return builder
+}
+
+// 需要精确登出的 session 标识符
+//
+// 示例值：AAAAAAAAAANll6nQoIAAFA==
+func (builder *LogoutSessionPathReqBodyBuilder) Sid(sid string) *LogoutSessionPathReqBodyBuilder {
+	builder.sid = sid
+	builder.sidFlag = true
+	return builder
+}
+
+func (builder *LogoutSessionPathReqBodyBuilder) Build() (*LogoutSessionReqBody, error) {
+	req := &LogoutSessionReqBody{}
+	if builder.idpCredentialIdFlag {
+		req.IdpCredentialId = &builder.idpCredentialId
+	}
+	if builder.logoutTypeFlag {
+		req.LogoutType = &builder.logoutType
+	}
+	if builder.terminalTypeFlag {
+		req.TerminalType = builder.terminalType
+	}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+	}
+	if builder.logoutReasonFlag {
+		req.LogoutReason = &builder.logoutReason
+	}
+	if builder.sidFlag {
+		req.Sid = &builder.sid
+	}
+	return req, nil
+}
+
+type LogoutSessionReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *LogoutSessionReqBody
+}
+
+func NewLogoutSessionReqBuilder() *LogoutSessionReqBuilder {
+	builder := &LogoutSessionReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// user_id_type
+//
+// 示例值：open_id
+func (builder *LogoutSessionReqBuilder) UserIdType(userIdType string) *LogoutSessionReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *LogoutSessionReqBuilder) Body(body *LogoutSessionReqBody) *LogoutSessionReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *LogoutSessionReqBuilder) Build() *LogoutSessionReq {
+	req := &LogoutSessionReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type LogoutSessionReqBody struct {
+	IdpCredentialId *string `json:"idp_credential_id,omitempty"` // idp 侧的唯一标识
+	LogoutType      *int    `json:"logout_type,omitempty"`       // 登出的方式
+	TerminalType    []int   `json:"terminal_type,omitempty"`     // 登出的客户端类型，默认全部登出，1-桌面端，2-网页端，3-安卓移动端，4-Apple移动端 5-服务端 6-旧版小程序端 8-其他移动端
+	UserId          *string `json:"user_id,omitempty"`           // user_id
+	LogoutReason    *int    `json:"logout_reason,omitempty"`     // 登出原因
+	Sid             *string `json:"sid,omitempty"`               // 需要精确登出的 session 标识符
+}
+
+type LogoutSessionReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *LogoutSessionReqBody `body:""`
+}
+
+type LogoutSessionResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *LogoutSessionResp) Success() bool {
+	return resp.Code == 0
 }
 
 type QuerySessionReqBodyBuilder struct {

@@ -73,6 +73,7 @@ type V1 struct {
 	TalentObject                    *talentObject                    // talent_object
 	TalentOperationLog              *talentOperationLog              // talent_operation_log
 	TalentPool                      *talentPool                      // talent_pool
+	TalentTag                       *talentTag                       // talent_tag
 	TerminationReason               *terminationReason               // termination_reason
 	Test                            *test                            // test
 	Todo                            *todo                            // 待办
@@ -152,6 +153,7 @@ func New(config *larkcore.Config) *V1 {
 		TalentObject:                    &talentObject{config: config},
 		TalentOperationLog:              &talentOperationLog{config: config},
 		TalentPool:                      &talentPool{config: config},
+		TalentTag:                       &talentTag{config: config},
 		TerminationReason:               &terminationReason{config: config},
 		Test:                            &test{config: config},
 		Todo:                            &todo{config: config},
@@ -356,6 +358,9 @@ type talentOperationLog struct {
 	config *larkcore.Config
 }
 type talentPool struct {
+	config *larkcore.Config
+}
+type talentTag struct {
 	config *larkcore.Config
 }
 type terminationReason struct {
@@ -3800,6 +3805,32 @@ func (t *talent) OnboardStatus(ctx context.Context, req *OnboardStatusTalentReq,
 	return resp, err
 }
 
+// Tag
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=tag&project=hire&resource=talent&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/hirev1/tag_talent.go
+func (t *talent) Tag(ctx context.Context, req *TagTalentReq, options ...larkcore.RequestOptionFunc) (*TagTalentResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/hire/v1/talents/:talent_id/tag"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, t.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &TagTalentResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, t.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Create 创建人才外部信息
 //
 // - 创建人才外部信息
@@ -3997,6 +4028,40 @@ func (t *talentPool) SearchByIterator(ctx context.Context, req *SearchTalentPool
 		ctx:      ctx,
 		req:      req,
 		listFunc: t.Search,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// List
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=hire&resource=talent_tag&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/hirev1/list_talentTag.go
+func (t *talentTag) List(ctx context.Context, req *ListTalentTagReq, options ...larkcore.RequestOptionFunc) (*ListTalentTagResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/hire/v1/talent_tags"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, t.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListTalentTagResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, t.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (t *talentTag) ListByIterator(ctx context.Context, req *ListTalentTagReq, options ...larkcore.RequestOptionFunc) (*ListTalentTagIterator, error) {
+	return &ListTalentTagIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: t.List,
 		options:  options,
 		limit:    req.Limit}, nil
 }

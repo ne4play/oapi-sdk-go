@@ -1535,30 +1535,44 @@ func (builder *ChannelBuilder) Build() *Channel {
 }
 
 type DataAsset struct {
-	DataAssetId    *string           `json:"data_asset_id,omitempty"`    // 数据知识ID
-	Label          map[string]string `json:"label,omitempty"`            // 数据知识标题
-	Description    map[string]string `json:"description,omitempty"`      // 数据知识描述
-	DataSourceType *string           `json:"data_source_type,omitempty"` // 数据资源类型
-	ConnectStatus  *string           `json:"connect_status,omitempty"`   // 数据连接状态
-	Tags           []*DataAssetTag   `json:"tags,omitempty"`             // 数据知识分类列表
-	Items          []*DataAssetItem  `json:"items,omitempty"`            // 数据知识项列表
+	DataAssetId         *string           `json:"data_asset_id,omitempty"`         // 数据知识ID
+	Label               map[string]string `json:"label,omitempty"`                 // 数据知识标题
+	Description         map[string]string `json:"description,omitempty"`           // 数据知识描述
+	DataSourceType      *string           `json:"data_source_type,omitempty"`      // 数据资源类型
+	ConnectStatus       *string           `json:"connect_status,omitempty"`        // 数据连接状态
+	Tags                []*DataAssetTag   `json:"tags,omitempty"`                  // 数据知识分类列表
+	Items               []*DataAssetItem  `json:"items,omitempty"`                 // 数据知识项列表
+	ConnectFailedReason *string           `json:"connect_failed_reason,omitempty"` // 连接状态失败信息
+
+	ConnectType *string `json:"connect_type,omitempty"` // 数据连接类型
+	CreatedTime *string `json:"created_time,omitempty"` // 创建时间，毫秒时间戳
+	UpdatedTime *string `json:"updated_time,omitempty"` // 更新时间，毫秒时间戳
 }
 
 type DataAssetBuilder struct {
-	dataAssetId        string // 数据知识ID
-	dataAssetIdFlag    bool
-	label              map[string]string // 数据知识标题
-	labelFlag          bool
-	description        map[string]string // 数据知识描述
-	descriptionFlag    bool
-	dataSourceType     string // 数据资源类型
-	dataSourceTypeFlag bool
-	connectStatus      string // 数据连接状态
-	connectStatusFlag  bool
-	tags               []*DataAssetTag // 数据知识分类列表
-	tagsFlag           bool
-	items              []*DataAssetItem // 数据知识项列表
-	itemsFlag          bool
+	dataAssetId             string // 数据知识ID
+	dataAssetIdFlag         bool
+	label                   map[string]string // 数据知识标题
+	labelFlag               bool
+	description             map[string]string // 数据知识描述
+	descriptionFlag         bool
+	dataSourceType          string // 数据资源类型
+	dataSourceTypeFlag      bool
+	connectStatus           string // 数据连接状态
+	connectStatusFlag       bool
+	tags                    []*DataAssetTag // 数据知识分类列表
+	tagsFlag                bool
+	items                   []*DataAssetItem // 数据知识项列表
+	itemsFlag               bool
+	connectFailedReason     string // 连接状态失败信息
+	connectFailedReasonFlag bool
+
+	connectType     string // 数据连接类型
+	connectTypeFlag bool
+	createdTime     string // 创建时间，毫秒时间戳
+	createdTimeFlag bool
+	updatedTime     string // 更新时间，毫秒时间戳
+	updatedTimeFlag bool
 }
 
 func NewDataAssetBuilder() *DataAssetBuilder {
@@ -1629,6 +1643,42 @@ func (builder *DataAssetBuilder) Items(items []*DataAssetItem) *DataAssetBuilder
 	return builder
 }
 
+// 连接状态失败信息
+//
+// 示例值：连接超时
+func (builder *DataAssetBuilder) ConnectFailedReason(connectFailedReason string) *DataAssetBuilder {
+	builder.connectFailedReason = connectFailedReason
+	builder.connectFailedReasonFlag = true
+	return builder
+}
+
+// 数据连接类型
+//
+// 示例值：direct
+func (builder *DataAssetBuilder) ConnectType(connectType string) *DataAssetBuilder {
+	builder.connectType = connectType
+	builder.connectTypeFlag = true
+	return builder
+}
+
+// 创建时间，毫秒时间戳
+//
+// 示例值：1711975665710
+func (builder *DataAssetBuilder) CreatedTime(createdTime string) *DataAssetBuilder {
+	builder.createdTime = createdTime
+	builder.createdTimeFlag = true
+	return builder
+}
+
+// 更新时间，毫秒时间戳
+//
+// 示例值：1711975665710
+func (builder *DataAssetBuilder) UpdatedTime(updatedTime string) *DataAssetBuilder {
+	builder.updatedTime = updatedTime
+	builder.updatedTimeFlag = true
+	return builder
+}
+
 func (builder *DataAssetBuilder) Build() *DataAsset {
 	req := &DataAsset{}
 	if builder.dataAssetIdFlag {
@@ -1654,6 +1704,483 @@ func (builder *DataAssetBuilder) Build() *DataAsset {
 	}
 	if builder.itemsFlag {
 		req.Items = builder.items
+	}
+	if builder.connectFailedReasonFlag {
+		req.ConnectFailedReason = &builder.connectFailedReason
+
+	}
+
+	if builder.connectTypeFlag {
+		req.ConnectType = &builder.connectType
+
+	}
+	if builder.createdTimeFlag {
+		req.CreatedTime = &builder.createdTime
+
+	}
+	if builder.updatedTimeFlag {
+		req.UpdatedTime = &builder.updatedTime
+
+	}
+	return req
+}
+
+type DataAssetFile struct {
+	Token    *string `json:"token,omitempty"`     // 文件token
+	MimeType *string `json:"mime_type,omitempty"` // 文件内容类型
+}
+
+type DataAssetFileBuilder struct {
+	token        string // 文件token
+	tokenFlag    bool
+	mimeType     string // 文件内容类型
+	mimeTypeFlag bool
+}
+
+func NewDataAssetFileBuilder() *DataAssetFileBuilder {
+	builder := &DataAssetFileBuilder{}
+	return builder
+}
+
+// 文件token
+//
+// 示例值：file_token_abcd123
+func (builder *DataAssetFileBuilder) Token(token string) *DataAssetFileBuilder {
+	builder.token = token
+	builder.tokenFlag = true
+	return builder
+}
+
+// 文件内容类型
+//
+// 示例值：excel
+func (builder *DataAssetFileBuilder) MimeType(mimeType string) *DataAssetFileBuilder {
+	builder.mimeType = mimeType
+	builder.mimeTypeFlag = true
+	return builder
+}
+
+func (builder *DataAssetFileBuilder) Build() *DataAssetFile {
+	req := &DataAssetFile{}
+	if builder.tokenFlag {
+		req.Token = &builder.token
+
+	}
+	if builder.mimeTypeFlag {
+		req.MimeType = &builder.mimeType
+
+	}
+	return req
+}
+
+type DataAssetImportKnowledgeFile struct {
+	Title    *string `json:"title,omitempty"`     // 文件标题
+	Token    *string `json:"token,omitempty"`     // 上传文件获取到的token。和content二选一，优先使用token。
+	Content  *string `json:"content,omitempty"`   // 文件内容。和token二选一，优先使用token。有长度限制，大文件优先使用token方式。
+	MimeType *string `json:"mime_type,omitempty"` // 文件内容对应的 MIME 类型，使用token方式必须填写
+	Url      *string `json:"url,omitempty"`       // 文件源的URL
+}
+
+type DataAssetImportKnowledgeFileBuilder struct {
+	title        string // 文件标题
+	titleFlag    bool
+	token        string // 上传文件获取到的token。和content二选一，优先使用token。
+	tokenFlag    bool
+	content      string // 文件内容。和token二选一，优先使用token。有长度限制，大文件优先使用token方式。
+	contentFlag  bool
+	mimeType     string // 文件内容对应的 MIME 类型，使用token方式必须填写
+	mimeTypeFlag bool
+	url          string // 文件源的URL
+	urlFlag      bool
+}
+
+func NewDataAssetImportKnowledgeFileBuilder() *DataAssetImportKnowledgeFileBuilder {
+	builder := &DataAssetImportKnowledgeFileBuilder{}
+	return builder
+}
+
+// 文件标题
+//
+// 示例值：文件标题
+func (builder *DataAssetImportKnowledgeFileBuilder) Title(title string) *DataAssetImportKnowledgeFileBuilder {
+	builder.title = title
+	builder.titleFlag = true
+	return builder
+}
+
+// 上传文件获取到的token。和content二选一，优先使用token。
+//
+// 示例值：bb690637b49440b08f39459a2fdcd2ca
+func (builder *DataAssetImportKnowledgeFileBuilder) Token(token string) *DataAssetImportKnowledgeFileBuilder {
+	builder.token = token
+	builder.tokenFlag = true
+	return builder
+}
+
+// 文件内容。和token二选一，优先使用token。有长度限制，大文件优先使用token方式。
+//
+// 示例值：这是文件内容
+func (builder *DataAssetImportKnowledgeFileBuilder) Content(content string) *DataAssetImportKnowledgeFileBuilder {
+	builder.content = content
+	builder.contentFlag = true
+	return builder
+}
+
+// 文件内容对应的 MIME 类型，使用token方式必须填写
+//
+// 示例值：.docx
+func (builder *DataAssetImportKnowledgeFileBuilder) MimeType(mimeType string) *DataAssetImportKnowledgeFileBuilder {
+	builder.mimeType = mimeType
+	builder.mimeTypeFlag = true
+	return builder
+}
+
+// 文件源的URL
+//
+// 示例值：https://document.com/1
+func (builder *DataAssetImportKnowledgeFileBuilder) Url(url string) *DataAssetImportKnowledgeFileBuilder {
+	builder.url = url
+	builder.urlFlag = true
+	return builder
+}
+
+func (builder *DataAssetImportKnowledgeFileBuilder) Build() *DataAssetImportKnowledgeFile {
+	req := &DataAssetImportKnowledgeFile{}
+	if builder.titleFlag {
+		req.Title = &builder.title
+
+	}
+	if builder.tokenFlag {
+		req.Token = &builder.token
+
+	}
+	if builder.contentFlag {
+		req.Content = &builder.content
+
+	}
+	if builder.mimeTypeFlag {
+		req.MimeType = &builder.mimeType
+
+	}
+	if builder.urlFlag {
+		req.Url = &builder.url
+
+	}
+	return req
+}
+
+type DataAssetImportKnowledgeHelpdesk struct {
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 飞书服务台ID
+}
+
+type DataAssetImportKnowledgeHelpdeskBuilder struct {
+	helpdeskId     string // 飞书服务台ID
+	helpdeskIdFlag bool
+}
+
+func NewDataAssetImportKnowledgeHelpdeskBuilder() *DataAssetImportKnowledgeHelpdeskBuilder {
+	builder := &DataAssetImportKnowledgeHelpdeskBuilder{}
+	return builder
+}
+
+// 飞书服务台ID
+//
+// 示例值：123
+func (builder *DataAssetImportKnowledgeHelpdeskBuilder) HelpdeskId(helpdeskId string) *DataAssetImportKnowledgeHelpdeskBuilder {
+	builder.helpdeskId = helpdeskId
+	builder.helpdeskIdFlag = true
+	return builder
+}
+
+func (builder *DataAssetImportKnowledgeHelpdeskBuilder) Build() *DataAssetImportKnowledgeHelpdesk {
+	req := &DataAssetImportKnowledgeHelpdesk{}
+	if builder.helpdeskIdFlag {
+		req.HelpdeskId = &builder.helpdeskId
+
+	}
+	return req
+}
+
+type DataAssetImportKnowledgeLarkDoc struct {
+	Type        *string `json:"type,omitempty"`          // 云文档类型
+	Token       *string `json:"token,omitempty"`         // 云文档标识
+	WithSubDocs *bool   `json:"with_sub_docs,omitempty"` // 是否包含子文档，只有wiki类型的云文档支持
+
+}
+
+type DataAssetImportKnowledgeLarkDocBuilder struct {
+	type_           string // 云文档类型
+	typeFlag        bool
+	token           string // 云文档标识
+	tokenFlag       bool
+	withSubDocs     bool // 是否包含子文档，只有wiki类型的云文档支持
+	withSubDocsFlag bool
+}
+
+func NewDataAssetImportKnowledgeLarkDocBuilder() *DataAssetImportKnowledgeLarkDocBuilder {
+	builder := &DataAssetImportKnowledgeLarkDocBuilder{}
+	return builder
+}
+
+// 云文档类型
+//
+// 示例值：docx
+func (builder *DataAssetImportKnowledgeLarkDocBuilder) Type(type_ string) *DataAssetImportKnowledgeLarkDocBuilder {
+	builder.type_ = type_
+	builder.typeFlag = true
+	return builder
+}
+
+// 云文档标识
+//
+// 示例值：T8FAcuilgC1fdaxkt58vcp91xngh
+func (builder *DataAssetImportKnowledgeLarkDocBuilder) Token(token string) *DataAssetImportKnowledgeLarkDocBuilder {
+	builder.token = token
+	builder.tokenFlag = true
+	return builder
+}
+
+// 是否包含子文档，只有wiki类型的云文档支持
+//
+// 示例值：
+func (builder *DataAssetImportKnowledgeLarkDocBuilder) WithSubDocs(withSubDocs bool) *DataAssetImportKnowledgeLarkDocBuilder {
+	builder.withSubDocs = withSubDocs
+	builder.withSubDocsFlag = true
+	return builder
+}
+
+func (builder *DataAssetImportKnowledgeLarkDocBuilder) Build() *DataAssetImportKnowledgeLarkDoc {
+	req := &DataAssetImportKnowledgeLarkDoc{}
+	if builder.typeFlag {
+		req.Type = &builder.type_
+
+	}
+	if builder.tokenFlag {
+		req.Token = &builder.token
+
+	}
+	if builder.withSubDocsFlag {
+		req.WithSubDocs = &builder.withSubDocs
+
+	}
+
+	return req
+}
+
+type DataAssetImportKnowledgeSetting struct {
+	ChunkSetting  *DataAssetKnowledgeChunkSetting   `json:"chunk_setting,omitempty"`   // 知识切片配置
+	File          *DataAssetImportKnowledgeFile     `json:"file,omitempty"`            // 知识导入-文件
+	LarkDoc       *DataAssetImportKnowledgeLarkDoc  `json:"lark_doc,omitempty"`        // 知识导入-飞书云文档
+	LarkWikiSpace *DataAssetImportKnowledgeWiki     `json:"lark_wiki_space,omitempty"` // 知识导入-飞书知识空间
+	LarkHelpdesk  *DataAssetImportKnowledgeHelpdesk `json:"lark_helpdesk,omitempty"`   // 知识导入-飞书服务台
+}
+
+type DataAssetImportKnowledgeSettingBuilder struct {
+	chunkSetting      *DataAssetKnowledgeChunkSetting // 知识切片配置
+	chunkSettingFlag  bool
+	file              *DataAssetImportKnowledgeFile // 知识导入-文件
+	fileFlag          bool
+	larkDoc           *DataAssetImportKnowledgeLarkDoc // 知识导入-飞书云文档
+	larkDocFlag       bool
+	larkWikiSpace     *DataAssetImportKnowledgeWiki // 知识导入-飞书知识空间
+	larkWikiSpaceFlag bool
+	larkHelpdesk      *DataAssetImportKnowledgeHelpdesk // 知识导入-飞书服务台
+	larkHelpdeskFlag  bool
+}
+
+func NewDataAssetImportKnowledgeSettingBuilder() *DataAssetImportKnowledgeSettingBuilder {
+	builder := &DataAssetImportKnowledgeSettingBuilder{}
+	return builder
+}
+
+// 知识切片配置
+//
+// 示例值：
+func (builder *DataAssetImportKnowledgeSettingBuilder) ChunkSetting(chunkSetting *DataAssetKnowledgeChunkSetting) *DataAssetImportKnowledgeSettingBuilder {
+	builder.chunkSetting = chunkSetting
+	builder.chunkSettingFlag = true
+	return builder
+}
+
+// 知识导入-文件
+//
+// 示例值：
+func (builder *DataAssetImportKnowledgeSettingBuilder) File(file *DataAssetImportKnowledgeFile) *DataAssetImportKnowledgeSettingBuilder {
+	builder.file = file
+	builder.fileFlag = true
+	return builder
+}
+
+// 知识导入-飞书云文档
+//
+// 示例值：
+func (builder *DataAssetImportKnowledgeSettingBuilder) LarkDoc(larkDoc *DataAssetImportKnowledgeLarkDoc) *DataAssetImportKnowledgeSettingBuilder {
+	builder.larkDoc = larkDoc
+	builder.larkDocFlag = true
+	return builder
+}
+
+// 知识导入-飞书知识空间
+//
+// 示例值：
+func (builder *DataAssetImportKnowledgeSettingBuilder) LarkWikiSpace(larkWikiSpace *DataAssetImportKnowledgeWiki) *DataAssetImportKnowledgeSettingBuilder {
+	builder.larkWikiSpace = larkWikiSpace
+	builder.larkWikiSpaceFlag = true
+	return builder
+}
+
+// 知识导入-飞书服务台
+//
+// 示例值：
+func (builder *DataAssetImportKnowledgeSettingBuilder) LarkHelpdesk(larkHelpdesk *DataAssetImportKnowledgeHelpdesk) *DataAssetImportKnowledgeSettingBuilder {
+	builder.larkHelpdesk = larkHelpdesk
+	builder.larkHelpdeskFlag = true
+	return builder
+}
+
+func (builder *DataAssetImportKnowledgeSettingBuilder) Build() *DataAssetImportKnowledgeSetting {
+	req := &DataAssetImportKnowledgeSetting{}
+	if builder.chunkSettingFlag {
+		req.ChunkSetting = builder.chunkSetting
+	}
+	if builder.fileFlag {
+		req.File = builder.file
+	}
+	if builder.larkDocFlag {
+		req.LarkDoc = builder.larkDoc
+	}
+	if builder.larkWikiSpaceFlag {
+		req.LarkWikiSpace = builder.larkWikiSpace
+	}
+	if builder.larkHelpdeskFlag {
+		req.LarkHelpdesk = builder.larkHelpdesk
+	}
+	return req
+}
+
+type DataAssetImportKnowledgeWiki struct {
+	SpaceId *string                               `json:"space_id,omitempty"` // 飞书知识空间ID
+	SubDocs []*DataAssetImportKnowledgeWikiSubDoc `json:"sub_docs,omitempty"` // 指定知识空间子节点时使用
+	Url     *string                               `json:"url,omitempty"`      // 知识空间URL
+}
+
+type DataAssetImportKnowledgeWikiBuilder struct {
+	spaceId     string // 飞书知识空间ID
+	spaceIdFlag bool
+	subDocs     []*DataAssetImportKnowledgeWikiSubDoc // 指定知识空间子节点时使用
+	subDocsFlag bool
+	url         string // 知识空间URL
+	urlFlag     bool
+}
+
+func NewDataAssetImportKnowledgeWikiBuilder() *DataAssetImportKnowledgeWikiBuilder {
+	builder := &DataAssetImportKnowledgeWikiBuilder{}
+	return builder
+}
+
+// 飞书知识空间ID
+//
+// 示例值：798546548961351
+func (builder *DataAssetImportKnowledgeWikiBuilder) SpaceId(spaceId string) *DataAssetImportKnowledgeWikiBuilder {
+	builder.spaceId = spaceId
+	builder.spaceIdFlag = true
+	return builder
+}
+
+// 指定知识空间子节点时使用
+//
+// 示例值：
+func (builder *DataAssetImportKnowledgeWikiBuilder) SubDocs(subDocs []*DataAssetImportKnowledgeWikiSubDoc) *DataAssetImportKnowledgeWikiBuilder {
+	builder.subDocs = subDocs
+	builder.subDocsFlag = true
+	return builder
+}
+
+// 知识空间URL
+//
+// 示例值：https://ai-tenant.feishu-boe.cn/wiki/space/7283525110814736404
+func (builder *DataAssetImportKnowledgeWikiBuilder) Url(url string) *DataAssetImportKnowledgeWikiBuilder {
+	builder.url = url
+	builder.urlFlag = true
+	return builder
+}
+
+func (builder *DataAssetImportKnowledgeWikiBuilder) Build() *DataAssetImportKnowledgeWiki {
+	req := &DataAssetImportKnowledgeWiki{}
+	if builder.spaceIdFlag {
+		req.SpaceId = &builder.spaceId
+
+	}
+	if builder.subDocsFlag {
+		req.SubDocs = builder.subDocs
+	}
+	if builder.urlFlag {
+		req.Url = &builder.url
+
+	}
+	return req
+}
+
+type DataAssetImportKnowledgeWikiSubDoc struct {
+	Type  *string `json:"type,omitempty"`  // 云文档类型，只支持wiki中的云文档
+	Token *string `json:"token,omitempty"` // 云文档标识
+	Url   *string `json:"url,omitempty"`   // 云文档链接
+}
+
+type DataAssetImportKnowledgeWikiSubDocBuilder struct {
+	type_     string // 云文档类型，只支持wiki中的云文档
+	typeFlag  bool
+	token     string // 云文档标识
+	tokenFlag bool
+	url       string // 云文档链接
+	urlFlag   bool
+}
+
+func NewDataAssetImportKnowledgeWikiSubDocBuilder() *DataAssetImportKnowledgeWikiSubDocBuilder {
+	builder := &DataAssetImportKnowledgeWikiSubDocBuilder{}
+	return builder
+}
+
+// 云文档类型，只支持wiki中的云文档
+//
+// 示例值：wiki
+func (builder *DataAssetImportKnowledgeWikiSubDocBuilder) Type(type_ string) *DataAssetImportKnowledgeWikiSubDocBuilder {
+	builder.type_ = type_
+	builder.typeFlag = true
+	return builder
+}
+
+// 云文档标识
+//
+// 示例值：T8FAcuilgC1fdaxkt58vcp91xngh
+func (builder *DataAssetImportKnowledgeWikiSubDocBuilder) Token(token string) *DataAssetImportKnowledgeWikiSubDocBuilder {
+	builder.token = token
+	builder.tokenFlag = true
+	return builder
+}
+
+// 云文档链接
+//
+// 示例值：https://cdas.feishu.cn/wiki/fdisu1
+func (builder *DataAssetImportKnowledgeWikiSubDocBuilder) Url(url string) *DataAssetImportKnowledgeWikiSubDocBuilder {
+	builder.url = url
+	builder.urlFlag = true
+	return builder
+}
+
+func (builder *DataAssetImportKnowledgeWikiSubDocBuilder) Build() *DataAssetImportKnowledgeWikiSubDoc {
+	req := &DataAssetImportKnowledgeWikiSubDoc{}
+	if builder.typeFlag {
+		req.Type = &builder.type_
+
+	}
+	if builder.tokenFlag {
+		req.Token = &builder.token
+
+	}
+	if builder.urlFlag {
+		req.Url = &builder.url
+
 	}
 	return req
 }
@@ -1751,16 +2278,98 @@ func (builder *DataAssetItemBuilder) Build() *DataAssetItem {
 	return req
 }
 
+type DataAssetKnowledgeChunkSetting struct {
+	RuleType     *string `json:"rule_type,omitempty"`     // 切片规则
+	SeparateType *string `json:"separate_type,omitempty"` // 切片分割符类型
+	Size         *int    `json:"size,omitempty"`          // 分段最大长度（字符），按标识符切片时必须填写
+	Overlap      *int    `json:"overlap,omitempty"`       // 分段重叠字符数，按标识符切片时必须填写，不能超过size的数值
+}
+
+type DataAssetKnowledgeChunkSettingBuilder struct {
+	ruleType         string // 切片规则
+	ruleTypeFlag     bool
+	separateType     string // 切片分割符类型
+	separateTypeFlag bool
+	size             int // 分段最大长度（字符），按标识符切片时必须填写
+	sizeFlag         bool
+	overlap          int // 分段重叠字符数，按标识符切片时必须填写，不能超过size的数值
+	overlapFlag      bool
+}
+
+func NewDataAssetKnowledgeChunkSettingBuilder() *DataAssetKnowledgeChunkSettingBuilder {
+	builder := &DataAssetKnowledgeChunkSettingBuilder{}
+	return builder
+}
+
+// 切片规则
+//
+// 示例值：intelligent
+func (builder *DataAssetKnowledgeChunkSettingBuilder) RuleType(ruleType string) *DataAssetKnowledgeChunkSettingBuilder {
+	builder.ruleType = ruleType
+	builder.ruleTypeFlag = true
+	return builder
+}
+
+// 切片分割符类型
+//
+// 示例值：paragraph
+func (builder *DataAssetKnowledgeChunkSettingBuilder) SeparateType(separateType string) *DataAssetKnowledgeChunkSettingBuilder {
+	builder.separateType = separateType
+	builder.separateTypeFlag = true
+	return builder
+}
+
+// 分段最大长度（字符），按标识符切片时必须填写
+//
+// 示例值：600
+func (builder *DataAssetKnowledgeChunkSettingBuilder) Size(size int) *DataAssetKnowledgeChunkSettingBuilder {
+	builder.size = size
+	builder.sizeFlag = true
+	return builder
+}
+
+// 分段重叠字符数，按标识符切片时必须填写，不能超过size的数值
+//
+// 示例值：10
+func (builder *DataAssetKnowledgeChunkSettingBuilder) Overlap(overlap int) *DataAssetKnowledgeChunkSettingBuilder {
+	builder.overlap = overlap
+	builder.overlapFlag = true
+	return builder
+}
+
+func (builder *DataAssetKnowledgeChunkSettingBuilder) Build() *DataAssetKnowledgeChunkSetting {
+	req := &DataAssetKnowledgeChunkSetting{}
+	if builder.ruleTypeFlag {
+		req.RuleType = &builder.ruleType
+
+	}
+	if builder.separateTypeFlag {
+		req.SeparateType = &builder.separateType
+
+	}
+	if builder.sizeFlag {
+		req.Size = &builder.size
+
+	}
+	if builder.overlapFlag {
+		req.Overlap = &builder.overlap
+
+	}
+	return req
+}
+
 type DataAssetResource struct {
-	ResourceId  *string `json:"resource_id,omitempty"`  // 数据知识资源ID
-	ResouceType *string `json:"resouce_type,omitempty"` // 数据知识资源类型
+	ResourceId *string `json:"resource_id,omitempty"` // 数据知识资源ID
+
+	ResourceType *string `json:"resource_type,omitempty"` // 数据知识资源类型
 }
 
 type DataAssetResourceBuilder struct {
-	resourceId      string // 数据知识资源ID
-	resourceIdFlag  bool
-	resouceType     string // 数据知识资源类型
-	resouceTypeFlag bool
+	resourceId     string // 数据知识资源ID
+	resourceIdFlag bool
+
+	resourceType     string // 数据知识资源类型
+	resourceTypeFlag bool
 }
 
 func NewDataAssetResourceBuilder() *DataAssetResourceBuilder {
@@ -1780,9 +2389,9 @@ func (builder *DataAssetResourceBuilder) ResourceId(resourceId string) *DataAsse
 // 数据知识资源类型
 //
 // 示例值：dataset
-func (builder *DataAssetResourceBuilder) ResouceType(resouceType string) *DataAssetResourceBuilder {
-	builder.resouceType = resouceType
-	builder.resouceTypeFlag = true
+func (builder *DataAssetResourceBuilder) ResourceType(resourceType string) *DataAssetResourceBuilder {
+	builder.resourceType = resourceType
+	builder.resourceTypeFlag = true
 	return builder
 }
 
@@ -1792,8 +2401,9 @@ func (builder *DataAssetResourceBuilder) Build() *DataAssetResource {
 		req.ResourceId = &builder.resourceId
 
 	}
-	if builder.resouceTypeFlag {
-		req.ResouceType = &builder.resouceType
+
+	if builder.resourceTypeFlag {
+		req.ResourceType = &builder.resourceType
 
 	}
 	return req
@@ -6014,6 +6624,682 @@ func (resp *ListAilySessionRunResp) Success() bool {
 	return resp.Code == 0
 }
 
+type ListAppDataAssetReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListAppDataAssetReqBuilder() *ListAppDataAssetReqBuilder {
+	builder := &ListAppDataAssetReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListAppDataAssetReqBuilder) Limit(limit int) *ListAppDataAssetReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// AppID
+//
+// 示例值：spring_5862e4fea8__c
+func (builder *ListAppDataAssetReqBuilder) AppId(appId string) *ListAppDataAssetReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 分页参数：分页大小，默认：20，最大：100
+//
+// 示例值：
+func (builder *ListAppDataAssetReqBuilder) PageSize(pageSize int) *ListAppDataAssetReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页参数：分页起始位置，为空表示首页
+//
+// 示例值：
+func (builder *ListAppDataAssetReqBuilder) PageToken(pageToken string) *ListAppDataAssetReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 模糊匹配关键词
+//
+// 示例值：电影
+func (builder *ListAppDataAssetReqBuilder) Keyword(keyword string) *ListAppDataAssetReqBuilder {
+	builder.apiReq.QueryParams.Set("keyword", fmt.Sprint(keyword))
+	return builder
+}
+
+// 根据数据知识 ID 进行过滤
+//
+// 示例值：
+func (builder *ListAppDataAssetReqBuilder) DataAssetIds(dataAssetIds []string) *ListAppDataAssetReqBuilder {
+	for _, v := range dataAssetIds {
+		builder.apiReq.QueryParams.Add("data_asset_ids", fmt.Sprint(v))
+	}
+	return builder
+}
+
+// 根据数据知识分类 ID 进行过滤
+//
+// 示例值：
+func (builder *ListAppDataAssetReqBuilder) DataAssetTagIds(dataAssetTagIds []string) *ListAppDataAssetReqBuilder {
+	for _, v := range dataAssetTagIds {
+		builder.apiReq.QueryParams.Add("data_asset_tag_ids", fmt.Sprint(v))
+	}
+	return builder
+}
+
+// 结果是否包含数据与知识项目
+//
+// 示例值：
+func (builder *ListAppDataAssetReqBuilder) WithDataAssetItem(withDataAssetItem bool) *ListAppDataAssetReqBuilder {
+	builder.apiReq.QueryParams.Set("with_data_asset_item", fmt.Sprint(withDataAssetItem))
+	return builder
+}
+
+// 结果是否包含数据连接状态
+//
+// 示例值：
+func (builder *ListAppDataAssetReqBuilder) WithConnectStatus(withConnectStatus bool) *ListAppDataAssetReqBuilder {
+	builder.apiReq.QueryParams.Set("with_connect_status", fmt.Sprint(withConnectStatus))
+	return builder
+}
+
+// 结果是否包含导入数据源信息
+//
+// 示例值：
+func (builder *ListAppDataAssetReqBuilder) WithImportSetting(withImportSetting bool) *ListAppDataAssetReqBuilder {
+	builder.apiReq.QueryParams.Set("with_import_setting", fmt.Sprint(withImportSetting))
+	return builder
+}
+
+func (builder *ListAppDataAssetReqBuilder) Build() *ListAppDataAssetReq {
+	req := &ListAppDataAssetReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListAppDataAssetReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListAppDataAssetRespData struct {
+	Items     []*DataAsset `json:"items,omitempty"`      // 数据知识列表
+	PageToken *string      `json:"page_token,omitempty"` // has_more=true，可使用page_token继续查询
+	HasMore   *bool        `json:"has_more,omitempty"`   // 是否有更多
+}
+
+type ListAppDataAssetResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListAppDataAssetRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListAppDataAssetResp) Success() bool {
+	return resp.Code == 0
+}
+
+type ListAppDataAssetTagReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListAppDataAssetTagReqBuilder() *ListAppDataAssetTagReqBuilder {
+	builder := &ListAppDataAssetTagReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListAppDataAssetTagReqBuilder) Limit(limit int) *ListAppDataAssetTagReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// AppID
+//
+// 示例值：spring_5862e4fea8__c
+func (builder *ListAppDataAssetTagReqBuilder) AppId(appId string) *ListAppDataAssetTagReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 分页参数：分页大小，默认：20，最大：100
+//
+// 示例值：
+func (builder *ListAppDataAssetTagReqBuilder) PageSize(pageSize int) *ListAppDataAssetTagReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页参数：分页起始位置，为空表示首页
+//
+// 示例值：
+func (builder *ListAppDataAssetTagReqBuilder) PageToken(pageToken string) *ListAppDataAssetTagReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 模糊匹配分类名称
+//
+// 示例值：电影
+func (builder *ListAppDataAssetTagReqBuilder) Keyword(keyword string) *ListAppDataAssetTagReqBuilder {
+	builder.apiReq.QueryParams.Set("keyword", fmt.Sprint(keyword))
+	return builder
+}
+
+// 模糊匹配分类名称
+//
+// 示例值：
+func (builder *ListAppDataAssetTagReqBuilder) DataAssetTagIds(dataAssetTagIds []string) *ListAppDataAssetTagReqBuilder {
+	for _, v := range dataAssetTagIds {
+		builder.apiReq.QueryParams.Add("data_asset_tag_ids", fmt.Sprint(v))
+	}
+	return builder
+}
+
+func (builder *ListAppDataAssetTagReqBuilder) Build() *ListAppDataAssetTagReq {
+	req := &ListAppDataAssetTagReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListAppDataAssetTagReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListAppDataAssetTagRespData struct {
+	Items     []*DataAssetTag `json:"items,omitempty"`      // 数据知识分类列表
+	PageToken *string         `json:"page_token,omitempty"` // has_more=true，可使用 page_token继续查询
+	HasMore   *bool           `json:"has_more,omitempty"`   // 是否有更多
+}
+
+type ListAppDataAssetTagResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListAppDataAssetTagRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListAppDataAssetTagResp) Success() bool {
+	return resp.Code == 0
+}
+
+type AskAppKnowledgeReqBodyBuilder struct {
+	message             *AilyKnowledgeMessage // 输入消息（当前仅支持纯文本输入）
+	messageFlag         bool
+	dataAssetIds        []string // 控制知识问答所依据的数据知识范围
+	dataAssetIdsFlag    bool
+	dataAssetTagIds     []string // 控制知识问答所依据的数据知识分类范围
+	dataAssetTagIdsFlag bool
+}
+
+func NewAskAppKnowledgeReqBodyBuilder() *AskAppKnowledgeReqBodyBuilder {
+	builder := &AskAppKnowledgeReqBodyBuilder{}
+	return builder
+}
+
+// 输入消息（当前仅支持纯文本输入）
+//
+// 示例值：
+func (builder *AskAppKnowledgeReqBodyBuilder) Message(message *AilyKnowledgeMessage) *AskAppKnowledgeReqBodyBuilder {
+	builder.message = message
+	builder.messageFlag = true
+	return builder
+}
+
+// 控制知识问答所依据的数据知识范围
+//
+// 示例值：
+func (builder *AskAppKnowledgeReqBodyBuilder) DataAssetIds(dataAssetIds []string) *AskAppKnowledgeReqBodyBuilder {
+	builder.dataAssetIds = dataAssetIds
+	builder.dataAssetIdsFlag = true
+	return builder
+}
+
+// 控制知识问答所依据的数据知识分类范围
+//
+// 示例值：
+func (builder *AskAppKnowledgeReqBodyBuilder) DataAssetTagIds(dataAssetTagIds []string) *AskAppKnowledgeReqBodyBuilder {
+	builder.dataAssetTagIds = dataAssetTagIds
+	builder.dataAssetTagIdsFlag = true
+	return builder
+}
+
+func (builder *AskAppKnowledgeReqBodyBuilder) Build() *AskAppKnowledgeReqBody {
+	req := &AskAppKnowledgeReqBody{}
+	if builder.messageFlag {
+		req.Message = builder.message
+	}
+	if builder.dataAssetIdsFlag {
+		req.DataAssetIds = builder.dataAssetIds
+	}
+	if builder.dataAssetTagIdsFlag {
+		req.DataAssetTagIds = builder.dataAssetTagIds
+	}
+	return req
+}
+
+type AskAppKnowledgePathReqBodyBuilder struct {
+	message             *AilyKnowledgeMessage
+	messageFlag         bool
+	dataAssetIds        []string
+	dataAssetIdsFlag    bool
+	dataAssetTagIds     []string
+	dataAssetTagIdsFlag bool
+}
+
+func NewAskAppKnowledgePathReqBodyBuilder() *AskAppKnowledgePathReqBodyBuilder {
+	builder := &AskAppKnowledgePathReqBodyBuilder{}
+	return builder
+}
+
+// 输入消息（当前仅支持纯文本输入）
+//
+// 示例值：
+func (builder *AskAppKnowledgePathReqBodyBuilder) Message(message *AilyKnowledgeMessage) *AskAppKnowledgePathReqBodyBuilder {
+	builder.message = message
+	builder.messageFlag = true
+	return builder
+}
+
+// 控制知识问答所依据的数据知识范围
+//
+// 示例值：
+func (builder *AskAppKnowledgePathReqBodyBuilder) DataAssetIds(dataAssetIds []string) *AskAppKnowledgePathReqBodyBuilder {
+	builder.dataAssetIds = dataAssetIds
+	builder.dataAssetIdsFlag = true
+	return builder
+}
+
+// 控制知识问答所依据的数据知识分类范围
+//
+// 示例值：
+func (builder *AskAppKnowledgePathReqBodyBuilder) DataAssetTagIds(dataAssetTagIds []string) *AskAppKnowledgePathReqBodyBuilder {
+	builder.dataAssetTagIds = dataAssetTagIds
+	builder.dataAssetTagIdsFlag = true
+	return builder
+}
+
+func (builder *AskAppKnowledgePathReqBodyBuilder) Build() (*AskAppKnowledgeReqBody, error) {
+	req := &AskAppKnowledgeReqBody{}
+	if builder.messageFlag {
+		req.Message = builder.message
+	}
+	if builder.dataAssetIdsFlag {
+		req.DataAssetIds = builder.dataAssetIds
+	}
+	if builder.dataAssetTagIdsFlag {
+		req.DataAssetTagIds = builder.dataAssetTagIds
+	}
+	return req, nil
+}
+
+type AskAppKnowledgeReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *AskAppKnowledgeReqBody
+}
+
+func NewAskAppKnowledgeReqBuilder() *AskAppKnowledgeReqBuilder {
+	builder := &AskAppKnowledgeReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 飞书智能伙伴搭建平台的AppID
+//
+// 示例值：spring_5862e4fea8__c
+func (builder *AskAppKnowledgeReqBuilder) AppId(appId string) *AskAppKnowledgeReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 执行一次数据知识问答
+func (builder *AskAppKnowledgeReqBuilder) Body(body *AskAppKnowledgeReqBody) *AskAppKnowledgeReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *AskAppKnowledgeReqBuilder) Build() *AskAppKnowledgeReq {
+	req := &AskAppKnowledgeReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type AskAppKnowledgeReqBody struct {
+	Message         *AilyKnowledgeMessage `json:"message,omitempty"`            // 输入消息（当前仅支持纯文本输入）
+	DataAssetIds    []string              `json:"data_asset_ids,omitempty"`     // 控制知识问答所依据的数据知识范围
+	DataAssetTagIds []string              `json:"data_asset_tag_ids,omitempty"` // 控制知识问答所依据的数据知识分类范围
+}
+
+type AskAppKnowledgeReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *AskAppKnowledgeReqBody `body:""`
+}
+
+type AskAppKnowledgeRespData struct {
+	Status      *string                      `json:"status,omitempty"`       // 响应状态，枚举值
+	FinishType  *string                      `json:"finish_type,omitempty"`  // 结束类型，枚举值
+	Message     *AilyKnowledgeMessage        `json:"message,omitempty"`      // 响应消息
+	ProcessData *AilyKnowledgeAskProcessData `json:"process_data,omitempty"` // 知识问答运行过程结构化数据，status=finished 且 finish_type=qa 时返回
+	FaqResult   *AilyKnowledgeFaq            `json:"faq_result,omitempty"`   // 匹配标准问答对结果，status=finished 且 finish_type=faq时返回
+	HasAnswer   *bool                        `json:"has_answer,omitempty"`   // 是否有结果，true 则 代表 message 中的内容是通过配置知识而生成的
+}
+
+type AskAppKnowledgeResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *AskAppKnowledgeRespData `json:"data"` // 业务数据
+}
+
+func (resp *AskAppKnowledgeResp) Success() bool {
+	return resp.Code == 0
+}
+
+type GetAppSkillReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewGetAppSkillReqBuilder() *GetAppSkillReqBuilder {
+	builder := &GetAppSkillReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 应用 ID
+//
+// 示例值：spring_xxx__c
+func (builder *GetAppSkillReqBuilder) AppId(appId string) *GetAppSkillReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 技能 ID
+//
+// 示例值：skill_6cc6166178ca
+func (builder *GetAppSkillReqBuilder) SkillId(skillId string) *GetAppSkillReqBuilder {
+	builder.apiReq.PathParams.Set("skill_id", fmt.Sprint(skillId))
+	return builder
+}
+
+func (builder *GetAppSkillReqBuilder) Build() *GetAppSkillReq {
+	req := &GetAppSkillReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	return req
+}
+
+type GetAppSkillReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type GetAppSkillRespData struct {
+	Skill *Skill `json:"skill,omitempty"` // 技能信息
+}
+
+type GetAppSkillResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *GetAppSkillRespData `json:"data"` // 业务数据
+}
+
+func (resp *GetAppSkillResp) Success() bool {
+	return resp.Code == 0
+}
+
+type ListAppSkillReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListAppSkillReqBuilder() *ListAppSkillReqBuilder {
+	builder := &ListAppSkillReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListAppSkillReqBuilder) Limit(limit int) *ListAppSkillReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// 应用 ID
+//
+// 示例值：spring_xxx__c
+func (builder *ListAppSkillReqBuilder) AppId(appId string) *ListAppSkillReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 页面大小
+//
+// 示例值：
+func (builder *ListAppSkillReqBuilder) PageSize(pageSize int) *ListAppSkillReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页偏移量
+//
+// 示例值：
+func (builder *ListAppSkillReqBuilder) PageToken(pageToken string) *ListAppSkillReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+func (builder *ListAppSkillReqBuilder) Build() *ListAppSkillReq {
+	req := &ListAppSkillReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListAppSkillReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListAppSkillRespData struct {
+	Skills    []*Skill `json:"skills,omitempty"`     // 技能列表
+	PageToken *string  `json:"page_token,omitempty"` // 下一页的起始偏移量
+	HasMore   *bool    `json:"has_more,omitempty"`   // 是否还有更多数据
+}
+
+type ListAppSkillResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListAppSkillRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListAppSkillResp) Success() bool {
+	return resp.Code == 0
+}
+
+type StartAppSkillReqBodyBuilder struct {
+	globalVariable     *SkillGlobalVariable // 技能的全局变量
+	globalVariableFlag bool
+	input              string // 技能的自定义变量
+	inputFlag          bool
+}
+
+func NewStartAppSkillReqBodyBuilder() *StartAppSkillReqBodyBuilder {
+	builder := &StartAppSkillReqBodyBuilder{}
+	return builder
+}
+
+// 技能的全局变量
+//
+// 示例值：
+func (builder *StartAppSkillReqBodyBuilder) GlobalVariable(globalVariable *SkillGlobalVariable) *StartAppSkillReqBodyBuilder {
+	builder.globalVariable = globalVariable
+	builder.globalVariableFlag = true
+	return builder
+}
+
+// 技能的自定义变量
+//
+// 示例值：{"custom_s":"text","custom_i":12,"custom_b":true,"custom_f":1.2}
+func (builder *StartAppSkillReqBodyBuilder) Input(input string) *StartAppSkillReqBodyBuilder {
+	builder.input = input
+	builder.inputFlag = true
+	return builder
+}
+
+func (builder *StartAppSkillReqBodyBuilder) Build() *StartAppSkillReqBody {
+	req := &StartAppSkillReqBody{}
+	if builder.globalVariableFlag {
+		req.GlobalVariable = builder.globalVariable
+	}
+	if builder.inputFlag {
+		req.Input = &builder.input
+	}
+	return req
+}
+
+type StartAppSkillPathReqBodyBuilder struct {
+	globalVariable     *SkillGlobalVariable
+	globalVariableFlag bool
+	input              string
+	inputFlag          bool
+}
+
+func NewStartAppSkillPathReqBodyBuilder() *StartAppSkillPathReqBodyBuilder {
+	builder := &StartAppSkillPathReqBodyBuilder{}
+	return builder
+}
+
+// 技能的全局变量
+//
+// 示例值：
+func (builder *StartAppSkillPathReqBodyBuilder) GlobalVariable(globalVariable *SkillGlobalVariable) *StartAppSkillPathReqBodyBuilder {
+	builder.globalVariable = globalVariable
+	builder.globalVariableFlag = true
+	return builder
+}
+
+// 技能的自定义变量
+//
+// 示例值：{"custom_s":"text","custom_i":12,"custom_b":true,"custom_f":1.2}
+func (builder *StartAppSkillPathReqBodyBuilder) Input(input string) *StartAppSkillPathReqBodyBuilder {
+	builder.input = input
+	builder.inputFlag = true
+	return builder
+}
+
+func (builder *StartAppSkillPathReqBodyBuilder) Build() (*StartAppSkillReqBody, error) {
+	req := &StartAppSkillReqBody{}
+	if builder.globalVariableFlag {
+		req.GlobalVariable = builder.globalVariable
+	}
+	if builder.inputFlag {
+		req.Input = &builder.input
+	}
+	return req, nil
+}
+
+type StartAppSkillReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *StartAppSkillReqBody
+}
+
+func NewStartAppSkillReqBuilder() *StartAppSkillReqBuilder {
+	builder := &StartAppSkillReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 应用 ID
+//
+// 示例值：spring_xxx__c
+func (builder *StartAppSkillReqBuilder) AppId(appId string) *StartAppSkillReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 技能 ID
+//
+// 示例值：skill_6cc6166178ca
+func (builder *StartAppSkillReqBuilder) SkillId(skillId string) *StartAppSkillReqBuilder {
+	builder.apiReq.PathParams.Set("skill_id", fmt.Sprint(skillId))
+	return builder
+}
+
+// 该 API 用于执行飞书智能伙伴应用的技能（Skill）获取输出
+func (builder *StartAppSkillReqBuilder) Body(body *StartAppSkillReqBody) *StartAppSkillReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *StartAppSkillReqBuilder) Build() *StartAppSkillReq {
+	req := &StartAppSkillReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type StartAppSkillReqBody struct {
+	GlobalVariable *SkillGlobalVariable `json:"global_variable,omitempty"` // 技能的全局变量
+	Input          *string              `json:"input,omitempty"`           // 技能的自定义变量
+}
+
+type StartAppSkillReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *StartAppSkillReqBody `body:""`
+}
+
+type StartAppSkillRespData struct {
+	Output *string `json:"output,omitempty"` // 技能的输出
+	Status *string `json:"status,omitempty"` // 技能的执行状态
+}
+
+type StartAppSkillResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *StartAppSkillRespData `json:"data"` // 业务数据
+}
+
+func (resp *StartAppSkillResp) Success() bool {
+	return resp.Code == 0
+}
+
 type ListAilySessionAilyMessageIterator struct {
 	nextPageToken *string
 	items         []*AilyMessage
@@ -6119,5 +7405,167 @@ func (iterator *ListAilySessionRunIterator) Next() (bool, *Run, error) {
 }
 
 func (iterator *ListAilySessionRunIterator) NextPageToken() *string {
+	return iterator.nextPageToken
+}
+
+type ListAppDataAssetIterator struct {
+	nextPageToken *string
+	items         []*DataAsset
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListAppDataAssetReq
+	listFunc      func(ctx context.Context, req *ListAppDataAssetReq, options ...larkcore.RequestOptionFunc) (*ListAppDataAssetResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListAppDataAssetIterator) Next() (bool, *DataAsset, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Items) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Items
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListAppDataAssetIterator) NextPageToken() *string {
+	return iterator.nextPageToken
+}
+
+type ListAppDataAssetTagIterator struct {
+	nextPageToken *string
+	items         []*DataAssetTag
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListAppDataAssetTagReq
+	listFunc      func(ctx context.Context, req *ListAppDataAssetTagReq, options ...larkcore.RequestOptionFunc) (*ListAppDataAssetTagResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListAppDataAssetTagIterator) Next() (bool, *DataAssetTag, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Items) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Items
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListAppDataAssetTagIterator) NextPageToken() *string {
+	return iterator.nextPageToken
+}
+
+type ListAppSkillIterator struct {
+	nextPageToken *string
+	items         []*Skill
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListAppSkillReq
+	listFunc      func(ctx context.Context, req *ListAppSkillReq, options ...larkcore.RequestOptionFunc) (*ListAppSkillResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListAppSkillIterator) Next() (bool, *Skill, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Skills) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Skills
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListAppSkillIterator) NextPageToken() *string {
 	return iterator.nextPageToken
 }

@@ -25,26 +25,26 @@ import (
 )
 
 const (
-	UserIdTypeUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeOpenId  = "open_id"  // 以open_id来识别用户
+	UpdateAppBadgeUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	UpdateAppBadgeUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	UpdateAppBadgeUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
-	UserIdTypeListAppRecommendRuleUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeListAppRecommendRuleUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeListAppRecommendRuleOpenId  = "open_id"  // 以open_id来识别用户
+	ListAppRecommendRuleUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	ListAppRecommendRuleUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	ListAppRecommendRuleUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
-	DepartmentIdTypeDepartmentId     = "department_id"      // 以自定义department_id来标识部门
-	DepartmentIdTypeOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
+	GetAppContactsRangeConfigurationDepartmentIDTypeDepartmentId     = "department_id"      // 以自定义department_id来标识部门
+	GetAppContactsRangeConfigurationDepartmentIDTypeOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
 )
 
 const (
-	UserIdTypeContactsRangeConfigurationApplicationUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeContactsRangeConfigurationApplicationUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeContactsRangeConfigurationApplicationOpenId  = "open_id"  // 以open_id来识别用户
+	GetAppContactsRangeConfigurationUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	GetAppContactsRangeConfigurationUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	GetAppContactsRangeConfigurationUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
@@ -54,9 +54,9 @@ const (
 )
 
 const (
-	UserIdTypeGetApplicationUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeGetApplicationUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeGetApplicationOpenId  = "open_id"  // 以open_id来识别用户
+	GetApplicationUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	GetApplicationUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	GetApplicationUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
@@ -72,9 +72,9 @@ const (
 )
 
 const (
-	UserIdTypeUnderauditlistApplicationUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeUnderauditlistApplicationUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeUnderauditlistApplicationOpenId  = "open_id"  // 以open_id来识别用户
+	ListUnderAuditApplicationUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	ListUnderAuditApplicationUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	ListUnderAuditApplicationUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
@@ -85,8 +85,8 @@ const (
 )
 
 const (
-	DepartmentIdTypeDepartmentOverviewApplicationAppUsageDepartmentId     = "department_id"      // 以自定义department_id来标识部门
-	DepartmentIdTypeDepartmentOverviewApplicationAppUsageOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
+	DepartmentOverviewApplicationAppUsageDepartmentIDTypeDepartmentId     = "department_id"      // 以自定义department_id来标识部门
+	DepartmentOverviewApplicationAppUsageDepartmentIDTypeOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
 )
 
 const (
@@ -109,26 +109,26 @@ const (
 )
 
 const (
-	AbilityApp = "app" // 返回应用整体的数据
-	AbilityMp  = "mp"  // 返回小程序的数据
-	AbilityH5  = "h5"  // 返回网页的数据
-	AbilityBot = "bot" // 返回机器人的数据
+	OverviewApplicationAppUsageAbilityApp = "app" // 返回应用整体的数据
+	OverviewApplicationAppUsageAbilityMp  = "mp"  // 返回小程序的数据
+	OverviewApplicationAppUsageAbilityH5  = "h5"  // 返回网页的数据
+	OverviewApplicationAppUsageAbilityBot = "bot" // 返回机器人的数据
 )
 
 const (
-	DepartmentIdTypeOverviewApplicationAppUsageDepartmentId     = "department_id"      // 以自定义department_id来标识部门
-	DepartmentIdTypeOverviewApplicationAppUsageOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
+	DepartmentIdTypeDepartmentId     = "department_id"      // 以自定义department_id来标识部门
+	DepartmentIdTypeOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
 )
 
 const (
-	DepartmentIdTypeContactsRangeSuggestApplicationAppVersionDepartmentId     = "department_id"      // 以自定义department_id来标识部门
-	DepartmentIdTypeContactsRangeSuggestApplicationAppVersionOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
+	GetAppVersionContactsRangeDepartmentIDTypeDepartmentId     = "department_id"      // 以自定义department_id来标识部门
+	GetAppVersionContactsRangeDepartmentIDTypeOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
 )
 
 const (
-	UserIdTypeContactsRangeSuggestApplicationAppVersionUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeContactsRangeSuggestApplicationAppVersionUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeContactsRangeSuggestApplicationAppVersionOpenId  = "open_id"  // 以open_id来识别用户
+	GetAppVersionContactsRangeUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	GetAppVersionContactsRangeUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	GetAppVersionContactsRangeUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
@@ -138,9 +138,9 @@ const (
 )
 
 const (
-	UserIdTypeGetApplicationAppVersionUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeGetApplicationAppVersionUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeGetApplicationAppVersionOpenId  = "open_id"  // 以open_id来识别用户
+	GetAppVersionUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	GetAppVersionUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	GetAppVersionUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
@@ -150,9 +150,9 @@ const (
 )
 
 const (
-	UserIdTypeListApplicationAppVersionUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeListApplicationAppVersionUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeListApplicationAppVersionOpenId  = "open_id"  // 以open_id来识别用户
+	ListApplicationAppVersionUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	ListApplicationAppVersionUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	ListApplicationAppVersionUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
@@ -165,26 +165,26 @@ const (
 )
 
 const (
-	UserIdTypePatchApplicationAppVersionUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypePatchApplicationAppVersionUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypePatchApplicationAppVersionOpenId  = "open_id"  // 以open_id来识别用户
+	UpdateAppVersionUserIDTypeUserId  = "user_id"  // 以user_id来识别用户
+	UpdateAppVersionUserIDTypeUnionId = "union_id" // 以union_id来识别用户
+	UpdateAppVersionUserIDTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
-	ContactsRangeTypeEqualToAvailability = "equal_to_availability" // 与应用可用范围一致
-	ContactsRangeTypeSome                = "some"                  // 修改部分成员
-	ContactsRangeTypeAll                 = "all"                   // 全部成员范围
+	PatchApplicationContactsRangeContactsRangeTypeEqualToAvailability = "equal_to_availability" // 与应用可用范围一致
+	PatchApplicationContactsRangeContactsRangeTypeSome                = "some"                  // 修改部分成员
+	PatchApplicationContactsRangeContactsRangeTypeAll                 = "all"                   // 全部成员范围
 )
 
 const (
-	UserIdTypePatchApplicationContactsRangeOpenId  = "open_id"  // 以open_id 标识成员
-	UserIdTypePatchApplicationContactsRangeUserId  = "user_id"  // 以user_id 标识用户
-	UserIdTypePatchApplicationContactsRangeUnionId = "union_id" // 以union_id 标识用户
+	PatchApplicationContactsRangeUserIDTypeOpenId  = "open_id"  // 以open_id 标识成员
+	PatchApplicationContactsRangeUserIDTypeUserId  = "user_id"  // 以user_id 标识用户
+	PatchApplicationContactsRangeUserIDTypeUnionId = "union_id" // 以union_id 标识用户
 )
 
 const (
-	DepartmentIdTypePatchApplicationContactsRangeOpenDepartmentId = "open_department_id" // 以open_department_id标识部门
-	DepartmentIdTypePatchApplicationContactsRangeDepartmentId     = "department_id"      // 以department_id标识部门
+	PatchApplicationContactsRangeDepartmentIDTypeOpenDepartmentId = "open_department_id" // 以open_department_id标识部门
+	PatchApplicationContactsRangeDepartmentIDTypeDepartmentId     = "department_id"      // 以department_id标识部门
 )
 
 const (
@@ -202,15 +202,15 @@ const (
 )
 
 const (
-	UserIdTypeListApplicationFeedbackOpenId  = "open_id"  // 用户的 open id
-	UserIdTypeListApplicationFeedbackUnionId = "union_id" // 用户的 union id
-	UserIdTypeListApplicationFeedbackUserId  = "user_id"  // 用户的 user id
+	ListApplicationFeedbackUserIDTypeOpenId  = "open_id"  // 用户的 open id
+	ListApplicationFeedbackUserIDTypeUnionId = "union_id" // 用户的 union id
+	ListApplicationFeedbackUserIDTypeUserId  = "user_id"  // 用户的 user id
 )
 
 const (
-	UserIdTypePatchApplicationFeedbackOpenId  = "open_id"  // 用户的 open id
-	UserIdTypePatchApplicationFeedbackUnionId = "union_id" // 用户的 union id
-	UserIdTypePatchApplicationFeedbackUserId  = "user_id"  // 用户的 user id
+	PatchApplicationFeedbackUserIDTypeOpenId  = "open_id"  // 用户的 open id
+	PatchApplicationFeedbackUserIDTypeUnionId = "union_id" // 用户的 union id
+	PatchApplicationFeedbackUserIDTypeUserId  = "user_id"  // 用户的 user id
 )
 
 const (
@@ -222,25 +222,25 @@ const (
 )
 
 const (
-	UserIdTypeCheckWhiteBlackListApplicationVisibilityUserId  = "user_id"  // 以user_id来标识用户
-	UserIdTypeCheckWhiteBlackListApplicationVisibilityUnionId = "union_id" // 以union_id来标识用户
-	UserIdTypeCheckWhiteBlackListApplicationVisibilityOpenId  = "open_id"  // 以open_id来标识用户
+	CheckWhiteBlackListApplicationVisibilityUserIDTypeUserId  = "user_id"  // 以user_id来标识用户
+	CheckWhiteBlackListApplicationVisibilityUserIDTypeUnionId = "union_id" // 以union_id来标识用户
+	CheckWhiteBlackListApplicationVisibilityUserIDTypeOpenId  = "open_id"  // 以open_id来标识用户
 )
 
 const (
-	DepartmentIdTypeCheckWhiteBlackListApplicationVisibilityDepartmentId     = "department_id"      // 以department_id来标识部门
-	DepartmentIdTypeCheckWhiteBlackListApplicationVisibilityOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
+	CheckWhiteBlackListApplicationVisibilityDepartmentIDTypeDepartmentId     = "department_id"      // 以department_id来标识部门
+	CheckWhiteBlackListApplicationVisibilityDepartmentIDTypeOpenDepartmentId = "open_department_id" // 以open_department_id来标识部门
 )
 
 const (
-	DepartmentIdTypePatchApplicationVisibilityOpenDepartmentId = "open_department_id" // 以open_department_id标识部门
-	DepartmentIdTypePatchApplicationVisibilityDepartmentId     = "department_id"      // 以department_id标识部门
+	PatchApplicationVisibilityDepartmentIDTypeOpenDepartmentId = "open_department_id" // 以open_department_id标识部门
+	PatchApplicationVisibilityDepartmentIDTypeDepartmentId     = "department_id"      // 以department_id标识部门
 )
 
 const (
-	UserIdTypePatchApplicationVisibilityOpenId  = "open_id"  // 以open_id 标识用户
-	UserIdTypePatchApplicationVisibilityUserId  = "user_id"  // 以user_id 标识用户
-	UserIdTypePatchApplicationVisibilityUnionId = "union_id" // 以union_id 标识用户
+	PatchApplicationVisibilityUserIDTypeOpenId  = "open_id"  // 以open_id 标识用户
+	PatchApplicationVisibilityUserIDTypeUserId  = "user_id"  // 以user_id 标识用户
+	PatchApplicationVisibilityUserIDTypeUnionId = "union_id" // 以union_id 标识用户
 )
 
 type Accessibility struct {
