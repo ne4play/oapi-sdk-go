@@ -6718,6 +6718,14 @@ func (builder *BatchCreateAppTableRecordReqBuilder) ClientToken(clientToken stri
 	return builder
 }
 
+// 用于控制一致性读写，默认开启检查
+//
+// 示例值：true
+func (builder *BatchCreateAppTableRecordReqBuilder) IgnoreConsistencyCheck(ignoreConsistencyCheck bool) *BatchCreateAppTableRecordReqBuilder {
+	builder.apiReq.QueryParams.Set("ignore_consistency_check", fmt.Sprint(ignoreConsistencyCheck))
+	return builder
+}
+
 // 该接口用于在数据表中新增多条记录，单次调用最多新增 500 条记录。
 func (builder *BatchCreateAppTableRecordReqBuilder) Body(body *BatchCreateAppTableRecordReqBody) *BatchCreateAppTableRecordReqBuilder {
 	builder.body = body
@@ -7179,6 +7187,14 @@ func (builder *BatchUpdateAppTableRecordReqBuilder) UserIdType(userIdType string
 	return builder
 }
 
+// 用于控制一致性读写，默认开启检查
+//
+// 示例值：true
+func (builder *BatchUpdateAppTableRecordReqBuilder) IgnoreConsistencyCheck(ignoreConsistencyCheck bool) *BatchUpdateAppTableRecordReqBuilder {
+	builder.apiReq.QueryParams.Set("ignore_consistency_check", fmt.Sprint(ignoreConsistencyCheck))
+	return builder
+}
+
 // 该接口用于更新数据表中的多条记录，单次调用最多更新 500 条记录。
 func (builder *BatchUpdateAppTableRecordReqBuilder) Body(body *BatchUpdateAppTableRecordReqBody) *BatchUpdateAppTableRecordReqBuilder {
 	builder.body = body
@@ -7260,6 +7276,14 @@ func (builder *CreateAppTableRecordReqBuilder) UserIdType(userIdType string) *Cr
 // 示例值：fe599b60-450f-46ff-b2ef-9f6675625b97
 func (builder *CreateAppTableRecordReqBuilder) ClientToken(clientToken string) *CreateAppTableRecordReqBuilder {
 	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 用于控制一致性读写，默认开启检查
+//
+// 示例值：true
+func (builder *CreateAppTableRecordReqBuilder) IgnoreConsistencyCheck(ignoreConsistencyCheck bool) *CreateAppTableRecordReqBuilder {
+	builder.apiReq.QueryParams.Set("ignore_consistency_check", fmt.Sprint(ignoreConsistencyCheck))
 	return builder
 }
 
@@ -7929,6 +7953,14 @@ func (builder *UpdateAppTableRecordReqBuilder) RecordId(recordId string) *Update
 // 示例值：
 func (builder *UpdateAppTableRecordReqBuilder) UserIdType(userIdType string) *UpdateAppTableRecordReqBuilder {
 	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 用于控制一致性读写，默认开启检查
+//
+// 示例值：true
+func (builder *UpdateAppTableRecordReqBuilder) IgnoreConsistencyCheck(ignoreConsistencyCheck bool) *UpdateAppTableRecordReqBuilder {
+	builder.apiReq.QueryParams.Set("ignore_consistency_check", fmt.Sprint(ignoreConsistencyCheck))
 	return builder
 }
 

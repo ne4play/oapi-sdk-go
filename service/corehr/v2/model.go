@@ -236,6 +236,45 @@ const (
 )
 
 const (
+	UserIdTypeBatchEmployeesAdditionalJobUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypeBatchEmployeesAdditionalJobUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypeBatchEmployeesAdditionalJobOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypeBatchEmployeesAdditionalJobPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
+)
+
+const (
+	DepartmentIdTypeBatchEmployeesAdditionalJobOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
+	DepartmentIdTypeBatchEmployeesAdditionalJobDepartmentId             = "department_id"               // 以 department_id 来标识部门
+	DepartmentIdTypeBatchEmployeesAdditionalJobPeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+)
+
+const (
+	UserIdTypeCreateEmployeesAdditionalJobUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypeCreateEmployeesAdditionalJobUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypeCreateEmployeesAdditionalJobOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypeCreateEmployeesAdditionalJobPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
+)
+
+const (
+	DepartmentIdTypeCreateEmployeesAdditionalJobOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
+	DepartmentIdTypeCreateEmployeesAdditionalJobDepartmentId             = "department_id"               // 以 department_id 来标识部门
+	DepartmentIdTypeCreateEmployeesAdditionalJobPeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+)
+
+const (
+	UserIdTypePatchEmployeesAdditionalJobUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypePatchEmployeesAdditionalJobUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypePatchEmployeesAdditionalJobOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypePatchEmployeesAdditionalJobPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
+)
+
+const (
+	DepartmentIdTypePatchEmployeesAdditionalJobOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
+	DepartmentIdTypePatchEmployeesAdditionalJobDepartmentId             = "department_id"               // 以 department_id 来标识部门
+	DepartmentIdTypePatchEmployeesAdditionalJobPeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+)
+
+const (
 	UserIdTypeBatchGetEmployeesBpUserId         = "user_id"          // 以 user_id 来识别用户
 	UserIdTypeBatchGetEmployeesBpUnionId        = "union_id"         // 以 union_id 来识别用户
 	UserIdTypeBatchGetEmployeesBpOpenId         = "open_id"          // 以 open_id 来识别用户
@@ -279,6 +318,19 @@ const (
 	DepartmentIdTypeSearchJobChangeOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
 	DepartmentIdTypeSearchJobChangeDepartmentId             = "department_id"               // 以 department_id 来标识部门
 	DepartmentIdTypeSearchJobChangePeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+)
+
+const (
+	OffboardingModeTerminationOfDismissal = 1 // 直接离职
+	OffboardingModeOffboardingWithProcess = 2 // 发起离职审批
+
+)
+
+const (
+	UserIdTypeSubmitV2OffboardingUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypeSubmitV2OffboardingUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypeSubmitV2OffboardingOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypeSubmitV2OffboardingPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
 )
 
 const (
@@ -2474,9 +2526,10 @@ func (builder *BankAccountForUpdateBuilder) Build() *BankAccountForUpdate {
 
 type BankBranch struct {
 	BankBranchId   *string `json:"bank_branch_id,omitempty"`   // 支行 ID
+	Name           []*I18n `json:"name,omitempty"`             // 金融分支机构名称（支行全称）
 	BankBranchName []*I18n `json:"bank_branch_name,omitempty"` // 支行名称
 	BankId         *string `json:"bank_id,omitempty"`          // 所属银行 ID，可通过[查询银行信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-bank/search)接口查询
-	Code           *string `json:"code,omitempty"`             // 金融分支机构编码
+	Code           *string `json:"code,omitempty"`             // 金融分支机构编码（联行号）
 	SwiftCode      *string `json:"swift_code,omitempty"`       // SWIFT 银行代码（ISO 9362）
 	Status         *int    `json:"status,omitempty"`           // 状态
 	BankBranchCode *string `json:"bank_branch_code,omitempty"` // Bank Branch Code（特定国家地区汇款使用的编码，如美国银行的 ABA Number、澳大利亚银行的 BSB Code、英国银行的 Sort Code）
@@ -2489,11 +2542,13 @@ type BankBranch struct {
 type BankBranchBuilder struct {
 	bankBranchId       string // 支行 ID
 	bankBranchIdFlag   bool
+	name               []*I18n // 金融分支机构名称（支行全称）
+	nameFlag           bool
 	bankBranchName     []*I18n // 支行名称
 	bankBranchNameFlag bool
 	bankId             string // 所属银行 ID，可通过[查询银行信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-bank/search)接口查询
 	bankIdFlag         bool
-	code               string // 金融分支机构编码
+	code               string // 金融分支机构编码（联行号）
 	codeFlag           bool
 	swiftCode          string // SWIFT 银行代码（ISO 9362）
 	swiftCodeFlag      bool
@@ -2525,6 +2580,15 @@ func (builder *BankBranchBuilder) BankBranchId(bankBranchId string) *BankBranchB
 	return builder
 }
 
+// 金融分支机构名称（支行全称）
+//
+// 示例值：
+func (builder *BankBranchBuilder) Name(name []*I18n) *BankBranchBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
 // 支行名称
 //
 // 示例值：
@@ -2543,7 +2607,7 @@ func (builder *BankBranchBuilder) BankId(bankId string) *BankBranchBuilder {
 	return builder
 }
 
-// 金融分支机构编码
+// 金融分支机构编码（联行号）
 //
 // 示例值：308100005019
 func (builder *BankBranchBuilder) Code(code string) *BankBranchBuilder {
@@ -2620,6 +2684,9 @@ func (builder *BankBranchBuilder) Build() *BankBranch {
 	if builder.bankBranchIdFlag {
 		req.BankBranchId = &builder.bankBranchId
 
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
 	}
 	if builder.bankBranchNameFlag {
 		req.BankBranchName = builder.bankBranchName
@@ -8836,7 +8903,7 @@ func NewDimensionEntityBuilder() *DimensionEntityBuilder {
 
 // 维度key
 //
-// 示例值："department"
+// 示例值：department
 func (builder *DimensionEntityBuilder) DimensionKey(dimensionKey string) *DimensionEntityBuilder {
 	builder.dimensionKey = dimensionKey
 	builder.dimensionKeyFlag = true
@@ -8845,7 +8912,7 @@ func (builder *DimensionEntityBuilder) DimensionKey(dimensionKey string) *Dimens
 
 // 维度值
 //
-// 示例值："7322790168290739756"
+// 示例值：7322790168290739756
 func (builder *DimensionEntityBuilder) DimensionValue(dimensionValue string) *DimensionEntityBuilder {
 	builder.dimensionValue = dimensionValue
 	builder.dimensionValueFlag = true
@@ -10033,6 +10100,7 @@ type Employee struct {
 	ContractEndDate          *string              `json:"contract_end_date,omitempty"`           // 主合同到期日期
 	ContractExpectedEndDate  *string              `json:"contract_expected_end_date,omitempty"`  // 主合同预计到期日期
 	PayGroupId               *string              `json:"pay_group_id,omitempty"`                // 所属薪资组 ID
+	AssignmentPayGroupId     *string              `json:"assignment_pay_group_id,omitempty"`     // 所属外派薪资组 ID
 	InternationalAssignment  *bool                `json:"international_assignment,omitempty"`    // 是否外派
 	WorkCalendarId           *string              `json:"work_calendar_id,omitempty"`            // 工作日历 ID
 	Department               *BasicDepartment     `json:"department,omitempty"`                  // 部门基本信息
@@ -10159,6 +10227,8 @@ type EmployeeBuilder struct {
 	contractExpectedEndDateFlag  bool
 	payGroupId                   string // 所属薪资组 ID
 	payGroupIdFlag               bool
+	assignmentPayGroupId         string // 所属外派薪资组 ID
+	assignmentPayGroupIdFlag     bool
 	internationalAssignment      bool // 是否外派
 	internationalAssignmentFlag  bool
 	workCalendarId               string // 工作日历 ID
@@ -10683,6 +10753,15 @@ func (builder *EmployeeBuilder) PayGroupId(payGroupId string) *EmployeeBuilder {
 	return builder
 }
 
+// 所属外派薪资组 ID
+//
+// 示例值：7164286667866966659
+func (builder *EmployeeBuilder) AssignmentPayGroupId(assignmentPayGroupId string) *EmployeeBuilder {
+	builder.assignmentPayGroupId = assignmentPayGroupId
+	builder.assignmentPayGroupIdFlag = true
+	return builder
+}
+
 // 是否外派
 //
 // 示例值：true
@@ -10980,6 +11059,10 @@ func (builder *EmployeeBuilder) Build() *Employee {
 	}
 	if builder.payGroupIdFlag {
 		req.PayGroupId = &builder.payGroupId
+
+	}
+	if builder.assignmentPayGroupIdFlag {
+		req.AssignmentPayGroupId = &builder.assignmentPayGroupId
 
 	}
 	if builder.internationalAssignmentFlag {
@@ -11290,66 +11373,68 @@ func (builder *EmployeeJobLevelBuilder) Build() *EmployeeJobLevel {
 }
 
 type EmployeeBt struct {
-	EmploymentId                   *string                  `json:"employment_id,omitempty"`                    // 雇佣 ID;- 类型与 user_id_type 一致
-	AtsApplicationId               *string                  `json:"ats_application_id,omitempty"`               // 招聘投递 ID;- 可通过[获取投递信息](https://open.feishu.cn/document/ukTMukTMukTM/uMzM1YjLzMTN24yMzUjN/hire-v1/application/get)获取详情
-	PrehireId                      *string                  `json:"prehire_id,omitempty"`                       // 待入职 ID;- 可通过[查询单个待入职](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/pre_hire/get)获取详情
-	EmployeeNumber                 *string                  `json:"employee_number,omitempty"`                  // 工号
-	EmployeeTypeId                 *string                  `json:"employee_type_id,omitempty"`                 // 人员类型 ID;- 可通过[查询单个人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/employee_type/get)获取详情
-	EmployeeSubtypeId              *string                  `json:"employee_subtype_id,omitempty"`              // 人员子类型 ID
-	DepartmentId                   *string                  `json:"department_id,omitempty"`                    // 部门 ID;- 可通过[批量查询部门V2](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/department/batch_get) 或者[搜索部门信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/department/search) 获取详情;- 类型与 department_id_type 一致
-	JobLevelId                     *string                  `json:"job_level_id,omitempty"`                     // 职级 ID;- 可通过[查询单个职级](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_level/get)获取详情
-	JobGradeId                     *string                  `json:"job_grade_id,omitempty"`                     // 职等 ID;- 可通过 [查询职等](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/job_grade/query)获取详情
-	WorkLocationId                 *string                  `json:"work_location_id,omitempty"`                 // 工作地点 ID;- 可通过[查询单个地点](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/location/get)获取详情
-	JobFamilyId                    *string                  `json:"job_family_id,omitempty"`                    // 序列 ID;- 可通过[查询单个序列](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_family/get)获取详情
-	PositionId                     *string                  `json:"position_id,omitempty"`                      // 岗位 ID;- 功能灰度中，有需要请联系[技术支持](https://applink.feishu.cn/TLJpeNdW)
-	JobId                          *string                  `json:"job_id,omitempty"`                           // 职务 ID;- 可通过[查询单个职务（V2）](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/job/get)获取详情
-	CompanyId                      *string                  `json:"company_id,omitempty"`                       // 所属公司 ID;- 可通过[查询单个公司](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/company/get)获取详情
-	WorkingHoursTypeId             *string                  `json:"working_hours_type_id,omitempty"`            // 工时制度 ID;- 可通过[查询单个工时制度](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/working_hours_type/get)获取详情
-	Tenure                         *string                  `json:"tenure,omitempty"`                           // 司龄
-	SeniorityDate                  *string                  `json:"seniority_date,omitempty"`                   // 司龄起算日期
-	EffectiveDate                  *string                  `json:"effective_date,omitempty"`                   // 当前雇佣记录的入职日期
-	PrimaryEmployment              *bool                    `json:"primary_employment,omitempty"`               // 是否是主雇佣信息
-	ProbationPeriod                *int                     `json:"probation_period,omitempty"`                 // 试用期时长（月）
-	OnProbation                    *bool                    `json:"on_probation,omitempty"`                     // 是否在试用期中
-	ProbationEndDate               *string                  `json:"probation_end_date,omitempty"`               // 试用期结束日期（实际结束日期）
-	DirectManagerId                *string                  `json:"direct_manager_id,omitempty"`                // 直接上级的雇佣 ID;- 类型与 user_id_type 一致;- 可通过[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get) 或 [搜索员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/search)获取详细信息
-	DottedLineManagerId            *string                  `json:"dotted_line_manager_id,omitempty"`           // 虚线上级的雇佣 ID; - 类型与 user_id_type 一致; - 可通过[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get) 或 [搜索员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/search)获取详细信息
-	EmploymentType                 *Enum                    `json:"employment_type,omitempty"`                  // 雇佣类型;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：employment_type
-	EmploymentStatus               *Enum                    `json:"employment_status,omitempty"`                // 雇佣状态;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：employment_status
-	ExpirationDate                 *string                  `json:"expiration_date,omitempty"`                  // 离职日期;- 即员工的最后一个工作日，最后一个工作日时员工的雇佣状态仍为“在职”，次日凌晨将更改为“离职”
-	ReasonForOffboarding           *Enum                    `json:"reason_for_offboarding,omitempty"`           // 离职原因;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：reason_for_offboarding
-	EmailAddress                   *string                  `json:"email_address,omitempty"`                    // 邮箱地址
-	UserName                       *string                  `json:"user_name,omitempty"`                        // 对应老People user_name字段，仅支持字节租户
-	WorkEmailList                  []*WorkEmail             `json:"work_email_list,omitempty"`                  // 工作邮箱列表
-	CostCenterList                 []*JobDataCostCenter     `json:"cost_center_list,omitempty"`                 // 成本中心列表
-	Rehire                         *Enum                    `json:"rehire,omitempty"`                           // 是否离职重聘;- 枚举如下：;  - no：否;  - yes：是;  - to_be_confirmed：待确定
-	RehireEmploymentId             *string                  `json:"rehire_employment_id,omitempty"`             // 历史雇佣信息 ID;- 可通过[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get) 或 [搜索员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/search)获取详细信息;- 类型不跟随 user_id_type
-	PersonInfo                     *PersonInfoBt            `json:"person_info,omitempty"`                      // 基本个人信息
-	CustomFields                   []*CustomFieldData       `json:"custom_fields,omitempty"`                    // 自定义字段;- 请参考[自定义字段说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
-	NoncompeteStatus               *Enum                    `json:"noncompete_status,omitempty"`                // 竞业状态;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：noncompete_status
-	PastOffboarding                *bool                    `json:"past_offboarding,omitempty"`                 // 是否历史离职人员
-	RegularEmployeeStartDate       *string                  `json:"regular_employee_start_date,omitempty"`      // 转正式日期
-	ExternalId                     *string                  `json:"external_id,omitempty"`                      // 外部系统 ID , 可存储租户系统中的员工 ID
-	TimesEmployed                  *int                     `json:"times_employed,omitempty"`                   // 入职次数
-	RecruitmentType                *Enum                    `json:"recruitment_type,omitempty"`                 // 招聘来源;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：recruitment_type
-	AvatarUrl                      *string                  `json:"avatar_url,omitempty"`                       // 员工头像（即飞书头像）
-	PrimaryContractId              *string                  `json:"primary_contract_id,omitempty"`              // 主合同 ID;- 可通过[查询单个合同](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/contract/get)获取详情
-	ContractStartDate              *string                  `json:"contract_start_date,omitempty"`              // 主合同开始日期
-	ContractEndDate                *string                  `json:"contract_end_date,omitempty"`                // 主合同到期日期
-	ContractExpectedEndDate        *string                  `json:"contract_expected_end_date,omitempty"`       // 主合同预计到期日期
-	PayGroupId                     *string                  `json:"pay_group_id,omitempty"`                     // 所属薪资组 ID
-	InternationalAssignment        *bool                    `json:"international_assignment,omitempty"`         // 是否外派
-	WorkCalendarId                 *string                  `json:"work_calendar_id,omitempty"`                 // 工作日历 ID - 可通过[查询工作日历](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/leave/work_calendar)获取详情
-	Department                     *BasicDepartment         `json:"department,omitempty"`                       // 部门基本信息
-	DirectManager                  *BasicEmployee           `json:"direct_manager,omitempty"`                   // 直接上级基本信息
-	DottedLineManager              *BasicEmployee           `json:"dotted_line_manager,omitempty"`              // 虚线上级基本信息
-	TimeZone                       *string                  `json:"time_zone,omitempty"`                        // 时区
-	PrimaryInternationalAssignment *InternationalAssignment `json:"primary_international_assignment,omitempty"` // 当前生效的外派记录
-	ServiceCompany                 *string                  `json:"service_company,omitempty"`                  // 任职公司;- 可通过[查询单个公司](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/company/get)获取详情
-	CompensationType               *Enum                    `json:"compensation_type,omitempty"`                // 薪资类型;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：job_data;  - custom_api_name：compensation_type
-	WorkShift                      *Enum                    `json:"work_shift,omitempty"`                       // 排班类型;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：job_data;  - custom_api_name：work_shift
-	TalentPoolIdList               []string                 `json:"talent_pool_id_list,omitempty"`              // 所属人才池
-	CustomOrg                      *string                  `json:"custom_org,omitempty"`                       // 自定义组织
+	EmploymentId                   *string                       `json:"employment_id,omitempty"`                     // 雇佣 ID;- 类型与 user_id_type 一致
+	AtsApplicationId               *string                       `json:"ats_application_id,omitempty"`                // 招聘投递 ID;- 可通过[获取投递信息](https://open.feishu.cn/document/ukTMukTMukTM/uMzM1YjLzMTN24yMzUjN/hire-v1/application/get)获取详情
+	PrehireId                      *string                       `json:"prehire_id,omitempty"`                        // 待入职 ID;- 可通过[查询单个待入职](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/pre_hire/get)获取详情
+	EmployeeNumber                 *string                       `json:"employee_number,omitempty"`                   // 工号
+	EmployeeTypeId                 *string                       `json:"employee_type_id,omitempty"`                  // 人员类型 ID;- 可通过[查询单个人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/employee_type/get)获取详情
+	EmployeeSubtypeId              *string                       `json:"employee_subtype_id,omitempty"`               // 人员子类型 ID
+	DepartmentId                   *string                       `json:"department_id,omitempty"`                     // 部门 ID;- 可通过[批量查询部门V2](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/department/batch_get) 或者[搜索部门信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/department/search) 获取详情;- 类型与 department_id_type 一致
+	JobLevelId                     *string                       `json:"job_level_id,omitempty"`                      // 职级 ID;- 可通过[查询单个职级](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_level/get)获取详情
+	JobGradeId                     *string                       `json:"job_grade_id,omitempty"`                      // 职等 ID;- 可通过 [查询职等](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/job_grade/query)获取详情
+	WorkLocationId                 *string                       `json:"work_location_id,omitempty"`                  // 工作地点 ID;- 可通过[查询单个地点](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/location/get)获取详情
+	JobFamilyId                    *string                       `json:"job_family_id,omitempty"`                     // 序列 ID;- 可通过[查询单个序列](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/job_family/get)获取详情
+	PositionId                     *string                       `json:"position_id,omitempty"`                       // 岗位 ID;- 功能灰度中，有需要请联系[技术支持](https://applink.feishu.cn/TLJpeNdW)
+	JobId                          *string                       `json:"job_id,omitempty"`                            // 职务 ID;- 可通过[查询单个职务（V2）](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/job/get)获取详情
+	CompanyId                      *string                       `json:"company_id,omitempty"`                        // 所属公司 ID;- 可通过[查询单个公司](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/company/get)获取详情
+	WorkingHoursTypeId             *string                       `json:"working_hours_type_id,omitempty"`             // 工时制度 ID;- 可通过[查询单个工时制度](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/working_hours_type/get)获取详情
+	Tenure                         *string                       `json:"tenure,omitempty"`                            // 司龄
+	SeniorityDate                  *string                       `json:"seniority_date,omitempty"`                    // 司龄起算日期
+	EffectiveDate                  *string                       `json:"effective_date,omitempty"`                    // 当前雇佣记录的入职日期
+	PrimaryEmployment              *bool                         `json:"primary_employment,omitempty"`                // 是否是主雇佣信息
+	ProbationPeriod                *int                          `json:"probation_period,omitempty"`                  // 试用期时长（月）
+	OnProbation                    *bool                         `json:"on_probation,omitempty"`                      // 是否在试用期中
+	ProbationEndDate               *string                       `json:"probation_end_date,omitempty"`                // 试用期结束日期（实际结束日期）
+	DirectManagerId                *string                       `json:"direct_manager_id,omitempty"`                 // 直接上级的雇佣 ID;- 类型与 user_id_type 一致;- 可通过[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get) 或 [搜索员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/search)获取详细信息
+	DottedLineManagerId            *string                       `json:"dotted_line_manager_id,omitempty"`            // 虚线上级的雇佣 ID; - 类型与 user_id_type 一致; - 可通过[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get) 或 [搜索员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/search)获取详细信息
+	EmploymentType                 *Enum                         `json:"employment_type,omitempty"`                   // 雇佣类型;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：employment_type
+	EmploymentStatus               *Enum                         `json:"employment_status,omitempty"`                 // 雇佣状态;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：employment_status
+	ExpirationDate                 *string                       `json:"expiration_date,omitempty"`                   // 离职日期;- 即员工的最后一个工作日，最后一个工作日时员工的雇佣状态仍为“在职”，次日凌晨将更改为“离职”
+	ReasonForOffboarding           *Enum                         `json:"reason_for_offboarding,omitempty"`            // 离职原因;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：reason_for_offboarding
+	EmailAddress                   *string                       `json:"email_address,omitempty"`                     // 邮箱地址
+	UserName                       *string                       `json:"user_name,omitempty"`                         // 对应老People user_name字段，仅支持字节租户
+	WorkEmailList                  []*WorkEmail                  `json:"work_email_list,omitempty"`                   // 工作邮箱列表
+	CostCenterList                 []*JobDataCostCenter          `json:"cost_center_list,omitempty"`                  // 成本中心列表
+	Rehire                         *Enum                         `json:"rehire,omitempty"`                            // 是否离职重聘;- 枚举如下：;  - no：否;  - yes：是;  - to_be_confirmed：待确定
+	RehireEmploymentId             *string                       `json:"rehire_employment_id,omitempty"`              // 历史雇佣信息 ID;- 可通过[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get) 或 [搜索员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/search)获取详细信息;- 类型不跟随 user_id_type
+	PersonInfo                     *PersonInfoBt                 `json:"person_info,omitempty"`                       // 基本个人信息
+	CustomFields                   []*CustomFieldData            `json:"custom_fields,omitempty"`                     // 自定义字段;- 请参考[自定义字段说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
+	NoncompeteStatus               *Enum                         `json:"noncompete_status,omitempty"`                 // 竞业状态;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：noncompete_status
+	PastOffboarding                *bool                         `json:"past_offboarding,omitempty"`                  // 是否历史离职人员
+	RegularEmployeeStartDate       *string                       `json:"regular_employee_start_date,omitempty"`       // 转正式日期
+	ExternalId                     *string                       `json:"external_id,omitempty"`                       // 外部系统 ID , 可存储租户系统中的员工 ID
+	TimesEmployed                  *int                          `json:"times_employed,omitempty"`                    // 入职次数
+	RecruitmentType                *Enum                         `json:"recruitment_type,omitempty"`                  // 招聘来源;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：employment;  - custom_api_name：recruitment_type
+	AvatarUrl                      *string                       `json:"avatar_url,omitempty"`                        // 员工头像（即飞书头像）
+	PrimaryContractId              *string                       `json:"primary_contract_id,omitempty"`               // 主合同 ID;- 可通过[查询单个合同](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/contract/get)获取详情
+	ContractStartDate              *string                       `json:"contract_start_date,omitempty"`               // 主合同开始日期
+	ContractEndDate                *string                       `json:"contract_end_date,omitempty"`                 // 主合同到期日期
+	ContractExpectedEndDate        *string                       `json:"contract_expected_end_date,omitempty"`        // 主合同预计到期日期
+	PayGroupId                     *string                       `json:"pay_group_id,omitempty"`                      // 所属薪资组 ID
+	AssignmentPayGroupId           *string                       `json:"assignment_pay_group_id,omitempty"`           // 所属外派薪资组 ID
+	InternationalAssignment        *bool                         `json:"international_assignment,omitempty"`          // 是否外派
+	WorkCalendarId                 *string                       `json:"work_calendar_id,omitempty"`                  // 工作日历 ID - 可通过[查询工作日历](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/leave/work_calendar)获取详情
+	Department                     *BasicDepartment              `json:"department,omitempty"`                        // 部门基本信息
+	DirectManager                  *BasicEmployee                `json:"direct_manager,omitempty"`                    // 直接上级基本信息
+	DottedLineManager              *BasicEmployee                `json:"dotted_line_manager,omitempty"`               // 虚线上级基本信息
+	TimeZone                       *string                       `json:"time_zone,omitempty"`                         // 时区
+	PrimaryInternationalAssignment *InternationalAssignment      `json:"primary_international_assignment,omitempty"`  // 当前生效的外派记录
+	ServiceCompany                 *string                       `json:"service_company,omitempty"`                   // 任职公司;- 可通过[查询单个公司](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/company/get)获取详情
+	CompensationType               *Enum                         `json:"compensation_type,omitempty"`                 // 薪资类型;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：job_data;  - custom_api_name：compensation_type
+	WorkShift                      *Enum                         `json:"work_shift,omitempty"`                        // 排班类型;- 可通过[获取字段详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：job_data;  - custom_api_name：work_shift
+	TalentPoolIdList               []string                      `json:"talent_pool_id_list,omitempty"`               // 所属人才池
+	CustomOrg                      *string                       `json:"custom_org,omitempty"`                        // 自定义组织
+	SeniorityAdjustInformationList []*SeniorityAdjustInformation `json:"seniority_adjust_information_list,omitempty"` // 司龄调整信息
 }
 
 type EmployeeBtBuilder struct {
@@ -11449,6 +11534,8 @@ type EmployeeBtBuilder struct {
 	contractExpectedEndDateFlag        bool
 	payGroupId                         string // 所属薪资组 ID
 	payGroupIdFlag                     bool
+	assignmentPayGroupId               string // 所属外派薪资组 ID
+	assignmentPayGroupIdFlag           bool
 	internationalAssignment            bool // 是否外派
 	internationalAssignmentFlag        bool
 	workCalendarId                     string // 工作日历 ID - 可通过[查询工作日历](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/leave/work_calendar)获取详情
@@ -11473,6 +11560,8 @@ type EmployeeBtBuilder struct {
 	talentPoolIdListFlag               bool
 	customOrg                          string // 自定义组织
 	customOrgFlag                      bool
+	seniorityAdjustInformationList     []*SeniorityAdjustInformation // 司龄调整信息
+	seniorityAdjustInformationListFlag bool
 }
 
 func NewEmployeeBtBuilder() *EmployeeBtBuilder {
@@ -11912,6 +12001,15 @@ func (builder *EmployeeBtBuilder) PayGroupId(payGroupId string) *EmployeeBtBuild
 	return builder
 }
 
+// 所属外派薪资组 ID
+//
+// 示例值：7164286667866966659
+func (builder *EmployeeBtBuilder) AssignmentPayGroupId(assignmentPayGroupId string) *EmployeeBtBuilder {
+	builder.assignmentPayGroupId = assignmentPayGroupId
+	builder.assignmentPayGroupIdFlag = true
+	return builder
+}
+
 // 是否外派
 //
 // 示例值：true
@@ -12017,6 +12115,15 @@ func (builder *EmployeeBtBuilder) TalentPoolIdList(talentPoolIdList []string) *E
 func (builder *EmployeeBtBuilder) CustomOrg(customOrg string) *EmployeeBtBuilder {
 	builder.customOrg = customOrg
 	builder.customOrgFlag = true
+	return builder
+}
+
+// 司龄调整信息
+//
+// 示例值：
+func (builder *EmployeeBtBuilder) SeniorityAdjustInformationList(seniorityAdjustInformationList []*SeniorityAdjustInformation) *EmployeeBtBuilder {
+	builder.seniorityAdjustInformationList = seniorityAdjustInformationList
+	builder.seniorityAdjustInformationListFlag = true
 	return builder
 }
 
@@ -12204,6 +12311,10 @@ func (builder *EmployeeBtBuilder) Build() *EmployeeBt {
 		req.PayGroupId = &builder.payGroupId
 
 	}
+	if builder.assignmentPayGroupIdFlag {
+		req.AssignmentPayGroupId = &builder.assignmentPayGroupId
+
+	}
 	if builder.internationalAssignmentFlag {
 		req.InternationalAssignment = &builder.internationalAssignment
 
@@ -12244,6 +12355,9 @@ func (builder *EmployeeBtBuilder) Build() *EmployeeBt {
 	if builder.customOrgFlag {
 		req.CustomOrg = &builder.customOrg
 
+	}
+	if builder.seniorityAdjustInformationListFlag {
+		req.SeniorityAdjustInformationList = builder.seniorityAdjustInformationList
 	}
 	return req
 }
@@ -15381,6 +15495,163 @@ func (builder *EnumBuilder) Build() *Enum {
 	}
 	if builder.displayFlag {
 		req.Display = builder.display
+	}
+	return req
+}
+
+type EnumField struct {
+	ApiName     *string `json:"api_name,omitempty"`      // ApiName
+	Name        []*I18n `json:"name,omitempty"`          // 枚举值名
+	Description []*I18n `json:"description,omitempty"`   // 枚举值描述
+	EnumApiName *string `json:"enum_api_name,omitempty"` // 所属枚举常量ApiName
+	Order       *int    `json:"order,omitempty"`         // 顺序
+	Status      *int    `json:"status,omitempty"`        // 状态
+}
+
+type EnumFieldBuilder struct {
+	apiName         string // ApiName
+	apiNameFlag     bool
+	name            []*I18n // 枚举值名
+	nameFlag        bool
+	description     []*I18n // 枚举值描述
+	descriptionFlag bool
+	enumApiName     string // 所属枚举常量ApiName
+	enumApiNameFlag bool
+	order           int // 顺序
+	orderFlag       bool
+	status          int // 状态
+	statusFlag      bool
+}
+
+func NewEnumFieldBuilder() *EnumFieldBuilder {
+	builder := &EnumFieldBuilder{}
+	return builder
+}
+
+// ApiName
+//
+// 示例值：special_day
+func (builder *EnumFieldBuilder) ApiName(apiName string) *EnumFieldBuilder {
+	builder.apiName = apiName
+	builder.apiNameFlag = true
+	return builder
+}
+
+// 枚举值名
+//
+// 示例值：
+func (builder *EnumFieldBuilder) Name(name []*I18n) *EnumFieldBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 枚举值描述
+//
+// 示例值：
+func (builder *EnumFieldBuilder) Description(description []*I18n) *EnumFieldBuilder {
+	builder.description = description
+	builder.descriptionFlag = true
+	return builder
+}
+
+// 所属枚举常量ApiName
+//
+// 示例值：overtime_date_type
+func (builder *EnumFieldBuilder) EnumApiName(enumApiName string) *EnumFieldBuilder {
+	builder.enumApiName = enumApiName
+	builder.enumApiNameFlag = true
+	return builder
+}
+
+// 顺序
+//
+// 示例值：1
+func (builder *EnumFieldBuilder) Order(order int) *EnumFieldBuilder {
+	builder.order = order
+	builder.orderFlag = true
+	return builder
+}
+
+// 状态
+//
+// 示例值：1
+func (builder *EnumFieldBuilder) Status(status int) *EnumFieldBuilder {
+	builder.status = status
+	builder.statusFlag = true
+	return builder
+}
+
+func (builder *EnumFieldBuilder) Build() *EnumField {
+	req := &EnumField{}
+	if builder.apiNameFlag {
+		req.ApiName = &builder.apiName
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	if builder.descriptionFlag {
+		req.Description = builder.description
+	}
+	if builder.enumApiNameFlag {
+		req.EnumApiName = &builder.enumApiName
+
+	}
+	if builder.orderFlag {
+		req.Order = &builder.order
+
+	}
+	if builder.statusFlag {
+		req.Status = &builder.status
+
+	}
+	return req
+}
+
+type Enums struct {
+	EnumApiname *string      `json:"enum_apiname,omitempty"` // 枚举名称
+	EnumItems   []*EnumField `json:"enum_items,omitempty"`   // 枚举值
+}
+
+type EnumsBuilder struct {
+	enumApiname     string // 枚举名称
+	enumApinameFlag bool
+	enumItems       []*EnumField // 枚举值
+	enumItemsFlag   bool
+}
+
+func NewEnumsBuilder() *EnumsBuilder {
+	builder := &EnumsBuilder{}
+	return builder
+}
+
+// 枚举名称
+//
+// 示例值：overtime_date_type
+func (builder *EnumsBuilder) EnumApiname(enumApiname string) *EnumsBuilder {
+	builder.enumApiname = enumApiname
+	builder.enumApinameFlag = true
+	return builder
+}
+
+// 枚举值
+//
+// 示例值：
+func (builder *EnumsBuilder) EnumItems(enumItems []*EnumField) *EnumsBuilder {
+	builder.enumItems = enumItems
+	builder.enumItemsFlag = true
+	return builder
+}
+
+func (builder *EnumsBuilder) Build() *Enums {
+	req := &Enums{}
+	if builder.enumApinameFlag {
+		req.EnumApiname = &builder.enumApiname
+
+	}
+	if builder.enumItemsFlag {
+		req.EnumItems = builder.enumItems
 	}
 	return req
 }
@@ -25338,6 +25609,148 @@ func (builder *OrganizationDomainEventDataBuilder) Build() *OrganizationDomainEv
 	return req
 }
 
+type OrganizationOpLog struct {
+	ObjectId        *string                    `json:"object_id,omitempty"`        // 业务对象ID
+	Changes         []*OperationLogEntityField `json:"changes,omitempty"`          // 字段变化列表
+	Opretor         *string                    `json:"opretor,omitempty"`          // 操作人
+	OperationType   *string                    `json:"operation_type,omitempty"`   // 操作类型
+	OperationTime   *string                    `json:"operation_time,omitempty"`   // 操作时间
+	EffectiveTime   *string                    `json:"effective_time,omitempty"`   // 操作生效时间
+	OperationReason *string                    `json:"operation_reason,omitempty"` // 操作原因说明
+	ChangeReasons   []string                   `json:"change_reasons,omitempty"`   // 调整原因列表
+}
+
+type OrganizationOpLogBuilder struct {
+	objectId            string // 业务对象ID
+	objectIdFlag        bool
+	changes             []*OperationLogEntityField // 字段变化列表
+	changesFlag         bool
+	opretor             string // 操作人
+	opretorFlag         bool
+	operationType       string // 操作类型
+	operationTypeFlag   bool
+	operationTime       string // 操作时间
+	operationTimeFlag   bool
+	effectiveTime       string // 操作生效时间
+	effectiveTimeFlag   bool
+	operationReason     string // 操作原因说明
+	operationReasonFlag bool
+	changeReasons       []string // 调整原因列表
+	changeReasonsFlag   bool
+}
+
+func NewOrganizationOpLogBuilder() *OrganizationOpLogBuilder {
+	builder := &OrganizationOpLogBuilder{}
+	return builder
+}
+
+// 业务对象ID
+//
+// 示例值：7094136522860922111
+func (builder *OrganizationOpLogBuilder) ObjectId(objectId string) *OrganizationOpLogBuilder {
+	builder.objectId = objectId
+	builder.objectIdFlag = true
+	return builder
+}
+
+// 字段变化列表
+//
+// 示例值：
+func (builder *OrganizationOpLogBuilder) Changes(changes []*OperationLogEntityField) *OrganizationOpLogBuilder {
+	builder.changes = changes
+	builder.changesFlag = true
+	return builder
+}
+
+// 操作人
+//
+// 示例值：工号001
+func (builder *OrganizationOpLogBuilder) Opretor(opretor string) *OrganizationOpLogBuilder {
+	builder.opretor = opretor
+	builder.opretorFlag = true
+	return builder
+}
+
+// 操作类型
+//
+// 示例值：编辑
+func (builder *OrganizationOpLogBuilder) OperationType(operationType string) *OrganizationOpLogBuilder {
+	builder.operationType = operationType
+	builder.operationTypeFlag = true
+	return builder
+}
+
+// 操作时间
+//
+// 示例值：2020-05-02 12:00:00
+func (builder *OrganizationOpLogBuilder) OperationTime(operationTime string) *OrganizationOpLogBuilder {
+	builder.operationTime = operationTime
+	builder.operationTimeFlag = true
+	return builder
+}
+
+// 操作生效时间
+//
+// 示例值：2020-06-02 00:00:00
+func (builder *OrganizationOpLogBuilder) EffectiveTime(effectiveTime string) *OrganizationOpLogBuilder {
+	builder.effectiveTime = effectiveTime
+	builder.effectiveTimeFlag = true
+	return builder
+}
+
+// 操作原因说明
+//
+// 示例值：因人员调整,变更部门负责人为某某
+func (builder *OrganizationOpLogBuilder) OperationReason(operationReason string) *OrganizationOpLogBuilder {
+	builder.operationReason = operationReason
+	builder.operationReasonFlag = true
+	return builder
+}
+
+// 调整原因列表
+//
+// 示例值：
+func (builder *OrganizationOpLogBuilder) ChangeReasons(changeReasons []string) *OrganizationOpLogBuilder {
+	builder.changeReasons = changeReasons
+	builder.changeReasonsFlag = true
+	return builder
+}
+
+func (builder *OrganizationOpLogBuilder) Build() *OrganizationOpLog {
+	req := &OrganizationOpLog{}
+	if builder.objectIdFlag {
+		req.ObjectId = &builder.objectId
+
+	}
+	if builder.changesFlag {
+		req.Changes = builder.changes
+	}
+	if builder.opretorFlag {
+		req.Opretor = &builder.opretor
+
+	}
+	if builder.operationTypeFlag {
+		req.OperationType = &builder.operationType
+
+	}
+	if builder.operationTimeFlag {
+		req.OperationTime = &builder.operationTime
+
+	}
+	if builder.effectiveTimeFlag {
+		req.EffectiveTime = &builder.effectiveTime
+
+	}
+	if builder.operationReasonFlag {
+		req.OperationReason = &builder.operationReason
+
+	}
+	if builder.changeReasonsFlag {
+		req.ChangeReasons = builder.changeReasons
+	}
+	return req
+}
+
 type OrgdraftDepartmentId struct {
 	DepartmentId      *string `json:"department_id,omitempty"`       // 部门 ID ，新建部门审批通过前会返回空值
 	DraftDepartmentId *string `json:"draft_department_id,omitempty"` // 调整部门 ID ，新建部门审批通过前会返回格式为 td_xxx 的临时 ID
@@ -31958,12 +32371,12 @@ func (builder *ProcessApproverBuilder) Build() *ProcessApprover {
 }
 
 type ProcessRevokeAndWithdraw struct {
-	UserId *string `json:"user_id,omitempty"` // 按user_id_type类型传递。如果system_approval为false，则必填。否则非必填。
+	UserId *string `json:"user_id,omitempty"` // 按照指定的用户ID类型传递对应的用户ID。
 	Reason *string `json:"reason,omitempty"`  // 原因
 }
 
 type ProcessRevokeAndWithdrawBuilder struct {
-	userId     string // 按user_id_type类型传递。如果system_approval为false，则必填。否则非必填。
+	userId     string // 按照指定的用户ID类型传递对应的用户ID。
 	userIdFlag bool
 	reason     string // 原因
 	reasonFlag bool
@@ -31974,7 +32387,7 @@ func NewProcessRevokeAndWithdrawBuilder() *ProcessRevokeAndWithdrawBuilder {
 	return builder
 }
 
-// 按user_id_type类型传递。如果system_approval为false，则必填。否则非必填。
+// 按照指定的用户ID类型传递对应的用户ID。
 //
 // 示例值：ou_91791271921729102012
 func (builder *ProcessRevokeAndWithdrawBuilder) UserId(userId string) *ProcessRevokeAndWithdrawBuilder {
@@ -37901,14 +38314,14 @@ func (builder *ReorganizationInfoBuilder) Build() *ReorganizationInfo {
 }
 
 type ReportDetailReq struct {
-	WokforcePlanId                *string                   `json:"wokforce_plan_id,omitempty"`                 // 编制规划id
+	WorkforcePlanId               *string                   `json:"workforce_plan_id,omitempty"`                // 编制规划id
 	CentralizedReportingProjectId *string                   `json:"centralized_reporting_project_id,omitempty"` // 集中填报id
 	Items                         []*WorkforcePlanDetailRow `json:"items,omitempty"`                            // 集中填报的一些填报行
 }
 
 type ReportDetailReqBuilder struct {
-	wokforcePlanId                    string // 编制规划id
-	wokforcePlanIdFlag                bool
+	workforcePlanId                   string // 编制规划id
+	workforcePlanIdFlag               bool
 	centralizedReportingProjectId     string // 集中填报id
 	centralizedReportingProjectIdFlag bool
 	items                             []*WorkforcePlanDetailRow // 集中填报的一些填报行
@@ -37923,15 +38336,15 @@ func NewReportDetailReqBuilder() *ReportDetailReqBuilder {
 // 编制规划id
 //
 // 示例值：7430330781544564268
-func (builder *ReportDetailReqBuilder) WokforcePlanId(wokforcePlanId string) *ReportDetailReqBuilder {
-	builder.wokforcePlanId = wokforcePlanId
-	builder.wokforcePlanIdFlag = true
+func (builder *ReportDetailReqBuilder) WorkforcePlanId(workforcePlanId string) *ReportDetailReqBuilder {
+	builder.workforcePlanId = workforcePlanId
+	builder.workforcePlanIdFlag = true
 	return builder
 }
 
 // 集中填报id
 //
-// 示例值："7430470688844023340"
+// 示例值：7430470688844023340
 func (builder *ReportDetailReqBuilder) CentralizedReportingProjectId(centralizedReportingProjectId string) *ReportDetailReqBuilder {
 	builder.centralizedReportingProjectId = centralizedReportingProjectId
 	builder.centralizedReportingProjectIdFlag = true
@@ -37949,8 +38362,8 @@ func (builder *ReportDetailReqBuilder) Items(items []*WorkforcePlanDetailRow) *R
 
 func (builder *ReportDetailReqBuilder) Build() *ReportDetailReq {
 	req := &ReportDetailReq{}
-	if builder.wokforcePlanIdFlag {
-		req.WokforcePlanId = &builder.wokforcePlanId
+	if builder.workforcePlanIdFlag {
+		req.WorkforcePlanId = &builder.workforcePlanId
 
 	}
 	if builder.centralizedReportingProjectIdFlag {
@@ -38132,6 +38545,259 @@ func (builder *ResidentTaxForUpdateBuilder) Build() *ResidentTaxForUpdate {
 	if builder.yearResidentTaxFlag {
 		req.YearResidentTax = &builder.yearResidentTax
 
+	}
+	return req
+}
+
+type SeniorityAdjustInformation struct {
+	Id                            *string            `json:"id,omitempty"`                               // 分组 ID
+	SeniorityAdjustmentType       *Enum              `json:"seniority_adjustment_type,omitempty"`        // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	StartDate                     *string            `json:"start_date,omitempty"`                       // 开始日期;- 格式： yyyy-mm-dd
+	EndDate                       *string            `json:"end_date,omitempty"`                         // 结束日期;- 格式： yyyy-mm-dd
+	ReasonsForSeniorityAdjustment *string            `json:"reasons_for_seniority_adjustment,omitempty"` // 调整原因
+	SeniorityAdjustment           *float64           `json:"seniority_adjustment,omitempty"`             // 调整值;- 精确度：两位小数;- 单位：年
+	CustomFields                  []*CustomFieldData `json:"custom_fields,omitempty"`                    // 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
+}
+
+type SeniorityAdjustInformationBuilder struct {
+	id                                string // 分组 ID
+	idFlag                            bool
+	seniorityAdjustmentType           *Enum // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	seniorityAdjustmentTypeFlag       bool
+	startDate                         string // 开始日期;- 格式： yyyy-mm-dd
+	startDateFlag                     bool
+	endDate                           string // 结束日期;- 格式： yyyy-mm-dd
+	endDateFlag                       bool
+	reasonsForSeniorityAdjustment     string // 调整原因
+	reasonsForSeniorityAdjustmentFlag bool
+	seniorityAdjustment               float64 // 调整值;- 精确度：两位小数;- 单位：年
+	seniorityAdjustmentFlag           bool
+	customFields                      []*CustomFieldData // 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
+	customFieldsFlag                  bool
+}
+
+func NewSeniorityAdjustInformationBuilder() *SeniorityAdjustInformationBuilder {
+	builder := &SeniorityAdjustInformationBuilder{}
+	return builder
+}
+
+// 分组 ID
+//
+// 示例值：123
+func (builder *SeniorityAdjustInformationBuilder) Id(id string) *SeniorityAdjustInformationBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+//
+// 示例值：
+func (builder *SeniorityAdjustInformationBuilder) SeniorityAdjustmentType(seniorityAdjustmentType *Enum) *SeniorityAdjustInformationBuilder {
+	builder.seniorityAdjustmentType = seniorityAdjustmentType
+	builder.seniorityAdjustmentTypeFlag = true
+	return builder
+}
+
+// 开始日期;- 格式： yyyy-mm-dd
+//
+// 示例值：2024-01-01
+func (builder *SeniorityAdjustInformationBuilder) StartDate(startDate string) *SeniorityAdjustInformationBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 结束日期;- 格式： yyyy-mm-dd
+//
+// 示例值：2024-01-02
+func (builder *SeniorityAdjustInformationBuilder) EndDate(endDate string) *SeniorityAdjustInformationBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 调整原因
+//
+// 示例值：example
+func (builder *SeniorityAdjustInformationBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *SeniorityAdjustInformationBuilder {
+	builder.reasonsForSeniorityAdjustment = reasonsForSeniorityAdjustment
+	builder.reasonsForSeniorityAdjustmentFlag = true
+	return builder
+}
+
+// 调整值;- 精确度：两位小数;- 单位：年
+//
+// 示例值：1.01
+func (builder *SeniorityAdjustInformationBuilder) SeniorityAdjustment(seniorityAdjustment float64) *SeniorityAdjustInformationBuilder {
+	builder.seniorityAdjustment = seniorityAdjustment
+	builder.seniorityAdjustmentFlag = true
+	return builder
+}
+
+// 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
+//
+// 示例值：
+func (builder *SeniorityAdjustInformationBuilder) CustomFields(customFields []*CustomFieldData) *SeniorityAdjustInformationBuilder {
+	builder.customFields = customFields
+	builder.customFieldsFlag = true
+	return builder
+}
+
+func (builder *SeniorityAdjustInformationBuilder) Build() *SeniorityAdjustInformation {
+	req := &SeniorityAdjustInformation{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.seniorityAdjustmentTypeFlag {
+		req.SeniorityAdjustmentType = builder.seniorityAdjustmentType
+	}
+	if builder.startDateFlag {
+		req.StartDate = &builder.startDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
+
+	}
+	if builder.reasonsForSeniorityAdjustmentFlag {
+		req.ReasonsForSeniorityAdjustment = &builder.reasonsForSeniorityAdjustment
+
+	}
+	if builder.seniorityAdjustmentFlag {
+		req.SeniorityAdjustment = &builder.seniorityAdjustment
+
+	}
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
+	}
+	return req
+}
+
+type SeniorityAdjustInformationForEdit struct {
+	Id                            *string                      `json:"id,omitempty"`                               // 分组 ID
+	SeniorityAdjustmentType       *string                      `json:"seniority_adjustment_type,omitempty"`        // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	StartDate                     *string                      `json:"start_date,omitempty"`                       // 开始日期;- 格式： yyyy-mm-dd
+	EndDate                       *string                      `json:"end_date,omitempty"`                         // 结束日期;- 格式： yyyy-mm-dd
+	ReasonsForSeniorityAdjustment *string                      `json:"reasons_for_seniority_adjustment,omitempty"` // 调整原因
+	SeniorityAdjustment           *float64                     `json:"seniority_adjustment,omitempty"`             // 调整值;- 精确度：两位小数;- 单位：年
+	CustomFields                  []*ProfileSettingCustomField `json:"custom_fields,omitempty"`                    // 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
+}
+
+type SeniorityAdjustInformationForEditBuilder struct {
+	id                                string // 分组 ID
+	idFlag                            bool
+	seniorityAdjustmentType           string // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	seniorityAdjustmentTypeFlag       bool
+	startDate                         string // 开始日期;- 格式： yyyy-mm-dd
+	startDateFlag                     bool
+	endDate                           string // 结束日期;- 格式： yyyy-mm-dd
+	endDateFlag                       bool
+	reasonsForSeniorityAdjustment     string // 调整原因
+	reasonsForSeniorityAdjustmentFlag bool
+	seniorityAdjustment               float64 // 调整值;- 精确度：两位小数;- 单位：年
+	seniorityAdjustmentFlag           bool
+	customFields                      []*ProfileSettingCustomField // 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
+	customFieldsFlag                  bool
+}
+
+func NewSeniorityAdjustInformationForEditBuilder() *SeniorityAdjustInformationForEditBuilder {
+	builder := &SeniorityAdjustInformationForEditBuilder{}
+	return builder
+}
+
+// 分组 ID
+//
+// 示例值：123
+func (builder *SeniorityAdjustInformationForEditBuilder) Id(id string) *SeniorityAdjustInformationForEditBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+//
+// 示例值：increase
+func (builder *SeniorityAdjustInformationForEditBuilder) SeniorityAdjustmentType(seniorityAdjustmentType string) *SeniorityAdjustInformationForEditBuilder {
+	builder.seniorityAdjustmentType = seniorityAdjustmentType
+	builder.seniorityAdjustmentTypeFlag = true
+	return builder
+}
+
+// 开始日期;- 格式： yyyy-mm-dd
+//
+// 示例值：2024-01-01
+func (builder *SeniorityAdjustInformationForEditBuilder) StartDate(startDate string) *SeniorityAdjustInformationForEditBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 结束日期;- 格式： yyyy-mm-dd
+//
+// 示例值：2024-01-02
+func (builder *SeniorityAdjustInformationForEditBuilder) EndDate(endDate string) *SeniorityAdjustInformationForEditBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 调整原因
+//
+// 示例值：example
+func (builder *SeniorityAdjustInformationForEditBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *SeniorityAdjustInformationForEditBuilder {
+	builder.reasonsForSeniorityAdjustment = reasonsForSeniorityAdjustment
+	builder.reasonsForSeniorityAdjustmentFlag = true
+	return builder
+}
+
+// 调整值;- 精确度：两位小数;- 单位：年
+//
+// 示例值：1.01
+func (builder *SeniorityAdjustInformationForEditBuilder) SeniorityAdjustment(seniorityAdjustment float64) *SeniorityAdjustInformationForEditBuilder {
+	builder.seniorityAdjustment = seniorityAdjustment
+	builder.seniorityAdjustmentFlag = true
+	return builder
+}
+
+// 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
+//
+// 示例值：
+func (builder *SeniorityAdjustInformationForEditBuilder) CustomFields(customFields []*ProfileSettingCustomField) *SeniorityAdjustInformationForEditBuilder {
+	builder.customFields = customFields
+	builder.customFieldsFlag = true
+	return builder
+}
+
+func (builder *SeniorityAdjustInformationForEditBuilder) Build() *SeniorityAdjustInformationForEdit {
+	req := &SeniorityAdjustInformationForEdit{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.seniorityAdjustmentTypeFlag {
+		req.SeniorityAdjustmentType = &builder.seniorityAdjustmentType
+
+	}
+	if builder.startDateFlag {
+		req.StartDate = &builder.startDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
+
+	}
+	if builder.reasonsForSeniorityAdjustmentFlag {
+		req.ReasonsForSeniorityAdjustment = &builder.reasonsForSeniorityAdjustment
+
+	}
+	if builder.seniorityAdjustmentFlag {
+		req.SeniorityAdjustment = &builder.seniorityAdjustment
+
+	}
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
 	}
 	return req
 }
@@ -40995,6 +41661,85 @@ func (builder *SignatureUserInfoBuilder) Build() *SignatureUserInfo {
 	return req
 }
 
+type StartProcessParam struct {
+	FlowApiName     *string                  `json:"flow_api_name,omitempty"`    // 流程定义标识
+	InitiatorId     *string                  `json:"initiator_id,omitempty"`     // 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
+	SystemInitiator *bool                    `json:"system_initiator,omitempty"` // 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
+	FlowData        []*ProcessFormVariableV2 `json:"flow_data,omitempty"`        // 业务数据
+}
+
+type StartProcessParamBuilder struct {
+	flowApiName         string // 流程定义标识
+	flowApiNameFlag     bool
+	initiatorId         string // 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
+	initiatorIdFlag     bool
+	systemInitiator     bool // 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
+	systemInitiatorFlag bool
+	flowData            []*ProcessFormVariableV2 // 业务数据
+	flowDataFlag        bool
+}
+
+func NewStartProcessParamBuilder() *StartProcessParamBuilder {
+	builder := &StartProcessParamBuilder{}
+	return builder
+}
+
+// 流程定义标识
+//
+// 示例值：custom
+func (builder *StartProcessParamBuilder) FlowApiName(flowApiName string) *StartProcessParamBuilder {
+	builder.flowApiName = flowApiName
+	builder.flowApiNameFlag = true
+	return builder
+}
+
+// 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
+//
+// 示例值：ou_91791271921729102012
+func (builder *StartProcessParamBuilder) InitiatorId(initiatorId string) *StartProcessParamBuilder {
+	builder.initiatorId = initiatorId
+	builder.initiatorIdFlag = true
+	return builder
+}
+
+// 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
+//
+// 示例值：true
+func (builder *StartProcessParamBuilder) SystemInitiator(systemInitiator bool) *StartProcessParamBuilder {
+	builder.systemInitiator = systemInitiator
+	builder.systemInitiatorFlag = true
+	return builder
+}
+
+// 业务数据
+//
+// 示例值：
+func (builder *StartProcessParamBuilder) FlowData(flowData []*ProcessFormVariableV2) *StartProcessParamBuilder {
+	builder.flowData = flowData
+	builder.flowDataFlag = true
+	return builder
+}
+
+func (builder *StartProcessParamBuilder) Build() *StartProcessParam {
+	req := &StartProcessParam{}
+	if builder.flowApiNameFlag {
+		req.FlowApiName = &builder.flowApiName
+
+	}
+	if builder.initiatorIdFlag {
+		req.InitiatorId = &builder.initiatorId
+
+	}
+	if builder.systemInitiatorFlag {
+		req.SystemInitiator = &builder.systemInitiator
+
+	}
+	if builder.flowDataFlag {
+		req.FlowData = builder.flowData
+	}
+	return req
+}
+
 type TerminateSignatureFailIdAndReason struct {
 	SignatureFileId *string `json:"signature_file_id,omitempty"` // 终止操作失败的文件ID
 	FailReason      *string `json:"fail_reason,omitempty"`       // 终止失败的原因
@@ -43208,15 +43953,15 @@ func (builder *WorkforcePlanDetailBuilder) Build() *WorkforcePlanDetail {
 }
 
 type WorkforcePlanDetailReq struct {
-	WorkforePlanId *string                   `json:"workfore_plan_id,omitempty"` // 编制规划id
-	Items          []*WorkforcePlanDetailRow `json:"items,omitempty"`            // 编制规划的多个明细行
+	WorkforcePlanId *string                   `json:"workforce_plan_id,omitempty"` // 编制规划id
+	Items           []*WorkforcePlanDetailRow `json:"items,omitempty"`             // 编制规划的多个明细行
 }
 
 type WorkforcePlanDetailReqBuilder struct {
-	workforePlanId     string // 编制规划id
-	workforePlanIdFlag bool
-	items              []*WorkforcePlanDetailRow // 编制规划的多个明细行
-	itemsFlag          bool
+	workforcePlanId     string // 编制规划id
+	workforcePlanIdFlag bool
+	items               []*WorkforcePlanDetailRow // 编制规划的多个明细行
+	itemsFlag           bool
 }
 
 func NewWorkforcePlanDetailReqBuilder() *WorkforcePlanDetailReqBuilder {
@@ -43226,10 +43971,10 @@ func NewWorkforcePlanDetailReqBuilder() *WorkforcePlanDetailReqBuilder {
 
 // 编制规划id
 //
-// 示例值："7430330781544564268"
-func (builder *WorkforcePlanDetailReqBuilder) WorkforePlanId(workforePlanId string) *WorkforcePlanDetailReqBuilder {
-	builder.workforePlanId = workforePlanId
-	builder.workforePlanIdFlag = true
+// 示例值：7430330781544564268
+func (builder *WorkforcePlanDetailReqBuilder) WorkforcePlanId(workforcePlanId string) *WorkforcePlanDetailReqBuilder {
+	builder.workforcePlanId = workforcePlanId
+	builder.workforcePlanIdFlag = true
 	return builder
 }
 
@@ -43244,8 +43989,8 @@ func (builder *WorkforcePlanDetailReqBuilder) Items(items []*WorkforcePlanDetail
 
 func (builder *WorkforcePlanDetailReqBuilder) Build() *WorkforcePlanDetailReq {
 	req := &WorkforcePlanDetailReq{}
-	if builder.workforePlanIdFlag {
-		req.WorkforePlanId = &builder.workforePlanId
+	if builder.workforcePlanIdFlag {
+		req.WorkforcePlanId = &builder.workforcePlanId
 
 	}
 	if builder.itemsFlag {
@@ -43255,16 +44000,16 @@ func (builder *WorkforcePlanDetailReqBuilder) Build() *WorkforcePlanDetailReq {
 }
 
 type WorkforcePlanDetailRow struct {
-	Dimensions []*DimensionEntity      `json:"dimensions,omitempty"` // 维度信息
-	EaiDetail  *WorkforcePlanEaiDetail `json:"eai_detail,omitempty"` // 预估在职人数
-	PlanValue  *string                 `json:"plan_value,omitempty"` // 编制规划值
+	Dimensions []*DimensionEntity        `json:"dimensions,omitempty"`  // 维度信息
+	EaiDetails []*WorkforcePlanEaiDetail `json:"eai_details,omitempty"` // 预估在职人数
+	PlanValue  *string                   `json:"plan_value,omitempty"`  // 编制规划值
 }
 
 type WorkforcePlanDetailRowBuilder struct {
 	dimensions     []*DimensionEntity // 维度信息
 	dimensionsFlag bool
-	eaiDetail      *WorkforcePlanEaiDetail // 预估在职人数
-	eaiDetailFlag  bool
+	eaiDetails     []*WorkforcePlanEaiDetail // 预估在职人数
+	eaiDetailsFlag bool
 	planValue      string // 编制规划值
 	planValueFlag  bool
 }
@@ -43286,15 +44031,15 @@ func (builder *WorkforcePlanDetailRowBuilder) Dimensions(dimensions []*Dimension
 // 预估在职人数
 //
 // 示例值：
-func (builder *WorkforcePlanDetailRowBuilder) EaiDetail(eaiDetail *WorkforcePlanEaiDetail) *WorkforcePlanDetailRowBuilder {
-	builder.eaiDetail = eaiDetail
-	builder.eaiDetailFlag = true
+func (builder *WorkforcePlanDetailRowBuilder) EaiDetails(eaiDetails []*WorkforcePlanEaiDetail) *WorkforcePlanDetailRowBuilder {
+	builder.eaiDetails = eaiDetails
+	builder.eaiDetailsFlag = true
 	return builder
 }
 
 // 编制规划值
 //
-// 示例值："12"
+// 示例值：12
 func (builder *WorkforcePlanDetailRowBuilder) PlanValue(planValue string) *WorkforcePlanDetailRowBuilder {
 	builder.planValue = planValue
 	builder.planValueFlag = true
@@ -43306,8 +44051,8 @@ func (builder *WorkforcePlanDetailRowBuilder) Build() *WorkforcePlanDetailRow {
 	if builder.dimensionsFlag {
 		req.Dimensions = builder.dimensions
 	}
-	if builder.eaiDetailFlag {
-		req.EaiDetail = builder.eaiDetail
+	if builder.eaiDetailsFlag {
+		req.EaiDetails = builder.eaiDetails
 	}
 	if builder.planValueFlag {
 		req.PlanValue = &builder.planValue
@@ -43520,9 +44265,9 @@ type ListApproverReq struct {
 }
 
 type ListApproverRespData struct {
-	PageToken *string         `json:"page_token,omitempty"` // 分页键
-	HasMore   *bool           `json:"has_more,omitempty"`   // 是否有更多数据
-	Approvers []*ApproverInfo `json:"approvers,omitempty"`  // 审批任务列表
+	PageToken    *string         `json:"page_token,omitempty"`    // 分页键
+	HasMore      *bool           `json:"has_more,omitempty"`      // 是否有更多数据
+	ApproverList []*ApproverInfo `json:"approver_list,omitempty"` // 审批任务列表
 }
 
 type ListApproverResp struct {
@@ -43790,6 +44535,10 @@ type SearchBasicInfoBankBranchReqBodyBuilder struct {
 	bankBranchIdListFlag   bool
 	bankBranchNameList     []string // 支行名称列表，支持对支行名称精确搜索
 	bankBranchNameListFlag bool
+	codeList               []string // 金融分支机构编码（联行号）列表，支持对金融分支机构编码精确搜索
+	codeListFlag           bool
+	nameList               []string // 金融分支机构名称（支行全称）列表，支持对金融分支机构名称精确搜索
+	nameListFlag           bool
 	statusList             []int // 状态列表
 	statusListFlag         bool
 	updateStartTime        string // 最早更新时间
@@ -43827,6 +44576,24 @@ func (builder *SearchBasicInfoBankBranchReqBodyBuilder) BankBranchIdList(bankBra
 func (builder *SearchBasicInfoBankBranchReqBodyBuilder) BankBranchNameList(bankBranchNameList []string) *SearchBasicInfoBankBranchReqBodyBuilder {
 	builder.bankBranchNameList = bankBranchNameList
 	builder.bankBranchNameListFlag = true
+	return builder
+}
+
+// 金融分支机构编码（联行号）列表，支持对金融分支机构编码精确搜索
+//
+// 示例值：
+func (builder *SearchBasicInfoBankBranchReqBodyBuilder) CodeList(codeList []string) *SearchBasicInfoBankBranchReqBodyBuilder {
+	builder.codeList = codeList
+	builder.codeListFlag = true
+	return builder
+}
+
+// 金融分支机构名称（支行全称）列表，支持对金融分支机构名称精确搜索
+//
+// 示例值：
+func (builder *SearchBasicInfoBankBranchReqBodyBuilder) NameList(nameList []string) *SearchBasicInfoBankBranchReqBodyBuilder {
+	builder.nameList = nameList
+	builder.nameListFlag = true
 	return builder
 }
 
@@ -43868,6 +44635,12 @@ func (builder *SearchBasicInfoBankBranchReqBodyBuilder) Build() *SearchBasicInfo
 	if builder.bankBranchNameListFlag {
 		req.BankBranchNameList = builder.bankBranchNameList
 	}
+	if builder.codeListFlag {
+		req.CodeList = builder.codeList
+	}
+	if builder.nameListFlag {
+		req.NameList = builder.nameList
+	}
 	if builder.statusListFlag {
 		req.StatusList = builder.statusList
 	}
@@ -43887,6 +44660,10 @@ type SearchBasicInfoBankBranchPathReqBodyBuilder struct {
 	bankBranchIdListFlag   bool
 	bankBranchNameList     []string
 	bankBranchNameListFlag bool
+	codeList               []string
+	codeListFlag           bool
+	nameList               []string
+	nameListFlag           bool
 	statusList             []int
 	statusListFlag         bool
 	updateStartTime        string
@@ -43927,6 +44704,24 @@ func (builder *SearchBasicInfoBankBranchPathReqBodyBuilder) BankBranchNameList(b
 	return builder
 }
 
+// 金融分支机构编码（联行号）列表，支持对金融分支机构编码精确搜索
+//
+// 示例值：
+func (builder *SearchBasicInfoBankBranchPathReqBodyBuilder) CodeList(codeList []string) *SearchBasicInfoBankBranchPathReqBodyBuilder {
+	builder.codeList = codeList
+	builder.codeListFlag = true
+	return builder
+}
+
+// 金融分支机构名称（支行全称）列表，支持对金融分支机构名称精确搜索
+//
+// 示例值：
+func (builder *SearchBasicInfoBankBranchPathReqBodyBuilder) NameList(nameList []string) *SearchBasicInfoBankBranchPathReqBodyBuilder {
+	builder.nameList = nameList
+	builder.nameListFlag = true
+	return builder
+}
+
 // 状态列表
 //
 // 示例值：
@@ -43964,6 +44759,12 @@ func (builder *SearchBasicInfoBankBranchPathReqBodyBuilder) Build() (*SearchBasi
 	}
 	if builder.bankBranchNameListFlag {
 		req.BankBranchNameList = builder.bankBranchNameList
+	}
+	if builder.codeListFlag {
+		req.CodeList = builder.codeList
+	}
+	if builder.nameListFlag {
+		req.NameList = builder.nameList
 	}
 	if builder.statusListFlag {
 		req.StatusList = builder.statusList
@@ -44032,6 +44833,8 @@ type SearchBasicInfoBankBranchReqBody struct {
 	BankIdList         []string `json:"bank_id_list,omitempty"`          // 银行 ID 列表，可通过[查询银行信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-bank/search)列举，或从[搜索员工信息](https://open.feishu.cn/document/server-docs/corehr-v1/employee/search)、[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get)等接口返回的 `person_info.bank_account_list.bank_id_v2` 字段中获取
 	BankBranchIdList   []string `json:"bank_branch_id_list,omitempty"`   // 支行 ID 列表，可通过[搜索员工信息](https://open.feishu.cn/document/server-docs/corehr-v1/employee/search)、[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get)等接口返回的 `person_info.bank_account_list.bank_branch_id_v2` 字段获取
 	BankBranchNameList []string `json:"bank_branch_name_list,omitempty"` // 支行名称列表，支持对支行名称精确搜索
+	CodeList           []string `json:"code_list,omitempty"`             // 金融分支机构编码（联行号）列表，支持对金融分支机构编码精确搜索
+	NameList           []string `json:"name_list,omitempty"`             // 金融分支机构名称（支行全称）列表，支持对金融分支机构名称精确搜索
 	StatusList         []int    `json:"status_list,omitempty"`           // 状态列表
 	UpdateStartTime    *string  `json:"update_start_time,omitempty"`     // 最早更新时间
 	UpdateEndTime      *string  `json:"update_end_time,omitempty"`       // 最晚更新时间
@@ -49980,6 +50783,492 @@ func (resp *SearchEmployeeResp) Success() bool {
 	return resp.Code == 0
 }
 
+type BatchEmployeesAdditionalJobReqBodyBuilder struct {
+	employmentIds        []string // 雇佣 ID
+	employmentIdsFlag    bool
+	additionalJobIds     []string // 兼职 ID
+	additionalJobIdsFlag bool
+	startDate            *EmployeesAdditionalJobBatchReqDate // 开始日期
+	startDateFlag        bool
+	endDate              *EmployeesAdditionalJobBatchReqDate // 结束日期
+	endDateFlag          bool
+	dataDate             string // 查看数据日期，默认当天
+	dataDateFlag         bool
+	isEffective          bool // 仅查询 【data_date】日期生效中的
+	isEffectiveFlag      bool
+}
+
+func NewBatchEmployeesAdditionalJobReqBodyBuilder() *BatchEmployeesAdditionalJobReqBodyBuilder {
+	builder := &BatchEmployeesAdditionalJobReqBodyBuilder{}
+	return builder
+}
+
+// 雇佣 ID
+//
+// 示例值：
+func (builder *BatchEmployeesAdditionalJobReqBodyBuilder) EmploymentIds(employmentIds []string) *BatchEmployeesAdditionalJobReqBodyBuilder {
+	builder.employmentIds = employmentIds
+	builder.employmentIdsFlag = true
+	return builder
+}
+
+// 兼职 ID
+//
+// 示例值：
+func (builder *BatchEmployeesAdditionalJobReqBodyBuilder) AdditionalJobIds(additionalJobIds []string) *BatchEmployeesAdditionalJobReqBodyBuilder {
+	builder.additionalJobIds = additionalJobIds
+	builder.additionalJobIdsFlag = true
+	return builder
+}
+
+// 开始日期
+//
+// 示例值：
+func (builder *BatchEmployeesAdditionalJobReqBodyBuilder) StartDate(startDate *EmployeesAdditionalJobBatchReqDate) *BatchEmployeesAdditionalJobReqBodyBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 结束日期
+//
+// 示例值：
+func (builder *BatchEmployeesAdditionalJobReqBodyBuilder) EndDate(endDate *EmployeesAdditionalJobBatchReqDate) *BatchEmployeesAdditionalJobReqBodyBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 查看数据日期，默认当天
+//
+// 示例值：2024-01-02
+func (builder *BatchEmployeesAdditionalJobReqBodyBuilder) DataDate(dataDate string) *BatchEmployeesAdditionalJobReqBodyBuilder {
+	builder.dataDate = dataDate
+	builder.dataDateFlag = true
+	return builder
+}
+
+// 仅查询 【data_date】日期生效中的
+//
+// 示例值：true
+func (builder *BatchEmployeesAdditionalJobReqBodyBuilder) IsEffective(isEffective bool) *BatchEmployeesAdditionalJobReqBodyBuilder {
+	builder.isEffective = isEffective
+	builder.isEffectiveFlag = true
+	return builder
+}
+
+func (builder *BatchEmployeesAdditionalJobReqBodyBuilder) Build() *BatchEmployeesAdditionalJobReqBody {
+	req := &BatchEmployeesAdditionalJobReqBody{}
+	if builder.employmentIdsFlag {
+		req.EmploymentIds = builder.employmentIds
+	}
+	if builder.additionalJobIdsFlag {
+		req.AdditionalJobIds = builder.additionalJobIds
+	}
+	if builder.startDateFlag {
+		req.StartDate = builder.startDate
+	}
+	if builder.endDateFlag {
+		req.EndDate = builder.endDate
+	}
+	if builder.dataDateFlag {
+		req.DataDate = &builder.dataDate
+	}
+	if builder.isEffectiveFlag {
+		req.IsEffective = &builder.isEffective
+	}
+	return req
+}
+
+type BatchEmployeesAdditionalJobPathReqBodyBuilder struct {
+	employmentIds        []string
+	employmentIdsFlag    bool
+	additionalJobIds     []string
+	additionalJobIdsFlag bool
+	startDate            *EmployeesAdditionalJobBatchReqDate
+	startDateFlag        bool
+	endDate              *EmployeesAdditionalJobBatchReqDate
+	endDateFlag          bool
+	dataDate             string
+	dataDateFlag         bool
+	isEffective          bool
+	isEffectiveFlag      bool
+}
+
+func NewBatchEmployeesAdditionalJobPathReqBodyBuilder() *BatchEmployeesAdditionalJobPathReqBodyBuilder {
+	builder := &BatchEmployeesAdditionalJobPathReqBodyBuilder{}
+	return builder
+}
+
+// 雇佣 ID
+//
+// 示例值：
+func (builder *BatchEmployeesAdditionalJobPathReqBodyBuilder) EmploymentIds(employmentIds []string) *BatchEmployeesAdditionalJobPathReqBodyBuilder {
+	builder.employmentIds = employmentIds
+	builder.employmentIdsFlag = true
+	return builder
+}
+
+// 兼职 ID
+//
+// 示例值：
+func (builder *BatchEmployeesAdditionalJobPathReqBodyBuilder) AdditionalJobIds(additionalJobIds []string) *BatchEmployeesAdditionalJobPathReqBodyBuilder {
+	builder.additionalJobIds = additionalJobIds
+	builder.additionalJobIdsFlag = true
+	return builder
+}
+
+// 开始日期
+//
+// 示例值：
+func (builder *BatchEmployeesAdditionalJobPathReqBodyBuilder) StartDate(startDate *EmployeesAdditionalJobBatchReqDate) *BatchEmployeesAdditionalJobPathReqBodyBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 结束日期
+//
+// 示例值：
+func (builder *BatchEmployeesAdditionalJobPathReqBodyBuilder) EndDate(endDate *EmployeesAdditionalJobBatchReqDate) *BatchEmployeesAdditionalJobPathReqBodyBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 查看数据日期，默认当天
+//
+// 示例值：2024-01-02
+func (builder *BatchEmployeesAdditionalJobPathReqBodyBuilder) DataDate(dataDate string) *BatchEmployeesAdditionalJobPathReqBodyBuilder {
+	builder.dataDate = dataDate
+	builder.dataDateFlag = true
+	return builder
+}
+
+// 仅查询 【data_date】日期生效中的
+//
+// 示例值：true
+func (builder *BatchEmployeesAdditionalJobPathReqBodyBuilder) IsEffective(isEffective bool) *BatchEmployeesAdditionalJobPathReqBodyBuilder {
+	builder.isEffective = isEffective
+	builder.isEffectiveFlag = true
+	return builder
+}
+
+func (builder *BatchEmployeesAdditionalJobPathReqBodyBuilder) Build() (*BatchEmployeesAdditionalJobReqBody, error) {
+	req := &BatchEmployeesAdditionalJobReqBody{}
+	if builder.employmentIdsFlag {
+		req.EmploymentIds = builder.employmentIds
+	}
+	if builder.additionalJobIdsFlag {
+		req.AdditionalJobIds = builder.additionalJobIds
+	}
+	if builder.startDateFlag {
+		req.StartDate = builder.startDate
+	}
+	if builder.endDateFlag {
+		req.EndDate = builder.endDate
+	}
+	if builder.dataDateFlag {
+		req.DataDate = &builder.dataDate
+	}
+	if builder.isEffectiveFlag {
+		req.IsEffective = &builder.isEffective
+	}
+	return req, nil
+}
+
+type BatchEmployeesAdditionalJobReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *BatchEmployeesAdditionalJobReqBody
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewBatchEmployeesAdditionalJobReqBuilder() *BatchEmployeesAdditionalJobReqBuilder {
+	builder := &BatchEmployeesAdditionalJobReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *BatchEmployeesAdditionalJobReqBuilder) Limit(limit int) *BatchEmployeesAdditionalJobReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：10
+func (builder *BatchEmployeesAdditionalJobReqBuilder) PageSize(pageSize int) *BatchEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：Njg5MTI1MTcyMjYzMTg5MDQ0NQ==
+func (builder *BatchEmployeesAdditionalJobReqBuilder) PageToken(pageToken string) *BatchEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：open_id
+func (builder *BatchEmployeesAdditionalJobReqBuilder) UserIdType(userIdType string) *BatchEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 此次调用中使用的部门 ID 类型
+//
+// 示例值：open_department_id
+func (builder *BatchEmployeesAdditionalJobReqBuilder) DepartmentIdType(departmentIdType string) *BatchEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("department_id_type", fmt.Sprint(departmentIdType))
+	return builder
+}
+
+// 批量查询兼职信息
+func (builder *BatchEmployeesAdditionalJobReqBuilder) Body(body *BatchEmployeesAdditionalJobReqBody) *BatchEmployeesAdditionalJobReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *BatchEmployeesAdditionalJobReqBuilder) Build() *BatchEmployeesAdditionalJobReq {
+	req := &BatchEmployeesAdditionalJobReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type BatchEmployeesAdditionalJobReqBody struct {
+	EmploymentIds    []string                            `json:"employment_ids,omitempty"`     // 雇佣 ID
+	AdditionalJobIds []string                            `json:"additional_job_ids,omitempty"` // 兼职 ID
+	StartDate        *EmployeesAdditionalJobBatchReqDate `json:"start_date,omitempty"`         // 开始日期
+	EndDate          *EmployeesAdditionalJobBatchReqDate `json:"end_date,omitempty"`           // 结束日期
+	DataDate         *string                             `json:"data_date,omitempty"`          // 查看数据日期，默认当天
+	IsEffective      *bool                               `json:"is_effective,omitempty"`       // 仅查询 【data_date】日期生效中的
+}
+
+type BatchEmployeesAdditionalJobReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *BatchEmployeesAdditionalJobReqBody `body:""`
+	Limit  int                                 // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type BatchEmployeesAdditionalJobRespData struct {
+	Items     []*EmployeesAdditionalJob `json:"items,omitempty"`      // 兼职记录
+	PageToken *string                   `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+	HasMore   *bool                     `json:"has_more,omitempty"`   // 是否还有更多项
+}
+
+type BatchEmployeesAdditionalJobResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *BatchEmployeesAdditionalJobRespData `json:"data"` // 业务数据
+}
+
+func (resp *BatchEmployeesAdditionalJobResp) Success() bool {
+	return resp.Code == 0
+}
+
+type CreateEmployeesAdditionalJobReqBuilder struct {
+	apiReq                     *larkcore.ApiReq
+	employeesAdditionalJobEdit *EmployeesAdditionalJobEdit
+}
+
+func NewCreateEmployeesAdditionalJobReqBuilder() *CreateEmployeesAdditionalJobReqBuilder {
+	builder := &CreateEmployeesAdditionalJobReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 操作的唯一标识，用于幂等校验。请求成功时，重复的client_token不会再创建、变更数据。
+//
+// 示例值：12454646
+func (builder *CreateEmployeesAdditionalJobReqBuilder) ClientToken(clientToken string) *CreateEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：open_id
+func (builder *CreateEmployeesAdditionalJobReqBuilder) UserIdType(userIdType string) *CreateEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 此次调用中使用的部门 ID 类型
+//
+// 示例值：open_department_id
+func (builder *CreateEmployeesAdditionalJobReqBuilder) DepartmentIdType(departmentIdType string) *CreateEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("department_id_type", fmt.Sprint(departmentIdType))
+	return builder
+}
+
+// 创建兼职
+func (builder *CreateEmployeesAdditionalJobReqBuilder) EmployeesAdditionalJobEdit(employeesAdditionalJobEdit *EmployeesAdditionalJobEdit) *CreateEmployeesAdditionalJobReqBuilder {
+	builder.employeesAdditionalJobEdit = employeesAdditionalJobEdit
+	return builder
+}
+
+func (builder *CreateEmployeesAdditionalJobReqBuilder) Build() *CreateEmployeesAdditionalJobReq {
+	req := &CreateEmployeesAdditionalJobReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.employeesAdditionalJobEdit
+	return req
+}
+
+type CreateEmployeesAdditionalJobReq struct {
+	apiReq                     *larkcore.ApiReq
+	EmployeesAdditionalJobEdit *EmployeesAdditionalJobEdit `body:""`
+}
+
+type CreateEmployeesAdditionalJobRespData struct {
+	AdditionalJob *EmployeesAdditionalJobWriteResp `json:"additional_job,omitempty"` //
+}
+
+type CreateEmployeesAdditionalJobResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *CreateEmployeesAdditionalJobRespData `json:"data"` // 业务数据
+}
+
+func (resp *CreateEmployeesAdditionalJobResp) Success() bool {
+	return resp.Code == 0
+}
+
+type DeleteEmployeesAdditionalJobReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewDeleteEmployeesAdditionalJobReqBuilder() *DeleteEmployeesAdditionalJobReqBuilder {
+	builder := &DeleteEmployeesAdditionalJobReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 兼职记录ID
+//
+// 示例值：654637829201
+func (builder *DeleteEmployeesAdditionalJobReqBuilder) AdditionalJobId(additionalJobId string) *DeleteEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.PathParams.Set("additional_job_id", fmt.Sprint(additionalJobId))
+	return builder
+}
+
+func (builder *DeleteEmployeesAdditionalJobReqBuilder) Build() *DeleteEmployeesAdditionalJobReq {
+	req := &DeleteEmployeesAdditionalJobReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	return req
+}
+
+type DeleteEmployeesAdditionalJobReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type DeleteEmployeesAdditionalJobResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *DeleteEmployeesAdditionalJobResp) Success() bool {
+	return resp.Code == 0
+}
+
+type PatchEmployeesAdditionalJobReqBuilder struct {
+	apiReq                     *larkcore.ApiReq
+	employeesAdditionalJobEdit *EmployeesAdditionalJobEdit
+}
+
+func NewPatchEmployeesAdditionalJobReqBuilder() *PatchEmployeesAdditionalJobReqBuilder {
+	builder := &PatchEmployeesAdditionalJobReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 兼职记录ID
+//
+// 示例值：12454646
+func (builder *PatchEmployeesAdditionalJobReqBuilder) AdditionalJobId(additionalJobId string) *PatchEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.PathParams.Set("additional_job_id", fmt.Sprint(additionalJobId))
+	return builder
+}
+
+// 根据 client_token 是否一致来判断是否为同一请求
+//
+// 示例值：12454646
+func (builder *PatchEmployeesAdditionalJobReqBuilder) ClientToken(clientToken string) *PatchEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：open_id
+func (builder *PatchEmployeesAdditionalJobReqBuilder) UserIdType(userIdType string) *PatchEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 此次调用中使用的部门 ID 类型
+//
+// 示例值：open_department_id
+func (builder *PatchEmployeesAdditionalJobReqBuilder) DepartmentIdType(departmentIdType string) *PatchEmployeesAdditionalJobReqBuilder {
+	builder.apiReq.QueryParams.Set("department_id_type", fmt.Sprint(departmentIdType))
+	return builder
+}
+
+// 更新兼职
+func (builder *PatchEmployeesAdditionalJobReqBuilder) EmployeesAdditionalJobEdit(employeesAdditionalJobEdit *EmployeesAdditionalJobEdit) *PatchEmployeesAdditionalJobReqBuilder {
+	builder.employeesAdditionalJobEdit = employeesAdditionalJobEdit
+	return builder
+}
+
+func (builder *PatchEmployeesAdditionalJobReqBuilder) Build() *PatchEmployeesAdditionalJobReq {
+	req := &PatchEmployeesAdditionalJobReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.employeesAdditionalJobEdit
+	return req
+}
+
+type PatchEmployeesAdditionalJobReq struct {
+	apiReq                     *larkcore.ApiReq
+	EmployeesAdditionalJobEdit *EmployeesAdditionalJobEdit `body:""`
+}
+
+type PatchEmployeesAdditionalJobRespData struct {
+	AdditionalJob *EmployeesAdditionalJobWriteResp `json:"additional_job,omitempty"` //
+}
+
+type PatchEmployeesAdditionalJobResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *PatchEmployeesAdditionalJobRespData `json:"data"` // 业务数据
+}
+
+func (resp *PatchEmployeesAdditionalJobResp) Success() bool {
+	return resp.Code == 0
+}
+
 type BatchGetEmployeesBpReqBodyBuilder struct {
 	employmentIds     []string // 员工雇佣 ID
 	employmentIdsFlag bool
@@ -52297,6 +53586,417 @@ type PatchLocationAddressResp struct {
 }
 
 func (resp *PatchLocationAddressResp) Success() bool {
+	return resp.Code == 0
+}
+
+type SubmitV2OffboardingReqBodyBuilder struct {
+	offboardingMode                       int // 离职方式
+	offboardingModeFlag                   bool
+	employmentId                          string // 雇员 id
+	employmentIdFlag                      bool
+	offboardingDate                       string // 离职日期
+	offboardingDateFlag                   bool
+	offboardingReasonUniqueIdentifier     string // 离职原因
+	offboardingReasonUniqueIdentifierFlag bool
+	offboardingReasonExplanation          string // 离职原因说明
+	offboardingReasonExplanationFlag      bool
+	initiatorId                           string // 操作发起人 ID（employment_id），为空默认为系统发起。注意：只有操作发起人可以撤销流程
+	initiatorIdFlag                       bool
+	addBlockList                          bool // 是否加入离职屏蔽名单
+	addBlockListFlag                      bool
+	blockReason                           string // 屏蔽原因
+	blockReasonFlag                       bool
+	blockReasonExplanation                string // 屏蔽原因说明
+	blockReasonExplanationFlag            bool
+	customFields                          []*ObjectFieldData // 自定义字段
+	customFieldsFlag                      bool
+	retainAccount                         bool // 离职是否保留飞书账号
+	retainAccountFlag                     bool
+}
+
+func NewSubmitV2OffboardingReqBodyBuilder() *SubmitV2OffboardingReqBodyBuilder {
+	builder := &SubmitV2OffboardingReqBodyBuilder{}
+	return builder
+}
+
+// 离职方式
+//
+// 示例值：1
+func (builder *SubmitV2OffboardingReqBodyBuilder) OffboardingMode(offboardingMode int) *SubmitV2OffboardingReqBodyBuilder {
+	builder.offboardingMode = offboardingMode
+	builder.offboardingModeFlag = true
+	return builder
+}
+
+// 雇员 id
+//
+// 示例值：6982509313466189342
+func (builder *SubmitV2OffboardingReqBodyBuilder) EmploymentId(employmentId string) *SubmitV2OffboardingReqBodyBuilder {
+	builder.employmentId = employmentId
+	builder.employmentIdFlag = true
+	return builder
+}
+
+// 离职日期
+//
+// 示例值：2022-05-18
+func (builder *SubmitV2OffboardingReqBodyBuilder) OffboardingDate(offboardingDate string) *SubmitV2OffboardingReqBodyBuilder {
+	builder.offboardingDate = offboardingDate
+	builder.offboardingDateFlag = true
+	return builder
+}
+
+// 离职原因
+//
+// 示例值：reason_for_offboarding_option8
+func (builder *SubmitV2OffboardingReqBodyBuilder) OffboardingReasonUniqueIdentifier(offboardingReasonUniqueIdentifier string) *SubmitV2OffboardingReqBodyBuilder {
+	builder.offboardingReasonUniqueIdentifier = offboardingReasonUniqueIdentifier
+	builder.offboardingReasonUniqueIdentifierFlag = true
+	return builder
+}
+
+// 离职原因说明
+//
+// 示例值：离职原因说明
+func (builder *SubmitV2OffboardingReqBodyBuilder) OffboardingReasonExplanation(offboardingReasonExplanation string) *SubmitV2OffboardingReqBodyBuilder {
+	builder.offboardingReasonExplanation = offboardingReasonExplanation
+	builder.offboardingReasonExplanationFlag = true
+	return builder
+}
+
+// 操作发起人 ID（employment_id），为空默认为系统发起。注意：只有操作发起人可以撤销流程
+//
+// 示例值：6982509313466189341
+func (builder *SubmitV2OffboardingReqBodyBuilder) InitiatorId(initiatorId string) *SubmitV2OffboardingReqBodyBuilder {
+	builder.initiatorId = initiatorId
+	builder.initiatorIdFlag = true
+	return builder
+}
+
+// 是否加入离职屏蔽名单
+//
+// 示例值：false
+func (builder *SubmitV2OffboardingReqBodyBuilder) AddBlockList(addBlockList bool) *SubmitV2OffboardingReqBodyBuilder {
+	builder.addBlockList = addBlockList
+	builder.addBlockListFlag = true
+	return builder
+}
+
+// 屏蔽原因
+//
+// 示例值：红线
+func (builder *SubmitV2OffboardingReqBodyBuilder) BlockReason(blockReason string) *SubmitV2OffboardingReqBodyBuilder {
+	builder.blockReason = blockReason
+	builder.blockReasonFlag = true
+	return builder
+}
+
+// 屏蔽原因说明
+//
+// 示例值：xx 年 xx 月 xx 日因 xx 原因红线
+func (builder *SubmitV2OffboardingReqBodyBuilder) BlockReasonExplanation(blockReasonExplanation string) *SubmitV2OffboardingReqBodyBuilder {
+	builder.blockReasonExplanation = blockReasonExplanation
+	builder.blockReasonExplanationFlag = true
+	return builder
+}
+
+// 自定义字段
+//
+// 示例值：
+func (builder *SubmitV2OffboardingReqBodyBuilder) CustomFields(customFields []*ObjectFieldData) *SubmitV2OffboardingReqBodyBuilder {
+	builder.customFields = customFields
+	builder.customFieldsFlag = true
+	return builder
+}
+
+// 离职是否保留飞书账号
+//
+// 示例值：false
+func (builder *SubmitV2OffboardingReqBodyBuilder) RetainAccount(retainAccount bool) *SubmitV2OffboardingReqBodyBuilder {
+	builder.retainAccount = retainAccount
+	builder.retainAccountFlag = true
+	return builder
+}
+
+func (builder *SubmitV2OffboardingReqBodyBuilder) Build() *SubmitV2OffboardingReqBody {
+	req := &SubmitV2OffboardingReqBody{}
+	if builder.offboardingModeFlag {
+		req.OffboardingMode = &builder.offboardingMode
+	}
+	if builder.employmentIdFlag {
+		req.EmploymentId = &builder.employmentId
+	}
+	if builder.offboardingDateFlag {
+		req.OffboardingDate = &builder.offboardingDate
+	}
+	if builder.offboardingReasonUniqueIdentifierFlag {
+		req.OffboardingReasonUniqueIdentifier = &builder.offboardingReasonUniqueIdentifier
+	}
+	if builder.offboardingReasonExplanationFlag {
+		req.OffboardingReasonExplanation = &builder.offboardingReasonExplanation
+	}
+	if builder.initiatorIdFlag {
+		req.InitiatorId = &builder.initiatorId
+	}
+	if builder.addBlockListFlag {
+		req.AddBlockList = &builder.addBlockList
+	}
+	if builder.blockReasonFlag {
+		req.BlockReason = &builder.blockReason
+	}
+	if builder.blockReasonExplanationFlag {
+		req.BlockReasonExplanation = &builder.blockReasonExplanation
+	}
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
+	}
+	if builder.retainAccountFlag {
+		req.RetainAccount = &builder.retainAccount
+	}
+	return req
+}
+
+type SubmitV2OffboardingPathReqBodyBuilder struct {
+	offboardingMode                       int
+	offboardingModeFlag                   bool
+	employmentId                          string
+	employmentIdFlag                      bool
+	offboardingDate                       string
+	offboardingDateFlag                   bool
+	offboardingReasonUniqueIdentifier     string
+	offboardingReasonUniqueIdentifierFlag bool
+	offboardingReasonExplanation          string
+	offboardingReasonExplanationFlag      bool
+	initiatorId                           string
+	initiatorIdFlag                       bool
+	addBlockList                          bool
+	addBlockListFlag                      bool
+	blockReason                           string
+	blockReasonFlag                       bool
+	blockReasonExplanation                string
+	blockReasonExplanationFlag            bool
+	customFields                          []*ObjectFieldData
+	customFieldsFlag                      bool
+	retainAccount                         bool
+	retainAccountFlag                     bool
+}
+
+func NewSubmitV2OffboardingPathReqBodyBuilder() *SubmitV2OffboardingPathReqBodyBuilder {
+	builder := &SubmitV2OffboardingPathReqBodyBuilder{}
+	return builder
+}
+
+// 离职方式
+//
+// 示例值：1
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) OffboardingMode(offboardingMode int) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.offboardingMode = offboardingMode
+	builder.offboardingModeFlag = true
+	return builder
+}
+
+// 雇员 id
+//
+// 示例值：6982509313466189342
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) EmploymentId(employmentId string) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.employmentId = employmentId
+	builder.employmentIdFlag = true
+	return builder
+}
+
+// 离职日期
+//
+// 示例值：2022-05-18
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) OffboardingDate(offboardingDate string) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.offboardingDate = offboardingDate
+	builder.offboardingDateFlag = true
+	return builder
+}
+
+// 离职原因
+//
+// 示例值：reason_for_offboarding_option8
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) OffboardingReasonUniqueIdentifier(offboardingReasonUniqueIdentifier string) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.offboardingReasonUniqueIdentifier = offboardingReasonUniqueIdentifier
+	builder.offboardingReasonUniqueIdentifierFlag = true
+	return builder
+}
+
+// 离职原因说明
+//
+// 示例值：离职原因说明
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) OffboardingReasonExplanation(offboardingReasonExplanation string) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.offboardingReasonExplanation = offboardingReasonExplanation
+	builder.offboardingReasonExplanationFlag = true
+	return builder
+}
+
+// 操作发起人 ID（employment_id），为空默认为系统发起。注意：只有操作发起人可以撤销流程
+//
+// 示例值：6982509313466189341
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) InitiatorId(initiatorId string) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.initiatorId = initiatorId
+	builder.initiatorIdFlag = true
+	return builder
+}
+
+// 是否加入离职屏蔽名单
+//
+// 示例值：false
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) AddBlockList(addBlockList bool) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.addBlockList = addBlockList
+	builder.addBlockListFlag = true
+	return builder
+}
+
+// 屏蔽原因
+//
+// 示例值：红线
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) BlockReason(blockReason string) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.blockReason = blockReason
+	builder.blockReasonFlag = true
+	return builder
+}
+
+// 屏蔽原因说明
+//
+// 示例值：xx 年 xx 月 xx 日因 xx 原因红线
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) BlockReasonExplanation(blockReasonExplanation string) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.blockReasonExplanation = blockReasonExplanation
+	builder.blockReasonExplanationFlag = true
+	return builder
+}
+
+// 自定义字段
+//
+// 示例值：
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) CustomFields(customFields []*ObjectFieldData) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.customFields = customFields
+	builder.customFieldsFlag = true
+	return builder
+}
+
+// 离职是否保留飞书账号
+//
+// 示例值：false
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) RetainAccount(retainAccount bool) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.retainAccount = retainAccount
+	builder.retainAccountFlag = true
+	return builder
+}
+
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) Build() (*SubmitV2OffboardingReqBody, error) {
+	req := &SubmitV2OffboardingReqBody{}
+	if builder.offboardingModeFlag {
+		req.OffboardingMode = &builder.offboardingMode
+	}
+	if builder.employmentIdFlag {
+		req.EmploymentId = &builder.employmentId
+	}
+	if builder.offboardingDateFlag {
+		req.OffboardingDate = &builder.offboardingDate
+	}
+	if builder.offboardingReasonUniqueIdentifierFlag {
+		req.OffboardingReasonUniqueIdentifier = &builder.offboardingReasonUniqueIdentifier
+	}
+	if builder.offboardingReasonExplanationFlag {
+		req.OffboardingReasonExplanation = &builder.offboardingReasonExplanation
+	}
+	if builder.initiatorIdFlag {
+		req.InitiatorId = &builder.initiatorId
+	}
+	if builder.addBlockListFlag {
+		req.AddBlockList = &builder.addBlockList
+	}
+	if builder.blockReasonFlag {
+		req.BlockReason = &builder.blockReason
+	}
+	if builder.blockReasonExplanationFlag {
+		req.BlockReasonExplanation = &builder.blockReasonExplanation
+	}
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
+	}
+	if builder.retainAccountFlag {
+		req.RetainAccount = &builder.retainAccount
+	}
+	return req, nil
+}
+
+type SubmitV2OffboardingReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *SubmitV2OffboardingReqBody
+}
+
+func NewSubmitV2OffboardingReqBuilder() *SubmitV2OffboardingReqBuilder {
+	builder := &SubmitV2OffboardingReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：people_corehr_id
+func (builder *SubmitV2OffboardingReqBuilder) UserIdType(userIdType string) *SubmitV2OffboardingReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *SubmitV2OffboardingReqBuilder) Body(body *SubmitV2OffboardingReqBody) *SubmitV2OffboardingReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *SubmitV2OffboardingReqBuilder) Build() *SubmitV2OffboardingReq {
+	req := &SubmitV2OffboardingReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type SubmitV2OffboardingReqBody struct {
+	OffboardingMode                   *int               `json:"offboarding_mode,omitempty"`                     // 离职方式
+	EmploymentId                      *string            `json:"employment_id,omitempty"`                        // 雇员 id
+	OffboardingDate                   *string            `json:"offboarding_date,omitempty"`                     // 离职日期
+	OffboardingReasonUniqueIdentifier *string            `json:"offboarding_reason_unique_identifier,omitempty"` // 离职原因
+	OffboardingReasonExplanation      *string            `json:"offboarding_reason_explanation,omitempty"`       // 离职原因说明
+	InitiatorId                       *string            `json:"initiator_id,omitempty"`                         // 操作发起人 ID（employment_id），为空默认为系统发起。注意：只有操作发起人可以撤销流程
+	AddBlockList                      *bool              `json:"add_block_list,omitempty"`                       // 是否加入离职屏蔽名单
+	BlockReason                       *string            `json:"block_reason,omitempty"`                         // 屏蔽原因
+	BlockReasonExplanation            *string            `json:"block_reason_explanation,omitempty"`             // 屏蔽原因说明
+	CustomFields                      []*ObjectFieldData `json:"custom_fields,omitempty"`                        // 自定义字段
+	RetainAccount                     *bool              `json:"retain_account,omitempty"`                       // 离职是否保留飞书账号
+}
+
+type SubmitV2OffboardingReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *SubmitV2OffboardingReqBody `body:""`
+}
+
+type SubmitV2OffboardingRespData struct {
+	OffboardingId                     *string `json:"offboarding_id,omitempty"`                       // 离职记录 id
+	EmploymentId                      *string `json:"employment_id,omitempty"`                        // 雇员 id
+	OffboardingReasonUniqueIdentifier *string `json:"offboarding_reason_unique_identifier,omitempty"` // 离职原因
+	OffboardingDate                   *string `json:"offboarding_date,omitempty"`                     // 离职日期
+	OffboardingReasonExplanation      *string `json:"offboarding_reason_explanation,omitempty"`       // 离职原因说明
+	AddBlockList                      *bool   `json:"add_block_list,omitempty"`                       // 是否加入离职屏蔽名单
+	BlockReason                       *string `json:"block_reason,omitempty"`                         // 屏蔽原因
+	BlockReasonExplanation            *string `json:"block_reason_explanation,omitempty"`             // 屏蔽原因说明
+	CreatedTime                       *string `json:"created_time,omitempty"`                         // 创建时间
+	RetainAccount                     *bool   `json:"retain_account,omitempty"`                       // 离职是否保留飞书账号
+}
+
+type SubmitV2OffboardingResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *SubmitV2OffboardingRespData `json:"data"` // 业务数据
+}
+
+func (resp *SubmitV2OffboardingResp) Success() bool {
 	return resp.Code == 0
 }
 
@@ -55160,6 +56860,22 @@ func NewListWorkforcePlanReqBuilder() *ListWorkforcePlanReqBuilder {
 	return builder
 }
 
+// 查询数量
+//
+// 示例值：1
+func (builder *ListWorkforcePlanReqBuilder) Limit(limit int) *ListWorkforcePlanReqBuilder {
+	builder.apiReq.QueryParams.Set("limit", fmt.Sprint(limit))
+	return builder
+}
+
+// 跳过数量
+//
+// 示例值：1
+func (builder *ListWorkforcePlanReqBuilder) Offset(offset int) *ListWorkforcePlanReqBuilder {
+	builder.apiReq.QueryParams.Set("offset", fmt.Sprint(offset))
+	return builder
+}
+
 // 是否获取所有编制规划方案，true 所有编制规划方案列表，false 为仅获取当前生效的编制规划方案，默认为 false示例值：false
 //
 // 示例值：
@@ -56161,12 +57877,12 @@ func (iterator *ListApproverIterator) Next() (bool, *ApproverInfo, error) {
 			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
 		}
 
-		if len(resp.Data.Approvers) == 0 {
+		if len(resp.Data.ApproverList) == 0 {
 			return false, nil, nil
 		}
 
 		iterator.nextPageToken = resp.Data.PageToken
-		iterator.items = resp.Data.Approvers
+		iterator.items = resp.Data.ApproverList
 		iterator.index = 0
 	}
 
@@ -56933,6 +58649,60 @@ func (iterator *SearchEmployeeIterator) Next() (bool, *Employee, error) {
 }
 
 func (iterator *SearchEmployeeIterator) NextPageToken() *string {
+	return iterator.nextPageToken
+}
+
+type BatchEmployeesAdditionalJobIterator struct {
+	nextPageToken *string
+	items         []*EmployeesAdditionalJob
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *BatchEmployeesAdditionalJobReq
+	listFunc      func(ctx context.Context, req *BatchEmployeesAdditionalJobReq, options ...larkcore.RequestOptionFunc) (*BatchEmployeesAdditionalJobResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *BatchEmployeesAdditionalJobIterator) Next() (bool, *EmployeesAdditionalJob, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Items) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Items
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *BatchEmployeesAdditionalJobIterator) NextPageToken() *string {
 	return iterator.nextPageToken
 }
 

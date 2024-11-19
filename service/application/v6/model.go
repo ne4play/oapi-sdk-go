@@ -60,6 +60,26 @@ const (
 )
 
 const (
+	AvailabilityStatusAvailabilityStopped     = 0 // 停用
+	AvailabilityStatusAvailabilityActivated   = 1 // 启用
+	AvailabilityStatusAvailabilityUnactivated = 2 // 未启用
+
+)
+
+const (
+	PaymentTypeFree = 0 // 免费
+	PaymentTypePaid = 1 // 付费
+
+)
+
+const (
+	OwnerTypeFeishuTechnology = 0 // 飞书科技
+	OwnerTypeFeishuThirdParty = 1 // 飞书合作伙伴
+	OwnerTypeEnterpriseMember = 2 // 企业内成员
+
+)
+
+const (
 	I18nKeyPatchApplicationZhCn = "zh_cn" // 中文
 	I18nKeyPatchApplicationEnUs = "en_us" // 英文
 	I18nKeyPatchApplicationJaJp = "ja_jp" // 日文
@@ -6774,6 +6794,113 @@ func (resp *GetApplicationResp) Success() bool {
 	return resp.Code == 0
 }
 
+type ListApplicationReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListApplicationReqBuilder() *ListApplicationReqBuilder {
+	builder := &ListApplicationReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListApplicationReqBuilder) Limit(limit int) *ListApplicationReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：50
+func (builder *ListApplicationReqBuilder) PageSize(pageSize int) *ListApplicationReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：AQD9/Rn9eij9Pm39ED40/dk53s4Ebp882DYfFaPFbz00L4CMZJrqGdzNyc8BcZtDbwVUvRmQTvyMYicnGWrde9X56TgdBuS+JKiSIkdexPw=
+func (builder *ListApplicationReqBuilder) PageToken(pageToken string) *ListApplicationReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：
+func (builder *ListApplicationReqBuilder) UserIdType(userIdType string) *ListApplicationReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 应用的图标、描述、帮助文档链接是按照应用的主语言返回；其他内容（如应用权限、应用分类）按照该参数设定返回对应的语言。可选值有： zh_cn：中文 en_us：英文 ja_jp：日文  如不填写，则按照应用的主语言返回
+//
+// 示例值：zh_cn
+func (builder *ListApplicationReqBuilder) Lang(lang string) *ListApplicationReqBuilder {
+	builder.apiReq.QueryParams.Set("lang", fmt.Sprint(lang))
+	return builder
+}
+
+// 不传入代表全部返回。传入则按照这种应用状态返回。应用状态可选值有：0：停用状态1：启用状态 2：未启用状态
+//
+// 示例值：0
+func (builder *ListApplicationReqBuilder) Status(status int) *ListApplicationReqBuilder {
+	builder.apiReq.QueryParams.Set("status", fmt.Sprint(status))
+	return builder
+}
+
+// 不传入代表全部返回。传入则按照这种应用状态返回。 付费类型 可选值： 0：免费 1：付费
+//
+// 示例值：0
+func (builder *ListApplicationReqBuilder) PaymentType(paymentType int) *ListApplicationReqBuilder {
+	builder.apiReq.QueryParams.Set("payment_type", fmt.Sprint(paymentType))
+	return builder
+}
+
+// 不传入代表全部返回。传入则按照这种应用状态返回。所有者类型，可选值： 0：飞书科技 1：飞书合作伙伴 2：企业内成员
+//
+// 示例值：0
+func (builder *ListApplicationReqBuilder) OwnerType(ownerType int) *ListApplicationReqBuilder {
+	builder.apiReq.QueryParams.Set("owner_type", fmt.Sprint(ownerType))
+	return builder
+}
+
+func (builder *ListApplicationReqBuilder) Build() *ListApplicationReq {
+	req := &ListApplicationReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListApplicationReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListApplicationRespData struct {
+	AppList    []*Application `json:"app_list,omitempty"`    // 应用列表
+	PageToken  *string        `json:"page_token,omitempty"`  // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+	HasMore    *bool          `json:"has_more,omitempty"`    // 是否还有更多项
+	TotalCount *int           `json:"total_count,omitempty"` // 应用状态=启用的应用总数
+}
+
+type ListApplicationResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListApplicationRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListApplicationResp) Success() bool {
+	return resp.Code == 0
+}
+
 type PatchApplicationReqBuilder struct {
 	apiReq      *larkcore.ApiReq
 	application *Application
@@ -9014,6 +9141,60 @@ func (iterator *ListAppRecommendRuleIterator) Next() (bool, *AppRecommendRule, e
 }
 
 func (iterator *ListAppRecommendRuleIterator) NextPageToken() *string {
+	return iterator.nextPageToken
+}
+
+type ListApplicationIterator struct {
+	nextPageToken *string
+	items         []*Application
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListApplicationReq
+	listFunc      func(ctx context.Context, req *ListApplicationReq, options ...larkcore.RequestOptionFunc) (*ListApplicationResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListApplicationIterator) Next() (bool, *Application, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.AppList) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.AppList
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListApplicationIterator) NextPageToken() *string {
 	return iterator.nextPageToken
 }
 

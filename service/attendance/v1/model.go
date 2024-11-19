@@ -4306,8 +4306,9 @@ type OvertimeApproval struct {
 	UserId               *string                `json:"user_id,omitempty"`                // 用户id
 	StartTime            *string                `json:"start_time,omitempty"`             // 加班开始时间
 	EndTime              *string                `json:"end_time,omitempty"`               // 加班结束时间
-	CreateTime           *int                   `json:"create_time,omitempty"`            // 审批单创建时间
+	CreateTime           *string                `json:"create_time,omitempty"`            // 审批单创建时间
 	ApprovalDailyDetails []*ApprovalDailyDetail `json:"approval_daily_details,omitempty"` // 审批单每日加班详情
+	Status               *int                   `json:"status,omitempty"`                 // 审批单状态
 }
 
 type OvertimeApprovalBuilder struct {
@@ -4317,10 +4318,12 @@ type OvertimeApprovalBuilder struct {
 	startTimeFlag            bool
 	endTime                  string // 加班结束时间
 	endTimeFlag              bool
-	createTime               int // 审批单创建时间
+	createTime               string // 审批单创建时间
 	createTimeFlag           bool
 	approvalDailyDetails     []*ApprovalDailyDetail // 审批单每日加班详情
 	approvalDailyDetailsFlag bool
+	status                   int // 审批单状态
+	statusFlag               bool
 }
 
 func NewOvertimeApprovalBuilder() *OvertimeApprovalBuilder {
@@ -4357,8 +4360,8 @@ func (builder *OvertimeApprovalBuilder) EndTime(endTime string) *OvertimeApprova
 
 // 审批单创建时间
 //
-// 示例值：1730119195
-func (builder *OvertimeApprovalBuilder) CreateTime(createTime int) *OvertimeApprovalBuilder {
+// 示例值：2024-10-22 15:15
+func (builder *OvertimeApprovalBuilder) CreateTime(createTime string) *OvertimeApprovalBuilder {
 	builder.createTime = createTime
 	builder.createTimeFlag = true
 	return builder
@@ -4370,6 +4373,15 @@ func (builder *OvertimeApprovalBuilder) CreateTime(createTime int) *OvertimeAppr
 func (builder *OvertimeApprovalBuilder) ApprovalDailyDetails(approvalDailyDetails []*ApprovalDailyDetail) *OvertimeApprovalBuilder {
 	builder.approvalDailyDetails = approvalDailyDetails
 	builder.approvalDailyDetailsFlag = true
+	return builder
+}
+
+// 审批单状态
+//
+// 示例值：0
+func (builder *OvertimeApprovalBuilder) Status(status int) *OvertimeApprovalBuilder {
+	builder.status = status
+	builder.statusFlag = true
 	return builder
 }
 
@@ -4393,6 +4405,10 @@ func (builder *OvertimeApprovalBuilder) Build() *OvertimeApproval {
 	}
 	if builder.approvalDailyDetailsFlag {
 		req.ApprovalDailyDetails = builder.approvalDailyDetails
+	}
+	if builder.statusFlag {
+		req.Status = &builder.status
+
 	}
 	return req
 }
@@ -6675,6 +6691,53 @@ func (builder *UserArrangeShiftGroupBuilder) Build() *UserArrangeShiftGroup {
 	}
 	if builder.shiftGroupFlag {
 		req.ShiftGroup = builder.shiftGroup
+	}
+	return req
+}
+
+type UserBase struct {
+	UserId        *string  `json:"user_id,omitempty"`        // 用户 ID
+	DepartmentIds []string `json:"department_ids,omitempty"` // 该用户所属部门 ID 列表
+}
+
+type UserBaseBuilder struct {
+	userId            string // 用户 ID
+	userIdFlag        bool
+	departmentIds     []string // 该用户所属部门 ID 列表
+	departmentIdsFlag bool
+}
+
+func NewUserBaseBuilder() *UserBaseBuilder {
+	builder := &UserBaseBuilder{}
+	return builder
+}
+
+// 用户 ID
+//
+// 示例值：5874663B
+func (builder *UserBaseBuilder) UserId(userId string) *UserBaseBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 该用户所属部门 ID 列表
+//
+// 示例值：
+func (builder *UserBaseBuilder) DepartmentIds(departmentIds []string) *UserBaseBuilder {
+	builder.departmentIds = departmentIds
+	builder.departmentIdsFlag = true
+	return builder
+}
+
+func (builder *UserBaseBuilder) Build() *UserBase {
+	req := &UserBase{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.departmentIdsFlag {
+		req.DepartmentIds = builder.departmentIds
 	}
 	return req
 }

@@ -2919,36 +2919,39 @@ func (builder *RecurringPaymentBuilder) Build() *RecurringPayment {
 }
 
 type RecurringPaymentForCreate struct {
-	UniqueId     *string `json:"unique_id,omitempty"`     // 外部幂等id，由上游业务决定
-	UserId       *string `json:"user_id,omitempty"`       // 员工id，具体类型由入参中的 user_id_type 指定
-	ItemId       *string `json:"item_id,omitempty"`       // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
-	EachAmount   *string `json:"each_amount,omitempty"`   // 每次发放金额
-	StartDate    *string `json:"start_date,omitempty"`    // 发放开始时间
-	EndDate      *string `json:"end_date,omitempty"`      // 发放结束时间
-	CurrencyId   *string `json:"currency_id,omitempty"`   // 币种id
-	IssuanceType *string `json:"issuance_type,omitempty"` // 发放方式
-	Remark       *string `json:"remark,omitempty"`        // 备注
+	UniqueId       *string `json:"unique_id,omitempty"`       // 外部幂等id，由上游业务决定
+	UserId         *string `json:"user_id,omitempty"`         // 员工id，具体类型由入参中的 user_id_type 指定
+	ItemId         *string `json:"item_id,omitempty"`         // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+	EachAmount     *string `json:"each_amount,omitempty"`     // 每次发放金额
+	StartDate      *string `json:"start_date,omitempty"`      // 发放开始时间
+	EndDate        *string `json:"end_date,omitempty"`        // 发放结束时间
+	CurrencyId     *string `json:"currency_id,omitempty"`     // 币种id
+	IssuanceType   *string `json:"issuance_type,omitempty"`   // 发放方式
+	IssuancePeriod *string `json:"issuance_period,omitempty"` // 发放频率
+	Remark         *string `json:"remark,omitempty"`          // 备注
 }
 
 type RecurringPaymentForCreateBuilder struct {
-	uniqueId         string // 外部幂等id，由上游业务决定
-	uniqueIdFlag     bool
-	userId           string // 员工id，具体类型由入参中的 user_id_type 指定
-	userIdFlag       bool
-	itemId           string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
-	itemIdFlag       bool
-	eachAmount       string // 每次发放金额
-	eachAmountFlag   bool
-	startDate        string // 发放开始时间
-	startDateFlag    bool
-	endDate          string // 发放结束时间
-	endDateFlag      bool
-	currencyId       string // 币种id
-	currencyIdFlag   bool
-	issuanceType     string // 发放方式
-	issuanceTypeFlag bool
-	remark           string // 备注
-	remarkFlag       bool
+	uniqueId           string // 外部幂等id，由上游业务决定
+	uniqueIdFlag       bool
+	userId             string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag         bool
+	itemId             string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+	itemIdFlag         bool
+	eachAmount         string // 每次发放金额
+	eachAmountFlag     bool
+	startDate          string // 发放开始时间
+	startDateFlag      bool
+	endDate            string // 发放结束时间
+	endDateFlag        bool
+	currencyId         string // 币种id
+	currencyIdFlag     bool
+	issuanceType       string // 发放方式
+	issuanceTypeFlag   bool
+	issuancePeriod     string // 发放频率
+	issuancePeriodFlag bool
+	remark             string // 备注
+	remarkFlag         bool
 }
 
 func NewRecurringPaymentForCreateBuilder() *RecurringPaymentForCreateBuilder {
@@ -3028,6 +3031,15 @@ func (builder *RecurringPaymentForCreateBuilder) IssuanceType(issuanceType strin
 	return builder
 }
 
+// 发放频率
+//
+// 示例值：year
+func (builder *RecurringPaymentForCreateBuilder) IssuancePeriod(issuancePeriod string) *RecurringPaymentForCreateBuilder {
+	builder.issuancePeriod = issuancePeriod
+	builder.issuancePeriodFlag = true
+	return builder
+}
+
 // 备注
 //
 // 示例值：这是个备注
@@ -3069,6 +3081,10 @@ func (builder *RecurringPaymentForCreateBuilder) Build() *RecurringPaymentForCre
 	}
 	if builder.issuanceTypeFlag {
 		req.IssuanceType = &builder.issuanceType
+
+	}
+	if builder.issuancePeriodFlag {
+		req.IssuancePeriod = &builder.issuancePeriod
 
 	}
 	if builder.remarkFlag {

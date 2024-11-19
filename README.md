@@ -40,7 +40,7 @@
 ## 安装
 
 ```shell
-go get -u github.com/larksuite/oapi-sdk-go/v3@v3.3.7
+go get -u github.com/larksuite/oapi-sdk-go/v3@v3.4.0
 ```
 
 ## API Client
@@ -514,7 +514,7 @@ func main() {
 
 更多 API 调用示例：[./sample/callrawapi/api.go](./sample/callrawapi/api.go)
 
-## 处理消息事件回调
+## 处理事件
 
 关于消息订阅相关的知识，可以点击[这里查看](https://open.feishu.cn/document/ukTMukTMukTM/uUTNz4SN1MjL1UzM)
 
@@ -711,6 +711,8 @@ func main() {
 
 关于卡片行为相关的知识，可点击[这里查看](https://open.feishu.cn/document/ukTMukTMukTM/uczM3QjL3MzN04yNzcDN)
 
+以下示例为处理消息卡片回传交互（旧） （card.action.trigger_v1）的写法。
+新版本卡片回传交互 (card.action.trigger) 请参考[./sample/event/event.go](./sample/event/event.go) 中 OnP2CardActionTrigger
 ### 基本用法
 
 开发者配置消息卡片回调地址后，可以使用下面代码，对飞书开放平台推送的卡片行为进行处理，如下代码基于go-sdk原生http

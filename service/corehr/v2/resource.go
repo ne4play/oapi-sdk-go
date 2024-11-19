@@ -27,6 +27,7 @@ type V2 struct {
 	CostCenterVersion                 *costCenterVersion                 // cost_center.version
 	Department                        *department                        // department
 	Employee                          *employee                          // employee
+	EmployeesAdditionalJob            *employeesAdditionalJob            // employees.additional_job
 	EmployeesBp                       *employeesBp                       // employees.bp
 	EmployeesJobData                  *employeesJobData                  // employees.job_data
 	Job                               *job                               // job
@@ -71,6 +72,7 @@ func New(config *larkcore.Config) *V2 {
 		CostCenterVersion:                 &costCenterVersion{config: config},
 		Department:                        &department{config: config},
 		Employee:                          &employee{config: config},
+		EmployeesAdditionalJob:            &employeesAdditionalJob{config: config},
 		EmployeesBp:                       &employeesBp{config: config},
 		EmployeesJobData:                  &employeesJobData{config: config},
 		Job:                               &job{config: config},
@@ -148,6 +150,9 @@ type department struct {
 	config *larkcore.Config
 }
 type employee struct {
+	config *larkcore.Config
+}
+type employeesAdditionalJob struct {
 	config *larkcore.Config
 }
 type employeesBp struct {
@@ -1273,6 +1278,118 @@ func (e *employee) SearchByIterator(ctx context.Context, req *SearchEmployeeReq,
 		limit:    req.Limit}, nil
 }
 
+// Batch
+//
+// - 批量查询兼职信息
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batch&project=corehr&resource=employees.additional_job&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/batch_employeesAdditionalJob.go
+func (e *employeesAdditionalJob) Batch(ctx context.Context, req *BatchEmployeesAdditionalJobReq, options ...larkcore.RequestOptionFunc) (*BatchEmployeesAdditionalJobResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/employees/additional_jobs/batch"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, e.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchEmployeesAdditionalJobResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, e.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (e *employeesAdditionalJob) BatchByIterator(ctx context.Context, req *BatchEmployeesAdditionalJobReq, options ...larkcore.RequestOptionFunc) (*BatchEmployeesAdditionalJobIterator, error) {
+	return &BatchEmployeesAdditionalJobIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: e.Batch,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// Create
+//
+// - 创建兼职
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=create&project=corehr&resource=employees.additional_job&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/create_employeesAdditionalJob.go
+func (e *employeesAdditionalJob) Create(ctx context.Context, req *CreateEmployeesAdditionalJobReq, options ...larkcore.RequestOptionFunc) (*CreateEmployeesAdditionalJobResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/employees/additional_jobs"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, e.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &CreateEmployeesAdditionalJobResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, e.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Delete
+//
+// - 删除兼职
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=delete&project=corehr&resource=employees.additional_job&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/delete_employeesAdditionalJob.go
+func (e *employeesAdditionalJob) Delete(ctx context.Context, req *DeleteEmployeesAdditionalJobReq, options ...larkcore.RequestOptionFunc) (*DeleteEmployeesAdditionalJobResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/employees/additional_jobs/:additional_job_id"
+	apiReq.HttpMethod = http.MethodDelete
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, e.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &DeleteEmployeesAdditionalJobResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, e.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Patch
+//
+// - 更新兼职
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=patch&project=corehr&resource=employees.additional_job&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/patch_employeesAdditionalJob.go
+func (e *employeesAdditionalJob) Patch(ctx context.Context, req *PatchEmployeesAdditionalJobReq, options ...larkcore.RequestOptionFunc) (*PatchEmployeesAdditionalJobResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/employees/additional_jobs/:additional_job_id"
+	apiReq.HttpMethod = http.MethodPatch
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, e.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &PatchEmployeesAdditionalJobResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, e.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // BatchGet
 //
 // -
@@ -1743,6 +1860,32 @@ func (l *locationAddress) Patch(ctx context.Context, req *PatchLocationAddressRe
 	// 反序列响应结果
 	resp := &PatchLocationAddressResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// SubmitV2
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=submit_v2&project=corehr&resource=offboarding&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/submitV2_offboarding.go
+func (o *offboarding) SubmitV2(ctx context.Context, req *SubmitV2OffboardingReq, options ...larkcore.RequestOptionFunc) (*SubmitV2OffboardingResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/offboardings/submit_v2"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, o.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &SubmitV2OffboardingResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, o.config)
 	if err != nil {
 		return nil, err
 	}

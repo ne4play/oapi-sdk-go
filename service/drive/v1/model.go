@@ -10335,8 +10335,8 @@ type P2FilePermissionMemberAddedV1Data struct {
 	FileToken            *string   `json:"file_token,omitempty"`              // 文档token
 	OperatorId           *UserId   `json:"operator_id,omitempty"`             // 操作者id
 	UserList             []*UserId `json:"user_list,omitempty"`               // 添加的用户列表
-	ChatList             []string  `json:"chat_list,omitempty"`               //
-	OpenDepartmentIdList []string  `json:"open_department_id_list,omitempty"` //
+	ChatList             []string  `json:"chat_list,omitempty"`               // 群聊列表
+	OpenDepartmentIdList []string  `json:"open_department_id_list,omitempty"` // 部门列表
 	SubscriberIdList     []*UserId `json:"subscriber_id_list,omitempty"`      // 订阅用户id列表
 }
 
@@ -10355,8 +10355,8 @@ type P2FilePermissionMemberRemovedV1Data struct {
 	FileToken            *string   `json:"file_token,omitempty"`              // 文档token
 	OperatorId           *UserId   `json:"operator_id,omitempty"`             // 操作者id
 	UserList             []*UserId `json:"user_list,omitempty"`               // 移除的用户列表
-	ChatList             []string  `json:"chat_list,omitempty"`               //
-	OpenDepartmentIdList []string  `json:"open_department_id_list,omitempty"` //
+	ChatList             []string  `json:"chat_list,omitempty"`               // 群聊列表
+	OpenDepartmentIdList []string  `json:"open_department_id_list,omitempty"` // 部门列表
 	SubscriberIdList     []*UserId `json:"subscriber_id_list,omitempty"`      // 订阅用户id列表
 }
 
