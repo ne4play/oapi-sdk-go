@@ -1840,6 +1840,38 @@ func (builder *BpmDataengineI18nBuilder) Build() *BpmDataengineI18n {
 	return req
 }
 
+type CalculatedFieldSetting struct {
+	Type *int `json:"type,omitempty"` // 字段类型
+}
+
+type CalculatedFieldSettingBuilder struct {
+	type_    int // 字段类型
+	typeFlag bool
+}
+
+func NewCalculatedFieldSettingBuilder() *CalculatedFieldSettingBuilder {
+	builder := &CalculatedFieldSettingBuilder{}
+	return builder
+}
+
+// 字段类型
+//
+// 示例值：1
+func (builder *CalculatedFieldSettingBuilder) Type(type_ int) *CalculatedFieldSettingBuilder {
+	builder.type_ = type_
+	builder.typeFlag = true
+	return builder
+}
+
+func (builder *CalculatedFieldSettingBuilder) Build() *CalculatedFieldSetting {
+	req := &CalculatedFieldSetting{}
+	if builder.typeFlag {
+		req.Type = &builder.type_
+
+	}
+	return req
+}
+
 type CalendarDateByDateFilter struct {
 	WkCalendarIds []string `json:"wk_calendar_ids,omitempty"` // 工作日历WKID列表，最多100
 	Dates         []string `json:"dates,omitempty"`           // 日期，格式："2006-01-02"，最多50个
@@ -1973,6 +2005,7 @@ type CommonSchemaConfig struct {
 	DateTimeFieldSetting   *DateTimeFieldSetting   `json:"date_time_field_setting,omitempty"`  // 日期时间配置信息
 	AttachmentFieldSetting *AttachmentFieldSetting `json:"attachment_field_setting,omitempty"` // 附件配置信息
 	ImageFieldSetting      *ImageFieldSetting      `json:"image_field_setting,omitempty"`      // 图片配置信息
+	CalculatedFieldSetting *CalculatedFieldSetting `json:"calculated_field_setting,omitempty"` // 计算字段配置信息
 }
 
 type CommonSchemaConfigBuilder struct {
@@ -1990,6 +2023,8 @@ type CommonSchemaConfigBuilder struct {
 	attachmentFieldSettingFlag bool
 	imageFieldSetting          *ImageFieldSetting // 图片配置信息
 	imageFieldSettingFlag      bool
+	calculatedFieldSetting     *CalculatedFieldSetting // 计算字段配置信息
+	calculatedFieldSettingFlag bool
 }
 
 func NewCommonSchemaConfigBuilder() *CommonSchemaConfigBuilder {
@@ -2060,6 +2095,15 @@ func (builder *CommonSchemaConfigBuilder) ImageFieldSetting(imageFieldSetting *I
 	return builder
 }
 
+// 计算字段配置信息
+//
+// 示例值：
+func (builder *CommonSchemaConfigBuilder) CalculatedFieldSetting(calculatedFieldSetting *CalculatedFieldSetting) *CommonSchemaConfigBuilder {
+	builder.calculatedFieldSetting = calculatedFieldSetting
+	builder.calculatedFieldSettingFlag = true
+	return builder
+}
+
 func (builder *CommonSchemaConfigBuilder) Build() *CommonSchemaConfig {
 	req := &CommonSchemaConfig{}
 	if builder.textFieldSettingFlag {
@@ -2082,6 +2126,9 @@ func (builder *CommonSchemaConfigBuilder) Build() *CommonSchemaConfig {
 	}
 	if builder.imageFieldSettingFlag {
 		req.ImageFieldSetting = builder.imageFieldSetting
+	}
+	if builder.calculatedFieldSettingFlag {
+		req.CalculatedFieldSetting = builder.calculatedFieldSetting
 	}
 	return req
 }
@@ -18349,6 +18396,22 @@ func (builder *QueryAuthorizationReqBuilder) UserIdType(userIdType string) *Quer
 	return builder
 }
 
+// 授权时间大于
+//
+// 示例值：1729773628
+func (builder *QueryAuthorizationReqBuilder) UpdatedAtGte(updatedAtGte string) *QueryAuthorizationReqBuilder {
+	builder.apiReq.QueryParams.Set("updated_at_gte", fmt.Sprint(updatedAtGte))
+	return builder
+}
+
+// 授权时间小于
+//
+// 示例值：1729773628
+func (builder *QueryAuthorizationReqBuilder) UpdatedAtLte(updatedAtLte string) *QueryAuthorizationReqBuilder {
+	builder.apiReq.QueryParams.Set("updated_at_lte", fmt.Sprint(updatedAtLte))
+	return builder
+}
+
 func (builder *QueryAuthorizationReqBuilder) Build() *QueryAuthorizationReq {
 	req := &QueryAuthorizationReq{}
 	req.apiReq = &larkcore.ApiReq{}
@@ -25523,8 +25586,12 @@ func (resp *ListSecurityGroupResp) Success() bool {
 }
 
 type QuerySecurityGroupReqBodyBuilder struct {
-	itemList     []*BpRoleOrganization // 角色列表，一次最多支持查询 50 个
-	itemListFlag bool
+	itemList         []*BpRoleOrganization // 角色列表，一次最多支持查询 50 个
+	itemListFlag     bool
+	updatedAtGte     string // 授权时间大于
+	updatedAtGteFlag bool
+	updatedAtLte     string // 授权时间小于
+	updatedAtLteFlag bool
 }
 
 func NewQuerySecurityGroupReqBodyBuilder() *QuerySecurityGroupReqBodyBuilder {
@@ -25541,17 +25608,45 @@ func (builder *QuerySecurityGroupReqBodyBuilder) ItemList(itemList []*BpRoleOrga
 	return builder
 }
 
+// 授权时间大于
+//
+// 示例值：1729773628
+func (builder *QuerySecurityGroupReqBodyBuilder) UpdatedAtGte(updatedAtGte string) *QuerySecurityGroupReqBodyBuilder {
+	builder.updatedAtGte = updatedAtGte
+	builder.updatedAtGteFlag = true
+	return builder
+}
+
+// 授权时间小于
+//
+// 示例值：1729773628
+func (builder *QuerySecurityGroupReqBodyBuilder) UpdatedAtLte(updatedAtLte string) *QuerySecurityGroupReqBodyBuilder {
+	builder.updatedAtLte = updatedAtLte
+	builder.updatedAtLteFlag = true
+	return builder
+}
+
 func (builder *QuerySecurityGroupReqBodyBuilder) Build() *QuerySecurityGroupReqBody {
 	req := &QuerySecurityGroupReqBody{}
 	if builder.itemListFlag {
 		req.ItemList = builder.itemList
 	}
+	if builder.updatedAtGteFlag {
+		req.UpdatedAtGte = &builder.updatedAtGte
+	}
+	if builder.updatedAtLteFlag {
+		req.UpdatedAtLte = &builder.updatedAtLte
+	}
 	return req
 }
 
 type QuerySecurityGroupPathReqBodyBuilder struct {
-	itemList     []*BpRoleOrganization
-	itemListFlag bool
+	itemList         []*BpRoleOrganization
+	itemListFlag     bool
+	updatedAtGte     string
+	updatedAtGteFlag bool
+	updatedAtLte     string
+	updatedAtLteFlag bool
 }
 
 func NewQuerySecurityGroupPathReqBodyBuilder() *QuerySecurityGroupPathReqBodyBuilder {
@@ -25568,10 +25663,34 @@ func (builder *QuerySecurityGroupPathReqBodyBuilder) ItemList(itemList []*BpRole
 	return builder
 }
 
+// 授权时间大于
+//
+// 示例值：1729773628
+func (builder *QuerySecurityGroupPathReqBodyBuilder) UpdatedAtGte(updatedAtGte string) *QuerySecurityGroupPathReqBodyBuilder {
+	builder.updatedAtGte = updatedAtGte
+	builder.updatedAtGteFlag = true
+	return builder
+}
+
+// 授权时间小于
+//
+// 示例值：1729773628
+func (builder *QuerySecurityGroupPathReqBodyBuilder) UpdatedAtLte(updatedAtLte string) *QuerySecurityGroupPathReqBodyBuilder {
+	builder.updatedAtLte = updatedAtLte
+	builder.updatedAtLteFlag = true
+	return builder
+}
+
 func (builder *QuerySecurityGroupPathReqBodyBuilder) Build() (*QuerySecurityGroupReqBody, error) {
 	req := &QuerySecurityGroupReqBody{}
 	if builder.itemListFlag {
 		req.ItemList = builder.itemList
+	}
+	if builder.updatedAtGteFlag {
+		req.UpdatedAtGte = &builder.updatedAtGte
+	}
+	if builder.updatedAtLteFlag {
+		req.UpdatedAtLte = &builder.updatedAtLte
 	}
 	return req, nil
 }
@@ -25613,7 +25732,9 @@ func (builder *QuerySecurityGroupReqBuilder) Build() *QuerySecurityGroupReq {
 }
 
 type QuerySecurityGroupReqBody struct {
-	ItemList []*BpRoleOrganization `json:"item_list,omitempty"` // 角色列表，一次最多支持查询 50 个
+	ItemList     []*BpRoleOrganization `json:"item_list,omitempty"`      // 角色列表，一次最多支持查询 50 个
+	UpdatedAtGte *string               `json:"updated_at_gte,omitempty"` // 授权时间大于
+	UpdatedAtLte *string               `json:"updated_at_lte,omitempty"` // 授权时间小于
 }
 
 type QuerySecurityGroupReq struct {
@@ -26230,7 +26351,8 @@ func (resp *PatchWorkingHoursTypeResp) Success() bool {
 }
 
 type P2CommonDataMetaDataUpdatedV1Data struct {
-	ApiName *string `json:"api_name,omitempty"` // 对象 API Name
+	ApiName      *string  `json:"api_name,omitempty"`      // 对象 API Name
+	FieldChanges []string `json:"field_changes,omitempty"` // 变更的字段
 }
 
 type P2CommonDataMetaDataUpdatedV1 struct {

@@ -10524,6 +10524,95 @@ func (resp *ListGroupResp) Success() bool {
 	return resp.Code == 0
 }
 
+type ListUserGroupReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewListUserGroupReqBuilder() *ListUserGroupReqBuilder {
+	builder := &ListUserGroupReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 考勤组id
+//
+// 示例值：6919358128597097404
+func (builder *ListUserGroupReqBuilder) GroupId(groupId string) *ListUserGroupReqBuilder {
+	builder.apiReq.PathParams.Set("group_id", fmt.Sprint(groupId))
+	return builder
+}
+
+// 用户 ID 的类型
+//
+// 示例值：employee_id
+func (builder *ListUserGroupReqBuilder) EmployeeType(employeeType string) *ListUserGroupReqBuilder {
+	builder.apiReq.QueryParams.Set("employee_type", fmt.Sprint(employeeType))
+	return builder
+}
+
+// 部门 ID 的类型
+//
+// 示例值：open_id
+func (builder *ListUserGroupReqBuilder) DeptType(deptType string) *ListUserGroupReqBuilder {
+	builder.apiReq.QueryParams.Set("dept_type", fmt.Sprint(deptType))
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：10
+func (builder *ListUserGroupReqBuilder) PageSize(pageSize int) *ListUserGroupReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：92xKiuWrBCSweSZJBSTpag%3D%3D
+func (builder *ListUserGroupReqBuilder) PageToken(pageToken string) *ListUserGroupReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 打卡类型
+//
+// 示例值：1
+func (builder *ListUserGroupReqBuilder) MemberClockType(memberClockType int) *ListUserGroupReqBuilder {
+	builder.apiReq.QueryParams.Set("member_clock_type", fmt.Sprint(memberClockType))
+	return builder
+}
+
+func (builder *ListUserGroupReqBuilder) Build() *ListUserGroupReq {
+	req := &ListUserGroupReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListUserGroupReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type ListUserGroupRespData struct {
+	Users     []*UserBase `json:"users,omitempty"`      // 考勤组成员列表
+	PageToken *string     `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+	HasMore   *bool       `json:"has_more,omitempty"`   // 是否还有更多项
+}
+
+type ListUserGroupResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListUserGroupRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListUserGroupResp) Success() bool {
+	return resp.Code == 0
+}
+
 type SearchGroupReqBodyBuilder struct {
 	groupName     string // 考勤组名称
 	groupNameFlag bool

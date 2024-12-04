@@ -5730,7 +5730,7 @@ type GetSubscribeFileReq struct {
 }
 
 type GetSubscribeFileRespData struct {
-	IsSubseribe *bool `json:"is_subseribe,omitempty"` // 是否有订阅，取值 true 表示已订阅；false 表示未订阅
+	IsSubscribe *bool `json:"is_subscribe,omitempty"` // 是否有订阅，取值 true 表示已订阅；false 表示未订阅
 }
 
 type GetSubscribeFileResp struct {
@@ -10295,6 +10295,24 @@ func (m *P2FileBitableRecordChangedV1) RawReq(req *larkevent.EventReq) {
 	m.EventReq = req
 }
 
+type P2FileCreatedInFolderV1Data struct {
+	FileType      *string   `json:"file_type,omitempty"`      // 文档类型
+	FileToken     *string   `json:"file_token,omitempty"`     // 文档 Token
+	FolderToken   *string   `json:"folder_token,omitempty"`   // 文件夹 Token
+	OperatorId    *UserId   `json:"operator_id,omitempty"`    // 操作者 ID
+	SubscriberIds []*UserId `json:"subscriber_ids,omitempty"` // 订阅用户 ID 列表
+}
+
+type P2FileCreatedInFolderV1 struct {
+	*larkevent.EventV2Base                              // 事件基础数据
+	*larkevent.EventReq                                 // 请求原生数据
+	Event                  *P2FileCreatedInFolderV1Data `json:"event"` // 事件内容
+}
+
+func (m *P2FileCreatedInFolderV1) RawReq(req *larkevent.EventReq) {
+	m.EventReq = req
+}
+
 type P2FileDeletedV1Data struct {
 	FileType         *string   `json:"file_type,omitempty"`          // 文档类型
 	FileToken        *string   `json:"file_token,omitempty"`         // 文档token
@@ -10347,6 +10365,28 @@ type P2FilePermissionMemberAddedV1 struct {
 }
 
 func (m *P2FilePermissionMemberAddedV1) RawReq(req *larkevent.EventReq) {
+	m.EventReq = req
+}
+
+type P2FilePermissionMemberAppliedV1Data struct {
+	FileType                  *string   `json:"file_type,omitempty"`                   // 文件对应的类型
+	FileToken                 *string   `json:"file_token,omitempty"`                  // 文件的 Token
+	OperatorId                *UserId   `json:"operator_id,omitempty"`                 // 操作者 ID
+	ApproverId                *UserId   `json:"approver_id,omitempty"`                 // 收到申请处理审批的用户 ID
+	ApplicationUserList       []*UserId `json:"application_user_list,omitempty"`       // 申请授权的用户 ID 列表
+	ApplicationChatList       []string  `json:"application_chat_list,omitempty"`       // 申请授权的群 ID 列表
+	ApplicationDepartmentList []string  `json:"application_department_list,omitempty"` // 申请授权的组织架构 ID 列表
+	Permission                *string   `json:"permission,omitempty"`                  // 需要申请的权限
+	SubscriberIds             []*UserId `json:"subscriber_ids,omitempty"`              // 订阅用户 ID 列表
+}
+
+type P2FilePermissionMemberAppliedV1 struct {
+	*larkevent.EventV2Base                                      // 事件基础数据
+	*larkevent.EventReq                                         // 请求原生数据
+	Event                  *P2FilePermissionMemberAppliedV1Data `json:"event"` // 事件内容
+}
+
+func (m *P2FilePermissionMemberAppliedV1) RawReq(req *larkevent.EventReq) {
 	m.EventReq = req
 }
 

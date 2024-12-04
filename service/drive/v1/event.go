@@ -58,6 +58,26 @@ func (h *P2FileBitableRecordChangedV1Handler) Handle(ctx context.Context, event 
 }
 
 // 消息处理器定义
+type P2FileCreatedInFolderV1Handler struct {
+	handler func(context.Context, *P2FileCreatedInFolderV1) error
+}
+
+func NewP2FileCreatedInFolderV1Handler(handler func(context.Context, *P2FileCreatedInFolderV1) error) *P2FileCreatedInFolderV1Handler {
+	h := &P2FileCreatedInFolderV1Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2FileCreatedInFolderV1Handler) Event() interface{} {
+	return &P2FileCreatedInFolderV1{}
+}
+
+// 回调开发者注册的handle
+func (h *P2FileCreatedInFolderV1Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2FileCreatedInFolderV1))
+}
+
+// 消息处理器定义
 type P2FileDeletedV1Handler struct {
 	handler func(context.Context, *P2FileDeletedV1) error
 }
@@ -115,6 +135,26 @@ func (h *P2FilePermissionMemberAddedV1Handler) Event() interface{} {
 // 回调开发者注册的handle
 func (h *P2FilePermissionMemberAddedV1Handler) Handle(ctx context.Context, event interface{}) error {
 	return h.handler(ctx, event.(*P2FilePermissionMemberAddedV1))
+}
+
+// 消息处理器定义
+type P2FilePermissionMemberAppliedV1Handler struct {
+	handler func(context.Context, *P2FilePermissionMemberAppliedV1) error
+}
+
+func NewP2FilePermissionMemberAppliedV1Handler(handler func(context.Context, *P2FilePermissionMemberAppliedV1) error) *P2FilePermissionMemberAppliedV1Handler {
+	h := &P2FilePermissionMemberAppliedV1Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2FilePermissionMemberAppliedV1Handler) Event() interface{} {
+	return &P2FilePermissionMemberAppliedV1{}
+}
+
+// 回调开发者注册的handle
+func (h *P2FilePermissionMemberAppliedV1Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2FilePermissionMemberAppliedV1))
 }
 
 // 消息处理器定义

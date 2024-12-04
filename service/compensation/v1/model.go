@@ -187,6 +187,7 @@ type ArchiveDetail struct {
 	ChangeReasonId    *string             `json:"change_reason_id,omitempty"`   // 调薪原因ID，详细信息可以通过[批量查询定调薪原因](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/change_reason/list)接口查询获得
 	ChangeDescription *string             `json:"change_description,omitempty"` // 调薪说明
 	EffectiveDate     *string             `json:"effective_date,omitempty"`     // 生效时间
+	ExpirationDate    *string             `json:"expiration_date,omitempty"`    // 失效时间
 	SalaryLevelId     *string             `json:"salary_level_id,omitempty"`    // 薪级薪等ID
 	ArchiveItems      []*ArchiveItem      `json:"archive_items,omitempty"`      // 档案关联的薪资项
 	ArchiveIndicators []*ArchiveIndicator `json:"archive_indicators,omitempty"` // 档案关联的薪资指标
@@ -211,6 +212,8 @@ type ArchiveDetailBuilder struct {
 	changeDescriptionFlag bool
 	effectiveDate         string // 生效时间
 	effectiveDateFlag     bool
+	expirationDate        string // 失效时间
+	expirationDateFlag    bool
 	salaryLevelId         string // 薪级薪等ID
 	salaryLevelIdFlag     bool
 	archiveItems          []*ArchiveItem // 档案关联的薪资项
@@ -305,6 +308,15 @@ func (builder *ArchiveDetailBuilder) EffectiveDate(effectiveDate string) *Archiv
 	return builder
 }
 
+// 失效时间
+//
+// 示例值：2022-10-24
+func (builder *ArchiveDetailBuilder) ExpirationDate(expirationDate string) *ArchiveDetailBuilder {
+	builder.expirationDate = expirationDate
+	builder.expirationDateFlag = true
+	return builder
+}
+
 // 薪级薪等ID
 //
 // 示例值：12342313
@@ -368,6 +380,10 @@ func (builder *ArchiveDetailBuilder) Build() *ArchiveDetail {
 	}
 	if builder.effectiveDateFlag {
 		req.EffectiveDate = &builder.effectiveDate
+
+	}
+	if builder.expirationDateFlag {
+		req.ExpirationDate = &builder.expirationDate
 
 	}
 	if builder.salaryLevelIdFlag {
@@ -506,6 +522,70 @@ func (builder *ArchiveItemBuilder) Build() *ArchiveItem {
 	}
 	if builder.itemResultRegularFlag {
 		req.ItemResultRegular = &builder.itemResultRegular
+
+	}
+	return req
+}
+
+type ArchiveItemValue struct {
+	ItemId           *string `json:"item_id,omitempty"`            // 薪资项ID
+	ItemValue        *string `json:"item_value,omitempty"`         // 薪资项的值
+	ItemValueRegular *string `json:"item_value_regular,omitempty"` // 员工转正后薪资项的值，仅用于开启试用期的薪资方案，以及员工处于实习期
+}
+
+type ArchiveItemValueBuilder struct {
+	itemId               string // 薪资项ID
+	itemIdFlag           bool
+	itemValue            string // 薪资项的值
+	itemValueFlag        bool
+	itemValueRegular     string // 员工转正后薪资项的值，仅用于开启试用期的薪资方案，以及员工处于实习期
+	itemValueRegularFlag bool
+}
+
+func NewArchiveItemValueBuilder() *ArchiveItemValueBuilder {
+	builder := &ArchiveItemValueBuilder{}
+	return builder
+}
+
+// 薪资项ID
+//
+// 示例值：7244131355509917228
+func (builder *ArchiveItemValueBuilder) ItemId(itemId string) *ArchiveItemValueBuilder {
+	builder.itemId = itemId
+	builder.itemIdFlag = true
+	return builder
+}
+
+// 薪资项的值
+//
+// 示例值：200.00
+func (builder *ArchiveItemValueBuilder) ItemValue(itemValue string) *ArchiveItemValueBuilder {
+	builder.itemValue = itemValue
+	builder.itemValueFlag = true
+	return builder
+}
+
+// 员工转正后薪资项的值，仅用于开启试用期的薪资方案，以及员工处于实习期
+//
+// 示例值：600.00
+func (builder *ArchiveItemValueBuilder) ItemValueRegular(itemValueRegular string) *ArchiveItemValueBuilder {
+	builder.itemValueRegular = itemValueRegular
+	builder.itemValueRegularFlag = true
+	return builder
+}
+
+func (builder *ArchiveItemValueBuilder) Build() *ArchiveItemValue {
+	req := &ArchiveItemValue{}
+	if builder.itemIdFlag {
+		req.ItemId = &builder.itemId
+
+	}
+	if builder.itemValueFlag {
+		req.ItemValue = &builder.itemValue
+
+	}
+	if builder.itemValueRegularFlag {
+		req.ItemValueRegular = &builder.itemValueRegular
 
 	}
 	return req
@@ -4374,6 +4454,8 @@ func (builder *SocialPlanScopeBuilder) Build() *SocialPlanScope {
 type QueryArchiveReqBodyBuilder struct {
 	userIdList             []string // 用户ID列表
 	userIdListFlag         bool
+	tidList                []string // 档案Tid列表
+	tidListFlag            bool
 	effectiveStartDate     string // 生效开始时间
 	effectiveStartDateFlag bool
 	effectiveEndDate       string // 生效结束时间
@@ -4391,6 +4473,15 @@ func NewQueryArchiveReqBodyBuilder() *QueryArchiveReqBodyBuilder {
 func (builder *QueryArchiveReqBodyBuilder) UserIdList(userIdList []string) *QueryArchiveReqBodyBuilder {
 	builder.userIdList = userIdList
 	builder.userIdListFlag = true
+	return builder
+}
+
+// 档案Tid列表
+//
+// 示例值：
+func (builder *QueryArchiveReqBodyBuilder) TidList(tidList []string) *QueryArchiveReqBodyBuilder {
+	builder.tidList = tidList
+	builder.tidListFlag = true
 	return builder
 }
 
@@ -4417,6 +4508,9 @@ func (builder *QueryArchiveReqBodyBuilder) Build() *QueryArchiveReqBody {
 	if builder.userIdListFlag {
 		req.UserIdList = builder.userIdList
 	}
+	if builder.tidListFlag {
+		req.TidList = builder.tidList
+	}
 	if builder.effectiveStartDateFlag {
 		req.EffectiveStartDate = &builder.effectiveStartDate
 	}
@@ -4429,6 +4523,8 @@ func (builder *QueryArchiveReqBodyBuilder) Build() *QueryArchiveReqBody {
 type QueryArchivePathReqBodyBuilder struct {
 	userIdList             []string
 	userIdListFlag         bool
+	tidList                []string
+	tidListFlag            bool
 	effectiveStartDate     string
 	effectiveStartDateFlag bool
 	effectiveEndDate       string
@@ -4446,6 +4542,15 @@ func NewQueryArchivePathReqBodyBuilder() *QueryArchivePathReqBodyBuilder {
 func (builder *QueryArchivePathReqBodyBuilder) UserIdList(userIdList []string) *QueryArchivePathReqBodyBuilder {
 	builder.userIdList = userIdList
 	builder.userIdListFlag = true
+	return builder
+}
+
+// 档案Tid列表
+//
+// 示例值：
+func (builder *QueryArchivePathReqBodyBuilder) TidList(tidList []string) *QueryArchivePathReqBodyBuilder {
+	builder.tidList = tidList
+	builder.tidListFlag = true
 	return builder
 }
 
@@ -4471,6 +4576,9 @@ func (builder *QueryArchivePathReqBodyBuilder) Build() (*QueryArchiveReqBody, er
 	req := &QueryArchiveReqBody{}
 	if builder.userIdListFlag {
 		req.UserIdList = builder.userIdList
+	}
+	if builder.tidListFlag {
+		req.TidList = builder.tidList
 	}
 	if builder.effectiveStartDateFlag {
 		req.EffectiveStartDate = &builder.effectiveStartDate
@@ -4534,6 +4642,7 @@ func (builder *QueryArchiveReqBuilder) Build() *QueryArchiveReq {
 
 type QueryArchiveReqBody struct {
 	UserIdList         []string `json:"user_id_list,omitempty"`         // 用户ID列表
+	TidList            []string `json:"tid_list,omitempty"`             // 档案Tid列表
 	EffectiveStartDate *string  `json:"effective_start_date,omitempty"` // 生效开始时间
 	EffectiveEndDate   *string  `json:"effective_end_date,omitempty"`   // 生效结束时间
 }

@@ -10979,6 +10979,102 @@ func (builder *UserIdBuilder) Build() *UserId {
 	return req
 }
 
+type WidgetInstance struct {
+	InstanceCode        *string `json:"instance_code,omitempty"`         // 审批实例唯一标识
+	Status              *string `json:"status,omitempty"`                // 实例当前状态
+	InstanceOperateTime *string `json:"instance_operate_time,omitempty"` // 实例变更时间，毫秒时间戳
+	IsRevertApproval    *bool   `json:"is_revert_approval,omitempty"`    // 是否是撤销已通过审批的流程
+	FormContent         *string `json:"form_content,omitempty"`          // 表单数据，仅包含自定义控件内的数据
+}
+
+type WidgetInstanceBuilder struct {
+	instanceCode            string // 审批实例唯一标识
+	instanceCodeFlag        bool
+	status                  string // 实例当前状态
+	statusFlag              bool
+	instanceOperateTime     string // 实例变更时间，毫秒时间戳
+	instanceOperateTimeFlag bool
+	isRevertApproval        bool // 是否是撤销已通过审批的流程
+	isRevertApprovalFlag    bool
+	formContent             string // 表单数据，仅包含自定义控件内的数据
+	formContentFlag         bool
+}
+
+func NewWidgetInstanceBuilder() *WidgetInstanceBuilder {
+	builder := &WidgetInstanceBuilder{}
+	return builder
+}
+
+// 审批实例唯一标识
+//
+// 示例值：81D31358-93AF-92D6-7425-01A5D67C4E71
+func (builder *WidgetInstanceBuilder) InstanceCode(instanceCode string) *WidgetInstanceBuilder {
+	builder.instanceCode = instanceCode
+	builder.instanceCodeFlag = true
+	return builder
+}
+
+// 实例当前状态
+//
+// 示例值：PENDING
+func (builder *WidgetInstanceBuilder) Status(status string) *WidgetInstanceBuilder {
+	builder.status = status
+	builder.statusFlag = true
+	return builder
+}
+
+// 实例变更时间，毫秒时间戳
+//
+// 示例值：1666079207003
+func (builder *WidgetInstanceBuilder) InstanceOperateTime(instanceOperateTime string) *WidgetInstanceBuilder {
+	builder.instanceOperateTime = instanceOperateTime
+	builder.instanceOperateTimeFlag = true
+	return builder
+}
+
+// 是否是撤销已通过审批的流程
+//
+// 示例值：false
+func (builder *WidgetInstanceBuilder) IsRevertApproval(isRevertApproval bool) *WidgetInstanceBuilder {
+	builder.isRevertApproval = isRevertApproval
+	builder.isRevertApprovalFlag = true
+	return builder
+}
+
+// 表单数据，仅包含自定义控件内的数据
+//
+// 示例值：[{\"id\": \"widget1\",\"custom_id\": \"user_info\",\"name\": \"Item application\",\"type\": \"textarea\"}]
+func (builder *WidgetInstanceBuilder) FormContent(formContent string) *WidgetInstanceBuilder {
+	builder.formContent = formContent
+	builder.formContentFlag = true
+	return builder
+}
+
+func (builder *WidgetInstanceBuilder) Build() *WidgetInstance {
+	req := &WidgetInstance{}
+	if builder.instanceCodeFlag {
+		req.InstanceCode = &builder.instanceCode
+
+	}
+	if builder.statusFlag {
+		req.Status = &builder.status
+
+	}
+	if builder.instanceOperateTimeFlag {
+		req.InstanceOperateTime = &builder.instanceOperateTime
+
+	}
+	if builder.isRevertApprovalFlag {
+		req.IsRevertApproval = &builder.isRevertApproval
+
+	}
+	if builder.formContentFlag {
+		req.FormContent = &builder.formContent
+
+	}
+	return req
+}
+
 type CreateApprovalReqBuilder struct {
 	apiReq         *larkcore.ApiReq
 	approvalCreate *ApprovalCreate

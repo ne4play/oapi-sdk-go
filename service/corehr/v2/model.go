@@ -32,6 +32,39 @@ const (
 )
 
 const (
+	UserIdTypeOpenQueryDepartmentChangeListByIdsApprovalGroupsUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypeOpenQueryDepartmentChangeListByIdsApprovalGroupsUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypeOpenQueryDepartmentChangeListByIdsApprovalGroupsOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypeOpenQueryDepartmentChangeListByIdsApprovalGroupsPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
+)
+
+const (
+	DepartmentIdTypeOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
+	DepartmentIdTypeDepartmentId             = "department_id"               // 以 department_id 来标识部门
+	DepartmentIdTypePeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+)
+
+const (
+	UserIdTypeOpenQueryJobChangeListByIdsApprovalGroupsUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypeOpenQueryJobChangeListByIdsApprovalGroupsUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypeOpenQueryJobChangeListByIdsApprovalGroupsOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypeOpenQueryJobChangeListByIdsApprovalGroupsPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
+)
+
+const (
+	DepartmentIdTypeOpenQueryJobChangeListByIdsApprovalGroupsOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
+	DepartmentIdTypeOpenQueryJobChangeListByIdsApprovalGroupsDepartmentId             = "department_id"               // 以 department_id 来标识部门
+	DepartmentIdTypeOpenQueryJobChangeListByIdsApprovalGroupsPeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+)
+
+const (
+	UserIdTypeListApproverUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypeListApproverUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypeListApproverOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypeListApproverPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
+)
+
+const (
 	ApproverStatusSkipped       = -2 // 跳过
 	ApproverStatusInitiated     = -1 // 发起
 	ApproverStatusNotStarted    = 0  // 未开始
@@ -55,9 +88,9 @@ const (
 )
 
 const (
-	DepartmentIdTypeOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
-	DepartmentIdTypeDepartmentId             = "department_id"               // 以 department_id 来标识部门
-	DepartmentIdTypePeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+	DepartmentIdTypeGetByDepartmentBpOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
+	DepartmentIdTypeGetByDepartmentBpDepartmentId             = "department_id"               // 以 department_id 来标识部门
+	DepartmentIdTypeGetByDepartmentBpPeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
 )
 
 const (
@@ -318,6 +351,20 @@ const (
 	DepartmentIdTypeSearchJobChangeOpenDepartmentId         = "open_department_id"          // 以 open_department_id 来标识部门
 	DepartmentIdTypeSearchJobChangeDepartmentId             = "department_id"               // 以 department_id 来标识部门
 	DepartmentIdTypeSearchJobChangePeopleCorehrDepartmentId = "people_corehr_department_id" // 以 people_corehr_department_id 来标识部门
+)
+
+const (
+	UserIdTypeEditOffboardingUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypeEditOffboardingUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypeEditOffboardingOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypeEditOffboardingPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
+)
+
+const (
+	UserIdTypeRevokeOffboardingUserId         = "user_id"          // 以 user_id 来识别用户
+	UserIdTypeRevokeOffboardingUnionId        = "union_id"         // 以 union_id 来识别用户
+	UserIdTypeRevokeOffboardingOpenId         = "open_id"          // 以 open_id 来识别用户
+	UserIdTypeRevokeOffboardingPeopleCorehrId = "people_corehr_id" // 以飞书人事的 ID 来识别用户
 )
 
 const (
@@ -2526,7 +2573,6 @@ func (builder *BankAccountForUpdateBuilder) Build() *BankAccountForUpdate {
 
 type BankBranch struct {
 	BankBranchId   *string `json:"bank_branch_id,omitempty"`   // 支行 ID
-	Name           []*I18n `json:"name,omitempty"`             // 金融分支机构名称（支行全称）
 	BankBranchName []*I18n `json:"bank_branch_name,omitempty"` // 支行名称
 	BankId         *string `json:"bank_id,omitempty"`          // 所属银行 ID，可通过[查询银行信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-bank/search)接口查询
 	Code           *string `json:"code,omitempty"`             // 金融分支机构编码（联行号）
@@ -2542,8 +2588,6 @@ type BankBranch struct {
 type BankBranchBuilder struct {
 	bankBranchId       string // 支行 ID
 	bankBranchIdFlag   bool
-	name               []*I18n // 金融分支机构名称（支行全称）
-	nameFlag           bool
 	bankBranchName     []*I18n // 支行名称
 	bankBranchNameFlag bool
 	bankId             string // 所属银行 ID，可通过[查询银行信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-bank/search)接口查询
@@ -2577,15 +2621,6 @@ func NewBankBranchBuilder() *BankBranchBuilder {
 func (builder *BankBranchBuilder) BankBranchId(bankBranchId string) *BankBranchBuilder {
 	builder.bankBranchId = bankBranchId
 	builder.bankBranchIdFlag = true
-	return builder
-}
-
-// 金融分支机构名称（支行全称）
-//
-// 示例值：
-func (builder *BankBranchBuilder) Name(name []*I18n) *BankBranchBuilder {
-	builder.name = name
-	builder.nameFlag = true
 	return builder
 }
 
@@ -2684,9 +2719,6 @@ func (builder *BankBranchBuilder) Build() *BankBranch {
 	if builder.bankBranchIdFlag {
 		req.BankBranchId = &builder.bankBranchId
 
-	}
-	if builder.nameFlag {
-		req.Name = builder.name
 	}
 	if builder.bankBranchNameFlag {
 		req.BankBranchName = builder.bankBranchName
@@ -5805,6 +5837,7 @@ type CreateTransferInfo struct {
 	TargetServiceCompany     *string                `json:"target_service_company,omitempty"`      // 新任职公司
 	TargetPosition           *string                `json:"target_position,omitempty"`             // 新岗位
 	TargetSocialSecurityCity *string                `json:"target_social_security_city,omitempty"` // 新社保城市
+	IsTransferWithWorkforce  *bool                  `json:"is_transfer_with_workforce,omitempty"`  // 编制随人员一起调整
 }
 
 type CreateTransferInfoBuilder struct {
@@ -5872,6 +5905,8 @@ type CreateTransferInfoBuilder struct {
 	targetPositionFlag           bool
 	targetSocialSecurityCity     string // 新社保城市
 	targetSocialSecurityCityFlag bool
+	isTransferWithWorkforce      bool // 编制随人员一起调整
+	isTransferWithWorkforceFlag  bool
 }
 
 func NewCreateTransferInfoBuilder() *CreateTransferInfoBuilder {
@@ -6142,7 +6177,7 @@ func (builder *CreateTransferInfoBuilder) TargetCompensationType(targetCompensat
 
 // 新任职公司
 //
-// 示例值：7289005963599693367
+// 示例值：7289005963599693368
 func (builder *CreateTransferInfoBuilder) TargetServiceCompany(targetServiceCompany string) *CreateTransferInfoBuilder {
 	builder.targetServiceCompany = targetServiceCompany
 	builder.targetServiceCompanyFlag = true
@@ -6164,6 +6199,15 @@ func (builder *CreateTransferInfoBuilder) TargetPosition(targetPosition string) 
 func (builder *CreateTransferInfoBuilder) TargetSocialSecurityCity(targetSocialSecurityCity string) *CreateTransferInfoBuilder {
 	builder.targetSocialSecurityCity = targetSocialSecurityCity
 	builder.targetSocialSecurityCityFlag = true
+	return builder
+}
+
+// 编制随人员一起调整
+//
+// 示例值：false
+func (builder *CreateTransferInfoBuilder) IsTransferWithWorkforce(isTransferWithWorkforce bool) *CreateTransferInfoBuilder {
+	builder.isTransferWithWorkforce = isTransferWithWorkforce
+	builder.isTransferWithWorkforceFlag = true
 	return builder
 }
 
@@ -6293,6 +6337,10 @@ func (builder *CreateTransferInfoBuilder) Build() *CreateTransferInfo {
 	}
 	if builder.targetSocialSecurityCityFlag {
 		req.TargetSocialSecurityCity = &builder.targetSocialSecurityCity
+
+	}
+	if builder.isTransferWithWorkforceFlag {
+		req.IsTransferWithWorkforce = &builder.isTransferWithWorkforce
 
 	}
 	return req
@@ -10112,7 +10160,8 @@ type Employee struct {
 	CompensationType *Enum   `json:"compensation_type,omitempty"` // 薪资类型
 	WorkShift        *Enum   `json:"work_shift,omitempty"`        // 排班类型
 
-	CustomOrg *string `json:"custom_org,omitempty"` // 自定义组织
+	CustomOrg                      *string                       `json:"custom_org,omitempty"`                        // 自定义组织
+	SeniorityAdjustInformationList []*SeniorityAdjustInformation `json:"seniority_adjust_information_list,omitempty"` // 司龄调整信息
 }
 
 type EmployeeBuilder struct {
@@ -10249,8 +10298,10 @@ type EmployeeBuilder struct {
 	workShift            *Enum // 排班类型
 	workShiftFlag        bool
 
-	customOrg     string // 自定义组织
-	customOrgFlag bool
+	customOrg                          string // 自定义组织
+	customOrgFlag                      bool
+	seniorityAdjustInformationList     []*SeniorityAdjustInformation // 司龄调整信息
+	seniorityAdjustInformationListFlag bool
 }
 
 func NewEmployeeBuilder() *EmployeeBuilder {
@@ -10852,6 +10903,15 @@ func (builder *EmployeeBuilder) CustomOrg(customOrg string) *EmployeeBuilder {
 	return builder
 }
 
+// 司龄调整信息
+//
+// 示例值：
+func (builder *EmployeeBuilder) SeniorityAdjustInformationList(seniorityAdjustInformationList []*SeniorityAdjustInformation) *EmployeeBuilder {
+	builder.seniorityAdjustInformationList = seniorityAdjustInformationList
+	builder.seniorityAdjustInformationListFlag = true
+	return builder
+}
+
 func (builder *EmployeeBuilder) Build() *Employee {
 	req := &Employee{}
 	if builder.employmentIdFlag {
@@ -11101,6 +11161,9 @@ func (builder *EmployeeBuilder) Build() *Employee {
 	if builder.customOrgFlag {
 		req.CustomOrg = &builder.customOrg
 
+	}
+	if builder.seniorityAdjustInformationListFlag {
+		req.SeniorityAdjustInformationList = builder.seniorityAdjustInformationList
 	}
 	return req
 }
@@ -23258,150 +23321,153 @@ func (builder *ObjectFieldDataBuilder) Build() *ObjectFieldData {
 }
 
 type OfferInfo struct {
-	OfferId              *string              `json:"offer_id,omitempty"`                // Offer id
-	OfferHrId            *string              `json:"offer_hr_id,omitempty"`             // Offer hr id
-	DepartmentId         *string              `json:"department_id,omitempty"`           // 部门 id
-	DirectLeaderId       *string              `json:"direct_leader_id,omitempty"`        // 直属领导id
-	DottedLineManagerId  *string              `json:"dotted_line_manager_id,omitempty"`  // 虚线上级id
-	JobId                *string              `json:"job_id,omitempty"`                  // 职务id
-	JobFamilyId          *string              `json:"job_family_id,omitempty"`           // 序列id
-	JobLevelId           *string              `json:"job_level_id,omitempty"`            // 级别id
-	JobTitle             *string              `json:"job_title,omitempty"`               // 职务头衔id
-	ProbationStartDate   *string              `json:"probation_start_date,omitempty"`    // 试用期开始日期
-	ProbationEndDate     *string              `json:"probation_end_date,omitempty"`      // 试用期结束日期
-	ContractStartDate    *string              `json:"contract_start_date,omitempty"`     // 合同开始日期
-	ContractEndDate      *string              `json:"contract_end_date,omitempty"`       // 合同结束日期
-	DurationPeriod       *float64             `json:"duration_period,omitempty"`         // 合同期限时长
-	DurationUnit         *string              `json:"duration_unit,omitempty"`           // 合同期限单位
-	OnboardingDate       *string              `json:"onboarding_date,omitempty"`         // 入职日期
-	OnboardingLocationId *string              `json:"onboarding_location_id,omitempty"`  // 入职地点id
-	OfficeLocationId     *string              `json:"office_location_id,omitempty"`      // 办公地点id
-	RecruitmentTypeId    *string              `json:"recruitment_type_id,omitempty"`     // 招聘来源id
-	ProbationPeriod      *string              `json:"probation_period,omitempty"`        // 试用期时长
-	EmployeeTypeId       *string              `json:"employee_type_id,omitempty"`        // 人员类型id
-	EmployeeSubtypeId    *string              `json:"employee_subtype_id,omitempty"`     // 人员子类型id
-	EmploymentTypeId     *string              `json:"employment_type_id,omitempty"`      // 雇佣类型id
-	WorkEmail            *string              `json:"work_email,omitempty"`              // 工作邮箱
-	DurationTypeId       *string              `json:"duration_type_id,omitempty"`        // 期限类型id
-	SigningTypeId        *string              `json:"signing_type_id,omitempty"`         // 签订类型id
-	EntryMode            *string              `json:"entry_mode,omitempty"`              // 入职方式
-	SocialSecurityCityId *string              `json:"social_security_city_id,omitempty"` // 社保城市id
-	ContractType         *string              `json:"contract_type,omitempty"`           // 合同类型
-	Company              *string              `json:"company,omitempty"`                 // 公司
-	CostCenterRate       []*JobDataCostCenter `json:"cost_center_rate,omitempty"`        // 成本中心分摊信息
-	JobGradeId           *string              `json:"job_grade_id,omitempty"`            // 职等ID
-	CustomFields         []*ObjectFieldData   `json:"custom_fields,omitempty"`           // 自定义字段
-	ServiceCompany       *string              `json:"service_company,omitempty"`         // 任职公司
-	WorkShift            *string              `json:"work_shift,omitempty"`              // 排班
-	CompensationType     *string              `json:"compensation_type,omitempty"`       // 薪资类型
-	WorkLocationId       *string              `json:"work_location_id,omitempty"`        // 工作地点id
-	OnboardingAddressId  *string              `json:"onboarding_address_id,omitempty"`   // 入职地址id
-	OfficeAddressId      *string              `json:"office_address_id,omitempty"`       // 办公地址id
-	PositionId           *string              `json:"position_id,omitempty"`             // 岗位id
-	WorkingCalendarId    *string              `json:"working_calendar_id,omitempty"`     // 工作日历id
-	WorkingHoursType     *string              `json:"working_hours_type,omitempty"`      // 工时制度
-	PayGroupId           *string              `json:"pay_group_id,omitempty"`            // 薪资组
-	FlowId               *string              `json:"flow_id,omitempty"`                 // 入职流程ID
-	CheckInTime          *string              `json:"check_in_time,omitempty"`           // 签到日期
-	CheckInMethod        *string              `json:"check_in_method,omitempty"`         // 签到方式
-	SeniorityDate        *string              `json:"seniority_date,omitempty"`          // 司龄起算日期
+	OfferId                        *string                              `json:"offer_id,omitempty"`                          // Offer id
+	OfferHrId                      *string                              `json:"offer_hr_id,omitempty"`                       // Offer hr id
+	DepartmentId                   *string                              `json:"department_id,omitempty"`                     // 部门 id
+	DirectLeaderId                 *string                              `json:"direct_leader_id,omitempty"`                  // 直属领导id
+	DottedLineManagerId            *string                              `json:"dotted_line_manager_id,omitempty"`            // 虚线上级id
+	JobId                          *string                              `json:"job_id,omitempty"`                            // 职务id
+	JobFamilyId                    *string                              `json:"job_family_id,omitempty"`                     // 序列id
+	JobLevelId                     *string                              `json:"job_level_id,omitempty"`                      // 级别id
+	JobTitle                       *string                              `json:"job_title,omitempty"`                         // 职务头衔id
+	ProbationStartDate             *string                              `json:"probation_start_date,omitempty"`              // 试用期开始日期
+	ProbationEndDate               *string                              `json:"probation_end_date,omitempty"`                // 试用期结束日期
+	ContractStartDate              *string                              `json:"contract_start_date,omitempty"`               // 合同开始日期
+	ContractEndDate                *string                              `json:"contract_end_date,omitempty"`                 // 合同结束日期
+	DurationPeriod                 *float64                             `json:"duration_period,omitempty"`                   // 合同期限时长
+	DurationUnit                   *string                              `json:"duration_unit,omitempty"`                     // 合同期限单位
+	OnboardingDate                 *string                              `json:"onboarding_date,omitempty"`                   // 入职日期
+	OnboardingLocationId           *string                              `json:"onboarding_location_id,omitempty"`            // 入职地点id
+	OfficeLocationId               *string                              `json:"office_location_id,omitempty"`                // 办公地点id
+	RecruitmentTypeId              *string                              `json:"recruitment_type_id,omitempty"`               // 招聘来源id
+	ProbationPeriod                *string                              `json:"probation_period,omitempty"`                  // 试用期时长
+	EmployeeTypeId                 *string                              `json:"employee_type_id,omitempty"`                  // 人员类型id
+	EmployeeSubtypeId              *string                              `json:"employee_subtype_id,omitempty"`               // 人员子类型id
+	EmploymentTypeId               *string                              `json:"employment_type_id,omitempty"`                // 雇佣类型id
+	WorkEmail                      *string                              `json:"work_email,omitempty"`                        // 工作邮箱
+	DurationTypeId                 *string                              `json:"duration_type_id,omitempty"`                  // 期限类型id
+	SigningTypeId                  *string                              `json:"signing_type_id,omitempty"`                   // 签订类型id
+	EntryMode                      *string                              `json:"entry_mode,omitempty"`                        // 入职方式
+	SocialSecurityCityId           *string                              `json:"social_security_city_id,omitempty"`           // 社保城市id
+	ContractType                   *string                              `json:"contract_type,omitempty"`                     // 合同类型
+	Company                        *string                              `json:"company,omitempty"`                           // 公司
+	CostCenterRate                 []*JobDataCostCenter                 `json:"cost_center_rate,omitempty"`                  // 成本中心分摊信息
+	JobGradeId                     *string                              `json:"job_grade_id,omitempty"`                      // 职等ID
+	CustomFields                   []*ObjectFieldData                   `json:"custom_fields,omitempty"`                     // 自定义字段
+	ServiceCompany                 *string                              `json:"service_company,omitempty"`                   // 任职公司
+	WorkShift                      *string                              `json:"work_shift,omitempty"`                        // 排班
+	CompensationType               *string                              `json:"compensation_type,omitempty"`                 // 薪资类型
+	WorkLocationId                 *string                              `json:"work_location_id,omitempty"`                  // 工作地点id
+	OnboardingAddressId            *string                              `json:"onboarding_address_id,omitempty"`             // 入职地址id
+	OfficeAddressId                *string                              `json:"office_address_id,omitempty"`                 // 办公地址id
+	PositionId                     *string                              `json:"position_id,omitempty"`                       // 岗位id
+	WorkingCalendarId              *string                              `json:"working_calendar_id,omitempty"`               // 工作日历id
+	WorkingHoursType               *string                              `json:"working_hours_type,omitempty"`                // 工时制度
+	PayGroupId                     *string                              `json:"pay_group_id,omitempty"`                      // 薪资组
+	FlowId                         *string                              `json:"flow_id,omitempty"`                           // 入职流程ID
+	CheckInTime                    *string                              `json:"check_in_time,omitempty"`                     // 签到日期
+	CheckInMethod                  *string                              `json:"check_in_method,omitempty"`                   // 签到方式
+	SeniorityDate                  *string                              `json:"seniority_date,omitempty"`                    // 司龄起算日期
+	SeniorityAdjustInformationList []*PrehireSeniorityAdjustInformation `json:"seniority_adjust_information_list,omitempty"` // 司龄调整信息
 }
 
 type OfferInfoBuilder struct {
-	offerId                  string // Offer id
-	offerIdFlag              bool
-	offerHrId                string // Offer hr id
-	offerHrIdFlag            bool
-	departmentId             string // 部门 id
-	departmentIdFlag         bool
-	directLeaderId           string // 直属领导id
-	directLeaderIdFlag       bool
-	dottedLineManagerId      string // 虚线上级id
-	dottedLineManagerIdFlag  bool
-	jobId                    string // 职务id
-	jobIdFlag                bool
-	jobFamilyId              string // 序列id
-	jobFamilyIdFlag          bool
-	jobLevelId               string // 级别id
-	jobLevelIdFlag           bool
-	jobTitle                 string // 职务头衔id
-	jobTitleFlag             bool
-	probationStartDate       string // 试用期开始日期
-	probationStartDateFlag   bool
-	probationEndDate         string // 试用期结束日期
-	probationEndDateFlag     bool
-	contractStartDate        string // 合同开始日期
-	contractStartDateFlag    bool
-	contractEndDate          string // 合同结束日期
-	contractEndDateFlag      bool
-	durationPeriod           float64 // 合同期限时长
-	durationPeriodFlag       bool
-	durationUnit             string // 合同期限单位
-	durationUnitFlag         bool
-	onboardingDate           string // 入职日期
-	onboardingDateFlag       bool
-	onboardingLocationId     string // 入职地点id
-	onboardingLocationIdFlag bool
-	officeLocationId         string // 办公地点id
-	officeLocationIdFlag     bool
-	recruitmentTypeId        string // 招聘来源id
-	recruitmentTypeIdFlag    bool
-	probationPeriod          string // 试用期时长
-	probationPeriodFlag      bool
-	employeeTypeId           string // 人员类型id
-	employeeTypeIdFlag       bool
-	employeeSubtypeId        string // 人员子类型id
-	employeeSubtypeIdFlag    bool
-	employmentTypeId         string // 雇佣类型id
-	employmentTypeIdFlag     bool
-	workEmail                string // 工作邮箱
-	workEmailFlag            bool
-	durationTypeId           string // 期限类型id
-	durationTypeIdFlag       bool
-	signingTypeId            string // 签订类型id
-	signingTypeIdFlag        bool
-	entryMode                string // 入职方式
-	entryModeFlag            bool
-	socialSecurityCityId     string // 社保城市id
-	socialSecurityCityIdFlag bool
-	contractType             string // 合同类型
-	contractTypeFlag         bool
-	company                  string // 公司
-	companyFlag              bool
-	costCenterRate           []*JobDataCostCenter // 成本中心分摊信息
-	costCenterRateFlag       bool
-	jobGradeId               string // 职等ID
-	jobGradeIdFlag           bool
-	customFields             []*ObjectFieldData // 自定义字段
-	customFieldsFlag         bool
-	serviceCompany           string // 任职公司
-	serviceCompanyFlag       bool
-	workShift                string // 排班
-	workShiftFlag            bool
-	compensationType         string // 薪资类型
-	compensationTypeFlag     bool
-	workLocationId           string // 工作地点id
-	workLocationIdFlag       bool
-	onboardingAddressId      string // 入职地址id
-	onboardingAddressIdFlag  bool
-	officeAddressId          string // 办公地址id
-	officeAddressIdFlag      bool
-	positionId               string // 岗位id
-	positionIdFlag           bool
-	workingCalendarId        string // 工作日历id
-	workingCalendarIdFlag    bool
-	workingHoursType         string // 工时制度
-	workingHoursTypeFlag     bool
-	payGroupId               string // 薪资组
-	payGroupIdFlag           bool
-	flowId                   string // 入职流程ID
-	flowIdFlag               bool
-	checkInTime              string // 签到日期
-	checkInTimeFlag          bool
-	checkInMethod            string // 签到方式
-	checkInMethodFlag        bool
-	seniorityDate            string // 司龄起算日期
-	seniorityDateFlag        bool
+	offerId                            string // Offer id
+	offerIdFlag                        bool
+	offerHrId                          string // Offer hr id
+	offerHrIdFlag                      bool
+	departmentId                       string // 部门 id
+	departmentIdFlag                   bool
+	directLeaderId                     string // 直属领导id
+	directLeaderIdFlag                 bool
+	dottedLineManagerId                string // 虚线上级id
+	dottedLineManagerIdFlag            bool
+	jobId                              string // 职务id
+	jobIdFlag                          bool
+	jobFamilyId                        string // 序列id
+	jobFamilyIdFlag                    bool
+	jobLevelId                         string // 级别id
+	jobLevelIdFlag                     bool
+	jobTitle                           string // 职务头衔id
+	jobTitleFlag                       bool
+	probationStartDate                 string // 试用期开始日期
+	probationStartDateFlag             bool
+	probationEndDate                   string // 试用期结束日期
+	probationEndDateFlag               bool
+	contractStartDate                  string // 合同开始日期
+	contractStartDateFlag              bool
+	contractEndDate                    string // 合同结束日期
+	contractEndDateFlag                bool
+	durationPeriod                     float64 // 合同期限时长
+	durationPeriodFlag                 bool
+	durationUnit                       string // 合同期限单位
+	durationUnitFlag                   bool
+	onboardingDate                     string // 入职日期
+	onboardingDateFlag                 bool
+	onboardingLocationId               string // 入职地点id
+	onboardingLocationIdFlag           bool
+	officeLocationId                   string // 办公地点id
+	officeLocationIdFlag               bool
+	recruitmentTypeId                  string // 招聘来源id
+	recruitmentTypeIdFlag              bool
+	probationPeriod                    string // 试用期时长
+	probationPeriodFlag                bool
+	employeeTypeId                     string // 人员类型id
+	employeeTypeIdFlag                 bool
+	employeeSubtypeId                  string // 人员子类型id
+	employeeSubtypeIdFlag              bool
+	employmentTypeId                   string // 雇佣类型id
+	employmentTypeIdFlag               bool
+	workEmail                          string // 工作邮箱
+	workEmailFlag                      bool
+	durationTypeId                     string // 期限类型id
+	durationTypeIdFlag                 bool
+	signingTypeId                      string // 签订类型id
+	signingTypeIdFlag                  bool
+	entryMode                          string // 入职方式
+	entryModeFlag                      bool
+	socialSecurityCityId               string // 社保城市id
+	socialSecurityCityIdFlag           bool
+	contractType                       string // 合同类型
+	contractTypeFlag                   bool
+	company                            string // 公司
+	companyFlag                        bool
+	costCenterRate                     []*JobDataCostCenter // 成本中心分摊信息
+	costCenterRateFlag                 bool
+	jobGradeId                         string // 职等ID
+	jobGradeIdFlag                     bool
+	customFields                       []*ObjectFieldData // 自定义字段
+	customFieldsFlag                   bool
+	serviceCompany                     string // 任职公司
+	serviceCompanyFlag                 bool
+	workShift                          string // 排班
+	workShiftFlag                      bool
+	compensationType                   string // 薪资类型
+	compensationTypeFlag               bool
+	workLocationId                     string // 工作地点id
+	workLocationIdFlag                 bool
+	onboardingAddressId                string // 入职地址id
+	onboardingAddressIdFlag            bool
+	officeAddressId                    string // 办公地址id
+	officeAddressIdFlag                bool
+	positionId                         string // 岗位id
+	positionIdFlag                     bool
+	workingCalendarId                  string // 工作日历id
+	workingCalendarIdFlag              bool
+	workingHoursType                   string // 工时制度
+	workingHoursTypeFlag               bool
+	payGroupId                         string // 薪资组
+	payGroupIdFlag                     bool
+	flowId                             string // 入职流程ID
+	flowIdFlag                         bool
+	checkInTime                        string // 签到日期
+	checkInTimeFlag                    bool
+	checkInMethod                      string // 签到方式
+	checkInMethodFlag                  bool
+	seniorityDate                      string // 司龄起算日期
+	seniorityDateFlag                  bool
+	seniorityAdjustInformationList     []*PrehireSeniorityAdjustInformation // 司龄调整信息
+	seniorityAdjustInformationListFlag bool
 }
 
 func NewOfferInfoBuilder() *OfferInfoBuilder {
@@ -23832,6 +23898,15 @@ func (builder *OfferInfoBuilder) SeniorityDate(seniorityDate string) *OfferInfoB
 	return builder
 }
 
+// 司龄调整信息
+//
+// 示例值：
+func (builder *OfferInfoBuilder) SeniorityAdjustInformationList(seniorityAdjustInformationList []*PrehireSeniorityAdjustInformation) *OfferInfoBuilder {
+	builder.seniorityAdjustInformationList = seniorityAdjustInformationList
+	builder.seniorityAdjustInformationListFlag = true
+	return builder
+}
+
 func (builder *OfferInfoBuilder) Build() *OfferInfo {
 	req := &OfferInfo{}
 	if builder.offerIdFlag {
@@ -24020,142 +24095,148 @@ func (builder *OfferInfoBuilder) Build() *OfferInfo {
 		req.SeniorityDate = &builder.seniorityDate
 
 	}
+	if builder.seniorityAdjustInformationListFlag {
+		req.SeniorityAdjustInformationList = builder.seniorityAdjustInformationList
+	}
 	return req
 }
 
 type OfferInfoUpdate struct {
-	OnboardingDate       *string              `json:"onboarding_date,omitempty"`        // 入职日期
-	AtsApplicationId     *string              `json:"ats_application_id,omitempty"`     // 招聘应用ID
-	OnboardingLocationId *string              `json:"onboarding_location_id,omitempty"` // 入职地点ID，详细信息可通过【批量查询地点】接口获得
-	OnboardingAddressId  *string              `json:"onboarding_address_id,omitempty"`  // 入职地址ID，详细信息可通过【批量查询地址】接口获得
-	OfficeLocationId     *string              `json:"office_location_id,omitempty"`     // 办公地点ID，详细信息可通过【批量查询地点】接口获得
-	OfficeAddressId      *string              `json:"office_address_id,omitempty"`      // 办公地址ID，详细信息可通过【批量查询地址】接口获得
-	EmploymentType       *string              `json:"employment_type,omitempty"`        // 雇佣类型，通过查询枚举集【employment_type】获得枚举apiName
-	OnboardingMethod     *string              `json:"onboarding_method,omitempty"`      // 入职方式，通过查询枚举集【onboarding_method】获得枚举apiName
-	WorkEmails           []*EmailForUpdate    `json:"work_emails,omitempty"`            // 工作邮箱
-	CostCenterRates      []*JobDataCostCenter `json:"cost_center_rates,omitempty"`      // 成本中心分摊信息,只支持商业化租户
-	CustomFields         []*ObjectFieldData   `json:"custom_fields,omitempty"`          // 自定义字段
-	PositionId           *string              `json:"position_id,omitempty"`            // 岗位 ID,
-	ProbationPeriod      *int                 `json:"probation_period,omitempty"`       // 试用期时长
-	ProbationStartDate   *string              `json:"probation_start_date,omitempty"`   // 试用期开始日期
-	ProbationEndDate     *string              `json:"probation_end_date,omitempty"`     // 试用期结束日期
-	ContractStartDate    *string              `json:"contract_start_date,omitempty"`    // 合同开始日期
-	ContractEndDate      *string              `json:"contract_end_date,omitempty"`      // 合同结束日期
-	ContractType         *string              `json:"contract_type,omitempty"`          // 合同类型
-	DurationTypeId       *string              `json:"duration_type_id,omitempty"`       // 期限类型
-	SigningTypeId        *string              `json:"signing_type_id,omitempty"`        // 签订类型
-	WorkerId             *string              `json:"worker_id,omitempty"`              // 工号
-	CheckInTime          *string              `json:"check_in_time,omitempty"`          // 签到时间
-	CheckInMethod        *string              `json:"check_in_method,omitempty"`        // 签到方式
-	Company              *string              `json:"company,omitempty"`                // 公司主体
-	WorkShift            *string              `json:"work_shift,omitempty"`             // 排班
-	RecruitmentTypeId    *string              `json:"recruitment_type_id,omitempty"`    // 招聘类型
-	CompensationType     *string              `json:"compensation_type,omitempty"`      // 薪资类型
-	PayGroupId           *string              `json:"pay_group_id,omitempty"`           // 薪资组
-	OfferHrId            *string              `json:"offer_hr_id,omitempty"`            // offer HR
-	JobId                *string              `json:"job_id,omitempty"`                 // 职务
-	JobFamilyId          *string              `json:"job_family_id,omitempty"`          // 序列
-	JobLevelId           *string              `json:"job_level_id,omitempty"`           // 职级
-	JobGradeId           *string              `json:"job_grade_id,omitempty"`           // 职等
-	EmployeeTypeId       *string              `json:"employee_type_id,omitempty"`       // 人员类型
-	EmployeeSubtypeId    *string              `json:"employee_subtype_id,omitempty"`    // 人员子类型
-	DirectLeaderId       *string              `json:"direct_leader_id,omitempty"`       // 直属上级
-	DottedLineManagerId  *string              `json:"dotted_line_manager_id,omitempty"` // 虚线上级
-	DepartmentId         *string              `json:"department_id,omitempty"`          // 部门
-	SocialSecurityCity   *string              `json:"social_security_city,omitempty"`   // 社保城市
-	WorkLocationId       *string              `json:"work_location_id,omitempty"`       // 工作城市
-	WorkingCalendar      *string              `json:"working_calendar,omitempty"`       // 工作日历
-	WorkingHoursType     *string              `json:"working_hours_type,omitempty"`     // 工时制度
-	SeniorityDate        *string              `json:"seniority_date,omitempty"`         // 司龄起算日期
+	OnboardingDate                 *string                                    `json:"onboarding_date,omitempty"`                   // 入职日期
+	AtsApplicationId               *string                                    `json:"ats_application_id,omitempty"`                // 招聘应用ID
+	OnboardingLocationId           *string                                    `json:"onboarding_location_id,omitempty"`            // 入职地点ID，详细信息可通过【批量查询地点】接口获得
+	OnboardingAddressId            *string                                    `json:"onboarding_address_id,omitempty"`             // 入职地址ID，详细信息可通过【批量查询地址】接口获得
+	OfficeLocationId               *string                                    `json:"office_location_id,omitempty"`                // 办公地点ID，详细信息可通过【批量查询地点】接口获得
+	OfficeAddressId                *string                                    `json:"office_address_id,omitempty"`                 // 办公地址ID，详细信息可通过【批量查询地址】接口获得
+	EmploymentType                 *string                                    `json:"employment_type,omitempty"`                   // 雇佣类型，通过查询枚举集【employment_type】获得枚举apiName
+	OnboardingMethod               *string                                    `json:"onboarding_method,omitempty"`                 // 入职方式，通过查询枚举集【onboarding_method】获得枚举apiName
+	WorkEmails                     []*EmailForUpdate                          `json:"work_emails,omitempty"`                       // 工作邮箱
+	CostCenterRates                []*JobDataCostCenter                       `json:"cost_center_rates,omitempty"`                 // 成本中心分摊信息,只支持商业化租户
+	CustomFields                   []*ObjectFieldData                         `json:"custom_fields,omitempty"`                     // 自定义字段
+	PositionId                     *string                                    `json:"position_id,omitempty"`                       // 岗位 ID,
+	ProbationPeriod                *int                                       `json:"probation_period,omitempty"`                  // 试用期时长
+	ProbationStartDate             *string                                    `json:"probation_start_date,omitempty"`              // 试用期开始日期
+	ProbationEndDate               *string                                    `json:"probation_end_date,omitempty"`                // 试用期结束日期
+	ContractStartDate              *string                                    `json:"contract_start_date,omitempty"`               // 合同开始日期
+	ContractEndDate                *string                                    `json:"contract_end_date,omitempty"`                 // 合同结束日期
+	ContractType                   *string                                    `json:"contract_type,omitempty"`                     // 合同类型
+	DurationTypeId                 *string                                    `json:"duration_type_id,omitempty"`                  // 期限类型
+	SigningTypeId                  *string                                    `json:"signing_type_id,omitempty"`                   // 签订类型
+	WorkerId                       *string                                    `json:"worker_id,omitempty"`                         // 工号
+	CheckInTime                    *string                                    `json:"check_in_time,omitempty"`                     // 签到时间
+	CheckInMethod                  *string                                    `json:"check_in_method,omitempty"`                   // 签到方式
+	Company                        *string                                    `json:"company,omitempty"`                           // 公司主体
+	WorkShift                      *string                                    `json:"work_shift,omitempty"`                        // 排班
+	RecruitmentTypeId              *string                                    `json:"recruitment_type_id,omitempty"`               // 招聘类型
+	CompensationType               *string                                    `json:"compensation_type,omitempty"`                 // 薪资类型
+	PayGroupId                     *string                                    `json:"pay_group_id,omitempty"`                      // 薪资组
+	OfferHrId                      *string                                    `json:"offer_hr_id,omitempty"`                       // offer HR
+	JobId                          *string                                    `json:"job_id,omitempty"`                            // 职务
+	JobFamilyId                    *string                                    `json:"job_family_id,omitempty"`                     // 序列
+	JobLevelId                     *string                                    `json:"job_level_id,omitempty"`                      // 职级
+	JobGradeId                     *string                                    `json:"job_grade_id,omitempty"`                      // 职等
+	EmployeeTypeId                 *string                                    `json:"employee_type_id,omitempty"`                  // 人员类型
+	EmployeeSubtypeId              *string                                    `json:"employee_subtype_id,omitempty"`               // 人员子类型
+	DirectLeaderId                 *string                                    `json:"direct_leader_id,omitempty"`                  // 直属上级
+	DottedLineManagerId            *string                                    `json:"dotted_line_manager_id,omitempty"`            // 虚线上级
+	DepartmentId                   *string                                    `json:"department_id,omitempty"`                     // 部门
+	SocialSecurityCity             *string                                    `json:"social_security_city,omitempty"`              // 社保城市
+	WorkLocationId                 *string                                    `json:"work_location_id,omitempty"`                  // 工作城市
+	WorkingCalendar                *string                                    `json:"working_calendar,omitempty"`                  // 工作日历
+	WorkingHoursType               *string                                    `json:"working_hours_type,omitempty"`                // 工时制度
+	SeniorityDate                  *string                                    `json:"seniority_date,omitempty"`                    // 司龄起算日期
+	SeniorityAdjustInformationList []*PrehireSeniorityAdjustInformationUpdate `json:"seniority_adjust_information_list,omitempty"` // 司龄调整信息
 }
 
 type OfferInfoUpdateBuilder struct {
-	onboardingDate           string // 入职日期
-	onboardingDateFlag       bool
-	atsApplicationId         string // 招聘应用ID
-	atsApplicationIdFlag     bool
-	onboardingLocationId     string // 入职地点ID，详细信息可通过【批量查询地点】接口获得
-	onboardingLocationIdFlag bool
-	onboardingAddressId      string // 入职地址ID，详细信息可通过【批量查询地址】接口获得
-	onboardingAddressIdFlag  bool
-	officeLocationId         string // 办公地点ID，详细信息可通过【批量查询地点】接口获得
-	officeLocationIdFlag     bool
-	officeAddressId          string // 办公地址ID，详细信息可通过【批量查询地址】接口获得
-	officeAddressIdFlag      bool
-	employmentType           string // 雇佣类型，通过查询枚举集【employment_type】获得枚举apiName
-	employmentTypeFlag       bool
-	onboardingMethod         string // 入职方式，通过查询枚举集【onboarding_method】获得枚举apiName
-	onboardingMethodFlag     bool
-	workEmails               []*EmailForUpdate // 工作邮箱
-	workEmailsFlag           bool
-	costCenterRates          []*JobDataCostCenter // 成本中心分摊信息,只支持商业化租户
-	costCenterRatesFlag      bool
-	customFields             []*ObjectFieldData // 自定义字段
-	customFieldsFlag         bool
-	positionId               string // 岗位 ID,
-	positionIdFlag           bool
-	probationPeriod          int // 试用期时长
-	probationPeriodFlag      bool
-	probationStartDate       string // 试用期开始日期
-	probationStartDateFlag   bool
-	probationEndDate         string // 试用期结束日期
-	probationEndDateFlag     bool
-	contractStartDate        string // 合同开始日期
-	contractStartDateFlag    bool
-	contractEndDate          string // 合同结束日期
-	contractEndDateFlag      bool
-	contractType             string // 合同类型
-	contractTypeFlag         bool
-	durationTypeId           string // 期限类型
-	durationTypeIdFlag       bool
-	signingTypeId            string // 签订类型
-	signingTypeIdFlag        bool
-	workerId                 string // 工号
-	workerIdFlag             bool
-	checkInTime              string // 签到时间
-	checkInTimeFlag          bool
-	checkInMethod            string // 签到方式
-	checkInMethodFlag        bool
-	company                  string // 公司主体
-	companyFlag              bool
-	workShift                string // 排班
-	workShiftFlag            bool
-	recruitmentTypeId        string // 招聘类型
-	recruitmentTypeIdFlag    bool
-	compensationType         string // 薪资类型
-	compensationTypeFlag     bool
-	payGroupId               string // 薪资组
-	payGroupIdFlag           bool
-	offerHrId                string // offer HR
-	offerHrIdFlag            bool
-	jobId                    string // 职务
-	jobIdFlag                bool
-	jobFamilyId              string // 序列
-	jobFamilyIdFlag          bool
-	jobLevelId               string // 职级
-	jobLevelIdFlag           bool
-	jobGradeId               string // 职等
-	jobGradeIdFlag           bool
-	employeeTypeId           string // 人员类型
-	employeeTypeIdFlag       bool
-	employeeSubtypeId        string // 人员子类型
-	employeeSubtypeIdFlag    bool
-	directLeaderId           string // 直属上级
-	directLeaderIdFlag       bool
-	dottedLineManagerId      string // 虚线上级
-	dottedLineManagerIdFlag  bool
-	departmentId             string // 部门
-	departmentIdFlag         bool
-	socialSecurityCity       string // 社保城市
-	socialSecurityCityFlag   bool
-	workLocationId           string // 工作城市
-	workLocationIdFlag       bool
-	workingCalendar          string // 工作日历
-	workingCalendarFlag      bool
-	workingHoursType         string // 工时制度
-	workingHoursTypeFlag     bool
-	seniorityDate            string // 司龄起算日期
-	seniorityDateFlag        bool
+	onboardingDate                     string // 入职日期
+	onboardingDateFlag                 bool
+	atsApplicationId                   string // 招聘应用ID
+	atsApplicationIdFlag               bool
+	onboardingLocationId               string // 入职地点ID，详细信息可通过【批量查询地点】接口获得
+	onboardingLocationIdFlag           bool
+	onboardingAddressId                string // 入职地址ID，详细信息可通过【批量查询地址】接口获得
+	onboardingAddressIdFlag            bool
+	officeLocationId                   string // 办公地点ID，详细信息可通过【批量查询地点】接口获得
+	officeLocationIdFlag               bool
+	officeAddressId                    string // 办公地址ID，详细信息可通过【批量查询地址】接口获得
+	officeAddressIdFlag                bool
+	employmentType                     string // 雇佣类型，通过查询枚举集【employment_type】获得枚举apiName
+	employmentTypeFlag                 bool
+	onboardingMethod                   string // 入职方式，通过查询枚举集【onboarding_method】获得枚举apiName
+	onboardingMethodFlag               bool
+	workEmails                         []*EmailForUpdate // 工作邮箱
+	workEmailsFlag                     bool
+	costCenterRates                    []*JobDataCostCenter // 成本中心分摊信息,只支持商业化租户
+	costCenterRatesFlag                bool
+	customFields                       []*ObjectFieldData // 自定义字段
+	customFieldsFlag                   bool
+	positionId                         string // 岗位 ID,
+	positionIdFlag                     bool
+	probationPeriod                    int // 试用期时长
+	probationPeriodFlag                bool
+	probationStartDate                 string // 试用期开始日期
+	probationStartDateFlag             bool
+	probationEndDate                   string // 试用期结束日期
+	probationEndDateFlag               bool
+	contractStartDate                  string // 合同开始日期
+	contractStartDateFlag              bool
+	contractEndDate                    string // 合同结束日期
+	contractEndDateFlag                bool
+	contractType                       string // 合同类型
+	contractTypeFlag                   bool
+	durationTypeId                     string // 期限类型
+	durationTypeIdFlag                 bool
+	signingTypeId                      string // 签订类型
+	signingTypeIdFlag                  bool
+	workerId                           string // 工号
+	workerIdFlag                       bool
+	checkInTime                        string // 签到时间
+	checkInTimeFlag                    bool
+	checkInMethod                      string // 签到方式
+	checkInMethodFlag                  bool
+	company                            string // 公司主体
+	companyFlag                        bool
+	workShift                          string // 排班
+	workShiftFlag                      bool
+	recruitmentTypeId                  string // 招聘类型
+	recruitmentTypeIdFlag              bool
+	compensationType                   string // 薪资类型
+	compensationTypeFlag               bool
+	payGroupId                         string // 薪资组
+	payGroupIdFlag                     bool
+	offerHrId                          string // offer HR
+	offerHrIdFlag                      bool
+	jobId                              string // 职务
+	jobIdFlag                          bool
+	jobFamilyId                        string // 序列
+	jobFamilyIdFlag                    bool
+	jobLevelId                         string // 职级
+	jobLevelIdFlag                     bool
+	jobGradeId                         string // 职等
+	jobGradeIdFlag                     bool
+	employeeTypeId                     string // 人员类型
+	employeeTypeIdFlag                 bool
+	employeeSubtypeId                  string // 人员子类型
+	employeeSubtypeIdFlag              bool
+	directLeaderId                     string // 直属上级
+	directLeaderIdFlag                 bool
+	dottedLineManagerId                string // 虚线上级
+	dottedLineManagerIdFlag            bool
+	departmentId                       string // 部门
+	departmentIdFlag                   bool
+	socialSecurityCity                 string // 社保城市
+	socialSecurityCityFlag             bool
+	workLocationId                     string // 工作城市
+	workLocationIdFlag                 bool
+	workingCalendar                    string // 工作日历
+	workingCalendarFlag                bool
+	workingHoursType                   string // 工时制度
+	workingHoursTypeFlag               bool
+	seniorityDate                      string // 司龄起算日期
+	seniorityDateFlag                  bool
+	seniorityAdjustInformationList     []*PrehireSeniorityAdjustInformationUpdate // 司龄调整信息
+	seniorityAdjustInformationListFlag bool
 }
 
 func NewOfferInfoUpdateBuilder() *OfferInfoUpdateBuilder {
@@ -24550,6 +24631,15 @@ func (builder *OfferInfoUpdateBuilder) SeniorityDate(seniorityDate string) *Offe
 	return builder
 }
 
+// 司龄调整信息
+//
+// 示例值：
+func (builder *OfferInfoUpdateBuilder) SeniorityAdjustInformationList(seniorityAdjustInformationList []*PrehireSeniorityAdjustInformationUpdate) *OfferInfoUpdateBuilder {
+	builder.seniorityAdjustInformationList = seniorityAdjustInformationList
+	builder.seniorityAdjustInformationListFlag = true
+	return builder
+}
+
 func (builder *OfferInfoUpdateBuilder) Build() *OfferInfoUpdate {
 	req := &OfferInfoUpdate{}
 	if builder.onboardingDateFlag {
@@ -24720,6 +24810,9 @@ func (builder *OfferInfoUpdateBuilder) Build() *OfferInfoUpdate {
 	if builder.seniorityDateFlag {
 		req.SeniorityDate = &builder.seniorityDate
 
+	}
+	if builder.seniorityAdjustInformationListFlag {
+		req.SeniorityAdjustInformationList = builder.seniorityAdjustInformationList
 	}
 	return req
 }
@@ -25612,8 +25705,8 @@ func (builder *OrganizationDomainEventDataBuilder) Build() *OrganizationDomainEv
 type OrganizationOpLog struct {
 	ObjectId        *string                    `json:"object_id,omitempty"`        // 业务对象ID
 	Changes         []*OperationLogEntityField `json:"changes,omitempty"`          // 字段变化列表
-	Opretor         *string                    `json:"opretor,omitempty"`          // 操作人
-	OperationType   *string                    `json:"operation_type,omitempty"`   // 操作类型
+	Operator        *string                    `json:"operator,omitempty"`         // 操作人
+	OperationType   *int                       `json:"operation_type,omitempty"`   // 操作类型
 	OperationTime   *string                    `json:"operation_time,omitempty"`   // 操作时间
 	EffectiveTime   *string                    `json:"effective_time,omitempty"`   // 操作生效时间
 	OperationReason *string                    `json:"operation_reason,omitempty"` // 操作原因说明
@@ -25625,9 +25718,9 @@ type OrganizationOpLogBuilder struct {
 	objectIdFlag        bool
 	changes             []*OperationLogEntityField // 字段变化列表
 	changesFlag         bool
-	opretor             string // 操作人
-	opretorFlag         bool
-	operationType       string // 操作类型
+	operator            string // 操作人
+	operatorFlag        bool
+	operationType       int // 操作类型
 	operationTypeFlag   bool
 	operationTime       string // 操作时间
 	operationTimeFlag   bool
@@ -25665,16 +25758,16 @@ func (builder *OrganizationOpLogBuilder) Changes(changes []*OperationLogEntityFi
 // 操作人
 //
 // 示例值：工号001
-func (builder *OrganizationOpLogBuilder) Opretor(opretor string) *OrganizationOpLogBuilder {
-	builder.opretor = opretor
-	builder.opretorFlag = true
+func (builder *OrganizationOpLogBuilder) Operator(operator string) *OrganizationOpLogBuilder {
+	builder.operator = operator
+	builder.operatorFlag = true
 	return builder
 }
 
 // 操作类型
 //
-// 示例值：编辑
-func (builder *OrganizationOpLogBuilder) OperationType(operationType string) *OrganizationOpLogBuilder {
+// 示例值：10
+func (builder *OrganizationOpLogBuilder) OperationType(operationType int) *OrganizationOpLogBuilder {
 	builder.operationType = operationType
 	builder.operationTypeFlag = true
 	return builder
@@ -25691,7 +25784,7 @@ func (builder *OrganizationOpLogBuilder) OperationTime(operationTime string) *Or
 
 // 操作生效时间
 //
-// 示例值：2020-06-02 00:00:00
+// 示例值：2020-06-02
 func (builder *OrganizationOpLogBuilder) EffectiveTime(effectiveTime string) *OrganizationOpLogBuilder {
 	builder.effectiveTime = effectiveTime
 	builder.effectiveTimeFlag = true
@@ -25725,8 +25818,8 @@ func (builder *OrganizationOpLogBuilder) Build() *OrganizationOpLog {
 	if builder.changesFlag {
 		req.Changes = builder.changes
 	}
-	if builder.opretorFlag {
-		req.Opretor = &builder.opretor
+	if builder.operatorFlag {
+		req.Operator = &builder.operator
 
 	}
 	if builder.operationTypeFlag {
@@ -27603,11 +27696,11 @@ func (builder *PersonInfoChnBuilder) Build() *PersonInfoChn {
 type PersonName struct {
 	LocalPrimary                     *string `json:"local_primary,omitempty"`                         // 姓 - 本地文字
 	LocalFirstName                   *string `json:"local_first_name,omitempty"`                      // 名 - 本地文字
-	CountryRegionId                  *string `json:"country_region_id,omitempty"`                     // 国家 / 地区
-	NameType                         *Enum   `json:"name_type,omitempty"`                             // 姓名类型
+	CountryRegionId                  *string `json:"country_region_id,omitempty"`                     // 国家 / 地区;- 详细信息可通过[查询国家/地区信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-country_region/search)接口查询获得
+	NameType                         *Enum   `json:"name_type,omitempty"`                             // 姓名类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：name_type
 	LocalFirstName2                  *string `json:"local_first_name_2,omitempty"`                    // 名 - 第二本地文字
 	LocalPrimary2                    *string `json:"local_primary_2,omitempty"`                       // 姓 - 第二本地文字
-	AdditionalNameType               *Enum   `json:"additional_name_type,omitempty"`                  // 补充姓名类型
+	AdditionalNameType               *Enum   `json:"additional_name_type,omitempty"`                  // 补充姓名类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：additional_name_type
 	FirstName                        *string `json:"first_name,omitempty"`                            // 名
 	FullName                         *string `json:"full_name,omitempty"`                             // 全名
 	Hereditary                       *string `json:"hereditary,omitempty"`                            // 姓氏称谓
@@ -27616,9 +27709,9 @@ type PersonName struct {
 	MiddleName                       *string `json:"middle_name,omitempty"`                           // 中间名
 	NamePrimary                      *string `json:"name_primary,omitempty"`                          // 姓
 	Secondary                        *string `json:"secondary,omitempty"`                             // 第二姓氏
-	Social                           *Enum   `json:"social,omitempty"`                                // 尊称
 	Tertiary                         *string `json:"tertiary,omitempty"`                              // 婚后姓氏
-	Title                            *Enum   `json:"title,omitempty"`                                 // 头衔
+	Social                           *Enum   `json:"social,omitempty"`                                // 尊称;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：social
+	Title                            *Enum   `json:"title,omitempty"`                                 // 头衔;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：title
 	LocalMiddleName                  *string `json:"local_middle_name,omitempty"`                     // 本地中间名
 	LocalSecondary                   *string `json:"local_secondary,omitempty"`                       // 第二姓氏 - 本地文字
 	DisplayNameLocalAndWesternScript *string `json:"display_name_local_and_western_script,omitempty"` // 展示姓名（本地和西方文字）
@@ -27631,15 +27724,15 @@ type PersonNameBuilder struct {
 	localPrimaryFlag                     bool
 	localFirstName                       string // 名 - 本地文字
 	localFirstNameFlag                   bool
-	countryRegionId                      string // 国家 / 地区
+	countryRegionId                      string // 国家 / 地区;- 详细信息可通过[查询国家/地区信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-country_region/search)接口查询获得
 	countryRegionIdFlag                  bool
-	nameType                             *Enum // 姓名类型
+	nameType                             *Enum // 姓名类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：name_type
 	nameTypeFlag                         bool
 	localFirstName2                      string // 名 - 第二本地文字
 	localFirstName2Flag                  bool
 	localPrimary2                        string // 姓 - 第二本地文字
 	localPrimary2Flag                    bool
-	additionalNameType                   *Enum // 补充姓名类型
+	additionalNameType                   *Enum // 补充姓名类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：additional_name_type
 	additionalNameTypeFlag               bool
 	firstName                            string // 名
 	firstNameFlag                        bool
@@ -27657,11 +27750,11 @@ type PersonNameBuilder struct {
 	namePrimaryFlag                      bool
 	secondary                            string // 第二姓氏
 	secondaryFlag                        bool
-	social                               *Enum // 尊称
-	socialFlag                           bool
 	tertiary                             string // 婚后姓氏
 	tertiaryFlag                         bool
-	title                                *Enum // 头衔
+	social                               *Enum // 尊称;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：social
+	socialFlag                           bool
+	title                                *Enum // 头衔;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：title
 	titleFlag                            bool
 	localMiddleName                      string // 本地中间名
 	localMiddleNameFlag                  bool
@@ -27698,7 +27791,7 @@ func (builder *PersonNameBuilder) LocalFirstName(localFirstName string) *PersonN
 	return builder
 }
 
-// 国家 / 地区
+// 国家 / 地区;- 详细信息可通过[查询国家/地区信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-country_region/search)接口查询获得
 //
 // 示例值：6862995757234914824
 func (builder *PersonNameBuilder) CountryRegionId(countryRegionId string) *PersonNameBuilder {
@@ -27707,7 +27800,7 @@ func (builder *PersonNameBuilder) CountryRegionId(countryRegionId string) *Perso
 	return builder
 }
 
-// 姓名类型
+// 姓名类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：name_type
 //
 // 示例值：
 func (builder *PersonNameBuilder) NameType(nameType *Enum) *PersonNameBuilder {
@@ -27734,7 +27827,7 @@ func (builder *PersonNameBuilder) LocalPrimary2(localPrimary2 string) *PersonNam
 	return builder
 }
 
-// 补充姓名类型
+// 补充姓名类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：additional_name_type
 //
 // 示例值：
 func (builder *PersonNameBuilder) AdditionalNameType(additionalNameType *Enum) *PersonNameBuilder {
@@ -27815,15 +27908,6 @@ func (builder *PersonNameBuilder) Secondary(secondary string) *PersonNameBuilder
 	return builder
 }
 
-// 尊称
-//
-// 示例值：王大帅
-func (builder *PersonNameBuilder) Social(social *Enum) *PersonNameBuilder {
-	builder.social = social
-	builder.socialFlag = true
-	return builder
-}
-
 // 婚后姓氏
 //
 // 示例值：王
@@ -27833,7 +27917,16 @@ func (builder *PersonNameBuilder) Tertiary(tertiary string) *PersonNameBuilder {
 	return builder
 }
 
-// 头衔
+// 尊称;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：social
+//
+// 示例值：王大帅
+func (builder *PersonNameBuilder) Social(social *Enum) *PersonNameBuilder {
+	builder.social = social
+	builder.socialFlag = true
+	return builder
+}
+
+// 头衔;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：title
 //
 // 示例值：王
 func (builder *PersonNameBuilder) Title(title *Enum) *PersonNameBuilder {
@@ -27947,12 +28040,12 @@ func (builder *PersonNameBuilder) Build() *PersonName {
 		req.Secondary = &builder.secondary
 
 	}
-	if builder.socialFlag {
-		req.Social = builder.social
-	}
 	if builder.tertiaryFlag {
 		req.Tertiary = &builder.tertiary
 
+	}
+	if builder.socialFlag {
+		req.Social = builder.social
 	}
 	if builder.titleFlag {
 		req.Title = builder.title
@@ -30137,58 +30230,59 @@ func (builder *PreHireContractInfoBuilder) Build() *PreHireContractInfo {
 }
 
 type PreHireEmploymentInfo struct {
-	DepartmentId                     *string                  `json:"department_id,omitempty"`                        // 部门 ID ，可以通过【搜索部门信息】接口获取
-	CostCenterRates                  []*JobDataCostCenter     `json:"cost_center_rates,omitempty"`                    // 成本中心分摊信息
-	OfficeLocationId                 *string                  `json:"office_location_id,omitempty"`                   // 办公地点id ，详细信息可通过【批量查询地点】接口获得
-	WorkLocationId                   *string                  `json:"work_location_id,omitempty"`                     // 工作地点id ，详细信息可通过【批量查询地点】接口获得
-	WorkStation                      *string                  `json:"work_station,omitempty"`                         // 工位
-	WorkerId                         *string                  `json:"worker_id,omitempty"`                            // 工号
-	CompensationType                 *Enum                    `json:"compensation_type,omitempty"`                    // -| 薪资类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：compensation_type - object_api_name：pre_hire
-	DirectLeaderId                   *string                  `json:"direct_leader_id,omitempty"`                     // 直属上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
-	DottedLineManagerId              *string                  `json:"dotted_line_manager_id,omitempty"`               // 虚线上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
-	JobId                            *string                  `json:"job_id,omitempty"`                               // 职务 ID ,可以通过【批量查询职务】接口获取
-	JobFamilyId                      *string                  `json:"job_family_id,omitempty"`                        // 序列 ID，可以通过【批量查询职务序列】接口获取
-	JobLevelId                       *string                  `json:"job_level_id,omitempty"`                         // 职级 ID，可以通过【批量查询职务级别】接口获取
-	JobGradeId                       *string                  `json:"job_grade_id,omitempty"`                         // 职等 ID
-	JobTitle                         *string                  `json:"job_title,omitempty"`                            // 职务头衔
-	EmployeeTypeId                   *string                  `json:"employee_type_id,omitempty"`                     // 人员类型 ID ，可以通过招聘【批量查询人员类型】接口获取
-	EmployeeSubtypeId                *string                  `json:"employee_subtype_id,omitempty"`                  // 人员子类型 ID
-	EmploymentType                   *string                  `json:"employment_type,omitempty"`                      // -| 雇佣类型， 枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - object_api_name = "pre_hire" - custom_api_name = "employment_type"
-	WorkEmail                        *string                  `json:"work_email,omitempty"`                           // 工作邮箱
-	CompanyId                        *string                  `json:"company_id,omitempty"`                           // 公司 ID , 详细信息可通过【批量查询公司】接口获得
-	SocialSecurityCityId             *string                  `json:"social_security_city_id,omitempty"`              // 社保城市 ID ，详细信息可通过【批量查询地点】接口获得
-	NonCompeteCovenant               *bool                    `json:"non_compete_covenant,omitempty"`                 // 是否包含竞业条款
-	WeeklyWorkingHours               *int                     `json:"weekly_working_hours,omitempty"`                 // 周工作时长（单位：小时）
-	Rehire                           *string                  `json:"rehire,omitempty"`                               // 是否离职重聘
-	RehireEmploymentId               *string                  `json:"rehire_employment_id,omitempty"`                 // -| 历史雇佣信息 ID ，雇佣信息详细信息可以通过「查询单个雇佣信息」API 获得，系统会检验当前雇佣信息的合法性，要求： - 雇佣信息为该人员最后一次雇佣记录 - 雇佣信息的雇员状态 = "terminated" - 该人员不存在其他待入职记录
-	WorkingHoursType                 *string                  `json:"working_hours_type,omitempty"`                   // -| 工时制度 ID ，可通过【查询单个工时制度】接口获取
-	WeeklyWorkingHoursV2             *float64                 `json:"weekly_working_hours_v2,omitempty"`              // 周工作时长v2（单位：小时）
-	OfficeAddress                    *Address                 `json:"office_address,omitempty"`                       // 办公地址
-	WorkingCalendarId                *string                  `json:"working_calendar_id,omitempty"`                  // 工作日历
-	UpdatedAt                        *string                  `json:"updated_at,omitempty"`                           // 待入职信息 更新时间
-	SuspectedRehiring                *bool                    `json:"suspected_rehiring,omitempty"`                   // 是否疑似重聘
-	CustomFields                     []*CustomFieldData       `json:"custom_fields,omitempty"`                        // 自定义字段
-	PositionId                       *string                  `json:"position_id,omitempty"`                          // 岗位 ID
-	CompanyManualUpdated             *bool                    `json:"company_manual_updated,omitempty"`               // 公司主体是否被手动修改
-	PayGroup                         *PreHirePayGroupInfo     `json:"pay_group,omitempty"`                            // 薪资组信息
-	WhetherTheInformationIsAbnormal  *bool                    `json:"whether_the_information_is_abnormal,omitempty"`  // 是否信息异常
-	AbnormalReason                   []*PreHireAbnormalReason `json:"abnormal_reason,omitempty"`                      // 异常原因列表
-	HasOfferSalary                   *bool                    `json:"has_offer_salary,omitempty"`                     // 是否有 Offer 薪酬
-	RecruitmentProjectId             *string                  `json:"recruitment_project_id,omitempty"`               // 招聘项目 ID
-	WorkShift                        *Enum                    `json:"work_shift,omitempty"`                           // -| 排班类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：work_shift - object_api_name：pre_hire
-	CreatedAt                        *string                  `json:"created_at,omitempty"`                           // 待入职信息 创建时间
-	CreatedBy                        *string                  `json:"created_by,omitempty"`                           // 待入职信息 创建人
-	UpdatedBy                        *string                  `json:"updated_by,omitempty"`                           // 待入职信息 更新人
-	SeniorityDate                    *string                  `json:"seniority_date,omitempty"`                       // 司龄起算日期
-	BackgroundCheckOrderId           *string                  `json:"background_check_order_id,omitempty"`            // 背调订单ID
-	BackgroundCheckOrderName         *string                  `json:"background_check_order_name,omitempty"`          // 背调名称
-	BackgroundCheckOrderPackageName  *string                  `json:"background_check_order_package_name,omitempty"`  // 背调套餐
-	BackgroundCheckOrderResult       *string                  `json:"background_check_order_result,omitempty"`        // 背调结果
-	BackgroundCheckOrderSupplierName *string                  `json:"background_check_order_supplier_name,omitempty"` // 背调供应商
-	BackgroundCheckOrderAccountName  *string                  `json:"background_check_order_account_name,omitempty"`  // 背调账号名称
-	BackgroundCheckOrderStartTime    *string                  `json:"background_check_order_start_time,omitempty"`    // 背调开始时间
-	BackgroundCheckOrderCompleteTime *string                  `json:"background_check_order_complete_time,omitempty"` // 背调完成时间
-	BackgroundCheckOrderStatus       *Enum                    `json:"background_check_order_status,omitempty"`        // -| 背调状态，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：background_check_order_status - object_api_name：pre_hire
+	DepartmentId                     *string                                   `json:"department_id,omitempty"`                        // 部门 ID ，可以通过【搜索部门信息】接口获取
+	CostCenterRates                  []*JobDataCostCenter                      `json:"cost_center_rates,omitempty"`                    // 成本中心分摊信息
+	OfficeLocationId                 *string                                   `json:"office_location_id,omitempty"`                   // 办公地点id ，详细信息可通过【批量查询地点】接口获得
+	WorkLocationId                   *string                                   `json:"work_location_id,omitempty"`                     // 工作地点id ，详细信息可通过【批量查询地点】接口获得
+	WorkStation                      *string                                   `json:"work_station,omitempty"`                         // 工位
+	WorkerId                         *string                                   `json:"worker_id,omitempty"`                            // 工号
+	CompensationType                 *Enum                                     `json:"compensation_type,omitempty"`                    // -| 薪资类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：compensation_type - object_api_name：pre_hire
+	DirectLeaderId                   *string                                   `json:"direct_leader_id,omitempty"`                     // 直属上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
+	DottedLineManagerId              *string                                   `json:"dotted_line_manager_id,omitempty"`               // 虚线上级雇佣 ID ， 可以通过【搜索员工信息】接口获取
+	JobId                            *string                                   `json:"job_id,omitempty"`                               // 职务 ID ,可以通过【批量查询职务】接口获取
+	JobFamilyId                      *string                                   `json:"job_family_id,omitempty"`                        // 序列 ID，可以通过【批量查询职务序列】接口获取
+	JobLevelId                       *string                                   `json:"job_level_id,omitempty"`                         // 职级 ID，可以通过【批量查询职务级别】接口获取
+	JobGradeId                       *string                                   `json:"job_grade_id,omitempty"`                         // 职等 ID
+	JobTitle                         *string                                   `json:"job_title,omitempty"`                            // 职务头衔
+	EmployeeTypeId                   *string                                   `json:"employee_type_id,omitempty"`                     // 人员类型 ID ，可以通过招聘【批量查询人员类型】接口获取
+	EmployeeSubtypeId                *string                                   `json:"employee_subtype_id,omitempty"`                  // 人员子类型 ID
+	EmploymentType                   *string                                   `json:"employment_type,omitempty"`                      // -| 雇佣类型， 枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - object_api_name = "pre_hire" - custom_api_name = "employment_type"
+	WorkEmail                        *string                                   `json:"work_email,omitempty"`                           // 工作邮箱
+	CompanyId                        *string                                   `json:"company_id,omitempty"`                           // 公司 ID , 详细信息可通过【批量查询公司】接口获得
+	SocialSecurityCityId             *string                                   `json:"social_security_city_id,omitempty"`              // 社保城市 ID ，详细信息可通过【批量查询地点】接口获得
+	NonCompeteCovenant               *bool                                     `json:"non_compete_covenant,omitempty"`                 // 是否包含竞业条款
+	WeeklyWorkingHours               *int                                      `json:"weekly_working_hours,omitempty"`                 // 周工作时长（单位：小时）
+	Rehire                           *string                                   `json:"rehire,omitempty"`                               // 是否离职重聘
+	RehireEmploymentId               *string                                   `json:"rehire_employment_id,omitempty"`                 // -| 历史雇佣信息 ID ，雇佣信息详细信息可以通过「查询单个雇佣信息」API 获得，系统会检验当前雇佣信息的合法性，要求： - 雇佣信息为该人员最后一次雇佣记录 - 雇佣信息的雇员状态 = "terminated" - 该人员不存在其他待入职记录
+	WorkingHoursType                 *string                                   `json:"working_hours_type,omitempty"`                   // -| 工时制度 ID ，可通过【查询单个工时制度】接口获取
+	WeeklyWorkingHoursV2             *float64                                  `json:"weekly_working_hours_v2,omitempty"`              // 周工作时长v2（单位：小时）
+	OfficeAddress                    *Address                                  `json:"office_address,omitempty"`                       // 办公地址
+	WorkingCalendarId                *string                                   `json:"working_calendar_id,omitempty"`                  // 工作日历
+	UpdatedAt                        *string                                   `json:"updated_at,omitempty"`                           // 待入职信息 更新时间
+	SuspectedRehiring                *bool                                     `json:"suspected_rehiring,omitempty"`                   // 是否疑似重聘
+	CustomFields                     []*CustomFieldData                        `json:"custom_fields,omitempty"`                        // 自定义字段
+	PositionId                       *string                                   `json:"position_id,omitempty"`                          // 岗位 ID
+	CompanyManualUpdated             *bool                                     `json:"company_manual_updated,omitempty"`               // 公司主体是否被手动修改
+	PayGroup                         *PreHirePayGroupInfo                      `json:"pay_group,omitempty"`                            // 薪资组信息
+	WhetherTheInformationIsAbnormal  *bool                                     `json:"whether_the_information_is_abnormal,omitempty"`  // 是否信息异常
+	AbnormalReason                   []*PreHireAbnormalReason                  `json:"abnormal_reason,omitempty"`                      // 异常原因列表
+	HasOfferSalary                   *bool                                     `json:"has_offer_salary,omitempty"`                     // 是否有 Offer 薪酬
+	RecruitmentProjectId             *string                                   `json:"recruitment_project_id,omitempty"`               // 招聘项目 ID
+	WorkShift                        *Enum                                     `json:"work_shift,omitempty"`                           // -| 排班类型，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：work_shift - object_api_name：pre_hire
+	CreatedAt                        *string                                   `json:"created_at,omitempty"`                           // 待入职信息 创建时间
+	CreatedBy                        *string                                   `json:"created_by,omitempty"`                           // 待入职信息 创建人
+	UpdatedBy                        *string                                   `json:"updated_by,omitempty"`                           // 待入职信息 更新人
+	SeniorityDate                    *string                                   `json:"seniority_date,omitempty"`                       // 司龄起算日期
+	BackgroundCheckOrderId           *string                                   `json:"background_check_order_id,omitempty"`            // 背调订单ID
+	BackgroundCheckOrderName         *string                                   `json:"background_check_order_name,omitempty"`          // 背调名称
+	BackgroundCheckOrderPackageName  *string                                   `json:"background_check_order_package_name,omitempty"`  // 背调套餐
+	BackgroundCheckOrderResult       *string                                   `json:"background_check_order_result,omitempty"`        // 背调结果
+	BackgroundCheckOrderSupplierName *string                                   `json:"background_check_order_supplier_name,omitempty"` // 背调供应商
+	BackgroundCheckOrderAccountName  *string                                   `json:"background_check_order_account_name,omitempty"`  // 背调账号名称
+	BackgroundCheckOrderStartTime    *string                                   `json:"background_check_order_start_time,omitempty"`    // 背调开始时间
+	BackgroundCheckOrderCompleteTime *string                                   `json:"background_check_order_complete_time,omitempty"` // 背调完成时间
+	BackgroundCheckOrderStatus       *Enum                                     `json:"background_check_order_status,omitempty"`        // -| 背调状态，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：background_check_order_status - object_api_name：pre_hire
+	SeniorityAdjustInformationList   []*PrehireSeniorityAdjustInformationQuery `json:"seniority_adjust_information_list,omitempty"`    // 司龄调整信息
 }
 
 type PreHireEmploymentInfoBuilder struct {
@@ -30296,6 +30390,8 @@ type PreHireEmploymentInfoBuilder struct {
 	backgroundCheckOrderCompleteTimeFlag bool
 	backgroundCheckOrderStatus           *Enum // -| 背调状态，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：background_check_order_status - object_api_name：pre_hire
 	backgroundCheckOrderStatusFlag       bool
+	seniorityAdjustInformationList       []*PrehireSeniorityAdjustInformationQuery // 司龄调整信息
+	seniorityAdjustInformationListFlag   bool
 }
 
 func NewPreHireEmploymentInfoBuilder() *PreHireEmploymentInfoBuilder {
@@ -30771,6 +30867,15 @@ func (builder *PreHireEmploymentInfoBuilder) BackgroundCheckOrderStatus(backgrou
 	return builder
 }
 
+// 司龄调整信息
+//
+// 示例值：
+func (builder *PreHireEmploymentInfoBuilder) SeniorityAdjustInformationList(seniorityAdjustInformationList []*PrehireSeniorityAdjustInformationQuery) *PreHireEmploymentInfoBuilder {
+	builder.seniorityAdjustInformationList = seniorityAdjustInformationList
+	builder.seniorityAdjustInformationListFlag = true
+	return builder
+}
+
 func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 	req := &PreHireEmploymentInfo{}
 	if builder.departmentIdFlag {
@@ -30972,6 +31077,9 @@ func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 	}
 	if builder.backgroundCheckOrderStatusFlag {
 		req.BackgroundCheckOrderStatus = builder.backgroundCheckOrderStatus
+	}
+	if builder.seniorityAdjustInformationListFlag {
+		req.SeniorityAdjustInformationList = builder.seniorityAdjustInformationList
 	}
 	return req
 }
@@ -31442,6 +31550,308 @@ func (builder *PrehireCreateBuilder) Build() *PrehireCreate {
 	}
 	if builder.outBizIdFlag {
 		req.OutBizId = &builder.outBizId
+
+	}
+	return req
+}
+
+type PrehireSeniorityAdjustInformation struct {
+	SeniorityAdjustment           *float64           `json:"seniority_adjustment,omitempty"`             // 调整值;- 精确度：两位小数;- 单位：年
+	SeniorityAdjustmentType       *string            `json:"seniority_adjustment_type,omitempty"`        // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	ReasonsForSeniorityAdjustment *string            `json:"reasons_for_seniority_adjustment,omitempty"` // 司龄调整原因
+	StartDate                     *string            `json:"start_date,omitempty"`                       // 开始日期;- 格式： yyyy-mm-dd
+	EndDate                       *string            `json:"end_date,omitempty"`                         // 结束日期;- 格式： yyyy-mm-dd
+	CustomFields                  []*ObjectFieldData `json:"custom_fields,omitempty"`                    // 自定义字段
+}
+
+type PrehireSeniorityAdjustInformationBuilder struct {
+	seniorityAdjustment               float64 // 调整值;- 精确度：两位小数;- 单位：年
+	seniorityAdjustmentFlag           bool
+	seniorityAdjustmentType           string // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	seniorityAdjustmentTypeFlag       bool
+	reasonsForSeniorityAdjustment     string // 司龄调整原因
+	reasonsForSeniorityAdjustmentFlag bool
+	startDate                         string // 开始日期;- 格式： yyyy-mm-dd
+	startDateFlag                     bool
+	endDate                           string // 结束日期;- 格式： yyyy-mm-dd
+	endDateFlag                       bool
+	customFields                      []*ObjectFieldData // 自定义字段
+	customFieldsFlag                  bool
+}
+
+func NewPrehireSeniorityAdjustInformationBuilder() *PrehireSeniorityAdjustInformationBuilder {
+	builder := &PrehireSeniorityAdjustInformationBuilder{}
+	return builder
+}
+
+// 调整值;- 精确度：两位小数;- 单位：年
+//
+// 示例值：0.5
+func (builder *PrehireSeniorityAdjustInformationBuilder) SeniorityAdjustment(seniorityAdjustment float64) *PrehireSeniorityAdjustInformationBuilder {
+	builder.seniorityAdjustment = seniorityAdjustment
+	builder.seniorityAdjustmentFlag = true
+	return builder
+}
+
+// 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+//
+// 示例值：增加
+func (builder *PrehireSeniorityAdjustInformationBuilder) SeniorityAdjustmentType(seniorityAdjustmentType string) *PrehireSeniorityAdjustInformationBuilder {
+	builder.seniorityAdjustmentType = seniorityAdjustmentType
+	builder.seniorityAdjustmentTypeFlag = true
+	return builder
+}
+
+// 司龄调整原因
+//
+// 示例值：工厂停产需要减去半年工龄
+func (builder *PrehireSeniorityAdjustInformationBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *PrehireSeniorityAdjustInformationBuilder {
+	builder.reasonsForSeniorityAdjustment = reasonsForSeniorityAdjustment
+	builder.reasonsForSeniorityAdjustmentFlag = true
+	return builder
+}
+
+// 开始日期;- 格式： yyyy-mm-dd
+//
+// 示例值：2024-05-19
+func (builder *PrehireSeniorityAdjustInformationBuilder) StartDate(startDate string) *PrehireSeniorityAdjustInformationBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 结束日期;- 格式： yyyy-mm-dd
+//
+// 示例值：2024-11-18
+func (builder *PrehireSeniorityAdjustInformationBuilder) EndDate(endDate string) *PrehireSeniorityAdjustInformationBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+// 自定义字段
+//
+// 示例值：
+func (builder *PrehireSeniorityAdjustInformationBuilder) CustomFields(customFields []*ObjectFieldData) *PrehireSeniorityAdjustInformationBuilder {
+	builder.customFields = customFields
+	builder.customFieldsFlag = true
+	return builder
+}
+
+func (builder *PrehireSeniorityAdjustInformationBuilder) Build() *PrehireSeniorityAdjustInformation {
+	req := &PrehireSeniorityAdjustInformation{}
+	if builder.seniorityAdjustmentFlag {
+		req.SeniorityAdjustment = &builder.seniorityAdjustment
+
+	}
+	if builder.seniorityAdjustmentTypeFlag {
+		req.SeniorityAdjustmentType = &builder.seniorityAdjustmentType
+
+	}
+	if builder.reasonsForSeniorityAdjustmentFlag {
+		req.ReasonsForSeniorityAdjustment = &builder.reasonsForSeniorityAdjustment
+
+	}
+	if builder.startDateFlag {
+		req.StartDate = &builder.startDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
+
+	}
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
+	}
+	return req
+}
+
+type PrehireSeniorityAdjustInformationQuery struct {
+	SeniorityAdjustment           *float64 `json:"seniority_adjustment,omitempty"`             // 调整值;- 精确度：两位小数;- 单位：年
+	SeniorityAdjustmentType       *Enum    `json:"seniority_adjustment_type,omitempty"`        // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	ReasonsForSeniorityAdjustment *string  `json:"reasons_for_seniority_adjustment,omitempty"` // 司龄调整原因
+	StartDate                     *string  `json:"start_date,omitempty"`                       // 开始日期
+	EndDate                       *string  `json:"end_date,omitempty"`                         // 结束日期
+}
+
+type PrehireSeniorityAdjustInformationQueryBuilder struct {
+	seniorityAdjustment               float64 // 调整值;- 精确度：两位小数;- 单位：年
+	seniorityAdjustmentFlag           bool
+	seniorityAdjustmentType           *Enum // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	seniorityAdjustmentTypeFlag       bool
+	reasonsForSeniorityAdjustment     string // 司龄调整原因
+	reasonsForSeniorityAdjustmentFlag bool
+	startDate                         string // 开始日期
+	startDateFlag                     bool
+	endDate                           string // 结束日期
+	endDateFlag                       bool
+}
+
+func NewPrehireSeniorityAdjustInformationQueryBuilder() *PrehireSeniorityAdjustInformationQueryBuilder {
+	builder := &PrehireSeniorityAdjustInformationQueryBuilder{}
+	return builder
+}
+
+// 调整值;- 精确度：两位小数;- 单位：年
+//
+// 示例值：0.5
+func (builder *PrehireSeniorityAdjustInformationQueryBuilder) SeniorityAdjustment(seniorityAdjustment float64) *PrehireSeniorityAdjustInformationQueryBuilder {
+	builder.seniorityAdjustment = seniorityAdjustment
+	builder.seniorityAdjustmentFlag = true
+	return builder
+}
+
+// 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+//
+// 示例值：增加
+func (builder *PrehireSeniorityAdjustInformationQueryBuilder) SeniorityAdjustmentType(seniorityAdjustmentType *Enum) *PrehireSeniorityAdjustInformationQueryBuilder {
+	builder.seniorityAdjustmentType = seniorityAdjustmentType
+	builder.seniorityAdjustmentTypeFlag = true
+	return builder
+}
+
+// 司龄调整原因
+//
+// 示例值：工厂停产需要减去半年工龄
+func (builder *PrehireSeniorityAdjustInformationQueryBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *PrehireSeniorityAdjustInformationQueryBuilder {
+	builder.reasonsForSeniorityAdjustment = reasonsForSeniorityAdjustment
+	builder.reasonsForSeniorityAdjustmentFlag = true
+	return builder
+}
+
+// 开始日期
+//
+// 示例值：2024-05-19
+func (builder *PrehireSeniorityAdjustInformationQueryBuilder) StartDate(startDate string) *PrehireSeniorityAdjustInformationQueryBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 结束日期
+//
+// 示例值：2024-11-18
+func (builder *PrehireSeniorityAdjustInformationQueryBuilder) EndDate(endDate string) *PrehireSeniorityAdjustInformationQueryBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+func (builder *PrehireSeniorityAdjustInformationQueryBuilder) Build() *PrehireSeniorityAdjustInformationQuery {
+	req := &PrehireSeniorityAdjustInformationQuery{}
+	if builder.seniorityAdjustmentFlag {
+		req.SeniorityAdjustment = &builder.seniorityAdjustment
+
+	}
+	if builder.seniorityAdjustmentTypeFlag {
+		req.SeniorityAdjustmentType = builder.seniorityAdjustmentType
+	}
+	if builder.reasonsForSeniorityAdjustmentFlag {
+		req.ReasonsForSeniorityAdjustment = &builder.reasonsForSeniorityAdjustment
+
+	}
+	if builder.startDateFlag {
+		req.StartDate = &builder.startDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
+
+	}
+	return req
+}
+
+type PrehireSeniorityAdjustInformationUpdate struct {
+	SeniorityAdjustment           *float64 `json:"seniority_adjustment,omitempty"`             // 调整值;- 精确度：两位小数;- 单位：年
+	SeniorityAdjustmentType       *string  `json:"seniority_adjustment_type,omitempty"`        // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	ReasonsForSeniorityAdjustment *string  `json:"reasons_for_seniority_adjustment,omitempty"` // 司龄调整原因
+	StartDate                     *string  `json:"start_date,omitempty"`                       // 开始日期;- 格式： yyyy-mm-dd
+	EndDate                       *string  `json:"end_date,omitempty"`                         // 结束日期;- 格式： yyyy-mm-dd
+}
+
+type PrehireSeniorityAdjustInformationUpdateBuilder struct {
+	seniorityAdjustment               float64 // 调整值;- 精确度：两位小数;- 单位：年
+	seniorityAdjustmentFlag           bool
+	seniorityAdjustmentType           string // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+	seniorityAdjustmentTypeFlag       bool
+	reasonsForSeniorityAdjustment     string // 司龄调整原因
+	reasonsForSeniorityAdjustmentFlag bool
+	startDate                         string // 开始日期;- 格式： yyyy-mm-dd
+	startDateFlag                     bool
+	endDate                           string // 结束日期;- 格式： yyyy-mm-dd
+	endDateFlag                       bool
+}
+
+func NewPrehireSeniorityAdjustInformationUpdateBuilder() *PrehireSeniorityAdjustInformationUpdateBuilder {
+	builder := &PrehireSeniorityAdjustInformationUpdateBuilder{}
+	return builder
+}
+
+// 调整值;- 精确度：两位小数;- 单位：年
+//
+// 示例值：0.5
+func (builder *PrehireSeniorityAdjustInformationUpdateBuilder) SeniorityAdjustment(seniorityAdjustment float64) *PrehireSeniorityAdjustInformationUpdateBuilder {
+	builder.seniorityAdjustment = seniorityAdjustment
+	builder.seniorityAdjustmentFlag = true
+	return builder
+}
+
+// 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
+//
+// 示例值：增加
+func (builder *PrehireSeniorityAdjustInformationUpdateBuilder) SeniorityAdjustmentType(seniorityAdjustmentType string) *PrehireSeniorityAdjustInformationUpdateBuilder {
+	builder.seniorityAdjustmentType = seniorityAdjustmentType
+	builder.seniorityAdjustmentTypeFlag = true
+	return builder
+}
+
+// 司龄调整原因
+//
+// 示例值：工厂停产需要减去半年工龄
+func (builder *PrehireSeniorityAdjustInformationUpdateBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *PrehireSeniorityAdjustInformationUpdateBuilder {
+	builder.reasonsForSeniorityAdjustment = reasonsForSeniorityAdjustment
+	builder.reasonsForSeniorityAdjustmentFlag = true
+	return builder
+}
+
+// 开始日期;- 格式： yyyy-mm-dd
+//
+// 示例值：2024-05-19
+func (builder *PrehireSeniorityAdjustInformationUpdateBuilder) StartDate(startDate string) *PrehireSeniorityAdjustInformationUpdateBuilder {
+	builder.startDate = startDate
+	builder.startDateFlag = true
+	return builder
+}
+
+// 结束日期;- 格式： yyyy-mm-dd
+//
+// 示例值：2024-11-18
+func (builder *PrehireSeniorityAdjustInformationUpdateBuilder) EndDate(endDate string) *PrehireSeniorityAdjustInformationUpdateBuilder {
+	builder.endDate = endDate
+	builder.endDateFlag = true
+	return builder
+}
+
+func (builder *PrehireSeniorityAdjustInformationUpdateBuilder) Build() *PrehireSeniorityAdjustInformationUpdate {
+	req := &PrehireSeniorityAdjustInformationUpdate{}
+	if builder.seniorityAdjustmentFlag {
+		req.SeniorityAdjustment = &builder.seniorityAdjustment
+
+	}
+	if builder.seniorityAdjustmentTypeFlag {
+		req.SeniorityAdjustmentType = &builder.seniorityAdjustmentType
+
+	}
+	if builder.reasonsForSeniorityAdjustmentFlag {
+		req.ReasonsForSeniorityAdjustment = &builder.reasonsForSeniorityAdjustment
+
+	}
+	if builder.startDateFlag {
+		req.StartDate = &builder.startDate
+
+	}
+	if builder.endDateFlag {
+		req.EndDate = &builder.endDate
 
 	}
 	return req
@@ -32371,15 +32781,18 @@ func (builder *ProcessApproverBuilder) Build() *ProcessApprover {
 }
 
 type ProcessRevokeAndWithdraw struct {
-	UserId *string `json:"user_id,omitempty"` // 按照指定的用户ID类型传递对应的用户ID。
-	Reason *string `json:"reason,omitempty"`  // 原因
+	UserId     *string `json:"user_id,omitempty"`     // 按照指定的用户ID类型传递对应的用户ID。
+	Reason     *string `json:"reason,omitempty"`      // 原因
+	SystemUser *bool   `json:"system_user,omitempty"` // true-系统身份操作
 }
 
 type ProcessRevokeAndWithdrawBuilder struct {
-	userId     string // 按照指定的用户ID类型传递对应的用户ID。
-	userIdFlag bool
-	reason     string // 原因
-	reasonFlag bool
+	userId         string // 按照指定的用户ID类型传递对应的用户ID。
+	userIdFlag     bool
+	reason         string // 原因
+	reasonFlag     bool
+	systemUser     bool // true-系统身份操作
+	systemUserFlag bool
 }
 
 func NewProcessRevokeAndWithdrawBuilder() *ProcessRevokeAndWithdrawBuilder {
@@ -32405,6 +32818,15 @@ func (builder *ProcessRevokeAndWithdrawBuilder) Reason(reason string) *ProcessRe
 	return builder
 }
 
+// true-系统身份操作
+//
+// 示例值：true
+func (builder *ProcessRevokeAndWithdrawBuilder) SystemUser(systemUser bool) *ProcessRevokeAndWithdrawBuilder {
+	builder.systemUser = systemUser
+	builder.systemUserFlag = true
+	return builder
+}
+
 func (builder *ProcessRevokeAndWithdrawBuilder) Build() *ProcessRevokeAndWithdraw {
 	req := &ProcessRevokeAndWithdraw{}
 	if builder.userIdFlag {
@@ -32413,6 +32835,10 @@ func (builder *ProcessRevokeAndWithdrawBuilder) Build() *ProcessRevokeAndWithdra
 	}
 	if builder.reasonFlag {
 		req.Reason = &builder.reason
+
+	}
+	if builder.systemUserFlag {
+		req.SystemUser = &builder.systemUser
 
 	}
 	return req
@@ -32858,17 +33284,18 @@ func (builder *ProcessDoneItemBuilder) Build() *ProcessDoneItem {
 }
 
 type ProcessExtra struct {
-	Operator     *string  `json:"operator,omitempty"`       // 操作人，不传是默认为系统操作
+	Operator     *string  `json:"operator,omitempty"`       // 操作人，当system_user为true时，可以不传值
 	NodeId       *string  `json:"node_id,omitempty"`        // 流程节点id，与approver_id二选一传入，都传以node_id为准
 	ApproverId   *string  `json:"approver_id,omitempty"`    // 审批任务id，与node_id二选一传入，都传以node_id为准
 	ExtraType    *int     `json:"extra_type,omitempty"`     // 加签方式
 	ApprovalType *int     `json:"approval_type,omitempty"`  // 多人加签时的审批方式
 	ExtraUserIds []string `json:"extra_user_ids,omitempty"` // 加签人员id列表
 	Remark       *string  `json:"remark,omitempty"`         // 备注
+	SystemUser   *bool    `json:"system_user,omitempty"`    // true-以系统身份操作
 }
 
 type ProcessExtraBuilder struct {
-	operator         string // 操作人，不传是默认为系统操作
+	operator         string // 操作人，当system_user为true时，可以不传值
 	operatorFlag     bool
 	nodeId           string // 流程节点id，与approver_id二选一传入，都传以node_id为准
 	nodeIdFlag       bool
@@ -32882,6 +33309,8 @@ type ProcessExtraBuilder struct {
 	extraUserIdsFlag bool
 	remark           string // 备注
 	remarkFlag       bool
+	systemUser       bool // true-以系统身份操作
+	systemUserFlag   bool
 }
 
 func NewProcessExtraBuilder() *ProcessExtraBuilder {
@@ -32889,7 +33318,7 @@ func NewProcessExtraBuilder() *ProcessExtraBuilder {
 	return builder
 }
 
-// 操作人，不传是默认为系统操作
+// 操作人，当system_user为true时，可以不传值
 //
 // 示例值：7184703091806602796
 func (builder *ProcessExtraBuilder) Operator(operator string) *ProcessExtraBuilder {
@@ -32952,6 +33381,15 @@ func (builder *ProcessExtraBuilder) Remark(remark string) *ProcessExtraBuilder {
 	return builder
 }
 
+// true-以系统身份操作
+//
+// 示例值：true
+func (builder *ProcessExtraBuilder) SystemUser(systemUser bool) *ProcessExtraBuilder {
+	builder.systemUser = systemUser
+	builder.systemUserFlag = true
+	return builder
+}
+
 func (builder *ProcessExtraBuilder) Build() *ProcessExtra {
 	req := &ProcessExtra{}
 	if builder.operatorFlag {
@@ -32979,6 +33417,10 @@ func (builder *ProcessExtraBuilder) Build() *ProcessExtra {
 	}
 	if builder.remarkFlag {
 		req.Remark = &builder.remark
+
+	}
+	if builder.systemUserFlag {
+		req.SystemUser = &builder.systemUser
 
 	}
 	return req
@@ -33645,14 +34087,15 @@ func (builder *ProcessTodoItemBuilder) Build() *ProcessTodoItem {
 }
 
 type ProcessTransfer struct {
-	Operator    *string  `json:"operator,omitempty"`     // 操作人，不传是默认为系统操作
+	Operator    *string  `json:"operator,omitempty"`     // 操作人，当system_user为true，可不传值
 	ToUserId    *string  `json:"to_user_id,omitempty"`   // 被转交人id
 	ApproverIds []string `json:"approver_ids,omitempty"` // 待转交审批任务id列表
 	Remark      *string  `json:"remark,omitempty"`       // 备注
+	SystemUser  *bool    `json:"system_user,omitempty"`  // true-以系统身份操作
 }
 
 type ProcessTransferBuilder struct {
-	operator        string // 操作人，不传是默认为系统操作
+	operator        string // 操作人，当system_user为true，可不传值
 	operatorFlag    bool
 	toUserId        string // 被转交人id
 	toUserIdFlag    bool
@@ -33660,6 +34103,8 @@ type ProcessTransferBuilder struct {
 	approverIdsFlag bool
 	remark          string // 备注
 	remarkFlag      bool
+	systemUser      bool // true-以系统身份操作
+	systemUserFlag  bool
 }
 
 func NewProcessTransferBuilder() *ProcessTransferBuilder {
@@ -33667,7 +34112,7 @@ func NewProcessTransferBuilder() *ProcessTransferBuilder {
 	return builder
 }
 
-// 操作人，不传是默认为系统操作
+// 操作人，当system_user为true，可不传值
 //
 // 示例值：7184703091806602796
 func (builder *ProcessTransferBuilder) Operator(operator string) *ProcessTransferBuilder {
@@ -33703,6 +34148,15 @@ func (builder *ProcessTransferBuilder) Remark(remark string) *ProcessTransferBui
 	return builder
 }
 
+// true-以系统身份操作
+//
+// 示例值：true
+func (builder *ProcessTransferBuilder) SystemUser(systemUser bool) *ProcessTransferBuilder {
+	builder.systemUser = systemUser
+	builder.systemUserFlag = true
+	return builder
+}
+
 func (builder *ProcessTransferBuilder) Build() *ProcessTransfer {
 	req := &ProcessTransfer{}
 	if builder.operatorFlag {
@@ -33718,6 +34172,10 @@ func (builder *ProcessTransferBuilder) Build() *ProcessTransfer {
 	}
 	if builder.remarkFlag {
 		req.Remark = &builder.remark
+
+	}
+	if builder.systemUserFlag {
+		req.SystemUser = &builder.systemUser
 
 	}
 	return req
@@ -35450,18 +35908,21 @@ func (builder *ProfileSettingEmpContractRecordBuilder) Build() *ProfileSettingEm
 }
 
 type ProfileSettingEmpInfoForUpdate struct {
-	BasicInfo     *ProfileSettingEmpBasicInfoForUpdate `json:"basic_info,omitempty"`     // 基本信息
-	ProbationInfo *ProfileSettingProbationInfo         `json:"probation_info,omitempty"` // 试用期信息
-	CustomGroups  []*ProfileSettingCustomGroup         `json:"custom_groups,omitempty"`  // 自定义分组
+	BasicInfo                   *ProfileSettingEmpBasicInfoForUpdate `json:"basic_info,omitempty"`                    // 基本信息
+	ProbationInfo               *ProfileSettingProbationInfo         `json:"probation_info,omitempty"`                // 试用期信息
+	CustomGroups                []*ProfileSettingCustomGroup         `json:"custom_groups,omitempty"`                 // 自定义分组
+	SeniorityAdjustInformations []*SeniorityAdjustInformationEdit    `json:"seniority_adjust_informations,omitempty"` // 司龄调整信息
 }
 
 type ProfileSettingEmpInfoForUpdateBuilder struct {
-	basicInfo         *ProfileSettingEmpBasicInfoForUpdate // 基本信息
-	basicInfoFlag     bool
-	probationInfo     *ProfileSettingProbationInfo // 试用期信息
-	probationInfoFlag bool
-	customGroups      []*ProfileSettingCustomGroup // 自定义分组
-	customGroupsFlag  bool
+	basicInfo                       *ProfileSettingEmpBasicInfoForUpdate // 基本信息
+	basicInfoFlag                   bool
+	probationInfo                   *ProfileSettingProbationInfo // 试用期信息
+	probationInfoFlag               bool
+	customGroups                    []*ProfileSettingCustomGroup // 自定义分组
+	customGroupsFlag                bool
+	seniorityAdjustInformations     []*SeniorityAdjustInformationEdit // 司龄调整信息
+	seniorityAdjustInformationsFlag bool
 }
 
 func NewProfileSettingEmpInfoForUpdateBuilder() *ProfileSettingEmpInfoForUpdateBuilder {
@@ -35496,6 +35957,15 @@ func (builder *ProfileSettingEmpInfoForUpdateBuilder) CustomGroups(customGroups 
 	return builder
 }
 
+// 司龄调整信息
+//
+// 示例值：
+func (builder *ProfileSettingEmpInfoForUpdateBuilder) SeniorityAdjustInformations(seniorityAdjustInformations []*SeniorityAdjustInformationEdit) *ProfileSettingEmpInfoForUpdateBuilder {
+	builder.seniorityAdjustInformations = seniorityAdjustInformations
+	builder.seniorityAdjustInformationsFlag = true
+	return builder
+}
+
 func (builder *ProfileSettingEmpInfoForUpdateBuilder) Build() *ProfileSettingEmpInfoForUpdate {
 	req := &ProfileSettingEmpInfoForUpdate{}
 	if builder.basicInfoFlag {
@@ -35506,6 +35976,9 @@ func (builder *ProfileSettingEmpInfoForUpdateBuilder) Build() *ProfileSettingEmp
 	}
 	if builder.customGroupsFlag {
 		req.CustomGroups = builder.customGroups
+	}
+	if builder.seniorityAdjustInformationsFlag {
+		req.SeniorityAdjustInformations = builder.seniorityAdjustInformations
 	}
 	return req
 }
@@ -35656,27 +36129,30 @@ func (builder *ProfileSettingEmploymentBasicInfoBuilder) Build() *ProfileSetting
 }
 
 type ProfileSettingEmploymentInfo struct {
-	BasicInfo         *ProfileSettingEmploymentBasicInfo `json:"basic_info,omitempty"`          // 基本信息
-	ProbationInfo     *ProfileSettingProbationInfo       `json:"probation_info,omitempty"`      // 试用期信息
-	EmploymentRecord  *ProfileSettingEmploymentRecord    `json:"employment_record,omitempty"`   // 任职记录
-	EmpContractRecord *ProfileSettingEmpContractRecord   `json:"emp_contract_record,omitempty"` // 合同记录
-	CustomGroups      []*ProfileSettingCustomGroup       `json:"custom_groups,omitempty"`       // 自定义分组
-	CustomOrgGroups   []*JobDataCustomOrg                `json:"custom_org_groups,omitempty"`   // 自定义组织记录
+	BasicInfo                   *ProfileSettingEmploymentBasicInfo `json:"basic_info,omitempty"`                    // 基本信息
+	ProbationInfo               *ProfileSettingProbationInfo       `json:"probation_info,omitempty"`                // 试用期信息
+	EmploymentRecord            *ProfileSettingEmploymentRecord    `json:"employment_record,omitempty"`             // 任职记录
+	EmpContractRecord           *ProfileSettingEmpContractRecord   `json:"emp_contract_record,omitempty"`           // 合同记录
+	CustomGroups                []*ProfileSettingCustomGroup       `json:"custom_groups,omitempty"`                 // 自定义分组
+	CustomOrgGroups             []*JobDataCustomOrg                `json:"custom_org_groups,omitempty"`             // 自定义组织记录
+	SeniorityAdjustInformations []*SeniorityAdjustInformationEdit  `json:"seniority_adjust_informations,omitempty"` // 司龄调整信息
 }
 
 type ProfileSettingEmploymentInfoBuilder struct {
-	basicInfo             *ProfileSettingEmploymentBasicInfo // 基本信息
-	basicInfoFlag         bool
-	probationInfo         *ProfileSettingProbationInfo // 试用期信息
-	probationInfoFlag     bool
-	employmentRecord      *ProfileSettingEmploymentRecord // 任职记录
-	employmentRecordFlag  bool
-	empContractRecord     *ProfileSettingEmpContractRecord // 合同记录
-	empContractRecordFlag bool
-	customGroups          []*ProfileSettingCustomGroup // 自定义分组
-	customGroupsFlag      bool
-	customOrgGroups       []*JobDataCustomOrg // 自定义组织记录
-	customOrgGroupsFlag   bool
+	basicInfo                       *ProfileSettingEmploymentBasicInfo // 基本信息
+	basicInfoFlag                   bool
+	probationInfo                   *ProfileSettingProbationInfo // 试用期信息
+	probationInfoFlag               bool
+	employmentRecord                *ProfileSettingEmploymentRecord // 任职记录
+	employmentRecordFlag            bool
+	empContractRecord               *ProfileSettingEmpContractRecord // 合同记录
+	empContractRecordFlag           bool
+	customGroups                    []*ProfileSettingCustomGroup // 自定义分组
+	customGroupsFlag                bool
+	customOrgGroups                 []*JobDataCustomOrg // 自定义组织记录
+	customOrgGroupsFlag             bool
+	seniorityAdjustInformations     []*SeniorityAdjustInformationEdit // 司龄调整信息
+	seniorityAdjustInformationsFlag bool
 }
 
 func NewProfileSettingEmploymentInfoBuilder() *ProfileSettingEmploymentInfoBuilder {
@@ -35738,6 +36214,15 @@ func (builder *ProfileSettingEmploymentInfoBuilder) CustomOrgGroups(customOrgGro
 	return builder
 }
 
+// 司龄调整信息
+//
+// 示例值：
+func (builder *ProfileSettingEmploymentInfoBuilder) SeniorityAdjustInformations(seniorityAdjustInformations []*SeniorityAdjustInformationEdit) *ProfileSettingEmploymentInfoBuilder {
+	builder.seniorityAdjustInformations = seniorityAdjustInformations
+	builder.seniorityAdjustInformationsFlag = true
+	return builder
+}
+
 func (builder *ProfileSettingEmploymentInfoBuilder) Build() *ProfileSettingEmploymentInfo {
 	req := &ProfileSettingEmploymentInfo{}
 	if builder.basicInfoFlag {
@@ -35757,6 +36242,9 @@ func (builder *ProfileSettingEmploymentInfoBuilder) Build() *ProfileSettingEmplo
 	}
 	if builder.customOrgGroupsFlag {
 		req.CustomOrgGroups = builder.customOrgGroups
+	}
+	if builder.seniorityAdjustInformationsFlag {
+		req.SeniorityAdjustInformations = builder.seniorityAdjustInformations
 	}
 	return req
 }
@@ -38550,43 +39038,31 @@ func (builder *ResidentTaxForUpdateBuilder) Build() *ResidentTaxForUpdate {
 }
 
 type SeniorityAdjustInformation struct {
-	Id                            *string            `json:"id,omitempty"`                               // 分组 ID
 	SeniorityAdjustmentType       *Enum              `json:"seniority_adjustment_type,omitempty"`        // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
 	StartDate                     *string            `json:"start_date,omitempty"`                       // 开始日期;- 格式： yyyy-mm-dd
 	EndDate                       *string            `json:"end_date,omitempty"`                         // 结束日期;- 格式： yyyy-mm-dd
-	ReasonsForSeniorityAdjustment *string            `json:"reasons_for_seniority_adjustment,omitempty"` // 调整原因
 	SeniorityAdjustment           *float64           `json:"seniority_adjustment,omitempty"`             // 调整值;- 精确度：两位小数;- 单位：年
+	ReasonsForSeniorityAdjustment *string            `json:"reasons_for_seniority_adjustment,omitempty"` // 调整原因
 	CustomFields                  []*CustomFieldData `json:"custom_fields,omitempty"`                    // 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
 }
 
 type SeniorityAdjustInformationBuilder struct {
-	id                                string // 分组 ID
-	idFlag                            bool
 	seniorityAdjustmentType           *Enum // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
 	seniorityAdjustmentTypeFlag       bool
 	startDate                         string // 开始日期;- 格式： yyyy-mm-dd
 	startDateFlag                     bool
 	endDate                           string // 结束日期;- 格式： yyyy-mm-dd
 	endDateFlag                       bool
-	reasonsForSeniorityAdjustment     string // 调整原因
-	reasonsForSeniorityAdjustmentFlag bool
 	seniorityAdjustment               float64 // 调整值;- 精确度：两位小数;- 单位：年
 	seniorityAdjustmentFlag           bool
+	reasonsForSeniorityAdjustment     string // 调整原因
+	reasonsForSeniorityAdjustmentFlag bool
 	customFields                      []*CustomFieldData // 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
 	customFieldsFlag                  bool
 }
 
 func NewSeniorityAdjustInformationBuilder() *SeniorityAdjustInformationBuilder {
 	builder := &SeniorityAdjustInformationBuilder{}
-	return builder
-}
-
-// 分组 ID
-//
-// 示例值：123
-func (builder *SeniorityAdjustInformationBuilder) Id(id string) *SeniorityAdjustInformationBuilder {
-	builder.id = id
-	builder.idFlag = true
 	return builder
 }
 
@@ -38610,19 +39086,10 @@ func (builder *SeniorityAdjustInformationBuilder) StartDate(startDate string) *S
 
 // 结束日期;- 格式： yyyy-mm-dd
 //
-// 示例值：2024-01-02
+// 示例值：2024-10-01
 func (builder *SeniorityAdjustInformationBuilder) EndDate(endDate string) *SeniorityAdjustInformationBuilder {
 	builder.endDate = endDate
 	builder.endDateFlag = true
-	return builder
-}
-
-// 调整原因
-//
-// 示例值：example
-func (builder *SeniorityAdjustInformationBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *SeniorityAdjustInformationBuilder {
-	builder.reasonsForSeniorityAdjustment = reasonsForSeniorityAdjustment
-	builder.reasonsForSeniorityAdjustmentFlag = true
 	return builder
 }
 
@@ -38632,6 +39099,15 @@ func (builder *SeniorityAdjustInformationBuilder) ReasonsForSeniorityAdjustment(
 func (builder *SeniorityAdjustInformationBuilder) SeniorityAdjustment(seniorityAdjustment float64) *SeniorityAdjustInformationBuilder {
 	builder.seniorityAdjustment = seniorityAdjustment
 	builder.seniorityAdjustmentFlag = true
+	return builder
+}
+
+// 调整原因
+//
+// 示例值：工厂停产需要减去半年工龄
+func (builder *SeniorityAdjustInformationBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *SeniorityAdjustInformationBuilder {
+	builder.reasonsForSeniorityAdjustment = reasonsForSeniorityAdjustment
+	builder.reasonsForSeniorityAdjustmentFlag = true
 	return builder
 }
 
@@ -38646,10 +39122,6 @@ func (builder *SeniorityAdjustInformationBuilder) CustomFields(customFields []*C
 
 func (builder *SeniorityAdjustInformationBuilder) Build() *SeniorityAdjustInformation {
 	req := &SeniorityAdjustInformation{}
-	if builder.idFlag {
-		req.Id = &builder.id
-
-	}
 	if builder.seniorityAdjustmentTypeFlag {
 		req.SeniorityAdjustmentType = builder.seniorityAdjustmentType
 	}
@@ -38661,12 +39133,12 @@ func (builder *SeniorityAdjustInformationBuilder) Build() *SeniorityAdjustInform
 		req.EndDate = &builder.endDate
 
 	}
-	if builder.reasonsForSeniorityAdjustmentFlag {
-		req.ReasonsForSeniorityAdjustment = &builder.reasonsForSeniorityAdjustment
-
-	}
 	if builder.seniorityAdjustmentFlag {
 		req.SeniorityAdjustment = &builder.seniorityAdjustment
+
+	}
+	if builder.reasonsForSeniorityAdjustmentFlag {
+		req.ReasonsForSeniorityAdjustment = &builder.reasonsForSeniorityAdjustment
 
 	}
 	if builder.customFieldsFlag {
@@ -38675,8 +39147,7 @@ func (builder *SeniorityAdjustInformationBuilder) Build() *SeniorityAdjustInform
 	return req
 }
 
-type SeniorityAdjustInformationForEdit struct {
-	Id                            *string                      `json:"id,omitempty"`                               // 分组 ID
+type SeniorityAdjustInformationEdit struct {
 	SeniorityAdjustmentType       *string                      `json:"seniority_adjustment_type,omitempty"`        // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
 	StartDate                     *string                      `json:"start_date,omitempty"`                       // 开始日期;- 格式： yyyy-mm-dd
 	EndDate                       *string                      `json:"end_date,omitempty"`                         // 结束日期;- 格式： yyyy-mm-dd
@@ -38685,9 +39156,7 @@ type SeniorityAdjustInformationForEdit struct {
 	CustomFields                  []*ProfileSettingCustomField `json:"custom_fields,omitempty"`                    // 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
 }
 
-type SeniorityAdjustInformationForEditBuilder struct {
-	id                                string // 分组 ID
-	idFlag                            bool
+type SeniorityAdjustInformationEditBuilder struct {
 	seniorityAdjustmentType           string // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
 	seniorityAdjustmentTypeFlag       bool
 	startDate                         string // 开始日期;- 格式： yyyy-mm-dd
@@ -38702,24 +39171,15 @@ type SeniorityAdjustInformationForEditBuilder struct {
 	customFieldsFlag                  bool
 }
 
-func NewSeniorityAdjustInformationForEditBuilder() *SeniorityAdjustInformationForEditBuilder {
-	builder := &SeniorityAdjustInformationForEditBuilder{}
-	return builder
-}
-
-// 分组 ID
-//
-// 示例值：123
-func (builder *SeniorityAdjustInformationForEditBuilder) Id(id string) *SeniorityAdjustInformationForEditBuilder {
-	builder.id = id
-	builder.idFlag = true
+func NewSeniorityAdjustInformationEditBuilder() *SeniorityAdjustInformationEditBuilder {
+	builder := &SeniorityAdjustInformationEditBuilder{}
 	return builder
 }
 
 // 调整类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：seniority_adjust_information;  - custom_api_name：seniority_adjustment_type
 //
 // 示例值：increase
-func (builder *SeniorityAdjustInformationForEditBuilder) SeniorityAdjustmentType(seniorityAdjustmentType string) *SeniorityAdjustInformationForEditBuilder {
+func (builder *SeniorityAdjustInformationEditBuilder) SeniorityAdjustmentType(seniorityAdjustmentType string) *SeniorityAdjustInformationEditBuilder {
 	builder.seniorityAdjustmentType = seniorityAdjustmentType
 	builder.seniorityAdjustmentTypeFlag = true
 	return builder
@@ -38728,7 +39188,7 @@ func (builder *SeniorityAdjustInformationForEditBuilder) SeniorityAdjustmentType
 // 开始日期;- 格式： yyyy-mm-dd
 //
 // 示例值：2024-01-01
-func (builder *SeniorityAdjustInformationForEditBuilder) StartDate(startDate string) *SeniorityAdjustInformationForEditBuilder {
+func (builder *SeniorityAdjustInformationEditBuilder) StartDate(startDate string) *SeniorityAdjustInformationEditBuilder {
 	builder.startDate = startDate
 	builder.startDateFlag = true
 	return builder
@@ -38737,7 +39197,7 @@ func (builder *SeniorityAdjustInformationForEditBuilder) StartDate(startDate str
 // 结束日期;- 格式： yyyy-mm-dd
 //
 // 示例值：2024-01-02
-func (builder *SeniorityAdjustInformationForEditBuilder) EndDate(endDate string) *SeniorityAdjustInformationForEditBuilder {
+func (builder *SeniorityAdjustInformationEditBuilder) EndDate(endDate string) *SeniorityAdjustInformationEditBuilder {
 	builder.endDate = endDate
 	builder.endDateFlag = true
 	return builder
@@ -38745,8 +39205,8 @@ func (builder *SeniorityAdjustInformationForEditBuilder) EndDate(endDate string)
 
 // 调整原因
 //
-// 示例值：example
-func (builder *SeniorityAdjustInformationForEditBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *SeniorityAdjustInformationForEditBuilder {
+// 示例值：工厂停产需要减去半年工龄
+func (builder *SeniorityAdjustInformationEditBuilder) ReasonsForSeniorityAdjustment(reasonsForSeniorityAdjustment string) *SeniorityAdjustInformationEditBuilder {
 	builder.reasonsForSeniorityAdjustment = reasonsForSeniorityAdjustment
 	builder.reasonsForSeniorityAdjustmentFlag = true
 	return builder
@@ -38755,7 +39215,7 @@ func (builder *SeniorityAdjustInformationForEditBuilder) ReasonsForSeniorityAdju
 // 调整值;- 精确度：两位小数;- 单位：年
 //
 // 示例值：1.01
-func (builder *SeniorityAdjustInformationForEditBuilder) SeniorityAdjustment(seniorityAdjustment float64) *SeniorityAdjustInformationForEditBuilder {
+func (builder *SeniorityAdjustInformationEditBuilder) SeniorityAdjustment(seniorityAdjustment float64) *SeniorityAdjustInformationEditBuilder {
 	builder.seniorityAdjustment = seniorityAdjustment
 	builder.seniorityAdjustmentFlag = true
 	return builder
@@ -38764,18 +39224,14 @@ func (builder *SeniorityAdjustInformationForEditBuilder) SeniorityAdjustment(sen
 // 自定义字段;- 具体支持的对象请参考[【自定义字段说明】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom-fields-guide)
 //
 // 示例值：
-func (builder *SeniorityAdjustInformationForEditBuilder) CustomFields(customFields []*ProfileSettingCustomField) *SeniorityAdjustInformationForEditBuilder {
+func (builder *SeniorityAdjustInformationEditBuilder) CustomFields(customFields []*ProfileSettingCustomField) *SeniorityAdjustInformationEditBuilder {
 	builder.customFields = customFields
 	builder.customFieldsFlag = true
 	return builder
 }
 
-func (builder *SeniorityAdjustInformationForEditBuilder) Build() *SeniorityAdjustInformationForEdit {
-	req := &SeniorityAdjustInformationForEdit{}
-	if builder.idFlag {
-		req.Id = &builder.id
-
-	}
+func (builder *SeniorityAdjustInformationEditBuilder) Build() *SeniorityAdjustInformationEdit {
+	req := &SeniorityAdjustInformationEdit{}
 	if builder.seniorityAdjustmentTypeFlag {
 		req.SeniorityAdjustmentType = &builder.seniorityAdjustmentType
 
@@ -41662,21 +42118,21 @@ func (builder *SignatureUserInfoBuilder) Build() *SignatureUserInfo {
 }
 
 type StartProcessParam struct {
-	FlowApiName     *string                  `json:"flow_api_name,omitempty"`    // 流程定义标识
-	InitiatorId     *string                  `json:"initiator_id,omitempty"`     // 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
-	SystemInitiator *bool                    `json:"system_initiator,omitempty"` // 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
-	FlowData        []*ProcessFormVariableV2 `json:"flow_data,omitempty"`        // 业务数据
+	FlowDefinitionId *string                  `json:"flow_definition_id,omitempty"` // 流程定义ID
+	InitiatorId      *string                  `json:"initiator_id,omitempty"`       // 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
+	SystemInitiator  *bool                    `json:"system_initiator,omitempty"`   // 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
+	FlowData         []*ProcessFormVariableV2 `json:"flow_data,omitempty"`          // 业务数据
 }
 
 type StartProcessParamBuilder struct {
-	flowApiName         string // 流程定义标识
-	flowApiNameFlag     bool
-	initiatorId         string // 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
-	initiatorIdFlag     bool
-	systemInitiator     bool // 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
-	systemInitiatorFlag bool
-	flowData            []*ProcessFormVariableV2 // 业务数据
-	flowDataFlag        bool
+	flowDefinitionId     string // 流程定义ID
+	flowDefinitionIdFlag bool
+	initiatorId          string // 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
+	initiatorIdFlag      bool
+	systemInitiator      bool // 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
+	systemInitiatorFlag  bool
+	flowData             []*ProcessFormVariableV2 // 业务数据
+	flowDataFlag         bool
 }
 
 func NewStartProcessParamBuilder() *StartProcessParamBuilder {
@@ -41684,12 +42140,12 @@ func NewStartProcessParamBuilder() *StartProcessParamBuilder {
 	return builder
 }
 
-// 流程定义标识
+// 流程定义ID
 //
-// 示例值：custom
-func (builder *StartProcessParamBuilder) FlowApiName(flowApiName string) *StartProcessParamBuilder {
-	builder.flowApiName = flowApiName
-	builder.flowApiNameFlag = true
+// 示例值：people_7023711013443944467_7437160904904494892
+func (builder *StartProcessParamBuilder) FlowDefinitionId(flowDefinitionId string) *StartProcessParamBuilder {
+	builder.flowDefinitionId = flowDefinitionId
+	builder.flowDefinitionIdFlag = true
 	return builder
 }
 
@@ -41722,8 +42178,8 @@ func (builder *StartProcessParamBuilder) FlowData(flowData []*ProcessFormVariabl
 
 func (builder *StartProcessParamBuilder) Build() *StartProcessParam {
 	req := &StartProcessParam{}
-	if builder.flowApiNameFlag {
-		req.FlowApiName = &builder.flowApiName
+	if builder.flowDefinitionIdFlag {
+		req.FlowDefinitionId = &builder.flowDefinitionId
 
 	}
 	if builder.initiatorIdFlag {
@@ -42027,6 +42483,7 @@ type TransferInfo struct {
 	TargetDraftPosition        *string                 `json:"target_draft_position,omitempty"`         // 新岗位，新建岗位审批完成前会返回 td_xxx 的临时 ID
 	OriginalSocialSecurityCity *string                 `json:"original_social_security_city,omitempty"` // 原社保城市
 	TargetSocialSecurityCity   *string                 `json:"target_social_security_city,omitempty"`   // 新社保城市
+	IsTransferWithWorkforce    *bool                   `json:"is_transfer_with_workforce,omitempty"`    // 编制随人员一起调整
 }
 
 type TransferInfoBuilder struct {
@@ -42158,6 +42615,8 @@ type TransferInfoBuilder struct {
 	originalSocialSecurityCityFlag bool
 	targetSocialSecurityCity       string // 新社保城市
 	targetSocialSecurityCityFlag   bool
+	isTransferWithWorkforce        bool // 编制随人员一起调整
+	isTransferWithWorkforceFlag    bool
 }
 
 func NewTransferInfoBuilder() *TransferInfoBuilder {
@@ -42741,6 +43200,15 @@ func (builder *TransferInfoBuilder) TargetSocialSecurityCity(targetSocialSecurit
 	return builder
 }
 
+// 编制随人员一起调整
+//
+// 示例值：false
+func (builder *TransferInfoBuilder) IsTransferWithWorkforce(isTransferWithWorkforce bool) *TransferInfoBuilder {
+	builder.isTransferWithWorkforce = isTransferWithWorkforce
+	builder.isTransferWithWorkforceFlag = true
+	return builder
+}
+
 func (builder *TransferInfoBuilder) Build() *TransferInfo {
 	req := &TransferInfo{}
 	if builder.remarkFlag {
@@ -42991,6 +43459,10 @@ func (builder *TransferInfoBuilder) Build() *TransferInfo {
 	}
 	if builder.targetSocialSecurityCityFlag {
 		req.TargetSocialSecurityCity = &builder.targetSocialSecurityCity
+
+	}
+	if builder.isTransferWithWorkforceFlag {
+		req.IsTransferWithWorkforce = &builder.isTransferWithWorkforce
 
 	}
 	return req
@@ -44190,6 +44662,376 @@ func (builder *WorkforcePlanEaiDetailBuilder) Build() *WorkforcePlanEaiDetail {
 	return req
 }
 
+type GetApprovalGroupsReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewGetApprovalGroupsReqBuilder() *GetApprovalGroupsReqBuilder {
+	builder := &GetApprovalGroupsReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 组织架构调整流程 ID
+//
+// 示例值：6893014062142064111
+func (builder *GetApprovalGroupsReqBuilder) ProcessId(processId string) *GetApprovalGroupsReqBuilder {
+	builder.apiReq.PathParams.Set("process_id", fmt.Sprint(processId))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：open_id
+func (builder *GetApprovalGroupsReqBuilder) UserIdType(userIdType string) *GetApprovalGroupsReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *GetApprovalGroupsReqBuilder) Build() *GetApprovalGroupsReq {
+	req := &GetApprovalGroupsReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type GetApprovalGroupsReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type GetApprovalGroupsRespData struct {
+	ApprovalGroup *ApprovalGroup `json:"approval_group,omitempty"` // 组织架构调整流程信息
+}
+
+type GetApprovalGroupsResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *GetApprovalGroupsRespData `json:"data"` // 业务数据
+}
+
+func (resp *GetApprovalGroupsResp) Success() bool {
+	return resp.Code == 0
+}
+
+type OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder struct {
+	departmentChangeIds     []string // 部门调整记录 ID List
+	departmentChangeIdsFlag bool
+	needDepartmentPath      bool // 是否返回部门全路径
+	needDepartmentPathFlag  bool
+}
+
+func NewOpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder() *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder {
+	builder := &OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder{}
+	return builder
+}
+
+// 部门调整记录 ID List
+//
+// 示例值：
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder) DepartmentChangeIds(departmentChangeIds []string) *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder {
+	builder.departmentChangeIds = departmentChangeIds
+	builder.departmentChangeIdsFlag = true
+	return builder
+}
+
+// 是否返回部门全路径
+//
+// 示例值：false
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder) NeedDepartmentPath(needDepartmentPath bool) *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder {
+	builder.needDepartmentPath = needDepartmentPath
+	builder.needDepartmentPathFlag = true
+	return builder
+}
+
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBodyBuilder) Build() *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBody {
+	req := &OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBody{}
+	if builder.departmentChangeIdsFlag {
+		req.DepartmentChangeIds = builder.departmentChangeIds
+	}
+	if builder.needDepartmentPathFlag {
+		req.NeedDepartmentPath = &builder.needDepartmentPath
+	}
+	return req
+}
+
+type OpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder struct {
+	departmentChangeIds     []string
+	departmentChangeIdsFlag bool
+	needDepartmentPath      bool
+	needDepartmentPathFlag  bool
+}
+
+func NewOpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder() *OpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder {
+	builder := &OpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder{}
+	return builder
+}
+
+// 部门调整记录 ID List
+//
+// 示例值：
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder) DepartmentChangeIds(departmentChangeIds []string) *OpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder {
+	builder.departmentChangeIds = departmentChangeIds
+	builder.departmentChangeIdsFlag = true
+	return builder
+}
+
+// 是否返回部门全路径
+//
+// 示例值：false
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder) NeedDepartmentPath(needDepartmentPath bool) *OpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder {
+	builder.needDepartmentPath = needDepartmentPath
+	builder.needDepartmentPathFlag = true
+	return builder
+}
+
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsPathReqBodyBuilder) Build() (*OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBody, error) {
+	req := &OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBody{}
+	if builder.departmentChangeIdsFlag {
+		req.DepartmentChangeIds = builder.departmentChangeIds
+	}
+	if builder.needDepartmentPathFlag {
+		req.NeedDepartmentPath = &builder.needDepartmentPath
+	}
+	return req, nil
+}
+
+type OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBody
+}
+
+func NewOpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder() *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder {
+	builder := &OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 组织架构调整流程 ID
+//
+// 示例值：6893014062142064111
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder) ProcessId(processId string) *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder {
+	builder.apiReq.QueryParams.Set("process_id", fmt.Sprint(processId))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：open_id
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder) UserIdType(userIdType string) *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 此次调用中使用的部门 ID 类型
+//
+// 示例值：open_department_id
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder) DepartmentIdType(departmentIdType string) *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder {
+	builder.apiReq.QueryParams.Set("department_id_type", fmt.Sprint(departmentIdType))
+	return builder
+}
+
+// 获取部门调整信息详情
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder) Body(body *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBody) *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBuilder) Build() *OpenQueryDepartmentChangeListByIdsApprovalGroupsReq {
+	req := &OpenQueryDepartmentChangeListByIdsApprovalGroupsReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBody struct {
+	DepartmentChangeIds []string `json:"department_change_ids,omitempty"` // 部门调整记录 ID List
+	NeedDepartmentPath  *bool    `json:"need_department_path,omitempty"`  // 是否返回部门全路径
+}
+
+type OpenQueryDepartmentChangeListByIdsApprovalGroupsReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *OpenQueryDepartmentChangeListByIdsApprovalGroupsReqBody `body:""`
+}
+
+type OpenQueryDepartmentChangeListByIdsApprovalGroupsRespData struct {
+	DepartmentChanges []*DepartmentChange `json:"department_changes,omitempty"` // 部门调整记录信息列表
+}
+
+type OpenQueryDepartmentChangeListByIdsApprovalGroupsResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *OpenQueryDepartmentChangeListByIdsApprovalGroupsRespData `json:"data"` // 业务数据
+}
+
+func (resp *OpenQueryDepartmentChangeListByIdsApprovalGroupsResp) Success() bool {
+	return resp.Code == 0
+}
+
+type OpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder struct {
+	jobChangeIds           []string // 人员异动记录 ID List
+	jobChangeIdsFlag       bool
+	needDepartmentPath     bool // 是否返回部门全路径
+	needDepartmentPathFlag bool
+}
+
+func NewOpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder() *OpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder {
+	builder := &OpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder{}
+	return builder
+}
+
+// 人员异动记录 ID List
+//
+// 示例值：
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder) JobChangeIds(jobChangeIds []string) *OpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder {
+	builder.jobChangeIds = jobChangeIds
+	builder.jobChangeIdsFlag = true
+	return builder
+}
+
+// 是否返回部门全路径
+//
+// 示例值：false
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder) NeedDepartmentPath(needDepartmentPath bool) *OpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder {
+	builder.needDepartmentPath = needDepartmentPath
+	builder.needDepartmentPathFlag = true
+	return builder
+}
+
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsReqBodyBuilder) Build() *OpenQueryJobChangeListByIdsApprovalGroupsReqBody {
+	req := &OpenQueryJobChangeListByIdsApprovalGroupsReqBody{}
+	if builder.jobChangeIdsFlag {
+		req.JobChangeIds = builder.jobChangeIds
+	}
+	if builder.needDepartmentPathFlag {
+		req.NeedDepartmentPath = &builder.needDepartmentPath
+	}
+	return req
+}
+
+type OpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder struct {
+	jobChangeIds           []string
+	jobChangeIdsFlag       bool
+	needDepartmentPath     bool
+	needDepartmentPathFlag bool
+}
+
+func NewOpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder() *OpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder {
+	builder := &OpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder{}
+	return builder
+}
+
+// 人员异动记录 ID List
+//
+// 示例值：
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder) JobChangeIds(jobChangeIds []string) *OpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder {
+	builder.jobChangeIds = jobChangeIds
+	builder.jobChangeIdsFlag = true
+	return builder
+}
+
+// 是否返回部门全路径
+//
+// 示例值：false
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder) NeedDepartmentPath(needDepartmentPath bool) *OpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder {
+	builder.needDepartmentPath = needDepartmentPath
+	builder.needDepartmentPathFlag = true
+	return builder
+}
+
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsPathReqBodyBuilder) Build() (*OpenQueryJobChangeListByIdsApprovalGroupsReqBody, error) {
+	req := &OpenQueryJobChangeListByIdsApprovalGroupsReqBody{}
+	if builder.jobChangeIdsFlag {
+		req.JobChangeIds = builder.jobChangeIds
+	}
+	if builder.needDepartmentPathFlag {
+		req.NeedDepartmentPath = &builder.needDepartmentPath
+	}
+	return req, nil
+}
+
+type OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *OpenQueryJobChangeListByIdsApprovalGroupsReqBody
+}
+
+func NewOpenQueryJobChangeListByIdsApprovalGroupsReqBuilder() *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder {
+	builder := &OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 组织架构调整流程 ID
+//
+// 示例值：6991776076699549697
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder) ProcessId(processId string) *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder {
+	builder.apiReq.QueryParams.Set("process_id", fmt.Sprint(processId))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：open_id
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder) UserIdType(userIdType string) *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 此次调用中使用的部门 ID 类型
+//
+// 示例值：open_department_id
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder) DepartmentIdType(departmentIdType string) *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder {
+	builder.apiReq.QueryParams.Set("department_id_type", fmt.Sprint(departmentIdType))
+	return builder
+}
+
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder) Body(body *OpenQueryJobChangeListByIdsApprovalGroupsReqBody) *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *OpenQueryJobChangeListByIdsApprovalGroupsReqBuilder) Build() *OpenQueryJobChangeListByIdsApprovalGroupsReq {
+	req := &OpenQueryJobChangeListByIdsApprovalGroupsReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type OpenQueryJobChangeListByIdsApprovalGroupsReqBody struct {
+	JobChangeIds       []string `json:"job_change_ids,omitempty"`       // 人员异动记录 ID List
+	NeedDepartmentPath *bool    `json:"need_department_path,omitempty"` // 是否返回部门全路径
+}
+
+type OpenQueryJobChangeListByIdsApprovalGroupsReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *OpenQueryJobChangeListByIdsApprovalGroupsReqBody `body:""`
+}
+
+type OpenQueryJobChangeListByIdsApprovalGroupsRespData struct {
+	JobChanges []*JobChange `json:"job_changes,omitempty"` // 人员异动记录信息列表
+}
+
+type OpenQueryJobChangeListByIdsApprovalGroupsResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *OpenQueryJobChangeListByIdsApprovalGroupsRespData `json:"data"` // 业务数据
+}
+
+func (resp *OpenQueryJobChangeListByIdsApprovalGroupsResp) Success() bool {
+	return resp.Code == 0
+}
+
 type ListApproverReqBuilder struct {
 	apiReq *larkcore.ApiReq
 	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
@@ -44537,8 +45379,6 @@ type SearchBasicInfoBankBranchReqBodyBuilder struct {
 	bankBranchNameListFlag bool
 	codeList               []string // 金融分支机构编码（联行号）列表，支持对金融分支机构编码精确搜索
 	codeListFlag           bool
-	nameList               []string // 金融分支机构名称（支行全称）列表，支持对金融分支机构名称精确搜索
-	nameListFlag           bool
 	statusList             []int // 状态列表
 	statusListFlag         bool
 	updateStartTime        string // 最早更新时间
@@ -44588,15 +45428,6 @@ func (builder *SearchBasicInfoBankBranchReqBodyBuilder) CodeList(codeList []stri
 	return builder
 }
 
-// 金融分支机构名称（支行全称）列表，支持对金融分支机构名称精确搜索
-//
-// 示例值：
-func (builder *SearchBasicInfoBankBranchReqBodyBuilder) NameList(nameList []string) *SearchBasicInfoBankBranchReqBodyBuilder {
-	builder.nameList = nameList
-	builder.nameListFlag = true
-	return builder
-}
-
 // 状态列表
 //
 // 示例值：
@@ -44638,9 +45469,6 @@ func (builder *SearchBasicInfoBankBranchReqBodyBuilder) Build() *SearchBasicInfo
 	if builder.codeListFlag {
 		req.CodeList = builder.codeList
 	}
-	if builder.nameListFlag {
-		req.NameList = builder.nameList
-	}
 	if builder.statusListFlag {
 		req.StatusList = builder.statusList
 	}
@@ -44662,8 +45490,6 @@ type SearchBasicInfoBankBranchPathReqBodyBuilder struct {
 	bankBranchNameListFlag bool
 	codeList               []string
 	codeListFlag           bool
-	nameList               []string
-	nameListFlag           bool
 	statusList             []int
 	statusListFlag         bool
 	updateStartTime        string
@@ -44713,15 +45539,6 @@ func (builder *SearchBasicInfoBankBranchPathReqBodyBuilder) CodeList(codeList []
 	return builder
 }
 
-// 金融分支机构名称（支行全称）列表，支持对金融分支机构名称精确搜索
-//
-// 示例值：
-func (builder *SearchBasicInfoBankBranchPathReqBodyBuilder) NameList(nameList []string) *SearchBasicInfoBankBranchPathReqBodyBuilder {
-	builder.nameList = nameList
-	builder.nameListFlag = true
-	return builder
-}
-
 // 状态列表
 //
 // 示例值：
@@ -44762,9 +45579,6 @@ func (builder *SearchBasicInfoBankBranchPathReqBodyBuilder) Build() (*SearchBasi
 	}
 	if builder.codeListFlag {
 		req.CodeList = builder.codeList
-	}
-	if builder.nameListFlag {
-		req.NameList = builder.nameList
 	}
 	if builder.statusListFlag {
 		req.StatusList = builder.statusList
@@ -44834,7 +45648,6 @@ type SearchBasicInfoBankBranchReqBody struct {
 	BankBranchIdList   []string `json:"bank_branch_id_list,omitempty"`   // 支行 ID 列表，可通过[搜索员工信息](https://open.feishu.cn/document/server-docs/corehr-v1/employee/search)、[批量查询员工信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/employee/batch_get)等接口返回的 `person_info.bank_account_list.bank_branch_id_v2` 字段获取
 	BankBranchNameList []string `json:"bank_branch_name_list,omitempty"` // 支行名称列表，支持对支行名称精确搜索
 	CodeList           []string `json:"code_list,omitempty"`             // 金融分支机构编码（联行号）列表，支持对金融分支机构编码精确搜索
-	NameList           []string `json:"name_list,omitempty"`             // 金融分支机构名称（支行全称）列表，支持对金融分支机构名称精确搜索
 	StatusList         []int    `json:"status_list,omitempty"`           // 状态列表
 	UpdateStartTime    *string  `json:"update_start_time,omitempty"`     // 最早更新时间
 	UpdateEndTime      *string  `json:"update_end_time,omitempty"`       // 最晚更新时间
@@ -53589,6 +54402,314 @@ func (resp *PatchLocationAddressResp) Success() bool {
 	return resp.Code == 0
 }
 
+type EditOffboardingReqBodyBuilder struct {
+	offboardingId     string // 离职记录 ID
+	offboardingIdFlag bool
+	operatorId        string // 操作人雇佣 ID（employment_id），为空默认为系统操作。
+	operatorIdFlag    bool
+	updateData        []*ObjectFieldData // 编辑字段数据信息
+	updateDataFlag    bool
+}
+
+func NewEditOffboardingReqBodyBuilder() *EditOffboardingReqBodyBuilder {
+	builder := &EditOffboardingReqBodyBuilder{}
+	return builder
+}
+
+// 离职记录 ID
+//
+// 示例值：7095671727698478604
+func (builder *EditOffboardingReqBodyBuilder) OffboardingId(offboardingId string) *EditOffboardingReqBodyBuilder {
+	builder.offboardingId = offboardingId
+	builder.offboardingIdFlag = true
+	return builder
+}
+
+// 操作人雇佣 ID（employment_id），为空默认为系统操作。
+//
+// 示例值：6982509313466189341
+func (builder *EditOffboardingReqBodyBuilder) OperatorId(operatorId string) *EditOffboardingReqBodyBuilder {
+	builder.operatorId = operatorId
+	builder.operatorIdFlag = true
+	return builder
+}
+
+// 编辑字段数据信息
+//
+// 示例值：
+func (builder *EditOffboardingReqBodyBuilder) UpdateData(updateData []*ObjectFieldData) *EditOffboardingReqBodyBuilder {
+	builder.updateData = updateData
+	builder.updateDataFlag = true
+	return builder
+}
+
+func (builder *EditOffboardingReqBodyBuilder) Build() *EditOffboardingReqBody {
+	req := &EditOffboardingReqBody{}
+	if builder.offboardingIdFlag {
+		req.OffboardingId = &builder.offboardingId
+	}
+	if builder.operatorIdFlag {
+		req.OperatorId = &builder.operatorId
+	}
+	if builder.updateDataFlag {
+		req.UpdateData = builder.updateData
+	}
+	return req
+}
+
+type EditOffboardingPathReqBodyBuilder struct {
+	offboardingId     string
+	offboardingIdFlag bool
+	operatorId        string
+	operatorIdFlag    bool
+	updateData        []*ObjectFieldData
+	updateDataFlag    bool
+}
+
+func NewEditOffboardingPathReqBodyBuilder() *EditOffboardingPathReqBodyBuilder {
+	builder := &EditOffboardingPathReqBodyBuilder{}
+	return builder
+}
+
+// 离职记录 ID
+//
+// 示例值：7095671727698478604
+func (builder *EditOffboardingPathReqBodyBuilder) OffboardingId(offboardingId string) *EditOffboardingPathReqBodyBuilder {
+	builder.offboardingId = offboardingId
+	builder.offboardingIdFlag = true
+	return builder
+}
+
+// 操作人雇佣 ID（employment_id），为空默认为系统操作。
+//
+// 示例值：6982509313466189341
+func (builder *EditOffboardingPathReqBodyBuilder) OperatorId(operatorId string) *EditOffboardingPathReqBodyBuilder {
+	builder.operatorId = operatorId
+	builder.operatorIdFlag = true
+	return builder
+}
+
+// 编辑字段数据信息
+//
+// 示例值：
+func (builder *EditOffboardingPathReqBodyBuilder) UpdateData(updateData []*ObjectFieldData) *EditOffboardingPathReqBodyBuilder {
+	builder.updateData = updateData
+	builder.updateDataFlag = true
+	return builder
+}
+
+func (builder *EditOffboardingPathReqBodyBuilder) Build() (*EditOffboardingReqBody, error) {
+	req := &EditOffboardingReqBody{}
+	if builder.offboardingIdFlag {
+		req.OffboardingId = &builder.offboardingId
+	}
+	if builder.operatorIdFlag {
+		req.OperatorId = &builder.operatorId
+	}
+	if builder.updateDataFlag {
+		req.UpdateData = builder.updateData
+	}
+	return req, nil
+}
+
+type EditOffboardingReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *EditOffboardingReqBody
+}
+
+func NewEditOffboardingReqBuilder() *EditOffboardingReqBuilder {
+	builder := &EditOffboardingReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：people_corehr_id
+func (builder *EditOffboardingReqBuilder) UserIdType(userIdType string) *EditOffboardingReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 编辑离职信息
+func (builder *EditOffboardingReqBuilder) Body(body *EditOffboardingReqBody) *EditOffboardingReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *EditOffboardingReqBuilder) Build() *EditOffboardingReq {
+	req := &EditOffboardingReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type EditOffboardingReqBody struct {
+	OffboardingId *string            `json:"offboarding_id,omitempty"` // 离职记录 ID
+	OperatorId    *string            `json:"operator_id,omitempty"`    // 操作人雇佣 ID（employment_id），为空默认为系统操作。
+	UpdateData    []*ObjectFieldData `json:"update_data,omitempty"`    // 编辑字段数据信息
+}
+
+type EditOffboardingReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *EditOffboardingReqBody `body:""`
+}
+
+type EditOffboardingRespData struct {
+	Data []*ObjectFieldData `json:"data,omitempty"` // 编辑字段数据信息
+}
+
+type EditOffboardingResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *EditOffboardingRespData `json:"data"` // 业务数据
+}
+
+func (resp *EditOffboardingResp) Success() bool {
+	return resp.Code == 0
+}
+
+type RevokeOffboardingReqBodyBuilder struct {
+	offboardingId     string // 离职记录 ID
+	offboardingIdFlag bool
+	operatorId        string // 操作人雇佣 ID（employment_id），为空默认为系统操作。
+	operatorIdFlag    bool
+}
+
+func NewRevokeOffboardingReqBodyBuilder() *RevokeOffboardingReqBodyBuilder {
+	builder := &RevokeOffboardingReqBodyBuilder{}
+	return builder
+}
+
+// 离职记录 ID
+//
+// 示例值：7095671727698478604
+func (builder *RevokeOffboardingReqBodyBuilder) OffboardingId(offboardingId string) *RevokeOffboardingReqBodyBuilder {
+	builder.offboardingId = offboardingId
+	builder.offboardingIdFlag = true
+	return builder
+}
+
+// 操作人雇佣 ID（employment_id），为空默认为系统操作。
+//
+// 示例值：6982509313466189341
+func (builder *RevokeOffboardingReqBodyBuilder) OperatorId(operatorId string) *RevokeOffboardingReqBodyBuilder {
+	builder.operatorId = operatorId
+	builder.operatorIdFlag = true
+	return builder
+}
+
+func (builder *RevokeOffboardingReqBodyBuilder) Build() *RevokeOffboardingReqBody {
+	req := &RevokeOffboardingReqBody{}
+	if builder.offboardingIdFlag {
+		req.OffboardingId = &builder.offboardingId
+	}
+	if builder.operatorIdFlag {
+		req.OperatorId = &builder.operatorId
+	}
+	return req
+}
+
+type RevokeOffboardingPathReqBodyBuilder struct {
+	offboardingId     string
+	offboardingIdFlag bool
+	operatorId        string
+	operatorIdFlag    bool
+}
+
+func NewRevokeOffboardingPathReqBodyBuilder() *RevokeOffboardingPathReqBodyBuilder {
+	builder := &RevokeOffboardingPathReqBodyBuilder{}
+	return builder
+}
+
+// 离职记录 ID
+//
+// 示例值：7095671727698478604
+func (builder *RevokeOffboardingPathReqBodyBuilder) OffboardingId(offboardingId string) *RevokeOffboardingPathReqBodyBuilder {
+	builder.offboardingId = offboardingId
+	builder.offboardingIdFlag = true
+	return builder
+}
+
+// 操作人雇佣 ID（employment_id），为空默认为系统操作。
+//
+// 示例值：6982509313466189341
+func (builder *RevokeOffboardingPathReqBodyBuilder) OperatorId(operatorId string) *RevokeOffboardingPathReqBodyBuilder {
+	builder.operatorId = operatorId
+	builder.operatorIdFlag = true
+	return builder
+}
+
+func (builder *RevokeOffboardingPathReqBodyBuilder) Build() (*RevokeOffboardingReqBody, error) {
+	req := &RevokeOffboardingReqBody{}
+	if builder.offboardingIdFlag {
+		req.OffboardingId = &builder.offboardingId
+	}
+	if builder.operatorIdFlag {
+		req.OperatorId = &builder.operatorId
+	}
+	return req, nil
+}
+
+type RevokeOffboardingReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *RevokeOffboardingReqBody
+}
+
+func NewRevokeOffboardingReqBuilder() *RevokeOffboardingReqBuilder {
+	builder := &RevokeOffboardingReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：people_corehr_id
+func (builder *RevokeOffboardingReqBuilder) UserIdType(userIdType string) *RevokeOffboardingReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+// 撤销离职信息
+func (builder *RevokeOffboardingReqBuilder) Body(body *RevokeOffboardingReqBody) *RevokeOffboardingReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *RevokeOffboardingReqBuilder) Build() *RevokeOffboardingReq {
+	req := &RevokeOffboardingReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type RevokeOffboardingReqBody struct {
+	OffboardingId *string `json:"offboarding_id,omitempty"` // 离职记录 ID
+	OperatorId    *string `json:"operator_id,omitempty"`    // 操作人雇佣 ID（employment_id），为空默认为系统操作。
+}
+
+type RevokeOffboardingReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *RevokeOffboardingReqBody `body:""`
+}
+
+type RevokeOffboardingResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *RevokeOffboardingResp) Success() bool {
+	return resp.Code == 0
+}
+
 type SubmitV2OffboardingReqBodyBuilder struct {
 	offboardingMode                       int // 离职方式
 	offboardingModeFlag                   bool
@@ -53612,6 +54733,8 @@ type SubmitV2OffboardingReqBodyBuilder struct {
 	customFieldsFlag                      bool
 	retainAccount                         bool // 离职是否保留飞书账号
 	retainAccountFlag                     bool
+	isTransferWithWorkforce               bool // 编制随人员一起调整
+	isTransferWithWorkforceFlag           bool
 }
 
 func NewSubmitV2OffboardingReqBodyBuilder() *SubmitV2OffboardingReqBodyBuilder {
@@ -53718,6 +54841,15 @@ func (builder *SubmitV2OffboardingReqBodyBuilder) RetainAccount(retainAccount bo
 	return builder
 }
 
+// 编制随人员一起调整
+//
+// 示例值：false
+func (builder *SubmitV2OffboardingReqBodyBuilder) IsTransferWithWorkforce(isTransferWithWorkforce bool) *SubmitV2OffboardingReqBodyBuilder {
+	builder.isTransferWithWorkforce = isTransferWithWorkforce
+	builder.isTransferWithWorkforceFlag = true
+	return builder
+}
+
 func (builder *SubmitV2OffboardingReqBodyBuilder) Build() *SubmitV2OffboardingReqBody {
 	req := &SubmitV2OffboardingReqBody{}
 	if builder.offboardingModeFlag {
@@ -53753,6 +54885,9 @@ func (builder *SubmitV2OffboardingReqBodyBuilder) Build() *SubmitV2OffboardingRe
 	if builder.retainAccountFlag {
 		req.RetainAccount = &builder.retainAccount
 	}
+	if builder.isTransferWithWorkforceFlag {
+		req.IsTransferWithWorkforce = &builder.isTransferWithWorkforce
+	}
 	return req
 }
 
@@ -53779,6 +54914,8 @@ type SubmitV2OffboardingPathReqBodyBuilder struct {
 	customFieldsFlag                      bool
 	retainAccount                         bool
 	retainAccountFlag                     bool
+	isTransferWithWorkforce               bool
+	isTransferWithWorkforceFlag           bool
 }
 
 func NewSubmitV2OffboardingPathReqBodyBuilder() *SubmitV2OffboardingPathReqBodyBuilder {
@@ -53885,6 +55022,15 @@ func (builder *SubmitV2OffboardingPathReqBodyBuilder) RetainAccount(retainAccoun
 	return builder
 }
 
+// 编制随人员一起调整
+//
+// 示例值：false
+func (builder *SubmitV2OffboardingPathReqBodyBuilder) IsTransferWithWorkforce(isTransferWithWorkforce bool) *SubmitV2OffboardingPathReqBodyBuilder {
+	builder.isTransferWithWorkforce = isTransferWithWorkforce
+	builder.isTransferWithWorkforceFlag = true
+	return builder
+}
+
 func (builder *SubmitV2OffboardingPathReqBodyBuilder) Build() (*SubmitV2OffboardingReqBody, error) {
 	req := &SubmitV2OffboardingReqBody{}
 	if builder.offboardingModeFlag {
@@ -53919,6 +55065,9 @@ func (builder *SubmitV2OffboardingPathReqBodyBuilder) Build() (*SubmitV2Offboard
 	}
 	if builder.retainAccountFlag {
 		req.RetainAccount = &builder.retainAccount
+	}
+	if builder.isTransferWithWorkforceFlag {
+		req.IsTransferWithWorkforce = &builder.isTransferWithWorkforce
 	}
 	return req, nil
 }
@@ -53970,6 +55119,7 @@ type SubmitV2OffboardingReqBody struct {
 	BlockReasonExplanation            *string            `json:"block_reason_explanation,omitempty"`             // 屏蔽原因说明
 	CustomFields                      []*ObjectFieldData `json:"custom_fields,omitempty"`                        // 自定义字段
 	RetainAccount                     *bool              `json:"retain_account,omitempty"`                       // 离职是否保留飞书账号
+	IsTransferWithWorkforce           *bool              `json:"is_transfer_with_workforce,omitempty"`           // 编制随人员一起调整
 }
 
 type SubmitV2OffboardingReq struct {
@@ -53988,6 +55138,7 @@ type SubmitV2OffboardingRespData struct {
 	BlockReasonExplanation            *string `json:"block_reason_explanation,omitempty"`             // 屏蔽原因说明
 	CreatedTime                       *string `json:"created_time,omitempty"`                         // 创建时间
 	RetainAccount                     *bool   `json:"retain_account,omitempty"`                       // 离职是否保留飞书账号
+	IsTransferWithWorkforce           *bool   `json:"is_transfer_with_workforce,omitempty"`           // 编制随人员一起调整
 }
 
 type SubmitV2OffboardingResp struct {
@@ -57321,6 +58472,28 @@ type BatchWorkforcePlanDetailResp struct {
 
 func (resp *BatchWorkforcePlanDetailResp) Success() bool {
 	return resp.Code == 0
+}
+
+type P2ApprovalGroupsUpdatedV2Data struct {
+	ApprovalGroupId     *string `json:"approval_group_id,omitempty"`     // 组织架构调整审批组 ID
+	ProcessId           *string `json:"process_id,omitempty"`            // 组织架构调整流程 ID
+	ApprovalGroupStatus *int    `json:"approval_group_status,omitempty"` // 组织架构调整流程状态
+	Topic               *string `json:"topic,omitempty"`                 // 调整主题
+	AdjustReason        *string `json:"adjust_reason,omitempty"`         // 调整原因
+	EffectiveDate       *string `json:"effective_date,omitempty"`        // 生效日期
+	CreatedBy           *string `json:"created_by,omitempty"`            // 发起人
+	DraftId             *string `json:"draft_id,omitempty"`              // 组织架构调整任务 ID
+	DraftStatus         *int    `json:"draft_status,omitempty"`          // 组织架构调整任务状态
+}
+
+type P2ApprovalGroupsUpdatedV2 struct {
+	*larkevent.EventV2Base                                // 事件基础数据
+	*larkevent.EventReq                                   // 请求原生数据
+	Event                  *P2ApprovalGroupsUpdatedV2Data `json:"event"` // 事件内容
+}
+
+func (m *P2ApprovalGroupsUpdatedV2) RawReq(req *larkevent.EventReq) {
+	m.EventReq = req
 }
 
 type P2CompanyCreatedV2Data struct {

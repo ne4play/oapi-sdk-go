@@ -22,6 +22,19 @@ import (
 // - 
 //
 // - 事件描述文档链接:
+func ( dispatcher * EventDispatcher ) OnP2ApprovalGroupsUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2ApprovalGroupsUpdatedV2) error) * EventDispatcher{
+	_, existed := dispatcher.eventType2EventHandler["corehr.approval_groups.updated_v2"]
+	if existed {
+		panic("event: multiple handler registrations for " + "corehr.approval_groups.updated_v2")
+	}
+	dispatcher.eventType2EventHandler["corehr.approval_groups.updated_v2"] = larkcorehr.NewP2ApprovalGroupsUpdatedV2Handler(handler)
+	return dispatcher
+}
+// 
+//
+// - 
+//
+// - 事件描述文档链接:
 func ( dispatcher * EventDispatcher ) OnP2CompanyCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2CompanyCreatedV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.company.created_v2"]
 	if existed {

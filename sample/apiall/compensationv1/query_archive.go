@@ -32,6 +32,7 @@ func main() {
 		UserIdType("open_id").
 		Body(larkcompensation.NewQueryArchiveReqBodyBuilder().
 			UserIdList([]string{}).
+			TidList([]string{}).
 			EffectiveStartDate("2022-05-10").
 			EffectiveEndDate("2023-05-15").
 			Build()).

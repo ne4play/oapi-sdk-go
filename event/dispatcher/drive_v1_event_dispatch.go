@@ -47,6 +47,19 @@ func ( dispatcher * EventDispatcher ) OnP2FileBitableRecordChangedV1(handler fun
 //
 // - 
 //
+// - 事件描述文档链接:
+func ( dispatcher * EventDispatcher ) OnP2FileCreatedInFolderV1(handler func(ctx context.Context, event *larkdrive.P2FileCreatedInFolderV1) error) * EventDispatcher{
+	_, existed := dispatcher.eventType2EventHandler["drive.file.created_in_folder_v1"]
+	if existed {
+		panic("event: multiple handler registrations for " + "drive.file.created_in_folder_v1")
+	}
+	dispatcher.eventType2EventHandler["drive.file.created_in_folder_v1"] = larkdrive.NewP2FileCreatedInFolderV1Handler(handler)
+	return dispatcher
+}
+// 
+//
+// - 
+//
 // - 事件描述文档链接:https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/event/file-deleted-completely
 func ( dispatcher * EventDispatcher ) OnP2FileDeletedV1(handler func(ctx context.Context, event *larkdrive.P2FileDeletedV1) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["drive.file.deleted_v1"]
@@ -80,6 +93,19 @@ func ( dispatcher * EventDispatcher ) OnP2FilePermissionMemberAddedV1(handler fu
 		panic("event: multiple handler registrations for " + "drive.file.permission_member_added_v1")
 	}
 	dispatcher.eventType2EventHandler["drive.file.permission_member_added_v1"] = larkdrive.NewP2FilePermissionMemberAddedV1Handler(handler)
+	return dispatcher
+}
+// 
+//
+// - 
+//
+// - 事件描述文档链接:
+func ( dispatcher * EventDispatcher ) OnP2FilePermissionMemberAppliedV1(handler func(ctx context.Context, event *larkdrive.P2FilePermissionMemberAppliedV1) error) * EventDispatcher{
+	_, existed := dispatcher.eventType2EventHandler["drive.file.permission_member_applied_v1"]
+	if existed {
+		panic("event: multiple handler registrations for " + "drive.file.permission_member_applied_v1")
+	}
+	dispatcher.eventType2EventHandler["drive.file.permission_member_applied_v1"] = larkdrive.NewP2FilePermissionMemberAppliedV1Handler(handler)
 	return dispatcher
 }
 // 

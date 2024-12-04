@@ -34,6 +34,7 @@ func main() {
 			StageName("阶段报告").
 			StageTime("1660123456789").
 			Result("通过").
+			OperatorRole(1).
 			ReportFileList([]*larkhire.EcoBackgroundCheckReportFile{larkhire.NewEcoBackgroundCheckReportFileBuilder().Build()}).
 			Build()).
 		Build()

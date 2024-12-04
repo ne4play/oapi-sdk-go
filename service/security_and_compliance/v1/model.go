@@ -2845,6 +2845,7 @@ type DeviceApplyRecord struct {
 	DeviceSystem       *string `json:"device_system,omitempty"`        // 操作系统
 	DeviceName         *string `json:"device_name,omitempty"`          // 设备名称
 	DeviceRecordId     *string `json:"device_record_id,omitempty"`     // 设备单ID
+	Aaid               *string `json:"aaid,omitempty"`                 // 鸿蒙系统应用匿名标识符
 }
 
 type DeviceApplyRecordBuilder struct {
@@ -2886,6 +2887,8 @@ type DeviceApplyRecordBuilder struct {
 	deviceNameFlag         bool
 	deviceRecordId         string // 设备单ID
 	deviceRecordIdFlag     bool
+	aaid                   string // 鸿蒙系统应用匿名标识符
+	aaidFlag               bool
 }
 
 func NewDeviceApplyRecordBuilder() *DeviceApplyRecordBuilder {
@@ -3064,6 +3067,15 @@ func (builder *DeviceApplyRecordBuilder) DeviceRecordId(deviceRecordId string) *
 	return builder
 }
 
+// 鸿蒙系统应用匿名标识符
+//
+// 示例值：84a5a123-04c5-6789-9d71-3706e50f9250
+func (builder *DeviceApplyRecordBuilder) Aaid(aaid string) *DeviceApplyRecordBuilder {
+	builder.aaid = aaid
+	builder.aaidFlag = true
+	return builder
+}
+
 func (builder *DeviceApplyRecordBuilder) Build() *DeviceApplyRecord {
 	req := &DeviceApplyRecord{}
 	if builder.applyIdFlag {
@@ -3141,6 +3153,10 @@ func (builder *DeviceApplyRecordBuilder) Build() *DeviceApplyRecord {
 		req.DeviceRecordId = &builder.deviceRecordId
 
 	}
+	if builder.aaidFlag {
+		req.Aaid = &builder.aaid
+
+	}
 	return req
 }
 
@@ -3164,6 +3180,7 @@ type DeviceRecord struct {
 	DeviceCredibility  *string `json:"device_credibility,omitempty"`   // 设备状态
 	Version            *string `json:"version,omitempty"`              // 设备记录版本
 	DiskSerialNumber   *string `json:"disk_serial_number,omitempty"`   // 硬盘序列号
+	Aaid               *string `json:"aaid,omitempty"`                 // 鸿蒙系统应用匿名标识符
 }
 
 type DeviceRecordBuilder struct {
@@ -3205,6 +3222,8 @@ type DeviceRecordBuilder struct {
 	versionFlag            bool
 	diskSerialNumber       string // 硬盘序列号
 	diskSerialNumberFlag   bool
+	aaid                   string // 鸿蒙系统应用匿名标识符
+	aaidFlag               bool
 }
 
 func NewDeviceRecordBuilder() *DeviceRecordBuilder {
@@ -3383,6 +3402,15 @@ func (builder *DeviceRecordBuilder) DiskSerialNumber(diskSerialNumber string) *D
 	return builder
 }
 
+// 鸿蒙系统应用匿名标识符
+//
+// 示例值：84a5a123-04c5-6789-9d71-3706e50f9250
+func (builder *DeviceRecordBuilder) Aaid(aaid string) *DeviceRecordBuilder {
+	builder.aaid = aaid
+	builder.aaidFlag = true
+	return builder
+}
+
 func (builder *DeviceRecordBuilder) Build() *DeviceRecord {
 	req := &DeviceRecord{}
 	if builder.deviceRecordIdFlag {
@@ -3459,6 +3487,10 @@ func (builder *DeviceRecordBuilder) Build() *DeviceRecord {
 	}
 	if builder.diskSerialNumberFlag {
 		req.DiskSerialNumber = &builder.diskSerialNumber
+
+	}
+	if builder.aaidFlag {
+		req.Aaid = &builder.aaid
 
 	}
 	return req

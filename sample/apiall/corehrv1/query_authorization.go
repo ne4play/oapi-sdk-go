@@ -32,6 +32,8 @@ func main() {
 		PageToken("6969864184272078374").
 		PageSize("20").
 		UserIdType("people_corehr_id").
+		UpdatedAtGte("1729773628").
+		UpdatedAtLte("1729773628").
 		Build()
 	// 发起请求
 	resp, err := client.Corehr.V1.Authorization.Query(context.Background(), req)

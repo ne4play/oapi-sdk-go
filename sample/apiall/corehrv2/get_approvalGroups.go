@@ -18,24 +18,20 @@ import (
 	"fmt"
 	"github.com/larksuite/oapi-sdk-go/v3"
 	"github.com/larksuite/oapi-sdk-go/v3/core"
-	"github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1"
+	"github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2"
 )
 
-// POST /open-apis/corehr/v1/security_groups/query
+// GET /open-apis/corehr/v2/approval_groups/:process_id
 func main() {
 	// 创建 Client
 	client := lark.NewClient("appID", "appSecret")
 	// 创建请求对象
-	req := larkcorehr.NewQuerySecurityGroupReqBuilder().
-		DepartmentIdType("people_corehr_department_id").
-		Body(larkcorehr.NewQuerySecurityGroupReqBodyBuilder().
-			ItemList([]*larkcorehr.BpRoleOrganization{larkcorehr.NewBpRoleOrganizationBuilder().Build()}).
-			UpdatedAtGte("1729773628").
-			UpdatedAtLte("1729773628").
-			Build()).
+	req := larkcorehr.NewGetApprovalGroupsReqBuilder().
+		ProcessId("6893014062142064111").
+		UserIdType("open_id").
 		Build()
 	// 发起请求
-	resp, err := client.Corehr.V1.SecurityGroup.Query(context.Background(), req)
+	resp, err := client.Corehr.V2.ApprovalGroups.Get(context.Background(), req)
 
 	// 处理错误
 	if err != nil {

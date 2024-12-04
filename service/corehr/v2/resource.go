@@ -9,6 +9,7 @@ import (
 )
 
 type V2 struct {
+	ApprovalGroups                    *approvalGroups                    // approval_groups
 	Approver                          *approver                          // approver
 	BasicInfoBank                     *basicInfoBank                     // basic_info.bank
 	BasicInfoBankBranch               *basicInfoBankBranch               // basic_info.bank_branch
@@ -54,6 +55,7 @@ type V2 struct {
 
 func New(config *larkcore.Config) *V2 {
 	return &V2{
+		ApprovalGroups:                    &approvalGroups{config: config},
 		Approver:                          &approver{config: config},
 		BasicInfoBank:                     &basicInfoBank{config: config},
 		BasicInfoBankBranch:               &basicInfoBankBranch{config: config},
@@ -98,6 +100,9 @@ func New(config *larkcore.Config) *V2 {
 	}
 }
 
+type approvalGroups struct {
+	config *larkcore.Config
+}
 type approver struct {
 	config *larkcore.Config
 }
@@ -220,6 +225,84 @@ type workforcePlan struct {
 }
 type workforcePlanDetail struct {
 	config *larkcore.Config
+}
+
+// Get
+//
+// - 获取审批组信息
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=get&project=corehr&resource=approval_groups&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/get_approvalGroups.go
+func (a *approvalGroups) Get(ctx context.Context, req *GetApprovalGroupsReq, options ...larkcore.RequestOptionFunc) (*GetApprovalGroupsResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/approval_groups/:process_id"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &GetApprovalGroupsResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// OpenQueryDepartmentChangeListByIds
+//
+// - 获取部门调整信息详情
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=open_query_department_change_list_by_ids&project=corehr&resource=approval_groups&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/openQueryDepartmentChangeListByIds_approvalGroups.go
+func (a *approvalGroups) OpenQueryDepartmentChangeListByIds(ctx context.Context, req *OpenQueryDepartmentChangeListByIdsApprovalGroupsReq, options ...larkcore.RequestOptionFunc) (*OpenQueryDepartmentChangeListByIdsApprovalGroupsResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/approval_groups/open_query_department_change_list_by_ids"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &OpenQueryDepartmentChangeListByIdsApprovalGroupsResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// OpenQueryJobChangeListByIds
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=open_query_job_change_list_by_ids&project=corehr&resource=approval_groups&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/openQueryJobChangeListByIds_approvalGroups.go
+func (a *approvalGroups) OpenQueryJobChangeListByIds(ctx context.Context, req *OpenQueryJobChangeListByIdsApprovalGroupsReq, options ...larkcore.RequestOptionFunc) (*OpenQueryJobChangeListByIdsApprovalGroupsResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/approval_groups/open_query_job_change_list_by_ids"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &OpenQueryJobChangeListByIdsApprovalGroupsResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
 }
 
 // List
@@ -1860,6 +1943,58 @@ func (l *locationAddress) Patch(ctx context.Context, req *PatchLocationAddressRe
 	// 反序列响应结果
 	resp := &PatchLocationAddressResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Edit
+//
+// - 编辑离职信息
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=edit&project=corehr&resource=offboarding&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/edit_offboarding.go
+func (o *offboarding) Edit(ctx context.Context, req *EditOffboardingReq, options ...larkcore.RequestOptionFunc) (*EditOffboardingResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/offboardings/edit"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, o.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &EditOffboardingResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, o.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Revoke
+//
+// - 撤销离职信息
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=revoke&project=corehr&resource=offboarding&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/revoke_offboarding.go
+func (o *offboarding) Revoke(ctx context.Context, req *RevokeOffboardingReq, options ...larkcore.RequestOptionFunc) (*RevokeOffboardingResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/offboardings/revoke"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, o.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &RevokeOffboardingResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, o.config)
 	if err != nil {
 		return nil, err
 	}

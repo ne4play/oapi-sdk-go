@@ -60,6 +60,7 @@ func main() {
 			JobTypeId("6930815272790114324").
 			JobIdList([]string{}).
 			EmploymentJobId("123").
+			PositionId("123").
 			Build()).
 		Build()
 	// 发起请求

@@ -34,7 +34,6 @@ func main() {
 			BankBranchIdList([]string{}).
 			BankBranchNameList([]string{}).
 			CodeList([]string{}).
-			NameList([]string{}).
 			StatusList([]int{}).
 			UpdateStartTime("2020-01-01 00:00:00").
 			UpdateEndTime("2024-01-01 00:00:00").

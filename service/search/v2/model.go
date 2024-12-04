@@ -2716,13 +2716,14 @@ func (builder *ParaphraseResultBuilder) Build() *ParaphraseResult {
 }
 
 type Passage struct {
-	PassageId     *string  `json:"passage_id,omitempty"`     // passage的唯一标识
-	PassageSource *int     `json:"passage_source,omitempty"` // passage所属的数据源
-	Content       *string  `json:"content,omitempty"`        // 和query相关的文本段落
-	Title         *string  `json:"title,omitempty"`          // wiki或doc的题目
-	Url           *string  `json:"url,omitempty"`            // 跳转链接
-	Score         *float64 `json:"score,omitempty"`          // 文本段落和query的相关性分数
-	Extra         *string  `json:"extra,omitempty"`          // 其他source相关的字段
+	PassageId     *string  `json:"passage_id,omitempty"`      // passage的唯一标识
+	PassageSource *int     `json:"passage_source,omitempty"`  // passage所属的数据源
+	Content       *string  `json:"content,omitempty"`         // 和query相关的文本段落
+	Title         *string  `json:"title,omitempty"`           // wiki或doc的题目
+	Url           *string  `json:"url,omitempty"`             // 跳转链接
+	Score         *float64 `json:"score,omitempty"`           // 文本段落和query的相关性分数
+	Extra         *string  `json:"extra,omitempty"`           // 其他source相关的字段
+	ContentForLlm *string  `json:"content_for_llm,omitempty"` // 和query相关的文本段落经过small2big之后的片段
 }
 
 type PassageBuilder struct {
@@ -2740,6 +2741,8 @@ type PassageBuilder struct {
 	scoreFlag         bool
 	extra             string // 其他source相关的字段
 	extraFlag         bool
+	contentForLlm     string // 和query相关的文本段落经过small2big之后的片段
+	contentForLlmFlag bool
 }
 
 func NewPassageBuilder() *PassageBuilder {
@@ -2810,6 +2813,15 @@ func (builder *PassageBuilder) Extra(extra string) *PassageBuilder {
 	return builder
 }
 
+// 和query相关的文本段落经过small2big之后的片段
+//
+// 示例值：流程如下：xxxxxxx。可以在飞书官方官网上找到更详细内容。
+func (builder *PassageBuilder) ContentForLlm(contentForLlm string) *PassageBuilder {
+	builder.contentForLlm = contentForLlm
+	builder.contentForLlmFlag = true
+	return builder
+}
+
 func (builder *PassageBuilder) Build() *Passage {
 	req := &Passage{}
 	if builder.passageIdFlag {
@@ -2838,6 +2850,10 @@ func (builder *PassageBuilder) Build() *Passage {
 	}
 	if builder.extraFlag {
 		req.Extra = &builder.extra
+
+	}
+	if builder.contentForLlmFlag {
+		req.ContentForLlm = &builder.contentForLlm
 
 	}
 	return req
@@ -3470,21 +3486,27 @@ func (builder *ScenarioContextBuilder) Build() *ScenarioContext {
 }
 
 type ScenarioContextExtra struct {
-	GroundingId     *string `json:"grounding_id,omitempty"`      // Grounding ID
-	ModelKey        *string `json:"model_key,omitempty"`         // 模型 key
-	SpecifiedObjIds *string `json:"specified_obj_ids,omitempty"` // 检索时指定的文档 id, 多个 id 以`,`分隔
-	SuggestQueryId  *string `json:"suggest_query_id,omitempty"`  // 推荐问题的 ID
+	GroundingId             *string `json:"grounding_id,omitempty"`              // Grounding ID
+	ModelKey                *string `json:"model_key,omitempty"`                 // 模型 key
+	SpecifiedObjIds         *string `json:"specified_obj_ids,omitempty"`         // 检索时指定的文档 id, 多个 id 以`,`分隔
+	SuggestQueryId          *string `json:"suggest_query_id,omitempty"`          // 推荐问题的 ID
+	ButtonSendMessageInfo   *string `json:"button_send_message_info,omitempty"`  // 点击按钮发送消息时所携带的参数信息
+	ButtonRegenerateMessage *string `json:"button_regenerate_message,omitempty"` // 点击重新生成按钮时携带的参数信息
 }
 
 type ScenarioContextExtraBuilder struct {
-	groundingId         string // Grounding ID
-	groundingIdFlag     bool
-	modelKey            string // 模型 key
-	modelKeyFlag        bool
-	specifiedObjIds     string // 检索时指定的文档 id, 多个 id 以`,`分隔
-	specifiedObjIdsFlag bool
-	suggestQueryId      string // 推荐问题的 ID
-	suggestQueryIdFlag  bool
+	groundingId                 string // Grounding ID
+	groundingIdFlag             bool
+	modelKey                    string // 模型 key
+	modelKeyFlag                bool
+	specifiedObjIds             string // 检索时指定的文档 id, 多个 id 以`,`分隔
+	specifiedObjIdsFlag         bool
+	suggestQueryId              string // 推荐问题的 ID
+	suggestQueryIdFlag          bool
+	buttonSendMessageInfo       string // 点击按钮发送消息时所携带的参数信息
+	buttonSendMessageInfoFlag   bool
+	buttonRegenerateMessage     string // 点击重新生成按钮时携带的参数信息
+	buttonRegenerateMessageFlag bool
 }
 
 func NewScenarioContextExtraBuilder() *ScenarioContextExtraBuilder {
@@ -3528,6 +3550,24 @@ func (builder *ScenarioContextExtraBuilder) SuggestQueryId(suggestQueryId string
 	return builder
 }
 
+// 点击按钮发送消息时所携带的参数信息
+//
+// 示例值：1
+func (builder *ScenarioContextExtraBuilder) ButtonSendMessageInfo(buttonSendMessageInfo string) *ScenarioContextExtraBuilder {
+	builder.buttonSendMessageInfo = buttonSendMessageInfo
+	builder.buttonSendMessageInfoFlag = true
+	return builder
+}
+
+// 点击重新生成按钮时携带的参数信息
+//
+// 示例值：1
+func (builder *ScenarioContextExtraBuilder) ButtonRegenerateMessage(buttonRegenerateMessage string) *ScenarioContextExtraBuilder {
+	builder.buttonRegenerateMessage = buttonRegenerateMessage
+	builder.buttonRegenerateMessageFlag = true
+	return builder
+}
+
 func (builder *ScenarioContextExtraBuilder) Build() *ScenarioContextExtra {
 	req := &ScenarioContextExtra{}
 	if builder.groundingIdFlag {
@@ -3544,6 +3584,14 @@ func (builder *ScenarioContextExtraBuilder) Build() *ScenarioContextExtra {
 	}
 	if builder.suggestQueryIdFlag {
 		req.SuggestQueryId = &builder.suggestQueryId
+
+	}
+	if builder.buttonSendMessageInfoFlag {
+		req.ButtonSendMessageInfo = &builder.buttonSendMessageInfo
+
+	}
+	if builder.buttonRegenerateMessageFlag {
+		req.ButtonRegenerateMessage = &builder.buttonRegenerateMessage
 
 	}
 	return req

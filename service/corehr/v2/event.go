@@ -18,6 +18,26 @@ import (
 )
 
 // 消息处理器定义
+type P2ApprovalGroupsUpdatedV2Handler struct {
+	handler func(context.Context, *P2ApprovalGroupsUpdatedV2) error
+}
+
+func NewP2ApprovalGroupsUpdatedV2Handler(handler func(context.Context, *P2ApprovalGroupsUpdatedV2) error) *P2ApprovalGroupsUpdatedV2Handler {
+	h := &P2ApprovalGroupsUpdatedV2Handler{handler: handler}
+	return h
+}
+
+// 返回事件的消息体的实例，用于反序列化用
+func (h *P2ApprovalGroupsUpdatedV2Handler) Event() interface{} {
+	return &P2ApprovalGroupsUpdatedV2{}
+}
+
+// 回调开发者注册的handle
+func (h *P2ApprovalGroupsUpdatedV2Handler) Handle(ctx context.Context, event interface{}) error {
+	return h.handler(ctx, event.(*P2ApprovalGroupsUpdatedV2))
+}
+
+// 消息处理器定义
 type P2CompanyCreatedV2Handler struct {
 	handler func(context.Context, *P2CompanyCreatedV2) error
 }

@@ -411,6 +411,32 @@ func (g *group) ListByIterator(ctx context.Context, req *ListGroupReq, options .
 		limit:    req.Limit}, nil
 }
 
+// ListUser
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list_user&project=attendance&resource=group&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/attendancev1/listUser_group.go
+func (g *group) ListUser(ctx context.Context, req *ListUserGroupReq, options ...larkcore.RequestOptionFunc) (*ListUserGroupResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/attendance/v1/groups/:group_id/list_user"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, g.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListUserGroupResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, g.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Search 按名称查询考勤组
 //
 // - 按考勤组名称查询考勤组摘要信息。查询条件支持名称精确匹配和模糊匹配两种方式。查询结果按考勤组修改时间 desc 排序，且最大记录数为 10 条。

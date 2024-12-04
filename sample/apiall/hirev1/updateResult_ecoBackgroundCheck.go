@@ -31,6 +31,7 @@ func main() {
 			BackgroundCheckId("6931286400470354183").
 			Result("无差异").
 			ResultTime("1660123456789").
+			OperatorRole(1).
 			ReportFileList([]*larkhire.EcoBackgroundCheckReportFile{larkhire.NewEcoBackgroundCheckReportFileBuilder().Build()}).
 			Build()).
 		Build()

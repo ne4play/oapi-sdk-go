@@ -40,6 +40,7 @@ func main() {
 			BlockReasonExplanation("xx 年 xx 月 xx 日因 xx 原因红线").
 			CustomFields([]*larkcorehr.ObjectFieldData{larkcorehr.NewObjectFieldDataBuilder().Build()}).
 			RetainAccount(false).
+			IsTransferWithWorkforce(false).
 			Build()).
 		Build()
 	// 发起请求
