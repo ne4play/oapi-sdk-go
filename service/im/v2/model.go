@@ -178,7 +178,10 @@ func (builder *ChatCommonHeaderBuilder) Build() *ChatCommonHeader {
 		req.ChatId = &builder.chatId
 
 	}
+	if builder.botIdFlag {
+		req.BotId = &builder.botId
 
+	}
 	return req
 }
 
@@ -1637,7 +1640,10 @@ func (builder *MessageCommonHeaderBuilder) BotId(botId string) *MessageCommonHea
 
 func (builder *MessageCommonHeaderBuilder) Build() *MessageCommonHeader {
 	req := &MessageCommonHeader{}
+	if builder.botIdFlag {
+		req.BotId = &builder.botId
 
+	}
 	return req
 }
 
@@ -3171,7 +3177,10 @@ func (builder *UrgentCommonHeaderBuilder) BotId(botId string) *UrgentCommonHeade
 
 func (builder *UrgentCommonHeaderBuilder) Build() *UrgentCommonHeader {
 	req := &UrgentCommonHeader{}
+	if builder.botIdFlag {
+		req.BotId = &builder.botId
 
+	}
 	return req
 }
 

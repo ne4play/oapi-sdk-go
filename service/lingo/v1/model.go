@@ -14,11 +14,13 @@
 package larklingo
 
 import (
-	"context"
-	"errors"
-	"fmt"
 	"io"
 	"io/ioutil"
+
+	"fmt"
+
+	"context"
+	"errors"
 
 	"github.com/larksuite/oapi-sdk-go/v3/core"
 )
@@ -1573,7 +1575,9 @@ func (builder *EntityBuilder) Build() *Entity {
 	if builder.mainKeysFlag {
 		req.MainKeys = builder.mainKeys
 	}
-
+	if builder.fullNamesFlag {
+		req.FullNames = builder.fullNames
+	}
 	if builder.aliasesFlag {
 		req.Aliases = builder.aliases
 	}

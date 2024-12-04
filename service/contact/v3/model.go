@@ -1838,7 +1838,9 @@ func (builder *DepartmentEventBuilder) Build() *DepartmentEvent {
 		req.Order = &builder.order
 
 	}
-
+	if builder.unitIdsFlag {
+		req.UnitIds = builder.unitIds
+	}
 	if builder.statusFlag {
 		req.Status = builder.status
 	}
@@ -2844,7 +2846,15 @@ func (builder *GroupBuilder) Build() *Group {
 		req.Type = &builder.type_
 
 	}
-
+	if builder.dynamicGroupRuleFlag {
+		req.DynamicGroupRule = builder.dynamicGroupRule
+	}
+	if builder.visibleScopeFlag {
+		req.VisibleScope = builder.visibleScope
+	}
+	if builder.departmentScopeListFlag {
+		req.DepartmentScopeList = builder.departmentScopeList
+	}
 	if builder.groupIdFlag {
 		req.GroupId = &builder.groupId
 
@@ -4836,7 +4846,9 @@ func (builder *UserBuilder) Build() *User {
 		req.EmployeeType = &builder.employeeType
 
 	}
-
+	if builder.positionsFlag {
+		req.Positions = builder.positions
+	}
 	if builder.ordersFlag {
 		req.Orders = builder.orders
 	}
@@ -4847,12 +4859,29 @@ func (builder *UserBuilder) Build() *User {
 		req.EnterpriseEmail = &builder.enterpriseEmail
 
 	}
+	if builder.idpTypeFlag {
+		req.IdpType = &builder.idpType
 
+	}
+	if builder.timeZoneFlag {
+		req.TimeZone = &builder.timeZone
+
+	}
+	if builder.descriptionFlag {
+		req.Description = &builder.description
+
+	}
 	if builder.jobTitleFlag {
 		req.JobTitle = &builder.jobTitle
 
 	}
+	if builder.needSendNotificationFlag {
+		req.NeedSendNotification = &builder.needSendNotification
 
+	}
+	if builder.notificationOptionFlag {
+		req.NotificationOption = builder.notificationOption
+	}
 	if builder.isFrozenFlag {
 		req.IsFrozen = &builder.isFrozen
 
@@ -5853,7 +5882,10 @@ func (builder *UserEventBuilder) Build() *UserEvent {
 		req.Mobile = &builder.mobile
 
 	}
+	if builder.mobileVisibleFlag {
+		req.MobileVisible = &builder.mobileVisible
 
+	}
 	if builder.genderFlag {
 		req.Gender = &builder.gender
 
@@ -5887,7 +5919,10 @@ func (builder *UserEventBuilder) Build() *UserEvent {
 		req.JoinTime = &builder.joinTime
 
 	}
+	if builder.isTenantManagerFlag {
+		req.IsTenantManager = &builder.isTenantManager
 
+	}
 	if builder.employeeNoFlag {
 		req.EmployeeNo = &builder.employeeNo
 
@@ -5896,11 +5931,16 @@ func (builder *UserEventBuilder) Build() *UserEvent {
 		req.EmployeeType = &builder.employeeType
 
 	}
-
+	if builder.positionsFlag {
+		req.Positions = builder.positions
+	}
 	if builder.ordersFlag {
 		req.Orders = builder.orders
 	}
+	if builder.timeZoneFlag {
+		req.TimeZone = &builder.timeZone
 
+	}
 	if builder.customAttrsFlag {
 		req.CustomAttrs = builder.customAttrs
 	}

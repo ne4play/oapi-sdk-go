@@ -7690,7 +7690,9 @@ func (builder *ReserveFormConfigBuilder) Build() *ReserveFormConfig {
 		req.TimeUnit = &builder.timeUnit
 
 	}
-
+	if builder.customListFlag {
+		req.CustomList = builder.customList
+	}
 	return req
 }
 

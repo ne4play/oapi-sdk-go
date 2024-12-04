@@ -3738,7 +3738,9 @@ func (builder *FilterInfoBuilder) Build() *FilterInfo {
 	if builder.conditionsFlag {
 		req.Conditions = builder.conditions
 	}
-
+	if builder.childrenFlag {
+		req.Children = builder.children
+	}
 	return req
 }
 

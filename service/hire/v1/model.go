@@ -1633,7 +1633,9 @@ func (builder *AccountBuilder) Build() *Account {
 		req.Status = &builder.status
 
 	}
-
+	if builder.referrerFlag {
+		req.Referrer = builder.referrer
+	}
 	return req
 }
 
@@ -9805,7 +9807,9 @@ func (builder *AssetsBuilder) Build() *Assets {
 	if builder.confirmedBonusFlag {
 		req.ConfirmedBonus = builder.confirmedBonus
 	}
-
+	if builder.paidBonusFlag {
+		req.PaidBonus = builder.paidBonus
+	}
 	return req
 }
 
@@ -12295,12 +12299,17 @@ func (builder *BonusAmountBuilder) CashBonus(cashBonus []*Cash) *BonusAmountBuil
 
 func (builder *BonusAmountBuilder) Build() *BonusAmount {
 	req := &BonusAmount{}
+	if builder.bonusTypeFlag {
+		req.BonusType = &builder.bonusType
 
+	}
 	if builder.pointBonusFlag {
 		req.PointBonus = &builder.pointBonus
 
 	}
-
+	if builder.cashFlag {
+		req.Cash = builder.cash
+	}
 	if builder.cashBonusFlag {
 		req.CashBonus = builder.cashBonus
 	}
@@ -13453,7 +13462,10 @@ func (builder *CombinedJobBuilder) Build() *CombinedJob {
 		req.Requirement = &builder.requirement
 
 	}
+	if builder.addressIdFlag {
+		req.AddressId = &builder.addressId
 
+	}
 	if builder.descriptionFlag {
 		req.Description = &builder.description
 
@@ -13965,7 +13977,9 @@ func (builder *CommonFilterBuilder) Build() *CommonFilter {
 	if builder.rangeFilterFlag {
 		req.RangeFilter = builder.rangeFilter
 	}
-
+	if builder.userIdListFlag {
+		req.UserIdList = builder.userIdList
+	}
 	return req
 }
 
@@ -19457,7 +19471,10 @@ func (builder *ExternalOfferBuilder) Build() *ExternalOffer {
 		req.Owner = &builder.owner
 
 	}
+	if builder.creatorFlag {
+		req.Creator = &builder.creator
 
+	}
 	if builder.offerStatusFlag {
 		req.OfferStatus = &builder.offerStatus
 
@@ -23739,7 +23756,14 @@ func (builder *InterviewRecordBuilder) Build() *InterviewRecord {
 		req.Content = &builder.content
 
 	}
+	if builder.minJobLevelIdFlag {
+		req.MinJobLevelId = &builder.minJobLevelId
 
+	}
+	if builder.maxJobLevelIdFlag {
+		req.MaxJobLevelId = &builder.maxJobLevelId
+
+	}
 	if builder.commitStatusFlag {
 		req.CommitStatus = &builder.commitStatus
 
@@ -25976,7 +26000,10 @@ func (builder *JobConfigDetailBuilder) Build() *JobConfigDetail {
 	if builder.assessmentTemplateFlag {
 		req.AssessmentTemplate = builder.assessmentTemplate
 	}
+	if builder.idFlag {
+		req.Id = &builder.id
 
+	}
 	if builder.interviewRoundListFlag {
 		req.InterviewRoundList = builder.interviewRoundList
 	}
@@ -29219,7 +29246,9 @@ func (builder *JobRequirementBuilder) Build() *JobRequirement {
 		req.PositionId = &builder.positionId
 
 	}
-
+	if builder.updateOptionFlag {
+		req.UpdateOption = builder.updateOption
+	}
 	return req
 }
 
@@ -39074,7 +39103,10 @@ func (builder *RewardUserBuilder) Build() *RewardUser {
 	if builder.departmentFlag {
 		req.Department = builder.department
 	}
+	if builder.recruitmentTypeFlag {
+		req.RecruitmentType = &builder.recruitmentType
 
+	}
 	return req
 }
 
@@ -43077,7 +43109,9 @@ func (builder *TalentBasicInfoBuilder) Build() *TalentBasicInfo {
 		req.IdentificationNumber = &builder.identificationNumber
 
 	}
-
+	if builder.identificationFlag {
+		req.Identification = builder.identification
+	}
 	if builder.birthdayFlag {
 		req.Birthday = &builder.birthday
 
@@ -52272,7 +52306,13 @@ func (builder *WebsiteJobPostBuilder) Build() *WebsiteJobPost {
 	if builder.addressListFlag {
 		req.AddressList = builder.addressList
 	}
+	if builder.jobSequenceInfoFlag {
+		req.JobSequenceInfo = builder.jobSequenceInfo
+	}
+	if builder.currencyFlag {
+		req.Currency = &builder.currency
 
+	}
 	if builder.targetMajorListFlag {
 		req.TargetMajorList = builder.targetMajorList
 	}

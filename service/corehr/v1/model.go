@@ -811,7 +811,14 @@ func (builder *AddressBuilder) Build() *Address {
 		req.DistinctId = &builder.distinctId
 
 	}
+	if builder.cityIdV2Flag {
+		req.CityIdV2 = &builder.cityIdV2
 
+	}
+	if builder.districtIdV2Flag {
+		req.DistrictIdV2 = &builder.districtIdV2
+
+	}
 	if builder.addressLine1Flag {
 		req.AddressLine1 = &builder.addressLine1
 
@@ -1890,12 +1897,22 @@ func (builder *BankAccountBuilder) Build() *BankAccount {
 	if builder.bankFlag {
 		req.Bank = builder.bank
 	}
+	if builder.bankIdentificationCodeFlag {
+		req.BankIdentificationCode = &builder.bankIdentificationCode
 
+	}
 	if builder.branchNameFlag {
 		req.BranchName = &builder.branchName
 
 	}
+	if builder.bankIdFlag {
+		req.BankId = &builder.bankId
 
+	}
+	if builder.branchIdFlag {
+		req.BranchId = &builder.branchId
+
+	}
 	if builder.bankIdV2Flag {
 		req.BankIdV2 = &builder.bankIdV2
 
@@ -10292,7 +10309,9 @@ func (builder *JobDataBuilder) Build() *JobData {
 	if builder.costCenterRateFlag {
 		req.CostCenterRate = builder.costCenterRate
 	}
-
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
+	}
 	if builder.weeklyWorkingHoursV2Flag {
 		req.WeeklyWorkingHoursV2 = &builder.weeklyWorkingHoursV2
 
@@ -14865,7 +14884,10 @@ func (builder *PersonBuilder) Build() *Person {
 		req.NationalityId = &builder.nationalityId
 
 	}
+	if builder.nationalityIdV2Flag {
+		req.NationalityIdV2 = &builder.nationalityIdV2
 
+	}
 	if builder.raceFlag {
 		req.Race = builder.race
 	}
@@ -15864,7 +15886,10 @@ func (builder *PersonalProfileBuilder) Files(files []*File) *PersonalProfileBuil
 
 func (builder *PersonalProfileBuilder) Build() *PersonalProfile {
 	req := &PersonalProfile{}
+	if builder.personalProfileIdFlag {
+		req.PersonalProfileId = &builder.personalProfileId
 
+	}
 	if builder.personalProfileTypeFlag {
 		req.PersonalProfileType = builder.personalProfileType
 	}

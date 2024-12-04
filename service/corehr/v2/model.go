@@ -1250,7 +1250,22 @@ func (builder *AddressBuilder) Build() *Address {
 		req.RegionId = &builder.regionId
 
 	}
+	if builder.cityIdFlag {
+		req.CityId = &builder.cityId
 
+	}
+	if builder.distinctIdFlag {
+		req.DistinctId = &builder.distinctId
+
+	}
+	if builder.cityIdV2Flag {
+		req.CityIdV2 = &builder.cityIdV2
+
+	}
+	if builder.districtIdV2Flag {
+		req.DistrictIdV2 = &builder.districtIdV2
+
+	}
 	if builder.addressLine1Flag {
 		req.AddressLine1 = &builder.addressLine1
 
@@ -2693,12 +2708,25 @@ func (builder *BankAccountBuilder) Build() *BankAccount {
 		req.AccountHolder = &builder.accountHolder
 
 	}
+	if builder.bankFlag {
+		req.Bank = builder.bank
+	}
+	if builder.bankIdentificationCodeFlag {
+		req.BankIdentificationCode = &builder.bankIdentificationCode
 
+	}
 	if builder.branchNameFlag {
 		req.BranchName = &builder.branchName
 
 	}
+	if builder.bankIdFlag {
+		req.BankId = &builder.bankId
 
+	}
+	if builder.branchIdFlag {
+		req.BranchId = &builder.branchId
+
+	}
 	if builder.bankIdV2Flag {
 		req.BankIdV2 = &builder.bankIdV2
 
@@ -9500,7 +9528,10 @@ func (builder *DependentBuilder) Build() *Dependent {
 		req.DateOfBirth = &builder.dateOfBirth
 
 	}
+	if builder.nationalityIdFlag {
+		req.NationalityId = &builder.nationalityId
 
+	}
 	if builder.nationalityIdV2Flag {
 		req.NationalityIdV2 = &builder.nationalityIdV2
 
@@ -12279,7 +12310,10 @@ func (builder *EmployeeBuilder) Build() *Employee {
 		req.EmailAddress = &builder.emailAddress
 
 	}
+	if builder.userNameFlag {
+		req.UserName = &builder.userName
 
+	}
 	if builder.workEmailListFlag {
 		req.WorkEmailList = builder.workEmailList
 	}
@@ -12370,7 +12404,9 @@ func (builder *EmployeeBuilder) Build() *Employee {
 		req.TimeZone = &builder.timeZone
 
 	}
-
+	if builder.primaryInternationalAssignmentFlag {
+		req.PrimaryInternationalAssignment = builder.primaryInternationalAssignment
+	}
 	if builder.serviceCompanyFlag {
 		req.ServiceCompany = &builder.serviceCompany
 
@@ -12381,7 +12417,9 @@ func (builder *EmployeeBuilder) Build() *Employee {
 	if builder.workShiftFlag {
 		req.WorkShift = builder.workShift
 	}
-
+	if builder.talentPoolIdListFlag {
+		req.TalentPoolIdList = builder.talentPoolIdList
+	}
 	if builder.customOrgFlag {
 		req.CustomOrg = &builder.customOrg
 
@@ -21048,7 +21086,9 @@ func (builder *JobDataBuilder) Build() *JobData {
 		req.ServiceCompany = &builder.serviceCompany
 
 	}
-
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
+	}
 	if builder.createdAtFlag {
 		req.CreatedAt = &builder.createdAt
 
@@ -29501,12 +29541,20 @@ func (builder *PersonInfoBuilder) Build() *PersonInfo {
 		req.DateOfBirth = &builder.dateOfBirth
 
 	}
+	if builder.nationalityIdFlag {
+		req.NationalityId = &builder.nationalityId
 
+	}
 	if builder.nationalityIdV2Flag {
 		req.NationalityIdV2 = &builder.nationalityIdV2
 
 	}
-
+	if builder.additionalNationalitiesFlag {
+		req.AdditionalNationalities = builder.additionalNationalities
+	}
+	if builder.citizenshipStatusFlag {
+		req.CitizenshipStatus = builder.citizenshipStatus
+	}
 	if builder.raceFlag {
 		req.Race = builder.race
 	}
@@ -30432,7 +30480,10 @@ func (builder *PersonInfoBtBuilder) Build() *PersonInfoBt {
 		req.DateOfBirth = &builder.dateOfBirth
 
 	}
+	if builder.nationalityIdFlag {
+		req.NationalityId = &builder.nationalityId
 
+	}
 	if builder.nationalityIdV2Flag {
 		req.NationalityIdV2 = &builder.nationalityIdV2
 
@@ -31176,7 +31227,10 @@ func (builder *PersonalProfileBuilder) Files(files []*File) *PersonalProfileBuil
 
 func (builder *PersonalProfileBuilder) Build() *PersonalProfile {
 	req := &PersonalProfile{}
+	if builder.personalProfileIdFlag {
+		req.PersonalProfileId = &builder.personalProfileId
 
+	}
 	if builder.personalProfileTypeFlag {
 		req.PersonalProfileType = builder.personalProfileType
 	}
@@ -33391,7 +33445,10 @@ func (builder *PreHireBuilder) Build() *PreHire {
 		req.PreHireId = &builder.preHireId
 
 	}
+	if builder.peopleFieldsJsonFlag {
+		req.PeopleFieldsJson = &builder.peopleFieldsJson
 
+	}
 	return req
 }
 
@@ -40005,7 +40062,14 @@ func (builder *ProfileSettingEmploymentBasicInfoBuilder) Build() *ProfileSetting
 		req.EmployeeNumber = &builder.employeeNumber
 
 	}
+	if builder.rehireFlag {
+		req.Rehire = &builder.rehire
 
+	}
+	if builder.employmentInfoBeforeRehireFlag {
+		req.EmploymentInfoBeforeRehire = &builder.employmentInfoBeforeRehire
+
+	}
 	if builder.effectiveTimeFlag {
 		req.EffectiveTime = &builder.effectiveTime
 
@@ -42963,7 +43027,14 @@ func (builder *ReorganizationInfoBuilder) Build() *ReorganizationInfo {
 		req.TargetIsConfidential = &builder.targetIsConfidential
 
 	}
+	if builder.originalStaffingModelFlag {
+		req.OriginalStaffingModel = &builder.originalStaffingModel
 
+	}
+	if builder.targetStaffingModelFlag {
+		req.TargetStaffingModel = &builder.targetStaffingModel
+
+	}
 	if builder.originalStaffingModeOptionFlag {
 		req.OriginalStaffingModeOption = builder.originalStaffingModeOption
 	}
@@ -49210,7 +49281,34 @@ func (builder *WorkforcePlanDetailBuilder) Build() *WorkforcePlanDetail {
 		req.WorkforcePlan = &builder.workforcePlan
 
 	}
+	if builder.activeIndividualsFlag {
+		req.ActiveIndividuals = &builder.activeIndividuals
 
+	}
+	if builder.individualsToBeAddedFlag {
+		req.IndividualsToBeAdded = &builder.individualsToBeAdded
+
+	}
+	if builder.individualsToBeRemovedFlag {
+		req.IndividualsToBeRemoved = &builder.individualsToBeRemoved
+
+	}
+	if builder.vacancyFlag {
+		req.Vacancy = &builder.vacancy
+
+	}
+	if builder.vacancyIncludingIndividualsToBeAddedAndRemovedFlag {
+		req.VacancyIncludingIndividualsToBeAddedAndRemoved = &builder.vacancyIncludingIndividualsToBeAddedAndRemoved
+
+	}
+	if builder.fulfillmentRateFlag {
+		req.FulfillmentRate = &builder.fulfillmentRate
+
+	}
+	if builder.fulfillmentRateIncludingIndividualsToBeAddedAndRemovedFlag {
+		req.FulfillmentRateIncludingIndividualsToBeAddedAndRemoved = &builder.fulfillmentRateIncludingIndividualsToBeAddedAndRemoved
+
+	}
 	if builder.estimatedActiveIndividualsDetailFlag {
 		req.EstimatedActiveIndividualsDetail = builder.estimatedActiveIndividualsDetail
 	}
@@ -49508,7 +49606,34 @@ func (builder *WorkforcePlanDetailV2Builder) Build() *WorkforcePlanDetailV2 {
 		req.WorkforcePlan = &builder.workforcePlan
 
 	}
+	if builder.activeIndividualsFlag {
+		req.ActiveIndividuals = &builder.activeIndividuals
 
+	}
+	if builder.individualsToBeAddedFlag {
+		req.IndividualsToBeAdded = &builder.individualsToBeAdded
+
+	}
+	if builder.individualsToBeRemovedFlag {
+		req.IndividualsToBeRemoved = &builder.individualsToBeRemoved
+
+	}
+	if builder.vacancyFlag {
+		req.Vacancy = &builder.vacancy
+
+	}
+	if builder.vacancyIncludingIndividualsToBeAddedAndRemovedFlag {
+		req.VacancyIncludingIndividualsToBeAddedAndRemoved = &builder.vacancyIncludingIndividualsToBeAddedAndRemoved
+
+	}
+	if builder.fulfillmentRateFlag {
+		req.FulfillmentRate = &builder.fulfillmentRate
+
+	}
+	if builder.fulfillmentRateIncludingIndividualsToBeAddedAndRemovedFlag {
+		req.FulfillmentRateIncludingIndividualsToBeAddedAndRemoved = &builder.fulfillmentRateIncludingIndividualsToBeAddedAndRemoved
+
+	}
 	if builder.estimatedActiveIndividualsDetailsFlag {
 		req.EstimatedActiveIndividualsDetails = builder.estimatedActiveIndividualsDetails
 	}

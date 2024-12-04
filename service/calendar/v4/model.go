@@ -6521,7 +6521,13 @@ func (builder *VchatBuilder) Build() *Vchat {
 		req.MeetingUrl = &builder.meetingUrl
 
 	}
+	if builder.liveLinkFlag {
+		req.LiveLink = &builder.liveLink
 
+	}
+	if builder.vcInfoFlag {
+		req.VcInfo = builder.vcInfo
+	}
 	if builder.meetingSettingsFlag {
 		req.MeetingSettings = builder.meetingSettings
 	}

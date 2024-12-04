@@ -832,7 +832,9 @@ func (builder *ChatBuilder) Build() *Chat {
 		req.Type = &builder.type_
 
 	}
-
+	if builder.labelsFlag {
+		req.Labels = builder.labels
+	}
 	return req
 }
 
@@ -1502,7 +1504,9 @@ func (builder *ChatChangeBuilder) Build() *ChatChange {
 	if builder.ownerIdFlag {
 		req.OwnerId = builder.ownerId
 	}
-
+	if builder.labelsFlag {
+		req.Labels = builder.labels
+	}
 	if builder.restrictedModeSettingFlag {
 		req.RestrictedModeSetting = builder.restrictedModeSetting
 	}
@@ -3209,7 +3213,9 @@ func (builder *ListChatBuilder) Build() *ListChat {
 		req.TenantKey = &builder.tenantKey
 
 	}
-
+	if builder.labelsFlag {
+		req.Labels = builder.labels
+	}
 	if builder.chatStatusFlag {
 		req.ChatStatus = &builder.chatStatus
 

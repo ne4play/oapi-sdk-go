@@ -1090,7 +1090,10 @@ func (builder *CostCenterBuilder) Build() *CostCenter {
 		req.CoAreaCode = &builder.coAreaCode
 
 	}
+	if builder.companyCodeFlag {
+		req.CompanyCode = &builder.companyCode
 
+	}
 	if builder.profitCenterCodeFlag {
 		req.ProfitCenterCode = &builder.profitCenterCode
 

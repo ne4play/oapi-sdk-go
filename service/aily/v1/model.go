@@ -1843,7 +1843,9 @@ func (builder *DataAssetBuilder) Build() *DataAsset {
 		req.ConnectFailedReason = &builder.connectFailedReason
 
 	}
-
+	if builder.importKnowledgeSettingFlag {
+		req.ImportKnowledgeSetting = builder.importKnowledgeSetting
+	}
 	if builder.connectTypeFlag {
 		req.ConnectType = &builder.connectType
 
@@ -2124,7 +2126,10 @@ func (builder *DataAssetImportKnowledgeLarkDocBuilder) Build() *DataAssetImportK
 		req.WithSubDocs = &builder.withSubDocs
 
 	}
+	if builder.urlFlag {
+		req.Url = &builder.url
 
+	}
 	return req
 }
 
@@ -2606,7 +2611,10 @@ func (builder *DataAssetResourceBuilder) Build() *DataAssetResource {
 		req.ResourceId = &builder.resourceId
 
 	}
+	if builder.resouceTypeFlag {
+		req.ResouceType = &builder.resouceType
 
+	}
 	if builder.resourceTypeFlag {
 		req.ResourceType = &builder.resourceType
 

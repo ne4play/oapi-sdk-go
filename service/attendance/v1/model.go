@@ -7719,7 +7719,14 @@ func (builder *UserFlowBuilder) Build() *UserFlow {
 		req.RecordId = &builder.recordId
 
 	}
+	if builder.longitudeFlag {
+		req.Longitude = &builder.longitude
 
+	}
+	if builder.latitudeFlag {
+		req.Latitude = &builder.latitude
+
+	}
 	if builder.ssidFlag {
 		req.Ssid = &builder.ssid
 
