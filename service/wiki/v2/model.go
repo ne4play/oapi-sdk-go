@@ -112,13 +112,15 @@ const (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -157,20 +159,26 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type Member struct {
 	MemberType *string `json:"member_type,omitempty"` // “openchat” - 群id ;;“userid” - 用户id;;“email” - 邮箱;;“opendepartmentid” - 部门id;;“openid” - 应用openid;;“unionid” - [unionid](/:ssltoken/home/user-identity-introduction/union-id;)
-	MemberId   *string `json:"member_id,omitempty"`   // 用户id，值的类型由上面的 member_type 参数决定
+
+	MemberId *string `json:"member_id,omitempty"` // 用户id，值的类型由上面的 member_type 参数决定
+
 	MemberRole *string `json:"member_role,omitempty"` // 角色:;;“admin” - 管理员;;“member” - 成员
-	Type       *string `json:"type,omitempty"`        // 知识库协作者类型
+
+	Type *string `json:"type,omitempty"` // 知识库协作者类型
 }
 
 type MemberBuilder struct {
 	memberType     string // “openchat” - 群id ;;“userid” - 用户id;;“email” - 邮箱;;“opendepartmentid” - 部门id;;“openid” - 应用openid;;“unionid” - [unionid](/:ssltoken/home/user-identity-introduction/union-id;)
 	memberTypeFlag bool
-	memberId       string // 用户id，值的类型由上面的 member_type 参数决定
-	memberIdFlag   bool
+
+	memberId     string // 用户id，值的类型由上面的 member_type 参数决定
+	memberIdFlag bool
+
 	memberRole     string // 角色:;;“admin” - 管理员;;“member” - 成员
 	memberRoleFlag bool
-	type_          string // 知识库协作者类型
-	typeFlag       bool
+
+	type_    string // 知识库协作者类型
+	typeFlag bool
 }
 
 func NewMemberBuilder() *MemberBuilder {
@@ -236,16 +244,20 @@ func (builder *MemberBuilder) Build() *Member {
 }
 
 type MoveResult struct {
-	Node      *Node   `json:"node,omitempty"`       // 移动完成的节点信息
-	Status    *int    `json:"status,omitempty"`     // 节点移动状态码
+	Node *Node `json:"node,omitempty"` // 移动完成的节点信息
+
+	Status *int `json:"status,omitempty"` // 节点移动状态码
+
 	StatusMsg *string `json:"status_msg,omitempty"` // 节点移动状态信息
 }
 
 type MoveResultBuilder struct {
-	node          *Node // 移动完成的节点信息
-	nodeFlag      bool
-	status        int // 节点移动状态码
-	statusFlag    bool
+	node     *Node // 移动完成的节点信息
+	nodeFlag bool
+
+	status     int // 节点移动状态码
+	statusFlag bool
+
 	statusMsg     string // 节点移动状态信息
 	statusMsgFlag bool
 }
@@ -299,57 +311,87 @@ func (builder *MoveResultBuilder) Build() *MoveResult {
 }
 
 type Node struct {
-	SpaceId         *string `json:"space_id,omitempty"`          // 知识空间id;[获取方式](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/wiki-overview)
-	NodeToken       *string `json:"node_token,omitempty"`        // 节点token
-	ObjToken        *string `json:"obj_token,omitempty"`         // 对应文档类型的token，可根据 obj_type 判断属于哪种文档类型。
-	ObjType         *string `json:"obj_type,omitempty"`          // 文档类型，对于快捷方式，该字段是对应的实体的obj_type。
+	SpaceId *string `json:"space_id,omitempty"` // 知识空间id;[获取方式](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/wiki-overview)
+
+	NodeToken *string `json:"node_token,omitempty"` // 节点token
+
+	ObjToken *string `json:"obj_token,omitempty"` // 对应文档类型的token，可根据 obj_type 判断属于哪种文档类型。
+
+	ObjType *string `json:"obj_type,omitempty"` // 文档类型，对于快捷方式，该字段是对应的实体的obj_type。
+
 	ParentNodeToken *string `json:"parent_node_token,omitempty"` // 父节点 token。若当前节点为一级节点，父节点 token 为空。
-	NodeType        *string `json:"node_type,omitempty"`         // 节点类型
+
+	NodeType *string `json:"node_type,omitempty"` // 节点类型
+
 	OriginNodeToken *string `json:"origin_node_token,omitempty"` // 快捷方式对应的实体node_token，当节点为快捷方式时，该值不为空。
-	OriginSpaceId   *string `json:"origin_space_id,omitempty"`   // 快捷方式对应的实体所在的space id
-	HasChild        *bool   `json:"has_child,omitempty"`         // 是否有子节点
-	Title           *string `json:"title,omitempty"`             // 文档标题
-	ObjCreateTime   *string `json:"obj_create_time,omitempty"`   // 文档创建时间
-	ObjEditTime     *string `json:"obj_edit_time,omitempty"`     // 文档最近编辑时间
-	NodeCreateTime  *string `json:"node_create_time,omitempty"`  // 节点创建时间
-	Creator         *string `json:"creator,omitempty"`           // 节点创建者
-	Owner           *string `json:"owner,omitempty"`             // 节点所有者
-	NodeCreator     *string `json:"node_creator,omitempty"`      // 节点创建者
+
+	OriginSpaceId *string `json:"origin_space_id,omitempty"` // 快捷方式对应的实体所在的space id
+
+	HasChild *bool `json:"has_child,omitempty"` // 是否有子节点
+
+	Title *string `json:"title,omitempty"` // 文档标题
+
+	ObjCreateTime *string `json:"obj_create_time,omitempty"` // 文档创建时间
+
+	ObjEditTime *string `json:"obj_edit_time,omitempty"` // 文档最近编辑时间
+
+	NodeCreateTime *string `json:"node_create_time,omitempty"` // 节点创建时间
+
+	Creator *string `json:"creator,omitempty"` // 节点创建者
+
+	Owner *string `json:"owner,omitempty"` // 节点所有者
+
+	NodeCreator *string `json:"node_creator,omitempty"` // 节点创建者
 }
 
 type NodeBuilder struct {
-	spaceId             string // 知识空间id;[获取方式](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/wiki-overview)
-	spaceIdFlag         bool
-	nodeToken           string // 节点token
-	nodeTokenFlag       bool
-	objToken            string // 对应文档类型的token，可根据 obj_type 判断属于哪种文档类型。
-	objTokenFlag        bool
-	objType             string // 文档类型，对于快捷方式，该字段是对应的实体的obj_type。
-	objTypeFlag         bool
+	spaceId     string // 知识空间id;[获取方式](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/wiki-overview)
+	spaceIdFlag bool
+
+	nodeToken     string // 节点token
+	nodeTokenFlag bool
+
+	objToken     string // 对应文档类型的token，可根据 obj_type 判断属于哪种文档类型。
+	objTokenFlag bool
+
+	objType     string // 文档类型，对于快捷方式，该字段是对应的实体的obj_type。
+	objTypeFlag bool
+
 	parentNodeToken     string // 父节点 token。若当前节点为一级节点，父节点 token 为空。
 	parentNodeTokenFlag bool
-	nodeType            string // 节点类型
-	nodeTypeFlag        bool
+
+	nodeType     string // 节点类型
+	nodeTypeFlag bool
+
 	originNodeToken     string // 快捷方式对应的实体node_token，当节点为快捷方式时，该值不为空。
 	originNodeTokenFlag bool
-	originSpaceId       string // 快捷方式对应的实体所在的space id
-	originSpaceIdFlag   bool
-	hasChild            bool // 是否有子节点
-	hasChildFlag        bool
-	title               string // 文档标题
-	titleFlag           bool
-	objCreateTime       string // 文档创建时间
-	objCreateTimeFlag   bool
-	objEditTime         string // 文档最近编辑时间
-	objEditTimeFlag     bool
-	nodeCreateTime      string // 节点创建时间
-	nodeCreateTimeFlag  bool
-	creator             string // 节点创建者
-	creatorFlag         bool
-	owner               string // 节点所有者
-	ownerFlag           bool
-	nodeCreator         string // 节点创建者
-	nodeCreatorFlag     bool
+
+	originSpaceId     string // 快捷方式对应的实体所在的space id
+	originSpaceIdFlag bool
+
+	hasChild     bool // 是否有子节点
+	hasChildFlag bool
+
+	title     string // 文档标题
+	titleFlag bool
+
+	objCreateTime     string // 文档创建时间
+	objCreateTimeFlag bool
+
+	objEditTime     string // 文档最近编辑时间
+	objEditTimeFlag bool
+
+	nodeCreateTime     string // 节点创建时间
+	nodeCreateTimeFlag bool
+
+	creator     string // 节点创建者
+	creatorFlag bool
+
+	owner     string // 节点所有者
+	ownerFlag bool
+
+	nodeCreator     string // 节点创建者
+	nodeCreatorFlag bool
 }
 
 func NewNodeBuilder() *NodeBuilder {
@@ -571,40 +613,60 @@ func (builder *NodeBuilder) Build() *Node {
 }
 
 type NodeSearch struct {
-	NodeId   *string  `json:"node_id,omitempty"`   // node的唯一标识
-	SpaceId  *string  `json:"space_id,omitempty"`  // 所属空间id
-	ParentId *string  `json:"parent_id,omitempty"` // 父节点id
-	ObjType  *int     `json:"obj_type,omitempty"`  // wiki类型
-	Title    *string  `json:"title,omitempty"`     // wiki标题
-	Url      *string  `json:"url,omitempty"`       // wiki的访问url
-	Icon     *string  `json:"icon,omitempty"`      // wiki对应图标的url
-	AreaId   *string  `json:"area_id,omitempty"`   // 所属权限范围id
-	SortId   *float64 `json:"sort_id,omitempty"`   // 序号
-	Domain   *string  `json:"domain,omitempty"`    // 所在域名
-	ObjToken *string  `json:"obj_token,omitempty"` // objToken
+	NodeId *string `json:"node_id,omitempty"` // node的唯一标识
+
+	SpaceId *string `json:"space_id,omitempty"` // 所属空间id
+
+	ParentId *string `json:"parent_id,omitempty"` // 父节点id
+
+	ObjType *int `json:"obj_type,omitempty"` // wiki类型
+
+	Title *string `json:"title,omitempty"` // wiki标题
+
+	Url *string `json:"url,omitempty"` // wiki的访问url
+
+	Icon *string `json:"icon,omitempty"` // wiki对应图标的url
+
+	AreaId *string `json:"area_id,omitempty"` // 所属权限范围id
+
+	SortId *float64 `json:"sort_id,omitempty"` // 序号
+
+	Domain *string `json:"domain,omitempty"` // 所在域名
+
+	ObjToken *string `json:"obj_token,omitempty"` // objToken
 }
 
 type NodeSearchBuilder struct {
-	nodeId       string // node的唯一标识
-	nodeIdFlag   bool
-	spaceId      string // 所属空间id
-	spaceIdFlag  bool
+	nodeId     string // node的唯一标识
+	nodeIdFlag bool
+
+	spaceId     string // 所属空间id
+	spaceIdFlag bool
+
 	parentId     string // 父节点id
 	parentIdFlag bool
-	objType      int // wiki类型
-	objTypeFlag  bool
-	title        string // wiki标题
-	titleFlag    bool
-	url          string // wiki的访问url
-	urlFlag      bool
-	icon         string // wiki对应图标的url
-	iconFlag     bool
-	areaId       string // 所属权限范围id
-	areaIdFlag   bool
-	sortId       float64 // 序号
-	sortIdFlag   bool
-	domain       string // 所在域名
-	domainFlag   bool
+
+	objType     int // wiki类型
+	objTypeFlag bool
+
+	title     string // wiki标题
+	titleFlag bool
+
+	url     string // wiki的访问url
+	urlFlag bool
+
+	icon     string // wiki对应图标的url
+	iconFlag bool
+
+	areaId     string // 所属权限范围id
+	areaIdFlag bool
+
+	sortId     float64 // 序号
+	sortIdFlag bool
+
+	domain     string // 所在域名
+	domainFlag bool
+
 	objToken     string // objToken
 	objTokenFlag bool
 }
@@ -763,18 +825,22 @@ func (builder *NodeSearchBuilder) Build() *NodeSearch {
 }
 
 type Setting struct {
-	CreateSetting   *string `json:"create_setting,omitempty"`   // 谁可以创建空间的一级页面： "admin_and_member" = 管理员和成员 "admin"  - 仅管理员
+	CreateSetting *string `json:"create_setting,omitempty"` // 谁可以创建空间的一级页面： "admin_and_member" = 管理员和成员 "admin"  - 仅管理员
+
 	SecuritySetting *string `json:"security_setting,omitempty"` // 可阅读用户可否创建副本/打印/导出/复制： "allow" - 允许 "not_allow" - 不允许
-	CommentSetting  *string `json:"comment_setting,omitempty"`  // 可阅读用户可否评论： "allow" - 允许 "not_allow" - 不允许
+
+	CommentSetting *string `json:"comment_setting,omitempty"` // 可阅读用户可否评论： "allow" - 允许 "not_allow" - 不允许
 }
 
 type SettingBuilder struct {
-	createSetting       string // 谁可以创建空间的一级页面： "admin_and_member" = 管理员和成员 "admin"  - 仅管理员
-	createSettingFlag   bool
+	createSetting     string // 谁可以创建空间的一级页面： "admin_and_member" = 管理员和成员 "admin"  - 仅管理员
+	createSettingFlag bool
+
 	securitySetting     string // 可阅读用户可否创建副本/打印/导出/复制： "allow" - 允许 "not_allow" - 不允许
 	securitySettingFlag bool
-	commentSetting      string // 可阅读用户可否评论： "allow" - 允许 "not_allow" - 不允许
-	commentSettingFlag  bool
+
+	commentSetting     string // 可阅读用户可否评论： "allow" - 允许 "not_allow" - 不允许
+	commentSettingFlag bool
 }
 
 func NewSettingBuilder() *SettingBuilder {
@@ -827,25 +893,35 @@ func (builder *SettingBuilder) Build() *Setting {
 }
 
 type Space struct {
-	Name        *string `json:"name,omitempty"`         // 知识空间名称
-	Description *string `json:"description,omitempty"`  // 知识空间描述
-	SpaceId     *string `json:"space_id,omitempty"`     // 知识空间id
-	SpaceType   *string `json:"space_type,omitempty"`   // 表示知识空间类型（团队空间 或 个人空间）
-	Visibility  *string `json:"visibility,omitempty"`   // 表示知识空间可见性（公开空间 或 私有空间）
+	Name *string `json:"name,omitempty"` // 知识空间名称
+
+	Description *string `json:"description,omitempty"` // 知识空间描述
+
+	SpaceId *string `json:"space_id,omitempty"` // 知识空间id
+
+	SpaceType *string `json:"space_type,omitempty"` // 表示知识空间类型（团队空间 或 个人空间）
+
+	Visibility *string `json:"visibility,omitempty"` // 表示知识空间可见性（公开空间 或 私有空间）
+
 	OpenSharing *string `json:"open_sharing,omitempty"` // 表示知识空间的分享状态
 }
 
 type SpaceBuilder struct {
-	name            string // 知识空间名称
-	nameFlag        bool
+	name     string // 知识空间名称
+	nameFlag bool
+
 	description     string // 知识空间描述
 	descriptionFlag bool
-	spaceId         string // 知识空间id
-	spaceIdFlag     bool
-	spaceType       string // 表示知识空间类型（团队空间 或 个人空间）
-	spaceTypeFlag   bool
-	visibility      string // 表示知识空间可见性（公开空间 或 私有空间）
-	visibilityFlag  bool
+
+	spaceId     string // 知识空间id
+	spaceIdFlag bool
+
+	spaceType     string // 表示知识空间类型（团队空间 或 个人空间）
+	spaceTypeFlag bool
+
+	visibility     string // 表示知识空间可见性（公开空间 或 私有空间）
+	visibilityFlag bool
+
 	openSharing     string // 表示知识空间的分享状态
 	openSharingFlag bool
 }
@@ -939,13 +1015,15 @@ func (builder *SpaceBuilder) Build() *Space {
 }
 
 type TaskResult struct {
-	TaskId     *string       `json:"task_id,omitempty"`     // 任务id
+	TaskId *string `json:"task_id,omitempty"` // 任务id
+
 	MoveResult []*MoveResult `json:"move_result,omitempty"` // [移动云空间文档至知识空间](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/wiki-v2/space-node/move_docs_to_wiki)任务结果
 }
 
 type TaskResultBuilder struct {
-	taskId         string // 任务id
-	taskIdFlag     bool
+	taskId     string // 任务id
+	taskIdFlag bool
+
 	moveResult     []*MoveResult // [移动云空间文档至知识空间](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/wiki-v2/space-node/move_docs_to_wiki)任务结果
 	moveResultFlag bool
 }
@@ -1199,9 +1277,11 @@ type ListSpaceReq struct {
 }
 
 type ListSpaceRespData struct {
-	Items     []*Space `json:"items,omitempty"`      // 数据列表
-	PageToken *string  `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*Space `json:"items,omitempty"` // 数据列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListSpaceResp struct {
@@ -1391,9 +1471,11 @@ type ListSpaceMemberReq struct {
 }
 
 type ListSpaceMemberRespData struct {
-	Members   []*Member `json:"members,omitempty"`    // 空间成员列表
-	PageToken *string   `json:"page_token,omitempty"` // 分页标记
-	HasMore   *bool     `json:"has_more,omitempty"`   // 是否有下一页
+	Members []*Member `json:"members,omitempty"` // 空间成员列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
 }
 
 type ListSpaceMemberResp struct {
@@ -1409,10 +1491,12 @@ func (resp *ListSpaceMemberResp) Success() bool {
 type CopySpaceNodeReqBodyBuilder struct {
 	targetParentToken     string // 目标父节点token
 	targetParentTokenFlag bool
-	targetSpaceId         string // 目标知识空间id
-	targetSpaceIdFlag     bool
-	title                 string // 复制后的新标题。如果填空，则新标题为空。如果不填，则使用原节点标题。
-	titleFlag             bool
+
+	targetSpaceId     string // 目标知识空间id
+	targetSpaceIdFlag bool
+
+	title     string // 复制后的新标题。如果填空，则新标题为空。如果不填，则使用原节点标题。
+	titleFlag bool
 }
 
 func NewCopySpaceNodeReqBodyBuilder() *CopySpaceNodeReqBodyBuilder {
@@ -1562,8 +1646,10 @@ func (builder *CopySpaceNodeReqBuilder) Build() *CopySpaceNodeReq {
 
 type CopySpaceNodeReqBody struct {
 	TargetParentToken *string `json:"target_parent_token,omitempty"` // 目标父节点token
-	TargetSpaceId     *string `json:"target_space_id,omitempty"`     // 目标知识空间id
-	Title             *string `json:"title,omitempty"`               // 复制后的新标题。如果填空，则新标题为空。如果不填，则使用原节点标题。
+
+	TargetSpaceId *string `json:"target_space_id,omitempty"` // 目标知识空间id
+
+	Title *string `json:"title,omitempty"` // 复制后的新标题。如果填空，则新标题为空。如果不填，则使用原节点标题。
 }
 
 type CopySpaceNodeReq struct {
@@ -1708,9 +1794,11 @@ type ListSpaceNodeReq struct {
 }
 
 type ListSpaceNodeRespData struct {
-	Items     []*Node `json:"items,omitempty"`      // 数据列表
+	Items []*Node `json:"items,omitempty"` // 数据列表
+
 	PageToken *string `json:"page_token,omitempty"` // 分页Token
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
 }
 
 type ListSpaceNodeResp struct {
@@ -1726,8 +1814,9 @@ func (resp *ListSpaceNodeResp) Success() bool {
 type MoveSpaceNodeReqBodyBuilder struct {
 	targetParentToken     string // 移动到的父节点token
 	targetParentTokenFlag bool
-	targetSpaceId         string // 移动到的知识空间ID
-	targetSpaceIdFlag     bool
+
+	targetSpaceId     string // 移动到的知识空间ID
+	targetSpaceIdFlag bool
 }
 
 func NewMoveSpaceNodeReqBodyBuilder() *MoveSpaceNodeReqBodyBuilder {
@@ -1851,7 +1940,8 @@ func (builder *MoveSpaceNodeReqBuilder) Build() *MoveSpaceNodeReq {
 
 type MoveSpaceNodeReqBody struct {
 	TargetParentToken *string `json:"target_parent_token,omitempty"` // 移动到的父节点token
-	TargetSpaceId     *string `json:"target_space_id,omitempty"`     // 移动到的知识空间ID
+
+	TargetSpaceId *string `json:"target_space_id,omitempty"` // 移动到的知识空间ID
 }
 
 type MoveSpaceNodeReq struct {
@@ -1876,12 +1966,15 @@ func (resp *MoveSpaceNodeResp) Success() bool {
 type MoveDocsToWikiSpaceNodeReqBodyBuilder struct {
 	parentWikiToken     string // 节点的父亲token。;;传空或不传时将移动为知识空间一级节点。
 	parentWikiTokenFlag bool
-	objType             string // 文档类型
-	objTypeFlag         bool
-	objToken            string // 文档token
-	objTokenFlag        bool
-	apply               bool // 没有权限时，是否申请移动文档。;;如果申请移动，文档将在处理人同意时自动移动至指定位置。
-	applyFlag           bool
+
+	objType     string // 文档类型
+	objTypeFlag bool
+
+	objToken     string // 文档token
+	objTokenFlag bool
+
+	apply     bool // 没有权限时，是否申请移动文档。;;如果申请移动，文档将在处理人同意时自动移动至指定位置。
+	applyFlag bool
 }
 
 func NewMoveDocsToWikiSpaceNodeReqBodyBuilder() *MoveDocsToWikiSpaceNodeReqBodyBuilder {
@@ -2049,9 +2142,12 @@ func (builder *MoveDocsToWikiSpaceNodeReqBuilder) Build() *MoveDocsToWikiSpaceNo
 
 type MoveDocsToWikiSpaceNodeReqBody struct {
 	ParentWikiToken *string `json:"parent_wiki_token,omitempty"` // 节点的父亲token。;;传空或不传时将移动为知识空间一级节点。
-	ObjType         *string `json:"obj_type,omitempty"`          // 文档类型
-	ObjToken        *string `json:"obj_token,omitempty"`         // 文档token
-	Apply           *bool   `json:"apply,omitempty"`             // 没有权限时，是否申请移动文档。;;如果申请移动，文档将在处理人同意时自动移动至指定位置。
+
+	ObjType *string `json:"obj_type,omitempty"` // 文档类型
+
+	ObjToken *string `json:"obj_token,omitempty"` // 文档token
+
+	Apply *bool `json:"apply,omitempty"` // 没有权限时，是否申请移动文档。;;如果申请移动，文档将在处理人同意时自动移动至指定位置。
 }
 
 type MoveDocsToWikiSpaceNodeReq struct {
@@ -2061,8 +2157,10 @@ type MoveDocsToWikiSpaceNodeReq struct {
 
 type MoveDocsToWikiSpaceNodeRespData struct {
 	WikiToken *string `json:"wiki_token,omitempty"` // 移动后的知识库token
-	TaskId    *string `json:"task_id,omitempty"`    // 任务id
-	Applied   *bool   `json:"applied,omitempty"`    // 是否提交了文档迁入申请
+
+	TaskId *string `json:"task_id,omitempty"` // 任务id
+
+	Applied *bool `json:"applied,omitempty"` // 是否提交了文档迁入申请
 }
 
 type MoveDocsToWikiSpaceNodeResp struct {

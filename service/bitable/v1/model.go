@@ -220,14 +220,16 @@ const (
 
 type AllowedEditModes struct {
 	Manual *bool `json:"manual,omitempty"` // 是否允许手动录入
-	Scan   *bool `json:"scan,omitempty"`   // 是否允许移动端录入
+
+	Scan *bool `json:"scan,omitempty"` // 是否允许移动端录入
 }
 
 type AllowedEditModesBuilder struct {
 	manual     bool // 是否允许手动录入
 	manualFlag bool
-	scan       bool // 是否允许移动端录入
-	scanFlag   bool
+
+	scan     bool // 是否允许移动端录入
+	scanFlag bool
 }
 
 func NewAllowedEditModesBuilder() *AllowedEditModesBuilder {
@@ -267,30 +269,42 @@ func (builder *AllowedEditModesBuilder) Build() *AllowedEditModes {
 }
 
 type App struct {
-	AppToken       *string `json:"app_token,omitempty"`        // 多维表格 app token
-	Name           *string `json:"name,omitempty"`             // 多维表格 App 名字
-	Revision       *int    `json:"revision,omitempty"`         // 多维表格 App 版本号
-	FolderToken    *string `json:"folder_token,omitempty"`     // 多维表格 App 归属文件夹
-	Url            *string `json:"url,omitempty"`              // 多维表格 App URL
+	AppToken *string `json:"app_token,omitempty"` // 多维表格 app token
+
+	Name *string `json:"name,omitempty"` // 多维表格 App 名字
+
+	Revision *int `json:"revision,omitempty"` // 多维表格 App 版本号
+
+	FolderToken *string `json:"folder_token,omitempty"` // 多维表格 App 归属文件夹
+
+	Url *string `json:"url,omitempty"` // 多维表格 App URL
+
 	DefaultTableId *string `json:"default_table_id,omitempty"` // 默认的表格id
-	TimeZone       *string `json:"time_zone,omitempty"`        // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
+
+	TimeZone *string `json:"time_zone,omitempty"` // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
 }
 
 type AppBuilder struct {
-	appToken           string // 多维表格 app token
-	appTokenFlag       bool
-	name               string // 多维表格 App 名字
-	nameFlag           bool
-	revision           int // 多维表格 App 版本号
-	revisionFlag       bool
-	folderToken        string // 多维表格 App 归属文件夹
-	folderTokenFlag    bool
-	url                string // 多维表格 App URL
-	urlFlag            bool
+	appToken     string // 多维表格 app token
+	appTokenFlag bool
+
+	name     string // 多维表格 App 名字
+	nameFlag bool
+
+	revision     int // 多维表格 App 版本号
+	revisionFlag bool
+
+	folderToken     string // 多维表格 App 归属文件夹
+	folderTokenFlag bool
+
+	url     string // 多维表格 App URL
+	urlFlag bool
+
 	defaultTableId     string // 默认的表格id
 	defaultTableIdFlag bool
-	timeZone           string // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
-	timeZoneFlag       bool
+
+	timeZone     string // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
+	timeZoneFlag bool
 }
 
 func NewAppBuilder() *AppBuilder {
@@ -396,14 +410,16 @@ func (builder *AppBuilder) Build() *App {
 
 type AppDashboard struct {
 	BlockId *string `json:"block_id,omitempty"` // 仪表盘 ID
-	Name    *string `json:"name,omitempty"`     // 仪表盘名字
+
+	Name *string `json:"name,omitempty"` // 仪表盘名字
 }
 
 type AppDashboardBuilder struct {
 	blockId     string // 仪表盘 ID
 	blockIdFlag bool
-	name        string // 仪表盘名字
-	nameFlag    bool
+
+	name     string // 仪表盘名字
+	nameFlag bool
 }
 
 func NewAppDashboardBuilder() *AppDashboardBuilder {
@@ -443,13 +459,15 @@ func (builder *AppDashboardBuilder) Build() *AppDashboard {
 }
 
 type AppFieldPropertyAutoSerial struct {
-	Type    *string                              `json:"type,omitempty"`    // 自动编号类型
+	Type *string `json:"type,omitempty"` // 自动编号类型
+
 	Options []*AppFieldPropertyAutoSerialOptions `json:"options,omitempty"` // 自动编号规则列表
 }
 
 type AppFieldPropertyAutoSerialBuilder struct {
-	type_       string // 自动编号类型
-	typeFlag    bool
+	type_    string // 自动编号类型
+	typeFlag bool
+
 	options     []*AppFieldPropertyAutoSerialOptions // 自动编号规则列表
 	optionsFlag bool
 }
@@ -490,13 +508,15 @@ func (builder *AppFieldPropertyAutoSerialBuilder) Build() *AppFieldPropertyAutoS
 }
 
 type AppFieldPropertyAutoSerialOptions struct {
-	Type  *string `json:"type,omitempty"`  // 自动编号的可选规则项类型
+	Type *string `json:"type,omitempty"` // 自动编号的可选规则项类型
+
 	Value *string `json:"value,omitempty"` // 与自动编号的可选规则项类型相对应的取值
 }
 
 type AppFieldPropertyAutoSerialOptionsBuilder struct {
-	type_     string // 自动编号的可选规则项类型
-	typeFlag  bool
+	type_    string // 自动编号的可选规则项类型
+	typeFlag bool
+
 	value     string // 与自动编号的可选规则项类型相对应的取值
 	valueFlag bool
 }
@@ -570,19 +590,25 @@ func (builder *AppFieldPropertyLocationBuilder) Build() *AppFieldPropertyLocatio
 }
 
 type AppRole struct {
-	RoleName   *string             `json:"role_name,omitempty"`   // 自定义角色的名字
-	RoleId     *string             `json:"role_id,omitempty"`     // 自定义角色的id
+	RoleName *string `json:"role_name,omitempty"` // 自定义角色的名字
+
+	RoleId *string `json:"role_id,omitempty"` // 自定义角色的id
+
 	TableRoles []*AppRoleTableRole `json:"table_roles,omitempty"` // 数据表角色
+
 	BlockRoles []*AppRoleBlockRole `json:"block_roles,omitempty"` // block权限
 }
 
 type AppRoleBuilder struct {
-	roleName       string // 自定义角色的名字
-	roleNameFlag   bool
-	roleId         string // 自定义角色的id
-	roleIdFlag     bool
+	roleName     string // 自定义角色的名字
+	roleNameFlag bool
+
+	roleId     string // 自定义角色的id
+	roleIdFlag bool
+
 	tableRoles     []*AppRoleTableRole // 数据表角色
 	tableRolesFlag bool
+
 	blockRoles     []*AppRoleBlockRole // block权限
 	blockRolesFlag bool
 }
@@ -648,16 +674,20 @@ func (builder *AppRoleBuilder) Build() *AppRole {
 }
 
 type AppRoleBlockRole struct {
-	BlockId   *string `json:"block_id,omitempty"`   // Block 的 ID，例如列出仪表盘接口中的仪表盘 block  id
+	BlockId *string `json:"block_id,omitempty"` // Block 的 ID，例如列出仪表盘接口中的仪表盘 block  id
+
 	BlockType *string `json:"block_type,omitempty"` // Block类型
-	BlockPerm *int    `json:"block_perm,omitempty"` // Block权限
+
+	BlockPerm *int `json:"block_perm,omitempty"` // Block权限
 }
 
 type AppRoleBlockRoleBuilder struct {
-	blockId       string // Block 的 ID，例如列出仪表盘接口中的仪表盘 block  id
-	blockIdFlag   bool
+	blockId     string // Block 的 ID，例如列出仪表盘接口中的仪表盘 block  id
+	blockIdFlag bool
+
 	blockType     string // Block类型
 	blockTypeFlag bool
+
 	blockPerm     int // Block权限
 	blockPermFlag bool
 }
@@ -712,39 +742,57 @@ func (builder *AppRoleBlockRoleBuilder) Build() *AppRoleBlockRole {
 }
 
 type AppRoleMember struct {
-	MemberId         *string `json:"member_id,omitempty"`          // 协作者id
-	OpenId           *string `json:"open_id,omitempty"`            // 用户的 open_id
-	UnionId          *string `json:"union_id,omitempty"`           // 用户的 union_id
-	UserId           *string `json:"user_id,omitempty"`            // 用户的 user_id
-	ChatId           *string `json:"chat_id,omitempty"`            // 群聊的 chat_id
-	DepartmentId     *string `json:"department_id,omitempty"`      // 部门的 department_id
+	MemberId *string `json:"member_id,omitempty"` // 协作者id
+
+	OpenId *string `json:"open_id,omitempty"` // 用户的 open_id
+
+	UnionId *string `json:"union_id,omitempty"` // 用户的 union_id
+
+	UserId *string `json:"user_id,omitempty"` // 用户的 user_id
+
+	ChatId *string `json:"chat_id,omitempty"` // 群聊的 chat_id
+
+	DepartmentId *string `json:"department_id,omitempty"` // 部门的 department_id
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` // 部门的 open_department_id
-	MemberName       *string `json:"member_name,omitempty"`        // 协作者名字
-	MemberEnName     *string `json:"member_en_name,omitempty"`     // 协作者英文名
-	MemberType       *string `json:"member_type,omitempty"`        // 协作者类型
+
+	MemberName *string `json:"member_name,omitempty"` // 协作者名字
+
+	MemberEnName *string `json:"member_en_name,omitempty"` // 协作者英文名
+
+	MemberType *string `json:"member_type,omitempty"` // 协作者类型
 }
 
 type AppRoleMemberBuilder struct {
-	memberId             string // 协作者id
-	memberIdFlag         bool
-	openId               string // 用户的 open_id
-	openIdFlag           bool
-	unionId              string // 用户的 union_id
-	unionIdFlag          bool
-	userId               string // 用户的 user_id
-	userIdFlag           bool
-	chatId               string // 群聊的 chat_id
-	chatIdFlag           bool
-	departmentId         string // 部门的 department_id
-	departmentIdFlag     bool
+	memberId     string // 协作者id
+	memberIdFlag bool
+
+	openId     string // 用户的 open_id
+	openIdFlag bool
+
+	unionId     string // 用户的 union_id
+	unionIdFlag bool
+
+	userId     string // 用户的 user_id
+	userIdFlag bool
+
+	chatId     string // 群聊的 chat_id
+	chatIdFlag bool
+
+	departmentId     string // 部门的 department_id
+	departmentIdFlag bool
+
 	openDepartmentId     string // 部门的 open_department_id
 	openDepartmentIdFlag bool
-	memberName           string // 协作者名字
-	memberNameFlag       bool
-	memberEnName         string // 协作者英文名
-	memberEnNameFlag     bool
-	memberType           string // 协作者类型
-	memberTypeFlag       bool
+
+	memberName     string // 协作者名字
+	memberNameFlag bool
+
+	memberEnName     string // 协作者英文名
+	memberEnNameFlag bool
+
+	memberType     string // 协作者类型
+	memberTypeFlag bool
 }
 
 func NewAppRoleMemberBuilder() *AppRoleMemberBuilder {
@@ -889,14 +937,16 @@ func (builder *AppRoleMemberBuilder) Build() *AppRoleMember {
 
 type AppRoleMemberId struct {
 	Type *string `json:"type,omitempty"` // 协作者 ID 类型
-	Id   *string `json:"id,omitempty"`   // 协作者 ID
+
+	Id *string `json:"id,omitempty"` // 协作者 ID
 }
 
 type AppRoleMemberIdBuilder struct {
 	type_    string // 协作者 ID 类型
 	typeFlag bool
-	id       string // 协作者 ID
-	idFlag   bool
+
+	id     string // 协作者 ID
+	idFlag bool
 }
 
 func NewAppRoleMemberIdBuilder() *AppRoleMemberIdBuilder {
@@ -936,28 +986,40 @@ func (builder *AppRoleMemberIdBuilder) Build() *AppRoleMemberId {
 }
 
 type AppRoleTableRole struct {
-	TablePerm         *int                     `json:"table_perm,omitempty"`          // 数据表权限，`协作者可编辑自己的记录`和`可编辑指定字段`是`可编辑记录`的特殊情况，可通过指定`rec_rule`或`field_perm`参数实现相同的效果
-	TableName         *string                  `json:"table_name,omitempty"`          // 数据表名
-	TableId           *string                  `json:"table_id,omitempty"`            // 数据表ID
-	RecRule           *AppRoleTableRoleRecRule `json:"rec_rule,omitempty"`            // 记录筛选条件，在table_perm为1或2时有意义，用于指定可编辑或可阅读某些记录
-	FieldPerm         map[string]int           `json:"field_perm,omitempty"`          // 字段权限，仅在table_perm为2时有意义，设置字段可编辑或可阅读。类型为 map，key 是字段名，value 是字段权限;;**value 枚举值有：**;- `1`：可阅读;- `2`：可编辑
-	AllowAddRecord    *bool                    `json:"allow_add_record,omitempty"`    // 新增记录权限，仅在table_perm为2时有意义，用于设置记录是否可以新增。
-	AllowDeleteRecord *bool                    `json:"allow_delete_record,omitempty"` // 删除记录权限，仅在table_perm为2时有意义，用于设置记录是否可以删除
+	TablePerm *int `json:"table_perm,omitempty"` // 数据表权限，`协作者可编辑自己的记录`和`可编辑指定字段`是`可编辑记录`的特殊情况，可通过指定`rec_rule`或`field_perm`参数实现相同的效果
+
+	TableName *string `json:"table_name,omitempty"` // 数据表名
+
+	TableId *string `json:"table_id,omitempty"` // 数据表ID
+
+	RecRule *AppRoleTableRoleRecRule `json:"rec_rule,omitempty"` // 记录筛选条件，在table_perm为1或2时有意义，用于指定可编辑或可阅读某些记录
+
+	FieldPerm map[string]int `json:"field_perm,omitempty"` // 字段权限，仅在table_perm为2时有意义，设置字段可编辑或可阅读。类型为 map，key 是字段名，value 是字段权限;;**value 枚举值有：**;- `1`：可阅读;- `2`：可编辑
+
+	AllowAddRecord *bool `json:"allow_add_record,omitempty"` // 新增记录权限，仅在table_perm为2时有意义，用于设置记录是否可以新增。
+
+	AllowDeleteRecord *bool `json:"allow_delete_record,omitempty"` // 删除记录权限，仅在table_perm为2时有意义，用于设置记录是否可以删除
 }
 
 type AppRoleTableRoleBuilder struct {
-	tablePerm             int // 数据表权限，`协作者可编辑自己的记录`和`可编辑指定字段`是`可编辑记录`的特殊情况，可通过指定`rec_rule`或`field_perm`参数实现相同的效果
-	tablePermFlag         bool
-	tableName             string // 数据表名
-	tableNameFlag         bool
-	tableId               string // 数据表ID
-	tableIdFlag           bool
-	recRule               *AppRoleTableRoleRecRule // 记录筛选条件，在table_perm为1或2时有意义，用于指定可编辑或可阅读某些记录
-	recRuleFlag           bool
-	fieldPerm             map[string]int // 字段权限，仅在table_perm为2时有意义，设置字段可编辑或可阅读。类型为 map，key 是字段名，value 是字段权限;;**value 枚举值有：**;- `1`：可阅读;- `2`：可编辑
-	fieldPermFlag         bool
-	allowAddRecord        bool // 新增记录权限，仅在table_perm为2时有意义，用于设置记录是否可以新增。
-	allowAddRecordFlag    bool
+	tablePerm     int // 数据表权限，`协作者可编辑自己的记录`和`可编辑指定字段`是`可编辑记录`的特殊情况，可通过指定`rec_rule`或`field_perm`参数实现相同的效果
+	tablePermFlag bool
+
+	tableName     string // 数据表名
+	tableNameFlag bool
+
+	tableId     string // 数据表ID
+	tableIdFlag bool
+
+	recRule     *AppRoleTableRoleRecRule // 记录筛选条件，在table_perm为1或2时有意义，用于指定可编辑或可阅读某些记录
+	recRuleFlag bool
+
+	fieldPerm     map[string]int // 字段权限，仅在table_perm为2时有意义，设置字段可编辑或可阅读。类型为 map，key 是字段名，value 是字段权限;;**value 枚举值有：**;- `1`：可阅读;- `2`：可编辑
+	fieldPermFlag bool
+
+	allowAddRecord     bool // 新增记录权限，仅在table_perm为2时有意义，用于设置记录是否可以新增。
+	allowAddRecordFlag bool
+
 	allowDeleteRecord     bool // 删除记录权限，仅在table_perm为2时有意义，用于设置记录是否可以删除
 	allowDeleteRecordFlag bool
 }
@@ -1065,18 +1127,22 @@ type AppRoleTableRoleFieldPerm struct {
 }
 
 type AppRoleTableRoleRecRule struct {
-	Conditions  []*AppRoleTableRoleRecRuleCondition `json:"conditions,omitempty"`  // 记录筛选条件
-	Conjunction *string                             `json:"conjunction,omitempty"` // 多个筛选条件的关系
-	OtherPerm   *int                                `json:"other_perm,omitempty"`  // 其他记录权限，仅在table_perm为2时有意义
+	Conditions []*AppRoleTableRoleRecRuleCondition `json:"conditions,omitempty"` // 记录筛选条件
+
+	Conjunction *string `json:"conjunction,omitempty"` // 多个筛选条件的关系
+
+	OtherPerm *int `json:"other_perm,omitempty"` // 其他记录权限，仅在table_perm为2时有意义
 }
 
 type AppRoleTableRoleRecRuleBuilder struct {
-	conditions      []*AppRoleTableRoleRecRuleCondition // 记录筛选条件
-	conditionsFlag  bool
+	conditions     []*AppRoleTableRoleRecRuleCondition // 记录筛选条件
+	conditionsFlag bool
+
 	conjunction     string // 多个筛选条件的关系
 	conjunctionFlag bool
-	otherPerm       int // 其他记录权限，仅在table_perm为2时有意义
-	otherPermFlag   bool
+
+	otherPerm     int // 其他记录权限，仅在table_perm为2时有意义
+	otherPermFlag bool
 }
 
 func NewAppRoleTableRoleRecRuleBuilder() *AppRoleTableRoleRecRuleBuilder {
@@ -1128,19 +1194,25 @@ func (builder *AppRoleTableRoleRecRuleBuilder) Build() *AppRoleTableRoleRecRule 
 }
 
 type AppRoleTableRoleRecRuleCondition struct {
-	FieldName *string  `json:"field_name,omitempty"` // 字段名，记录筛选条件是`创建人包含访问者本人`时，此参数值为""
-	Operator  *string  `json:"operator,omitempty"`   // 运算符
-	Value     []string `json:"value,omitempty"`      // 单选或多选字段的选项id
-	FieldType *int     `json:"field_type,omitempty"` // 字段类型
+	FieldName *string `json:"field_name,omitempty"` // 字段名，记录筛选条件是`创建人包含访问者本人`时，此参数值为""
+
+	Operator *string `json:"operator,omitempty"` // 运算符
+
+	Value []string `json:"value,omitempty"` // 单选或多选字段的选项id
+
+	FieldType *int `json:"field_type,omitempty"` // 字段类型
 }
 
 type AppRoleTableRoleRecRuleConditionBuilder struct {
 	fieldName     string // 字段名，记录筛选条件是`创建人包含访问者本人`时，此参数值为""
 	fieldNameFlag bool
-	operator      string // 运算符
-	operatorFlag  bool
-	value         []string // 单选或多选字段的选项id
-	valueFlag     bool
+
+	operator     string // 运算符
+	operatorFlag bool
+
+	value     []string // 单选或多选字段的选项id
+	valueFlag bool
+
 	fieldType     int // 字段类型
 	fieldTypeFlag bool
 }
@@ -1207,18 +1279,22 @@ func (builder *AppRoleTableRoleRecRuleConditionBuilder) Build() *AppRoleTableRol
 }
 
 type AppTable struct {
-	TableId  *string `json:"table_id,omitempty"` // 数据表 id
-	Revision *int    `json:"revision,omitempty"` // 数据表的版本号
-	Name     *string `json:"name,omitempty"`     // 数据表名字
+	TableId *string `json:"table_id,omitempty"` // 数据表 id
+
+	Revision *int `json:"revision,omitempty"` // 数据表的版本号
+
+	Name *string `json:"name,omitempty"` // 数据表名字
 }
 
 type AppTableBuilder struct {
-	tableId      string // 数据表 id
-	tableIdFlag  bool
+	tableId     string // 数据表 id
+	tableIdFlag bool
+
 	revision     int // 数据表的版本号
 	revisionFlag bool
-	name         string // 数据表名字
-	nameFlag     bool
+
+	name     string // 数据表名字
+	nameFlag bool
 }
 
 func NewAppTableBuilder() *AppTableBuilder {
@@ -1271,25 +1347,35 @@ func (builder *AppTableBuilder) Build() *AppTable {
 }
 
 type AppTableCreateHeader struct {
-	FieldName   *string                   `json:"field_name,omitempty"`  // 字段名
-	Type        *int                      `json:"type,omitempty"`        // 字段类型
-	UiType      *string                   `json:"ui_type,omitempty"`     // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
-	FieldId     *string                   `json:"field_id,omitempty"`    // 字段Id
-	Property    *AppTableFieldProperty    `json:"property,omitempty"`    // 字段属性
+	FieldName *string `json:"field_name,omitempty"` // 字段名
+
+	Type *int `json:"type,omitempty"` // 字段类型
+
+	UiType *string `json:"ui_type,omitempty"` // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+
+	FieldId *string `json:"field_id,omitempty"` // 字段Id
+
+	Property *AppTableFieldProperty `json:"property,omitempty"` // 字段属性
+
 	Description *AppTableFieldDescription `json:"description,omitempty"` // 字段的描述
 }
 
 type AppTableCreateHeaderBuilder struct {
-	fieldName       string // 字段名
-	fieldNameFlag   bool
-	type_           int // 字段类型
-	typeFlag        bool
-	uiType          string // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
-	uiTypeFlag      bool
-	fieldId         string // 字段Id
-	fieldIdFlag     bool
-	property        *AppTableFieldProperty // 字段属性
-	propertyFlag    bool
+	fieldName     string // 字段名
+	fieldNameFlag bool
+
+	type_    int // 字段类型
+	typeFlag bool
+
+	uiType     string // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+	uiTypeFlag bool
+
+	fieldId     string // 字段Id
+	fieldIdFlag bool
+
+	property     *AppTableFieldProperty // 字段属性
+	propertyFlag bool
+
 	description     *AppTableFieldDescription // 字段的描述
 	descriptionFlag bool
 }
@@ -1381,33 +1467,47 @@ func (builder *AppTableCreateHeaderBuilder) Build() *AppTableCreateHeader {
 }
 
 type AppTableField struct {
-	FieldName   *string                   `json:"field_name,omitempty"`  // 多维表格字段名
-	Type        *int                      `json:"type,omitempty"`        // 多维表格字段类型
-	Property    *AppTableFieldProperty    `json:"property,omitempty"`    // 字段属性，具体参考：[字段编辑指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/bitable-v1/app-table-field/guide)
+	FieldName *string `json:"field_name,omitempty"` // 多维表格字段名
+
+	Type *int `json:"type,omitempty"` // 多维表格字段类型
+
+	Property *AppTableFieldProperty `json:"property,omitempty"` // 字段属性，具体参考：[字段编辑指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/bitable-v1/app-table-field/guide)
+
 	Description *AppTableFieldDescription `json:"description,omitempty"` // 字段的描述
-	IsPrimary   *bool                     `json:"is_primary,omitempty"`  // 是否是索引列
-	FieldId     *string                   `json:"field_id,omitempty"`    // 多维表格字段 id
-	UiType      *string                   `json:"ui_type,omitempty"`     // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
-	IsHidden    *bool                     `json:"is_hidden,omitempty"`   // 是否是隐藏字段
+
+	IsPrimary *bool `json:"is_primary,omitempty"` // 是否是索引列
+
+	FieldId *string `json:"field_id,omitempty"` // 多维表格字段 id
+
+	UiType *string `json:"ui_type,omitempty"` // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+
+	IsHidden *bool `json:"is_hidden,omitempty"` // 是否是隐藏字段
 }
 
 type AppTableFieldBuilder struct {
-	fieldName       string // 多维表格字段名
-	fieldNameFlag   bool
-	type_           int // 多维表格字段类型
-	typeFlag        bool
-	property        *AppTableFieldProperty // 字段属性，具体参考：[字段编辑指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/bitable-v1/app-table-field/guide)
-	propertyFlag    bool
+	fieldName     string // 多维表格字段名
+	fieldNameFlag bool
+
+	type_    int // 多维表格字段类型
+	typeFlag bool
+
+	property     *AppTableFieldProperty // 字段属性，具体参考：[字段编辑指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/bitable-v1/app-table-field/guide)
+	propertyFlag bool
+
 	description     *AppTableFieldDescription // 字段的描述
 	descriptionFlag bool
-	isPrimary       bool // 是否是索引列
-	isPrimaryFlag   bool
-	fieldId         string // 多维表格字段 id
-	fieldIdFlag     bool
-	uiType          string // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
-	uiTypeFlag      bool
-	isHidden        bool // 是否是隐藏字段
-	isHiddenFlag    bool
+
+	isPrimary     bool // 是否是索引列
+	isPrimaryFlag bool
+
+	fieldId     string // 多维表格字段 id
+	fieldIdFlag bool
+
+	uiType     string // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+	uiTypeFlag bool
+
+	isHidden     bool // 是否是隐藏字段
+	isHiddenFlag bool
 }
 
 func NewAppTableFieldBuilder() *AppTableFieldBuilder {
@@ -1523,15 +1623,17 @@ func (builder *AppTableFieldBuilder) Build() *AppTableField {
 }
 
 type AppTableFieldDescription struct {
-	DisableSync *bool   `json:"disable_sync,omitempty"` // 是否禁止同步，如果为true，表示禁止同步该描述内容到表单的问题描述（只在新增、修改字段时生效）
-	Text        *string `json:"text,omitempty"`         // 字段描述内容
+	DisableSync *bool `json:"disable_sync,omitempty"` // 是否禁止同步，如果为true，表示禁止同步该描述内容到表单的问题描述（只在新增、修改字段时生效）
+
+	Text *string `json:"text,omitempty"` // 字段描述内容
 }
 
 type AppTableFieldDescriptionBuilder struct {
 	disableSync     bool // 是否禁止同步，如果为true，表示禁止同步该描述内容到表单的问题描述（只在新增、修改字段时生效）
 	disableSyncFlag bool
-	text            string // 字段描述内容
-	textFlag        bool
+
+	text     string // 字段描述内容
+	textFlag bool
 }
 
 func NewAppTableFieldDescriptionBuilder() *AppTableFieldDescriptionBuilder {
@@ -1571,60 +1673,92 @@ func (builder *AppTableFieldDescriptionBuilder) Build() *AppTableFieldDescriptio
 }
 
 type AppTableFieldProperty struct {
-	Options           []*AppTableFieldPropertyOption `json:"options,omitempty"`            // 单选、多选字段的选项信息
-	Formatter         *string                        `json:"formatter,omitempty"`          // 数字、公式字段的显示格式
-	DateFormatter     *string                        `json:"date_formatter,omitempty"`     // 日期、创建时间、最后更新时间字段的显示格式
-	AutoFill          *bool                          `json:"auto_fill,omitempty"`          // 日期字段中新纪录自动填写创建时间
-	Multiple          *bool                          `json:"multiple,omitempty"`           // 人员字段中允许添加多个成员，单向关联、双向关联中允许添加多个记录
-	TableId           *string                        `json:"table_id,omitempty"`           // 单向关联、双向关联字段中关联的数据表的id
-	TableName         *string                        `json:"table_name,omitempty"`         // 单向关联、双向关联字段中关联的数据表的名字
-	BackFieldName     *string                        `json:"back_field_name,omitempty"`    // 双向关联字段中关联的数据表中对应的双向关联字段的名字
-	AutoSerial        *AppFieldPropertyAutoSerial    `json:"auto_serial,omitempty"`        // 自动编号类型
-	Location          *AppFieldPropertyLocation      `json:"location,omitempty"`           // 地理位置输入方式
-	FormulaExpression *string                        `json:"formula_expression,omitempty"` // 公式字段的表达式
-	AllowedEditModes  *AllowedEditModes              `json:"allowed_edit_modes,omitempty"` // 字段支持的编辑模式
-	Min               *float64                       `json:"min,omitempty"`                // 进度、评分等字段的数据范围最小值
-	Max               *float64                       `json:"max,omitempty"`                // 进度、评分等字段的数据范围最大值
-	RangeCustomize    *bool                          `json:"range_customize,omitempty"`    // 进度等字段是否支持自定义范围
-	CurrencyCode      *string                        `json:"currency_code,omitempty"`      // 货币币种
-	Rating            *Rating                        `json:"rating,omitempty"`             // 评分字段的相关设置
+	Options []*AppTableFieldPropertyOption `json:"options,omitempty"` // 单选、多选字段的选项信息
+
+	Formatter *string `json:"formatter,omitempty"` // 数字、公式字段的显示格式
+
+	DateFormatter *string `json:"date_formatter,omitempty"` // 日期、创建时间、最后更新时间字段的显示格式
+
+	AutoFill *bool `json:"auto_fill,omitempty"` // 日期字段中新纪录自动填写创建时间
+
+	Multiple *bool `json:"multiple,omitempty"` // 人员字段中允许添加多个成员，单向关联、双向关联中允许添加多个记录
+
+	TableId *string `json:"table_id,omitempty"` // 单向关联、双向关联字段中关联的数据表的id
+
+	TableName *string `json:"table_name,omitempty"` // 单向关联、双向关联字段中关联的数据表的名字
+
+	BackFieldName *string `json:"back_field_name,omitempty"` // 双向关联字段中关联的数据表中对应的双向关联字段的名字
+
+	AutoSerial *AppFieldPropertyAutoSerial `json:"auto_serial,omitempty"` // 自动编号类型
+
+	Location *AppFieldPropertyLocation `json:"location,omitempty"` // 地理位置输入方式
+
+	FormulaExpression *string `json:"formula_expression,omitempty"` // 公式字段的表达式
+
+	AllowedEditModes *AllowedEditModes `json:"allowed_edit_modes,omitempty"` // 字段支持的编辑模式
+
+	Min *float64 `json:"min,omitempty"` // 进度、评分等字段的数据范围最小值
+
+	Max *float64 `json:"max,omitempty"` // 进度、评分等字段的数据范围最大值
+
+	RangeCustomize *bool `json:"range_customize,omitempty"` // 进度等字段是否支持自定义范围
+
+	CurrencyCode *string `json:"currency_code,omitempty"` // 货币币种
+
+	Rating *Rating `json:"rating,omitempty"` // 评分字段的相关设置
 }
 
 type AppTableFieldPropertyBuilder struct {
-	options               []*AppTableFieldPropertyOption // 单选、多选字段的选项信息
-	optionsFlag           bool
-	formatter             string // 数字、公式字段的显示格式
-	formatterFlag         bool
-	dateFormatter         string // 日期、创建时间、最后更新时间字段的显示格式
-	dateFormatterFlag     bool
-	autoFill              bool // 日期字段中新纪录自动填写创建时间
-	autoFillFlag          bool
-	multiple              bool // 人员字段中允许添加多个成员，单向关联、双向关联中允许添加多个记录
-	multipleFlag          bool
-	tableId               string // 单向关联、双向关联字段中关联的数据表的id
-	tableIdFlag           bool
-	tableName             string // 单向关联、双向关联字段中关联的数据表的名字
-	tableNameFlag         bool
-	backFieldName         string // 双向关联字段中关联的数据表中对应的双向关联字段的名字
-	backFieldNameFlag     bool
-	autoSerial            *AppFieldPropertyAutoSerial // 自动编号类型
-	autoSerialFlag        bool
-	location              *AppFieldPropertyLocation // 地理位置输入方式
-	locationFlag          bool
+	options     []*AppTableFieldPropertyOption // 单选、多选字段的选项信息
+	optionsFlag bool
+
+	formatter     string // 数字、公式字段的显示格式
+	formatterFlag bool
+
+	dateFormatter     string // 日期、创建时间、最后更新时间字段的显示格式
+	dateFormatterFlag bool
+
+	autoFill     bool // 日期字段中新纪录自动填写创建时间
+	autoFillFlag bool
+
+	multiple     bool // 人员字段中允许添加多个成员，单向关联、双向关联中允许添加多个记录
+	multipleFlag bool
+
+	tableId     string // 单向关联、双向关联字段中关联的数据表的id
+	tableIdFlag bool
+
+	tableName     string // 单向关联、双向关联字段中关联的数据表的名字
+	tableNameFlag bool
+
+	backFieldName     string // 双向关联字段中关联的数据表中对应的双向关联字段的名字
+	backFieldNameFlag bool
+
+	autoSerial     *AppFieldPropertyAutoSerial // 自动编号类型
+	autoSerialFlag bool
+
+	location     *AppFieldPropertyLocation // 地理位置输入方式
+	locationFlag bool
+
 	formulaExpression     string // 公式字段的表达式
 	formulaExpressionFlag bool
-	allowedEditModes      *AllowedEditModes // 字段支持的编辑模式
-	allowedEditModesFlag  bool
-	min                   float64 // 进度、评分等字段的数据范围最小值
-	minFlag               bool
-	max                   float64 // 进度、评分等字段的数据范围最大值
-	maxFlag               bool
-	rangeCustomize        bool // 进度等字段是否支持自定义范围
-	rangeCustomizeFlag    bool
-	currencyCode          string // 货币币种
-	currencyCodeFlag      bool
-	rating                *Rating // 评分字段的相关设置
-	ratingFlag            bool
+
+	allowedEditModes     *AllowedEditModes // 字段支持的编辑模式
+	allowedEditModesFlag bool
+
+	min     float64 // 进度、评分等字段的数据范围最小值
+	minFlag bool
+
+	max     float64 // 进度、评分等字段的数据范围最大值
+	maxFlag bool
+
+	rangeCustomize     bool // 进度等字段是否支持自定义范围
+	rangeCustomizeFlag bool
+
+	currencyCode     string // 货币币种
+	currencyCodeFlag bool
+
+	rating     *Rating // 评分字段的相关设置
+	ratingFlag bool
 }
 
 func NewAppTableFieldPropertyBuilder() *AppTableFieldPropertyBuilder {
@@ -1854,16 +1988,20 @@ func (builder *AppTableFieldPropertyBuilder) Build() *AppTableFieldProperty {
 }
 
 type AppTableFieldPropertyOption struct {
-	Name  *string `json:"name,omitempty"`  // 选项名
-	Id    *string `json:"id,omitempty"`    // 选项 ID，创建时不允许指定 ID
-	Color *int    `json:"color,omitempty"` // 选项颜色
+	Name *string `json:"name,omitempty"` // 选项名
+
+	Id *string `json:"id,omitempty"` // 选项 ID，创建时不允许指定 ID
+
+	Color *int `json:"color,omitempty"` // 选项颜色
 }
 
 type AppTableFieldPropertyOptionBuilder struct {
-	name      string // 选项名
-	nameFlag  bool
-	id        string // 选项 ID，创建时不允许指定 ID
-	idFlag    bool
+	name     string // 选项名
+	nameFlag bool
+
+	id     string // 选项 ID，创建时不允许指定 ID
+	idFlag bool
+
 	color     int // 选项颜色
 	colorFlag bool
 }
@@ -1918,33 +2056,47 @@ func (builder *AppTableFieldPropertyOptionBuilder) Build() *AppTableFieldPropert
 }
 
 type AppTableFieldForList struct {
-	FieldName   *string                `json:"field_name,omitempty"`  // 字段名
-	Type        *int                   `json:"type,omitempty"`        // 字段类型
-	Property    *AppTableFieldProperty `json:"property,omitempty"`    // 字段属性
-	Description interface{}            `json:"description,omitempty"` // 字段的描述, text_field_as_array为false时值为字符串，为true则是对象数组
-	IsPrimary   *bool                  `json:"is_primary,omitempty"`  // 是否是索引列
-	FieldId     *string                `json:"field_id,omitempty"`    // 字段Id
-	UiType      *string                `json:"ui_type,omitempty"`     // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
-	IsHidden    *bool                  `json:"is_hidden,omitempty"`   // 是否是隐藏字段
+	FieldName *string `json:"field_name,omitempty"` // 字段名
+
+	Type *int `json:"type,omitempty"` // 字段类型
+
+	Property *AppTableFieldProperty `json:"property,omitempty"` // 字段属性
+
+	Description interface{} `json:"description,omitempty"` // 字段的描述, text_field_as_array为false时值为字符串，为true则是对象数组
+
+	IsPrimary *bool `json:"is_primary,omitempty"` // 是否是索引列
+
+	FieldId *string `json:"field_id,omitempty"` // 字段Id
+
+	UiType *string `json:"ui_type,omitempty"` // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+
+	IsHidden *bool `json:"is_hidden,omitempty"` // 是否是隐藏字段
 }
 
 type AppTableFieldForListBuilder struct {
-	fieldName       string // 字段名
-	fieldNameFlag   bool
-	type_           int // 字段类型
-	typeFlag        bool
-	property        *AppTableFieldProperty // 字段属性
-	propertyFlag    bool
+	fieldName     string // 字段名
+	fieldNameFlag bool
+
+	type_    int // 字段类型
+	typeFlag bool
+
+	property     *AppTableFieldProperty // 字段属性
+	propertyFlag bool
+
 	description     interface{} // 字段的描述, text_field_as_array为false时值为字符串，为true则是对象数组
 	descriptionFlag bool
-	isPrimary       bool // 是否是索引列
-	isPrimaryFlag   bool
-	fieldId         string // 字段Id
-	fieldIdFlag     bool
-	uiType          string // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
-	uiTypeFlag      bool
-	isHidden        bool // 是否是隐藏字段
-	isHiddenFlag    bool
+
+	isPrimary     bool // 是否是索引列
+	isPrimaryFlag bool
+
+	fieldId     string // 字段Id
+	fieldIdFlag bool
+
+	uiType     string // 字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+	uiTypeFlag bool
+
+	isHidden     bool // 是否是隐藏字段
+	isHiddenFlag bool
 }
 
 func NewAppTableFieldForListBuilder() *AppTableFieldForListBuilder {
@@ -2061,25 +2213,35 @@ func (builder *AppTableFieldForListBuilder) Build() *AppTableFieldForList {
 }
 
 type AppTableForm struct {
-	Name            *string `json:"name,omitempty"`              // 表单名称
-	Description     *string `json:"description,omitempty"`       // 表单描述
-	Shared          *bool   `json:"shared,omitempty"`            // 是否开启共享
-	SharedUrl       *string `json:"shared_url,omitempty"`        // 分享 URL
-	SharedLimit     *string `json:"shared_limit,omitempty"`      // 分享范围限制
-	SubmitLimitOnce *bool   `json:"submit_limit_once,omitempty"` // 填写次数限制一次
+	Name *string `json:"name,omitempty"` // 表单名称
+
+	Description *string `json:"description,omitempty"` // 表单描述
+
+	Shared *bool `json:"shared,omitempty"` // 是否开启共享
+
+	SharedUrl *string `json:"shared_url,omitempty"` // 分享 URL
+
+	SharedLimit *string `json:"shared_limit,omitempty"` // 分享范围限制
+
+	SubmitLimitOnce *bool `json:"submit_limit_once,omitempty"` // 填写次数限制一次
 }
 
 type AppTableFormBuilder struct {
-	name                string // 表单名称
-	nameFlag            bool
-	description         string // 表单描述
-	descriptionFlag     bool
-	shared              bool // 是否开启共享
-	sharedFlag          bool
-	sharedUrl           string // 分享 URL
-	sharedUrlFlag       bool
-	sharedLimit         string // 分享范围限制
-	sharedLimitFlag     bool
+	name     string // 表单名称
+	nameFlag bool
+
+	description     string // 表单描述
+	descriptionFlag bool
+
+	shared     bool // 是否开启共享
+	sharedFlag bool
+
+	sharedUrl     string // 分享 URL
+	sharedUrlFlag bool
+
+	sharedLimit     string // 分享范围限制
+	sharedLimitFlag bool
+
 	submitLimitOnce     bool // 填写次数限制一次
 	submitLimitOnceFlag bool
 }
@@ -2173,24 +2335,32 @@ func (builder *AppTableFormBuilder) Build() *AppTableForm {
 }
 
 type AppTableFormField struct {
-	FieldId     *string `json:"field_id,omitempty"`    // 表单问题 ID
-	Title       *string `json:"title,omitempty"`       // 表单问题
+	FieldId *string `json:"field_id,omitempty"` // 表单问题 ID
+
+	Title *string `json:"title,omitempty"` // 表单问题
+
 	Description *string `json:"description,omitempty"` // 问题描述
-	Required    *bool   `json:"required,omitempty"`    // 是否必填
-	Visible     *bool   `json:"visible,omitempty"`     // 是否可见
+
+	Required *bool `json:"required,omitempty"` // 是否必填
+
+	Visible *bool `json:"visible,omitempty"` // 是否可见
 }
 
 type AppTableFormFieldBuilder struct {
-	fieldId         string // 表单问题 ID
-	fieldIdFlag     bool
-	title           string // 表单问题
-	titleFlag       bool
+	fieldId     string // 表单问题 ID
+	fieldIdFlag bool
+
+	title     string // 表单问题
+	titleFlag bool
+
 	description     string // 问题描述
 	descriptionFlag bool
-	required        bool // 是否必填
-	requiredFlag    bool
-	visible         bool // 是否可见
-	visibleFlag     bool
+
+	required     bool // 是否必填
+	requiredFlag bool
+
+	visible     bool // 是否可见
+	visibleFlag bool
 }
 
 func NewAppTableFormFieldBuilder() *AppTableFormFieldBuilder {
@@ -2269,24 +2439,32 @@ func (builder *AppTableFormFieldBuilder) Build() *AppTableFormField {
 }
 
 type AppTableFormPatchedField struct {
-	PreFieldId  *string `json:"pre_field_id,omitempty"` // 上一个表单问题 ID，用于支持调整表单问题的顺序，通过前一个表单问题的 field_id 来确定位置；如果 pre_field_id 为空字符串，则说明要排到首个表单问题
-	Title       *string `json:"title,omitempty"`        // 表单问题
-	Description *string `json:"description,omitempty"`  // 问题描述
-	Required    *bool   `json:"required,omitempty"`     // 是否必填
-	Visible     *bool   `json:"visible,omitempty"`      // 是否可见，当值为 false 时，不允许更新其他字段。
+	PreFieldId *string `json:"pre_field_id,omitempty"` // 上一个表单问题 ID，用于支持调整表单问题的顺序，通过前一个表单问题的 field_id 来确定位置；如果 pre_field_id 为空字符串，则说明要排到首个表单问题
+
+	Title *string `json:"title,omitempty"` // 表单问题
+
+	Description *string `json:"description,omitempty"` // 问题描述
+
+	Required *bool `json:"required,omitempty"` // 是否必填
+
+	Visible *bool `json:"visible,omitempty"` // 是否可见，当值为 false 时，不允许更新其他字段。
 }
 
 type AppTableFormPatchedFieldBuilder struct {
-	preFieldId      string // 上一个表单问题 ID，用于支持调整表单问题的顺序，通过前一个表单问题的 field_id 来确定位置；如果 pre_field_id 为空字符串，则说明要排到首个表单问题
-	preFieldIdFlag  bool
-	title           string // 表单问题
-	titleFlag       bool
+	preFieldId     string // 上一个表单问题 ID，用于支持调整表单问题的顺序，通过前一个表单问题的 field_id 来确定位置；如果 pre_field_id 为空字符串，则说明要排到首个表单问题
+	preFieldIdFlag bool
+
+	title     string // 表单问题
+	titleFlag bool
+
 	description     string // 问题描述
 	descriptionFlag bool
-	required        bool // 是否必填
-	requiredFlag    bool
-	visible         bool // 是否可见，当值为 false 时，不允许更新其他字段。
-	visibleFlag     bool
+
+	required     bool // 是否必填
+	requiredFlag bool
+
+	visible     bool // 是否可见，当值为 false 时，不允许更新其他字段。
+	visibleFlag bool
 }
 
 func NewAppTableFormPatchedFieldBuilder() *AppTableFormPatchedFieldBuilder {
@@ -2365,33 +2543,47 @@ func (builder *AppTableFormPatchedFieldBuilder) Build() *AppTableFormPatchedFiel
 }
 
 type AppTableRecord struct {
-	Fields           map[string]interface{} `json:"fields,omitempty"`             // 数据表的字段，即数据表的列;;当前接口支持的字段类型请参考[接入指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#31f78a3c);;不同类型字段的数据结构请参考[数据结构概述](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/development-guide/bitable-structure)
-	RecordId         *string                `json:"record_id,omitempty"`          // 一条记录的唯一标识 id [record_id 参数说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#15d8db94)
-	CreatedBy        *Person                `json:"created_by,omitempty"`         // 该记录的创建人
-	CreatedTime      *int64                 `json:"created_time,omitempty"`       // 该记录的创建时间
-	LastModifiedBy   *Person                `json:"last_modified_by,omitempty"`   // 该记录最新一次更新的修改人
-	LastModifiedTime *int64                 `json:"last_modified_time,omitempty"` // 该记录最近一次的更新时间
-	SharedUrl        *string                `json:"shared_url,omitempty"`         // 记录分享链接(批量获取记录接口将返回该字段)
-	RecordUrl        *string                `json:"record_url,omitempty"`         // 记录链接(检索记录接口将返回该字段)
+	Fields map[string]interface{} `json:"fields,omitempty"` // 数据表的字段，即数据表的列;;当前接口支持的字段类型请参考[接入指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#31f78a3c);;不同类型字段的数据结构请参考[数据结构概述](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/development-guide/bitable-structure)
+
+	RecordId *string `json:"record_id,omitempty"` // 一条记录的唯一标识 id [record_id 参数说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#15d8db94)
+
+	CreatedBy *Person `json:"created_by,omitempty"` // 该记录的创建人
+
+	CreatedTime *int64 `json:"created_time,omitempty"` // 该记录的创建时间
+
+	LastModifiedBy *Person `json:"last_modified_by,omitempty"` // 该记录最新一次更新的修改人
+
+	LastModifiedTime *int64 `json:"last_modified_time,omitempty"` // 该记录最近一次的更新时间
+
+	SharedUrl *string `json:"shared_url,omitempty"` // 记录分享链接(批量获取记录接口将返回该字段)
+
+	RecordUrl *string `json:"record_url,omitempty"` // 记录链接(检索记录接口将返回该字段)
 }
 
 type AppTableRecordBuilder struct {
-	fields               map[string]interface{} // 数据表的字段，即数据表的列;;当前接口支持的字段类型请参考[接入指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#31f78a3c);;不同类型字段的数据结构请参考[数据结构概述](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/development-guide/bitable-structure)
-	fieldsFlag           bool
-	recordId             string // 一条记录的唯一标识 id [record_id 参数说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#15d8db94)
-	recordIdFlag         bool
-	createdBy            *Person // 该记录的创建人
-	createdByFlag        bool
-	createdTime          int64 // 该记录的创建时间
-	createdTimeFlag      bool
-	lastModifiedBy       *Person // 该记录最新一次更新的修改人
-	lastModifiedByFlag   bool
+	fields     map[string]interface{} // 数据表的字段，即数据表的列;;当前接口支持的字段类型请参考[接入指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#31f78a3c);;不同类型字段的数据结构请参考[数据结构概述](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/development-guide/bitable-structure)
+	fieldsFlag bool
+
+	recordId     string // 一条记录的唯一标识 id [record_id 参数说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#15d8db94)
+	recordIdFlag bool
+
+	createdBy     *Person // 该记录的创建人
+	createdByFlag bool
+
+	createdTime     int64 // 该记录的创建时间
+	createdTimeFlag bool
+
+	lastModifiedBy     *Person // 该记录最新一次更新的修改人
+	lastModifiedByFlag bool
+
 	lastModifiedTime     int64 // 该记录最近一次的更新时间
 	lastModifiedTimeFlag bool
-	sharedUrl            string // 记录分享链接(批量获取记录接口将返回该字段)
-	sharedUrlFlag        bool
-	recordUrl            string // 记录链接(检索记录接口将返回该字段)
-	recordUrlFlag        bool
+
+	sharedUrl     string // 记录分享链接(批量获取记录接口将返回该字段)
+	sharedUrlFlag bool
+
+	recordUrl     string // 记录链接(检索记录接口将返回该字段)
+	recordUrlFlag bool
 }
 
 func NewAppTableRecordBuilder() *AppTableRecordBuilder {
@@ -2506,25 +2698,35 @@ func (builder *AppTableRecordBuilder) Build() *AppTableRecord {
 }
 
 type AppTableView struct {
-	ViewId             *string               `json:"view_id,omitempty"`               // 视图Id
-	ViewName           *string               `json:"view_name,omitempty"`             // 视图名字
-	ViewType           *string               `json:"view_type,omitempty"`             // 视图类型
-	Property           *AppTableViewProperty `json:"property,omitempty"`              // 视图属性
-	ViewPublicLevel    *string               `json:"view_public_level,omitempty"`     // 视图公共等级 Public、Locked、Private
-	ViewPrivateOwnerId *string               `json:"view_private_owner_id,omitempty"` // 个人视图的owner_id，id类型和 user_id_type 参数保持一致
+	ViewId *string `json:"view_id,omitempty"` // 视图Id
+
+	ViewName *string `json:"view_name,omitempty"` // 视图名字
+
+	ViewType *string `json:"view_type,omitempty"` // 视图类型
+
+	Property *AppTableViewProperty `json:"property,omitempty"` // 视图属性
+
+	ViewPublicLevel *string `json:"view_public_level,omitempty"` // 视图公共等级 Public、Locked、Private
+
+	ViewPrivateOwnerId *string `json:"view_private_owner_id,omitempty"` // 个人视图的owner_id，id类型和 user_id_type 参数保持一致
 }
 
 type AppTableViewBuilder struct {
-	viewId                 string // 视图Id
-	viewIdFlag             bool
-	viewName               string // 视图名字
-	viewNameFlag           bool
-	viewType               string // 视图类型
-	viewTypeFlag           bool
-	property               *AppTableViewProperty // 视图属性
-	propertyFlag           bool
-	viewPublicLevel        string // 视图公共等级 Public、Locked、Private
-	viewPublicLevelFlag    bool
+	viewId     string // 视图Id
+	viewIdFlag bool
+
+	viewName     string // 视图名字
+	viewNameFlag bool
+
+	viewType     string // 视图类型
+	viewTypeFlag bool
+
+	property     *AppTableViewProperty // 视图属性
+	propertyFlag bool
+
+	viewPublicLevel     string // 视图公共等级 Public、Locked、Private
+	viewPublicLevelFlag bool
+
 	viewPrivateOwnerId     string // 个人视图的owner_id，id类型和 user_id_type 参数保持一致
 	viewPrivateOwnerIdFlag bool
 }
@@ -2617,16 +2819,20 @@ func (builder *AppTableViewBuilder) Build() *AppTableView {
 }
 
 type AppTableViewProperty struct {
-	FilterInfo      *AppTableViewPropertyFilterInfo      `json:"filter_info,omitempty"`      // 过滤条件
-	HiddenFields    []string                             `json:"hidden_fields,omitempty"`    // 隐藏字段ID列表
+	FilterInfo *AppTableViewPropertyFilterInfo `json:"filter_info,omitempty"` // 过滤条件
+
+	HiddenFields []string `json:"hidden_fields,omitempty"` // 隐藏字段ID列表
+
 	HierarchyConfig *AppTableViewPropertyHierarchyConfig `json:"hierarchy_config,omitempty"` // 表格视图层级结构设置
 }
 
 type AppTableViewPropertyBuilder struct {
-	filterInfo          *AppTableViewPropertyFilterInfo // 过滤条件
-	filterInfoFlag      bool
-	hiddenFields        []string // 隐藏字段ID列表
-	hiddenFieldsFlag    bool
+	filterInfo     *AppTableViewPropertyFilterInfo // 过滤条件
+	filterInfoFlag bool
+
+	hiddenFields     []string // 隐藏字段ID列表
+	hiddenFieldsFlag bool
+
 	hierarchyConfig     *AppTableViewPropertyHierarchyConfig // 表格视图层级结构设置
 	hierarchyConfigFlag bool
 }
@@ -2678,16 +2884,20 @@ func (builder *AppTableViewPropertyBuilder) Build() *AppTableViewProperty {
 }
 
 type AppTableViewPropertyFilterInfo struct {
-	Conjunction      *string                                    `json:"conjunction,omitempty"`       // 多个筛选条件的关系
-	Conditions       []*AppTableViewPropertyFilterInfoCondition `json:"conditions,omitempty"`        // 筛选条件
-	ConditionOmitted *bool                                      `json:"condition_omitted,omitempty"` // 筛选条件是否缺省
+	Conjunction *string `json:"conjunction,omitempty"` // 多个筛选条件的关系
+
+	Conditions []*AppTableViewPropertyFilterInfoCondition `json:"conditions,omitempty"` // 筛选条件
+
+	ConditionOmitted *bool `json:"condition_omitted,omitempty"` // 筛选条件是否缺省
 }
 
 type AppTableViewPropertyFilterInfoBuilder struct {
-	conjunction          string // 多个筛选条件的关系
-	conjunctionFlag      bool
-	conditions           []*AppTableViewPropertyFilterInfoCondition // 筛选条件
-	conditionsFlag       bool
+	conjunction     string // 多个筛选条件的关系
+	conjunctionFlag bool
+
+	conditions     []*AppTableViewPropertyFilterInfoCondition // 筛选条件
+	conditionsFlag bool
+
 	conditionOmitted     bool // 筛选条件是否缺省
 	conditionOmittedFlag bool
 }
@@ -2741,24 +2951,32 @@ func (builder *AppTableViewPropertyFilterInfoBuilder) Build() *AppTableViewPrope
 }
 
 type AppTableViewPropertyFilterInfoCondition struct {
-	FieldId     *string `json:"field_id,omitempty"`     // 用于过滤的字段唯一ID
-	Operator    *string `json:"operator,omitempty"`     // 过滤操作的类型
-	Value       *string `json:"value,omitempty"`        // 筛选值
+	FieldId *string `json:"field_id,omitempty"` // 用于过滤的字段唯一ID
+
+	Operator *string `json:"operator,omitempty"` // 过滤操作的类型
+
+	Value *string `json:"value,omitempty"` // 筛选值
+
 	ConditionId *string `json:"condition_id,omitempty"` // 过滤条件的唯一ID
-	FieldType   *int    `json:"field_type,omitempty"`   // 用于过滤的字段类型
+
+	FieldType *int `json:"field_type,omitempty"` // 用于过滤的字段类型
 }
 
 type AppTableViewPropertyFilterInfoConditionBuilder struct {
-	fieldId         string // 用于过滤的字段唯一ID
-	fieldIdFlag     bool
-	operator        string // 过滤操作的类型
-	operatorFlag    bool
-	value           string // 筛选值
-	valueFlag       bool
+	fieldId     string // 用于过滤的字段唯一ID
+	fieldIdFlag bool
+
+	operator     string // 过滤操作的类型
+	operatorFlag bool
+
+	value     string // 筛选值
+	valueFlag bool
+
 	conditionId     string // 过滤条件的唯一ID
 	conditionIdFlag bool
-	fieldType       int // 用于过滤的字段类型
-	fieldTypeFlag   bool
+
+	fieldType     int // 用于过滤的字段类型
+	fieldTypeFlag bool
 }
 
 func NewAppTableViewPropertyFilterInfoConditionBuilder() *AppTableViewPropertyFilterInfoConditionBuilder {
@@ -2870,17 +3088,21 @@ func (builder *AppTableViewPropertyHierarchyConfigBuilder) Build() *AppTableView
 
 type AppWorkflow struct {
 	WorkflowId *string `json:"workflow_id,omitempty"` // 自动化工作流的id
-	Status     *string `json:"status,omitempty"`      // 自动化工作流的状态
-	Title      *string `json:"title,omitempty"`       // 自动化工作流的名称
+
+	Status *string `json:"status,omitempty"` // 自动化工作流的状态
+
+	Title *string `json:"title,omitempty"` // 自动化工作流的名称
 }
 
 type AppWorkflowBuilder struct {
 	workflowId     string // 自动化工作流的id
 	workflowIdFlag bool
-	status         string // 自动化工作流的状态
-	statusFlag     bool
-	title          string // 自动化工作流的名称
-	titleFlag      bool
+
+	status     string // 自动化工作流的状态
+	statusFlag bool
+
+	title     string // 自动化工作流的名称
+	titleFlag bool
 }
 
 func NewAppWorkflowBuilder() *AppWorkflowBuilder {
@@ -2934,26 +3156,36 @@ func (builder *AppWorkflowBuilder) Build() *AppWorkflow {
 
 type Attachment struct {
 	FileToken *string `json:"file_token,omitempty"` // attachment token
-	Name      *string `json:"name,omitempty"`       // attachment name
-	Type      *string `json:"type,omitempty"`       // attachment type
-	Size      *int    `json:"size,omitempty"`       // attachment size
-	Url       *string `json:"url,omitempty"`        // download url
-	TmpUrl    *string `json:"tmp_url,omitempty"`    // temporary download url
+
+	Name *string `json:"name,omitempty"` // attachment name
+
+	Type *string `json:"type,omitempty"` // attachment type
+
+	Size *int `json:"size,omitempty"` // attachment size
+
+	Url *string `json:"url,omitempty"` // download url
+
+	TmpUrl *string `json:"tmp_url,omitempty"` // temporary download url
 }
 
 type AttachmentBuilder struct {
 	fileToken     string // attachment token
 	fileTokenFlag bool
-	name          string // attachment name
-	nameFlag      bool
-	type_         string // attachment type
-	typeFlag      bool
-	size          int // attachment size
-	sizeFlag      bool
-	url           string // download url
-	urlFlag       bool
-	tmpUrl        string // temporary download url
-	tmpUrlFlag    bool
+
+	name     string // attachment name
+	nameFlag bool
+
+	type_    string // attachment type
+	typeFlag bool
+
+	size     int // attachment size
+	sizeFlag bool
+
+	url     string // download url
+	urlFlag bool
+
+	tmpUrl     string // temporary download url
+	tmpUrlFlag bool
 }
 
 func NewAttachmentBuilder() *AttachmentBuilder {
@@ -3045,15 +3277,17 @@ func (builder *AttachmentBuilder) Build() *Attachment {
 }
 
 type ChildrenFilter struct {
-	Conjunction *string      `json:"conjunction,omitempty"` // 条件逻辑连接词
-	Conditions  []*Condition `json:"conditions,omitempty"`  // 筛选条件集合
+	Conjunction *string `json:"conjunction,omitempty"` // 条件逻辑连接词
+
+	Conditions []*Condition `json:"conditions,omitempty"` // 筛选条件集合
 }
 
 type ChildrenFilterBuilder struct {
 	conjunction     string // 条件逻辑连接词
 	conjunctionFlag bool
-	conditions      []*Condition // 筛选条件集合
-	conditionsFlag  bool
+
+	conditions     []*Condition // 筛选条件集合
+	conditionsFlag bool
 }
 
 func NewChildrenFilterBuilder() *ChildrenFilterBuilder {
@@ -3092,18 +3326,22 @@ func (builder *ChildrenFilterBuilder) Build() *ChildrenFilter {
 }
 
 type Condition struct {
-	FieldName *string  `json:"field_name,omitempty"` // 筛选条件的左值，值为字段的名称
-	Operator  *string  `json:"operator,omitempty"`   // 条件运算符
-	Value     []string `json:"value,omitempty"`      // 目标值
+	FieldName *string `json:"field_name,omitempty"` // 筛选条件的左值，值为字段的名称
+
+	Operator *string `json:"operator,omitempty"` // 条件运算符
+
+	Value []string `json:"value,omitempty"` // 目标值
 }
 
 type ConditionBuilder struct {
 	fieldName     string // 筛选条件的左值，值为字段的名称
 	fieldNameFlag bool
-	operator      string // 条件运算符
-	operatorFlag  bool
-	value         []string // 目标值
-	valueFlag     bool
+
+	operator     string // 条件运算符
+	operatorFlag bool
+
+	value     []string // 目标值
+	valueFlag bool
 }
 
 func NewConditionBuilder() *ConditionBuilder {
@@ -3155,13 +3393,15 @@ func (builder *ConditionBuilder) Build() *Condition {
 }
 
 type DeleteRecord struct {
-	Deleted  *bool   `json:"deleted,omitempty"`   // 是否成功删除
+	Deleted *bool `json:"deleted,omitempty"` // 是否成功删除
+
 	RecordId *string `json:"record_id,omitempty"` // 删除的记录 ID
 }
 
 type DeleteRecordBuilder struct {
-	deleted      bool // 是否成功删除
-	deletedFlag  bool
+	deleted     bool // 是否成功删除
+	deletedFlag bool
+
 	recordId     string // 删除的记录 ID
 	recordIdFlag bool
 }
@@ -3203,13 +3443,15 @@ func (builder *DeleteRecordBuilder) Build() *DeleteRecord {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -3247,24 +3489,32 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type DisplayApp struct {
-	AppToken   *string `json:"app_token,omitempty"`   // 多维表格的 app_token;[app_token 参数说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#8121eebe)
-	Name       *string `json:"name,omitempty"`        // 多维表格的名字
-	Revision   *int    `json:"revision,omitempty"`    // 多维表格的版本号（对多维表格进行修改时更新，如新增、删除数据表，修改数据表名等，初始为1，每次更新+1）
-	IsAdvanced *bool   `json:"is_advanced,omitempty"` // 多维表格是否开启了高级权限。取值包括：;- true：表示开启了高级权限;- false：表示关闭了高级权限;;[了解更多：使用多维表格高级权限](https://www.feishu.cn/hc/zh-CN/articles/588604550568)
-	TimeZone   *string `json:"time_zone,omitempty"`   // 文档时区
+	AppToken *string `json:"app_token,omitempty"` // 多维表格的 app_token;[app_token 参数说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#8121eebe)
+
+	Name *string `json:"name,omitempty"` // 多维表格的名字
+
+	Revision *int `json:"revision,omitempty"` // 多维表格的版本号（对多维表格进行修改时更新，如新增、删除数据表，修改数据表名等，初始为1，每次更新+1）
+
+	IsAdvanced *bool `json:"is_advanced,omitempty"` // 多维表格是否开启了高级权限。取值包括：;- true：表示开启了高级权限;- false：表示关闭了高级权限;;[了解更多：使用多维表格高级权限](https://www.feishu.cn/hc/zh-CN/articles/588604550568)
+
+	TimeZone *string `json:"time_zone,omitempty"` // 文档时区
 }
 
 type DisplayAppBuilder struct {
-	appToken       string // 多维表格的 app_token;[app_token 参数说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#8121eebe)
-	appTokenFlag   bool
-	name           string // 多维表格的名字
-	nameFlag       bool
-	revision       int // 多维表格的版本号（对多维表格进行修改时更新，如新增、删除数据表，修改数据表名等，初始为1，每次更新+1）
-	revisionFlag   bool
+	appToken     string // 多维表格的 app_token;[app_token 参数说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/bitable/notification#8121eebe)
+	appTokenFlag bool
+
+	name     string // 多维表格的名字
+	nameFlag bool
+
+	revision     int // 多维表格的版本号（对多维表格进行修改时更新，如新增、删除数据表，修改数据表名等，初始为1，每次更新+1）
+	revisionFlag bool
+
 	isAdvanced     bool // 多维表格是否开启了高级权限。取值包括：;- true：表示开启了高级权限;- false：表示关闭了高级权限;;[了解更多：使用多维表格高级权限](https://www.feishu.cn/hc/zh-CN/articles/588604550568)
 	isAdvancedFlag bool
-	timeZone       string // 文档时区
-	timeZoneFlag   bool
+
+	timeZone     string // 文档时区
+	timeZoneFlag bool
 }
 
 func NewDisplayAppBuilder() *DisplayAppBuilder {
@@ -3343,21 +3593,27 @@ func (builder *DisplayAppBuilder) Build() *DisplayApp {
 }
 
 type DisplayAppV2 struct {
-	AppToken   *string `json:"app_token,omitempty"`   // 多维表格的 app_token
-	Name       *string `json:"name,omitempty"`        // 多维表格的名字
-	IsAdvanced *bool   `json:"is_advanced,omitempty"` // 多维表格是否已开启高级权限
-	TimeZone   *string `json:"time_zone,omitempty"`   // 文档时区
+	AppToken *string `json:"app_token,omitempty"` // 多维表格的 app_token
+
+	Name *string `json:"name,omitempty"` // 多维表格的名字
+
+	IsAdvanced *bool `json:"is_advanced,omitempty"` // 多维表格是否已开启高级权限
+
+	TimeZone *string `json:"time_zone,omitempty"` // 文档时区
 }
 
 type DisplayAppV2Builder struct {
-	appToken       string // 多维表格的 app_token
-	appTokenFlag   bool
-	name           string // 多维表格的名字
-	nameFlag       bool
+	appToken     string // 多维表格的 app_token
+	appTokenFlag bool
+
+	name     string // 多维表格的名字
+	nameFlag bool
+
 	isAdvanced     bool // 多维表格是否已开启高级权限
 	isAdvancedFlag bool
-	timeZone       string // 文档时区
-	timeZoneFlag   bool
+
+	timeZone     string // 文档时区
+	timeZoneFlag bool
 }
 
 func NewDisplayAppV2Builder() *DisplayAppV2Builder {
@@ -3423,16 +3679,22 @@ func (builder *DisplayAppV2Builder) Build() *DisplayAppV2 {
 }
 
 type FilterInfo struct {
-	Conjunction *string      `json:"conjunction,omitempty"` // 条件逻辑连接词
-	Conditions  []*Condition `json:"conditions,omitempty"`  // 筛选条件集合
+	Conjunction *string `json:"conjunction,omitempty"` // 条件逻辑连接词
 
+	Conditions []*Condition `json:"conditions,omitempty"` // 筛选条件集合
+
+	Children []*ChildrenFilter `json:"children,omitempty"` // 下一级筛选条件
 }
 
 type FilterInfoBuilder struct {
 	conjunction     string // 条件逻辑连接词
 	conjunctionFlag bool
-	conditions      []*Condition // 筛选条件集合
-	conditionsFlag  bool
+
+	conditions     []*Condition // 筛选条件集合
+	conditionsFlag bool
+
+	children     []*ChildrenFilter // 下一级筛选条件
+	childrenFlag bool
 }
 
 func NewFilterInfoBuilder() *FilterInfoBuilder {
@@ -3458,6 +3720,15 @@ func (builder *FilterInfoBuilder) Conditions(conditions []*Condition) *FilterInf
 	return builder
 }
 
+// 下一级筛选条件
+//
+// 示例值：
+func (builder *FilterInfoBuilder) Children(children []*ChildrenFilter) *FilterInfoBuilder {
+	builder.children = children
+	builder.childrenFlag = true
+	return builder
+}
+
 func (builder *FilterInfoBuilder) Build() *FilterInfo {
 	req := &FilterInfo{}
 	if builder.conjunctionFlag {
@@ -3472,16 +3743,20 @@ func (builder *FilterInfoBuilder) Build() *FilterInfo {
 }
 
 type Group struct {
-	Id        *string `json:"id,omitempty"`         // 群组的id
-	Name      *string `json:"name,omitempty"`       // 群组名称
+	Id *string `json:"id,omitempty"` // 群组的id
+
+	Name *string `json:"name,omitempty"` // 群组名称
+
 	AvatarUrl *string `json:"avatar_url,omitempty"` // 群组头像链接
 }
 
 type GroupBuilder struct {
-	id            string // 群组的id
-	idFlag        bool
-	name          string // 群组名称
-	nameFlag      bool
+	id     string // 群组的id
+	idFlag bool
+
+	name     string // 群组名称
+	nameFlag bool
+
 	avatarUrl     string // 群组头像链接
 	avatarUrlFlag bool
 }
@@ -3536,28 +3811,40 @@ func (builder *GroupBuilder) Build() *Group {
 }
 
 type Location struct {
-	Location    *string `json:"location,omitempty"`     // 经纬度
-	Pname       *string `json:"pname,omitempty"`        // 省
-	Cityname    *string `json:"cityname,omitempty"`     // 市
-	Adname      *string `json:"adname,omitempty"`       // 区
-	Address     *string `json:"address,omitempty"`      // 详细地址
-	Name        *string `json:"name,omitempty"`         // 地名
+	Location *string `json:"location,omitempty"` // 经纬度
+
+	Pname *string `json:"pname,omitempty"` // 省
+
+	Cityname *string `json:"cityname,omitempty"` // 市
+
+	Adname *string `json:"adname,omitempty"` // 区
+
+	Address *string `json:"address,omitempty"` // 详细地址
+
+	Name *string `json:"name,omitempty"` // 地名
+
 	FullAddress *string `json:"full_address,omitempty"` // 完整地址
 }
 
 type LocationBuilder struct {
-	location        string // 经纬度
-	locationFlag    bool
-	pname           string // 省
-	pnameFlag       bool
-	cityname        string // 市
-	citynameFlag    bool
-	adname          string // 区
-	adnameFlag      bool
-	address         string // 详细地址
-	addressFlag     bool
-	name            string // 地名
-	nameFlag        bool
+	location     string // 经纬度
+	locationFlag bool
+
+	pname     string // 省
+	pnameFlag bool
+
+	cityname     string // 市
+	citynameFlag bool
+
+	adname     string // 区
+	adnameFlag bool
+
+	address     string // 详细地址
+	addressFlag bool
+
+	name     string // 地名
+	nameFlag bool
+
 	fullAddress     string // 完整地址
 	fullAddressFlag bool
 }
@@ -3664,22 +3951,30 @@ func (builder *LocationBuilder) Build() *Location {
 }
 
 type Person struct {
-	Id        *string `json:"id,omitempty"`         // 用户id，id类型等于user_id_type所指定的类型。
-	Name      *string `json:"name,omitempty"`       // 用户的中文名称
-	EnName    *string `json:"en_name,omitempty"`    // 用户的英文名称
-	Email     *string `json:"email,omitempty"`      // 用户的邮箱
+	Id *string `json:"id,omitempty"` // 用户id，id类型等于user_id_type所指定的类型。
+
+	Name *string `json:"name,omitempty"` // 用户的中文名称
+
+	EnName *string `json:"en_name,omitempty"` // 用户的英文名称
+
+	Email *string `json:"email,omitempty"` // 用户的邮箱
+
 	AvatarUrl *string `json:"avatar_url,omitempty"` // 头像链接
 }
 
 type PersonBuilder struct {
-	id            string // 用户id，id类型等于user_id_type所指定的类型。
-	idFlag        bool
-	name          string // 用户的中文名称
-	nameFlag      bool
-	enName        string // 用户的英文名称
-	enNameFlag    bool
-	email         string // 用户的邮箱
-	emailFlag     bool
+	id     string // 用户id，id类型等于user_id_type所指定的类型。
+	idFlag bool
+
+	name     string // 用户的中文名称
+	nameFlag bool
+
+	enName     string // 用户的英文名称
+	enNameFlag bool
+
+	email     string // 用户的邮箱
+	emailFlag bool
+
 	avatarUrl     string // 头像链接
 	avatarUrlFlag bool
 }
@@ -3792,18 +4087,22 @@ func (builder *RatingBuilder) Build() *Rating {
 }
 
 type ReqApp struct {
-	Name        *string `json:"name,omitempty"`         // 多维表格App名字
+	Name *string `json:"name,omitempty"` // 多维表格App名字
+
 	FolderToken *string `json:"folder_token,omitempty"` // 多维表格App归属文件夹
-	TimeZone    *string `json:"time_zone,omitempty"`    // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
+
+	TimeZone *string `json:"time_zone,omitempty"` // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
 }
 
 type ReqAppBuilder struct {
-	name            string // 多维表格App名字
-	nameFlag        bool
+	name     string // 多维表格App名字
+	nameFlag bool
+
 	folderToken     string // 多维表格App归属文件夹
 	folderTokenFlag bool
-	timeZone        string // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
-	timeZoneFlag    bool
+
+	timeZone     string // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
+	timeZoneFlag bool
 }
 
 func NewReqAppBuilder() *ReqAppBuilder {
@@ -3856,18 +4155,22 @@ func (builder *ReqAppBuilder) Build() *ReqApp {
 }
 
 type ReqTable struct {
-	Name            *string                 `json:"name,omitempty"`              // 数据表名字，必填字段
-	DefaultViewName *string                 `json:"default_view_name,omitempty"` // 默认表格视图的名称
-	Fields          []*AppTableCreateHeader `json:"fields,omitempty"`            // 允许设置数据表的初始字段,默认第一个字段为索引列
+	Name *string `json:"name,omitempty"` // 数据表名字，必填字段
+
+	DefaultViewName *string `json:"default_view_name,omitempty"` // 默认表格视图的名称
+
+	Fields []*AppTableCreateHeader `json:"fields,omitempty"` // 允许设置数据表的初始字段,默认第一个字段为索引列
 }
 
 type ReqTableBuilder struct {
-	name                string // 数据表名字，必填字段
-	nameFlag            bool
+	name     string // 数据表名字，必填字段
+	nameFlag bool
+
 	defaultViewName     string // 默认表格视图的名称
 	defaultViewNameFlag bool
-	fields              []*AppTableCreateHeader // 允许设置数据表的初始字段,默认第一个字段为索引列
-	fieldsFlag          bool
+
+	fields     []*AppTableCreateHeader // 允许设置数据表的初始字段,默认第一个字段为索引列
+	fieldsFlag bool
 }
 
 func NewReqTableBuilder() *ReqTableBuilder {
@@ -3920,12 +4223,14 @@ func (builder *ReqTableBuilder) Build() *ReqTable {
 
 type ReqView struct {
 	ViewName *string `json:"view_name,omitempty"` // 视图名字
+
 	ViewType *string `json:"view_type,omitempty"` // 视图类型
 }
 
 type ReqViewBuilder struct {
 	viewName     string // 视图名字
 	viewNameFlag bool
+
 	viewType     string // 视图类型
 	viewTypeFlag bool
 }
@@ -3968,14 +4273,16 @@ func (builder *ReqViewBuilder) Build() *ReqView {
 
 type Sort struct {
 	FieldName *string `json:"field_name,omitempty"` // 字段名称
-	Desc      *bool   `json:"desc,omitempty"`       // 是否倒序排序
+
+	Desc *bool `json:"desc,omitempty"` // 是否倒序排序
 }
 
 type SortBuilder struct {
 	fieldName     string // 字段名称
 	fieldNameFlag bool
-	desc          bool // 是否倒序排序
-	descFlag      bool
+
+	desc     bool // 是否倒序排序
+	descFlag bool
 }
 
 func NewSortBuilder() *SortBuilder {
@@ -4016,12 +4323,14 @@ func (builder *SortBuilder) Build() *Sort {
 
 type Url struct {
 	Text *string `json:"text,omitempty"` // url text
+
 	Link *string `json:"link,omitempty"` // url link
 }
 
 type UrlBuilder struct {
 	text     string // url text
 	textFlag bool
+
 	link     string // url link
 	linkFlag bool
 }
@@ -4063,14 +4372,17 @@ func (builder *UrlBuilder) Build() *Url {
 }
 
 type CopyAppReqBodyBuilder struct {
-	name               string // 多维表格 App 名字
-	nameFlag           bool
-	folderToken        string // 多维表格 App 归属文件夹
-	folderTokenFlag    bool
+	name     string // 多维表格 App 名字
+	nameFlag bool
+
+	folderToken     string // 多维表格 App 归属文件夹
+	folderTokenFlag bool
+
 	withoutContent     bool // 不复制文档内容，只复制文档结构
 	withoutContentFlag bool
-	timeZone           string // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
-	timeZoneFlag       bool
+
+	timeZone     string // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
+	timeZoneFlag bool
 }
 
 func NewCopyAppReqBodyBuilder() *CopyAppReqBodyBuilder {
@@ -4236,10 +4548,13 @@ func (builder *CopyAppReqBuilder) Build() *CopyAppReq {
 }
 
 type CopyAppReqBody struct {
-	Name           *string `json:"name,omitempty"`            // 多维表格 App 名字
-	FolderToken    *string `json:"folder_token,omitempty"`    // 多维表格 App 归属文件夹
-	WithoutContent *bool   `json:"without_content,omitempty"` // 不复制文档内容，只复制文档结构
-	TimeZone       *string `json:"time_zone,omitempty"`       // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
+	Name *string `json:"name,omitempty"` // 多维表格 App 名字
+
+	FolderToken *string `json:"folder_token,omitempty"` // 多维表格 App 归属文件夹
+
+	WithoutContent *bool `json:"without_content,omitempty"` // 不复制文档内容，只复制文档结构
+
+	TimeZone *string `json:"time_zone,omitempty"` // 文档时区，说明见：https://bytedance.feishu.cn/docx/YKRndTM7VoyDqpxqqeEcd67MnEf
 }
 
 type CopyAppReq struct {
@@ -4388,8 +4703,9 @@ func (resp *GetAppResp) Success() bool {
 }
 
 type UpdateAppReqBodyBuilder struct {
-	name           string // 新的多维表格名字
-	nameFlag       bool
+	name     string // 新的多维表格名字
+	nameFlag bool
+
 	isAdvanced     bool // 多维表格是否开启高级权限
 	isAdvancedFlag bool
 }
@@ -4506,8 +4822,9 @@ func (builder *UpdateAppReqBuilder) Build() *UpdateAppReq {
 }
 
 type UpdateAppReqBody struct {
-	Name       *string `json:"name,omitempty"`        // 新的多维表格名字
-	IsAdvanced *bool   `json:"is_advanced,omitempty"` // 多维表格是否开启高级权限
+	Name *string `json:"name,omitempty"` // 新的多维表格名字
+
+	IsAdvanced *bool `json:"is_advanced,omitempty"` // 多维表格是否开启高级权限
 }
 
 type UpdateAppReq struct {
@@ -4638,7 +4955,8 @@ type CopyAppDashboardReq struct {
 
 type CopyAppDashboardRespData struct {
 	BlockId *string `json:"block_id,omitempty"` // 多维表格 block_id
-	Name    *string `json:"name,omitempty"`     // block 名称
+
+	Name *string `json:"name,omitempty"` // block 名称
 }
 
 type CopyAppDashboardResp struct {
@@ -4712,8 +5030,10 @@ type ListAppDashboardReq struct {
 
 type ListAppDashboardRespData struct {
 	Dashboards []*AppDashboard `json:"dashboards,omitempty"` // 仪表盘信息
-	PageToken  *string         `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore    *bool           `json:"has_more,omitempty"`   // 是否还有更多项
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListAppDashboardResp struct {
@@ -4890,10 +5210,13 @@ type ListAppRoleReq struct {
 }
 
 type ListAppRoleRespData struct {
-	Items     []*AppRole `json:"items,omitempty"`      // 自定义角色列表
-	PageToken *string    `json:"page_token,omitempty"` // 下一页分页的token
-	HasMore   *bool      `json:"has_more,omitempty"`   // 是否有下一页数据
-	Total     *int       `json:"total,omitempty"`      // 总数
+	Items []*AppRole `json:"items,omitempty"` // 自定义角色列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	Total *int `json:"total,omitempty"` // 总数
 }
 
 type ListAppRoleResp struct {
@@ -5402,10 +5725,13 @@ type ListAppRoleMemberReq struct {
 }
 
 type ListAppRoleMemberRespData struct {
-	Items     []*AppRoleMember `json:"items,omitempty"`      // 协作者列表
-	HasMore   *bool            `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string          `json:"page_token,omitempty"` // 下一页分页的token
-	Total     *int             `json:"total,omitempty"`      // 总数
+	Items []*AppRoleMember `json:"items,omitempty"` // 协作者列表
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Total *int `json:"total,omitempty"` // 总数
 }
 
 type ListAppRoleMemberResp struct {
@@ -5748,9 +6074,11 @@ type CreateAppTableReq struct {
 }
 
 type CreateAppTableRespData struct {
-	TableId       *string  `json:"table_id,omitempty"`        // table id
-	DefaultViewId *string  `json:"default_view_id,omitempty"` // 默认表格视图的id，该字段仅在请求参数中填写了default_view_name或fields才会返回
-	FieldIdList   []string `json:"field_id_list,omitempty"`   // 数据表初始字段的id列表，该字段仅在请求参数中填写了fields才会返回
+	TableId *string `json:"table_id,omitempty"` // table id
+
+	DefaultViewId *string `json:"default_view_id,omitempty"` // 默认表格视图的id，该字段仅在请求参数中填写了default_view_name或fields才会返回
+
+	FieldIdList []string `json:"field_id_list,omitempty"` // 数据表初始字段的id列表，该字段仅在请求参数中填写了fields才会返回
 }
 
 type CreateAppTableResp struct {
@@ -5872,10 +6200,13 @@ type ListAppTableReq struct {
 }
 
 type ListAppTableRespData struct {
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string     `json:"page_token,omitempty"` // 下一页分页的token
-	Total     *int        `json:"total,omitempty"`      // 总数
-	Items     []*AppTable `json:"items,omitempty"`      // 数据表信息
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Total *int `json:"total,omitempty"` // 总数
+
+	Items []*AppTable `json:"items,omitempty"` // 数据表信息
 }
 
 type ListAppTableResp struct {
@@ -6130,7 +6461,8 @@ type DeleteAppTableFieldReq struct {
 
 type DeleteAppTableFieldRespData struct {
 	FieldId *string `json:"field_id,omitempty"` // field id
-	Deleted *bool   `json:"deleted,omitempty"`  // 删除标记
+
+	Deleted *bool `json:"deleted,omitempty"` // 删除标记
 }
 
 type DeleteAppTableFieldResp struct {
@@ -6227,10 +6559,13 @@ type ListAppTableFieldReq struct {
 }
 
 type ListAppTableFieldRespData struct {
-	HasMore   *bool                   `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string                 `json:"page_token,omitempty"` // 下一页分页的token
-	Total     *int                    `json:"total,omitempty"`      // 总数
-	Items     []*AppTableFieldForList `json:"items,omitempty"`      // 字段信息
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Total *int `json:"total,omitempty"` // 总数
+
+	Items []*AppTableFieldForList `json:"items,omitempty"` // 字段信息
 }
 
 type ListAppTableFieldResp struct {
@@ -6523,10 +6858,13 @@ type ListAppTableFormFieldReq struct {
 }
 
 type ListAppTableFormFieldRespData struct {
-	Items     []*AppTableFormField `json:"items,omitempty"`      // 表单问题信息
-	PageToken *string              `json:"page_token,omitempty"` // 下一页分页的token
-	HasMore   *bool                `json:"has_more,omitempty"`   // 是否有下一页
-	Total     *int                 `json:"total,omitempty"`      // 总数
+	Items []*AppTableFormField `json:"items,omitempty"` // 表单问题信息
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
+
+	Total *int `json:"total,omitempty"` // 总数
 }
 
 type ListAppTableFormFieldResp struct {
@@ -6886,12 +7224,15 @@ func (resp *BatchDeleteAppTableRecordResp) Success() bool {
 }
 
 type BatchGetAppTableRecordReqBodyBuilder struct {
-	recordIds           []string // 记录 id 列表
-	recordIdsFlag       bool
-	userIdType          string // 此次调用中使用的用户 id 的类型
-	userIdTypeFlag      bool
-	withSharedUrl       bool // 控制是否返回记录的分享链接，true 表示返回分享链接
-	withSharedUrlFlag   bool
+	recordIds     []string // 记录 id 列表
+	recordIdsFlag bool
+
+	userIdType     string // 此次调用中使用的用户 id 的类型
+	userIdTypeFlag bool
+
+	withSharedUrl     bool // 控制是否返回记录的分享链接，true 表示返回分享链接
+	withSharedUrlFlag bool
+
 	automaticFields     bool // 控制是否返回自动计算的字段，true 表示返回
 	automaticFieldsFlag bool
 }
@@ -7068,10 +7409,13 @@ func (builder *BatchGetAppTableRecordReqBuilder) Build() *BatchGetAppTableRecord
 }
 
 type BatchGetAppTableRecordReqBody struct {
-	RecordIds       []string `json:"record_ids,omitempty"`       // 记录 id 列表
-	UserIdType      *string  `json:"user_id_type,omitempty"`     // 此次调用中使用的用户 id 的类型
-	WithSharedUrl   *bool    `json:"with_shared_url,omitempty"`  // 控制是否返回记录的分享链接，true 表示返回分享链接
-	AutomaticFields *bool    `json:"automatic_fields,omitempty"` // 控制是否返回自动计算的字段，true 表示返回
+	RecordIds []string `json:"record_ids,omitempty"` // 记录 id 列表
+
+	UserIdType *string `json:"user_id_type,omitempty"` // 此次调用中使用的用户 id 的类型
+
+	WithSharedUrl *bool `json:"with_shared_url,omitempty"` // 控制是否返回记录的分享链接，true 表示返回分享链接
+
+	AutomaticFields *bool `json:"automatic_fields,omitempty"` // 控制是否返回自动计算的字段，true 表示返回
 }
 
 type BatchGetAppTableRecordReq struct {
@@ -7080,9 +7424,11 @@ type BatchGetAppTableRecordReq struct {
 }
 
 type BatchGetAppTableRecordRespData struct {
-	Records            []*AppTableRecord `json:"records,omitempty"`              // 记录列表
-	ForbiddenRecordIds []string          `json:"forbidden_record_ids,omitempty"` // 禁止访问的记录列表(针对开启了高级权限的文档)
-	AbsentRecordIds    []string          `json:"absent_record_ids,omitempty"`    // 不存在的记录列表
+	Records []*AppTableRecord `json:"records,omitempty"` // 记录列表
+
+	ForbiddenRecordIds []string `json:"forbidden_record_ids,omitempty"` // 禁止访问的记录列表(针对开启了高级权限的文档)
+
+	AbsentRecordIds []string `json:"absent_record_ids,omitempty"` // 不存在的记录列表
 }
 
 type BatchGetAppTableRecordResp struct {
@@ -7370,7 +7716,8 @@ type DeleteAppTableRecordReq struct {
 }
 
 type DeleteAppTableRecordRespData struct {
-	Deleted  *bool   `json:"deleted,omitempty"`   // 是否成功删除
+	Deleted *bool `json:"deleted,omitempty"` // 是否成功删除
+
 	RecordId *string `json:"record_id,omitempty"` // 删除的记录id
 }
 
@@ -7619,10 +7966,13 @@ type ListAppTableRecordReq struct {
 }
 
 type ListAppTableRecordRespData struct {
-	HasMore   *bool             `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string           `json:"page_token,omitempty"` // 下一页分页的token
-	Total     *int              `json:"total,omitempty"`      // 本次请求返回的总记录数
-	Items     []*AppTableRecord `json:"items,omitempty"`      // 本次请求返回的全部记录列表
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Total *int `json:"total,omitempty"` // 本次请求返回的总记录数
+
+	Items []*AppTableRecord `json:"items,omitempty"` // 本次请求返回的全部记录列表
 }
 
 type ListAppTableRecordResp struct {
@@ -7636,14 +7986,18 @@ func (resp *ListAppTableRecordResp) Success() bool {
 }
 
 type SearchAppTableRecordReqBodyBuilder struct {
-	viewId              string // 视图Id,指定视图id则按照视图的筛选排序结果返回数据
-	viewIdFlag          bool
-	fieldNames          []string // 指定要返回的字段
-	fieldNamesFlag      bool
-	sort                []*Sort // 排序条件
-	sortFlag            bool
-	filter              *FilterInfo // 筛选条件
-	filterFlag          bool
+	viewId     string // 视图Id,指定视图id则按照视图的筛选排序结果返回数据
+	viewIdFlag bool
+
+	fieldNames     []string // 指定要返回的字段
+	fieldNamesFlag bool
+
+	sort     []*Sort // 排序条件
+	sortFlag bool
+
+	filter     *FilterInfo // 筛选条件
+	filterFlag bool
+
 	automaticFields     bool // 控制是否返回自动计算的字段, true 表示返回
 	automaticFieldsFlag bool
 }
@@ -7879,11 +8233,15 @@ func (builder *SearchAppTableRecordReqBuilder) Build() *SearchAppTableRecordReq 
 }
 
 type SearchAppTableRecordReqBody struct {
-	ViewId          *string     `json:"view_id,omitempty"`          // 视图Id,指定视图id则按照视图的筛选排序结果返回数据
-	FieldNames      []string    `json:"field_names,omitempty"`      // 指定要返回的字段
-	Sort            []*Sort     `json:"sort,omitempty"`             // 排序条件
-	Filter          *FilterInfo `json:"filter,omitempty"`           // 筛选条件
-	AutomaticFields *bool       `json:"automatic_fields,omitempty"` // 控制是否返回自动计算的字段, true 表示返回
+	ViewId *string `json:"view_id,omitempty"` // 视图Id,指定视图id则按照视图的筛选排序结果返回数据
+
+	FieldNames []string `json:"field_names,omitempty"` // 指定要返回的字段
+
+	Sort []*Sort `json:"sort,omitempty"` // 排序条件
+
+	Filter *FilterInfo `json:"filter,omitempty"` // 筛选条件
+
+	AutomaticFields *bool `json:"automatic_fields,omitempty"` // 控制是否返回自动计算的字段, true 表示返回
 }
 
 type SearchAppTableRecordReq struct {
@@ -7894,10 +8252,13 @@ type SearchAppTableRecordReq struct {
 }
 
 type SearchAppTableRecordRespData struct {
-	Items     []*AppTableRecord `json:"items,omitempty"`      // record 结果
-	HasMore   *bool             `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string           `json:"page_token,omitempty"` // 下一页分页的token
-	Total     *int              `json:"total,omitempty"`      // 总数
+	Items []*AppTableRecord `json:"items,omitempty"` // record 结果
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Total *int `json:"total,omitempty"` // 总数
 }
 
 type SearchAppTableRecordResp struct {
@@ -8256,10 +8617,13 @@ type ListAppTableViewReq struct {
 }
 
 type ListAppTableViewRespData struct {
-	Items     []*AppTableView `json:"items,omitempty"`      // 视图信息
-	PageToken *string         `json:"page_token,omitempty"` // 下一页分页的token
-	HasMore   *bool           `json:"has_more,omitempty"`   // 是否有下一页数据
-	Total     *int            `json:"total,omitempty"`      // 总数
+	Items []*AppTableView `json:"items,omitempty"` // 视图信息
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	Total *int `json:"total,omitempty"` // 总数
 }
 
 type ListAppTableViewResp struct {
@@ -8275,6 +8639,7 @@ func (resp *ListAppTableViewResp) Success() bool {
 type PatchAppTableViewReqBodyBuilder struct {
 	viewName     string // 视图名称
 	viewNameFlag bool
+
 	property     *AppTableViewProperty // 视图属性
 	propertyFlag bool
 }
@@ -8407,8 +8772,9 @@ func (builder *PatchAppTableViewReqBuilder) Build() *PatchAppTableViewReq {
 }
 
 type PatchAppTableViewReqBody struct {
-	ViewName *string               `json:"view_name,omitempty"` // 视图名称
-	Property *AppTableViewProperty `json:"property,omitempty"`  // 视图属性
+	ViewName *string `json:"view_name,omitempty"` // 视图名称
+
+	Property *AppTableViewProperty `json:"property,omitempty"` // 视图属性
 }
 
 type PatchAppTableViewReq struct {

@@ -90,32 +90,46 @@ const (
 
 type AccessRecord struct {
 	AccessRecordId *string `json:"access_record_id,omitempty"` // 门禁记录 ID
-	UserId         *string `json:"user_id,omitempty"`          // 门禁记录所属用户 ID
-	DeviceId       *string `json:"device_id,omitempty"`        // 门禁设备 ID
-	IsClockIn      *bool   `json:"is_clock_in,omitempty"`      // 是否是打卡
-	AccessTime     *string `json:"access_time,omitempty"`      // 访问时间，单位秒
-	AccessType     *string `json:"access_type,omitempty"`      // 识别方式
-	AccessData     *string `json:"access_data,omitempty"`      // 识别相关数据，根据 access_type 不同，取值不同
-	IsDoorOpen     *bool   `json:"is_door_open,omitempty"`     // 是否开门
+
+	UserId *string `json:"user_id,omitempty"` // 门禁记录所属用户 ID
+
+	DeviceId *string `json:"device_id,omitempty"` // 门禁设备 ID
+
+	IsClockIn *bool `json:"is_clock_in,omitempty"` // 是否是打卡
+
+	AccessTime *string `json:"access_time,omitempty"` // 访问时间，单位秒
+
+	AccessType *string `json:"access_type,omitempty"` // 识别方式
+
+	AccessData *string `json:"access_data,omitempty"` // 识别相关数据，根据 access_type 不同，取值不同
+
+	IsDoorOpen *bool `json:"is_door_open,omitempty"` // 是否开门
 }
 
 type AccessRecordBuilder struct {
 	accessRecordId     string // 门禁记录 ID
 	accessRecordIdFlag bool
-	userId             string // 门禁记录所属用户 ID
-	userIdFlag         bool
-	deviceId           string // 门禁设备 ID
-	deviceIdFlag       bool
-	isClockIn          bool // 是否是打卡
-	isClockInFlag      bool
-	accessTime         string // 访问时间，单位秒
-	accessTimeFlag     bool
-	accessType         string // 识别方式
-	accessTypeFlag     bool
-	accessData         string // 识别相关数据，根据 access_type 不同，取值不同
-	accessDataFlag     bool
-	isDoorOpen         bool // 是否开门
-	isDoorOpenFlag     bool
+
+	userId     string // 门禁记录所属用户 ID
+	userIdFlag bool
+
+	deviceId     string // 门禁设备 ID
+	deviceIdFlag bool
+
+	isClockIn     bool // 是否是打卡
+	isClockInFlag bool
+
+	accessTime     string // 访问时间，单位秒
+	accessTimeFlag bool
+
+	accessType     string // 识别方式
+	accessTypeFlag bool
+
+	accessData     string // 识别相关数据，根据 access_type 不同，取值不同
+	accessDataFlag bool
+
+	isDoorOpen     bool // 是否开门
+	isDoorOpenFlag bool
 }
 
 func NewAccessRecordBuilder() *AccessRecordBuilder {
@@ -233,13 +247,15 @@ func (builder *AccessRecordBuilder) Build() *AccessRecord {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -277,21 +293,27 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type Device struct {
-	DeviceId   *string   `json:"device_id,omitempty"`   // 门禁设备 ID
-	DeviceName *string   `json:"device_name,omitempty"` // 设备名称
-	DeviceSn   *string   `json:"device_sn,omitempty"`   // 设备 SN 码
-	Property   *Property `json:"property,omitempty"`    // 设备属性
+	DeviceId *string `json:"device_id,omitempty"` // 门禁设备 ID
+
+	DeviceName *string `json:"device_name,omitempty"` // 设备名称
+
+	DeviceSn *string `json:"device_sn,omitempty"` // 设备 SN 码
+
+	Property *Property `json:"property,omitempty"` // 设备属性
 }
 
 type DeviceBuilder struct {
-	deviceId       string // 门禁设备 ID
-	deviceIdFlag   bool
+	deviceId     string // 门禁设备 ID
+	deviceIdFlag bool
+
 	deviceName     string // 设备名称
 	deviceNameFlag bool
-	deviceSn       string // 设备 SN 码
-	deviceSnFlag   bool
-	property       *Property // 设备属性
-	propertyFlag   bool
+
+	deviceSn     string // 设备 SN 码
+	deviceSnFlag bool
+
+	property     *Property // 设备属性
+	propertyFlag bool
 }
 
 func NewDeviceBuilder() *DeviceBuilder {
@@ -356,13 +378,15 @@ func (builder *DeviceBuilder) Build() *Device {
 }
 
 type DeviceExternal struct {
-	Id   *string `json:"id,omitempty"`   // 设备id
+	Id *string `json:"id,omitempty"` // 设备id
+
 	Name *string `json:"name,omitempty"` // 设备名称
 }
 
 type DeviceExternalBuilder struct {
-	id       string // 设备id
-	idFlag   bool
+	id     string // 设备id
+	idFlag bool
+
 	name     string // 设备名称
 	nameFlag bool
 }
@@ -404,13 +428,15 @@ func (builder *DeviceExternalBuilder) Build() *DeviceExternal {
 }
 
 type Feature struct {
-	Card         *int  `json:"card,omitempty"`          // 卡号
+	Card *int `json:"card,omitempty"` // 卡号
+
 	FaceUploaded *bool `json:"face_uploaded,omitempty"` // 是否已上传人脸图片
 }
 
 type FeatureBuilder struct {
-	card             int // 卡号
-	cardFlag         bool
+	card     int // 卡号
+	cardFlag bool
+
 	faceUploaded     bool // 是否已上传人脸图片
 	faceUploadedFlag bool
 }
@@ -452,16 +478,20 @@ func (builder *FeatureBuilder) Build() *Feature {
 }
 
 type File struct {
-	Files    io.Reader `json:"files,omitempty"`     // 人脸图片内容
-	FileType *string   `json:"file_type,omitempty"` // 文件类型,可选的类型有jpg,png
-	FileName *string   `json:"file_name,omitempty"` // 带后缀的文件名
+	Files io.Reader `json:"files,omitempty"` // 人脸图片内容
+
+	FileType *string `json:"file_type,omitempty"` // 文件类型,可选的类型有jpg,png
+
+	FileName *string `json:"file_name,omitempty"` // 带后缀的文件名
 }
 
 type FileBuilder struct {
-	files        io.Reader // 人脸图片内容
-	filesFlag    bool
+	files     io.Reader // 人脸图片内容
+	filesFlag bool
+
 	fileType     string // 文件类型,可选的类型有jpg,png
 	fileTypeFlag bool
+
 	fileName     string // 带后缀的文件名
 	fileNameFlag bool
 }
@@ -516,15 +546,19 @@ func (builder *FileBuilder) Build() *File {
 
 type OpeningTimeExternal struct {
 	ValidDay *OpeningTimeValidDayExternal `json:"valid_day,omitempty"` // 有效日期
-	Weekdays []int                        `json:"weekdays,omitempty"`  // 有效星期
+
+	Weekdays []int `json:"weekdays,omitempty"` // 有效星期
+
 	DayTimes []*OpeningTimePeriodExternal `json:"day_times,omitempty"` // 有效时间
 }
 
 type OpeningTimeExternalBuilder struct {
 	validDay     *OpeningTimeValidDayExternal // 有效日期
 	validDayFlag bool
+
 	weekdays     []int // 有效星期
 	weekdaysFlag bool
+
 	dayTimes     []*OpeningTimePeriodExternal // 有效时间
 	dayTimesFlag bool
 }
@@ -577,14 +611,16 @@ func (builder *OpeningTimeExternalBuilder) Build() *OpeningTimeExternal {
 
 type OpeningTimePeriodExternal struct {
 	StartHhmm *int `json:"start_hhmm,omitempty"` // 起始时间
-	EndHhmm   *int `json:"end_hhmm,omitempty"`   // 结束时间
+
+	EndHhmm *int `json:"end_hhmm,omitempty"` // 结束时间
 }
 
 type OpeningTimePeriodExternalBuilder struct {
 	startHhmm     int // 起始时间
 	startHhmmFlag bool
-	endHhmm       int // 结束时间
-	endHhmmFlag   bool
+
+	endHhmm     int // 结束时间
+	endHhmmFlag bool
 }
 
 func NewOpeningTimePeriodExternalBuilder() *OpeningTimePeriodExternalBuilder {
@@ -625,14 +661,16 @@ func (builder *OpeningTimePeriodExternalBuilder) Build() *OpeningTimePeriodExter
 
 type OpeningTimeValidDayExternal struct {
 	StartDay *int `json:"start_day,omitempty"` // 权限开始时间
-	EndDay   *int `json:"end_day,omitempty"`   // 权限结束时间
+
+	EndDay *int `json:"end_day,omitempty"` // 权限结束时间
 }
 
 type OpeningTimeValidDayExternalBuilder struct {
 	startDay     int // 权限开始时间
 	startDayFlag bool
-	endDay       int // 权限结束时间
-	endDayFlag   bool
+
+	endDay     int // 权限结束时间
+	endDayFlag bool
 }
 
 func NewOpeningTimeValidDayExternalBuilder() *OpeningTimeValidDayExternalBuilder {
@@ -672,27 +710,37 @@ func (builder *OpeningTimeValidDayExternalBuilder) Build() *OpeningTimeValidDayE
 }
 
 type Property struct {
-	Version                *string `json:"version,omitempty"`                   // 设备版本号
-	CurrentDeviceFaceCount *int    `json:"current_device_face_count,omitempty"` // 当前设备人脸数量
-	MaxFaceCapacity        *int    `json:"max_face_capacity,omitempty"`         // 设备最大人脸容量
-	OnlineStatus           *int    `json:"online_status,omitempty"`             // 在线状态
-	DeviceName             *string `json:"device_name,omitempty"`               // 设备名称
-	IsClockIn              *bool   `json:"is_clock_in,omitempty"`               // 是否是打卡
+	Version *string `json:"version,omitempty"` // 设备版本号
+
+	CurrentDeviceFaceCount *int `json:"current_device_face_count,omitempty"` // 当前设备人脸数量
+
+	MaxFaceCapacity *int `json:"max_face_capacity,omitempty"` // 设备最大人脸容量
+
+	OnlineStatus *int `json:"online_status,omitempty"` // 在线状态
+
+	DeviceName *string `json:"device_name,omitempty"` // 设备名称
+
+	IsClockIn *bool `json:"is_clock_in,omitempty"` // 是否是打卡
 }
 
 type PropertyBuilder struct {
-	version                    string // 设备版本号
-	versionFlag                bool
+	version     string // 设备版本号
+	versionFlag bool
+
 	currentDeviceFaceCount     int // 当前设备人脸数量
 	currentDeviceFaceCountFlag bool
-	maxFaceCapacity            int // 设备最大人脸容量
-	maxFaceCapacityFlag        bool
-	onlineStatus               int // 在线状态
-	onlineStatusFlag           bool
-	deviceName                 string // 设备名称
-	deviceNameFlag             bool
-	isClockIn                  bool // 是否是打卡
-	isClockInFlag              bool
+
+	maxFaceCapacity     int // 设备最大人脸容量
+	maxFaceCapacityFlag bool
+
+	onlineStatus     int // 在线状态
+	onlineStatusFlag bool
+
+	deviceName     string // 设备名称
+	deviceNameFlag bool
+
+	isClockIn     bool // 是否是打卡
+	isClockInFlag bool
 }
 
 func NewPropertyBuilder() *PropertyBuilder {
@@ -784,39 +832,57 @@ func (builder *PropertyBuilder) Build() *Property {
 }
 
 type Rule struct {
-	Id           *string              `json:"id,omitempty"`            // 权限组id
-	Name         *string              `json:"name,omitempty"`          // 权限组名称
-	Devices      []*DeviceExternal    `json:"devices,omitempty"`       // 权限组包含的设备
-	UserCount    *string              `json:"user_count,omitempty"`    // 权限组包含的员工个数
-	Users        []*UserExternal      `json:"users,omitempty"`         // 权限组包含的员工列表
-	VisitorCount *string              `json:"visitor_count,omitempty"` // 权限组包含的访客个数
-	Visitors     []*UserExternal      `json:"visitors,omitempty"`      // 权限组包含的访客列表
-	RemindFace   *bool                `json:"remind_face,omitempty"`   // 是否通知人员录入
-	OpeningTime  *OpeningTimeExternal `json:"opening_time,omitempty"`  // 开门时间段
-	IsTemp       *bool                `json:"is_temp,omitempty"`       // 是否为临时权限组
+	Id *string `json:"id,omitempty"` // 权限组id
+
+	Name *string `json:"name,omitempty"` // 权限组名称
+
+	Devices []*DeviceExternal `json:"devices,omitempty"` // 权限组包含的设备
+
+	UserCount *string `json:"user_count,omitempty"` // 权限组包含的员工个数
+
+	Users []*UserExternal `json:"users,omitempty"` // 权限组包含的员工列表
+
+	VisitorCount *string `json:"visitor_count,omitempty"` // 权限组包含的访客个数
+
+	Visitors []*UserExternal `json:"visitors,omitempty"` // 权限组包含的访客列表
+
+	RemindFace *bool `json:"remind_face,omitempty"` // 是否通知人员录入
+
+	OpeningTime *OpeningTimeExternal `json:"opening_time,omitempty"` // 开门时间段
+
+	IsTemp *bool `json:"is_temp,omitempty"` // 是否为临时权限组
 }
 
 type RuleBuilder struct {
-	id               string // 权限组id
-	idFlag           bool
-	name             string // 权限组名称
-	nameFlag         bool
-	devices          []*DeviceExternal // 权限组包含的设备
-	devicesFlag      bool
-	userCount        string // 权限组包含的员工个数
-	userCountFlag    bool
-	users            []*UserExternal // 权限组包含的员工列表
-	usersFlag        bool
+	id     string // 权限组id
+	idFlag bool
+
+	name     string // 权限组名称
+	nameFlag bool
+
+	devices     []*DeviceExternal // 权限组包含的设备
+	devicesFlag bool
+
+	userCount     string // 权限组包含的员工个数
+	userCountFlag bool
+
+	users     []*UserExternal // 权限组包含的员工列表
+	usersFlag bool
+
 	visitorCount     string // 权限组包含的访客个数
 	visitorCountFlag bool
-	visitors         []*UserExternal // 权限组包含的访客列表
-	visitorsFlag     bool
-	remindFace       bool // 是否通知人员录入
-	remindFaceFlag   bool
-	openingTime      *OpeningTimeExternal // 开门时间段
-	openingTimeFlag  bool
-	isTemp           bool // 是否为临时权限组
-	isTempFlag       bool
+
+	visitors     []*UserExternal // 权限组包含的访客列表
+	visitorsFlag bool
+
+	remindFace     bool // 是否通知人员录入
+	remindFaceFlag bool
+
+	openingTime     *OpeningTimeExternal // 开门时间段
+	openingTimeFlag bool
+
+	isTemp     bool // 是否为临时权限组
+	isTempFlag bool
 }
 
 func NewRuleBuilder() *RuleBuilder {
@@ -957,14 +1023,16 @@ func (builder *RuleBuilder) Build() *Rule {
 
 type User struct {
 	Feature *Feature `json:"feature,omitempty"` // 用户特征
-	UserId  *string  `json:"user_id,omitempty"` // 用户 ID
+
+	UserId *string `json:"user_id,omitempty"` // 用户 ID
 }
 
 type UserBuilder struct {
 	feature     *Feature // 用户特征
 	featureFlag bool
-	userId      string // 用户 ID
-	userIdFlag  bool
+
+	userId     string // 用户 ID
+	userIdFlag bool
 }
 
 func NewUserBuilder() *UserBuilder {
@@ -1003,22 +1071,30 @@ func (builder *UserBuilder) Build() *User {
 }
 
 type UserExternal struct {
-	UserType     *int    `json:"user_type,omitempty"`     // 用户类型
-	UserId       *string `json:"user_id,omitempty"`       // 用户id
-	UserName     *string `json:"user_name,omitempty"`     // 用户名称
-	PhoneNum     *string `json:"phone_num,omitempty"`     // 电话号码
+	UserType *int `json:"user_type,omitempty"` // 用户类型
+
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	UserName *string `json:"user_name,omitempty"` // 用户名称
+
+	PhoneNum *string `json:"phone_num,omitempty"` // 电话号码
+
 	DepartmentId *string `json:"department_id,omitempty"` // 部门id
 }
 
 type UserExternalBuilder struct {
-	userType         int // 用户类型
-	userTypeFlag     bool
-	userId           string // 用户id
-	userIdFlag       bool
-	userName         string // 用户名称
-	userNameFlag     bool
-	phoneNum         string // 电话号码
-	phoneNumFlag     bool
+	userType     int // 用户类型
+	userTypeFlag bool
+
+	userId     string // 用户id
+	userIdFlag bool
+
+	userName     string // 用户名称
+	userNameFlag bool
+
+	phoneNum     string // 电话号码
+	phoneNumFlag bool
+
 	departmentId     string // 部门id
 	departmentIdFlag bool
 }
@@ -1099,16 +1175,20 @@ func (builder *UserExternalBuilder) Build() *UserExternal {
 }
 
 type UserId struct {
-	UserId  *string `json:"user_id,omitempty"`  //
-	OpenId  *string `json:"open_id,omitempty"`  //
+	UserId *string `json:"user_id,omitempty"` //
+
+	OpenId *string `json:"open_id,omitempty"` //
+
 	UnionId *string `json:"union_id,omitempty"` //
 }
 
 type UserIdBuilder struct {
-	userId      string //
-	userIdFlag  bool
-	openId      string //
-	openIdFlag  bool
+	userId     string //
+	userIdFlag bool
+
+	openId     string //
+	openIdFlag bool
+
 	unionId     string //
 	unionIdFlag bool
 }
@@ -1239,9 +1319,11 @@ type ListAccessRecordReq struct {
 }
 
 type ListAccessRecordRespData struct {
-	Items     []*AccessRecord `json:"items,omitempty"`      // -
-	PageToken *string         `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool           `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*AccessRecord `json:"items,omitempty"` // -
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListAccessRecordResp struct {
@@ -1488,8 +1570,9 @@ func (resp *DeleteRuleExternalResp) Success() bool {
 type DeviceBindRuleExternalReqBodyBuilder struct {
 	deviceId     string // 设备id
 	deviceIdFlag bool
-	ruleIds      []string // 权限组id列表
-	ruleIdsFlag  bool
+
+	ruleIds     []string // 权限组id列表
+	ruleIdsFlag bool
 }
 
 func NewDeviceBindRuleExternalReqBodyBuilder() *DeviceBindRuleExternalReqBodyBuilder {
@@ -1594,8 +1677,9 @@ func (builder *DeviceBindRuleExternalReqBuilder) Build() *DeviceBindRuleExternal
 }
 
 type DeviceBindRuleExternalReqBody struct {
-	DeviceId *string  `json:"device_id,omitempty"` // 设备id
-	RuleIds  []string `json:"rule_ids,omitempty"`  // 权限组id列表
+	DeviceId *string `json:"device_id,omitempty"` // 设备id
+
+	RuleIds []string `json:"rule_ids,omitempty"` // 权限组id列表
 }
 
 type DeviceBindRuleExternalReq struct {
@@ -1780,9 +1864,11 @@ type ListUserReq struct {
 }
 
 type ListUserRespData struct {
-	Items     []*User `json:"items,omitempty"`      // -
+	Items []*User `json:"items,omitempty"` // -
+
 	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有更多项
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListUserResp struct {
@@ -2150,11 +2236,16 @@ func (resp *DeleteVisitorResp) Success() bool {
 
 type P2AccessRecordCreatedV1Data struct {
 	AccessRecordId *string `json:"access_record_id,omitempty"` // 门禁记录 ID
-	UserId         *UserId `json:"user_id,omitempty"`          // 用户 ID
-	DeviceId       *string `json:"device_id,omitempty"`        // 设备 ID
-	IsClockIn      *bool   `json:"is_clock_in,omitempty"`      // 是否打卡
-	IsDoorOpen     *bool   `json:"is_door_open,omitempty"`     // 是否开门
-	AccessTime     *string `json:"access_time,omitempty"`      // 识别时间 （单位：秒）
+
+	UserId *UserId `json:"user_id,omitempty"` // 用户 ID
+
+	DeviceId *string `json:"device_id,omitempty"` // 设备 ID
+
+	IsClockIn *bool `json:"is_clock_in,omitempty"` // 是否打卡
+
+	IsDoorOpen *bool `json:"is_door_open,omitempty"` // 是否开门
+
+	AccessTime *string `json:"access_time,omitempty"` // 识别时间 （单位：秒）
 }
 
 type P2AccessRecordCreatedV1 struct {
@@ -2168,9 +2259,11 @@ func (m *P2AccessRecordCreatedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2UserUpdatedV1Data struct {
-	UserId       *UserId `json:"user_id,omitempty"`       // 用户 ID
-	Card         *int    `json:"card,omitempty"`          // 卡号
-	FaceUploaded *bool   `json:"face_uploaded,omitempty"` // 是否上传人脸图片
+	UserId *UserId `json:"user_id,omitempty"` // 用户 ID
+
+	Card *int `json:"card,omitempty"` // 卡号
+
+	FaceUploaded *bool `json:"face_uploaded,omitempty"` // 是否上传人脸图片
 }
 
 type P2UserUpdatedV1 struct {

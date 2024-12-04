@@ -59,13 +59,15 @@ func (builder *BankCardBuilder) Build() *BankCard {
 }
 
 type BankCardEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type BankCardEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -107,36 +109,52 @@ func (builder *BankCardEntityBuilder) Build() *BankCardEntity {
 }
 
 type BankEntity struct {
-	AccountName   *string `json:"account_name,omitempty"`   // 账户名
-	BankName      *string `json:"bank_name,omitempty"`      // 银行名称
+	AccountName *string `json:"account_name,omitempty"` // 账户名
+
+	BankName *string `json:"bank_name,omitempty"` // 银行名称
+
 	AccountNumber *string `json:"account_number,omitempty"` // 账户ID
-	Phone         *string `json:"phone,omitempty"`          // 电话
-	Contacts      *string `json:"contacts,omitempty"`       // 联系人
-	TaxNumber     *string `json:"tax_number,omitempty"`     // 传真号码
-	Address       *string `json:"address,omitempty"`        // 联系地址
-	IdNumber      *string `json:"id_number,omitempty"`      // id号
-	Email         *string `json:"email,omitempty"`          // 邮箱
+
+	Phone *string `json:"phone,omitempty"` // 电话
+
+	Contacts *string `json:"contacts,omitempty"` // 联系人
+
+	TaxNumber *string `json:"tax_number,omitempty"` // 传真号码
+
+	Address *string `json:"address,omitempty"` // 联系地址
+
+	IdNumber *string `json:"id_number,omitempty"` // id号
+
+	Email *string `json:"email,omitempty"` // 邮箱
 }
 
 type BankEntityBuilder struct {
-	accountName       string // 账户名
-	accountNameFlag   bool
-	bankName          string // 银行名称
-	bankNameFlag      bool
+	accountName     string // 账户名
+	accountNameFlag bool
+
+	bankName     string // 银行名称
+	bankNameFlag bool
+
 	accountNumber     string // 账户ID
 	accountNumberFlag bool
-	phone             string // 电话
-	phoneFlag         bool
-	contacts          string // 联系人
-	contactsFlag      bool
-	taxNumber         string // 传真号码
-	taxNumberFlag     bool
-	address           string // 联系地址
-	addressFlag       bool
-	idNumber          string // id号
-	idNumberFlag      bool
-	email             string // 邮箱
-	emailFlag         bool
+
+	phone     string // 电话
+	phoneFlag bool
+
+	contacts     string // 联系人
+	contactsFlag bool
+
+	taxNumber     string // 传真号码
+	taxNumberFlag bool
+
+	address     string // 联系地址
+	addressFlag bool
+
+	idNumber     string // id号
+	idNumberFlag bool
+
+	email     string // 邮箱
+	emailFlag bool
 }
 
 func NewBankEntityBuilder() *BankEntityBuilder {
@@ -267,15 +285,17 @@ func (builder *BankEntityBuilder) Build() *BankEntity {
 }
 
 type BankInfo struct {
-	BankType *string     `json:"bank_type,omitempty"` // 甲乙方信息类型
-	Value    *BankEntity `json:"value,omitempty"`     // 值
+	BankType *string `json:"bank_type,omitempty"` // 甲乙方信息类型
+
+	Value *BankEntity `json:"value,omitempty"` // 值
 }
 
 type BankInfoBuilder struct {
 	bankType     string // 甲乙方信息类型
 	bankTypeFlag bool
-	value        *BankEntity // 值
-	valueFlag    bool
+
+	value     *BankEntity // 值
+	valueFlag bool
 }
 
 func NewBankInfoBuilder() *BankInfoBuilder {
@@ -314,30 +334,42 @@ func (builder *BankInfoBuilder) Build() *BankInfo {
 }
 
 type BodyEntity struct {
-	Address             *string `json:"address,omitempty"`              // 地址
-	Contacts            *string `json:"contacts,omitempty"`             // 联系人
-	Email               *string `json:"email,omitempty"`                // 邮箱
-	Phone               *string `json:"phone,omitempty"`                // 电话
-	IdNumber            *string `json:"id_number,omitempty"`            // ID
+	Address *string `json:"address,omitempty"` // 地址
+
+	Contacts *string `json:"contacts,omitempty"` // 联系人
+
+	Email *string `json:"email,omitempty"` // 邮箱
+
+	Phone *string `json:"phone,omitempty"` // 电话
+
+	IdNumber *string `json:"id_number,omitempty"` // ID
+
 	LegalRepresentative *string `json:"legal_representative,omitempty"` // 法人代表
-	Party               *string `json:"party,omitempty"`                // 当事人
+
+	Party *string `json:"party,omitempty"` // 当事人
 }
 
 type BodyEntityBuilder struct {
-	address                 string // 地址
-	addressFlag             bool
-	contacts                string // 联系人
-	contactsFlag            bool
-	email                   string // 邮箱
-	emailFlag               bool
-	phone                   string // 电话
-	phoneFlag               bool
-	idNumber                string // ID
-	idNumberFlag            bool
+	address     string // 地址
+	addressFlag bool
+
+	contacts     string // 联系人
+	contactsFlag bool
+
+	email     string // 邮箱
+	emailFlag bool
+
+	phone     string // 电话
+	phoneFlag bool
+
+	idNumber     string // ID
+	idNumberFlag bool
+
 	legalRepresentative     string // 法人代表
 	legalRepresentativeFlag bool
-	party                   string // 当事人
-	partyFlag               bool
+
+	party     string // 当事人
+	partyFlag bool
 }
 
 func NewBodyEntityBuilder() *BodyEntityBuilder {
@@ -442,15 +474,17 @@ func (builder *BodyEntityBuilder) Build() *BodyEntity {
 }
 
 type BodyInfo struct {
-	BodyType *string     `json:"body_type,omitempty"` // 主体类型
-	Value    *BodyEntity `json:"value,omitempty"`     // 值
+	BodyType *string `json:"body_type,omitempty"` // 主体类型
+
+	Value *BodyEntity `json:"value,omitempty"` // 值
 }
 
 type BodyInfoBuilder struct {
 	bodyType     string // 主体类型
 	bodyTypeFlag bool
-	value        *BodyEntity // 值
-	valueFlag    bool
+
+	value     *BodyEntity // 值
+	valueFlag bool
 }
 
 func NewBodyInfoBuilder() *BodyInfoBuilder {
@@ -489,13 +523,15 @@ func (builder *BodyInfoBuilder) Build() *BodyInfo {
 }
 
 type BusinessEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type BusinessEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -599,13 +635,15 @@ func (builder *ChinesePassportBuilder) Build() *ChinesePassport {
 }
 
 type ChinesePassportEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type ChinesePassportEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -648,12 +686,14 @@ func (builder *ChinesePassportEntityBuilder) Build() *ChinesePassportEntity {
 
 type Currency struct {
 	CurrencyName *string `json:"currency_name,omitempty"` // 币种名称
+
 	CurrencyText *string `json:"currency_text,omitempty"` // 币种符号
 }
 
 type CurrencyBuilder struct {
 	currencyName     string // 币种名称
 	currencyNameFlag bool
+
 	currencyText     string // 币种符号
 	currencyTextFlag bool
 }
@@ -695,13 +735,15 @@ func (builder *CurrencyBuilder) Build() *Currency {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -770,15 +812,17 @@ func (builder *DocChunkBboxItemBuilder) Build() *DocChunkBboxItem {
 }
 
 type DocChunkPosition struct {
-	PageNumbers []int               `json:"page_numbers,omitempty"` // pdf文件解析结果所在页数
-	Bboxes      []*DocChunkBboxItem `json:"bboxes,omitempty"`       // pdf文件解析结果bbox信息
+	PageNumbers []int `json:"page_numbers,omitempty"` // pdf文件解析结果所在页数
+
+	Bboxes []*DocChunkBboxItem `json:"bboxes,omitempty"` // pdf文件解析结果bbox信息
 }
 
 type DocChunkPositionBuilder struct {
 	pageNumbers     []int // pdf文件解析结果所在页数
 	pageNumbersFlag bool
-	bboxes          []*DocChunkBboxItem // pdf文件解析结果bbox信息
-	bboxesFlag      bool
+
+	bboxes     []*DocChunkBboxItem // pdf文件解析结果bbox信息
+	bboxesFlag bool
 }
 
 func NewDocChunkPositionBuilder() *DocChunkPositionBuilder {
@@ -816,48 +860,72 @@ func (builder *DocChunkPositionBuilder) Build() *DocChunkPosition {
 }
 
 type DocChunkResult struct {
-	Id          *int                 `json:"id,omitempty"`           // 段落索引
-	Type        *string              `json:"type,omitempty"`         // 该chunk属于哪一种文档元素
-	Positions   *DocChunkPosition    `json:"positions,omitempty"`    // chunk的位置信息，pdf文档中会有bbox和page_no
-	Text        *string              `json:"text,omitempty"`         // 段落文本内容
-	Level       *int                 `json:"level,omitempty"`        // 段落层级，类似飞书文档的Hn
-	Parent      *int                 `json:"parent,omitempty"`       // 当前段落父节点索引
-	Children    []int                `json:"children,omitempty"`     // 当前段落所有子节点索引
-	Label       *string              `json:"label,omitempty"`        // 段落的语义标签，（以论文为例，会有title, author, abstract, introduction, related works...）
-	BlockId     *string              `json:"block_id,omitempty"`     // 飞书文档的block_id字段
+	Id *int `json:"id,omitempty"` // 段落索引
+
+	Type *string `json:"type,omitempty"` // 该chunk属于哪一种文档元素
+
+	Positions *DocChunkPosition `json:"positions,omitempty"` // chunk的位置信息，pdf文档中会有bbox和page_no
+
+	Text *string `json:"text,omitempty"` // 段落文本内容
+
+	Level *int `json:"level,omitempty"` // 段落层级，类似飞书文档的Hn
+
+	Parent *int `json:"parent,omitempty"` // 当前段落父节点索引
+
+	Children []int `json:"children,omitempty"` // 当前段落所有子节点索引
+
+	Label *string `json:"label,omitempty"` // 段落的语义标签，（以论文为例，会有title, author, abstract, introduction, related works...）
+
+	BlockId *string `json:"block_id,omitempty"` // 飞书文档的block_id字段
+
 	TableDetail *DocChunkTableDetail `json:"table_detail,omitempty"` // 如chunk=table，则此字段包含表格信息
-	LlmDetail   *LlmDetail           `json:"llm_detail,omitempty"`   // 多模态返回的详细信息
-	ImageDetail *ImageDetail         `json:"image_detail,omitempty"` // 图片内容详细信息
-	SlideIndex  *string              `json:"slide_index,omitempty"`  // pptx文件里面的页码
+
+	LlmDetail *LlmDetail `json:"llm_detail,omitempty"` // 多模态返回的详细信息
+
+	ImageDetail *ImageDetail `json:"image_detail,omitempty"` // 图片内容详细信息
+
+	SlideIndex *string `json:"slide_index,omitempty"` // pptx文件里面的页码
 }
 
 type DocChunkResultBuilder struct {
-	id              int // 段落索引
-	idFlag          bool
-	type_           string // 该chunk属于哪一种文档元素
-	typeFlag        bool
-	positions       *DocChunkPosition // chunk的位置信息，pdf文档中会有bbox和page_no
-	positionsFlag   bool
-	text            string // 段落文本内容
-	textFlag        bool
-	level           int // 段落层级，类似飞书文档的Hn
-	levelFlag       bool
-	parent          int // 当前段落父节点索引
-	parentFlag      bool
-	children        []int // 当前段落所有子节点索引
-	childrenFlag    bool
-	label           string // 段落的语义标签，（以论文为例，会有title, author, abstract, introduction, related works...）
-	labelFlag       bool
-	blockId         string // 飞书文档的block_id字段
-	blockIdFlag     bool
+	id     int // 段落索引
+	idFlag bool
+
+	type_    string // 该chunk属于哪一种文档元素
+	typeFlag bool
+
+	positions     *DocChunkPosition // chunk的位置信息，pdf文档中会有bbox和page_no
+	positionsFlag bool
+
+	text     string // 段落文本内容
+	textFlag bool
+
+	level     int // 段落层级，类似飞书文档的Hn
+	levelFlag bool
+
+	parent     int // 当前段落父节点索引
+	parentFlag bool
+
+	children     []int // 当前段落所有子节点索引
+	childrenFlag bool
+
+	label     string // 段落的语义标签，（以论文为例，会有title, author, abstract, introduction, related works...）
+	labelFlag bool
+
+	blockId     string // 飞书文档的block_id字段
+	blockIdFlag bool
+
 	tableDetail     *DocChunkTableDetail // 如chunk=table，则此字段包含表格信息
 	tableDetailFlag bool
-	llmDetail       *LlmDetail // 多模态返回的详细信息
-	llmDetailFlag   bool
+
+	llmDetail     *LlmDetail // 多模态返回的详细信息
+	llmDetailFlag bool
+
 	imageDetail     *ImageDetail // 图片内容详细信息
 	imageDetailFlag bool
-	slideIndex      string // pptx文件里面的页码
-	slideIndexFlag  bool
+
+	slideIndex     string // pptx文件里面的页码
+	slideIndexFlag bool
 }
 
 func NewDocChunkResultBuilder() *DocChunkResultBuilder {
@@ -1035,40 +1103,60 @@ func (builder *DocChunkResultBuilder) Build() *DocChunkResult {
 }
 
 type DocChunkTableCell struct {
-	Type        *string `json:"type,omitempty"`          // 现在只有paragraph，目前只支持文本形式的单元格内容返回
-	Text        *string `json:"text,omitempty"`          // 文本内容
-	X0          *string `json:"x0,omitempty"`            // 单元格的bbox坐标（左）
-	Y0          *string `json:"y0,omitempty"`            // 单元格的bbox坐标（上）
-	X1          *string `json:"x1,omitempty"`            // 单元格的bbox坐标（右）
-	Y1          *string `json:"y1,omitempty"`            // 单元格的bbox坐标（下）
-	RowIndex    *int    `json:"row_index,omitempty"`     // 单元格行逻辑坐标，表示当前单元格在第rowIndex行
-	ColIndex    *int    `json:"col_index,omitempty"`     // 单元格列逻辑坐标，表示当前单元格在第colIndex列
-	RowSpan     *int    `json:"row_span,omitempty"`      // 单元格占的行数
-	ColSpan     *int    `json:"col_span,omitempty"`      // 单元格占的列数
-	IsMergeCell *bool   `json:"is_merge_cell,omitempty"` // 是否合并单元格
+	Type *string `json:"type,omitempty"` // 现在只有paragraph，目前只支持文本形式的单元格内容返回
+
+	Text *string `json:"text,omitempty"` // 文本内容
+
+	X0 *string `json:"x0,omitempty"` // 单元格的bbox坐标（左）
+
+	Y0 *string `json:"y0,omitempty"` // 单元格的bbox坐标（上）
+
+	X1 *string `json:"x1,omitempty"` // 单元格的bbox坐标（右）
+
+	Y1 *string `json:"y1,omitempty"` // 单元格的bbox坐标（下）
+
+	RowIndex *int `json:"row_index,omitempty"` // 单元格行逻辑坐标，表示当前单元格在第rowIndex行
+
+	ColIndex *int `json:"col_index,omitempty"` // 单元格列逻辑坐标，表示当前单元格在第colIndex列
+
+	RowSpan *int `json:"row_span,omitempty"` // 单元格占的行数
+
+	ColSpan *int `json:"col_span,omitempty"` // 单元格占的列数
+
+	IsMergeCell *bool `json:"is_merge_cell,omitempty"` // 是否合并单元格
 }
 
 type DocChunkTableCellBuilder struct {
-	type_           string // 现在只有paragraph，目前只支持文本形式的单元格内容返回
-	typeFlag        bool
-	text            string // 文本内容
-	textFlag        bool
-	x0              string // 单元格的bbox坐标（左）
-	x0Flag          bool
-	y0              string // 单元格的bbox坐标（上）
-	y0Flag          bool
-	x1              string // 单元格的bbox坐标（右）
-	x1Flag          bool
-	y1              string // 单元格的bbox坐标（下）
-	y1Flag          bool
-	rowIndex        int // 单元格行逻辑坐标，表示当前单元格在第rowIndex行
-	rowIndexFlag    bool
-	colIndex        int // 单元格列逻辑坐标，表示当前单元格在第colIndex列
-	colIndexFlag    bool
-	rowSpan         int // 单元格占的行数
-	rowSpanFlag     bool
-	colSpan         int // 单元格占的列数
-	colSpanFlag     bool
+	type_    string // 现在只有paragraph，目前只支持文本形式的单元格内容返回
+	typeFlag bool
+
+	text     string // 文本内容
+	textFlag bool
+
+	x0     string // 单元格的bbox坐标（左）
+	x0Flag bool
+
+	y0     string // 单元格的bbox坐标（上）
+	y0Flag bool
+
+	x1     string // 单元格的bbox坐标（右）
+	x1Flag bool
+
+	y1     string // 单元格的bbox坐标（下）
+	y1Flag bool
+
+	rowIndex     int // 单元格行逻辑坐标，表示当前单元格在第rowIndex行
+	rowIndexFlag bool
+
+	colIndex     int // 单元格列逻辑坐标，表示当前单元格在第colIndex列
+	colIndexFlag bool
+
+	rowSpan     int // 单元格占的行数
+	rowSpanFlag bool
+
+	colSpan     int // 单元格占的列数
+	colSpanFlag bool
+
 	isMergeCell     bool // 是否合并单元格
 	isMergeCellFlag bool
 }
@@ -1227,18 +1315,22 @@ func (builder *DocChunkTableCellBuilder) Build() *DocChunkTableCell {
 }
 
 type DocChunkTableDetail struct {
-	TableIdx *int                `json:"table_idx,omitempty"` // 全文的第n个表格
-	Text     *string             `json:"text,omitempty"`      // 表格的所有文字内容，'\t\n'代表换行，'\t'代表新单元格
-	Cells    []*DocChunkTableRow `json:"cells,omitempty"`     // 表格中全部cell的数据
+	TableIdx *int `json:"table_idx,omitempty"` // 全文的第n个表格
+
+	Text *string `json:"text,omitempty"` // 表格的所有文字内容，'\t\n'代表换行，'\t'代表新单元格
+
+	Cells []*DocChunkTableRow `json:"cells,omitempty"` // 表格中全部cell的数据
 }
 
 type DocChunkTableDetailBuilder struct {
 	tableIdx     int // 全文的第n个表格
 	tableIdxFlag bool
-	text         string // 表格的所有文字内容，'\t\n'代表换行，'\t'代表新单元格
-	textFlag     bool
-	cells        []*DocChunkTableRow // 表格中全部cell的数据
-	cellsFlag    bool
+
+	text     string // 表格的所有文字内容，'\t\n'代表换行，'\t'代表新单元格
+	textFlag bool
+
+	cells     []*DocChunkTableRow // 表格中全部cell的数据
+	cellsFlag bool
 }
 
 func NewDocChunkTableDetailBuilder() *DocChunkTableDetailBuilder {
@@ -1321,13 +1413,15 @@ func (builder *DocChunkTableRowBuilder) Build() *DocChunkTableRow {
 }
 
 type DrivingEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type DrivingEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -1400,21 +1494,27 @@ func (builder *DrvingLicenseBuilder) Build() *DrvingLicense {
 }
 
 type ExtractCopy struct {
-	CopyNum      *int    `json:"copy_num,omitempty"`      // 盖章份数
+	CopyNum *int `json:"copy_num,omitempty"` // 盖章份数
+
 	OriginalCopy *string `json:"original_copy,omitempty"` // 从原文中抽取的盖章份数
-	Key          *string `json:"key,omitempty"`           // 盖章文件类型
-	Text         *string `json:"text,omitempty"`          // 原文有关盖章份数的描述
+
+	Key *string `json:"key,omitempty"` // 盖章文件类型
+
+	Text *string `json:"text,omitempty"` // 原文有关盖章份数的描述
 }
 
 type ExtractCopyBuilder struct {
-	copyNum          int // 盖章份数
-	copyNumFlag      bool
+	copyNum     int // 盖章份数
+	copyNumFlag bool
+
 	originalCopy     string // 从原文中抽取的盖章份数
 	originalCopyFlag bool
-	key              string // 盖章文件类型
-	keyFlag          bool
-	text             string // 原文有关盖章份数的描述
-	textFlag         bool
+
+	key     string // 盖章文件类型
+	keyFlag bool
+
+	text     string // 原文有关盖章份数的描述
+	textFlag bool
 }
 
 func NewExtractCopyBuilder() *ExtractCopyBuilder {
@@ -1481,12 +1581,14 @@ func (builder *ExtractCopyBuilder) Build() *ExtractCopy {
 
 type ExtractCurrency struct {
 	CurrencyName *string `json:"currency_name,omitempty"` // 币种名称
+
 	CurrencyText *string `json:"currency_text,omitempty"` // 币种符号
 }
 
 type ExtractCurrencyBuilder struct {
 	currencyName     string // 币种名称
 	currencyNameFlag bool
+
 	currencyText     string // 币种符号
 	currencyTextFlag bool
 }
@@ -1528,18 +1630,22 @@ func (builder *ExtractCurrencyBuilder) Build() *ExtractCurrency {
 }
 
 type ExtractPrice struct {
-	ContractPrice         *float64 `json:"contract_price,omitempty"`          // 交易金额
-	ContractPriceOriginal *string  `json:"contract_price_original,omitempty"` // 从原文中抽取的交易金额
-	Text                  *string  `json:"text,omitempty"`                    // 原文中描述交易金额的文字
+	ContractPrice *float64 `json:"contract_price,omitempty"` // 交易金额
+
+	ContractPriceOriginal *string `json:"contract_price_original,omitempty"` // 从原文中抽取的交易金额
+
+	Text *string `json:"text,omitempty"` // 原文中描述交易金额的文字
 }
 
 type ExtractPriceBuilder struct {
-	contractPrice             float64 // 交易金额
-	contractPriceFlag         bool
+	contractPrice     float64 // 交易金额
+	contractPriceFlag bool
+
 	contractPriceOriginal     string // 从原文中抽取的交易金额
 	contractPriceOriginalFlag bool
-	text                      string // 原文中描述交易金额的文字
-	textFlag                  bool
+
+	text     string // 原文中描述交易金额的文字
+	textFlag bool
 }
 
 func NewExtractPriceBuilder() *ExtractPriceBuilder {
@@ -1593,12 +1699,14 @@ func (builder *ExtractPriceBuilder) Build() *ExtractPrice {
 
 type ExtractTerm struct {
 	InitialTime *string `json:"initial_time,omitempty"` // 合同持续时长
+
 	InitialUnit *string `json:"initial_unit,omitempty"` // 持续时长单位
 }
 
 type ExtractTermBuilder struct {
 	initialTime     string // 合同持续时长
 	initialTimeFlag bool
+
 	initialUnit     string // 持续时长单位
 	initialUnitFlag bool
 }
@@ -1640,33 +1748,47 @@ func (builder *ExtractTermBuilder) Build() *ExtractTerm {
 }
 
 type ExtractTime struct {
-	TimeStart         *string      `json:"time_start,omitempty"`          // 开始时间
-	TimeEnd           *string      `json:"time_end,omitempty"`            // 结束时间
-	OriginalTimeStart *string      `json:"original_time_start,omitempty"` // 原文中抽取出的开始时间
-	OriginalTimeEnd   *string      `json:"original_time_end,omitempty"`   // 原文中抽取出的结束时间
-	TextStart         *string      `json:"text_start,omitempty"`          // 原文中关于开始时间的描述
-	TextEnd           *string      `json:"text_end,omitempty"`            // 原文中关于结束时间的描述
-	InitialTerm       *ExtractTerm `json:"initial_term,omitempty"`        // 合同持续时长
-	TextInitialTerm   *string      `json:"text_initial_term,omitempty"`   // 原文中关于持续时间的描述
+	TimeStart *string `json:"time_start,omitempty"` // 开始时间
+
+	TimeEnd *string `json:"time_end,omitempty"` // 结束时间
+
+	OriginalTimeStart *string `json:"original_time_start,omitempty"` // 原文中抽取出的开始时间
+
+	OriginalTimeEnd *string `json:"original_time_end,omitempty"` // 原文中抽取出的结束时间
+
+	TextStart *string `json:"text_start,omitempty"` // 原文中关于开始时间的描述
+
+	TextEnd *string `json:"text_end,omitempty"` // 原文中关于结束时间的描述
+
+	InitialTerm *ExtractTerm `json:"initial_term,omitempty"` // 合同持续时长
+
+	TextInitialTerm *string `json:"text_initial_term,omitempty"` // 原文中关于持续时间的描述
 }
 
 type ExtractTimeBuilder struct {
-	timeStart             string // 开始时间
-	timeStartFlag         bool
-	timeEnd               string // 结束时间
-	timeEndFlag           bool
+	timeStart     string // 开始时间
+	timeStartFlag bool
+
+	timeEnd     string // 结束时间
+	timeEndFlag bool
+
 	originalTimeStart     string // 原文中抽取出的开始时间
 	originalTimeStartFlag bool
-	originalTimeEnd       string // 原文中抽取出的结束时间
-	originalTimeEndFlag   bool
-	textStart             string // 原文中关于开始时间的描述
-	textStartFlag         bool
-	textEnd               string // 原文中关于结束时间的描述
-	textEndFlag           bool
-	initialTerm           *ExtractTerm // 合同持续时长
-	initialTermFlag       bool
-	textInitialTerm       string // 原文中关于持续时间的描述
-	textInitialTermFlag   bool
+
+	originalTimeEnd     string // 原文中抽取出的结束时间
+	originalTimeEndFlag bool
+
+	textStart     string // 原文中关于开始时间的描述
+	textStartFlag bool
+
+	textEnd     string // 原文中关于结束时间的描述
+	textEndFlag bool
+
+	initialTerm     *ExtractTerm // 合同持续时长
+	initialTermFlag bool
+
+	textInitialTerm     string // 原文中关于持续时间的描述
+	textInitialTermFlag bool
 }
 
 func NewExtractTimeBuilder() *ExtractTimeBuilder {
@@ -1783,13 +1905,15 @@ func (builder *ExtractTimeBuilder) Build() *ExtractTime {
 }
 
 type FoodManageEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type FoodManageEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -1862,13 +1986,15 @@ func (builder *FoodManageLicenseBuilder) Build() *FoodManageLicense {
 }
 
 type FoodProduceEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type FoodProduceEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -1972,13 +2098,15 @@ func (builder *HealthCertificateBuilder) Build() *HealthCertificate {
 }
 
 type HealthCertificateEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type HealthCertificateEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -2051,13 +2179,15 @@ func (builder *HkmMainlandTravelPermitBuilder) Build() *HkmMainlandTravelPermit 
 }
 
 type HkmMainlandTravelPermitEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type HkmMainlandTravelPermitEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -2099,19 +2229,25 @@ func (builder *HkmMainlandTravelPermitEntityBuilder) Build() *HkmMainlandTravelP
 }
 
 type IdCard struct {
-	Entities    []*IdEntity `json:"entities,omitempty"`     // 识别的实体列表
-	Side        *int        `json:"side,omitempty"`         // 正反面，1为身份证-姓名页，0为身份证-国徽页
-	Conners     []int       `json:"conners,omitempty"`      // 四角坐标[x0,y0,x1,y1,x2,y2,x3,y3]
-	FaceConners []int       `json:"face_conners,omitempty"` // 人像四角坐标[x0,y0,x1,y1,x2,y2,x3,y3]
+	Entities []*IdEntity `json:"entities,omitempty"` // 识别的实体列表
+
+	Side *int `json:"side,omitempty"` // 正反面，1为身份证-姓名页，0为身份证-国徽页
+
+	Conners []int `json:"conners,omitempty"` // 四角坐标[x0,y0,x1,y1,x2,y2,x3,y3]
+
+	FaceConners []int `json:"face_conners,omitempty"` // 人像四角坐标[x0,y0,x1,y1,x2,y2,x3,y3]
 }
 
 type IdCardBuilder struct {
-	entities        []*IdEntity // 识别的实体列表
-	entitiesFlag    bool
-	side            int // 正反面，1为身份证-姓名页，0为身份证-国徽页
-	sideFlag        bool
-	conners         []int // 四角坐标[x0,y0,x1,y1,x2,y2,x3,y3]
-	connersFlag     bool
+	entities     []*IdEntity // 识别的实体列表
+	entitiesFlag bool
+
+	side     int // 正反面，1为身份证-姓名页，0为身份证-国徽页
+	sideFlag bool
+
+	conners     []int // 四角坐标[x0,y0,x1,y1,x2,y2,x3,y3]
+	connersFlag bool
+
 	faceConners     []int // 人像四角坐标[x0,y0,x1,y1,x2,y2,x3,y3]
 	faceConnersFlag bool
 }
@@ -2176,13 +2312,15 @@ func (builder *IdCardBuilder) Build() *IdCard {
 }
 
 type IdEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type IdEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -2224,18 +2362,22 @@ func (builder *IdEntityBuilder) Build() *IdEntity {
 }
 
 type ImageDetail struct {
-	Base64  *string  `json:"base64,omitempty"`  // 图片完整内容base64字符串
-	Caption *string  `json:"caption,omitempty"` // 图片描述，目前为当前图片的前一段和后一段\n拼接
-	Links   []string `json:"links,omitempty"`   // 图片url
+	Base64 *string `json:"base64,omitempty"` // 图片完整内容base64字符串
+
+	Caption *string `json:"caption,omitempty"` // 图片描述，目前为当前图片的前一段和后一段\n拼接
+
+	Links []string `json:"links,omitempty"` // 图片url
 }
 
 type ImageDetailBuilder struct {
-	base64      string // 图片完整内容base64字符串
-	base64Flag  bool
+	base64     string // 图片完整内容base64字符串
+	base64Flag bool
+
 	caption     string // 图片描述，目前为当前图片的前一段和后一段\n拼接
 	captionFlag bool
-	links       []string // 图片url
-	linksFlag   bool
+
+	links     []string // 图片url
+	linksFlag bool
 }
 
 func NewImageDetailBuilder() *ImageDetailBuilder {
@@ -2287,31 +2429,45 @@ func (builder *ImageDetailBuilder) Build() *ImageDetail {
 }
 
 type LlmConfig struct {
-	Model            *string       `json:"model,omitempty"`             // 模型名称
-	Messages         []*LlmMessage `json:"messages,omitempty"`          // 消息
-	MaxTokens        *int          `json:"max_tokens,omitempty"`        // 默认1024，最多生成多少个tokens
-	MessageType      *string       `json:"message_type,omitempty"`      // 消息类型
-	N                *int          `json:"n,omitempty"`                 // 默认1，每个query返回多少个预测结果
-	Temperature      *float64      `json:"temperature,omitempty"`       // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
-	PresencePenalty  *float64      `json:"presence_penalty,omitempty"`  // 默认0，>0惩罚模型输出已经在输出中出现过的token
-	FrequencyPenalty *float64      `json:"frequency_penalty,omitempty"` // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
+	Model *string `json:"model,omitempty"` // 模型名称
+
+	Messages []*LlmMessage `json:"messages,omitempty"` // 消息
+
+	MaxTokens *int `json:"max_tokens,omitempty"` // 默认1024，最多生成多少个tokens
+
+	MessageType *string `json:"message_type,omitempty"` // 消息类型
+
+	N *int `json:"n,omitempty"` // 默认1，每个query返回多少个预测结果
+
+	Temperature *float64 `json:"temperature,omitempty"` // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
+
+	PresencePenalty *float64 `json:"presence_penalty,omitempty"` // 默认0，>0惩罚模型输出已经在输出中出现过的token
+
+	FrequencyPenalty *float64 `json:"frequency_penalty,omitempty"` // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
 }
 
 type LlmConfigBuilder struct {
-	model                string // 模型名称
-	modelFlag            bool
-	messages             []*LlmMessage // 消息
-	messagesFlag         bool
-	maxTokens            int // 默认1024，最多生成多少个tokens
-	maxTokensFlag        bool
-	messageType          string // 消息类型
-	messageTypeFlag      bool
-	n                    int // 默认1，每个query返回多少个预测结果
-	nFlag                bool
-	temperature          float64 // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
-	temperatureFlag      bool
-	presencePenalty      float64 // 默认0，>0惩罚模型输出已经在输出中出现过的token
-	presencePenaltyFlag  bool
+	model     string // 模型名称
+	modelFlag bool
+
+	messages     []*LlmMessage // 消息
+	messagesFlag bool
+
+	maxTokens     int // 默认1024，最多生成多少个tokens
+	maxTokensFlag bool
+
+	messageType     string // 消息类型
+	messageTypeFlag bool
+
+	n     int // 默认1，每个query返回多少个预测结果
+	nFlag bool
+
+	temperature     float64 // 默认0，越大模型结果越发散，如果为0默认每次取概率最高的作为next token。
+	temperatureFlag bool
+
+	presencePenalty     float64 // 默认0，>0惩罚模型输出已经在输出中出现过的token
+	presencePenaltyFlag bool
+
 	frequencyPenalty     float64 // 默认0，>0惩罚模型输出同样的token，输出次数越多惩罚越大
 	frequencyPenaltyFlag bool
 }
@@ -2430,13 +2586,15 @@ func (builder *LlmConfigBuilder) Build() *LlmConfig {
 }
 
 type LlmContent struct {
-	Type    *string `json:"type,omitempty"`    // 内容类型：text, image_zip
+	Type *string `json:"type,omitempty"` // 内容类型：text, image_zip
+
 	Content *string `json:"content,omitempty"` // 内容：text类型就是对应的输入文本， image_zip是文件的相对路径，文件需要以zip格式输入
 }
 
 type LlmContentBuilder struct {
-	type_       string // 内容类型：text, image_zip
-	typeFlag    bool
+	type_    string // 内容类型：text, image_zip
+	typeFlag bool
+
 	content     string // 内容：text类型就是对应的输入文本， image_zip是文件的相对路径，文件需要以zip格式输入
 	contentFlag bool
 }
@@ -2478,16 +2636,20 @@ func (builder *LlmContentBuilder) Build() *LlmContent {
 }
 
 type LlmDetail struct {
-	QueryId      *int      `json:"query_id,omitempty"`      // query在原始输入batch中的序号，从0开始
-	Usage        *LlmUsage `json:"usage,omitempty"`         // 统计输入和输出的token个数
-	FinishReason *string   `json:"finish_reason,omitempty"` // 表明模型停止生成的原因，如'length', 'stop'
+	QueryId *int `json:"query_id,omitempty"` // query在原始输入batch中的序号，从0开始
+
+	Usage *LlmUsage `json:"usage,omitempty"` // 统计输入和输出的token个数
+
+	FinishReason *string `json:"finish_reason,omitempty"` // 表明模型停止生成的原因，如'length', 'stop'
 }
 
 type LlmDetailBuilder struct {
-	queryId          int // query在原始输入batch中的序号，从0开始
-	queryIdFlag      bool
-	usage            *LlmUsage // 统计输入和输出的token个数
-	usageFlag        bool
+	queryId     int // query在原始输入batch中的序号，从0开始
+	queryIdFlag bool
+
+	usage     *LlmUsage // 统计输入和输出的token个数
+	usageFlag bool
+
 	finishReason     string // 表明模型停止生成的原因，如'length', 'stop'
 	finishReasonFlag bool
 }
@@ -2541,13 +2703,15 @@ func (builder *LlmDetailBuilder) Build() *LlmDetail {
 }
 
 type LlmMessage struct {
-	Role     *string       `json:"role,omitempty"`     // 角色名
+	Role *string `json:"role,omitempty"` // 角色名
+
 	Contents []*LlmContent `json:"contents,omitempty"` // 内容信息，如果同时输入多张图片和多段文本，默认将所有图片置于开头，取第一段文本作为输入的prompt；如果是图片，目前1个query (dict)最多输入3张图片，每张图片大小不超过3000*3000
 }
 
 type LlmMessageBuilder struct {
-	role         string // 角色名
-	roleFlag     bool
+	role     string // 角色名
+	roleFlag bool
+
 	contents     []*LlmContent // 内容信息，如果同时输入多张图片和多段文本，默认将所有图片置于开头，取第一段文本作为输入的prompt；如果是图片，目前1个query (dict)最多输入3张图片，每张图片大小不超过3000*3000
 	contentsFlag bool
 }
@@ -2588,18 +2752,22 @@ func (builder *LlmMessageBuilder) Build() *LlmMessage {
 }
 
 type LlmUsage struct {
-	PromptTokens     *int `json:"prompt_tokens,omitempty"`     // 当前输入token的个数
+	PromptTokens *int `json:"prompt_tokens,omitempty"` // 当前输入token的个数
+
 	CompletionTokens *int `json:"completion_tokens,omitempty"` // 当前输出token的个数
-	TotalTokens      *int `json:"total_tokens,omitempty"`      // 输入+输出token的总个数
+
+	TotalTokens *int `json:"total_tokens,omitempty"` // 输入+输出token的总个数
 }
 
 type LlmUsageBuilder struct {
-	promptTokens         int // 当前输入token的个数
-	promptTokensFlag     bool
+	promptTokens     int // 当前输入token的个数
+	promptTokensFlag bool
+
 	completionTokens     int // 当前输出token的个数
 	completionTokensFlag bool
-	totalTokens          int // 输入+输出token的总个数
-	totalTokensFlag      bool
+
+	totalTokens     int // 输入+输出token的总个数
+	totalTokensFlag bool
 }
 
 func NewLlmUsageBuilder() *LlmUsageBuilder {
@@ -2683,13 +2851,15 @@ func (builder *RecognizedEntitiesBuilder) Build() *RecognizedEntities {
 }
 
 type RecognizedEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type RecognizedEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -2731,84 +2901,132 @@ func (builder *RecognizedEntityBuilder) Build() *RecognizedEntity {
 }
 
 type Resume struct {
-	FileMd5          *string              `json:"file_md5,omitempty"`          // 文件标识ID，依据文件内容自动生成
-	Content          *string              `json:"content,omitempty"`           // 文本内容，当接口返回成功时，该字段才存在
-	NewContent       *string              `json:"new_content,omitempty"`       // 经过排序后的文本内容，当接口返回成功时，该字段才存在
-	Name             *string              `json:"name,omitempty"`              // 名称
-	Email            *string              `json:"email,omitempty"`             // 邮箱
-	Mobile           *string              `json:"mobile,omitempty"`            // 手机号码
-	MobileIsVirtual  *bool                `json:"mobile_is_virtual,omitempty"` // 手机号码是否虚拟号码
-	CountryCode      *string              `json:"country_code,omitempty"`      // 手机号码国家编码
-	Educations       []*ResumeEducation   `json:"educations,omitempty"`        // 教育经历
-	Careers          []*ResumeCareer      `json:"careers,omitempty"`           // 职业经历
-	Projects         []*ResumeProject     `json:"projects,omitempty"`          // 项目经历
-	WorkYear         *int                 `json:"work_year,omitempty"`         // 工作年限，为空表示工作年限未知，数字单位为年，整数
-	DateOfBirth      *string              `json:"date_of_birth,omitempty"`     // 生日，格式YYYY-MM-DD
-	Gender           *int                 `json:"gender,omitempty"`            // 性别
-	WillingPositions []string             `json:"willing_positions,omitempty"` // 希望获得的职位列表
-	CurrentLocation  *string              `json:"current_location,omitempty"`  // 当前工作地点(城市)
-	WillingLocations []string             `json:"willing_locations,omitempty"` // 希望工作地点列表
-	HomeLocation     *string              `json:"home_location,omitempty"`     // 家乡(城市)
-	Languages        []*ResumeLanguage    `json:"languages,omitempty"`         // 语言
-	Awards           []*ResumeAward       `json:"awards,omitempty"`            // 获奖
-	Certificates     []*ResumeCertificate `json:"certificates,omitempty"`      // 证书
-	Competitions     []*ResumeCompetition `json:"competitions,omitempty"`      // 竞赛
-	SelfEvaluation   *string              `json:"self_evaluation,omitempty"`   // 自我评价
-	Urls             []string             `json:"urls,omitempty"`              // 链接列表
-	SocialLinks      []string             `json:"social_links,omitempty"`      // 社交链接
+	FileMd5 *string `json:"file_md5,omitempty"` // 文件标识ID，依据文件内容自动生成
+
+	Content *string `json:"content,omitempty"` // 文本内容，当接口返回成功时，该字段才存在
+
+	NewContent *string `json:"new_content,omitempty"` // 经过排序后的文本内容，当接口返回成功时，该字段才存在
+
+	Name *string `json:"name,omitempty"` // 名称
+
+	Email *string `json:"email,omitempty"` // 邮箱
+
+	Mobile *string `json:"mobile,omitempty"` // 手机号码
+
+	MobileIsVirtual *bool `json:"mobile_is_virtual,omitempty"` // 手机号码是否虚拟号码
+
+	CountryCode *string `json:"country_code,omitempty"` // 手机号码国家编码
+
+	Educations []*ResumeEducation `json:"educations,omitempty"` // 教育经历
+
+	Careers []*ResumeCareer `json:"careers,omitempty"` // 职业经历
+
+	Projects []*ResumeProject `json:"projects,omitempty"` // 项目经历
+
+	WorkYear *int `json:"work_year,omitempty"` // 工作年限，为空表示工作年限未知，数字单位为年，整数
+
+	DateOfBirth *string `json:"date_of_birth,omitempty"` // 生日，格式YYYY-MM-DD
+
+	Gender *int `json:"gender,omitempty"` // 性别
+
+	WillingPositions []string `json:"willing_positions,omitempty"` // 希望获得的职位列表
+
+	CurrentLocation *string `json:"current_location,omitempty"` // 当前工作地点(城市)
+
+	WillingLocations []string `json:"willing_locations,omitempty"` // 希望工作地点列表
+
+	HomeLocation *string `json:"home_location,omitempty"` // 家乡(城市)
+
+	Languages []*ResumeLanguage `json:"languages,omitempty"` // 语言
+
+	Awards []*ResumeAward `json:"awards,omitempty"` // 获奖
+
+	Certificates []*ResumeCertificate `json:"certificates,omitempty"` // 证书
+
+	Competitions []*ResumeCompetition `json:"competitions,omitempty"` // 竞赛
+
+	SelfEvaluation *string `json:"self_evaluation,omitempty"` // 自我评价
+
+	Urls []string `json:"urls,omitempty"` // 链接列表
+
+	SocialLinks []string `json:"social_links,omitempty"` // 社交链接
 }
 
 type ResumeBuilder struct {
-	fileMd5              string // 文件标识ID，依据文件内容自动生成
-	fileMd5Flag          bool
-	content              string // 文本内容，当接口返回成功时，该字段才存在
-	contentFlag          bool
-	newContent           string // 经过排序后的文本内容，当接口返回成功时，该字段才存在
-	newContentFlag       bool
-	name                 string // 名称
-	nameFlag             bool
-	email                string // 邮箱
-	emailFlag            bool
-	mobile               string // 手机号码
-	mobileFlag           bool
-	mobileIsVirtual      bool // 手机号码是否虚拟号码
-	mobileIsVirtualFlag  bool
-	countryCode          string // 手机号码国家编码
-	countryCodeFlag      bool
-	educations           []*ResumeEducation // 教育经历
-	educationsFlag       bool
-	careers              []*ResumeCareer // 职业经历
-	careersFlag          bool
-	projects             []*ResumeProject // 项目经历
-	projectsFlag         bool
-	workYear             int // 工作年限，为空表示工作年限未知，数字单位为年，整数
-	workYearFlag         bool
-	dateOfBirth          string // 生日，格式YYYY-MM-DD
-	dateOfBirthFlag      bool
-	gender               int // 性别
-	genderFlag           bool
+	fileMd5     string // 文件标识ID，依据文件内容自动生成
+	fileMd5Flag bool
+
+	content     string // 文本内容，当接口返回成功时，该字段才存在
+	contentFlag bool
+
+	newContent     string // 经过排序后的文本内容，当接口返回成功时，该字段才存在
+	newContentFlag bool
+
+	name     string // 名称
+	nameFlag bool
+
+	email     string // 邮箱
+	emailFlag bool
+
+	mobile     string // 手机号码
+	mobileFlag bool
+
+	mobileIsVirtual     bool // 手机号码是否虚拟号码
+	mobileIsVirtualFlag bool
+
+	countryCode     string // 手机号码国家编码
+	countryCodeFlag bool
+
+	educations     []*ResumeEducation // 教育经历
+	educationsFlag bool
+
+	careers     []*ResumeCareer // 职业经历
+	careersFlag bool
+
+	projects     []*ResumeProject // 项目经历
+	projectsFlag bool
+
+	workYear     int // 工作年限，为空表示工作年限未知，数字单位为年，整数
+	workYearFlag bool
+
+	dateOfBirth     string // 生日，格式YYYY-MM-DD
+	dateOfBirthFlag bool
+
+	gender     int // 性别
+	genderFlag bool
+
 	willingPositions     []string // 希望获得的职位列表
 	willingPositionsFlag bool
-	currentLocation      string // 当前工作地点(城市)
-	currentLocationFlag  bool
+
+	currentLocation     string // 当前工作地点(城市)
+	currentLocationFlag bool
+
 	willingLocations     []string // 希望工作地点列表
 	willingLocationsFlag bool
-	homeLocation         string // 家乡(城市)
-	homeLocationFlag     bool
-	languages            []*ResumeLanguage // 语言
-	languagesFlag        bool
-	awards               []*ResumeAward // 获奖
-	awardsFlag           bool
-	certificates         []*ResumeCertificate // 证书
-	certificatesFlag     bool
-	competitions         []*ResumeCompetition // 竞赛
-	competitionsFlag     bool
-	selfEvaluation       string // 自我评价
-	selfEvaluationFlag   bool
-	urls                 []string // 链接列表
-	urlsFlag             bool
-	socialLinks          []string // 社交链接
-	socialLinksFlag      bool
+
+	homeLocation     string // 家乡(城市)
+	homeLocationFlag bool
+
+	languages     []*ResumeLanguage // 语言
+	languagesFlag bool
+
+	awards     []*ResumeAward // 获奖
+	awardsFlag bool
+
+	certificates     []*ResumeCertificate // 证书
+	certificatesFlag bool
+
+	competitions     []*ResumeCompetition // 竞赛
+	competitionsFlag bool
+
+	selfEvaluation     string // 自我评价
+	selfEvaluationFlag bool
+
+	urls     []string // 链接列表
+	urlsFlag bool
+
+	socialLinks     []string // 社交链接
+	socialLinksFlag bool
 }
 
 func NewResumeBuilder() *ResumeBuilder {
@@ -3136,16 +3354,20 @@ func (builder *ResumeBuilder) Build() *Resume {
 }
 
 type ResumeAward struct {
-	Award       *string `json:"award,omitempty"`       // 奖项
-	Date        *string `json:"date,omitempty"`        // 获奖时间，格式：YYYY
+	Award *string `json:"award,omitempty"` // 奖项
+
+	Date *string `json:"date,omitempty"` // 获奖时间，格式：YYYY
+
 	Description *string `json:"description,omitempty"` // 描述
 }
 
 type ResumeAwardBuilder struct {
-	award           string // 奖项
-	awardFlag       bool
-	date            string // 获奖时间，格式：YYYY
-	dateFlag        bool
+	award     string // 奖项
+	awardFlag bool
+
+	date     string // 获奖时间，格式：YYYY
+	dateFlag bool
+
 	description     string // 描述
 	descriptionFlag bool
 }
@@ -3200,34 +3422,50 @@ func (builder *ResumeAwardBuilder) Build() *ResumeAward {
 }
 
 type ResumeCareer struct {
-	Company        *string `json:"company,omitempty"`         // 公司名称
-	StartDate      *string `json:"start_date,omitempty"`      // 开始时间,格式：YYYY-MM-DD
-	StartTime      *string `json:"start_time,omitempty"`      // 始时间,格式：YYYY-MM-DD,跟start_date值一样
-	EndDate        *string `json:"end_date,omitempty"`        // 结束时间,格式：YYYY-MM-DD
-	EndTime        *string `json:"end_time,omitempty"`        // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值为其他时，end_date==end_time
-	Title          *string `json:"title,omitempty"`           // 职位
-	Type           *int    `json:"type,omitempty"`            // 工作类型
-	TypeStr        *string `json:"type_str,omitempty"`        // 工作类型——'实习'、'全职'
+	Company *string `json:"company,omitempty"` // 公司名称
+
+	StartDate *string `json:"start_date,omitempty"` // 开始时间,格式：YYYY-MM-DD
+
+	StartTime *string `json:"start_time,omitempty"` // 始时间,格式：YYYY-MM-DD,跟start_date值一样
+
+	EndDate *string `json:"end_date,omitempty"` // 结束时间,格式：YYYY-MM-DD
+
+	EndTime *string `json:"end_time,omitempty"` // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值为其他时，end_date==end_time
+
+	Title *string `json:"title,omitempty"` // 职位
+
+	Type *int `json:"type,omitempty"` // 工作类型
+
+	TypeStr *string `json:"type_str,omitempty"` // 工作类型——'实习'、'全职'
+
 	JobDescription *string `json:"job_description,omitempty"` // 工作描述
 }
 
 type ResumeCareerBuilder struct {
-	company            string // 公司名称
-	companyFlag        bool
-	startDate          string // 开始时间,格式：YYYY-MM-DD
-	startDateFlag      bool
-	startTime          string // 始时间,格式：YYYY-MM-DD,跟start_date值一样
-	startTimeFlag      bool
-	endDate            string // 结束时间,格式：YYYY-MM-DD
-	endDateFlag        bool
-	endTime            string // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值为其他时，end_date==end_time
-	endTimeFlag        bool
-	title              string // 职位
-	titleFlag          bool
-	type_              int // 工作类型
-	typeFlag           bool
-	typeStr            string // 工作类型——'实习'、'全职'
-	typeStrFlag        bool
+	company     string // 公司名称
+	companyFlag bool
+
+	startDate     string // 开始时间,格式：YYYY-MM-DD
+	startDateFlag bool
+
+	startTime     string // 始时间,格式：YYYY-MM-DD,跟start_date值一样
+	startTimeFlag bool
+
+	endDate     string // 结束时间,格式：YYYY-MM-DD
+	endDateFlag bool
+
+	endTime     string // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值为其他时，end_date==end_time
+	endTimeFlag bool
+
+	title     string // 职位
+	titleFlag bool
+
+	type_    int // 工作类型
+	typeFlag bool
+
+	typeStr     string // 工作类型——'实习'、'全职'
+	typeStrFlag bool
+
 	jobDescription     string // 工作描述
 	jobDescriptionFlag bool
 }
@@ -3361,12 +3599,14 @@ func (builder *ResumeCareerBuilder) Build() *ResumeCareer {
 
 type ResumeCertificate struct {
 	Name *string `json:"name,omitempty"` // 证书名称
+
 	Desc *string `json:"desc,omitempty"` // 描述
 }
 
 type ResumeCertificateBuilder struct {
 	name     string // 证书名称
 	nameFlag bool
+
 	desc     string // 描述
 	descFlag bool
 }
@@ -3409,12 +3649,14 @@ func (builder *ResumeCertificateBuilder) Build() *ResumeCertificate {
 
 type ResumeCompetition struct {
 	Name *string `json:"name,omitempty"` // 竞赛名称
+
 	Desc *string `json:"desc,omitempty"` // 描述
 }
 
 type ResumeCompetitionBuilder struct {
 	name     string // 竞赛名称
 	nameFlag bool
+
 	desc     string // 描述
 	descFlag bool
 }
@@ -3456,31 +3698,45 @@ func (builder *ResumeCompetitionBuilder) Build() *ResumeCompetition {
 }
 
 type ResumeEducation struct {
-	School        *string `json:"school,omitempty"`        // 学校名称
-	StartDate     *string `json:"start_date,omitempty"`    // 开始时间,格式：YYYY-MM-DD
-	StartTime     *string `json:"start_time,omitempty"`    // 开始时间,格式：YYYY-MM-DD,跟start_date值一样
-	EndDate       *string `json:"end_date,omitempty"`      // 结束时间,格式：YYYY-MM-DD
-	EndTime       *string `json:"end_time,omitempty"`      // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值为其他时，end_date==end_time
-	Major         *string `json:"major,omitempty"`         // 专业
-	Degree        *string `json:"degree,omitempty"`        // 学历——小学、初中、中职、高中、专科、本科、硕士、博士、其他
-	Qualification *int    `json:"qualification,omitempty"` // 学历对应ID
+	School *string `json:"school,omitempty"` // 学校名称
+
+	StartDate *string `json:"start_date,omitempty"` // 开始时间,格式：YYYY-MM-DD
+
+	StartTime *string `json:"start_time,omitempty"` // 开始时间,格式：YYYY-MM-DD,跟start_date值一样
+
+	EndDate *string `json:"end_date,omitempty"` // 结束时间,格式：YYYY-MM-DD
+
+	EndTime *string `json:"end_time,omitempty"` // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值为其他时，end_date==end_time
+
+	Major *string `json:"major,omitempty"` // 专业
+
+	Degree *string `json:"degree,omitempty"` // 学历——小学、初中、中职、高中、专科、本科、硕士、博士、其他
+
+	Qualification *int `json:"qualification,omitempty"` // 学历对应ID
 }
 
 type ResumeEducationBuilder struct {
-	school            string // 学校名称
-	schoolFlag        bool
-	startDate         string // 开始时间,格式：YYYY-MM-DD
-	startDateFlag     bool
-	startTime         string // 开始时间,格式：YYYY-MM-DD,跟start_date值一样
-	startTimeFlag     bool
-	endDate           string // 结束时间,格式：YYYY-MM-DD
-	endDateFlag       bool
-	endTime           string // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值为其他时，end_date==end_time
-	endTimeFlag       bool
-	major             string // 专业
-	majorFlag         bool
-	degree            string // 学历——小学、初中、中职、高中、专科、本科、硕士、博士、其他
-	degreeFlag        bool
+	school     string // 学校名称
+	schoolFlag bool
+
+	startDate     string // 开始时间,格式：YYYY-MM-DD
+	startDateFlag bool
+
+	startTime     string // 开始时间,格式：YYYY-MM-DD,跟start_date值一样
+	startTimeFlag bool
+
+	endDate     string // 结束时间,格式：YYYY-MM-DD
+	endDateFlag bool
+
+	endTime     string // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值为其他时，end_date==end_time
+	endTimeFlag bool
+
+	major     string // 专业
+	majorFlag bool
+
+	degree     string // 学历——小学、初中、中职、高中、专科、本科、硕士、博士、其他
+	degreeFlag bool
+
 	qualification     int // 学历对应ID
 	qualificationFlag bool
 }
@@ -3600,13 +3856,15 @@ func (builder *ResumeEducationBuilder) Build() *ResumeEducation {
 }
 
 type ResumeLanguage struct {
-	Level       *int    `json:"level,omitempty"`       // 语言等级
+	Level *int `json:"level,omitempty"` // 语言等级
+
 	Description *string `json:"description,omitempty"` // 语言描述
 }
 
 type ResumeLanguageBuilder struct {
-	level           int // 语言等级
-	levelFlag       bool
+	level     int // 语言等级
+	levelFlag bool
+
 	description     string // 语言描述
 	descriptionFlag bool
 }
@@ -3648,28 +3906,40 @@ func (builder *ResumeLanguageBuilder) Build() *ResumeLanguage {
 }
 
 type ResumeProject struct {
-	Name        *string `json:"name,omitempty"`        // 项目名称
-	Title       *string `json:"title,omitempty"`       // 项目岗位
-	StartDate   *string `json:"start_date,omitempty"`  // 开始时间,格式：YYYY-MM-DD
-	StartTime   *string `json:"start_time,omitempty"`  // 开始时间,格式：YYYY-MM-DD,跟start_date值一样
-	EndDate     *string `json:"end_date,omitempty"`    // 结束时间,格式：YYYY-MM-DD
-	EndTime     *string `json:"end_time,omitempty"`    // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值
+	Name *string `json:"name,omitempty"` // 项目名称
+
+	Title *string `json:"title,omitempty"` // 项目岗位
+
+	StartDate *string `json:"start_date,omitempty"` // 开始时间,格式：YYYY-MM-DD
+
+	StartTime *string `json:"start_time,omitempty"` // 开始时间,格式：YYYY-MM-DD,跟start_date值一样
+
+	EndDate *string `json:"end_date,omitempty"` // 结束时间,格式：YYYY-MM-DD
+
+	EndTime *string `json:"end_time,omitempty"` // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值
+
 	Description *string `json:"description,omitempty"` // 项目描述
 }
 
 type ResumeProjectBuilder struct {
-	name            string // 项目名称
-	nameFlag        bool
-	title           string // 项目岗位
-	titleFlag       bool
-	startDate       string // 开始时间,格式：YYYY-MM-DD
-	startDateFlag   bool
-	startTime       string // 开始时间,格式：YYYY-MM-DD,跟start_date值一样
-	startTimeFlag   bool
-	endDate         string // 结束时间,格式：YYYY-MM-DD
-	endDateFlag     bool
-	endTime         string // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值
-	endTimeFlag     bool
+	name     string // 项目名称
+	nameFlag bool
+
+	title     string // 项目岗位
+	titleFlag bool
+
+	startDate     string // 开始时间,格式：YYYY-MM-DD
+	startDateFlag bool
+
+	startTime     string // 开始时间,格式：YYYY-MM-DD,跟start_date值一样
+	startTimeFlag bool
+
+	endDate     string // 结束时间,格式：YYYY-MM-DD
+	endDateFlag bool
+
+	endTime     string // 结束时间,格式：YYYY-MM-DD 或 “至今”，当值为“至今”时，end_date=="",值
+	endTimeFlag bool
+
 	description     string // 项目描述
 	descriptionFlag bool
 }
@@ -3776,13 +4046,15 @@ func (builder *ResumeProjectBuilder) Build() *ResumeProject {
 }
 
 type TaxiEnitity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type TaxiEnitityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -3824,13 +4096,15 @@ func (builder *TaxiEnitityBuilder) Build() *TaxiEnitity {
 }
 
 type TaxiEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type TaxiEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -3903,13 +4177,15 @@ func (builder *TaxiInvoiceBuilder) Build() *TaxiInvoice {
 }
 
 type TrainEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type TrainEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -4013,13 +4289,15 @@ func (builder *TwMainlandTravelPermitBuilder) Build() *TwMainlandTravelPermit {
 }
 
 type TwMainlandTravelPermitEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type TwMainlandTravelPermitEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -4061,13 +4339,15 @@ func (builder *TwMainlandTravelPermitEntityBuilder) Build() *TwMainlandTravelPer
 }
 
 type VatEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的实体类型
+	Type *string `json:"type,omitempty"` // 识别的实体类型
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type VatEntityBuilder struct {
-	type_     string // 识别的实体类型
-	typeFlag  bool
+	type_    string // 识别的实体类型
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -4140,13 +4420,15 @@ func (builder *VatInvoiceBuilder) Build() *VatInvoice {
 }
 
 type VehicleEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type VehicleEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -4219,13 +4501,15 @@ func (builder *VehicleInvoiceBuilder) Build() *VehicleInvoice {
 }
 
 type VehicleInvoiceEntity struct {
-	Type  *string `json:"type,omitempty"`  // 识别的字段种类
+	Type *string `json:"type,omitempty"` // 识别的字段种类
+
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
 }
 
 type VehicleInvoiceEntityBuilder struct {
-	type_     string // 识别的字段种类
-	typeFlag  bool
+	type_    string // 识别的字段种类
+	typeFlag bool
+
 	value     string // 识别出字段的文本信息
 	valueFlag bool
 }
@@ -4726,12 +5010,14 @@ func (resp *RecognizeChinesePassportResp) Success() bool {
 }
 
 type FieldExtractionContractReqBodyBuilder struct {
-	file             io.Reader // 合同字段解析的源文件，当前只支持pdf, doc, docx三种类型的文件
-	fileFlag         bool
+	file     io.Reader // 合同字段解析的源文件，当前只支持pdf, doc, docx三种类型的文件
+	fileFlag bool
+
 	pdfPageLimit     int // pdf页数限制，太长会导致latency增加，最大允许100页
 	pdfPageLimitFlag bool
-	ocrMode          string // ocr 参数，当前支持force, pdf, unused三种格式
-	ocrModeFlag      bool
+
+	ocrMode     string // ocr 参数，当前支持force, pdf, unused三种格式
+	ocrModeFlag bool
 }
 
 func NewFieldExtractionContractReqBodyBuilder() *FieldExtractionContractReqBodyBuilder {
@@ -4866,9 +5152,11 @@ func (builder *FieldExtractionContractReqBuilder) Build() *FieldExtractionContra
 }
 
 type FieldExtractionContractReqBody struct {
-	File         io.Reader `json:"file,omitempty"`           // 合同字段解析的源文件，当前只支持pdf, doc, docx三种类型的文件
-	PdfPageLimit *int      `json:"pdf_page_limit,omitempty"` // pdf页数限制，太长会导致latency增加，最大允许100页
-	OcrMode      *string   `json:"ocr_mode,omitempty"`       // ocr 参数，当前支持force, pdf, unused三种格式
+	File io.Reader `json:"file,omitempty"` // 合同字段解析的源文件，当前只支持pdf, doc, docx三种类型的文件
+
+	PdfPageLimit *int `json:"pdf_page_limit,omitempty"` // pdf页数限制，太长会导致latency增加，最大允许100页
+
+	OcrMode *string `json:"ocr_mode,omitempty"` // ocr 参数，当前支持force, pdf, unused三种格式
 }
 
 type FieldExtractionContractReq struct {
@@ -4877,14 +5165,21 @@ type FieldExtractionContractReq struct {
 }
 
 type FieldExtractionContractRespData struct {
-	FileId   *string          `json:"file_id,omitempty"`   // 文件的唯一id
-	Price    *ExtractPrice    `json:"price,omitempty"`     // 总交易金额
-	Time     *ExtractTime     `json:"time,omitempty"`      // 期限相关信息，包括开始日期、结束日期、有效时长
-	Copy     *ExtractCopy     `json:"copy,omitempty"`      // 盖章份数
-	Currency *ExtractCurrency `json:"currency,omitempty"`  // 币种
-	Header   *string          `json:"header,omitempty"`    // 合同标题
-	BodyInfo []*BodyInfo      `json:"body_info,omitempty"` // 主体信息
-	BankInfo []*BankInfo      `json:"bank_info,omitempty"` // 银行信息
+	FileId *string `json:"file_id,omitempty"` // 文件的唯一id
+
+	Price *ExtractPrice `json:"price,omitempty"` // 总交易金额
+
+	Time *ExtractTime `json:"time,omitempty"` // 期限相关信息，包括开始日期、结束日期、有效时长
+
+	Copy *ExtractCopy `json:"copy,omitempty"` // 盖章份数
+
+	Currency *ExtractCurrency `json:"currency,omitempty"` // 币种
+
+	Header *string `json:"header,omitempty"` // 合同标题
+
+	BodyInfo []*BodyInfo `json:"body_info,omitempty"` // 主体信息
+
+	BankInfo []*BankInfo `json:"bank_info,omitempty"` // 银行信息
 }
 
 type FieldExtractionContractResp struct {

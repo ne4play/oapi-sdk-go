@@ -376,52 +376,80 @@ const (
 )
 
 type Alert struct {
-	AlertId              *string    `json:"alert_id,omitempty"`                // 告警ID
-	ResourceScope        *string    `json:"resource_scope,omitempty"`          // 触发告警规则的会议室/服务器具体的名称
-	MonitorTarget        *int       `json:"monitor_target,omitempty"`          // 触发告警规则的监控对象
-	AlertStrategy        *string    `json:"alert_strategy,omitempty"`          // 告警规则的规则描述
-	AlertTime            *string    `json:"alert_time,omitempty"`              // 告警通知发生时间（unix时间，单位sec）
-	AlertLevel           *int       `json:"alert_level,omitempty"`             // 告警等级：严重/警告/提醒
-	Contacts             []*Contact `json:"contacts,omitempty"`                // 告警联系人
-	NotifyMethods        []int      `json:"notifyMethods,omitempty"`           // 通知方式
-	AlertRule            *string    `json:"alertRule,omitempty"`               // 规则名称
-	ProcessTime          *string    `json:"process_time,omitempty"`            // 处理时间
-	RecoverTime          *string    `json:"recover_time,omitempty"`            // 恢复时间
-	ProcessStatus        *int       `json:"process_status,omitempty"`          // 处理状态：待处理/处理中/已恢复
-	AlertRuleId          *string    `json:"alert_rule_id,omitempty"`           // 告警规则ID
-	MonitorTargetRoomId  *string    `json:"monitor_target_room_id,omitempty"`  // 触发告警规则的会议室ID，当触发告警规则的是会议室时返回该信息
-	MonitorTargetRoomMac *string    `json:"monitor_target_room_mac,omitempty"` // 触发告警规则的会议室主机Mac地址，当monitor_target=1时返回该信息
+	AlertId *string `json:"alert_id,omitempty"` // 告警ID
+
+	ResourceScope *string `json:"resource_scope,omitempty"` // 触发告警规则的会议室/服务器具体的名称
+
+	MonitorTarget *int `json:"monitor_target,omitempty"` // 触发告警规则的监控对象
+
+	AlertStrategy *string `json:"alert_strategy,omitempty"` // 告警规则的规则描述
+
+	AlertTime *string `json:"alert_time,omitempty"` // 告警通知发生时间（unix时间，单位sec）
+
+	AlertLevel *int `json:"alert_level,omitempty"` // 告警等级：严重/警告/提醒
+
+	Contacts []*Contact `json:"contacts,omitempty"` // 告警联系人
+
+	NotifyMethods []int `json:"notifyMethods,omitempty"` // 通知方式
+
+	AlertRule *string `json:"alertRule,omitempty"` // 规则名称
+
+	ProcessTime *string `json:"process_time,omitempty"` // 处理时间
+
+	RecoverTime *string `json:"recover_time,omitempty"` // 恢复时间
+
+	ProcessStatus *int `json:"process_status,omitempty"` // 处理状态：待处理/处理中/已恢复
+
+	AlertRuleId *string `json:"alert_rule_id,omitempty"` // 告警规则ID
+
+	MonitorTargetRoomId *string `json:"monitor_target_room_id,omitempty"` // 触发告警规则的会议室ID，当触发告警规则的是会议室时返回该信息
+
+	MonitorTargetRoomMac *string `json:"monitor_target_room_mac,omitempty"` // 触发告警规则的会议室主机Mac地址，当monitor_target=1时返回该信息
 }
 
 type AlertBuilder struct {
-	alertId                  string // 告警ID
-	alertIdFlag              bool
-	resourceScope            string // 触发告警规则的会议室/服务器具体的名称
-	resourceScopeFlag        bool
-	monitorTarget            int // 触发告警规则的监控对象
-	monitorTargetFlag        bool
-	alertStrategy            string // 告警规则的规则描述
-	alertStrategyFlag        bool
-	alertTime                string // 告警通知发生时间（unix时间，单位sec）
-	alertTimeFlag            bool
-	alertLevel               int // 告警等级：严重/警告/提醒
-	alertLevelFlag           bool
-	contacts                 []*Contact // 告警联系人
-	contactsFlag             bool
-	notifyMethods            []int // 通知方式
-	notifyMethodsFlag        bool
-	alertRule                string // 规则名称
-	alertRuleFlag            bool
-	processTime              string // 处理时间
-	processTimeFlag          bool
-	recoverTime              string // 恢复时间
-	recoverTimeFlag          bool
-	processStatus            int // 处理状态：待处理/处理中/已恢复
-	processStatusFlag        bool
-	alertRuleId              string // 告警规则ID
-	alertRuleIdFlag          bool
-	monitorTargetRoomId      string // 触发告警规则的会议室ID，当触发告警规则的是会议室时返回该信息
-	monitorTargetRoomIdFlag  bool
+	alertId     string // 告警ID
+	alertIdFlag bool
+
+	resourceScope     string // 触发告警规则的会议室/服务器具体的名称
+	resourceScopeFlag bool
+
+	monitorTarget     int // 触发告警规则的监控对象
+	monitorTargetFlag bool
+
+	alertStrategy     string // 告警规则的规则描述
+	alertStrategyFlag bool
+
+	alertTime     string // 告警通知发生时间（unix时间，单位sec）
+	alertTimeFlag bool
+
+	alertLevel     int // 告警等级：严重/警告/提醒
+	alertLevelFlag bool
+
+	contacts     []*Contact // 告警联系人
+	contactsFlag bool
+
+	notifyMethods     []int // 通知方式
+	notifyMethodsFlag bool
+
+	alertRule     string // 规则名称
+	alertRuleFlag bool
+
+	processTime     string // 处理时间
+	processTimeFlag bool
+
+	recoverTime     string // 恢复时间
+	recoverTimeFlag bool
+
+	processStatus     int // 处理状态：待处理/处理中/已恢复
+	processStatusFlag bool
+
+	alertRuleId     string // 告警规则ID
+	alertRuleIdFlag bool
+
+	monitorTargetRoomId     string // 触发告警规则的会议室ID，当触发告警规则的是会议室时返回该信息
+	monitorTargetRoomIdFlag bool
+
 	monitorTargetRoomMac     string // 触发告警规则的会议室主机Mac地址，当monitor_target=1时返回该信息
 	monitorTargetRoomMacFlag bool
 }
@@ -630,21 +658,27 @@ func (builder *AlertBuilder) Build() *Alert {
 }
 
 type ApprovalConfig struct {
-	ApprovalSwitch    *int             `json:"approval_switch,omitempty"`    // 预定审批开关：0 代表关闭，1 代表打开。;<b>说明</b>：;1.  未设置值时不更新原开关的值，但此时必填  approval_condition;2.  设置值为 1 时，必填  approval_condition<br>								 ;3.  设置值为 0 时整个 ;approval_config 其他字段均可省略。
-	ApprovalCondition *int             `json:"approval_condition,omitempty"` // 预定审批条件：0 代表所有预定均需审批，1 代表满足条件的需审批;<b>说明</b>：为 1 时必填 meeting_duration
-	MeetingDuration   *float64         `json:"meeting_duration,omitempty"`   // 超过 meeting_duration;的预定需要审批（单位：小时，取值范围[0.1-99]）;;<b>说明</b>：;1.  当 approval_condition ; 为 0 ，更新时如果未设置值，默认更新为 99 .;2.  传入的值小数点后超过 2 位，自动四舍五入保留两位。
-	Approvers         []*SubscribeUser `json:"approvers,omitempty"`          // 审批人列表，当打开审批开关时，至少需要设置一位审批人
+	ApprovalSwitch *int `json:"approval_switch,omitempty"` // 预定审批开关：0 代表关闭，1 代表打开。;<b>说明</b>：;1.  未设置值时不更新原开关的值，但此时必填  approval_condition;2.  设置值为 1 时，必填  approval_condition<br>								 ;3.  设置值为 0 时整个 ;approval_config 其他字段均可省略。
+
+	ApprovalCondition *int `json:"approval_condition,omitempty"` // 预定审批条件：0 代表所有预定均需审批，1 代表满足条件的需审批;<b>说明</b>：为 1 时必填 meeting_duration
+
+	MeetingDuration *float64 `json:"meeting_duration,omitempty"` // 超过 meeting_duration;的预定需要审批（单位：小时，取值范围[0.1-99]）;;<b>说明</b>：;1.  当 approval_condition ; 为 0 ，更新时如果未设置值，默认更新为 99 .;2.  传入的值小数点后超过 2 位，自动四舍五入保留两位。
+
+	Approvers []*SubscribeUser `json:"approvers,omitempty"` // 审批人列表，当打开审批开关时，至少需要设置一位审批人
 }
 
 type ApprovalConfigBuilder struct {
-	approvalSwitch        int // 预定审批开关：0 代表关闭，1 代表打开。;<b>说明</b>：;1.  未设置值时不更新原开关的值，但此时必填  approval_condition;2.  设置值为 1 时，必填  approval_condition<br>								 ;3.  设置值为 0 时整个 ;approval_config 其他字段均可省略。
-	approvalSwitchFlag    bool
+	approvalSwitch     int // 预定审批开关：0 代表关闭，1 代表打开。;<b>说明</b>：;1.  未设置值时不更新原开关的值，但此时必填  approval_condition;2.  设置值为 1 时，必填  approval_condition<br>								 ;3.  设置值为 0 时整个 ;approval_config 其他字段均可省略。
+	approvalSwitchFlag bool
+
 	approvalCondition     int // 预定审批条件：0 代表所有预定均需审批，1 代表满足条件的需审批;<b>说明</b>：为 1 时必填 meeting_duration
 	approvalConditionFlag bool
-	meetingDuration       float64 // 超过 meeting_duration;的预定需要审批（单位：小时，取值范围[0.1-99]）;;<b>说明</b>：;1.  当 approval_condition ; 为 0 ，更新时如果未设置值，默认更新为 99 .;2.  传入的值小数点后超过 2 位，自动四舍五入保留两位。
-	meetingDurationFlag   bool
-	approvers             []*SubscribeUser // 审批人列表，当打开审批开关时，至少需要设置一位审批人
-	approversFlag         bool
+
+	meetingDuration     float64 // 超过 meeting_duration;的预定需要审批（单位：小时，取值范围[0.1-99]）;;<b>说明</b>：;1.  当 approval_condition ; 为 0 ，更新时如果未设置值，默认更新为 99 .;2.  传入的值小数点后超过 2 位，自动四舍五入保留两位。
+	meetingDurationFlag bool
+
+	approvers     []*SubscribeUser // 审批人列表，当打开审批开关时，至少需要设置一位审批人
+	approversFlag bool
 }
 
 func NewApprovalConfigBuilder() *ApprovalConfigBuilder {
@@ -709,21 +743,27 @@ func (builder *ApprovalConfigBuilder) Build() *ApprovalConfig {
 }
 
 type ApprovalConfigEvent struct {
-	ApprovalSwitch    *int                  `json:"approval_switch,omitempty"`    // 预定审批开关，0关闭，1打开
-	ApprovalCondition *int                  `json:"approval_condition,omitempty"` // 预定审批条件，0所有预定需要审批，1满足条件需审批
-	MeetingDuration   *float64              `json:"meeting_duration,omitempty"`   // 超过 meeting_duration小时需要审批
-	Approvers         []*SubscribeUserEvent `json:"approvers,omitempty"`          // 审批人列表
+	ApprovalSwitch *int `json:"approval_switch,omitempty"` // 预定审批开关，0关闭，1打开
+
+	ApprovalCondition *int `json:"approval_condition,omitempty"` // 预定审批条件，0所有预定需要审批，1满足条件需审批
+
+	MeetingDuration *float64 `json:"meeting_duration,omitempty"` // 超过 meeting_duration小时需要审批
+
+	Approvers []*SubscribeUserEvent `json:"approvers,omitempty"` // 审批人列表
 }
 
 type ApprovalConfigEventBuilder struct {
-	approvalSwitch        int // 预定审批开关，0关闭，1打开
-	approvalSwitchFlag    bool
+	approvalSwitch     int // 预定审批开关，0关闭，1打开
+	approvalSwitchFlag bool
+
 	approvalCondition     int // 预定审批条件，0所有预定需要审批，1满足条件需审批
 	approvalConditionFlag bool
-	meetingDuration       float64 // 超过 meeting_duration小时需要审批
-	meetingDurationFlag   bool
-	approvers             []*SubscribeUserEvent // 审批人列表
-	approversFlag         bool
+
+	meetingDuration     float64 // 超过 meeting_duration小时需要审批
+	meetingDurationFlag bool
+
+	approvers     []*SubscribeUserEvent // 审批人列表
+	approversFlag bool
 }
 
 func NewApprovalConfigEventBuilder() *ApprovalConfigEventBuilder {
@@ -788,13 +828,15 @@ func (builder *ApprovalConfigEventBuilder) Build() *ApprovalConfigEvent {
 }
 
 type Conditions struct {
-	CustomKey  *string  `json:"custom_key,omitempty"`  // 自定义题目的key
+	CustomKey *string `json:"custom_key,omitempty"` // 自定义题目的key
+
 	OptionKeys []string `json:"option_keys,omitempty"` // 自定义选项的key
 }
 
 type ConditionsBuilder struct {
-	customKey      string // 自定义题目的key
-	customKeyFlag  bool
+	customKey     string // 自定义题目的key
+	customKeyFlag bool
+
 	optionKeys     []string // 自定义选项的key
 	optionKeysFlag bool
 }
@@ -835,13 +877,15 @@ func (builder *ConditionsBuilder) Build() *Conditions {
 }
 
 type Contact struct {
-	ContactType *int    `json:"contact_type,omitempty"` // 联系人类型
+	ContactType *int `json:"contact_type,omitempty"` // 联系人类型
+
 	ContactName *string `json:"contact_name,omitempty"` // 联系人名
 }
 
 type ContactBuilder struct {
 	contactType     int // 联系人类型
 	contactTypeFlag bool
+
 	contactName     string // 联系人名
 	contactNameFlag bool
 }
@@ -883,30 +927,42 @@ func (builder *ContactBuilder) Build() *Contact {
 }
 
 type CustomList struct {
-	CustomType  *int          `json:"custom_type,omitempty"` // 问题类型
-	Key         *string       `json:"key,omitempty"`         // 自定义题目的key，用于设置显示条件
-	NeedFill    *bool         `json:"need_fill,omitempty"`   // 题目是否必填
-	Title       *string       `json:"title,omitempty"`       // 题目标题
-	Placeholder *string       `json:"placeholder,omitempty"` // 文本框题目对应的输入提示
-	Options     []*Options    `json:"options,omitempty"`     // 选项配置，单选多选时使用
-	Conditions  []*Conditions `json:"conditions,omitempty"`  // 条件设置，满足某条件才显示某问题
+	CustomType *int `json:"custom_type,omitempty"` // 问题类型
+
+	Key *string `json:"key,omitempty"` // 自定义题目的key，用于设置显示条件
+
+	NeedFill *bool `json:"need_fill,omitempty"` // 题目是否必填
+
+	Title *string `json:"title,omitempty"` // 题目标题
+
+	Placeholder *string `json:"placeholder,omitempty"` // 文本框题目对应的输入提示
+
+	Options []*Options `json:"options,omitempty"` // 选项配置，单选多选时使用
+
+	Conditions []*Conditions `json:"conditions,omitempty"` // 条件设置，满足某条件才显示某问题
 }
 
 type CustomListBuilder struct {
-	customType      int // 问题类型
-	customTypeFlag  bool
-	key             string // 自定义题目的key，用于设置显示条件
-	keyFlag         bool
-	needFill        bool // 题目是否必填
-	needFillFlag    bool
-	title           string // 题目标题
-	titleFlag       bool
+	customType     int // 问题类型
+	customTypeFlag bool
+
+	key     string // 自定义题目的key，用于设置显示条件
+	keyFlag bool
+
+	needFill     bool // 题目是否必填
+	needFillFlag bool
+
+	title     string // 题目标题
+	titleFlag bool
+
 	placeholder     string // 文本框题目对应的输入提示
 	placeholderFlag bool
-	options         []*Options // 选项配置，单选多选时使用
-	optionsFlag     bool
-	conditions      []*Conditions // 条件设置，满足某条件才显示某问题
-	conditionsFlag  bool
+
+	options     []*Options // 选项配置，单选多选时使用
+	optionsFlag bool
+
+	conditions     []*Conditions // 条件设置，满足某条件才显示某问题
+	conditionsFlag bool
 }
 
 func NewCustomListBuilder() *CustomListBuilder {
@@ -1009,13 +1065,15 @@ func (builder *CustomListBuilder) Build() *CustomList {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -1085,21 +1143,27 @@ func (builder *DeviceBuilder) Build() *Device {
 }
 
 type DisableInformConfig struct {
-	IfCoverChildScope *bool                  `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
-	IfInform          *bool                  `json:"if_inform,omitempty"`            // 禁用状态变更通知开关
-	InformedUsers     []*SubscribeUser       `json:"informed_users,omitempty"`       // 通知成员列表
-	InformedDepts     []*SubscribeDepartment `json:"informed_depts,omitempty"`       // 通知部门列表
+	IfCoverChildScope *bool `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
+
+	IfInform *bool `json:"if_inform,omitempty"` // 禁用状态变更通知开关
+
+	InformedUsers []*SubscribeUser `json:"informed_users,omitempty"` // 通知成员列表
+
+	InformedDepts []*SubscribeDepartment `json:"informed_depts,omitempty"` // 通知部门列表
 }
 
 type DisableInformConfigBuilder struct {
 	ifCoverChildScope     bool // 是否覆盖子层级及会议室
 	ifCoverChildScopeFlag bool
-	ifInform              bool // 禁用状态变更通知开关
-	ifInformFlag          bool
-	informedUsers         []*SubscribeUser // 通知成员列表
-	informedUsersFlag     bool
-	informedDepts         []*SubscribeDepartment // 通知部门列表
-	informedDeptsFlag     bool
+
+	ifInform     bool // 禁用状态变更通知开关
+	ifInformFlag bool
+
+	informedUsers     []*SubscribeUser // 通知成员列表
+	informedUsersFlag bool
+
+	informedDepts     []*SubscribeDepartment // 通知部门列表
+	informedDeptsFlag bool
 }
 
 func NewDisableInformConfigBuilder() *DisableInformConfigBuilder {
@@ -1163,13 +1227,15 @@ func (builder *DisableInformConfigBuilder) Build() *DisableInformConfig {
 }
 
 type KeyPoint struct {
-	Name        *string `json:"name,omitempty"`        // 关键点
+	Name *string `json:"name,omitempty"` // 关键点
+
 	Description *string `json:"description,omitempty"` // 关键点描述
 }
 
 type KeyPointBuilder struct {
-	name            string // 关键点
-	nameFlag        bool
+	name     string // 关键点
+	nameFlag bool
+
 	description     string // 关键点描述
 	descriptionFlag bool
 }
@@ -1212,14 +1278,16 @@ func (builder *KeyPointBuilder) Build() *KeyPoint {
 
 type KeyPointMatchDetail struct {
 	StartTimestamp *string `json:"start_timestamp,omitempty"` // 开始时间戳
-	MatchedText    *string `json:"matched_text,omitempty"`    // 匹配到的文本
+
+	MatchedText *string `json:"matched_text,omitempty"` // 匹配到的文本
 }
 
 type KeyPointMatchDetailBuilder struct {
 	startTimestamp     string // 开始时间戳
 	startTimestampFlag bool
-	matchedText        string // 匹配到的文本
-	matchedTextFlag    bool
+
+	matchedText     string // 匹配到的文本
+	matchedTextFlag bool
 }
 
 func NewKeyPointMatchDetailBuilder() *KeyPointMatchDetailBuilder {
@@ -1290,28 +1358,40 @@ func (builder *KeyPointMatchDetailsBuilder) Build() *KeyPointMatchDetails {
 }
 
 type Material struct {
-	Name           *string `json:"name,omitempty"`            // 素材名称
-	FileToken      *string `json:"file_token,omitempty"`      // 文件上传drive后的token
-	FileSize       *int    `json:"file_size,omitempty"`       // 文件大小(KB)
-	DeviceType     *int    `json:"device_type,omitempty"`     // 素材适用设备类型
-	MaterialType   *int    `json:"material_type,omitempty"`   // 素材类型
-	ReviewResult   *int    `json:"review_result,omitempty"`   // 审核结果
-	MaterialSource *int    `json:"material_source,omitempty"` // 素材来源
+	Name *string `json:"name,omitempty"` // 素材名称
+
+	FileToken *string `json:"file_token,omitempty"` // 文件上传drive后的token
+
+	FileSize *int `json:"file_size,omitempty"` // 文件大小(KB)
+
+	DeviceType *int `json:"device_type,omitempty"` // 素材适用设备类型
+
+	MaterialType *int `json:"material_type,omitempty"` // 素材类型
+
+	ReviewResult *int `json:"review_result,omitempty"` // 审核结果
+
+	MaterialSource *int `json:"material_source,omitempty"` // 素材来源
 }
 
 type MaterialBuilder struct {
-	name               string // 素材名称
-	nameFlag           bool
-	fileToken          string // 文件上传drive后的token
-	fileTokenFlag      bool
-	fileSize           int // 文件大小(KB)
-	fileSizeFlag       bool
-	deviceType         int // 素材适用设备类型
-	deviceTypeFlag     bool
-	materialType       int // 素材类型
-	materialTypeFlag   bool
-	reviewResult       int // 审核结果
-	reviewResultFlag   bool
+	name     string // 素材名称
+	nameFlag bool
+
+	fileToken     string // 文件上传drive后的token
+	fileTokenFlag bool
+
+	fileSize     int // 文件大小(KB)
+	fileSizeFlag bool
+
+	deviceType     int // 素材适用设备类型
+	deviceTypeFlag bool
+
+	materialType     int // 素材类型
+	materialTypeFlag bool
+
+	reviewResult     int // 审核结果
+	reviewResultFlag bool
+
 	materialSource     int // 素材来源
 	materialSourceFlag bool
 }
@@ -1419,14 +1499,16 @@ func (builder *MaterialBuilder) Build() *Material {
 
 type MaterialDeleteResult struct {
 	FileToken *string `json:"file_token,omitempty"` // 文件上传drive后的token
-	Result    *int    `json:"result,omitempty"`     // 删除结果
+
+	Result *int `json:"result,omitempty"` // 删除结果
 }
 
 type MaterialDeleteResultBuilder struct {
 	fileToken     string // 文件上传drive后的token
 	fileTokenFlag bool
-	result        int // 删除结果
-	resultFlag    bool
+
+	result     int // 删除结果
+	resultFlag bool
 }
 
 func NewMaterialDeleteResultBuilder() *MaterialDeleteResultBuilder {
@@ -1467,14 +1549,16 @@ func (builder *MaterialDeleteResultBuilder) Build() *MaterialDeleteResult {
 
 type MaterialReviewResult struct {
 	FileToken *string `json:"file_token,omitempty"` // 文件上传drive后的token
-	Result    *int    `json:"result,omitempty"`     // 审核结果
+
+	Result *int `json:"result,omitempty"` // 审核结果
 }
 
 type MaterialReviewResultBuilder struct {
 	fileToken     string // 文件上传drive后的token
 	fileTokenFlag bool
-	result        int // 审核结果
-	resultFlag    bool
+
+	result     int // 审核结果
+	resultFlag bool
 }
 
 func NewMaterialReviewResultBuilder() *MaterialReviewResultBuilder {
@@ -1515,14 +1599,16 @@ func (builder *MaterialReviewResultBuilder) Build() *MaterialReviewResult {
 
 type MaterialUploadResult struct {
 	FileToken *string `json:"file_token,omitempty"` // 文件上传drive后的token
-	Result    *int    `json:"result,omitempty"`     // 上传结果
+
+	Result *int `json:"result,omitempty"` // 上传结果
 }
 
 type MaterialUploadResultBuilder struct {
 	fileToken     string // 文件上传drive后的token
 	fileTokenFlag bool
-	result        int // 上传结果
-	resultFlag    bool
+
+	result     int // 上传结果
+	resultFlag bool
 }
 
 func NewMaterialUploadResultBuilder() *MaterialUploadResultBuilder {
@@ -1562,54 +1648,82 @@ func (builder *MaterialUploadResultBuilder) Build() *MaterialUploadResult {
 }
 
 type Meeting struct {
-	Id                          *string               `json:"id,omitempty"`                            // 会议ID（视频会议的唯一标识，视频会议开始后才会产生）
-	Topic                       *string               `json:"topic,omitempty"`                         // 会议主题
-	Url                         *string               `json:"url,omitempty"`                           // 会议链接（飞书用户可通过点击会议链接快捷入会）
-	MeetingNo                   *string               `json:"meeting_no,omitempty"`                    // 会议号
-	Password                    *string               `json:"password,omitempty"`                      // 会议密码
-	CreateTime                  *string               `json:"create_time,omitempty"`                   // 会议创建时间（unix时间，单位sec）
-	StartTime                   *string               `json:"start_time,omitempty"`                    // 会议开始时间（unix时间，单位sec）
-	EndTime                     *string               `json:"end_time,omitempty"`                      // 会议结束时间（unix时间，单位sec）
-	HostUser                    *MeetingUser          `json:"host_user,omitempty"`                     // 主持人
-	MeetingConnect              *bool                 `json:"meeting_connect,omitempty"`               // 该会议是否支持互通
-	Status                      *int                  `json:"status,omitempty"`                        // 会议状态
-	ParticipantCount            *string               `json:"participant_count,omitempty"`             // 参会峰值人数
-	ParticipantCountAccumulated *string               `json:"participant_count_accumulated,omitempty"` // 累计参会人数
-	Participants                []*MeetingParticipant `json:"participants,omitempty"`                  // 参会人列表
-	Ability                     *MeetingAbility       `json:"ability,omitempty"`                       // 会中使用的能力
+	Id *string `json:"id,omitempty"` // 会议ID（视频会议的唯一标识，视频会议开始后才会产生）
+
+	Topic *string `json:"topic,omitempty"` // 会议主题
+
+	Url *string `json:"url,omitempty"` // 会议链接（飞书用户可通过点击会议链接快捷入会）
+
+	MeetingNo *string `json:"meeting_no,omitempty"` // 会议号
+
+	Password *string `json:"password,omitempty"` // 会议密码
+
+	CreateTime *string `json:"create_time,omitempty"` // 会议创建时间（unix时间，单位sec）
+
+	StartTime *string `json:"start_time,omitempty"` // 会议开始时间（unix时间，单位sec）
+
+	EndTime *string `json:"end_time,omitempty"` // 会议结束时间（unix时间，单位sec）
+
+	HostUser *MeetingUser `json:"host_user,omitempty"` // 主持人
+
+	MeetingConnect *bool `json:"meeting_connect,omitempty"` // 该会议是否支持互通
+
+	Status *int `json:"status,omitempty"` // 会议状态
+
+	ParticipantCount *string `json:"participant_count,omitempty"` // 参会峰值人数
+
+	ParticipantCountAccumulated *string `json:"participant_count_accumulated,omitempty"` // 累计参会人数
+
+	Participants []*MeetingParticipant `json:"participants,omitempty"` // 参会人列表
+
+	Ability *MeetingAbility `json:"ability,omitempty"` // 会中使用的能力
 }
 
 type MeetingBuilder struct {
-	id                              string // 会议ID（视频会议的唯一标识，视频会议开始后才会产生）
-	idFlag                          bool
-	topic                           string // 会议主题
-	topicFlag                       bool
-	url                             string // 会议链接（飞书用户可通过点击会议链接快捷入会）
-	urlFlag                         bool
-	meetingNo                       string // 会议号
-	meetingNoFlag                   bool
-	password                        string // 会议密码
-	passwordFlag                    bool
-	createTime                      string // 会议创建时间（unix时间，单位sec）
-	createTimeFlag                  bool
-	startTime                       string // 会议开始时间（unix时间，单位sec）
-	startTimeFlag                   bool
-	endTime                         string // 会议结束时间（unix时间，单位sec）
-	endTimeFlag                     bool
-	hostUser                        *MeetingUser // 主持人
-	hostUserFlag                    bool
-	meetingConnect                  bool // 该会议是否支持互通
-	meetingConnectFlag              bool
-	status                          int // 会议状态
-	statusFlag                      bool
-	participantCount                string // 参会峰值人数
-	participantCountFlag            bool
+	id     string // 会议ID（视频会议的唯一标识，视频会议开始后才会产生）
+	idFlag bool
+
+	topic     string // 会议主题
+	topicFlag bool
+
+	url     string // 会议链接（飞书用户可通过点击会议链接快捷入会）
+	urlFlag bool
+
+	meetingNo     string // 会议号
+	meetingNoFlag bool
+
+	password     string // 会议密码
+	passwordFlag bool
+
+	createTime     string // 会议创建时间（unix时间，单位sec）
+	createTimeFlag bool
+
+	startTime     string // 会议开始时间（unix时间，单位sec）
+	startTimeFlag bool
+
+	endTime     string // 会议结束时间（unix时间，单位sec）
+	endTimeFlag bool
+
+	hostUser     *MeetingUser // 主持人
+	hostUserFlag bool
+
+	meetingConnect     bool // 该会议是否支持互通
+	meetingConnectFlag bool
+
+	status     int // 会议状态
+	statusFlag bool
+
+	participantCount     string // 参会峰值人数
+	participantCountFlag bool
+
 	participantCountAccumulated     string // 累计参会人数
 	participantCountAccumulatedFlag bool
-	participants                    []*MeetingParticipant // 参会人列表
-	participantsFlag                bool
-	ability                         *MeetingAbility // 会中使用的能力
-	abilityFlag                     bool
+
+	participants     []*MeetingParticipant // 参会人列表
+	participantsFlag bool
+
+	ability     *MeetingAbility // 会中使用的能力
+	abilityFlag bool
 }
 
 func NewMeetingBuilder() *MeetingBuilder {
@@ -1815,21 +1929,27 @@ func (builder *MeetingBuilder) Build() *Meeting {
 }
 
 type MeetingRecording struct {
-	Id        *string `json:"id,omitempty"`         // 录制ID
+	Id *string `json:"id,omitempty"` // 录制ID
+
 	MeetingId *string `json:"meeting_id,omitempty"` // 会议ID
-	Url       *string `json:"url,omitempty"`        // 录制文件URL
-	Duration  *string `json:"duration,omitempty"`   // 录制总时长（单位msec）
+
+	Url *string `json:"url,omitempty"` // 录制文件URL
+
+	Duration *string `json:"duration,omitempty"` // 录制总时长（单位msec）
 }
 
 type MeetingRecordingBuilder struct {
-	id            string // 录制ID
-	idFlag        bool
+	id     string // 录制ID
+	idFlag bool
+
 	meetingId     string // 会议ID
 	meetingIdFlag bool
-	url           string // 录制文件URL
-	urlFlag       bool
-	duration      string // 录制总时长（单位msec）
-	durationFlag  bool
+
+	url     string // 录制文件URL
+	urlFlag bool
+
+	duration     string // 录制总时长（单位msec）
+	durationFlag bool
 }
 
 func NewMeetingRecordingBuilder() *MeetingRecordingBuilder {
@@ -1895,27 +2015,37 @@ func (builder *MeetingRecordingBuilder) Build() *MeetingRecording {
 }
 
 type MeetingAbility struct {
-	UseVideo        *bool `json:"use_video,omitempty"`         // 是否使用视频
-	UseAudio        *bool `json:"use_audio,omitempty"`         // 是否使用音频
-	UseShareScreen  *bool `json:"use_share_screen,omitempty"`  // 是否使用共享屏幕
+	UseVideo *bool `json:"use_video,omitempty"` // 是否使用视频
+
+	UseAudio *bool `json:"use_audio,omitempty"` // 是否使用音频
+
+	UseShareScreen *bool `json:"use_share_screen,omitempty"` // 是否使用共享屏幕
+
 	UseFollowScreen *bool `json:"use_follow_screen,omitempty"` // 是否使用妙享（magic share）
-	UseRecording    *bool `json:"use_recording,omitempty"`     // 是否使用录制
-	UsePstn         *bool `json:"use_pstn,omitempty"`          // 是否使用PSTN
+
+	UseRecording *bool `json:"use_recording,omitempty"` // 是否使用录制
+
+	UsePstn *bool `json:"use_pstn,omitempty"` // 是否使用PSTN
 }
 
 type MeetingAbilityBuilder struct {
-	useVideo            bool // 是否使用视频
-	useVideoFlag        bool
-	useAudio            bool // 是否使用音频
-	useAudioFlag        bool
-	useShareScreen      bool // 是否使用共享屏幕
-	useShareScreenFlag  bool
+	useVideo     bool // 是否使用视频
+	useVideoFlag bool
+
+	useAudio     bool // 是否使用音频
+	useAudioFlag bool
+
+	useShareScreen     bool // 是否使用共享屏幕
+	useShareScreenFlag bool
+
 	useFollowScreen     bool // 是否使用妙享（magic share）
 	useFollowScreenFlag bool
-	useRecording        bool // 是否使用录制
-	useRecordingFlag    bool
-	usePstn             bool // 是否使用PSTN
-	usePstnFlag         bool
+
+	useRecording     bool // 是否使用录制
+	useRecordingFlag bool
+
+	usePstn     bool // 是否使用PSTN
+	usePstnFlag bool
 }
 
 func NewMeetingAbilityBuilder() *MeetingAbilityBuilder {
@@ -2007,19 +2137,25 @@ func (builder *MeetingAbilityBuilder) Build() *MeetingAbility {
 }
 
 type MeetingAnalyzeOutput struct {
-	MeetingId             *string                `json:"meeting_id,omitempty"`              // 会议号
-	CheckStatusCode       *int                   `json:"check_status_code,omitempty"`       // 状态码
-	ObjectiveCheckOutput  *ObjectiveCheckOutput  `json:"objective_check_output,omitempty"`  // 客观分析结果
+	MeetingId *string `json:"meeting_id,omitempty"` // 会议号
+
+	CheckStatusCode *int `json:"check_status_code,omitempty"` // 状态码
+
+	ObjectiveCheckOutput *ObjectiveCheckOutput `json:"objective_check_output,omitempty"` // 客观分析结果
+
 	SubjectiveCheckOutput *SubjectiveCheckOutput `json:"subjective_check_output,omitempty"` // 主观分析结果
 }
 
 type MeetingAnalyzeOutputBuilder struct {
-	meetingId                 string // 会议号
-	meetingIdFlag             bool
-	checkStatusCode           int // 状态码
-	checkStatusCodeFlag       bool
-	objectiveCheckOutput      *ObjectiveCheckOutput // 客观分析结果
-	objectiveCheckOutputFlag  bool
+	meetingId     string // 会议号
+	meetingIdFlag bool
+
+	checkStatusCode     int // 状态码
+	checkStatusCodeFlag bool
+
+	objectiveCheckOutput     *ObjectiveCheckOutput // 客观分析结果
+	objectiveCheckOutputFlag bool
+
 	subjectiveCheckOutput     *SubjectiveCheckOutput // 主观分析结果
 	subjectiveCheckOutputFlag bool
 }
@@ -2085,45 +2221,67 @@ func (builder *MeetingAnalyzeOutputBuilder) Build() *MeetingAnalyzeOutput {
 }
 
 type MeetingEventMeeting struct {
-	Id              *string                 `json:"id,omitempty"`                // 会议ID（视频会议的唯一标识，视频会议开始后才会产生）
-	Topic           *string                 `json:"topic,omitempty"`             // 会议主题
-	MeetingNo       *string                 `json:"meeting_no,omitempty"`        // 9位会议号（飞书用户可通过输入9位会议号快捷入会）
-	MeetingSource   *int                    `json:"meeting_source,omitempty"`    // 会议创建源
-	StartTime       *string                 `json:"start_time,omitempty"`        // 会议开始时间（unix时间，单位sec）
-	EndTime         *string                 `json:"end_time,omitempty"`          // 会议结束时间（unix时间，单位sec）
-	HostUser        *MeetingEventUser       `json:"host_user,omitempty"`         // 会议主持人
-	Owner           *MeetingEventUser       `json:"owner,omitempty"`             // 会议拥有者
-	CalendarEventId *string                 `json:"calendar_event_id,omitempty"` // 日程实体的唯一标志
-	MeetingSubType  *int                    `json:"meeting_sub_type,omitempty"`  // 会议子类型
-	SecuritySetting *MeetingSecuritySetting `json:"security_setting,omitempty"`  // 会议安全设置
-	WebinarSetting  *MeetingWebinarSetting  `json:"webinar_setting,omitempty"`   // 研讨会相关设置
+	Id *string `json:"id,omitempty"` // 会议ID（视频会议的唯一标识，视频会议开始后才会产生）
+
+	Topic *string `json:"topic,omitempty"` // 会议主题
+
+	MeetingNo *string `json:"meeting_no,omitempty"` // 9位会议号（飞书用户可通过输入9位会议号快捷入会）
+
+	MeetingSource *int `json:"meeting_source,omitempty"` // 会议创建源
+
+	StartTime *string `json:"start_time,omitempty"` // 会议开始时间（unix时间，单位sec）
+
+	EndTime *string `json:"end_time,omitempty"` // 会议结束时间（unix时间，单位sec）
+
+	HostUser *MeetingEventUser `json:"host_user,omitempty"` // 会议主持人
+
+	Owner *MeetingEventUser `json:"owner,omitempty"` // 会议拥有者
+
+	CalendarEventId *string `json:"calendar_event_id,omitempty"` // 日程实体的唯一标志
+
+	MeetingSubType *int `json:"meeting_sub_type,omitempty"` // 会议子类型
+
+	SecuritySetting *MeetingSecuritySetting `json:"security_setting,omitempty"` // 会议安全设置
+
+	WebinarSetting *MeetingWebinarSetting `json:"webinar_setting,omitempty"` // 研讨会相关设置
 }
 
 type MeetingEventMeetingBuilder struct {
-	id                  string // 会议ID（视频会议的唯一标识，视频会议开始后才会产生）
-	idFlag              bool
-	topic               string // 会议主题
-	topicFlag           bool
-	meetingNo           string // 9位会议号（飞书用户可通过输入9位会议号快捷入会）
-	meetingNoFlag       bool
-	meetingSource       int // 会议创建源
-	meetingSourceFlag   bool
-	startTime           string // 会议开始时间（unix时间，单位sec）
-	startTimeFlag       bool
-	endTime             string // 会议结束时间（unix时间，单位sec）
-	endTimeFlag         bool
-	hostUser            *MeetingEventUser // 会议主持人
-	hostUserFlag        bool
-	owner               *MeetingEventUser // 会议拥有者
-	ownerFlag           bool
+	id     string // 会议ID（视频会议的唯一标识，视频会议开始后才会产生）
+	idFlag bool
+
+	topic     string // 会议主题
+	topicFlag bool
+
+	meetingNo     string // 9位会议号（飞书用户可通过输入9位会议号快捷入会）
+	meetingNoFlag bool
+
+	meetingSource     int // 会议创建源
+	meetingSourceFlag bool
+
+	startTime     string // 会议开始时间（unix时间，单位sec）
+	startTimeFlag bool
+
+	endTime     string // 会议结束时间（unix时间，单位sec）
+	endTimeFlag bool
+
+	hostUser     *MeetingEventUser // 会议主持人
+	hostUserFlag bool
+
+	owner     *MeetingEventUser // 会议拥有者
+	ownerFlag bool
+
 	calendarEventId     string // 日程实体的唯一标志
 	calendarEventIdFlag bool
-	meetingSubType      int // 会议子类型
-	meetingSubTypeFlag  bool
+
+	meetingSubType     int // 会议子类型
+	meetingSubTypeFlag bool
+
 	securitySetting     *MeetingSecuritySetting // 会议安全设置
 	securitySettingFlag bool
-	webinarSetting      *MeetingWebinarSetting // 研讨会相关设置
-	webinarSettingFlag  bool
+
+	webinarSetting     *MeetingWebinarSetting // 研讨会相关设置
+	webinarSettingFlag bool
 }
 
 func NewMeetingEventMeetingBuilder() *MeetingEventMeetingBuilder {
@@ -2289,16 +2447,20 @@ func (builder *MeetingEventMeetingBuilder) Build() *MeetingEventMeeting {
 }
 
 type MeetingEventUser struct {
-	Id       *UserId `json:"id,omitempty"`        // 用户 ID
-	UserRole *int    `json:"user_role,omitempty"` // 用户会中角色
-	UserType *int    `json:"user_type,omitempty"` // 用户类型
+	Id *UserId `json:"id,omitempty"` // 用户 ID
+
+	UserRole *int `json:"user_role,omitempty"` // 用户会中角色
+
+	UserType *int `json:"user_type,omitempty"` // 用户类型
 }
 
 type MeetingEventUserBuilder struct {
-	id           *UserId // 用户 ID
-	idFlag       bool
+	id     *UserId // 用户 ID
+	idFlag bool
+
 	userRole     int // 用户会中角色
 	userRoleFlag bool
+
 	userType     int // 用户类型
 	userTypeFlag bool
 }
@@ -2352,72 +2514,112 @@ func (builder *MeetingEventUserBuilder) Build() *MeetingEventUser {
 }
 
 type MeetingInfo struct {
-	MeetingId            *string         `json:"meeting_id,omitempty"`             // 9位会议号
-	MeetingTopic         *string         `json:"meeting_topic,omitempty"`          // 会议主题
-	MeetingType          *int            `json:"meeting_type,omitempty"`           // 会议类型
-	Organizer            *string         `json:"organizer,omitempty"`              // 组织者
-	Department           *string         `json:"department,omitempty"`             // 部门
-	UserId               *string         `json:"user_id,omitempty"`                // 用户ID
-	EmployeeId           *string         `json:"employee_id,omitempty"`            // 工号
-	Email                *string         `json:"email,omitempty"`                  // 邮箱
-	Mobile               *string         `json:"mobile,omitempty"`                 // 手机
-	MeetingStartTime     *string         `json:"meeting_start_time,omitempty"`     // 会议开始时间
-	MeetingEndTime       *string         `json:"meeting_end_time,omitempty"`       // 会议结束时间
-	MeetingDuration      *string         `json:"meeting_duration,omitempty"`       // 会议持续时间
-	NumberOfParticipants *string         `json:"number_of_participants,omitempty"` // 参会人数
-	NumberOfDevices      *string         `json:"number_of_devices,omitempty"`      // 累计入会设备数
-	Audio                *bool           `json:"audio,omitempty"`                  // 音频
-	Video                *bool           `json:"video,omitempty"`                  // 视频
-	Sharing              *bool           `json:"sharing,omitempty"`                // 共享
-	Recording            *bool           `json:"recording,omitempty"`              // 录制
-	Telephone            *bool           `json:"telephone,omitempty"`              // 电话
-	ReservedRooms        []*ReservedRoom `json:"reserved_rooms,omitempty"`         // 关联会议室列表
-	HasRelatedDocument   *bool           `json:"has_related_document,omitempty"`   // 是否有关联文档和纪要
+	MeetingId *string `json:"meeting_id,omitempty"` // 9位会议号
+
+	MeetingTopic *string `json:"meeting_topic,omitempty"` // 会议主题
+
+	MeetingType *int `json:"meeting_type,omitempty"` // 会议类型
+
+	Organizer *string `json:"organizer,omitempty"` // 组织者
+
+	Department *string `json:"department,omitempty"` // 部门
+
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	EmployeeId *string `json:"employee_id,omitempty"` // 工号
+
+	Email *string `json:"email,omitempty"` // 邮箱
+
+	Mobile *string `json:"mobile,omitempty"` // 手机
+
+	MeetingStartTime *string `json:"meeting_start_time,omitempty"` // 会议开始时间
+
+	MeetingEndTime *string `json:"meeting_end_time,omitempty"` // 会议结束时间
+
+	MeetingDuration *string `json:"meeting_duration,omitempty"` // 会议持续时间
+
+	NumberOfParticipants *string `json:"number_of_participants,omitempty"` // 参会人数
+
+	NumberOfDevices *string `json:"number_of_devices,omitempty"` // 累计入会设备数
+
+	Audio *bool `json:"audio,omitempty"` // 音频
+
+	Video *bool `json:"video,omitempty"` // 视频
+
+	Sharing *bool `json:"sharing,omitempty"` // 共享
+
+	Recording *bool `json:"recording,omitempty"` // 录制
+
+	Telephone *bool `json:"telephone,omitempty"` // 电话
+
+	ReservedRooms []*ReservedRoom `json:"reserved_rooms,omitempty"` // 关联会议室列表
+
+	HasRelatedDocument *bool `json:"has_related_document,omitempty"` // 是否有关联文档和纪要
 }
 
 type MeetingInfoBuilder struct {
-	meetingId                string // 9位会议号
-	meetingIdFlag            bool
-	meetingTopic             string // 会议主题
-	meetingTopicFlag         bool
-	meetingType              int // 会议类型
-	meetingTypeFlag          bool
-	organizer                string // 组织者
-	organizerFlag            bool
-	department               string // 部门
-	departmentFlag           bool
-	userId                   string // 用户ID
-	userIdFlag               bool
-	employeeId               string // 工号
-	employeeIdFlag           bool
-	email                    string // 邮箱
-	emailFlag                bool
-	mobile                   string // 手机
-	mobileFlag               bool
-	meetingStartTime         string // 会议开始时间
-	meetingStartTimeFlag     bool
-	meetingEndTime           string // 会议结束时间
-	meetingEndTimeFlag       bool
-	meetingDuration          string // 会议持续时间
-	meetingDurationFlag      bool
+	meetingId     string // 9位会议号
+	meetingIdFlag bool
+
+	meetingTopic     string // 会议主题
+	meetingTopicFlag bool
+
+	meetingType     int // 会议类型
+	meetingTypeFlag bool
+
+	organizer     string // 组织者
+	organizerFlag bool
+
+	department     string // 部门
+	departmentFlag bool
+
+	userId     string // 用户ID
+	userIdFlag bool
+
+	employeeId     string // 工号
+	employeeIdFlag bool
+
+	email     string // 邮箱
+	emailFlag bool
+
+	mobile     string // 手机
+	mobileFlag bool
+
+	meetingStartTime     string // 会议开始时间
+	meetingStartTimeFlag bool
+
+	meetingEndTime     string // 会议结束时间
+	meetingEndTimeFlag bool
+
+	meetingDuration     string // 会议持续时间
+	meetingDurationFlag bool
+
 	numberOfParticipants     string // 参会人数
 	numberOfParticipantsFlag bool
-	numberOfDevices          string // 累计入会设备数
-	numberOfDevicesFlag      bool
-	audio                    bool // 音频
-	audioFlag                bool
-	video                    bool // 视频
-	videoFlag                bool
-	sharing                  bool // 共享
-	sharingFlag              bool
-	recording                bool // 录制
-	recordingFlag            bool
-	telephone                bool // 电话
-	telephoneFlag            bool
-	reservedRooms            []*ReservedRoom // 关联会议室列表
-	reservedRoomsFlag        bool
-	hasRelatedDocument       bool // 是否有关联文档和纪要
-	hasRelatedDocumentFlag   bool
+
+	numberOfDevices     string // 累计入会设备数
+	numberOfDevicesFlag bool
+
+	audio     bool // 音频
+	audioFlag bool
+
+	video     bool // 视频
+	videoFlag bool
+
+	sharing     bool // 共享
+	sharingFlag bool
+
+	recording     bool // 录制
+	recordingFlag bool
+
+	telephone     bool // 电话
+	telephoneFlag bool
+
+	reservedRooms     []*ReservedRoom // 关联会议室列表
+	reservedRoomsFlag bool
+
+	hasRelatedDocument     bool // 是否有关联文档和纪要
+	hasRelatedDocumentFlag bool
 }
 
 func NewMeetingInfoBuilder() *MeetingInfoBuilder {
@@ -2703,18 +2905,22 @@ func (builder *MeetingInfoBuilder) Build() *MeetingInfo {
 }
 
 type MeetingInviteStatus struct {
-	Id       *string `json:"id,omitempty"`        // 用户ID
-	UserType *int    `json:"user_type,omitempty"` // 用户类型
-	Status   *int    `json:"status,omitempty"`    // 邀请结果
+	Id *string `json:"id,omitempty"` // 用户ID
+
+	UserType *int `json:"user_type,omitempty"` // 用户类型
+
+	Status *int `json:"status,omitempty"` // 邀请结果
 }
 
 type MeetingInviteStatusBuilder struct {
-	id           string // 用户ID
-	idFlag       bool
+	id     string // 用户ID
+	idFlag bool
+
 	userType     int // 用户类型
 	userTypeFlag bool
-	status       int // 邀请结果
-	statusFlag   bool
+
+	status     int // 邀请结果
+	statusFlag bool
 }
 
 func NewMeetingInviteStatusBuilder() *MeetingInviteStatusBuilder {
@@ -2767,36 +2973,52 @@ func (builder *MeetingInviteStatusBuilder) Build() *MeetingInviteStatus {
 }
 
 type MeetingParticipant struct {
-	Id                *string `json:"id,omitempty"`                  // 用户ID
-	FirstJoinTime     *string `json:"first_join_time,omitempty"`     // 首次入会时间，秒级Unix时间戳
-	FinalLeaveTime    *string `json:"final_leave_time,omitempty"`    // 最终离会时间，秒级Unix时间戳
+	Id *string `json:"id,omitempty"` // 用户ID
+
+	FirstJoinTime *string `json:"first_join_time,omitempty"` // 首次入会时间，秒级Unix时间戳
+
+	FinalLeaveTime *string `json:"final_leave_time,omitempty"` // 最终离会时间，秒级Unix时间戳
+
 	InMeetingDuration *string `json:"in_meeting_duration,omitempty"` // 累计在会中时间，时间单位：秒
-	UserType          *int    `json:"user_type,omitempty"`           // 用户类型
-	IsHost            *bool   `json:"is_host,omitempty"`             // 是否为主持人
-	IsCohost          *bool   `json:"is_cohost,omitempty"`           // 是否为联席主持人
-	IsExternal        *bool   `json:"is_external,omitempty"`         // 是否为外部参会人
-	Status            *int    `json:"status,omitempty"`              // 参会人状态
+
+	UserType *int `json:"user_type,omitempty"` // 用户类型
+
+	IsHost *bool `json:"is_host,omitempty"` // 是否为主持人
+
+	IsCohost *bool `json:"is_cohost,omitempty"` // 是否为联席主持人
+
+	IsExternal *bool `json:"is_external,omitempty"` // 是否为外部参会人
+
+	Status *int `json:"status,omitempty"` // 参会人状态
 }
 
 type MeetingParticipantBuilder struct {
-	id                    string // 用户ID
-	idFlag                bool
-	firstJoinTime         string // 首次入会时间，秒级Unix时间戳
-	firstJoinTimeFlag     bool
-	finalLeaveTime        string // 最终离会时间，秒级Unix时间戳
-	finalLeaveTimeFlag    bool
+	id     string // 用户ID
+	idFlag bool
+
+	firstJoinTime     string // 首次入会时间，秒级Unix时间戳
+	firstJoinTimeFlag bool
+
+	finalLeaveTime     string // 最终离会时间，秒级Unix时间戳
+	finalLeaveTimeFlag bool
+
 	inMeetingDuration     string // 累计在会中时间，时间单位：秒
 	inMeetingDurationFlag bool
-	userType              int // 用户类型
-	userTypeFlag          bool
-	isHost                bool // 是否为主持人
-	isHostFlag            bool
-	isCohost              bool // 是否为联席主持人
-	isCohostFlag          bool
-	isExternal            bool // 是否为外部参会人
-	isExternalFlag        bool
-	status                int // 参会人状态
-	statusFlag            bool
+
+	userType     int // 用户类型
+	userTypeFlag bool
+
+	isHost     bool // 是否为主持人
+	isHostFlag bool
+
+	isCohost     bool // 是否为联席主持人
+	isCohostFlag bool
+
+	isExternal     bool // 是否为外部参会人
+	isExternalFlag bool
+
+	status     int // 参会人状态
+	statusFlag bool
 }
 
 func NewMeetingParticipantBuilder() *MeetingParticipantBuilder {
@@ -2927,18 +3149,22 @@ func (builder *MeetingParticipantBuilder) Build() *MeetingParticipant {
 }
 
 type MeetingParticipantResult struct {
-	Id       *string `json:"id,omitempty"`        // 用户ID
-	UserType *int    `json:"user_type,omitempty"` // 用户类型
-	Result   *int    `json:"result,omitempty"`    // 移除结果
+	Id *string `json:"id,omitempty"` // 用户ID
+
+	UserType *int `json:"user_type,omitempty"` // 用户类型
+
+	Result *int `json:"result,omitempty"` // 移除结果
 }
 
 type MeetingParticipantResultBuilder struct {
-	id           string // 用户ID
-	idFlag       bool
+	id     string // 用户ID
+	idFlag bool
+
 	userType     int // 用户类型
 	userTypeFlag bool
-	result       int // 移除结果
-	resultFlag   bool
+
+	result     int // 移除结果
+	resultFlag bool
 }
 
 func NewMeetingParticipantResultBuilder() *MeetingParticipantResultBuilder {
@@ -2991,22 +3217,30 @@ func (builder *MeetingParticipantResultBuilder) Build() *MeetingParticipantResul
 }
 
 type MeetingSecuritySetting struct {
-	SecurityLevel                  *int      `json:"security_level,omitempty"`                      // 安全级别
-	GroupIds                       []string  `json:"group_ids,omitempty"`                           // 允许入会的群组ID列表
-	UserIds                        []*UserId `json:"user_ids,omitempty"`                            // 允许入会的用户ID列表
-	RoomIds                        []string  `json:"room_ids,omitempty"`                            // 允许入会的会议室ID列表
-	HasSetSecurityContactsAndGroup *bool     `json:"has_set_security_contacts_and_group,omitempty"` // 是否设置了仅指定联系人和群组可参会
+	SecurityLevel *int `json:"security_level,omitempty"` // 安全级别
+
+	GroupIds []string `json:"group_ids,omitempty"` // 允许入会的群组ID列表
+
+	UserIds []*UserId `json:"user_ids,omitempty"` // 允许入会的用户ID列表
+
+	RoomIds []string `json:"room_ids,omitempty"` // 允许入会的会议室ID列表
+
+	HasSetSecurityContactsAndGroup *bool `json:"has_set_security_contacts_and_group,omitempty"` // 是否设置了仅指定联系人和群组可参会
 }
 
 type MeetingSecuritySettingBuilder struct {
-	securityLevel                      int // 安全级别
-	securityLevelFlag                  bool
-	groupIds                           []string // 允许入会的群组ID列表
-	groupIdsFlag                       bool
-	userIds                            []*UserId // 允许入会的用户ID列表
-	userIdsFlag                        bool
-	roomIds                            []string // 允许入会的会议室ID列表
-	roomIdsFlag                        bool
+	securityLevel     int // 安全级别
+	securityLevelFlag bool
+
+	groupIds     []string // 允许入会的群组ID列表
+	groupIdsFlag bool
+
+	userIds     []*UserId // 允许入会的用户ID列表
+	userIdsFlag bool
+
+	roomIds     []string // 允许入会的会议室ID列表
+	roomIdsFlag bool
+
 	hasSetSecurityContactsAndGroup     bool // 是否设置了仅指定联系人和群组可参会
 	hasSetSecurityContactsAndGroupFlag bool
 }
@@ -3084,13 +3318,15 @@ func (builder *MeetingSecuritySettingBuilder) Build() *MeetingSecuritySetting {
 }
 
 type MeetingUser struct {
-	Id       *string `json:"id,omitempty"`        // 用户ID
-	UserType *int    `json:"user_type,omitempty"` // 用户类型
+	Id *string `json:"id,omitempty"` // 用户ID
+
+	UserType *int `json:"user_type,omitempty"` // 用户类型
 }
 
 type MeetingUserBuilder struct {
-	id           string // 用户ID
-	idFlag       bool
+	id     string // 用户ID
+	idFlag bool
+
 	userType     int // 用户类型
 	userTypeFlag bool
 }
@@ -3165,14 +3401,16 @@ func (builder *MeetingWebinarSettingBuilder) Build() *MeetingWebinarSetting {
 
 type MyAiAvPluginCardStatus struct {
 	FromStatus *string `json:"from_status,omitempty"` // card from status
-	ToStatus   *string `json:"to_status,omitempty"`   // card to status
+
+	ToStatus *string `json:"to_status,omitempty"` // card to status
 }
 
 type MyAiAvPluginCardStatusBuilder struct {
 	fromStatus     string // card from status
 	fromStatusFlag bool
-	toStatus       string // card to status
-	toStatusFlag   bool
+
+	toStatus     string // card to status
+	toStatusFlag bool
 }
 
 func NewMyAiAvPluginCardStatusBuilder() *MyAiAvPluginCardStatusBuilder {
@@ -3276,22 +3514,30 @@ func (builder *MyAiAvPluginCardVaribalesBuilder) Build() *MyAiAvPluginCardVariba
 }
 
 type MyAiAvPluginContextSystemInfo struct {
-	Lang       *string `json:"lang,omitempty"`        // 语言
-	Brand      *string `json:"brand,omitempty"`       // 品牌
-	Locale     *string `json:"locale,omitempty"`      // 客户端语言
-	SessionId  *string `json:"session_id,omitempty"`  // 会话ID
+	Lang *string `json:"lang,omitempty"` // 语言
+
+	Brand *string `json:"brand,omitempty"` // 品牌
+
+	Locale *string `json:"locale,omitempty"` // 客户端语言
+
+	SessionId *string `json:"session_id,omitempty"` // 会话ID
+
 	AppVersion *string `json:"app_version,omitempty"` // app version
 }
 
 type MyAiAvPluginContextSystemInfoBuilder struct {
-	lang           string // 语言
-	langFlag       bool
-	brand          string // 品牌
-	brandFlag      bool
-	locale         string // 客户端语言
-	localeFlag     bool
-	sessionId      string // 会话ID
-	sessionIdFlag  bool
+	lang     string // 语言
+	langFlag bool
+
+	brand     string // 品牌
+	brandFlag bool
+
+	locale     string // 客户端语言
+	localeFlag bool
+
+	sessionId     string // 会话ID
+	sessionIdFlag bool
+
 	appVersion     string // app version
 	appVersionFlag bool
 }
@@ -3372,24 +3618,32 @@ func (builder *MyAiAvPluginContextSystemInfoBuilder) Build() *MyAiAvPluginContex
 }
 
 type MyAiAvPluginPresentInfo struct {
-	Type           *string                    `json:"type,omitempty"`             // present type
-	CardTemplateId *string                    `json:"card_template_id,omitempty"` // card template id
-	Body           *string                    `json:"body,omitempty"`             // body
-	CardVariables  *MyAiAvPluginCardVariables `json:"card_variables,omitempty"`   //
-	CallbackInfo   *string                    `json:"callback_info,omitempty"`    // callback info
+	Type *string `json:"type,omitempty"` // present type
+
+	CardTemplateId *string `json:"card_template_id,omitempty"` // card template id
+
+	Body *string `json:"body,omitempty"` // body
+
+	CardVariables *MyAiAvPluginCardVariables `json:"card_variables,omitempty"` //
+
+	CallbackInfo *string `json:"callback_info,omitempty"` // callback info
 }
 
 type MyAiAvPluginPresentInfoBuilder struct {
-	type_              string // present type
-	typeFlag           bool
+	type_    string // present type
+	typeFlag bool
+
 	cardTemplateId     string // card template id
 	cardTemplateIdFlag bool
-	body               string // body
-	bodyFlag           bool
-	cardVariables      *MyAiAvPluginCardVariables //
-	cardVariablesFlag  bool
-	callbackInfo       string // callback info
-	callbackInfoFlag   bool
+
+	body     string // body
+	bodyFlag bool
+
+	cardVariables     *MyAiAvPluginCardVariables //
+	cardVariablesFlag bool
+
+	callbackInfo     string // callback info
+	callbackInfoFlag bool
 }
 
 func NewMyAiAvPluginPresentInfoBuilder() *MyAiAvPluginPresentInfoBuilder {
@@ -3465,27 +3719,37 @@ func (builder *MyAiAvPluginPresentInfoBuilder) Build() *MyAiAvPluginPresentInfo 
 }
 
 type MyAiAvPluginScenarioContext struct {
-	Plugins       []*MyAiPluginContext           `json:"plugins,omitempty"`        // 会话选择的插件列表
-	WorkMode      *int                           `json:"work_mode,omitempty"`      // 会话所处的业务模式
-	Scenario      *string                        `json:"scenario,omitempty"`       // 会话所处的业务场景
-	SessionId     *string                        `json:"session_id,omitempty"`     // 会话ID
-	UploadObjects []*MyAiAvPluginUploadObject    `json:"upload_objects,omitempty"` // upload objects
-	SystemInfo    *MyAiAvPluginContextSystemInfo `json:"system_info,omitempty"`    // system info
+	Plugins []*MyAiPluginContext `json:"plugins,omitempty"` // 会话选择的插件列表
+
+	WorkMode *int `json:"work_mode,omitempty"` // 会话所处的业务模式
+
+	Scenario *string `json:"scenario,omitempty"` // 会话所处的业务场景
+
+	SessionId *string `json:"session_id,omitempty"` // 会话ID
+
+	UploadObjects []*MyAiAvPluginUploadObject `json:"upload_objects,omitempty"` // upload objects
+
+	SystemInfo *MyAiAvPluginContextSystemInfo `json:"system_info,omitempty"` // system info
 }
 
 type MyAiAvPluginScenarioContextBuilder struct {
-	plugins           []*MyAiPluginContext // 会话选择的插件列表
-	pluginsFlag       bool
-	workMode          int // 会话所处的业务模式
-	workModeFlag      bool
-	scenario          string // 会话所处的业务场景
-	scenarioFlag      bool
-	sessionId         string // 会话ID
-	sessionIdFlag     bool
+	plugins     []*MyAiPluginContext // 会话选择的插件列表
+	pluginsFlag bool
+
+	workMode     int // 会话所处的业务模式
+	workModeFlag bool
+
+	scenario     string // 会话所处的业务场景
+	scenarioFlag bool
+
+	sessionId     string // 会话ID
+	sessionIdFlag bool
+
 	uploadObjects     []*MyAiAvPluginUploadObject // upload objects
 	uploadObjectsFlag bool
-	systemInfo        *MyAiAvPluginContextSystemInfo // system info
-	systemInfoFlag    bool
+
+	systemInfo     *MyAiAvPluginContextSystemInfo // system info
+	systemInfoFlag bool
 }
 
 func NewMyAiAvPluginScenarioContextBuilder() *MyAiAvPluginScenarioContextBuilder {
@@ -3575,14 +3839,16 @@ func (builder *MyAiAvPluginScenarioContextBuilder) Build() *MyAiAvPluginScenario
 
 type MyAiAvPluginUploadObject struct {
 	BizId *string `json:"biz_id,omitempty"` // 业务ID
-	Type  *string `json:"type,omitempty"`   // 类型
+
+	Type *string `json:"type,omitempty"` // 类型
 }
 
 type MyAiAvPluginUploadObjectBuilder struct {
 	bizId     string // 业务ID
 	bizIdFlag bool
-	type_     string // 类型
-	typeFlag  bool
+
+	type_    string // 类型
+	typeFlag bool
 }
 
 func NewMyAiAvPluginUploadObjectBuilder() *MyAiAvPluginUploadObjectBuilder {
@@ -3623,14 +3889,16 @@ func (builder *MyAiAvPluginUploadObjectBuilder) Build() *MyAiAvPluginUploadObjec
 
 type MyAiCallbackAction struct {
 	Value *MyAiCallbackActionValue `json:"value,omitempty"` // 卡片交互回调的value
-	Tag   *string                  `json:"tag,omitempty"`   // 交互的类型
+
+	Tag *string `json:"tag,omitempty"` // 交互的类型
 }
 
 type MyAiCallbackActionBuilder struct {
 	value     *MyAiCallbackActionValue // 卡片交互回调的value
 	valueFlag bool
-	tag       string // 交互的类型
-	tagFlag   bool
+
+	tag     string // 交互的类型
+	tagFlag bool
 }
 
 func NewMyAiCallbackActionBuilder() *MyAiCallbackActionBuilder {
@@ -3669,13 +3937,15 @@ func (builder *MyAiCallbackActionBuilder) Build() *MyAiCallbackAction {
 }
 
 type MyAiCallbackActionValue struct {
-	Body   *string `json:"body,omitempty"`   // myai卡片交互回调的value
+	Body *string `json:"body,omitempty"` // myai卡片交互回调的value
+
 	Handle *string `json:"handle,omitempty"` // 用户的交互操作
 }
 
 type MyAiCallbackActionValueBuilder struct {
-	body       string // myai卡片交互回调的value
-	bodyFlag   bool
+	body     string // myai卡片交互回调的value
+	bodyFlag bool
+
 	handle     string // 用户的交互操作
 	handleFlag bool
 }
@@ -3717,13 +3987,15 @@ func (builder *MyAiCallbackActionValueBuilder) Build() *MyAiCallbackActionValue 
 }
 
 type MyAiObjectContext struct {
-	Type  *string `json:"type,omitempty"`   // 会话所在实体类型
+	Type *string `json:"type,omitempty"` // 会话所在实体类型
+
 	BizId *string `json:"biz_id,omitempty"` // 业务资源 ID
 }
 
 type MyAiObjectContextBuilder struct {
-	type_     string // 会话所在实体类型
-	typeFlag  bool
+	type_    string // 会话所在实体类型
+	typeFlag bool
+
 	bizId     string // 业务资源 ID
 	bizIdFlag bool
 }
@@ -3797,30 +4069,42 @@ func (builder *MyAiPluginContextBuilder) Build() *MyAiPluginContext {
 }
 
 type MyAiResponsePresent struct {
-	Type          *string `json:"type,omitempty"`           // 类型
-	Body          *string `json:"body,omitempty"`           // 透传消息体
-	Interactable  *bool   `json:"interactable,omitempty"`   // 是否可交互
+	Type *string `json:"type,omitempty"` // 类型
+
+	Body *string `json:"body,omitempty"` // 透传消息体
+
+	Interactable *bool `json:"interactable,omitempty"` // 是否可交互
+
 	OperationType *string `json:"operation_type,omitempty"` // tool对卡片交互的响应
-	OperationUrl  *string `json:"operation_url,omitempty"`  // 卡片后续链路交互的请求地址
-	CallbackUrl   *string `json:"callback_url,omitempty"`   // 透传数据上屏后,回调业务方的url;支持Open API 与 rpc 两种方式。由业务方提供。
-	CallbackInfo  *string `json:"callback_info,omitempty"`  // 回调信息
+
+	OperationUrl *string `json:"operation_url,omitempty"` // 卡片后续链路交互的请求地址
+
+	CallbackUrl *string `json:"callback_url,omitempty"` // 透传数据上屏后,回调业务方的url;支持Open API 与 rpc 两种方式。由业务方提供。
+
+	CallbackInfo *string `json:"callback_info,omitempty"` // 回调信息
 }
 
 type MyAiResponsePresentBuilder struct {
-	type_             string // 类型
-	typeFlag          bool
-	body              string // 透传消息体
-	bodyFlag          bool
-	interactable      bool // 是否可交互
-	interactableFlag  bool
+	type_    string // 类型
+	typeFlag bool
+
+	body     string // 透传消息体
+	bodyFlag bool
+
+	interactable     bool // 是否可交互
+	interactableFlag bool
+
 	operationType     string // tool对卡片交互的响应
 	operationTypeFlag bool
-	operationUrl      string // 卡片后续链路交互的请求地址
-	operationUrlFlag  bool
-	callbackUrl       string // 透传数据上屏后,回调业务方的url;支持Open API 与 rpc 两种方式。由业务方提供。
-	callbackUrlFlag   bool
-	callbackInfo      string // 回调信息
-	callbackInfoFlag  bool
+
+	operationUrl     string // 卡片后续链路交互的请求地址
+	operationUrlFlag bool
+
+	callbackUrl     string // 透传数据上屏后,回调业务方的url;支持Open API 与 rpc 两种方式。由业务方提供。
+	callbackUrlFlag bool
+
+	callbackInfo     string // 回调信息
+	callbackInfoFlag bool
 }
 
 func NewMyAiResponsePresentBuilder() *MyAiResponsePresentBuilder {
@@ -3925,13 +4209,15 @@ func (builder *MyAiResponsePresentBuilder) Build() *MyAiResponsePresent {
 }
 
 type MyAiRoomCommonResult struct {
-	RoomReply       *string                  `json:"room_reply,omitempty"`       // 通用回复
+	RoomReply *string `json:"room_reply,omitempty"` // 通用回复
+
 	OpenapiResponse *MyAiRoomOpenapiResponse `json:"openapi_response,omitempty"` // openapi 响应结果
 }
 
 type MyAiRoomCommonResultBuilder struct {
-	roomReply           string // 通用回复
-	roomReplyFlag       bool
+	roomReply     string // 通用回复
+	roomReplyFlag bool
+
 	openapiResponse     *MyAiRoomOpenapiResponse // openapi 响应结果
 	openapiResponseFlag bool
 }
@@ -3972,21 +4258,27 @@ func (builder *MyAiRoomCommonResultBuilder) Build() *MyAiRoomCommonResult {
 }
 
 type MyAiRoomOpenapiResponse struct {
-	ResponseType    *int    `json:"response_type,omitempty"`     // openapi 返回的意图类型，不同 tool 的不同值都不一样
+	ResponseType *int `json:"response_type,omitempty"` // openapi 返回的意图类型，不同 tool 的不同值都不一样
+
 	ScheduleEventId *string `json:"schedule_event_id,omitempty"` // 日程 id
-	OtherMsg        *string `json:"other_msg,omitempty"`         // 其他信息
-	OapiMsg         *string `json:"oapi_msg,omitempty"`          // oapi 传递的消息，用于缓存
+
+	OtherMsg *string `json:"other_msg,omitempty"` // 其他信息
+
+	OapiMsg *string `json:"oapi_msg,omitempty"` // oapi 传递的消息，用于缓存
 }
 
 type MyAiRoomOpenapiResponseBuilder struct {
-	responseType        int // openapi 返回的意图类型，不同 tool 的不同值都不一样
-	responseTypeFlag    bool
+	responseType     int // openapi 返回的意图类型，不同 tool 的不同值都不一样
+	responseTypeFlag bool
+
 	scheduleEventId     string // 日程 id
 	scheduleEventIdFlag bool
-	otherMsg            string // 其他信息
-	otherMsgFlag        bool
-	oapiMsg             string // oapi 传递的消息，用于缓存
-	oapiMsgFlag         bool
+
+	otherMsg     string // 其他信息
+	otherMsgFlag bool
+
+	oapiMsg     string // oapi 传递的消息，用于缓存
+	oapiMsgFlag bool
 }
 
 func NewMyAiRoomOpenapiResponseBuilder() *MyAiRoomOpenapiResponseBuilder {
@@ -4052,13 +4344,15 @@ func (builder *MyAiRoomOpenapiResponseBuilder) Build() *MyAiRoomOpenapiResponse 
 }
 
 type MyAiSipCardVariables struct {
-	Text     *string `json:"text,omitempty"`      // 占位符类型为TEXT时对应的值
+	Text *string `json:"text,omitempty"` // 占位符类型为TEXT时对应的值
+
 	ImageKey *string `json:"image_key,omitempty"` // 占位符类型为IMAGE时对应的值
 }
 
 type MyAiSipCardVariablesBuilder struct {
-	text         string // 占位符类型为TEXT时对应的值
-	textFlag     bool
+	text     string // 占位符类型为TEXT时对应的值
+	textFlag bool
+
 	imageKey     string // 占位符类型为IMAGE时对应的值
 	imageKeyFlag bool
 }
@@ -4100,18 +4394,22 @@ func (builder *MyAiSipCardVariablesBuilder) Build() *MyAiSipCardVariables {
 }
 
 type MyAiSipImageProperty struct {
-	Theme  *string `json:"theme,omitempty"`  // 图像主题
-	Number *int    `json:"number,omitempty"` // 图像张数
-	Size   *string `json:"size,omitempty"`   // 图像尺寸
+	Theme *string `json:"theme,omitempty"` // 图像主题
+
+	Number *int `json:"number,omitempty"` // 图像张数
+
+	Size *string `json:"size,omitempty"` // 图像尺寸
 }
 
 type MyAiSipImagePropertyBuilder struct {
-	theme      string // 图像主题
-	themeFlag  bool
+	theme     string // 图像主题
+	themeFlag bool
+
 	number     int // 图像张数
 	numberFlag bool
-	size       string // 图像尺寸
-	sizeFlag   bool
+
+	size     string // 图像尺寸
+	sizeFlag bool
 }
 
 func NewMyAiSipImagePropertyBuilder() *MyAiSipImagePropertyBuilder {
@@ -4164,36 +4462,52 @@ func (builder *MyAiSipImagePropertyBuilder) Build() *MyAiSipImageProperty {
 }
 
 type MyAiSipPresent struct {
-	Type           *string               `json:"type,omitempty"`             // 透传数据类型
-	Body           *string               `json:"body,omitempty"`             // 透传消息体
-	OperationType  *string               `json:"operation_type,omitempty"`   // 在交互卡片的场景下，完成交互，对交互行为做出的响应
-	Interactable   *bool                 `json:"interactable,omitempty"`     // 是否为交互卡片
-	OperationUrl   *string               `json:"operation_url,omitempty"`    // 卡片后续链路交互的请求地址
-	CallbackUrl    *string               `json:"callback_url,omitempty"`     // 透传数据上屏后，回调业务方的url，支持open API、RPC两种方式
-	CallbackInfo   *string               `json:"callback_info,omitempty"`    // 透传数据上屏后，回调给业务方的数据（适用开放平台卡片）
-	CardTemplateId *string               `json:"card_template_id,omitempty"` // 模版信息（适用于模版卡片）
-	CardVariables  *MyAiSipCardVariables `json:"card_variables,omitempty"`   // 模版变量信息（适用于模版卡片）
+	Type *string `json:"type,omitempty"` // 透传数据类型
+
+	Body *string `json:"body,omitempty"` // 透传消息体
+
+	OperationType *string `json:"operation_type,omitempty"` // 在交互卡片的场景下，完成交互，对交互行为做出的响应
+
+	Interactable *bool `json:"interactable,omitempty"` // 是否为交互卡片
+
+	OperationUrl *string `json:"operation_url,omitempty"` // 卡片后续链路交互的请求地址
+
+	CallbackUrl *string `json:"callback_url,omitempty"` // 透传数据上屏后，回调业务方的url，支持open API、RPC两种方式
+
+	CallbackInfo *string `json:"callback_info,omitempty"` // 透传数据上屏后，回调给业务方的数据（适用开放平台卡片）
+
+	CardTemplateId *string `json:"card_template_id,omitempty"` // 模版信息（适用于模版卡片）
+
+	CardVariables *MyAiSipCardVariables `json:"card_variables,omitempty"` // 模版变量信息（适用于模版卡片）
 }
 
 type MyAiSipPresentBuilder struct {
-	type_              string // 透传数据类型
-	typeFlag           bool
-	body               string // 透传消息体
-	bodyFlag           bool
-	operationType      string // 在交互卡片的场景下，完成交互，对交互行为做出的响应
-	operationTypeFlag  bool
-	interactable       bool // 是否为交互卡片
-	interactableFlag   bool
-	operationUrl       string // 卡片后续链路交互的请求地址
-	operationUrlFlag   bool
-	callbackUrl        string // 透传数据上屏后，回调业务方的url，支持open API、RPC两种方式
-	callbackUrlFlag    bool
-	callbackInfo       string // 透传数据上屏后，回调给业务方的数据（适用开放平台卡片）
-	callbackInfoFlag   bool
+	type_    string // 透传数据类型
+	typeFlag bool
+
+	body     string // 透传消息体
+	bodyFlag bool
+
+	operationType     string // 在交互卡片的场景下，完成交互，对交互行为做出的响应
+	operationTypeFlag bool
+
+	interactable     bool // 是否为交互卡片
+	interactableFlag bool
+
+	operationUrl     string // 卡片后续链路交互的请求地址
+	operationUrlFlag bool
+
+	callbackUrl     string // 透传数据上屏后，回调业务方的url，支持open API、RPC两种方式
+	callbackUrlFlag bool
+
+	callbackInfo     string // 透传数据上屏后，回调给业务方的数据（适用开放平台卡片）
+	callbackInfoFlag bool
+
 	cardTemplateId     string // 模版信息（适用于模版卡片）
 	cardTemplateIdFlag bool
-	cardVariables      *MyAiSipCardVariables // 模版变量信息（适用于模版卡片）
-	cardVariablesFlag  bool
+
+	cardVariables     *MyAiSipCardVariables // 模版变量信息（适用于模版卡片）
+	cardVariablesFlag bool
 }
 
 func NewMyAiSipPresentBuilder() *MyAiSipPresentBuilder {
@@ -4387,25 +4701,35 @@ func (builder *MyAiVcMeetingContentCommonResultBuilder) Build() *MyAiVcMeetingCo
 }
 
 type MyAiVcMeetingExtra struct {
-	VcMeetingId              *string `json:"vc_meeting_id,omitempty"`                // 会议id
-	VcLocale                 *string `json:"vc_locale,omitempty"`                    // 客户端语言
-	VcApplinkHost            *string `json:"vc_applink_host,omitempty"`              // applink域名
-	VcAppVersion             *string `json:"vc_app_version,omitempty"`               // app版本
-	VcFeatureConfig          *string `json:"vc_feature_config,omitempty"`            // 功能开关，用于一些功能服务端确认客户端是否可以执行。
+	VcMeetingId *string `json:"vc_meeting_id,omitempty"` // 会议id
+
+	VcLocale *string `json:"vc_locale,omitempty"` // 客户端语言
+
+	VcApplinkHost *string `json:"vc_applink_host,omitempty"` // applink域名
+
+	VcAppVersion *string `json:"vc_app_version,omitempty"` // app版本
+
+	VcFeatureConfig *string `json:"vc_feature_config,omitempty"` // 功能开关，用于一些功能服务端确认客户端是否可以执行。
+
 	QuickExecuteParamRichTag *string `json:"quick_execute_param_rich_tag,omitempty"` // 端上富文本额外信息
 }
 
 type MyAiVcMeetingExtraBuilder struct {
-	vcMeetingId                  string // 会议id
-	vcMeetingIdFlag              bool
-	vcLocale                     string // 客户端语言
-	vcLocaleFlag                 bool
-	vcApplinkHost                string // applink域名
-	vcApplinkHostFlag            bool
-	vcAppVersion                 string // app版本
-	vcAppVersionFlag             bool
-	vcFeatureConfig              string // 功能开关，用于一些功能服务端确认客户端是否可以执行。
-	vcFeatureConfigFlag          bool
+	vcMeetingId     string // 会议id
+	vcMeetingIdFlag bool
+
+	vcLocale     string // 客户端语言
+	vcLocaleFlag bool
+
+	vcApplinkHost     string // applink域名
+	vcApplinkHostFlag bool
+
+	vcAppVersion     string // app版本
+	vcAppVersionFlag bool
+
+	vcFeatureConfig     string // 功能开关，用于一些功能服务端确认客户端是否可以执行。
+	vcFeatureConfigFlag bool
+
 	quickExecuteParamRichTag     string // 端上富文本额外信息
 	quickExecuteParamRichTagFlag bool
 }
@@ -4532,14 +4856,16 @@ func (builder *MyAiVcMeetingOperationResultBuilder) Build() *MyAiVcMeetingOperat
 
 type MyAiVcMeetingRecapResult struct {
 	MeetingRecapOrFailReason *string `json:"meeting_recap_or_fail_reason,omitempty"` // 会议纪要for快捷指令
-	MeetingRecap             *string `json:"meeting_recap,omitempty"`                // 会议纪要for自由对话
+
+	MeetingRecap *string `json:"meeting_recap,omitempty"` // 会议纪要for自由对话
 }
 
 type MyAiVcMeetingRecapResultBuilder struct {
 	meetingRecapOrFailReason     string // 会议纪要for快捷指令
 	meetingRecapOrFailReasonFlag bool
-	meetingRecap                 string // 会议纪要for自由对话
-	meetingRecapFlag             bool
+
+	meetingRecap     string // 会议纪要for自由对话
+	meetingRecapFlag bool
 }
 
 func NewMyAiVcMeetingRecapResultBuilder() *MyAiVcMeetingRecapResultBuilder {
@@ -4579,25 +4905,35 @@ func (builder *MyAiVcMeetingRecapResultBuilder) Build() *MyAiVcMeetingRecapResul
 }
 
 type MyAiVcMeetingScenarioContext struct {
-	Plugins    []*MyAiPluginContext           `json:"plugins,omitempty"`     // 会话选择的插件列表
-	Object     *MyAiObjectContext             `json:"object,omitempty"`      // 会话所在实体的信息
-	WorkMode   *int                           `json:"work_mode,omitempty"`   // 会话所处的业务模式
-	Scenario   *string                        `json:"scenario,omitempty"`    // 会话所处的业务场景
-	Extra      *MyAiVcMeetingExtra            `json:"extra,omitempty"`       // 透传数据
+	Plugins []*MyAiPluginContext `json:"plugins,omitempty"` // 会话选择的插件列表
+
+	Object *MyAiObjectContext `json:"object,omitempty"` // 会话所在实体的信息
+
+	WorkMode *int `json:"work_mode,omitempty"` // 会话所处的业务模式
+
+	Scenario *string `json:"scenario,omitempty"` // 会话所处的业务场景
+
+	Extra *MyAiVcMeetingExtra `json:"extra,omitempty"` // 透传数据
+
 	SystemInfo *MyAiAvPluginContextSystemInfo `json:"system_info,omitempty"` // system info
 }
 
 type MyAiVcMeetingScenarioContextBuilder struct {
-	plugins        []*MyAiPluginContext // 会话选择的插件列表
-	pluginsFlag    bool
-	object         *MyAiObjectContext // 会话所在实体的信息
-	objectFlag     bool
-	workMode       int // 会话所处的业务模式
-	workModeFlag   bool
-	scenario       string // 会话所处的业务场景
-	scenarioFlag   bool
-	extra          *MyAiVcMeetingExtra // 透传数据
-	extraFlag      bool
+	plugins     []*MyAiPluginContext // 会话选择的插件列表
+	pluginsFlag bool
+
+	object     *MyAiObjectContext // 会话所在实体的信息
+	objectFlag bool
+
+	workMode     int // 会话所处的业务模式
+	workModeFlag bool
+
+	scenario     string // 会话所处的业务场景
+	scenarioFlag bool
+
+	extra     *MyAiVcMeetingExtra // 透传数据
+	extraFlag bool
+
 	systemInfo     *MyAiAvPluginContextSystemInfo // system info
 	systemInfoFlag bool
 }
@@ -4720,14 +5056,16 @@ func (builder *MyAiVcMeetingSuggestQuestionResultBuilder) Build() *MyAiVcMeeting
 
 type MyAiVcMeetingTodoTaskResult struct {
 	MeetingTodoTaskOrFailReason *string `json:"meeting_todo_task_or_fail_reason,omitempty"` // 会议待办for快捷指令
-	MeetingTodoTask             *string `json:"meeting_todo_task,omitempty"`                // 会议待办for自由对话
+
+	MeetingTodoTask *string `json:"meeting_todo_task,omitempty"` // 会议待办for自由对话
 }
 
 type MyAiVcMeetingTodoTaskResultBuilder struct {
 	meetingTodoTaskOrFailReason     string // 会议待办for快捷指令
 	meetingTodoTaskOrFailReasonFlag bool
-	meetingTodoTask                 string // 会议待办for自由对话
-	meetingTodoTaskFlag             bool
+
+	meetingTodoTask     string // 会议待办for自由对话
+	meetingTodoTaskFlag bool
 }
 
 func NewMyAiVcMeetingTodoTaskResultBuilder() *MyAiVcMeetingTodoTaskResultBuilder {
@@ -4799,22 +5137,30 @@ func (builder *MyAiVcRoomExtraBuilder) Build() *MyAiVcRoomExtra {
 }
 
 type MyAiVcRoomRequestCommonParam struct {
-	Language       *string                  `json:"language,omitempty"`        // 语言类型
-	UtcOffset      *string                  `json:"utc_offset,omitempty"`      // 时区偏移,单位分钟,480表示东八区
-	RoomId         *string                  `json:"room_id,omitempty"`         // 会议室 ID
-	ClientVersion  *string                  `json:"client_version,omitempty"`  // 客户端版本
+	Language *string `json:"language,omitempty"` // 语言类型
+
+	UtcOffset *string `json:"utc_offset,omitempty"` // 时区偏移,单位分钟,480表示东八区
+
+	RoomId *string `json:"room_id,omitempty"` // 会议室 ID
+
+	ClientVersion *string `json:"client_version,omitempty"` // 客户端版本
+
 	OpenapiHistory *MyAiRoomOpenapiResponse `json:"openapi_history,omitempty"` // open api response 历史
 }
 
 type MyAiVcRoomRequestCommonParamBuilder struct {
-	language           string // 语言类型
-	languageFlag       bool
-	utcOffset          string // 时区偏移,单位分钟,480表示东八区
-	utcOffsetFlag      bool
-	roomId             string // 会议室 ID
-	roomIdFlag         bool
-	clientVersion      string // 客户端版本
-	clientVersionFlag  bool
+	language     string // 语言类型
+	languageFlag bool
+
+	utcOffset     string // 时区偏移,单位分钟,480表示东八区
+	utcOffsetFlag bool
+
+	roomId     string // 会议室 ID
+	roomIdFlag bool
+
+	clientVersion     string // 客户端版本
+	clientVersionFlag bool
+
 	openapiHistory     *MyAiRoomOpenapiResponse // open api response 历史
 	openapiHistoryFlag bool
 }
@@ -4895,14 +5241,16 @@ func (builder *MyAiVcRoomRequestCommonParamBuilder) Build() *MyAiVcRoomRequestCo
 
 type MyAiVcRoomScenarioContext struct {
 	Plugins []*MyAiPluginContext `json:"plugins,omitempty"` // 会话选择的插件列表
-	Extra   *MyAiVcRoomExtra     `json:"extra,omitempty"`   // 透传数据
+
+	Extra *MyAiVcRoomExtra `json:"extra,omitempty"` // 透传数据
 }
 
 type MyAiVcRoomScenarioContextBuilder struct {
 	plugins     []*MyAiPluginContext // 会话选择的插件列表
 	pluginsFlag bool
-	extra       *MyAiVcRoomExtra // 透传数据
-	extraFlag   bool
+
+	extra     *MyAiVcRoomExtra // 透传数据
+	extraFlag bool
 }
 
 func NewMyAiVcRoomScenarioContextBuilder() *MyAiVcRoomScenarioContextBuilder {
@@ -4940,13 +5288,15 @@ func (builder *MyAiVcRoomScenarioContextBuilder) Build() *MyAiVcRoomScenarioCont
 }
 
 type ObjectiveCheck struct {
-	ObjectiveCheckTypes  []int                  `json:"objective_check_types,omitempty"`  // 客观分析类型
+	ObjectiveCheckTypes []int `json:"objective_check_types,omitempty"` // 客观分析类型
+
 	ObjectiveCheckParams []*ObjectiveCheckParam `json:"objective_check_params,omitempty"` // 客观分析参数
 }
 
 type ObjectiveCheckBuilder struct {
-	objectiveCheckTypes      []int // 客观分析类型
-	objectiveCheckTypesFlag  bool
+	objectiveCheckTypes     []int // 客观分析类型
+	objectiveCheckTypesFlag bool
+
 	objectiveCheckParams     []*ObjectiveCheckParam // 客观分析参数
 	objectiveCheckParamsFlag bool
 }
@@ -4987,14 +5337,16 @@ func (builder *ObjectiveCheckBuilder) Build() *ObjectiveCheck {
 
 type ObjectiveCheckOutput struct {
 	FailedLists []int `json:"failed_lists,omitempty"` // 失败列表
-	StatusCode  *int  `json:"status_code,omitempty"`  // 状态码
+
+	StatusCode *int `json:"status_code,omitempty"` // 状态码
 }
 
 type ObjectiveCheckOutputBuilder struct {
 	failedLists     []int // 失败列表
 	failedListsFlag bool
-	statusCode      int // 状态码
-	statusCodeFlag  bool
+
+	statusCode     int // 状态码
+	statusCodeFlag bool
 }
 
 func NewObjectiveCheckOutputBuilder() *ObjectiveCheckOutputBuilder {
@@ -5064,16 +5416,20 @@ func (builder *ObjectiveCheckParamBuilder) Build() *ObjectiveCheckParam {
 }
 
 type Options struct {
-	Text    *string `json:"text,omitempty"`     // 选项文本名称/其他选项的对应文本
-	Key     *string `json:"key,omitempty"`      // 选项的自定义key
-	IsOther *bool   `json:"is_other,omitempty"` // 区分是否为其他选项
+	Text *string `json:"text,omitempty"` // 选项文本名称/其他选项的对应文本
+
+	Key *string `json:"key,omitempty"` // 选项的自定义key
+
+	IsOther *bool `json:"is_other,omitempty"` // 区分是否为其他选项
 }
 
 type OptionsBuilder struct {
-	text        string // 选项文本名称/其他选项的对应文本
-	textFlag    bool
-	key         string // 选项的自定义key
-	keyFlag     bool
+	text     string // 选项文本名称/其他选项的对应文本
+	textFlag bool
+
+	key     string // 选项的自定义key
+	keyFlag bool
+
 	isOther     bool // 区分是否为其他选项
 	isOtherFlag bool
 }
@@ -5129,86 +5485,136 @@ func (builder *OptionsBuilder) Build() *Options {
 
 type Participant struct {
 	ParticipantName *string `json:"participant_name,omitempty"` // 参会者
-	Department      *string `json:"department,omitempty"`       // 部门
-	UserId          *string `json:"user_id,omitempty"`          // 用户ID
-	MeetingRoomId   *string `json:"meeting_room_id,omitempty"`  // 会议室ID
-	EmployeeId      *string `json:"employee_id,omitempty"`      // 工号
-	Phone           *string `json:"phone,omitempty"`            // 电话
-	Email           *string `json:"email,omitempty"`            // 邮箱
-	Device          *string `json:"device,omitempty"`           // 设备
-	AppVersion      *string `json:"app_version,omitempty"`      // 客户端版本
-	PublicIp        *string `json:"public_ip,omitempty"`        // 公网IP
-	InternalIp      *string `json:"internal_ip,omitempty"`      // 内网IP
-	UseRtcProxy     *bool   `json:"use_rtc_proxy,omitempty"`    // 代理服务
-	Location        *string `json:"location,omitempty"`         // 位置
-	NetworkType     *string `json:"network_type,omitempty"`     // 网络类型
-	Protocol        *string `json:"protocol,omitempty"`         // 连接类型
-	Microphone      *string `json:"microphone,omitempty"`       // 麦克风
-	Speaker         *string `json:"speaker,omitempty"`          // 扬声器
-	Camera          *string `json:"camera,omitempty"`           // 摄像头
-	Audio           *bool   `json:"audio,omitempty"`            // 音频
-	Video           *bool   `json:"video,omitempty"`            // 视频
-	Sharing         *bool   `json:"sharing,omitempty"`          // 共享
-	JoinTime        *string `json:"join_time,omitempty"`        // 入会时间
-	LeaveTime       *string `json:"leave_time,omitempty"`       // 离会时间
-	TimeInMeeting   *string `json:"time_in_meeting,omitempty"`  // 参会时长
-	LeaveReason     *string `json:"leave_reason,omitempty"`     // 离会原因
-	AcceptStatus    *int    `json:"accept_status,omitempty"`    // 日程响应状态
+
+	Department *string `json:"department,omitempty"` // 部门
+
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	MeetingRoomId *string `json:"meeting_room_id,omitempty"` // 会议室ID
+
+	EmployeeId *string `json:"employee_id,omitempty"` // 工号
+
+	Phone *string `json:"phone,omitempty"` // 电话
+
+	Email *string `json:"email,omitempty"` // 邮箱
+
+	Device *string `json:"device,omitempty"` // 设备
+
+	AppVersion *string `json:"app_version,omitempty"` // 客户端版本
+
+	PublicIp *string `json:"public_ip,omitempty"` // 公网IP
+
+	InternalIp *string `json:"internal_ip,omitempty"` // 内网IP
+
+	UseRtcProxy *bool `json:"use_rtc_proxy,omitempty"` // 代理服务
+
+	Location *string `json:"location,omitempty"` // 位置
+
+	NetworkType *string `json:"network_type,omitempty"` // 网络类型
+
+	Protocol *string `json:"protocol,omitempty"` // 连接类型
+
+	Microphone *string `json:"microphone,omitempty"` // 麦克风
+
+	Speaker *string `json:"speaker,omitempty"` // 扬声器
+
+	Camera *string `json:"camera,omitempty"` // 摄像头
+
+	Audio *bool `json:"audio,omitempty"` // 音频
+
+	Video *bool `json:"video,omitempty"` // 视频
+
+	Sharing *bool `json:"sharing,omitempty"` // 共享
+
+	JoinTime *string `json:"join_time,omitempty"` // 入会时间
+
+	LeaveTime *string `json:"leave_time,omitempty"` // 离会时间
+
+	TimeInMeeting *string `json:"time_in_meeting,omitempty"` // 参会时长
+
+	LeaveReason *string `json:"leave_reason,omitempty"` // 离会原因
+
+	AcceptStatus *int `json:"accept_status,omitempty"` // 日程响应状态
 }
 
 type ParticipantBuilder struct {
 	participantName     string // 参会者
 	participantNameFlag bool
-	department          string // 部门
-	departmentFlag      bool
-	userId              string // 用户ID
-	userIdFlag          bool
-	meetingRoomId       string // 会议室ID
-	meetingRoomIdFlag   bool
-	employeeId          string // 工号
-	employeeIdFlag      bool
-	phone               string // 电话
-	phoneFlag           bool
-	email               string // 邮箱
-	emailFlag           bool
-	device              string // 设备
-	deviceFlag          bool
-	appVersion          string // 客户端版本
-	appVersionFlag      bool
-	publicIp            string // 公网IP
-	publicIpFlag        bool
-	internalIp          string // 内网IP
-	internalIpFlag      bool
-	useRtcProxy         bool // 代理服务
-	useRtcProxyFlag     bool
-	location            string // 位置
-	locationFlag        bool
-	networkType         string // 网络类型
-	networkTypeFlag     bool
-	protocol            string // 连接类型
-	protocolFlag        bool
-	microphone          string // 麦克风
-	microphoneFlag      bool
-	speaker             string // 扬声器
-	speakerFlag         bool
-	camera              string // 摄像头
-	cameraFlag          bool
-	audio               bool // 音频
-	audioFlag           bool
-	video               bool // 视频
-	videoFlag           bool
-	sharing             bool // 共享
-	sharingFlag         bool
-	joinTime            string // 入会时间
-	joinTimeFlag        bool
-	leaveTime           string // 离会时间
-	leaveTimeFlag       bool
-	timeInMeeting       string // 参会时长
-	timeInMeetingFlag   bool
-	leaveReason         string // 离会原因
-	leaveReasonFlag     bool
-	acceptStatus        int // 日程响应状态
-	acceptStatusFlag    bool
+
+	department     string // 部门
+	departmentFlag bool
+
+	userId     string // 用户ID
+	userIdFlag bool
+
+	meetingRoomId     string // 会议室ID
+	meetingRoomIdFlag bool
+
+	employeeId     string // 工号
+	employeeIdFlag bool
+
+	phone     string // 电话
+	phoneFlag bool
+
+	email     string // 邮箱
+	emailFlag bool
+
+	device     string // 设备
+	deviceFlag bool
+
+	appVersion     string // 客户端版本
+	appVersionFlag bool
+
+	publicIp     string // 公网IP
+	publicIpFlag bool
+
+	internalIp     string // 内网IP
+	internalIpFlag bool
+
+	useRtcProxy     bool // 代理服务
+	useRtcProxyFlag bool
+
+	location     string // 位置
+	locationFlag bool
+
+	networkType     string // 网络类型
+	networkTypeFlag bool
+
+	protocol     string // 连接类型
+	protocolFlag bool
+
+	microphone     string // 麦克风
+	microphoneFlag bool
+
+	speaker     string // 扬声器
+	speakerFlag bool
+
+	camera     string // 摄像头
+	cameraFlag bool
+
+	audio     bool // 音频
+	audioFlag bool
+
+	video     bool // 视频
+	videoFlag bool
+
+	sharing     bool // 共享
+	sharingFlag bool
+
+	joinTime     string // 入会时间
+	joinTimeFlag bool
+
+	leaveTime     string // 离会时间
+	leaveTimeFlag bool
+
+	timeInMeeting     string // 参会时长
+	timeInMeetingFlag bool
+
+	leaveReason     string // 离会原因
+	leaveReasonFlag bool
+
+	acceptStatus     int // 日程响应状态
+	acceptStatusFlag bool
 }
 
 func NewParticipantBuilder() *ParticipantBuilder {
@@ -5560,24 +5966,32 @@ func (builder *ParticipantBuilder) Build() *Participant {
 }
 
 type ParticipantQuality struct {
-	Network       *QualityNetwork      `json:"network,omitempty"`        // 网络
-	Audio         *QualityAudio        `json:"audio,omitempty"`          // 音频
-	Video         *QualityVideoSharing `json:"video,omitempty"`          // 视频
+	Network *QualityNetwork `json:"network,omitempty"` // 网络
+
+	Audio *QualityAudio `json:"audio,omitempty"` // 音频
+
+	Video *QualityVideoSharing `json:"video,omitempty"` // 视频
+
 	ScreenSharing *QualityVideoSharing `json:"screen_sharing,omitempty"` // 共享屏幕
-	CpuUsage      *QualityCpuUsage     `json:"cpu_usage,omitempty"`      // Cpu使用量
+
+	CpuUsage *QualityCpuUsage `json:"cpu_usage,omitempty"` // Cpu使用量
 }
 
 type ParticipantQualityBuilder struct {
-	network           *QualityNetwork // 网络
-	networkFlag       bool
-	audio             *QualityAudio // 音频
-	audioFlag         bool
-	video             *QualityVideoSharing // 视频
-	videoFlag         bool
+	network     *QualityNetwork // 网络
+	networkFlag bool
+
+	audio     *QualityAudio // 音频
+	audioFlag bool
+
+	video     *QualityVideoSharing // 视频
+	videoFlag bool
+
 	screenSharing     *QualityVideoSharing // 共享屏幕
 	screenSharingFlag bool
-	cpuUsage          *QualityCpuUsage // Cpu使用量
-	cpuUsageFlag      bool
+
+	cpuUsage     *QualityCpuUsage // Cpu使用量
+	cpuUsageFlag bool
 }
 
 func NewParticipantQualityBuilder() *ParticipantQualityBuilder {
@@ -5651,13 +6065,15 @@ func (builder *ParticipantQualityBuilder) Build() *ParticipantQuality {
 }
 
 type PstnSipInfo struct {
-	Nickname    *string `json:"nickname,omitempty"`     // 给pstn/sip用户设置的临时昵称
+	Nickname *string `json:"nickname,omitempty"` // 给pstn/sip用户设置的临时昵称
+
 	MainAddress *string `json:"main_address,omitempty"` // pstn/sip主机号，格式为：[国际冠字]-[电话区号][电话号码]，当前仅支持国内手机及固定电话号码
 }
 
 type PstnSipInfoBuilder struct {
-	nickname        string // 给pstn/sip用户设置的临时昵称
-	nicknameFlag    bool
+	nickname     string // 给pstn/sip用户设置的临时昵称
+	nicknameFlag bool
+
 	mainAddress     string // pstn/sip主机号，格式为：[国际冠字]-[电话区号][电话号码]，当前仅支持国内手机及固定电话号码
 	mainAddressFlag bool
 }
@@ -5699,36 +6115,52 @@ func (builder *PstnSipInfoBuilder) Build() *PstnSipInfo {
 }
 
 type QualityAudio struct {
-	Time            *string `json:"time,omitempty"`             // 时间
-	MicInputVolume  *string `json:"mic_input_volume,omitempty"` // 麦克风采集音量
-	SpeakerVolume   *string `json:"speaker_volume,omitempty"`   // 扬声器播放音量
+	Time *string `json:"time,omitempty"` // 时间
+
+	MicInputVolume *string `json:"mic_input_volume,omitempty"` // 麦克风采集音量
+
+	SpeakerVolume *string `json:"speaker_volume,omitempty"` // 扬声器播放音量
+
 	BitrateReceived *string `json:"bitrate_received,omitempty"` // 码率（接收）
+
 	LatencyReceived *string `json:"latency_received,omitempty"` // 延迟（接收）
-	JitterReceived  *string `json:"jitter_received,omitempty"`  // 抖动（接收）
-	BitrateSent     *string `json:"bitrate_sent,omitempty"`     // 码率（发送）
-	LatencySent     *string `json:"latency_sent,omitempty"`     // 延迟（发送）
-	JitterSent      *string `json:"jitter_sent,omitempty"`      // 抖动（发送）
+
+	JitterReceived *string `json:"jitter_received,omitempty"` // 抖动（接收）
+
+	BitrateSent *string `json:"bitrate_sent,omitempty"` // 码率（发送）
+
+	LatencySent *string `json:"latency_sent,omitempty"` // 延迟（发送）
+
+	JitterSent *string `json:"jitter_sent,omitempty"` // 抖动（发送）
 }
 
 type QualityAudioBuilder struct {
-	time                string // 时间
-	timeFlag            bool
-	micInputVolume      string // 麦克风采集音量
-	micInputVolumeFlag  bool
-	speakerVolume       string // 扬声器播放音量
-	speakerVolumeFlag   bool
+	time     string // 时间
+	timeFlag bool
+
+	micInputVolume     string // 麦克风采集音量
+	micInputVolumeFlag bool
+
+	speakerVolume     string // 扬声器播放音量
+	speakerVolumeFlag bool
+
 	bitrateReceived     string // 码率（接收）
 	bitrateReceivedFlag bool
+
 	latencyReceived     string // 延迟（接收）
 	latencyReceivedFlag bool
-	jitterReceived      string // 抖动（接收）
-	jitterReceivedFlag  bool
-	bitrateSent         string // 码率（发送）
-	bitrateSentFlag     bool
-	latencySent         string // 延迟（发送）
-	latencySentFlag     bool
-	jitterSent          string // 抖动（发送）
-	jitterSentFlag      bool
+
+	jitterReceived     string // 抖动（接收）
+	jitterReceivedFlag bool
+
+	bitrateSent     string // 码率（发送）
+	bitrateSentFlag bool
+
+	latencySent     string // 延迟（发送）
+	latencySentFlag bool
+
+	jitterSent     string // 抖动（发送）
+	jitterSentFlag bool
 }
 
 func NewQualityAudioBuilder() *QualityAudioBuilder {
@@ -5859,22 +6291,30 @@ func (builder *QualityAudioBuilder) Build() *QualityAudio {
 }
 
 type QualityCpuUsage struct {
-	Time              *string `json:"time,omitempty"`                 // 时间
+	Time *string `json:"time,omitempty"` // 时间
+
 	ClientAvgCpuUsage *string `json:"client_avg_cpu_usage,omitempty"` // 客户端平均 CPU 占用
+
 	ClientMaxCpuUsage *string `json:"client_max_cpu_usage,omitempty"` // 客户端最大 CPU 占用
+
 	SystemAvgCpuUsage *string `json:"system_avg_cpu_usage,omitempty"` // 系统平均 CPU 占用
+
 	SystemMaxCpuUsage *string `json:"system_max_cpu_usage,omitempty"` // 系统最大 CPU 占用
 }
 
 type QualityCpuUsageBuilder struct {
-	time                  string // 时间
-	timeFlag              bool
+	time     string // 时间
+	timeFlag bool
+
 	clientAvgCpuUsage     string // 客户端平均 CPU 占用
 	clientAvgCpuUsageFlag bool
+
 	clientMaxCpuUsage     string // 客户端最大 CPU 占用
 	clientMaxCpuUsageFlag bool
+
 	systemAvgCpuUsage     string // 系统平均 CPU 占用
 	systemAvgCpuUsageFlag bool
+
 	systemMaxCpuUsage     string // 系统最大 CPU 占用
 	systemMaxCpuUsageFlag bool
 }
@@ -5955,33 +6395,47 @@ func (builder *QualityCpuUsageBuilder) Build() *QualityCpuUsage {
 }
 
 type QualityNetwork struct {
-	Time                  *string `json:"time,omitempty"`                     // 时间
-	NetworkDelay          *string `json:"network_delay,omitempty"`            // 网络延迟
-	BitrateReceived       *string `json:"bitrate_received,omitempty"`         // 码率（接收）
+	Time *string `json:"time,omitempty"` // 时间
+
+	NetworkDelay *string `json:"network_delay,omitempty"` // 网络延迟
+
+	BitrateReceived *string `json:"bitrate_received,omitempty"` // 码率（接收）
+
 	PacketLossAvgReceived *string `json:"packet_loss_avg_received,omitempty"` // 丢包 - 平均（接收）
+
 	PacketLossMaxReceived *string `json:"packet_loss_max_received,omitempty"` // 丢包 - 最大（接收）
-	BitrateSent           *string `json:"bitrate_sent,omitempty"`             // 码率（发送）
-	PacketLossAvgSent     *string `json:"packet_loss_avg_sent,omitempty"`     // 丢包 - 平均（发送）
-	PacketLossMaxSent     *string `json:"packet_loss_max_sent,omitempty"`     // 丢包 - 最大（发送）
+
+	BitrateSent *string `json:"bitrate_sent,omitempty"` // 码率（发送）
+
+	PacketLossAvgSent *string `json:"packet_loss_avg_sent,omitempty"` // 丢包 - 平均（发送）
+
+	PacketLossMaxSent *string `json:"packet_loss_max_sent,omitempty"` // 丢包 - 最大（发送）
 }
 
 type QualityNetworkBuilder struct {
-	time                      string // 时间
-	timeFlag                  bool
-	networkDelay              string // 网络延迟
-	networkDelayFlag          bool
-	bitrateReceived           string // 码率（接收）
-	bitrateReceivedFlag       bool
+	time     string // 时间
+	timeFlag bool
+
+	networkDelay     string // 网络延迟
+	networkDelayFlag bool
+
+	bitrateReceived     string // 码率（接收）
+	bitrateReceivedFlag bool
+
 	packetLossAvgReceived     string // 丢包 - 平均（接收）
 	packetLossAvgReceivedFlag bool
+
 	packetLossMaxReceived     string // 丢包 - 最大（接收）
 	packetLossMaxReceivedFlag bool
-	bitrateSent               string // 码率（发送）
-	bitrateSentFlag           bool
-	packetLossAvgSent         string // 丢包 - 平均（发送）
-	packetLossAvgSentFlag     bool
-	packetLossMaxSent         string // 丢包 - 最大（发送）
-	packetLossMaxSentFlag     bool
+
+	bitrateSent     string // 码率（发送）
+	bitrateSentFlag bool
+
+	packetLossAvgSent     string // 丢包 - 平均（发送）
+	packetLossAvgSentFlag bool
+
+	packetLossMaxSent     string // 丢包 - 最大（发送）
+	packetLossMaxSentFlag bool
 }
 
 func NewQualityNetworkBuilder() *QualityNetworkBuilder {
@@ -6099,42 +6553,62 @@ func (builder *QualityNetworkBuilder) Build() *QualityNetwork {
 }
 
 type QualityVideoSharing struct {
-	Time                      *string `json:"time,omitempty"`                        // 时间
-	BitrateReceived           *string `json:"bitrate_received,omitempty"`            // 码率（接收）
-	LatencyReceived           *string `json:"latency_received,omitempty"`            // 延迟（接收）
-	JitterReceived            *string `json:"jitter_received,omitempty"`             // 抖动（接收）
+	Time *string `json:"time,omitempty"` // 时间
+
+	BitrateReceived *string `json:"bitrate_received,omitempty"` // 码率（接收）
+
+	LatencyReceived *string `json:"latency_received,omitempty"` // 延迟（接收）
+
+	JitterReceived *string `json:"jitter_received,omitempty"` // 抖动（接收）
+
 	MaximumResolutionReceived *string `json:"maximum_resolution_received,omitempty"` // 最大分辨率（接收）
-	FramerateReceived         *string `json:"framerate_received,omitempty"`          // 帧率（接收）
-	BitrateSent               *string `json:"bitrate_sent,omitempty"`                // 码率（发送）
-	LatencySent               *string `json:"latency_sent,omitempty"`                // 延迟（发送）
-	JitterSent                *string `json:"jitter_sent,omitempty"`                 // 抖动（发送）
-	MaximumResolutionSent     *string `json:"maximum_resolution_sent,omitempty"`     // 最大分辨率（发送）
-	FramerateSent             *string `json:"framerate_sent,omitempty"`              // 帧率（发送）
+
+	FramerateReceived *string `json:"framerate_received,omitempty"` // 帧率（接收）
+
+	BitrateSent *string `json:"bitrate_sent,omitempty"` // 码率（发送）
+
+	LatencySent *string `json:"latency_sent,omitempty"` // 延迟（发送）
+
+	JitterSent *string `json:"jitter_sent,omitempty"` // 抖动（发送）
+
+	MaximumResolutionSent *string `json:"maximum_resolution_sent,omitempty"` // 最大分辨率（发送）
+
+	FramerateSent *string `json:"framerate_sent,omitempty"` // 帧率（发送）
 }
 
 type QualityVideoSharingBuilder struct {
-	time                          string // 时间
-	timeFlag                      bool
-	bitrateReceived               string // 码率（接收）
-	bitrateReceivedFlag           bool
-	latencyReceived               string // 延迟（接收）
-	latencyReceivedFlag           bool
-	jitterReceived                string // 抖动（接收）
-	jitterReceivedFlag            bool
+	time     string // 时间
+	timeFlag bool
+
+	bitrateReceived     string // 码率（接收）
+	bitrateReceivedFlag bool
+
+	latencyReceived     string // 延迟（接收）
+	latencyReceivedFlag bool
+
+	jitterReceived     string // 抖动（接收）
+	jitterReceivedFlag bool
+
 	maximumResolutionReceived     string // 最大分辨率（接收）
 	maximumResolutionReceivedFlag bool
-	framerateReceived             string // 帧率（接收）
-	framerateReceivedFlag         bool
-	bitrateSent                   string // 码率（发送）
-	bitrateSentFlag               bool
-	latencySent                   string // 延迟（发送）
-	latencySentFlag               bool
-	jitterSent                    string // 抖动（发送）
-	jitterSentFlag                bool
-	maximumResolutionSent         string // 最大分辨率（发送）
-	maximumResolutionSentFlag     bool
-	framerateSent                 string // 帧率（发送）
-	framerateSentFlag             bool
+
+	framerateReceived     string // 帧率（接收）
+	framerateReceivedFlag bool
+
+	bitrateSent     string // 码率（发送）
+	bitrateSentFlag bool
+
+	latencySent     string // 延迟（发送）
+	latencySentFlag bool
+
+	jitterSent     string // 抖动（发送）
+	jitterSentFlag bool
+
+	maximumResolutionSent     string // 最大分辨率（发送）
+	maximumResolutionSentFlag bool
+
+	framerateSent     string // 帧率（发送）
+	framerateSentFlag bool
 }
 
 func NewQualityVideoSharingBuilder() *QualityVideoSharingBuilder {
@@ -6291,16 +6765,20 @@ func (builder *QualityVideoSharingBuilder) Build() *QualityVideoSharing {
 }
 
 type RecordingPermissionObject struct {
-	Id         *string `json:"id,omitempty"`         // 授权对象ID
-	Type       *int    `json:"type,omitempty"`       // 授权对象类型
-	Permission *int    `json:"permission,omitempty"` // 权限
+	Id *string `json:"id,omitempty"` // 授权对象ID
+
+	Type *int `json:"type,omitempty"` // 授权对象类型
+
+	Permission *int `json:"permission,omitempty"` // 权限
 }
 
 type RecordingPermissionObjectBuilder struct {
-	id             string // 授权对象ID
-	idFlag         bool
-	type_          int // 授权对象类型
-	typeFlag       bool
+	id     string // 授权对象ID
+	idFlag bool
+
+	type_    int // 授权对象类型
+	typeFlag bool
+
 	permission     int // 权限
 	permissionFlag bool
 }
@@ -6355,21 +6833,27 @@ func (builder *RecordingPermissionObjectBuilder) Build() *RecordingPermissionObj
 }
 
 type Report struct {
-	TotalMeetingCount     *string               `json:"total_meeting_count,omitempty"`     // 总会议数量
-	TotalMeetingDuration  *string               `json:"total_meeting_duration,omitempty"`  // 总会议时长（单位sec）
-	TotalParticipantCount *string               `json:"total_participant_count,omitempty"` // 总参会人数
-	DailyReport           []*ReportMeetingDaily `json:"daily_report,omitempty"`            // 每日会议报告列表
+	TotalMeetingCount *string `json:"total_meeting_count,omitempty"` // 总会议数量
+
+	TotalMeetingDuration *string `json:"total_meeting_duration,omitempty"` // 总会议时长（单位sec）
+
+	TotalParticipantCount *string `json:"total_participant_count,omitempty"` // 总参会人数
+
+	DailyReport []*ReportMeetingDaily `json:"daily_report,omitempty"` // 每日会议报告列表
 }
 
 type ReportBuilder struct {
-	totalMeetingCount         string // 总会议数量
-	totalMeetingCountFlag     bool
-	totalMeetingDuration      string // 总会议时长（单位sec）
-	totalMeetingDurationFlag  bool
+	totalMeetingCount     string // 总会议数量
+	totalMeetingCountFlag bool
+
+	totalMeetingDuration     string // 总会议时长（单位sec）
+	totalMeetingDurationFlag bool
+
 	totalParticipantCount     string // 总参会人数
 	totalParticipantCountFlag bool
-	dailyReport               []*ReportMeetingDaily // 每日会议报告列表
-	dailyReportFlag           bool
+
+	dailyReport     []*ReportMeetingDaily // 每日会议报告列表
+	dailyReportFlag bool
 }
 
 func NewReportBuilder() *ReportBuilder {
@@ -6434,19 +6918,25 @@ func (builder *ReportBuilder) Build() *Report {
 }
 
 type ReportMeetingDaily struct {
-	Date             *string `json:"date,omitempty"`              // 日期（unix时间，单位sec）
-	MeetingCount     *string `json:"meeting_count,omitempty"`     // 会议数量
-	MeetingDuration  *string `json:"meeting_duration,omitempty"`  // 会议时长（单位sec）
+	Date *string `json:"date,omitempty"` // 日期（unix时间，单位sec）
+
+	MeetingCount *string `json:"meeting_count,omitempty"` // 会议数量
+
+	MeetingDuration *string `json:"meeting_duration,omitempty"` // 会议时长（单位sec）
+
 	ParticipantCount *string `json:"participant_count,omitempty"` // 参会人数
 }
 
 type ReportMeetingDailyBuilder struct {
-	date                 string // 日期（unix时间，单位sec）
-	dateFlag             bool
-	meetingCount         string // 会议数量
-	meetingCountFlag     bool
-	meetingDuration      string // 会议时长（单位sec）
-	meetingDurationFlag  bool
+	date     string // 日期（unix时间，单位sec）
+	dateFlag bool
+
+	meetingCount     string // 会议数量
+	meetingCountFlag bool
+
+	meetingDuration     string // 会议时长（单位sec）
+	meetingDurationFlag bool
+
 	participantCount     string // 参会人数
 	participantCountFlag bool
 }
@@ -6514,22 +7004,30 @@ func (builder *ReportMeetingDailyBuilder) Build() *ReportMeetingDaily {
 }
 
 type ReportTopUser struct {
-	Id              *string `json:"id,omitempty"`               // 用户ID
-	Name            *string `json:"name,omitempty"`             // 用户名
-	UserType        *int    `json:"user_type,omitempty"`        // 用户类型
-	MeetingCount    *string `json:"meeting_count,omitempty"`    // 会议数量
+	Id *string `json:"id,omitempty"` // 用户ID
+
+	Name *string `json:"name,omitempty"` // 用户名
+
+	UserType *int `json:"user_type,omitempty"` // 用户类型
+
+	MeetingCount *string `json:"meeting_count,omitempty"` // 会议数量
+
 	MeetingDuration *string `json:"meeting_duration,omitempty"` // 会议时长（单位min）
 }
 
 type ReportTopUserBuilder struct {
-	id                  string // 用户ID
-	idFlag              bool
-	name                string // 用户名
-	nameFlag            bool
-	userType            int // 用户类型
-	userTypeFlag        bool
-	meetingCount        string // 会议数量
-	meetingCountFlag    bool
+	id     string // 用户ID
+	idFlag bool
+
+	name     string // 用户名
+	nameFlag bool
+
+	userType     int // 用户类型
+	userTypeFlag bool
+
+	meetingCount     string // 会议数量
+	meetingCountFlag bool
+
 	meetingDuration     string // 会议时长（单位min）
 	meetingDurationFlag bool
 }
@@ -6610,37 +7108,55 @@ func (builder *ReportTopUserBuilder) Build() *ReportTopUser {
 }
 
 type Reserve struct {
-	Id              *string                `json:"id,omitempty"`               // 预约ID（预约的唯一标识）
-	MeetingNo       *string                `json:"meeting_no,omitempty"`       // 9位会议号（飞书用户可通过输入9位会议号快捷入会）
-	Password        *string                `json:"password,omitempty"`         // 会议密码
-	Url             *string                `json:"url,omitempty"`              // 会议链接（飞书用户可通过点击会议链接快捷入会）
-	AppLink         *string                `json:"app_link,omitempty"`         // APPLink用于唤起飞书APP入会。"{?}"为占位符，用于配置入会参数，使用时需替换具体值：0表示关闭，1表示打开。preview为入会前的设置页，mic为麦克风，speaker为扬声器，camera为摄像头
-	LiveLink        *string                `json:"live_link,omitempty"`        // 会议转直播链接
-	EndTime         *string                `json:"end_time,omitempty"`         // 预约到期时间（unix时间，单位sec）
-	ExpireStatus    *int                   `json:"expire_status,omitempty"`    // 过期状态
-	ReserveUserId   *string                `json:"reserve_user_id,omitempty"`  // 预约人ID
+	Id *string `json:"id,omitempty"` // 预约ID（预约的唯一标识）
+
+	MeetingNo *string `json:"meeting_no,omitempty"` // 9位会议号（飞书用户可通过输入9位会议号快捷入会）
+
+	Password *string `json:"password,omitempty"` // 会议密码
+
+	Url *string `json:"url,omitempty"` // 会议链接（飞书用户可通过点击会议链接快捷入会）
+
+	AppLink *string `json:"app_link,omitempty"` // APPLink用于唤起飞书APP入会。"{?}"为占位符，用于配置入会参数，使用时需替换具体值：0表示关闭，1表示打开。preview为入会前的设置页，mic为麦克风，speaker为扬声器，camera为摄像头
+
+	LiveLink *string `json:"live_link,omitempty"` // 会议转直播链接
+
+	EndTime *string `json:"end_time,omitempty"` // 预约到期时间（unix时间，单位sec）
+
+	ExpireStatus *int `json:"expire_status,omitempty"` // 过期状态
+
+	ReserveUserId *string `json:"reserve_user_id,omitempty"` // 预约人ID
+
 	MeetingSettings *ReserveMeetingSetting `json:"meeting_settings,omitempty"` // 会议设置
 }
 
 type ReserveBuilder struct {
-	id                  string // 预约ID（预约的唯一标识）
-	idFlag              bool
-	meetingNo           string // 9位会议号（飞书用户可通过输入9位会议号快捷入会）
-	meetingNoFlag       bool
-	password            string // 会议密码
-	passwordFlag        bool
-	url                 string // 会议链接（飞书用户可通过点击会议链接快捷入会）
-	urlFlag             bool
-	appLink             string // APPLink用于唤起飞书APP入会。"{?}"为占位符，用于配置入会参数，使用时需替换具体值：0表示关闭，1表示打开。preview为入会前的设置页，mic为麦克风，speaker为扬声器，camera为摄像头
-	appLinkFlag         bool
-	liveLink            string // 会议转直播链接
-	liveLinkFlag        bool
-	endTime             string // 预约到期时间（unix时间，单位sec）
-	endTimeFlag         bool
-	expireStatus        int // 过期状态
-	expireStatusFlag    bool
-	reserveUserId       string // 预约人ID
-	reserveUserIdFlag   bool
+	id     string // 预约ID（预约的唯一标识）
+	idFlag bool
+
+	meetingNo     string // 9位会议号（飞书用户可通过输入9位会议号快捷入会）
+	meetingNoFlag bool
+
+	password     string // 会议密码
+	passwordFlag bool
+
+	url     string // 会议链接（飞书用户可通过点击会议链接快捷入会）
+	urlFlag bool
+
+	appLink     string // APPLink用于唤起飞书APP入会。"{?}"为占位符，用于配置入会参数，使用时需替换具体值：0表示关闭，1表示打开。preview为入会前的设置页，mic为麦克风，speaker为扬声器，camera为摄像头
+	appLinkFlag bool
+
+	liveLink     string // 会议转直播链接
+	liveLinkFlag bool
+
+	endTime     string // 预约到期时间（unix时间，单位sec）
+	endTimeFlag bool
+
+	expireStatus     int // 过期状态
+	expireStatusFlag bool
+
+	reserveUserId     string // 预约人ID
+	reserveUserIdFlag bool
+
 	meetingSettings     *ReserveMeetingSetting // 会议设置
 	meetingSettingsFlag bool
 }
@@ -6785,13 +7301,15 @@ func (builder *ReserveBuilder) Build() *Reserve {
 }
 
 type ReserveActionPermission struct {
-	Permission         *int                        `json:"permission,omitempty"`          // 权限项
+	Permission *int `json:"permission,omitempty"` // 权限项
+
 	PermissionCheckers []*ReservePermissionChecker `json:"permission_checkers,omitempty"` // 权限检查器列表，权限检查器之间为"逻辑或"的关系（即 有一个为true则拥有该权限）
 }
 
 type ReserveActionPermissionBuilder struct {
-	permission             int // 权限项
-	permissionFlag         bool
+	permission     int // 权限项
+	permissionFlag bool
+
 	permissionCheckers     []*ReservePermissionChecker // 权限检查器列表，权限检查器之间为"逻辑或"的关系（即 有一个为true则拥有该权限）
 	permissionCheckersFlag bool
 }
@@ -6833,12 +7351,14 @@ func (builder *ReserveActionPermissionBuilder) Build() *ReserveActionPermission 
 
 type ReserveAdminConfig struct {
 	Depts []*SubscribeDepartment `json:"depts,omitempty"` // 预定管理部门
-	Users []*SubscribeUser       `json:"users,omitempty"` // 预定管理用户
+
+	Users []*SubscribeUser `json:"users,omitempty"` // 预定管理用户
 }
 
 type ReserveAdminConfigBuilder struct {
 	depts     []*SubscribeDepartment // 预定管理部门
 	deptsFlag bool
+
 	users     []*SubscribeUser // 预定管理用户
 	usersFlag bool
 }
@@ -6878,15 +7398,17 @@ func (builder *ReserveAdminConfigBuilder) Build() *ReserveAdminConfig {
 }
 
 type ReserveAssignHost struct {
-	UserType *int    `json:"user_type,omitempty"` // 用户类型，仅支持设置同租户下的 Lark 用户
-	Id       *string `json:"id,omitempty"`        // 用户ID
+	UserType *int `json:"user_type,omitempty"` // 用户类型，仅支持设置同租户下的 Lark 用户
+
+	Id *string `json:"id,omitempty"` // 用户ID
 }
 
 type ReserveAssignHostBuilder struct {
 	userType     int // 用户类型，仅支持设置同租户下的 Lark 用户
 	userTypeFlag bool
-	id           string // 用户ID
-	idFlag       bool
+
+	id     string // 用户ID
+	idFlag bool
 }
 
 func NewReserveAssignHostBuilder() *ReserveAssignHostBuilder {
@@ -6957,16 +7479,20 @@ func (builder *ReserveCallSettingBuilder) Build() *ReserveCallSetting {
 }
 
 type ReserveCallee struct {
-	Id          *string      `json:"id,omitempty"`            // 用户ID
-	UserType    *int         `json:"user_type,omitempty"`     // 用户类型，当前仅支持用户类型6(pstn用户)
+	Id *string `json:"id,omitempty"` // 用户ID
+
+	UserType *int `json:"user_type,omitempty"` // 用户类型，当前仅支持用户类型6(pstn用户)
+
 	PstnSipInfo *PstnSipInfo `json:"pstn_sip_info,omitempty"` // pstn/sip信息
 }
 
 type ReserveCalleeBuilder struct {
-	id              string // 用户ID
-	idFlag          bool
-	userType        int // 用户类型，当前仅支持用户类型6(pstn用户)
-	userTypeFlag    bool
+	id     string // 用户ID
+	idFlag bool
+
+	userType     int // 用户类型，当前仅支持用户类型6(pstn用户)
+	userTypeFlag bool
+
 	pstnSipInfo     *PstnSipInfo // pstn/sip信息
 	pstnSipInfoFlag bool
 }
@@ -7051,25 +7577,37 @@ func (builder *ReserveCorrectionCheckInfoBuilder) Build() *ReserveCorrectionChec
 }
 
 type ReserveFormConfig struct {
-	IfCoverChildScope *bool            `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
-	ReserveForm       *bool            `json:"reserve_form,omitempty"`         // 预定表单开关
-	NotifiedUsers     []*SubscribeUser `json:"notified_users,omitempty"`       // 通知人列表
-	NotifiedTime      *int             `json:"notified_time,omitempty"`        // 最晚于会议开始前 notified_time收到通知(单位:分/时/天)
-	TimeUnit          *int             `json:"time_unit,omitempty"`            // 时间单位,1为分钟;2为小时;3为天，默认为天
+	IfCoverChildScope *bool `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
 
+	ReserveForm *bool `json:"reserve_form,omitempty"` // 预定表单开关
+
+	NotifiedUsers []*SubscribeUser `json:"notified_users,omitempty"` // 通知人列表
+
+	NotifiedTime *int `json:"notified_time,omitempty"` // 最晚于会议开始前 notified_time收到通知(单位:分/时/天)
+
+	TimeUnit *int `json:"time_unit,omitempty"` // 时间单位,1为分钟;2为小时;3为天，默认为天
+
+	CustomList []*CustomList `json:"custom_list,omitempty"` // 题目选项配置
 }
 
 type ReserveFormConfigBuilder struct {
 	ifCoverChildScope     bool // 是否覆盖子层级及会议室
 	ifCoverChildScopeFlag bool
-	reserveForm           bool // 预定表单开关
-	reserveFormFlag       bool
-	notifiedUsers         []*SubscribeUser // 通知人列表
-	notifiedUsersFlag     bool
-	notifiedTime          int // 最晚于会议开始前 notified_time收到通知(单位:分/时/天)
-	notifiedTimeFlag      bool
-	timeUnit              int // 时间单位,1为分钟;2为小时;3为天，默认为天
-	timeUnitFlag          bool
+
+	reserveForm     bool // 预定表单开关
+	reserveFormFlag bool
+
+	notifiedUsers     []*SubscribeUser // 通知人列表
+	notifiedUsersFlag bool
+
+	notifiedTime     int // 最晚于会议开始前 notified_time收到通知(单位:分/时/天)
+	notifiedTimeFlag bool
+
+	timeUnit     int // 时间单位,1为分钟;2为小时;3为天，默认为天
+	timeUnitFlag bool
+
+	customList     []*CustomList // 题目选项配置
+	customListFlag bool
 }
 
 func NewReserveFormConfigBuilder() *ReserveFormConfigBuilder {
@@ -7122,6 +7660,15 @@ func (builder *ReserveFormConfigBuilder) TimeUnit(timeUnit int) *ReserveFormConf
 	return builder
 }
 
+// 题目选项配置
+//
+// 示例值：
+func (builder *ReserveFormConfigBuilder) CustomList(customList []*CustomList) *ReserveFormConfigBuilder {
+	builder.customList = customList
+	builder.customListFlag = true
+	return builder
+}
+
 func (builder *ReserveFormConfigBuilder) Build() *ReserveFormConfig {
 	req := &ReserveFormConfig{}
 	if builder.ifCoverChildScopeFlag {
@@ -7148,33 +7695,47 @@ func (builder *ReserveFormConfigBuilder) Build() *ReserveFormConfig {
 }
 
 type ReserveMeetingSetting struct {
-	Topic              *string                    `json:"topic,omitempty"`                // 会议主题
-	ActionPermissions  []*ReserveActionPermission `json:"action_permissions,omitempty"`   // 会议权限配置列表，如果存在相同的权限配置项则它们之间为"逻辑或"的关系（即 有一个为true则拥有该权限）
-	MeetingInitialType *int                       `json:"meeting_initial_type,omitempty"` // 会议初始类型
-	MeetingConnect     *bool                      `json:"meeting_connect,omitempty"`      // 该会议是否支持互通，不支持更新（注：该字段内测中）
-	CallSetting        *ReserveCallSetting        `json:"call_setting,omitempty"`         // 1v1呼叫相关参数
-	AutoRecord         *bool                      `json:"auto_record,omitempty"`          // 使用飞书视频会议时，是否开启自动录制，默认false
-	AssignHostList     []*ReserveAssignHost       `json:"assign_host_list,omitempty"`     // 指定主持人列表
-	Password           *string                    `json:"password,omitempty"`             // 设置会议密码，仅支持 4-9 位数字
+	Topic *string `json:"topic,omitempty"` // 会议主题
+
+	ActionPermissions []*ReserveActionPermission `json:"action_permissions,omitempty"` // 会议权限配置列表，如果存在相同的权限配置项则它们之间为"逻辑或"的关系（即 有一个为true则拥有该权限）
+
+	MeetingInitialType *int `json:"meeting_initial_type,omitempty"` // 会议初始类型
+
+	MeetingConnect *bool `json:"meeting_connect,omitempty"` // 该会议是否支持互通，不支持更新（注：该字段内测中）
+
+	CallSetting *ReserveCallSetting `json:"call_setting,omitempty"` // 1v1呼叫相关参数
+
+	AutoRecord *bool `json:"auto_record,omitempty"` // 使用飞书视频会议时，是否开启自动录制，默认false
+
+	AssignHostList []*ReserveAssignHost `json:"assign_host_list,omitempty"` // 指定主持人列表
+
+	Password *string `json:"password,omitempty"` // 设置会议密码，仅支持 4-9 位数字
 }
 
 type ReserveMeetingSettingBuilder struct {
-	topic                  string // 会议主题
-	topicFlag              bool
-	actionPermissions      []*ReserveActionPermission // 会议权限配置列表，如果存在相同的权限配置项则它们之间为"逻辑或"的关系（即 有一个为true则拥有该权限）
-	actionPermissionsFlag  bool
+	topic     string // 会议主题
+	topicFlag bool
+
+	actionPermissions     []*ReserveActionPermission // 会议权限配置列表，如果存在相同的权限配置项则它们之间为"逻辑或"的关系（即 有一个为true则拥有该权限）
+	actionPermissionsFlag bool
+
 	meetingInitialType     int // 会议初始类型
 	meetingInitialTypeFlag bool
-	meetingConnect         bool // 该会议是否支持互通，不支持更新（注：该字段内测中）
-	meetingConnectFlag     bool
-	callSetting            *ReserveCallSetting // 1v1呼叫相关参数
-	callSettingFlag        bool
-	autoRecord             bool // 使用飞书视频会议时，是否开启自动录制，默认false
-	autoRecordFlag         bool
-	assignHostList         []*ReserveAssignHost // 指定主持人列表
-	assignHostListFlag     bool
-	password               string // 设置会议密码，仅支持 4-9 位数字
-	passwordFlag           bool
+
+	meetingConnect     bool // 该会议是否支持互通，不支持更新（注：该字段内测中）
+	meetingConnectFlag bool
+
+	callSetting     *ReserveCallSetting // 1v1呼叫相关参数
+	callSettingFlag bool
+
+	autoRecord     bool // 使用飞书视频会议时，是否开启自动录制，默认false
+	autoRecordFlag bool
+
+	assignHostList     []*ReserveAssignHost // 指定主持人列表
+	assignHostListFlag bool
+
+	password     string // 设置会议密码，仅支持 4-9 位数字
+	passwordFlag bool
 }
 
 func NewReserveMeetingSettingBuilder() *ReserveMeetingSettingBuilder {
@@ -7289,18 +7850,22 @@ func (builder *ReserveMeetingSettingBuilder) Build() *ReserveMeetingSetting {
 }
 
 type ReservePermissionChecker struct {
-	CheckField *int     `json:"check_field,omitempty"` // 检查字段类型
-	CheckMode  *int     `json:"check_mode,omitempty"`  // 检查方式
-	CheckList  []string `json:"check_list,omitempty"`  // 检查字段列表
+	CheckField *int `json:"check_field,omitempty"` // 检查字段类型
+
+	CheckMode *int `json:"check_mode,omitempty"` // 检查方式
+
+	CheckList []string `json:"check_list,omitempty"` // 检查字段列表
 }
 
 type ReservePermissionCheckerBuilder struct {
 	checkField     int // 检查字段类型
 	checkFieldFlag bool
-	checkMode      int // 检查方式
-	checkModeFlag  bool
-	checkList      []string // 检查字段列表
-	checkListFlag  bool
+
+	checkMode     int // 检查方式
+	checkModeFlag bool
+
+	checkList     []string // 检查字段列表
+	checkListFlag bool
 }
 
 func NewReservePermissionCheckerBuilder() *ReservePermissionCheckerBuilder {
@@ -7352,21 +7917,27 @@ func (builder *ReservePermissionCheckerBuilder) Build() *ReservePermissionChecke
 }
 
 type ReserveScopeConfig struct {
-	IfCoverChildScope *bool                  `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
-	AllowAllUsers     *int                   `json:"allow_all_users,omitempty"`      // 可预定成员范围：0 代表部分成员，1 代表全部成员。;<b>说明</b>：;1.  此值必填。;2.  当设置为 0 时，至少需要 1 个预定部门或预定人
-	AllowUsers        []*SubscribeUser       `json:"allow_users,omitempty"`          // 可预定成员列表
-	AllowDepts        []*SubscribeDepartment `json:"allow_depts,omitempty"`          // 可预定部门列表
+	IfCoverChildScope *bool `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
+
+	AllowAllUsers *int `json:"allow_all_users,omitempty"` // 可预定成员范围：0 代表部分成员，1 代表全部成员。;<b>说明</b>：;1.  此值必填。;2.  当设置为 0 时，至少需要 1 个预定部门或预定人
+
+	AllowUsers []*SubscribeUser `json:"allow_users,omitempty"` // 可预定成员列表
+
+	AllowDepts []*SubscribeDepartment `json:"allow_depts,omitempty"` // 可预定部门列表
 }
 
 type ReserveScopeConfigBuilder struct {
 	ifCoverChildScope     bool // 是否覆盖子层级及会议室
 	ifCoverChildScopeFlag bool
-	allowAllUsers         int // 可预定成员范围：0 代表部分成员，1 代表全部成员。;<b>说明</b>：;1.  此值必填。;2.  当设置为 0 时，至少需要 1 个预定部门或预定人
-	allowAllUsersFlag     bool
-	allowUsers            []*SubscribeUser // 可预定成员列表
-	allowUsersFlag        bool
-	allowDepts            []*SubscribeDepartment // 可预定部门列表
-	allowDeptsFlag        bool
+
+	allowAllUsers     int // 可预定成员范围：0 代表部分成员，1 代表全部成员。;<b>说明</b>：;1.  此值必填。;2.  当设置为 0 时，至少需要 1 个预定部门或预定人
+	allowAllUsersFlag bool
+
+	allowUsers     []*SubscribeUser // 可预定成员列表
+	allowUsersFlag bool
+
+	allowDepts     []*SubscribeDepartment // 可预定部门列表
+	allowDeptsFlag bool
 }
 
 func NewReserveScopeConfigBuilder() *ReserveScopeConfigBuilder {
@@ -7430,18 +8001,22 @@ func (builder *ReserveScopeConfigBuilder) Build() *ReserveScopeConfig {
 }
 
 type ReserveScopeConfigEvent struct {
-	AllowAllUsers *int                   `json:"allow_all_users,omitempty"` // 可预定成员范围，0部分成员，1全部成员
-	AllowUsers    []*SubscribeUserEvent  `json:"allow_users,omitempty"`     // 可预定成员列表
-	AllowDepts    []*SubscribeDepartment `json:"allow_depts,omitempty"`     // 可预定部门列表
+	AllowAllUsers *int `json:"allow_all_users,omitempty"` // 可预定成员范围，0部分成员，1全部成员
+
+	AllowUsers []*SubscribeUserEvent `json:"allow_users,omitempty"` // 可预定成员列表
+
+	AllowDepts []*SubscribeDepartment `json:"allow_depts,omitempty"` // 可预定部门列表
 }
 
 type ReserveScopeConfigEventBuilder struct {
 	allowAllUsers     int // 可预定成员范围，0部分成员，1全部成员
 	allowAllUsersFlag bool
-	allowUsers        []*SubscribeUserEvent // 可预定成员列表
-	allowUsersFlag    bool
-	allowDepts        []*SubscribeDepartment // 可预定部门列表
-	allowDeptsFlag    bool
+
+	allowUsers     []*SubscribeUserEvent // 可预定成员列表
+	allowUsersFlag bool
+
+	allowDepts     []*SubscribeDepartment // 可预定部门列表
+	allowDeptsFlag bool
 }
 
 func NewReserveScopeConfigEventBuilder() *ReserveScopeConfigEventBuilder {
@@ -7492,13 +8067,15 @@ func (builder *ReserveScopeConfigEventBuilder) Build() *ReserveScopeConfigEvent 
 }
 
 type ReservedRoom struct {
-	RoomId   *string `json:"room_id,omitempty"`   // 会议室ID
+	RoomId *string `json:"room_id,omitempty"` // 会议室ID
+
 	RoomName *string `json:"room_name,omitempty"` // 会议室名称
 }
 
 type ReservedRoomBuilder struct {
-	roomId       string // 会议室ID
-	roomIdFlag   bool
+	roomId     string // 会议室ID
+	roomIdFlag bool
+
 	roomName     string // 会议室名称
 	roomNameFlag bool
 }
@@ -7540,39 +8117,57 @@ func (builder *ReservedRoomBuilder) Build() *ReservedRoom {
 }
 
 type Room struct {
-	RoomId       *string     `json:"room_id,omitempty"`        // 会议室ID
-	Name         *string     `json:"name,omitempty"`           // 会议室名称
-	Capacity     *int        `json:"capacity,omitempty"`       // 会议室能容纳的人数
-	Description  *string     `json:"description,omitempty"`    // 会议室的相关描述
-	DisplayId    *string     `json:"display_id,omitempty"`     // 会议室的展示ID
-	CustomRoomId *string     `json:"custom_room_id,omitempty"` // 自定义的会议室ID
-	RoomLevelId  *string     `json:"room_level_id,omitempty"`  // 层级ID
-	Path         []string    `json:"path,omitempty"`           // 层级路径
-	RoomStatus   *RoomStatus `json:"room_status,omitempty"`    // 会议室状态
-	Device       []*Device   `json:"device,omitempty"`         // 设施信息列表
+	RoomId *string `json:"room_id,omitempty"` // 会议室ID
+
+	Name *string `json:"name,omitempty"` // 会议室名称
+
+	Capacity *int `json:"capacity,omitempty"` // 会议室能容纳的人数
+
+	Description *string `json:"description,omitempty"` // 会议室的相关描述
+
+	DisplayId *string `json:"display_id,omitempty"` // 会议室的展示ID
+
+	CustomRoomId *string `json:"custom_room_id,omitempty"` // 自定义的会议室ID
+
+	RoomLevelId *string `json:"room_level_id,omitempty"` // 层级ID
+
+	Path []string `json:"path,omitempty"` // 层级路径
+
+	RoomStatus *RoomStatus `json:"room_status,omitempty"` // 会议室状态
+
+	Device []*Device `json:"device,omitempty"` // 设施信息列表
 }
 
 type RoomBuilder struct {
-	roomId           string // 会议室ID
-	roomIdFlag       bool
-	name             string // 会议室名称
-	nameFlag         bool
-	capacity         int // 会议室能容纳的人数
-	capacityFlag     bool
-	description      string // 会议室的相关描述
-	descriptionFlag  bool
-	displayId        string // 会议室的展示ID
-	displayIdFlag    bool
+	roomId     string // 会议室ID
+	roomIdFlag bool
+
+	name     string // 会议室名称
+	nameFlag bool
+
+	capacity     int // 会议室能容纳的人数
+	capacityFlag bool
+
+	description     string // 会议室的相关描述
+	descriptionFlag bool
+
+	displayId     string // 会议室的展示ID
+	displayIdFlag bool
+
 	customRoomId     string // 自定义的会议室ID
 	customRoomIdFlag bool
-	roomLevelId      string // 层级ID
-	roomLevelIdFlag  bool
-	path             []string // 层级路径
-	pathFlag         bool
-	roomStatus       *RoomStatus // 会议室状态
-	roomStatusFlag   bool
-	device           []*Device // 设施信息列表
-	deviceFlag       bool
+
+	roomLevelId     string // 层级ID
+	roomLevelIdFlag bool
+
+	path     []string // 层级路径
+	pathFlag bool
+
+	roomStatus     *RoomStatus // 会议室状态
+	roomStatusFlag bool
+
+	device     []*Device // 设施信息列表
+	deviceFlag bool
 }
 
 func NewRoomBuilder() *RoomBuilder {
@@ -7713,24 +8308,32 @@ func (builder *RoomBuilder) Build() *Room {
 }
 
 type RoomConfig struct {
-	RoomBackground        *string             `json:"room_background,omitempty"`          // 飞书会议室背景图
-	DisplayBackground     *string             `json:"display_background,omitempty"`       // 飞书签到板背景图
-	DigitalSignage        *RoomDigitalSignage `json:"digital_signage,omitempty"`          // 飞书会议室数字标牌
+	RoomBackground *string `json:"room_background,omitempty"` // 飞书会议室背景图
+
+	DisplayBackground *string `json:"display_background,omitempty"` // 飞书签到板背景图
+
+	DigitalSignage *RoomDigitalSignage `json:"digital_signage,omitempty"` // 飞书会议室数字标牌
+
 	RoomBoxDigitalSignage *RoomDigitalSignage `json:"room_box_digital_signage,omitempty"` // 飞书投屏盒子数字标牌
-	RoomStatus            *RoomStatus         `json:"room_status,omitempty"`              // 会议室状态
+
+	RoomStatus *RoomStatus `json:"room_status,omitempty"` // 会议室状态
 }
 
 type RoomConfigBuilder struct {
-	roomBackground            string // 飞书会议室背景图
-	roomBackgroundFlag        bool
-	displayBackground         string // 飞书签到板背景图
-	displayBackgroundFlag     bool
-	digitalSignage            *RoomDigitalSignage // 飞书会议室数字标牌
-	digitalSignageFlag        bool
+	roomBackground     string // 飞书会议室背景图
+	roomBackgroundFlag bool
+
+	displayBackground     string // 飞书签到板背景图
+	displayBackgroundFlag bool
+
+	digitalSignage     *RoomDigitalSignage // 飞书会议室数字标牌
+	digitalSignageFlag bool
+
 	roomBoxDigitalSignage     *RoomDigitalSignage // 飞书投屏盒子数字标牌
 	roomBoxDigitalSignageFlag bool
-	roomStatus                *RoomStatus // 会议室状态
-	roomStatusFlag            bool
+
+	roomStatus     *RoomStatus // 会议室状态
+	roomStatusFlag bool
 }
 
 func NewRoomConfigBuilder() *RoomConfigBuilder {
@@ -7806,27 +8409,37 @@ func (builder *RoomConfigBuilder) Build() *RoomConfig {
 }
 
 type RoomDigitalSignage struct {
-	IfCoverChildScope *bool                         `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
-	Enable            *bool                         `json:"enable,omitempty"`               // 是否开启数字标牌功能
-	Mute              *bool                         `json:"mute,omitempty"`                 // 是否静音播放
-	StartDisplay      *int                          `json:"start_display,omitempty"`        // 在会议结束n分钟后开始播放，取值1~720（仅对飞书会议室数字标牌生效）
-	StopDisplay       *int                          `json:"stop_display,omitempty"`         // 在日程会议开始前n分钟停止播放，取值1~720（仅对飞书会议室数字标牌生效）
-	Materials         []*RoomDigitalSignageMaterial `json:"materials,omitempty"`            // 素材列表
+	IfCoverChildScope *bool `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
+
+	Enable *bool `json:"enable,omitempty"` // 是否开启数字标牌功能
+
+	Mute *bool `json:"mute,omitempty"` // 是否静音播放
+
+	StartDisplay *int `json:"start_display,omitempty"` // 在会议结束n分钟后开始播放，取值1~720（仅对飞书会议室数字标牌生效）
+
+	StopDisplay *int `json:"stop_display,omitempty"` // 在日程会议开始前n分钟停止播放，取值1~720（仅对飞书会议室数字标牌生效）
+
+	Materials []*RoomDigitalSignageMaterial `json:"materials,omitempty"` // 素材列表
 }
 
 type RoomDigitalSignageBuilder struct {
 	ifCoverChildScope     bool // 是否覆盖子层级及会议室
 	ifCoverChildScopeFlag bool
-	enable                bool // 是否开启数字标牌功能
-	enableFlag            bool
-	mute                  bool // 是否静音播放
-	muteFlag              bool
-	startDisplay          int // 在会议结束n分钟后开始播放，取值1~720（仅对飞书会议室数字标牌生效）
-	startDisplayFlag      bool
-	stopDisplay           int // 在日程会议开始前n分钟停止播放，取值1~720（仅对飞书会议室数字标牌生效）
-	stopDisplayFlag       bool
-	materials             []*RoomDigitalSignageMaterial // 素材列表
-	materialsFlag         bool
+
+	enable     bool // 是否开启数字标牌功能
+	enableFlag bool
+
+	mute     bool // 是否静音播放
+	muteFlag bool
+
+	startDisplay     int // 在会议结束n分钟后开始播放，取值1~720（仅对飞书会议室数字标牌生效）
+	startDisplayFlag bool
+
+	stopDisplay     int // 在日程会议开始前n分钟停止播放，取值1~720（仅对飞书会议室数字标牌生效）
+	stopDisplayFlag bool
+
+	materials     []*RoomDigitalSignageMaterial // 素材列表
+	materialsFlag bool
 }
 
 func NewRoomDigitalSignageBuilder() *RoomDigitalSignageBuilder {
@@ -7917,36 +8530,52 @@ func (builder *RoomDigitalSignageBuilder) Build() *RoomDigitalSignage {
 }
 
 type RoomDigitalSignageMaterial struct {
-	Id           *string `json:"id,omitempty"`            // 素材ID，当设置新素材时，无需传递该字段
-	Name         *string `json:"name,omitempty"`          // 素材名称
-	MaterialType *int    `json:"material_type,omitempty"` // 素材类型
-	Url          *string `json:"url,omitempty"`           // 素材url
-	Duration     *int    `json:"duration,omitempty"`      // 播放时长（单位sec），取值1~43200
-	Cover        *string `json:"cover,omitempty"`         // 素材封面url
-	Md5          *string `json:"md5,omitempty"`           // 素材文件md5
-	Vid          *string `json:"vid,omitempty"`           // 素材文件vid
-	Size         *string `json:"size,omitempty"`          // 素材文件大小（单位byte）
+	Id *string `json:"id,omitempty"` // 素材ID，当设置新素材时，无需传递该字段
+
+	Name *string `json:"name,omitempty"` // 素材名称
+
+	MaterialType *int `json:"material_type,omitempty"` // 素材类型
+
+	Url *string `json:"url,omitempty"` // 素材url
+
+	Duration *int `json:"duration,omitempty"` // 播放时长（单位sec），取值1~43200
+
+	Cover *string `json:"cover,omitempty"` // 素材封面url
+
+	Md5 *string `json:"md5,omitempty"` // 素材文件md5
+
+	Vid *string `json:"vid,omitempty"` // 素材文件vid
+
+	Size *string `json:"size,omitempty"` // 素材文件大小（单位byte）
 }
 
 type RoomDigitalSignageMaterialBuilder struct {
-	id               string // 素材ID，当设置新素材时，无需传递该字段
-	idFlag           bool
-	name             string // 素材名称
-	nameFlag         bool
+	id     string // 素材ID，当设置新素材时，无需传递该字段
+	idFlag bool
+
+	name     string // 素材名称
+	nameFlag bool
+
 	materialType     int // 素材类型
 	materialTypeFlag bool
-	url              string // 素材url
-	urlFlag          bool
-	duration         int // 播放时长（单位sec），取值1~43200
-	durationFlag     bool
-	cover            string // 素材封面url
-	coverFlag        bool
-	md5              string // 素材文件md5
-	md5Flag          bool
-	vid              string // 素材文件vid
-	vidFlag          bool
-	size             string // 素材文件大小（单位byte）
-	sizeFlag         bool
+
+	url     string // 素材url
+	urlFlag bool
+
+	duration     int // 播放时长（单位sec），取值1~43200
+	durationFlag bool
+
+	cover     string // 素材封面url
+	coverFlag bool
+
+	md5     string // 素材文件md5
+	md5Flag bool
+
+	vid     string // 素材文件vid
+	vidFlag bool
+
+	size     string // 素材文件大小（单位byte）
+	sizeFlag bool
 }
 
 func NewRoomDigitalSignageMaterialBuilder() *RoomDigitalSignageMaterialBuilder {
@@ -8077,39 +8706,57 @@ func (builder *RoomDigitalSignageMaterialBuilder) Build() *RoomDigitalSignageMat
 }
 
 type RoomEvent struct {
-	RoomId       *string          `json:"room_id,omitempty"`        // 会议室ID
-	Name         *string          `json:"name,omitempty"`           // 会议室名称
-	Capacity     *int             `json:"capacity,omitempty"`       // 会议室能容纳的人数
-	Description  *string          `json:"description,omitempty"`    // 会议室的相关描述
-	DisplayId    *string          `json:"display_id,omitempty"`     // 会议室的展示ID
-	CustomRoomId *string          `json:"custom_room_id,omitempty"` // 自定义的会议室ID
-	RoomLevelId  *string          `json:"room_level_id,omitempty"`  // 层级ID
-	Path         []string         `json:"path,omitempty"`           // 层级路径
-	RoomStatus   *RoomStatusEvent `json:"room_status,omitempty"`    // 会议室状态
-	Device       []*Device        `json:"device,omitempty"`         // 设施信息列表
+	RoomId *string `json:"room_id,omitempty"` // 会议室ID
+
+	Name *string `json:"name,omitempty"` // 会议室名称
+
+	Capacity *int `json:"capacity,omitempty"` // 会议室能容纳的人数
+
+	Description *string `json:"description,omitempty"` // 会议室的相关描述
+
+	DisplayId *string `json:"display_id,omitempty"` // 会议室的展示ID
+
+	CustomRoomId *string `json:"custom_room_id,omitempty"` // 自定义的会议室ID
+
+	RoomLevelId *string `json:"room_level_id,omitempty"` // 层级ID
+
+	Path []string `json:"path,omitempty"` // 层级路径
+
+	RoomStatus *RoomStatusEvent `json:"room_status,omitempty"` // 会议室状态
+
+	Device []*Device `json:"device,omitempty"` // 设施信息列表
 }
 
 type RoomEventBuilder struct {
-	roomId           string // 会议室ID
-	roomIdFlag       bool
-	name             string // 会议室名称
-	nameFlag         bool
-	capacity         int // 会议室能容纳的人数
-	capacityFlag     bool
-	description      string // 会议室的相关描述
-	descriptionFlag  bool
-	displayId        string // 会议室的展示ID
-	displayIdFlag    bool
+	roomId     string // 会议室ID
+	roomIdFlag bool
+
+	name     string // 会议室名称
+	nameFlag bool
+
+	capacity     int // 会议室能容纳的人数
+	capacityFlag bool
+
+	description     string // 会议室的相关描述
+	descriptionFlag bool
+
+	displayId     string // 会议室的展示ID
+	displayIdFlag bool
+
 	customRoomId     string // 自定义的会议室ID
 	customRoomIdFlag bool
-	roomLevelId      string // 层级ID
-	roomLevelIdFlag  bool
-	path             []string // 层级路径
-	pathFlag         bool
-	roomStatus       *RoomStatusEvent // 会议室状态
-	roomStatusFlag   bool
-	device           []*Device // 设施信息列表
-	deviceFlag       bool
+
+	roomLevelId     string // 层级ID
+	roomLevelIdFlag bool
+
+	path     []string // 层级路径
+	pathFlag bool
+
+	roomStatus     *RoomStatusEvent // 会议室状态
+	roomStatusFlag bool
+
+	device     []*Device // 设施信息列表
+	deviceFlag bool
 }
 
 func NewRoomEventBuilder() *RoomEventBuilder {
@@ -8250,25 +8897,35 @@ func (builder *RoomEventBuilder) Build() *RoomEvent {
 }
 
 type RoomLevel struct {
-	RoomLevelId   *string  `json:"room_level_id,omitempty"`   // 层级ID
-	Name          *string  `json:"name,omitempty"`            // 层级名称
-	ParentId      *string  `json:"parent_id,omitempty"`       // 父层级ID
-	Path          []string `json:"path,omitempty"`            // 层级路径
-	HasChild      *bool    `json:"has_child,omitempty"`       // 是否有子层级
-	CustomGroupId *string  `json:"custom_group_id,omitempty"` // 自定义层级ID
+	RoomLevelId *string `json:"room_level_id,omitempty"` // 层级ID
+
+	Name *string `json:"name,omitempty"` // 层级名称
+
+	ParentId *string `json:"parent_id,omitempty"` // 父层级ID
+
+	Path []string `json:"path,omitempty"` // 层级路径
+
+	HasChild *bool `json:"has_child,omitempty"` // 是否有子层级
+
+	CustomGroupId *string `json:"custom_group_id,omitempty"` // 自定义层级ID
 }
 
 type RoomLevelBuilder struct {
-	roomLevelId       string // 层级ID
-	roomLevelIdFlag   bool
-	name              string // 层级名称
-	nameFlag          bool
-	parentId          string // 父层级ID
-	parentIdFlag      bool
-	path              []string // 层级路径
-	pathFlag          bool
-	hasChild          bool // 是否有子层级
-	hasChildFlag      bool
+	roomLevelId     string // 层级ID
+	roomLevelIdFlag bool
+
+	name     string // 层级名称
+	nameFlag bool
+
+	parentId     string // 父层级ID
+	parentIdFlag bool
+
+	path     []string // 层级路径
+	pathFlag bool
+
+	hasChild     bool // 是否有子层级
+	hasChildFlag bool
+
 	customGroupId     string // 自定义层级ID
 	customGroupIdFlag bool
 }
@@ -8361,63 +9018,97 @@ func (builder *RoomLevelBuilder) Build() *RoomLevel {
 }
 
 type RoomMeetingReservation struct {
-	RoomId               *string `json:"room_id,omitempty"`                // 会议室ID
-	RoomName             *string `json:"room_name,omitempty"`              // 会议室名称
-	EventTitle           *string `json:"event_title,omitempty"`            // 会议标题
-	Reserver             *string `json:"reserver,omitempty"`               // 预定人
-	ReserverUserId       *string `json:"reserver_user_id,omitempty"`       // 预定人ID
+	RoomId *string `json:"room_id,omitempty"` // 会议室ID
+
+	RoomName *string `json:"room_name,omitempty"` // 会议室名称
+
+	EventTitle *string `json:"event_title,omitempty"` // 会议标题
+
+	Reserver *string `json:"reserver,omitempty"` // 预定人
+
+	ReserverUserId *string `json:"reserver_user_id,omitempty"` // 预定人ID
+
 	DepartmentOfReserver *string `json:"department_of_reserver,omitempty"` // 预定人所属部门
-	GuestsNumber         *string `json:"guests_number,omitempty"`          // 邀约人数
-	AcceptedNumber       *string `json:"accepted_number,omitempty"`        // 接受人数
-	EventStartTime       *string `json:"event_start_time,omitempty"`       // 会议开始时间
-	EventEndTime         *string `json:"event_end_time,omitempty"`         // 会议结束时间
-	EventDuration        *string `json:"event_duration,omitempty"`         // 会议时长
-	ReservationStatus    *string `json:"reservation_status,omitempty"`     // 会议室预定状态
-	CheckInDevice        *string `json:"check_in_device,omitempty"`        // 签到设备
-	RoomCheckInStatus    *string `json:"room_check_in_status,omitempty"`   // 会议室签到状态
-	CheckInTime          *string `json:"check_in_time,omitempty"`          // 会议室签到时间
-	IsReleaseEarly       *string `json:"is_release_early,omitempty"`       // 是否提前释放
-	ReleasingPerson      *string `json:"releasing_person,omitempty"`       // 释放人
-	ReleasingTime        *string `json:"releasing_time,omitempty"`         // 释放时间
+
+	GuestsNumber *string `json:"guests_number,omitempty"` // 邀约人数
+
+	AcceptedNumber *string `json:"accepted_number,omitempty"` // 接受人数
+
+	EventStartTime *string `json:"event_start_time,omitempty"` // 会议开始时间
+
+	EventEndTime *string `json:"event_end_time,omitempty"` // 会议结束时间
+
+	EventDuration *string `json:"event_duration,omitempty"` // 会议时长
+
+	ReservationStatus *string `json:"reservation_status,omitempty"` // 会议室预定状态
+
+	CheckInDevice *string `json:"check_in_device,omitempty"` // 签到设备
+
+	RoomCheckInStatus *string `json:"room_check_in_status,omitempty"` // 会议室签到状态
+
+	CheckInTime *string `json:"check_in_time,omitempty"` // 会议室签到时间
+
+	IsReleaseEarly *string `json:"is_release_early,omitempty"` // 是否提前释放
+
+	ReleasingPerson *string `json:"releasing_person,omitempty"` // 释放人
+
+	ReleasingTime *string `json:"releasing_time,omitempty"` // 释放时间
 }
 
 type RoomMeetingReservationBuilder struct {
-	roomId                   string // 会议室ID
-	roomIdFlag               bool
-	roomName                 string // 会议室名称
-	roomNameFlag             bool
-	eventTitle               string // 会议标题
-	eventTitleFlag           bool
-	reserver                 string // 预定人
-	reserverFlag             bool
-	reserverUserId           string // 预定人ID
-	reserverUserIdFlag       bool
+	roomId     string // 会议室ID
+	roomIdFlag bool
+
+	roomName     string // 会议室名称
+	roomNameFlag bool
+
+	eventTitle     string // 会议标题
+	eventTitleFlag bool
+
+	reserver     string // 预定人
+	reserverFlag bool
+
+	reserverUserId     string // 预定人ID
+	reserverUserIdFlag bool
+
 	departmentOfReserver     string // 预定人所属部门
 	departmentOfReserverFlag bool
-	guestsNumber             string // 邀约人数
-	guestsNumberFlag         bool
-	acceptedNumber           string // 接受人数
-	acceptedNumberFlag       bool
-	eventStartTime           string // 会议开始时间
-	eventStartTimeFlag       bool
-	eventEndTime             string // 会议结束时间
-	eventEndTimeFlag         bool
-	eventDuration            string // 会议时长
-	eventDurationFlag        bool
-	reservationStatus        string // 会议室预定状态
-	reservationStatusFlag    bool
-	checkInDevice            string // 签到设备
-	checkInDeviceFlag        bool
-	roomCheckInStatus        string // 会议室签到状态
-	roomCheckInStatusFlag    bool
-	checkInTime              string // 会议室签到时间
-	checkInTimeFlag          bool
-	isReleaseEarly           string // 是否提前释放
-	isReleaseEarlyFlag       bool
-	releasingPerson          string // 释放人
-	releasingPersonFlag      bool
-	releasingTime            string // 释放时间
-	releasingTimeFlag        bool
+
+	guestsNumber     string // 邀约人数
+	guestsNumberFlag bool
+
+	acceptedNumber     string // 接受人数
+	acceptedNumberFlag bool
+
+	eventStartTime     string // 会议开始时间
+	eventStartTimeFlag bool
+
+	eventEndTime     string // 会议结束时间
+	eventEndTimeFlag bool
+
+	eventDuration     string // 会议时长
+	eventDurationFlag bool
+
+	reservationStatus     string // 会议室预定状态
+	reservationStatusFlag bool
+
+	checkInDevice     string // 签到设备
+	checkInDeviceFlag bool
+
+	roomCheckInStatus     string // 会议室签到状态
+	roomCheckInStatusFlag bool
+
+	checkInTime     string // 会议室签到时间
+	checkInTimeFlag bool
+
+	isReleaseEarly     string // 是否提前释放
+	isReleaseEarlyFlag bool
+
+	releasingPerson     string // 释放人
+	releasingPersonFlag bool
+
+	releasingTime     string // 释放时间
+	releasingTimeFlag bool
 }
 
 func NewRoomMeetingReservationBuilder() *RoomMeetingReservationBuilder {
@@ -8665,33 +9356,47 @@ func (builder *RoomMeetingReservationBuilder) Build() *RoomMeetingReservation {
 }
 
 type RoomStatus struct {
-	Status           *bool    `json:"status,omitempty"`             // 是否启用会议室
-	ScheduleStatus   *bool    `json:"schedule_status,omitempty"`    // 会议室未来状态为启用或禁用
-	DisableStartTime *string  `json:"disable_start_time,omitempty"` // 禁用开始时间（unix时间，单位sec）
-	DisableEndTime   *string  `json:"disable_end_time,omitempty"`   // 禁用结束时间（unix时间，单位sec，数值0表示永久禁用）
-	DisableReason    *string  `json:"disable_reason,omitempty"`     // 禁用原因
-	ContactIds       []string `json:"contact_ids,omitempty"`        // 联系人列表，id类型由user_id_type参数决定
-	DisableNotice    *bool    `json:"disable_notice,omitempty"`     // 是否在禁用时发送通知给预定了该会议室的员工
-	ResumeNotice     *bool    `json:"resume_notice,omitempty"`      // 是否在恢复启用时发送通知给联系人
+	Status *bool `json:"status,omitempty"` // 是否启用会议室
+
+	ScheduleStatus *bool `json:"schedule_status,omitempty"` // 会议室未来状态为启用或禁用
+
+	DisableStartTime *string `json:"disable_start_time,omitempty"` // 禁用开始时间（unix时间，单位sec）
+
+	DisableEndTime *string `json:"disable_end_time,omitempty"` // 禁用结束时间（unix时间，单位sec，数值0表示永久禁用）
+
+	DisableReason *string `json:"disable_reason,omitempty"` // 禁用原因
+
+	ContactIds []string `json:"contact_ids,omitempty"` // 联系人列表，id类型由user_id_type参数决定
+
+	DisableNotice *bool `json:"disable_notice,omitempty"` // 是否在禁用时发送通知给预定了该会议室的员工
+
+	ResumeNotice *bool `json:"resume_notice,omitempty"` // 是否在恢复启用时发送通知给联系人
 }
 
 type RoomStatusBuilder struct {
-	status               bool // 是否启用会议室
-	statusFlag           bool
-	scheduleStatus       bool // 会议室未来状态为启用或禁用
-	scheduleStatusFlag   bool
+	status     bool // 是否启用会议室
+	statusFlag bool
+
+	scheduleStatus     bool // 会议室未来状态为启用或禁用
+	scheduleStatusFlag bool
+
 	disableStartTime     string // 禁用开始时间（unix时间，单位sec）
 	disableStartTimeFlag bool
-	disableEndTime       string // 禁用结束时间（unix时间，单位sec，数值0表示永久禁用）
-	disableEndTimeFlag   bool
-	disableReason        string // 禁用原因
-	disableReasonFlag    bool
-	contactIds           []string // 联系人列表，id类型由user_id_type参数决定
-	contactIdsFlag       bool
-	disableNotice        bool // 是否在禁用时发送通知给预定了该会议室的员工
-	disableNoticeFlag    bool
-	resumeNotice         bool // 是否在恢复启用时发送通知给联系人
-	resumeNoticeFlag     bool
+
+	disableEndTime     string // 禁用结束时间（unix时间，单位sec，数值0表示永久禁用）
+	disableEndTimeFlag bool
+
+	disableReason     string // 禁用原因
+	disableReasonFlag bool
+
+	contactIds     []string // 联系人列表，id类型由user_id_type参数决定
+	contactIdsFlag bool
+
+	disableNotice     bool // 是否在禁用时发送通知给预定了该会议室的员工
+	disableNoticeFlag bool
+
+	resumeNotice     bool // 是否在恢复启用时发送通知给联系人
+	resumeNoticeFlag bool
 }
 
 func NewRoomStatusBuilder() *RoomStatusBuilder {
@@ -8808,33 +9513,47 @@ func (builder *RoomStatusBuilder) Build() *RoomStatus {
 }
 
 type RoomStatusEvent struct {
-	Status           *bool     `json:"status,omitempty"`             // 是否启用会议室
-	ScheduleStatus   *bool     `json:"schedule_status,omitempty"`    // 会议室未来状态为启用或禁用
-	DisableStartTime *string   `json:"disable_start_time,omitempty"` // 禁用开始时间（unix时间，单位sec）
-	DisableEndTime   *string   `json:"disable_end_time,omitempty"`   // 禁用结束时间（unix时间，单位sec，数值0表示永久禁用）
-	DisableReason    *string   `json:"disable_reason,omitempty"`     // 禁用原因
-	ContactIds       []*UserId `json:"contact_ids,omitempty"`        // 联系人列表
-	DisableNotice    *bool     `json:"disable_notice,omitempty"`     // 是否在禁用时发送通知给预定了该会议室的员工
-	ResumeNotice     *bool     `json:"resume_notice,omitempty"`      // 是否在恢复启用时发送通知给预定了该会议室的员工
+	Status *bool `json:"status,omitempty"` // 是否启用会议室
+
+	ScheduleStatus *bool `json:"schedule_status,omitempty"` // 会议室未来状态为启用或禁用
+
+	DisableStartTime *string `json:"disable_start_time,omitempty"` // 禁用开始时间（unix时间，单位sec）
+
+	DisableEndTime *string `json:"disable_end_time,omitempty"` // 禁用结束时间（unix时间，单位sec，数值0表示永久禁用）
+
+	DisableReason *string `json:"disable_reason,omitempty"` // 禁用原因
+
+	ContactIds []*UserId `json:"contact_ids,omitempty"` // 联系人列表
+
+	DisableNotice *bool `json:"disable_notice,omitempty"` // 是否在禁用时发送通知给预定了该会议室的员工
+
+	ResumeNotice *bool `json:"resume_notice,omitempty"` // 是否在恢复启用时发送通知给预定了该会议室的员工
 }
 
 type RoomStatusEventBuilder struct {
-	status               bool // 是否启用会议室
-	statusFlag           bool
-	scheduleStatus       bool // 会议室未来状态为启用或禁用
-	scheduleStatusFlag   bool
+	status     bool // 是否启用会议室
+	statusFlag bool
+
+	scheduleStatus     bool // 会议室未来状态为启用或禁用
+	scheduleStatusFlag bool
+
 	disableStartTime     string // 禁用开始时间（unix时间，单位sec）
 	disableStartTimeFlag bool
-	disableEndTime       string // 禁用结束时间（unix时间，单位sec，数值0表示永久禁用）
-	disableEndTimeFlag   bool
-	disableReason        string // 禁用原因
-	disableReasonFlag    bool
-	contactIds           []*UserId // 联系人列表
-	contactIdsFlag       bool
-	disableNotice        bool // 是否在禁用时发送通知给预定了该会议室的员工
-	disableNoticeFlag    bool
-	resumeNotice         bool // 是否在恢复启用时发送通知给预定了该会议室的员工
-	resumeNoticeFlag     bool
+
+	disableEndTime     string // 禁用结束时间（unix时间，单位sec，数值0表示永久禁用）
+	disableEndTimeFlag bool
+
+	disableReason     string // 禁用原因
+	disableReasonFlag bool
+
+	contactIds     []*UserId // 联系人列表
+	contactIdsFlag bool
+
+	disableNotice     bool // 是否在禁用时发送通知给预定了该会议室的员工
+	disableNoticeFlag bool
+
+	resumeNotice     bool // 是否在恢复启用时发送通知给预定了该会议室的员工
+	resumeNoticeFlag bool
 }
 
 func NewRoomStatusEventBuilder() *RoomStatusEventBuilder {
@@ -8951,16 +9670,20 @@ func (builder *RoomStatusEventBuilder) Build() *RoomStatusEvent {
 }
 
 type ScopeConfig struct {
-	ScopeType   *int        `json:"scope_type,omitempty"`   // 查询节点范围
-	ScopeId     *string     `json:"scope_id,omitempty"`     // 查询节点ID：如果scope_type为1，则为层级ID，如果scope_type为2，则为会议室ID
+	ScopeType *int `json:"scope_type,omitempty"` // 查询节点范围
+
+	ScopeId *string `json:"scope_id,omitempty"` // 查询节点ID：如果scope_type为1，则为层级ID，如果scope_type为2，则为会议室ID
+
 	ScopeConfig *RoomConfig `json:"scope_config,omitempty"` // 节点配置
 }
 
 type ScopeConfigBuilder struct {
-	scopeType       int // 查询节点范围
-	scopeTypeFlag   bool
-	scopeId         string // 查询节点ID：如果scope_type为1，则为层级ID，如果scope_type为2，则为会议室ID
-	scopeIdFlag     bool
+	scopeType     int // 查询节点范围
+	scopeTypeFlag bool
+
+	scopeId     string // 查询节点ID：如果scope_type为1，则为层级ID，如果scope_type为2，则为会议室ID
+	scopeIdFlag bool
+
 	scopeConfig     *RoomConfig // 节点配置
 	scopeConfigFlag bool
 }
@@ -9014,13 +9737,15 @@ func (builder *ScopeConfigBuilder) Build() *ScopeConfig {
 }
 
 type SubjectiveCheck struct {
-	KeyPoints        []*KeyPoint `json:"key_points,omitempty"`         // 关键点
-	UserInputPrompts []string    `json:"user_input_prompts,omitempty"` // 用户输入prompt
+	KeyPoints []*KeyPoint `json:"key_points,omitempty"` // 关键点
+
+	UserInputPrompts []string `json:"user_input_prompts,omitempty"` // 用户输入prompt
 }
 
 type SubjectiveCheckBuilder struct {
-	keyPoints            []*KeyPoint // 关键点
-	keyPointsFlag        bool
+	keyPoints     []*KeyPoint // 关键点
+	keyPointsFlag bool
+
 	userInputPrompts     []string // 用户输入prompt
 	userInputPromptsFlag bool
 }
@@ -9060,21 +9785,27 @@ func (builder *SubjectiveCheckBuilder) Build() *SubjectiveCheck {
 }
 
 type SubjectiveCheckOutput struct {
-	Keypoints            []string                `json:"keypoints,omitempty"`               // 关键点
+	Keypoints []string `json:"keypoints,omitempty"` // 关键点
+
 	KeyPointMatchDetails []*KeyPointMatchDetails `json:"key_point_match_details,omitempty"` // 关键点详情
-	UserPromptOutputs    []string                `json:"user_prompt_outputs,omitempty"`     // 用户prompt输出
-	StatusCode           *int                    `json:"status_code,omitempty"`             // 状态码
+
+	UserPromptOutputs []string `json:"user_prompt_outputs,omitempty"` // 用户prompt输出
+
+	StatusCode *int `json:"status_code,omitempty"` // 状态码
 }
 
 type SubjectiveCheckOutputBuilder struct {
-	keypoints                []string // 关键点
-	keypointsFlag            bool
+	keypoints     []string // 关键点
+	keypointsFlag bool
+
 	keyPointMatchDetails     []*KeyPointMatchDetails // 关键点详情
 	keyPointMatchDetailsFlag bool
-	userPromptOutputs        []string // 用户prompt输出
-	userPromptOutputsFlag    bool
-	statusCode               int // 状态码
-	statusCodeFlag           bool
+
+	userPromptOutputs     []string // 用户prompt输出
+	userPromptOutputsFlag bool
+
+	statusCode     int // 状态码
+	statusCodeFlag bool
 }
 
 func NewSubjectiveCheckOutputBuilder() *SubjectiveCheckOutputBuilder {
@@ -9137,13 +9868,15 @@ func (builder *SubjectiveCheckOutputBuilder) Build() *SubjectiveCheckOutput {
 }
 
 type SubscribeDepartment struct {
-	DepartmentId   *string `json:"department_id,omitempty"`   // 可预定部门id
+	DepartmentId *string `json:"department_id,omitempty"` // 可预定部门id
+
 	DepartmentName *string `json:"department_name,omitempty"` // 预定部门名称
 }
 
 type SubscribeDepartmentBuilder struct {
-	departmentId       string // 可预定部门id
-	departmentIdFlag   bool
+	departmentId     string // 可预定部门id
+	departmentIdFlag bool
+
 	departmentName     string // 预定部门名称
 	departmentNameFlag bool
 }
@@ -9185,13 +9918,15 @@ func (builder *SubscribeDepartmentBuilder) Build() *SubscribeDepartment {
 }
 
 type SubscribeUser struct {
-	UserId   *string `json:"user_id,omitempty"`   // 审批人/预定人id
+	UserId *string `json:"user_id,omitempty"` // 审批人/预定人id
+
 	UserName *string `json:"user_name,omitempty"` // 预订人姓名
 }
 
 type SubscribeUserBuilder struct {
-	userId       string // 审批人/预定人id
-	userIdFlag   bool
+	userId     string // 审批人/预定人id
+	userIdFlag bool
+
 	userName     string // 预订人姓名
 	userNameFlag bool
 }
@@ -9264,30 +9999,42 @@ func (builder *SubscribeUserEventBuilder) Build() *SubscribeUserEvent {
 }
 
 type TimeConfig struct {
-	IfCoverChildScope *bool   `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
-	TimeSwitch        *int    `json:"time_switch,omitempty"`          // 预定时间开关：0 代表关闭，1 代表开启
-	DaysInAdvance     *int    `json:"days_in_advance,omitempty"`      // 最早可提前 ; days_in_advance 预定会议室（单位：天，取值范围[1-730]）;<b>说明</b>：不填写时，默认更新为 365
-	OpeningHour       *string `json:"opening_hour,omitempty"`         // 开放当天可于 ; opening_hour 开始预定（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时默认更新为 ; 28800 ;2.  如果填写的值不是 60 ; 的倍数，则自动会更新为离其最近的 60 整数倍的值。
-	StartTime         *string `json:"start_time,omitempty"`           // 每日可预定时间范围的开始时间（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时，默认更新为 0 ，此时填写的  end_time 不得小于 30。;2.  当 start_time 与;  end_time 均填写时，; end_time 至少超过 ; start_time 30 。;3.  如果填写的值不是 60 的倍数，则自动会更新为离其最近的 60 整数倍的值。
-	EndTime           *string `json:"end_time,omitempty"`             // 每日可预定时间范围结束时间（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时，默认更新为 86400 ，此时填写的; start_time 不得大于等于 86370 。;2.  当 start_time 与;  end_time 均填写时，; end_time 至少要超过;  start_time 30。;3.  如果填写的值不是  60 的倍数，则自动会更新为离其最近的 60 整数倍的值。
-	MaxDuration       *int    `json:"max_duration,omitempty"`         // 单次会议室可预定时长上限（单位：小时，取值范围[1,99]）;<b>说明</b>：不填写时默认更新为 2
+	IfCoverChildScope *bool `json:"if_cover_child_scope,omitempty"` // 是否覆盖子层级及会议室
+
+	TimeSwitch *int `json:"time_switch,omitempty"` // 预定时间开关：0 代表关闭，1 代表开启
+
+	DaysInAdvance *int `json:"days_in_advance,omitempty"` // 最早可提前 ; days_in_advance 预定会议室（单位：天，取值范围[1-730]）;<b>说明</b>：不填写时，默认更新为 365
+
+	OpeningHour *string `json:"opening_hour,omitempty"` // 开放当天可于 ; opening_hour 开始预定（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时默认更新为 ; 28800 ;2.  如果填写的值不是 60 ; 的倍数，则自动会更新为离其最近的 60 整数倍的值。
+
+	StartTime *string `json:"start_time,omitempty"` // 每日可预定时间范围的开始时间（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时，默认更新为 0 ，此时填写的  end_time 不得小于 30。;2.  当 start_time 与;  end_time 均填写时，; end_time 至少超过 ; start_time 30 。;3.  如果填写的值不是 60 的倍数，则自动会更新为离其最近的 60 整数倍的值。
+
+	EndTime *string `json:"end_time,omitempty"` // 每日可预定时间范围结束时间（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时，默认更新为 86400 ，此时填写的; start_time 不得大于等于 86370 。;2.  当 start_time 与;  end_time 均填写时，; end_time 至少要超过;  start_time 30。;3.  如果填写的值不是  60 的倍数，则自动会更新为离其最近的 60 整数倍的值。
+
+	MaxDuration *int `json:"max_duration,omitempty"` // 单次会议室可预定时长上限（单位：小时，取值范围[1,99]）;<b>说明</b>：不填写时默认更新为 2
 }
 
 type TimeConfigBuilder struct {
 	ifCoverChildScope     bool // 是否覆盖子层级及会议室
 	ifCoverChildScopeFlag bool
-	timeSwitch            int // 预定时间开关：0 代表关闭，1 代表开启
-	timeSwitchFlag        bool
-	daysInAdvance         int // 最早可提前 ; days_in_advance 预定会议室（单位：天，取值范围[1-730]）;<b>说明</b>：不填写时，默认更新为 365
-	daysInAdvanceFlag     bool
-	openingHour           string // 开放当天可于 ; opening_hour 开始预定（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时默认更新为 ; 28800 ;2.  如果填写的值不是 60 ; 的倍数，则自动会更新为离其最近的 60 整数倍的值。
-	openingHourFlag       bool
-	startTime             string // 每日可预定时间范围的开始时间（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时，默认更新为 0 ，此时填写的  end_time 不得小于 30。;2.  当 start_time 与;  end_time 均填写时，; end_time 至少超过 ; start_time 30 。;3.  如果填写的值不是 60 的倍数，则自动会更新为离其最近的 60 整数倍的值。
-	startTimeFlag         bool
-	endTime               string // 每日可预定时间范围结束时间（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时，默认更新为 86400 ，此时填写的; start_time 不得大于等于 86370 。;2.  当 start_time 与;  end_time 均填写时，; end_time 至少要超过;  start_time 30。;3.  如果填写的值不是  60 的倍数，则自动会更新为离其最近的 60 整数倍的值。
-	endTimeFlag           bool
-	maxDuration           int // 单次会议室可预定时长上限（单位：小时，取值范围[1,99]）;<b>说明</b>：不填写时默认更新为 2
-	maxDurationFlag       bool
+
+	timeSwitch     int // 预定时间开关：0 代表关闭，1 代表开启
+	timeSwitchFlag bool
+
+	daysInAdvance     int // 最早可提前 ; days_in_advance 预定会议室（单位：天，取值范围[1-730]）;<b>说明</b>：不填写时，默认更新为 365
+	daysInAdvanceFlag bool
+
+	openingHour     string // 开放当天可于 ; opening_hour 开始预定（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时默认更新为 ; 28800 ;2.  如果填写的值不是 60 ; 的倍数，则自动会更新为离其最近的 60 整数倍的值。
+	openingHourFlag bool
+
+	startTime     string // 每日可预定时间范围的开始时间（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时，默认更新为 0 ，此时填写的  end_time 不得小于 30。;2.  当 start_time 与;  end_time 均填写时，; end_time 至少超过 ; start_time 30 。;3.  如果填写的值不是 60 的倍数，则自动会更新为离其最近的 60 整数倍的值。
+	startTimeFlag bool
+
+	endTime     string // 每日可预定时间范围结束时间（单位：秒，取值范围[0,86400]）;<b>说明</b>：;1.  不填写时，默认更新为 86400 ，此时填写的; start_time 不得大于等于 86370 。;2.  当 start_time 与;  end_time 均填写时，; end_time 至少要超过;  start_time 30。;3.  如果填写的值不是  60 的倍数，则自动会更新为离其最近的 60 整数倍的值。
+	endTimeFlag bool
+
+	maxDuration     int // 单次会议室可预定时长上限（单位：小时，取值范围[1,99]）;<b>说明</b>：不填写时默认更新为 2
+	maxDurationFlag bool
 }
 
 func NewTimeConfigBuilder() *TimeConfigBuilder {
@@ -9392,16 +10139,20 @@ func (builder *TimeConfigBuilder) Build() *TimeConfig {
 }
 
 type UserId struct {
-	UserId  *string `json:"user_id,omitempty"`  //
-	OpenId  *string `json:"open_id,omitempty"`  //
+	UserId *string `json:"user_id,omitempty"` //
+
+	OpenId *string `json:"open_id,omitempty"` //
+
 	UnionId *string `json:"union_id,omitempty"` //
 }
 
 type UserIdBuilder struct {
-	userId      string //
-	userIdFlag  bool
-	openId      string //
-	openIdFlag  bool
+	userId     string //
+	userIdFlag bool
+
+	openId     string //
+	openIdFlag bool
+
 	unionId     string //
 	unionIdFlag bool
 }
@@ -9532,9 +10283,11 @@ type ListAlertReq struct {
 }
 
 type ListAlertRespData struct {
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否还有数据
-	PageToken *string  `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
-	Items     []*Alert `json:"items,omitempty"`      // 告警记录
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
+
+	Items []*Alert `json:"items,omitempty"` // 告警记录
 }
 
 type ListAlertResp struct {
@@ -9636,10 +10389,13 @@ type GetExportReq struct {
 }
 
 type GetExportRespData struct {
-	Status    *int    `json:"status,omitempty"`     // 任务状态
-	Url       *string `json:"url,omitempty"`        // 文件下载地址
+	Status *int `json:"status,omitempty"` // 任务状态
+
+	Url *string `json:"url,omitempty"` // 文件下载地址
+
 	FileToken *string `json:"file_token,omitempty"` // 文件token
-	FailMsg   *string `json:"fail_msg,omitempty"`   // 失败信息
+
+	FailMsg *string `json:"fail_msg,omitempty"` // 失败信息
 }
 
 type GetExportResp struct {
@@ -9653,20 +10409,26 @@ func (resp *GetExportResp) Success() bool {
 }
 
 type MeetingListExportReqBodyBuilder struct {
-	startTime         string // 查询开始时间（unix时间，单位sec）
-	startTimeFlag     bool
-	endTime           string // 查询结束时间（unix时间，单位sec）
-	endTimeFlag       bool
+	startTime     string // 查询开始时间（unix时间，单位sec）
+	startTimeFlag bool
+
+	endTime     string // 查询结束时间（unix时间，单位sec）
+	endTimeFlag bool
+
 	meetingStatus     int // 会议状态（不传默认为已结束会议）
 	meetingStatusFlag bool
-	meetingNo         string // 按9位会议号筛选（最多一个筛选条件）
-	meetingNoFlag     bool
-	userId            string // 按参会Lark用户筛选（最多一个筛选条件）
-	userIdFlag        bool
-	roomId            string // 按参会Rooms筛选（最多一个筛选条件）
-	roomIdFlag        bool
-	meetingType       int // 按会议类型筛选（最多一个筛选条件）
-	meetingTypeFlag   bool
+
+	meetingNo     string // 按9位会议号筛选（最多一个筛选条件）
+	meetingNoFlag bool
+
+	userId     string // 按参会Lark用户筛选（最多一个筛选条件）
+	userIdFlag bool
+
+	roomId     string // 按参会Rooms筛选（最多一个筛选条件）
+	roomIdFlag bool
+
+	meetingType     int // 按会议类型筛选（最多一个筛选条件）
+	meetingTypeFlag bool
 }
 
 func NewMeetingListExportReqBodyBuilder() *MeetingListExportReqBodyBuilder {
@@ -9911,13 +10673,19 @@ func (builder *MeetingListExportReqBuilder) Build() *MeetingListExportReq {
 }
 
 type MeetingListExportReqBody struct {
-	StartTime     *string `json:"start_time,omitempty"`     // 查询开始时间（unix时间，单位sec）
-	EndTime       *string `json:"end_time,omitempty"`       // 查询结束时间（unix时间，单位sec）
-	MeetingStatus *int    `json:"meeting_status,omitempty"` // 会议状态（不传默认为已结束会议）
-	MeetingNo     *string `json:"meeting_no,omitempty"`     // 按9位会议号筛选（最多一个筛选条件）
-	UserId        *string `json:"user_id,omitempty"`        // 按参会Lark用户筛选（最多一个筛选条件）
-	RoomId        *string `json:"room_id,omitempty"`        // 按参会Rooms筛选（最多一个筛选条件）
-	MeetingType   *int    `json:"meeting_type,omitempty"`   // 按会议类型筛选（最多一个筛选条件）
+	StartTime *string `json:"start_time,omitempty"` // 查询开始时间（unix时间，单位sec）
+
+	EndTime *string `json:"end_time,omitempty"` // 查询结束时间（unix时间，单位sec）
+
+	MeetingStatus *int `json:"meeting_status,omitempty"` // 会议状态（不传默认为已结束会议）
+
+	MeetingNo *string `json:"meeting_no,omitempty"` // 按9位会议号筛选（最多一个筛选条件）
+
+	UserId *string `json:"user_id,omitempty"` // 按参会Lark用户筛选（最多一个筛选条件）
+
+	RoomId *string `json:"room_id,omitempty"` // 按参会Rooms筛选（最多一个筛选条件）
+
+	MeetingType *int `json:"meeting_type,omitempty"` // 按会议类型筛选（最多一个筛选条件）
 }
 
 type MeetingListExportReq struct {
@@ -9942,16 +10710,21 @@ func (resp *MeetingListExportResp) Success() bool {
 type ParticipantListExportReqBodyBuilder struct {
 	meetingStartTime     string // 会议开始时间（unix时间，单位sec）
 	meetingStartTimeFlag bool
-	meetingEndTime       string // 会议结束时间（unix时间，单位sec）
-	meetingEndTimeFlag   bool
-	meetingStatus        int // 会议状态（不传默认为已结束会议）
-	meetingStatusFlag    bool
-	meetingNo            string // 9位会议号
-	meetingNoFlag        bool
-	userId               string // 按参会Lark用户筛选（最多一个筛选条件）
-	userIdFlag           bool
-	roomId               string // 按参会Rooms筛选（最多一个筛选条件）
-	roomIdFlag           bool
+
+	meetingEndTime     string // 会议结束时间（unix时间，单位sec）
+	meetingEndTimeFlag bool
+
+	meetingStatus     int // 会议状态（不传默认为已结束会议）
+	meetingStatusFlag bool
+
+	meetingNo     string // 9位会议号
+	meetingNoFlag bool
+
+	userId     string // 按参会Lark用户筛选（最多一个筛选条件）
+	userIdFlag bool
+
+	roomId     string // 按参会Rooms筛选（最多一个筛选条件）
+	roomIdFlag bool
 }
 
 func NewParticipantListExportReqBodyBuilder() *ParticipantListExportReqBodyBuilder {
@@ -10171,11 +10944,16 @@ func (builder *ParticipantListExportReqBuilder) Build() *ParticipantListExportRe
 
 type ParticipantListExportReqBody struct {
 	MeetingStartTime *string `json:"meeting_start_time,omitempty"` // 会议开始时间（unix时间，单位sec）
-	MeetingEndTime   *string `json:"meeting_end_time,omitempty"`   // 会议结束时间（unix时间，单位sec）
-	MeetingStatus    *int    `json:"meeting_status,omitempty"`     // 会议状态（不传默认为已结束会议）
-	MeetingNo        *string `json:"meeting_no,omitempty"`         // 9位会议号
-	UserId           *string `json:"user_id,omitempty"`            // 按参会Lark用户筛选（最多一个筛选条件）
-	RoomId           *string `json:"room_id,omitempty"`            // 按参会Rooms筛选（最多一个筛选条件）
+
+	MeetingEndTime *string `json:"meeting_end_time,omitempty"` // 会议结束时间（unix时间，单位sec）
+
+	MeetingStatus *int `json:"meeting_status,omitempty"` // 会议状态（不传默认为已结束会议）
+
+	MeetingNo *string `json:"meeting_no,omitempty"` // 9位会议号
+
+	UserId *string `json:"user_id,omitempty"` // 按参会Lark用户筛选（最多一个筛选条件）
+
+	RoomId *string `json:"room_id,omitempty"` // 按参会Rooms筛选（最多一个筛选条件）
 }
 
 type ParticipantListExportReq struct {
@@ -10200,16 +10978,21 @@ func (resp *ParticipantListExportResp) Success() bool {
 type ParticipantQualityListExportReqBodyBuilder struct {
 	meetingStartTime     string // 会议开始时间（unix时间，单位sec）
 	meetingStartTimeFlag bool
-	meetingEndTime       string // 会议结束时间（unix时间，单位sec）
-	meetingEndTimeFlag   bool
-	meetingNo            string // 9位会议号
-	meetingNoFlag        bool
-	joinTime             string // 参会人入会时间（unix时间，单位sec）
-	joinTimeFlag         bool
-	userId               string // 参会人为Lark用户时填入，room_id和user_id必须只填一个
-	userIdFlag           bool
-	roomId               string // 参会人为Rooms时填入，room_id和user_id必须只填一个
-	roomIdFlag           bool
+
+	meetingEndTime     string // 会议结束时间（unix时间，单位sec）
+	meetingEndTimeFlag bool
+
+	meetingNo     string // 9位会议号
+	meetingNoFlag bool
+
+	joinTime     string // 参会人入会时间（unix时间，单位sec）
+	joinTimeFlag bool
+
+	userId     string // 参会人为Lark用户时填入，room_id和user_id必须只填一个
+	userIdFlag bool
+
+	roomId     string // 参会人为Rooms时填入，room_id和user_id必须只填一个
+	roomIdFlag bool
 }
 
 func NewParticipantQualityListExportReqBodyBuilder() *ParticipantQualityListExportReqBodyBuilder {
@@ -10429,11 +11212,16 @@ func (builder *ParticipantQualityListExportReqBuilder) Build() *ParticipantQuali
 
 type ParticipantQualityListExportReqBody struct {
 	MeetingStartTime *string `json:"meeting_start_time,omitempty"` // 会议开始时间（unix时间，单位sec）
-	MeetingEndTime   *string `json:"meeting_end_time,omitempty"`   // 会议结束时间（unix时间，单位sec）
-	MeetingNo        *string `json:"meeting_no,omitempty"`         // 9位会议号
-	JoinTime         *string `json:"join_time,omitempty"`          // 参会人入会时间（unix时间，单位sec）
-	UserId           *string `json:"user_id,omitempty"`            // 参会人为Lark用户时填入，room_id和user_id必须只填一个
-	RoomId           *string `json:"room_id,omitempty"`            // 参会人为Rooms时填入，room_id和user_id必须只填一个
+
+	MeetingEndTime *string `json:"meeting_end_time,omitempty"` // 会议结束时间（unix时间，单位sec）
+
+	MeetingNo *string `json:"meeting_no,omitempty"` // 9位会议号
+
+	JoinTime *string `json:"join_time,omitempty"` // 参会人入会时间（unix时间，单位sec）
+
+	UserId *string `json:"user_id,omitempty"` // 参会人为Lark用户时填入，room_id和user_id必须只填一个
+
+	RoomId *string `json:"room_id,omitempty"` // 参会人为Rooms时填入，room_id和user_id必须只填一个
 }
 
 type ParticipantQualityListExportReq struct {
@@ -10458,16 +11246,21 @@ func (resp *ParticipantQualityListExportResp) Success() bool {
 type ResourceReservationListExportReqBodyBuilder struct {
 	roomLevelId     string // 会议室层级id
 	roomLevelIdFlag bool
-	needTopic       bool // 是否展示会议主题
-	needTopicFlag   bool
-	startTime       string // 查询开始时间（unix时间，单位sec）
-	startTimeFlag   bool
-	endTime         string // 查询结束时间（unix时间，单位sec）
-	endTimeFlag     bool
-	roomIds         []string // 待筛选的会议室id列表
-	roomIdsFlag     bool
-	isExclude       bool // 若为true表示导出room_ids范围外的会议室，默认为false
-	isExcludeFlag   bool
+
+	needTopic     bool // 是否展示会议主题
+	needTopicFlag bool
+
+	startTime     string // 查询开始时间（unix时间，单位sec）
+	startTimeFlag bool
+
+	endTime     string // 查询结束时间（unix时间，单位sec）
+	endTimeFlag bool
+
+	roomIds     []string // 待筛选的会议室id列表
+	roomIdsFlag bool
+
+	isExclude     bool // 若为true表示导出room_ids范围外的会议室，默认为false
+	isExcludeFlag bool
 }
 
 func NewResourceReservationListExportReqBodyBuilder() *ResourceReservationListExportReqBodyBuilder {
@@ -10677,12 +11470,17 @@ func (builder *ResourceReservationListExportReqBuilder) Build() *ResourceReserva
 }
 
 type ResourceReservationListExportReqBody struct {
-	RoomLevelId *string  `json:"room_level_id,omitempty"` // 会议室层级id
-	NeedTopic   *bool    `json:"need_topic,omitempty"`    // 是否展示会议主题
-	StartTime   *string  `json:"start_time,omitempty"`    // 查询开始时间（unix时间，单位sec）
-	EndTime     *string  `json:"end_time,omitempty"`      // 查询结束时间（unix时间，单位sec）
-	RoomIds     []string `json:"room_ids,omitempty"`      // 待筛选的会议室id列表
-	IsExclude   *bool    `json:"is_exclude,omitempty"`    // 若为true表示导出room_ids范围外的会议室，默认为false
+	RoomLevelId *string `json:"room_level_id,omitempty"` // 会议室层级id
+
+	NeedTopic *bool `json:"need_topic,omitempty"` // 是否展示会议主题
+
+	StartTime *string `json:"start_time,omitempty"` // 查询开始时间（unix时间，单位sec）
+
+	EndTime *string `json:"end_time,omitempty"` // 查询结束时间（unix时间，单位sec）
+
+	RoomIds []string `json:"room_ids,omitempty"` // 待筛选的会议室id列表
+
+	IsExclude *bool `json:"is_exclude,omitempty"` // 若为true表示导出room_ids范围外的会议室，默认为false
 }
 
 type ResourceReservationListExportReq struct {
@@ -11135,8 +11933,10 @@ type ListByNoMeetingReq struct {
 }
 
 type ListByNoMeetingRespData struct {
-	HasMore       *bool      `json:"has_more,omitempty"`       // 是否还有数据
-	PageToken     *string    `json:"page_token,omitempty"`     // 下一页分页的token，下次请求时传入
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
+
 	MeetingBriefs []*Meeting `json:"meeting_briefs,omitempty"` // 会议简要信息列表
 }
 
@@ -11151,8 +11951,9 @@ func (resp *ListByNoMeetingResp) Success() bool {
 }
 
 type SetHostMeetingReqBodyBuilder struct {
-	hostUser        *MeetingUser // 将要设置的主持人
-	hostUserFlag    bool
+	hostUser     *MeetingUser // 将要设置的主持人
+	hostUserFlag bool
+
 	oldHostUser     *MeetingUser // 当前主持人（CAS并发安全：如果和会中当前主持人不符则会设置失败，可使用返回的最新数据重新设置）
 	oldHostUserFlag bool
 }
@@ -11278,7 +12079,8 @@ func (builder *SetHostMeetingReqBuilder) Build() *SetHostMeetingReq {
 }
 
 type SetHostMeetingReqBody struct {
-	HostUser    *MeetingUser `json:"host_user,omitempty"`     // 将要设置的主持人
+	HostUser *MeetingUser `json:"host_user,omitempty"` // 将要设置的主持人
+
 	OldHostUser *MeetingUser `json:"old_host_user,omitempty"` // 当前主持人（CAS并发安全：如果和会中当前主持人不符则会设置失败，可使用返回的最新数据重新设置）
 }
 
@@ -11350,8 +12152,9 @@ func (resp *GetMeetingRecordingResp) Success() bool {
 type SetPermissionMeetingRecordingReqBodyBuilder struct {
 	permissionObjects     []*RecordingPermissionObject // 授权对象列表
 	permissionObjectsFlag bool
-	actionType            int // 授权或者取消授权，默认授权
-	actionTypeFlag        bool
+
+	actionType     int // 授权或者取消授权，默认授权
+	actionTypeFlag bool
 }
 
 func NewSetPermissionMeetingRecordingReqBodyBuilder() *SetPermissionMeetingRecordingReqBodyBuilder {
@@ -11476,7 +12279,8 @@ func (builder *SetPermissionMeetingRecordingReqBuilder) Build() *SetPermissionMe
 
 type SetPermissionMeetingRecordingReqBody struct {
 	PermissionObjects []*RecordingPermissionObject `json:"permission_objects,omitempty"` // 授权对象列表
-	ActionType        *int                         `json:"action_type,omitempty"`        // 授权或者取消授权，默认授权
+
+	ActionType *int `json:"action_type,omitempty"` // 授权或者取消授权，默认授权
 }
 
 type SetPermissionMeetingRecordingReq struct {
@@ -11758,8 +12562,10 @@ type GetMeetingListReq struct {
 
 type GetMeetingListRespData struct {
 	MeetingList []*MeetingInfo `json:"meeting_list,omitempty"` // 会议列表
-	PageToken   *string        `json:"page_token,omitempty"`   // 下一页分页的token，下次请求时传入
-	HasMore     *bool          `json:"has_more,omitempty"`     // 是否还有数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
 }
 
 type GetMeetingListResp struct {
@@ -11880,8 +12686,10 @@ type GetParticipantListReq struct {
 
 type GetParticipantListRespData struct {
 	Participants []*Participant `json:"participants,omitempty"` // 参会人列表
-	PageToken    *string        `json:"page_token,omitempty"`   // 下一页分页的token，下次请求时传入
-	HasMore      *bool          `json:"has_more,omitempty"`     // 是否还有数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
 }
 
 type GetParticipantListResp struct {
@@ -12002,8 +12810,10 @@ type GetParticipantQualityListReq struct {
 
 type GetParticipantQualityListRespData struct {
 	ParticipantQualityList []*ParticipantQuality `json:"participant_quality_list,omitempty"` // 参会人参会质量列表
-	PageToken              *string               `json:"page_token,omitempty"`               // 下一页分页的token，下次请求时传入
-	HasMore                *bool                 `json:"has_more,omitempty"`                 // 是否还有数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
 }
 
 type GetParticipantQualityListResp struct {
@@ -12165,10 +12975,12 @@ func (resp *GetTopUserReportResp) Success() bool {
 }
 
 type ApplyReserveReqBodyBuilder struct {
-	endTime             string // 预约到期时间（unix时间，单位sec），多人会议必填
-	endTimeFlag         bool
-	ownerId             string // 指定会议归属人，使用tenant_access_token时生效且必传，使用user_access_token时不生效，必须指定为同租户下的合法lark用户
-	ownerIdFlag         bool
+	endTime     string // 预约到期时间（unix时间，单位sec），多人会议必填
+	endTimeFlag bool
+
+	ownerId     string // 指定会议归属人，使用tenant_access_token时生效且必传，使用user_access_token时不生效，必须指定为同租户下的合法lark用户
+	ownerIdFlag bool
+
 	meetingSettings     *ReserveMeetingSetting // 会议设置
 	meetingSettingsFlag bool
 }
@@ -12311,8 +13123,10 @@ func (builder *ApplyReserveReqBuilder) Build() *ApplyReserveReq {
 }
 
 type ApplyReserveReqBody struct {
-	EndTime         *string                `json:"end_time,omitempty"`         // 预约到期时间（unix时间，单位sec），多人会议必填
-	OwnerId         *string                `json:"owner_id,omitempty"`         // 指定会议归属人，使用tenant_access_token时生效且必传，使用user_access_token时不生效，必须指定为同租户下的合法lark用户
+	EndTime *string `json:"end_time,omitempty"` // 预约到期时间（unix时间，单位sec），多人会议必填
+
+	OwnerId *string `json:"owner_id,omitempty"` // 指定会议归属人，使用tenant_access_token时生效且必传，使用user_access_token时不生效，必须指定为同租户下的合法lark用户
+
 	MeetingSettings *ReserveMeetingSetting `json:"meeting_settings,omitempty"` // 会议设置
 }
 
@@ -12322,7 +13136,8 @@ type ApplyReserveReq struct {
 }
 
 type ApplyReserveRespData struct {
-	Reserve                    *Reserve                    `json:"reserve,omitempty"`                       // 预约数据
+	Reserve *Reserve `json:"reserve,omitempty"` // 预约数据
+
 	ReserveCorrectionCheckInfo *ReserveCorrectionCheckInfo `json:"reserve_correction_check_info,omitempty"` // 预约参数检查信息
 }
 
@@ -12496,8 +13311,9 @@ func (resp *GetActiveMeetingReserveResp) Success() bool {
 }
 
 type UpdateReserveReqBodyBuilder struct {
-	endTime             string // 预约到期时间（unix时间，单位sec）
-	endTimeFlag         bool
+	endTime     string // 预约到期时间（unix时间，单位sec）
+	endTimeFlag bool
+
 	meetingSettings     *ReserveMeetingSetting // 会议设置
 	meetingSettingsFlag bool
 }
@@ -12623,7 +13439,8 @@ func (builder *UpdateReserveReqBuilder) Build() *UpdateReserveReq {
 }
 
 type UpdateReserveReqBody struct {
-	EndTime         *string                `json:"end_time,omitempty"`         // 预约到期时间（unix时间，单位sec）
+	EndTime *string `json:"end_time,omitempty"` // 预约到期时间（unix时间，单位sec）
+
 	MeetingSettings *ReserveMeetingSetting `json:"meeting_settings,omitempty"` // 会议设置
 }
 
@@ -12633,7 +13450,8 @@ type UpdateReserveReq struct {
 }
 
 type UpdateReserveRespData struct {
-	Reserve                    *Reserve                    `json:"reserve,omitempty"`                       // 预约数据
+	Reserve *Reserve `json:"reserve,omitempty"` // 预约数据
+
 	ReserveCorrectionCheckInfo *ReserveCorrectionCheckInfo `json:"reserve_correction_check_info,omitempty"` // 预约参数检查信息
 }
 
@@ -12648,12 +13466,15 @@ func (resp *UpdateReserveResp) Success() bool {
 }
 
 type PatchReserveConfigReqBodyBuilder struct {
-	scopeType              string // 1 代表层级，2 代表会议室
-	scopeTypeFlag          bool
-	approvalConfig         *ApprovalConfig // 预定审批设置
-	approvalConfigFlag     bool
-	timeConfig             *TimeConfig // 预定时间设置
-	timeConfigFlag         bool
+	scopeType     string // 1 代表层级，2 代表会议室
+	scopeTypeFlag bool
+
+	approvalConfig     *ApprovalConfig // 预定审批设置
+	approvalConfigFlag bool
+
+	timeConfig     *TimeConfig // 预定时间设置
+	timeConfigFlag bool
+
 	reserveScopeConfig     *ReserveScopeConfig // 预定范围设置
 	reserveScopeConfigFlag bool
 }
@@ -12831,9 +13652,12 @@ func (builder *PatchReserveConfigReqBuilder) Build() *PatchReserveConfigReq {
 }
 
 type PatchReserveConfigReqBody struct {
-	ScopeType          *string             `json:"scope_type,omitempty"`           // 1 代表层级，2 代表会议室
-	ApprovalConfig     *ApprovalConfig     `json:"approval_config,omitempty"`      // 预定审批设置
-	TimeConfig         *TimeConfig         `json:"time_config,omitempty"`          // 预定时间设置
+	ScopeType *string `json:"scope_type,omitempty"` // 1 代表层级，2 代表会议室
+
+	ApprovalConfig *ApprovalConfig `json:"approval_config,omitempty"` // 预定审批设置
+
+	TimeConfig *TimeConfig `json:"time_config,omitempty"` // 预定时间设置
+
 	ReserveScopeConfig *ReserveScopeConfig `json:"reserve_scope_config,omitempty"` // 预定范围设置
 }
 
@@ -12900,8 +13724,10 @@ type ReserveScopeReserveConfigReq struct {
 }
 
 type ReserveScopeReserveConfigRespData struct {
-	ApproveConfig      *ApprovalConfig     `json:"approve_config,omitempty"`       // 预定审批设置
-	TimeConfig         *TimeConfig         `json:"time_config,omitempty"`          // 预定时间设置
+	ApproveConfig *ApprovalConfig `json:"approve_config,omitempty"` // 预定审批设置
+
+	TimeConfig *TimeConfig `json:"time_config,omitempty"` // 预定时间设置
+
 	ReserveScopeConfig *ReserveScopeConfig `json:"reserve_scope_config,omitempty"` // 预定范围设置
 }
 
@@ -12979,8 +13805,9 @@ func (resp *GetReserveConfigAdminResp) Success() bool {
 }
 
 type PatchReserveConfigAdminReqBodyBuilder struct {
-	scopeType              int // 1代表层级，2代表会议室
-	scopeTypeFlag          bool
+	scopeType     int // 1代表层级，2代表会议室
+	scopeTypeFlag bool
+
 	reserveAdminConfig     *ReserveAdminConfig // 预定管理员或部门
 	reserveAdminConfigFlag bool
 }
@@ -13105,7 +13932,8 @@ func (builder *PatchReserveConfigAdminReqBuilder) Build() *PatchReserveConfigAdm
 }
 
 type PatchReserveConfigAdminReqBody struct {
-	ScopeType          *int                `json:"scope_type,omitempty"`           // 1代表层级，2代表会议室
+	ScopeType *int `json:"scope_type,omitempty"` // 1代表层级，2代表会议室
+
 	ReserveAdminConfig *ReserveAdminConfig `json:"reserve_admin_config,omitempty"` // 预定管理员或部门
 }
 
@@ -13187,8 +14015,9 @@ func (resp *GetReserveConfigDisableInformResp) Success() bool {
 }
 
 type PatchReserveConfigDisableInformReqBodyBuilder struct {
-	scopeType         int // 1表示会议室层级，2表示会议室
-	scopeTypeFlag     bool
+	scopeType     int // 1表示会议室层级，2表示会议室
+	scopeTypeFlag bool
+
 	disableInform     *DisableInformConfig // 禁用通知配置
 	disableInformFlag bool
 }
@@ -13313,7 +14142,8 @@ func (builder *PatchReserveConfigDisableInformReqBuilder) Build() *PatchReserveC
 }
 
 type PatchReserveConfigDisableInformReqBody struct {
-	ScopeType     *int                 `json:"scope_type,omitempty"`     // 1表示会议室层级，2表示会议室
+	ScopeType *int `json:"scope_type,omitempty"` // 1表示会议室层级，2表示会议室
+
 	DisableInform *DisableInformConfig `json:"disable_inform,omitempty"` // 禁用通知配置
 }
 
@@ -13395,8 +14225,9 @@ func (resp *GetReserveConfigFormResp) Success() bool {
 }
 
 type PatchReserveConfigFormReqBodyBuilder struct {
-	scopeType             int // 1代表层级，2代表会议室
-	scopeTypeFlag         bool
+	scopeType     int // 1代表层级，2代表会议室
+	scopeTypeFlag bool
+
 	reserveFormConfig     *ReserveFormConfig // 预定表单设置
 	reserveFormConfigFlag bool
 }
@@ -13521,7 +14352,8 @@ func (builder *PatchReserveConfigFormReqBuilder) Build() *PatchReserveConfigForm
 }
 
 type PatchReserveConfigFormReqBody struct {
-	ScopeType         *int               `json:"scope_type,omitempty"`          // 1代表层级，2代表会议室
+	ScopeType *int `json:"scope_type,omitempty"` // 1代表层级，2代表会议室
+
 	ReserveFormConfig *ReserveFormConfig `json:"reserve_form_config,omitempty"` // 预定表单设置
 }
 
@@ -13641,8 +14473,10 @@ type GetResourceReservationListReq struct {
 
 type GetResourceReservationListRespData struct {
 	RoomReservationList []*RoomMeetingReservation `json:"room_reservation_list,omitempty"` // 会议室预定列表
-	PageToken           *string                   `json:"page_token,omitempty"`            // 下一页分页的token，下次请求时传入
-	HasMore             *bool                     `json:"has_more,omitempty"`              // 是否还有数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
 }
 
 type GetResourceReservationListResp struct {
@@ -13873,9 +14707,11 @@ type ListRoomReq struct {
 }
 
 type ListRoomRespData struct {
-	Rooms     []*Room `json:"rooms,omitempty"`      // 会议室列表
+	Rooms []*Room `json:"rooms,omitempty"` // 会议室列表
+
 	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
 }
 
 type ListRoomResp struct {
@@ -14061,18 +14897,23 @@ func (resp *PatchRoomResp) Success() bool {
 }
 
 type SearchRoomReqBodyBuilder struct {
-	customRoomIds       []string // 用于查询指定会议室的租户自定义会议室ID列表，优先使用该字段进行查询
-	customRoomIdsFlag   bool
-	keyword             string // 会议室搜索关键词（当custom_room_ids为空时，使用该字段进行查询）
-	keywordFlag         bool
-	roomLevelId         string // 在该会议室层级下进行搜索（当custom_room_ids为空时，使用该字段进行查询）
-	roomLevelIdFlag     bool
+	customRoomIds     []string // 用于查询指定会议室的租户自定义会议室ID列表，优先使用该字段进行查询
+	customRoomIdsFlag bool
+
+	keyword     string // 会议室搜索关键词（当custom_room_ids为空时，使用该字段进行查询）
+	keywordFlag bool
+
+	roomLevelId     string // 在该会议室层级下进行搜索（当custom_room_ids为空时，使用该字段进行查询）
+	roomLevelIdFlag bool
+
 	searchLevelName     bool // 搜索会议室是否包括层级名称（当custom_room_ids为空时，使用该字段进行查询）
 	searchLevelNameFlag bool
-	pageSize            int // 分页大小，该值默认为10，最大为100（当custom_room_ids为空时，使用该字段进行查询）
-	pageSizeFlag        bool
-	pageToken           string // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果（当custom_room_ids为空时，使用该字段进行查询）
-	pageTokenFlag       bool
+
+	pageSize     int // 分页大小，该值默认为10，最大为100（当custom_room_ids为空时，使用该字段进行查询）
+	pageSizeFlag bool
+
+	pageToken     string // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果（当custom_room_ids为空时，使用该字段进行查询）
+	pageTokenFlag bool
 }
 
 func NewSearchRoomReqBodyBuilder() *SearchRoomReqBodyBuilder {
@@ -14291,12 +15132,17 @@ func (builder *SearchRoomReqBuilder) Build() *SearchRoomReq {
 }
 
 type SearchRoomReqBody struct {
-	CustomRoomIds   []string `json:"custom_room_ids,omitempty"`   // 用于查询指定会议室的租户自定义会议室ID列表，优先使用该字段进行查询
-	Keyword         *string  `json:"keyword,omitempty"`           // 会议室搜索关键词（当custom_room_ids为空时，使用该字段进行查询）
-	RoomLevelId     *string  `json:"room_level_id,omitempty"`     // 在该会议室层级下进行搜索（当custom_room_ids为空时，使用该字段进行查询）
-	SearchLevelName *bool    `json:"search_level_name,omitempty"` // 搜索会议室是否包括层级名称（当custom_room_ids为空时，使用该字段进行查询）
-	PageSize        *int     `json:"page_size,omitempty"`         // 分页大小，该值默认为10，最大为100（当custom_room_ids为空时，使用该字段进行查询）
-	PageToken       *string  `json:"page_token,omitempty"`        // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果（当custom_room_ids为空时，使用该字段进行查询）
+	CustomRoomIds []string `json:"custom_room_ids,omitempty"` // 用于查询指定会议室的租户自定义会议室ID列表，优先使用该字段进行查询
+
+	Keyword *string `json:"keyword,omitempty"` // 会议室搜索关键词（当custom_room_ids为空时，使用该字段进行查询）
+
+	RoomLevelId *string `json:"room_level_id,omitempty"` // 在该会议室层级下进行搜索（当custom_room_ids为空时，使用该字段进行查询）
+
+	SearchLevelName *bool `json:"search_level_name,omitempty"` // 搜索会议室是否包括层级名称（当custom_room_ids为空时，使用该字段进行查询）
+
+	PageSize *int `json:"page_size,omitempty"` // 分页大小，该值默认为10，最大为100（当custom_room_ids为空时，使用该字段进行查询）
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果（当custom_room_ids为空时，使用该字段进行查询）
 }
 
 type SearchRoomReq struct {
@@ -14305,9 +15151,11 @@ type SearchRoomReq struct {
 }
 
 type SearchRoomRespData struct {
-	Rooms     []*Room `json:"rooms,omitempty"`      // 会议室列表
+	Rooms []*Room `json:"rooms,omitempty"` // 会议室列表
+
 	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token，下次请求时传入
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有数据
 }
 
 type SearchRoomResp struct {
@@ -14401,11 +15249,15 @@ type QueryRoomConfigReq struct {
 }
 
 type QueryRoomConfigRespData struct {
-	RoomBackground        *string             `json:"room_background,omitempty"`          // 飞书会议室背景图
-	DisplayBackground     *string             `json:"display_background,omitempty"`       // 飞书签到板背景图
-	DigitalSignage        *RoomDigitalSignage `json:"digital_signage,omitempty"`          // 飞书会议室数字标牌
+	RoomBackground *string `json:"room_background,omitempty"` // 飞书会议室背景图
+
+	DisplayBackground *string `json:"display_background,omitempty"` // 飞书签到板背景图
+
+	DigitalSignage *RoomDigitalSignage `json:"digital_signage,omitempty"` // 飞书会议室数字标牌
+
 	RoomBoxDigitalSignage *RoomDigitalSignage `json:"room_box_digital_signage,omitempty"` // 飞书投屏盒子数字标牌
-	RoomStatus            *RoomStatus         `json:"room_status,omitempty"`              // 会议室状态
+
+	RoomStatus *RoomStatus `json:"room_status,omitempty"` // 会议室状态
 }
 
 type QueryRoomConfigResp struct {
@@ -14419,18 +15271,24 @@ func (resp *QueryRoomConfigResp) Success() bool {
 }
 
 type SetRoomConfigReqBodyBuilder struct {
-	scope          int // 设置节点范围
-	scopeFlag      bool
-	countryId      string // 国家/地区ID scope为2，3时需要此参数
-	countryIdFlag  bool
+	scope     int // 设置节点范围
+	scopeFlag bool
+
+	countryId     string // 国家/地区ID scope为2，3时需要此参数
+	countryIdFlag bool
+
 	districtId     string // 城市ID scope为3时需要此参数
 	districtIdFlag bool
+
 	buildingId     string // 建筑ID scope为4，5时需要此参数
 	buildingIdFlag bool
-	floorName      string // 楼层 scope为5时需要此参数
-	floorNameFlag  bool
-	roomId         string // 会议室ID scope为6时需要此参数
-	roomIdFlag     bool
+
+	floorName     string // 楼层 scope为5时需要此参数
+	floorNameFlag bool
+
+	roomId     string // 会议室ID scope为6时需要此参数
+	roomIdFlag bool
+
 	roomConfig     *RoomConfig // 会议室设置
 	roomConfigFlag bool
 }
@@ -14676,12 +15534,18 @@ func (builder *SetRoomConfigReqBuilder) Build() *SetRoomConfigReq {
 }
 
 type SetRoomConfigReqBody struct {
-	Scope      *int        `json:"scope,omitempty"`       // 设置节点范围
-	CountryId  *string     `json:"country_id,omitempty"`  // 国家/地区ID scope为2，3时需要此参数
-	DistrictId *string     `json:"district_id,omitempty"` // 城市ID scope为3时需要此参数
-	BuildingId *string     `json:"building_id,omitempty"` // 建筑ID scope为4，5时需要此参数
-	FloorName  *string     `json:"floor_name,omitempty"`  // 楼层 scope为5时需要此参数
-	RoomId     *string     `json:"room_id,omitempty"`     // 会议室ID scope为6时需要此参数
+	Scope *int `json:"scope,omitempty"` // 设置节点范围
+
+	CountryId *string `json:"country_id,omitempty"` // 国家/地区ID scope为2，3时需要此参数
+
+	DistrictId *string `json:"district_id,omitempty"` // 城市ID scope为3时需要此参数
+
+	BuildingId *string `json:"building_id,omitempty"` // 建筑ID scope为4，5时需要此参数
+
+	FloorName *string `json:"floor_name,omitempty"` // 楼层 scope为5时需要此参数
+
+	RoomId *string `json:"room_id,omitempty"` // 会议室ID scope为6时需要此参数
+
 	RoomConfig *RoomConfig `json:"room_config,omitempty"` // 会议室设置
 }
 
@@ -14700,20 +15564,26 @@ func (resp *SetRoomConfigResp) Success() bool {
 }
 
 type SetCheckboardAccessCodeRoomConfigReqBodyBuilder struct {
-	scope          int // 设置节点范围
-	scopeFlag      bool
-	countryId      string // 国家/地区ID scope为2，3时需要此参数
-	countryIdFlag  bool
+	scope     int // 设置节点范围
+	scopeFlag bool
+
+	countryId     string // 国家/地区ID scope为2，3时需要此参数
+	countryIdFlag bool
+
 	districtId     string // 城市ID scope为3时需要此参数
 	districtIdFlag bool
+
 	buildingId     string // 建筑ID scope为4，5时需要此参数
 	buildingIdFlag bool
-	floorName      string // 楼层 scope为5时需要此参数
-	floorNameFlag  bool
-	roomId         string // 会议室ID scope为6时需要此参数
-	roomIdFlag     bool
-	validDay       int // 有效天数
-	validDayFlag   bool
+
+	floorName     string // 楼层 scope为5时需要此参数
+	floorNameFlag bool
+
+	roomId     string // 会议室ID scope为6时需要此参数
+	roomIdFlag bool
+
+	validDay     int // 有效天数
+	validDayFlag bool
 }
 
 func NewSetCheckboardAccessCodeRoomConfigReqBodyBuilder() *SetCheckboardAccessCodeRoomConfigReqBodyBuilder {
@@ -14948,13 +15818,19 @@ func (builder *SetCheckboardAccessCodeRoomConfigReqBuilder) Build() *SetCheckboa
 }
 
 type SetCheckboardAccessCodeRoomConfigReqBody struct {
-	Scope      *int    `json:"scope,omitempty"`       // 设置节点范围
-	CountryId  *string `json:"country_id,omitempty"`  // 国家/地区ID scope为2，3时需要此参数
+	Scope *int `json:"scope,omitempty"` // 设置节点范围
+
+	CountryId *string `json:"country_id,omitempty"` // 国家/地区ID scope为2，3时需要此参数
+
 	DistrictId *string `json:"district_id,omitempty"` // 城市ID scope为3时需要此参数
+
 	BuildingId *string `json:"building_id,omitempty"` // 建筑ID scope为4，5时需要此参数
-	FloorName  *string `json:"floor_name,omitempty"`  // 楼层 scope为5时需要此参数
-	RoomId     *string `json:"room_id,omitempty"`     // 会议室ID scope为6时需要此参数
-	ValidDay   *int    `json:"valid_day,omitempty"`   // 有效天数
+
+	FloorName *string `json:"floor_name,omitempty"` // 楼层 scope为5时需要此参数
+
+	RoomId *string `json:"room_id,omitempty"` // 会议室ID scope为6时需要此参数
+
+	ValidDay *int `json:"valid_day,omitempty"` // 有效天数
 }
 
 type SetCheckboardAccessCodeRoomConfigReq struct {
@@ -14977,20 +15853,26 @@ func (resp *SetCheckboardAccessCodeRoomConfigResp) Success() bool {
 }
 
 type SetRoomAccessCodeRoomConfigReqBodyBuilder struct {
-	scope          int // 设置节点范围
-	scopeFlag      bool
-	countryId      string // 国家/地区ID scope为2，3时需要此参数
-	countryIdFlag  bool
+	scope     int // 设置节点范围
+	scopeFlag bool
+
+	countryId     string // 国家/地区ID scope为2，3时需要此参数
+	countryIdFlag bool
+
 	districtId     string // 城市ID scope为3时需要此参数
 	districtIdFlag bool
+
 	buildingId     string // 建筑ID scope为4，5时需要此参数
 	buildingIdFlag bool
-	floorName      string // 楼层 scope为5时需要此参数
-	floorNameFlag  bool
-	roomId         string // 会议室ID scope为6时需要此参数
-	roomIdFlag     bool
-	validDay       int // 有效天数
-	validDayFlag   bool
+
+	floorName     string // 楼层 scope为5时需要此参数
+	floorNameFlag bool
+
+	roomId     string // 会议室ID scope为6时需要此参数
+	roomIdFlag bool
+
+	validDay     int // 有效天数
+	validDayFlag bool
 }
 
 func NewSetRoomAccessCodeRoomConfigReqBodyBuilder() *SetRoomAccessCodeRoomConfigReqBodyBuilder {
@@ -15225,13 +16107,19 @@ func (builder *SetRoomAccessCodeRoomConfigReqBuilder) Build() *SetRoomAccessCode
 }
 
 type SetRoomAccessCodeRoomConfigReqBody struct {
-	Scope      *int    `json:"scope,omitempty"`       // 设置节点范围
-	CountryId  *string `json:"country_id,omitempty"`  // 国家/地区ID scope为2，3时需要此参数
+	Scope *int `json:"scope,omitempty"` // 设置节点范围
+
+	CountryId *string `json:"country_id,omitempty"` // 国家/地区ID scope为2，3时需要此参数
+
 	DistrictId *string `json:"district_id,omitempty"` // 城市ID scope为3时需要此参数
+
 	BuildingId *string `json:"building_id,omitempty"` // 建筑ID scope为4，5时需要此参数
-	FloorName  *string `json:"floor_name,omitempty"`  // 楼层 scope为5时需要此参数
-	RoomId     *string `json:"room_id,omitempty"`     // 会议室ID scope为6时需要此参数
-	ValidDay   *int    `json:"valid_day,omitempty"`   // 有效天数
+
+	FloorName *string `json:"floor_name,omitempty"` // 楼层 scope为5时需要此参数
+
+	RoomId *string `json:"room_id,omitempty"` // 会议室ID scope为6时需要此参数
+
+	ValidDay *int `json:"valid_day,omitempty"` // 有效天数
 }
 
 type SetRoomAccessCodeRoomConfigReq struct {
@@ -15302,6 +16190,7 @@ func (resp *CreateRoomLevelResp) Success() bool {
 type DelRoomLevelReqBodyBuilder struct {
 	roomLevelId     string // 层级ID
 	roomLevelIdFlag bool
+
 	deleteChild     bool // 是否删除所有子层级
 	deleteChildFlag bool
 }
@@ -15410,7 +16299,8 @@ func (builder *DelRoomLevelReqBuilder) Build() *DelRoomLevelReq {
 
 type DelRoomLevelReqBody struct {
 	RoomLevelId *string `json:"room_level_id,omitempty"` // 层级ID
-	DeleteChild *bool   `json:"delete_child,omitempty"`  // 是否删除所有子层级
+
+	DeleteChild *bool `json:"delete_child,omitempty"` // 是否删除所有子层级
 }
 
 type DelRoomLevelReq struct {
@@ -15532,9 +16422,11 @@ type ListRoomLevelReq struct {
 }
 
 type ListRoomLevelRespData struct {
-	Items     []*RoomLevel `json:"items,omitempty"`      // 会议室层级列表
-	PageToken *string      `json:"page_token,omitempty"` //
-	HasMore   *bool        `json:"has_more,omitempty"`   //
+	Items []*RoomLevel `json:"items,omitempty"` // 会议室层级列表
+
+	PageToken *string `json:"page_token,omitempty"` //
+
+	HasMore *bool `json:"has_more,omitempty"` //
 }
 
 type ListRoomLevelResp struct {
@@ -15846,7 +16738,8 @@ type GetScopeConfigReq struct {
 }
 
 type GetScopeConfigRespData struct {
-	CurrentConfig *ScopeConfig   `json:"current_config,omitempty"` // 当前节点的配置，根据层级顺序从底向上进行合并计算后的结果；如果当前节点某个值已配置，则取该节点的值，否则会从该节点的父层级节点获取，如果父节点依然未配置，则继续向上递归获取；若所有节点均未配置，则该值返回为空
+	CurrentConfig *ScopeConfig `json:"current_config,omitempty"` // 当前节点的配置，根据层级顺序从底向上进行合并计算后的结果；如果当前节点某个值已配置，则取该节点的值，否则会从该节点的父层级节点获取，如果父节点依然未配置，则继续向上递归获取；若所有节点均未配置，则该值返回为空
+
 	OriginConfigs []*ScopeConfig `json:"origin_configs,omitempty"` // 所有节点的原始配置，按照层级顺序从底向上返回；如果某节点某个值未配置，则该值返回为空
 }
 
@@ -15861,8 +16754,9 @@ func (resp *GetScopeConfigResp) Success() bool {
 }
 
 type P2MeetingAllMeetingEndedV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingAllMeetingEndedV1 struct {
@@ -15876,8 +16770,9 @@ func (m *P2MeetingAllMeetingEndedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingAllMeetingStartedV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingAllMeetingStartedV1 struct {
@@ -15891,8 +16786,9 @@ func (m *P2MeetingAllMeetingStartedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingJoinMeetingV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingJoinMeetingV1 struct {
@@ -15906,10 +16802,13 @@ func (m *P2MeetingJoinMeetingV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingLeaveMeetingV1Data struct {
-	Meeting     *MeetingEventMeeting `json:"meeting,omitempty"`      // 会议数据
-	Operator    *MeetingEventUser    `json:"operator,omitempty"`     // 事件操作人
-	LeaveReason *int                 `json:"leave_reason,omitempty"` // 离开会议原因
-	LeaveUser   *MeetingEventUser    `json:"leave_user,omitempty"`   // 离会人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
+
+	LeaveReason *int `json:"leave_reason,omitempty"` // 离开会议原因
+
+	LeaveUser *MeetingEventUser `json:"leave_user,omitempty"` // 离会人
 }
 
 type P2MeetingLeaveMeetingV1 struct {
@@ -15923,8 +16822,9 @@ func (m *P2MeetingLeaveMeetingV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingEndedV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingEndedV1 struct {
@@ -15938,8 +16838,9 @@ func (m *P2MeetingEndedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingStartedV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingStartedV1 struct {
@@ -15953,8 +16854,9 @@ func (m *P2MeetingStartedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingRecordingEndedV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingRecordingEndedV1 struct {
@@ -15968,9 +16870,11 @@ func (m *P2MeetingRecordingEndedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingRecordingReadyV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Url      *string              `json:"url,omitempty"`      // 会议录制链接
-	Duration *string              `json:"duration,omitempty"` // 录制总时长（单位msec）
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Url *string `json:"url,omitempty"` // 会议录制链接
+
+	Duration *string `json:"duration,omitempty"` // 录制总时长（单位msec）
 }
 
 type P2MeetingRecordingReadyV1 struct {
@@ -15984,8 +16888,9 @@ func (m *P2MeetingRecordingReadyV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingRecordingStartedV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingRecordingStartedV1 struct {
@@ -15999,8 +16904,9 @@ func (m *P2MeetingRecordingStartedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingShareEndedV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingShareEndedV1 struct {
@@ -16014,8 +16920,9 @@ func (m *P2MeetingShareEndedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MeetingShareStartedV1Data struct {
-	Meeting  *MeetingEventMeeting `json:"meeting,omitempty"`  // 会议数据
-	Operator *MeetingEventUser    `json:"operator,omitempty"` // 事件操作人
+	Meeting *MeetingEventMeeting `json:"meeting,omitempty"` // 会议数据
+
+	Operator *MeetingEventUser `json:"operator,omitempty"` // 事件操作人
 }
 
 type P2MeetingShareStartedV1 struct {
@@ -16029,10 +16936,14 @@ func (m *P2MeetingShareStartedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ReserveConfigUpdatedV1Data struct {
-	ScopeId            *string                  `json:"scope_id,omitempty"`             // 会议室或层级id
-	ScopeType          *int                     `json:"scope_type,omitempty"`           // 1代表层级，2代表会议室
-	ApproveConfig      *ApprovalConfigEvent     `json:"approve_config,omitempty"`       // 预定审批设置
-	TimeConfig         *TimeConfig              `json:"time_config,omitempty"`          // 预定时间设置
+	ScopeId *string `json:"scope_id,omitempty"` // 会议室或层级id
+
+	ScopeType *int `json:"scope_type,omitempty"` // 1代表层级，2代表会议室
+
+	ApproveConfig *ApprovalConfigEvent `json:"approve_config,omitempty"` // 预定审批设置
+
+	TimeConfig *TimeConfig `json:"time_config,omitempty"` // 预定时间设置
+
 	ReserveScopeConfig *ReserveScopeConfigEvent `json:"reserve_scope_config,omitempty"` // 预定范围设置
 }
 
@@ -16104,7 +17015,8 @@ func (m *P2RoomLevelCreatedV1) RawReq(req *larkevent.EventReq) {
 
 type P2RoomLevelDeletedV1Data struct {
 	RoomLevelId *string `json:"room_level_id,omitempty"` // 层级ID
-	DeleteChild *bool   `json:"delete_child,omitempty"`  // 是否删除所有子层级
+
+	DeleteChild *bool `json:"delete_child,omitempty"` // 是否删除所有子层级
 }
 
 type P2RoomLevelDeletedV1 struct {

@@ -57,17 +57,21 @@ func (builder *CompositeShapeBuilder) Build() *CompositeShape {
 
 type Connector struct {
 	StartObject *ConnectorAttachedObject `json:"start_object,omitempty"` // 连线连接的起点图形
-	EndObject   *ConnectorAttachedObject `json:"end_object,omitempty"`   // 连线连接的终点图形
-	Captions    *ConnectorCaption        `json:"captions,omitempty"`     // 连线文本
+
+	EndObject *ConnectorAttachedObject `json:"end_object,omitempty"` // 连线连接的终点图形
+
+	Captions *ConnectorCaption `json:"captions,omitempty"` // 连线文本
 }
 
 type ConnectorBuilder struct {
 	startObject     *ConnectorAttachedObject // 连线连接的起点图形
 	startObjectFlag bool
-	endObject       *ConnectorAttachedObject // 连线连接的终点图形
-	endObjectFlag   bool
-	captions        *ConnectorCaption // 连线文本
-	captionsFlag    bool
+
+	endObject     *ConnectorAttachedObject // 连线连接的终点图形
+	endObjectFlag bool
+
+	captions     *ConnectorCaption // 连线文本
+	captionsFlag bool
 }
 
 func NewConnectorBuilder() *ConnectorBuilder {
@@ -180,13 +184,15 @@ func (builder *ConnectorCaptionBuilder) Build() *ConnectorCaption {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -320,27 +326,37 @@ func (builder *SectionBuilder) Build() *Section {
 }
 
 type Style struct {
-	FillOpacity   *float64 `json:"fill_opacity,omitempty"`   // 填充透明度
-	BorderStyle   *string  `json:"border_style,omitempty"`   // 边框样式
-	BorderWidth   *string  `json:"border_width,omitempty"`   // 边框宽度
+	FillOpacity *float64 `json:"fill_opacity,omitempty"` // 填充透明度
+
+	BorderStyle *string `json:"border_style,omitempty"` // 边框样式
+
+	BorderWidth *string `json:"border_width,omitempty"` // 边框宽度
+
 	BorderOpacity *float64 `json:"border_opacity,omitempty"` // 边框透明度
-	HFlip         *bool    `json:"h_flip,omitempty"`         // 水平翻折
-	VFlip         *bool    `json:"v_flip,omitempty"`         // 垂直翻折
+
+	HFlip *bool `json:"h_flip,omitempty"` // 水平翻折
+
+	VFlip *bool `json:"v_flip,omitempty"` // 垂直翻折
 }
 
 type StyleBuilder struct {
-	fillOpacity       float64 // 填充透明度
-	fillOpacityFlag   bool
-	borderStyle       string // 边框样式
-	borderStyleFlag   bool
-	borderWidth       string // 边框宽度
-	borderWidthFlag   bool
+	fillOpacity     float64 // 填充透明度
+	fillOpacityFlag bool
+
+	borderStyle     string // 边框样式
+	borderStyleFlag bool
+
+	borderWidth     string // 边框宽度
+	borderWidthFlag bool
+
 	borderOpacity     float64 // 边框透明度
 	borderOpacityFlag bool
-	hFlip             bool // 水平翻折
-	hFlipFlag         bool
-	vFlip             bool // 垂直翻折
-	vFlipFlag         bool
+
+	hFlip     bool // 水平翻折
+	hFlipFlag bool
+
+	vFlip     bool // 垂直翻折
+	vFlipFlag bool
 }
 
 func NewStyleBuilder() *StyleBuilder {
@@ -432,16 +448,20 @@ func (builder *StyleBuilder) Build() *Style {
 }
 
 type Table struct {
-	Meta  *TableMeta   `json:"meta,omitempty"`  // 元信息
-	Title *string      `json:"title,omitempty"` // 标题
+	Meta *TableMeta `json:"meta,omitempty"` // 元信息
+
+	Title *string `json:"title,omitempty"` // 标题
+
 	Cells []*TableCell `json:"cells,omitempty"` // 单元格列表
 }
 
 type TableBuilder struct {
-	meta      *TableMeta // 元信息
-	metaFlag  bool
+	meta     *TableMeta // 元信息
+	metaFlag bool
+
 	title     string // 标题
 	titleFlag bool
+
 	cells     []*TableCell // 单元格列表
 	cellsFlag bool
 }
@@ -494,24 +514,32 @@ func (builder *TableBuilder) Build() *Table {
 }
 
 type TableCell struct {
-	RowIndex  *int                `json:"row_index,omitempty"`  // 行下标，从 1 开始
-	ColIndex  *int                `json:"col_index,omitempty"`  // 列下标，从 1 开始
+	RowIndex *int `json:"row_index,omitempty"` // 行下标，从 1 开始
+
+	ColIndex *int `json:"col_index,omitempty"` // 列下标，从 1 开始
+
 	MergeInfo *TableCellMergeInfo `json:"merge_info,omitempty"` // 单元格合并信息
-	Children  []string            `json:"children,omitempty"`   // 单元格包含的子节点 id
-	Text      *Text               `json:"text,omitempty"`       // 单元格内文字
+
+	Children []string `json:"children,omitempty"` // 单元格包含的子节点 id
+
+	Text *Text `json:"text,omitempty"` // 单元格内文字
 }
 
 type TableCellBuilder struct {
-	rowIndex      int // 行下标，从 1 开始
-	rowIndexFlag  bool
-	colIndex      int // 列下标，从 1 开始
-	colIndexFlag  bool
+	rowIndex     int // 行下标，从 1 开始
+	rowIndexFlag bool
+
+	colIndex     int // 列下标，从 1 开始
+	colIndexFlag bool
+
 	mergeInfo     *TableCellMergeInfo // 单元格合并信息
 	mergeInfoFlag bool
-	children      []string // 单元格包含的子节点 id
-	childrenFlag  bool
-	text          *Text // 单元格内文字
-	textFlag      bool
+
+	children     []string // 单元格包含的子节点 id
+	childrenFlag bool
+
+	text     *Text // 单元格内文字
+	textFlag bool
 }
 
 func NewTableCellBuilder() *TableCellBuilder {
@@ -588,12 +616,14 @@ func (builder *TableCellBuilder) Build() *TableCell {
 
 type TableCellMergeInfo struct {
 	RowSpan *int `json:"row_span,omitempty"` // 从当前行索引起被合并的连续行数
+
 	ColSpan *int `json:"col_span,omitempty"` // 从当前列索引起被合并的连续列数
 }
 
 type TableCellMergeInfoBuilder struct {
 	rowSpan     int // 从当前行索引起被合并的连续行数
 	rowSpanFlag bool
+
 	colSpan     int // 从当前列索引起被合并的连续列数
 	colSpanFlag bool
 }
@@ -636,12 +666,14 @@ func (builder *TableCellMergeInfoBuilder) Build() *TableCellMergeInfo {
 
 type TableMeta struct {
 	RowNum *int `json:"row_num,omitempty"` // 行数
+
 	ColNum *int `json:"col_num,omitempty"` // 列数
 }
 
 type TableMetaBuilder struct {
 	rowNum     int // 行数
 	rowNumFlag bool
+
 	colNum     int // 列数
 	colNumFlag bool
 }
@@ -683,24 +715,32 @@ func (builder *TableMetaBuilder) Build() *TableMeta {
 }
 
 type Text struct {
-	Text            *string `json:"text,omitempty"`             // 文字内容
-	FontWeight      *string `json:"font_weight,omitempty"`      // 文字字重
-	FontSize        *int    `json:"font_size,omitempty"`        // 文字大小
+	Text *string `json:"text,omitempty"` // 文字内容
+
+	FontWeight *string `json:"font_weight,omitempty"` // 文字字重
+
+	FontSize *int `json:"font_size,omitempty"` // 文字大小
+
 	HorizontalAlign *string `json:"horizontal_align,omitempty"` // 水平对齐
-	VerticalAlign   *string `json:"vertical_align,omitempty"`   // 垂直对齐
+
+	VerticalAlign *string `json:"vertical_align,omitempty"` // 垂直对齐
 }
 
 type TextBuilder struct {
-	text                string // 文字内容
-	textFlag            bool
-	fontWeight          string // 文字字重
-	fontWeightFlag      bool
-	fontSize            int // 文字大小
-	fontSizeFlag        bool
+	text     string // 文字内容
+	textFlag bool
+
+	fontWeight     string // 文字字重
+	fontWeightFlag bool
+
+	fontSize     int // 文字大小
+	fontSizeFlag bool
+
 	horizontalAlign     string // 水平对齐
 	horizontalAlignFlag bool
-	verticalAlign       string // 垂直对齐
-	verticalAlignFlag   bool
+
+	verticalAlign     string // 垂直对齐
+	verticalAlignFlag bool
 }
 
 func NewTextBuilder() *TextBuilder {
@@ -779,60 +819,92 @@ func (builder *TextBuilder) Build() *Text {
 }
 
 type WhiteboardNode struct {
-	Id             *string         `json:"id,omitempty"`              // 节点 id
-	Type           *string         `json:"type,omitempty"`            // 节点图形类型，目前创建节点仅支持创建图片、文本、基础图形等类型，读取到不支持创建的图形时只返回一些基础信息，如 id、type、text、style 等
-	ParentId       *string         `json:"parent_id,omitempty"`       // 父节点 id
-	Children       []string        `json:"children,omitempty"`        // 子节点
-	X              *float64        `json:"x,omitempty"`               // 图形相对画布的 x 轴位置信息（存在父容器时为相对父容器的坐标，父容器为组合图形 group 时，坐标是穿透的），单位为 px
-	Y              *float64        `json:"y,omitempty"`               // 图形相对画布的 y 轴位置信息（存在父容器时为相对父容器的坐标，父容器为组合图形 group 时，坐标是穿透的），单位为 px
-	Angle          *float64        `json:"angle,omitempty"`           // 图形旋转角度
-	Width          *float64        `json:"width,omitempty"`           // 图形宽度，单位为 px
-	Height         *float64        `json:"height,omitempty"`          // 图形高度，单位为 px
-	Text           *Text           `json:"text,omitempty"`            // 图形内文字
-	Style          *Style          `json:"style,omitempty"`           // 图形样式
-	Image          *Image          `json:"image,omitempty"`           // 图片
+	Id *string `json:"id,omitempty"` // 节点 id
+
+	Type *string `json:"type,omitempty"` // 节点图形类型，目前创建节点仅支持创建图片、文本、基础图形等类型，读取到不支持创建的图形时只返回一些基础信息，如 id、type、text、style 等
+
+	ParentId *string `json:"parent_id,omitempty"` // 父节点 id
+
+	Children []string `json:"children,omitempty"` // 子节点
+
+	X *float64 `json:"x,omitempty"` // 图形相对画布的 x 轴位置信息（存在父容器时为相对父容器的坐标，父容器为组合图形 group 时，坐标是穿透的），单位为 px
+
+	Y *float64 `json:"y,omitempty"` // 图形相对画布的 y 轴位置信息（存在父容器时为相对父容器的坐标，父容器为组合图形 group 时，坐标是穿透的），单位为 px
+
+	Angle *float64 `json:"angle,omitempty"` // 图形旋转角度
+
+	Width *float64 `json:"width,omitempty"` // 图形宽度，单位为 px
+
+	Height *float64 `json:"height,omitempty"` // 图形高度，单位为 px
+
+	Text *Text `json:"text,omitempty"` // 图形内文字
+
+	Style *Style `json:"style,omitempty"` // 图形样式
+
+	Image *Image `json:"image,omitempty"` // 图片
+
 	CompositeShape *CompositeShape `json:"composite_shape,omitempty"` // 基础图形属性
-	Connector      *Connector      `json:"connector,omitempty"`       // 连线属性
-	Section        *Section        `json:"section,omitempty"`         // 分区属性
-	Table          *Table          `json:"table,omitempty"`           // 表格属性
-	MindMap        *MindMap        `json:"mind_map,omitempty"`        // 思维导图属性
+
+	Connector *Connector `json:"connector,omitempty"` // 连线属性
+
+	Section *Section `json:"section,omitempty"` // 分区属性
+
+	Table *Table `json:"table,omitempty"` // 表格属性
+
+	MindMap *MindMap `json:"mind_map,omitempty"` // 思维导图属性
 }
 
 type WhiteboardNodeBuilder struct {
-	id                 string // 节点 id
-	idFlag             bool
-	type_              string // 节点图形类型，目前创建节点仅支持创建图片、文本、基础图形等类型，读取到不支持创建的图形时只返回一些基础信息，如 id、type、text、style 等
-	typeFlag           bool
-	parentId           string // 父节点 id
-	parentIdFlag       bool
-	children           []string // 子节点
-	childrenFlag       bool
-	x                  float64 // 图形相对画布的 x 轴位置信息（存在父容器时为相对父容器的坐标，父容器为组合图形 group 时，坐标是穿透的），单位为 px
-	xFlag              bool
-	y                  float64 // 图形相对画布的 y 轴位置信息（存在父容器时为相对父容器的坐标，父容器为组合图形 group 时，坐标是穿透的），单位为 px
-	yFlag              bool
-	angle              float64 // 图形旋转角度
-	angleFlag          bool
-	width              float64 // 图形宽度，单位为 px
-	widthFlag          bool
-	height             float64 // 图形高度，单位为 px
-	heightFlag         bool
-	text               *Text // 图形内文字
-	textFlag           bool
-	style              *Style // 图形样式
-	styleFlag          bool
-	image              *Image // 图片
-	imageFlag          bool
+	id     string // 节点 id
+	idFlag bool
+
+	type_    string // 节点图形类型，目前创建节点仅支持创建图片、文本、基础图形等类型，读取到不支持创建的图形时只返回一些基础信息，如 id、type、text、style 等
+	typeFlag bool
+
+	parentId     string // 父节点 id
+	parentIdFlag bool
+
+	children     []string // 子节点
+	childrenFlag bool
+
+	x     float64 // 图形相对画布的 x 轴位置信息（存在父容器时为相对父容器的坐标，父容器为组合图形 group 时，坐标是穿透的），单位为 px
+	xFlag bool
+
+	y     float64 // 图形相对画布的 y 轴位置信息（存在父容器时为相对父容器的坐标，父容器为组合图形 group 时，坐标是穿透的），单位为 px
+	yFlag bool
+
+	angle     float64 // 图形旋转角度
+	angleFlag bool
+
+	width     float64 // 图形宽度，单位为 px
+	widthFlag bool
+
+	height     float64 // 图形高度，单位为 px
+	heightFlag bool
+
+	text     *Text // 图形内文字
+	textFlag bool
+
+	style     *Style // 图形样式
+	styleFlag bool
+
+	image     *Image // 图片
+	imageFlag bool
+
 	compositeShape     *CompositeShape // 基础图形属性
 	compositeShapeFlag bool
-	connector          *Connector // 连线属性
-	connectorFlag      bool
-	section            *Section // 分区属性
-	sectionFlag        bool
-	table              *Table // 表格属性
-	tableFlag          bool
-	mindMap            *MindMap // 思维导图属性
-	mindMapFlag        bool
+
+	connector     *Connector // 连线属性
+	connectorFlag bool
+
+	section     *Section // 分区属性
+	sectionFlag bool
+
+	table     *Table // 表格属性
+	tableFlag bool
+
+	mindMap     *MindMap // 思维导图属性
+	mindMapFlag bool
 }
 
 func NewWhiteboardNodeBuilder() *WhiteboardNodeBuilder {

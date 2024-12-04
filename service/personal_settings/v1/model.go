@@ -72,13 +72,15 @@ const (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -116,30 +118,42 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type SystemStatus struct {
-	SystemStatusId *string                  `json:"system_status_id,omitempty"` // 系统状态ID
-	Title          *string                  `json:"title,omitempty"`            // 系统状态名称，名称字符数要在1到20范围内。不同系统状态的title不能重复。;; **注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	I18nTitle      *SystemStatusI18nName    `json:"i18n_title,omitempty"`       // 系统状态国际化名称，名称字符数要在1到20范围内。不同系统状态之间i18n_title中任何一种title都不能重复。;; **注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	IconKey        *string                  `json:"icon_key,omitempty"`         // 图标;;[**了解icon_key可选值**](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/personal_settings-v1/system_status/overview)
-	Color          *string                  `json:"color,omitempty"`            // 颜色
-	Priority       *int                     `json:"priority,omitempty"`         // 优先级，数值越小，客户端展示的优先级越高。不同系统状态的优先级不能一样。
-	SyncSetting    *SystemStatusSyncSetting `json:"sync_setting,omitempty"`     // 同步设置
+	SystemStatusId *string `json:"system_status_id,omitempty"` // 系统状态ID
+
+	Title *string `json:"title,omitempty"` // 系统状态名称，名称字符数要在1到20范围内。不同系统状态的title不能重复。;; **注意：** ;- 1中文=2英文=2其他语言字符=2字符
+
+	I18nTitle *SystemStatusI18nName `json:"i18n_title,omitempty"` // 系统状态国际化名称，名称字符数要在1到20范围内。不同系统状态之间i18n_title中任何一种title都不能重复。;; **注意：** ;- 1中文=2英文=2其他语言字符=2字符
+
+	IconKey *string `json:"icon_key,omitempty"` // 图标;;[**了解icon_key可选值**](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/personal_settings-v1/system_status/overview)
+
+	Color *string `json:"color,omitempty"` // 颜色
+
+	Priority *int `json:"priority,omitempty"` // 优先级，数值越小，客户端展示的优先级越高。不同系统状态的优先级不能一样。
+
+	SyncSetting *SystemStatusSyncSetting `json:"sync_setting,omitempty"` // 同步设置
 }
 
 type SystemStatusBuilder struct {
 	systemStatusId     string // 系统状态ID
 	systemStatusIdFlag bool
-	title              string // 系统状态名称，名称字符数要在1到20范围内。不同系统状态的title不能重复。;; **注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	titleFlag          bool
-	i18nTitle          *SystemStatusI18nName // 系统状态国际化名称，名称字符数要在1到20范围内。不同系统状态之间i18n_title中任何一种title都不能重复。;; **注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	i18nTitleFlag      bool
-	iconKey            string // 图标;;[**了解icon_key可选值**](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/personal_settings-v1/system_status/overview)
-	iconKeyFlag        bool
-	color              string // 颜色
-	colorFlag          bool
-	priority           int // 优先级，数值越小，客户端展示的优先级越高。不同系统状态的优先级不能一样。
-	priorityFlag       bool
-	syncSetting        *SystemStatusSyncSetting // 同步设置
-	syncSettingFlag    bool
+
+	title     string // 系统状态名称，名称字符数要在1到20范围内。不同系统状态的title不能重复。;; **注意：** ;- 1中文=2英文=2其他语言字符=2字符
+	titleFlag bool
+
+	i18nTitle     *SystemStatusI18nName // 系统状态国际化名称，名称字符数要在1到20范围内。不同系统状态之间i18n_title中任何一种title都不能重复。;; **注意：** ;- 1中文=2英文=2其他语言字符=2字符
+	i18nTitleFlag bool
+
+	iconKey     string // 图标;;[**了解icon_key可选值**](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/personal_settings-v1/system_status/overview)
+	iconKeyFlag bool
+
+	color     string // 颜色
+	colorFlag bool
+
+	priority     int // 优先级，数值越小，客户端展示的优先级越高。不同系统状态的优先级不能一样。
+	priorityFlag bool
+
+	syncSetting     *SystemStatusSyncSetting // 同步设置
+	syncSettingFlag bool
 }
 
 func NewSystemStatusBuilder() *SystemStatusBuilder {
@@ -243,15 +257,19 @@ func (builder *SystemStatusBuilder) Build() *SystemStatus {
 
 type SystemStatusI18nName struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文名
+
 	EnUs *string `json:"en_us,omitempty"` // 英文名
+
 	JaJp *string `json:"ja_jp,omitempty"` // 日文名
 }
 
 type SystemStatusI18nNameBuilder struct {
 	zhCn     string // 中文名
 	zhCnFlag bool
+
 	enUs     string // 英文名
 	enUsFlag bool
+
 	jaJp     string // 日文名
 	jaJpFlag bool
 }
@@ -307,15 +325,19 @@ func (builder *SystemStatusI18nNameBuilder) Build() *SystemStatusI18nName {
 
 type SystemStatusSyncI18nExplain struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文名
+
 	EnUs *string `json:"en_us,omitempty"` // 英文名
+
 	JaJp *string `json:"ja_jp,omitempty"` // 日文名
 }
 
 type SystemStatusSyncI18nExplainBuilder struct {
 	zhCn     string // 中文名
 	zhCnFlag bool
+
 	enUs     string // 英文名
 	enUsFlag bool
+
 	jaJp     string // 日文名
 	jaJpFlag bool
 }
@@ -371,15 +393,19 @@ func (builder *SystemStatusSyncI18nExplainBuilder) Build() *SystemStatusSyncI18n
 
 type SystemStatusSyncI18nName struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文名
+
 	EnUs *string `json:"en_us,omitempty"` // 英文名
+
 	JaJp *string `json:"ja_jp,omitempty"` // 日文名
 }
 
 type SystemStatusSyncI18nNameBuilder struct {
 	zhCn     string // 中文名
 	zhCnFlag bool
+
 	enUs     string // 英文名
 	enUsFlag bool
+
 	jaJp     string // 日文名
 	jaJpFlag bool
 }
@@ -434,24 +460,32 @@ func (builder *SystemStatusSyncI18nNameBuilder) Build() *SystemStatusSyncI18nNam
 }
 
 type SystemStatusSyncSetting struct {
-	IsOpenByDefault *bool                        `json:"is_open_by_default,omitempty"` // 是否默认开启
-	Title           *string                      `json:"title,omitempty"`              // 同步设置名称，名称字符数要在1到30范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	I18nTitle       *SystemStatusSyncI18nName    `json:"i18n_title,omitempty"`         // 同步设置国际化名称，名称字符数要在1到30范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	Explain         *string                      `json:"explain,omitempty"`            // 同步设置解释文案，解释字符数要在1到60范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	I18nExplain     *SystemStatusSyncI18nExplain `json:"i18n_explain,omitempty"`       // 同步设置国际化解释文案，解释字符数要在1到60范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+	IsOpenByDefault *bool `json:"is_open_by_default,omitempty"` // 是否默认开启
+
+	Title *string `json:"title,omitempty"` // 同步设置名称，名称字符数要在1到30范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+
+	I18nTitle *SystemStatusSyncI18nName `json:"i18n_title,omitempty"` // 同步设置国际化名称，名称字符数要在1到30范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+
+	Explain *string `json:"explain,omitempty"` // 同步设置解释文案，解释字符数要在1到60范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+
+	I18nExplain *SystemStatusSyncI18nExplain `json:"i18n_explain,omitempty"` // 同步设置国际化解释文案，解释字符数要在1到60范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
 }
 
 type SystemStatusSyncSettingBuilder struct {
 	isOpenByDefault     bool // 是否默认开启
 	isOpenByDefaultFlag bool
-	title               string // 同步设置名称，名称字符数要在1到30范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	titleFlag           bool
-	i18nTitle           *SystemStatusSyncI18nName // 同步设置国际化名称，名称字符数要在1到30范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	i18nTitleFlag       bool
-	explain             string // 同步设置解释文案，解释字符数要在1到60范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	explainFlag         bool
-	i18nExplain         *SystemStatusSyncI18nExplain // 同步设置国际化解释文案，解释字符数要在1到60范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	i18nExplainFlag     bool
+
+	title     string // 同步设置名称，名称字符数要在1到30范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+	titleFlag bool
+
+	i18nTitle     *SystemStatusSyncI18nName // 同步设置国际化名称，名称字符数要在1到30范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+	i18nTitleFlag bool
+
+	explain     string // 同步设置解释文案，解释字符数要在1到60范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+	explainFlag bool
+
+	i18nExplain     *SystemStatusSyncI18nExplain // 同步设置国际化解释文案，解释字符数要在1到60范围内。;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+	i18nExplainFlag bool
 }
 
 func NewSystemStatusSyncSettingBuilder() *SystemStatusSyncSettingBuilder {
@@ -529,12 +563,14 @@ func (builder *SystemStatusSyncSettingBuilder) Build() *SystemStatusSyncSetting 
 
 type SystemStatusUserCloseResultEntity struct {
 	UserId *string `json:"user_id,omitempty"` // 用户ID
-	Result *string `json:"result,omitempty"`  // 关闭结果
+
+	Result *string `json:"result,omitempty"` // 关闭结果
 }
 
 type SystemStatusUserCloseResultEntityBuilder struct {
 	userId     string // 用户ID
 	userIdFlag bool
+
 	result     string // 关闭结果
 	resultFlag bool
 }
@@ -576,13 +612,15 @@ func (builder *SystemStatusUserCloseResultEntityBuilder) Build() *SystemStatusUs
 }
 
 type SystemStatusUserOpenParam struct {
-	UserId  *string `json:"user_id,omitempty"`  // 用户ID
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
 	EndTime *string `json:"end_time,omitempty"` // 结束时间，传入的应为秒单位的时间戳，距当前的时间跨度不能超过365天。
 }
 
 type SystemStatusUserOpenParamBuilder struct {
-	userId      string // 用户ID
-	userIdFlag  bool
+	userId     string // 用户ID
+	userIdFlag bool
+
 	endTime     string // 结束时间，传入的应为秒单位的时间戳，距当前的时间跨度不能超过365天。
 	endTimeFlag bool
 }
@@ -624,18 +662,22 @@ func (builder *SystemStatusUserOpenParamBuilder) Build() *SystemStatusUserOpenPa
 }
 
 type SystemStatusUserOpenResultEntity struct {
-	UserId  *string `json:"user_id,omitempty"`  // 用户ID
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
 	EndTime *string `json:"end_time,omitempty"` // 结束时间，传入的应为秒单位的时间戳，距当前的时间跨度不能超过365天。
-	Result  *string `json:"result,omitempty"`   // 开启结果
+
+	Result *string `json:"result,omitempty"` // 开启结果
 }
 
 type SystemStatusUserOpenResultEntityBuilder struct {
-	userId      string // 用户ID
-	userIdFlag  bool
+	userId     string // 用户ID
+	userIdFlag bool
+
 	endTime     string // 结束时间，传入的应为秒单位的时间戳，距当前的时间跨度不能超过365天。
 	endTimeFlag bool
-	result      string // 开启结果
-	resultFlag  bool
+
+	result     string // 开启结果
+	resultFlag bool
 }
 
 func NewSystemStatusUserOpenResultEntityBuilder() *SystemStatusUserOpenResultEntityBuilder {
@@ -1069,9 +1111,11 @@ type ListSystemStatusReq struct {
 }
 
 type ListSystemStatusRespData struct {
-	Items     []*SystemStatus `json:"items,omitempty"`      // 租户系统状态
-	PageToken *string         `json:"page_token,omitempty"` // 分页token
-	HasMore   *bool           `json:"has_more,omitempty"`   // 是否存在更多
+	Items []*SystemStatus `json:"items,omitempty"` // 租户系统状态
+
+	PageToken *string `json:"page_token,omitempty"` // 分页token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否存在更多
 }
 
 type ListSystemStatusResp struct {
@@ -1087,6 +1131,7 @@ func (resp *ListSystemStatusResp) Success() bool {
 type PatchSystemStatusReqBodyBuilder struct {
 	systemStatus     *SystemStatus // 系统状态
 	systemStatusFlag bool
+
 	updateFields     []string // 需要更新的字段
 	updateFieldsFlag bool
 }
@@ -1204,7 +1249,8 @@ func (builder *PatchSystemStatusReqBuilder) Build() *PatchSystemStatusReq {
 
 type PatchSystemStatusReqBody struct {
 	SystemStatus *SystemStatus `json:"system_status,omitempty"` // 系统状态
-	UpdateFields []string      `json:"update_fields,omitempty"` // 需要更新的字段
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 需要更新的字段
 }
 
 type PatchSystemStatusReq struct {

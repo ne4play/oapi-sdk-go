@@ -36,13 +36,15 @@ const (
 )
 
 type AdjustmentLogic struct {
-	Fixed   *string  `json:"fixed,omitempty"`   // 固定值
+	Fixed *string `json:"fixed,omitempty"` // 固定值
+
 	Formula *Formula `json:"formula,omitempty"` // 公式配置
 }
 
 type AdjustmentLogicBuilder struct {
-	fixed       string // 固定值
-	fixedFlag   bool
+	fixed     string // 固定值
+	fixedFlag bool
+
 	formula     *Formula // 公式配置
 	formulaFlag bool
 }
@@ -83,22 +85,30 @@ func (builder *AdjustmentLogicBuilder) Build() *AdjustmentLogic {
 }
 
 type Archive struct {
-	ArchiveId     *string `json:"archive_id,omitempty"`     // 档案ID
-	ArchiveTid    *string `json:"archive_tid,omitempty"`    // 档案时间轴版本ID
-	UserId        *string `json:"user_id,omitempty"`        // 员工ID
-	Plan          *Plan   `json:"plan,omitempty"`           // 关联方案
+	ArchiveId *string `json:"archive_id,omitempty"` // 档案ID
+
+	ArchiveTid *string `json:"archive_tid,omitempty"` // 档案时间轴版本ID
+
+	UserId *string `json:"user_id,omitempty"` // 员工ID
+
+	Plan *Plan `json:"plan,omitempty"` // 关联方案
+
 	EffectiveDate *string `json:"effective_date,omitempty"` // 档案生效时间
 }
 
 type ArchiveBuilder struct {
-	archiveId         string // 档案ID
-	archiveIdFlag     bool
-	archiveTid        string // 档案时间轴版本ID
-	archiveTidFlag    bool
-	userId            string // 员工ID
-	userIdFlag        bool
-	plan              *Plan // 关联方案
-	planFlag          bool
+	archiveId     string // 档案ID
+	archiveIdFlag bool
+
+	archiveTid     string // 档案时间轴版本ID
+	archiveTidFlag bool
+
+	userId     string // 员工ID
+	userIdFlag bool
+
+	plan     *Plan // 关联方案
+	planFlag bool
+
 	effectiveDate     string // 档案生效时间
 	effectiveDateFlag bool
 }
@@ -178,46 +188,70 @@ func (builder *ArchiveBuilder) Build() *Archive {
 }
 
 type ArchiveDetail struct {
-	UserId            *string             `json:"user_id,omitempty"`            // 员工ID
-	Id                *string             `json:"id,omitempty"`                 // 档案ID
-	Tid               *string             `json:"tid,omitempty"`                // 档案TID
-	PlanId            *string             `json:"plan_id,omitempty"`            // 关联方案ID，详细信息可以通过[批量查询薪资方案](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/plan/list)接口查询获得
-	PlanTid           *string             `json:"plan_tid,omitempty"`           // 关联方案TID，详细信息可以通过[批量查询薪资方案](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/plan/list)接口查询获得
-	CurrencyId        *string             `json:"currency_id,omitempty"`        // 档案币种ID，详细信息可以通过[查询货币信息v2](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-currency/search)接口查询获得
-	ChangeReasonId    *string             `json:"change_reason_id,omitempty"`   // 调薪原因ID，详细信息可以通过[批量查询定调薪原因](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/change_reason/list)接口查询获得
-	ChangeDescription *string             `json:"change_description,omitempty"` // 调薪说明
-	EffectiveDate     *string             `json:"effective_date,omitempty"`     // 生效时间
-	ExpirationDate    *string             `json:"expiration_date,omitempty"`    // 失效时间
-	SalaryLevelId     *string             `json:"salary_level_id,omitempty"`    // 薪级薪等ID
-	ArchiveItems      []*ArchiveItem      `json:"archive_items,omitempty"`      // 档案关联的薪资项
+	UserId *string `json:"user_id,omitempty"` // 员工ID
+
+	Id *string `json:"id,omitempty"` // 档案ID
+
+	Tid *string `json:"tid,omitempty"` // 档案TID
+
+	PlanId *string `json:"plan_id,omitempty"` // 关联方案ID，详细信息可以通过[批量查询薪资方案](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/plan/list)接口查询获得
+
+	PlanTid *string `json:"plan_tid,omitempty"` // 关联方案TID，详细信息可以通过[批量查询薪资方案](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/plan/list)接口查询获得
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 档案币种ID，详细信息可以通过[查询货币信息v2](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-currency/search)接口查询获得
+
+	ChangeReasonId *string `json:"change_reason_id,omitempty"` // 调薪原因ID，详细信息可以通过[批量查询定调薪原因](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/change_reason/list)接口查询获得
+
+	ChangeDescription *string `json:"change_description,omitempty"` // 调薪说明
+
+	EffectiveDate *string `json:"effective_date,omitempty"` // 生效时间
+
+	ExpirationDate *string `json:"expiration_date,omitempty"` // 失效时间
+
+	SalaryLevelId *string `json:"salary_level_id,omitempty"` // 薪级薪等ID
+
+	ArchiveItems []*ArchiveItem `json:"archive_items,omitempty"` // 档案关联的薪资项
+
 	ArchiveIndicators []*ArchiveIndicator `json:"archive_indicators,omitempty"` // 档案关联的薪资指标
 }
 
 type ArchiveDetailBuilder struct {
-	userId                string // 员工ID
-	userIdFlag            bool
-	id                    string // 档案ID
-	idFlag                bool
-	tid                   string // 档案TID
-	tidFlag               bool
-	planId                string // 关联方案ID，详细信息可以通过[批量查询薪资方案](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/plan/list)接口查询获得
-	planIdFlag            bool
-	planTid               string // 关联方案TID，详细信息可以通过[批量查询薪资方案](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/plan/list)接口查询获得
-	planTidFlag           bool
-	currencyId            string // 档案币种ID，详细信息可以通过[查询货币信息v2](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-currency/search)接口查询获得
-	currencyIdFlag        bool
-	changeReasonId        string // 调薪原因ID，详细信息可以通过[批量查询定调薪原因](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/change_reason/list)接口查询获得
-	changeReasonIdFlag    bool
+	userId     string // 员工ID
+	userIdFlag bool
+
+	id     string // 档案ID
+	idFlag bool
+
+	tid     string // 档案TID
+	tidFlag bool
+
+	planId     string // 关联方案ID，详细信息可以通过[批量查询薪资方案](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/plan/list)接口查询获得
+	planIdFlag bool
+
+	planTid     string // 关联方案TID，详细信息可以通过[批量查询薪资方案](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/plan/list)接口查询获得
+	planTidFlag bool
+
+	currencyId     string // 档案币种ID，详细信息可以通过[查询货币信息v2](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-currency/search)接口查询获得
+	currencyIdFlag bool
+
+	changeReasonId     string // 调薪原因ID，详细信息可以通过[批量查询定调薪原因](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/change_reason/list)接口查询获得
+	changeReasonIdFlag bool
+
 	changeDescription     string // 调薪说明
 	changeDescriptionFlag bool
-	effectiveDate         string // 生效时间
-	effectiveDateFlag     bool
-	expirationDate        string // 失效时间
-	expirationDateFlag    bool
-	salaryLevelId         string // 薪级薪等ID
-	salaryLevelIdFlag     bool
-	archiveItems          []*ArchiveItem // 档案关联的薪资项
-	archiveItemsFlag      bool
+
+	effectiveDate     string // 生效时间
+	effectiveDateFlag bool
+
+	expirationDate     string // 失效时间
+	expirationDateFlag bool
+
+	salaryLevelId     string // 薪级薪等ID
+	salaryLevelIdFlag bool
+
+	archiveItems     []*ArchiveItem // 档案关联的薪资项
+	archiveItemsFlag bool
+
 	archiveIndicators     []*ArchiveIndicator // 档案关联的薪资指标
 	archiveIndicatorsFlag bool
 }
@@ -400,16 +434,20 @@ func (builder *ArchiveDetailBuilder) Build() *ArchiveDetail {
 }
 
 type ArchiveIndicator struct {
-	IndicatorId            *string `json:"indicator_id,omitempty"`             // 薪资统计指标ID，详细信息可以通过[批量查询薪资统计指标](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/indicator/list)接口查询获得
-	IndicatorResult        *string `json:"indicator_result,omitempty"`         // 档案关联薪资统计指标数值
+	IndicatorId *string `json:"indicator_id,omitempty"` // 薪资统计指标ID，详细信息可以通过[批量查询薪资统计指标](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/indicator/list)接口查询获得
+
+	IndicatorResult *string `json:"indicator_result,omitempty"` // 档案关联薪资统计指标数值
+
 	IndicatorResultRegular *string `json:"indicator_result_regular,omitempty"` // 档案关联薪资统计指标转正后数值
 }
 
 type ArchiveIndicatorBuilder struct {
-	indicatorId                string // 薪资统计指标ID，详细信息可以通过[批量查询薪资统计指标](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/indicator/list)接口查询获得
-	indicatorIdFlag            bool
-	indicatorResult            string // 档案关联薪资统计指标数值
-	indicatorResultFlag        bool
+	indicatorId     string // 薪资统计指标ID，详细信息可以通过[批量查询薪资统计指标](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/indicator/list)接口查询获得
+	indicatorIdFlag bool
+
+	indicatorResult     string // 档案关联薪资统计指标数值
+	indicatorResultFlag bool
+
 	indicatorResultRegular     string // 档案关联薪资统计指标转正后数值
 	indicatorResultRegularFlag bool
 }
@@ -464,16 +502,20 @@ func (builder *ArchiveIndicatorBuilder) Build() *ArchiveIndicator {
 }
 
 type ArchiveItem struct {
-	ItemId            *string `json:"item_id,omitempty"`             // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
-	ItemResult        *string `json:"item_result,omitempty"`         // 档案关联薪酬项数值
+	ItemId *string `json:"item_id,omitempty"` // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+
+	ItemResult *string `json:"item_result,omitempty"` // 档案关联薪酬项数值
+
 	ItemResultRegular *string `json:"item_result_regular,omitempty"` // 档案关联薪酬项转正后数值
 }
 
 type ArchiveItemBuilder struct {
-	itemId                string // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
-	itemIdFlag            bool
-	itemResult            string // 档案关联薪酬项数值
-	itemResultFlag        bool
+	itemId     string // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+	itemIdFlag bool
+
+	itemResult     string // 档案关联薪酬项数值
+	itemResultFlag bool
+
 	itemResultRegular     string // 档案关联薪酬项转正后数值
 	itemResultRegularFlag bool
 }
@@ -528,16 +570,20 @@ func (builder *ArchiveItemBuilder) Build() *ArchiveItem {
 }
 
 type ArchiveItemValue struct {
-	ItemId           *string `json:"item_id,omitempty"`            // 薪资项ID
-	ItemValue        *string `json:"item_value,omitempty"`         // 薪资项的值
+	ItemId *string `json:"item_id,omitempty"` // 薪资项ID
+
+	ItemValue *string `json:"item_value,omitempty"` // 薪资项的值
+
 	ItemValueRegular *string `json:"item_value_regular,omitempty"` // 员工转正后薪资项的值，仅用于开启试用期的薪资方案，以及员工处于实习期
 }
 
 type ArchiveItemValueBuilder struct {
-	itemId               string // 薪资项ID
-	itemIdFlag           bool
-	itemValue            string // 薪资项的值
-	itemValueFlag        bool
+	itemId     string // 薪资项ID
+	itemIdFlag bool
+
+	itemValue     string // 薪资项的值
+	itemValueFlag bool
+
 	itemValueRegular     string // 员工转正后薪资项的值，仅用于开启试用期的薪资方案，以及员工处于实习期
 	itemValueRegularFlag bool
 }
@@ -592,27 +638,37 @@ func (builder *ArchiveItemValueBuilder) Build() *ArchiveItemValue {
 }
 
 type ChangeReason struct {
-	Id           *string        `json:"id,omitempty"`            // 调薪原因ID
-	Name         *string        `json:"name,omitempty"`          // 调薪原因名称
-	Note         *string        `json:"note,omitempty"`          // 调薪原因备注
-	ActiveStatus *int           `json:"active_status,omitempty"` // 启用状态
-	I18nNames    []*I18nContent `json:"i18n_names,omitempty"`    // 多语言名称
-	I18nNotes    []*I18nContent `json:"i18n_notes,omitempty"`    // 多语言描述
+	Id *string `json:"id,omitempty"` // 调薪原因ID
+
+	Name *string `json:"name,omitempty"` // 调薪原因名称
+
+	Note *string `json:"note,omitempty"` // 调薪原因备注
+
+	ActiveStatus *int `json:"active_status,omitempty"` // 启用状态
+
+	I18nNames []*I18nContent `json:"i18n_names,omitempty"` // 多语言名称
+
+	I18nNotes []*I18nContent `json:"i18n_notes,omitempty"` // 多语言描述
 }
 
 type ChangeReasonBuilder struct {
-	id               string // 调薪原因ID
-	idFlag           bool
-	name             string // 调薪原因名称
-	nameFlag         bool
-	note             string // 调薪原因备注
-	noteFlag         bool
+	id     string // 调薪原因ID
+	idFlag bool
+
+	name     string // 调薪原因名称
+	nameFlag bool
+
+	note     string // 调薪原因备注
+	noteFlag bool
+
 	activeStatus     int // 启用状态
 	activeStatusFlag bool
-	i18nNames        []*I18nContent // 多语言名称
-	i18nNamesFlag    bool
-	i18nNotes        []*I18nContent // 多语言描述
-	i18nNotesFlag    bool
+
+	i18nNames     []*I18nContent // 多语言名称
+	i18nNamesFlag bool
+
+	i18nNotes     []*I18nContent // 多语言描述
+	i18nNotesFlag bool
 }
 
 func NewChangeReasonBuilder() *ChangeReasonBuilder {
@@ -702,13 +758,15 @@ func (builder *ChangeReasonBuilder) Build() *ChangeReason {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -746,13 +804,15 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type Formula struct {
-	Expr          *string         `json:"expr,omitempty"`           // 公式表达式
+	Expr *string `json:"expr,omitempty"` // 公式表达式
+
 	FormulaParams []*FormulaParam `json:"formula_params,omitempty"` // 公式参数列表
 }
 
 type FormulaBuilder struct {
-	expr              string // 公式表达式
-	exprFlag          bool
+	expr     string // 公式表达式
+	exprFlag bool
+
 	formulaParams     []*FormulaParam // 公式参数列表
 	formulaParamsFlag bool
 }
@@ -793,15 +853,17 @@ func (builder *FormulaBuilder) Build() *Formula {
 }
 
 type FormulaParam struct {
-	RefType *int    `json:"ref_type,omitempty"` // 引用类型
-	Id      *string `json:"id,omitempty"`       // 引用类型ID
+	RefType *int `json:"ref_type,omitempty"` // 引用类型
+
+	Id *string `json:"id,omitempty"` // 引用类型ID
 }
 
 type FormulaParamBuilder struct {
 	refType     int // 引用类型
 	refTypeFlag bool
-	id          string // 引用类型ID
-	idFlag      bool
+
+	id     string // 引用类型ID
+	idFlag bool
 }
 
 func NewFormulaParamBuilder() *FormulaParamBuilder {
@@ -842,12 +904,14 @@ func (builder *FormulaParamBuilder) Build() *FormulaParam {
 
 type I18n struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文名称
+
 	EnUs *string `json:"en_us,omitempty"` // 英文名称
 }
 
 type I18nBuilder struct {
 	zhCn     string // 中文名称
 	zhCnFlag bool
+
 	enUs     string // 英文名称
 	enUsFlag bool
 }
@@ -890,14 +954,16 @@ func (builder *I18nBuilder) Build() *I18n {
 
 type I18nContent struct {
 	Locale *string `json:"locale,omitempty"` // 语言版本
-	Value  *string `json:"value,omitempty"`  // 语言名称
+
+	Value *string `json:"value,omitempty"` // 语言名称
 }
 
 type I18nContentBuilder struct {
 	locale     string // 语言版本
 	localeFlag bool
-	value      string // 语言名称
-	valueFlag  bool
+
+	value     string // 语言名称
+	valueFlag bool
 }
 
 func NewI18nContentBuilder() *I18nContentBuilder {
@@ -937,24 +1003,32 @@ func (builder *I18nContentBuilder) Build() *I18nContent {
 }
 
 type Indicator struct {
-	Id           *string        `json:"id,omitempty"`            // 薪资统计指标ID
-	Name         *string        `json:"name,omitempty"`          // 薪资统计指标名称
-	ValueType    *string        `json:"value_type,omitempty"`    // 薪资统计指标数值类型
-	ActiveStatus *int           `json:"active_status,omitempty"` // 启用状态
-	I18nNames    []*I18nContent `json:"i18n_names,omitempty"`    // 多语言名称
+	Id *string `json:"id,omitempty"` // 薪资统计指标ID
+
+	Name *string `json:"name,omitempty"` // 薪资统计指标名称
+
+	ValueType *string `json:"value_type,omitempty"` // 薪资统计指标数值类型
+
+	ActiveStatus *int `json:"active_status,omitempty"` // 启用状态
+
+	I18nNames []*I18nContent `json:"i18n_names,omitempty"` // 多语言名称
 }
 
 type IndicatorBuilder struct {
-	id               string // 薪资统计指标ID
-	idFlag           bool
-	name             string // 薪资统计指标名称
-	nameFlag         bool
-	valueType        string // 薪资统计指标数值类型
-	valueTypeFlag    bool
+	id     string // 薪资统计指标ID
+	idFlag bool
+
+	name     string // 薪资统计指标名称
+	nameFlag bool
+
+	valueType     string // 薪资统计指标数值类型
+	valueTypeFlag bool
+
 	activeStatus     int // 启用状态
 	activeStatusFlag bool
-	i18nNames        []*I18nContent // 多语言名称
-	i18nNamesFlag    bool
+
+	i18nNames     []*I18nContent // 多语言名称
+	i18nNamesFlag bool
 }
 
 func NewIndicatorBuilder() *IndicatorBuilder {
@@ -1032,42 +1106,62 @@ func (builder *IndicatorBuilder) Build() *Indicator {
 }
 
 type Item struct {
-	Id                  *string        `json:"id,omitempty"`                     // 薪酬项ID
-	Name                *string        `json:"name,omitempty"`                   // 薪酬项名称
-	Description         *string        `json:"description,omitempty"`            // 薪酬项描述
-	CategoryId          *string        `json:"category_id,omitempty"`            // 薪酬项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
-	ValueType           *string        `json:"value_type,omitempty"`             // 薪酬项数值类型
-	PayOffFrequencyType *string        `json:"pay_off_frequency_type,omitempty"` // 发放频率
-	DecimalPlaces       *int           `json:"decimal_places,omitempty"`         // 小数位数
-	ActiveStatus        *int           `json:"active_status,omitempty"`          // 启用状态
-	I18nNames           []*I18nContent `json:"i18n_names,omitempty"`             // 多语言名称
-	I18nDescriptions    []*I18nContent `json:"i18n_descriptions,omitempty"`      // 多语言描述
-	ItemType            *string        `json:"item_type,omitempty"`              // 薪酬项类型
+	Id *string `json:"id,omitempty"` // 薪酬项ID
+
+	Name *string `json:"name,omitempty"` // 薪酬项名称
+
+	Description *string `json:"description,omitempty"` // 薪酬项描述
+
+	CategoryId *string `json:"category_id,omitempty"` // 薪酬项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
+
+	ValueType *string `json:"value_type,omitempty"` // 薪酬项数值类型
+
+	PayOffFrequencyType *string `json:"pay_off_frequency_type,omitempty"` // 发放频率
+
+	DecimalPlaces *int `json:"decimal_places,omitempty"` // 小数位数
+
+	ActiveStatus *int `json:"active_status,omitempty"` // 启用状态
+
+	I18nNames []*I18nContent `json:"i18n_names,omitempty"` // 多语言名称
+
+	I18nDescriptions []*I18nContent `json:"i18n_descriptions,omitempty"` // 多语言描述
+
+	ItemType *string `json:"item_type,omitempty"` // 薪酬项类型
 }
 
 type ItemBuilder struct {
-	id                      string // 薪酬项ID
-	idFlag                  bool
-	name                    string // 薪酬项名称
-	nameFlag                bool
-	description             string // 薪酬项描述
-	descriptionFlag         bool
-	categoryId              string // 薪酬项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
-	categoryIdFlag          bool
-	valueType               string // 薪酬项数值类型
-	valueTypeFlag           bool
+	id     string // 薪酬项ID
+	idFlag bool
+
+	name     string // 薪酬项名称
+	nameFlag bool
+
+	description     string // 薪酬项描述
+	descriptionFlag bool
+
+	categoryId     string // 薪酬项分类ID，详细信息可以通过[批量获取薪资项分类信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item_category/list)接口查询获得
+	categoryIdFlag bool
+
+	valueType     string // 薪酬项数值类型
+	valueTypeFlag bool
+
 	payOffFrequencyType     string // 发放频率
 	payOffFrequencyTypeFlag bool
-	decimalPlaces           int // 小数位数
-	decimalPlacesFlag       bool
-	activeStatus            int // 启用状态
-	activeStatusFlag        bool
-	i18nNames               []*I18nContent // 多语言名称
-	i18nNamesFlag           bool
-	i18nDescriptions        []*I18nContent // 多语言描述
-	i18nDescriptionsFlag    bool
-	itemType                string // 薪酬项类型
-	itemTypeFlag            bool
+
+	decimalPlaces     int // 小数位数
+	decimalPlacesFlag bool
+
+	activeStatus     int // 启用状态
+	activeStatusFlag bool
+
+	i18nNames     []*I18nContent // 多语言名称
+	i18nNamesFlag bool
+
+	i18nDescriptions     []*I18nContent // 多语言描述
+	i18nDescriptionsFlag bool
+
+	itemType     string // 薪酬项类型
+	itemTypeFlag bool
 }
 
 func NewItemBuilder() *ItemBuilder {
@@ -1222,16 +1316,20 @@ func (builder *ItemBuilder) Build() *Item {
 }
 
 type ItemCategory struct {
-	Id        *string        `json:"id,omitempty"`         // 薪酬项分类ID
-	Name      *string        `json:"name,omitempty"`       // 薪酬项分类名称
+	Id *string `json:"id,omitempty"` // 薪酬项分类ID
+
+	Name *string `json:"name,omitempty"` // 薪酬项分类名称
+
 	I18nNames []*I18nContent `json:"i18n_names,omitempty"` // 薪酬项多语言分类
 }
 
 type ItemCategoryBuilder struct {
-	id            string // 薪酬项分类ID
-	idFlag        bool
-	name          string // 薪酬项分类名称
-	nameFlag      bool
+	id     string // 薪酬项分类ID
+	idFlag bool
+
+	name     string // 薪酬项分类名称
+	nameFlag bool
+
 	i18nNames     []*I18nContent // 薪酬项多语言分类
 	i18nNamesFlag bool
 }
@@ -1285,54 +1383,82 @@ func (builder *ItemCategoryBuilder) Build() *ItemCategory {
 }
 
 type LumpSumPayment struct {
-	Id                 *string                 `json:"id,omitempty"`                   // 一次性支付记录id
-	UniqueId           *string                 `json:"unique_id,omitempty"`            // 外部幂等id，由上游业务决定
-	UserId             *string                 `json:"user_id,omitempty"`              // 员工id，具体类型由入参中的 user_id_type 指定
-	TotalAmount        *string                 `json:"total_amount,omitempty"`         // 总金额，字符串表达的数字
-	BindingPeriod      *int                    `json:"binding_period,omitempty"`       // 绑定期，单位为月
-	CurrencyId         *string                 `json:"currency_id,omitempty"`          // 币种id
-	IssuanceFrequency  *int                    `json:"issuance_frequency,omitempty"`   // 发放次数
-	GrantDate          *string                 `json:"grant_date,omitempty"`           // 授予日期
-	ItemId             *string                 `json:"item_id,omitempty"`              // 薪酬项id
-	Remark             *string                 `json:"remark,omitempty"`               // 备注
-	IssuanceDetailText *I18n                   `json:"issuance_detail_text,omitempty"` // 发放规则描述文本
-	ApplySource        *int                    `json:"apply_source,omitempty"`         // 申请来源
-	CreateTime         *string                 `json:"create_time,omitempty"`          // 创建时间
-	ModifyTime         *string                 `json:"modify_time,omitempty"`          // 更新时间
-	Details            []*LumpSumPaymentDetail `json:"details,omitempty"`              // 发放明细列表
+	Id *string `json:"id,omitempty"` // 一次性支付记录id
+
+	UniqueId *string `json:"unique_id,omitempty"` // 外部幂等id，由上游业务决定
+
+	UserId *string `json:"user_id,omitempty"` // 员工id，具体类型由入参中的 user_id_type 指定
+
+	TotalAmount *string `json:"total_amount,omitempty"` // 总金额，字符串表达的数字
+
+	BindingPeriod *int `json:"binding_period,omitempty"` // 绑定期，单位为月
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
+
+	IssuanceFrequency *int `json:"issuance_frequency,omitempty"` // 发放次数
+
+	GrantDate *string `json:"grant_date,omitempty"` // 授予日期
+
+	ItemId *string `json:"item_id,omitempty"` // 薪酬项id
+
+	Remark *string `json:"remark,omitempty"` // 备注
+
+	IssuanceDetailText *I18n `json:"issuance_detail_text,omitempty"` // 发放规则描述文本
+
+	ApplySource *int `json:"apply_source,omitempty"` // 申请来源
+
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间
+
+	ModifyTime *string `json:"modify_time,omitempty"` // 更新时间
+
+	Details []*LumpSumPaymentDetail `json:"details,omitempty"` // 发放明细列表
 }
 
 type LumpSumPaymentBuilder struct {
-	id                     string // 一次性支付记录id
-	idFlag                 bool
-	uniqueId               string // 外部幂等id，由上游业务决定
-	uniqueIdFlag           bool
-	userId                 string // 员工id，具体类型由入参中的 user_id_type 指定
-	userIdFlag             bool
-	totalAmount            string // 总金额，字符串表达的数字
-	totalAmountFlag        bool
-	bindingPeriod          int // 绑定期，单位为月
-	bindingPeriodFlag      bool
-	currencyId             string // 币种id
-	currencyIdFlag         bool
-	issuanceFrequency      int // 发放次数
-	issuanceFrequencyFlag  bool
-	grantDate              string // 授予日期
-	grantDateFlag          bool
-	itemId                 string // 薪酬项id
-	itemIdFlag             bool
-	remark                 string // 备注
-	remarkFlag             bool
+	id     string // 一次性支付记录id
+	idFlag bool
+
+	uniqueId     string // 外部幂等id，由上游业务决定
+	uniqueIdFlag bool
+
+	userId     string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag bool
+
+	totalAmount     string // 总金额，字符串表达的数字
+	totalAmountFlag bool
+
+	bindingPeriod     int // 绑定期，单位为月
+	bindingPeriodFlag bool
+
+	currencyId     string // 币种id
+	currencyIdFlag bool
+
+	issuanceFrequency     int // 发放次数
+	issuanceFrequencyFlag bool
+
+	grantDate     string // 授予日期
+	grantDateFlag bool
+
+	itemId     string // 薪酬项id
+	itemIdFlag bool
+
+	remark     string // 备注
+	remarkFlag bool
+
 	issuanceDetailText     *I18n // 发放规则描述文本
 	issuanceDetailTextFlag bool
-	applySource            int // 申请来源
-	applySourceFlag        bool
-	createTime             string // 创建时间
-	createTimeFlag         bool
-	modifyTime             string // 更新时间
-	modifyTimeFlag         bool
-	details                []*LumpSumPaymentDetail // 发放明细列表
-	detailsFlag            bool
+
+	applySource     int // 申请来源
+	applySourceFlag bool
+
+	createTime     string // 创建时间
+	createTimeFlag bool
+
+	modifyTime     string // 更新时间
+	modifyTimeFlag bool
+
+	details     []*LumpSumPaymentDetail // 发放明细列表
+	detailsFlag bool
 }
 
 func NewLumpSumPaymentBuilder() *LumpSumPaymentBuilder {
@@ -1539,39 +1665,57 @@ func (builder *LumpSumPaymentBuilder) Build() *LumpSumPayment {
 }
 
 type LumpSumPaymentDetail struct {
-	Id             *string `json:"id,omitempty"`              // 一次性支付记录明细id
-	RecordId       *string `json:"record_id,omitempty"`       // 一次性支付记录id
-	UserId         *string `json:"user_id,omitempty"`         // 员工id，具体类型由入参中的 user_id_type 指定
+	Id *string `json:"id,omitempty"` // 一次性支付记录明细id
+
+	RecordId *string `json:"record_id,omitempty"` // 一次性支付记录id
+
+	UserId *string `json:"user_id,omitempty"` // 员工id，具体类型由入参中的 user_id_type 指定
+
 	IssuanceAmount *string `json:"issuance_amount,omitempty"` // 一次性支付明细发放金额，可转数字的字符串
+
 	IssuanceStatus *string `json:"issuance_status,omitempty"` // 发放状态
-	IssuanceWay    *string `json:"issuance_way,omitempty"`    // 发放方式
-	IssuanceTime   *string `json:"issuance_time,omitempty"`   // 发放时间
-	CurrencyId     *string `json:"currency_id,omitempty"`     // 币种id
-	CreateTime     *string `json:"create_time,omitempty"`     // 创建时间
-	ModifyTime     *string `json:"modify_time,omitempty"`     // 更新时间
+
+	IssuanceWay *string `json:"issuance_way,omitempty"` // 发放方式
+
+	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放时间
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
+
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间
+
+	ModifyTime *string `json:"modify_time,omitempty"` // 更新时间
 }
 
 type LumpSumPaymentDetailBuilder struct {
-	id                 string // 一次性支付记录明细id
-	idFlag             bool
-	recordId           string // 一次性支付记录id
-	recordIdFlag       bool
-	userId             string // 员工id，具体类型由入参中的 user_id_type 指定
-	userIdFlag         bool
+	id     string // 一次性支付记录明细id
+	idFlag bool
+
+	recordId     string // 一次性支付记录id
+	recordIdFlag bool
+
+	userId     string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag bool
+
 	issuanceAmount     string // 一次性支付明细发放金额，可转数字的字符串
 	issuanceAmountFlag bool
+
 	issuanceStatus     string // 发放状态
 	issuanceStatusFlag bool
-	issuanceWay        string // 发放方式
-	issuanceWayFlag    bool
-	issuanceTime       string // 发放时间
-	issuanceTimeFlag   bool
-	currencyId         string // 币种id
-	currencyIdFlag     bool
-	createTime         string // 创建时间
-	createTimeFlag     bool
-	modifyTime         string // 更新时间
-	modifyTimeFlag     bool
+
+	issuanceWay     string // 发放方式
+	issuanceWayFlag bool
+
+	issuanceTime     string // 发放时间
+	issuanceTimeFlag bool
+
+	currencyId     string // 币种id
+	currencyIdFlag bool
+
+	createTime     string // 创建时间
+	createTimeFlag bool
+
+	modifyTime     string // 更新时间
+	modifyTimeFlag bool
 }
 
 func NewLumpSumPaymentDetailBuilder() *LumpSumPaymentDetailBuilder {
@@ -1716,20 +1860,26 @@ func (builder *LumpSumPaymentDetailBuilder) Build() *LumpSumPaymentDetail {
 
 type LumpSumPaymentDetailForCreate struct {
 	IssuanceAmount *string `json:"issuance_amount,omitempty"` // 一次性支付明细发放金额，可转数字的字符串
+
 	IssuanceStatus *string `json:"issuance_status,omitempty"` // 发放状态
-	IssuanceWay    *string `json:"issuance_way,omitempty"`    // 发放方式
-	IssuanceTime   *string `json:"issuance_time,omitempty"`   // 发放时间
+
+	IssuanceWay *string `json:"issuance_way,omitempty"` // 发放方式
+
+	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放时间
 }
 
 type LumpSumPaymentDetailForCreateBuilder struct {
 	issuanceAmount     string // 一次性支付明细发放金额，可转数字的字符串
 	issuanceAmountFlag bool
+
 	issuanceStatus     string // 发放状态
 	issuanceStatusFlag bool
-	issuanceWay        string // 发放方式
-	issuanceWayFlag    bool
-	issuanceTime       string // 发放时间
-	issuanceTimeFlag   bool
+
+	issuanceWay     string // 发放方式
+	issuanceWayFlag bool
+
+	issuanceTime     string // 发放时间
+	issuanceTimeFlag bool
 }
 
 func NewLumpSumPaymentDetailForCreateBuilder() *LumpSumPaymentDetailForCreateBuilder {
@@ -1795,24 +1945,32 @@ func (builder *LumpSumPaymentDetailForCreateBuilder) Build() *LumpSumPaymentDeta
 }
 
 type LumpSumPaymentDetailForUpdate struct {
-	Id             *string `json:"id,omitempty"`              // 一次性支付记录明细id。传入已有的id代表直接在原明细上进行更新，不传则代表创建新的明细
+	Id *string `json:"id,omitempty"` // 一次性支付记录明细id。传入已有的id代表直接在原明细上进行更新，不传则代表创建新的明细
+
 	IssuanceAmount *string `json:"issuance_amount,omitempty"` // 一次性支付明细发放金额，可转数字的字符串
+
 	IssuanceStatus *string `json:"issuance_status,omitempty"` // 发放状态
-	IssuanceWay    *string `json:"issuance_way,omitempty"`    // 发放方式
-	IssuanceTime   *string `json:"issuance_time,omitempty"`   // 发放时间
+
+	IssuanceWay *string `json:"issuance_way,omitempty"` // 发放方式
+
+	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放时间
 }
 
 type LumpSumPaymentDetailForUpdateBuilder struct {
-	id                 string // 一次性支付记录明细id。传入已有的id代表直接在原明细上进行更新，不传则代表创建新的明细
-	idFlag             bool
+	id     string // 一次性支付记录明细id。传入已有的id代表直接在原明细上进行更新，不传则代表创建新的明细
+	idFlag bool
+
 	issuanceAmount     string // 一次性支付明细发放金额，可转数字的字符串
 	issuanceAmountFlag bool
+
 	issuanceStatus     string // 发放状态
 	issuanceStatusFlag bool
-	issuanceWay        string // 发放方式
-	issuanceWayFlag    bool
-	issuanceTime       string // 发放时间
-	issuanceTimeFlag   bool
+
+	issuanceWay     string // 发放方式
+	issuanceWayFlag bool
+
+	issuanceTime     string // 发放时间
+	issuanceTimeFlag bool
 }
 
 func NewLumpSumPaymentDetailForUpdateBuilder() *LumpSumPaymentDetailForUpdateBuilder {
@@ -1891,39 +2049,57 @@ func (builder *LumpSumPaymentDetailForUpdateBuilder) Build() *LumpSumPaymentDeta
 }
 
 type LumpSumPaymentForCreate struct {
-	UniqueId          *string                          `json:"unique_id,omitempty"`          // 外部幂等id，由上游业务决定
-	UserId            *string                          `json:"user_id,omitempty"`            // 员工id，具体类型由入参中的 user_id_type 指定
-	TotalAmount       *string                          `json:"total_amount,omitempty"`       // 总金额，字符串表达的数字
-	BindingPeriod     *int                             `json:"binding_period,omitempty"`     // 绑定期，单位为月
-	CurrencyId        *string                          `json:"currency_id,omitempty"`        // 币种id
-	IssuanceFrequency *int                             `json:"issuance_frequency,omitempty"` // 发放次数，必须与 details 的长度一致
-	GrantDate         *string                          `json:"grant_date,omitempty"`         // 授予日期
-	ItemId            *string                          `json:"item_id,omitempty"`            // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
-	Details           []*LumpSumPaymentDetailForCreate `json:"details,omitempty"`            // 发放明细列表
-	Remark            *string                          `json:"remark,omitempty"`             // 备注
+	UniqueId *string `json:"unique_id,omitempty"` // 外部幂等id，由上游业务决定
+
+	UserId *string `json:"user_id,omitempty"` // 员工id，具体类型由入参中的 user_id_type 指定
+
+	TotalAmount *string `json:"total_amount,omitempty"` // 总金额，字符串表达的数字
+
+	BindingPeriod *int `json:"binding_period,omitempty"` // 绑定期，单位为月
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
+
+	IssuanceFrequency *int `json:"issuance_frequency,omitempty"` // 发放次数，必须与 details 的长度一致
+
+	GrantDate *string `json:"grant_date,omitempty"` // 授予日期
+
+	ItemId *string `json:"item_id,omitempty"` // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+
+	Details []*LumpSumPaymentDetailForCreate `json:"details,omitempty"` // 发放明细列表
+
+	Remark *string `json:"remark,omitempty"` // 备注
 }
 
 type LumpSumPaymentForCreateBuilder struct {
-	uniqueId              string // 外部幂等id，由上游业务决定
-	uniqueIdFlag          bool
-	userId                string // 员工id，具体类型由入参中的 user_id_type 指定
-	userIdFlag            bool
-	totalAmount           string // 总金额，字符串表达的数字
-	totalAmountFlag       bool
-	bindingPeriod         int // 绑定期，单位为月
-	bindingPeriodFlag     bool
-	currencyId            string // 币种id
-	currencyIdFlag        bool
+	uniqueId     string // 外部幂等id，由上游业务决定
+	uniqueIdFlag bool
+
+	userId     string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag bool
+
+	totalAmount     string // 总金额，字符串表达的数字
+	totalAmountFlag bool
+
+	bindingPeriod     int // 绑定期，单位为月
+	bindingPeriodFlag bool
+
+	currencyId     string // 币种id
+	currencyIdFlag bool
+
 	issuanceFrequency     int // 发放次数，必须与 details 的长度一致
 	issuanceFrequencyFlag bool
-	grantDate             string // 授予日期
-	grantDateFlag         bool
-	itemId                string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
-	itemIdFlag            bool
-	details               []*LumpSumPaymentDetailForCreate // 发放明细列表
-	detailsFlag           bool
-	remark                string // 备注
-	remarkFlag            bool
+
+	grantDate     string // 授予日期
+	grantDateFlag bool
+
+	itemId     string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+	itemIdFlag bool
+
+	details     []*LumpSumPaymentDetailForCreate // 发放明细列表
+	detailsFlag bool
+
+	remark     string // 备注
+	remarkFlag bool
 }
 
 func NewLumpSumPaymentForCreateBuilder() *LumpSumPaymentForCreateBuilder {
@@ -2066,30 +2242,42 @@ func (builder *LumpSumPaymentForCreateBuilder) Build() *LumpSumPaymentForCreate 
 }
 
 type LumpSumPaymentForUpdate struct {
-	Id                *string                          `json:"id,omitempty"`                 // 一次性支付记录id
-	TotalAmount       *string                          `json:"total_amount,omitempty"`       // 总金额，字符串表达的数字
-	BindingPeriod     *int                             `json:"binding_period,omitempty"`     // 绑定期，单位为月
-	CurrencyId        *string                          `json:"currency_id,omitempty"`        // 币种id
-	IssuanceFrequency *int                             `json:"issuance_frequency,omitempty"` // 发放次数，必须与details的长度一致
-	Remark            *string                          `json:"remark,omitempty"`             // 备注
-	Details           []*LumpSumPaymentDetailForUpdate `json:"details,omitempty"`            // 发放明细列表
+	Id *string `json:"id,omitempty"` // 一次性支付记录id
+
+	TotalAmount *string `json:"total_amount,omitempty"` // 总金额，字符串表达的数字
+
+	BindingPeriod *int `json:"binding_period,omitempty"` // 绑定期，单位为月
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
+
+	IssuanceFrequency *int `json:"issuance_frequency,omitempty"` // 发放次数，必须与details的长度一致
+
+	Remark *string `json:"remark,omitempty"` // 备注
+
+	Details []*LumpSumPaymentDetailForUpdate `json:"details,omitempty"` // 发放明细列表
 }
 
 type LumpSumPaymentForUpdateBuilder struct {
-	id                    string // 一次性支付记录id
-	idFlag                bool
-	totalAmount           string // 总金额，字符串表达的数字
-	totalAmountFlag       bool
-	bindingPeriod         int // 绑定期，单位为月
-	bindingPeriodFlag     bool
-	currencyId            string // 币种id
-	currencyIdFlag        bool
+	id     string // 一次性支付记录id
+	idFlag bool
+
+	totalAmount     string // 总金额，字符串表达的数字
+	totalAmountFlag bool
+
+	bindingPeriod     int // 绑定期，单位为月
+	bindingPeriodFlag bool
+
+	currencyId     string // 币种id
+	currencyIdFlag bool
+
 	issuanceFrequency     int // 发放次数，必须与details的长度一致
 	issuanceFrequencyFlag bool
-	remark                string // 备注
-	remarkFlag            bool
-	details               []*LumpSumPaymentDetailForUpdate // 发放明细列表
-	detailsFlag           bool
+
+	remark     string // 备注
+	remarkFlag bool
+
+	details     []*LumpSumPaymentDetailForUpdate // 发放明细列表
+	detailsFlag bool
 }
 
 func NewLumpSumPaymentForUpdateBuilder() *LumpSumPaymentForUpdateBuilder {
@@ -2193,21 +2381,27 @@ func (builder *LumpSumPaymentForUpdateBuilder) Build() *LumpSumPaymentForUpdate 
 }
 
 type LumpSumPaymentOperateResult struct {
-	Id       *string `json:"id,omitempty"`        // 操作的记录的 id
+	Id *string `json:"id,omitempty"` // 操作的记录的 id
+
 	UniqueId *string `json:"unique_id,omitempty"` // 操作的记录的 unique_id
-	Code     *int    `json:"code,omitempty"`      // 操作结果状态码
-	Message  *string `json:"message,omitempty"`   // 操作结果描述
+
+	Code *int `json:"code,omitempty"` // 操作结果状态码
+
+	Message *string `json:"message,omitempty"` // 操作结果描述
 }
 
 type LumpSumPaymentOperateResultBuilder struct {
-	id           string // 操作的记录的 id
-	idFlag       bool
+	id     string // 操作的记录的 id
+	idFlag bool
+
 	uniqueId     string // 操作的记录的 unique_id
 	uniqueIdFlag bool
-	code         int // 操作结果状态码
-	codeFlag     bool
-	message      string // 操作结果描述
-	messageFlag  bool
+
+	code     int // 操作结果状态码
+	codeFlag bool
+
+	message     string // 操作结果描述
+	messageFlag bool
 }
 
 func NewLumpSumPaymentOperateResultBuilder() *LumpSumPaymentOperateResultBuilder {
@@ -2273,19 +2467,25 @@ func (builder *LumpSumPaymentOperateResultBuilder) Build() *LumpSumPaymentOperat
 }
 
 type Plan struct {
-	PlanId   *string `json:"plan_id,omitempty"`   // 方案ID
-	PlanTid  *string `json:"plan_tid,omitempty"`  // 方案时间轴版本ID
-	Name     *I18n   `json:"name,omitempty"`      // 方案名称
-	PeopleId *int    `json:"people_id,omitempty"` // People系统方案ID
+	PlanId *string `json:"plan_id,omitempty"` // 方案ID
+
+	PlanTid *string `json:"plan_tid,omitempty"` // 方案时间轴版本ID
+
+	Name *I18n `json:"name,omitempty"` // 方案名称
+
+	PeopleId *int `json:"people_id,omitempty"` // People系统方案ID
 }
 
 type PlanBuilder struct {
-	planId       string // 方案ID
-	planIdFlag   bool
-	planTid      string // 方案时间轴版本ID
-	planTidFlag  bool
-	name         *I18n // 方案名称
-	nameFlag     bool
+	planId     string // 方案ID
+	planIdFlag bool
+
+	planTid     string // 方案时间轴版本ID
+	planTidFlag bool
+
+	name     *I18n // 方案名称
+	nameFlag bool
+
 	peopleId     int // People系统方案ID
 	peopleIdFlag bool
 }
@@ -2352,16 +2552,20 @@ func (builder *PlanBuilder) Build() *Plan {
 }
 
 type PlanCondition struct {
-	LeftType   *int     `json:"left_type,omitempty"`   // 适用范围左值
-	Operator   *int     `json:"operator,omitempty"`    // 适用范围操作
+	LeftType *int `json:"left_type,omitempty"` // 适用范围左值
+
+	Operator *int `json:"operator,omitempty"` // 适用范围操作
+
 	RightValue []string `json:"right_value,omitempty"` // 适用范围右值
 }
 
 type PlanConditionBuilder struct {
-	leftType       int // 适用范围左值
-	leftTypeFlag   bool
-	operator       int // 适用范围操作
-	operatorFlag   bool
+	leftType     int // 适用范围左值
+	leftTypeFlag bool
+
+	operator     int // 适用范围操作
+	operatorFlag bool
+
 	rightValue     []string // 适用范围右值
 	rightValueFlag bool
 }
@@ -2415,45 +2619,67 @@ func (builder *PlanConditionBuilder) Build() *PlanCondition {
 }
 
 type PlanDetail struct {
-	Id                    *string          `json:"id,omitempty"`                      // 薪资方案ID
-	Tid                   *string          `json:"tid,omitempty"`                     // 薪资方案TID
-	Name                  *string          `json:"name,omitempty"`                    // 薪资方案名称
-	Description           *string          `json:"description,omitempty"`             // 薪资方案描述
-	EffectiveDate         *string          `json:"effective_date,omitempty"`          // 薪资方案生效时间
-	PlanScope             *PlanScope       `json:"plan_scope,omitempty"`              // 薪资方案适用范围
-	CurrencyId            *string          `json:"currency_id,omitempty"`             // 币种ID
-	ProbationSalaryStatus *bool            `json:"probation_salary_status,omitempty"` // 开启试用期薪酬状态
-	PlanItems             []*PlanItem      `json:"plan_items,omitempty"`              // 方案关联的薪资项
-	PlanIndicators        []*PlanIndicator `json:"plan_indicators,omitempty"`         // 方案关联的薪资统计指标
-	I18nNames             []*I18nContent   `json:"i18n_names,omitempty"`              // 多语言名称
-	I18nDescriptions      []*I18nContent   `json:"i18n_descriptions,omitempty"`       // 多语言描述
+	Id *string `json:"id,omitempty"` // 薪资方案ID
+
+	Tid *string `json:"tid,omitempty"` // 薪资方案TID
+
+	Name *string `json:"name,omitempty"` // 薪资方案名称
+
+	Description *string `json:"description,omitempty"` // 薪资方案描述
+
+	EffectiveDate *string `json:"effective_date,omitempty"` // 薪资方案生效时间
+
+	PlanScope *PlanScope `json:"plan_scope,omitempty"` // 薪资方案适用范围
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 币种ID
+
+	ProbationSalaryStatus *bool `json:"probation_salary_status,omitempty"` // 开启试用期薪酬状态
+
+	PlanItems []*PlanItem `json:"plan_items,omitempty"` // 方案关联的薪资项
+
+	PlanIndicators []*PlanIndicator `json:"plan_indicators,omitempty"` // 方案关联的薪资统计指标
+
+	I18nNames []*I18nContent `json:"i18n_names,omitempty"` // 多语言名称
+
+	I18nDescriptions []*I18nContent `json:"i18n_descriptions,omitempty"` // 多语言描述
 }
 
 type PlanDetailBuilder struct {
-	id                        string // 薪资方案ID
-	idFlag                    bool
-	tid                       string // 薪资方案TID
-	tidFlag                   bool
-	name                      string // 薪资方案名称
-	nameFlag                  bool
-	description               string // 薪资方案描述
-	descriptionFlag           bool
-	effectiveDate             string // 薪资方案生效时间
-	effectiveDateFlag         bool
-	planScope                 *PlanScope // 薪资方案适用范围
-	planScopeFlag             bool
-	currencyId                string // 币种ID
-	currencyIdFlag            bool
+	id     string // 薪资方案ID
+	idFlag bool
+
+	tid     string // 薪资方案TID
+	tidFlag bool
+
+	name     string // 薪资方案名称
+	nameFlag bool
+
+	description     string // 薪资方案描述
+	descriptionFlag bool
+
+	effectiveDate     string // 薪资方案生效时间
+	effectiveDateFlag bool
+
+	planScope     *PlanScope // 薪资方案适用范围
+	planScopeFlag bool
+
+	currencyId     string // 币种ID
+	currencyIdFlag bool
+
 	probationSalaryStatus     bool // 开启试用期薪酬状态
 	probationSalaryStatusFlag bool
-	planItems                 []*PlanItem // 方案关联的薪资项
-	planItemsFlag             bool
-	planIndicators            []*PlanIndicator // 方案关联的薪资统计指标
-	planIndicatorsFlag        bool
-	i18nNames                 []*I18nContent // 多语言名称
-	i18nNamesFlag             bool
-	i18nDescriptions          []*I18nContent // 多语言描述
-	i18nDescriptionsFlag      bool
+
+	planItems     []*PlanItem // 方案关联的薪资项
+	planItemsFlag bool
+
+	planIndicators     []*PlanIndicator // 方案关联的薪资统计指标
+	planIndicatorsFlag bool
+
+	i18nNames     []*I18nContent // 多语言名称
+	i18nNamesFlag bool
+
+	i18nDescriptions     []*I18nContent // 多语言描述
+	i18nDescriptionsFlag bool
 }
 
 func NewPlanDetailBuilder() *PlanDetailBuilder {
@@ -2618,13 +2844,15 @@ func (builder *PlanDetailBuilder) Build() *PlanDetail {
 }
 
 type PlanIndicator struct {
-	IndicatorId        *string          `json:"indicator_id,omitempty"`         // 薪资统计指标ID，详细信息可以通过[批量查询薪资统计指标](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/indicator/list)接口查询获得
+	IndicatorId *string `json:"indicator_id,omitempty"` // 薪资统计指标ID，详细信息可以通过[批量查询薪资统计指标](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/indicator/list)接口查询获得
+
 	PlanIndicatorLogic *AdjustmentLogic `json:"plan_indicator_logic,omitempty"` // 方案关联薪资统计指标逻辑配置
 }
 
 type PlanIndicatorBuilder struct {
-	indicatorId            string // 薪资统计指标ID，详细信息可以通过[批量查询薪资统计指标](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/indicator/list)接口查询获得
-	indicatorIdFlag        bool
+	indicatorId     string // 薪资统计指标ID，详细信息可以通过[批量查询薪资统计指标](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/indicator/list)接口查询获得
+	indicatorIdFlag bool
+
 	planIndicatorLogic     *AdjustmentLogic // 方案关联薪资统计指标逻辑配置
 	planIndicatorLogicFlag bool
 }
@@ -2665,22 +2893,30 @@ func (builder *PlanIndicatorBuilder) Build() *PlanIndicator {
 }
 
 type PlanItem struct {
-	AdjustmentType             *string          `json:"adjustment_type,omitempty"`              // 定薪方式
-	ItemId                     *string          `json:"item_id,omitempty"`                      // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
-	PlanItemLogic              *AdjustmentLogic `json:"plan_item_logic,omitempty"`              // 方案关联薪资项逻辑配置
-	ProbationDiscountType      *string          `json:"probation_discount_type,omitempty"`      // 试用期薪酬类型
-	ProbationDiscountPercentum *string          `json:"probation_discount_percentum,omitempty"` // 试用期薪酬百分比
+	AdjustmentType *string `json:"adjustment_type,omitempty"` // 定薪方式
+
+	ItemId *string `json:"item_id,omitempty"` // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+
+	PlanItemLogic *AdjustmentLogic `json:"plan_item_logic,omitempty"` // 方案关联薪资项逻辑配置
+
+	ProbationDiscountType *string `json:"probation_discount_type,omitempty"` // 试用期薪酬类型
+
+	ProbationDiscountPercentum *string `json:"probation_discount_percentum,omitempty"` // 试用期薪酬百分比
 }
 
 type PlanItemBuilder struct {
-	adjustmentType                 string // 定薪方式
-	adjustmentTypeFlag             bool
-	itemId                         string // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
-	itemIdFlag                     bool
-	planItemLogic                  *AdjustmentLogic // 方案关联薪资项逻辑配置
-	planItemLogicFlag              bool
-	probationDiscountType          string // 试用期薪酬类型
-	probationDiscountTypeFlag      bool
+	adjustmentType     string // 定薪方式
+	adjustmentTypeFlag bool
+
+	itemId     string // 薪酬项ID，详细信息可以通过[批量查询薪资项](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list)接口查询获得
+	itemIdFlag bool
+
+	planItemLogic     *AdjustmentLogic // 方案关联薪资项逻辑配置
+	planItemLogicFlag bool
+
+	probationDiscountType     string // 试用期薪酬类型
+	probationDiscountTypeFlag bool
+
 	probationDiscountPercentum     string // 试用期薪酬百分比
 	probationDiscountPercentumFlag bool
 }
@@ -2760,13 +2996,15 @@ func (builder *PlanItemBuilder) Build() *PlanItem {
 }
 
 type PlanScope struct {
-	IsAll          *bool            `json:"is_all,omitempty"`          // 是否全部范围
+	IsAll *bool `json:"is_all,omitempty"` // 是否全部范围
+
 	PlanConditions []*PlanCondition `json:"plan_conditions,omitempty"` // 方案适用范围条件组
 }
 
 type PlanScopeBuilder struct {
-	isAll              bool // 是否全部范围
-	isAllFlag          bool
+	isAll     bool // 是否全部范围
+	isAllFlag bool
+
 	planConditions     []*PlanCondition // 方案适用范围条件组
 	planConditionsFlag bool
 }
@@ -2807,42 +3045,62 @@ func (builder *PlanScopeBuilder) Build() *PlanScope {
 }
 
 type RecurringPayment struct {
-	Id             *string `json:"id,omitempty"`              // 经常性支付记录id
-	UniqueId       *string `json:"unique_id,omitempty"`       // 外部幂等id，由上游业务决定
-	UserId         *string `json:"user_id,omitempty"`         // 员工id，具体类型由入参中的 user_id_type 指定
-	ItemId         *string `json:"item_id,omitempty"`         // 薪酬项id
-	IssuanceType   *string `json:"issuance_type,omitempty"`   // 发放方式
-	EachAmount     *string `json:"each_amount,omitempty"`     // 单次发放金额
-	StartDate      *string `json:"start_date,omitempty"`      // 发放开始日期
-	EndDate        *string `json:"end_date,omitempty"`        // 发放结束日期
+	Id *string `json:"id,omitempty"` // 经常性支付记录id
+
+	UniqueId *string `json:"unique_id,omitempty"` // 外部幂等id，由上游业务决定
+
+	UserId *string `json:"user_id,omitempty"` // 员工id，具体类型由入参中的 user_id_type 指定
+
+	ItemId *string `json:"item_id,omitempty"` // 薪酬项id
+
+	IssuanceType *string `json:"issuance_type,omitempty"` // 发放方式
+
+	EachAmount *string `json:"each_amount,omitempty"` // 单次发放金额
+
+	StartDate *string `json:"start_date,omitempty"` // 发放开始日期
+
+	EndDate *string `json:"end_date,omitempty"` // 发放结束日期
+
 	IssuancePeriod *string `json:"issuance_period,omitempty"` // 发放频率
-	CurrencyId     *string `json:"currency_id,omitempty"`     // 币种id
-	Remark         *string `json:"remark,omitempty"`          // 备注
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
+
+	Remark *string `json:"remark,omitempty"` // 备注
 }
 
 type RecurringPaymentBuilder struct {
-	id                 string // 经常性支付记录id
-	idFlag             bool
-	uniqueId           string // 外部幂等id，由上游业务决定
-	uniqueIdFlag       bool
-	userId             string // 员工id，具体类型由入参中的 user_id_type 指定
-	userIdFlag         bool
-	itemId             string // 薪酬项id
-	itemIdFlag         bool
-	issuanceType       string // 发放方式
-	issuanceTypeFlag   bool
-	eachAmount         string // 单次发放金额
-	eachAmountFlag     bool
-	startDate          string // 发放开始日期
-	startDateFlag      bool
-	endDate            string // 发放结束日期
-	endDateFlag        bool
+	id     string // 经常性支付记录id
+	idFlag bool
+
+	uniqueId     string // 外部幂等id，由上游业务决定
+	uniqueIdFlag bool
+
+	userId     string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag bool
+
+	itemId     string // 薪酬项id
+	itemIdFlag bool
+
+	issuanceType     string // 发放方式
+	issuanceTypeFlag bool
+
+	eachAmount     string // 单次发放金额
+	eachAmountFlag bool
+
+	startDate     string // 发放开始日期
+	startDateFlag bool
+
+	endDate     string // 发放结束日期
+	endDateFlag bool
+
 	issuancePeriod     string // 发放频率
 	issuancePeriodFlag bool
-	currencyId         string // 币种id
-	currencyIdFlag     bool
-	remark             string // 备注
-	remarkFlag         bool
+
+	currencyId     string // 币种id
+	currencyIdFlag bool
+
+	remark     string // 备注
+	remarkFlag bool
 }
 
 func NewRecurringPaymentBuilder() *RecurringPaymentBuilder {
@@ -2999,39 +3257,57 @@ func (builder *RecurringPaymentBuilder) Build() *RecurringPayment {
 }
 
 type RecurringPaymentForCreate struct {
-	UniqueId       *string `json:"unique_id,omitempty"`       // 外部幂等id，由上游业务决定
-	UserId         *string `json:"user_id,omitempty"`         // 员工id，具体类型由入参中的 user_id_type 指定
-	ItemId         *string `json:"item_id,omitempty"`         // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
-	EachAmount     *string `json:"each_amount,omitempty"`     // 每次发放金额
-	StartDate      *string `json:"start_date,omitempty"`      // 发放开始时间
-	EndDate        *string `json:"end_date,omitempty"`        // 发放结束时间
-	CurrencyId     *string `json:"currency_id,omitempty"`     // 币种id
-	IssuanceType   *string `json:"issuance_type,omitempty"`   // 发放方式
+	UniqueId *string `json:"unique_id,omitempty"` // 外部幂等id，由上游业务决定
+
+	UserId *string `json:"user_id,omitempty"` // 员工id，具体类型由入参中的 user_id_type 指定
+
+	ItemId *string `json:"item_id,omitempty"` // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+
+	EachAmount *string `json:"each_amount,omitempty"` // 每次发放金额
+
+	StartDate *string `json:"start_date,omitempty"` // 发放开始时间
+
+	EndDate *string `json:"end_date,omitempty"` // 发放结束时间
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
+
+	IssuanceType *string `json:"issuance_type,omitempty"` // 发放方式
+
 	IssuancePeriod *string `json:"issuance_period,omitempty"` // 发放频率
-	Remark         *string `json:"remark,omitempty"`          // 备注
+
+	Remark *string `json:"remark,omitempty"` // 备注
 }
 
 type RecurringPaymentForCreateBuilder struct {
-	uniqueId           string // 外部幂等id，由上游业务决定
-	uniqueIdFlag       bool
-	userId             string // 员工id，具体类型由入参中的 user_id_type 指定
-	userIdFlag         bool
-	itemId             string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
-	itemIdFlag         bool
-	eachAmount         string // 每次发放金额
-	eachAmountFlag     bool
-	startDate          string // 发放开始时间
-	startDateFlag      bool
-	endDate            string // 发放结束时间
-	endDateFlag        bool
-	currencyId         string // 币种id
-	currencyIdFlag     bool
-	issuanceType       string // 发放方式
-	issuanceTypeFlag   bool
+	uniqueId     string // 外部幂等id，由上游业务决定
+	uniqueIdFlag bool
+
+	userId     string // 员工id，具体类型由入参中的 user_id_type 指定
+	userIdFlag bool
+
+	itemId     string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
+	itemIdFlag bool
+
+	eachAmount     string // 每次发放金额
+	eachAmountFlag bool
+
+	startDate     string // 发放开始时间
+	startDateFlag bool
+
+	endDate     string // 发放结束时间
+	endDateFlag bool
+
+	currencyId     string // 币种id
+	currencyIdFlag bool
+
+	issuanceType     string // 发放方式
+	issuanceTypeFlag bool
+
 	issuancePeriod     string // 发放频率
 	issuancePeriodFlag bool
-	remark             string // 备注
-	remarkFlag         bool
+
+	remark     string // 备注
+	remarkFlag bool
 }
 
 func NewRecurringPaymentForCreateBuilder() *RecurringPaymentForCreateBuilder {
@@ -3175,30 +3451,42 @@ func (builder *RecurringPaymentForCreateBuilder) Build() *RecurringPaymentForCre
 }
 
 type RecurringPaymentForUpdate struct {
-	Id           *string `json:"id,omitempty"`            // 经常性支付记录id
-	EachAmount   *string `json:"each_amount,omitempty"`   // 每次发放金额
-	StartDate    *string `json:"start_date,omitempty"`    // 发放开始时间
-	EndDate      *string `json:"end_date,omitempty"`      // 发放结束时间
-	CurrencyId   *string `json:"currency_id,omitempty"`   // 币种id
+	Id *string `json:"id,omitempty"` // 经常性支付记录id
+
+	EachAmount *string `json:"each_amount,omitempty"` // 每次发放金额
+
+	StartDate *string `json:"start_date,omitempty"` // 发放开始时间
+
+	EndDate *string `json:"end_date,omitempty"` // 发放结束时间
+
+	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
+
 	IssuanceType *string `json:"issuance_type,omitempty"` // 发放方式
-	Remark       *string `json:"remark,omitempty"`        // 原因
+
+	Remark *string `json:"remark,omitempty"` // 原因
 }
 
 type RecurringPaymentForUpdateBuilder struct {
-	id               string // 经常性支付记录id
-	idFlag           bool
-	eachAmount       string // 每次发放金额
-	eachAmountFlag   bool
-	startDate        string // 发放开始时间
-	startDateFlag    bool
-	endDate          string // 发放结束时间
-	endDateFlag      bool
-	currencyId       string // 币种id
-	currencyIdFlag   bool
+	id     string // 经常性支付记录id
+	idFlag bool
+
+	eachAmount     string // 每次发放金额
+	eachAmountFlag bool
+
+	startDate     string // 发放开始时间
+	startDateFlag bool
+
+	endDate     string // 发放结束时间
+	endDateFlag bool
+
+	currencyId     string // 币种id
+	currencyIdFlag bool
+
 	issuanceType     string // 发放方式
 	issuanceTypeFlag bool
-	remark           string // 原因
-	remarkFlag       bool
+
+	remark     string // 原因
+	remarkFlag bool
 }
 
 func NewRecurringPaymentForUpdateBuilder() *RecurringPaymentForUpdateBuilder {
@@ -3303,21 +3591,27 @@ func (builder *RecurringPaymentForUpdateBuilder) Build() *RecurringPaymentForUpd
 }
 
 type RecurringPaymentOperateResult struct {
-	Id       *string `json:"id,omitempty"`        // 操作记录的id
+	Id *string `json:"id,omitempty"` // 操作记录的id
+
 	UniqueId *string `json:"unique_id,omitempty"` // 操作的记录的 unique_id
-	Code     *int    `json:"code,omitempty"`      // 操作结果状态码
-	Message  *string `json:"message,omitempty"`   // 操作结果描述
+
+	Code *int `json:"code,omitempty"` // 操作结果状态码
+
+	Message *string `json:"message,omitempty"` // 操作结果描述
 }
 
 type RecurringPaymentOperateResultBuilder struct {
-	id           string // 操作记录的id
-	idFlag       bool
+	id     string // 操作记录的id
+	idFlag bool
+
 	uniqueId     string // 操作的记录的 unique_id
 	uniqueIdFlag bool
-	code         int // 操作结果状态码
-	codeFlag     bool
-	message      string // 操作结果描述
-	messageFlag  bool
+
+	code     int // 操作结果状态码
+	codeFlag bool
+
+	message     string // 操作结果描述
+	messageFlag bool
 }
 
 func NewRecurringPaymentOperateResultBuilder() *RecurringPaymentOperateResultBuilder {
@@ -3383,13 +3677,15 @@ func (builder *RecurringPaymentOperateResultBuilder) Build() *RecurringPaymentOp
 }
 
 type SocialArchive struct {
-	UserId  *string                `json:"user_id,omitempty"` // 员工ID
+	UserId *string `json:"user_id,omitempty"` // 员工ID
+
 	Details []*SocialArchiveDetail `json:"details,omitempty"` // 员工参保档案，包含社保、公积金档案
 }
 
 type SocialArchiveBuilder struct {
-	userId      string // 员工ID
-	userIdFlag  bool
+	userId     string // 员工ID
+	userIdFlag bool
+
 	details     []*SocialArchiveDetail // 员工参保档案，包含社保、公积金档案
 	detailsFlag bool
 }
@@ -3430,18 +3726,22 @@ func (builder *SocialArchiveBuilder) Build() *SocialArchive {
 }
 
 type SocialArchiveAdjustRecord struct {
-	UserId     *string                `json:"user_id,omitempty"`     // 员工ID
-	RecordType *string                `json:"record_type,omitempty"` // 类型，increase: 增员; attrition: 减员
-	Details    []*SocialArchiveDetail `json:"details,omitempty"`     // 员工增减员记录，包括社保、公积金记录
+	UserId *string `json:"user_id,omitempty"` // 员工ID
+
+	RecordType *string `json:"record_type,omitempty"` // 类型，increase: 增员; attrition: 减员
+
+	Details []*SocialArchiveDetail `json:"details,omitempty"` // 员工增减员记录，包括社保、公积金记录
 }
 
 type SocialArchiveAdjustRecordBuilder struct {
-	userId         string // 员工ID
-	userIdFlag     bool
+	userId     string // 员工ID
+	userIdFlag bool
+
 	recordType     string // 类型，increase: 增员; attrition: 减员
 	recordTypeFlag bool
-	details        []*SocialArchiveDetail // 员工增减员记录，包括社保、公积金记录
-	detailsFlag    bool
+
+	details     []*SocialArchiveDetail // 员工增减员记录，包括社保、公积金记录
+	detailsFlag bool
 }
 
 func NewSocialArchiveAdjustRecordBuilder() *SocialArchiveAdjustRecordBuilder {
@@ -3493,51 +3793,77 @@ func (builder *SocialArchiveAdjustRecordBuilder) Build() *SocialArchiveAdjustRec
 }
 
 type SocialArchiveDetail struct {
-	Description      *I18n                `json:"description,omitempty"`       // 调整说明
-	InsuranceType    *string              `json:"insurance_type,omitempty"`    // 类型。social_insurance: 社保; provident_fund: 公积金
-	InsuranceStatus  *string              `json:"insurance_status,omitempty"`  // 参保状态，非「参保」状态下，基数、险种数据等为空
-	Id               *string              `json:"id,omitempty"`                // 档案时间轴对象ID，仅参保档案对象会包含
-	Tid              *string              `json:"tid,omitempty"`               // 档案时间轴对象版本ID，仅参保档案对象会包含
-	PlanId           *string              `json:"plan_id,omitempty"`           // 参保方案ID，详细信息可通过「查询参保方案」接口获取
-	PlanTid          *string              `json:"plan_tid,omitempty"`          // 参保方案版本ID
-	LocationId       *string              `json:"location_id,omitempty"`       // 参保城市ID，可通过获取地点信息接口查询详细信息
-	CompanyId        *string              `json:"company_id,omitempty"`        // 社保缴纳主体ID，可通过获取公司主体接口查询详细信息
-	AccountType      *string              `json:"account_type,omitempty"`      // 社保账户类型
-	InsuranceAccount *string              `json:"insurance_account,omitempty"` // 社保账号
-	BaseSalary       *string              `json:"base_salary,omitempty"`       // 申报缴纳基数
+	Description *I18n `json:"description,omitempty"` // 调整说明
+
+	InsuranceType *string `json:"insurance_type,omitempty"` // 类型。social_insurance: 社保; provident_fund: 公积金
+
+	InsuranceStatus *string `json:"insurance_status,omitempty"` // 参保状态，非「参保」状态下，基数、险种数据等为空
+
+	Id *string `json:"id,omitempty"` // 档案时间轴对象ID，仅参保档案对象会包含
+
+	Tid *string `json:"tid,omitempty"` // 档案时间轴对象版本ID，仅参保档案对象会包含
+
+	PlanId *string `json:"plan_id,omitempty"` // 参保方案ID，详细信息可通过「查询参保方案」接口获取
+
+	PlanTid *string `json:"plan_tid,omitempty"` // 参保方案版本ID
+
+	LocationId *string `json:"location_id,omitempty"` // 参保城市ID，可通过获取地点信息接口查询详细信息
+
+	CompanyId *string `json:"company_id,omitempty"` // 社保缴纳主体ID，可通过获取公司主体接口查询详细信息
+
+	AccountType *string `json:"account_type,omitempty"` // 社保账户类型
+
+	InsuranceAccount *string `json:"insurance_account,omitempty"` // 社保账号
+
+	BaseSalary *string `json:"base_salary,omitempty"` // 申报缴纳基数
+
 	InsuranceDetails []*SocialArchiveItem `json:"insurance_details,omitempty"` // 险种数据详情
-	EffectiveDate    *string              `json:"effective_date,omitempty"`    // 档案生效时间，HHHH-MM-DD
+
+	EffectiveDate *string `json:"effective_date,omitempty"` // 档案生效时间，HHHH-MM-DD
 }
 
 type SocialArchiveDetailBuilder struct {
-	description          *I18n // 调整说明
-	descriptionFlag      bool
-	insuranceType        string // 类型。social_insurance: 社保; provident_fund: 公积金
-	insuranceTypeFlag    bool
-	insuranceStatus      string // 参保状态，非「参保」状态下，基数、险种数据等为空
-	insuranceStatusFlag  bool
-	id                   string // 档案时间轴对象ID，仅参保档案对象会包含
-	idFlag               bool
-	tid                  string // 档案时间轴对象版本ID，仅参保档案对象会包含
-	tidFlag              bool
-	planId               string // 参保方案ID，详细信息可通过「查询参保方案」接口获取
-	planIdFlag           bool
-	planTid              string // 参保方案版本ID
-	planTidFlag          bool
-	locationId           string // 参保城市ID，可通过获取地点信息接口查询详细信息
-	locationIdFlag       bool
-	companyId            string // 社保缴纳主体ID，可通过获取公司主体接口查询详细信息
-	companyIdFlag        bool
-	accountType          string // 社保账户类型
-	accountTypeFlag      bool
+	description     *I18n // 调整说明
+	descriptionFlag bool
+
+	insuranceType     string // 类型。social_insurance: 社保; provident_fund: 公积金
+	insuranceTypeFlag bool
+
+	insuranceStatus     string // 参保状态，非「参保」状态下，基数、险种数据等为空
+	insuranceStatusFlag bool
+
+	id     string // 档案时间轴对象ID，仅参保档案对象会包含
+	idFlag bool
+
+	tid     string // 档案时间轴对象版本ID，仅参保档案对象会包含
+	tidFlag bool
+
+	planId     string // 参保方案ID，详细信息可通过「查询参保方案」接口获取
+	planIdFlag bool
+
+	planTid     string // 参保方案版本ID
+	planTidFlag bool
+
+	locationId     string // 参保城市ID，可通过获取地点信息接口查询详细信息
+	locationIdFlag bool
+
+	companyId     string // 社保缴纳主体ID，可通过获取公司主体接口查询详细信息
+	companyIdFlag bool
+
+	accountType     string // 社保账户类型
+	accountTypeFlag bool
+
 	insuranceAccount     string // 社保账号
 	insuranceAccountFlag bool
-	baseSalary           string // 申报缴纳基数
-	baseSalaryFlag       bool
+
+	baseSalary     string // 申报缴纳基数
+	baseSalaryFlag bool
+
 	insuranceDetails     []*SocialArchiveItem // 险种数据详情
 	insuranceDetailsFlag bool
-	effectiveDate        string // 档案生效时间，HHHH-MM-DD
-	effectiveDateFlag    bool
+
+	effectiveDate     string // 档案生效时间，HHHH-MM-DD
+	effectiveDateFlag bool
 }
 
 func NewSocialArchiveDetailBuilder() *SocialArchiveDetailBuilder {
@@ -3731,33 +4057,47 @@ func (builder *SocialArchiveDetailBuilder) Build() *SocialArchiveDetail {
 }
 
 type SocialArchiveItem struct {
-	InsuranceId       *string                `json:"insurance_id,omitempty"`       // 险种ID，详细信息可通过社保险种接口查询
-	InsuranceName     *I18n                  `json:"insurance_name,omitempty"`     // 险种名称
-	CompanyDeduction  *string                `json:"company_deduction,omitempty"`  // 企业缴纳金额
-	CompanySetting    *SocialPlanItemSetting `json:"company_setting,omitempty"`    // 险种缴纳配置
-	PersonalDeduction *string                `json:"personal_deduction,omitempty"` // 企业缴纳金额
-	PersonalSetting   *SocialPlanItemSetting `json:"personal_setting,omitempty"`   // 险种缴纳配置
-	PaymentFrequency  *string                `json:"payment_frequency,omitempty"`  // 缴纳频率
-	PaymentMonths     []int                  `json:"payment_months,omitempty"`     // 缴纳月份
+	InsuranceId *string `json:"insurance_id,omitempty"` // 险种ID，详细信息可通过社保险种接口查询
+
+	InsuranceName *I18n `json:"insurance_name,omitempty"` // 险种名称
+
+	CompanyDeduction *string `json:"company_deduction,omitempty"` // 企业缴纳金额
+
+	CompanySetting *SocialPlanItemSetting `json:"company_setting,omitempty"` // 险种缴纳配置
+
+	PersonalDeduction *string `json:"personal_deduction,omitempty"` // 企业缴纳金额
+
+	PersonalSetting *SocialPlanItemSetting `json:"personal_setting,omitempty"` // 险种缴纳配置
+
+	PaymentFrequency *string `json:"payment_frequency,omitempty"` // 缴纳频率
+
+	PaymentMonths []int `json:"payment_months,omitempty"` // 缴纳月份
 }
 
 type SocialArchiveItemBuilder struct {
-	insuranceId           string // 险种ID，详细信息可通过社保险种接口查询
-	insuranceIdFlag       bool
-	insuranceName         *I18n // 险种名称
-	insuranceNameFlag     bool
-	companyDeduction      string // 企业缴纳金额
-	companyDeductionFlag  bool
-	companySetting        *SocialPlanItemSetting // 险种缴纳配置
-	companySettingFlag    bool
+	insuranceId     string // 险种ID，详细信息可通过社保险种接口查询
+	insuranceIdFlag bool
+
+	insuranceName     *I18n // 险种名称
+	insuranceNameFlag bool
+
+	companyDeduction     string // 企业缴纳金额
+	companyDeductionFlag bool
+
+	companySetting     *SocialPlanItemSetting // 险种缴纳配置
+	companySettingFlag bool
+
 	personalDeduction     string // 企业缴纳金额
 	personalDeductionFlag bool
-	personalSetting       *SocialPlanItemSetting // 险种缴纳配置
-	personalSettingFlag   bool
-	paymentFrequency      string // 缴纳频率
-	paymentFrequencyFlag  bool
-	paymentMonths         []int // 缴纳月份
-	paymentMonthsFlag     bool
+
+	personalSetting     *SocialPlanItemSetting // 险种缴纳配置
+	personalSettingFlag bool
+
+	paymentFrequency     string // 缴纳频率
+	paymentFrequencyFlag bool
+
+	paymentMonths     []int // 缴纳月份
+	paymentMonthsFlag bool
 }
 
 func NewSocialArchiveItemBuilder() *SocialArchiveItemBuilder {
@@ -3871,24 +4211,32 @@ func (builder *SocialArchiveItemBuilder) Build() *SocialArchiveItem {
 }
 
 type SocialInsurance struct {
-	Id            *string `json:"id,omitempty"`             // 险种唯一ID
-	Name          *I18n   `json:"name,omitempty"`           // 险种名称
+	Id *string `json:"id,omitempty"` // 险种唯一ID
+
+	Name *I18n `json:"name,omitempty"` // 险种名称
+
 	InsuranceType *string `json:"insurance_type,omitempty"` // 险种类型. social_insurance: 社保; provident_fund: 公积金
-	Active        *bool   `json:"active,omitempty"`         // 启用状态
-	IsSystem      *bool   `json:"is_system,omitempty"`      // 是否为系统预置险种。养老保险、医疗保险、失业保险、工伤保险、生育保险、住房公积金为系统预置险种。
+
+	Active *bool `json:"active,omitempty"` // 启用状态
+
+	IsSystem *bool `json:"is_system,omitempty"` // 是否为系统预置险种。养老保险、医疗保险、失业保险、工伤保险、生育保险、住房公积金为系统预置险种。
 }
 
 type SocialInsuranceBuilder struct {
-	id                string // 险种唯一ID
-	idFlag            bool
-	name              *I18n // 险种名称
-	nameFlag          bool
+	id     string // 险种唯一ID
+	idFlag bool
+
+	name     *I18n // 险种名称
+	nameFlag bool
+
 	insuranceType     string // 险种类型. social_insurance: 社保; provident_fund: 公积金
 	insuranceTypeFlag bool
-	active            bool // 启用状态
-	activeFlag        bool
-	isSystem          bool // 是否为系统预置险种。养老保险、医疗保险、失业保险、工伤保险、生育保险、住房公积金为系统预置险种。
-	isSystemFlag      bool
+
+	active     bool // 启用状态
+	activeFlag bool
+
+	isSystem     bool // 是否为系统预置险种。养老保险、医疗保险、失业保险、工伤保险、生育保险、住房公积金为系统预置险种。
+	isSystemFlag bool
 }
 
 func NewSocialInsuranceBuilder() *SocialInsuranceBuilder {
@@ -3966,36 +4314,52 @@ func (builder *SocialInsuranceBuilder) Build() *SocialInsurance {
 }
 
 type SocialPlan struct {
-	PlanId        *string                 `json:"plan_id,omitempty"`        // 参保方案ID
-	PlanTid       *string                 `json:"plan_tid,omitempty"`       // 参保方案版本ID
-	Name          *I18n                   `json:"name,omitempty"`           // 参保方案名称
-	EffectiveDate *string                 `json:"effective_date,omitempty"` // 生效时间，HHHH-MM-DD
-	Active        *bool                   `json:"active,omitempty"`         // 是否启用
-	InsuranceType *string                 `json:"insurance_type,omitempty"` // 险种类型. social_insurance: 社保; provident_fund: 公积金
-	Scope         *SocialPlanScope        `json:"scope,omitempty"`          // 参保方案适用范围
-	ItemDetail    []*SocialPlanItemDetail `json:"item_detail,omitempty"`    // 参保信息
-	Remark        *I18n                   `json:"remark,omitempty"`         // 备注
+	PlanId *string `json:"plan_id,omitempty"` // 参保方案ID
+
+	PlanTid *string `json:"plan_tid,omitempty"` // 参保方案版本ID
+
+	Name *I18n `json:"name,omitempty"` // 参保方案名称
+
+	EffectiveDate *string `json:"effective_date,omitempty"` // 生效时间，HHHH-MM-DD
+
+	Active *bool `json:"active,omitempty"` // 是否启用
+
+	InsuranceType *string `json:"insurance_type,omitempty"` // 险种类型. social_insurance: 社保; provident_fund: 公积金
+
+	Scope *SocialPlanScope `json:"scope,omitempty"` // 参保方案适用范围
+
+	ItemDetail []*SocialPlanItemDetail `json:"item_detail,omitempty"` // 参保信息
+
+	Remark *I18n `json:"remark,omitempty"` // 备注
 }
 
 type SocialPlanBuilder struct {
-	planId            string // 参保方案ID
-	planIdFlag        bool
-	planTid           string // 参保方案版本ID
-	planTidFlag       bool
-	name              *I18n // 参保方案名称
-	nameFlag          bool
+	planId     string // 参保方案ID
+	planIdFlag bool
+
+	planTid     string // 参保方案版本ID
+	planTidFlag bool
+
+	name     *I18n // 参保方案名称
+	nameFlag bool
+
 	effectiveDate     string // 生效时间，HHHH-MM-DD
 	effectiveDateFlag bool
-	active            bool // 是否启用
-	activeFlag        bool
+
+	active     bool // 是否启用
+	activeFlag bool
+
 	insuranceType     string // 险种类型. social_insurance: 社保; provident_fund: 公积金
 	insuranceTypeFlag bool
-	scope             *SocialPlanScope // 参保方案适用范围
-	scopeFlag         bool
-	itemDetail        []*SocialPlanItemDetail // 参保信息
-	itemDetailFlag    bool
-	remark            *I18n // 备注
-	remarkFlag        bool
+
+	scope     *SocialPlanScope // 参保方案适用范围
+	scopeFlag bool
+
+	itemDetail     []*SocialPlanItemDetail // 参保信息
+	itemDetailFlag bool
+
+	remark     *I18n // 备注
+	remarkFlag bool
 }
 
 func NewSocialPlanBuilder() *SocialPlanBuilder {
@@ -4122,16 +4486,20 @@ func (builder *SocialPlanBuilder) Build() *SocialPlan {
 }
 
 type SocialPlanCondition struct {
-	LeftType    *int     `json:"left_type,omitempty"`    // 适用范围左值
-	Operator    *int     `json:"operator,omitempty"`     // 适用范围操作
+	LeftType *int `json:"left_type,omitempty"` // 适用范围左值
+
+	Operator *int `json:"operator,omitempty"` // 适用范围操作
+
 	RightValues []string `json:"right_values,omitempty"` // 适用范围右值
 }
 
 type SocialPlanConditionBuilder struct {
-	leftType        int // 适用范围左值
-	leftTypeFlag    bool
-	operator        int // 适用范围操作
-	operatorFlag    bool
+	leftType     int // 适用范围左值
+	leftTypeFlag bool
+
+	operator     int // 适用范围操作
+	operatorFlag bool
+
 	rightValues     []string // 适用范围右值
 	rightValuesFlag bool
 }
@@ -4185,27 +4553,37 @@ func (builder *SocialPlanConditionBuilder) Build() *SocialPlanCondition {
 }
 
 type SocialPlanItemDetail struct {
-	ItemId               *string                `json:"item_id,omitempty"`                 // 险种ID，详细信息可通过社保险种接口查询
-	ItemName             *I18n                  `json:"item_name,omitempty"`               // 险种名
-	ItemSettingOfPerson  *SocialPlanItemSetting `json:"item_setting_of_person,omitempty"`  // 险种缴纳配置
+	ItemId *string `json:"item_id,omitempty"` // 险种ID，详细信息可通过社保险种接口查询
+
+	ItemName *I18n `json:"item_name,omitempty"` // 险种名
+
+	ItemSettingOfPerson *SocialPlanItemSetting `json:"item_setting_of_person,omitempty"` // 险种缴纳配置
+
 	ItemSettingOfCompany *SocialPlanItemSetting `json:"item_setting_of_company,omitempty"` // 险种缴纳配置
-	PaymentFrequency     *string                `json:"payment_frequency,omitempty"`       // 缴纳频率
-	PaymentMonths        []int                  `json:"payment_months,omitempty"`          // 缴纳月份
+
+	PaymentFrequency *string `json:"payment_frequency,omitempty"` // 缴纳频率
+
+	PaymentMonths []int `json:"payment_months,omitempty"` // 缴纳月份
 }
 
 type SocialPlanItemDetailBuilder struct {
-	itemId                   string // 险种ID，详细信息可通过社保险种接口查询
-	itemIdFlag               bool
-	itemName                 *I18n // 险种名
-	itemNameFlag             bool
-	itemSettingOfPerson      *SocialPlanItemSetting // 险种缴纳配置
-	itemSettingOfPersonFlag  bool
+	itemId     string // 险种ID，详细信息可通过社保险种接口查询
+	itemIdFlag bool
+
+	itemName     *I18n // 险种名
+	itemNameFlag bool
+
+	itemSettingOfPerson     *SocialPlanItemSetting // 险种缴纳配置
+	itemSettingOfPersonFlag bool
+
 	itemSettingOfCompany     *SocialPlanItemSetting // 险种缴纳配置
 	itemSettingOfCompanyFlag bool
-	paymentFrequency         string // 缴纳频率
-	paymentFrequencyFlag     bool
-	paymentMonths            []int // 缴纳月份
-	paymentMonthsFlag        bool
+
+	paymentFrequency     string // 缴纳频率
+	paymentFrequencyFlag bool
+
+	paymentMonths     []int // 缴纳月份
+	paymentMonthsFlag bool
 }
 
 func NewSocialPlanItemDetailBuilder() *SocialPlanItemDetailBuilder {
@@ -4293,27 +4671,37 @@ func (builder *SocialPlanItemDetailBuilder) Build() *SocialPlanItemDetail {
 }
 
 type SocialPlanItemSetting struct {
-	LowerLimit          *string `json:"lower_limit,omitempty"`           // 基数下限，浮点数，保留二位小数
-	UpperLimit          *string `json:"upper_limit,omitempty"`           // 基数上限，浮点数，保留二位小数
-	PaymentRatio        *string `json:"payment_ratio,omitempty"`         // 缴纳比例，浮点数，默认填充到二位小数，支持输入到四位，单位为 %
+	LowerLimit *string `json:"lower_limit,omitempty"` // 基数下限，浮点数，保留二位小数
+
+	UpperLimit *string `json:"upper_limit,omitempty"` // 基数上限，浮点数，保留二位小数
+
+	PaymentRatio *string `json:"payment_ratio,omitempty"` // 缴纳比例，浮点数，默认填充到二位小数，支持输入到四位，单位为 %
+
 	PaymentRoundingRule *string `json:"payment_rounding_rule,omitempty"` // 缴纳金舍入规则。rounding: 四舍五入; round_up: 向上舍入; round_down: 向下舍入
-	PaymentDecimals     *int    `json:"payment_decimals,omitempty"`      // 缴纳金小数位数，0-6之间选择
-	FixedPayment        *string `json:"fixed_payment,omitempty"`         // 附加固定金额，浮点数，保留二位小数
+
+	PaymentDecimals *int `json:"payment_decimals,omitempty"` // 缴纳金小数位数，0-6之间选择
+
+	FixedPayment *string `json:"fixed_payment,omitempty"` // 附加固定金额，浮点数，保留二位小数
 }
 
 type SocialPlanItemSettingBuilder struct {
-	lowerLimit              string // 基数下限，浮点数，保留二位小数
-	lowerLimitFlag          bool
-	upperLimit              string // 基数上限，浮点数，保留二位小数
-	upperLimitFlag          bool
-	paymentRatio            string // 缴纳比例，浮点数，默认填充到二位小数，支持输入到四位，单位为 %
-	paymentRatioFlag        bool
+	lowerLimit     string // 基数下限，浮点数，保留二位小数
+	lowerLimitFlag bool
+
+	upperLimit     string // 基数上限，浮点数，保留二位小数
+	upperLimitFlag bool
+
+	paymentRatio     string // 缴纳比例，浮点数，默认填充到二位小数，支持输入到四位，单位为 %
+	paymentRatioFlag bool
+
 	paymentRoundingRule     string // 缴纳金舍入规则。rounding: 四舍五入; round_up: 向上舍入; round_down: 向下舍入
 	paymentRoundingRuleFlag bool
-	paymentDecimals         int // 缴纳金小数位数，0-6之间选择
-	paymentDecimalsFlag     bool
-	fixedPayment            string // 附加固定金额，浮点数，保留二位小数
-	fixedPaymentFlag        bool
+
+	paymentDecimals     int // 缴纳金小数位数，0-6之间选择
+	paymentDecimalsFlag bool
+
+	fixedPayment     string // 附加固定金额，浮点数，保留二位小数
+	fixedPaymentFlag bool
 }
 
 func NewSocialPlanItemSettingBuilder() *SocialPlanItemSettingBuilder {
@@ -4405,13 +4793,15 @@ func (builder *SocialPlanItemSettingBuilder) Build() *SocialPlanItemSetting {
 }
 
 type SocialPlanScope struct {
-	IsAll *bool                    `json:"is_all,omitempty"` // 是否适用于全部
-	Rules [][]*SocialPlanCondition `json:"rules,omitempty"`  // 适用范围，二维。外层or连接，内层and连接
+	IsAll *bool `json:"is_all,omitempty"` // 是否适用于全部
+
+	Rules [][]*SocialPlanCondition `json:"rules,omitempty"` // 适用范围，二维。外层or连接，内层and连接
 }
 
 type SocialPlanScopeBuilder struct {
 	isAll     bool // 是否适用于全部
 	isAllFlag bool
+
 	rules     [][]*SocialPlanCondition // 适用范围，二维。外层or连接，内层and连接
 	rulesFlag bool
 }
@@ -4452,14 +4842,17 @@ func (builder *SocialPlanScopeBuilder) Build() *SocialPlanScope {
 }
 
 type QueryArchiveReqBodyBuilder struct {
-	userIdList             []string // 用户ID列表
-	userIdListFlag         bool
-	tidList                []string // 档案Tid列表
-	tidListFlag            bool
+	userIdList     []string // 用户ID列表
+	userIdListFlag bool
+
+	tidList     []string // 档案Tid列表
+	tidListFlag bool
+
 	effectiveStartDate     string // 生效开始时间
 	effectiveStartDateFlag bool
-	effectiveEndDate       string // 生效结束时间
-	effectiveEndDateFlag   bool
+
+	effectiveEndDate     string // 生效结束时间
+	effectiveEndDateFlag bool
 }
 
 func NewQueryArchiveReqBodyBuilder() *QueryArchiveReqBodyBuilder {
@@ -4641,10 +5034,13 @@ func (builder *QueryArchiveReqBuilder) Build() *QueryArchiveReq {
 }
 
 type QueryArchiveReqBody struct {
-	UserIdList         []string `json:"user_id_list,omitempty"`         // 用户ID列表
-	TidList            []string `json:"tid_list,omitempty"`             // 档案Tid列表
-	EffectiveStartDate *string  `json:"effective_start_date,omitempty"` // 生效开始时间
-	EffectiveEndDate   *string  `json:"effective_end_date,omitempty"`   // 生效结束时间
+	UserIdList []string `json:"user_id_list,omitempty"` // 用户ID列表
+
+	TidList []string `json:"tid_list,omitempty"` // 档案Tid列表
+
+	EffectiveStartDate *string `json:"effective_start_date,omitempty"` // 生效开始时间
+
+	EffectiveEndDate *string `json:"effective_end_date,omitempty"` // 生效结束时间
 }
 
 type QueryArchiveReq struct {
@@ -4653,9 +5049,11 @@ type QueryArchiveReq struct {
 }
 
 type QueryArchiveRespData struct {
-	Items     []*ArchiveDetail `json:"items,omitempty"`      // 档案信息列表
-	PageToken *string          `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool            `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*ArchiveDetail `json:"items,omitempty"` // 档案信息列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type QueryArchiveResp struct {
@@ -4719,9 +5117,11 @@ type ListChangeReasonReq struct {
 }
 
 type ListChangeReasonRespData struct {
-	Items     []*ChangeReason `json:"items,omitempty"`      // 调薪原因信息列表
-	PageToken *string         `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool           `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*ChangeReason `json:"items,omitempty"` // 调薪原因信息列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListChangeReasonResp struct {
@@ -4785,9 +5185,11 @@ type ListIndicatorReq struct {
 }
 
 type ListIndicatorRespData struct {
-	Items     []*Indicator `json:"items,omitempty"`      // 薪资统计指标信息列表
-	PageToken *string      `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool        `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*Indicator `json:"items,omitempty"` // 薪资统计指标信息列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListIndicatorResp struct {
@@ -4859,9 +5261,11 @@ type ListItemReq struct {
 }
 
 type ListItemRespData struct {
-	Items     []*Item `json:"items,omitempty"`      // 薪酬项信息列表
+	Items []*Item `json:"items,omitempty"` // 薪酬项信息列表
+
 	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有更多项
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListItemResp struct {
@@ -4925,9 +5329,11 @@ type ListItemCategoryReq struct {
 }
 
 type ListItemCategoryRespData struct {
-	Items     []*ItemCategory `json:"items,omitempty"`      // 薪酬项分类信息列表
-	PageToken *string         `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool           `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*ItemCategory `json:"items,omitempty"` // 薪酬项分类信息列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListItemCategoryResp struct {
@@ -4991,9 +5397,11 @@ type ListPlanReq struct {
 }
 
 type ListPlanRespData struct {
-	Items     []*PlanDetail `json:"items,omitempty"`      // 薪资方案信息列表
-	PageToken *string       `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*PlanDetail `json:"items,omitempty"` // 薪资方案信息列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListPlanResp struct {

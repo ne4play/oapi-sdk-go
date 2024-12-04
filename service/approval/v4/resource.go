@@ -15,7 +15,7 @@ type V4 struct {
 	ExternalTask     *externalTask     // 三方审批任务
 	Instance         *instance         // 原生审批实例
 	InstanceComment  *instanceComment  // 原生审批评论
-	Task             *task             // 原生审批任务
+	Task             *task             // 审批查询
 }
 
 func New(config *larkcore.Config) *V4 {

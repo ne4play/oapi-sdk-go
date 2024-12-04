@@ -18,13 +18,15 @@ import (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -62,16 +64,20 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type FileConfig struct {
-	FileId     *string `json:"file_id,omitempty"`     // 仅包含字母数字和下划线的 16 位字符串作为文件的标识，用户生成
-	Format     *string `json:"format,omitempty"`      // 语音格式，目前仅支持：pcm
+	FileId *string `json:"file_id,omitempty"` // 仅包含字母数字和下划线的 16 位字符串作为文件的标识，用户生成
+
+	Format *string `json:"format,omitempty"` // 语音格式，目前仅支持：pcm
+
 	EngineType *string `json:"engine_type,omitempty"` // 引擎类型，目前仅支持：16k_auto 中英混合
 }
 
 type FileConfigBuilder struct {
-	fileId         string // 仅包含字母数字和下划线的 16 位字符串作为文件的标识，用户生成
-	fileIdFlag     bool
-	format         string // 语音格式，目前仅支持：pcm
-	formatFlag     bool
+	fileId     string // 仅包含字母数字和下划线的 16 位字符串作为文件的标识，用户生成
+	fileIdFlag bool
+
+	format     string // 语音格式，目前仅支持：pcm
+	formatFlag bool
+
 	engineType     string // 引擎类型，目前仅支持：16k_auto 中英混合
 	engineTypeFlag bool
 }
@@ -126,13 +132,15 @@ func (builder *FileConfigBuilder) Build() *FileConfig {
 }
 
 type Speech struct {
-	Speech    *string `json:"speech,omitempty"`     // pcm格式音频文件（文件识别）或音频分片（流式识别）经base64编码后的内容
+	Speech *string `json:"speech,omitempty"` // pcm格式音频文件（文件识别）或音频分片（流式识别）经base64编码后的内容
+
 	SpeechKey *string `json:"speech_key,omitempty"` // 上传到 drive 存储平台后获取到的 key （暂不支持）
 }
 
 type SpeechBuilder struct {
-	speech        string // pcm格式音频文件（文件识别）或音频分片（流式识别）经base64编码后的内容
-	speechFlag    bool
+	speech     string // pcm格式音频文件（文件识别）或音频分片（流式识别）经base64编码后的内容
+	speechFlag bool
+
 	speechKey     string // 上传到 drive 存储平台后获取到的 key （暂不支持）
 	speechKeyFlag bool
 }
@@ -174,22 +182,30 @@ func (builder *SpeechBuilder) Build() *Speech {
 }
 
 type StreamConfig struct {
-	StreamId   *string `json:"stream_id,omitempty"`   // 仅包含字母数字和下划线的 16 位字符串作为同一数据流的标识，用户生成
-	SequenceId *int    `json:"sequence_id,omitempty"` // 数据流分片的序号，序号从 0 开始，每次请求递增 1
-	Action     *int    `json:"action,omitempty"`      // 数据流标记：1 首包，2 正常结束，等待结果返回，3 中断数据流不返回最终结果
-	Format     *string `json:"format,omitempty"`      // 语音格式，目前仅支持：pcm
+	StreamId *string `json:"stream_id,omitempty"` // 仅包含字母数字和下划线的 16 位字符串作为同一数据流的标识，用户生成
+
+	SequenceId *int `json:"sequence_id,omitempty"` // 数据流分片的序号，序号从 0 开始，每次请求递增 1
+
+	Action *int `json:"action,omitempty"` // 数据流标记：1 首包，2 正常结束，等待结果返回，3 中断数据流不返回最终结果
+
+	Format *string `json:"format,omitempty"` // 语音格式，目前仅支持：pcm
+
 	EngineType *string `json:"engine_type,omitempty"` // 引擎类型，目前仅支持：16k_auto 中英混合
 }
 
 type StreamConfigBuilder struct {
-	streamId       string // 仅包含字母数字和下划线的 16 位字符串作为同一数据流的标识，用户生成
-	streamIdFlag   bool
+	streamId     string // 仅包含字母数字和下划线的 16 位字符串作为同一数据流的标识，用户生成
+	streamIdFlag bool
+
 	sequenceId     int // 数据流分片的序号，序号从 0 开始，每次请求递增 1
 	sequenceIdFlag bool
-	action         int // 数据流标记：1 首包，2 正常结束，等待结果返回，3 中断数据流不返回最终结果
-	actionFlag     bool
-	format         string // 语音格式，目前仅支持：pcm
-	formatFlag     bool
+
+	action     int // 数据流标记：1 首包，2 正常结束，等待结果返回，3 中断数据流不返回最终结果
+	actionFlag bool
+
+	format     string // 语音格式，目前仅支持：pcm
+	formatFlag bool
+
 	engineType     string // 引擎类型，目前仅支持：16k_auto 中英混合
 	engineTypeFlag bool
 }
@@ -272,6 +288,7 @@ func (builder *StreamConfigBuilder) Build() *StreamConfig {
 type FileRecognizeSpeechReqBodyBuilder struct {
 	speech     *Speech // 语音资源
 	speechFlag bool
+
 	config     *FileConfig // 配置属性
 	configFlag bool
 }
@@ -379,7 +396,8 @@ func (builder *FileRecognizeSpeechReqBuilder) Build() *FileRecognizeSpeechReq {
 }
 
 type FileRecognizeSpeechReqBody struct {
-	Speech *Speech     `json:"speech,omitempty"` // 语音资源
+	Speech *Speech `json:"speech,omitempty"` // 语音资源
+
 	Config *FileConfig `json:"config,omitempty"` // 配置属性
 }
 
@@ -405,6 +423,7 @@ func (resp *FileRecognizeSpeechResp) Success() bool {
 type StreamRecognizeSpeechReqBodyBuilder struct {
 	speech     *Speech // 语音资源
 	speechFlag bool
+
 	config     *StreamConfig // 配置属性
 	configFlag bool
 }
@@ -512,7 +531,8 @@ func (builder *StreamRecognizeSpeechReqBuilder) Build() *StreamRecognizeSpeechRe
 }
 
 type StreamRecognizeSpeechReqBody struct {
-	Speech *Speech       `json:"speech,omitempty"` // 语音资源
+	Speech *Speech `json:"speech,omitempty"` // 语音资源
+
 	Config *StreamConfig `json:"config,omitempty"` // 配置属性
 }
 
@@ -522,8 +542,10 @@ type StreamRecognizeSpeechReq struct {
 }
 
 type StreamRecognizeSpeechRespData struct {
-	StreamId        *string `json:"stream_id,omitempty"`        // 16 位 String 随机串作为同一数据流的标识
-	SequenceId      *int    `json:"sequence_id,omitempty"`      // 数据流分片的序号，序号从 0 开始，每次请求递增 1
+	StreamId *string `json:"stream_id,omitempty"` // 16 位 String 随机串作为同一数据流的标识
+
+	SequenceId *int `json:"sequence_id,omitempty"` // 数据流分片的序号，序号从 0 开始，每次请求递增 1
+
 	RecognitionText *string `json:"recognition_text,omitempty"` // 语音流识别后的文本信息
 }
 

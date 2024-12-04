@@ -129,27 +129,37 @@ const (
 )
 
 type AdminDeptExtContactStat struct {
-	Date              *string `json:"date,omitempty"`                 // 日期
-	DepartmentId      *string `json:"department_id,omitempty"`        // 部门ID
-	DepartmentName    *string `json:"department_name,omitempty"`      // 部门名
+	Date *string `json:"date,omitempty"` // 日期
+
+	DepartmentId *string `json:"department_id,omitempty"` // 部门ID
+
+	DepartmentName *string `json:"department_name,omitempty"` // 部门名
+
 	HasRefContactUcnt *string `json:"has_ref_contact_ucnt,omitempty"` // 拥有外部联系人的成员数
-	RefContactUcnt    *string `json:"ref_contact_ucnt,omitempty"`     // 外部联系人总数
-	RefContactTcnt    *string `json:"ref_contact_tcnt,omitempty"`     // 外部联系人所属租户数
+
+	RefContactUcnt *string `json:"ref_contact_ucnt,omitempty"` // 外部联系人总数
+
+	RefContactTcnt *string `json:"ref_contact_tcnt,omitempty"` // 外部联系人所属租户数
 }
 
 type AdminDeptExtContactStatBuilder struct {
-	date                  string // 日期
-	dateFlag              bool
-	departmentId          string // 部门ID
-	departmentIdFlag      bool
-	departmentName        string // 部门名
-	departmentNameFlag    bool
+	date     string // 日期
+	dateFlag bool
+
+	departmentId     string // 部门ID
+	departmentIdFlag bool
+
+	departmentName     string // 部门名
+	departmentNameFlag bool
+
 	hasRefContactUcnt     string // 拥有外部联系人的成员数
 	hasRefContactUcntFlag bool
-	refContactUcnt        string // 外部联系人总数
-	refContactUcntFlag    bool
-	refContactTcnt        string // 外部联系人所属租户数
-	refContactTcntFlag    bool
+
+	refContactUcnt     string // 外部联系人总数
+	refContactUcntFlag bool
+
+	refContactTcnt     string // 外部联系人所属租户数
+	refContactTcntFlag bool
 }
 
 func NewAdminDeptExtContactStatBuilder() *AdminDeptExtContactStatBuilder {
@@ -241,135 +251,217 @@ func (builder *AdminDeptExtContactStatBuilder) Build() *AdminDeptExtContactStat 
 }
 
 type AdminDeptStat struct {
-	Date                 *string `json:"date,omitempty"`                    // 日期
-	DepartmentId         *string `json:"department_id,omitempty"`           // 部门的department_id 或者open_department_id
-	DepartmentName       *string `json:"department_name,omitempty"`         // 部门名字
-	DepartmentPath       *string `json:"department_path,omitempty"`         // 部门路径
-	TotalUserNum         *int    `json:"total_user_num,omitempty"`          // 部门总人数
-	ActiveUserNum        *int    `json:"active_user_num,omitempty"`         // 激活人数
-	ActiveUserRate       *string `json:"active_user_rate,omitempty"`        // 激活率
-	SuiteDau             *int    `json:"suite_dau,omitempty"`               // 活跃人数
-	SuiteActiveRate      *string `json:"suite_active_rate,omitempty"`       // 活跃率
-	NewUserNum           *int    `json:"new_user_num,omitempty"`            // 新用户数
-	NewActiveNum         *int    `json:"new_active_num,omitempty"`          // 新激活数
-	ResignUserNum        *int    `json:"resign_user_num,omitempty"`         // 离职人数
-	ImDau                *int    `json:"im_dau,omitempty"`                  // 消息活跃人数
-	SendMessengerUserNum *int    `json:"send_messenger_user_num,omitempty"` // 发送消息人数
-	SendMessengerNum     *int    `json:"send_messenger_num,omitempty"`      // 发送消息数
-	AvgSendMessengerNum  *string `json:"avg_send_messenger_num,omitempty"`  // 人均发送消息数
-	DocsDau              *int    `json:"docs_dau,omitempty"`                // 云文档活跃人数
-	CreateDocsUserNum    *int    `json:"create_docs_user_num,omitempty"`    // 创建文件人数
-	CreateDocsNum        *int    `json:"create_docs_num,omitempty"`         // 创建文件数
-	AvgCreateDocsNum     *string `json:"avg_create_docs_num,omitempty"`     // 人均创建文件数
-	CalDau               *int    `json:"cal_dau,omitempty"`                 // 日历活跃人数
-	CreateCalUserNum     *int    `json:"create_cal_user_num,omitempty"`     // 创建日程人数
-	CreateCalNum         *int    `json:"create_cal_num,omitempty"`          // 创建日程数
-	AvgCreateCalNum      *string `json:"avg_create_cal_num,omitempty"`      // 人均创建日程数
-	VcDau                *int    `json:"vc_dau,omitempty"`                  // 音视频会议活跃人数
-	VcDuration           *int    `json:"vc_duration,omitempty"`             // 会议时长：企业内员工参与通话与会议的总时长（分钟）
-	AvgVcDuration        *string `json:"avg_vc_duration,omitempty"`         // 人均会议时长（分钟）
-	AvgDuration          *string `json:"avg_duration,omitempty"`            // 人均飞书使用时长（分钟）
-	TaskDau              *int    `json:"task_dau,omitempty"`                // 任务活跃人数
-	CreateTaskUserNum    *int    `json:"create_task_user_num,omitempty"`    // 创建任务人数
-	CreateTaskNum        *int    `json:"create_task_num,omitempty"`         // 创建任务数
-	AvgCreateTaskNum     *string `json:"avg_create_task_num,omitempty"`     // 人均创建任务数
-	EmailSendCount       *string `json:"email_send_count,omitempty"`        // 邮件总发件量
-	EmailReceiveCount    *string `json:"email_receive_count,omitempty"`     // 邮件总收件量
-	EmailSendExtCount    *string `json:"email_send_ext_count,omitempty"`    // 对外发件数
+	Date *string `json:"date,omitempty"` // 日期
+
+	DepartmentId *string `json:"department_id,omitempty"` // 部门的department_id 或者open_department_id
+
+	DepartmentName *string `json:"department_name,omitempty"` // 部门名字
+
+	DepartmentPath *string `json:"department_path,omitempty"` // 部门路径
+
+	TotalUserNum *int `json:"total_user_num,omitempty"` // 部门总人数
+
+	ActiveUserNum *int `json:"active_user_num,omitempty"` // 激活人数
+
+	ActiveUserRate *string `json:"active_user_rate,omitempty"` // 激活率
+
+	SuiteDau *int `json:"suite_dau,omitempty"` // 活跃人数
+
+	SuiteActiveRate *string `json:"suite_active_rate,omitempty"` // 活跃率
+
+	NewUserNum *int `json:"new_user_num,omitempty"` // 新用户数
+
+	NewActiveNum *int `json:"new_active_num,omitempty"` // 新激活数
+
+	ResignUserNum *int `json:"resign_user_num,omitempty"` // 离职人数
+
+	ImDau *int `json:"im_dau,omitempty"` // 消息活跃人数
+
+	SendMessengerUserNum *int `json:"send_messenger_user_num,omitempty"` // 发送消息人数
+
+	SendMessengerNum *int `json:"send_messenger_num,omitempty"` // 发送消息数
+
+	AvgSendMessengerNum *string `json:"avg_send_messenger_num,omitempty"` // 人均发送消息数
+
+	DocsDau *int `json:"docs_dau,omitempty"` // 云文档活跃人数
+
+	CreateDocsUserNum *int `json:"create_docs_user_num,omitempty"` // 创建文件人数
+
+	CreateDocsNum *int `json:"create_docs_num,omitempty"` // 创建文件数
+
+	AvgCreateDocsNum *string `json:"avg_create_docs_num,omitempty"` // 人均创建文件数
+
+	CalDau *int `json:"cal_dau,omitempty"` // 日历活跃人数
+
+	CreateCalUserNum *int `json:"create_cal_user_num,omitempty"` // 创建日程人数
+
+	CreateCalNum *int `json:"create_cal_num,omitempty"` // 创建日程数
+
+	AvgCreateCalNum *string `json:"avg_create_cal_num,omitempty"` // 人均创建日程数
+
+	VcDau *int `json:"vc_dau,omitempty"` // 音视频会议活跃人数
+
+	VcDuration *int `json:"vc_duration,omitempty"` // 会议时长：企业内员工参与通话与会议的总时长（分钟）
+
+	AvgVcDuration *string `json:"avg_vc_duration,omitempty"` // 人均会议时长（分钟）
+
+	AvgDuration *string `json:"avg_duration,omitempty"` // 人均飞书使用时长（分钟）
+
+	TaskDau *int `json:"task_dau,omitempty"` // 任务活跃人数
+
+	CreateTaskUserNum *int `json:"create_task_user_num,omitempty"` // 创建任务人数
+
+	CreateTaskNum *int `json:"create_task_num,omitempty"` // 创建任务数
+
+	AvgCreateTaskNum *string `json:"avg_create_task_num,omitempty"` // 人均创建任务数
+
+	EmailSendCount *string `json:"email_send_count,omitempty"` // 邮件总发件量
+
+	EmailReceiveCount *string `json:"email_receive_count,omitempty"` // 邮件总收件量
+
+	EmailSendExtCount *string `json:"email_send_ext_count,omitempty"` // 对外发件数
+
 	EmailReceiveExtCount *string `json:"email_receive_ext_count,omitempty"` // 来自外部收件数
-	EmailSendInCount     *string `json:"email_send_in_count,omitempty"`     // 对内发件数
-	EmailReceiveInCount  *string `json:"email_receive_in_count,omitempty"`  // 来自内部收件数
-	SearchActiveDau      *string `json:"search_active_dau,omitempty"`       // 大搜搜索活跃人数
-	TotalSearchCount     *string `json:"total_search_count,omitempty"`      // 总搜索次数
-	QuickSearchCount     *string `json:"quick_search_count,omitempty"`      // 综搜次数
-	TabSearchCount       *string `json:"tab_search_count,omitempty"`        // 垂搜次数
+
+	EmailSendInCount *string `json:"email_send_in_count,omitempty"` // 对内发件数
+
+	EmailReceiveInCount *string `json:"email_receive_in_count,omitempty"` // 来自内部收件数
+
+	SearchActiveDau *string `json:"search_active_dau,omitempty"` // 大搜搜索活跃人数
+
+	TotalSearchCount *string `json:"total_search_count,omitempty"` // 总搜索次数
+
+	QuickSearchCount *string `json:"quick_search_count,omitempty"` // 综搜次数
+
+	TabSearchCount *string `json:"tab_search_count,omitempty"` // 垂搜次数
 }
 
 type AdminDeptStatBuilder struct {
-	date                     string // 日期
-	dateFlag                 bool
-	departmentId             string // 部门的department_id 或者open_department_id
-	departmentIdFlag         bool
-	departmentName           string // 部门名字
-	departmentNameFlag       bool
-	departmentPath           string // 部门路径
-	departmentPathFlag       bool
-	totalUserNum             int // 部门总人数
-	totalUserNumFlag         bool
-	activeUserNum            int // 激活人数
-	activeUserNumFlag        bool
-	activeUserRate           string // 激活率
-	activeUserRateFlag       bool
-	suiteDau                 int // 活跃人数
-	suiteDauFlag             bool
-	suiteActiveRate          string // 活跃率
-	suiteActiveRateFlag      bool
-	newUserNum               int // 新用户数
-	newUserNumFlag           bool
-	newActiveNum             int // 新激活数
-	newActiveNumFlag         bool
-	resignUserNum            int // 离职人数
-	resignUserNumFlag        bool
-	imDau                    int // 消息活跃人数
-	imDauFlag                bool
+	date     string // 日期
+	dateFlag bool
+
+	departmentId     string // 部门的department_id 或者open_department_id
+	departmentIdFlag bool
+
+	departmentName     string // 部门名字
+	departmentNameFlag bool
+
+	departmentPath     string // 部门路径
+	departmentPathFlag bool
+
+	totalUserNum     int // 部门总人数
+	totalUserNumFlag bool
+
+	activeUserNum     int // 激活人数
+	activeUserNumFlag bool
+
+	activeUserRate     string // 激活率
+	activeUserRateFlag bool
+
+	suiteDau     int // 活跃人数
+	suiteDauFlag bool
+
+	suiteActiveRate     string // 活跃率
+	suiteActiveRateFlag bool
+
+	newUserNum     int // 新用户数
+	newUserNumFlag bool
+
+	newActiveNum     int // 新激活数
+	newActiveNumFlag bool
+
+	resignUserNum     int // 离职人数
+	resignUserNumFlag bool
+
+	imDau     int // 消息活跃人数
+	imDauFlag bool
+
 	sendMessengerUserNum     int // 发送消息人数
 	sendMessengerUserNumFlag bool
-	sendMessengerNum         int // 发送消息数
-	sendMessengerNumFlag     bool
-	avgSendMessengerNum      string // 人均发送消息数
-	avgSendMessengerNumFlag  bool
-	docsDau                  int // 云文档活跃人数
-	docsDauFlag              bool
-	createDocsUserNum        int // 创建文件人数
-	createDocsUserNumFlag    bool
-	createDocsNum            int // 创建文件数
-	createDocsNumFlag        bool
-	avgCreateDocsNum         string // 人均创建文件数
-	avgCreateDocsNumFlag     bool
-	calDau                   int // 日历活跃人数
-	calDauFlag               bool
-	createCalUserNum         int // 创建日程人数
-	createCalUserNumFlag     bool
-	createCalNum             int // 创建日程数
-	createCalNumFlag         bool
-	avgCreateCalNum          string // 人均创建日程数
-	avgCreateCalNumFlag      bool
-	vcDau                    int // 音视频会议活跃人数
-	vcDauFlag                bool
-	vcDuration               int // 会议时长：企业内员工参与通话与会议的总时长（分钟）
-	vcDurationFlag           bool
-	avgVcDuration            string // 人均会议时长（分钟）
-	avgVcDurationFlag        bool
-	avgDuration              string // 人均飞书使用时长（分钟）
-	avgDurationFlag          bool
-	taskDau                  int // 任务活跃人数
-	taskDauFlag              bool
-	createTaskUserNum        int // 创建任务人数
-	createTaskUserNumFlag    bool
-	createTaskNum            int // 创建任务数
-	createTaskNumFlag        bool
-	avgCreateTaskNum         string // 人均创建任务数
-	avgCreateTaskNumFlag     bool
-	emailSendCount           string // 邮件总发件量
-	emailSendCountFlag       bool
-	emailReceiveCount        string // 邮件总收件量
-	emailReceiveCountFlag    bool
-	emailSendExtCount        string // 对外发件数
-	emailSendExtCountFlag    bool
+
+	sendMessengerNum     int // 发送消息数
+	sendMessengerNumFlag bool
+
+	avgSendMessengerNum     string // 人均发送消息数
+	avgSendMessengerNumFlag bool
+
+	docsDau     int // 云文档活跃人数
+	docsDauFlag bool
+
+	createDocsUserNum     int // 创建文件人数
+	createDocsUserNumFlag bool
+
+	createDocsNum     int // 创建文件数
+	createDocsNumFlag bool
+
+	avgCreateDocsNum     string // 人均创建文件数
+	avgCreateDocsNumFlag bool
+
+	calDau     int // 日历活跃人数
+	calDauFlag bool
+
+	createCalUserNum     int // 创建日程人数
+	createCalUserNumFlag bool
+
+	createCalNum     int // 创建日程数
+	createCalNumFlag bool
+
+	avgCreateCalNum     string // 人均创建日程数
+	avgCreateCalNumFlag bool
+
+	vcDau     int // 音视频会议活跃人数
+	vcDauFlag bool
+
+	vcDuration     int // 会议时长：企业内员工参与通话与会议的总时长（分钟）
+	vcDurationFlag bool
+
+	avgVcDuration     string // 人均会议时长（分钟）
+	avgVcDurationFlag bool
+
+	avgDuration     string // 人均飞书使用时长（分钟）
+	avgDurationFlag bool
+
+	taskDau     int // 任务活跃人数
+	taskDauFlag bool
+
+	createTaskUserNum     int // 创建任务人数
+	createTaskUserNumFlag bool
+
+	createTaskNum     int // 创建任务数
+	createTaskNumFlag bool
+
+	avgCreateTaskNum     string // 人均创建任务数
+	avgCreateTaskNumFlag bool
+
+	emailSendCount     string // 邮件总发件量
+	emailSendCountFlag bool
+
+	emailReceiveCount     string // 邮件总收件量
+	emailReceiveCountFlag bool
+
+	emailSendExtCount     string // 对外发件数
+	emailSendExtCountFlag bool
+
 	emailReceiveExtCount     string // 来自外部收件数
 	emailReceiveExtCountFlag bool
-	emailSendInCount         string // 对内发件数
-	emailSendInCountFlag     bool
-	emailReceiveInCount      string // 来自内部收件数
-	emailReceiveInCountFlag  bool
-	searchActiveDau          string // 大搜搜索活跃人数
-	searchActiveDauFlag      bool
-	totalSearchCount         string // 总搜索次数
-	totalSearchCountFlag     bool
-	quickSearchCount         string // 综搜次数
-	quickSearchCountFlag     bool
-	tabSearchCount           string // 垂搜次数
-	tabSearchCountFlag       bool
+
+	emailSendInCount     string // 对内发件数
+	emailSendInCountFlag bool
+
+	emailReceiveInCount     string // 来自内部收件数
+	emailReceiveInCountFlag bool
+
+	searchActiveDau     string // 大搜搜索活跃人数
+	searchActiveDauFlag bool
+
+	totalSearchCount     string // 总搜索次数
+	totalSearchCountFlag bool
+
+	quickSearchCount     string // 综搜次数
+	quickSearchCountFlag bool
+
+	tabSearchCount     string // 垂搜次数
+	tabSearchCountFlag bool
 }
 
 func NewAdminDeptStatBuilder() *AdminDeptStatBuilder {
@@ -929,25 +1021,35 @@ func (builder *AdminDeptStatBuilder) Build() *AdminDeptStat {
 }
 
 type AdminUserExtContactStat struct {
-	Date           *string `json:"date,omitempty"`             // 日期
-	UserId         *string `json:"user_id,omitempty"`          // 用户ID
-	UserName       *string `json:"user_name,omitempty"`        // 成员姓名
-	DepartmentName *string `json:"department_name,omitempty"`  // 部门名
+	Date *string `json:"date,omitempty"` // 日期
+
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	UserName *string `json:"user_name,omitempty"` // 成员姓名
+
+	DepartmentName *string `json:"department_name,omitempty"` // 部门名
+
 	RefContactUcnt *string `json:"ref_contact_ucnt,omitempty"` // 外部联系人数量
+
 	RefContactTcnt *string `json:"ref_contact_tcnt,omitempty"` // 外部联系人所属企业数量
 }
 
 type AdminUserExtContactStatBuilder struct {
-	date               string // 日期
-	dateFlag           bool
-	userId             string // 用户ID
-	userIdFlag         bool
-	userName           string // 成员姓名
-	userNameFlag       bool
+	date     string // 日期
+	dateFlag bool
+
+	userId     string // 用户ID
+	userIdFlag bool
+
+	userName     string // 成员姓名
+	userNameFlag bool
+
 	departmentName     string // 部门名
 	departmentNameFlag bool
+
 	refContactUcnt     string // 外部联系人数量
 	refContactUcntFlag bool
+
 	refContactTcnt     string // 外部联系人所属企业数量
 	refContactTcntFlag bool
 }
@@ -1041,108 +1143,172 @@ func (builder *AdminUserExtContactStatBuilder) Build() *AdminUserExtContactStat 
 }
 
 type AdminUserStat struct {
-	Date                 *string `json:"date,omitempty"`                    // 日期
-	UserId               *string `json:"user_id,omitempty"`                 // 用户ID
-	UserName             *string `json:"user_name,omitempty"`               // 用户名
-	DepartmentName       *string `json:"department_name,omitempty"`         // 部门名
-	DepartmentPath       *string `json:"department_path,omitempty"`         // 部门路径
-	CreateTime           *string `json:"create_time,omitempty"`             // 账号创建时间
-	UserActiveFlag       *int    `json:"user_active_flag,omitempty"`        // 用户激活状态
-	RegisterTime         *string `json:"register_time,omitempty"`           // 激活时间
-	SuiteActiveFlag      *int    `json:"suite_active_flag,omitempty"`       // 用户活跃状态，用户在飞书套件任意应用登陆，即为活跃。包括飞书即时消息，文档，日历，会议，开放平台等
-	LastActiveTime       *string `json:"last_active_time,omitempty"`        // 最近活跃时间
-	ImActiveFlag         *int    `json:"im_active_flag,omitempty"`          // 用户消息活跃状态，发生过如下事件，则认为该用户消息活跃：;发送消息、回复消息、reaction、转发消息、阅读消息、查看会话、发送表情消息等
-	SendMessengerNum     *int    `json:"send_messenger_num,omitempty"`      // 发送消息数
-	DocsActiveFlag       *int    `json:"docs_active_flag,omitempty"`        // 用户云文档活跃状态，"发生过如下事件，则认为该用户云文档活跃： ;事件1：文档/文件打开;事件2：进入docs相关页面：如文档详情页，space的各个页面"
-	CreateDocsNum        *int    `json:"create_docs_num,omitempty"`         // 创建文件数
-	CalActiveFlag        *int    `json:"cal_active_flag,omitempty"`         // 用户日历活跃状态，发生过如下事件，则认为用户日历活跃，包含进入日历、创建日程、收到日程邀请等
-	CreateCalNum         *int    `json:"create_cal_num,omitempty"`          // 创建日程数
-	VcActiveFlag         *int    `json:"vc_active_flag,omitempty"`          // 用户音视频会议活跃状态，用户进入会中状态（不包含妙计和直播）即为活跃
-	VcDuration           *int    `json:"vc_duration,omitempty"`             // 会议时长（分钟）
-	ActiveOs             *string `json:"active_os,omitempty"`               // 活跃设备
-	CreateTaskNum        *int    `json:"create_task_num,omitempty"`         // 创建任务数
-	VcNum                *int    `json:"vc_num,omitempty"`                  // 会议数
-	AppPackageType       *string `json:"app_package_type,omitempty"`        // 飞书的应用类型名称
-	OsName               *string `json:"os_name,omitempty"`                 // 操作系统名称
-	EmailSendCount       *string `json:"email_send_count,omitempty"`        // 邮件总发件量
-	EmailReceiveCount    *string `json:"email_receive_count,omitempty"`     // 邮件总收件量
-	EmailSendExtCount    *string `json:"email_send_ext_count,omitempty"`    // 对外发件数
+	Date *string `json:"date,omitempty"` // 日期
+
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	UserName *string `json:"user_name,omitempty"` // 用户名
+
+	DepartmentName *string `json:"department_name,omitempty"` // 部门名
+
+	DepartmentPath *string `json:"department_path,omitempty"` // 部门路径
+
+	CreateTime *string `json:"create_time,omitempty"` // 账号创建时间
+
+	UserActiveFlag *int `json:"user_active_flag,omitempty"` // 用户激活状态
+
+	RegisterTime *string `json:"register_time,omitempty"` // 激活时间
+
+	SuiteActiveFlag *int `json:"suite_active_flag,omitempty"` // 用户活跃状态，用户在飞书套件任意应用登陆，即为活跃。包括飞书即时消息，文档，日历，会议，开放平台等
+
+	LastActiveTime *string `json:"last_active_time,omitempty"` // 最近活跃时间
+
+	ImActiveFlag *int `json:"im_active_flag,omitempty"` // 用户消息活跃状态，发生过如下事件，则认为该用户消息活跃：;发送消息、回复消息、reaction、转发消息、阅读消息、查看会话、发送表情消息等
+
+	SendMessengerNum *int `json:"send_messenger_num,omitempty"` // 发送消息数
+
+	DocsActiveFlag *int `json:"docs_active_flag,omitempty"` // 用户云文档活跃状态，"发生过如下事件，则认为该用户云文档活跃： ;事件1：文档/文件打开;事件2：进入docs相关页面：如文档详情页，space的各个页面"
+
+	CreateDocsNum *int `json:"create_docs_num,omitempty"` // 创建文件数
+
+	CalActiveFlag *int `json:"cal_active_flag,omitempty"` // 用户日历活跃状态，发生过如下事件，则认为用户日历活跃，包含进入日历、创建日程、收到日程邀请等
+
+	CreateCalNum *int `json:"create_cal_num,omitempty"` // 创建日程数
+
+	VcActiveFlag *int `json:"vc_active_flag,omitempty"` // 用户音视频会议活跃状态，用户进入会中状态（不包含妙计和直播）即为活跃
+
+	VcDuration *int `json:"vc_duration,omitempty"` // 会议时长（分钟）
+
+	ActiveOs *string `json:"active_os,omitempty"` // 活跃设备
+
+	CreateTaskNum *int `json:"create_task_num,omitempty"` // 创建任务数
+
+	VcNum *int `json:"vc_num,omitempty"` // 会议数
+
+	AppPackageType *string `json:"app_package_type,omitempty"` // 飞书的应用类型名称
+
+	OsName *string `json:"os_name,omitempty"` // 操作系统名称
+
+	EmailSendCount *string `json:"email_send_count,omitempty"` // 邮件总发件量
+
+	EmailReceiveCount *string `json:"email_receive_count,omitempty"` // 邮件总收件量
+
+	EmailSendExtCount *string `json:"email_send_ext_count,omitempty"` // 对外发件数
+
 	EmailReceiveExtCount *string `json:"email_receive_ext_count,omitempty"` // 来自外部收件数
-	EmailSendInCount     *string `json:"email_send_in_count,omitempty"`     // 对内发件数
-	EmailReceiveInCount  *string `json:"email_receive_in_count,omitempty"`  // 来自内部收件数
-	SearchActiveFlag     *int    `json:"search_active_flag,omitempty"`      // 是否使用了大搜
-	TotalSearchCount     *string `json:"total_search_count,omitempty"`      // 总搜索次数
-	QuickSearchCount     *string `json:"quick_search_count,omitempty"`      // 综搜次数
-	TabSearchCount       *string `json:"tab_search_count,omitempty"`        // 垂搜次数
+
+	EmailSendInCount *string `json:"email_send_in_count,omitempty"` // 对内发件数
+
+	EmailReceiveInCount *string `json:"email_receive_in_count,omitempty"` // 来自内部收件数
+
+	SearchActiveFlag *int `json:"search_active_flag,omitempty"` // 是否使用了大搜
+
+	TotalSearchCount *string `json:"total_search_count,omitempty"` // 总搜索次数
+
+	QuickSearchCount *string `json:"quick_search_count,omitempty"` // 综搜次数
+
+	TabSearchCount *string `json:"tab_search_count,omitempty"` // 垂搜次数
 }
 
 type AdminUserStatBuilder struct {
-	date                     string // 日期
-	dateFlag                 bool
-	userId                   string // 用户ID
-	userIdFlag               bool
-	userName                 string // 用户名
-	userNameFlag             bool
-	departmentName           string // 部门名
-	departmentNameFlag       bool
-	departmentPath           string // 部门路径
-	departmentPathFlag       bool
-	createTime               string // 账号创建时间
-	createTimeFlag           bool
-	userActiveFlag           int // 用户激活状态
-	userActiveFlagFlag       bool
-	registerTime             string // 激活时间
-	registerTimeFlag         bool
-	suiteActiveFlag          int // 用户活跃状态，用户在飞书套件任意应用登陆，即为活跃。包括飞书即时消息，文档，日历，会议，开放平台等
-	suiteActiveFlagFlag      bool
-	lastActiveTime           string // 最近活跃时间
-	lastActiveTimeFlag       bool
-	imActiveFlag             int // 用户消息活跃状态，发生过如下事件，则认为该用户消息活跃：;发送消息、回复消息、reaction、转发消息、阅读消息、查看会话、发送表情消息等
-	imActiveFlagFlag         bool
-	sendMessengerNum         int // 发送消息数
-	sendMessengerNumFlag     bool
-	docsActiveFlag           int // 用户云文档活跃状态，"发生过如下事件，则认为该用户云文档活跃： ;事件1：文档/文件打开;事件2：进入docs相关页面：如文档详情页，space的各个页面"
-	docsActiveFlagFlag       bool
-	createDocsNum            int // 创建文件数
-	createDocsNumFlag        bool
-	calActiveFlag            int // 用户日历活跃状态，发生过如下事件，则认为用户日历活跃，包含进入日历、创建日程、收到日程邀请等
-	calActiveFlagFlag        bool
-	createCalNum             int // 创建日程数
-	createCalNumFlag         bool
-	vcActiveFlag             int // 用户音视频会议活跃状态，用户进入会中状态（不包含妙计和直播）即为活跃
-	vcActiveFlagFlag         bool
-	vcDuration               int // 会议时长（分钟）
-	vcDurationFlag           bool
-	activeOs                 string // 活跃设备
-	activeOsFlag             bool
-	createTaskNum            int // 创建任务数
-	createTaskNumFlag        bool
-	vcNum                    int // 会议数
-	vcNumFlag                bool
-	appPackageType           string // 飞书的应用类型名称
-	appPackageTypeFlag       bool
-	osName                   string // 操作系统名称
-	osNameFlag               bool
-	emailSendCount           string // 邮件总发件量
-	emailSendCountFlag       bool
-	emailReceiveCount        string // 邮件总收件量
-	emailReceiveCountFlag    bool
-	emailSendExtCount        string // 对外发件数
-	emailSendExtCountFlag    bool
+	date     string // 日期
+	dateFlag bool
+
+	userId     string // 用户ID
+	userIdFlag bool
+
+	userName     string // 用户名
+	userNameFlag bool
+
+	departmentName     string // 部门名
+	departmentNameFlag bool
+
+	departmentPath     string // 部门路径
+	departmentPathFlag bool
+
+	createTime     string // 账号创建时间
+	createTimeFlag bool
+
+	userActiveFlag     int // 用户激活状态
+	userActiveFlagFlag bool
+
+	registerTime     string // 激活时间
+	registerTimeFlag bool
+
+	suiteActiveFlag     int // 用户活跃状态，用户在飞书套件任意应用登陆，即为活跃。包括飞书即时消息，文档，日历，会议，开放平台等
+	suiteActiveFlagFlag bool
+
+	lastActiveTime     string // 最近活跃时间
+	lastActiveTimeFlag bool
+
+	imActiveFlag     int // 用户消息活跃状态，发生过如下事件，则认为该用户消息活跃：;发送消息、回复消息、reaction、转发消息、阅读消息、查看会话、发送表情消息等
+	imActiveFlagFlag bool
+
+	sendMessengerNum     int // 发送消息数
+	sendMessengerNumFlag bool
+
+	docsActiveFlag     int // 用户云文档活跃状态，"发生过如下事件，则认为该用户云文档活跃： ;事件1：文档/文件打开;事件2：进入docs相关页面：如文档详情页，space的各个页面"
+	docsActiveFlagFlag bool
+
+	createDocsNum     int // 创建文件数
+	createDocsNumFlag bool
+
+	calActiveFlag     int // 用户日历活跃状态，发生过如下事件，则认为用户日历活跃，包含进入日历、创建日程、收到日程邀请等
+	calActiveFlagFlag bool
+
+	createCalNum     int // 创建日程数
+	createCalNumFlag bool
+
+	vcActiveFlag     int // 用户音视频会议活跃状态，用户进入会中状态（不包含妙计和直播）即为活跃
+	vcActiveFlagFlag bool
+
+	vcDuration     int // 会议时长（分钟）
+	vcDurationFlag bool
+
+	activeOs     string // 活跃设备
+	activeOsFlag bool
+
+	createTaskNum     int // 创建任务数
+	createTaskNumFlag bool
+
+	vcNum     int // 会议数
+	vcNumFlag bool
+
+	appPackageType     string // 飞书的应用类型名称
+	appPackageTypeFlag bool
+
+	osName     string // 操作系统名称
+	osNameFlag bool
+
+	emailSendCount     string // 邮件总发件量
+	emailSendCountFlag bool
+
+	emailReceiveCount     string // 邮件总收件量
+	emailReceiveCountFlag bool
+
+	emailSendExtCount     string // 对外发件数
+	emailSendExtCountFlag bool
+
 	emailReceiveExtCount     string // 来自外部收件数
 	emailReceiveExtCountFlag bool
-	emailSendInCount         string // 对内发件数
-	emailSendInCountFlag     bool
-	emailReceiveInCount      string // 来自内部收件数
-	emailReceiveInCountFlag  bool
-	searchActiveFlag         int // 是否使用了大搜
-	searchActiveFlagFlag     bool
-	totalSearchCount         string // 总搜索次数
-	totalSearchCountFlag     bool
-	quickSearchCount         string // 综搜次数
-	quickSearchCountFlag     bool
-	tabSearchCount           string // 垂搜次数
-	tabSearchCountFlag       bool
+
+	emailSendInCount     string // 对内发件数
+	emailSendInCountFlag bool
+
+	emailReceiveInCount     string // 来自内部收件数
+	emailReceiveInCountFlag bool
+
+	searchActiveFlag     int // 是否使用了大搜
+	searchActiveFlagFlag bool
+
+	totalSearchCount     string // 总搜索次数
+	totalSearchCountFlag bool
+
+	quickSearchCount     string // 综搜次数
+	quickSearchCountFlag bool
+
+	tabSearchCount     string // 垂搜次数
+	tabSearchCountFlag bool
 }
 
 func NewAdminUserStatBuilder() *AdminUserStatBuilder {
@@ -1585,18 +1751,22 @@ func (builder *AdminUserStatBuilder) Build() *AdminUserStat {
 }
 
 type Administrator struct {
-	UserId               *string `json:"user_id,omitempty"`                //
-	IsSuperAdministrator *bool   `json:"is_super_administrator,omitempty"` // 用户是否是超级管理员
-	IsAdministrator      *bool   `json:"is_administrator,omitempty"`       // 用户是否是管理员
+	UserId *string `json:"user_id,omitempty"` //
+
+	IsSuperAdministrator *bool `json:"is_super_administrator,omitempty"` // 用户是否是超级管理员
+
+	IsAdministrator *bool `json:"is_administrator,omitempty"` // 用户是否是管理员
 }
 
 type AdministratorBuilder struct {
-	userId                   string //
-	userIdFlag               bool
+	userId     string //
+	userIdFlag bool
+
 	isSuperAdministrator     bool // 用户是否是超级管理员
 	isSuperAdministratorFlag bool
-	isAdministrator          bool // 用户是否是管理员
-	isAdministratorFlag      bool
+
+	isAdministrator     bool // 用户是否是管理员
+	isAdministratorFlag bool
 }
 
 func NewAdministratorBuilder() *AdministratorBuilder {
@@ -1647,15 +1817,17 @@ func (builder *AdministratorBuilder) Build() *Administrator {
 }
 
 type AnnualReportMapFloat struct {
-	Year *string  `json:"year,omitempty"` // 年份
-	Num  *float64 `json:"num,omitempty"`  // float64类型数据
+	Year *string `json:"year,omitempty"` // 年份
+
+	Num *float64 `json:"num,omitempty"` // float64类型数据
 }
 
 type AnnualReportMapFloatBuilder struct {
 	year     string // 年份
 	yearFlag bool
-	num      float64 // float64类型数据
-	numFlag  bool
+
+	num     float64 // float64类型数据
+	numFlag bool
 }
 
 func NewAnnualReportMapFloatBuilder() *AnnualReportMapFloatBuilder {
@@ -1695,13 +1867,15 @@ func (builder *AnnualReportMapFloatBuilder) Build() *AnnualReportMapFloat {
 }
 
 type AnnualReportMapInt struct {
-	Year  *string `json:"year,omitempty"`  // 年份
+	Year *string `json:"year,omitempty"` // 年份
+
 	Count *string `json:"count,omitempty"` // int64类型数据
 }
 
 type AnnualReportMapIntBuilder struct {
-	year      string // 年份
-	yearFlag  bool
+	year     string // 年份
+	yearFlag bool
+
 	count     string // int64类型数据
 	countFlag bool
 }
@@ -1774,22 +1948,30 @@ func (builder *ApiAuditCommonDrawersBuilder) Build() *ApiAuditCommonDrawers {
 }
 
 type ApiAuditDrawerInfo struct {
-	InfoKey    *string `json:"info_key,omitempty"`     // key信息
-	InfoVal    *string `json:"info_val,omitempty"`     // val值
+	InfoKey *string `json:"info_key,omitempty"` // key信息
+
+	InfoVal *string `json:"info_val,omitempty"` // val值
+
 	KeyI18nKey *string `json:"key_i18n_key,omitempty"` // key对应的i18nkey
-	ValType    *string `json:"val_type,omitempty"`     // val类型
+
+	ValType *string `json:"val_type,omitempty"` // val类型
+
 	ValI18nKey *string `json:"val_i18n_key,omitempty"` // val对应的i18nkey
 }
 
 type ApiAuditDrawerInfoBuilder struct {
-	infoKey        string // key信息
-	infoKeyFlag    bool
-	infoVal        string // val值
-	infoValFlag    bool
+	infoKey     string // key信息
+	infoKeyFlag bool
+
+	infoVal     string // val值
+	infoValFlag bool
+
 	keyI18nKey     string // key对应的i18nkey
 	keyI18nKeyFlag bool
-	valType        string // val类型
-	valTypeFlag    bool
+
+	valType     string // val类型
+	valTypeFlag bool
+
 	valI18nKey     string // val对应的i18nkey
 	valI18nKeyFlag bool
 }
@@ -1870,69 +2052,107 @@ func (builder *ApiAuditDrawerInfoBuilder) Build() *ApiAuditDrawerInfo {
 }
 
 type AuditAndroidContext struct {
-	Udid            *string `json:"udid,omitempty"`              // UDID
-	Did             *string `json:"did,omitempty"`               // 设备ID
-	AppVer          *string `json:"app_ver,omitempty"`           // app的版本
-	Ver             *string `json:"ver,omitempty"`               // SecSDK版本
-	Region          *string `json:"region,omitempty"`            // 设备语言
-	IdI             *string `json:"id_i,omitempty"`              // 安卓版本号
-	IdR             *string `json:"id_r,omitempty"`              // 安卓版本
-	HwBrand         *string `json:"hw_brand,omitempty"`          // Brand
-	HwManuf         *string `json:"hw_manuf,omitempty"`          // 制造商
-	Wifip           *string `json:"wifip,omitempty"`             // wifi ip
-	RouteIip        *string `json:"route_iip,omitempty"`         // 路由IP
-	RouteGip        *string `json:"route_gip,omitempty"`         // 路由网关IP
-	EnvSu           *string `json:"env_su,omitempty"`            // 表示当前是否root
-	EnvTz           *string `json:"env_tz,omitempty"`            // 手机系统时区
-	EnvMl           *string `json:"env_ml,omitempty"`            // 手机系统语言
-	Location        *string `json:"location,omitempty"`          // GPS经纬度
-	ActiveIp        *string `json:"active_ip,omitempty"`         // 当前设备活跃ip
-	ActiveIpDetail  *string `json:"active_ip_detail,omitempty"`  // 当前设备活跃ip对应网卡类型
+	Udid *string `json:"udid,omitempty"` // UDID
+
+	Did *string `json:"did,omitempty"` // 设备ID
+
+	AppVer *string `json:"app_ver,omitempty"` // app的版本
+
+	Ver *string `json:"ver,omitempty"` // SecSDK版本
+
+	Region *string `json:"region,omitempty"` // 设备语言
+
+	IdI *string `json:"id_i,omitempty"` // 安卓版本号
+
+	IdR *string `json:"id_r,omitempty"` // 安卓版本
+
+	HwBrand *string `json:"hw_brand,omitempty"` // Brand
+
+	HwManuf *string `json:"hw_manuf,omitempty"` // 制造商
+
+	Wifip *string `json:"wifip,omitempty"` // wifi ip
+
+	RouteIip *string `json:"route_iip,omitempty"` // 路由IP
+
+	RouteGip *string `json:"route_gip,omitempty"` // 路由网关IP
+
+	EnvSu *string `json:"env_su,omitempty"` // 表示当前是否root
+
+	EnvTz *string `json:"env_tz,omitempty"` // 手机系统时区
+
+	EnvMl *string `json:"env_ml,omitempty"` // 手机系统语言
+
+	Location *string `json:"location,omitempty"` // GPS经纬度
+
+	ActiveIp *string `json:"active_ip,omitempty"` // 当前设备活跃ip
+
+	ActiveIpDetail *string `json:"active_ip_detail,omitempty"` // 当前设备活跃ip对应网卡类型
+
 	CellBaseStation *string `json:"cell_base_station,omitempty"` // 基站信息
-	IP              *string `json:"IP,omitempty"`                // 公网ip
+
+	IP *string `json:"IP,omitempty"` // 公网ip
 }
 
 type AuditAndroidContextBuilder struct {
-	udid                string // UDID
-	udidFlag            bool
-	did                 string // 设备ID
-	didFlag             bool
-	appVer              string // app的版本
-	appVerFlag          bool
-	ver                 string // SecSDK版本
-	verFlag             bool
-	region              string // 设备语言
-	regionFlag          bool
-	idI                 string // 安卓版本号
-	idIFlag             bool
-	idR                 string // 安卓版本
-	idRFlag             bool
-	hwBrand             string // Brand
-	hwBrandFlag         bool
-	hwManuf             string // 制造商
-	hwManufFlag         bool
-	wifip               string // wifi ip
-	wifipFlag           bool
-	routeIip            string // 路由IP
-	routeIipFlag        bool
-	routeGip            string // 路由网关IP
-	routeGipFlag        bool
-	envSu               string // 表示当前是否root
-	envSuFlag           bool
-	envTz               string // 手机系统时区
-	envTzFlag           bool
-	envMl               string // 手机系统语言
-	envMlFlag           bool
-	location            string // GPS经纬度
-	locationFlag        bool
-	activeIp            string // 当前设备活跃ip
-	activeIpFlag        bool
-	activeIpDetail      string // 当前设备活跃ip对应网卡类型
-	activeIpDetailFlag  bool
+	udid     string // UDID
+	udidFlag bool
+
+	did     string // 设备ID
+	didFlag bool
+
+	appVer     string // app的版本
+	appVerFlag bool
+
+	ver     string // SecSDK版本
+	verFlag bool
+
+	region     string // 设备语言
+	regionFlag bool
+
+	idI     string // 安卓版本号
+	idIFlag bool
+
+	idR     string // 安卓版本
+	idRFlag bool
+
+	hwBrand     string // Brand
+	hwBrandFlag bool
+
+	hwManuf     string // 制造商
+	hwManufFlag bool
+
+	wifip     string // wifi ip
+	wifipFlag bool
+
+	routeIip     string // 路由IP
+	routeIipFlag bool
+
+	routeGip     string // 路由网关IP
+	routeGipFlag bool
+
+	envSu     string // 表示当前是否root
+	envSuFlag bool
+
+	envTz     string // 手机系统时区
+	envTzFlag bool
+
+	envMl     string // 手机系统语言
+	envMlFlag bool
+
+	location     string // GPS经纬度
+	locationFlag bool
+
+	activeIp     string // 当前设备活跃ip
+	activeIpFlag bool
+
+	activeIpDetail     string // 当前设备活跃ip对应网卡类型
+	activeIpDetailFlag bool
+
 	cellBaseStation     string // 基站信息
 	cellBaseStationFlag bool
-	iP                  string // 公网ip
-	iPFlag              bool
+
+	iP     string // 公网ip
+	iPFlag bool
 }
 
 func NewAuditAndroidContextBuilder() *AuditAndroidContextBuilder {
@@ -2206,22 +2426,30 @@ func (builder *AuditAndroidContextBuilder) Build() *AuditAndroidContext {
 }
 
 type AuditContext struct {
-	TerminalType   *int                 `json:"terminal_type,omitempty"`   // 终端类型
-	IosContext     *AuditIosContext     `json:"ios_context,omitempty"`     // ios的环境信息
-	PcContext      *AuditPcContext      `json:"pc_context,omitempty"`      // pc的环境信息
-	WebContext     *AuditWebContext     `json:"web_context,omitempty"`     // web的环境信息
+	TerminalType *int `json:"terminal_type,omitempty"` // 终端类型
+
+	IosContext *AuditIosContext `json:"ios_context,omitempty"` // ios的环境信息
+
+	PcContext *AuditPcContext `json:"pc_context,omitempty"` // pc的环境信息
+
+	WebContext *AuditWebContext `json:"web_context,omitempty"` // web的环境信息
+
 	AndroidContext *AuditAndroidContext `json:"android_context,omitempty"` // android的环境信息
 }
 
 type AuditContextBuilder struct {
-	terminalType       int // 终端类型
-	terminalTypeFlag   bool
-	iosContext         *AuditIosContext // ios的环境信息
-	iosContextFlag     bool
-	pcContext          *AuditPcContext // pc的环境信息
-	pcContextFlag      bool
-	webContext         *AuditWebContext // web的环境信息
-	webContextFlag     bool
+	terminalType     int // 终端类型
+	terminalTypeFlag bool
+
+	iosContext     *AuditIosContext // ios的环境信息
+	iosContextFlag bool
+
+	pcContext     *AuditPcContext // pc的环境信息
+	pcContextFlag bool
+
+	webContext     *AuditWebContext // web的环境信息
+	webContextFlag bool
+
 	androidContext     *AuditAndroidContext // android的环境信息
 	androidContextFlag bool
 }
@@ -2298,21 +2526,27 @@ func (builder *AuditContextBuilder) Build() *AuditContext {
 }
 
 type AuditDetail struct {
-	Mc          *string `json:"mc,omitempty"`           // mac地址
+	Mc *string `json:"mc,omitempty"` // mac地址
+
 	DeviceModel *string `json:"device_model,omitempty"` // 设备模型
-	Os          *string `json:"os,omitempty"`           // 操作系统
-	City        *string `json:"city,omitempty"`         // ip属地
+
+	Os *string `json:"os,omitempty"` // 操作系统
+
+	City *string `json:"city,omitempty"` // ip属地
 }
 
 type AuditDetailBuilder struct {
-	mc              string // mac地址
-	mcFlag          bool
+	mc     string // mac地址
+	mcFlag bool
+
 	deviceModel     string // 设备模型
 	deviceModelFlag bool
-	os              string // 操作系统
-	osFlag          bool
-	city            string // ip属地
-	cityFlag        bool
+
+	os     string // 操作系统
+	osFlag bool
+
+	city     string // ip属地
+	cityFlag bool
 }
 
 func NewAuditDetailBuilder() *AuditDetailBuilder {
@@ -2378,37 +2612,55 @@ func (builder *AuditDetailBuilder) Build() *AuditDetail {
 }
 
 type AuditEventExtend struct {
-	CommentType                 *string `json:"comment_type,omitempty"`                     // 评论类型
-	AppDetail                   *string `json:"app_detail,omitempty"`                       // app信息
-	TwoStepValidation           *bool   `json:"two_step_validation,omitempty"`              // 是否两步验证
-	LoginMethod                 *string `json:"login_method,omitempty"`                     // 登录方式
-	NewPeopleNumInVideo         *int    `json:"new_people_num_in_video,omitempty"`          // 创建新的{x}人会议/通话
-	ExternalPeopleNumInVideo    *int    `json:"external_people_num_in_video,omitempty"`     // 将{x}名外部用户加入/退出通话
-	ExternalPeopleNumInChat     *int    `json:"external_people_num_in_chat,omitempty"`      // 将{x}名外部用户加入/退出群组
-	JoinGroup                   *int    `json:"join_group,omitempty"`                       // 创建{x}人数的群组
-	QuitGroup                   *int    `json:"quit_group,omitempty"`                       // 解散{x}人数的群组
-	ExternalPeopleNumInDocShare *int    `json:"external_people_num_in_doc_share,omitempty"` // 分享文档给{x}名外部用户
+	CommentType *string `json:"comment_type,omitempty"` // 评论类型
+
+	AppDetail *string `json:"app_detail,omitempty"` // app信息
+
+	TwoStepValidation *bool `json:"two_step_validation,omitempty"` // 是否两步验证
+
+	LoginMethod *string `json:"login_method,omitempty"` // 登录方式
+
+	NewPeopleNumInVideo *int `json:"new_people_num_in_video,omitempty"` // 创建新的{x}人会议/通话
+
+	ExternalPeopleNumInVideo *int `json:"external_people_num_in_video,omitempty"` // 将{x}名外部用户加入/退出通话
+
+	ExternalPeopleNumInChat *int `json:"external_people_num_in_chat,omitempty"` // 将{x}名外部用户加入/退出群组
+
+	JoinGroup *int `json:"join_group,omitempty"` // 创建{x}人数的群组
+
+	QuitGroup *int `json:"quit_group,omitempty"` // 解散{x}人数的群组
+
+	ExternalPeopleNumInDocShare *int `json:"external_people_num_in_doc_share,omitempty"` // 分享文档给{x}名外部用户
 }
 
 type AuditEventExtendBuilder struct {
-	commentType                     string // 评论类型
-	commentTypeFlag                 bool
-	appDetail                       string // app信息
-	appDetailFlag                   bool
-	twoStepValidation               bool // 是否两步验证
-	twoStepValidationFlag           bool
-	loginMethod                     string // 登录方式
-	loginMethodFlag                 bool
-	newPeopleNumInVideo             int // 创建新的{x}人会议/通话
-	newPeopleNumInVideoFlag         bool
-	externalPeopleNumInVideo        int // 将{x}名外部用户加入/退出通话
-	externalPeopleNumInVideoFlag    bool
-	externalPeopleNumInChat         int // 将{x}名外部用户加入/退出群组
-	externalPeopleNumInChatFlag     bool
-	joinGroup                       int // 创建{x}人数的群组
-	joinGroupFlag                   bool
-	quitGroup                       int // 解散{x}人数的群组
-	quitGroupFlag                   bool
+	commentType     string // 评论类型
+	commentTypeFlag bool
+
+	appDetail     string // app信息
+	appDetailFlag bool
+
+	twoStepValidation     bool // 是否两步验证
+	twoStepValidationFlag bool
+
+	loginMethod     string // 登录方式
+	loginMethodFlag bool
+
+	newPeopleNumInVideo     int // 创建新的{x}人会议/通话
+	newPeopleNumInVideoFlag bool
+
+	externalPeopleNumInVideo     int // 将{x}名外部用户加入/退出通话
+	externalPeopleNumInVideoFlag bool
+
+	externalPeopleNumInChat     int // 将{x}名外部用户加入/退出群组
+	externalPeopleNumInChatFlag bool
+
+	joinGroup     int // 创建{x}人数的群组
+	joinGroupFlag bool
+
+	quitGroup     int // 解散{x}人数的群组
+	quitGroupFlag bool
+
 	externalPeopleNumInDocShare     int // 分享文档给{x}名外部用户
 	externalPeopleNumInDocShareFlag bool
 }
@@ -2554,63 +2806,97 @@ func (builder *AuditEventExtendBuilder) Build() *AuditEventExtend {
 }
 
 type AuditInfo struct {
-	EventId         *string                 `json:"event_id,omitempty"`          // 事件id
-	UniqueId        *string                 `json:"unique_id,omitempty"`         // 唯一id
-	EventName       *string                 `json:"event_name,omitempty"`        // 事件名称
-	DepartmentIds   []string                `json:"department_ids,omitempty"`    // 用户所属部门的ID列表
-	EventModule     *int                    `json:"event_module,omitempty"`      // 模块
-	OperatorType    *int                    `json:"operator_type,omitempty"`     // 操作人类型
-	OperatorValue   *string                 `json:"operator_value,omitempty"`    // 操作人id
-	Objects         []*AuditObjectEntity    `json:"objects,omitempty"`           // 操作对象列表
-	Recipients      []*AuditRecipientEntity `json:"recipients,omitempty"`        // 接收者对象列表
-	EventTime       *int                    `json:"event_time,omitempty"`        // 事件时间
-	Ip              *string                 `json:"ip,omitempty"`                // ip信息
-	OperatorApp     *string                 `json:"operator_app,omitempty"`      // 第三方isvID
-	AuditContext    *AuditContext           `json:"audit_context,omitempty"`     // 环境信息
-	Extend          *AuditEventExtend       `json:"extend,omitempty"`            // 事件级别的扩展
-	OperatorAppName *string                 `json:"operator_app_name,omitempty"` // 第三方isv名称
-	CommonDrawers   *ApiAuditCommonDrawers  `json:"common_drawers,omitempty"`    // 扩展字段信息
-	AuditDetail     *AuditDetail            `json:"audit_detail,omitempty"`      // 日志扩展信息
-	OperatorTenant  *string                 `json:"operator_tenant,omitempty"`   // 操作人企业编号
+	EventId *string `json:"event_id,omitempty"` // 事件id
+
+	UniqueId *string `json:"unique_id,omitempty"` // 唯一id
+
+	EventName *string `json:"event_name,omitempty"` // 事件名称
+
+	DepartmentIds []string `json:"department_ids,omitempty"` // 用户所属部门的ID列表
+
+	EventModule *int `json:"event_module,omitempty"` // 模块
+
+	OperatorType *int `json:"operator_type,omitempty"` // 操作人类型
+
+	OperatorValue *string `json:"operator_value,omitempty"` // 操作人id
+
+	Objects []*AuditObjectEntity `json:"objects,omitempty"` // 操作对象列表
+
+	Recipients []*AuditRecipientEntity `json:"recipients,omitempty"` // 接收者对象列表
+
+	EventTime *int `json:"event_time,omitempty"` // 事件时间
+
+	Ip *string `json:"ip,omitempty"` // ip信息
+
+	OperatorApp *string `json:"operator_app,omitempty"` // 第三方isvID
+
+	AuditContext *AuditContext `json:"audit_context,omitempty"` // 环境信息
+
+	Extend *AuditEventExtend `json:"extend,omitempty"` // 事件级别的扩展
+
+	OperatorAppName *string `json:"operator_app_name,omitempty"` // 第三方isv名称
+
+	CommonDrawers *ApiAuditCommonDrawers `json:"common_drawers,omitempty"` // 扩展字段信息
+
+	AuditDetail *AuditDetail `json:"audit_detail,omitempty"` // 日志扩展信息
+
+	OperatorTenant *string `json:"operator_tenant,omitempty"` // 操作人企业编号
 }
 
 type AuditInfoBuilder struct {
-	eventId             string // 事件id
-	eventIdFlag         bool
-	uniqueId            string // 唯一id
-	uniqueIdFlag        bool
-	eventName           string // 事件名称
-	eventNameFlag       bool
-	departmentIds       []string // 用户所属部门的ID列表
-	departmentIdsFlag   bool
-	eventModule         int // 模块
-	eventModuleFlag     bool
-	operatorType        int // 操作人类型
-	operatorTypeFlag    bool
-	operatorValue       string // 操作人id
-	operatorValueFlag   bool
-	objects             []*AuditObjectEntity // 操作对象列表
-	objectsFlag         bool
-	recipients          []*AuditRecipientEntity // 接收者对象列表
-	recipientsFlag      bool
-	eventTime           int // 事件时间
-	eventTimeFlag       bool
-	ip                  string // ip信息
-	ipFlag              bool
-	operatorApp         string // 第三方isvID
-	operatorAppFlag     bool
-	auditContext        *AuditContext // 环境信息
-	auditContextFlag    bool
-	extend              *AuditEventExtend // 事件级别的扩展
-	extendFlag          bool
+	eventId     string // 事件id
+	eventIdFlag bool
+
+	uniqueId     string // 唯一id
+	uniqueIdFlag bool
+
+	eventName     string // 事件名称
+	eventNameFlag bool
+
+	departmentIds     []string // 用户所属部门的ID列表
+	departmentIdsFlag bool
+
+	eventModule     int // 模块
+	eventModuleFlag bool
+
+	operatorType     int // 操作人类型
+	operatorTypeFlag bool
+
+	operatorValue     string // 操作人id
+	operatorValueFlag bool
+
+	objects     []*AuditObjectEntity // 操作对象列表
+	objectsFlag bool
+
+	recipients     []*AuditRecipientEntity // 接收者对象列表
+	recipientsFlag bool
+
+	eventTime     int // 事件时间
+	eventTimeFlag bool
+
+	ip     string // ip信息
+	ipFlag bool
+
+	operatorApp     string // 第三方isvID
+	operatorAppFlag bool
+
+	auditContext     *AuditContext // 环境信息
+	auditContextFlag bool
+
+	extend     *AuditEventExtend // 事件级别的扩展
+	extendFlag bool
+
 	operatorAppName     string // 第三方isv名称
 	operatorAppNameFlag bool
-	commonDrawers       *ApiAuditCommonDrawers // 扩展字段信息
-	commonDrawersFlag   bool
-	auditDetail         *AuditDetail // 日志扩展信息
-	auditDetailFlag     bool
-	operatorTenant      string // 操作人企业编号
-	operatorTenantFlag  bool
+
+	commonDrawers     *ApiAuditCommonDrawers // 扩展字段信息
+	commonDrawersFlag bool
+
+	auditDetail     *AuditDetail // 日志扩展信息
+	auditDetailFlag bool
+
+	operatorTenant     string // 操作人企业编号
+	operatorTenantFlag bool
 }
 
 func NewAuditInfoBuilder() *AuditInfoBuilder {
@@ -2851,54 +3137,82 @@ func (builder *AuditInfoBuilder) Build() *AuditInfo {
 }
 
 type AuditIosContext struct {
-	Udid            *string `json:"udid,omitempty"`              // UDID
-	Did             *string `json:"did,omitempty"`               // 设备ID
-	AppVer          *string `json:"app_ver,omitempty"`           // app的版本
-	Ver             *string `json:"ver,omitempty"`               // SecSDK版本
-	Os              *string `json:"os,omitempty"`                // 系统类型及版本
-	STZone          *string `json:"STZone,omitempty"`            // 系统时区
-	ML              *string `json:"ML,omitempty"`                // 当前语言
-	Sjd             *string `json:"sjd,omitempty"`               // 是否越狱
-	Proxyip         *string `json:"proxyip,omitempty"`           // 代理ip
-	Wifip           *string `json:"wifip,omitempty"`             // wifi ip
-	Location        *string `json:"location,omitempty"`          // GPS经纬度
-	ActiveIp        *string `json:"active_ip,omitempty"`         // 当前设备活跃ip
-	ActiveIpDetail  *string `json:"active_ip_detail,omitempty"`  // 当前设备活跃ip对应网卡类型
+	Udid *string `json:"udid,omitempty"` // UDID
+
+	Did *string `json:"did,omitempty"` // 设备ID
+
+	AppVer *string `json:"app_ver,omitempty"` // app的版本
+
+	Ver *string `json:"ver,omitempty"` // SecSDK版本
+
+	Os *string `json:"os,omitempty"` // 系统类型及版本
+
+	STZone *string `json:"STZone,omitempty"` // 系统时区
+
+	ML *string `json:"ML,omitempty"` // 当前语言
+
+	Sjd *string `json:"sjd,omitempty"` // 是否越狱
+
+	Proxyip *string `json:"proxyip,omitempty"` // 代理ip
+
+	Wifip *string `json:"wifip,omitempty"` // wifi ip
+
+	Location *string `json:"location,omitempty"` // GPS经纬度
+
+	ActiveIp *string `json:"active_ip,omitempty"` // 当前设备活跃ip
+
+	ActiveIpDetail *string `json:"active_ip_detail,omitempty"` // 当前设备活跃ip对应网卡类型
+
 	CellBaseStation *string `json:"cell_base_station,omitempty"` // 基站信息
-	IP              *string `json:"IP,omitempty"`                // 公网ip
+
+	IP *string `json:"IP,omitempty"` // 公网ip
 }
 
 type AuditIosContextBuilder struct {
-	udid                string // UDID
-	udidFlag            bool
-	did                 string // 设备ID
-	didFlag             bool
-	appVer              string // app的版本
-	appVerFlag          bool
-	ver                 string // SecSDK版本
-	verFlag             bool
-	os                  string // 系统类型及版本
-	osFlag              bool
-	sTZone              string // 系统时区
-	sTZoneFlag          bool
-	mL                  string // 当前语言
-	mLFlag              bool
-	sjd                 string // 是否越狱
-	sjdFlag             bool
-	proxyip             string // 代理ip
-	proxyipFlag         bool
-	wifip               string // wifi ip
-	wifipFlag           bool
-	location            string // GPS经纬度
-	locationFlag        bool
-	activeIp            string // 当前设备活跃ip
-	activeIpFlag        bool
-	activeIpDetail      string // 当前设备活跃ip对应网卡类型
-	activeIpDetailFlag  bool
+	udid     string // UDID
+	udidFlag bool
+
+	did     string // 设备ID
+	didFlag bool
+
+	appVer     string // app的版本
+	appVerFlag bool
+
+	ver     string // SecSDK版本
+	verFlag bool
+
+	os     string // 系统类型及版本
+	osFlag bool
+
+	sTZone     string // 系统时区
+	sTZoneFlag bool
+
+	mL     string // 当前语言
+	mLFlag bool
+
+	sjd     string // 是否越狱
+	sjdFlag bool
+
+	proxyip     string // 代理ip
+	proxyipFlag bool
+
+	wifip     string // wifi ip
+	wifipFlag bool
+
+	location     string // GPS经纬度
+	locationFlag bool
+
+	activeIp     string // 当前设备活跃ip
+	activeIpFlag bool
+
+	activeIpDetail     string // 当前设备活跃ip对应网卡类型
+	activeIpDetailFlag bool
+
 	cellBaseStation     string // 基站信息
 	cellBaseStationFlag bool
-	iP                  string // 公网ip
-	iPFlag              bool
+
+	iP     string // 公网ip
+	iPFlag bool
 }
 
 func NewAuditIosContextBuilder() *AuditIosContextBuilder {
@@ -3107,48 +3421,72 @@ func (builder *AuditIosContextBuilder) Build() *AuditIosContext {
 }
 
 type AuditObjectDetail struct {
-	CloneSource                  *string `json:"clone_source,omitempty"`                    // 克隆来源
-	TextDetail                   *string `json:"text_detail,omitempty"`                     // 其他文本
-	FileName                     *string `json:"file_name,omitempty"`                       // 文件名称
-	ThirdPartyAppID              *string `json:"third_party_appID,omitempty"`               // 第三方APPID
-	ContainFileNum               *int    `json:"contain_file_num,omitempty"`                // 文件或文件夹数量
-	PermissionSettingType        *string `json:"permission_setting_type,omitempty"`         // 链接分享设置
-	PermissionExternalAccessType *bool   `json:"permission_external_access_Type,omitempty"` // 是否开启外部访问设置
-	PermissionShareType          *string `json:"permission_share_type,omitempty"`           // 分享设置
-	FileServiceSource            *string `json:"file_service_source,omitempty"`             // file上传业务来源
-	OkrDownloadContent           *string `json:"okr_download_content,omitempty"`            // 下载OKR时的内容范围
-	ContainerType                *string `json:"container_type,omitempty"`                  // 容器类型，标识是否wiki
-	ContainerId                  *string `json:"container_id,omitempty"`                    // 容器id，wiki标识字段
-	CurrentPage                  *string `json:"current_page,omitempty"`                    // 截屏、录制的开始页面
+	CloneSource *string `json:"clone_source,omitempty"` // 克隆来源
+
+	TextDetail *string `json:"text_detail,omitempty"` // 其他文本
+
+	FileName *string `json:"file_name,omitempty"` // 文件名称
+
+	ThirdPartyAppID *string `json:"third_party_appID,omitempty"` // 第三方APPID
+
+	ContainFileNum *int `json:"contain_file_num,omitempty"` // 文件或文件夹数量
+
+	PermissionSettingType *string `json:"permission_setting_type,omitempty"` // 链接分享设置
+
+	PermissionExternalAccessType *bool `json:"permission_external_access_Type,omitempty"` // 是否开启外部访问设置
+
+	PermissionShareType *string `json:"permission_share_type,omitempty"` // 分享设置
+
+	FileServiceSource *string `json:"file_service_source,omitempty"` // file上传业务来源
+
+	OkrDownloadContent *string `json:"okr_download_content,omitempty"` // 下载OKR时的内容范围
+
+	ContainerType *string `json:"container_type,omitempty"` // 容器类型，标识是否wiki
+
+	ContainerId *string `json:"container_id,omitempty"` // 容器id，wiki标识字段
+
+	CurrentPage *string `json:"current_page,omitempty"` // 截屏、录制的开始页面
 }
 
 type AuditObjectDetailBuilder struct {
-	cloneSource                      string // 克隆来源
-	cloneSourceFlag                  bool
-	textDetail                       string // 其他文本
-	textDetailFlag                   bool
-	fileName                         string // 文件名称
-	fileNameFlag                     bool
-	thirdPartyAppID                  string // 第三方APPID
-	thirdPartyAppIDFlag              bool
-	containFileNum                   int // 文件或文件夹数量
-	containFileNumFlag               bool
-	permissionSettingType            string // 链接分享设置
-	permissionSettingTypeFlag        bool
+	cloneSource     string // 克隆来源
+	cloneSourceFlag bool
+
+	textDetail     string // 其他文本
+	textDetailFlag bool
+
+	fileName     string // 文件名称
+	fileNameFlag bool
+
+	thirdPartyAppID     string // 第三方APPID
+	thirdPartyAppIDFlag bool
+
+	containFileNum     int // 文件或文件夹数量
+	containFileNumFlag bool
+
+	permissionSettingType     string // 链接分享设置
+	permissionSettingTypeFlag bool
+
 	permissionExternalAccessType     bool // 是否开启外部访问设置
 	permissionExternalAccessTypeFlag bool
-	permissionShareType              string // 分享设置
-	permissionShareTypeFlag          bool
-	fileServiceSource                string // file上传业务来源
-	fileServiceSourceFlag            bool
-	okrDownloadContent               string // 下载OKR时的内容范围
-	okrDownloadContentFlag           bool
-	containerType                    string // 容器类型，标识是否wiki
-	containerTypeFlag                bool
-	containerId                      string // 容器id，wiki标识字段
-	containerIdFlag                  bool
-	currentPage                      string // 截屏、录制的开始页面
-	currentPageFlag                  bool
+
+	permissionShareType     string // 分享设置
+	permissionShareTypeFlag bool
+
+	fileServiceSource     string // file上传业务来源
+	fileServiceSourceFlag bool
+
+	okrDownloadContent     string // 下载OKR时的内容范围
+	okrDownloadContentFlag bool
+
+	containerType     string // 容器类型，标识是否wiki
+	containerTypeFlag bool
+
+	containerId     string // 容器id，wiki标识字段
+	containerIdFlag bool
+
+	currentPage     string // 截屏、录制的开始页面
+	currentPageFlag bool
 }
 
 func NewAuditObjectDetailBuilder() *AuditObjectDetailBuilder {
@@ -3331,22 +3669,30 @@ func (builder *AuditObjectDetailBuilder) Build() *AuditObjectDetail {
 }
 
 type AuditObjectEntity struct {
-	ObjectType   *string            `json:"object_type,omitempty"`   // 操作对象类型
-	ObjectValue  *string            `json:"object_value,omitempty"`  // 操作对象值，可能存在department_id、user_id等，需要进行lark_id的转换
-	ObjectName   *string            `json:"object_name,omitempty"`   // 操作对象名称，如会话名、文档名等
-	ObjectOwner  *string            `json:"object_owner,omitempty"`  // 操作对象的所有者
+	ObjectType *string `json:"object_type,omitempty"` // 操作对象类型
+
+	ObjectValue *string `json:"object_value,omitempty"` // 操作对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+
+	ObjectName *string `json:"object_name,omitempty"` // 操作对象名称，如会话名、文档名等
+
+	ObjectOwner *string `json:"object_owner,omitempty"` // 操作对象的所有者
+
 	ObjectDetail *AuditObjectDetail `json:"object_detail,omitempty"` // object 详情
 }
 
 type AuditObjectEntityBuilder struct {
-	objectType       string // 操作对象类型
-	objectTypeFlag   bool
-	objectValue      string // 操作对象值，可能存在department_id、user_id等，需要进行lark_id的转换
-	objectValueFlag  bool
-	objectName       string // 操作对象名称，如会话名、文档名等
-	objectNameFlag   bool
-	objectOwner      string // 操作对象的所有者
-	objectOwnerFlag  bool
+	objectType     string // 操作对象类型
+	objectTypeFlag bool
+
+	objectValue     string // 操作对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+	objectValueFlag bool
+
+	objectName     string // 操作对象名称，如会话名、文档名等
+	objectNameFlag bool
+
+	objectOwner     string // 操作对象的所有者
+	objectOwnerFlag bool
+
 	objectDetail     *AuditObjectDetail // object 详情
 	objectDetailFlag bool
 }
@@ -3426,33 +3772,47 @@ func (builder *AuditObjectEntityBuilder) Build() *AuditObjectEntity {
 }
 
 type AuditPcContext struct {
-	Udid   *string `json:"udid,omitempty"`    // UDID
-	Did    *string `json:"did,omitempty"`     // 设备ID
+	Udid *string `json:"udid,omitempty"` // UDID
+
+	Did *string `json:"did,omitempty"` // 设备ID
+
 	AppVer *string `json:"app_ver,omitempty"` // app的版本
-	Ver    *string `json:"ver,omitempty"`     // SecSDK版本
-	Os     *string `json:"os,omitempty"`      // 客户端类型
-	Wifip  *string `json:"wifip,omitempty"`   // wifi ip
-	Region *string `json:"region,omitempty"`  // 设备区域
-	IP     *string `json:"IP,omitempty"`      // 公网ip
+
+	Ver *string `json:"ver,omitempty"` // SecSDK版本
+
+	Os *string `json:"os,omitempty"` // 客户端类型
+
+	Wifip *string `json:"wifip,omitempty"` // wifi ip
+
+	Region *string `json:"region,omitempty"` // 设备区域
+
+	IP *string `json:"IP,omitempty"` // 公网ip
 }
 
 type AuditPcContextBuilder struct {
-	udid       string // UDID
-	udidFlag   bool
-	did        string // 设备ID
-	didFlag    bool
+	udid     string // UDID
+	udidFlag bool
+
+	did     string // 设备ID
+	didFlag bool
+
 	appVer     string // app的版本
 	appVerFlag bool
-	ver        string // SecSDK版本
-	verFlag    bool
-	os         string // 客户端类型
-	osFlag     bool
-	wifip      string // wifi ip
-	wifipFlag  bool
+
+	ver     string // SecSDK版本
+	verFlag bool
+
+	os     string // 客户端类型
+	osFlag bool
+
+	wifip     string // wifi ip
+	wifipFlag bool
+
 	region     string // 设备区域
 	regionFlag bool
-	iP         string // 公网ip
-	iPFlag     bool
+
+	iP     string // 公网ip
+	iPFlag bool
 }
 
 func NewAuditPcContextBuilder() *AuditPcContextBuilder {
@@ -3602,16 +3962,20 @@ func (builder *AuditRecipientDetailBuilder) Build() *AuditRecipientDetail {
 }
 
 type AuditRecipientEntity struct {
-	RecipientType   *string               `json:"recipient_type,omitempty"`   // 接收者对象类型
-	RecipientValue  *string               `json:"recipient_value,omitempty"`  // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+	RecipientType *string `json:"recipient_type,omitempty"` // 接收者对象类型
+
+	RecipientValue *string `json:"recipient_value,omitempty"` // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+
 	RecipientDetail *AuditRecipientDetail `json:"recipient_detail,omitempty"` // recipient 详情
 }
 
 type AuditRecipientEntityBuilder struct {
-	recipientType       string // 接收者对象类型
-	recipientTypeFlag   bool
-	recipientValue      string // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
-	recipientValueFlag  bool
+	recipientType     string // 接收者对象类型
+	recipientTypeFlag bool
+
+	recipientValue     string // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+	recipientValueFlag bool
+
 	recipientDetail     *AuditRecipientDetail // recipient 详情
 	recipientDetailFlag bool
 }
@@ -3666,14 +4030,16 @@ func (builder *AuditRecipientEntityBuilder) Build() *AuditRecipientEntity {
 
 type AuditWebContext struct {
 	UserAgent *string `json:"user_agent,omitempty"` // UA信息
-	IP        *string `json:"IP,omitempty"`         // 本机IP
+
+	IP *string `json:"IP,omitempty"` // 本机IP
 }
 
 type AuditWebContextBuilder struct {
 	userAgent     string // UA信息
 	userAgentFlag bool
-	iP            string // 本机IP
-	iPFlag        bool
+
+	iP     string // 本机IP
+	iPFlag bool
 }
 
 func NewAuditWebContextBuilder() *AuditWebContextBuilder {
@@ -3713,28 +4079,40 @@ func (builder *AuditWebContextBuilder) Build() *AuditWebContext {
 }
 
 type Badge struct {
-	Id              *string `json:"id,omitempty"`               // 租户内勋章的唯一标识，该值由系统随机生成。
-	Name            *string `json:"name,omitempty"`             // 租户内唯一的勋章名称，最多30个字符。
-	Explanation     *string `json:"explanation,omitempty"`      // 勋章的描述文案，最多100个字符。
-	DetailImage     *string `json:"detail_image,omitempty"`     // 企业勋章的详情图Key。1.权限校验：非本租户上传的图片key，不能直接使用；2.时效校验：创建勋章，或者修改勋章图片key时，需使用1h内上传的图片key。
-	ShowImage       *string `json:"show_image,omitempty"`       // 企业勋章的头像挂饰图Key。1.权限校验：非本租户上传的图片key，不能直接使用；2.时效校验：创建勋章，或者修改勋章图片key时，需使用1h内上传的图片key。
-	I18nName        *I18n   `json:"i18n_name,omitempty"`        // 勋章的多语言名称，同name字段限制，最多30个字符。
-	I18nExplanation *I18n   `json:"i18n_explanation,omitempty"` // 勋章的多语言描述文案，同explanation字段限制，最多100个字符。
+	Id *string `json:"id,omitempty"` // 租户内勋章的唯一标识，该值由系统随机生成。
+
+	Name *string `json:"name,omitempty"` // 租户内唯一的勋章名称，最多30个字符。
+
+	Explanation *string `json:"explanation,omitempty"` // 勋章的描述文案，最多100个字符。
+
+	DetailImage *string `json:"detail_image,omitempty"` // 企业勋章的详情图Key。1.权限校验：非本租户上传的图片key，不能直接使用；2.时效校验：创建勋章，或者修改勋章图片key时，需使用1h内上传的图片key。
+
+	ShowImage *string `json:"show_image,omitempty"` // 企业勋章的头像挂饰图Key。1.权限校验：非本租户上传的图片key，不能直接使用；2.时效校验：创建勋章，或者修改勋章图片key时，需使用1h内上传的图片key。
+
+	I18nName *I18n `json:"i18n_name,omitempty"` // 勋章的多语言名称，同name字段限制，最多30个字符。
+
+	I18nExplanation *I18n `json:"i18n_explanation,omitempty"` // 勋章的多语言描述文案，同explanation字段限制，最多100个字符。
 }
 
 type BadgeBuilder struct {
-	id                  string // 租户内勋章的唯一标识，该值由系统随机生成。
-	idFlag              bool
-	name                string // 租户内唯一的勋章名称，最多30个字符。
-	nameFlag            bool
-	explanation         string // 勋章的描述文案，最多100个字符。
-	explanationFlag     bool
-	detailImage         string // 企业勋章的详情图Key。1.权限校验：非本租户上传的图片key，不能直接使用；2.时效校验：创建勋章，或者修改勋章图片key时，需使用1h内上传的图片key。
-	detailImageFlag     bool
-	showImage           string // 企业勋章的头像挂饰图Key。1.权限校验：非本租户上传的图片key，不能直接使用；2.时效校验：创建勋章，或者修改勋章图片key时，需使用1h内上传的图片key。
-	showImageFlag       bool
-	i18nName            *I18n // 勋章的多语言名称，同name字段限制，最多30个字符。
-	i18nNameFlag        bool
+	id     string // 租户内勋章的唯一标识，该值由系统随机生成。
+	idFlag bool
+
+	name     string // 租户内唯一的勋章名称，最多30个字符。
+	nameFlag bool
+
+	explanation     string // 勋章的描述文案，最多100个字符。
+	explanationFlag bool
+
+	detailImage     string // 企业勋章的详情图Key。1.权限校验：非本租户上传的图片key，不能直接使用；2.时效校验：创建勋章，或者修改勋章图片key时，需使用1h内上传的图片key。
+	detailImageFlag bool
+
+	showImage     string // 企业勋章的头像挂饰图Key。1.权限校验：非本租户上传的图片key，不能直接使用；2.时效校验：创建勋章，或者修改勋章图片key时，需使用1h内上传的图片key。
+	showImageFlag bool
+
+	i18nName     *I18n // 勋章的多语言名称，同name字段限制，最多30个字符。
+	i18nNameFlag bool
+
 	i18nExplanation     *I18n // 勋章的多语言描述文案，同explanation字段限制，最多100个字符。
 	i18nExplanationFlag bool
 }
@@ -3839,13 +4217,15 @@ func (builder *BadgeBuilder) Build() *Badge {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -3883,30 +4263,42 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type File struct {
-	Title      *string `json:"title,omitempty"`        // 文档标题
-	Type       *string `json:"type,omitempty"`         // 文档类型
-	Owner      *User   `json:"owner,omitempty"`        // 文档所有者
-	Size       *string `json:"size,omitempty"`         // 文档大小
+	Title *string `json:"title,omitempty"` // 文档标题
+
+	Type *string `json:"type,omitempty"` // 文档类型
+
+	Owner *User `json:"owner,omitempty"` // 文档所有者
+
+	Size *string `json:"size,omitempty"` // 文档大小
+
 	LastOpTime *string `json:"last_op_time,omitempty"` // 更新时间
-	Status     *string `json:"status,omitempty"`       // 文档状态
-	Token      *string `json:"token,omitempty"`        // 文档token
+
+	Status *string `json:"status,omitempty"` // 文档状态
+
+	Token *string `json:"token,omitempty"` // 文档token
 }
 
 type FileBuilder struct {
-	title          string // 文档标题
-	titleFlag      bool
-	type_          string // 文档类型
-	typeFlag       bool
-	owner          *User // 文档所有者
-	ownerFlag      bool
-	size           string // 文档大小
-	sizeFlag       bool
+	title     string // 文档标题
+	titleFlag bool
+
+	type_    string // 文档类型
+	typeFlag bool
+
+	owner     *User // 文档所有者
+	ownerFlag bool
+
+	size     string // 文档大小
+	sizeFlag bool
+
 	lastOpTime     string // 更新时间
 	lastOpTimeFlag bool
-	status         string // 文档状态
-	statusFlag     bool
-	token          string // 文档token
-	tokenFlag      bool
+
+	status     string // 文档状态
+	statusFlag bool
+
+	token     string // 文档token
+	tokenFlag bool
 }
 
 func NewFileBuilder() *FileBuilder {
@@ -4041,39 +4433,57 @@ func (builder *FileListBuilder) Build() *FileList {
 }
 
 type Grant struct {
-	Id            *string     `json:"id,omitempty"`             // 租户内授予名单的唯一标识，该值由系统随机生成。
-	BadgeId       *string     `json:"badge_id,omitempty"`       // 企业勋章的唯一ID
-	Name          *string     `json:"name,omitempty"`           // 勋章下唯一的授予事项，最多100个字符。
-	GrantType     *int        `json:"grant_type,omitempty"`     // 授予名单类型
-	TimeZone      *string     `json:"time_zone,omitempty"`      // 授予名单的生效时间对应的时区，用于检查RuleDetail的时间戳的取值是否规范，取值范围为TZ database name
-	RuleDetail    *RuleDetail `json:"rule_detail,omitempty"`    // 规则详情
-	IsGrantAll    *bool       `json:"is_grant_all,omitempty"`   // 是否授予给全员。1.为false时，需要关联1~500个用户群体。2.为true时，不可关联用户、用户组、部门。
-	UserIds       []string    `json:"user_ids,omitempty"`       // 授予的用户ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
-	DepartmentIds []string    `json:"department_ids,omitempty"` // 授予的部门ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
-	GroupIds      []string    `json:"group_ids,omitempty"`      // 授予的用户组ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
+	Id *string `json:"id,omitempty"` // 租户内授予名单的唯一标识，该值由系统随机生成。
+
+	BadgeId *string `json:"badge_id,omitempty"` // 企业勋章的唯一ID
+
+	Name *string `json:"name,omitempty"` // 勋章下唯一的授予事项，最多100个字符。
+
+	GrantType *int `json:"grant_type,omitempty"` // 授予名单类型
+
+	TimeZone *string `json:"time_zone,omitempty"` // 授予名单的生效时间对应的时区，用于检查RuleDetail的时间戳的取值是否规范，取值范围为TZ database name
+
+	RuleDetail *RuleDetail `json:"rule_detail,omitempty"` // 规则详情
+
+	IsGrantAll *bool `json:"is_grant_all,omitempty"` // 是否授予给全员。1.为false时，需要关联1~500个用户群体。2.为true时，不可关联用户、用户组、部门。
+
+	UserIds []string `json:"user_ids,omitempty"` // 授予的用户ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
+
+	DepartmentIds []string `json:"department_ids,omitempty"` // 授予的部门ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
+
+	GroupIds []string `json:"group_ids,omitempty"` // 授予的用户组ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
 }
 
 type GrantBuilder struct {
-	id                string // 租户内授予名单的唯一标识，该值由系统随机生成。
-	idFlag            bool
-	badgeId           string // 企业勋章的唯一ID
-	badgeIdFlag       bool
-	name              string // 勋章下唯一的授予事项，最多100个字符。
-	nameFlag          bool
-	grantType         int // 授予名单类型
-	grantTypeFlag     bool
-	timeZone          string // 授予名单的生效时间对应的时区，用于检查RuleDetail的时间戳的取值是否规范，取值范围为TZ database name
-	timeZoneFlag      bool
-	ruleDetail        *RuleDetail // 规则详情
-	ruleDetailFlag    bool
-	isGrantAll        bool // 是否授予给全员。1.为false时，需要关联1~500个用户群体。2.为true时，不可关联用户、用户组、部门。
-	isGrantAllFlag    bool
-	userIds           []string // 授予的用户ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
-	userIdsFlag       bool
+	id     string // 租户内授予名单的唯一标识，该值由系统随机生成。
+	idFlag bool
+
+	badgeId     string // 企业勋章的唯一ID
+	badgeIdFlag bool
+
+	name     string // 勋章下唯一的授予事项，最多100个字符。
+	nameFlag bool
+
+	grantType     int // 授予名单类型
+	grantTypeFlag bool
+
+	timeZone     string // 授予名单的生效时间对应的时区，用于检查RuleDetail的时间戳的取值是否规范，取值范围为TZ database name
+	timeZoneFlag bool
+
+	ruleDetail     *RuleDetail // 规则详情
+	ruleDetailFlag bool
+
+	isGrantAll     bool // 是否授予给全员。1.为false时，需要关联1~500个用户群体。2.为true时，不可关联用户、用户组、部门。
+	isGrantAllFlag bool
+
+	userIds     []string // 授予的用户ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
+	userIdsFlag bool
+
 	departmentIds     []string // 授予的部门ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
 	departmentIdsFlag bool
-	groupIds          []string // 授予的用户组ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
-	groupIdsFlag      bool
+
+	groupIds     []string // 授予的用户组ID列表，授予名单列表接口返回结果中不返回该字段，只在详情接口返回
+	groupIdsFlag bool
 }
 
 func NewGrantBuilder() *GrantBuilder {
@@ -4214,15 +4624,19 @@ func (builder *GrantBuilder) Build() *Grant {
 
 type I18n struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文文案
+
 	EnUs *string `json:"en_us,omitempty"` // 英文文案
+
 	JaJp *string `json:"ja_jp,omitempty"` // 日文文案
 }
 
 type I18nBuilder struct {
 	zhCn     string // 中文文案
 	zhCnFlag bool
+
 	enUs     string // 英文文案
 	enUsFlag bool
+
 	jaJp     string // 日文文案
 	jaJpFlag bool
 }
@@ -4309,19 +4723,25 @@ func (builder *PasswordBuilder) Build() *Password {
 }
 
 type RuleDetail struct {
-	EffectiveTime   *string `json:"effective_time,omitempty"`   // 开始生效的时间戳。1.手动设置有效期类型勋章，配置有效期限需要配置该字段；2.时间戳必须是所在时区当天的零点时间戳，如时区为Asia/Shanghai时区时的1649606400
-	ExpirationTime  *string `json:"expiration_time,omitempty"`  // 结束生效的时间戳。1.手动设置有效期类型勋章，配置有效期限需要配置该字段；2.最大值：不得超过effective_time+100 年；3.非永久有效：时间戳必须是所在时区当天的23:59:59时间戳，如时区为Asia/Shanghai时区时的1649692799；4.永久有效：传值为0即可
-	Anniversary     *int    `json:"anniversary,omitempty"`      // 入职周年日。根据入职时间发放类型勋章，需要配置该字段。
-	EffectivePeriod *int    `json:"effective_period,omitempty"` // 有效期限。根据入职时间发放类型勋章，需要配置该字段。
+	EffectiveTime *string `json:"effective_time,omitempty"` // 开始生效的时间戳。1.手动设置有效期类型勋章，配置有效期限需要配置该字段；2.时间戳必须是所在时区当天的零点时间戳，如时区为Asia/Shanghai时区时的1649606400
+
+	ExpirationTime *string `json:"expiration_time,omitempty"` // 结束生效的时间戳。1.手动设置有效期类型勋章，配置有效期限需要配置该字段；2.最大值：不得超过effective_time+100 年；3.非永久有效：时间戳必须是所在时区当天的23:59:59时间戳，如时区为Asia/Shanghai时区时的1649692799；4.永久有效：传值为0即可
+
+	Anniversary *int `json:"anniversary,omitempty"` // 入职周年日。根据入职时间发放类型勋章，需要配置该字段。
+
+	EffectivePeriod *int `json:"effective_period,omitempty"` // 有效期限。根据入职时间发放类型勋章，需要配置该字段。
 }
 
 type RuleDetailBuilder struct {
-	effectiveTime       string // 开始生效的时间戳。1.手动设置有效期类型勋章，配置有效期限需要配置该字段；2.时间戳必须是所在时区当天的零点时间戳，如时区为Asia/Shanghai时区时的1649606400
-	effectiveTimeFlag   bool
-	expirationTime      string // 结束生效的时间戳。1.手动设置有效期类型勋章，配置有效期限需要配置该字段；2.最大值：不得超过effective_time+100 年；3.非永久有效：时间戳必须是所在时区当天的23:59:59时间戳，如时区为Asia/Shanghai时区时的1649692799；4.永久有效：传值为0即可
-	expirationTimeFlag  bool
-	anniversary         int // 入职周年日。根据入职时间发放类型勋章，需要配置该字段。
-	anniversaryFlag     bool
+	effectiveTime     string // 开始生效的时间戳。1.手动设置有效期类型勋章，配置有效期限需要配置该字段；2.时间戳必须是所在时区当天的零点时间戳，如时区为Asia/Shanghai时区时的1649606400
+	effectiveTimeFlag bool
+
+	expirationTime     string // 结束生效的时间戳。1.手动设置有效期类型勋章，配置有效期限需要配置该字段；2.最大值：不得超过effective_time+100 年；3.非永久有效：时间戳必须是所在时区当天的23:59:59时间戳，如时区为Asia/Shanghai时区时的1649692799；4.永久有效：传值为0即可
+	expirationTimeFlag bool
+
+	anniversary     int // 入职周年日。根据入职时间发放类型勋章，需要配置该字段。
+	anniversaryFlag bool
+
 	effectivePeriod     int // 有效期限。根据入职时间发放类型勋章，需要配置该字段。
 	effectivePeriodFlag bool
 }
@@ -4389,33 +4809,47 @@ func (builder *RuleDetailBuilder) Build() *RuleDetail {
 }
 
 type SplashPageStat struct {
-	Date                      *string `json:"date,omitempty"`                        // 日期
-	SplashId                  *string `json:"splash_id,omitempty"`                   // 开屏素材id
-	ImpressionCount           *int    `json:"impression_count,omitempty"`            // 曝光数
-	ClickCount                *int    `json:"click_count,omitempty"`                 // 点击数
-	SkipCount                 *int    `json:"skip_count,omitempty"`                  // 点击跳过数
-	ImpressionCountAccumulate *int    `json:"impression_count_accumulate,omitempty"` // 累计曝光
-	ClickCountAccumulate      *int    `json:"click_count_accumulate,omitempty"`      // 累计点击
-	SkipCountAccumulate       *int    `json:"skip_count_accumulate,omitempty"`       // 累积点击跳过数
+	Date *string `json:"date,omitempty"` // 日期
+
+	SplashId *string `json:"splash_id,omitempty"` // 开屏素材id
+
+	ImpressionCount *int `json:"impression_count,omitempty"` // 曝光数
+
+	ClickCount *int `json:"click_count,omitempty"` // 点击数
+
+	SkipCount *int `json:"skip_count,omitempty"` // 点击跳过数
+
+	ImpressionCountAccumulate *int `json:"impression_count_accumulate,omitempty"` // 累计曝光
+
+	ClickCountAccumulate *int `json:"click_count_accumulate,omitempty"` // 累计点击
+
+	SkipCountAccumulate *int `json:"skip_count_accumulate,omitempty"` // 累积点击跳过数
 }
 
 type SplashPageStatBuilder struct {
-	date                          string // 日期
-	dateFlag                      bool
-	splashId                      string // 开屏素材id
-	splashIdFlag                  bool
-	impressionCount               int // 曝光数
-	impressionCountFlag           bool
-	clickCount                    int // 点击数
-	clickCountFlag                bool
-	skipCount                     int // 点击跳过数
-	skipCountFlag                 bool
+	date     string // 日期
+	dateFlag bool
+
+	splashId     string // 开屏素材id
+	splashIdFlag bool
+
+	impressionCount     int // 曝光数
+	impressionCountFlag bool
+
+	clickCount     int // 点击数
+	clickCountFlag bool
+
+	skipCount     int // 点击跳过数
+	skipCountFlag bool
+
 	impressionCountAccumulate     int // 累计曝光
 	impressionCountAccumulateFlag bool
-	clickCountAccumulate          int // 累计点击
-	clickCountAccumulateFlag      bool
-	skipCountAccumulate           int // 累积点击跳过数
-	skipCountAccumulateFlag       bool
+
+	clickCountAccumulate     int // 累计点击
+	clickCountAccumulateFlag bool
+
+	skipCountAccumulate     int // 累积点击跳过数
+	skipCountAccumulateFlag bool
 }
 
 func NewSplashPageStatBuilder() *SplashPageStatBuilder {
@@ -4533,30 +4967,42 @@ func (builder *SplashPageStatBuilder) Build() *SplashPageStat {
 }
 
 type Task struct {
-	OriginalUserId    *string `json:"original_user_id,omitempty"`    // 文档原所有者ID
-	TargetOwnerId     *string `json:"target_owner_id,omitempty"`     // 目标用户ID
-	FileList          []*File `json:"file_list,omitempty"`           // 恢复文件列表
-	TaskId            *string `json:"task_id,omitempty"`             // 任务id
-	Status            *int    `json:"status,omitempty"`              // 任务状态
+	OriginalUserId *string `json:"original_user_id,omitempty"` // 文档原所有者ID
+
+	TargetOwnerId *string `json:"target_owner_id,omitempty"` // 目标用户ID
+
+	FileList []*File `json:"file_list,omitempty"` // 恢复文件列表
+
+	TaskId *string `json:"task_id,omitempty"` // 任务id
+
+	Status *int `json:"status,omitempty"` // 任务状态
+
 	OriginalUserEmail *string `json:"original_user_email,omitempty"` // 文档原所有者邮箱
-	TargetOwnerEmail  *string `json:"target_owner_email,omitempty"`  // 文档新所有者邮箱
+
+	TargetOwnerEmail *string `json:"target_owner_email,omitempty"` // 文档新所有者邮箱
 }
 
 type TaskBuilder struct {
-	originalUserId        string // 文档原所有者ID
-	originalUserIdFlag    bool
-	targetOwnerId         string // 目标用户ID
-	targetOwnerIdFlag     bool
-	fileList              []*File // 恢复文件列表
-	fileListFlag          bool
-	taskId                string // 任务id
-	taskIdFlag            bool
-	status                int // 任务状态
-	statusFlag            bool
+	originalUserId     string // 文档原所有者ID
+	originalUserIdFlag bool
+
+	targetOwnerId     string // 目标用户ID
+	targetOwnerIdFlag bool
+
+	fileList     []*File // 恢复文件列表
+	fileListFlag bool
+
+	taskId     string // 任务id
+	taskIdFlag bool
+
+	status     int // 任务状态
+	statusFlag bool
+
 	originalUserEmail     string // 文档原所有者邮箱
 	originalUserEmailFlag bool
-	targetOwnerEmail      string // 文档新所有者邮箱
-	targetOwnerEmailFlag  bool
+
+	targetOwnerEmail     string // 文档新所有者邮箱
+	targetOwnerEmailFlag bool
 }
 
 func NewTaskBuilder() *TaskBuilder {
@@ -4660,18 +5106,22 @@ func (builder *TaskBuilder) Build() *Task {
 }
 
 type User struct {
-	Name   *string `json:"name,omitempty"`   // 用户名称
+	Name *string `json:"name,omitempty"` // 用户名称
+
 	Avatar *string `json:"avatar,omitempty"` // 用户头像
-	Id     *string `json:"id,omitempty"`     // 用户ID
+
+	Id *string `json:"id,omitempty"` // 用户ID
 }
 
 type UserBuilder struct {
-	name       string // 用户名称
-	nameFlag   bool
+	name     string // 用户名称
+	nameFlag bool
+
 	avatar     string // 用户头像
 	avatarFlag bool
-	id         string // 用户ID
-	idFlag     bool
+
+	id     string // 用户ID
+	idFlag bool
 }
 
 func NewUserBuilder() *UserBuilder {
@@ -4725,15 +5175,19 @@ func (builder *UserBuilder) Build() *User {
 
 type UserAnnualReport struct {
 	Year2021 *UserReport2021 `json:"year_2021,omitempty"` // 2021用户年度报告
+
 	Year2022 *UserReport2022 `json:"year_2022,omitempty"` // 2022用户年度报告
+
 	Year2023 *UserReport2023 `json:"year_2023,omitempty"` // 2023用户年度报告
 }
 
 type UserAnnualReportBuilder struct {
 	year2021     *UserReport2021 // 2021用户年度报告
 	year2021Flag bool
+
 	year2022     *UserReport2022 // 2022用户年度报告
 	year2022Flag bool
+
 	year2023     *UserReport2023 // 2023用户年度报告
 	year2023Flag bool
 }
@@ -4785,84 +5239,132 @@ func (builder *UserAnnualReportBuilder) Build() *UserAnnualReport {
 }
 
 type UserReport2021 struct {
-	ActiveDayCount                *int     `json:"active_day_count,omitempty"`                 // 活跃时长> 0的天数
-	BusyWeek                      *string  `json:"busy_week,omitempty"`                        // 工作日平均活跃最长的一周，「2021W10」格式
-	P2pChatCount                  *string  `json:"p2p_chat_count,omitempty"`                   // 单聊过的人数（仅限普通单聊，不包括bot等，不限本人是否有过发送消息）
-	TalkedChatCount               *string  `json:"talked_chat_count,omitempty"`                // 发过言的群数
-	FavoriteEmoji                 *string  `json:"favorite_emoji,omitempty"`                   // 任何场景下发的表情次数最多的一个表情
-	ReactionCount                 *string  `json:"reaction_count,omitempty"`                   // 本人使用快捷表情的次数
-	ConferenceCreateCount         *string  `json:"conference_create_count,omitempty"`          // 创建了日程并发起了视频会议的次数
-	TotalPartiCount               *string  `json:"total_parti_count,omitempty"`                // 创建日程中涉及到的总人次
-	MinutesObjectCount            *string  `json:"minutes_object_count,omitempty"`             // 录制了多少篇妙记
-	MinutesDuration               *float64 `json:"minutes_duration,omitempty"`                 // 录制妙记累积时长（分钟）
-	CreateEditFileCount           *string  `json:"create_edit_file_count,omitempty"`           // 创建及参与协作的文档篇数
-	CreateFileCount               *string  `json:"create_file_count,omitempty"`                // 创建文档数
-	CooperateEditFileCount        *string  `json:"cooperate_edit_file_count,omitempty"`        // 参与协作文档数
-	LikeRecordCount               *string  `json:"like_record_count,omitempty"`                // 所属的文档共获得多少个点赞
-	OkrCumOCount                  *string  `json:"okr_cum_o_count,omitempty"`                  // 填写过的O的数量
-	OkrCumKrCount                 *string  `json:"okr_cum_kr_count,omitempty"`                 // 填写过的KR的数量
-	OkrAlignedUserRankfirst       *string  `json:"okr_aligned_user_rankfirst,omitempty"`       // 被对齐次数最多的用户
-	ApprovalStartCount            *string  `json:"approval_start_count,omitempty"`             // 发起的审批流程数
-	ApprovalExecuteCount          *string  `json:"approval_execute_count,omitempty"`           // 处理的审批流程数
-	ApprovalRelationUserRankfirst *string  `json:"approval_relation_user_rankfirst,omitempty"` // 审批协作次数最多的用户（在同一个审批实例中出现过即算为审批协作）
-	UserId                        *string  `json:"user_id,omitempty"`                          // 用户id
-	BusyWeekSumDuration           *string  `json:"busy_week_sum_duration,omitempty"`           // 工作日平均活跃最长的一周 的总活跃时长（分钟）
-	BusyWeekMdate                 *string  `json:"busy_week_mdate,omitempty"`                  // 工作日平均活跃最长的一周 的最早工作日
-	BusyWeekActDays               *int     `json:"busy_week_act_days,omitempty"`               // 工作日平均活跃最长的一周 有活跃的工作日天数
-	CreateReadUserCount           *string  `json:"create_read_user_count,omitempty"`           // 创建的文档被XXX人阅读过
+	ActiveDayCount *int `json:"active_day_count,omitempty"` // 活跃时长> 0的天数
+
+	BusyWeek *string `json:"busy_week,omitempty"` // 工作日平均活跃最长的一周，「2021W10」格式
+
+	P2pChatCount *string `json:"p2p_chat_count,omitempty"` // 单聊过的人数（仅限普通单聊，不包括bot等，不限本人是否有过发送消息）
+
+	TalkedChatCount *string `json:"talked_chat_count,omitempty"` // 发过言的群数
+
+	FavoriteEmoji *string `json:"favorite_emoji,omitempty"` // 任何场景下发的表情次数最多的一个表情
+
+	ReactionCount *string `json:"reaction_count,omitempty"` // 本人使用快捷表情的次数
+
+	ConferenceCreateCount *string `json:"conference_create_count,omitempty"` // 创建了日程并发起了视频会议的次数
+
+	TotalPartiCount *string `json:"total_parti_count,omitempty"` // 创建日程中涉及到的总人次
+
+	MinutesObjectCount *string `json:"minutes_object_count,omitempty"` // 录制了多少篇妙记
+
+	MinutesDuration *float64 `json:"minutes_duration,omitempty"` // 录制妙记累积时长（分钟）
+
+	CreateEditFileCount *string `json:"create_edit_file_count,omitempty"` // 创建及参与协作的文档篇数
+
+	CreateFileCount *string `json:"create_file_count,omitempty"` // 创建文档数
+
+	CooperateEditFileCount *string `json:"cooperate_edit_file_count,omitempty"` // 参与协作文档数
+
+	LikeRecordCount *string `json:"like_record_count,omitempty"` // 所属的文档共获得多少个点赞
+
+	OkrCumOCount *string `json:"okr_cum_o_count,omitempty"` // 填写过的O的数量
+
+	OkrCumKrCount *string `json:"okr_cum_kr_count,omitempty"` // 填写过的KR的数量
+
+	OkrAlignedUserRankfirst *string `json:"okr_aligned_user_rankfirst,omitempty"` // 被对齐次数最多的用户
+
+	ApprovalStartCount *string `json:"approval_start_count,omitempty"` // 发起的审批流程数
+
+	ApprovalExecuteCount *string `json:"approval_execute_count,omitempty"` // 处理的审批流程数
+
+	ApprovalRelationUserRankfirst *string `json:"approval_relation_user_rankfirst,omitempty"` // 审批协作次数最多的用户（在同一个审批实例中出现过即算为审批协作）
+
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	BusyWeekSumDuration *string `json:"busy_week_sum_duration,omitempty"` // 工作日平均活跃最长的一周 的总活跃时长（分钟）
+
+	BusyWeekMdate *string `json:"busy_week_mdate,omitempty"` // 工作日平均活跃最长的一周 的最早工作日
+
+	BusyWeekActDays *int `json:"busy_week_act_days,omitempty"` // 工作日平均活跃最长的一周 有活跃的工作日天数
+
+	CreateReadUserCount *string `json:"create_read_user_count,omitempty"` // 创建的文档被XXX人阅读过
 }
 
 type UserReport2021Builder struct {
-	activeDayCount                    int // 活跃时长> 0的天数
-	activeDayCountFlag                bool
-	busyWeek                          string // 工作日平均活跃最长的一周，「2021W10」格式
-	busyWeekFlag                      bool
-	p2pChatCount                      string // 单聊过的人数（仅限普通单聊，不包括bot等，不限本人是否有过发送消息）
-	p2pChatCountFlag                  bool
-	talkedChatCount                   string // 发过言的群数
-	talkedChatCountFlag               bool
-	favoriteEmoji                     string // 任何场景下发的表情次数最多的一个表情
-	favoriteEmojiFlag                 bool
-	reactionCount                     string // 本人使用快捷表情的次数
-	reactionCountFlag                 bool
-	conferenceCreateCount             string // 创建了日程并发起了视频会议的次数
-	conferenceCreateCountFlag         bool
-	totalPartiCount                   string // 创建日程中涉及到的总人次
-	totalPartiCountFlag               bool
-	minutesObjectCount                string // 录制了多少篇妙记
-	minutesObjectCountFlag            bool
-	minutesDuration                   float64 // 录制妙记累积时长（分钟）
-	minutesDurationFlag               bool
-	createEditFileCount               string // 创建及参与协作的文档篇数
-	createEditFileCountFlag           bool
-	createFileCount                   string // 创建文档数
-	createFileCountFlag               bool
-	cooperateEditFileCount            string // 参与协作文档数
-	cooperateEditFileCountFlag        bool
-	likeRecordCount                   string // 所属的文档共获得多少个点赞
-	likeRecordCountFlag               bool
-	okrCumOCount                      string // 填写过的O的数量
-	okrCumOCountFlag                  bool
-	okrCumKrCount                     string // 填写过的KR的数量
-	okrCumKrCountFlag                 bool
-	okrAlignedUserRankfirst           string // 被对齐次数最多的用户
-	okrAlignedUserRankfirstFlag       bool
-	approvalStartCount                string // 发起的审批流程数
-	approvalStartCountFlag            bool
-	approvalExecuteCount              string // 处理的审批流程数
-	approvalExecuteCountFlag          bool
+	activeDayCount     int // 活跃时长> 0的天数
+	activeDayCountFlag bool
+
+	busyWeek     string // 工作日平均活跃最长的一周，「2021W10」格式
+	busyWeekFlag bool
+
+	p2pChatCount     string // 单聊过的人数（仅限普通单聊，不包括bot等，不限本人是否有过发送消息）
+	p2pChatCountFlag bool
+
+	talkedChatCount     string // 发过言的群数
+	talkedChatCountFlag bool
+
+	favoriteEmoji     string // 任何场景下发的表情次数最多的一个表情
+	favoriteEmojiFlag bool
+
+	reactionCount     string // 本人使用快捷表情的次数
+	reactionCountFlag bool
+
+	conferenceCreateCount     string // 创建了日程并发起了视频会议的次数
+	conferenceCreateCountFlag bool
+
+	totalPartiCount     string // 创建日程中涉及到的总人次
+	totalPartiCountFlag bool
+
+	minutesObjectCount     string // 录制了多少篇妙记
+	minutesObjectCountFlag bool
+
+	minutesDuration     float64 // 录制妙记累积时长（分钟）
+	minutesDurationFlag bool
+
+	createEditFileCount     string // 创建及参与协作的文档篇数
+	createEditFileCountFlag bool
+
+	createFileCount     string // 创建文档数
+	createFileCountFlag bool
+
+	cooperateEditFileCount     string // 参与协作文档数
+	cooperateEditFileCountFlag bool
+
+	likeRecordCount     string // 所属的文档共获得多少个点赞
+	likeRecordCountFlag bool
+
+	okrCumOCount     string // 填写过的O的数量
+	okrCumOCountFlag bool
+
+	okrCumKrCount     string // 填写过的KR的数量
+	okrCumKrCountFlag bool
+
+	okrAlignedUserRankfirst     string // 被对齐次数最多的用户
+	okrAlignedUserRankfirstFlag bool
+
+	approvalStartCount     string // 发起的审批流程数
+	approvalStartCountFlag bool
+
+	approvalExecuteCount     string // 处理的审批流程数
+	approvalExecuteCountFlag bool
+
 	approvalRelationUserRankfirst     string // 审批协作次数最多的用户（在同一个审批实例中出现过即算为审批协作）
 	approvalRelationUserRankfirstFlag bool
-	userId                            string // 用户id
-	userIdFlag                        bool
-	busyWeekSumDuration               string // 工作日平均活跃最长的一周 的总活跃时长（分钟）
-	busyWeekSumDurationFlag           bool
-	busyWeekMdate                     string // 工作日平均活跃最长的一周 的最早工作日
-	busyWeekMdateFlag                 bool
-	busyWeekActDays                   int // 工作日平均活跃最长的一周 有活跃的工作日天数
-	busyWeekActDaysFlag               bool
-	createReadUserCount               string // 创建的文档被XXX人阅读过
-	createReadUserCountFlag           bool
+
+	userId     string // 用户id
+	userIdFlag bool
+
+	busyWeekSumDuration     string // 工作日平均活跃最长的一周 的总活跃时长（分钟）
+	busyWeekSumDurationFlag bool
+
+	busyWeekMdate     string // 工作日平均活跃最长的一周 的最早工作日
+	busyWeekMdateFlag bool
+
+	busyWeekActDays     int // 工作日平均活跃最长的一周 有活跃的工作日天数
+	busyWeekActDaysFlag bool
+
+	createReadUserCount     string // 创建的文档被XXX人阅读过
+	createReadUserCountFlag bool
 }
 
 func NewUserReport2021Builder() *UserReport2021Builder {
@@ -5201,93 +5703,147 @@ func (builder *UserReport2021Builder) Build() *UserReport2021 {
 }
 
 type UserReport2022 struct {
-	UserId                  *string `json:"user_id,omitempty"`                      // 用户id
-	UserRegisterDate        *string `json:"user_register_date,omitempty"`           // 用户的飞书激活日期，yyyyMMdd格式（201909之前的用户可能是空
-	ActiveDayCount          *int    `json:"active_day_count,omitempty"`             // 用户2022年内在飞书有活跃的天数
-	MsgBusyDate             *string `json:"msg_busy_date,omitempty"`                // 2022全年用户发出消息条数最多的一天，yyyyMMdd格式
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	UserRegisterDate *string `json:"user_register_date,omitempty"` // 用户的飞书激活日期，yyyyMMdd格式（201909之前的用户可能是空
+
+	ActiveDayCount *int `json:"active_day_count,omitempty"` // 用户2022年内在飞书有活跃的天数
+
+	MsgBusyDate *string `json:"msg_busy_date,omitempty"` // 2022全年用户发出消息条数最多的一天，yyyyMMdd格式
+
 	MsgBusyDateSendMsgCount *string `json:"msg_busy_date_send_msg_count,omitempty"` // 全年发消息最多一天，发出的消息数
-	P2pChatCount            *string `json:"p2p_chat_count,omitempty"`               // 2022全年与此用户有过单聊的人数（双方任意一人发出过消息即计入）
-	TalkedChatCount         *string `json:"talked_chat_count,omitempty"`            // 2022全年用户有过发言的飞书群的数量
-	PositiveReactionCount   *string `json:"positive_reaction_count,omitempty"`      // 2022全年用户所发消息，收到点赞、送心、碰拳等正面表情回复的总次数
-	FirstPositiveReaction   *string `json:"first_positive_reaction,omitempty"`      // 用户所收到的正向表情回复，排第1的表情
-	SecondPositiveReaction  *string `json:"second_positive_reaction,omitempty"`     // 用户所收到的正向表情回复，排第2的表情
-	ThirdPositiveReaction   *string `json:"third_positive_reaction,omitempty"`      // 用户所收到的正向表情回复，排第3的表情
-	FourthPositiveReaction  *string `json:"fourth_positive_reaction,omitempty"`     // 用户所收到的正向表情回复，排第4的表情
-	FifthPositiveReaction   *string `json:"fifth_positive_reaction,omitempty"`      // 用户所收到的正向表情回复，排第5的表情
-	CreateFileCount         *string `json:"create_file_count,omitempty"`            // 2022全年用户本人创建过的飞书文档数量
-	CreatedFileViewCount    *string `json:"created_file_view_count,omitempty"`      // 此用户2022年创建的飞书文档的总阅读人数（含自己）
-	CommentFileCount        *string `json:"comment_file_count,omitempty"`           // 2022全年用户发表过评论的飞书文档数量
-	AttendEventCount        *string `json:"attend_event_count,omitempty"`           // 2022全年用户的日程总数（主日历日程，排除被删除的日程及用户拒绝、移除的日程，包括全天日程和重复日程，重复日程在周期内计算为多次）
-	EventBusyDate           *string `json:"event_busy_date,omitempty"`              // 2022全年用户日程数量最多的一天，yyyyMMdd格式
-	EventBusyDateEventCount *string `json:"event_busy_date_event_count,omitempty"`  // 日程最多一天的日程数量
-	EventStartTimeRange1    *string `json:"event_start_time_range1,omitempty"`      // 2022全年，此用户最经常的日程开始时间，精确到分钟，HH:mm格式
-	ConferenceCreateCount   *string `json:"conference_create_count,omitempty"`      // 2022全年，基于此用户所创建的日程，发起了视频会议的次数
-	TotalPartiCount         *string `json:"total_parti_count,omitempty"`            // 2022全年，基于此用户所创建的日程发起的视频会议，涉及的参会总人次
-	OkrCumOCount            *string `json:"okr_cum_o_count,omitempty"`              // 2022全年此用户写过的O的数量（未删除）
-	OkrCumKrCount           *string `json:"okr_cum_kr_count,omitempty"`             // 2022全年此用户写过的KR的数量（未删除）
-	OkrAlignedUserCount     *string `json:"okr_aligned_user_count,omitempty"`       // 2022全年用户所写的OKR对齐过的去重人数（未删除）
-	PeopleInterviewNum      *string `json:"people_interview_num,omitempty"`         // 2022全年用户在飞书招聘上进行的面试总场次（候选人是海外账号的未参与计算）
-	SendEmailCount          *string `json:"send_email_count,omitempty"`             // 2022全年此用户发出邮件数量
-	ReceiveEmailCount       *string `json:"receive_email_count,omitempty"`          // 2022全年此用户收到邮件数量
+
+	P2pChatCount *string `json:"p2p_chat_count,omitempty"` // 2022全年与此用户有过单聊的人数（双方任意一人发出过消息即计入）
+
+	TalkedChatCount *string `json:"talked_chat_count,omitempty"` // 2022全年用户有过发言的飞书群的数量
+
+	PositiveReactionCount *string `json:"positive_reaction_count,omitempty"` // 2022全年用户所发消息，收到点赞、送心、碰拳等正面表情回复的总次数
+
+	FirstPositiveReaction *string `json:"first_positive_reaction,omitempty"` // 用户所收到的正向表情回复，排第1的表情
+
+	SecondPositiveReaction *string `json:"second_positive_reaction,omitempty"` // 用户所收到的正向表情回复，排第2的表情
+
+	ThirdPositiveReaction *string `json:"third_positive_reaction,omitempty"` // 用户所收到的正向表情回复，排第3的表情
+
+	FourthPositiveReaction *string `json:"fourth_positive_reaction,omitempty"` // 用户所收到的正向表情回复，排第4的表情
+
+	FifthPositiveReaction *string `json:"fifth_positive_reaction,omitempty"` // 用户所收到的正向表情回复，排第5的表情
+
+	CreateFileCount *string `json:"create_file_count,omitempty"` // 2022全年用户本人创建过的飞书文档数量
+
+	CreatedFileViewCount *string `json:"created_file_view_count,omitempty"` // 此用户2022年创建的飞书文档的总阅读人数（含自己）
+
+	CommentFileCount *string `json:"comment_file_count,omitempty"` // 2022全年用户发表过评论的飞书文档数量
+
+	AttendEventCount *string `json:"attend_event_count,omitempty"` // 2022全年用户的日程总数（主日历日程，排除被删除的日程及用户拒绝、移除的日程，包括全天日程和重复日程，重复日程在周期内计算为多次）
+
+	EventBusyDate *string `json:"event_busy_date,omitempty"` // 2022全年用户日程数量最多的一天，yyyyMMdd格式
+
+	EventBusyDateEventCount *string `json:"event_busy_date_event_count,omitempty"` // 日程最多一天的日程数量
+
+	EventStartTimeRange1 *string `json:"event_start_time_range1,omitempty"` // 2022全年，此用户最经常的日程开始时间，精确到分钟，HH:mm格式
+
+	ConferenceCreateCount *string `json:"conference_create_count,omitempty"` // 2022全年，基于此用户所创建的日程，发起了视频会议的次数
+
+	TotalPartiCount *string `json:"total_parti_count,omitempty"` // 2022全年，基于此用户所创建的日程发起的视频会议，涉及的参会总人次
+
+	OkrCumOCount *string `json:"okr_cum_o_count,omitempty"` // 2022全年此用户写过的O的数量（未删除）
+
+	OkrCumKrCount *string `json:"okr_cum_kr_count,omitempty"` // 2022全年此用户写过的KR的数量（未删除）
+
+	OkrAlignedUserCount *string `json:"okr_aligned_user_count,omitempty"` // 2022全年用户所写的OKR对齐过的去重人数（未删除）
+
+	PeopleInterviewNum *string `json:"people_interview_num,omitempty"` // 2022全年用户在飞书招聘上进行的面试总场次（候选人是海外账号的未参与计算）
+
+	SendEmailCount *string `json:"send_email_count,omitempty"` // 2022全年此用户发出邮件数量
+
+	ReceiveEmailCount *string `json:"receive_email_count,omitempty"` // 2022全年此用户收到邮件数量
 }
 
 type UserReport2022Builder struct {
-	userId                      string // 用户id
-	userIdFlag                  bool
-	userRegisterDate            string // 用户的飞书激活日期，yyyyMMdd格式（201909之前的用户可能是空
-	userRegisterDateFlag        bool
-	activeDayCount              int // 用户2022年内在飞书有活跃的天数
-	activeDayCountFlag          bool
-	msgBusyDate                 string // 2022全年用户发出消息条数最多的一天，yyyyMMdd格式
-	msgBusyDateFlag             bool
+	userId     string // 用户id
+	userIdFlag bool
+
+	userRegisterDate     string // 用户的飞书激活日期，yyyyMMdd格式（201909之前的用户可能是空
+	userRegisterDateFlag bool
+
+	activeDayCount     int // 用户2022年内在飞书有活跃的天数
+	activeDayCountFlag bool
+
+	msgBusyDate     string // 2022全年用户发出消息条数最多的一天，yyyyMMdd格式
+	msgBusyDateFlag bool
+
 	msgBusyDateSendMsgCount     string // 全年发消息最多一天，发出的消息数
 	msgBusyDateSendMsgCountFlag bool
-	p2pChatCount                string // 2022全年与此用户有过单聊的人数（双方任意一人发出过消息即计入）
-	p2pChatCountFlag            bool
-	talkedChatCount             string // 2022全年用户有过发言的飞书群的数量
-	talkedChatCountFlag         bool
-	positiveReactionCount       string // 2022全年用户所发消息，收到点赞、送心、碰拳等正面表情回复的总次数
-	positiveReactionCountFlag   bool
-	firstPositiveReaction       string // 用户所收到的正向表情回复，排第1的表情
-	firstPositiveReactionFlag   bool
-	secondPositiveReaction      string // 用户所收到的正向表情回复，排第2的表情
-	secondPositiveReactionFlag  bool
-	thirdPositiveReaction       string // 用户所收到的正向表情回复，排第3的表情
-	thirdPositiveReactionFlag   bool
-	fourthPositiveReaction      string // 用户所收到的正向表情回复，排第4的表情
-	fourthPositiveReactionFlag  bool
-	fifthPositiveReaction       string // 用户所收到的正向表情回复，排第5的表情
-	fifthPositiveReactionFlag   bool
-	createFileCount             string // 2022全年用户本人创建过的飞书文档数量
-	createFileCountFlag         bool
-	createdFileViewCount        string // 此用户2022年创建的飞书文档的总阅读人数（含自己）
-	createdFileViewCountFlag    bool
-	commentFileCount            string // 2022全年用户发表过评论的飞书文档数量
-	commentFileCountFlag        bool
-	attendEventCount            string // 2022全年用户的日程总数（主日历日程，排除被删除的日程及用户拒绝、移除的日程，包括全天日程和重复日程，重复日程在周期内计算为多次）
-	attendEventCountFlag        bool
-	eventBusyDate               string // 2022全年用户日程数量最多的一天，yyyyMMdd格式
-	eventBusyDateFlag           bool
+
+	p2pChatCount     string // 2022全年与此用户有过单聊的人数（双方任意一人发出过消息即计入）
+	p2pChatCountFlag bool
+
+	talkedChatCount     string // 2022全年用户有过发言的飞书群的数量
+	talkedChatCountFlag bool
+
+	positiveReactionCount     string // 2022全年用户所发消息，收到点赞、送心、碰拳等正面表情回复的总次数
+	positiveReactionCountFlag bool
+
+	firstPositiveReaction     string // 用户所收到的正向表情回复，排第1的表情
+	firstPositiveReactionFlag bool
+
+	secondPositiveReaction     string // 用户所收到的正向表情回复，排第2的表情
+	secondPositiveReactionFlag bool
+
+	thirdPositiveReaction     string // 用户所收到的正向表情回复，排第3的表情
+	thirdPositiveReactionFlag bool
+
+	fourthPositiveReaction     string // 用户所收到的正向表情回复，排第4的表情
+	fourthPositiveReactionFlag bool
+
+	fifthPositiveReaction     string // 用户所收到的正向表情回复，排第5的表情
+	fifthPositiveReactionFlag bool
+
+	createFileCount     string // 2022全年用户本人创建过的飞书文档数量
+	createFileCountFlag bool
+
+	createdFileViewCount     string // 此用户2022年创建的飞书文档的总阅读人数（含自己）
+	createdFileViewCountFlag bool
+
+	commentFileCount     string // 2022全年用户发表过评论的飞书文档数量
+	commentFileCountFlag bool
+
+	attendEventCount     string // 2022全年用户的日程总数（主日历日程，排除被删除的日程及用户拒绝、移除的日程，包括全天日程和重复日程，重复日程在周期内计算为多次）
+	attendEventCountFlag bool
+
+	eventBusyDate     string // 2022全年用户日程数量最多的一天，yyyyMMdd格式
+	eventBusyDateFlag bool
+
 	eventBusyDateEventCount     string // 日程最多一天的日程数量
 	eventBusyDateEventCountFlag bool
-	eventStartTimeRange1        string // 2022全年，此用户最经常的日程开始时间，精确到分钟，HH:mm格式
-	eventStartTimeRange1Flag    bool
-	conferenceCreateCount       string // 2022全年，基于此用户所创建的日程，发起了视频会议的次数
-	conferenceCreateCountFlag   bool
-	totalPartiCount             string // 2022全年，基于此用户所创建的日程发起的视频会议，涉及的参会总人次
-	totalPartiCountFlag         bool
-	okrCumOCount                string // 2022全年此用户写过的O的数量（未删除）
-	okrCumOCountFlag            bool
-	okrCumKrCount               string // 2022全年此用户写过的KR的数量（未删除）
-	okrCumKrCountFlag           bool
-	okrAlignedUserCount         string // 2022全年用户所写的OKR对齐过的去重人数（未删除）
-	okrAlignedUserCountFlag     bool
-	peopleInterviewNum          string // 2022全年用户在飞书招聘上进行的面试总场次（候选人是海外账号的未参与计算）
-	peopleInterviewNumFlag      bool
-	sendEmailCount              string // 2022全年此用户发出邮件数量
-	sendEmailCountFlag          bool
-	receiveEmailCount           string // 2022全年此用户收到邮件数量
-	receiveEmailCountFlag       bool
+
+	eventStartTimeRange1     string // 2022全年，此用户最经常的日程开始时间，精确到分钟，HH:mm格式
+	eventStartTimeRange1Flag bool
+
+	conferenceCreateCount     string // 2022全年，基于此用户所创建的日程，发起了视频会议的次数
+	conferenceCreateCountFlag bool
+
+	totalPartiCount     string // 2022全年，基于此用户所创建的日程发起的视频会议，涉及的参会总人次
+	totalPartiCountFlag bool
+
+	okrCumOCount     string // 2022全年此用户写过的O的数量（未删除）
+	okrCumOCountFlag bool
+
+	okrCumKrCount     string // 2022全年此用户写过的KR的数量（未删除）
+	okrCumKrCountFlag bool
+
+	okrAlignedUserCount     string // 2022全年用户所写的OKR对齐过的去重人数（未删除）
+	okrAlignedUserCountFlag bool
+
+	peopleInterviewNum     string // 2022全年用户在飞书招聘上进行的面试总场次（候选人是海外账号的未参与计算）
+	peopleInterviewNumFlag bool
+
+	sendEmailCount     string // 2022全年此用户发出邮件数量
+	sendEmailCountFlag bool
+
+	receiveEmailCount     string // 2022全年此用户收到邮件数量
+	receiveEmailCountFlag bool
 }
 
 func NewUserReport2022Builder() *UserReport2022Builder {
@@ -5665,174 +6221,282 @@ func (builder *UserReport2022Builder) Build() *UserReport2022 {
 }
 
 type UserReport2023 struct {
-	UserId                      *string                 `json:"user_id,omitempty"`                         // 用户ID
-	TenantAllCnt                *int                    `json:"tenant_all_cnt,omitempty"`                  // 所在租户目前的总人数,已激活、未离职
-	UserRegisterDate            *string                 `json:"user_register_date,omitempty"`              // 用户的飞书激活日期,yyyyMMdd格式(201909之前的用户可能是空)
-	AllDayCnt                   *int                    `json:"all_day_cnt,omitempty"`                     // 用户激活至今的天数
-	ActiveDayCnt                *int                    `json:"active_day_cnt,omitempty"`                  // 用户2023年内活跃时长> 0的天数
-	DurationCnt2                []*AnnualReportMapFloat `json:"duration_cnt_2,omitempty"`                  // 用户2022-2023使用总时长(格式0.01h),共2组键值对,表示2年各自的数据。举例:{"2022":"33.33","2023":"55.55"}
-	DurationCntRank             *string                 `json:"duration_cnt_rank,omitempty"`               // 2023年全年活跃时长的排名。
-	BusyMonth                   *string                 `json:"busy_month,omitempty"`                      // 用户2023年最忙碌一个月。最忙碌一个月的定义:所有自然月中,飞书在线时长最长的一个月。
-	BusyMonthSumDuration        *float64                `json:"busy_month_sum_duration,omitempty"`         // 用户2023年最忙碌一个月的活跃时长(格式0.01h)
-	BusyMonthSendMsgCnt         *int                    `json:"busy_month_send_msg_cnt,omitempty"`         // 用户2023年最忙碌一个月的发消息数
-	BusyMonthMeetingCnt         *int                    `json:"busy_month_meeting_cnt,omitempty"`          // 用户2023年最忙碌一个月的参会数(指本人发起的会议+受邀参与的会议)
-	BusyMonthLastMeetingTime    *string                 `json:"busy_month_last_meeting_time,omitempty"`    // 用户2023年最忙碌一个月的会议结束最晚的时间(格式 : 【20230507 23:59】)。最晚时间的定义:将每天凌晨5点之前计入前一天来计算最晚时间点。
-	BusyMonthCreateEditFileCnt  *int                    `json:"busy_month_create_edit_file_cnt,omitempty"` // 用户2023年最忙碌一个月的创建+编辑评论文档
-	ImSendMsgCnt2               []*AnnualReportMapInt   `json:"im_send_msg_cnt_2,omitempty"`               // 用户2022-2023发消息数，共2组键值对，表示2年各自的数据。举例:[{"year":"2022","count":"33”},{"year":"2023","count":"55"}]
-	ImSendMsgCntRank            *string                 `json:"im_send_msg_cnt_rank,omitempty"`            // 用户2023年发出消息数,在租户内的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	ImBusyDate                  *string                 `json:"im_busy_date,omitempty"`                    // 用户2023年发消息最多的一天
-	ImBusyDateSendMsgCnt        *int                    `json:"im_busy_date_send_msg_cnt,omitempty"`       // 用户2023年发消息最多的一天发消息条数
-	ImLastSendMsgTime           *string                 `json:"im_last_send_msg_time,omitempty"`           // 用户2023年发出时间最晚的一条消息的时间,时间格式, 【20230507 23:59】。最晚时间的定义:将每天凌晨5点之前计入前一天来计算最晚时间点。
-	ImTalkedChatCnt             *int                    `json:"im_talked_chat_cnt,omitempty"`              // 用户2023年发过言的群数
-	ImPrivateChatCnt            *int                    `json:"im_private_chat_cnt,omitempty"`             // 用户2023年私聊过的人数
-	ImEmojiTop1                 *string                 `json:"im_emoji_top1,omitempty"`                   // 用户2023年使用最多的表情1
-	ImEmojiTop1Cnt              *string                 `json:"im_emoji_top1_cnt,omitempty"`               // 用户2023年使用最多的表情1次数
-	ImEmojiTop2                 *string                 `json:"im_emoji_top2,omitempty"`                   // 用户2023年使用最多的表情2
-	ImEmojiTop2Cnt              *string                 `json:"im_emoji_top2_cnt,omitempty"`               // 用户2023年使用最多的表情2次数
-	ImEmojiTop3                 *string                 `json:"im_emoji_top3,omitempty"`                   // 用户2023年使用最多的表情3
-	ImEmojiTop3Cnt              *string                 `json:"im_emoji_top3_cnt,omitempty"`               // 用户2023年使用最多的表情3次数
-	ImPositiveReactionCnt2      []*AnnualReportMapInt   `json:"im_positive_reaction_cnt_2,omitempty"`      // 用户2022-2023收到正向reaction次数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	ImPositiveReactionCntRank   *string                 `json:"im_positive_reaction_cnt_rank,omitempty"`   // 2023年收到表情数量排名
-	CcmCreateCnt2               []*AnnualReportMapInt   `json:"ccm_create_cnt_2,omitempty"`                // 用户2022-2023创建文档数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	CcmCreateCntRank            *string                 `json:"ccm_create_cnt_rank,omitempty"`             // 用户2023年创建文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	CcmCreateBusyMonth          *string                 `json:"ccm_create_busy_month,omitempty"`           // 用户2023年创建文档数最多的月份
-	CcmCreateBusyMonthCnt       *int                    `json:"ccm_create_busy_month_cnt,omitempty"`       // 用户2023年创建文档数最多的月份的文档数
-	CcmCreateViewedUcnt         *int                    `json:"ccm_create_viewed_ucnt,omitempty"`          // 用户本人创建的文档在2023年全年的浏览人数。注意:仅限制浏览时间是2023年,不限制文档的创建时间。
-	CcmCreateLikedCnt           *int                    `json:"ccm_create_liked_cnt,omitempty"`            // 用户本人创建的文档在2023年收到的点赞数,仅指文档底部的大拇指点赞。注意:仅限制点赞时间是2023年,不限制文档的创建时间。
-	CcmCreateLikedCntRank       *string                 `json:"ccm_create_liked_cnt_rank,omitempty"`       // 用户2023年由本人创建的文档的点赞数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	CcmEditCommentFcnt2         []*AnnualReportMapInt   `json:"ccm_edit_comment_fcnt_2,omitempty"`         // 用户2022-2023参与编辑、评论他人的文档数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	CcmEditCommentFcntRank      *string                 `json:"ccm_edit_comment_fcnt_rank,omitempty"`      // 用户2023年参与编辑、评论他人的文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	CcmViewOtherFcnt            *int                    `json:"ccm_view_other_fcnt,omitempty"`             // 用户2023年点击浏览过的他人文档数
-	CcmViewOtherFcntRank        *string                 `json:"ccm_view_other_fcnt_rank,omitempty"`        // 用户2023年点击浏览过的他人文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	VcSentMeetingCnt2           []*AnnualReportMapInt   `json:"vc_sent_meeting_cnt_2,omitempty"`           // 用户2022-2023本人发起的线上视频会议的数量(循环会议算多次,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	VcSentMeetingCntRank        *string                 `json:"vc_sent_meeting_cnt_rank,omitempty"`        // 用户2023年本人发起的线上视频会议的数量排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	VcSentMeetingUcnt           *int                    `json:"vc_sent_meeting_ucnt,omitempty"`            // 用户2023年本人发起会议邀请参会的人次
-	VcJoinMeetingCnt2           []*AnnualReportMapInt   `json:"vc_join_meeting_cnt_2,omitempty"`           // 用户2022-2023本人受邀参与的会议数(循环会议算多次),共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	VcJoinMeetingCntRank        *string                 `json:"vc_join_meeting_cnt_rank,omitempty"`        // 用户2023年本人受邀参与的会议数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	VcAllMeetingCnt             *int                    `json:"vc_all_meeting_cnt,omitempty"`              // 用户2023年本人的总参会次数(包含自己发起和被邀请)
-	VcAllMeetingCntRank         *string                 `json:"vc_all_meeting_cnt_rank,omitempty"`         // 用户2023年本人的总参会次数(包含自己发起和被邀请)的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量
-	VcAllMeetingDuration2       []*AnnualReportMapFloat `json:"vc_all_meeting_duration_2,omitempty"`       // 用户2022-2023本人总参会的时长(包含自己发起和被邀请),格式0.01h,共2组键值对,表示2年各自的数据。举例:{"2022":"33.33","2023":"55.55"}
-	CalCommentCalTime           *string                 `json:"cal_comment_cal_time,omitempty"`            // 用户2023年中最常开始日程的时间,精确到分钟,格式:【23:59】
-	PeopleProfileViewCnt        *string                 `json:"people_profile_view_cnt,omitempty"`         // 2023年查看同事profile的人次
-	PeopleInterviewNum2         []*AnnualReportMapInt   `json:"people_interview_num_2,omitempty"`          // 用户2022-2023面试了多少场,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	PeopleInterviewNumRank      *string                 `json:"people_interview_num_rank,omitempty"`       // people用户2023年面试总场次的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	PeopleInterviewOfferNum2    []*AnnualReportMapInt   `json:"people_interview_offer_num_2,omitempty"`    // 用户2022-2023本人面试之后,发出offer数量,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	PeopleInterviewOfferNumRank *string                 `json:"people_interview_offer_num_rank,omitempty"` // 2023年由本人面试之后,发出offer数量排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	EmailSendEmailCount         *int                    `json:"email_send_email_count,omitempty"`          // 用户2023年发邮件数
-	EmailReceiveEmailCount      *int                    `json:"email_receive_email_count,omitempty"`       // 用户2023年收邮件数
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	TenantAllCnt *int `json:"tenant_all_cnt,omitempty"` // 所在租户目前的总人数,已激活、未离职
+
+	UserRegisterDate *string `json:"user_register_date,omitempty"` // 用户的飞书激活日期,yyyyMMdd格式(201909之前的用户可能是空)
+
+	AllDayCnt *int `json:"all_day_cnt,omitempty"` // 用户激活至今的天数
+
+	ActiveDayCnt *int `json:"active_day_cnt,omitempty"` // 用户2023年内活跃时长> 0的天数
+
+	DurationCnt2 []*AnnualReportMapFloat `json:"duration_cnt_2,omitempty"` // 用户2022-2023使用总时长(格式0.01h),共2组键值对,表示2年各自的数据。举例:{"2022":"33.33","2023":"55.55"}
+
+	DurationCntRank *string `json:"duration_cnt_rank,omitempty"` // 2023年全年活跃时长的排名。
+
+	BusyMonth *string `json:"busy_month,omitempty"` // 用户2023年最忙碌一个月。最忙碌一个月的定义:所有自然月中,飞书在线时长最长的一个月。
+
+	BusyMonthSumDuration *float64 `json:"busy_month_sum_duration,omitempty"` // 用户2023年最忙碌一个月的活跃时长(格式0.01h)
+
+	BusyMonthSendMsgCnt *int `json:"busy_month_send_msg_cnt,omitempty"` // 用户2023年最忙碌一个月的发消息数
+
+	BusyMonthMeetingCnt *int `json:"busy_month_meeting_cnt,omitempty"` // 用户2023年最忙碌一个月的参会数(指本人发起的会议+受邀参与的会议)
+
+	BusyMonthLastMeetingTime *string `json:"busy_month_last_meeting_time,omitempty"` // 用户2023年最忙碌一个月的会议结束最晚的时间(格式 : 【20230507 23:59】)。最晚时间的定义:将每天凌晨5点之前计入前一天来计算最晚时间点。
+
+	BusyMonthCreateEditFileCnt *int `json:"busy_month_create_edit_file_cnt,omitempty"` // 用户2023年最忙碌一个月的创建+编辑评论文档
+
+	ImSendMsgCnt2 []*AnnualReportMapInt `json:"im_send_msg_cnt_2,omitempty"` // 用户2022-2023发消息数，共2组键值对，表示2年各自的数据。举例:[{"year":"2022","count":"33”},{"year":"2023","count":"55"}]
+
+	ImSendMsgCntRank *string `json:"im_send_msg_cnt_rank,omitempty"` // 用户2023年发出消息数,在租户内的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	ImBusyDate *string `json:"im_busy_date,omitempty"` // 用户2023年发消息最多的一天
+
+	ImBusyDateSendMsgCnt *int `json:"im_busy_date_send_msg_cnt,omitempty"` // 用户2023年发消息最多的一天发消息条数
+
+	ImLastSendMsgTime *string `json:"im_last_send_msg_time,omitempty"` // 用户2023年发出时间最晚的一条消息的时间,时间格式, 【20230507 23:59】。最晚时间的定义:将每天凌晨5点之前计入前一天来计算最晚时间点。
+
+	ImTalkedChatCnt *int `json:"im_talked_chat_cnt,omitempty"` // 用户2023年发过言的群数
+
+	ImPrivateChatCnt *int `json:"im_private_chat_cnt,omitempty"` // 用户2023年私聊过的人数
+
+	ImEmojiTop1 *string `json:"im_emoji_top1,omitempty"` // 用户2023年使用最多的表情1
+
+	ImEmojiTop1Cnt *string `json:"im_emoji_top1_cnt,omitempty"` // 用户2023年使用最多的表情1次数
+
+	ImEmojiTop2 *string `json:"im_emoji_top2,omitempty"` // 用户2023年使用最多的表情2
+
+	ImEmojiTop2Cnt *string `json:"im_emoji_top2_cnt,omitempty"` // 用户2023年使用最多的表情2次数
+
+	ImEmojiTop3 *string `json:"im_emoji_top3,omitempty"` // 用户2023年使用最多的表情3
+
+	ImEmojiTop3Cnt *string `json:"im_emoji_top3_cnt,omitempty"` // 用户2023年使用最多的表情3次数
+
+	ImPositiveReactionCnt2 []*AnnualReportMapInt `json:"im_positive_reaction_cnt_2,omitempty"` // 用户2022-2023收到正向reaction次数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+
+	ImPositiveReactionCntRank *string `json:"im_positive_reaction_cnt_rank,omitempty"` // 2023年收到表情数量排名
+
+	CcmCreateCnt2 []*AnnualReportMapInt `json:"ccm_create_cnt_2,omitempty"` // 用户2022-2023创建文档数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+
+	CcmCreateCntRank *string `json:"ccm_create_cnt_rank,omitempty"` // 用户2023年创建文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	CcmCreateBusyMonth *string `json:"ccm_create_busy_month,omitempty"` // 用户2023年创建文档数最多的月份
+
+	CcmCreateBusyMonthCnt *int `json:"ccm_create_busy_month_cnt,omitempty"` // 用户2023年创建文档数最多的月份的文档数
+
+	CcmCreateViewedUcnt *int `json:"ccm_create_viewed_ucnt,omitempty"` // 用户本人创建的文档在2023年全年的浏览人数。注意:仅限制浏览时间是2023年,不限制文档的创建时间。
+
+	CcmCreateLikedCnt *int `json:"ccm_create_liked_cnt,omitempty"` // 用户本人创建的文档在2023年收到的点赞数,仅指文档底部的大拇指点赞。注意:仅限制点赞时间是2023年,不限制文档的创建时间。
+
+	CcmCreateLikedCntRank *string `json:"ccm_create_liked_cnt_rank,omitempty"` // 用户2023年由本人创建的文档的点赞数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	CcmEditCommentFcnt2 []*AnnualReportMapInt `json:"ccm_edit_comment_fcnt_2,omitempty"` // 用户2022-2023参与编辑、评论他人的文档数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+
+	CcmEditCommentFcntRank *string `json:"ccm_edit_comment_fcnt_rank,omitempty"` // 用户2023年参与编辑、评论他人的文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	CcmViewOtherFcnt *int `json:"ccm_view_other_fcnt,omitempty"` // 用户2023年点击浏览过的他人文档数
+
+	CcmViewOtherFcntRank *string `json:"ccm_view_other_fcnt_rank,omitempty"` // 用户2023年点击浏览过的他人文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	VcSentMeetingCnt2 []*AnnualReportMapInt `json:"vc_sent_meeting_cnt_2,omitempty"` // 用户2022-2023本人发起的线上视频会议的数量(循环会议算多次,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+
+	VcSentMeetingCntRank *string `json:"vc_sent_meeting_cnt_rank,omitempty"` // 用户2023年本人发起的线上视频会议的数量排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	VcSentMeetingUcnt *int `json:"vc_sent_meeting_ucnt,omitempty"` // 用户2023年本人发起会议邀请参会的人次
+
+	VcJoinMeetingCnt2 []*AnnualReportMapInt `json:"vc_join_meeting_cnt_2,omitempty"` // 用户2022-2023本人受邀参与的会议数(循环会议算多次),共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+
+	VcJoinMeetingCntRank *string `json:"vc_join_meeting_cnt_rank,omitempty"` // 用户2023年本人受邀参与的会议数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	VcAllMeetingCnt *int `json:"vc_all_meeting_cnt,omitempty"` // 用户2023年本人的总参会次数(包含自己发起和被邀请)
+
+	VcAllMeetingCntRank *string `json:"vc_all_meeting_cnt_rank,omitempty"` // 用户2023年本人的总参会次数(包含自己发起和被邀请)的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量
+
+	VcAllMeetingDuration2 []*AnnualReportMapFloat `json:"vc_all_meeting_duration_2,omitempty"` // 用户2022-2023本人总参会的时长(包含自己发起和被邀请),格式0.01h,共2组键值对,表示2年各自的数据。举例:{"2022":"33.33","2023":"55.55"}
+
+	CalCommentCalTime *string `json:"cal_comment_cal_time,omitempty"` // 用户2023年中最常开始日程的时间,精确到分钟,格式:【23:59】
+
+	PeopleProfileViewCnt *string `json:"people_profile_view_cnt,omitempty"` // 2023年查看同事profile的人次
+
+	PeopleInterviewNum2 []*AnnualReportMapInt `json:"people_interview_num_2,omitempty"` // 用户2022-2023面试了多少场,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+
+	PeopleInterviewNumRank *string `json:"people_interview_num_rank,omitempty"` // people用户2023年面试总场次的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	PeopleInterviewOfferNum2 []*AnnualReportMapInt `json:"people_interview_offer_num_2,omitempty"` // 用户2022-2023本人面试之后,发出offer数量,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+
+	PeopleInterviewOfferNumRank *string `json:"people_interview_offer_num_rank,omitempty"` // 2023年由本人面试之后,发出offer数量排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+
+	EmailSendEmailCount *int `json:"email_send_email_count,omitempty"` // 用户2023年发邮件数
+
+	EmailReceiveEmailCount *int `json:"email_receive_email_count,omitempty"` // 用户2023年收邮件数
 }
 
 type UserReport2023Builder struct {
-	userId                          string // 用户ID
-	userIdFlag                      bool
-	tenantAllCnt                    int // 所在租户目前的总人数,已激活、未离职
-	tenantAllCntFlag                bool
-	userRegisterDate                string // 用户的飞书激活日期,yyyyMMdd格式(201909之前的用户可能是空)
-	userRegisterDateFlag            bool
-	allDayCnt                       int // 用户激活至今的天数
-	allDayCntFlag                   bool
-	activeDayCnt                    int // 用户2023年内活跃时长> 0的天数
-	activeDayCntFlag                bool
-	durationCnt2                    []*AnnualReportMapFloat // 用户2022-2023使用总时长(格式0.01h),共2组键值对,表示2年各自的数据。举例:{"2022":"33.33","2023":"55.55"}
-	durationCnt2Flag                bool
-	durationCntRank                 string // 2023年全年活跃时长的排名。
-	durationCntRankFlag             bool
-	busyMonth                       string // 用户2023年最忙碌一个月。最忙碌一个月的定义:所有自然月中,飞书在线时长最长的一个月。
-	busyMonthFlag                   bool
-	busyMonthSumDuration            float64 // 用户2023年最忙碌一个月的活跃时长(格式0.01h)
-	busyMonthSumDurationFlag        bool
-	busyMonthSendMsgCnt             int // 用户2023年最忙碌一个月的发消息数
-	busyMonthSendMsgCntFlag         bool
-	busyMonthMeetingCnt             int // 用户2023年最忙碌一个月的参会数(指本人发起的会议+受邀参与的会议)
-	busyMonthMeetingCntFlag         bool
-	busyMonthLastMeetingTime        string // 用户2023年最忙碌一个月的会议结束最晚的时间(格式 : 【20230507 23:59】)。最晚时间的定义:将每天凌晨5点之前计入前一天来计算最晚时间点。
-	busyMonthLastMeetingTimeFlag    bool
-	busyMonthCreateEditFileCnt      int // 用户2023年最忙碌一个月的创建+编辑评论文档
-	busyMonthCreateEditFileCntFlag  bool
-	imSendMsgCnt2                   []*AnnualReportMapInt // 用户2022-2023发消息数，共2组键值对，表示2年各自的数据。举例:[{"year":"2022","count":"33”},{"year":"2023","count":"55"}]
-	imSendMsgCnt2Flag               bool
-	imSendMsgCntRank                string // 用户2023年发出消息数,在租户内的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	imSendMsgCntRankFlag            bool
-	imBusyDate                      string // 用户2023年发消息最多的一天
-	imBusyDateFlag                  bool
-	imBusyDateSendMsgCnt            int // 用户2023年发消息最多的一天发消息条数
-	imBusyDateSendMsgCntFlag        bool
-	imLastSendMsgTime               string // 用户2023年发出时间最晚的一条消息的时间,时间格式, 【20230507 23:59】。最晚时间的定义:将每天凌晨5点之前计入前一天来计算最晚时间点。
-	imLastSendMsgTimeFlag           bool
-	imTalkedChatCnt                 int // 用户2023年发过言的群数
-	imTalkedChatCntFlag             bool
-	imPrivateChatCnt                int // 用户2023年私聊过的人数
-	imPrivateChatCntFlag            bool
-	imEmojiTop1                     string // 用户2023年使用最多的表情1
-	imEmojiTop1Flag                 bool
-	imEmojiTop1Cnt                  string // 用户2023年使用最多的表情1次数
-	imEmojiTop1CntFlag              bool
-	imEmojiTop2                     string // 用户2023年使用最多的表情2
-	imEmojiTop2Flag                 bool
-	imEmojiTop2Cnt                  string // 用户2023年使用最多的表情2次数
-	imEmojiTop2CntFlag              bool
-	imEmojiTop3                     string // 用户2023年使用最多的表情3
-	imEmojiTop3Flag                 bool
-	imEmojiTop3Cnt                  string // 用户2023年使用最多的表情3次数
-	imEmojiTop3CntFlag              bool
-	imPositiveReactionCnt2          []*AnnualReportMapInt // 用户2022-2023收到正向reaction次数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	imPositiveReactionCnt2Flag      bool
-	imPositiveReactionCntRank       string // 2023年收到表情数量排名
-	imPositiveReactionCntRankFlag   bool
-	ccmCreateCnt2                   []*AnnualReportMapInt // 用户2022-2023创建文档数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	ccmCreateCnt2Flag               bool
-	ccmCreateCntRank                string // 用户2023年创建文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	ccmCreateCntRankFlag            bool
-	ccmCreateBusyMonth              string // 用户2023年创建文档数最多的月份
-	ccmCreateBusyMonthFlag          bool
-	ccmCreateBusyMonthCnt           int // 用户2023年创建文档数最多的月份的文档数
-	ccmCreateBusyMonthCntFlag       bool
-	ccmCreateViewedUcnt             int // 用户本人创建的文档在2023年全年的浏览人数。注意:仅限制浏览时间是2023年,不限制文档的创建时间。
-	ccmCreateViewedUcntFlag         bool
-	ccmCreateLikedCnt               int // 用户本人创建的文档在2023年收到的点赞数,仅指文档底部的大拇指点赞。注意:仅限制点赞时间是2023年,不限制文档的创建时间。
-	ccmCreateLikedCntFlag           bool
-	ccmCreateLikedCntRank           string // 用户2023年由本人创建的文档的点赞数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	ccmCreateLikedCntRankFlag       bool
-	ccmEditCommentFcnt2             []*AnnualReportMapInt // 用户2022-2023参与编辑、评论他人的文档数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	ccmEditCommentFcnt2Flag         bool
-	ccmEditCommentFcntRank          string // 用户2023年参与编辑、评论他人的文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	ccmEditCommentFcntRankFlag      bool
-	ccmViewOtherFcnt                int // 用户2023年点击浏览过的他人文档数
-	ccmViewOtherFcntFlag            bool
-	ccmViewOtherFcntRank            string // 用户2023年点击浏览过的他人文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	ccmViewOtherFcntRankFlag        bool
-	vcSentMeetingCnt2               []*AnnualReportMapInt // 用户2022-2023本人发起的线上视频会议的数量(循环会议算多次,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	vcSentMeetingCnt2Flag           bool
-	vcSentMeetingCntRank            string // 用户2023年本人发起的线上视频会议的数量排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	vcSentMeetingCntRankFlag        bool
-	vcSentMeetingUcnt               int // 用户2023年本人发起会议邀请参会的人次
-	vcSentMeetingUcntFlag           bool
-	vcJoinMeetingCnt2               []*AnnualReportMapInt // 用户2022-2023本人受邀参与的会议数(循环会议算多次),共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	vcJoinMeetingCnt2Flag           bool
-	vcJoinMeetingCntRank            string // 用户2023年本人受邀参与的会议数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	vcJoinMeetingCntRankFlag        bool
-	vcAllMeetingCnt                 int // 用户2023年本人的总参会次数(包含自己发起和被邀请)
-	vcAllMeetingCntFlag             bool
-	vcAllMeetingCntRank             string // 用户2023年本人的总参会次数(包含自己发起和被邀请)的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量
-	vcAllMeetingCntRankFlag         bool
-	vcAllMeetingDuration2           []*AnnualReportMapFloat // 用户2022-2023本人总参会的时长(包含自己发起和被邀请),格式0.01h,共2组键值对,表示2年各自的数据。举例:{"2022":"33.33","2023":"55.55"}
-	vcAllMeetingDuration2Flag       bool
-	calCommentCalTime               string // 用户2023年中最常开始日程的时间,精确到分钟,格式:【23:59】
-	calCommentCalTimeFlag           bool
-	peopleProfileViewCnt            string // 2023年查看同事profile的人次
-	peopleProfileViewCntFlag        bool
-	peopleInterviewNum2             []*AnnualReportMapInt // 用户2022-2023面试了多少场,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	peopleInterviewNum2Flag         bool
-	peopleInterviewNumRank          string // people用户2023年面试总场次的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
-	peopleInterviewNumRankFlag      bool
-	peopleInterviewOfferNum2        []*AnnualReportMapInt // 用户2022-2023本人面试之后,发出offer数量,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
-	peopleInterviewOfferNum2Flag    bool
+	userId     string // 用户ID
+	userIdFlag bool
+
+	tenantAllCnt     int // 所在租户目前的总人数,已激活、未离职
+	tenantAllCntFlag bool
+
+	userRegisterDate     string // 用户的飞书激活日期,yyyyMMdd格式(201909之前的用户可能是空)
+	userRegisterDateFlag bool
+
+	allDayCnt     int // 用户激活至今的天数
+	allDayCntFlag bool
+
+	activeDayCnt     int // 用户2023年内活跃时长> 0的天数
+	activeDayCntFlag bool
+
+	durationCnt2     []*AnnualReportMapFloat // 用户2022-2023使用总时长(格式0.01h),共2组键值对,表示2年各自的数据。举例:{"2022":"33.33","2023":"55.55"}
+	durationCnt2Flag bool
+
+	durationCntRank     string // 2023年全年活跃时长的排名。
+	durationCntRankFlag bool
+
+	busyMonth     string // 用户2023年最忙碌一个月。最忙碌一个月的定义:所有自然月中,飞书在线时长最长的一个月。
+	busyMonthFlag bool
+
+	busyMonthSumDuration     float64 // 用户2023年最忙碌一个月的活跃时长(格式0.01h)
+	busyMonthSumDurationFlag bool
+
+	busyMonthSendMsgCnt     int // 用户2023年最忙碌一个月的发消息数
+	busyMonthSendMsgCntFlag bool
+
+	busyMonthMeetingCnt     int // 用户2023年最忙碌一个月的参会数(指本人发起的会议+受邀参与的会议)
+	busyMonthMeetingCntFlag bool
+
+	busyMonthLastMeetingTime     string // 用户2023年最忙碌一个月的会议结束最晚的时间(格式 : 【20230507 23:59】)。最晚时间的定义:将每天凌晨5点之前计入前一天来计算最晚时间点。
+	busyMonthLastMeetingTimeFlag bool
+
+	busyMonthCreateEditFileCnt     int // 用户2023年最忙碌一个月的创建+编辑评论文档
+	busyMonthCreateEditFileCntFlag bool
+
+	imSendMsgCnt2     []*AnnualReportMapInt // 用户2022-2023发消息数，共2组键值对，表示2年各自的数据。举例:[{"year":"2022","count":"33”},{"year":"2023","count":"55"}]
+	imSendMsgCnt2Flag bool
+
+	imSendMsgCntRank     string // 用户2023年发出消息数,在租户内的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+	imSendMsgCntRankFlag bool
+
+	imBusyDate     string // 用户2023年发消息最多的一天
+	imBusyDateFlag bool
+
+	imBusyDateSendMsgCnt     int // 用户2023年发消息最多的一天发消息条数
+	imBusyDateSendMsgCntFlag bool
+
+	imLastSendMsgTime     string // 用户2023年发出时间最晚的一条消息的时间,时间格式, 【20230507 23:59】。最晚时间的定义:将每天凌晨5点之前计入前一天来计算最晚时间点。
+	imLastSendMsgTimeFlag bool
+
+	imTalkedChatCnt     int // 用户2023年发过言的群数
+	imTalkedChatCntFlag bool
+
+	imPrivateChatCnt     int // 用户2023年私聊过的人数
+	imPrivateChatCntFlag bool
+
+	imEmojiTop1     string // 用户2023年使用最多的表情1
+	imEmojiTop1Flag bool
+
+	imEmojiTop1Cnt     string // 用户2023年使用最多的表情1次数
+	imEmojiTop1CntFlag bool
+
+	imEmojiTop2     string // 用户2023年使用最多的表情2
+	imEmojiTop2Flag bool
+
+	imEmojiTop2Cnt     string // 用户2023年使用最多的表情2次数
+	imEmojiTop2CntFlag bool
+
+	imEmojiTop3     string // 用户2023年使用最多的表情3
+	imEmojiTop3Flag bool
+
+	imEmojiTop3Cnt     string // 用户2023年使用最多的表情3次数
+	imEmojiTop3CntFlag bool
+
+	imPositiveReactionCnt2     []*AnnualReportMapInt // 用户2022-2023收到正向reaction次数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+	imPositiveReactionCnt2Flag bool
+
+	imPositiveReactionCntRank     string // 2023年收到表情数量排名
+	imPositiveReactionCntRankFlag bool
+
+	ccmCreateCnt2     []*AnnualReportMapInt // 用户2022-2023创建文档数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+	ccmCreateCnt2Flag bool
+
+	ccmCreateCntRank     string // 用户2023年创建文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+	ccmCreateCntRankFlag bool
+
+	ccmCreateBusyMonth     string // 用户2023年创建文档数最多的月份
+	ccmCreateBusyMonthFlag bool
+
+	ccmCreateBusyMonthCnt     int // 用户2023年创建文档数最多的月份的文档数
+	ccmCreateBusyMonthCntFlag bool
+
+	ccmCreateViewedUcnt     int // 用户本人创建的文档在2023年全年的浏览人数。注意:仅限制浏览时间是2023年,不限制文档的创建时间。
+	ccmCreateViewedUcntFlag bool
+
+	ccmCreateLikedCnt     int // 用户本人创建的文档在2023年收到的点赞数,仅指文档底部的大拇指点赞。注意:仅限制点赞时间是2023年,不限制文档的创建时间。
+	ccmCreateLikedCntFlag bool
+
+	ccmCreateLikedCntRank     string // 用户2023年由本人创建的文档的点赞数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+	ccmCreateLikedCntRankFlag bool
+
+	ccmEditCommentFcnt2     []*AnnualReportMapInt // 用户2022-2023参与编辑、评论他人的文档数,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+	ccmEditCommentFcnt2Flag bool
+
+	ccmEditCommentFcntRank     string // 用户2023年参与编辑、评论他人的文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+	ccmEditCommentFcntRankFlag bool
+
+	ccmViewOtherFcnt     int // 用户2023年点击浏览过的他人文档数
+	ccmViewOtherFcntFlag bool
+
+	ccmViewOtherFcntRank     string // 用户2023年点击浏览过的他人文档数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+	ccmViewOtherFcntRankFlag bool
+
+	vcSentMeetingCnt2     []*AnnualReportMapInt // 用户2022-2023本人发起的线上视频会议的数量(循环会议算多次,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+	vcSentMeetingCnt2Flag bool
+
+	vcSentMeetingCntRank     string // 用户2023年本人发起的线上视频会议的数量排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+	vcSentMeetingCntRankFlag bool
+
+	vcSentMeetingUcnt     int // 用户2023年本人发起会议邀请参会的人次
+	vcSentMeetingUcntFlag bool
+
+	vcJoinMeetingCnt2     []*AnnualReportMapInt // 用户2022-2023本人受邀参与的会议数(循环会议算多次),共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+	vcJoinMeetingCnt2Flag bool
+
+	vcJoinMeetingCntRank     string // 用户2023年本人受邀参与的会议数排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+	vcJoinMeetingCntRankFlag bool
+
+	vcAllMeetingCnt     int // 用户2023年本人的总参会次数(包含自己发起和被邀请)
+	vcAllMeetingCntFlag bool
+
+	vcAllMeetingCntRank     string // 用户2023年本人的总参会次数(包含自己发起和被邀请)的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量
+	vcAllMeetingCntRankFlag bool
+
+	vcAllMeetingDuration2     []*AnnualReportMapFloat // 用户2022-2023本人总参会的时长(包含自己发起和被邀请),格式0.01h,共2组键值对,表示2年各自的数据。举例:{"2022":"33.33","2023":"55.55"}
+	vcAllMeetingDuration2Flag bool
+
+	calCommentCalTime     string // 用户2023年中最常开始日程的时间,精确到分钟,格式:【23:59】
+	calCommentCalTimeFlag bool
+
+	peopleProfileViewCnt     string // 2023年查看同事profile的人次
+	peopleProfileViewCntFlag bool
+
+	peopleInterviewNum2     []*AnnualReportMapInt // 用户2022-2023面试了多少场,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+	peopleInterviewNum2Flag bool
+
+	peopleInterviewNumRank     string // people用户2023年面试总场次的排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
+	peopleInterviewNumRankFlag bool
+
+	peopleInterviewOfferNum2     []*AnnualReportMapInt // 用户2022-2023本人面试之后,发出offer数量,共2组键值对,表示2年各自的数据。举例:{"2022":"33","2023":"55"}
+	peopleInterviewOfferNum2Flag bool
+
 	peopleInterviewOfferNumRank     string // 2023年由本人面试之后,发出offer数量排名。排名的统一定义:在同一租户内,此指标大于本人的用户数量。
 	peopleInterviewOfferNumRankFlag bool
-	emailSendEmailCount             int // 用户2023年发邮件数
-	emailSendEmailCountFlag         bool
-	emailReceiveEmailCount          int // 用户2023年收邮件数
-	emailReceiveEmailCountFlag      bool
+
+	emailSendEmailCount     int // 用户2023年发邮件数
+	emailSendEmailCountFlag bool
+
+	emailReceiveEmailCount     int // 用户2023年收邮件数
+	emailReceiveEmailCountFlag bool
 }
 
 func NewUserReport2023Builder() *UserReport2023Builder {
@@ -6639,9 +7303,11 @@ type ListAdminDeptStatReq struct {
 }
 
 type ListAdminDeptStatRespData struct {
-	HasMore   *bool            `json:"has_more,omitempty"`   // 分页查询时返回，代表是否还有更多数据
-	PageToken *string          `json:"page_token,omitempty"` // 分页标记，下一页分页的token
-	Items     []*AdminDeptStat `json:"items,omitempty"`      // 数据报表
+	HasMore *bool `json:"has_more,omitempty"` // 分页查询时返回，代表是否还有更多数据
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，下一页分页的token
+
+	Items []*AdminDeptStat `json:"items,omitempty"` // 数据报表
 }
 
 type ListAdminDeptStatResp struct {
@@ -6751,9 +7417,11 @@ type ListAdminUserStatReq struct {
 }
 
 type ListAdminUserStatRespData struct {
-	HasMore   *bool            `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string          `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*AdminUserStat `json:"items,omitempty"`      // 数据报表
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*AdminUserStat `json:"items,omitempty"` // 数据报表
 }
 
 type ListAdminUserStatResp struct {
@@ -6905,9 +7573,11 @@ type ListAuditInfoReq struct {
 }
 
 type ListAuditInfoRespData struct {
-	HasMore   *bool        `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string      `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*AuditInfo `json:"items,omitempty"`      // 返回的具体数据内容
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*AuditInfo `json:"items,omitempty"` // 返回的具体数据内容
 }
 
 type ListAuditInfoResp struct {
@@ -7071,9 +7741,11 @@ type ListBadgeReq struct {
 }
 
 type ListBadgeRespData struct {
-	Badges    []*Badge `json:"badges,omitempty"`     // 勋章列表
-	PageToken *string  `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否已经遍历完，表示本次页面请求已经拿到所有列表数据
+	Badges []*Badge `json:"badges,omitempty"` // 勋章列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否已经遍历完，表示本次页面请求已经拿到所有列表数据
 }
 
 type ListBadgeResp struct {
@@ -7417,9 +8089,11 @@ type ListBadgeGrantReq struct {
 }
 
 type ListBadgeGrantRespData struct {
-	Grants    []*Grant `json:"grants,omitempty"`     // 授予名单列表
-	PageToken *string  `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否已经遍历完，表示本次页面请求已经拿到所有列表数据
+	Grants []*Grant `json:"grants,omitempty"` // 授予名单列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否已经遍历完，表示本次页面请求已经拿到所有列表数据
 }
 
 type ListBadgeGrantResp struct {
@@ -7515,6 +8189,7 @@ func (resp *UpdateBadgeGrantResp) Success() bool {
 type CreateBadgeImageReqBodyBuilder struct {
 	imageFile     io.Reader // 勋章图片的文件，仅支持 PNG 格式，320 x 320 像素，大小不超过 1024 KB。
 	imageFileFlag bool
+
 	imageType     int // 图片的类型
 	imageTypeFlag bool
 }
@@ -7627,7 +8302,8 @@ func (builder *CreateBadgeImageReqBuilder) Build() *CreateBadgeImageReq {
 
 type CreateBadgeImageReqBody struct {
 	ImageFile io.Reader `json:"image_file,omitempty"` // 勋章图片的文件，仅支持 PNG 格式，320 x 320 像素，大小不超过 1024 KB。
-	ImageType *int      `json:"image_type,omitempty"` // 图片的类型
+
+	ImageType *int `json:"image_type,omitempty"` // 图片的类型
 }
 
 type CreateBadgeImageReq struct {
@@ -7652,8 +8328,9 @@ func (resp *CreateBadgeImageResp) Success() bool {
 type ResetPasswordReqBodyBuilder struct {
 	password     *Password // 需要重置的密码参数，不少于8个字符，字母、数字和符号，至少三选二
 	passwordFlag bool
-	userId       string // 待修改密码的用户ID，只针对邮箱登录凭证与企业邮箱(包括别名)相等的用户生效
-	userIdFlag   bool
+
+	userId     string // 待修改密码的用户ID，只针对邮箱登录凭证与企业邮箱(包括别名)相等的用户生效
+	userIdFlag bool
 }
 
 func NewResetPasswordReqBodyBuilder() *ResetPasswordReqBodyBuilder {
@@ -7769,7 +8446,8 @@ func (builder *ResetPasswordReqBuilder) Build() *ResetPasswordReq {
 
 type ResetPasswordReqBody struct {
 	Password *Password `json:"password,omitempty"` // 需要重置的密码参数，不少于8个字符，字母、数字和符号，至少三选二
-	UserId   *string   `json:"user_id,omitempty"`  // 待修改密码的用户ID，只针对邮箱登录凭证与企业邮箱(包括别名)相等的用户生效
+
+	UserId *string `json:"user_id,omitempty"` // 待修改密码的用户ID，只针对邮箱登录凭证与企业邮箱(包括别名)相等的用户生效
 }
 
 type ResetPasswordReq struct {

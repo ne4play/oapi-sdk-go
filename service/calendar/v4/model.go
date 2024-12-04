@@ -194,13 +194,15 @@ const (
 )
 
 type AclScope struct {
-	Type   *string `json:"type,omitempty"`    // 权限类型，当type为User时，值为open_id/user_id/union_id
+	Type *string `json:"type,omitempty"` // 权限类型，当type为User时，值为open_id/user_id/union_id
+
 	UserId *string `json:"user_id,omitempty"` // 用户ID，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
 }
 
 type AclScopeBuilder struct {
-	type_      string // 权限类型，当type为User时，值为open_id/user_id/union_id
-	typeFlag   bool
+	type_    string // 权限类型，当type为User时，值为open_id/user_id/union_id
+	typeFlag bool
+
 	userId     string // 用户ID，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
 	userIdFlag bool
 }
@@ -242,13 +244,15 @@ func (builder *AclScopeBuilder) Build() *AclScope {
 }
 
 type AclScopeEvent struct {
-	Type   *string `json:"type,omitempty"`    // 权限类型，当type为User时，值为open_id/user_id/union_id
+	Type *string `json:"type,omitempty"` // 权限类型，当type为User时，值为open_id/user_id/union_id
+
 	UserId *UserId `json:"user_id,omitempty"` // 用户 ID
 }
 
 type AclScopeEventBuilder struct {
-	type_      string // 权限类型，当type为User时，值为open_id/user_id/union_id
-	typeFlag   bool
+	type_    string // 权限类型，当type为User时，值为open_id/user_id/union_id
+	typeFlag bool
+
 	userId     *UserId // 用户 ID
 	userIdFlag bool
 }
@@ -290,20 +294,26 @@ func (builder *AclScopeEventBuilder) Build() *AclScopeEvent {
 
 type Attachment struct {
 	FileToken *string `json:"file_token,omitempty"` // 附件token
-	FileSize  *string `json:"file_size,omitempty"`  // 附件大小
-	IsDeleted *bool   `json:"is_deleted,omitempty"` // 是否删除附件
-	Name      *string `json:"name,omitempty"`       // 附件名称
+
+	FileSize *string `json:"file_size,omitempty"` // 附件大小
+
+	IsDeleted *bool `json:"is_deleted,omitempty"` // 是否删除附件
+
+	Name *string `json:"name,omitempty"` // 附件名称
 }
 
 type AttachmentBuilder struct {
 	fileToken     string // 附件token
 	fileTokenFlag bool
-	fileSize      string // 附件大小
-	fileSizeFlag  bool
+
+	fileSize     string // 附件大小
+	fileSizeFlag bool
+
 	isDeleted     bool // 是否删除附件
 	isDeletedFlag bool
-	name          string // 附件名称
-	nameFlag      bool
+
+	name     string // 附件名称
+	nameFlag bool
 }
 
 func NewAttachmentBuilder() *AttachmentBuilder {
@@ -369,24 +379,32 @@ func (builder *AttachmentBuilder) Build() *Attachment {
 }
 
 type AttendeeChatMember struct {
-	RsvpStatus  *string `json:"rsvp_status,omitempty"`  // 参与人RSVP状态
-	IsOptional  *bool   `json:"is_optional,omitempty"`  // 参与人是否为「可选参加」
+	RsvpStatus *string `json:"rsvp_status,omitempty"` // 参与人RSVP状态
+
+	IsOptional *bool `json:"is_optional,omitempty"` // 参与人是否为「可选参加」
+
 	DisplayName *string `json:"display_name,omitempty"` // 参与人名称
-	IsOrganizer *bool   `json:"is_organizer,omitempty"` // 参与人是否为日程组织者
-	IsExternal  *bool   `json:"is_external,omitempty"`  // 参与人是否为外部参与人
+
+	IsOrganizer *bool `json:"is_organizer,omitempty"` // 参与人是否为日程组织者
+
+	IsExternal *bool `json:"is_external,omitempty"` // 参与人是否为外部参与人
 }
 
 type AttendeeChatMemberBuilder struct {
-	rsvpStatus      string // 参与人RSVP状态
-	rsvpStatusFlag  bool
-	isOptional      bool // 参与人是否为「可选参加」
-	isOptionalFlag  bool
+	rsvpStatus     string // 参与人RSVP状态
+	rsvpStatusFlag bool
+
+	isOptional     bool // 参与人是否为「可选参加」
+	isOptionalFlag bool
+
 	displayName     string // 参与人名称
 	displayNameFlag bool
+
 	isOrganizer     bool // 参与人是否为日程组织者
 	isOrganizerFlag bool
-	isExternal      bool // 参与人是否为外部参与人
-	isExternalFlag  bool
+
+	isExternal     bool // 参与人是否为外部参与人
+	isExternalFlag bool
 }
 
 func NewAttendeeChatMemberBuilder() *AttendeeChatMemberBuilder {
@@ -465,19 +483,25 @@ func (builder *AttendeeChatMemberBuilder) Build() *AttendeeChatMember {
 }
 
 type BookMeetingRoomData struct {
-	MeetingRoomId  *string     `json:"meeting_room_id,omitempty"` // 会议室ID
-	Hint           *string     `json:"hint,omitempty"`            // 返回给ai的会议室描述数据
-	Rooms          []*RoomMeta `json:"rooms,omitempty"`           // 日历实体列表
-	RecurrenceRule *string     `json:"recurrence_rule,omitempty"` // 重复性日程规则
+	MeetingRoomId *string `json:"meeting_room_id,omitempty"` // 会议室ID
+
+	Hint *string `json:"hint,omitempty"` // 返回给ai的会议室描述数据
+
+	Rooms []*RoomMeta `json:"rooms,omitempty"` // 日历实体列表
+
+	RecurrenceRule *string `json:"recurrence_rule,omitempty"` // 重复性日程规则
 }
 
 type BookMeetingRoomDataBuilder struct {
-	meetingRoomId      string // 会议室ID
-	meetingRoomIdFlag  bool
-	hint               string // 返回给ai的会议室描述数据
-	hintFlag           bool
-	rooms              []*RoomMeta // 日历实体列表
-	roomsFlag          bool
+	meetingRoomId     string // 会议室ID
+	meetingRoomIdFlag bool
+
+	hint     string // 返回给ai的会议室描述数据
+	hintFlag bool
+
+	rooms     []*RoomMeta // 日历实体列表
+	roomsFlag bool
+
 	recurrenceRule     string // 重复性日程规则
 	recurrenceRuleFlag bool
 }
@@ -544,39 +568,57 @@ func (builder *BookMeetingRoomDataBuilder) Build() *BookMeetingRoomData {
 }
 
 type Calendar struct {
-	CalendarId   *string `json:"calendar_id,omitempty"`    // 日历ID。参见[日历ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar/introduction)
-	Summary      *string `json:"summary,omitempty"`        // 日历标题
-	Description  *string `json:"description,omitempty"`    // 日历描述
-	Permissions  *string `json:"permissions,omitempty"`    // 日历公开范围
-	Color        *int    `json:"color,omitempty"`          // 日历颜色，颜色RGB值的int32表示。客户端展示时会映射到色板上最接近的一种颜色。仅对当前身份生效
-	Type         *string `json:"type,omitempty"`           // 日历类型
-	SummaryAlias *string `json:"summary_alias,omitempty"`  // 日历备注名，修改或添加后仅对当前身份生效
-	IsDeleted    *bool   `json:"is_deleted,omitempty"`     // 对于当前身份，日历是否已经被标记为删除
-	IsThirdParty *bool   `json:"is_third_party,omitempty"` // 当前日历是否是第三方数据；三方日历及日程只支持读，不支持写入
-	Role         *string `json:"role,omitempty"`           // 当前身份对于该日历的访问权限
+	CalendarId *string `json:"calendar_id,omitempty"` // 日历ID。参见[日历ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar/introduction)
+
+	Summary *string `json:"summary,omitempty"` // 日历标题
+
+	Description *string `json:"description,omitempty"` // 日历描述
+
+	Permissions *string `json:"permissions,omitempty"` // 日历公开范围
+
+	Color *int `json:"color,omitempty"` // 日历颜色，颜色RGB值的int32表示。客户端展示时会映射到色板上最接近的一种颜色。仅对当前身份生效
+
+	Type *string `json:"type,omitempty"` // 日历类型
+
+	SummaryAlias *string `json:"summary_alias,omitempty"` // 日历备注名，修改或添加后仅对当前身份生效
+
+	IsDeleted *bool `json:"is_deleted,omitempty"` // 对于当前身份，日历是否已经被标记为删除
+
+	IsThirdParty *bool `json:"is_third_party,omitempty"` // 当前日历是否是第三方数据；三方日历及日程只支持读，不支持写入
+
+	Role *string `json:"role,omitempty"` // 当前身份对于该日历的访问权限
 }
 
 type CalendarBuilder struct {
-	calendarId       string // 日历ID。参见[日历ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar/introduction)
-	calendarIdFlag   bool
-	summary          string // 日历标题
-	summaryFlag      bool
-	description      string // 日历描述
-	descriptionFlag  bool
-	permissions      string // 日历公开范围
-	permissionsFlag  bool
-	color            int // 日历颜色，颜色RGB值的int32表示。客户端展示时会映射到色板上最接近的一种颜色。仅对当前身份生效
-	colorFlag        bool
-	type_            string // 日历类型
-	typeFlag         bool
+	calendarId     string // 日历ID。参见[日历ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar/introduction)
+	calendarIdFlag bool
+
+	summary     string // 日历标题
+	summaryFlag bool
+
+	description     string // 日历描述
+	descriptionFlag bool
+
+	permissions     string // 日历公开范围
+	permissionsFlag bool
+
+	color     int // 日历颜色，颜色RGB值的int32表示。客户端展示时会映射到色板上最接近的一种颜色。仅对当前身份生效
+	colorFlag bool
+
+	type_    string // 日历类型
+	typeFlag bool
+
 	summaryAlias     string // 日历备注名，修改或添加后仅对当前身份生效
 	summaryAliasFlag bool
-	isDeleted        bool // 对于当前身份，日历是否已经被标记为删除
-	isDeletedFlag    bool
+
+	isDeleted     bool // 对于当前身份，日历是否已经被标记为删除
+	isDeletedFlag bool
+
 	isThirdParty     bool // 当前日历是否是第三方数据；三方日历及日程只支持读，不支持写入
 	isThirdPartyFlag bool
-	role             string // 当前身份对于该日历的访问权限
-	roleFlag         bool
+
+	role     string // 当前身份对于该日历的访问权限
+	roleFlag bool
 }
 
 func NewCalendarBuilder() *CalendarBuilder {
@@ -720,16 +762,20 @@ func (builder *CalendarBuilder) Build() *Calendar {
 }
 
 type CalendarAcl struct {
-	AclId *string   `json:"acl_id,omitempty"` // acl资源ID。参见[ACL ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-acl/introduction)
-	Role  *string   `json:"role,omitempty"`   // 对日历的访问权限
-	Scope *AclScope `json:"scope,omitempty"`  // 权限范围
+	AclId *string `json:"acl_id,omitempty"` // acl资源ID。参见[ACL ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-acl/introduction)
+
+	Role *string `json:"role,omitempty"` // 对日历的访问权限
+
+	Scope *AclScope `json:"scope,omitempty"` // 权限范围
 }
 
 type CalendarAclBuilder struct {
 	aclId     string // acl资源ID。参见[ACL ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-acl/introduction)
 	aclIdFlag bool
-	role      string // 对日历的访问权限
-	roleFlag  bool
+
+	role     string // 对日历的访问权限
+	roleFlag bool
+
 	scope     *AclScope // 权限范围
 	scopeFlag bool
 }
@@ -783,19 +829,25 @@ func (builder *CalendarAclBuilder) Build() *CalendarAcl {
 }
 
 type CalendarAclEvent struct {
-	AclId      *string        `json:"acl_id,omitempty"`       // acl资源ID
-	Role       *string        `json:"role,omitempty"`         // 对日历的访问权限
-	Scope      *AclScopeEvent `json:"scope,omitempty"`        // 权限范围
-	UserIdList []*UserId      `json:"user_id_list,omitempty"` // 需要推送事件的用户列表
+	AclId *string `json:"acl_id,omitempty"` // acl资源ID
+
+	Role *string `json:"role,omitempty"` // 对日历的访问权限
+
+	Scope *AclScopeEvent `json:"scope,omitempty"` // 权限范围
+
+	UserIdList []*UserId `json:"user_id_list,omitempty"` // 需要推送事件的用户列表
 }
 
 type CalendarAclEventBuilder struct {
-	aclId          string // acl资源ID
-	aclIdFlag      bool
-	role           string // 对日历的访问权限
-	roleFlag       bool
-	scope          *AclScopeEvent // 权限范围
-	scopeFlag      bool
+	aclId     string // acl资源ID
+	aclIdFlag bool
+
+	role     string // 对日历的访问权限
+	roleFlag bool
+
+	scope     *AclScopeEvent // 权限范围
+	scopeFlag bool
+
 	userIdList     []*UserId // 需要推送事件的用户列表
 	userIdListFlag bool
 }
@@ -861,18 +913,22 @@ func (builder *CalendarAclEventBuilder) Build() *CalendarAclEvent {
 }
 
 type CalendarAttendeeResourceCustomization struct {
-	IndexKey     *string                `json:"index_key,omitempty"`     // 每个配置的唯一ID
-	InputContent *string                `json:"input_content,omitempty"` // 当type类型为填空时，该参数需要填入
-	Options      []*CustomizationOption `json:"options,omitempty"`       // 每个配置的选项
+	IndexKey *string `json:"index_key,omitempty"` // 每个配置的唯一ID
+
+	InputContent *string `json:"input_content,omitempty"` // 当type类型为填空时，该参数需要填入
+
+	Options []*CustomizationOption `json:"options,omitempty"` // 每个配置的选项
 }
 
 type CalendarAttendeeResourceCustomizationBuilder struct {
-	indexKey         string // 每个配置的唯一ID
-	indexKeyFlag     bool
+	indexKey     string // 每个配置的唯一ID
+	indexKeyFlag bool
+
 	inputContent     string // 当type类型为填空时，该参数需要填入
 	inputContentFlag bool
-	options          []*CustomizationOption // 每个配置的选项
-	optionsFlag      bool
+
+	options     []*CustomizationOption // 每个配置的选项
+	optionsFlag bool
 }
 
 func NewCalendarAttendeeResourceCustomizationBuilder() *CalendarAttendeeResourceCustomizationBuilder {
@@ -924,84 +980,132 @@ func (builder *CalendarAttendeeResourceCustomizationBuilder) Build() *CalendarAt
 }
 
 type CalendarEvent struct {
-	EventId             *string                  `json:"event_id,omitempty"`              // 日程ID。参见[日程ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event/introduction)
-	OrganizerCalendarId *string                  `json:"organizer_calendar_id,omitempty"` // 日程组织者日历ID。参见[日历ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar/introduction)
-	Summary             *string                  `json:"summary,omitempty"`               // 日程标题
-	Description         *string                  `json:"description,omitempty"`           // 日程描述；目前不支持编辑富文本描述，如果日程描述通过客户端编辑过，更新描述会导致富文本格式丢失
-	NeedNotification    *bool                    `json:"need_notification,omitempty"`     // 更新日程是否给日程参与人发送bot通知，默认为true
-	StartTime           *TimeInfo                `json:"start_time,omitempty"`            // 日程开始时间
-	EndTime             *TimeInfo                `json:"end_time,omitempty"`              // 日程结束时间
-	Vchat               *Vchat                   `json:"vchat,omitempty"`                 // 视频会议信息。
-	Visibility          *string                  `json:"visibility,omitempty"`            // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	AttendeeAbility     *string                  `json:"attendee_ability,omitempty"`      // 参与人权限
-	FreeBusyStatus      *string                  `json:"free_busy_status,omitempty"`      // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	Location            *EventLocation           `json:"location,omitempty"`              // 日程地点
-	Color               *int                     `json:"color,omitempty"`                 // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
-	Reminders           []*Reminder              `json:"reminders,omitempty"`             // 日程提醒列表
-	Recurrence          *string                  `json:"recurrence,omitempty"`            // 重复日程的重复性规则；参考[rfc5545](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10)；;- 不支持COUNT和UNTIL同时出现；;- 预定会议室重复日程长度不得超过两年。
-	Status              *string                  `json:"status,omitempty"`                // 日程状态
-	IsException         *bool                    `json:"is_exception,omitempty"`          // 日程是否是一个重复日程的例外日程
-	RecurringEventId    *string                  `json:"recurring_event_id,omitempty"`    // 例外日程的原重复日程的event_id
-	CreateTime          *string                  `json:"create_time,omitempty"`           // 日程的创建时间（秒级时间戳）
-	Schemas             []*Schema                `json:"schemas,omitempty"`               // 日程自定义信息；控制日程详情页的ui展示。
-	EventOrganizer      *EventOrganizer          `json:"event_organizer,omitempty"`       // 日程组织者信息
-	AppLink             *string                  `json:"app_link,omitempty"`              // 日程的app_link,跳转到具体的某个日程
-	Attendees           []*CalendarEventAttendee `json:"attendees,omitempty"`             // 日程参与人信息
-	HasMoreAttendee     *bool                    `json:"has_more_attendee,omitempty"`     // 是否有更多的参与人
-	Attachments         []*Attachment            `json:"attachments,omitempty"`           // 日程附件
+	EventId *string `json:"event_id,omitempty"` // 日程ID。参见[日程ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event/introduction)
+
+	OrganizerCalendarId *string `json:"organizer_calendar_id,omitempty"` // 日程组织者日历ID。参见[日历ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar/introduction)
+
+	Summary *string `json:"summary,omitempty"` // 日程标题
+
+	Description *string `json:"description,omitempty"` // 日程描述；目前不支持编辑富文本描述，如果日程描述通过客户端编辑过，更新描述会导致富文本格式丢失
+
+	NeedNotification *bool `json:"need_notification,omitempty"` // 更新日程是否给日程参与人发送bot通知，默认为true
+
+	StartTime *TimeInfo `json:"start_time,omitempty"` // 日程开始时间
+
+	EndTime *TimeInfo `json:"end_time,omitempty"` // 日程结束时间
+
+	Vchat *Vchat `json:"vchat,omitempty"` // 视频会议信息。
+
+	Visibility *string `json:"visibility,omitempty"` // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+
+	AttendeeAbility *string `json:"attendee_ability,omitempty"` // 参与人权限
+
+	FreeBusyStatus *string `json:"free_busy_status,omitempty"` // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+
+	Location *EventLocation `json:"location,omitempty"` // 日程地点
+
+	Color *int `json:"color,omitempty"` // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
+
+	Reminders []*Reminder `json:"reminders,omitempty"` // 日程提醒列表
+
+	Recurrence *string `json:"recurrence,omitempty"` // 重复日程的重复性规则；参考[rfc5545](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10)；;- 不支持COUNT和UNTIL同时出现；;- 预定会议室重复日程长度不得超过两年。
+
+	Status *string `json:"status,omitempty"` // 日程状态
+
+	IsException *bool `json:"is_exception,omitempty"` // 日程是否是一个重复日程的例外日程
+
+	RecurringEventId *string `json:"recurring_event_id,omitempty"` // 例外日程的原重复日程的event_id
+
+	CreateTime *string `json:"create_time,omitempty"` // 日程的创建时间（秒级时间戳）
+
+	Schemas []*Schema `json:"schemas,omitempty"` // 日程自定义信息；控制日程详情页的ui展示。
+
+	EventOrganizer *EventOrganizer `json:"event_organizer,omitempty"` // 日程组织者信息
+
+	AppLink *string `json:"app_link,omitempty"` // 日程的app_link,跳转到具体的某个日程
+
+	Attendees []*CalendarEventAttendee `json:"attendees,omitempty"` // 日程参与人信息
+
+	HasMoreAttendee *bool `json:"has_more_attendee,omitempty"` // 是否有更多的参与人
+
+	Attachments []*Attachment `json:"attachments,omitempty"` // 日程附件
 }
 
 type CalendarEventBuilder struct {
-	eventId                 string // 日程ID。参见[日程ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event/introduction)
-	eventIdFlag             bool
+	eventId     string // 日程ID。参见[日程ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event/introduction)
+	eventIdFlag bool
+
 	organizerCalendarId     string // 日程组织者日历ID。参见[日历ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar/introduction)
 	organizerCalendarIdFlag bool
-	summary                 string // 日程标题
-	summaryFlag             bool
-	description             string // 日程描述；目前不支持编辑富文本描述，如果日程描述通过客户端编辑过，更新描述会导致富文本格式丢失
-	descriptionFlag         bool
-	needNotification        bool // 更新日程是否给日程参与人发送bot通知，默认为true
-	needNotificationFlag    bool
-	startTime               *TimeInfo // 日程开始时间
-	startTimeFlag           bool
-	endTime                 *TimeInfo // 日程结束时间
-	endTimeFlag             bool
-	vchat                   *Vchat // 视频会议信息。
-	vchatFlag               bool
-	visibility              string // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	visibilityFlag          bool
-	attendeeAbility         string // 参与人权限
-	attendeeAbilityFlag     bool
-	freeBusyStatus          string // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	freeBusyStatusFlag      bool
-	location                *EventLocation // 日程地点
-	locationFlag            bool
-	color                   int // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
-	colorFlag               bool
-	reminders               []*Reminder // 日程提醒列表
-	remindersFlag           bool
-	recurrence              string // 重复日程的重复性规则；参考[rfc5545](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10)；;- 不支持COUNT和UNTIL同时出现；;- 预定会议室重复日程长度不得超过两年。
-	recurrenceFlag          bool
-	status                  string // 日程状态
-	statusFlag              bool
-	isException             bool // 日程是否是一个重复日程的例外日程
-	isExceptionFlag         bool
-	recurringEventId        string // 例外日程的原重复日程的event_id
-	recurringEventIdFlag    bool
-	createTime              string // 日程的创建时间（秒级时间戳）
-	createTimeFlag          bool
-	schemas                 []*Schema // 日程自定义信息；控制日程详情页的ui展示。
-	schemasFlag             bool
-	eventOrganizer          *EventOrganizer // 日程组织者信息
-	eventOrganizerFlag      bool
-	appLink                 string // 日程的app_link,跳转到具体的某个日程
-	appLinkFlag             bool
-	attendees               []*CalendarEventAttendee // 日程参与人信息
-	attendeesFlag           bool
-	hasMoreAttendee         bool // 是否有更多的参与人
-	hasMoreAttendeeFlag     bool
-	attachments             []*Attachment // 日程附件
-	attachmentsFlag         bool
+
+	summary     string // 日程标题
+	summaryFlag bool
+
+	description     string // 日程描述；目前不支持编辑富文本描述，如果日程描述通过客户端编辑过，更新描述会导致富文本格式丢失
+	descriptionFlag bool
+
+	needNotification     bool // 更新日程是否给日程参与人发送bot通知，默认为true
+	needNotificationFlag bool
+
+	startTime     *TimeInfo // 日程开始时间
+	startTimeFlag bool
+
+	endTime     *TimeInfo // 日程结束时间
+	endTimeFlag bool
+
+	vchat     *Vchat // 视频会议信息。
+	vchatFlag bool
+
+	visibility     string // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+	visibilityFlag bool
+
+	attendeeAbility     string // 参与人权限
+	attendeeAbilityFlag bool
+
+	freeBusyStatus     string // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+	freeBusyStatusFlag bool
+
+	location     *EventLocation // 日程地点
+	locationFlag bool
+
+	color     int // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
+	colorFlag bool
+
+	reminders     []*Reminder // 日程提醒列表
+	remindersFlag bool
+
+	recurrence     string // 重复日程的重复性规则；参考[rfc5545](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10)；;- 不支持COUNT和UNTIL同时出现；;- 预定会议室重复日程长度不得超过两年。
+	recurrenceFlag bool
+
+	status     string // 日程状态
+	statusFlag bool
+
+	isException     bool // 日程是否是一个重复日程的例外日程
+	isExceptionFlag bool
+
+	recurringEventId     string // 例外日程的原重复日程的event_id
+	recurringEventIdFlag bool
+
+	createTime     string // 日程的创建时间（秒级时间戳）
+	createTimeFlag bool
+
+	schemas     []*Schema // 日程自定义信息；控制日程详情页的ui展示。
+	schemasFlag bool
+
+	eventOrganizer     *EventOrganizer // 日程组织者信息
+	eventOrganizerFlag bool
+
+	appLink     string // 日程的app_link,跳转到具体的某个日程
+	appLinkFlag bool
+
+	attendees     []*CalendarEventAttendee // 日程参与人信息
+	attendeesFlag bool
+
+	hasMoreAttendee     bool // 是否有更多的参与人
+	hasMoreAttendeeFlag bool
+
+	attachments     []*Attachment // 日程附件
+	attachmentsFlag bool
 }
 
 func NewCalendarEventBuilder() *CalendarEventBuilder {
@@ -1331,54 +1435,82 @@ func (builder *CalendarEventBuilder) Build() *CalendarEvent {
 }
 
 type CalendarEventAttendee struct {
-	Type                  *string                                  `json:"type,omitempty"`                   // 参与人类型
-	AttendeeId            *string                                  `json:"attendee_id,omitempty"`            // 参与人ID。参见[参与人ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event-attendee/introduction#4998889c)
-	RsvpStatus            *string                                  `json:"rsvp_status,omitempty"`            // 参与人RSVP状态
-	IsOptional            *bool                                    `json:"is_optional,omitempty"`            // 参与人是否为「可选参加」，无法编辑群参与人的此字段
-	IsOrganizer           *bool                                    `json:"is_organizer,omitempty"`           // 参与人是否为日程组织者
-	IsExternal            *bool                                    `json:"is_external,omitempty"`            // 参与人是否为外部参与人；外部参与人不支持编辑
-	DisplayName           *string                                  `json:"display_name,omitempty"`           // 参与人名称
-	ChatMembers           []*AttendeeChatMember                    `json:"chat_members,omitempty"`           // 群中的群成员，当type为Chat时有效；群成员不支持编辑
-	UserId                *string                                  `json:"user_id,omitempty"`                // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	ChatId                *string                                  `json:"chat_id,omitempty"`                // chat类型参与人的群组chat_id，参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	RoomId                *string                                  `json:"room_id,omitempty"`                // resource类型参与人的会议室room_id
-	ThirdPartyEmail       *string                                  `json:"third_party_email,omitempty"`      // third_party类型参与人的邮箱
-	OperateId             *string                                  `json:"operate_id,omitempty"`             // 如果日程是使用应用身份创建的，在添加会议室的时候，用来指定会议室的联系人，在会议室视图展示。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	Type *string `json:"type,omitempty"` // 参与人类型
+
+	AttendeeId *string `json:"attendee_id,omitempty"` // 参与人ID。参见[参与人ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event-attendee/introduction#4998889c)
+
+	RsvpStatus *string `json:"rsvp_status,omitempty"` // 参与人RSVP状态
+
+	IsOptional *bool `json:"is_optional,omitempty"` // 参与人是否为「可选参加」，无法编辑群参与人的此字段
+
+	IsOrganizer *bool `json:"is_organizer,omitempty"` // 参与人是否为日程组织者
+
+	IsExternal *bool `json:"is_external,omitempty"` // 参与人是否为外部参与人；外部参与人不支持编辑
+
+	DisplayName *string `json:"display_name,omitempty"` // 参与人名称
+
+	ChatMembers []*AttendeeChatMember `json:"chat_members,omitempty"` // 群中的群成员，当type为Chat时有效；群成员不支持编辑
+
+	UserId *string `json:"user_id,omitempty"` // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	ChatId *string `json:"chat_id,omitempty"` // chat类型参与人的群组chat_id，参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	RoomId *string `json:"room_id,omitempty"` // resource类型参与人的会议室room_id
+
+	ThirdPartyEmail *string `json:"third_party_email,omitempty"` // third_party类型参与人的邮箱
+
+	OperateId *string `json:"operate_id,omitempty"` // 如果日程是使用应用身份创建的，在添加会议室的时候，用来指定会议室的联系人，在会议室视图展示。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
 	ResourceCustomization []*CalendarAttendeeResourceCustomization `json:"resource_customization,omitempty"` // 会议室的个性化配置
-	ApprovalReason        *string                                  `json:"approval_reason,omitempty"`        // 会议室审批原因
+
+	ApprovalReason *string `json:"approval_reason,omitempty"` // 会议室审批原因
 }
 
 type CalendarEventAttendeeBuilder struct {
-	type_                     string // 参与人类型
-	typeFlag                  bool
-	attendeeId                string // 参与人ID。参见[参与人ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event-attendee/introduction#4998889c)
-	attendeeIdFlag            bool
-	rsvpStatus                string // 参与人RSVP状态
-	rsvpStatusFlag            bool
-	isOptional                bool // 参与人是否为「可选参加」，无法编辑群参与人的此字段
-	isOptionalFlag            bool
-	isOrganizer               bool // 参与人是否为日程组织者
-	isOrganizerFlag           bool
-	isExternal                bool // 参与人是否为外部参与人；外部参与人不支持编辑
-	isExternalFlag            bool
-	displayName               string // 参与人名称
-	displayNameFlag           bool
-	chatMembers               []*AttendeeChatMember // 群中的群成员，当type为Chat时有效；群成员不支持编辑
-	chatMembersFlag           bool
-	userId                    string // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	userIdFlag                bool
-	chatId                    string // chat类型参与人的群组chat_id，参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	chatIdFlag                bool
-	roomId                    string // resource类型参与人的会议室room_id
-	roomIdFlag                bool
-	thirdPartyEmail           string // third_party类型参与人的邮箱
-	thirdPartyEmailFlag       bool
-	operateId                 string // 如果日程是使用应用身份创建的，在添加会议室的时候，用来指定会议室的联系人，在会议室视图展示。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	operateIdFlag             bool
+	type_    string // 参与人类型
+	typeFlag bool
+
+	attendeeId     string // 参与人ID。参见[参与人ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event-attendee/introduction#4998889c)
+	attendeeIdFlag bool
+
+	rsvpStatus     string // 参与人RSVP状态
+	rsvpStatusFlag bool
+
+	isOptional     bool // 参与人是否为「可选参加」，无法编辑群参与人的此字段
+	isOptionalFlag bool
+
+	isOrganizer     bool // 参与人是否为日程组织者
+	isOrganizerFlag bool
+
+	isExternal     bool // 参与人是否为外部参与人；外部参与人不支持编辑
+	isExternalFlag bool
+
+	displayName     string // 参与人名称
+	displayNameFlag bool
+
+	chatMembers     []*AttendeeChatMember // 群中的群成员，当type为Chat时有效；群成员不支持编辑
+	chatMembersFlag bool
+
+	userId     string // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	userIdFlag bool
+
+	chatId     string // chat类型参与人的群组chat_id，参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+	chatIdFlag bool
+
+	roomId     string // resource类型参与人的会议室room_id
+	roomIdFlag bool
+
+	thirdPartyEmail     string // third_party类型参与人的邮箱
+	thirdPartyEmailFlag bool
+
+	operateId     string // 如果日程是使用应用身份创建的，在添加会议室的时候，用来指定会议室的联系人，在会议室视图展示。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	operateIdFlag bool
+
 	resourceCustomization     []*CalendarAttendeeResourceCustomization // 会议室的个性化配置
 	resourceCustomizationFlag bool
-	approvalReason            string // 会议室审批原因
-	approvalReasonFlag        bool
+
+	approvalReason     string // 会议室审批原因
+	approvalReasonFlag bool
 }
 
 func NewCalendarEventAttendeeBuilder() *CalendarEventAttendeeBuilder {
@@ -1585,27 +1717,37 @@ func (builder *CalendarEventAttendeeBuilder) Build() *CalendarEventAttendee {
 }
 
 type CalendarEventAttendeeChatMember struct {
-	RsvpStatus  *string `json:"rsvp_status,omitempty"`  // 参与人RSVP状态
-	IsOptional  *bool   `json:"is_optional,omitempty"`  // 参与人是否为「可选参加」
+	RsvpStatus *string `json:"rsvp_status,omitempty"` // 参与人RSVP状态
+
+	IsOptional *bool `json:"is_optional,omitempty"` // 参与人是否为「可选参加」
+
 	DisplayName *string `json:"display_name,omitempty"` // 参与人名称
-	OpenId      *string `json:"open_id,omitempty"`      // 参与人open_id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;**示例值**："ou_xxxxxxxx"
-	IsOrganizer *bool   `json:"is_organizer,omitempty"` // 参与人是否为日程组织者
-	IsExternal  *bool   `json:"is_external,omitempty"`  // 参与人是否为外部参与人
+
+	OpenId *string `json:"open_id,omitempty"` // 参与人open_id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;**示例值**："ou_xxxxxxxx"
+
+	IsOrganizer *bool `json:"is_organizer,omitempty"` // 参与人是否为日程组织者
+
+	IsExternal *bool `json:"is_external,omitempty"` // 参与人是否为外部参与人
 }
 
 type CalendarEventAttendeeChatMemberBuilder struct {
-	rsvpStatus      string // 参与人RSVP状态
-	rsvpStatusFlag  bool
-	isOptional      bool // 参与人是否为「可选参加」
-	isOptionalFlag  bool
+	rsvpStatus     string // 参与人RSVP状态
+	rsvpStatusFlag bool
+
+	isOptional     bool // 参与人是否为「可选参加」
+	isOptionalFlag bool
+
 	displayName     string // 参与人名称
 	displayNameFlag bool
-	openId          string // 参与人open_id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;**示例值**："ou_xxxxxxxx"
-	openIdFlag      bool
+
+	openId     string // 参与人open_id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;**示例值**："ou_xxxxxxxx"
+	openIdFlag bool
+
 	isOrganizer     bool // 参与人是否为日程组织者
 	isOrganizerFlag bool
-	isExternal      bool // 参与人是否为外部参与人
-	isExternalFlag  bool
+
+	isExternal     bool // 参与人是否为外部参与人
+	isExternalFlag bool
 }
 
 func NewCalendarEventAttendeeChatMemberBuilder() *CalendarEventAttendeeChatMemberBuilder {
@@ -1697,25 +1839,35 @@ func (builder *CalendarEventAttendeeChatMemberBuilder) Build() *CalendarEventAtt
 }
 
 type CalendarEventAttendeeId struct {
-	Type            *string `json:"type,omitempty"`              // 参与人类型，仅当新建参与人时可设置类型
-	AttendeeId      *string `json:"attendee_id,omitempty"`       // 参与人ID
-	UserId          *string `json:"user_id,omitempty"`           // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id
-	ChatId          *string `json:"chat_id,omitempty"`           // chat类型参与人的群组chat_id
-	RoomId          *string `json:"room_id,omitempty"`           // resource类型参与人的会议室room_id
+	Type *string `json:"type,omitempty"` // 参与人类型，仅当新建参与人时可设置类型
+
+	AttendeeId *string `json:"attendee_id,omitempty"` // 参与人ID
+
+	UserId *string `json:"user_id,omitempty"` // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id
+
+	ChatId *string `json:"chat_id,omitempty"` // chat类型参与人的群组chat_id
+
+	RoomId *string `json:"room_id,omitempty"` // resource类型参与人的会议室room_id
+
 	ThirdPartyEmail *string `json:"third_party_email,omitempty"` // third_party类型参与人的邮箱
 }
 
 type CalendarEventAttendeeIdBuilder struct {
-	type_               string // 参与人类型，仅当新建参与人时可设置类型
-	typeFlag            bool
-	attendeeId          string // 参与人ID
-	attendeeIdFlag      bool
-	userId              string // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id
-	userIdFlag          bool
-	chatId              string // chat类型参与人的群组chat_id
-	chatIdFlag          bool
-	roomId              string // resource类型参与人的会议室room_id
-	roomIdFlag          bool
+	type_    string // 参与人类型，仅当新建参与人时可设置类型
+	typeFlag bool
+
+	attendeeId     string // 参与人ID
+	attendeeIdFlag bool
+
+	userId     string // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id
+	userIdFlag bool
+
+	chatId     string // chat类型参与人的群组chat_id
+	chatIdFlag bool
+
+	roomId     string // resource类型参与人的会议室room_id
+	roomIdFlag bool
+
 	thirdPartyEmail     string // third_party类型参与人的邮箱
 	thirdPartyEmailFlag bool
 }
@@ -1809,49 +1961,75 @@ func (builder *CalendarEventAttendeeIdBuilder) Build() *CalendarEventAttendeeId 
 }
 
 type CalendarEventAttendeeResp struct {
-	Type                  *string                                  `json:"type,omitempty"`                   // 参与人类型，仅当新建参与人时可设置类型。
-	AttendeeId            *string                                  `json:"attendee_id,omitempty"`            // 参与人ID
-	RsvpStatus            *string                                  `json:"rsvp_status,omitempty"`            // 参与人RSVP状态
-	IsOptional            *bool                                    `json:"is_optional,omitempty"`            // 参与人是否为「可选参加」，无法编辑群参与人的此字段
-	IsOrganizer           *bool                                    `json:"is_organizer,omitempty"`           // 参与人是否为日程组织者
-	IsExternal            *bool                                    `json:"is_external,omitempty"`            // 参与人是否为外部参与人；外部参与人不支持编辑
-	DisplayName           *string                                  `json:"display_name,omitempty"`           // 参与人名称
-	ChatMembers           []*AttendeeChatMember                    `json:"chat_members,omitempty"`           // 群中的群成员，当type为Chat时有效；群成员不支持编辑
-	UserId                *string                                  `json:"user_id,omitempty"`                // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id
-	ChatId                *string                                  `json:"chat_id,omitempty"`                // chat类型参与人的群组chat_id
-	RoomId                *string                                  `json:"room_id,omitempty"`                // resource类型参与人的会议室room_id
-	ThirdPartyEmail       *string                                  `json:"third_party_email,omitempty"`      // third_party类型参与人的邮箱
-	OperateId             *string                                  `json:"operate_id,omitempty"`             // bot身份操作时，为预定的会议室指定实际预定人
+	Type *string `json:"type,omitempty"` // 参与人类型，仅当新建参与人时可设置类型。
+
+	AttendeeId *string `json:"attendee_id,omitempty"` // 参与人ID
+
+	RsvpStatus *string `json:"rsvp_status,omitempty"` // 参与人RSVP状态
+
+	IsOptional *bool `json:"is_optional,omitempty"` // 参与人是否为「可选参加」，无法编辑群参与人的此字段
+
+	IsOrganizer *bool `json:"is_organizer,omitempty"` // 参与人是否为日程组织者
+
+	IsExternal *bool `json:"is_external,omitempty"` // 参与人是否为外部参与人；外部参与人不支持编辑
+
+	DisplayName *string `json:"display_name,omitempty"` // 参与人名称
+
+	ChatMembers []*AttendeeChatMember `json:"chat_members,omitempty"` // 群中的群成员，当type为Chat时有效；群成员不支持编辑
+
+	UserId *string `json:"user_id,omitempty"` // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id
+
+	ChatId *string `json:"chat_id,omitempty"` // chat类型参与人的群组chat_id
+
+	RoomId *string `json:"room_id,omitempty"` // resource类型参与人的会议室room_id
+
+	ThirdPartyEmail *string `json:"third_party_email,omitempty"` // third_party类型参与人的邮箱
+
+	OperateId *string `json:"operate_id,omitempty"` // bot身份操作时，为预定的会议室指定实际预定人
+
 	ResourceCustomization []*CalendarAttendeeResourceCustomization `json:"resource_customization,omitempty"` // 会议室的个性化配置
 }
 
 type CalendarEventAttendeeRespBuilder struct {
-	type_                     string // 参与人类型，仅当新建参与人时可设置类型。
-	typeFlag                  bool
-	attendeeId                string // 参与人ID
-	attendeeIdFlag            bool
-	rsvpStatus                string // 参与人RSVP状态
-	rsvpStatusFlag            bool
-	isOptional                bool // 参与人是否为「可选参加」，无法编辑群参与人的此字段
-	isOptionalFlag            bool
-	isOrganizer               bool // 参与人是否为日程组织者
-	isOrganizerFlag           bool
-	isExternal                bool // 参与人是否为外部参与人；外部参与人不支持编辑
-	isExternalFlag            bool
-	displayName               string // 参与人名称
-	displayNameFlag           bool
-	chatMembers               []*AttendeeChatMember // 群中的群成员，当type为Chat时有效；群成员不支持编辑
-	chatMembersFlag           bool
-	userId                    string // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id
-	userIdFlag                bool
-	chatId                    string // chat类型参与人的群组chat_id
-	chatIdFlag                bool
-	roomId                    string // resource类型参与人的会议室room_id
-	roomIdFlag                bool
-	thirdPartyEmail           string // third_party类型参与人的邮箱
-	thirdPartyEmailFlag       bool
-	operateId                 string // bot身份操作时，为预定的会议室指定实际预定人
-	operateIdFlag             bool
+	type_    string // 参与人类型，仅当新建参与人时可设置类型。
+	typeFlag bool
+
+	attendeeId     string // 参与人ID
+	attendeeIdFlag bool
+
+	rsvpStatus     string // 参与人RSVP状态
+	rsvpStatusFlag bool
+
+	isOptional     bool // 参与人是否为「可选参加」，无法编辑群参与人的此字段
+	isOptionalFlag bool
+
+	isOrganizer     bool // 参与人是否为日程组织者
+	isOrganizerFlag bool
+
+	isExternal     bool // 参与人是否为外部参与人；外部参与人不支持编辑
+	isExternalFlag bool
+
+	displayName     string // 参与人名称
+	displayNameFlag bool
+
+	chatMembers     []*AttendeeChatMember // 群中的群成员，当type为Chat时有效；群成员不支持编辑
+	chatMembersFlag bool
+
+	userId     string // 参与人的用户id，依赖于user_id_type返回对应的取值，当is_external为true时，此字段只会返回open_id或者union_id
+	userIdFlag bool
+
+	chatId     string // chat类型参与人的群组chat_id
+	chatIdFlag bool
+
+	roomId     string // resource类型参与人的会议室room_id
+	roomIdFlag bool
+
+	thirdPartyEmail     string // third_party类型参与人的邮箱
+	thirdPartyEmailFlag bool
+
+	operateId     string // bot身份操作时，为预定的会议室指定实际预定人
+	operateIdFlag bool
+
 	resourceCustomization     []*CalendarAttendeeResourceCustomization // 会议室的个性化配置
 	resourceCustomizationFlag bool
 }
@@ -2047,69 +2225,107 @@ func (builder *CalendarEventAttendeeRespBuilder) Build() *CalendarEventAttendeeR
 }
 
 type CalendarEventResp struct {
-	EventId             *string        `json:"event_id,omitempty"`              // 日程ID
-	OrganizerCalendarId *string        `json:"organizer_calendar_id,omitempty"` // 日程组织者日历ID
-	Summary             *string        `json:"summary,omitempty"`               // 日程标题
-	Description         *string        `json:"description,omitempty"`           // 日程描述
-	NeedNotification    *bool          `json:"need_notification,omitempty"`     // 是否发送通知消息
-	StartTime           *TimeInfo      `json:"start_time,omitempty"`            // 日程开始时间
-	EndTime             *TimeInfo      `json:"end_time,omitempty"`              // 日程结束时间
-	Vchat               *Vchat         `json:"vchat,omitempty"`                 // 视频会议信息，仅当日程至少有一位attendee时生效
-	Visibility          *string        `json:"visibility,omitempty"`            // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	AttendeeAbility     *string        `json:"attendee_ability,omitempty"`      // 参与人权限
-	FreeBusyStatus      *string        `json:"free_busy_status,omitempty"`      // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	Location            *EventLocation `json:"location,omitempty"`              // 日程地点
-	Color               *int           `json:"color,omitempty"`                 // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
-	Reminders           []*Reminder    `json:"reminders,omitempty"`             // 日程提醒列表
-	Recurrence          *string        `json:"recurrence,omitempty"`            // 重复日程的重复性规则
-	Status              *string        `json:"status,omitempty"`                // 日程状态
-	IsException         *bool          `json:"is_exception,omitempty"`          // 日程是否是一个重复日程的例外日程
-	RecurringEventId    *string        `json:"recurring_event_id,omitempty"`    // 例外日程的原重复日程的event_id
-	CreateTime          *string        `json:"create_time,omitempty"`           // 日程的创建时间戳
-	Schemas             []*Schema      `json:"schemas,omitempty"`               // 日程自定义信息
+	EventId *string `json:"event_id,omitempty"` // 日程ID
+
+	OrganizerCalendarId *string `json:"organizer_calendar_id,omitempty"` // 日程组织者日历ID
+
+	Summary *string `json:"summary,omitempty"` // 日程标题
+
+	Description *string `json:"description,omitempty"` // 日程描述
+
+	NeedNotification *bool `json:"need_notification,omitempty"` // 是否发送通知消息
+
+	StartTime *TimeInfo `json:"start_time,omitempty"` // 日程开始时间
+
+	EndTime *TimeInfo `json:"end_time,omitempty"` // 日程结束时间
+
+	Vchat *Vchat `json:"vchat,omitempty"` // 视频会议信息，仅当日程至少有一位attendee时生效
+
+	Visibility *string `json:"visibility,omitempty"` // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+
+	AttendeeAbility *string `json:"attendee_ability,omitempty"` // 参与人权限
+
+	FreeBusyStatus *string `json:"free_busy_status,omitempty"` // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+
+	Location *EventLocation `json:"location,omitempty"` // 日程地点
+
+	Color *int `json:"color,omitempty"` // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
+
+	Reminders []*Reminder `json:"reminders,omitempty"` // 日程提醒列表
+
+	Recurrence *string `json:"recurrence,omitempty"` // 重复日程的重复性规则
+
+	Status *string `json:"status,omitempty"` // 日程状态
+
+	IsException *bool `json:"is_exception,omitempty"` // 日程是否是一个重复日程的例外日程
+
+	RecurringEventId *string `json:"recurring_event_id,omitempty"` // 例外日程的原重复日程的event_id
+
+	CreateTime *string `json:"create_time,omitempty"` // 日程的创建时间戳
+
+	Schemas []*Schema `json:"schemas,omitempty"` // 日程自定义信息
 }
 
 type CalendarEventRespBuilder struct {
-	eventId                 string // 日程ID
-	eventIdFlag             bool
+	eventId     string // 日程ID
+	eventIdFlag bool
+
 	organizerCalendarId     string // 日程组织者日历ID
 	organizerCalendarIdFlag bool
-	summary                 string // 日程标题
-	summaryFlag             bool
-	description             string // 日程描述
-	descriptionFlag         bool
-	needNotification        bool // 是否发送通知消息
-	needNotificationFlag    bool
-	startTime               *TimeInfo // 日程开始时间
-	startTimeFlag           bool
-	endTime                 *TimeInfo // 日程结束时间
-	endTimeFlag             bool
-	vchat                   *Vchat // 视频会议信息，仅当日程至少有一位attendee时生效
-	vchatFlag               bool
-	visibility              string // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	visibilityFlag          bool
-	attendeeAbility         string // 参与人权限
-	attendeeAbilityFlag     bool
-	freeBusyStatus          string // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	freeBusyStatusFlag      bool
-	location                *EventLocation // 日程地点
-	locationFlag            bool
-	color                   int // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
-	colorFlag               bool
-	reminders               []*Reminder // 日程提醒列表
-	remindersFlag           bool
-	recurrence              string // 重复日程的重复性规则
-	recurrenceFlag          bool
-	status                  string // 日程状态
-	statusFlag              bool
-	isException             bool // 日程是否是一个重复日程的例外日程
-	isExceptionFlag         bool
-	recurringEventId        string // 例外日程的原重复日程的event_id
-	recurringEventIdFlag    bool
-	createTime              string // 日程的创建时间戳
-	createTimeFlag          bool
-	schemas                 []*Schema // 日程自定义信息
-	schemasFlag             bool
+
+	summary     string // 日程标题
+	summaryFlag bool
+
+	description     string // 日程描述
+	descriptionFlag bool
+
+	needNotification     bool // 是否发送通知消息
+	needNotificationFlag bool
+
+	startTime     *TimeInfo // 日程开始时间
+	startTimeFlag bool
+
+	endTime     *TimeInfo // 日程结束时间
+	endTimeFlag bool
+
+	vchat     *Vchat // 视频会议信息，仅当日程至少有一位attendee时生效
+	vchatFlag bool
+
+	visibility     string // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+	visibilityFlag bool
+
+	attendeeAbility     string // 参与人权限
+	attendeeAbilityFlag bool
+
+	freeBusyStatus     string // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+	freeBusyStatusFlag bool
+
+	location     *EventLocation // 日程地点
+	locationFlag bool
+
+	color     int // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
+	colorFlag bool
+
+	reminders     []*Reminder // 日程提醒列表
+	remindersFlag bool
+
+	recurrence     string // 重复日程的重复性规则
+	recurrenceFlag bool
+
+	status     string // 日程状态
+	statusFlag bool
+
+	isException     bool // 日程是否是一个重复日程的例外日程
+	isExceptionFlag bool
+
+	recurringEventId     string // 例外日程的原重复日程的event_id
+	recurringEventIdFlag bool
+
+	createTime     string // 日程的创建时间戳
+	createTimeFlag bool
+
+	schemas     []*Schema // 日程自定义信息
+	schemasFlag bool
 }
 
 func NewCalendarEventRespBuilder() *CalendarEventRespBuilder {
@@ -2377,16 +2593,20 @@ func (builder *CalendarEventRespBuilder) Build() *CalendarEventResp {
 }
 
 type CalendarFreebusy struct {
-	StartTime  *string `json:"start_time,omitempty"`  // 忙闲信息开始时间，RFC3339 date_time格式
-	EndTime    *string `json:"end_time,omitempty"`    // 忙闲信息结束时间，RFC3339 date_time格式
+	StartTime *string `json:"start_time,omitempty"` // 忙闲信息开始时间，RFC3339 date_time格式
+
+	EndTime *string `json:"end_time,omitempty"` // 忙闲信息结束时间，RFC3339 date_time格式
+
 	CalendarId *string `json:"calendar_id,omitempty"` // 日历id
 }
 
 type CalendarFreebusyBuilder struct {
-	startTime      string // 忙闲信息开始时间，RFC3339 date_time格式
-	startTimeFlag  bool
-	endTime        string // 忙闲信息结束时间，RFC3339 date_time格式
-	endTimeFlag    bool
+	startTime     string // 忙闲信息开始时间，RFC3339 date_time格式
+	startTimeFlag bool
+
+	endTime     string // 忙闲信息结束时间，RFC3339 date_time格式
+	endTimeFlag bool
+
 	calendarId     string // 日历id
 	calendarIdFlag bool
 }
@@ -2442,14 +2662,16 @@ func (builder *CalendarFreebusyBuilder) Build() *CalendarFreebusy {
 
 type CalendarFreebusyError struct {
 	CalendarId *string `json:"calendar_id,omitempty"` // 日历id
-	ErrorMsg   *string `json:"error_msg,omitempty"`   // 错误信息
+
+	ErrorMsg *string `json:"error_msg,omitempty"` // 错误信息
 }
 
 type CalendarFreebusyErrorBuilder struct {
 	calendarId     string // 日历id
 	calendarIdFlag bool
-	errorMsg       string // 错误信息
-	errorMsgFlag   bool
+
+	errorMsg     string // 错误信息
+	errorMsgFlag bool
 }
 
 func NewCalendarFreebusyErrorBuilder() *CalendarFreebusyErrorBuilder {
@@ -2520,16 +2742,20 @@ func (builder *CalendarPrimaryBatchReqBuilder) Build() *CalendarPrimaryBatchReq 
 }
 
 type CalendarUnderstandExtra struct {
-	AiTaskId   *string `json:"ai_task_id,omitempty"`  // ai任务唯一标识
-	EventUid   *string `json:"event_uid,omitempty"`   // 日程uid
+	AiTaskId *string `json:"ai_task_id,omitempty"` // ai任务唯一标识
+
+	EventUid *string `json:"event_uid,omitempty"` // 日程uid
+
 	OriginTime *string `json:"origin_time,omitempty"` // 日程origin_time
 }
 
 type CalendarUnderstandExtraBuilder struct {
-	aiTaskId       string // ai任务唯一标识
-	aiTaskIdFlag   bool
-	eventUid       string // 日程uid
-	eventUidFlag   bool
+	aiTaskId     string // ai任务唯一标识
+	aiTaskIdFlag bool
+
+	eventUid     string // 日程uid
+	eventUidFlag bool
+
 	originTime     string // 日程origin_time
 	originTimeFlag bool
 }
@@ -2584,19 +2810,25 @@ func (builder *CalendarUnderstandExtraBuilder) Build() *CalendarUnderstandExtra 
 }
 
 type CalendarUnderstandScenarioContext struct {
-	Scenario   *string                  `json:"scenario,omitempty"`    // 会话所处的业务场景
-	WorkMode   *int                     `json:"work_mode,omitempty"`   // 会话所处的业务模式
-	Extra      *CalendarUnderstandExtra `json:"extra,omitempty"`       // 透传数据
-	SystemInfo *SystemInfo              `json:"system_info,omitempty"` // 系统信息
+	Scenario *string `json:"scenario,omitempty"` // 会话所处的业务场景
+
+	WorkMode *int `json:"work_mode,omitempty"` // 会话所处的业务模式
+
+	Extra *CalendarUnderstandExtra `json:"extra,omitempty"` // 透传数据
+
+	SystemInfo *SystemInfo `json:"system_info,omitempty"` // 系统信息
 }
 
 type CalendarUnderstandScenarioContextBuilder struct {
-	scenario       string // 会话所处的业务场景
-	scenarioFlag   bool
-	workMode       int // 会话所处的业务模式
-	workModeFlag   bool
-	extra          *CalendarUnderstandExtra // 透传数据
-	extraFlag      bool
+	scenario     string // 会话所处的业务场景
+	scenarioFlag bool
+
+	workMode     int // 会话所处的业务模式
+	workModeFlag bool
+
+	extra     *CalendarUnderstandExtra // 透传数据
+	extraFlag bool
+
 	systemInfo     *SystemInfo // 系统信息
 	systemInfoFlag bool
 }
@@ -2662,16 +2894,20 @@ func (builder *CalendarUnderstandScenarioContextBuilder) Build() *CalendarUnders
 }
 
 type CardCallback struct {
-	MessageId    *string         `json:"message_id,omitempty"`    // 卡片的消息ID
-	Status       *MyaiCardStatus `json:"status,omitempty"`        // 卡片状态
-	CallbackInfo *string         `json:"callback_info,omitempty"` // 业务定义的回调数据，json格式
+	MessageId *string `json:"message_id,omitempty"` // 卡片的消息ID
+
+	Status *MyaiCardStatus `json:"status,omitempty"` // 卡片状态
+
+	CallbackInfo *string `json:"callback_info,omitempty"` // 业务定义的回调数据，json格式
 }
 
 type CardCallbackBuilder struct {
-	messageId        string // 卡片的消息ID
-	messageIdFlag    bool
-	status           *MyaiCardStatus // 卡片状态
-	statusFlag       bool
+	messageId     string // 卡片的消息ID
+	messageIdFlag bool
+
+	status     *MyaiCardStatus // 卡片状态
+	statusFlag bool
+
 	callbackInfo     string // 业务定义的回调数据，json格式
 	callbackInfoFlag bool
 }
@@ -2725,24 +2961,32 @@ func (builder *CardCallbackBuilder) Build() *CardCallback {
 }
 
 type CardPresent struct {
-	Body          *string `json:"body,omitempty"`           // 卡片json内容
-	Interactable  *bool   `json:"interactable,omitempty"`   // 是否为交互卡片
-	Type          *string `json:"type,omitempty"`           // 卡片类型
+	Body *string `json:"body,omitempty"` // 卡片json内容
+
+	Interactable *bool `json:"interactable,omitempty"` // 是否为交互卡片
+
+	Type *string `json:"type,omitempty"` // 卡片类型
+
 	OperationType *string `json:"operation_type,omitempty"` // 操作类型
-	CallbackInfo  *string `json:"callback_info,omitempty"`  // 业务定义的卡片回调信息
+
+	CallbackInfo *string `json:"callback_info,omitempty"` // 业务定义的卡片回调信息
 }
 
 type CardPresentBuilder struct {
-	body              string // 卡片json内容
-	bodyFlag          bool
-	interactable      bool // 是否为交互卡片
-	interactableFlag  bool
-	type_             string // 卡片类型
-	typeFlag          bool
+	body     string // 卡片json内容
+	bodyFlag bool
+
+	interactable     bool // 是否为交互卡片
+	interactableFlag bool
+
+	type_    string // 卡片类型
+	typeFlag bool
+
 	operationType     string // 操作类型
 	operationTypeFlag bool
-	callbackInfo      string // 业务定义的卡片回调信息
-	callbackInfoFlag  bool
+
+	callbackInfo     string // 业务定义的卡片回调信息
+	callbackInfoFlag bool
 }
 
 func NewCardPresentBuilder() *CardPresentBuilder {
@@ -2821,13 +3065,15 @@ func (builder *CardPresentBuilder) Build() *CardPresent {
 }
 
 type CustomizationOption struct {
-	OptionKey     *string `json:"option_key,omitempty"`     // 每个选项的唯一ID
+	OptionKey *string `json:"option_key,omitempty"` // 每个选项的唯一ID
+
 	OthersContent *string `json:"others_content,omitempty"` // 当type类型为其它选项时，该参数需要填入
 }
 
 type CustomizationOptionBuilder struct {
-	optionKey         string // 每个选项的唯一ID
-	optionKeyFlag     bool
+	optionKey     string // 每个选项的唯一ID
+	optionKeyFlag bool
+
 	othersContent     string // 当type类型为其它选项时，该参数需要填入
 	othersContentFlag bool
 }
@@ -2869,13 +3115,15 @@ func (builder *CustomizationOptionBuilder) Build() *CustomizationOption {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -2913,25 +3161,35 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type EventBriefInfoAi struct {
-	EventId   *string         `json:"event_id,omitempty"`   // 日程ID
-	Summary   *string         `json:"summary,omitempty"`    // 日程名称
-	StartTime *string         `json:"start_time,omitempty"` // 日程开始时间
-	EndTime   *string         `json:"end_time,omitempty"`   // 日程结束时间
-	AppLink   *string         `json:"app_link,omitempty"`   // 日程链接
-	Organizer *EventOrganizer `json:"organizer,omitempty"`  // 日程组织者
+	EventId *string `json:"event_id,omitempty"` // 日程ID
+
+	Summary *string `json:"summary,omitempty"` // 日程名称
+
+	StartTime *string `json:"start_time,omitempty"` // 日程开始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 日程结束时间
+
+	AppLink *string `json:"app_link,omitempty"` // 日程链接
+
+	Organizer *EventOrganizer `json:"organizer,omitempty"` // 日程组织者
 }
 
 type EventBriefInfoAiBuilder struct {
-	eventId       string // 日程ID
-	eventIdFlag   bool
-	summary       string // 日程名称
-	summaryFlag   bool
+	eventId     string // 日程ID
+	eventIdFlag bool
+
+	summary     string // 日程名称
+	summaryFlag bool
+
 	startTime     string // 日程开始时间
 	startTimeFlag bool
-	endTime       string // 日程结束时间
-	endTimeFlag   bool
-	appLink       string // 日程链接
-	appLinkFlag   bool
+
+	endTime     string // 日程结束时间
+	endTimeFlag bool
+
+	appLink     string // 日程链接
+	appLinkFlag bool
+
 	organizer     *EventOrganizer // 日程组织者
 	organizerFlag bool
 }
@@ -3024,45 +3282,67 @@ func (builder *EventBriefInfoAiBuilder) Build() *EventBriefInfoAi {
 }
 
 type EventCard struct {
-	Summary                      *string                            `json:"summary,omitempty"`                         // 日程主题
-	StartTime                    *string                            `json:"start_time,omitempty"`                      // 日程开始时间，日期+时间格式
-	EndTime                      *string                            `json:"end_time,omitempty"`                        // 日程结束时间，日期+时间格式
-	StartTimezone                *string                            `json:"start_timezone,omitempty"`                  // 日程开始时间时区
-	ParticipantIds               *string                            `json:"participant_ids,omitempty"`                 // 日程参与人open ID
-	RecurrenceRule               *string                            `json:"recurrence_rule,omitempty"`                 // 日程的重复性规则
-	MeetingRoomIds               *string                            `json:"meeting_room_ids,omitempty"`                // 需要预定的会议室ID列表
-	Duration                     *string                            `json:"duration,omitempty"`                        // 需要预定的日程长度
-	NeedMeetingNotes             *string                            `json:"need_meeting_notes,omitempty"`              // 是否需要生成会议纪要
-	ScenarioContextSchemaVersion *string                            `json:"scenario_context_schema_version,omitempty"` // 上下文信息 schema 版本
-	ScenarioContext              *CalendarUnderstandScenarioContext `json:"scenario_context,omitempty"`                // 上下文信息
-	EventId                      *string                            `json:"event_id,omitempty"`                        // 日程的uid_originTime
+	Summary *string `json:"summary,omitempty"` // 日程主题
+
+	StartTime *string `json:"start_time,omitempty"` // 日程开始时间，日期+时间格式
+
+	EndTime *string `json:"end_time,omitempty"` // 日程结束时间，日期+时间格式
+
+	StartTimezone *string `json:"start_timezone,omitempty"` // 日程开始时间时区
+
+	ParticipantIds *string `json:"participant_ids,omitempty"` // 日程参与人open ID
+
+	RecurrenceRule *string `json:"recurrence_rule,omitempty"` // 日程的重复性规则
+
+	MeetingRoomIds *string `json:"meeting_room_ids,omitempty"` // 需要预定的会议室ID列表
+
+	Duration *string `json:"duration,omitempty"` // 需要预定的日程长度
+
+	NeedMeetingNotes *string `json:"need_meeting_notes,omitempty"` // 是否需要生成会议纪要
+
+	ScenarioContextSchemaVersion *string `json:"scenario_context_schema_version,omitempty"` // 上下文信息 schema 版本
+
+	ScenarioContext *CalendarUnderstandScenarioContext `json:"scenario_context,omitempty"` // 上下文信息
+
+	EventId *string `json:"event_id,omitempty"` // 日程的uid_originTime
 }
 
 type EventCardBuilder struct {
-	summary                          string // 日程主题
-	summaryFlag                      bool
-	startTime                        string // 日程开始时间，日期+时间格式
-	startTimeFlag                    bool
-	endTime                          string // 日程结束时间，日期+时间格式
-	endTimeFlag                      bool
-	startTimezone                    string // 日程开始时间时区
-	startTimezoneFlag                bool
-	participantIds                   string // 日程参与人open ID
-	participantIdsFlag               bool
-	recurrenceRule                   string // 日程的重复性规则
-	recurrenceRuleFlag               bool
-	meetingRoomIds                   string // 需要预定的会议室ID列表
-	meetingRoomIdsFlag               bool
-	duration                         string // 需要预定的日程长度
-	durationFlag                     bool
-	needMeetingNotes                 string // 是否需要生成会议纪要
-	needMeetingNotesFlag             bool
+	summary     string // 日程主题
+	summaryFlag bool
+
+	startTime     string // 日程开始时间，日期+时间格式
+	startTimeFlag bool
+
+	endTime     string // 日程结束时间，日期+时间格式
+	endTimeFlag bool
+
+	startTimezone     string // 日程开始时间时区
+	startTimezoneFlag bool
+
+	participantIds     string // 日程参与人open ID
+	participantIdsFlag bool
+
+	recurrenceRule     string // 日程的重复性规则
+	recurrenceRuleFlag bool
+
+	meetingRoomIds     string // 需要预定的会议室ID列表
+	meetingRoomIdsFlag bool
+
+	duration     string // 需要预定的日程长度
+	durationFlag bool
+
+	needMeetingNotes     string // 是否需要生成会议纪要
+	needMeetingNotesFlag bool
+
 	scenarioContextSchemaVersion     string // 上下文信息 schema 版本
 	scenarioContextSchemaVersionFlag bool
-	scenarioContext                  *CalendarUnderstandScenarioContext // 上下文信息
-	scenarioContextFlag              bool
-	eventId                          string // 日程的uid_originTime
-	eventIdFlag                      bool
+
+	scenarioContext     *CalendarUnderstandScenarioContext // 上下文信息
+	scenarioContextFlag bool
+
+	eventId     string // 日程的uid_originTime
+	eventIdFlag bool
 }
 
 func NewEventCardBuilder() *EventCardBuilder {
@@ -3231,19 +3511,25 @@ func (builder *EventCardBuilder) Build() *EventCard {
 }
 
 type EventLocation struct {
-	Name      *string  `json:"name,omitempty"`      // 地点名称
-	Address   *string  `json:"address,omitempty"`   // 地点地址
-	Latitude  *float64 `json:"latitude,omitempty"`  // 地点坐标纬度信息，对于国内的地点，采用GCJ-02标准，海外地点采用WGS84标准
+	Name *string `json:"name,omitempty"` // 地点名称
+
+	Address *string `json:"address,omitempty"` // 地点地址
+
+	Latitude *float64 `json:"latitude,omitempty"` // 地点坐标纬度信息，对于国内的地点，采用GCJ-02标准，海外地点采用WGS84标准
+
 	Longitude *float64 `json:"longitude,omitempty"` // 地点坐标经度信息，对于国内的地点，采用GCJ-02标准，海外地点采用WGS84标准
 }
 
 type EventLocationBuilder struct {
-	name          string // 地点名称
-	nameFlag      bool
-	address       string // 地点地址
-	addressFlag   bool
-	latitude      float64 // 地点坐标纬度信息，对于国内的地点，采用GCJ-02标准，海外地点采用WGS84标准
-	latitudeFlag  bool
+	name     string // 地点名称
+	nameFlag bool
+
+	address     string // 地点地址
+	addressFlag bool
+
+	latitude     float64 // 地点坐标纬度信息，对于国内的地点，采用GCJ-02标准，海外地点采用WGS84标准
+	latitudeFlag bool
+
 	longitude     float64 // 地点坐标经度信息，对于国内的地点，采用GCJ-02标准，海外地点采用WGS84标准
 	longitudeFlag bool
 }
@@ -3311,13 +3597,15 @@ func (builder *EventLocationBuilder) Build() *EventLocation {
 }
 
 type EventOrganizer struct {
-	UserId      *string `json:"user_id,omitempty"`      // 日程组织者user ID
+	UserId *string `json:"user_id,omitempty"` // 日程组织者user ID
+
 	DisplayName *string `json:"display_name,omitempty"` // 日程组织者姓名
 }
 
 type EventOrganizerBuilder struct {
-	userId          string // 日程组织者user ID
-	userIdFlag      bool
+	userId     string // 日程组织者user ID
+	userIdFlag bool
+
 	displayName     string // 日程组织者姓名
 	displayNameFlag bool
 }
@@ -3360,23 +3648,31 @@ func (builder *EventOrganizerBuilder) Build() *EventOrganizer {
 
 type EventSearchFilter struct {
 	StartTime *TimeInfo `json:"start_time,omitempty"` // 搜索过滤项，日程搜索区间的开始时间，被搜索日程的事件必须与搜索区间有交集
-	EndTime   *TimeInfo `json:"end_time,omitempty"`   // 搜索过滤项，日程搜索区间的结束时间，被搜索日程的事件必须与搜索区间有交集
-	UserIds   []string  `json:"user_ids,omitempty"`   // 搜索过滤项，参与人的用户ID列表，被搜索日程中必须包含至少一个其中的参与人。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	RoomIds   []string  `json:"room_ids,omitempty"`   // 搜索过滤项，会议室ID列表，被搜索日程中必须包含至少一个其中的会议室
-	ChatIds   []string  `json:"chat_ids,omitempty"`   // 搜索过滤项，群ID列表，被搜索日程的参与人中必须包含至少一个其中的群。参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	EndTime *TimeInfo `json:"end_time,omitempty"` // 搜索过滤项，日程搜索区间的结束时间，被搜索日程的事件必须与搜索区间有交集
+
+	UserIds []string `json:"user_ids,omitempty"` // 搜索过滤项，参与人的用户ID列表，被搜索日程中必须包含至少一个其中的参与人。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	RoomIds []string `json:"room_ids,omitempty"` // 搜索过滤项，会议室ID列表，被搜索日程中必须包含至少一个其中的会议室
+
+	ChatIds []string `json:"chat_ids,omitempty"` // 搜索过滤项，群ID列表，被搜索日程的参与人中必须包含至少一个其中的群。参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
 }
 
 type EventSearchFilterBuilder struct {
 	startTime     *TimeInfo // 搜索过滤项，日程搜索区间的开始时间，被搜索日程的事件必须与搜索区间有交集
 	startTimeFlag bool
-	endTime       *TimeInfo // 搜索过滤项，日程搜索区间的结束时间，被搜索日程的事件必须与搜索区间有交集
-	endTimeFlag   bool
-	userIds       []string // 搜索过滤项，参与人的用户ID列表，被搜索日程中必须包含至少一个其中的参与人。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	userIdsFlag   bool
-	roomIds       []string // 搜索过滤项，会议室ID列表，被搜索日程中必须包含至少一个其中的会议室
-	roomIdsFlag   bool
-	chatIds       []string // 搜索过滤项，群ID列表，被搜索日程的参与人中必须包含至少一个其中的群。参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	chatIdsFlag   bool
+
+	endTime     *TimeInfo // 搜索过滤项，日程搜索区间的结束时间，被搜索日程的事件必须与搜索区间有交集
+	endTimeFlag bool
+
+	userIds     []string // 搜索过滤项，参与人的用户ID列表，被搜索日程中必须包含至少一个其中的参与人。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	userIdsFlag bool
+
+	roomIds     []string // 搜索过滤项，会议室ID列表，被搜索日程中必须包含至少一个其中的会议室
+	roomIdsFlag bool
+
+	chatIds     []string // 搜索过滤项，群ID列表，被搜索日程的参与人中必须包含至少一个其中的群。参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+	chatIdsFlag bool
 }
 
 func NewEventSearchFilterBuilder() *EventSearchFilterBuilder {
@@ -3482,22 +3778,30 @@ func (builder *EventTimeBuilder) Build() *EventTime {
 }
 
 type ExchangeBinding struct {
-	AdminAccount      *string `json:"admin_account,omitempty"`       // admin账户
-	ExchangeAccount   *string `json:"exchange_account,omitempty"`    // 用户绑定的exchange账户
-	UserId            *string `json:"user_id,omitempty"`             // exchange账户绑定user唯一标识id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	Status            *string `json:"status,omitempty"`              // exchange账户同步状态
+	AdminAccount *string `json:"admin_account,omitempty"` // admin账户
+
+	ExchangeAccount *string `json:"exchange_account,omitempty"` // 用户绑定的exchange账户
+
+	UserId *string `json:"user_id,omitempty"` // exchange账户绑定user唯一标识id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	Status *string `json:"status,omitempty"` // exchange账户同步状态
+
 	ExchangeBindingId *string `json:"exchange_binding_id,omitempty"` // exchange绑定唯一标识id。参见[exchange绑定ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/exchange_binding/introduction#12533d5e)
 }
 
 type ExchangeBindingBuilder struct {
-	adminAccount          string // admin账户
-	adminAccountFlag      bool
-	exchangeAccount       string // 用户绑定的exchange账户
-	exchangeAccountFlag   bool
-	userId                string // exchange账户绑定user唯一标识id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	userIdFlag            bool
-	status                string // exchange账户同步状态
-	statusFlag            bool
+	adminAccount     string // admin账户
+	adminAccountFlag bool
+
+	exchangeAccount     string // 用户绑定的exchange账户
+	exchangeAccountFlag bool
+
+	userId     string // exchange账户绑定user唯一标识id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	userIdFlag bool
+
+	status     string // exchange账户同步状态
+	statusFlag bool
+
 	exchangeBindingId     string // exchange绑定唯一标识id。参见[exchange绑定ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/exchange_binding/introduction#12533d5e)
 	exchangeBindingIdFlag bool
 }
@@ -3579,17 +3883,21 @@ func (builder *ExchangeBindingBuilder) Build() *ExchangeBinding {
 
 type File struct {
 	FileToken *string `json:"file_token,omitempty"` // 附件token
-	FileSize  *string `json:"file_size,omitempty"`  // 附件大小
-	Name      *string `json:"name,omitempty"`       // 附件名称
+
+	FileSize *string `json:"file_size,omitempty"` // 附件大小
+
+	Name *string `json:"name,omitempty"` // 附件名称
 }
 
 type FileBuilder struct {
 	fileToken     string // 附件token
 	fileTokenFlag bool
-	fileSize      string // 附件大小
-	fileSizeFlag  bool
-	name          string // 附件名称
-	nameFlag      bool
+
+	fileSize     string // 附件大小
+	fileSizeFlag bool
+
+	name     string // 附件名称
+	nameFlag bool
 }
 
 func NewFileBuilder() *FileBuilder {
@@ -3643,17 +3951,21 @@ func (builder *FileBuilder) Build() *File {
 
 type FreeTime struct {
 	FreeTimeStart *string `json:"free_time_start,omitempty"` // 空闲开始时间
-	FreeTimeEnd   *string `json:"free_time_end,omitempty"`   // 空闲结束时间
-	FreeTimeList  *string `json:"free_time_list,omitempty"`  // 空闲时间列表
+
+	FreeTimeEnd *string `json:"free_time_end,omitempty"` // 空闲结束时间
+
+	FreeTimeList *string `json:"free_time_list,omitempty"` // 空闲时间列表
 }
 
 type FreeTimeBuilder struct {
 	freeTimeStart     string // 空闲开始时间
 	freeTimeStartFlag bool
-	freeTimeEnd       string // 空闲结束时间
-	freeTimeEndFlag   bool
-	freeTimeList      string // 空闲时间列表
-	freeTimeListFlag  bool
+
+	freeTimeEnd     string // 空闲结束时间
+	freeTimeEndFlag bool
+
+	freeTimeList     string // 空闲时间列表
+	freeTimeListFlag bool
 }
 
 func NewFreeTimeBuilder() *FreeTimeBuilder {
@@ -3739,17 +4051,21 @@ func (builder *FreeTimeAiBuilder) Build() *FreeTimeAi {
 
 type FreeTimeSlot struct {
 	StartTime *string `json:"start_time,omitempty"` // 空闲时间段的开始时间
-	EndTime   *string `json:"end_time,omitempty"`   // 空闲时间段的结束时间
-	Length    *int    `json:"length,omitempty"`     // 空闲时间段长度，单位 s
+
+	EndTime *string `json:"end_time,omitempty"` // 空闲时间段的结束时间
+
+	Length *int `json:"length,omitempty"` // 空闲时间段长度，单位 s
 }
 
 type FreeTimeSlotBuilder struct {
 	startTime     string // 空闲时间段的开始时间
 	startTimeFlag bool
-	endTime       string // 空闲时间段的结束时间
-	endTimeFlag   bool
-	length        int // 空闲时间段长度，单位 s
-	lengthFlag    bool
+
+	endTime     string // 空闲时间段的结束时间
+	endTimeFlag bool
+
+	length     int // 空闲时间段长度，单位 s
+	lengthFlag bool
 }
 
 func NewFreeTimeSlotBuilder() *FreeTimeSlotBuilder {
@@ -3803,14 +4119,16 @@ func (builder *FreeTimeSlotBuilder) Build() *FreeTimeSlot {
 
 type Freebusy struct {
 	StartTime *string `json:"start_time,omitempty"` // 忙闲信息开始时间，RFC3339 date_time 格式
-	EndTime   *string `json:"end_time,omitempty"`   // 忙闲信息结束时间，RFC3339 date_time 格式
+
+	EndTime *string `json:"end_time,omitempty"` // 忙闲信息结束时间，RFC3339 date_time 格式
 }
 
 type FreebusyBuilder struct {
 	startTime     string // 忙闲信息开始时间，RFC3339 date_time 格式
 	startTimeFlag bool
-	endTime       string // 忙闲信息结束时间，RFC3339 date_time 格式
-	endTimeFlag   bool
+
+	endTime     string // 忙闲信息结束时间，RFC3339 date_time 格式
+	endTimeFlag bool
 }
 
 func NewFreebusyBuilder() *FreebusyBuilder {
@@ -3850,63 +4168,97 @@ func (builder *FreebusyBuilder) Build() *Freebusy {
 }
 
 type Instance struct {
-	EventId             *string                  `json:"event_id,omitempty"`              // 日程实例ID
-	Summary             *string                  `json:"summary,omitempty"`               // 日程主题
-	Description         *string                  `json:"description,omitempty"`           // 日程描述
-	StartTime           *TimeInfo                `json:"start_time,omitempty"`            // 开始时间
-	EndTime             *TimeInfo                `json:"end_time,omitempty"`              // 结束时间
-	Status              *string                  `json:"status,omitempty"`                // 日程状态
-	IsException         *bool                    `json:"is_exception,omitempty"`          // 是否是例外日程实例
-	AppLink             *string                  `json:"app_link,omitempty"`              // 日程的app_link,跳转到具体的某个日程
-	OrganizerCalendarId *string                  `json:"organizer_calendar_id,omitempty"` // 日程组织者日历ID
-	Vchat               *Vchat                   `json:"vchat,omitempty"`                 // 视频会议信息，仅当日程至少有一位attendee时生效
-	Visibility          *string                  `json:"visibility,omitempty"`            // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	AttendeeAbility     *string                  `json:"attendee_ability,omitempty"`      // 参与人权限
-	FreeBusyStatus      *string                  `json:"free_busy_status,omitempty"`      // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	Location            *EventLocation           `json:"location,omitempty"`              // 日程地点
-	Color               *int                     `json:"color,omitempty"`                 // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
-	RecurringEventId    *string                  `json:"recurring_event_id,omitempty"`    // 例外日程的原重复日程的event_id
-	EventOrganizer      *EventOrganizer          `json:"event_organizer,omitempty"`       // 日程组织者信息
-	Attendees           []*CalendarEventAttendee `json:"attendees,omitempty"`             // 日程参与人信息
+	EventId *string `json:"event_id,omitempty"` // 日程实例ID
+
+	Summary *string `json:"summary,omitempty"` // 日程主题
+
+	Description *string `json:"description,omitempty"` // 日程描述
+
+	StartTime *TimeInfo `json:"start_time,omitempty"` // 开始时间
+
+	EndTime *TimeInfo `json:"end_time,omitempty"` // 结束时间
+
+	Status *string `json:"status,omitempty"` // 日程状态
+
+	IsException *bool `json:"is_exception,omitempty"` // 是否是例外日程实例
+
+	AppLink *string `json:"app_link,omitempty"` // 日程的app_link,跳转到具体的某个日程
+
+	OrganizerCalendarId *string `json:"organizer_calendar_id,omitempty"` // 日程组织者日历ID
+
+	Vchat *Vchat `json:"vchat,omitempty"` // 视频会议信息，仅当日程至少有一位attendee时生效
+
+	Visibility *string `json:"visibility,omitempty"` // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+
+	AttendeeAbility *string `json:"attendee_ability,omitempty"` // 参与人权限
+
+	FreeBusyStatus *string `json:"free_busy_status,omitempty"` // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+
+	Location *EventLocation `json:"location,omitempty"` // 日程地点
+
+	Color *int `json:"color,omitempty"` // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
+
+	RecurringEventId *string `json:"recurring_event_id,omitempty"` // 例外日程的原重复日程的event_id
+
+	EventOrganizer *EventOrganizer `json:"event_organizer,omitempty"` // 日程组织者信息
+
+	Attendees []*CalendarEventAttendee `json:"attendees,omitempty"` // 日程参与人信息
 }
 
 type InstanceBuilder struct {
-	eventId                 string // 日程实例ID
-	eventIdFlag             bool
-	summary                 string // 日程主题
-	summaryFlag             bool
-	description             string // 日程描述
-	descriptionFlag         bool
-	startTime               *TimeInfo // 开始时间
-	startTimeFlag           bool
-	endTime                 *TimeInfo // 结束时间
-	endTimeFlag             bool
-	status                  string // 日程状态
-	statusFlag              bool
-	isException             bool // 是否是例外日程实例
-	isExceptionFlag         bool
-	appLink                 string // 日程的app_link,跳转到具体的某个日程
-	appLinkFlag             bool
+	eventId     string // 日程实例ID
+	eventIdFlag bool
+
+	summary     string // 日程主题
+	summaryFlag bool
+
+	description     string // 日程描述
+	descriptionFlag bool
+
+	startTime     *TimeInfo // 开始时间
+	startTimeFlag bool
+
+	endTime     *TimeInfo // 结束时间
+	endTimeFlag bool
+
+	status     string // 日程状态
+	statusFlag bool
+
+	isException     bool // 是否是例外日程实例
+	isExceptionFlag bool
+
+	appLink     string // 日程的app_link,跳转到具体的某个日程
+	appLinkFlag bool
+
 	organizerCalendarId     string // 日程组织者日历ID
 	organizerCalendarIdFlag bool
-	vchat                   *Vchat // 视频会议信息，仅当日程至少有一位attendee时生效
-	vchatFlag               bool
-	visibility              string // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	visibilityFlag          bool
-	attendeeAbility         string // 参与人权限
-	attendeeAbilityFlag     bool
-	freeBusyStatus          string // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
-	freeBusyStatusFlag      bool
-	location                *EventLocation // 日程地点
-	locationFlag            bool
-	color                   int // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
-	colorFlag               bool
-	recurringEventId        string // 例外日程的原重复日程的event_id
-	recurringEventIdFlag    bool
-	eventOrganizer          *EventOrganizer // 日程组织者信息
-	eventOrganizerFlag      bool
-	attendees               []*CalendarEventAttendee // 日程参与人信息
-	attendeesFlag           bool
+
+	vchat     *Vchat // 视频会议信息，仅当日程至少有一位attendee时生效
+	vchatFlag bool
+
+	visibility     string // 日程公开范围，新建日程默认为Default；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+	visibilityFlag bool
+
+	attendeeAbility     string // 参与人权限
+	attendeeAbilityFlag bool
+
+	freeBusyStatus     string // 日程占用的忙闲状态，新建日程默认为Busy；仅新建日程时对所有参与人生效，之后修改该属性仅对当前身份生效
+	freeBusyStatusFlag bool
+
+	location     *EventLocation // 日程地点
+	locationFlag bool
+
+	color     int // 日程颜色，颜色RGB值的int32表示。仅对当前身份生效；客户端展示时会映射到色板上最接近的一种颜色；值为0或-1时默认跟随日历颜色。
+	colorFlag bool
+
+	recurringEventId     string // 例外日程的原重复日程的event_id
+	recurringEventIdFlag bool
+
+	eventOrganizer     *EventOrganizer // 日程组织者信息
+	eventOrganizerFlag bool
+
+	attendees     []*CalendarEventAttendee // 日程参与人信息
+	attendeesFlag bool
 }
 
 func NewInstanceBuilder() *InstanceBuilder {
@@ -4149,14 +4501,16 @@ func (builder *InstanceBuilder) Build() *Instance {
 
 type MeetingChat struct {
 	MeetingChatId *string `json:"meeting_chat_id,omitempty"` // 会议群ID
-	Applink       *string `json:"applink,omitempty"`         // 群分享链接
+
+	Applink *string `json:"applink,omitempty"` // 群分享链接
 }
 
 type MeetingChatBuilder struct {
 	meetingChatId     string // 会议群ID
 	meetingChatIdFlag bool
-	applink           string // 群分享链接
-	applinkFlag       bool
+
+	applink     string // 群分享链接
+	applinkFlag bool
 }
 
 func NewMeetingChatBuilder() *MeetingChatBuilder {
@@ -4197,14 +4551,16 @@ func (builder *MeetingChatBuilder) Build() *MeetingChat {
 
 type MeetingMinute struct {
 	DocToken *string `json:"doc_token,omitempty"` // 文档token
-	DocUrl   *string `json:"doc_url,omitempty"`   // 文档URL
+
+	DocUrl *string `json:"doc_url,omitempty"` // 文档URL
 }
 
 type MeetingMinuteBuilder struct {
 	docToken     string // 文档token
 	docTokenFlag bool
-	docUrl       string // 文档URL
-	docUrlFlag   bool
+
+	docUrl     string // 文档URL
+	docUrlFlag bool
 }
 
 func NewMeetingMinuteBuilder() *MeetingMinuteBuilder {
@@ -4244,30 +4600,42 @@ func (builder *MeetingMinuteBuilder) Build() *MeetingMinute {
 }
 
 type MeetingSettings struct {
-	OwnerId               *string  `json:"owner_id,omitempty"`                // 设置会议 owner
-	JoinMeetingPermission *string  `json:"join_meeting_permission,omitempty"` // 设置入会范围
-	Password              *string  `json:"password,omitempty"`                // 设置会议密码，仅支持 4-9 位数字
-	AssignHosts           []string `json:"assign_hosts,omitempty"`            // 指定主持人
-	AutoRecord            *bool    `json:"auto_record,omitempty"`             // 设置自动录制
-	OpenLobby             *bool    `json:"open_lobby,omitempty"`              // 开启等候室
-	AllowAttendeesStart   *bool    `json:"allow_attendees_start,omitempty"`   // 允许日程参与者发起会议
+	OwnerId *string `json:"owner_id,omitempty"` // 设置会议 owner
+
+	JoinMeetingPermission *string `json:"join_meeting_permission,omitempty"` // 设置入会范围
+
+	Password *string `json:"password,omitempty"` // 设置会议密码，仅支持 4-9 位数字
+
+	AssignHosts []string `json:"assign_hosts,omitempty"` // 指定主持人
+
+	AutoRecord *bool `json:"auto_record,omitempty"` // 设置自动录制
+
+	OpenLobby *bool `json:"open_lobby,omitempty"` // 开启等候室
+
+	AllowAttendeesStart *bool `json:"allow_attendees_start,omitempty"` // 允许日程参与者发起会议
 }
 
 type MeetingSettingsBuilder struct {
-	ownerId                   string // 设置会议 owner
-	ownerIdFlag               bool
+	ownerId     string // 设置会议 owner
+	ownerIdFlag bool
+
 	joinMeetingPermission     string // 设置入会范围
 	joinMeetingPermissionFlag bool
-	password                  string // 设置会议密码，仅支持 4-9 位数字
-	passwordFlag              bool
-	assignHosts               []string // 指定主持人
-	assignHostsFlag           bool
-	autoRecord                bool // 设置自动录制
-	autoRecordFlag            bool
-	openLobby                 bool // 开启等候室
-	openLobbyFlag             bool
-	allowAttendeesStart       bool // 允许日程参与者发起会议
-	allowAttendeesStartFlag   bool
+
+	password     string // 设置会议密码，仅支持 4-9 位数字
+	passwordFlag bool
+
+	assignHosts     []string // 指定主持人
+	assignHostsFlag bool
+
+	autoRecord     bool // 设置自动录制
+	autoRecordFlag bool
+
+	openLobby     bool // 开启等候室
+	openLobbyFlag bool
+
+	allowAttendeesStart     bool // 允许日程参与者发起会议
+	allowAttendeesStartFlag bool
 }
 
 func NewMeetingSettingsBuilder() *MeetingSettingsBuilder {
@@ -4371,36 +4739,52 @@ func (builder *MeetingSettingsBuilder) Build() *MeetingSettings {
 }
 
 type MyAiEventDetail struct {
-	EventId        *string     `json:"event_id,omitempty"`        // 日程的uid_originTime
-	Summary        *string     `json:"summary,omitempty"`         // 日程主题
-	StartTime      *string     `json:"start_time,omitempty"`      // 日程开始时间
-	EndTime        *string     `json:"end_time,omitempty"`        // 日程结束时间
-	Timezone       *string     `json:"timezone,omitempty"`        // 时区
-	RecurrenceRule *string     `json:"recurrence_rule,omitempty"` // 日程的重复性规则
-	Participants   []*UserMeta `json:"participants,omitempty"`    // 参与人实体列表
-	Rooms          []*RoomMeta `json:"rooms,omitempty"`           // 会议室实体列表
-	AccessRole     *string     `json:"access_role,omitempty"`     // 日程的权限
+	EventId *string `json:"event_id,omitempty"` // 日程的uid_originTime
+
+	Summary *string `json:"summary,omitempty"` // 日程主题
+
+	StartTime *string `json:"start_time,omitempty"` // 日程开始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 日程结束时间
+
+	Timezone *string `json:"timezone,omitempty"` // 时区
+
+	RecurrenceRule *string `json:"recurrence_rule,omitempty"` // 日程的重复性规则
+
+	Participants []*UserMeta `json:"participants,omitempty"` // 参与人实体列表
+
+	Rooms []*RoomMeta `json:"rooms,omitempty"` // 会议室实体列表
+
+	AccessRole *string `json:"access_role,omitempty"` // 日程的权限
 }
 
 type MyAiEventDetailBuilder struct {
-	eventId            string // 日程的uid_originTime
-	eventIdFlag        bool
-	summary            string // 日程主题
-	summaryFlag        bool
-	startTime          string // 日程开始时间
-	startTimeFlag      bool
-	endTime            string // 日程结束时间
-	endTimeFlag        bool
-	timezone           string // 时区
-	timezoneFlag       bool
+	eventId     string // 日程的uid_originTime
+	eventIdFlag bool
+
+	summary     string // 日程主题
+	summaryFlag bool
+
+	startTime     string // 日程开始时间
+	startTimeFlag bool
+
+	endTime     string // 日程结束时间
+	endTimeFlag bool
+
+	timezone     string // 时区
+	timezoneFlag bool
+
 	recurrenceRule     string // 日程的重复性规则
 	recurrenceRuleFlag bool
-	participants       []*UserMeta // 参与人实体列表
-	participantsFlag   bool
-	rooms              []*RoomMeta // 会议室实体列表
-	roomsFlag          bool
-	accessRole         string // 日程的权限
-	accessRoleFlag     bool
+
+	participants     []*UserMeta // 参与人实体列表
+	participantsFlag bool
+
+	rooms     []*RoomMeta // 会议室实体列表
+	roomsFlag bool
+
+	accessRole     string // 日程的权限
+	accessRoleFlag bool
 }
 
 func NewMyAiEventDetailBuilder() *MyAiEventDetailBuilder {
@@ -4529,31 +4913,45 @@ func (builder *MyAiEventDetailBuilder) Build() *MyAiEventDetail {
 }
 
 type MyAiEventInfo struct {
-	EventId        *string `json:"event_id,omitempty"`         // 日程的uid_originTime
-	Summary        *string `json:"summary,omitempty"`          // 日程主题
-	StartTime      *string `json:"start_time,omitempty"`       // 日程开始时间，日期+时间格式
-	EndTime        *string `json:"end_time,omitempty"`         // 日程结束时间，日期+时间格式
-	StartTimezone  *string `json:"start_timezone,omitempty"`   // 日程开始时间时区
-	RecurrenceRule *string `json:"recurrence_rule,omitempty"`  // 日程的重复性规则
-	ParticipantIds *string `json:"participant_ids,omitempty"`  // 日程参与人open ID
+	EventId *string `json:"event_id,omitempty"` // 日程的uid_originTime
+
+	Summary *string `json:"summary,omitempty"` // 日程主题
+
+	StartTime *string `json:"start_time,omitempty"` // 日程开始时间，日期+时间格式
+
+	EndTime *string `json:"end_time,omitempty"` // 日程结束时间，日期+时间格式
+
+	StartTimezone *string `json:"start_timezone,omitempty"` // 日程开始时间时区
+
+	RecurrenceRule *string `json:"recurrence_rule,omitempty"` // 日程的重复性规则
+
+	ParticipantIds *string `json:"participant_ids,omitempty"` // 日程参与人open ID
+
 	MeetingRoomIds *string `json:"meeting_room_ids,omitempty"` // 需要预定的会议室ID列表
 }
 
 type MyAiEventInfoBuilder struct {
-	eventId            string // 日程的uid_originTime
-	eventIdFlag        bool
-	summary            string // 日程主题
-	summaryFlag        bool
-	startTime          string // 日程开始时间，日期+时间格式
-	startTimeFlag      bool
-	endTime            string // 日程结束时间，日期+时间格式
-	endTimeFlag        bool
-	startTimezone      string // 日程开始时间时区
-	startTimezoneFlag  bool
+	eventId     string // 日程的uid_originTime
+	eventIdFlag bool
+
+	summary     string // 日程主题
+	summaryFlag bool
+
+	startTime     string // 日程开始时间，日期+时间格式
+	startTimeFlag bool
+
+	endTime     string // 日程结束时间，日期+时间格式
+	endTimeFlag bool
+
+	startTimezone     string // 日程开始时间时区
+	startTimezoneFlag bool
+
 	recurrenceRule     string // 日程的重复性规则
 	recurrenceRuleFlag bool
+
 	participantIds     string // 日程参与人open ID
 	participantIdsFlag bool
+
 	meetingRoomIds     string // 需要预定的会议室ID列表
 	meetingRoomIdsFlag bool
 }
@@ -4674,14 +5072,16 @@ func (builder *MyAiEventInfoBuilder) Build() *MyAiEventInfo {
 
 type MyaiCardStatus struct {
 	FromStatus *string `json:"from_status,omitempty"` // 卡片原来的状态
-	ToStatus   *string `json:"to_status,omitempty"`   // 卡片的新状态
+
+	ToStatus *string `json:"to_status,omitempty"` // 卡片的新状态
 }
 
 type MyaiCardStatusBuilder struct {
 	fromStatus     string // 卡片原来的状态
 	fromStatusFlag bool
-	toStatus       string // 卡片的新状态
-	toStatusFlag   bool
+
+	toStatus     string // 卡片的新状态
+	toStatusFlag bool
 }
 
 func NewMyaiCardStatusBuilder() *MyaiCardStatusBuilder {
@@ -4721,24 +5121,32 @@ func (builder *MyaiCardStatusBuilder) Build() *MyaiCardStatus {
 }
 
 type MyaiDocDetail struct {
-	Title   *string `json:"title,omitempty"`    // 文档标题
-	Url     *string `json:"url,omitempty"`      // 文档链接
-	Token   *string `json:"token,omitempty"`    // 文档Token
+	Title *string `json:"title,omitempty"` // 文档标题
+
+	Url *string `json:"url,omitempty"` // 文档链接
+
+	Token *string `json:"token,omitempty"` // 文档Token
+
 	DocType *string `json:"doc_type,omitempty"` // 文档类型
-	Extra   *string `json:"extra,omitempty"`    // 文档附加信息
+
+	Extra *string `json:"extra,omitempty"` // 文档附加信息
 }
 
 type MyaiDocDetailBuilder struct {
-	title       string // 文档标题
-	titleFlag   bool
-	url         string // 文档链接
-	urlFlag     bool
-	token       string // 文档Token
-	tokenFlag   bool
+	title     string // 文档标题
+	titleFlag bool
+
+	url     string // 文档链接
+	urlFlag bool
+
+	token     string // 文档Token
+	tokenFlag bool
+
 	docType     string // 文档类型
 	docTypeFlag bool
-	extra       string // 文档附加信息
-	extraFlag   bool
+
+	extra     string // 文档附加信息
+	extraFlag bool
 }
 
 func NewMyaiDocDetailBuilder() *MyaiDocDetailBuilder {
@@ -4817,31 +5225,45 @@ func (builder *MyaiDocDetailBuilder) Build() *MyaiDocDetail {
 }
 
 type MyaiReply struct {
-	Reply          *string     `json:"reply,omitempty"`           // 返回给myai的自然语言描述
-	StartTime      *string     `json:"start_time,omitempty"`      // 日程开始时间
-	EndTime        *string     `json:"end_time,omitempty"`        // 日程结束时间
-	Rooms          []*RoomMeta `json:"rooms,omitempty"`           // 会议室实体列表
-	Summary        *string     `json:"summary,omitempty"`         // 日程主题
-	Participants   []*UserMeta `json:"participants,omitempty"`    // 参与人实体列表
-	EventId        *string     `json:"event_id,omitempty"`        // 日程的uid_originTime
-	RecurrenceRule *string     `json:"recurrence_rule,omitempty"` // 日程的重复性规则
+	Reply *string `json:"reply,omitempty"` // 返回给myai的自然语言描述
+
+	StartTime *string `json:"start_time,omitempty"` // 日程开始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 日程结束时间
+
+	Rooms []*RoomMeta `json:"rooms,omitempty"` // 会议室实体列表
+
+	Summary *string `json:"summary,omitempty"` // 日程主题
+
+	Participants []*UserMeta `json:"participants,omitempty"` // 参与人实体列表
+
+	EventId *string `json:"event_id,omitempty"` // 日程的uid_originTime
+
+	RecurrenceRule *string `json:"recurrence_rule,omitempty"` // 日程的重复性规则
 }
 
 type MyaiReplyBuilder struct {
-	reply              string // 返回给myai的自然语言描述
-	replyFlag          bool
-	startTime          string // 日程开始时间
-	startTimeFlag      bool
-	endTime            string // 日程结束时间
-	endTimeFlag        bool
-	rooms              []*RoomMeta // 会议室实体列表
-	roomsFlag          bool
-	summary            string // 日程主题
-	summaryFlag        bool
-	participants       []*UserMeta // 参与人实体列表
-	participantsFlag   bool
-	eventId            string // 日程的uid_originTime
-	eventIdFlag        bool
+	reply     string // 返回给myai的自然语言描述
+	replyFlag bool
+
+	startTime     string // 日程开始时间
+	startTimeFlag bool
+
+	endTime     string // 日程结束时间
+	endTimeFlag bool
+
+	rooms     []*RoomMeta // 会议室实体列表
+	roomsFlag bool
+
+	summary     string // 日程主题
+	summaryFlag bool
+
+	participants     []*UserMeta // 参与人实体列表
+	participantsFlag bool
+
+	eventId     string // 日程的uid_originTime
+	eventIdFlag bool
+
 	recurrenceRule     string // 日程的重复性规则
 	recurrenceRuleFlag bool
 }
@@ -4960,14 +5382,16 @@ func (builder *MyaiReplyBuilder) Build() *MyaiReply {
 
 type MyaiSearchDocResult struct {
 	DocItems []*MyaiDocDetail `json:"doc_items,omitempty"` // 返回的文档列表
-	Message  *string          `json:"message,omitempty"`   // 返回给AI的信息
+
+	Message *string `json:"message,omitempty"` // 返回给AI的信息
 }
 
 type MyaiSearchDocResultBuilder struct {
 	docItems     []*MyaiDocDetail // 返回的文档列表
 	docItemsFlag bool
-	message      string // 返回给AI的信息
-	messageFlag  bool
+
+	message     string // 返回给AI的信息
+	messageFlag bool
 }
 
 func NewMyaiSearchDocResultBuilder() *MyaiSearchDocResultBuilder {
@@ -5007,12 +5431,14 @@ func (builder *MyaiSearchDocResultBuilder) Build() *MyaiSearchDocResult {
 
 type OpenEventRsvpInfo struct {
 	FromUserId *UserId `json:"from_user_id,omitempty"` // RSVP操作者
-	RsvpStatus *string `json:"rsvp_status,omitempty"`  // RSVP操作状态
+
+	RsvpStatus *string `json:"rsvp_status,omitempty"` // RSVP操作状态
 }
 
 type OpenEventRsvpInfoBuilder struct {
 	fromUserId     *UserId // RSVP操作者
 	fromUserIdFlag bool
+
 	rsvpStatus     string // RSVP操作状态
 	rsvpStatusFlag bool
 }
@@ -5054,14 +5480,16 @@ func (builder *OpenEventRsvpInfoBuilder) Build() *OpenEventRsvpInfo {
 
 type OperateCardData struct {
 	MeetingUrl *string `json:"meeting_url,omitempty"` // 视频会议链接
-	MeetingNo  *string `json:"meeting_no,omitempty"`  // 视频会议no
+
+	MeetingNo *string `json:"meeting_no,omitempty"` // 视频会议no
 }
 
 type OperateCardDataBuilder struct {
 	meetingUrl     string // 视频会议链接
 	meetingUrlFlag bool
-	meetingNo      string // 视频会议no
-	meetingNoFlag  bool
+
+	meetingNo     string // 视频会议no
+	meetingNoFlag bool
 }
 
 func NewOperateCardDataBuilder() *OperateCardDataBuilder {
@@ -5133,13 +5561,15 @@ func (builder *ReminderBuilder) Build() *Reminder {
 }
 
 type RoomMeta struct {
-	Name   *string `json:"name,omitempty"`    // 会议室名称
+	Name *string `json:"name,omitempty"` // 会议室名称
+
 	RoomId *string `json:"room_id,omitempty"` // 会议室ID
 }
 
 type RoomMetaBuilder struct {
-	name       string // 会议室名称
-	nameFlag   bool
+	name     string // 会议室名称
+	nameFlag bool
+
 	roomId     string // 会议室ID
 	roomIdFlag bool
 }
@@ -5181,18 +5611,22 @@ func (builder *RoomMetaBuilder) Build() *RoomMeta {
 }
 
 type Schema struct {
-	UiName   *string `json:"ui_name,omitempty"`   // UI名称。取值范围如下： ;- ForwardIcon: 日程转发按钮 ;- MeetingChatIcon: 会议群聊按钮 ;- MeetingMinutesIcon: 会议纪要按钮 ;- MeetingVideo: 视频会议区域 ;- RSVP: 接受/拒绝/待定区域 ;- Attendee: 参与者区域 ;- OrganizerOrCreator: 组织者/创建者区域
+	UiName *string `json:"ui_name,omitempty"` // UI名称。取值范围如下： ;- ForwardIcon: 日程转发按钮 ;- MeetingChatIcon: 会议群聊按钮 ;- MeetingMinutesIcon: 会议纪要按钮 ;- MeetingVideo: 视频会议区域 ;- RSVP: 接受/拒绝/待定区域 ;- Attendee: 参与者区域 ;- OrganizerOrCreator: 组织者/创建者区域
+
 	UiStatus *string `json:"ui_status,omitempty"` // UI项自定义状态。**目前只支持hide**
-	AppLink  *string `json:"app_link,omitempty"`  // 按钮点击后跳转的链接; **该字段暂不支持传入。**
+
+	AppLink *string `json:"app_link,omitempty"` // 按钮点击后跳转的链接; **该字段暂不支持传入。**
 }
 
 type SchemaBuilder struct {
-	uiName       string // UI名称。取值范围如下： ;- ForwardIcon: 日程转发按钮 ;- MeetingChatIcon: 会议群聊按钮 ;- MeetingMinutesIcon: 会议纪要按钮 ;- MeetingVideo: 视频会议区域 ;- RSVP: 接受/拒绝/待定区域 ;- Attendee: 参与者区域 ;- OrganizerOrCreator: 组织者/创建者区域
-	uiNameFlag   bool
+	uiName     string // UI名称。取值范围如下： ;- ForwardIcon: 日程转发按钮 ;- MeetingChatIcon: 会议群聊按钮 ;- MeetingMinutesIcon: 会议纪要按钮 ;- MeetingVideo: 视频会议区域 ;- RSVP: 接受/拒绝/待定区域 ;- Attendee: 参与者区域 ;- OrganizerOrCreator: 组织者/创建者区域
+	uiNameFlag bool
+
 	uiStatus     string // UI项自定义状态。**目前只支持hide**
 	uiStatusFlag bool
-	appLink      string // 按钮点击后跳转的链接; **该字段暂不支持传入。**
-	appLinkFlag  bool
+
+	appLink     string // 按钮点击后跳转的链接; **该字段暂不支持传入。**
+	appLinkFlag bool
 }
 
 func NewSchemaBuilder() *SchemaBuilder {
@@ -5246,14 +5680,16 @@ func (builder *SchemaBuilder) Build() *Schema {
 
 type SearchEventData struct {
 	Events []*EventBriefInfoAi `json:"events,omitempty"` // 日程列表
-	Msg    *string             `json:"msg,omitempty"`    // 返回给prompt展示内容
+
+	Msg *string `json:"msg,omitempty"` // 返回给prompt展示内容
 }
 
 type SearchEventDataBuilder struct {
 	events     []*EventBriefInfoAi // 日程列表
 	eventsFlag bool
-	msg        string // 返回给prompt展示内容
-	msgFlag    bool
+
+	msg     string // 返回给prompt展示内容
+	msgFlag bool
 }
 
 func NewSearchEventDataBuilder() *SearchEventDataBuilder {
@@ -5292,15 +5728,17 @@ func (builder *SearchEventDataBuilder) Build() *SearchEventData {
 }
 
 type SearchUserDataAi struct {
-	QueryKeyword *string   `json:"query_keyword,omitempty"` // 查询传入的单个Keyword
-	UserInfo     *UserMeta `json:"user_info,omitempty"`     // 搜索到的用户信息
+	QueryKeyword *string `json:"query_keyword,omitempty"` // 查询传入的单个Keyword
+
+	UserInfo *UserMeta `json:"user_info,omitempty"` // 搜索到的用户信息
 }
 
 type SearchUserDataAiBuilder struct {
 	queryKeyword     string // 查询传入的单个Keyword
 	queryKeywordFlag bool
-	userInfo         *UserMeta // 搜索到的用户信息
-	userInfoFlag     bool
+
+	userInfo     *UserMeta // 搜索到的用户信息
+	userInfoFlag bool
 }
 
 func NewSearchUserDataAiBuilder() *SearchUserDataAiBuilder {
@@ -5374,17 +5812,21 @@ type Setting struct {
 
 type SystemInfo struct {
 	SessionId *string `json:"session_id,omitempty"` // session_id
-	Lang      *string `json:"lang,omitempty"`       // 用户问题的语种
-	Locale    *string `json:"locale,omitempty"`     // 请求客户端的语种类
+
+	Lang *string `json:"lang,omitempty"` // 用户问题的语种
+
+	Locale *string `json:"locale,omitempty"` // 请求客户端的语种类
 }
 
 type SystemInfoBuilder struct {
 	sessionId     string // session_id
 	sessionIdFlag bool
-	lang          string // 用户问题的语种
-	langFlag      bool
-	locale        string // 请求客户端的语种类
-	localeFlag    bool
+
+	lang     string // 用户问题的语种
+	langFlag bool
+
+	locale     string // 请求客户端的语种类
+	localeFlag bool
 }
 
 func NewSystemInfoBuilder() *SystemInfoBuilder {
@@ -5437,18 +5879,22 @@ func (builder *SystemInfoBuilder) Build() *SystemInfo {
 }
 
 type TimeInfo struct {
-	Date      *string `json:"date,omitempty"`      // 仅全天日程使用该字段，如2018-09-01。需满足 RFC3339 格式。不能与 timestamp 同时指定
+	Date *string `json:"date,omitempty"` // 仅全天日程使用该字段，如2018-09-01。需满足 RFC3339 格式。不能与 timestamp 同时指定
+
 	Timestamp *string `json:"timestamp,omitempty"` // 秒级时间戳，如1602504000(表示2020/10/12 20:0:00 +8时区)
-	Timezone  *string `json:"timezone,omitempty"`  // 时区名称，使用IANA Time Zone Database标准，如Asia/Shanghai；全天日程时区固定为UTC，非全天日程时区默认为Asia/Shanghai
+
+	Timezone *string `json:"timezone,omitempty"` // 时区名称，使用IANA Time Zone Database标准，如Asia/Shanghai；全天日程时区固定为UTC，非全天日程时区默认为Asia/Shanghai
 }
 
 type TimeInfoBuilder struct {
-	date          string // 仅全天日程使用该字段，如2018-09-01。需满足 RFC3339 格式。不能与 timestamp 同时指定
-	dateFlag      bool
+	date     string // 仅全天日程使用该字段，如2018-09-01。需满足 RFC3339 格式。不能与 timestamp 同时指定
+	dateFlag bool
+
 	timestamp     string // 秒级时间戳，如1602504000(表示2020/10/12 20:0:00 +8时区)
 	timestampFlag bool
-	timezone      string // 时区名称，使用IANA Time Zone Database标准，如Asia/Shanghai；全天日程时区固定为UTC，非全天日程时区默认为Asia/Shanghai
-	timezoneFlag  bool
+
+	timezone     string // 时区名称，使用IANA Time Zone Database标准，如Asia/Shanghai；全天日程时区固定为UTC，非全天日程时区默认为Asia/Shanghai
+	timezoneFlag bool
 }
 
 func NewTimeInfoBuilder() *TimeInfoBuilder {
@@ -5502,14 +5948,16 @@ func (builder *TimeInfoBuilder) Build() *TimeInfo {
 
 type TimeSpan struct {
 	StartTime *string `json:"start_time,omitempty"` // 空闲时间-开始时间
-	EndTime   *string `json:"end_time,omitempty"`   // 空闲时间-结束时间
+
+	EndTime *string `json:"end_time,omitempty"` // 空闲时间-结束时间
 }
 
 type TimeSpanBuilder struct {
 	startTime     string // 空闲时间-开始时间
 	startTimeFlag bool
-	endTime       string // 空闲时间-结束时间
-	endTimeFlag   bool
+
+	endTime     string // 空闲时间-结束时间
+	endTimeFlag bool
 }
 
 func NewTimeSpanBuilder() *TimeSpanBuilder {
@@ -5550,29 +5998,41 @@ func (builder *TimeSpanBuilder) Build() *TimeSpan {
 
 type TimeoffEvent struct {
 	TimeoffEventId *string `json:"timeoff_event_id,omitempty"` // 请假日程ID。参见[请假日程ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/timeoff_event/introduction#b6611a02)
-	UserId         *string `json:"user_id,omitempty"`          // 用户id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	Timezone       *string `json:"timezone,omitempty"`         // 时区
-	StartTime      *string `json:"start_time,omitempty"`       // 休假开始时间：;有时间戳(1609430400)和日期(2021-01-01)两种格式，其它格式无效；;时间戳格式是按小时休假日程，日期格式是全天休假日程；;start_time与end_time格式需保持一致，否则无效。
-	EndTime        *string `json:"end_time,omitempty"`         // 休假结束时间：;有时间戳(1609430400)和日期(2021-01-01)两种格式，其它格式无效；;时间戳格式是按小时休假日程，日期格式是全天休假日程；;start_time与end_time格式需保持一致，否则无效。
-	Title          *string `json:"title,omitempty"`            // 自定义请假日程标题，没有设置则为默认日程标题
-	Description    *string `json:"description,omitempty"`      // 自定义请假日程描述，没有设置则为默认日程描述
+
+	UserId *string `json:"user_id,omitempty"` // 用户id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	Timezone *string `json:"timezone,omitempty"` // 时区
+
+	StartTime *string `json:"start_time,omitempty"` // 休假开始时间：;有时间戳(1609430400)和日期(2021-01-01)两种格式，其它格式无效；;时间戳格式是按小时休假日程，日期格式是全天休假日程；;start_time与end_time格式需保持一致，否则无效。
+
+	EndTime *string `json:"end_time,omitempty"` // 休假结束时间：;有时间戳(1609430400)和日期(2021-01-01)两种格式，其它格式无效；;时间戳格式是按小时休假日程，日期格式是全天休假日程；;start_time与end_time格式需保持一致，否则无效。
+
+	Title *string `json:"title,omitempty"` // 自定义请假日程标题，没有设置则为默认日程标题
+
+	Description *string `json:"description,omitempty"` // 自定义请假日程描述，没有设置则为默认日程描述
 }
 
 type TimeoffEventBuilder struct {
 	timeoffEventId     string // 请假日程ID。参见[请假日程ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/timeoff_event/introduction#b6611a02)
 	timeoffEventIdFlag bool
-	userId             string // 用户id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	userIdFlag         bool
-	timezone           string // 时区
-	timezoneFlag       bool
-	startTime          string // 休假开始时间：;有时间戳(1609430400)和日期(2021-01-01)两种格式，其它格式无效；;时间戳格式是按小时休假日程，日期格式是全天休假日程；;start_time与end_time格式需保持一致，否则无效。
-	startTimeFlag      bool
-	endTime            string // 休假结束时间：;有时间戳(1609430400)和日期(2021-01-01)两种格式，其它格式无效；;时间戳格式是按小时休假日程，日期格式是全天休假日程；;start_time与end_time格式需保持一致，否则无效。
-	endTimeFlag        bool
-	title              string // 自定义请假日程标题，没有设置则为默认日程标题
-	titleFlag          bool
-	description        string // 自定义请假日程描述，没有设置则为默认日程描述
-	descriptionFlag    bool
+
+	userId     string // 用户id，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	userIdFlag bool
+
+	timezone     string // 时区
+	timezoneFlag bool
+
+	startTime     string // 休假开始时间：;有时间戳(1609430400)和日期(2021-01-01)两种格式，其它格式无效；;时间戳格式是按小时休假日程，日期格式是全天休假日程；;start_time与end_time格式需保持一致，否则无效。
+	startTimeFlag bool
+
+	endTime     string // 休假结束时间：;有时间戳(1609430400)和日期(2021-01-01)两种格式，其它格式无效；;时间戳格式是按小时休假日程，日期格式是全天休假日程；;start_time与end_time格式需保持一致，否则无效。
+	endTimeFlag bool
+
+	title     string // 自定义请假日程标题，没有设置则为默认日程标题
+	titleFlag bool
+
+	description     string // 自定义请假日程描述，没有设置则为默认日程描述
+	descriptionFlag bool
 }
 
 func NewTimeoffEventBuilder() *TimeoffEventBuilder {
@@ -5678,14 +6138,16 @@ func (builder *TimeoffEventBuilder) Build() *TimeoffEvent {
 
 type UserCalendar struct {
 	Calendar *Calendar `json:"calendar,omitempty"` // 日历实体信息
-	UserId   *string   `json:"user_id,omitempty"`  // 日历的创建者user ID，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	UserId *string `json:"user_id,omitempty"` // 日历的创建者user ID，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
 }
 
 type UserCalendarBuilder struct {
 	calendar     *Calendar // 日历实体信息
 	calendarFlag bool
-	userId       string // 日历的创建者user ID，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	userIdFlag   bool
+
+	userId     string // 日历的创建者user ID，参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	userIdFlag bool
 }
 
 func NewUserCalendarBuilder() *UserCalendarBuilder {
@@ -5725,14 +6187,16 @@ func (builder *UserCalendarBuilder) Build() *UserCalendar {
 
 type UserFreebusy struct {
 	FreebusyItems []*Freebusy `json:"freebusy_items,omitempty"` // 日历上请求时间区间内的忙闲信息
-	UserId        *string     `json:"user_id,omitempty"`        // 日历的创建者userID
+
+	UserId *string `json:"user_id,omitempty"` // 日历的创建者userID
 }
 
 type UserFreebusyBuilder struct {
 	freebusyItems     []*Freebusy // 日历上请求时间区间内的忙闲信息
 	freebusyItemsFlag bool
-	userId            string // 日历的创建者userID
-	userIdFlag        bool
+
+	userId     string // 日历的创建者userID
+	userIdFlag bool
 }
 
 func NewUserFreebusyBuilder() *UserFreebusyBuilder {
@@ -5771,16 +6235,20 @@ func (builder *UserFreebusyBuilder) Build() *UserFreebusy {
 }
 
 type UserId struct {
-	UserId  *string `json:"user_id,omitempty"`  //
-	OpenId  *string `json:"open_id,omitempty"`  //
+	UserId *string `json:"user_id,omitempty"` //
+
+	OpenId *string `json:"open_id,omitempty"` //
+
 	UnionId *string `json:"union_id,omitempty"` //
 }
 
 type UserIdBuilder struct {
-	userId      string //
-	userIdFlag  bool
-	openId      string //
-	openIdFlag  bool
+	userId     string //
+	userIdFlag bool
+
+	openId     string //
+	openIdFlag bool
+
 	unionId     string //
 	unionIdFlag bool
 }
@@ -5829,13 +6297,15 @@ func (builder *UserIdBuilder) Build() *UserId {
 }
 
 type UserMeta struct {
-	Name   *string `json:"name,omitempty"`    // 用户名称
+	Name *string `json:"name,omitempty"` // 用户名称
+
 	UserId *string `json:"user_id,omitempty"` // 用户ID
 }
 
 type UserMetaBuilder struct {
-	name       string // 用户名称
-	nameFlag   bool
+	name     string // 用户名称
+	nameFlag bool
+
 	userId     string // 用户ID
 	userIdFlag bool
 }
@@ -5877,13 +6347,15 @@ func (builder *UserMetaBuilder) Build() *UserMeta {
 }
 
 type VcInfo struct {
-	UniqueId  *string `json:"unique_id,omitempty"`  // 会议唯一ID
+	UniqueId *string `json:"unique_id,omitempty"` // 会议唯一ID
+
 	MeetingNo *string `json:"meeting_no,omitempty"` // 会议号
 }
 
 type VcInfoBuilder struct {
-	uniqueId      string // 会议唯一ID
-	uniqueIdFlag  bool
+	uniqueId     string // 会议唯一ID
+	uniqueIdFlag bool
+
 	meetingNo     string // 会议号
 	meetingNoFlag bool
 }
@@ -5925,23 +6397,39 @@ func (builder *VcInfoBuilder) Build() *VcInfo {
 }
 
 type Vchat struct {
-	VcType      *string `json:"vc_type,omitempty"`     // 视频会议类型
-	IconType    *string `json:"icon_type,omitempty"`   // 第三方视频会议icon类型；可以为空，为空展示默认icon。
+	VcType *string `json:"vc_type,omitempty"` // 视频会议类型
+
+	IconType *string `json:"icon_type,omitempty"` // 第三方视频会议icon类型；可以为空，为空展示默认icon。
+
 	Description *string `json:"description,omitempty"` // 第三方视频会议文案，可以为空，为空展示默认文案
-	MeetingUrl  *string `json:"meeting_url,omitempty"` // 视频会议URL
+
+	MeetingUrl *string `json:"meeting_url,omitempty"` // 视频会议URL
+
+	LiveLink *string `json:"live_link,omitempty"` // VC视频会议转直播URL，当vc_type=vc时有值。
+
+	VcInfo *VcInfo `json:"vc_info,omitempty"` // VC视频会议原生信息。
 
 	MeetingSettings *MeetingSettings `json:"meeting_settings,omitempty"` // VC视频会议的会前设置
 }
 
 type VchatBuilder struct {
-	vcType          string // 视频会议类型
-	vcTypeFlag      bool
-	iconType        string // 第三方视频会议icon类型；可以为空，为空展示默认icon。
-	iconTypeFlag    bool
+	vcType     string // 视频会议类型
+	vcTypeFlag bool
+
+	iconType     string // 第三方视频会议icon类型；可以为空，为空展示默认icon。
+	iconTypeFlag bool
+
 	description     string // 第三方视频会议文案，可以为空，为空展示默认文案
 	descriptionFlag bool
-	meetingUrl      string // 视频会议URL
-	meetingUrlFlag  bool
+
+	meetingUrl     string // 视频会议URL
+	meetingUrlFlag bool
+
+	liveLink     string // VC视频会议转直播URL，当vc_type=vc时有值。
+	liveLinkFlag bool
+
+	vcInfo     *VcInfo // VC视频会议原生信息。
+	vcInfoFlag bool
 
 	meetingSettings     *MeetingSettings // VC视频会议的会前设置
 	meetingSettingsFlag bool
@@ -5988,6 +6476,24 @@ func (builder *VchatBuilder) MeetingUrl(meetingUrl string) *VchatBuilder {
 	return builder
 }
 
+// VC视频会议转直播URL，当vc_type=vc时有值。
+//
+// 示例值：https://meetings.feishu.cn/s/1iof4hpw6i51w
+func (builder *VchatBuilder) LiveLink(liveLink string) *VchatBuilder {
+	builder.liveLink = liveLink
+	builder.liveLinkFlag = true
+	return builder
+}
+
+// VC视频会议原生信息。
+//
+// 示例值：
+func (builder *VchatBuilder) VcInfo(vcInfo *VcInfo) *VchatBuilder {
+	builder.vcInfo = vcInfo
+	builder.vcInfoFlag = true
+	return builder
+}
+
 // VC视频会议的会前设置
 //
 // 示例值：
@@ -6024,17 +6530,21 @@ func (builder *VchatBuilder) Build() *Vchat {
 
 type Workhour struct {
 	DayOfWeek *int `json:"day_of_week,omitempty"` // 工作日，定义每周的星期几为工作日.枚举值 0-6 代表 周日-周六
-	StartTime *int `json:"start_time,omitempty"`  // 工作时间的开始时间，单位为分钟，取值 0 - 1440
-	EndTime   *int `json:"end_time,omitempty"`    // 工作时间的结束时间，单位为分钟，取值 start_time - 1440
+
+	StartTime *int `json:"start_time,omitempty"` // 工作时间的开始时间，单位为分钟，取值 0 - 1440
+
+	EndTime *int `json:"end_time,omitempty"` // 工作时间的结束时间，单位为分钟，取值 start_time - 1440
 }
 
 type WorkhourBuilder struct {
 	dayOfWeek     int // 工作日，定义每周的星期几为工作日.枚举值 0-6 代表 周日-周六
 	dayOfWeekFlag bool
+
 	startTime     int // 工作时间的开始时间，单位为分钟，取值 0 - 1440
 	startTimeFlag bool
-	endTime       int // 工作时间的结束时间，单位为分钟，取值 start_time - 1440
-	endTimeFlag   bool
+
+	endTime     int // 工作时间的结束时间，单位为分钟，取值 start_time - 1440
+	endTimeFlag bool
 }
 
 func NewWorkhourBuilder() *WorkhourBuilder {
@@ -6087,21 +6597,27 @@ func (builder *WorkhourBuilder) Build() *Workhour {
 }
 
 type WorkhourSetting struct {
-	Timezone       *string     `json:"timezone,omitempty"`         // 用户设置的对外展示时区
-	Workhours      []*Workhour `json:"workhours,omitempty"`        // 工作时间设置
-	EnableWorkHour *bool       `json:"enable_work_hour,omitempty"` // 用户是否启用工作时间设置
-	UserId         *string     `json:"user_id,omitempty"`          // 用户user id
+	Timezone *string `json:"timezone,omitempty"` // 用户设置的对外展示时区
+
+	Workhours []*Workhour `json:"workhours,omitempty"` // 工作时间设置
+
+	EnableWorkHour *bool `json:"enable_work_hour,omitempty"` // 用户是否启用工作时间设置
+
+	UserId *string `json:"user_id,omitempty"` // 用户user id
 }
 
 type WorkhourSettingBuilder struct {
-	timezone           string // 用户设置的对外展示时区
-	timezoneFlag       bool
-	workhours          []*Workhour // 工作时间设置
-	workhoursFlag      bool
+	timezone     string // 用户设置的对外展示时区
+	timezoneFlag bool
+
+	workhours     []*Workhour // 工作时间设置
+	workhoursFlag bool
+
 	enableWorkHour     bool // 用户是否启用工作时间设置
 	enableWorkHourFlag bool
-	userId             string // 用户user id
-	userIdFlag         bool
+
+	userId     string // 用户user id
+	userIdFlag bool
 }
 
 func NewWorkhourSettingBuilder() *WorkhourSettingBuilder {
@@ -6285,16 +6801,25 @@ type GetCalendarReq struct {
 }
 
 type GetCalendarRespData struct {
-	CalendarId   *string `json:"calendar_id,omitempty"`    // 日历OpenId
-	Summary      *string `json:"summary,omitempty"`        // 日历标题
-	Description  *string `json:"description,omitempty"`    // 日历描述
-	Permissions  *string `json:"permissions,omitempty"`    // 权限
-	Color        *int    `json:"color,omitempty"`          // 日历颜色，颜色RGB值的int32表示。客户端展示时会映射到色板上最接近的一种颜色。仅对当前身份生效
-	Type         *string `json:"type,omitempty"`           // 日历类型
-	SummaryAlias *string `json:"summary_alias,omitempty"`  // 日历备注名，修改或添加后仅对当前身份生效
-	IsDeleted    *bool   `json:"is_deleted,omitempty"`     // 对于当前身份，日历是否已经被标记为删除
-	IsThirdParty *bool   `json:"is_third_party,omitempty"` // 当前日历是否是第三方数据；三方日历及日程只支持读，不支持写入
-	Role         *string `json:"role,omitempty"`           // 当前身份对于该日历的访问权限
+	CalendarId *string `json:"calendar_id,omitempty"` // 日历OpenId
+
+	Summary *string `json:"summary,omitempty"` // 日历标题
+
+	Description *string `json:"description,omitempty"` // 日历描述
+
+	Permissions *string `json:"permissions,omitempty"` // 权限
+
+	Color *int `json:"color,omitempty"` // 日历颜色，颜色RGB值的int32表示。客户端展示时会映射到色板上最接近的一种颜色。仅对当前身份生效
+
+	Type *string `json:"type,omitempty"` // 日历类型
+
+	SummaryAlias *string `json:"summary_alias,omitempty"` // 日历备注名，修改或添加后仅对当前身份生效
+
+	IsDeleted *bool `json:"is_deleted,omitempty"` // 对于当前身份，日历是否已经被标记为删除
+
+	IsThirdParty *bool `json:"is_third_party,omitempty"` // 当前日历是否是第三方数据；三方日历及日程只支持读，不支持写入
+
+	Role *string `json:"role,omitempty"` // 当前身份对于该日历的访问权限
 }
 
 type GetCalendarResp struct {
@@ -6356,9 +6881,12 @@ type ListCalendarReq struct {
 }
 
 type ListCalendarRespData struct {
-	HasMore      *bool       `json:"has_more,omitempty"`      // 是否还有更多数据
-	PageToken    *string     `json:"page_token,omitempty"`    // 下次请求需要带上的分页标记，90 天有效期
-	SyncToken    *string     `json:"sync_token,omitempty"`    // 下次请求需要带上的增量同步标记，90 天有效期
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下次请求需要带上的分页标记，90 天有效期
+
+	SyncToken *string `json:"sync_token,omitempty"` // 下次请求需要带上的增量同步标记，90 天有效期
+
 	CalendarList []*Calendar `json:"calendar_list,omitempty"` // 分页加载的日历数据列表
 }
 
@@ -6591,8 +7119,9 @@ type SearchCalendarReq struct {
 }
 
 type SearchCalendarRespData struct {
-	Items     []*Calendar `json:"items,omitempty"`      // 搜索命中的日历列表
-	PageToken *string     `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
+	Items []*Calendar `json:"items,omitempty"` // 搜索命中的日历列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
 }
 
 type SearchCalendarResp struct {
@@ -6761,9 +7290,11 @@ type CreateCalendarAclReq struct {
 }
 
 type CreateCalendarAclRespData struct {
-	AclId *string   `json:"acl_id,omitempty"` // acl资源ID
-	Role  *string   `json:"role,omitempty"`   // 对日历的访问权限
-	Scope *AclScope `json:"scope,omitempty"`  // 权限范围
+	AclId *string `json:"acl_id,omitempty"` // acl资源ID
+
+	Role *string `json:"role,omitempty"` // 对日历的访问权限
+
+	Scope *AclScope `json:"scope,omitempty"` // 权限范围
 }
 
 type CreateCalendarAclResp struct {
@@ -6893,9 +7424,11 @@ type ListCalendarAclReq struct {
 }
 
 type ListCalendarAclRespData struct {
-	Acls      []*CalendarAcl `json:"acls,omitempty"`       // 入参日历对应的acl列表
-	HasMore   *bool          `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string        `json:"page_token,omitempty"` // 下次请求需要带上的分页标记，90 天有效期
+	Acls []*CalendarAcl `json:"acls,omitempty"` // 入参日历对应的acl列表
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下次请求需要带上的分页标记，90 天有效期
 }
 
 type ListCalendarAclResp struct {
@@ -7352,9 +7885,11 @@ type InstancesCalendarEventReq struct {
 }
 
 type InstancesCalendarEventRespData struct {
-	Items     []*Instance `json:"items,omitempty"`      // instances实例
-	PageToken *string     `json:"page_token,omitempty"` //
-	HasMore   *bool       `json:"has_more,omitempty"`   //
+	Items []*Instance `json:"items,omitempty"` // instances实例
+
+	PageToken *string `json:"page_token,omitempty"` //
+
+	HasMore *bool `json:"has_more,omitempty"` //
 }
 
 type InstancesCalendarEventResp struct {
@@ -7457,10 +7992,13 @@ type ListCalendarEventReq struct {
 }
 
 type ListCalendarEventRespData struct {
-	HasMore   *bool            `json:"has_more,omitempty"`   // 是否还有更多数据
-	PageToken *string          `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
-	SyncToken *string          `json:"sync_token,omitempty"` // 下次请求需要带上的增量同步标记
-	Items     []*CalendarEvent `json:"items,omitempty"`      // 日程列表
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
+
+	SyncToken *string `json:"sync_token,omitempty"` // 下次请求需要带上的增量同步标记
+
+	Items []*CalendarEvent `json:"items,omitempty"` // 日程列表
 }
 
 type ListCalendarEventResp struct {
@@ -7661,8 +8199,9 @@ func (resp *ReplyCalendarEventResp) Success() bool {
 }
 
 type SearchCalendarEventReqBodyBuilder struct {
-	query      string // 搜索关键字
-	queryFlag  bool
+	query     string // 搜索关键字
+	queryFlag bool
+
 	filter     *EventSearchFilter // 搜索过滤器
 	filterFlag bool
 }
@@ -7812,7 +8351,8 @@ func (builder *SearchCalendarEventReqBuilder) Build() *SearchCalendarEventReq {
 }
 
 type SearchCalendarEventReqBody struct {
-	Query  *string            `json:"query,omitempty"`  // 搜索关键字
+	Query *string `json:"query,omitempty"` // 搜索关键字
+
 	Filter *EventSearchFilter `json:"filter,omitempty"` // 搜索过滤器
 }
 
@@ -7824,8 +8364,9 @@ type SearchCalendarEventReq struct {
 }
 
 type SearchCalendarEventRespData struct {
-	Items     []*CalendarEvent `json:"items,omitempty"`      // 搜索命中的日程列表
-	PageToken *string          `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
+	Items []*CalendarEvent `json:"items,omitempty"` // 搜索命中的日程列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
 }
 
 type SearchCalendarEventResp struct {
@@ -7921,16 +8462,20 @@ func (resp *UnsubscriptionCalendarEventResp) Success() bool {
 }
 
 type BatchDeleteCalendarEventAttendeeReqBodyBuilder struct {
-	attendeeIds                []string // 要移除的参与人 ID 列表。参见[参与人ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event-attendee/introduction#4998889c)
-	attendeeIdsFlag            bool
-	deleteIds                  []*CalendarEventAttendeeId // 需要删除的参与人类型实体ID，作为attendee_ids字段的补充。
-	deleteIdsFlag              bool
-	needNotification           bool // 删除日程参与人时是否要给参与人发送bot通知，默认为true
-	needNotificationFlag       bool
+	attendeeIds     []string // 要移除的参与人 ID 列表。参见[参与人ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event-attendee/introduction#4998889c)
+	attendeeIdsFlag bool
+
+	deleteIds     []*CalendarEventAttendeeId // 需要删除的参与人类型实体ID，作为attendee_ids字段的补充。
+	deleteIdsFlag bool
+
+	needNotification     bool // 删除日程参与人时是否要给参与人发送bot通知，默认为true
+	needNotificationFlag bool
+
 	instanceStartTimeAdmin     string // 使用管理员身份访问时要修改的实例
 	instanceStartTimeAdminFlag bool
-	isEnableAdmin              bool // 是否启用管理员身份(需先在管理后台设置某人为会议室管理员)
-	isEnableAdminFlag          bool
+
+	isEnableAdmin     bool // 是否启用管理员身份(需先在管理后台设置某人为会议室管理员)
+	isEnableAdminFlag bool
 }
 
 func NewBatchDeleteCalendarEventAttendeeReqBodyBuilder() *BatchDeleteCalendarEventAttendeeReqBodyBuilder {
@@ -8140,11 +8685,15 @@ func (builder *BatchDeleteCalendarEventAttendeeReqBuilder) Build() *BatchDeleteC
 }
 
 type BatchDeleteCalendarEventAttendeeReqBody struct {
-	AttendeeIds            []string                   `json:"attendee_ids,omitempty"`              // 要移除的参与人 ID 列表。参见[参与人ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event-attendee/introduction#4998889c)
-	DeleteIds              []*CalendarEventAttendeeId `json:"delete_ids,omitempty"`                // 需要删除的参与人类型实体ID，作为attendee_ids字段的补充。
-	NeedNotification       *bool                      `json:"need_notification,omitempty"`         // 删除日程参与人时是否要给参与人发送bot通知，默认为true
-	InstanceStartTimeAdmin *string                    `json:"instance_start_time_admin,omitempty"` // 使用管理员身份访问时要修改的实例
-	IsEnableAdmin          *bool                      `json:"is_enable_admin,omitempty"`           // 是否启用管理员身份(需先在管理后台设置某人为会议室管理员)
+	AttendeeIds []string `json:"attendee_ids,omitempty"` // 要移除的参与人 ID 列表。参见[参与人ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/calendar-v4/calendar-event-attendee/introduction#4998889c)
+
+	DeleteIds []*CalendarEventAttendeeId `json:"delete_ids,omitempty"` // 需要删除的参与人类型实体ID，作为attendee_ids字段的补充。
+
+	NeedNotification *bool `json:"need_notification,omitempty"` // 删除日程参与人时是否要给参与人发送bot通知，默认为true
+
+	InstanceStartTimeAdmin *string `json:"instance_start_time_admin,omitempty"` // 使用管理员身份访问时要修改的实例
+
+	IsEnableAdmin *bool `json:"is_enable_admin,omitempty"` // 是否启用管理员身份(需先在管理后台设置某人为会议室管理员)
 }
 
 type BatchDeleteCalendarEventAttendeeReq struct {
@@ -8162,16 +8711,20 @@ func (resp *BatchDeleteCalendarEventAttendeeResp) Success() bool {
 }
 
 type CreateCalendarEventAttendeeReqBodyBuilder struct {
-	attendees                  []*CalendarEventAttendee // 新增参与人列表；;- 单次请求会议室的数量限制为100。
-	attendeesFlag              bool
-	needNotification           bool // 是否给参与人发送bot通知 默认为true
-	needNotificationFlag       bool
+	attendees     []*CalendarEventAttendee // 新增参与人列表；;- 单次请求会议室的数量限制为100。
+	attendeesFlag bool
+
+	needNotification     bool // 是否给参与人发送bot通知 默认为true
+	needNotificationFlag bool
+
 	instanceStartTimeAdmin     string // 使用管理员身份访问时要修改的实例(仅用于重复日程修改其中的一个实例，非重复日程无需填此字段)
 	instanceStartTimeAdminFlag bool
-	isEnableAdmin              bool // 是否启用管理员身份(需先在管理后台设置某人为会议室管理员)
-	isEnableAdminFlag          bool
-	addOperatorToAttendee      bool // 是否添加会议室operate_id标识的用户到参与人
-	addOperatorToAttendeeFlag  bool
+
+	isEnableAdmin     bool // 是否启用管理员身份(需先在管理后台设置某人为会议室管理员)
+	isEnableAdminFlag bool
+
+	addOperatorToAttendee     bool // 是否添加会议室operate_id标识的用户到参与人
+	addOperatorToAttendeeFlag bool
 }
 
 func NewCreateCalendarEventAttendeeReqBodyBuilder() *CreateCalendarEventAttendeeReqBodyBuilder {
@@ -8381,11 +8934,15 @@ func (builder *CreateCalendarEventAttendeeReqBuilder) Build() *CreateCalendarEve
 }
 
 type CreateCalendarEventAttendeeReqBody struct {
-	Attendees              []*CalendarEventAttendee `json:"attendees,omitempty"`                 // 新增参与人列表；;- 单次请求会议室的数量限制为100。
-	NeedNotification       *bool                    `json:"need_notification,omitempty"`         // 是否给参与人发送bot通知 默认为true
-	InstanceStartTimeAdmin *string                  `json:"instance_start_time_admin,omitempty"` // 使用管理员身份访问时要修改的实例(仅用于重复日程修改其中的一个实例，非重复日程无需填此字段)
-	IsEnableAdmin          *bool                    `json:"is_enable_admin,omitempty"`           // 是否启用管理员身份(需先在管理后台设置某人为会议室管理员)
-	AddOperatorToAttendee  *bool                    `json:"add_operator_to_attendee,omitempty"`  // 是否添加会议室operate_id标识的用户到参与人
+	Attendees []*CalendarEventAttendee `json:"attendees,omitempty"` // 新增参与人列表；;- 单次请求会议室的数量限制为100。
+
+	NeedNotification *bool `json:"need_notification,omitempty"` // 是否给参与人发送bot通知 默认为true
+
+	InstanceStartTimeAdmin *string `json:"instance_start_time_admin,omitempty"` // 使用管理员身份访问时要修改的实例(仅用于重复日程修改其中的一个实例，非重复日程无需填此字段)
+
+	IsEnableAdmin *bool `json:"is_enable_admin,omitempty"` // 是否启用管理员身份(需先在管理后台设置某人为会议室管理员)
+
+	AddOperatorToAttendee *bool `json:"add_operator_to_attendee,omitempty"` // 是否添加会议室operate_id标识的用户到参与人
 }
 
 type CreateCalendarEventAttendeeReq struct {
@@ -8491,9 +9048,11 @@ type ListCalendarEventAttendeeReq struct {
 }
 
 type ListCalendarEventAttendeeRespData struct {
-	Items     []*CalendarEventAttendee `json:"items,omitempty"`      // 日程的参与者列表
-	HasMore   *bool                    `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string                  `json:"page_token,omitempty"` // 下次请求需要带上的分页标记，90 天有效期
+	Items []*CalendarEventAttendee `json:"items,omitempty"` // 日程的参与者列表
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下次请求需要带上的分页标记，90 天有效期
 }
 
 type ListCalendarEventAttendeeResp struct {
@@ -8590,9 +9149,11 @@ type ListCalendarEventAttendeeChatMemberReq struct {
 }
 
 type ListCalendarEventAttendeeChatMemberRespData struct {
-	Items     []*CalendarEventAttendeeChatMember `json:"items,omitempty"`      // 群中的群成员，当type为chat时有效；群成员不支持编辑
-	HasMore   *bool                              `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string                            `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
+	Items []*CalendarEventAttendeeChatMember `json:"items,omitempty"` // 群中的群成员，当type为chat时有效；群成员不支持编辑
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
 }
 
 type ListCalendarEventAttendeeChatMemberResp struct {
@@ -8647,7 +9208,8 @@ type CreateCalendarEventMeetingChatReq struct {
 
 type CreateCalendarEventMeetingChatRespData struct {
 	MeetingChatId *string `json:"meeting_chat_id,omitempty"` // 会议群ID
-	Applink       *string `json:"applink,omitempty"`         // 群分享链接
+
+	Applink *string `json:"applink,omitempty"` // 群分享链接
 }
 
 type CreateCalendarEventMeetingChatResp struct {
@@ -8814,10 +9376,14 @@ type CreateExchangeBindingReq struct {
 }
 
 type CreateExchangeBindingRespData struct {
-	AdminAccount      *string `json:"admin_account,omitempty"`       // admin账户
-	ExchangeAccount   *string `json:"exchange_account,omitempty"`    // 用户绑定的Exchange账户
-	UserId            *string `json:"user_id,omitempty"`             // Exchange账户绑定user唯一标识id
-	Status            *string `json:"status,omitempty"`              // Exchange账户同步状态
+	AdminAccount *string `json:"admin_account,omitempty"` // admin账户
+
+	ExchangeAccount *string `json:"exchange_account,omitempty"` // 用户绑定的Exchange账户
+
+	UserId *string `json:"user_id,omitempty"` // Exchange账户绑定user唯一标识id
+
+	Status *string `json:"status,omitempty"` // Exchange账户同步状态
+
 	ExchangeBindingId *string `json:"exchange_binding_id,omitempty"` // exchange绑定唯一标识id
 }
 
@@ -8914,10 +9480,14 @@ type GetExchangeBindingReq struct {
 }
 
 type GetExchangeBindingRespData struct {
-	AdminAccount      *string `json:"admin_account,omitempty"`       // admin账户
-	ExchangeAccount   *string `json:"exchange_account,omitempty"`    // 用户绑定的Exchange账户
-	UserId            *string `json:"user_id,omitempty"`             // Exchange账户绑定user唯一标识id
-	Status            *string `json:"status,omitempty"`              // Exchange账户同步状态
+	AdminAccount *string `json:"admin_account,omitempty"` // admin账户
+
+	ExchangeAccount *string `json:"exchange_account,omitempty"` // 用户绑定的Exchange账户
+
+	UserId *string `json:"user_id,omitempty"` // Exchange账户绑定user唯一标识id
+
+	Status *string `json:"status,omitempty"` // Exchange账户同步状态
+
 	ExchangeBindingId *string `json:"exchange_binding_id,omitempty"` // Exchange绑定关系唯一标识ID
 }
 
@@ -8932,18 +9502,23 @@ func (resp *GetExchangeBindingResp) Success() bool {
 }
 
 type ListFreebusyReqBodyBuilder struct {
-	timeMin                     string // 查询时段开始时间，需要url编码
-	timeMinFlag                 bool
-	timeMax                     string // 查询时段结束时间，需要url编码
-	timeMaxFlag                 bool
-	userId                      string // 用户user_id，输入时与 room_id 二选一。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	userIdFlag                  bool
-	roomId                      string // 会议室room_id，输入时与 user_id 二选一
-	roomIdFlag                  bool
+	timeMin     string // 查询时段开始时间，需要url编码
+	timeMinFlag bool
+
+	timeMax     string // 查询时段结束时间，需要url编码
+	timeMaxFlag bool
+
+	userId     string // 用户user_id，输入时与 room_id 二选一。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	userIdFlag bool
+
+	roomId     string // 会议室room_id，输入时与 user_id 二选一
+	roomIdFlag bool
+
 	includeExternalCalendar     bool // 是否包含绑定的三方日历中的日程，不传默认为true，即包含。
 	includeExternalCalendarFlag bool
-	onlyBusy                    bool // 是否包含标记为空闲的日程，不传默认为true，即包含。
-	onlyBusyFlag                bool
+
+	onlyBusy     bool // 是否包含标记为空闲的日程，不传默认为true，即包含。
+	onlyBusyFlag bool
 }
 
 func NewListFreebusyReqBodyBuilder() *ListFreebusyReqBodyBuilder {
@@ -9162,12 +9737,17 @@ func (builder *ListFreebusyReqBuilder) Build() *ListFreebusyReq {
 }
 
 type ListFreebusyReqBody struct {
-	TimeMin                 *string `json:"time_min,omitempty"`                  // 查询时段开始时间，需要url编码
-	TimeMax                 *string `json:"time_max,omitempty"`                  // 查询时段结束时间，需要url编码
-	UserId                  *string `json:"user_id,omitempty"`                   // 用户user_id，输入时与 room_id 二选一。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	RoomId                  *string `json:"room_id,omitempty"`                   // 会议室room_id，输入时与 user_id 二选一
-	IncludeExternalCalendar *bool   `json:"include_external_calendar,omitempty"` // 是否包含绑定的三方日历中的日程，不传默认为true，即包含。
-	OnlyBusy                *bool   `json:"only_busy,omitempty"`                 // 是否包含标记为空闲的日程，不传默认为true，即包含。
+	TimeMin *string `json:"time_min,omitempty"` // 查询时段开始时间，需要url编码
+
+	TimeMax *string `json:"time_max,omitempty"` // 查询时段结束时间，需要url编码
+
+	UserId *string `json:"user_id,omitempty"` // 用户user_id，输入时与 room_id 二选一。参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	RoomId *string `json:"room_id,omitempty"` // 会议室room_id，输入时与 user_id 二选一
+
+	IncludeExternalCalendar *bool `json:"include_external_calendar,omitempty"` // 是否包含绑定的三方日历中的日程，不传默认为true，即包含。
+
+	OnlyBusy *bool `json:"only_busy,omitempty"` // 是否包含标记为空闲的日程，不传默认为true，即包含。
 }
 
 type ListFreebusyReq struct {
@@ -9280,10 +9860,13 @@ type GenerateCaldavConfSettingReq struct {
 }
 
 type GenerateCaldavConfSettingRespData struct {
-	Password      *string `json:"password,omitempty"`       // caldav密码
-	UserName      *string `json:"user_name,omitempty"`      // caldav用户名
+	Password *string `json:"password,omitempty"` // caldav密码
+
+	UserName *string `json:"user_name,omitempty"` // caldav用户名
+
 	ServerAddress *string `json:"server_address,omitempty"` // 服务器地址
-	DeviceName    *string `json:"device_name,omitempty"`    // 设备名
+
+	DeviceName *string `json:"device_name,omitempty"` // 设备名
 }
 
 type GenerateCaldavConfSettingResp struct {
@@ -9339,12 +9922,18 @@ type CreateTimeoffEventReq struct {
 
 type CreateTimeoffEventRespData struct {
 	TimeoffEventId *string `json:"timeoff_event_id,omitempty"` // 休假申请的唯一标识id
-	UserId         *string `json:"user_id,omitempty"`          // 用户的user id
-	Timezone       *string `json:"timezone,omitempty"`         // 休假人的时区
-	StartTime      *string `json:"start_time,omitempty"`       // 休假开始时间（时间戳）/日期（2021-01-01），为日期时将生成全天日程，且与end_time对应，不符合将返回错误
-	EndTime        *string `json:"end_time,omitempty"`         // 休假结束时间（时间戳）/日期（2021-01-01），为日期时将生成全天日程，与start_time对应，不符合将返回错误
-	Title          *string `json:"title,omitempty"`            // 休假日程标题，可自定义例如："请假中(全天) / 1-Day Time Off"，"请假中(半天) / 0.5-Day Time Off"，"长期休假中 / Leave of Absence"，"请假中"
-	Description    *string `json:"description,omitempty"`      // 休假日程描述，可自定义,例如：;"若拒绝或删除此日程，飞书中相应的“请假”标签将自动消失，而请假系统中的休假申请不会被撤销。;;If the event is rejected or deleted, corresponding "On Leave" tag in Feishu will disappear, while the leave request in the time off system will not be revoked."
+
+	UserId *string `json:"user_id,omitempty"` // 用户的user id
+
+	Timezone *string `json:"timezone,omitempty"` // 休假人的时区
+
+	StartTime *string `json:"start_time,omitempty"` // 休假开始时间（时间戳）/日期（2021-01-01），为日期时将生成全天日程，且与end_time对应，不符合将返回错误
+
+	EndTime *string `json:"end_time,omitempty"` // 休假结束时间（时间戳）/日期（2021-01-01），为日期时将生成全天日程，与start_time对应，不符合将返回错误
+
+	Title *string `json:"title,omitempty"` // 休假日程标题，可自定义例如："请假中(全天) / 1-Day Time Off"，"请假中(半天) / 0.5-Day Time Off"，"长期休假中 / Leave of Absence"，"请假中"
+
+	Description *string `json:"description,omitempty"` // 休假日程描述，可自定义,例如：;"若拒绝或删除此日程，飞书中相应的“请假”标签将自动消失，而请假系统中的休假申请不会被撤销。;;If the event is rejected or deleted, corresponding "On Leave" tag in Feishu will disappear, while the leave request in the time off system will not be revoked."
 }
 
 type CreateTimeoffEventResp struct {
@@ -9413,10 +10002,13 @@ func (m *P2CalendarChangedV4) RawReq(req *larkevent.EventReq) {
 }
 
 type P2CalendarAclCreatedV4Data struct {
-	AclId      *string        `json:"acl_id,omitempty"`       // acl资源ID
-	Role       *string        `json:"role,omitempty"`         // 对日历的访问权限
-	Scope      *AclScopeEvent `json:"scope,omitempty"`        // 权限范围
-	UserIdList []*UserId      `json:"user_id_list,omitempty"` // 需要推送事件的用户列表
+	AclId *string `json:"acl_id,omitempty"` // acl资源ID
+
+	Role *string `json:"role,omitempty"` // 对日历的访问权限
+
+	Scope *AclScopeEvent `json:"scope,omitempty"` // 权限范围
+
+	UserIdList []*UserId `json:"user_id_list,omitempty"` // 需要推送事件的用户列表
 }
 
 type P2CalendarAclCreatedV4 struct {
@@ -9430,10 +10022,13 @@ func (m *P2CalendarAclCreatedV4) RawReq(req *larkevent.EventReq) {
 }
 
 type P2CalendarAclDeletedV4Data struct {
-	AclId      *string        `json:"acl_id,omitempty"`       // acl资源ID
-	Role       *string        `json:"role,omitempty"`         // 对日历的访问权限
-	Scope      *AclScopeEvent `json:"scope,omitempty"`        // 权限范围
-	UserIdList []*UserId      `json:"user_id_list,omitempty"` // 需要推送事件的用户列表
+	AclId *string `json:"acl_id,omitempty"` // acl资源ID
+
+	Role *string `json:"role,omitempty"` // 对日历的访问权限
+
+	Scope *AclScopeEvent `json:"scope,omitempty"` // 权限范围
+
+	UserIdList []*UserId `json:"user_id_list,omitempty"` // 需要推送事件的用户列表
 }
 
 type P2CalendarAclDeletedV4 struct {
@@ -9447,11 +10042,15 @@ func (m *P2CalendarAclDeletedV4) RawReq(req *larkevent.EventReq) {
 }
 
 type P2CalendarEventChangedV4Data struct {
-	CalendarId      *string              `json:"calendar_id,omitempty"`       // 日历id
-	UserIdList      []*UserId            `json:"user_id_list,omitempty"`      // 需要推送事件的用户列表
-	CalendarEventId *string              `json:"calendar_event_id,omitempty"` // 发生变更的日程ID
-	ChangeType      *string              `json:"change_type,omitempty"`       // 变更类型
-	RsvpInfos       []*OpenEventRsvpInfo `json:"rsvp_infos,omitempty"`        // RSVP变更详情
+	CalendarId *string `json:"calendar_id,omitempty"` // 日历id
+
+	UserIdList []*UserId `json:"user_id_list,omitempty"` // 需要推送事件的用户列表
+
+	CalendarEventId *string `json:"calendar_event_id,omitempty"` // 发生变更的日程ID
+
+	ChangeType *string `json:"change_type,omitempty"` // 变更类型
+
+	RsvpInfos []*OpenEventRsvpInfo `json:"rsvp_infos,omitempty"` // RSVP变更详情
 }
 
 type P2CalendarEventChangedV4 struct {

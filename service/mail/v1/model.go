@@ -207,19 +207,25 @@ const (
 )
 
 type Attachment struct {
-	Body           *string `json:"body,omitempty"`            // 附件的正文，使用 base64url 编码（支持的文件最大 37MB）
-	Filename       *string `json:"filename,omitempty"`        // 附件文件名
-	Id             *string `json:"id,omitempty"`              // 附件 id
-	AttachmentType *int    `json:"attachment_type,omitempty"` // 附件类型
+	Body *string `json:"body,omitempty"` // 附件的正文，使用 base64url 编码（支持的文件最大 37MB）
+
+	Filename *string `json:"filename,omitempty"` // 附件文件名
+
+	Id *string `json:"id,omitempty"` // 附件 id
+
+	AttachmentType *int `json:"attachment_type,omitempty"` // 附件类型
 }
 
 type AttachmentBuilder struct {
-	body               string // 附件的正文，使用 base64url 编码（支持的文件最大 37MB）
-	bodyFlag           bool
-	filename           string // 附件文件名
-	filenameFlag       bool
-	id                 string // 附件 id
-	idFlag             bool
+	body     string // 附件的正文，使用 base64url 编码（支持的文件最大 37MB）
+	bodyFlag bool
+
+	filename     string // 附件文件名
+	filenameFlag bool
+
+	id     string // 附件 id
+	idFlag bool
+
 	attachmentType     int // 附件类型
 	attachmentTypeFlag bool
 }
@@ -288,14 +294,16 @@ func (builder *AttachmentBuilder) Build() *Attachment {
 
 type AttachmentDownloadUrlItem struct {
 	AttachmentId *string `json:"attachment_id,omitempty"` // 附件 id
-	DownloadUrl  *string `json:"download_url,omitempty"`  // 下载链接
+
+	DownloadUrl *string `json:"download_url,omitempty"` // 下载链接
 }
 
 type AttachmentDownloadUrlItemBuilder struct {
 	attachmentId     string // 附件 id
 	attachmentIdFlag bool
-	downloadUrl      string // 下载链接
-	downloadUrlFlag  bool
+
+	downloadUrl     string // 下载链接
+	downloadUrlFlag bool
 }
 
 func NewAttachmentDownloadUrlItemBuilder() *AttachmentDownloadUrlItemBuilder {
@@ -335,13 +343,15 @@ func (builder *AttachmentDownloadUrlItemBuilder) Build() *AttachmentDownloadUrlI
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -380,14 +390,16 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type EmailAlias struct {
 	PrimaryEmail *string `json:"primary_email,omitempty"` // 主邮箱地址
-	EmailAlias   *string `json:"email_alias,omitempty"`   // 邮箱别名
+
+	EmailAlias *string `json:"email_alias,omitempty"` // 邮箱别名
 }
 
 type EmailAliasBuilder struct {
 	primaryEmail     string // 主邮箱地址
 	primaryEmailFlag bool
-	emailAlias       string // 邮箱别名
-	emailAliasFlag   bool
+
+	emailAlias     string // 邮箱别名
+	emailAliasFlag bool
 }
 
 func NewEmailAliasBuilder() *EmailAliasBuilder {
@@ -427,24 +439,32 @@ func (builder *EmailAliasBuilder) Build() *EmailAlias {
 }
 
 type EventLog struct {
-	MailFrom      *string `json:"mail_from,omitempty"`       // 发信人
-	RcptTo        *string `json:"rcpt_to,omitempty"`         // 收信人
+	MailFrom *string `json:"mail_from,omitempty"` // 发信人
+
+	RcptTo *string `json:"rcpt_to,omitempty"` // 收信人
+
 	SmtpMessageId *string `json:"smtp_message_id,omitempty"` // 邮件ID
-	EventType     *string `json:"event_type,omitempty"`      // 行为类型
-	Timestamp     *int    `json:"timestamp,omitempty"`       // 时间戳
+
+	EventType *string `json:"event_type,omitempty"` // 行为类型
+
+	Timestamp *int `json:"timestamp,omitempty"` // 时间戳
 }
 
 type EventLogBuilder struct {
-	mailFrom          string // 发信人
-	mailFromFlag      bool
-	rcptTo            string // 收信人
-	rcptToFlag        bool
+	mailFrom     string // 发信人
+	mailFromFlag bool
+
+	rcptTo     string // 收信人
+	rcptToFlag bool
+
 	smtpMessageId     string // 邮件ID
 	smtpMessageIdFlag bool
-	eventType         string // 行为类型
-	eventTypeFlag     bool
-	timestamp         int // 时间戳
-	timestampFlag     bool
+
+	eventType     string // 行为类型
+	eventTypeFlag bool
+
+	timestamp     int // 时间戳
+	timestampFlag bool
 }
 
 func NewEventLogBuilder() *EventLogBuilder {
@@ -523,27 +543,37 @@ func (builder *EventLogBuilder) Build() *EventLog {
 }
 
 type Folder struct {
-	Id                 *string `json:"id,omitempty"`                   // folder id
-	Name               *string `json:"name,omitempty"`                 // 文件夹名称
-	ParentFolderId     *string `json:"parent_folder_id,omitempty"`     // 父文件夹 id，该值为 0 表示根文件夹
-	FolderType         *int    `json:"folder_type,omitempty"`          // 文件夹类型
-	UnreadMessageCount *int    `json:"unread_message_count,omitempty"` // 未读邮件数量
-	UnreadThreadCount  *int    `json:"unread_thread_count,omitempty"`  // 未读会话数量
+	Id *string `json:"id,omitempty"` // folder id
+
+	Name *string `json:"name,omitempty"` // 文件夹名称
+
+	ParentFolderId *string `json:"parent_folder_id,omitempty"` // 父文件夹 id，该值为 0 表示根文件夹
+
+	FolderType *int `json:"folder_type,omitempty"` // 文件夹类型
+
+	UnreadMessageCount *int `json:"unread_message_count,omitempty"` // 未读邮件数量
+
+	UnreadThreadCount *int `json:"unread_thread_count,omitempty"` // 未读会话数量
 }
 
 type FolderBuilder struct {
-	id                     string // folder id
-	idFlag                 bool
-	name                   string // 文件夹名称
-	nameFlag               bool
-	parentFolderId         string // 父文件夹 id，该值为 0 表示根文件夹
-	parentFolderIdFlag     bool
-	folderType             int // 文件夹类型
-	folderTypeFlag         bool
+	id     string // folder id
+	idFlag bool
+
+	name     string // 文件夹名称
+	nameFlag bool
+
+	parentFolderId     string // 父文件夹 id，该值为 0 表示根文件夹
+	parentFolderIdFlag bool
+
+	folderType     int // 文件夹类型
+	folderTypeFlag bool
+
 	unreadMessageCount     int // 未读邮件数量
 	unreadMessageCountFlag bool
-	unreadThreadCount      int // 未读会话数量
-	unreadThreadCountFlag  bool
+
+	unreadThreadCount     int // 未读会话数量
+	unreadThreadCountFlag bool
 }
 
 func NewFolderBuilder() *FolderBuilder {
@@ -636,14 +666,16 @@ func (builder *FolderBuilder) Build() *Folder {
 
 type MailAddress struct {
 	MailAddress *string `json:"mail_address,omitempty"` // 邮件地址
-	Name        *string `json:"name,omitempty"`         // 名称
+
+	Name *string `json:"name,omitempty"` // 名称
 }
 
 type MailAddressBuilder struct {
 	mailAddress     string // 邮件地址
 	mailAddressFlag bool
-	name            string // 名称
-	nameFlag        bool
+
+	name     string // 名称
+	nameFlag bool
 }
 
 func NewMailAddressBuilder() *MailAddressBuilder {
@@ -683,36 +715,52 @@ func (builder *MailAddressBuilder) Build() *MailAddress {
 }
 
 type MailContact struct {
-	Id          *string `json:"id,omitempty"`           // 联系人 id
-	Name        *string `json:"name,omitempty"`         // 联系人姓名
-	Company     *string `json:"company,omitempty"`      // 联系人公司
-	Phone       *string `json:"phone,omitempty"`        // 联系人手机号
+	Id *string `json:"id,omitempty"` // 联系人 id
+
+	Name *string `json:"name,omitempty"` // 联系人姓名
+
+	Company *string `json:"company,omitempty"` // 联系人公司
+
+	Phone *string `json:"phone,omitempty"` // 联系人手机号
+
 	MailAddress *string `json:"mail_address,omitempty"` // 联系人邮箱
-	Tag         *string `json:"tag,omitempty"`          // 联系人标签
-	Remark      *string `json:"remark,omitempty"`       // 联系人备注
-	Avatar      *string `json:"avatar,omitempty"`       // 联系人头像
-	Position    *string `json:"position,omitempty"`     // 联系人职位
+
+	Tag *string `json:"tag,omitempty"` // 联系人标签
+
+	Remark *string `json:"remark,omitempty"` // 联系人备注
+
+	Avatar *string `json:"avatar,omitempty"` // 联系人头像
+
+	Position *string `json:"position,omitempty"` // 联系人职位
 }
 
 type MailContactBuilder struct {
-	id              string // 联系人 id
-	idFlag          bool
-	name            string // 联系人姓名
-	nameFlag        bool
-	company         string // 联系人公司
-	companyFlag     bool
-	phone           string // 联系人手机号
-	phoneFlag       bool
+	id     string // 联系人 id
+	idFlag bool
+
+	name     string // 联系人姓名
+	nameFlag bool
+
+	company     string // 联系人公司
+	companyFlag bool
+
+	phone     string // 联系人手机号
+	phoneFlag bool
+
 	mailAddress     string // 联系人邮箱
 	mailAddressFlag bool
-	tag             string // 联系人标签
-	tagFlag         bool
-	remark          string // 联系人备注
-	remarkFlag      bool
-	avatar          string // 联系人头像
-	avatarFlag      bool
-	position        string // 联系人职位
-	positionFlag    bool
+
+	tag     string // 联系人标签
+	tagFlag bool
+
+	remark     string // 联系人备注
+	remarkFlag bool
+
+	avatar     string // 联系人头像
+	avatarFlag bool
+
+	position     string // 联系人职位
+	positionFlag bool
 }
 
 func NewMailContactBuilder() *MailContactBuilder {
@@ -843,33 +891,47 @@ func (builder *MailContactBuilder) Build() *MailContact {
 }
 
 type Mailgroup struct {
-	MailgroupId             *string `json:"mailgroup_id,omitempty"`               // 邮件组ID
-	Email                   *string `json:"email,omitempty"`                      // 邮件组地址
-	Name                    *string `json:"name,omitempty"`                       // 邮件组名称
-	Description             *string `json:"description,omitempty"`                // 邮件组描述
-	DirectMembersCount      *string `json:"direct_members_count,omitempty"`       // 邮件组成员数量
-	IncludeExternalMember   *bool   `json:"include_external_member,omitempty"`    // 是否包含外部成员
-	IncludeAllCompanyMember *bool   `json:"include_all_company_member,omitempty"` // 是否是全员邮件组
-	WhoCanSendMail          *string `json:"who_can_send_mail,omitempty"`          // 谁可发送邮件到此邮件组
+	MailgroupId *string `json:"mailgroup_id,omitempty"` // 邮件组ID
+
+	Email *string `json:"email,omitempty"` // 邮件组地址
+
+	Name *string `json:"name,omitempty"` // 邮件组名称
+
+	Description *string `json:"description,omitempty"` // 邮件组描述
+
+	DirectMembersCount *string `json:"direct_members_count,omitempty"` // 邮件组成员数量
+
+	IncludeExternalMember *bool `json:"include_external_member,omitempty"` // 是否包含外部成员
+
+	IncludeAllCompanyMember *bool `json:"include_all_company_member,omitempty"` // 是否是全员邮件组
+
+	WhoCanSendMail *string `json:"who_can_send_mail,omitempty"` // 谁可发送邮件到此邮件组
 }
 
 type MailgroupBuilder struct {
-	mailgroupId                 string // 邮件组ID
-	mailgroupIdFlag             bool
-	email                       string // 邮件组地址
-	emailFlag                   bool
-	name                        string // 邮件组名称
-	nameFlag                    bool
-	description                 string // 邮件组描述
-	descriptionFlag             bool
-	directMembersCount          string // 邮件组成员数量
-	directMembersCountFlag      bool
-	includeExternalMember       bool // 是否包含外部成员
-	includeExternalMemberFlag   bool
+	mailgroupId     string // 邮件组ID
+	mailgroupIdFlag bool
+
+	email     string // 邮件组地址
+	emailFlag bool
+
+	name     string // 邮件组名称
+	nameFlag bool
+
+	description     string // 邮件组描述
+	descriptionFlag bool
+
+	directMembersCount     string // 邮件组成员数量
+	directMembersCountFlag bool
+
+	includeExternalMember     bool // 是否包含外部成员
+	includeExternalMemberFlag bool
+
 	includeAllCompanyMember     bool // 是否是全员邮件组
 	includeAllCompanyMemberFlag bool
-	whoCanSendMail              string // 谁可发送邮件到此邮件组
-	whoCanSendMailFlag          bool
+
+	whoCanSendMail     string // 谁可发送邮件到此邮件组
+	whoCanSendMailFlag bool
 }
 
 func NewMailgroupBuilder() *MailgroupBuilder {
@@ -1019,24 +1081,32 @@ func (builder *MailgroupManagerBuilder) Build() *MailgroupManager {
 }
 
 type MailgroupMember struct {
-	MemberId     *string `json:"member_id,omitempty"`     // 邮件组内成员唯一标识
-	Email        *string `json:"email,omitempty"`         // 成员邮箱地址（当成员类型是EXTERNAL_USER/MAIL_GROUP/OTHER_MEMBER时有值）
-	UserId       *string `json:"user_id,omitempty"`       // 租户内用户的唯一标识（当成员类型是USER时有值）
+	MemberId *string `json:"member_id,omitempty"` // 邮件组内成员唯一标识
+
+	Email *string `json:"email,omitempty"` // 成员邮箱地址（当成员类型是EXTERNAL_USER/MAIL_GROUP/OTHER_MEMBER时有值）
+
+	UserId *string `json:"user_id,omitempty"` // 租户内用户的唯一标识（当成员类型是USER时有值）
+
 	DepartmentId *string `json:"department_id,omitempty"` // 租户内部门的唯一标识（当成员类型是DEPARTMENT时有值）
-	Type         *string `json:"type,omitempty"`          // 成员类型
+
+	Type *string `json:"type,omitempty"` // 成员类型
 }
 
 type MailgroupMemberBuilder struct {
-	memberId         string // 邮件组内成员唯一标识
-	memberIdFlag     bool
-	email            string // 成员邮箱地址（当成员类型是EXTERNAL_USER/MAIL_GROUP/OTHER_MEMBER时有值）
-	emailFlag        bool
-	userId           string // 租户内用户的唯一标识（当成员类型是USER时有值）
-	userIdFlag       bool
+	memberId     string // 邮件组内成员唯一标识
+	memberIdFlag bool
+
+	email     string // 成员邮箱地址（当成员类型是EXTERNAL_USER/MAIL_GROUP/OTHER_MEMBER时有值）
+	emailFlag bool
+
+	userId     string // 租户内用户的唯一标识（当成员类型是USER时有值）
+	userIdFlag bool
+
 	departmentId     string // 租户内部门的唯一标识（当成员类型是DEPARTMENT时有值）
 	departmentIdFlag bool
-	type_            string // 成员类型
-	typeFlag         bool
+
+	type_    string // 成员类型
+	typeFlag bool
 }
 
 func NewMailgroupMemberBuilder() *MailgroupMemberBuilder {
@@ -1116,23 +1186,31 @@ func (builder *MailgroupMemberBuilder) Build() *MailgroupMember {
 
 type MailgroupPermissionMember struct {
 	PermissionMemberId *string `json:"permission_member_id,omitempty"` // 权限组内成员唯一标识
-	UserId             *string `json:"user_id,omitempty"`              // 租户内用户的唯一标识（当成员类型是USER时有值）
-	DepartmentId       *string `json:"department_id,omitempty"`        // 租户内部门的唯一标识（当成员类型是DEPARTMENT时有值）
-	Email              *string `json:"email,omitempty"`                // 成员邮箱地址（当成员类型是MAIL_GROUP/PUBLIC_MAILBOX时有值）
-	Type               *string `json:"type,omitempty"`                 // 成员类型
+
+	UserId *string `json:"user_id,omitempty"` // 租户内用户的唯一标识（当成员类型是USER时有值）
+
+	DepartmentId *string `json:"department_id,omitempty"` // 租户内部门的唯一标识（当成员类型是DEPARTMENT时有值）
+
+	Email *string `json:"email,omitempty"` // 成员邮箱地址（当成员类型是MAIL_GROUP/PUBLIC_MAILBOX时有值）
+
+	Type *string `json:"type,omitempty"` // 成员类型
 }
 
 type MailgroupPermissionMemberBuilder struct {
 	permissionMemberId     string // 权限组内成员唯一标识
 	permissionMemberIdFlag bool
-	userId                 string // 租户内用户的唯一标识（当成员类型是USER时有值）
-	userIdFlag             bool
-	departmentId           string // 租户内部门的唯一标识（当成员类型是DEPARTMENT时有值）
-	departmentIdFlag       bool
-	email                  string // 成员邮箱地址（当成员类型是MAIL_GROUP/PUBLIC_MAILBOX时有值）
-	emailFlag              bool
-	type_                  string // 成员类型
-	typeFlag               bool
+
+	userId     string // 租户内用户的唯一标识（当成员类型是USER时有值）
+	userIdFlag bool
+
+	departmentId     string // 租户内部门的唯一标识（当成员类型是DEPARTMENT时有值）
+	departmentIdFlag bool
+
+	email     string // 成员邮箱地址（当成员类型是MAIL_GROUP/PUBLIC_MAILBOX时有值）
+	emailFlag bool
+
+	type_    string // 成员类型
+	typeFlag bool
 }
 
 func NewMailgroupPermissionMemberBuilder() *MailgroupPermissionMemberBuilder {
@@ -1211,51 +1289,77 @@ func (builder *MailgroupPermissionMemberBuilder) Build() *MailgroupPermissionMem
 }
 
 type Message struct {
-	Raw           *string        `json:"raw,omitempty"`             // MIME邮件数据，基于base64url编码
-	Subject       *string        `json:"subject,omitempty"`         // 主题
-	To            []*MailAddress `json:"to,omitempty"`              // 收件人
-	Cc            []*MailAddress `json:"cc,omitempty"`              // 抄送
-	Bcc           []*MailAddress `json:"bcc,omitempty"`             // 秘送
-	HeadFrom      *MailAddress   `json:"head_from,omitempty"`       // 发件人
-	BodyHtml      *string        `json:"body_html,omitempty"`       // 正文(base64url)
-	InternalDate  *string        `json:"internal_date,omitempty"`   // 创建/收/发信时间（毫秒）
-	MessageState  *int           `json:"message_state,omitempty"`   // 邮件状态
-	SmtpMessageId *string        `json:"smtp_message_id,omitempty"` // RFC协议id
-	MessageId     *string        `json:"message_id,omitempty"`      // 邮件id
-	BodyPlainText *string        `json:"body_plain_text,omitempty"` // 正文纯文本(base64url)
-	Attachments   []*Attachment  `json:"attachments,omitempty"`     // 邮件附件列表
-	ThreadId      *string        `json:"thread_id,omitempty"`       // 会话id
+	Raw *string `json:"raw,omitempty"` // MIME邮件数据，基于base64url编码
+
+	Subject *string `json:"subject,omitempty"` // 主题
+
+	To []*MailAddress `json:"to,omitempty"` // 收件人
+
+	Cc []*MailAddress `json:"cc,omitempty"` // 抄送
+
+	Bcc []*MailAddress `json:"bcc,omitempty"` // 秘送
+
+	HeadFrom *MailAddress `json:"head_from,omitempty"` // 发件人
+
+	BodyHtml *string `json:"body_html,omitempty"` // 正文(base64url)
+
+	InternalDate *string `json:"internal_date,omitempty"` // 创建/收/发信时间（毫秒）
+
+	MessageState *int `json:"message_state,omitempty"` // 邮件状态
+
+	SmtpMessageId *string `json:"smtp_message_id,omitempty"` // RFC协议id
+
+	MessageId *string `json:"message_id,omitempty"` // 邮件id
+
+	BodyPlainText *string `json:"body_plain_text,omitempty"` // 正文纯文本(base64url)
+
+	Attachments []*Attachment `json:"attachments,omitempty"` // 邮件附件列表
+
+	ThreadId *string `json:"thread_id,omitempty"` // 会话id
 }
 
 type MessageBuilder struct {
-	raw               string // MIME邮件数据，基于base64url编码
-	rawFlag           bool
-	subject           string // 主题
-	subjectFlag       bool
-	to                []*MailAddress // 收件人
-	toFlag            bool
-	cc                []*MailAddress // 抄送
-	ccFlag            bool
-	bcc               []*MailAddress // 秘送
-	bccFlag           bool
-	headFrom          *MailAddress // 发件人
-	headFromFlag      bool
-	bodyHtml          string // 正文(base64url)
-	bodyHtmlFlag      bool
-	internalDate      string // 创建/收/发信时间（毫秒）
-	internalDateFlag  bool
-	messageState      int // 邮件状态
-	messageStateFlag  bool
+	raw     string // MIME邮件数据，基于base64url编码
+	rawFlag bool
+
+	subject     string // 主题
+	subjectFlag bool
+
+	to     []*MailAddress // 收件人
+	toFlag bool
+
+	cc     []*MailAddress // 抄送
+	ccFlag bool
+
+	bcc     []*MailAddress // 秘送
+	bccFlag bool
+
+	headFrom     *MailAddress // 发件人
+	headFromFlag bool
+
+	bodyHtml     string // 正文(base64url)
+	bodyHtmlFlag bool
+
+	internalDate     string // 创建/收/发信时间（毫秒）
+	internalDateFlag bool
+
+	messageState     int // 邮件状态
+	messageStateFlag bool
+
 	smtpMessageId     string // RFC协议id
 	smtpMessageIdFlag bool
-	messageId         string // 邮件id
-	messageIdFlag     bool
+
+	messageId     string // 邮件id
+	messageIdFlag bool
+
 	bodyPlainText     string // 正文纯文本(base64url)
 	bodyPlainTextFlag bool
-	attachments       []*Attachment // 邮件附件列表
-	attachmentsFlag   bool
-	threadId          string // 会话id
-	threadIdFlag      bool
+
+	attachments     []*Attachment // 邮件附件列表
+	attachmentsFlag bool
+
+	threadId     string // 会话id
+	threadIdFlag bool
 }
 
 func NewMessageBuilder() *MessageBuilder {
@@ -1447,20 +1551,26 @@ func (builder *MessageBuilder) Build() *Message {
 
 type PublicMailbox struct {
 	PublicMailboxId *string `json:"public_mailbox_id,omitempty"` // 公共邮箱唯一标识
-	Email           *string `json:"email,omitempty"`             // 公共邮箱地址
-	Name            *string `json:"name,omitempty"`              // 公共邮箱名称
-	Geo             *string `json:"geo,omitempty"`               // 数据驻留地
+
+	Email *string `json:"email,omitempty"` // 公共邮箱地址
+
+	Name *string `json:"name,omitempty"` // 公共邮箱名称
+
+	Geo *string `json:"geo,omitempty"` // 数据驻留地
 }
 
 type PublicMailboxBuilder struct {
 	publicMailboxId     string // 公共邮箱唯一标识
 	publicMailboxIdFlag bool
-	email               string // 公共邮箱地址
-	emailFlag           bool
-	name                string // 公共邮箱名称
-	nameFlag            bool
-	geo                 string // 数据驻留地
-	geoFlag             bool
+
+	email     string // 公共邮箱地址
+	emailFlag bool
+
+	name     string // 公共邮箱名称
+	nameFlag bool
+
+	geo     string // 数据驻留地
+	geoFlag bool
 }
 
 func NewPublicMailboxBuilder() *PublicMailboxBuilder {
@@ -1527,17 +1637,21 @@ func (builder *PublicMailboxBuilder) Build() *PublicMailbox {
 
 type PublicMailboxMember struct {
 	MemberId *string `json:"member_id,omitempty"` // 公共邮箱内成员唯一标识
-	UserId   *string `json:"user_id,omitempty"`   // 租户内用户的唯一标识（当成员类型是USER时有值）
-	Type     *string `json:"type,omitempty"`      // 成员类型
+
+	UserId *string `json:"user_id,omitempty"` // 租户内用户的唯一标识（当成员类型是USER时有值）
+
+	Type *string `json:"type,omitempty"` // 成员类型
 }
 
 type PublicMailboxMemberBuilder struct {
 	memberId     string // 公共邮箱内成员唯一标识
 	memberIdFlag bool
-	userId       string // 租户内用户的唯一标识（当成员类型是USER时有值）
-	userIdFlag   bool
-	type_        string // 成员类型
-	typeFlag     bool
+
+	userId     string // 租户内用户的唯一标识（当成员类型是USER时有值）
+	userIdFlag bool
+
+	type_    string // 成员类型
+	typeFlag bool
 }
 
 func NewPublicMailboxMemberBuilder() *PublicMailboxMemberBuilder {
@@ -1590,27 +1704,37 @@ func (builder *PublicMailboxMemberBuilder) Build() *PublicMailboxMember {
 }
 
 type Rule struct {
-	Id                   *string        `json:"id,omitempty"`                       // 规则 id
-	Condition            *RuleCondition `json:"condition,omitempty"`                // 匹配条件
-	Action               *RuleAction    `json:"action,omitempty"`                   // 匹配命中后的操作
-	IgnoreTheRestOfRules *bool          `json:"ignore_the_rest_of_rules,omitempty"` // 是否终点规则
-	Name                 *string        `json:"name,omitempty"`                     // 规则名称
-	IsEnable             *bool          `json:"is_enable,omitempty"`                // 是否启用
+	Id *string `json:"id,omitempty"` // 规则 id
+
+	Condition *RuleCondition `json:"condition,omitempty"` // 匹配条件
+
+	Action *RuleAction `json:"action,omitempty"` // 匹配命中后的操作
+
+	IgnoreTheRestOfRules *bool `json:"ignore_the_rest_of_rules,omitempty"` // 是否终点规则
+
+	Name *string `json:"name,omitempty"` // 规则名称
+
+	IsEnable *bool `json:"is_enable,omitempty"` // 是否启用
 }
 
 type RuleBuilder struct {
-	id                       string // 规则 id
-	idFlag                   bool
-	condition                *RuleCondition // 匹配条件
-	conditionFlag            bool
-	action                   *RuleAction // 匹配命中后的操作
-	actionFlag               bool
+	id     string // 规则 id
+	idFlag bool
+
+	condition     *RuleCondition // 匹配条件
+	conditionFlag bool
+
+	action     *RuleAction // 匹配命中后的操作
+	actionFlag bool
+
 	ignoreTheRestOfRules     bool // 是否终点规则
 	ignoreTheRestOfRulesFlag bool
-	name                     string // 规则名称
-	nameFlag                 bool
-	isEnable                 bool // 是否启用
-	isEnableFlag             bool
+
+	name     string // 规则名称
+	nameFlag bool
+
+	isEnable     bool // 是否启用
+	isEnableFlag bool
 }
 
 func NewRuleBuilder() *RuleBuilder {
@@ -1731,13 +1855,15 @@ func (builder *RuleActionBuilder) Build() *RuleAction {
 }
 
 type RuleActionItem struct {
-	Type  *int    `json:"type,omitempty"`  // 操作类型
+	Type *int `json:"type,omitempty"` // 操作类型
+
 	Input *string `json:"input,omitempty"` // 当 type 为移动到文件夹时，该字段填文件夹的 id
 }
 
 type RuleActionItemBuilder struct {
-	type_     int // 操作类型
-	typeFlag  bool
+	type_    int // 操作类型
+	typeFlag bool
+
 	input     string // 当 type 为移动到文件夹时，该字段填文件夹的 id
 	inputFlag bool
 }
@@ -1779,15 +1905,17 @@ func (builder *RuleActionItemBuilder) Build() *RuleActionItem {
 }
 
 type RuleCondition struct {
-	MatchType *int                 `json:"match_type,omitempty"` // 匹配类型
-	Items     []*RuleConditionItem `json:"items,omitempty"`      // 匹配规则列表
+	MatchType *int `json:"match_type,omitempty"` // 匹配类型
+
+	Items []*RuleConditionItem `json:"items,omitempty"` // 匹配规则列表
 }
 
 type RuleConditionBuilder struct {
 	matchType     int // 匹配类型
 	matchTypeFlag bool
-	items         []*RuleConditionItem // 匹配规则列表
-	itemsFlag     bool
+
+	items     []*RuleConditionItem // 匹配规则列表
+	itemsFlag bool
 }
 
 func NewRuleConditionBuilder() *RuleConditionBuilder {
@@ -1826,18 +1954,22 @@ func (builder *RuleConditionBuilder) Build() *RuleCondition {
 }
 
 type RuleConditionItem struct {
-	Type     *int    `json:"type,omitempty"`     // 匹配条件左值
-	Operator *int    `json:"operator,omitempty"` // 匹配条件操作符
-	Input    *string `json:"input,omitempty"`    // 匹配条件右值
+	Type *int `json:"type,omitempty"` // 匹配条件左值
+
+	Operator *int `json:"operator,omitempty"` // 匹配条件操作符
+
+	Input *string `json:"input,omitempty"` // 匹配条件右值
 }
 
 type RuleConditionItemBuilder struct {
-	type_        int // 匹配条件左值
-	typeFlag     bool
+	type_    int // 匹配条件左值
+	typeFlag bool
+
 	operator     int // 匹配条件操作符
 	operatorFlag bool
-	input        string // 匹配条件右值
-	inputFlag    bool
+
+	input     string // 匹配条件右值
+	inputFlag bool
 }
 
 func NewRuleConditionItemBuilder() *RuleConditionItemBuilder {
@@ -1921,18 +2053,22 @@ func (builder *SubscriberBuilder) Build() *Subscriber {
 }
 
 type User struct {
-	Email  *string `json:"email,omitempty"`  // 邮箱地址
-	Status *int    `json:"status,omitempty"` // 邮箱地址状态
-	Type   *int    `json:"type,omitempty"`   // 邮箱地址类型
+	Email *string `json:"email,omitempty"` // 邮箱地址
+
+	Status *int `json:"status,omitempty"` // 邮箱地址状态
+
+	Type *int `json:"type,omitempty"` // 邮箱地址类型
 }
 
 type UserBuilder struct {
-	email      string // 邮箱地址
-	emailFlag  bool
+	email     string // 邮箱地址
+	emailFlag bool
+
 	status     int // 邮箱地址状态
 	statusFlag bool
-	type_      int // 邮箱地址类型
-	typeFlag   bool
+
+	type_    int // 邮箱地址类型
+	typeFlag bool
 }
 
 func NewUserBuilder() *UserBuilder {
@@ -1985,16 +2121,20 @@ func (builder *UserBuilder) Build() *User {
 }
 
 type UserId struct {
-	UserId  *string `json:"user_id,omitempty"`  //
-	OpenId  *string `json:"open_id,omitempty"`  //
+	UserId *string `json:"user_id,omitempty"` //
+
+	OpenId *string `json:"open_id,omitempty"` //
+
 	UnionId *string `json:"union_id,omitempty"` //
 }
 
 type UserIdBuilder struct {
-	userId      string //
-	userIdFlag  bool
-	openId      string //
-	openIdFlag  bool
+	userId     string //
+	userIdFlag bool
+
+	openId     string //
+	openIdFlag bool
+
 	unionId     string //
 	unionIdFlag bool
 }
@@ -2075,14 +2215,21 @@ type CreateMailgroupReq struct {
 }
 
 type CreateMailgroupRespData struct {
-	MailgroupId             *string `json:"mailgroup_id,omitempty"`               // The unique ID of a mail group
-	Email                   *string `json:"email,omitempty"`                      // The mail group's email address
-	Name                    *string `json:"name,omitempty"`                       // The mail group's display name
-	Description             *string `json:"description,omitempty"`                // The mail group's description
-	DirectMembersCount      *string `json:"direct_members_count,omitempty"`       // The number of mail group's direct members
-	IncludeExternalMember   *bool   `json:"include_external_member,omitempty"`    // Value is true if this mail group has external member
-	IncludeAllCompanyMember *bool   `json:"include_all_company_member,omitempty"` // Value is true if all company members are in this mail group
-	WhoCanSendMail          *string `json:"who_can_send_mail,omitempty"`          // Who can send mail to this mail group. Possible values are:;- ANYONE: Any Internet user can send mail to this mail group;- ALL_INTERNAL_USERS: Anyone in the team can send mail to this mail group;- ALL_GROUP_MEMBERS: Any group member can send mail to this mail group;- CUSTOM_MEMBERS: Only custom members can send mail to this mail group, define in mailgroup.permission_members resoure
+	MailgroupId *string `json:"mailgroup_id,omitempty"` // The unique ID of a mail group
+
+	Email *string `json:"email,omitempty"` // The mail group's email address
+
+	Name *string `json:"name,omitempty"` // The mail group's display name
+
+	Description *string `json:"description,omitempty"` // The mail group's description
+
+	DirectMembersCount *string `json:"direct_members_count,omitempty"` // The number of mail group's direct members
+
+	IncludeExternalMember *bool `json:"include_external_member,omitempty"` // Value is true if this mail group has external member
+
+	IncludeAllCompanyMember *bool `json:"include_all_company_member,omitempty"` // Value is true if all company members are in this mail group
+
+	WhoCanSendMail *string `json:"who_can_send_mail,omitempty"` // Who can send mail to this mail group. Possible values are:;- ANYONE: Any Internet user can send mail to this mail group;- ALL_INTERNAL_USERS: Anyone in the team can send mail to this mail group;- ALL_GROUP_MEMBERS: Any group member can send mail to this mail group;- CUSTOM_MEMBERS: Only custom members can send mail to this mail group, define in mailgroup.permission_members resoure
 }
 
 type CreateMailgroupResp struct {
@@ -2169,14 +2316,21 @@ type GetMailgroupReq struct {
 }
 
 type GetMailgroupRespData struct {
-	MailgroupId             *string `json:"mailgroup_id,omitempty"`               // The unique ID of a mail group
-	Email                   *string `json:"email,omitempty"`                      // The mail group's email address
-	Name                    *string `json:"name,omitempty"`                       // The mail group's display name
-	Description             *string `json:"description,omitempty"`                // The mail group's description
-	DirectMembersCount      *string `json:"direct_members_count,omitempty"`       // The number of mail group's direct members
-	IncludeExternalMember   *bool   `json:"include_external_member,omitempty"`    // Value is true if this mail group has external member
-	IncludeAllCompanyMember *bool   `json:"include_all_company_member,omitempty"` // Value is true if all company members are in this mail group
-	WhoCanSendMail          *string `json:"who_can_send_mail,omitempty"`          // Who can send mail to this mail group. Possible values are:;- ANYONE: Any Internet user can send mail to this mail group;- ALL_INTERNAL_USERS: Anyone in the team can send mail to this mail group;- ALL_GROUP_MEMBERS: Any group member can send mail to this mail group;- CUSTOM_MEMBERS: Only custom members can send mail to this mail group, define in mailgroup.permission_members resoure
+	MailgroupId *string `json:"mailgroup_id,omitempty"` // The unique ID of a mail group
+
+	Email *string `json:"email,omitempty"` // The mail group's email address
+
+	Name *string `json:"name,omitempty"` // The mail group's display name
+
+	Description *string `json:"description,omitempty"` // The mail group's description
+
+	DirectMembersCount *string `json:"direct_members_count,omitempty"` // The number of mail group's direct members
+
+	IncludeExternalMember *bool `json:"include_external_member,omitempty"` // Value is true if this mail group has external member
+
+	IncludeAllCompanyMember *bool `json:"include_all_company_member,omitempty"` // Value is true if all company members are in this mail group
+
+	WhoCanSendMail *string `json:"who_can_send_mail,omitempty"` // Who can send mail to this mail group. Possible values are:;- ANYONE: Any Internet user can send mail to this mail group;- ALL_INTERNAL_USERS: Anyone in the team can send mail to this mail group;- ALL_GROUP_MEMBERS: Any group member can send mail to this mail group;- CUSTOM_MEMBERS: Only custom members can send mail to this mail group, define in mailgroup.permission_members resoure
 }
 
 type GetMailgroupResp struct {
@@ -2256,9 +2410,11 @@ type ListMailgroupReq struct {
 }
 
 type ListMailgroupRespData struct {
-	HasMore   *bool        `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string      `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*Mailgroup `json:"items,omitempty"`      // 邮件组列表
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*Mailgroup `json:"items,omitempty"` // 邮件组列表
 }
 
 type ListMailgroupResp struct {
@@ -2313,14 +2469,21 @@ type PatchMailgroupReq struct {
 }
 
 type PatchMailgroupRespData struct {
-	MailgroupId             *string `json:"mailgroup_id,omitempty"`               // The unique ID of a mail group
-	Email                   *string `json:"email,omitempty"`                      // The mail group's email address
-	Name                    *string `json:"name,omitempty"`                       // The mail group's display name
-	Description             *string `json:"description,omitempty"`                // The mail group's description
-	DirectMembersCount      *string `json:"direct_members_count,omitempty"`       // The number of mail group's direct members
-	IncludeExternalMember   *bool   `json:"include_external_member,omitempty"`    // Value is true if this mail group has external member
-	IncludeAllCompanyMember *bool   `json:"include_all_company_member,omitempty"` // Value is true if all company members are in this mail group
-	WhoCanSendMail          *string `json:"who_can_send_mail,omitempty"`          // Who can send mail to this mail group. Possible values are:;- ANYONE: Any Internet user can send mail to this mail group;- ALL_INTERNAL_USERS: Anyone in the team can send mail to this mail group;- ALL_GROUP_MEMBERS: Any group member can send mail to this mail group;- CUSTOM_MEMBERS: Only custom members can send mail to this mail group, define in mailgroup.permission_members resoure
+	MailgroupId *string `json:"mailgroup_id,omitempty"` // The unique ID of a mail group
+
+	Email *string `json:"email,omitempty"` // The mail group's email address
+
+	Name *string `json:"name,omitempty"` // The mail group's display name
+
+	Description *string `json:"description,omitempty"` // The mail group's description
+
+	DirectMembersCount *string `json:"direct_members_count,omitempty"` // The number of mail group's direct members
+
+	IncludeExternalMember *bool `json:"include_external_member,omitempty"` // Value is true if this mail group has external member
+
+	IncludeAllCompanyMember *bool `json:"include_all_company_member,omitempty"` // Value is true if all company members are in this mail group
+
+	WhoCanSendMail *string `json:"who_can_send_mail,omitempty"` // Who can send mail to this mail group. Possible values are:;- ANYONE: Any Internet user can send mail to this mail group;- ALL_INTERNAL_USERS: Anyone in the team can send mail to this mail group;- ALL_GROUP_MEMBERS: Any group member can send mail to this mail group;- CUSTOM_MEMBERS: Only custom members can send mail to this mail group, define in mailgroup.permission_members resoure
 }
 
 type PatchMailgroupResp struct {
@@ -2375,14 +2538,21 @@ type UpdateMailgroupReq struct {
 }
 
 type UpdateMailgroupRespData struct {
-	MailgroupId             *string `json:"mailgroup_id,omitempty"`               // The unique ID of a mail group
-	Email                   *string `json:"email,omitempty"`                      // The mail group's email address
-	Name                    *string `json:"name,omitempty"`                       // The mail group's display name
-	Description             *string `json:"description,omitempty"`                // The mail group's description
-	DirectMembersCount      *string `json:"direct_members_count,omitempty"`       // The number of mail group's direct members
-	IncludeExternalMember   *bool   `json:"include_external_member,omitempty"`    // Value is true if this mail group has external member
-	IncludeAllCompanyMember *bool   `json:"include_all_company_member,omitempty"` // Value is true if all company members are in this mail group
-	WhoCanSendMail          *string `json:"who_can_send_mail,omitempty"`          // Who can send mail to this mail group. Possible values are:;- ANYONE: Any Internet user can send mail to this mail group;- ALL_INTERNAL_USERS: Anyone in the team can send mail to this mail group;- ALL_GROUP_MEMBERS: Any group member can send mail to this mail group;- CUSTOM_MEMBERS: Only custom members can send mail to this mail group, define in mailgroup.permission_members resoure
+	MailgroupId *string `json:"mailgroup_id,omitempty"` // The unique ID of a mail group
+
+	Email *string `json:"email,omitempty"` // The mail group's email address
+
+	Name *string `json:"name,omitempty"` // The mail group's display name
+
+	Description *string `json:"description,omitempty"` // The mail group's description
+
+	DirectMembersCount *string `json:"direct_members_count,omitempty"` // The number of mail group's direct members
+
+	IncludeExternalMember *bool `json:"include_external_member,omitempty"` // Value is true if this mail group has external member
+
+	IncludeAllCompanyMember *bool `json:"include_all_company_member,omitempty"` // Value is true if all company members are in this mail group
+
+	WhoCanSendMail *string `json:"who_can_send_mail,omitempty"` // Who can send mail to this mail group. Possible values are:;- ANYONE: Any Internet user can send mail to this mail group;- ALL_INTERNAL_USERS: Anyone in the team can send mail to this mail group;- ALL_GROUP_MEMBERS: Any group member can send mail to this mail group;- CUSTOM_MEMBERS: Only custom members can send mail to this mail group, define in mailgroup.permission_members resoure
 }
 
 type UpdateMailgroupResp struct {
@@ -2847,9 +3017,11 @@ type ListMailgroupManagerReq struct {
 }
 
 type ListMailgroupManagerRespData struct {
-	Items     []*MailgroupManager `json:"items,omitempty"`      // 邮件组管理员列表
-	PageToken *string             `json:"page_token,omitempty"` // 分页标识
-	HasMore   *bool               `json:"has_more,omitempty"`   // 是否有更多数据
+	Items []*MailgroupManager `json:"items,omitempty"` // 邮件组管理员列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标识
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
 }
 
 type ListMailgroupManagerResp struct {
@@ -3157,11 +3329,15 @@ type CreateMailgroupMemberReq struct {
 }
 
 type CreateMailgroupMemberRespData struct {
-	MemberId     *string `json:"member_id,omitempty"`     // The unique ID of a member in this mail group
-	Email        *string `json:"email,omitempty"`         // The member's email address. Value is valid when type is one of USER/EXTERNAL_USER/MAIL_GROUP/PUBLIC_MAILBOX/OTHER_MEMBER
-	UserId       *string `json:"user_id,omitempty"`       // The member's user id. Value is valid when type is USER
+	MemberId *string `json:"member_id,omitempty"` // The unique ID of a member in this mail group
+
+	Email *string `json:"email,omitempty"` // The member's email address. Value is valid when type is one of USER/EXTERNAL_USER/MAIL_GROUP/PUBLIC_MAILBOX/OTHER_MEMBER
+
+	UserId *string `json:"user_id,omitempty"` // The member's user id. Value is valid when type is USER
+
 	DepartmentId *string `json:"department_id,omitempty"` // The member's department id. Value is valid when type is DEPARTMENT
-	Type         *string `json:"type,omitempty"`          // The type of member. Possible values are:;- USER: internal user in the team;- DEPARTMENT: member is a department;- COMPANY: member is the company;- EXTERNAL_USER: internet user outside the organization;- MAIL_GROUP: member is another mail group;- PUBLIC_MAILBOX: member is a public mailbox;- OTHER_MEMBER: other internal member
+
+	Type *string `json:"type,omitempty"` // The type of member. Possible values are:;- USER: internal user in the team;- DEPARTMENT: member is a department;- COMPANY: member is the company;- EXTERNAL_USER: internet user outside the organization;- MAIL_GROUP: member is another mail group;- PUBLIC_MAILBOX: member is a public mailbox;- OTHER_MEMBER: other internal member
 }
 
 type CreateMailgroupMemberResp struct {
@@ -3281,11 +3457,15 @@ type GetMailgroupMemberReq struct {
 }
 
 type GetMailgroupMemberRespData struct {
-	MemberId     *string `json:"member_id,omitempty"`     // The unique ID of a member in this mail group
-	Email        *string `json:"email,omitempty"`         // The member's email address. Value is valid when type is one of USER/EXTERNAL_USER/MAIL_GROUP/PUBLIC_MAILBOX/OTHER_MEMBER
-	UserId       *string `json:"user_id,omitempty"`       // The member's user id. Value is valid when type is USER
+	MemberId *string `json:"member_id,omitempty"` // The unique ID of a member in this mail group
+
+	Email *string `json:"email,omitempty"` // The member's email address. Value is valid when type is one of USER/EXTERNAL_USER/MAIL_GROUP/PUBLIC_MAILBOX/OTHER_MEMBER
+
+	UserId *string `json:"user_id,omitempty"` // The member's user id. Value is valid when type is USER
+
 	DepartmentId *string `json:"department_id,omitempty"` // The member's department id. Value is valid when type is DEPARTMENT
-	Type         *string `json:"type,omitempty"`          // The type of member. Possible values are:;- USER: internal user in the team;- DEPARTMENT: member is a department;- COMPANY: member is the company;- EXTERNAL_USER: internet user outside the organization;- MAIL_GROUP: member is another mail group;- PUBLIC_MAILBOX: member is a public mailbox;- OTHER_MEMBER: other internal member
+
+	Type *string `json:"type,omitempty"` // The type of member. Possible values are:;- USER: internal user in the team;- DEPARTMENT: member is a department;- COMPANY: member is the company;- EXTERNAL_USER: internet user outside the organization;- MAIL_GROUP: member is another mail group;- PUBLIC_MAILBOX: member is a public mailbox;- OTHER_MEMBER: other internal member
 }
 
 type GetMailgroupMemberResp struct {
@@ -3374,9 +3554,11 @@ type ListMailgroupMemberReq struct {
 }
 
 type ListMailgroupMemberRespData struct {
-	HasMore   *bool              `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string            `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*MailgroupMember `json:"items,omitempty"`      // 邮件组成员列表
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*MailgroupMember `json:"items,omitempty"` // 邮件组成员列表
 }
 
 type ListMailgroupMemberResp struct {
@@ -3685,10 +3867,14 @@ type CreateMailgroupPermissionMemberReq struct {
 
 type CreateMailgroupPermissionMemberRespData struct {
 	PermissionMemberId *string `json:"permission_member_id,omitempty"` // The unique ID of a member in this permission group
-	UserId             *string `json:"user_id,omitempty"`              // The member's user id. Value is valid when type is USER
-	DepartmentId       *string `json:"department_id,omitempty"`        // The member's department id. Value is valid when type is DEPARTMENT
-	Email              *string `json:"email,omitempty"`                // The member's email address. Value is valid when type is MAIL_GROUP/PUBLIC_MAILBOX
-	Type               *string `json:"type,omitempty"`                 // The type of member. Possible values are:;- USER: internal user in the team;- DEPARTMENT: member is a department
+
+	UserId *string `json:"user_id,omitempty"` // The member's user id. Value is valid when type is USER
+
+	DepartmentId *string `json:"department_id,omitempty"` // The member's department id. Value is valid when type is DEPARTMENT
+
+	Email *string `json:"email,omitempty"` // The member's email address. Value is valid when type is MAIL_GROUP/PUBLIC_MAILBOX
+
+	Type *string `json:"type,omitempty"` // The type of member. Possible values are:;- USER: internal user in the team;- DEPARTMENT: member is a department
 }
 
 type CreateMailgroupPermissionMemberResp struct {
@@ -3809,10 +3995,14 @@ type GetMailgroupPermissionMemberReq struct {
 
 type GetMailgroupPermissionMemberRespData struct {
 	PermissionMemberId *string `json:"permission_member_id,omitempty"` // The unique ID of a member in this permission group
-	UserId             *string `json:"user_id,omitempty"`              // The member's user id. Value is valid when type is USER
-	DepartmentId       *string `json:"department_id,omitempty"`        // The member's department id. Value is valid when type is DEPARTMENT
-	Email              *string `json:"email,omitempty"`                // The member's email address. Value is valid when type is MAIL_GROUP/PUBLIC_MAILBOX
-	Type               *string `json:"type,omitempty"`                 // The type of member. Possible values are:;- USER: internal user in the team;- DEPARTMENT: member is a department
+
+	UserId *string `json:"user_id,omitempty"` // The member's user id. Value is valid when type is USER
+
+	DepartmentId *string `json:"department_id,omitempty"` // The member's department id. Value is valid when type is DEPARTMENT
+
+	Email *string `json:"email,omitempty"` // The member's email address. Value is valid when type is MAIL_GROUP/PUBLIC_MAILBOX
+
+	Type *string `json:"type,omitempty"` // The type of member. Possible values are:;- USER: internal user in the team;- DEPARTMENT: member is a department
 }
 
 type GetMailgroupPermissionMemberResp struct {
@@ -3901,9 +4091,11 @@ type ListMailgroupPermissionMemberReq struct {
 }
 
 type ListMailgroupPermissionMemberRespData struct {
-	HasMore   *bool                        `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string                      `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*MailgroupPermissionMember `json:"items,omitempty"`      // 邮件组权限成员列表
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*MailgroupPermissionMember `json:"items,omitempty"` // 邮件组权限成员列表
 }
 
 type ListMailgroupPermissionMemberResp struct {
@@ -3950,9 +4142,12 @@ type CreatePublicMailboxReq struct {
 
 type CreatePublicMailboxRespData struct {
 	PublicMailboxId *string `json:"public_mailbox_id,omitempty"` // The unique ID of a public mailbox
-	Email           *string `json:"email,omitempty"`             // The public mailbox's email address
-	Name            *string `json:"name,omitempty"`              // The public mailbox's display name
-	Geo             *string `json:"geo,omitempty"`               // 数据驻留地
+
+	Email *string `json:"email,omitempty"` // The public mailbox's email address
+
+	Name *string `json:"name,omitempty"` // The public mailbox's display name
+
+	Geo *string `json:"geo,omitempty"` // 数据驻留地
 }
 
 type CreatePublicMailboxResp struct {
@@ -4040,9 +4235,12 @@ type GetPublicMailboxReq struct {
 
 type GetPublicMailboxRespData struct {
 	PublicMailboxId *string `json:"public_mailbox_id,omitempty"` // The unique ID of a public mailbox
-	Email           *string `json:"email,omitempty"`             // The public mailbox's email address
-	Name            *string `json:"name,omitempty"`              // The public mailbox's display name
-	Geo             *string `json:"geo,omitempty"`               // 数据驻留地
+
+	Email *string `json:"email,omitempty"` // The public mailbox's email address
+
+	Name *string `json:"name,omitempty"` // The public mailbox's display name
+
+	Geo *string `json:"geo,omitempty"` // 数据驻留地
 }
 
 type GetPublicMailboxResp struct {
@@ -4122,9 +4320,11 @@ type ListPublicMailboxReq struct {
 }
 
 type ListPublicMailboxRespData struct {
-	HasMore   *bool            `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string          `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*PublicMailbox `json:"items,omitempty"`      // 公共邮箱列表
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*PublicMailbox `json:"items,omitempty"` // 公共邮箱列表
 }
 
 type ListPublicMailboxResp struct {
@@ -4180,9 +4380,12 @@ type PatchPublicMailboxReq struct {
 
 type PatchPublicMailboxRespData struct {
 	PublicMailboxId *string `json:"public_mailbox_id,omitempty"` // The unique ID of a public mailbox
-	Email           *string `json:"email,omitempty"`             // The public mailbox's email address
-	Name            *string `json:"name,omitempty"`              // The public mailbox's display name
 
+	Email *string `json:"email,omitempty"` // The public mailbox's email address
+
+	Name *string `json:"name,omitempty"` // The public mailbox's display name
+
+	Geo *string `json:"geo,omitempty"` // 数据驻留地
 }
 
 type PatchPublicMailboxResp struct {
@@ -4238,9 +4441,12 @@ type UpdatePublicMailboxReq struct {
 
 type UpdatePublicMailboxRespData struct {
 	PublicMailboxId *string `json:"public_mailbox_id,omitempty"` // The unique ID of a public mailbox
-	Email           *string `json:"email,omitempty"`             // The public mailbox's email address
-	Name            *string `json:"name,omitempty"`              // The public mailbox's display name
 
+	Email *string `json:"email,omitempty"` // The public mailbox's email address
+
+	Name *string `json:"name,omitempty"` // The public mailbox's display name
+
+	Geo *string `json:"geo,omitempty"` // 数据驻留地
 }
 
 type UpdatePublicMailboxResp struct {
@@ -4724,8 +4930,10 @@ type CreatePublicMailboxMemberReq struct {
 
 type CreatePublicMailboxMemberRespData struct {
 	MemberId *string `json:"member_id,omitempty"` // The unique ID of a member in this public mailbox
-	UserId   *string `json:"user_id,omitempty"`   // The member's user id. Value is valid when type is USER
-	Type     *string `json:"type,omitempty"`      // The type of member. Possible values are:;- USER: internal user in the team
+
+	UserId *string `json:"user_id,omitempty"` // The member's user id. Value is valid when type is USER
+
+	Type *string `json:"type,omitempty"` // The type of member. Possible values are:;- USER: internal user in the team
 }
 
 type CreatePublicMailboxMemberResp struct {
@@ -4838,8 +5046,10 @@ type GetPublicMailboxMemberReq struct {
 
 type GetPublicMailboxMemberRespData struct {
 	MemberId *string `json:"member_id,omitempty"` // The unique ID of a member in this public mailbox
-	UserId   *string `json:"user_id,omitempty"`   // The member's user id. Value is valid when type is USER
-	Type     *string `json:"type,omitempty"`      // The type of member. Possible values are:;- USER: internal user in the team
+
+	UserId *string `json:"user_id,omitempty"` // The member's user id. Value is valid when type is USER
+
+	Type *string `json:"type,omitempty"` // The type of member. Possible values are:;- USER: internal user in the team
 }
 
 type GetPublicMailboxMemberResp struct {
@@ -4920,9 +5130,11 @@ type ListPublicMailboxMemberReq struct {
 }
 
 type ListPublicMailboxMemberRespData struct {
-	HasMore   *bool                  `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string                `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*PublicMailboxMember `json:"items,omitempty"`      // 公共邮箱成员列表
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*PublicMailboxMember `json:"items,omitempty"` // 公共邮箱成员列表
 }
 
 type ListPublicMailboxMemberResp struct {

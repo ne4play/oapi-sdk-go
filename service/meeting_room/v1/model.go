@@ -18,13 +18,15 @@ import (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -125,12 +127,14 @@ func (builder *MeetingRoomBuilder) Build() *MeetingRoom {
 
 type UserInfo struct {
 	OpenId *string `json:"open_id,omitempty"` //
+
 	UserId *string `json:"user_id,omitempty"` // 用户在ISV下的唯一标识，申请了"获取用户 user ID"权限后才会返回
 }
 
 type UserInfoBuilder struct {
 	openId     string //
 	openIdFlag bool
+
 	userId     string // 用户在ISV下的唯一标识，申请了"获取用户 user ID"权限后才会返回
 	userIdFlag bool
 }
@@ -171,7 +175,8 @@ func (builder *UserInfoBuilder) Build() *UserInfo {
 
 type P2MeetingRoomCreatedV1Data struct {
 	RoomName *string `json:"room_name,omitempty"` //
-	RoomId   *string `json:"room_id,omitempty"`   //
+
+	RoomId *string `json:"room_id,omitempty"` //
 }
 
 type P2MeetingRoomCreatedV1 struct {
@@ -186,7 +191,8 @@ func (m *P2MeetingRoomCreatedV1) RawReq(req *larkevent.EventReq) {
 
 type P2MeetingRoomDeletedV1Data struct {
 	RoomName *string `json:"room_name,omitempty"` //
-	RoomId   *string `json:"room_id,omitempty"`   //
+
+	RoomId *string `json:"room_id,omitempty"` //
 }
 
 type P2MeetingRoomDeletedV1 struct {
@@ -201,7 +207,8 @@ func (m *P2MeetingRoomDeletedV1) RawReq(req *larkevent.EventReq) {
 
 type P2MeetingRoomStatusChangedV1Data struct {
 	RoomName *string `json:"room_name,omitempty"` // 会议室名称
-	RoomId   *string `json:"room_id,omitempty"`   // 会议室 ID
+
+	RoomId *string `json:"room_id,omitempty"` // 会议室 ID
 }
 
 type P2MeetingRoomStatusChangedV1 struct {
@@ -216,7 +223,8 @@ func (m *P2MeetingRoomStatusChangedV1) RawReq(req *larkevent.EventReq) {
 
 type P2MeetingRoomUpdatedV1Data struct {
 	RoomName *string `json:"room_name,omitempty"` //
-	RoomId   *string `json:"room_id,omitempty"`   //
+
+	RoomId *string `json:"room_id,omitempty"` //
 }
 
 type P2MeetingRoomUpdatedV1 struct {

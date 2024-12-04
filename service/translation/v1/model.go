@@ -18,13 +18,15 @@ import (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -63,14 +65,16 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type Term struct {
 	From *string `json:"from,omitempty"` // 原文
-	To   *string `json:"to,omitempty"`   // 译文
+
+	To *string `json:"to,omitempty"` // 译文
 }
 
 type TermBuilder struct {
 	from     string // 原文
 	fromFlag bool
-	to       string // 译文
-	toFlag   bool
+
+	to     string // 译文
+	toFlag bool
 }
 
 func NewTermBuilder() *TermBuilder {
@@ -219,12 +223,15 @@ func (resp *DetectTextResp) Success() bool {
 type TranslateTextReqBodyBuilder struct {
 	sourceLanguage     string // 源语言
 	sourceLanguageFlag bool
-	text               string // 源文本
-	textFlag           bool
+
+	text     string // 源文本
+	textFlag bool
+
 	targetLanguage     string // 目标语言
 	targetLanguageFlag bool
-	glossary           []*Term // 请求级术语表，携带术语，仅在本次翻译中生效（最多能携带 128个术语词）
-	glossaryFlag       bool
+
+	glossary     []*Term // 请求级术语表，携带术语，仅在本次翻译中生效（最多能携带 128个术语词）
+	glossaryFlag bool
 }
 
 func NewTranslateTextReqBodyBuilder() *TranslateTextReqBodyBuilder {
@@ -383,9 +390,12 @@ func (builder *TranslateTextReqBuilder) Build() *TranslateTextReq {
 
 type TranslateTextReqBody struct {
 	SourceLanguage *string `json:"source_language,omitempty"` // 源语言
-	Text           *string `json:"text,omitempty"`            // 源文本
+
+	Text *string `json:"text,omitempty"` // 源文本
+
 	TargetLanguage *string `json:"target_language,omitempty"` // 目标语言
-	Glossary       []*Term `json:"glossary,omitempty"`        // 请求级术语表，携带术语，仅在本次翻译中生效（最多能携带 128个术语词）
+
+	Glossary []*Term `json:"glossary,omitempty"` // 请求级术语表，携带术语，仅在本次翻译中生效（最多能携带 128个术语词）
 }
 
 type TranslateTextReq struct {

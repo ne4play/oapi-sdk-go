@@ -68,16 +68,20 @@ const (
 )
 
 type AppFeedNotify struct {
-	CloseNotify     *bool   `json:"close_notify,omitempty"`      // 是否关闭通知
+	CloseNotify *bool `json:"close_notify,omitempty"` // 是否关闭通知
+
 	CustomSoundText *string `json:"custom_sound_text,omitempty"` // 自定义语音播报文本内容
-	WithCustomSound *bool   `json:"with_custom_sound,omitempty"` // 是否播报自定义语音
+
+	WithCustomSound *bool `json:"with_custom_sound,omitempty"` // 是否播报自定义语音
 }
 
 type AppFeedNotifyBuilder struct {
-	closeNotify         bool // 是否关闭通知
-	closeNotifyFlag     bool
+	closeNotify     bool // 是否关闭通知
+	closeNotifyFlag bool
+
 	customSoundText     string // 自定义语音播报文本内容
 	customSoundTextFlag bool
+
 	withCustomSound     bool // 是否播报自定义语音
 	withCustomSoundFlag bool
 }
@@ -134,11 +138,15 @@ func (builder *AppFeedNotifyBuilder) Build() *AppFeedNotify {
 type ChatCommonHeader struct {
 	ChatId *string `json:"chat_id,omitempty"` // 群ID
 
+	BotId *string `json:"bot_id,omitempty"` // botid，不对外展示
 }
 
 type ChatCommonHeaderBuilder struct {
 	chatId     string // 群ID
 	chatIdFlag bool
+
+	botId     string // botid，不对外展示
+	botIdFlag bool
 }
 
 func NewChatCommonHeaderBuilder() *ChatCommonHeaderBuilder {
@@ -155,6 +163,15 @@ func (builder *ChatCommonHeaderBuilder) ChatId(chatId string) *ChatCommonHeaderB
 	return builder
 }
 
+// botid，不对外展示
+//
+// 示例值：0
+func (builder *ChatCommonHeaderBuilder) BotId(botId string) *ChatCommonHeaderBuilder {
+	builder.botId = botId
+	builder.botIdFlag = true
+	return builder
+}
+
 func (builder *ChatCommonHeaderBuilder) Build() *ChatCommonHeader {
 	req := &ChatCommonHeader{}
 	if builder.chatIdFlag {
@@ -166,36 +183,52 @@ func (builder *ChatCommonHeaderBuilder) Build() *ChatCommonHeader {
 }
 
 type ChatPin struct {
-	ChatPinId           *string     `json:"chat_pin_id,omitempty"`            // 置顶ID
-	ChatId              *string     `json:"chat_id,omitempty"`                // 群ID
-	ChatPinType         *string     `json:"chat_pin_type,omitempty"`          // 置顶类型
-	CreateTime          *string     `json:"create_time,omitempty"`            // 置顶创建时间，毫秒级别
-	ChatterId           *string     `json:"chatter_id,omitempty"`             // 创建置顶的操作者ID
-	IsFixed             *bool       `json:"is_fixed,omitempty"`               // 该置顶是否固定在置顶列表的最前面
-	OperateFixChatterId *string     `json:"operate_fix_chatter_id,omitempty"` // 固定置顶到置顶列表前面的操作者ID
-	MessagePinData      *MessagePin `json:"message_pin_data,omitempty"`       // 消息置顶数据
-	UrlPinData          *UrlPin     `json:"url_pin_data,omitempty"`           // url类型置顶数据
+	ChatPinId *string `json:"chat_pin_id,omitempty"` // 置顶ID
+
+	ChatId *string `json:"chat_id,omitempty"` // 群ID
+
+	ChatPinType *string `json:"chat_pin_type,omitempty"` // 置顶类型
+
+	CreateTime *string `json:"create_time,omitempty"` // 置顶创建时间，毫秒级别
+
+	ChatterId *string `json:"chatter_id,omitempty"` // 创建置顶的操作者ID
+
+	IsFixed *bool `json:"is_fixed,omitempty"` // 该置顶是否固定在置顶列表的最前面
+
+	OperateFixChatterId *string `json:"operate_fix_chatter_id,omitempty"` // 固定置顶到置顶列表前面的操作者ID
+
+	MessagePinData *MessagePin `json:"message_pin_data,omitempty"` // 消息置顶数据
+
+	UrlPinData *UrlPin `json:"url_pin_data,omitempty"` // url类型置顶数据
 }
 
 type ChatPinBuilder struct {
-	chatPinId               string // 置顶ID
-	chatPinIdFlag           bool
-	chatId                  string // 群ID
-	chatIdFlag              bool
-	chatPinType             string // 置顶类型
-	chatPinTypeFlag         bool
-	createTime              string // 置顶创建时间，毫秒级别
-	createTimeFlag          bool
-	chatterId               string // 创建置顶的操作者ID
-	chatterIdFlag           bool
-	isFixed                 bool // 该置顶是否固定在置顶列表的最前面
-	isFixedFlag             bool
+	chatPinId     string // 置顶ID
+	chatPinIdFlag bool
+
+	chatId     string // 群ID
+	chatIdFlag bool
+
+	chatPinType     string // 置顶类型
+	chatPinTypeFlag bool
+
+	createTime     string // 置顶创建时间，毫秒级别
+	createTimeFlag bool
+
+	chatterId     string // 创建置顶的操作者ID
+	chatterIdFlag bool
+
+	isFixed     bool // 该置顶是否固定在置顶列表的最前面
+	isFixedFlag bool
+
 	operateFixChatterId     string // 固定置顶到置顶列表前面的操作者ID
 	operateFixChatterIdFlag bool
-	messagePinData          *MessagePin // 消息置顶数据
-	messagePinDataFlag      bool
-	urlPinData              *UrlPin // url类型置顶数据
-	urlPinDataFlag          bool
+
+	messagePinData     *MessagePin // 消息置顶数据
+	messagePinDataFlag bool
+
+	urlPinData     *UrlPin // url类型置顶数据
+	urlPinDataFlag bool
 }
 
 func NewChatPinBuilder() *ChatPinBuilder {
@@ -325,14 +358,16 @@ func (builder *ChatPinBuilder) Build() *ChatPin {
 
 type ChatPinIcon struct {
 	ChatPinIconType *string `json:"chat_pin_icon_type,omitempty"` // 图标类型
-	IconKey         *string `json:"icon_key,omitempty"`           // 图标key
+
+	IconKey *string `json:"icon_key,omitempty"` // 图标key
 }
 
 type ChatPinIconBuilder struct {
 	chatPinIconType     string // 图标类型
 	chatPinIconTypeFlag bool
-	iconKey             string // 图标key
-	iconKeyFlag         bool
+
+	iconKey     string // 图标key
+	iconKeyFlag bool
 }
 
 func NewChatPinIconBuilder() *ChatPinIconBuilder {
@@ -372,16 +407,20 @@ func (builder *ChatPinIconBuilder) Build() *ChatPinIcon {
 }
 
 type CreateTag struct {
-	TagType   *string        `json:"tag_type,omitempty"`   // 标签类型
-	Name      *string        `json:"name,omitempty"`       // 标签默认名称
+	TagType *string `json:"tag_type,omitempty"` // 标签类型
+
+	Name *string `json:"name,omitempty"` // 标签默认名称
+
 	I18nNames []*TagI18nName `json:"i18n_names,omitempty"` // i18n标签名称集合
 }
 
 type CreateTagBuilder struct {
-	tagType       string // 标签类型
-	tagTypeFlag   bool
-	name          string // 标签默认名称
-	nameFlag      bool
+	tagType     string // 标签类型
+	tagTypeFlag bool
+
+	name     string // 标签默认名称
+	nameFlag bool
+
 	i18nNames     []*TagI18nName // i18n标签名称集合
 	i18nNamesFlag bool
 }
@@ -467,13 +506,15 @@ func (builder *CreateTagFailReasonBuilder) Build() *CreateTagFailReason {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -511,18 +552,22 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type FailedReason struct {
-	ErrorCode    *int    `json:"error_code,omitempty"`    // 错误码
+	ErrorCode *int `json:"error_code,omitempty"` // 错误码
+
 	ErrorMessage *string `json:"error_message,omitempty"` // 错误信息
-	UserId       *string `json:"user_id,omitempty"`       // 用户id
+
+	UserId *string `json:"user_id,omitempty"` // 用户id
 }
 
 type FailedReasonBuilder struct {
-	errorCode        int // 错误码
-	errorCodeFlag    bool
+	errorCode     int // 错误码
+	errorCodeFlag bool
+
 	errorMessage     string // 错误信息
 	errorMessageFlag bool
-	userId           string // 用户id
-	userIdFlag       bool
+
+	userId     string // 用户id
+	userIdFlag bool
 }
 
 func NewFailedReasonBuilder() *FailedReasonBuilder {
@@ -575,16 +620,20 @@ func (builder *FailedReasonBuilder) Build() *FailedReason {
 }
 
 type FeedCardDisplayRuleFailedItem struct {
-	Id           *string `json:"id,omitempty"`            // ..
-	ErrorCode    *int    `json:"error_code,omitempty"`    // ..
+	Id *string `json:"id,omitempty"` // ..
+
+	ErrorCode *int `json:"error_code,omitempty"` // ..
+
 	ErrorMessage *string `json:"error_message,omitempty"` // ..
 }
 
 type FeedCardDisplayRuleFailedItemBuilder struct {
-	id               string // ..
-	idFlag           bool
-	errorCode        int // ..
-	errorCodeFlag    bool
+	id     string // ..
+	idFlag bool
+
+	errorCode     int // ..
+	errorCodeFlag bool
+
 	errorMessage     string // ..
 	errorMessageFlag bool
 }
@@ -639,16 +688,20 @@ func (builder *FeedCardDisplayRuleFailedItemBuilder) Build() *FeedCardDisplayRul
 }
 
 type FeedCardDisplayRuleUpdater struct {
-	Id                        *string              `json:"id,omitempty"`                            // id
-	DisplayFeedRule           *OpenDisplayFeedRule `json:"display_feed_rule,omitempty"`             // 消息展示规则
-	DisplayFeedRuleUpdateType *string              `json:"display_feed_rule_update_type,omitempty"` // 消息展示规则更新类型
+	Id *string `json:"id,omitempty"` // id
+
+	DisplayFeedRule *OpenDisplayFeedRule `json:"display_feed_rule,omitempty"` // 消息展示规则
+
+	DisplayFeedRuleUpdateType *string `json:"display_feed_rule_update_type,omitempty"` // 消息展示规则更新类型
 }
 
 type FeedCardDisplayRuleUpdaterBuilder struct {
-	id                            string // id
-	idFlag                        bool
-	displayFeedRule               *OpenDisplayFeedRule // 消息展示规则
-	displayFeedRuleFlag           bool
+	id     string // id
+	idFlag bool
+
+	displayFeedRule     *OpenDisplayFeedRule // 消息展示规则
+	displayFeedRuleFlag bool
+
 	displayFeedRuleUpdateType     string // 消息展示规则更新类型
 	displayFeedRuleUpdateTypeFlag bool
 }
@@ -702,16 +755,20 @@ func (builder *FeedCardDisplayRuleUpdaterBuilder) Build() *FeedCardDisplayRuleUp
 }
 
 type FeedCardSettingFailedItem struct {
-	FeedCardId   *string `json:"feed_card_id,omitempty"`  // 消息流卡片 ID
-	ErrorCode    *int    `json:"error_code,omitempty"`    // 错误码
+	FeedCardId *string `json:"feed_card_id,omitempty"` // 消息流卡片 ID
+
+	ErrorCode *int `json:"error_code,omitempty"` // 错误码
+
 	ErrorMessage *string `json:"error_message,omitempty"` // 错误信息
 }
 
 type FeedCardSettingFailedItemBuilder struct {
-	feedCardId       string // 消息流卡片 ID
-	feedCardIdFlag   bool
-	errorCode        int // 错误码
-	errorCodeFlag    bool
+	feedCardId     string // 消息流卡片 ID
+	feedCardIdFlag bool
+
+	errorCode     int // 错误码
+	errorCodeFlag bool
+
 	errorMessage     string // 错误信息
 	errorMessageFlag bool
 }
@@ -766,16 +823,20 @@ func (builder *FeedCardSettingFailedItemBuilder) Build() *FeedCardSettingFailedI
 }
 
 type FeedCardSettingUpdater struct {
-	FeedCardId            *string `json:"feed_card_id,omitempty"`             // 消息流卡片 ID
-	ReadTimestamp         *string `json:"read_timestamp,omitempty"`           // 标记已读的时间戳
-	MuteWithSystemMessage *bool   `json:"mute_with_system_message,omitempty"` // 免打扰操作是否发送系统消息
+	FeedCardId *string `json:"feed_card_id,omitempty"` // 消息流卡片 ID
+
+	ReadTimestamp *string `json:"read_timestamp,omitempty"` // 标记已读的时间戳
+
+	MuteWithSystemMessage *bool `json:"mute_with_system_message,omitempty"` // 免打扰操作是否发送系统消息
 }
 
 type FeedCardSettingUpdaterBuilder struct {
-	feedCardId                string // 消息流卡片 ID
-	feedCardIdFlag            bool
-	readTimestamp             string // 标记已读的时间戳
-	readTimestampFlag         bool
+	feedCardId     string // 消息流卡片 ID
+	feedCardIdFlag bool
+
+	readTimestamp     string // 标记已读的时间戳
+	readTimestampFlag bool
+
 	muteWithSystemMessage     bool // 免打扰操作是否发送系统消息
 	muteWithSystemMessageFlag bool
 }
@@ -830,21 +891,27 @@ func (builder *FeedCardSettingUpdaterBuilder) Build() *FeedCardSettingUpdater {
 }
 
 type FeedGroup struct {
-	GroupId *string         `json:"group_id,omitempty"` // 标签 ID
-	Type    *string         `json:"type,omitempty"`     // 标签类型
-	Name    *string         `json:"name,omitempty"`     // 标签名
-	Rules   *FeedGroupRules `json:"rules,omitempty"`    // 标签规则
+	GroupId *string `json:"group_id,omitempty"` // 标签 ID
+
+	Type *string `json:"type,omitempty"` // 标签类型
+
+	Name *string `json:"name,omitempty"` // 标签名
+
+	Rules *FeedGroupRules `json:"rules,omitempty"` // 标签规则
 }
 
 type FeedGroupBuilder struct {
 	groupId     string // 标签 ID
 	groupIdFlag bool
-	type_       string // 标签类型
-	typeFlag    bool
-	name        string // 标签名
-	nameFlag    bool
-	rules       *FeedGroupRules // 标签规则
-	rulesFlag   bool
+
+	type_    string // 标签类型
+	typeFlag bool
+
+	name     string // 标签名
+	nameFlag bool
+
+	rules     *FeedGroupRules // 标签规则
+	rulesFlag bool
 }
 
 func NewFeedGroupBuilder() *FeedGroupBuilder {
@@ -909,16 +976,20 @@ func (builder *FeedGroupBuilder) Build() *FeedGroup {
 }
 
 type FeedGroupCreator struct {
-	Type  *string         `json:"type,omitempty"`  // 标签类型
-	Name  *string         `json:"name,omitempty"`  // 标签名
+	Type *string `json:"type,omitempty"` // 标签类型
+
+	Name *string `json:"name,omitempty"` // 标签名
+
 	Rules *FeedGroupRules `json:"rules,omitempty"` // 标签规则
 }
 
 type FeedGroupCreatorBuilder struct {
-	type_     string // 标签类型
-	typeFlag  bool
-	name      string // 标签名
-	nameFlag  bool
+	type_    string // 标签类型
+	typeFlag bool
+
+	name     string // 标签名
+	nameFlag bool
+
 	rules     *FeedGroupRules // 标签规则
 	rulesFlag bool
 }
@@ -972,13 +1043,15 @@ func (builder *FeedGroupCreatorBuilder) Build() *FeedGroupCreator {
 }
 
 type FeedGroupItem struct {
-	FeedId   *string `json:"feed_id,omitempty"`   // 消息卡片 ID
+	FeedId *string `json:"feed_id,omitempty"` // 消息卡片 ID
+
 	FeedType *string `json:"feed_type,omitempty"` // 消息卡片类型
 }
 
 type FeedGroupItemBuilder struct {
-	feedId       string // 消息卡片 ID
-	feedIdFlag   bool
+	feedId     string // 消息卡片 ID
+	feedIdFlag bool
+
 	feedType     string // 消息卡片类型
 	feedTypeFlag bool
 }
@@ -1021,14 +1094,16 @@ func (builder *FeedGroupItemBuilder) Build() *FeedGroupItem {
 
 type FeedGroupRule struct {
 	Condition *FeedGroupRuleCond `json:"condition,omitempty"` // 条件
-	Action    *string            `json:"action,omitempty"`    // 动作
+
+	Action *string `json:"action,omitempty"` // 动作
 }
 
 type FeedGroupRuleBuilder struct {
 	condition     *FeedGroupRuleCond // 条件
 	conditionFlag bool
-	action        string // 动作
-	actionFlag    bool
+
+	action     string // 动作
+	actionFlag bool
 }
 
 func NewFeedGroupRuleBuilder() *FeedGroupRuleBuilder {
@@ -1067,13 +1142,15 @@ func (builder *FeedGroupRuleBuilder) Build() *FeedGroupRule {
 }
 
 type FeedGroupRuleCond struct {
-	MatchType      *string                  `json:"match_type,omitempty"`      // 匹配类型
+	MatchType *string `json:"match_type,omitempty"` // 匹配类型
+
 	ConditionItems []*FeedGroupRuleCondItem `json:"condition_items,omitempty"` // 条件项列表
 }
 
 type FeedGroupRuleCondBuilder struct {
-	matchType          string // 匹配类型
-	matchTypeFlag      bool
+	matchType     string // 匹配类型
+	matchTypeFlag bool
+
 	conditionItems     []*FeedGroupRuleCondItem // 条件项列表
 	conditionItemsFlag bool
 }
@@ -1114,22 +1191,30 @@ func (builder *FeedGroupRuleCondBuilder) Build() *FeedGroupRuleCond {
 }
 
 type FeedGroupRuleCondItem struct {
-	Type     *string `json:"type,omitempty"`      // 条件类型
-	Operator *string `json:"operator,omitempty"`  // 操作符
-	Keyword  *string `json:"keyword,omitempty"`   // 关键词
-	UserId   *string `json:"user_id,omitempty"`   // 用户 ID
+	Type *string `json:"type,omitempty"` // 条件类型
+
+	Operator *string `json:"operator,omitempty"` // 操作符
+
+	Keyword *string `json:"keyword,omitempty"` // 关键词
+
+	UserId *string `json:"user_id,omitempty"` // 用户 ID
+
 	ChatType *string `json:"chat_type,omitempty"` // 会话类型
 }
 
 type FeedGroupRuleCondItemBuilder struct {
-	type_        string // 条件类型
-	typeFlag     bool
+	type_    string // 条件类型
+	typeFlag bool
+
 	operator     string // 操作符
 	operatorFlag bool
-	keyword      string // 关键词
-	keywordFlag  bool
-	userId       string // 用户 ID
-	userIdFlag   bool
+
+	keyword     string // 关键词
+	keywordFlag bool
+
+	userId     string // 用户 ID
+	userIdFlag bool
+
 	chatType     string // 会话类型
 	chatTypeFlag bool
 }
@@ -1241,19 +1326,25 @@ func (builder *FeedGroupRulesBuilder) Build() *FeedGroupRules {
 }
 
 type FeedGroupUpdater struct {
-	GroupId      *string         `json:"group_id,omitempty"`      // 标签 ID
-	Name         *string         `json:"name,omitempty"`          // 标签名
-	Rules        *FeedGroupRules `json:"rules,omitempty"`         // 标签规则列表
-	UpdateFields []string        `json:"update_fields,omitempty"` // 更新字段列表
+	GroupId *string `json:"group_id,omitempty"` // 标签 ID
+
+	Name *string `json:"name,omitempty"` // 标签名
+
+	Rules *FeedGroupRules `json:"rules,omitempty"` // 标签规则列表
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 更新字段列表
 }
 
 type FeedGroupUpdaterBuilder struct {
-	groupId          string // 标签 ID
-	groupIdFlag      bool
-	name             string // 标签名
-	nameFlag         bool
-	rules            *FeedGroupRules // 标签规则列表
-	rulesFlag        bool
+	groupId     string // 标签 ID
+	groupIdFlag bool
+
+	name     string // 标签名
+	nameFlag bool
+
+	rules     *FeedGroupRules // 标签规则列表
+	rulesFlag bool
+
 	updateFields     []string // 更新字段列表
 	updateFieldsFlag bool
 }
@@ -1319,16 +1410,20 @@ func (builder *FeedGroupUpdaterBuilder) Build() *FeedGroupUpdater {
 }
 
 type GroupFailedReason struct {
-	GroupId      *string `json:"group_id,omitempty"`      // 标签 ID
-	ErrorCode    *int    `json:"error_code,omitempty"`    // 错误码
+	GroupId *string `json:"group_id,omitempty"` // 标签 ID
+
+	ErrorCode *int `json:"error_code,omitempty"` // 错误码
+
 	ErrorMessage *string `json:"error_message,omitempty"` // 错误信息
 }
 
 type GroupFailedReasonBuilder struct {
-	groupId          string // 标签 ID
-	groupIdFlag      bool
-	errorCode        int // 错误码
-	errorCodeFlag    bool
+	groupId     string // 标签 ID
+	groupIdFlag bool
+
+	errorCode     int // 错误码
+	errorCodeFlag bool
+
 	errorMessage     string // 错误信息
 	errorMessageFlag bool
 }
@@ -1383,16 +1478,20 @@ func (builder *GroupFailedReasonBuilder) Build() *GroupFailedReason {
 }
 
 type GroupItemFailedReason struct {
-	Item         *FeedGroupItem `json:"item,omitempty"`          // 标签项
-	ErrorCode    *int           `json:"error_code,omitempty"`    // 错误码
-	ErrorMessage *string        `json:"error_message,omitempty"` // 错误消息
+	Item *FeedGroupItem `json:"item,omitempty"` // 标签项
+
+	ErrorCode *int `json:"error_code,omitempty"` // 错误码
+
+	ErrorMessage *string `json:"error_message,omitempty"` // 错误消息
 }
 
 type GroupItemFailedReasonBuilder struct {
-	item             *FeedGroupItem // 标签项
-	itemFlag         bool
-	errorCode        int // 错误码
-	errorCodeFlag    bool
+	item     *FeedGroupItem // 标签项
+	itemFlag bool
+
+	errorCode     int // 错误码
+	errorCodeFlag bool
+
 	errorMessage     string // 错误消息
 	errorMessageFlag bool
 }
@@ -1447,15 +1546,19 @@ func (builder *GroupItemFailedReasonBuilder) Build() *GroupItemFailedReason {
 
 type I18nNames struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文名称
+
 	EnUs *string `json:"en_us,omitempty"` // 英文名称
+
 	JaJp *string `json:"ja_jp,omitempty"` // 日文名称
 }
 
 type I18nNamesBuilder struct {
 	zhCn     string // 中文名称
 	zhCnFlag bool
+
 	enUs     string // 英文名称
 	enUsFlag bool
+
 	jaJp     string // 日文名称
 	jaJpFlag bool
 }
@@ -1510,13 +1613,25 @@ func (builder *I18nNamesBuilder) Build() *I18nNames {
 }
 
 type MessageCommonHeader struct {
+	BotId *string `json:"bot_id,omitempty"` // botid，不对外展示
 }
 
 type MessageCommonHeaderBuilder struct {
+	botId     string // botid，不对外展示
+	botIdFlag bool
 }
 
 func NewMessageCommonHeaderBuilder() *MessageCommonHeaderBuilder {
 	builder := &MessageCommonHeaderBuilder{}
+	return builder
+}
+
+// botid，不对外展示
+//
+// 示例值：0
+func (builder *MessageCommonHeaderBuilder) BotId(botId string) *MessageCommonHeaderBuilder {
+	builder.botId = botId
+	builder.botIdFlag = true
 	return builder
 }
 
@@ -1527,13 +1642,15 @@ func (builder *MessageCommonHeaderBuilder) Build() *MessageCommonHeader {
 }
 
 type MessageLink struct {
-	Token    *string `json:"token,omitempty"`     // 消息链接化Token
+	Token *string `json:"token,omitempty"` // 消息链接化Token
+
 	TokenUrl *string `json:"token_url,omitempty"` // 消息链接化URL
 }
 
 type MessageLinkBuilder struct {
-	token        string // 消息链接化Token
-	tokenFlag    bool
+	token     string // 消息链接化Token
+	tokenFlag bool
+
 	tokenUrl     string // 消息链接化URL
 	tokenUrlFlag bool
 }
@@ -1607,36 +1724,52 @@ func (builder *MessagePinBuilder) Build() *MessagePin {
 }
 
 type OpenAppFeedCard struct {
-	BizId         *string                 `json:"biz_id,omitempty"`         // 业务 ID
-	Title         *string                 `json:"title,omitempty"`          // 主标题
-	AvatarKey     *string                 `json:"avatar_key,omitempty"`     // 头像 key
-	Preview       *string                 `json:"preview,omitempty"`        // 预览信息
-	StatusLabel   *OpenFeedStatusLabel    `json:"status_label,omitempty"`   // 状态标签
-	Buttons       *OpenAppFeedCardButtons `json:"buttons,omitempty"`        // 交互按钮
-	Link          *OpenAppFeedLink        `json:"link,omitempty"`           // 跳转链接
-	TimeSensitive *bool                   `json:"time_sensitive,omitempty"` // 即时提醒状态，true-打开，false-关闭
-	Notify        *AppFeedNotify          `json:"notify,omitempty"`         // 通知设置，当前可设置通知是否关闭，为空时默认进行通知
+	BizId *string `json:"biz_id,omitempty"` // 业务 ID
+
+	Title *string `json:"title,omitempty"` // 主标题
+
+	AvatarKey *string `json:"avatar_key,omitempty"` // 头像 key
+
+	Preview *string `json:"preview,omitempty"` // 预览信息
+
+	StatusLabel *OpenFeedStatusLabel `json:"status_label,omitempty"` // 状态标签
+
+	Buttons *OpenAppFeedCardButtons `json:"buttons,omitempty"` // 交互按钮
+
+	Link *OpenAppFeedLink `json:"link,omitempty"` // 跳转链接
+
+	TimeSensitive *bool `json:"time_sensitive,omitempty"` // 即时提醒状态，true-打开，false-关闭
+
+	Notify *AppFeedNotify `json:"notify,omitempty"` // 通知设置，当前可设置通知是否关闭，为空时默认进行通知
 }
 
 type OpenAppFeedCardBuilder struct {
-	bizId             string // 业务 ID
-	bizIdFlag         bool
-	title             string // 主标题
-	titleFlag         bool
-	avatarKey         string // 头像 key
-	avatarKeyFlag     bool
-	preview           string // 预览信息
-	previewFlag       bool
-	statusLabel       *OpenFeedStatusLabel // 状态标签
-	statusLabelFlag   bool
-	buttons           *OpenAppFeedCardButtons // 交互按钮
-	buttonsFlag       bool
-	link              *OpenAppFeedLink // 跳转链接
-	linkFlag          bool
+	bizId     string // 业务 ID
+	bizIdFlag bool
+
+	title     string // 主标题
+	titleFlag bool
+
+	avatarKey     string // 头像 key
+	avatarKeyFlag bool
+
+	preview     string // 预览信息
+	previewFlag bool
+
+	statusLabel     *OpenFeedStatusLabel // 状态标签
+	statusLabelFlag bool
+
+	buttons     *OpenAppFeedCardButtons // 交互按钮
+	buttonsFlag bool
+
+	link     *OpenAppFeedLink // 跳转链接
+	linkFlag bool
+
 	timeSensitive     bool // 即时提醒状态，true-打开，false-关闭
 	timeSensitiveFlag bool
-	notify            *AppFeedNotify // 通知设置，当前可设置通知是否关闭，为空时默认进行通知
-	notifyFlag        bool
+
+	notify     *AppFeedNotify // 通知设置，当前可设置通知是否关闭，为空时默认进行通知
+	notifyFlag bool
 }
 
 func NewOpenAppFeedCardBuilder() *OpenAppFeedCardBuilder {
@@ -1763,24 +1896,32 @@ func (builder *OpenAppFeedCardBuilder) Build() *OpenAppFeedCard {
 }
 
 type OpenAppFeedCardButton struct {
-	MultiUrl   *OpenAppFeedCardUrl  `json:"multi_url,omitempty"`   // 跳转 URL
-	ActionType *string              `json:"action_type,omitempty"` // 交互类型
-	Text       *OpenAppFeedCardText `json:"text,omitempty"`        // 文字
-	ButtonType *string              `json:"button_type,omitempty"` // 按钮类型
-	ActionMap  map[string]string    `json:"action_map,omitempty"`  // action 字典
+	MultiUrl *OpenAppFeedCardUrl `json:"multi_url,omitempty"` // 跳转 URL
+
+	ActionType *string `json:"action_type,omitempty"` // 交互类型
+
+	Text *OpenAppFeedCardText `json:"text,omitempty"` // 文字
+
+	ButtonType *string `json:"button_type,omitempty"` // 按钮类型
+
+	ActionMap map[string]string `json:"action_map,omitempty"` // action 字典
 }
 
 type OpenAppFeedCardButtonBuilder struct {
-	multiUrl       *OpenAppFeedCardUrl // 跳转 URL
-	multiUrlFlag   bool
+	multiUrl     *OpenAppFeedCardUrl // 跳转 URL
+	multiUrlFlag bool
+
 	actionType     string // 交互类型
 	actionTypeFlag bool
-	text           *OpenAppFeedCardText // 文字
-	textFlag       bool
+
+	text     *OpenAppFeedCardText // 文字
+	textFlag bool
+
 	buttonType     string // 按钮类型
 	buttonTypeFlag bool
-	actionMap      map[string]string // action 字典
-	actionMapFlag  bool
+
+	actionMap     map[string]string // action 字典
+	actionMapFlag bool
 }
 
 func NewOpenAppFeedCardButtonBuilder() *OpenAppFeedCardButtonBuilder {
@@ -1919,21 +2060,27 @@ func (builder *OpenAppFeedCardTextBuilder) Build() *OpenAppFeedCardText {
 }
 
 type OpenAppFeedCardUrl struct {
-	Url        *string `json:"url,omitempty"`         // 默认 URL
+	Url *string `json:"url,omitempty"` // 默认 URL
+
 	AndroidUrl *string `json:"android_url,omitempty"` // Android 平台 URL
-	IosUrl     *string `json:"ios_url,omitempty"`     // iOS 平台 URL
-	PcUrl      *string `json:"pc_url,omitempty"`      // PC URL
+
+	IosUrl *string `json:"ios_url,omitempty"` // iOS 平台 URL
+
+	PcUrl *string `json:"pc_url,omitempty"` // PC URL
 }
 
 type OpenAppFeedCardUrlBuilder struct {
-	url            string // 默认 URL
-	urlFlag        bool
+	url     string // 默认 URL
+	urlFlag bool
+
 	androidUrl     string // Android 平台 URL
 	androidUrlFlag bool
-	iosUrl         string // iOS 平台 URL
-	iosUrlFlag     bool
-	pcUrl          string // PC URL
-	pcUrlFlag      bool
+
+	iosUrl     string // iOS 平台 URL
+	iosUrlFlag bool
+
+	pcUrl     string // PC URL
+	pcUrlFlag bool
 }
 
 func NewOpenAppFeedCardUrlBuilder() *OpenAppFeedCardUrlBuilder {
@@ -2031,13 +2178,15 @@ func (builder *OpenAppFeedLinkBuilder) Build() *OpenAppFeedLink {
 }
 
 type OpenDisplayFeedRule struct {
-	MainRule *string  `json:"main_rule,omitempty"` // 主规则
+	MainRule *string `json:"main_rule,omitempty"` // 主规则
+
 	MsgTypes []string `json:"msg_types,omitempty"` // 重要新消息类型
 }
 
 type OpenDisplayFeedRuleBuilder struct {
 	mainRule     string // 主规则
 	mainRuleFlag bool
+
 	msgTypes     []string // 重要新消息类型
 	msgTypesFlag bool
 }
@@ -2078,16 +2227,20 @@ func (builder *OpenDisplayFeedRuleBuilder) Build() *OpenDisplayFeedRule {
 }
 
 type OpenFailedUserAppFeedCardItem struct {
-	BizId  *string `json:"biz_id,omitempty"`  // 业务 ID
+	BizId *string `json:"biz_id,omitempty"` // 业务 ID
+
 	UserId *string `json:"user_id,omitempty"` // 用户 ID
-	Reason *string `json:"reason,omitempty"`  // 原因
+
+	Reason *string `json:"reason,omitempty"` // 原因
 }
 
 type OpenFailedUserAppFeedCardItemBuilder struct {
-	bizId      string // 业务 ID
-	bizIdFlag  bool
+	bizId     string // 业务 ID
+	bizIdFlag bool
+
 	userId     string // 用户 ID
 	userIdFlag bool
+
 	reason     string // 原因
 	reasonFlag bool
 }
@@ -2143,12 +2296,14 @@ func (builder *OpenFailedUserAppFeedCardItemBuilder) Build() *OpenFailedUserAppF
 
 type OpenFeedStatusLabel struct {
 	Text *string `json:"text,omitempty"` // 标签文字
+
 	Type *string `json:"type,omitempty"` // 标签类型
 }
 
 type OpenFeedStatusLabelBuilder struct {
 	text     string // 标签文字
 	textFlag bool
+
 	type_    string // 标签类型
 	typeFlag bool
 }
@@ -2190,16 +2345,20 @@ func (builder *OpenFeedStatusLabelBuilder) Build() *OpenFeedStatusLabel {
 }
 
 type PatchTag struct {
-	Id        *string        `json:"id,omitempty"`         // tagid
-	Name      *string        `json:"name,omitempty"`       // tag name
+	Id *string `json:"id,omitempty"` // tagid
+
+	Name *string `json:"name,omitempty"` // tag name
+
 	I18nNames []*TagI18nName `json:"i18n_names,omitempty"` // i18n名称集合
 }
 
 type PatchTagBuilder struct {
-	id            string // tagid
-	idFlag        bool
-	name          string // tag name
-	nameFlag      bool
+	id     string // tagid
+	idFlag bool
+
+	name     string // tag name
+	nameFlag bool
+
 	i18nNames     []*TagI18nName // i18n名称集合
 	i18nNamesFlag bool
 }
@@ -2286,14 +2445,16 @@ func (builder *PatchTagFailReasonBuilder) Build() *PatchTagFailReason {
 
 type TagI18nName struct {
 	Locale *string `json:"locale,omitempty"` // 语言
-	Name   *string `json:"name,omitempty"`   // 名称
+
+	Name *string `json:"name,omitempty"` // 名称
 }
 
 type TagI18nNameBuilder struct {
 	locale     string // 语言
 	localeFlag bool
-	name       string // 名称
-	nameFlag   bool
+
+	name     string // 名称
+	nameFlag bool
 }
 
 func NewTagI18nNameBuilder() *TagI18nNameBuilder {
@@ -2333,31 +2494,45 @@ func (builder *TagI18nNameBuilder) Build() *TagI18nName {
 }
 
 type TagInfo struct {
-	Id         *string        `json:"id,omitempty"`          // id
-	TenantId   *string        `json:"tenant_id,omitempty"`   // 租户id
-	TagType    *string        `json:"tag_type,omitempty"`    // 标签类型
-	Name       *string        `json:"name,omitempty"`        // name
-	I18nNames  []*TagI18nName `json:"i18n_names,omitempty"`  // i18n name
-	CreatorId  *string        `json:"creator_id,omitempty"`  // 创建人
-	CreateTime *string        `json:"create_time,omitempty"` // 创建时间
-	UpdateTime *string        `json:"update_time,omitempty"` // 更新时间
+	Id *string `json:"id,omitempty"` // id
+
+	TenantId *string `json:"tenant_id,omitempty"` // 租户id
+
+	TagType *string `json:"tag_type,omitempty"` // 标签类型
+
+	Name *string `json:"name,omitempty"` // name
+
+	I18nNames []*TagI18nName `json:"i18n_names,omitempty"` // i18n name
+
+	CreatorId *string `json:"creator_id,omitempty"` // 创建人
+
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间
+
+	UpdateTime *string `json:"update_time,omitempty"` // 更新时间
 }
 
 type TagInfoBuilder struct {
-	id             string // id
-	idFlag         bool
-	tenantId       string // 租户id
-	tenantIdFlag   bool
-	tagType        string // 标签类型
-	tagTypeFlag    bool
-	name           string // name
-	nameFlag       bool
-	i18nNames      []*TagI18nName // i18n name
-	i18nNamesFlag  bool
-	creatorId      string // 创建人
-	creatorIdFlag  bool
+	id     string // id
+	idFlag bool
+
+	tenantId     string // 租户id
+	tenantIdFlag bool
+
+	tagType     string // 标签类型
+	tagTypeFlag bool
+
+	name     string // name
+	nameFlag bool
+
+	i18nNames     []*TagI18nName // i18n name
+	i18nNamesFlag bool
+
+	creatorId     string // 创建人
+	creatorIdFlag bool
+
 	createTime     string // 创建时间
 	createTimeFlag bool
+
 	updateTime     string // 更新时间
 	updateTimeFlag bool
 }
@@ -2476,13 +2651,15 @@ func (builder *TagInfoBuilder) Build() *TagInfo {
 }
 
 type TagInfoWithBindVersion struct {
-	TagInfo     *TagInfo `json:"tag_info,omitempty"`     // 标签内容
-	BindVersion *string  `json:"bind_version,omitempty"` // 绑定时间
+	TagInfo *TagInfo `json:"tag_info,omitempty"` // 标签内容
+
+	BindVersion *string `json:"bind_version,omitempty"` // 绑定时间
 }
 
 type TagInfoWithBindVersionBuilder struct {
-	tagInfo         *TagInfo // 标签内容
-	tagInfoFlag     bool
+	tagInfo     *TagInfo // 标签内容
+	tagInfoFlag bool
+
 	bindVersion     string // 绑定时间
 	bindVersionFlag bool
 }
@@ -2523,36 +2700,52 @@ func (builder *TagInfoWithBindVersionBuilder) Build() *TagInfoWithBindVersion {
 }
 
 type UnReadUrgentMessage struct {
-	Id          *string `json:"id,omitempty"`           // id
-	MessageId   *string `json:"message_id,omitempty"`   // 消息id
-	ChatterId   *string `json:"chatter_id,omitempty"`   // 加急接受者id
-	Status      *int    `json:"status,omitempty"`       // 加急状态
+	Id *string `json:"id,omitempty"` // id
+
+	MessageId *string `json:"message_id,omitempty"` // 消息id
+
+	ChatterId *string `json:"chatter_id,omitempty"` // 加急接受者id
+
+	Status *int `json:"status,omitempty"` // 加急状态
+
 	ConfirmTime *string `json:"confirm_time,omitempty"` // 确定时间
-	SendTime    *string `json:"send_time,omitempty"`    // 加急时间
-	Type        *int    `json:"type,omitempty"`         // 加急类型
-	FromId      *string `json:"from_id,omitempty"`      // 消息发送者
-	ChatId      *string `json:"chat_id,omitempty"`      // 群组id
+
+	SendTime *string `json:"send_time,omitempty"` // 加急时间
+
+	Type *int `json:"type,omitempty"` // 加急类型
+
+	FromId *string `json:"from_id,omitempty"` // 消息发送者
+
+	ChatId *string `json:"chat_id,omitempty"` // 群组id
 }
 
 type UnReadUrgentMessageBuilder struct {
-	id              string // id
-	idFlag          bool
-	messageId       string // 消息id
-	messageIdFlag   bool
-	chatterId       string // 加急接受者id
-	chatterIdFlag   bool
-	status          int // 加急状态
-	statusFlag      bool
+	id     string // id
+	idFlag bool
+
+	messageId     string // 消息id
+	messageIdFlag bool
+
+	chatterId     string // 加急接受者id
+	chatterIdFlag bool
+
+	status     int // 加急状态
+	statusFlag bool
+
 	confirmTime     string // 确定时间
 	confirmTimeFlag bool
-	sendTime        string // 加急时间
-	sendTimeFlag    bool
-	type_           int // 加急类型
-	typeFlag        bool
-	fromId          string // 消息发送者
-	fromIdFlag      bool
-	chatId          string // 群组id
-	chatIdFlag      bool
+
+	sendTime     string // 加急时间
+	sendTimeFlag bool
+
+	type_    int // 加急类型
+	typeFlag bool
+
+	fromId     string // 消息发送者
+	fromIdFlag bool
+
+	chatId     string // 群组id
+	chatIdFlag bool
 }
 
 func NewUnReadUrgentMessageBuilder() *UnReadUrgentMessageBuilder {
@@ -2683,33 +2876,47 @@ func (builder *UnReadUrgentMessageBuilder) Build() *UnReadUrgentMessage {
 }
 
 type UnreadAtMessage struct {
-	MessageId    *string `json:"message_id,omitempty"`     // 消息id
-	FromId       *string `json:"from_id,omitempty"`        // 消息发送者
-	ChatId       *string `json:"chat_id,omitempty"`        // 群组id
-	CreateTime   *string `json:"create_time,omitempty"`    // 发送时间
+	MessageId *string `json:"message_id,omitempty"` // 消息id
+
+	FromId *string `json:"from_id,omitempty"` // 消息发送者
+
+	ChatId *string `json:"chat_id,omitempty"` // 群组id
+
+	CreateTime *string `json:"create_time,omitempty"` // 发送时间
+
 	CreateTimeMs *string `json:"create_time_ms,omitempty"` // 发送时间毫秒
+
 	UpdateTimeMs *string `json:"update_time_ms,omitempty"` // 更新时间毫秒
-	Type         *int    `json:"type,omitempty"`           // 消息类型
-	IsAtAll      *bool   `json:"is_at_all,omitempty"`      // 是否为atall
+
+	Type *int `json:"type,omitempty"` // 消息类型
+
+	IsAtAll *bool `json:"is_at_all,omitempty"` // 是否为atall
 }
 
 type UnreadAtMessageBuilder struct {
-	messageId        string // 消息id
-	messageIdFlag    bool
-	fromId           string // 消息发送者
-	fromIdFlag       bool
-	chatId           string // 群组id
-	chatIdFlag       bool
-	createTime       string // 发送时间
-	createTimeFlag   bool
+	messageId     string // 消息id
+	messageIdFlag bool
+
+	fromId     string // 消息发送者
+	fromIdFlag bool
+
+	chatId     string // 群组id
+	chatIdFlag bool
+
+	createTime     string // 发送时间
+	createTimeFlag bool
+
 	createTimeMs     string // 发送时间毫秒
 	createTimeMsFlag bool
+
 	updateTimeMs     string // 更新时间毫秒
 	updateTimeMsFlag bool
-	type_            int // 消息类型
-	typeFlag         bool
-	isAtAll          bool // 是否为atall
-	isAtAllFlag      bool
+
+	type_    int // 消息类型
+	typeFlag bool
+
+	isAtAll     bool // 是否为atall
+	isAtAllFlag bool
 }
 
 func NewUnreadAtMessageBuilder() *UnreadAtMessageBuilder {
@@ -2827,13 +3034,15 @@ func (builder *UnreadAtMessageBuilder) Build() *UnreadAtMessage {
 }
 
 type UpdateChatPin struct {
-	IsFixed      *bool         `json:"is_fixed,omitempty"`       // 置顶是否被固定到置顶列表前方,目前每个群内最多可以固定一个置顶。
+	IsFixed *bool `json:"is_fixed,omitempty"` // 置顶是否被固定到置顶列表前方,目前每个群内最多可以固定一个置顶。
+
 	UpdateUrlPin *UpdateUrlPin `json:"update_url_pin,omitempty"` //
 }
 
 type UpdateChatPinBuilder struct {
-	isFixed          bool // 置顶是否被固定到置顶列表前方,目前每个群内最多可以固定一个置顶。
-	isFixedFlag      bool
+	isFixed     bool // 置顶是否被固定到置顶列表前方,目前每个群内最多可以固定一个置顶。
+	isFixedFlag bool
+
 	updateUrlPin     *UpdateUrlPin //
 	updateUrlPinFlag bool
 }
@@ -2872,16 +3081,20 @@ func (builder *UpdateChatPinBuilder) Build() *UpdateChatPin {
 }
 
 type UpdateUrlPin struct {
-	Icon      *ChatPinIcon `json:"icon,omitempty"`       // 图标信息
-	Title     *string      `json:"title,omitempty"`      // 名称
-	I18nTitle *I18nNames   `json:"i18n_title,omitempty"` // 国际化名称，如果客户端语言环境对应的i18n_title存在则会被优先展示，否则展示title。
+	Icon *ChatPinIcon `json:"icon,omitempty"` // 图标信息
+
+	Title *string `json:"title,omitempty"` // 名称
+
+	I18nTitle *I18nNames `json:"i18n_title,omitempty"` // 国际化名称，如果客户端语言环境对应的i18n_title存在则会被优先展示，否则展示title。
 }
 
 type UpdateUrlPinBuilder struct {
-	icon          *ChatPinIcon // 图标信息
-	iconFlag      bool
-	title         string // 名称
-	titleFlag     bool
+	icon     *ChatPinIcon // 图标信息
+	iconFlag bool
+
+	title     string // 名称
+	titleFlag bool
+
 	i18nTitle     *I18nNames // 国际化名称，如果客户端语言环境对应的i18n_title存在则会被优先展示，否则展示title。
 	i18nTitleFlag bool
 }
@@ -2934,13 +3147,25 @@ func (builder *UpdateUrlPinBuilder) Build() *UpdateUrlPin {
 }
 
 type UrgentCommonHeader struct {
+	BotId *string `json:"bot_id,omitempty"` // botid，不对外展示
 }
 
 type UrgentCommonHeaderBuilder struct {
+	botId     string // botid，不对外展示
+	botIdFlag bool
 }
 
 func NewUrgentCommonHeaderBuilder() *UrgentCommonHeaderBuilder {
 	builder := &UrgentCommonHeaderBuilder{}
+	return builder
+}
+
+// botid，不对外展示
+//
+// 示例值：0
+func (builder *UrgentCommonHeaderBuilder) BotId(botId string) *UrgentCommonHeaderBuilder {
+	builder.botId = botId
+	builder.botIdFlag = true
 	return builder
 }
 
@@ -2951,27 +3176,37 @@ func (builder *UrgentCommonHeaderBuilder) Build() *UrgentCommonHeader {
 }
 
 type UrlPin struct {
-	Url                *string      `json:"url,omitempty"`                  // url
-	Icon               *ChatPinIcon `json:"icon,omitempty"`                 //
-	Title              *string      `json:"title,omitempty"`                // 名称
-	I18nTitle          *I18nNames   `json:"i18n_title,omitempty"`           // 国际化名称，如果客户端语言环境对应的i18n_title存在则会被优先展示，否则展示title。
-	TitleDynamicUpdate *bool        `json:"title_dynamic_update,omitempty"` // 标题是否需要动态更新
-	IconDynamicUpdate  *bool        `json:"icon_dynamic_update,omitempty"`  // 图标是否需要动态更新
+	Url *string `json:"url,omitempty"` // url
+
+	Icon *ChatPinIcon `json:"icon,omitempty"` //
+
+	Title *string `json:"title,omitempty"` // 名称
+
+	I18nTitle *I18nNames `json:"i18n_title,omitempty"` // 国际化名称，如果客户端语言环境对应的i18n_title存在则会被优先展示，否则展示title。
+
+	TitleDynamicUpdate *bool `json:"title_dynamic_update,omitempty"` // 标题是否需要动态更新
+
+	IconDynamicUpdate *bool `json:"icon_dynamic_update,omitempty"` // 图标是否需要动态更新
 }
 
 type UrlPinBuilder struct {
-	url                    string // url
-	urlFlag                bool
-	icon                   *ChatPinIcon //
-	iconFlag               bool
-	title                  string // 名称
-	titleFlag              bool
-	i18nTitle              *I18nNames // 国际化名称，如果客户端语言环境对应的i18n_title存在则会被优先展示，否则展示title。
-	i18nTitleFlag          bool
+	url     string // url
+	urlFlag bool
+
+	icon     *ChatPinIcon //
+	iconFlag bool
+
+	title     string // 名称
+	titleFlag bool
+
+	i18nTitle     *I18nNames // 国际化名称，如果客户端语言环境对应的i18n_title存在则会被优先展示，否则展示title。
+	i18nTitleFlag bool
+
 	titleDynamicUpdate     bool // 标题是否需要动态更新
 	titleDynamicUpdateFlag bool
-	iconDynamicUpdate      bool // 图标是否需要动态更新
-	iconDynamicUpdateFlag  bool
+
+	iconDynamicUpdate     bool // 图标是否需要动态更新
+	iconDynamicUpdateFlag bool
 }
 
 func NewUrlPinBuilder() *UrlPinBuilder {
@@ -3059,13 +3294,15 @@ func (builder *UrlPinBuilder) Build() *UrlPin {
 }
 
 type UserOpenAppFeedCardDeleter struct {
-	BizId  *string `json:"biz_id,omitempty"`  // 业务 ID
+	BizId *string `json:"biz_id,omitempty"` // 业务 ID
+
 	UserId *string `json:"user_id,omitempty"` // 用户 ID
 }
 
 type UserOpenAppFeedCardDeleterBuilder struct {
-	bizId      string // 业务 ID
-	bizIdFlag  bool
+	bizId     string // 业务 ID
+	bizIdFlag bool
+
 	userId     string // 用户 ID
 	userIdFlag bool
 }
@@ -3107,16 +3344,20 @@ func (builder *UserOpenAppFeedCardDeleterBuilder) Build() *UserOpenAppFeedCardDe
 }
 
 type UserOpenAppFeedCardUpdater struct {
-	AppFeedCard  *OpenAppFeedCard `json:"app_feed_card,omitempty"` // 应用消息卡片
-	UserId       *string          `json:"user_id,omitempty"`       // 用户 id
-	UpdateFields []string         `json:"update_fields,omitempty"` // 更新字段列表
+	AppFeedCard *OpenAppFeedCard `json:"app_feed_card,omitempty"` // 应用消息卡片
+
+	UserId *string `json:"user_id,omitempty"` // 用户 id
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 更新字段列表
 }
 
 type UserOpenAppFeedCardUpdaterBuilder struct {
-	appFeedCard      *OpenAppFeedCard // 应用消息卡片
-	appFeedCardFlag  bool
-	userId           string // 用户 id
-	userIdFlag       bool
+	appFeedCard     *OpenAppFeedCard // 应用消息卡片
+	appFeedCardFlag bool
+
+	userId     string // 用户 id
+	userIdFlag bool
+
 	updateFields     []string // 更新字段列表
 	updateFieldsFlag bool
 }
@@ -3171,8 +3412,9 @@ func (builder *UserOpenAppFeedCardUpdaterBuilder) Build() *UserOpenAppFeedCardUp
 type CreateAppFeedCardReqBodyBuilder struct {
 	appFeedCard     *OpenAppFeedCard // 应用消息卡片
 	appFeedCardFlag bool
-	userIds         []string // 用户 ID
-	userIdsFlag     bool
+
+	userIds     []string // 用户 ID
+	userIdsFlag bool
 }
 
 func NewCreateAppFeedCardReqBodyBuilder() *CreateAppFeedCardReqBodyBuilder {
@@ -3287,7 +3529,8 @@ func (builder *CreateAppFeedCardReqBuilder) Build() *CreateAppFeedCardReq {
 
 type CreateAppFeedCardReqBody struct {
 	AppFeedCard *OpenAppFeedCard `json:"app_feed_card,omitempty"` // 应用消息卡片
-	UserIds     []string         `json:"user_ids,omitempty"`      // 用户 ID
+
+	UserIds []string `json:"user_ids,omitempty"` // 用户 ID
 }
 
 type CreateAppFeedCardReq struct {
@@ -3297,7 +3540,8 @@ type CreateAppFeedCardReq struct {
 
 type CreateAppFeedCardRespData struct {
 	FailedCards []*OpenFailedUserAppFeedCardItem `json:"failed_cards,omitempty"` // 失败的卡片
-	BizId       *string                          `json:"biz_id,omitempty"`       // 卡片业务 ID
+
+	BizId *string `json:"biz_id,omitempty"` // 卡片业务 ID
 }
 
 type CreateAppFeedCardResp struct {
@@ -3535,12 +3779,17 @@ func (resp *UpdateAppFeedCardBatchResp) Success() bool {
 }
 
 type CreateBizEntityTagRelationReqBodyBuilder struct {
-	tagBizType      string // 业务类型
-	tagBizTypeFlag  bool
+	tagBizType     string // 业务类型
+	tagBizTypeFlag bool
+
 	bizEntityId     string // 业务实体id
 	bizEntityIdFlag bool
-	tagIds          []string // 标签id
-	tagIdsFlag      bool
+
+	tagIds     []string // 标签id
+	tagIdsFlag bool
+
+	botId     string // 机器人id
+	botIdFlag bool
 }
 
 func NewCreateBizEntityTagRelationReqBodyBuilder() *CreateBizEntityTagRelationReqBodyBuilder {
@@ -3673,10 +3922,13 @@ func (builder *CreateBizEntityTagRelationReqBuilder) Build() *CreateBizEntityTag
 }
 
 type CreateBizEntityTagRelationReqBody struct {
-	TagBizType  *string  `json:"tag_biz_type,omitempty"`  // 业务类型
-	BizEntityId *string  `json:"biz_entity_id,omitempty"` // 业务实体id
-	TagIds      []string `json:"tag_ids,omitempty"`       // 标签id
+	TagBizType *string `json:"tag_biz_type,omitempty"` // 业务类型
 
+	BizEntityId *string `json:"biz_entity_id,omitempty"` // 业务实体id
+
+	TagIds []string `json:"tag_ids,omitempty"` // 标签id
+
+	BotId *string `json:"bot_id,omitempty"` // 机器人id
 }
 
 type CreateBizEntityTagRelationReq struct {
@@ -3756,12 +4008,17 @@ func (resp *GetBizEntityTagRelationResp) Success() bool {
 }
 
 type UpdateBizEntityTagRelationReqBodyBuilder struct {
-	tagBizType      string // 业务类型
-	tagBizTypeFlag  bool
+	tagBizType     string // 业务类型
+	tagBizTypeFlag bool
+
 	bizEntityId     string // 业务实体id
 	bizEntityIdFlag bool
-	tagIds          []string // 标签id
-	tagIdsFlag      bool
+
+	tagIds     []string // 标签id
+	tagIdsFlag bool
+
+	botId     string // 机器人id
+	botIdFlag bool
 }
 
 func NewUpdateBizEntityTagRelationReqBodyBuilder() *UpdateBizEntityTagRelationReqBodyBuilder {
@@ -3894,10 +4151,13 @@ func (builder *UpdateBizEntityTagRelationReqBuilder) Build() *UpdateBizEntityTag
 }
 
 type UpdateBizEntityTagRelationReqBody struct {
-	TagBizType  *string  `json:"tag_biz_type,omitempty"`  // 业务类型
-	BizEntityId *string  `json:"biz_entity_id,omitempty"` // 业务实体id
-	TagIds      []string `json:"tag_ids,omitempty"`       // 标签id
+	TagBizType *string `json:"tag_biz_type,omitempty"` // 业务类型
 
+	BizEntityId *string `json:"biz_entity_id,omitempty"` // 业务实体id
+
+	TagIds []string `json:"tag_ids,omitempty"` // 标签id
+
+	BotId *string `json:"bot_id,omitempty"` // 机器人id
 }
 
 type UpdateBizEntityTagRelationReq struct {
@@ -3917,10 +4177,15 @@ func (resp *UpdateBizEntityTagRelationResp) Success() bool {
 type UpdateChatButtonReqBodyBuilder struct {
 	userIds     []string // 用户 ID 列表
 	userIdsFlag bool
-	chatId      string // 群 ID
-	chatIdFlag  bool
+
+	chatId     string // 群 ID
+	chatIdFlag bool
+
 	buttons     *OpenAppFeedCardButtons // 按钮
 	buttonsFlag bool
+
+	botId     string // Bot id
+	botIdFlag bool
 }
 
 func NewUpdateChatButtonReqBodyBuilder() *UpdateChatButtonReqBodyBuilder {
@@ -4062,10 +4327,13 @@ func (builder *UpdateChatButtonReqBuilder) Build() *UpdateChatButtonReq {
 }
 
 type UpdateChatButtonReqBody struct {
-	UserIds []string                `json:"user_ids,omitempty"` // 用户 ID 列表
-	ChatId  *string                 `json:"chat_id,omitempty"`  // 群 ID
-	Buttons *OpenAppFeedCardButtons `json:"buttons,omitempty"`  // 按钮
+	UserIds []string `json:"user_ids,omitempty"` // 用户 ID 列表
 
+	ChatId *string `json:"chat_id,omitempty"` // 群 ID
+
+	Buttons *OpenAppFeedCardButtons `json:"buttons,omitempty"` // 按钮
+
+	BotId *string `json:"bot_id,omitempty"` // Bot id
 }
 
 type UpdateChatButtonReq struct {
@@ -4088,10 +4356,14 @@ func (resp *UpdateChatButtonResp) Success() bool {
 }
 
 type BotTimeSentiveFeedCardReqBodyBuilder struct {
+	botId     string // 机器人id
+	botIdFlag bool
+
 	timeSensitive     bool // 临时置顶状态，true-打开，false-关闭
 	timeSensitiveFlag bool
-	userIds           []string // 用户id 列表
-	userIdsFlag       bool
+
+	userIds     []string // 用户id 列表
+	userIdsFlag bool
 }
 
 func NewBotTimeSentiveFeedCardReqBodyBuilder() *BotTimeSentiveFeedCardReqBodyBuilder {
@@ -4207,8 +4479,11 @@ func (builder *BotTimeSentiveFeedCardReqBuilder) Build() *BotTimeSentiveFeedCard
 }
 
 type BotTimeSentiveFeedCardReqBody struct {
-	TimeSensitive *bool    `json:"time_sensitive,omitempty"` // 临时置顶状态，true-打开，false-关闭
-	UserIds       []string `json:"user_ids,omitempty"`       // 用户id 列表
+	BotId *string `json:"bot_id,omitempty"` // 机器人id
+
+	TimeSensitive *bool `json:"time_sensitive,omitempty"` // 临时置顶状态，true-打开，false-关闭
+
+	UserIds []string `json:"user_ids,omitempty"` // 用户id 列表
 }
 
 type BotTimeSentiveFeedCardReq struct {
@@ -4233,8 +4508,9 @@ func (resp *BotTimeSentiveFeedCardResp) Success() bool {
 type PatchFeedCardReqBodyBuilder struct {
 	timeSensitive     bool // 临时置顶状态，true-打开，false-关闭
 	timeSensitiveFlag bool
-	userIds           []string // 用户id 列表
-	userIdsFlag       bool
+
+	userIds     []string // 用户id 列表
+	userIdsFlag bool
 }
 
 func NewPatchFeedCardReqBodyBuilder() *PatchFeedCardReqBodyBuilder {
@@ -4357,8 +4633,9 @@ func (builder *PatchFeedCardReqBuilder) Build() *PatchFeedCardReq {
 }
 
 type PatchFeedCardReqBody struct {
-	TimeSensitive *bool    `json:"time_sensitive,omitempty"` // 临时置顶状态，true-打开，false-关闭
-	UserIds       []string `json:"user_ids,omitempty"`       // 用户id 列表
+	TimeSensitive *bool `json:"time_sensitive,omitempty"` // 临时置顶状态，true-打开，false-关闭
+
+	UserIds []string `json:"user_ids,omitempty"` // 用户id 列表
 }
 
 type PatchFeedCardReq struct {
@@ -4383,6 +4660,9 @@ func (resp *PatchFeedCardResp) Success() bool {
 type CreateTagReqBodyBuilder struct {
 	createTag     *CreateTag // 创建标签
 	createTagFlag bool
+
+	botId     string // 机器人id
+	botIdFlag bool
 }
 
 func NewCreateTagReqBodyBuilder() *CreateTagReqBodyBuilder {
@@ -4465,6 +4745,7 @@ func (builder *CreateTagReqBuilder) Build() *CreateTagReq {
 type CreateTagReqBody struct {
 	CreateTag *CreateTag `json:"create_tag,omitempty"` // 创建标签
 
+	BotId *string `json:"bot_id,omitempty"` // 机器人id
 }
 
 type CreateTagReq struct {
@@ -4473,7 +4754,8 @@ type CreateTagReq struct {
 }
 
 type CreateTagRespData struct {
-	Id                  *string              `json:"id,omitempty"`                     // 创建的tagid
+	Id *string `json:"id,omitempty"` // 创建的tagid
+
 	CreateTagFailReason *CreateTagFailReason `json:"create_tag_fail_reason,omitempty"` // 创建失败原因
 }
 
@@ -4490,6 +4772,9 @@ func (resp *CreateTagResp) Success() bool {
 type PatchTagReqBodyBuilder struct {
 	patchTag     *PatchTag // 编辑标签
 	patchTagFlag bool
+
+	botId     string // 机器人id
+	botIdFlag bool
 }
 
 func NewPatchTagReqBodyBuilder() *PatchTagReqBodyBuilder {
@@ -4581,6 +4866,7 @@ func (builder *PatchTagReqBuilder) Build() *PatchTagReq {
 type PatchTagReqBody struct {
 	PatchTag *PatchTag `json:"patch_tag,omitempty"` // 编辑标签
 
+	BotId *string `json:"bot_id,omitempty"` // 机器人id
 }
 
 type PatchTagReq struct {
@@ -4589,7 +4875,8 @@ type PatchTagReq struct {
 }
 
 type PatchTagRespData struct {
-	TagInfo            *TagInfo            `json:"tag_info,omitempty"`              // 编辑后的taginfo
+	TagInfo *TagInfo `json:"tag_info,omitempty"` // 编辑后的taginfo
+
 	PatchTagFailReason *PatchTagFailReason `json:"patch_tag_fail_reason,omitempty"` // 修改失败原因
 }
 
@@ -4606,8 +4893,9 @@ func (resp *PatchTagResp) Success() bool {
 type BatchUpdateUrlPreviewReqBodyBuilder struct {
 	previewTokens     []string // URL预览的token列表
 	previewTokensFlag bool
-	openIds           []string // 需要更新URL预览的用户open_id。若不传，则默认更新URL所在会话成员；若用户不在URL所在会话，则无法更新该用户
-	openIdsFlag       bool
+
+	openIds     []string // 需要更新URL预览的用户open_id。若不传，则默认更新URL所在会话成员；若用户不在URL所在会话，则无法更新该用户
+	openIdsFlag bool
 }
 
 func NewBatchUpdateUrlPreviewReqBodyBuilder() *BatchUpdateUrlPreviewReqBodyBuilder {
@@ -4713,7 +5001,8 @@ func (builder *BatchUpdateUrlPreviewReqBuilder) Build() *BatchUpdateUrlPreviewRe
 
 type BatchUpdateUrlPreviewReqBody struct {
 	PreviewTokens []string `json:"preview_tokens,omitempty"` // URL预览的token列表
-	OpenIds       []string `json:"open_ids,omitempty"`       // 需要更新URL预览的用户open_id。若不传，则默认更新URL所在会话成员；若用户不在URL所在会话，则无法更新该用户
+
+	OpenIds []string `json:"open_ids,omitempty"` // 需要更新URL预览的用户open_id。若不传，则默认更新URL所在会话成员；若用户不在URL所在会话，则无法更新该用户
 }
 
 type BatchUpdateUrlPreviewReq struct {

@@ -23,13 +23,15 @@ import (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -117,9 +119,11 @@ type ListOutboundIpReq struct {
 }
 
 type ListOutboundIpRespData struct {
-	IpList    []string `json:"ip_list,omitempty"`    // outbound ip
-	PageToken *string  `json:"page_token,omitempty"` // 分页下次调用的page_token值
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否还有分页数据
+	IpList []string `json:"ip_list,omitempty"` // outbound ip
+
+	PageToken *string `json:"page_token,omitempty"` // 分页下次调用的page_token值
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有分页数据
 }
 
 type ListOutboundIpResp struct {

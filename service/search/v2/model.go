@@ -76,17 +76,21 @@ const (
 
 type Acl struct {
 	Access *string `json:"access,omitempty"` // 权限类型，优先级：Deny > Allow。
-	Value  *string `json:"value,omitempty"`  // 设置的权限值，例如 userID ，依赖 type 描述。;;**注**：在 type 为 user 且 access 为 allow 时，可填 "everyone" 来表示该数据项对全员可见；
-	Type   *string `json:"type,omitempty"`   // 权限值类型
+
+	Value *string `json:"value,omitempty"` // 设置的权限值，例如 userID ，依赖 type 描述。;;**注**：在 type 为 user 且 access 为 allow 时，可填 "everyone" 来表示该数据项对全员可见；
+
+	Type *string `json:"type,omitempty"` // 权限值类型
 }
 
 type AclBuilder struct {
 	access     string // 权限类型，优先级：Deny > Allow。
 	accessFlag bool
-	value      string // 设置的权限值，例如 userID ，依赖 type 描述。;;**注**：在 type 为 user 且 access 为 allow 时，可填 "everyone" 来表示该数据项对全员可见；
-	valueFlag  bool
-	type_      string // 权限值类型
-	typeFlag   bool
+
+	value     string // 设置的权限值，例如 userID ，依赖 type 描述。;;**注**：在 type 为 user 且 access 为 allow 时，可填 "everyone" 来表示该数据项对全员可见；
+	valueFlag bool
+
+	type_    string // 权限值类型
+	typeFlag bool
 }
 
 func NewAclBuilder() *AclBuilder {
@@ -139,18 +143,22 @@ func (builder *AclBuilder) Build() *Acl {
 }
 
 type BatchItemResult struct {
-	ItemId    *string `json:"item_id,omitempty"`    // 数据项ID，对应一条索引数据的ID
-	IsSuccess *bool   `json:"is_success,omitempty"` // 判断单条数据是否成功
-	Err       *string `json:"err,omitempty"`        // 如果单条数据失败，表示单条数据的错误信息；如果单条数据成功被索引，则err是空字符串
+	ItemId *string `json:"item_id,omitempty"` // 数据项ID，对应一条索引数据的ID
+
+	IsSuccess *bool `json:"is_success,omitempty"` // 判断单条数据是否成功
+
+	Err *string `json:"err,omitempty"` // 如果单条数据失败，表示单条数据的错误信息；如果单条数据成功被索引，则err是空字符串
 }
 
 type BatchItemResultBuilder struct {
-	itemId        string // 数据项ID，对应一条索引数据的ID
-	itemIdFlag    bool
+	itemId     string // 数据项ID，对应一条索引数据的ID
+	itemIdFlag bool
+
 	isSuccess     bool // 判断单条数据是否成功
 	isSuccessFlag bool
-	err           string // 如果单条数据失败，表示单条数据的错误信息；如果单条数据成功被索引，则err是空字符串
-	errFlag       bool
+
+	err     string // 如果单条数据失败，表示单条数据的错误信息；如果单条数据成功被索引，则err是空字符串
+	errFlag bool
 }
 
 func NewBatchItemResultBuilder() *BatchItemResultBuilder {
@@ -203,13 +211,15 @@ func (builder *BatchItemResultBuilder) Build() *BatchItemResult {
 }
 
 type CallbackAction struct {
-	Tag   *string              `json:"tag,omitempty"`   // tag
+	Tag *string `json:"tag,omitempty"` // tag
+
 	Value *CallbackActionValue `json:"value,omitempty"` // CallbackActionValue
 }
 
 type CallbackActionBuilder struct {
-	tag       string // tag
-	tagFlag   bool
+	tag     string // tag
+	tagFlag bool
+
 	value     *CallbackActionValue // CallbackActionValue
 	valueFlag bool
 }
@@ -251,23 +261,31 @@ func (builder *CallbackActionBuilder) Build() *CallbackAction {
 
 type CallbackActionValue struct {
 	StrategyInfo *string `json:"strategy_info,omitempty"` // strategy_info
-	AgentId      *string `json:"agent_id,omitempty"`      // agent_id
-	AgentType    *int    `json:"agent_type,omitempty"`    // agent_type
-	ResponseType *int    `json:"response_type,omitempty"` // response_type
-	SessionId    *string `json:"session_id,omitempty"`    // 当前会话的 id，需要透传到下一次请求中
+
+	AgentId *string `json:"agent_id,omitempty"` // agent_id
+
+	AgentType *int `json:"agent_type,omitempty"` // agent_type
+
+	ResponseType *int `json:"response_type,omitempty"` // response_type
+
+	SessionId *string `json:"session_id,omitempty"` // 当前会话的 id，需要透传到下一次请求中
 }
 
 type CallbackActionValueBuilder struct {
 	strategyInfo     string // strategy_info
 	strategyInfoFlag bool
-	agentId          string // agent_id
-	agentIdFlag      bool
-	agentType        int // agent_type
-	agentTypeFlag    bool
+
+	agentId     string // agent_id
+	agentIdFlag bool
+
+	agentType     int // agent_type
+	agentTypeFlag bool
+
 	responseType     int // response_type
 	responseTypeFlag bool
-	sessionId        string // 当前会话的 id，需要透传到下一次请求中
-	sessionIdFlag    bool
+
+	sessionId     string // 当前会话的 id，需要透传到下一次请求中
+	sessionIdFlag bool
 }
 
 func NewCallbackActionValueBuilder() *CallbackActionValueBuilder {
@@ -346,21 +364,27 @@ func (builder *CallbackActionValueBuilder) Build() *CallbackActionValue {
 }
 
 type CardCallbackRequest struct {
-	OpenChatId    *string         `json:"open_chat_id,omitempty"`    // open_chat_id
-	OpenMessageId *string         `json:"open_message_id,omitempty"` // open_message_id
-	Token         *string         `json:"token,omitempty"`           // token
-	Action        *CallbackAction `json:"action,omitempty"`          // CallbackAction
+	OpenChatId *string `json:"open_chat_id,omitempty"` // open_chat_id
+
+	OpenMessageId *string `json:"open_message_id,omitempty"` // open_message_id
+
+	Token *string `json:"token,omitempty"` // token
+
+	Action *CallbackAction `json:"action,omitempty"` // CallbackAction
 }
 
 type CardCallbackRequestBuilder struct {
-	openChatId        string // open_chat_id
-	openChatIdFlag    bool
+	openChatId     string // open_chat_id
+	openChatIdFlag bool
+
 	openMessageId     string // open_message_id
 	openMessageIdFlag bool
-	token             string // token
-	tokenFlag         bool
-	action            *CallbackAction // CallbackAction
-	actionFlag        bool
+
+	token     string // token
+	tokenFlag bool
+
+	action     *CallbackAction // CallbackAction
+	actionFlag bool
 }
 
 func NewCardCallbackRequestBuilder() *CardCallbackRequestBuilder {
@@ -425,34 +449,50 @@ func (builder *CardCallbackRequestBuilder) Build() *CardCallbackRequest {
 }
 
 type Chunk struct {
-	ChunkId    *string  `json:"chunk_id,omitempty"`    // 文本块的唯一标识
-	DocId      *string  `json:"doc_id,omitempty"`      // 文档的唯一标识
-	DatasetId  *string  `json:"dataset_id,omitempty"`  // 该文档对应的数据集id
-	UpdateTime *string  `json:"update_time,omitempty"` // 更新时间，精确到秒级
-	Content    *string  `json:"content,omitempty"`     // 需要向量化的文本内容
-	FilterData *string  `json:"filter_data,omitempty"` // 数据集对应filter_shema的值
-	Score      *float64 `json:"score,omitempty"`       // 排序模型返回的分数
-	TokenNum   *int     `json:"token_num,omitempty"`   // 文本块的token数
-	Overlength *bool    `json:"overlength,omitempty"`  // 文本块的长度是否超过阈值
+	ChunkId *string `json:"chunk_id,omitempty"` // 文本块的唯一标识
+
+	DocId *string `json:"doc_id,omitempty"` // 文档的唯一标识
+
+	DatasetId *string `json:"dataset_id,omitempty"` // 该文档对应的数据集id
+
+	UpdateTime *string `json:"update_time,omitempty"` // 更新时间，精确到秒级
+
+	Content *string `json:"content,omitempty"` // 需要向量化的文本内容
+
+	FilterData *string `json:"filter_data,omitempty"` // 数据集对应filter_shema的值
+
+	Score *float64 `json:"score,omitempty"` // 排序模型返回的分数
+
+	TokenNum *int `json:"token_num,omitempty"` // 文本块的token数
+
+	Overlength *bool `json:"overlength,omitempty"` // 文本块的长度是否超过阈值
 }
 
 type ChunkBuilder struct {
-	chunkId        string // 文本块的唯一标识
-	chunkIdFlag    bool
-	docId          string // 文档的唯一标识
-	docIdFlag      bool
-	datasetId      string // 该文档对应的数据集id
-	datasetIdFlag  bool
+	chunkId     string // 文本块的唯一标识
+	chunkIdFlag bool
+
+	docId     string // 文档的唯一标识
+	docIdFlag bool
+
+	datasetId     string // 该文档对应的数据集id
+	datasetIdFlag bool
+
 	updateTime     string // 更新时间，精确到秒级
 	updateTimeFlag bool
-	content        string // 需要向量化的文本内容
-	contentFlag    bool
+
+	content     string // 需要向量化的文本内容
+	contentFlag bool
+
 	filterData     string // 数据集对应filter_shema的值
 	filterDataFlag bool
-	score          float64 // 排序模型返回的分数
-	scoreFlag      bool
-	tokenNum       int // 文本块的token数
-	tokenNumFlag   bool
+
+	score     float64 // 排序模型返回的分数
+	scoreFlag bool
+
+	tokenNum     int // 文本块的token数
+	tokenNumFlag bool
+
 	overlength     bool // 文本块的长度是否超过阈值
 	overlengthFlag bool
 }
@@ -585,33 +625,47 @@ func (builder *ChunkBuilder) Build() *Chunk {
 }
 
 type ConnectDataSource struct {
-	ServiceUrl         *string `json:"service_url,omitempty"`         // 要托管的服务API地址，例如https://open.feishu.cn/xxxx/xxxx
-	ProjectName        *string `json:"project_name,omitempty"`        // 项目地址，只能包含小写字母，如bytedance_test
-	DisplayName        *string `json:"display_name,omitempty"`        // datasource名称，会展示在飞书搜索分类按钮（searchTab）中，如：公司wiki
-	Description        *string `json:"description,omitempty"`         // 描述datasource
-	IconUrl            *string `json:"icon_url,omitempty"`            // 图标
+	ServiceUrl *string `json:"service_url,omitempty"` // 要托管的服务API地址，例如https://open.feishu.cn/xxxx/xxxx
+
+	ProjectName *string `json:"project_name,omitempty"` // 项目地址，只能包含小写字母，如bytedance_test
+
+	DisplayName *string `json:"display_name,omitempty"` // datasource名称，会展示在飞书搜索分类按钮（searchTab）中，如：公司wiki
+
+	Description *string `json:"description,omitempty"` // 描述datasource
+
+	IconUrl *string `json:"icon_url,omitempty"` // 图标
+
 	ProjectDescription *string `json:"project_description,omitempty"` // 托管api的描述
-	ContactEmail       *string `json:"contact_email,omitempty"`       // 联系人邮箱，开发人员的邮箱，用于托管API的SLA（Service Level Agreement）问题沟通
-	TenantName         *string `json:"tenant_name,omitempty"`         // 创建api的组织名称，对企业开发者来说，建议使用企业名称
+
+	ContactEmail *string `json:"contact_email,omitempty"` // 联系人邮箱，开发人员的邮箱，用于托管API的SLA（Service Level Agreement）问题沟通
+
+	TenantName *string `json:"tenant_name,omitempty"` // 创建api的组织名称，对企业开发者来说，建议使用企业名称
 }
 
 type ConnectDataSourceBuilder struct {
-	serviceUrl             string // 要托管的服务API地址，例如https://open.feishu.cn/xxxx/xxxx
-	serviceUrlFlag         bool
-	projectName            string // 项目地址，只能包含小写字母，如bytedance_test
-	projectNameFlag        bool
-	displayName            string // datasource名称，会展示在飞书搜索分类按钮（searchTab）中，如：公司wiki
-	displayNameFlag        bool
-	description            string // 描述datasource
-	descriptionFlag        bool
-	iconUrl                string // 图标
-	iconUrlFlag            bool
+	serviceUrl     string // 要托管的服务API地址，例如https://open.feishu.cn/xxxx/xxxx
+	serviceUrlFlag bool
+
+	projectName     string // 项目地址，只能包含小写字母，如bytedance_test
+	projectNameFlag bool
+
+	displayName     string // datasource名称，会展示在飞书搜索分类按钮（searchTab）中，如：公司wiki
+	displayNameFlag bool
+
+	description     string // 描述datasource
+	descriptionFlag bool
+
+	iconUrl     string // 图标
+	iconUrlFlag bool
+
 	projectDescription     string // 托管api的描述
 	projectDescriptionFlag bool
-	contactEmail           string // 联系人邮箱，开发人员的邮箱，用于托管API的SLA（Service Level Agreement）问题沟通
-	contactEmailFlag       bool
-	tenantName             string // 创建api的组织名称，对企业开发者来说，建议使用企业名称
-	tenantNameFlag         bool
+
+	contactEmail     string // 联系人邮箱，开发人员的邮箱，用于托管API的SLA（Service Level Agreement）问题沟通
+	contactEmailFlag bool
+
+	tenantName     string // 创建api的组织名称，对企业开发者来说，建议使用企业名称
+	tenantNameFlag bool
 }
 
 func NewConnectDataSourceBuilder() *ConnectDataSourceBuilder {
@@ -729,15 +783,17 @@ func (builder *ConnectDataSourceBuilder) Build() *ConnectDataSource {
 }
 
 type ConnectorParam struct {
-	CallbackUserIdType *int    `json:"callback_user_id_type,omitempty"` // 回调时Request里面的id类型
-	CallbackEndpoint   *string `json:"callback_endpoint,omitempty"`     // 回调时的地址，必须为POST地址
+	CallbackUserIdType *int `json:"callback_user_id_type,omitempty"` // 回调时Request里面的id类型
+
+	CallbackEndpoint *string `json:"callback_endpoint,omitempty"` // 回调时的地址，必须为POST地址
 }
 
 type ConnectorParamBuilder struct {
 	callbackUserIdType     int // 回调时Request里面的id类型
 	callbackUserIdTypeFlag bool
-	callbackEndpoint       string // 回调时的地址，必须为POST地址
-	callbackEndpointFlag   bool
+
+	callbackEndpoint     string // 回调时的地址，必须为POST地址
+	callbackEndpointFlag bool
 }
 
 func NewConnectorParamBuilder() *ConnectorParamBuilder {
@@ -777,22 +833,30 @@ func (builder *ConnectorParamBuilder) Build() *ConnectorParam {
 }
 
 type CreateDocParam struct {
-	DocId                *string  `json:"doc_id,omitempty"`                 // 文档的唯一标识，只允许英文字母、数字和下划线
-	FilterData           *string  `json:"filter_data,omitempty"`            // 文档对应filter_schema的值
-	Content              *string  `json:"content,omitempty"`                // 需要向量化的文本内容
-	Chunks               []string `json:"chunks,omitempty"`                 // 文本块列表
-	OverlengthHandleType *int     `json:"overlength_handle_type,omitempty"` // 如果文本块超过最大长度的话，确定返回错误还是进行截断，默认是返回错误
+	DocId *string `json:"doc_id,omitempty"` // 文档的唯一标识，只允许英文字母、数字和下划线
+
+	FilterData *string `json:"filter_data,omitempty"` // 文档对应filter_schema的值
+
+	Content *string `json:"content,omitempty"` // 需要向量化的文本内容
+
+	Chunks []string `json:"chunks,omitempty"` // 文本块列表
+
+	OverlengthHandleType *int `json:"overlength_handle_type,omitempty"` // 如果文本块超过最大长度的话，确定返回错误还是进行截断，默认是返回错误
 }
 
 type CreateDocParamBuilder struct {
-	docId                    string // 文档的唯一标识，只允许英文字母、数字和下划线
-	docIdFlag                bool
-	filterData               string // 文档对应filter_schema的值
-	filterDataFlag           bool
-	content                  string // 需要向量化的文本内容
-	contentFlag              bool
-	chunks                   []string // 文本块列表
-	chunksFlag               bool
+	docId     string // 文档的唯一标识，只允许英文字母、数字和下划线
+	docIdFlag bool
+
+	filterData     string // 文档对应filter_schema的值
+	filterDataFlag bool
+
+	content     string // 需要向量化的文本内容
+	contentFlag bool
+
+	chunks     []string // 文本块列表
+	chunksFlag bool
+
 	overlengthHandleType     int // 如果文本块超过最大长度的话，确定返回错误还是进行截断，默认是返回错误
 	overlengthHandleTypeFlag bool
 }
@@ -872,60 +936,92 @@ func (builder *CreateDocParamBuilder) Build() *CreateDocParam {
 }
 
 type DataSource struct {
-	Id               *string         `json:"id,omitempty"`                // 数据源的唯一标识
-	Name             *string         `json:"name,omitempty"`              // data_source的展示名称
-	State            *int            `json:"state,omitempty"`             // 数据源状态，0-已上线，1-未上线。如果未填，默认是未上线状态。
-	Description      *string         `json:"description,omitempty"`       // 对于数据源的描述
-	CreateTime       *string         `json:"create_time,omitempty"`       // 创建时间，使用Unix时间戳，单位为“秒”
-	UpdateTime       *string         `json:"update_time,omitempty"`       // 更新时间，使用Unix时间戳，单位为“秒”
-	IsExceedQuota    *bool           `json:"is_exceed_quota,omitempty"`   // 是否超限
-	IconUrl          *string         `json:"icon_url,omitempty"`          // 数据源在 search tab 上的展示图标路径
-	Template         *string         `json:"template,omitempty"`          // 数据源采用的展示模版名称
-	SearchableFields []string        `json:"searchable_fields,omitempty"` // 【已废弃，如有定制需要请使用“数据范式”接口】描述哪些字段可以被搜索
-	I18nName         *I18nMeta       `json:"i18n_name,omitempty"`         // 数据源的国际化展示名称
-	I18nDescription  *I18nMeta       `json:"i18n_description,omitempty"`  // 数据源的国际化描述
-	SchemaId         *string         `json:"schema_id,omitempty"`         // 数据源关联的 schema 标识
-	AppId            *string         `json:"app_id,omitempty"`            // datasource对应的开放平台应用id
-	ConnectType      *int            `json:"connect_type,omitempty"`      // 搜索请求的接入方式
-	ConnectorParam   *ConnectorParam `json:"connector_param,omitempty"`   // 根据连接器类型不同所需要提供的相关参数
-	EnableAnswer     *bool           `json:"enable_answer,omitempty"`     // 是否使用问答服务
+	Id *string `json:"id,omitempty"` // 数据源的唯一标识
+
+	Name *string `json:"name,omitempty"` // data_source的展示名称
+
+	State *int `json:"state,omitempty"` // 数据源状态，0-已上线，1-未上线。如果未填，默认是未上线状态。
+
+	Description *string `json:"description,omitempty"` // 对于数据源的描述
+
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间，使用Unix时间戳，单位为“秒”
+
+	UpdateTime *string `json:"update_time,omitempty"` // 更新时间，使用Unix时间戳，单位为“秒”
+
+	IsExceedQuota *bool `json:"is_exceed_quota,omitempty"` // 是否超限
+
+	IconUrl *string `json:"icon_url,omitempty"` // 数据源在 search tab 上的展示图标路径
+
+	Template *string `json:"template,omitempty"` // 数据源采用的展示模版名称
+
+	SearchableFields []string `json:"searchable_fields,omitempty"` // 【已废弃，如有定制需要请使用“数据范式”接口】描述哪些字段可以被搜索
+
+	I18nName *I18nMeta `json:"i18n_name,omitempty"` // 数据源的国际化展示名称
+
+	I18nDescription *I18nMeta `json:"i18n_description,omitempty"` // 数据源的国际化描述
+
+	SchemaId *string `json:"schema_id,omitempty"` // 数据源关联的 schema 标识
+
+	AppId *string `json:"app_id,omitempty"` // datasource对应的开放平台应用id
+
+	ConnectType *int `json:"connect_type,omitempty"` // 搜索请求的接入方式
+
+	ConnectorParam *ConnectorParam `json:"connector_param,omitempty"` // 根据连接器类型不同所需要提供的相关参数
+
+	EnableAnswer *bool `json:"enable_answer,omitempty"` // 是否使用问答服务
 }
 
 type DataSourceBuilder struct {
-	id                   string // 数据源的唯一标识
-	idFlag               bool
-	name                 string // data_source的展示名称
-	nameFlag             bool
-	state                int // 数据源状态，0-已上线，1-未上线。如果未填，默认是未上线状态。
-	stateFlag            bool
-	description          string // 对于数据源的描述
-	descriptionFlag      bool
-	createTime           string // 创建时间，使用Unix时间戳，单位为“秒”
-	createTimeFlag       bool
-	updateTime           string // 更新时间，使用Unix时间戳，单位为“秒”
-	updateTimeFlag       bool
-	isExceedQuota        bool // 是否超限
-	isExceedQuotaFlag    bool
-	iconUrl              string // 数据源在 search tab 上的展示图标路径
-	iconUrlFlag          bool
-	template             string // 数据源采用的展示模版名称
-	templateFlag         bool
+	id     string // 数据源的唯一标识
+	idFlag bool
+
+	name     string // data_source的展示名称
+	nameFlag bool
+
+	state     int // 数据源状态，0-已上线，1-未上线。如果未填，默认是未上线状态。
+	stateFlag bool
+
+	description     string // 对于数据源的描述
+	descriptionFlag bool
+
+	createTime     string // 创建时间，使用Unix时间戳，单位为“秒”
+	createTimeFlag bool
+
+	updateTime     string // 更新时间，使用Unix时间戳，单位为“秒”
+	updateTimeFlag bool
+
+	isExceedQuota     bool // 是否超限
+	isExceedQuotaFlag bool
+
+	iconUrl     string // 数据源在 search tab 上的展示图标路径
+	iconUrlFlag bool
+
+	template     string // 数据源采用的展示模版名称
+	templateFlag bool
+
 	searchableFields     []string // 【已废弃，如有定制需要请使用“数据范式”接口】描述哪些字段可以被搜索
 	searchableFieldsFlag bool
-	i18nName             *I18nMeta // 数据源的国际化展示名称
-	i18nNameFlag         bool
-	i18nDescription      *I18nMeta // 数据源的国际化描述
-	i18nDescriptionFlag  bool
-	schemaId             string // 数据源关联的 schema 标识
-	schemaIdFlag         bool
-	appId                string // datasource对应的开放平台应用id
-	appIdFlag            bool
-	connectType          int // 搜索请求的接入方式
-	connectTypeFlag      bool
-	connectorParam       *ConnectorParam // 根据连接器类型不同所需要提供的相关参数
-	connectorParamFlag   bool
-	enableAnswer         bool // 是否使用问答服务
-	enableAnswerFlag     bool
+
+	i18nName     *I18nMeta // 数据源的国际化展示名称
+	i18nNameFlag bool
+
+	i18nDescription     *I18nMeta // 数据源的国际化描述
+	i18nDescriptionFlag bool
+
+	schemaId     string // 数据源关联的 schema 标识
+	schemaIdFlag bool
+
+	appId     string // datasource对应的开放平台应用id
+	appIdFlag bool
+
+	connectType     int // 搜索请求的接入方式
+	connectTypeFlag bool
+
+	connectorParam     *ConnectorParam // 根据连接器类型不同所需要提供的相关参数
+	connectorParamFlag bool
+
+	enableAnswer     bool // 是否使用问答服务
+	enableAnswerFlag bool
 }
 
 func NewDataSourceBuilder() *DataSourceBuilder {
@@ -1156,42 +1252,62 @@ func (builder *DataSourceBuilder) Build() *DataSource {
 }
 
 type Dataset struct {
-	DatasetId     *string         `json:"dataset_id,omitempty"`     // 数据集的唯一标识
-	AppId         *string         `json:"app_id,omitempty"`         // 该数据集对应的开放平台应用id
-	CreateTime    *string         `json:"create_time,omitempty"`    // 创建时间，精确到秒级
-	UpdateTime    *string         `json:"update_time,omitempty"`    // 更新时间
-	ChunkNum      *int            `json:"chunk_num,omitempty"`      // 数据集中的索引数据的数量
-	DocNum        *int            `json:"doc_num,omitempty"`        // 数据集中的数据项的数量
-	Name          *string         `json:"name,omitempty"`           // 数据源的名字，只允许英文字母、数字和下划线，需要保证应用内部的唯一性。
-	Description   *string         `json:"description,omitempty"`    // 描述该数据集的具体内容以及相关用途
+	DatasetId *string `json:"dataset_id,omitempty"` // 数据集的唯一标识
+
+	AppId *string `json:"app_id,omitempty"` // 该数据集对应的开放平台应用id
+
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间，精确到秒级
+
+	UpdateTime *string `json:"update_time,omitempty"` // 更新时间
+
+	ChunkNum *int `json:"chunk_num,omitempty"` // 数据集中的索引数据的数量
+
+	DocNum *int `json:"doc_num,omitempty"` // 数据集中的数据项的数量
+
+	Name *string `json:"name,omitempty"` // 数据源的名字，只允许英文字母、数字和下划线，需要保证应用内部的唯一性。
+
+	Description *string `json:"description,omitempty"` // 描述该数据集的具体内容以及相关用途
+
 	FilterSchemas []*FilterSchema `json:"filter_schemas,omitempty"` // 过滤字段，每个数据集支持多个过滤字段
-	ModelConfig   *ModelConfig    `json:"model_config,omitempty"`   // 模型配置
-	ViewerAppIds  []string        `json:"viewer_app_ids,omitempty"` // 被授权可搜/可见的应用
+
+	ModelConfig *ModelConfig `json:"model_config,omitempty"` // 模型配置
+
+	ViewerAppIds []string `json:"viewer_app_ids,omitempty"` // 被授权可搜/可见的应用
 }
 
 type DatasetBuilder struct {
-	datasetId         string // 数据集的唯一标识
-	datasetIdFlag     bool
-	appId             string // 该数据集对应的开放平台应用id
-	appIdFlag         bool
-	createTime        string // 创建时间，精确到秒级
-	createTimeFlag    bool
-	updateTime        string // 更新时间
-	updateTimeFlag    bool
-	chunkNum          int // 数据集中的索引数据的数量
-	chunkNumFlag      bool
-	docNum            int // 数据集中的数据项的数量
-	docNumFlag        bool
-	name              string // 数据源的名字，只允许英文字母、数字和下划线，需要保证应用内部的唯一性。
-	nameFlag          bool
-	description       string // 描述该数据集的具体内容以及相关用途
-	descriptionFlag   bool
+	datasetId     string // 数据集的唯一标识
+	datasetIdFlag bool
+
+	appId     string // 该数据集对应的开放平台应用id
+	appIdFlag bool
+
+	createTime     string // 创建时间，精确到秒级
+	createTimeFlag bool
+
+	updateTime     string // 更新时间
+	updateTimeFlag bool
+
+	chunkNum     int // 数据集中的索引数据的数量
+	chunkNumFlag bool
+
+	docNum     int // 数据集中的数据项的数量
+	docNumFlag bool
+
+	name     string // 数据源的名字，只允许英文字母、数字和下划线，需要保证应用内部的唯一性。
+	nameFlag bool
+
+	description     string // 描述该数据集的具体内容以及相关用途
+	descriptionFlag bool
+
 	filterSchemas     []*FilterSchema // 过滤字段，每个数据集支持多个过滤字段
 	filterSchemasFlag bool
-	modelConfig       *ModelConfig // 模型配置
-	modelConfigFlag   bool
-	viewerAppIds      []string // 被授权可搜/可见的应用
-	viewerAppIdsFlag  bool
+
+	modelConfig     *ModelConfig // 模型配置
+	modelConfigFlag bool
+
+	viewerAppIds     []string // 被授权可搜/可见的应用
+	viewerAppIdsFlag bool
 }
 
 func NewDatasetBuilder() *DatasetBuilder {
@@ -1345,13 +1461,15 @@ func (builder *DatasetBuilder) Build() *Dataset {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -1389,27 +1507,37 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type DialogSearchRequest struct {
-	ToolRawInstruction           *string          `json:"tool_raw_instruction,omitempty"`            // 用户问题
-	ScenarioContextSchemaVersion *string          `json:"scenario_context_schema_version,omitempty"` // 场景上下文的schema版本号
-	ScenarioContext              *ScenarioContext `json:"scenario_context,omitempty"`                // 场景上下文
-	AgentType                    *int             `json:"agent_type,omitempty"`                      // agent类型
-	ResponseType                 *int             `json:"response_type,omitempty"`                   // 返回结果的数据类型
-	PassageParam                 *PassageParam    `json:"passage_param,omitempty"`                   // passage_param
+	ToolRawInstruction *string `json:"tool_raw_instruction,omitempty"` // 用户问题
+
+	ScenarioContextSchemaVersion *string `json:"scenario_context_schema_version,omitempty"` // 场景上下文的schema版本号
+
+	ScenarioContext *ScenarioContext `json:"scenario_context,omitempty"` // 场景上下文
+
+	AgentType *int `json:"agent_type,omitempty"` // agent类型
+
+	ResponseType *int `json:"response_type,omitempty"` // 返回结果的数据类型
+
+	PassageParam *PassageParam `json:"passage_param,omitempty"` // passage_param
 }
 
 type DialogSearchRequestBuilder struct {
-	toolRawInstruction               string // 用户问题
-	toolRawInstructionFlag           bool
+	toolRawInstruction     string // 用户问题
+	toolRawInstructionFlag bool
+
 	scenarioContextSchemaVersion     string // 场景上下文的schema版本号
 	scenarioContextSchemaVersionFlag bool
-	scenarioContext                  *ScenarioContext // 场景上下文
-	scenarioContextFlag              bool
-	agentType                        int // agent类型
-	agentTypeFlag                    bool
-	responseType                     int // 返回结果的数据类型
-	responseTypeFlag                 bool
-	passageParam                     *PassageParam // passage_param
-	passageParamFlag                 bool
+
+	scenarioContext     *ScenarioContext // 场景上下文
+	scenarioContextFlag bool
+
+	agentType     int // agent类型
+	agentTypeFlag bool
+
+	responseType     int // 返回结果的数据类型
+	responseTypeFlag bool
+
+	passageParam     *PassageParam // passage_param
+	passageParamFlag bool
 }
 
 func NewDialogSearchRequestBuilder() *DialogSearchRequestBuilder {
@@ -1499,18 +1627,22 @@ func (builder *DialogSearchRequestBuilder) Build() *DialogSearchRequest {
 }
 
 type Doc struct {
-	DocId      *string  `json:"doc_id,omitempty"`      // 文档的唯一标识，只允许英文字母、数字和下划线
-	FilterData *string  `json:"filter_data,omitempty"` // 文档对应filter_schema的值
-	Chunks     []*Chunk `json:"chunks,omitempty"`      // 文本块列表
+	DocId *string `json:"doc_id,omitempty"` // 文档的唯一标识，只允许英文字母、数字和下划线
+
+	FilterData *string `json:"filter_data,omitempty"` // 文档对应filter_schema的值
+
+	Chunks []*Chunk `json:"chunks,omitempty"` // 文本块列表
 }
 
 type DocBuilder struct {
-	docId          string // 文档的唯一标识，只允许英文字母、数字和下划线
-	docIdFlag      bool
+	docId     string // 文档的唯一标识，只允许英文字母、数字和下划线
+	docIdFlag bool
+
 	filterData     string // 文档对应filter_schema的值
 	filterDataFlag bool
-	chunks         []*Chunk // 文本块列表
-	chunksFlag     bool
+
+	chunks     []*Chunk // 文本块列表
+	chunksFlag bool
 }
 
 func NewDocBuilder() *DocBuilder {
@@ -1562,39 +1694,57 @@ func (builder *DocBuilder) Build() *Doc {
 }
 
 type DocPassageParam struct {
-	Searchable           *bool    `json:"searchable,omitempty"`             // 是否要搜索doc
-	DocTokens            []string `json:"doc_tokens,omitempty"`             // 搜索几篇特定doc
-	FolderTokens         []string `json:"folder_tokens,omitempty"`          // 搜索特定的文件夹
-	ObjIds               []string `json:"obj_ids,omitempty"`                // 搜索特定doc（仅限内部使用，有需求请用doc_tokens）
-	DisableSearchLink    *bool    `json:"disable_search_link,omitempty"`    // 禁用搜索外链文档功能
-	ExcludedObjIds       []string `json:"excluded_obj_ids,omitempty"`       // 排除文档id
-	ExcludedDocTokens    []string `json:"excluded_doc_tokens,omitempty"`    // 排除文档token
+	Searchable *bool `json:"searchable,omitempty"` // 是否要搜索doc
+
+	DocTokens []string `json:"doc_tokens,omitempty"` // 搜索几篇特定doc
+
+	FolderTokens []string `json:"folder_tokens,omitempty"` // 搜索特定的文件夹
+
+	ObjIds []string `json:"obj_ids,omitempty"` // 搜索特定doc（仅限内部使用，有需求请用doc_tokens）
+
+	DisableSearchLink *bool `json:"disable_search_link,omitempty"` // 禁用搜索外链文档功能
+
+	ExcludedObjIds []string `json:"excluded_obj_ids,omitempty"` // 排除文档id
+
+	ExcludedDocTokens []string `json:"excluded_doc_tokens,omitempty"` // 排除文档token
+
 	ExcludedFolderTokens []string `json:"excluded_folder_tokens,omitempty"` // 排除的文件夹token
-	EnableCrossTenant    *bool    `json:"enable_cross_tenant,omitempty"`    // 是否跨租户
-	OnlySearchPublic     *bool    `json:"only_search_public,omitempty"`     // 是否只搜公开
+
+	EnableCrossTenant *bool `json:"enable_cross_tenant,omitempty"` // 是否跨租户
+
+	OnlySearchPublic *bool `json:"only_search_public,omitempty"` // 是否只搜公开
 }
 
 type DocPassageParamBuilder struct {
-	searchable               bool // 是否要搜索doc
-	searchableFlag           bool
-	docTokens                []string // 搜索几篇特定doc
-	docTokensFlag            bool
-	folderTokens             []string // 搜索特定的文件夹
-	folderTokensFlag         bool
-	objIds                   []string // 搜索特定doc（仅限内部使用，有需求请用doc_tokens）
-	objIdsFlag               bool
-	disableSearchLink        bool // 禁用搜索外链文档功能
-	disableSearchLinkFlag    bool
-	excludedObjIds           []string // 排除文档id
-	excludedObjIdsFlag       bool
-	excludedDocTokens        []string // 排除文档token
-	excludedDocTokensFlag    bool
+	searchable     bool // 是否要搜索doc
+	searchableFlag bool
+
+	docTokens     []string // 搜索几篇特定doc
+	docTokensFlag bool
+
+	folderTokens     []string // 搜索特定的文件夹
+	folderTokensFlag bool
+
+	objIds     []string // 搜索特定doc（仅限内部使用，有需求请用doc_tokens）
+	objIdsFlag bool
+
+	disableSearchLink     bool // 禁用搜索外链文档功能
+	disableSearchLinkFlag bool
+
+	excludedObjIds     []string // 排除文档id
+	excludedObjIdsFlag bool
+
+	excludedDocTokens     []string // 排除文档token
+	excludedDocTokensFlag bool
+
 	excludedFolderTokens     []string // 排除的文件夹token
 	excludedFolderTokensFlag bool
-	enableCrossTenant        bool // 是否跨租户
-	enableCrossTenantFlag    bool
-	onlySearchPublic         bool // 是否只搜公开
-	onlySearchPublicFlag     bool
+
+	enableCrossTenant     bool // 是否跨租户
+	enableCrossTenantFlag bool
+
+	onlySearchPublic     bool // 是否只搜公开
+	onlySearchPublicFlag bool
 }
 
 func NewDocPassageParamBuilder() *DocPassageParamBuilder {
@@ -1732,21 +1882,27 @@ func (builder *DocPassageParamBuilder) Build() *DocPassageParam {
 }
 
 type FilterSchema struct {
-	Field      *string `json:"field,omitempty"`       // 过滤字段的名字
-	Type       *string `json:"type,omitempty"`        // 过滤字段的类型
+	Field *string `json:"field,omitempty"` // 过滤字段的名字
+
+	Type *string `json:"type,omitempty"` // 过滤字段的类型
+
 	DefaultVal *string `json:"default_val,omitempty"` // 过滤字段的默认值
-	FieldType  *string `json:"field_type,omitempty"`  // 用于构建dsl过滤的类型，默认是enum
+
+	FieldType *string `json:"field_type,omitempty"` // 用于构建dsl过滤的类型，默认是enum
 }
 
 type FilterSchemaBuilder struct {
-	field          string // 过滤字段的名字
-	fieldFlag      bool
-	type_          string // 过滤字段的类型
-	typeFlag       bool
+	field     string // 过滤字段的名字
+	fieldFlag bool
+
+	type_    string // 过滤字段的类型
+	typeFlag bool
+
 	defaultVal     string // 过滤字段的默认值
 	defaultValFlag bool
-	fieldType      string // 用于构建dsl过滤的类型，默认是enum
-	fieldTypeFlag  bool
+
+	fieldType     string // 用于构建dsl过滤的类型，默认是enum
+	fieldTypeFlag bool
 }
 
 func NewFilterSchemaBuilder() *FilterSchemaBuilder {
@@ -1812,13 +1968,15 @@ func (builder *FilterSchemaBuilder) Build() *FilterSchema {
 }
 
 type HelpdeskPassageParam struct {
-	Searchable  *bool    `json:"searchable,omitempty"`   // 是否要搜索服务台
+	Searchable *bool `json:"searchable,omitempty"` // 是否要搜索服务台
+
 	HelpdeskIds []string `json:"helpdesk_ids,omitempty"` // 搜索特定的服务台
 }
 
 type HelpdeskPassageParamBuilder struct {
-	searchable      bool // 是否要搜索服务台
-	searchableFlag  bool
+	searchable     bool // 是否要搜索服务台
+	searchableFlag bool
+
 	helpdeskIds     []string // 搜索特定的服务台
 	helpdeskIdsFlag bool
 }
@@ -1860,15 +2018,19 @@ func (builder *HelpdeskPassageParamBuilder) Build() *HelpdeskPassageParam {
 
 type I18nMeta struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 国际化字段：中文
+
 	EnUs *string `json:"en_us,omitempty"` // 国际化字段：英文
+
 	JaJp *string `json:"ja_jp,omitempty"` // 国际化字段：日文
 }
 
 type I18nMetaBuilder struct {
 	zhCn     string // 国际化字段：中文
 	zhCnFlag bool
+
 	enUs     string // 国际化字段：英文
 	enUsFlag bool
+
 	jaJp     string // 国际化字段：日文
 	jaJpFlag bool
 }
@@ -1923,24 +2085,32 @@ func (builder *I18nMetaBuilder) Build() *I18nMeta {
 }
 
 type Item struct {
-	Id             *string       `json:"id,omitempty"`              // item 在 datasource 中的唯一标识
-	Acl            []*Acl        `json:"acl,omitempty"`             // item 的访问权限控制。 acl 字段为空数组，则默认数据不可见。如果数据是全员可见，需要设置 access="allow"; type="user"; value="everyone"
-	Metadata       *ItemMetadata `json:"metadata,omitempty"`        // item 的元信息
-	StructuredData *string       `json:"structured_data,omitempty"` // 结构化数据（以 json 字符串传递），这些字段是搜索结果的展示字段(特殊字段无须在此另外指定);具体格式可参参考 [通用模块接入指南](/uAjLw4CM/ukTMukTMukTM/search-v2/common-template-intergration-handbook) **请求创建数据项**部分
-	Content        *ItemContent  `json:"content,omitempty"`         // 非结构化数据，如文档文本，飞书搜索会用来做召回
+	Id *string `json:"id,omitempty"` // item 在 datasource 中的唯一标识
+
+	Acl []*Acl `json:"acl,omitempty"` // item 的访问权限控制。 acl 字段为空数组，则默认数据不可见。如果数据是全员可见，需要设置 access="allow"; type="user"; value="everyone"
+
+	Metadata *ItemMetadata `json:"metadata,omitempty"` // item 的元信息
+
+	StructuredData *string `json:"structured_data,omitempty"` // 结构化数据（以 json 字符串传递），这些字段是搜索结果的展示字段(特殊字段无须在此另外指定);具体格式可参参考 [通用模块接入指南](/uAjLw4CM/ukTMukTMukTM/search-v2/common-template-intergration-handbook) **请求创建数据项**部分
+
+	Content *ItemContent `json:"content,omitempty"` // 非结构化数据，如文档文本，飞书搜索会用来做召回
 }
 
 type ItemBuilder struct {
-	id                 string // item 在 datasource 中的唯一标识
-	idFlag             bool
-	acl                []*Acl // item 的访问权限控制。 acl 字段为空数组，则默认数据不可见。如果数据是全员可见，需要设置 access="allow"; type="user"; value="everyone"
-	aclFlag            bool
-	metadata           *ItemMetadata // item 的元信息
-	metadataFlag       bool
+	id     string // item 在 datasource 中的唯一标识
+	idFlag bool
+
+	acl     []*Acl // item 的访问权限控制。 acl 字段为空数组，则默认数据不可见。如果数据是全员可见，需要设置 access="allow"; type="user"; value="everyone"
+	aclFlag bool
+
+	metadata     *ItemMetadata // item 的元信息
+	metadataFlag bool
+
 	structuredData     string // 结构化数据（以 json 字符串传递），这些字段是搜索结果的展示字段(特殊字段无须在此另外指定);具体格式可参参考 [通用模块接入指南](/uAjLw4CM/ukTMukTMukTM/search-v2/common-template-intergration-handbook) **请求创建数据项**部分
 	structuredDataFlag bool
-	content            *ItemContent // 非结构化数据，如文档文本，飞书搜索会用来做召回
-	contentFlag        bool
+
+	content     *ItemContent // 非结构化数据，如文档文本，飞书搜索会用来做召回
+	contentFlag bool
 }
 
 func NewItemBuilder() *ItemBuilder {
@@ -2016,13 +2186,15 @@ func (builder *ItemBuilder) Build() *Item {
 }
 
 type ItemContent struct {
-	Format      *string `json:"format,omitempty"`       // 内容的格式
+	Format *string `json:"format,omitempty"` // 内容的格式
+
 	ContentData *string `json:"content_data,omitempty"` // 全文数据
 }
 
 type ItemContentBuilder struct {
-	format          string // 内容的格式
-	formatFlag      bool
+	format     string // 内容的格式
+	formatFlag bool
+
 	contentData     string // 全文数据
 	contentDataFlag bool
 }
@@ -2064,22 +2236,30 @@ func (builder *ItemContentBuilder) Build() *ItemContent {
 }
 
 type ItemMetadata struct {
-	Title           *string `json:"title,omitempty"`             // 该条数据记录对应的标题
-	SourceUrl       *string `json:"source_url,omitempty"`        // 该条数据记录对应的跳转url
-	CreateTime      *int    `json:"create_time,omitempty"`       // 数据项的创建时间。Unix 时间，单位为秒
-	UpdateTime      *int    `json:"update_time,omitempty"`       // 数据项的更新时间。Unix 时间，单位为秒
+	Title *string `json:"title,omitempty"` // 该条数据记录对应的标题
+
+	SourceUrl *string `json:"source_url,omitempty"` // 该条数据记录对应的跳转url
+
+	CreateTime *int `json:"create_time,omitempty"` // 数据项的创建时间。Unix 时间，单位为秒
+
+	UpdateTime *int `json:"update_time,omitempty"` // 数据项的更新时间。Unix 时间，单位为秒
+
 	SourceUrlMobile *string `json:"source_url_mobile,omitempty"` // 移动端搜索命中的跳转地址。如果您PC端和移动端有不同的跳转地址，可以在这里写入移动端专用的url，我们会在搜索时为您选择合适的地址
 }
 
 type ItemMetadataBuilder struct {
-	title               string // 该条数据记录对应的标题
-	titleFlag           bool
-	sourceUrl           string // 该条数据记录对应的跳转url
-	sourceUrlFlag       bool
-	createTime          int // 数据项的创建时间。Unix 时间，单位为秒
-	createTimeFlag      bool
-	updateTime          int // 数据项的更新时间。Unix 时间，单位为秒
-	updateTimeFlag      bool
+	title     string // 该条数据记录对应的标题
+	titleFlag bool
+
+	sourceUrl     string // 该条数据记录对应的跳转url
+	sourceUrlFlag bool
+
+	createTime     int // 数据项的创建时间。Unix 时间，单位为秒
+	createTimeFlag bool
+
+	updateTime     int // 数据项的更新时间。Unix 时间，单位为秒
+	updateTimeFlag bool
+
 	sourceUrlMobile     string // 移动端搜索命中的跳转地址。如果您PC端和移动端有不同的跳转地址，可以在这里写入移动端专用的url，我们会在搜索时为您选择合适的地址
 	sourceUrlMobileFlag bool
 }
@@ -2160,24 +2340,32 @@ func (builder *ItemMetadataBuilder) Build() *ItemMetadata {
 }
 
 type ItemRecord struct {
-	ItemId       *string `json:"item_id,omitempty"`        // 冗余当前item的ID
+	ItemId *string `json:"item_id,omitempty"` // 冗余当前item的ID
+
 	DataSourceId *string `json:"data_source_id,omitempty"` // 数据源id
-	Version      *string `json:"version,omitempty"`        // 当前数据的最新版本号，其值等于上一次item/create接口传入的时间戳
-	CreatedAt    *string `json:"created_at,omitempty"`     // 第一次投递时间
-	UpdatedAt    *string `json:"updated_at,omitempty"`     // 上一次更新落库时间
+
+	Version *string `json:"version,omitempty"` // 当前数据的最新版本号，其值等于上一次item/create接口传入的时间戳
+
+	CreatedAt *string `json:"created_at,omitempty"` // 第一次投递时间
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 上一次更新落库时间
 }
 
 type ItemRecordBuilder struct {
-	itemId           string // 冗余当前item的ID
-	itemIdFlag       bool
+	itemId     string // 冗余当前item的ID
+	itemIdFlag bool
+
 	dataSourceId     string // 数据源id
 	dataSourceIdFlag bool
-	version          string // 当前数据的最新版本号，其值等于上一次item/create接口传入的时间戳
-	versionFlag      bool
-	createdAt        string // 第一次投递时间
-	createdAtFlag    bool
-	updatedAt        string // 上一次更新落库时间
-	updatedAtFlag    bool
+
+	version     string // 当前数据的最新版本号，其值等于上一次item/create接口传入的时间戳
+	versionFlag bool
+
+	createdAt     string // 第一次投递时间
+	createdAtFlag bool
+
+	updatedAt     string // 上一次更新落库时间
+	updatedAtFlag bool
 }
 
 func NewItemRecordBuilder() *ItemRecordBuilder {
@@ -2288,19 +2476,25 @@ func (builder *LingoPassageParamBuilder) Build() *LingoPassageParam {
 }
 
 type LlmModelConfig struct {
-	ModelName   *string  `json:"model_name,omitempty"`  // 模型名称
-	Prompt      *string  `json:"prompt,omitempty"`      // 自定义的问答prompt，占位符格式和go标准库-text/template保持一致
-	MaxToken    *int     `json:"max_token,omitempty"`   // 模型接收的最大token数
+	ModelName *string `json:"model_name,omitempty"` // 模型名称
+
+	Prompt *string `json:"prompt,omitempty"` // 自定义的问答prompt，占位符格式和go标准库-text/template保持一致
+
+	MaxToken *int `json:"max_token,omitempty"` // 模型接收的最大token数
+
 	Temperature *float64 `json:"temperature,omitempty"` // 模型生成的温度系数
 }
 
 type LlmModelConfigBuilder struct {
-	modelName       string // 模型名称
-	modelNameFlag   bool
-	prompt          string // 自定义的问答prompt，占位符格式和go标准库-text/template保持一致
-	promptFlag      bool
-	maxToken        int // 模型接收的最大token数
-	maxTokenFlag    bool
+	modelName     string // 模型名称
+	modelNameFlag bool
+
+	prompt     string // 自定义的问答prompt，占位符格式和go标准库-text/template保持一致
+	promptFlag bool
+
+	maxToken     int // 模型接收的最大token数
+	maxTokenFlag bool
+
 	temperature     float64 // 模型生成的温度系数
 	temperatureFlag bool
 }
@@ -2368,13 +2562,15 @@ func (builder *LlmModelConfigBuilder) Build() *LlmModelConfig {
 }
 
 type MemoryMessage struct {
-	Role    *string `json:"role,omitempty"`    // 发送消息的角色
+	Role *string `json:"role,omitempty"` // 发送消息的角色
+
 	Content *string `json:"content,omitempty"` // 消息内容
 }
 
 type MemoryMessageBuilder struct {
-	role        string // 发送消息的角色
-	roleFlag    bool
+	role     string // 发送消息的角色
+	roleFlag bool
+
 	content     string // 消息内容
 	contentFlag bool
 }
@@ -2416,22 +2612,30 @@ func (builder *MemoryMessageBuilder) Build() *MemoryMessage {
 }
 
 type MessagePassageParam struct {
-	Searchable         *bool    `json:"searchable,omitempty"`           // searchable
-	ChatIds            []string `json:"chat_ids,omitempty"`             // chat_ids
+	Searchable *bool `json:"searchable,omitempty"` // searchable
+
+	ChatIds []string `json:"chat_ids,omitempty"` // chat_ids
+
 	ExcludedPassageIds []string `json:"excluded_passage_ids,omitempty"` // excluded_passage_ids
-	ExcludedChatIds    []string `json:"excluded_chat_ids,omitempty"`    // excluded_chat_ids
+
+	ExcludedChatIds []string `json:"excluded_chat_ids,omitempty"` // excluded_chat_ids
+
 	ExcludedMessageIds []string `json:"excluded_message_ids,omitempty"` // excluded_message_ids
 }
 
 type MessagePassageParamBuilder struct {
-	searchable             bool // searchable
-	searchableFlag         bool
-	chatIds                []string // chat_ids
-	chatIdsFlag            bool
+	searchable     bool // searchable
+	searchableFlag bool
+
+	chatIds     []string // chat_ids
+	chatIdsFlag bool
+
 	excludedPassageIds     []string // excluded_passage_ids
 	excludedPassageIdsFlag bool
-	excludedChatIds        []string // excluded_chat_ids
-	excludedChatIdsFlag    bool
+
+	excludedChatIds     []string // excluded_chat_ids
+	excludedChatIdsFlag bool
+
 	excludedMessageIds     []string // excluded_message_ids
 	excludedMessageIdsFlag bool
 }
@@ -2540,22 +2744,30 @@ func (builder *ModelConfigBuilder) Build() *ModelConfig {
 }
 
 type ModelParam struct {
-	EncoderName     *string `json:"encoder_name,omitempty"`     // embedding模型名字
-	RankerName      *string `json:"ranker_name,omitempty"`      // 排序模型名字
-	FilterName      *string `json:"filter_name,omitempty"`      // 过滤模型名字
-	BoosterName     *string `json:"booster_name,omitempty"`     // 时效权威互动模型名字
+	EncoderName *string `json:"encoder_name,omitempty"` // embedding模型名字
+
+	RankerName *string `json:"ranker_name,omitempty"` // 排序模型名字
+
+	FilterName *string `json:"filter_name,omitempty"` // 过滤模型名字
+
+	BoosterName *string `json:"booster_name,omitempty"` // 时效权威互动模型名字
+
 	PassageLanguage *string `json:"passage_language,omitempty"` // 选择返回的语种，可选{zh,en,ja,auto,all}，auto自动检测query的语种并过滤，all保留所有语种不做过滤，默认auto
 }
 
 type ModelParamBuilder struct {
-	encoderName         string // embedding模型名字
-	encoderNameFlag     bool
-	rankerName          string // 排序模型名字
-	rankerNameFlag      bool
-	filterName          string // 过滤模型名字
-	filterNameFlag      bool
-	boosterName         string // 时效权威互动模型名字
-	boosterNameFlag     bool
+	encoderName     string // embedding模型名字
+	encoderNameFlag bool
+
+	rankerName     string // 排序模型名字
+	rankerNameFlag bool
+
+	filterName     string // 过滤模型名字
+	filterNameFlag bool
+
+	boosterName     string // 时效权威互动模型名字
+	boosterNameFlag bool
+
 	passageLanguage     string // 选择返回的语种，可选{zh,en,ja,auto,all}，auto自动检测query的语种并过滤，all保留所有语种不做过滤，默认auto
 	passageLanguageFlag bool
 }
@@ -2668,13 +2880,15 @@ func (builder *NlsModelConfigBuilder) Build() *NlsModelConfig {
 }
 
 type ParaphraseResult struct {
-	Text  *string `json:"text,omitempty"`  // 改写后的结果
+	Text *string `json:"text,omitempty"` // 改写后的结果
+
 	Extra *string `json:"extra,omitempty"` // 补充字段（json序列化）
 }
 
 type ParaphraseResultBuilder struct {
-	text      string // 改写后的结果
-	textFlag  bool
+	text     string // 改写后的结果
+	textFlag bool
+
 	extra     string // 补充字段（json序列化）
 	extraFlag bool
 }
@@ -2716,31 +2930,45 @@ func (builder *ParaphraseResultBuilder) Build() *ParaphraseResult {
 }
 
 type Passage struct {
-	PassageId     *string  `json:"passage_id,omitempty"`      // passage的唯一标识
-	PassageSource *int     `json:"passage_source,omitempty"`  // passage所属的数据源
-	Content       *string  `json:"content,omitempty"`         // 和query相关的文本段落
-	Title         *string  `json:"title,omitempty"`           // wiki或doc的题目
-	Url           *string  `json:"url,omitempty"`             // 跳转链接
-	Score         *float64 `json:"score,omitempty"`           // 文本段落和query的相关性分数
-	Extra         *string  `json:"extra,omitempty"`           // 其他source相关的字段
-	ContentForLlm *string  `json:"content_for_llm,omitempty"` // 和query相关的文本段落经过small2big之后的片段
+	PassageId *string `json:"passage_id,omitempty"` // passage的唯一标识
+
+	PassageSource *int `json:"passage_source,omitempty"` // passage所属的数据源
+
+	Content *string `json:"content,omitempty"` // 和query相关的文本段落
+
+	Title *string `json:"title,omitempty"` // wiki或doc的题目
+
+	Url *string `json:"url,omitempty"` // 跳转链接
+
+	Score *float64 `json:"score,omitempty"` // 文本段落和query的相关性分数
+
+	Extra *string `json:"extra,omitempty"` // 其他source相关的字段
+
+	ContentForLlm *string `json:"content_for_llm,omitempty"` // 和query相关的文本段落经过small2big之后的片段
 }
 
 type PassageBuilder struct {
-	passageId         string // passage的唯一标识
-	passageIdFlag     bool
+	passageId     string // passage的唯一标识
+	passageIdFlag bool
+
 	passageSource     int // passage所属的数据源
 	passageSourceFlag bool
-	content           string // 和query相关的文本段落
-	contentFlag       bool
-	title             string // wiki或doc的题目
-	titleFlag         bool
-	url               string // 跳转链接
-	urlFlag           bool
-	score             float64 // 文本段落和query的相关性分数
-	scoreFlag         bool
-	extra             string // 其他source相关的字段
-	extraFlag         bool
+
+	content     string // 和query相关的文本段落
+	contentFlag bool
+
+	title     string // wiki或doc的题目
+	titleFlag bool
+
+	url     string // 跳转链接
+	urlFlag bool
+
+	score     float64 // 文本段落和query的相关性分数
+	scoreFlag bool
+
+	extra     string // 其他source相关的字段
+	extraFlag bool
+
 	contentForLlm     string // 和query相关的文本段落经过small2big之后的片段
 	contentForLlmFlag bool
 }
@@ -2860,27 +3088,37 @@ func (builder *PassageBuilder) Build() *Passage {
 }
 
 type PassageParam struct {
-	DocParam      *DocPassageParam      `json:"doc_param,omitempty"`      // 搜doc的相关参数
-	WikiParam     *WikiPassageParam     `json:"wiki_param,omitempty"`     // 搜wiki的相关参数
-	WebParam      *WebPassageParam      `json:"web_param,omitempty"`      // 搜web的相关参数
+	DocParam *DocPassageParam `json:"doc_param,omitempty"` // 搜doc的相关参数
+
+	WikiParam *WikiPassageParam `json:"wiki_param,omitempty"` // 搜wiki的相关参数
+
+	WebParam *WebPassageParam `json:"web_param,omitempty"` // 搜web的相关参数
+
 	HelpdeskParam *HelpdeskPassageParam `json:"helpdesk_param,omitempty"` // 搜helpdesk的相关参数
-	LingoParam    *LingoPassageParam    `json:"lingo_param,omitempty"`    // lingo_param
-	MessageParam  *MessagePassageParam  `json:"message_param,omitempty"`  // message_param
+
+	LingoParam *LingoPassageParam `json:"lingo_param,omitempty"` // lingo_param
+
+	MessageParam *MessagePassageParam `json:"message_param,omitempty"` // message_param
 }
 
 type PassageParamBuilder struct {
-	docParam          *DocPassageParam // 搜doc的相关参数
-	docParamFlag      bool
-	wikiParam         *WikiPassageParam // 搜wiki的相关参数
-	wikiParamFlag     bool
-	webParam          *WebPassageParam // 搜web的相关参数
-	webParamFlag      bool
+	docParam     *DocPassageParam // 搜doc的相关参数
+	docParamFlag bool
+
+	wikiParam     *WikiPassageParam // 搜wiki的相关参数
+	wikiParamFlag bool
+
+	webParam     *WebPassageParam // 搜web的相关参数
+	webParamFlag bool
+
 	helpdeskParam     *HelpdeskPassageParam // 搜helpdesk的相关参数
 	helpdeskParamFlag bool
-	lingoParam        *LingoPassageParam // lingo_param
-	lingoParamFlag    bool
-	messageParam      *MessagePassageParam // message_param
-	messageParamFlag  bool
+
+	lingoParam     *LingoPassageParam // lingo_param
+	lingoParamFlag bool
+
+	messageParam     *MessagePassageParam // message_param
+	messageParamFlag bool
 }
 
 func NewPassageParamBuilder() *PassageParamBuilder {
@@ -2966,16 +3204,20 @@ func (builder *PassageParamBuilder) Build() *PassageParam {
 }
 
 type PatchSchemaProperty struct {
-	Name         *string                  `json:"name,omitempty"`          // 属性名
-	Desc         *string                  `json:"desc,omitempty"`          // 属性描述
+	Name *string `json:"name,omitempty"` // 属性名
+
+	Desc *string `json:"desc,omitempty"` // 属性描述
+
 	AnswerOption *SchemaFieldAnswerOption `json:"answer_option,omitempty"` // 问答产品设置，仅在datasource中use_answer为true时生效
 }
 
 type PatchSchemaPropertyBuilder struct {
-	name             string // 属性名
-	nameFlag         bool
-	desc             string // 属性描述
-	descFlag         bool
+	name     string // 属性名
+	nameFlag bool
+
+	desc     string // 属性描述
+	descFlag bool
+
 	answerOption     *SchemaFieldAnswerOption // 问答产品设置，仅在datasource中use_answer为true时生效
 	answerOptionFlag bool
 }
@@ -3029,36 +3271,52 @@ func (builder *PatchSchemaPropertyBuilder) Build() *PatchSchemaProperty {
 }
 
 type Present struct {
-	Type           *string                `json:"type,omitempty"`             // 透传数据类型
-	Body           *string                `json:"body,omitempty"`             // 透传消息体
-	OperationType  *string                `json:"operation_type,omitempty"`   // 在交互卡片的场景下，如果用户完成交互，根据交互行为 Tool 对该交互行为做出的响应
-	Interactable   *bool                  `json:"interactable,omitempty"`     // 用来定义工具输出的卡片是否为交互卡片
-	OperationUrl   *string                `json:"operation_url,omitempty"`    // 卡片后续链路交互的请求地址
-	CallbackUrl    *string                `json:"callback_url,omitempty"`     // 透传数据上屏后，回调业务方的 url；支持 Open API 与 RPC 两种方式
-	CallbackInfo   *string                `json:"callback_info,omitempty"`    // 透传数据上屏后，回调给业务方的数据，仅在 type = card 时会回调
-	CardTemplateId *string                `json:"card_template_id,omitempty"` // 仅 type = template_card 时使用，代表模版卡片的模版信息
-	CardVariables  *TemplateCardVariables `json:"card_variables,omitempty"`   // 仅 type = template_card 使用，对应到模版卡片中模版里的变量信息，类型应该是map<string, string>
+	Type *string `json:"type,omitempty"` // 透传数据类型
+
+	Body *string `json:"body,omitempty"` // 透传消息体
+
+	OperationType *string `json:"operation_type,omitempty"` // 在交互卡片的场景下，如果用户完成交互，根据交互行为 Tool 对该交互行为做出的响应
+
+	Interactable *bool `json:"interactable,omitempty"` // 用来定义工具输出的卡片是否为交互卡片
+
+	OperationUrl *string `json:"operation_url,omitempty"` // 卡片后续链路交互的请求地址
+
+	CallbackUrl *string `json:"callback_url,omitempty"` // 透传数据上屏后，回调业务方的 url；支持 Open API 与 RPC 两种方式
+
+	CallbackInfo *string `json:"callback_info,omitempty"` // 透传数据上屏后，回调给业务方的数据，仅在 type = card 时会回调
+
+	CardTemplateId *string `json:"card_template_id,omitempty"` // 仅 type = template_card 时使用，代表模版卡片的模版信息
+
+	CardVariables *TemplateCardVariables `json:"card_variables,omitempty"` // 仅 type = template_card 使用，对应到模版卡片中模版里的变量信息，类型应该是map<string, string>
 }
 
 type PresentBuilder struct {
-	type_              string // 透传数据类型
-	typeFlag           bool
-	body               string // 透传消息体
-	bodyFlag           bool
-	operationType      string // 在交互卡片的场景下，如果用户完成交互，根据交互行为 Tool 对该交互行为做出的响应
-	operationTypeFlag  bool
-	interactable       bool // 用来定义工具输出的卡片是否为交互卡片
-	interactableFlag   bool
-	operationUrl       string // 卡片后续链路交互的请求地址
-	operationUrlFlag   bool
-	callbackUrl        string // 透传数据上屏后，回调业务方的 url；支持 Open API 与 RPC 两种方式
-	callbackUrlFlag    bool
-	callbackInfo       string // 透传数据上屏后，回调给业务方的数据，仅在 type = card 时会回调
-	callbackInfoFlag   bool
+	type_    string // 透传数据类型
+	typeFlag bool
+
+	body     string // 透传消息体
+	bodyFlag bool
+
+	operationType     string // 在交互卡片的场景下，如果用户完成交互，根据交互行为 Tool 对该交互行为做出的响应
+	operationTypeFlag bool
+
+	interactable     bool // 用来定义工具输出的卡片是否为交互卡片
+	interactableFlag bool
+
+	operationUrl     string // 卡片后续链路交互的请求地址
+	operationUrlFlag bool
+
+	callbackUrl     string // 透传数据上屏后，回调业务方的 url；支持 Open API 与 RPC 两种方式
+	callbackUrlFlag bool
+
+	callbackInfo     string // 透传数据上屏后，回调给业务方的数据，仅在 type = card 时会回调
+	callbackInfoFlag bool
+
 	cardTemplateId     string // 仅 type = template_card 时使用，代表模版卡片的模版信息
 	cardTemplateIdFlag bool
-	cardVariables      *TemplateCardVariables // 仅 type = template_card 使用，对应到模版卡片中模版里的变量信息，类型应该是map<string, string>
-	cardVariablesFlag  bool
+
+	cardVariables     *TemplateCardVariables // 仅 type = template_card 使用，对应到模版卡片中模版里的变量信息，类型应该是map<string, string>
+	cardVariablesFlag bool
 }
 
 func NewPresentBuilder() *PresentBuilder {
@@ -3188,16 +3446,20 @@ func (builder *PresentBuilder) Build() *Present {
 }
 
 type PresentDataCallbackDialogRequest struct {
-	MessageId    *string `json:"message_id,omitempty"`    // message_id
-	Status       *Status `json:"status,omitempty"`        // status
+	MessageId *string `json:"message_id,omitempty"` // message_id
+
+	Status *Status `json:"status,omitempty"` // status
+
 	CallbackInfo *string `json:"callback_info,omitempty"` // callback_info
 }
 
 type PresentDataCallbackDialogRequestBuilder struct {
-	messageId        string // message_id
-	messageIdFlag    bool
-	status           *Status // status
-	statusFlag       bool
+	messageId     string // message_id
+	messageIdFlag bool
+
+	status     *Status // status
+	statusFlag bool
+
 	callbackInfo     string // callback_info
 	callbackInfoFlag bool
 }
@@ -3251,18 +3513,22 @@ func (builder *PresentDataCallbackDialogRequestBuilder) Build() *PresentDataCall
 }
 
 type RagAnswerResponse struct {
-	Answer   *string    `json:"answer,omitempty"`   // 模型总结的结果
+	Answer *string `json:"answer,omitempty"` // 模型总结的结果
+
 	Passages []*Passage `json:"passages,omitempty"` // 召回的passage列表
-	Probe    *RagProbe  `json:"probe,omitempty"`    // 返回结果提示
+
+	Probe *RagProbe `json:"probe,omitempty"` // 返回结果提示
 }
 
 type RagAnswerResponseBuilder struct {
-	answer       string // 模型总结的结果
-	answerFlag   bool
+	answer     string // 模型总结的结果
+	answerFlag bool
+
 	passages     []*Passage // 召回的passage列表
 	passagesFlag bool
-	probe        *RagProbe // 返回结果提示
-	probeFlag    bool
+
+	probe     *RagProbe // 返回结果提示
+	probeFlag bool
 }
 
 func NewRagAnswerResponseBuilder() *RagAnswerResponseBuilder {
@@ -3313,18 +3579,22 @@ func (builder *RagAnswerResponseBuilder) Build() *RagAnswerResponse {
 }
 
 type RagProbe struct {
-	HitAuthority      *bool `json:"hit_authority,omitempty"`       // 是否命中了权威小库
+	HitAuthority *bool `json:"hit_authority,omitempty"` // 是否命中了权威小库
+
 	HitConfidenceWarn *bool `json:"hit_confidence_warn,omitempty"` // 是否命中了低置信度提示
-	HitLlmReject      *bool `json:"hit_llm_reject,omitempty"`      // 是否命中了模型拒答
+
+	HitLlmReject *bool `json:"hit_llm_reject,omitempty"` // 是否命中了模型拒答
 }
 
 type RagProbeBuilder struct {
-	hitAuthority          bool // 是否命中了权威小库
-	hitAuthorityFlag      bool
+	hitAuthority     bool // 是否命中了权威小库
+	hitAuthorityFlag bool
+
 	hitConfidenceWarn     bool // 是否命中了低置信度提示
 	hitConfidenceWarnFlag bool
-	hitLlmReject          bool // 是否命中了模型拒答
-	hitLlmRejectFlag      bool
+
+	hitLlmReject     bool // 是否命中了模型拒答
+	hitLlmRejectFlag bool
 }
 
 func NewRagProbeBuilder() *RagProbeBuilder {
@@ -3377,25 +3647,35 @@ func (builder *RagProbeBuilder) Build() *RagProbe {
 }
 
 type ScenarioContext struct {
-	Extra              *ScenarioContextExtra `json:"extra,omitempty"`                // 拓展信息
-	SystemInfo         *SystemInfo           `json:"system_info,omitempty"`          // AI Engine填充的系统信息
-	Memory             []*MemoryMessage      `json:"memory,omitempty"`               // 会话的历史对话
-	Scenario           *string               `json:"scenario,omitempty"`             // 会话所处的业务场景
-	WorkMode           *int                  `json:"work_mode,omitempty"`            // 会话所处的业务模式
-	ToolRawInstruction *string               `json:"tool_raw_instruction,omitempty"` // 用户原始的问题描述
+	Extra *ScenarioContextExtra `json:"extra,omitempty"` // 拓展信息
+
+	SystemInfo *SystemInfo `json:"system_info,omitempty"` // AI Engine填充的系统信息
+
+	Memory []*MemoryMessage `json:"memory,omitempty"` // 会话的历史对话
+
+	Scenario *string `json:"scenario,omitempty"` // 会话所处的业务场景
+
+	WorkMode *int `json:"work_mode,omitempty"` // 会话所处的业务模式
+
+	ToolRawInstruction *string `json:"tool_raw_instruction,omitempty"` // 用户原始的问题描述
 }
 
 type ScenarioContextBuilder struct {
-	extra                  *ScenarioContextExtra // 拓展信息
-	extraFlag              bool
-	systemInfo             *SystemInfo // AI Engine填充的系统信息
-	systemInfoFlag         bool
-	memory                 []*MemoryMessage // 会话的历史对话
-	memoryFlag             bool
-	scenario               string // 会话所处的业务场景
-	scenarioFlag           bool
-	workMode               int // 会话所处的业务模式
-	workModeFlag           bool
+	extra     *ScenarioContextExtra // 拓展信息
+	extraFlag bool
+
+	systemInfo     *SystemInfo // AI Engine填充的系统信息
+	systemInfoFlag bool
+
+	memory     []*MemoryMessage // 会话的历史对话
+	memoryFlag bool
+
+	scenario     string // 会话所处的业务场景
+	scenarioFlag bool
+
+	workMode     int // 会话所处的业务模式
+	workModeFlag bool
+
 	toolRawInstruction     string // 用户原始的问题描述
 	toolRawInstructionFlag bool
 }
@@ -3486,25 +3766,35 @@ func (builder *ScenarioContextBuilder) Build() *ScenarioContext {
 }
 
 type ScenarioContextExtra struct {
-	GroundingId             *string `json:"grounding_id,omitempty"`              // Grounding ID
-	ModelKey                *string `json:"model_key,omitempty"`                 // 模型 key
-	SpecifiedObjIds         *string `json:"specified_obj_ids,omitempty"`         // 检索时指定的文档 id, 多个 id 以`,`分隔
-	SuggestQueryId          *string `json:"suggest_query_id,omitempty"`          // 推荐问题的 ID
-	ButtonSendMessageInfo   *string `json:"button_send_message_info,omitempty"`  // 点击按钮发送消息时所携带的参数信息
+	GroundingId *string `json:"grounding_id,omitempty"` // Grounding ID
+
+	ModelKey *string `json:"model_key,omitempty"` // 模型 key
+
+	SpecifiedObjIds *string `json:"specified_obj_ids,omitempty"` // 检索时指定的文档 id, 多个 id 以`,`分隔
+
+	SuggestQueryId *string `json:"suggest_query_id,omitempty"` // 推荐问题的 ID
+
+	ButtonSendMessageInfo *string `json:"button_send_message_info,omitempty"` // 点击按钮发送消息时所携带的参数信息
+
 	ButtonRegenerateMessage *string `json:"button_regenerate_message,omitempty"` // 点击重新生成按钮时携带的参数信息
 }
 
 type ScenarioContextExtraBuilder struct {
-	groundingId                 string // Grounding ID
-	groundingIdFlag             bool
-	modelKey                    string // 模型 key
-	modelKeyFlag                bool
-	specifiedObjIds             string // 检索时指定的文档 id, 多个 id 以`,`分隔
-	specifiedObjIdsFlag         bool
-	suggestQueryId              string // 推荐问题的 ID
-	suggestQueryIdFlag          bool
-	buttonSendMessageInfo       string // 点击按钮发送消息时所携带的参数信息
-	buttonSendMessageInfoFlag   bool
+	groundingId     string // Grounding ID
+	groundingIdFlag bool
+
+	modelKey     string // 模型 key
+	modelKeyFlag bool
+
+	specifiedObjIds     string // 检索时指定的文档 id, 多个 id 以`,`分隔
+	specifiedObjIdsFlag bool
+
+	suggestQueryId     string // 推荐问题的 ID
+	suggestQueryIdFlag bool
+
+	buttonSendMessageInfo     string // 点击按钮发送消息时所携带的参数信息
+	buttonSendMessageInfoFlag bool
+
 	buttonRegenerateMessage     string // 点击重新生成按钮时携带的参数信息
 	buttonRegenerateMessageFlag bool
 }
@@ -3599,17 +3889,21 @@ func (builder *ScenarioContextExtraBuilder) Build() *ScenarioContextExtra {
 
 type Schema struct {
 	Properties []*SchemaProperty `json:"properties,omitempty"` // 数据范式的属性定义
-	Display    *SchemaDisplay    `json:"display,omitempty"`    // 数据展示相关配置
-	SchemaId   *string           `json:"schema_id,omitempty"`  // 用户自定义数据范式的唯一标识
+
+	Display *SchemaDisplay `json:"display,omitempty"` // 数据展示相关配置
+
+	SchemaId *string `json:"schema_id,omitempty"` // 用户自定义数据范式的唯一标识
 }
 
 type SchemaBuilder struct {
 	properties     []*SchemaProperty // 数据范式的属性定义
 	propertiesFlag bool
-	display        *SchemaDisplay // 数据展示相关配置
-	displayFlag    bool
-	schemaId       string // 用户自定义数据范式的唯一标识
-	schemaIdFlag   bool
+
+	display     *SchemaDisplay // 数据展示相关配置
+	displayFlag bool
+
+	schemaId     string // 用户自定义数据范式的唯一标识
+	schemaIdFlag bool
 }
 
 func NewSchemaBuilder() *SchemaBuilder {
@@ -3660,13 +3954,15 @@ func (builder *SchemaBuilder) Build() *Schema {
 }
 
 type SchemaDisplay struct {
-	CardKey       *string                      `json:"card_key,omitempty"`       // 搜索数据的展示卡片;;;卡片详细信息请参考 [通用模块接入指南](/uAjLw4CM/ukTMukTMukTM/search-v2/common-template-intergration-handbook)  "请求创建数据范式"部分
+	CardKey *string `json:"card_key,omitempty"` // 搜索数据的展示卡片;;;卡片详细信息请参考 [通用模块接入指南](/uAjLw4CM/ukTMukTMukTM/search-v2/common-template-intergration-handbook)  "请求创建数据范式"部分
+
 	FieldsMapping []*SchemaDisplayFieldMapping `json:"fields_mapping,omitempty"` // 数据字段名称和展示字段名称的映射关系。如果没有设置，则只会展示 与展示字段名称同名的 数据字段
 }
 
 type SchemaDisplayBuilder struct {
-	cardKey           string // 搜索数据的展示卡片;;;卡片详细信息请参考 [通用模块接入指南](/uAjLw4CM/ukTMukTMukTM/search-v2/common-template-intergration-handbook)  "请求创建数据范式"部分
-	cardKeyFlag       bool
+	cardKey     string // 搜索数据的展示卡片;;;卡片详细信息请参考 [通用模块接入指南](/uAjLw4CM/ukTMukTMukTM/search-v2/common-template-intergration-handbook)  "请求创建数据范式"部分
+	cardKeyFlag bool
+
 	fieldsMapping     []*SchemaDisplayFieldMapping // 数据字段名称和展示字段名称的映射关系。如果没有设置，则只会展示 与展示字段名称同名的 数据字段
 	fieldsMappingFlag bool
 }
@@ -3708,14 +4004,16 @@ func (builder *SchemaDisplayBuilder) Build() *SchemaDisplay {
 
 type SchemaDisplayFieldMapping struct {
 	DisplayField *string `json:"display_field,omitempty"` // 展示字段名称，与 card_key 有关，每个模版能展示的字段不同。该字段不能重复
-	DataField    *string `json:"data_field,omitempty"`    // 数据字段的名称。需要确保该字段对应在 schema 属性定义中的 is_returnable 为 true，否则无法展示。需要使用 ${xxx} 的规则来描述
+
+	DataField *string `json:"data_field,omitempty"` // 数据字段的名称。需要确保该字段对应在 schema 属性定义中的 is_returnable 为 true，否则无法展示。需要使用 ${xxx} 的规则来描述
 }
 
 type SchemaDisplayFieldMappingBuilder struct {
 	displayField     string // 展示字段名称，与 card_key 有关，每个模版能展示的字段不同。该字段不能重复
 	displayFieldFlag bool
-	dataField        string // 数据字段的名称。需要确保该字段对应在 schema 属性定义中的 is_returnable 为 true，否则无法展示。需要使用 ${xxx} 的规则来描述
-	dataFieldFlag    bool
+
+	dataField     string // 数据字段的名称。需要确保该字段对应在 schema 属性定义中的 is_returnable 为 true，否则无法展示。需要使用 ${xxx} 的规则来描述
+	dataFieldFlag bool
 }
 
 func NewSchemaDisplayFieldMappingBuilder() *SchemaDisplayFieldMappingBuilder {
@@ -3787,12 +4085,14 @@ func (builder *SchemaEnumOptionsBuilder) Build() *SchemaEnumOptions {
 
 type SchemaFieldAnswerOption struct {
 	IsSearchable *bool `json:"is_searchable,omitempty"` // 是否用于搜索
+
 	IsReturnable *bool `json:"is_returnable,omitempty"` // 是否用于返回
 }
 
 type SchemaFieldAnswerOptionBuilder struct {
 	isSearchable     bool // 是否用于搜索
 	isSearchableFlag bool
+
 	isReturnable     bool // 是否用于返回
 	isReturnableFlag bool
 }
@@ -3834,31 +4134,45 @@ func (builder *SchemaFieldAnswerOptionBuilder) Build() *SchemaFieldAnswerOption 
 }
 
 type SchemaFilterOptions struct {
-	DisplayName           *string                      `json:"display_name,omitempty"`            // 筛选器展示名称
-	I18nDisplayName       *I18nMeta                    `json:"i18n_display_name,omitempty"`       // 筛选器展示名称国际化字段
-	OptionMode            *string                      `json:"option_mode,omitempty"`             // 指明该筛选器支持单选或多选，默认单选
-	AssociatedSmartFilter *string                      `json:"associated_smart_filter,omitempty"` // 关联的综合筛选器。只有 filter_type 为"user"和"time"时可以关联。"user" -> "from"；"time" -> "date"。
-	FilterType            *string                      `json:"filter_type,omitempty"`             // 筛选器类型
-	PredefineEnumValues   []*SchemaPredefineEnumStruct `json:"predefine_enum_values,omitempty"`   // 预定义的展示枚举值。在 filter_type 为 "predefine_enum" 时必须填写
-	EnableClientFilter    *bool                        `json:"enable_client_filter,omitempty"`    // 是否开启客户端筛选器
-	ReferenceDatasourceId *string                      `json:"reference_datasource_id,omitempty"` // 可搜筛选器关联的数据源标识
+	DisplayName *string `json:"display_name,omitempty"` // 筛选器展示名称
+
+	I18nDisplayName *I18nMeta `json:"i18n_display_name,omitempty"` // 筛选器展示名称国际化字段
+
+	OptionMode *string `json:"option_mode,omitempty"` // 指明该筛选器支持单选或多选，默认单选
+
+	AssociatedSmartFilter *string `json:"associated_smart_filter,omitempty"` // 关联的综合筛选器。只有 filter_type 为"user"和"time"时可以关联。"user" -> "from"；"time" -> "date"。
+
+	FilterType *string `json:"filter_type,omitempty"` // 筛选器类型
+
+	PredefineEnumValues []*SchemaPredefineEnumStruct `json:"predefine_enum_values,omitempty"` // 预定义的展示枚举值。在 filter_type 为 "predefine_enum" 时必须填写
+
+	EnableClientFilter *bool `json:"enable_client_filter,omitempty"` // 是否开启客户端筛选器
+
+	ReferenceDatasourceId *string `json:"reference_datasource_id,omitempty"` // 可搜筛选器关联的数据源标识
 }
 
 type SchemaFilterOptionsBuilder struct {
-	displayName               string // 筛选器展示名称
-	displayNameFlag           bool
-	i18nDisplayName           *I18nMeta // 筛选器展示名称国际化字段
-	i18nDisplayNameFlag       bool
-	optionMode                string // 指明该筛选器支持单选或多选，默认单选
-	optionModeFlag            bool
+	displayName     string // 筛选器展示名称
+	displayNameFlag bool
+
+	i18nDisplayName     *I18nMeta // 筛选器展示名称国际化字段
+	i18nDisplayNameFlag bool
+
+	optionMode     string // 指明该筛选器支持单选或多选，默认单选
+	optionModeFlag bool
+
 	associatedSmartFilter     string // 关联的综合筛选器。只有 filter_type 为"user"和"time"时可以关联。"user" -> "from"；"time" -> "date"。
 	associatedSmartFilterFlag bool
-	filterType                string // 筛选器类型
-	filterTypeFlag            bool
-	predefineEnumValues       []*SchemaPredefineEnumStruct // 预定义的展示枚举值。在 filter_type 为 "predefine_enum" 时必须填写
-	predefineEnumValuesFlag   bool
-	enableClientFilter        bool // 是否开启客户端筛选器
-	enableClientFilterFlag    bool
+
+	filterType     string // 筛选器类型
+	filterTypeFlag bool
+
+	predefineEnumValues     []*SchemaPredefineEnumStruct // 预定义的展示枚举值。在 filter_type 为 "predefine_enum" 时必须填写
+	predefineEnumValuesFlag bool
+
+	enableClientFilter     bool // 是否开启客户端筛选器
+	enableClientFilterFlag bool
+
 	referenceDatasourceId     string // 可搜筛选器关联的数据源标识
 	referenceDatasourceIdFlag bool
 }
@@ -3977,12 +4291,14 @@ func (builder *SchemaFilterOptionsBuilder) Build() *SchemaFilterOptions {
 
 type SchemaPredefineEnumStruct struct {
 	Name *string `json:"name,omitempty"` // 枚举值的标识。在多枚举值定义中保持唯一
+
 	Text *string `json:"text,omitempty"` // 枚举值展示文案
 }
 
 type SchemaPredefineEnumStructBuilder struct {
 	name     string // 枚举值的标识。在多枚举值定义中保持唯一
 	nameFlag bool
+
 	text     string // 枚举值展示文案
 	textFlag bool
 }
@@ -4024,45 +4340,67 @@ func (builder *SchemaPredefineEnumStructBuilder) Build() *SchemaPredefineEnumStr
 }
 
 type SchemaProperty struct {
-	Name            *string                  `json:"name,omitempty"`             // 属性名
-	Type            *string                  `json:"type,omitempty"`             // 属性类型
-	IsSearchable    *bool                    `json:"is_searchable,omitempty"`    // 该属性是否可用作搜索，默认为 false
-	IsSortable      *bool                    `json:"is_sortable,omitempty"`      // 该属性是否可用作搜索结果排序，默认为 false。如果为 true，需要再配置 sortOptions
-	IsReturnable    *bool                    `json:"is_returnable,omitempty"`    // 该属性是否可用作返回字段，为 false 时，该字段不会被召回和展示。默认为 false
-	SortOptions     *SchemaSortOptions       `json:"sort_options,omitempty"`     // 属性排序的可选配置，当 is_sortable 为 true 时，该字段为必填字段
-	TypeDefinitions *SchemaTypeDefinitions   `json:"type_definitions,omitempty"` // 相关类型数据的定义和约束
-	SearchOptions   *SchemaSearchOptions     `json:"search_options,omitempty"`   // 属性搜索的可选配置，当 is_searchable 为 true 时，该字段为必填参数
-	IsFilterable    *bool                    `json:"is_filterable,omitempty"`    // 该属性是否可用作返回字段，为 false 时，该字段不会被筛选。默认为 false
-	FilterOptions   *SchemaFilterOptions     `json:"filter_options,omitempty"`   // 属性筛选的可选配置，当 is_searchable 为 true 时，该字段为必填参数
-	AnswerOption    *SchemaFieldAnswerOption `json:"answer_option,omitempty"`    // 问答产品设置，仅在datasource中enable_answer为true时生效
-	Desc            *string                  `json:"desc,omitempty"`             // 字段描述
+	Name *string `json:"name,omitempty"` // 属性名
+
+	Type *string `json:"type,omitempty"` // 属性类型
+
+	IsSearchable *bool `json:"is_searchable,omitempty"` // 该属性是否可用作搜索，默认为 false
+
+	IsSortable *bool `json:"is_sortable,omitempty"` // 该属性是否可用作搜索结果排序，默认为 false。如果为 true，需要再配置 sortOptions
+
+	IsReturnable *bool `json:"is_returnable,omitempty"` // 该属性是否可用作返回字段，为 false 时，该字段不会被召回和展示。默认为 false
+
+	SortOptions *SchemaSortOptions `json:"sort_options,omitempty"` // 属性排序的可选配置，当 is_sortable 为 true 时，该字段为必填字段
+
+	TypeDefinitions *SchemaTypeDefinitions `json:"type_definitions,omitempty"` // 相关类型数据的定义和约束
+
+	SearchOptions *SchemaSearchOptions `json:"search_options,omitempty"` // 属性搜索的可选配置，当 is_searchable 为 true 时，该字段为必填参数
+
+	IsFilterable *bool `json:"is_filterable,omitempty"` // 该属性是否可用作返回字段，为 false 时，该字段不会被筛选。默认为 false
+
+	FilterOptions *SchemaFilterOptions `json:"filter_options,omitempty"` // 属性筛选的可选配置，当 is_searchable 为 true 时，该字段为必填参数
+
+	AnswerOption *SchemaFieldAnswerOption `json:"answer_option,omitempty"` // 问答产品设置，仅在datasource中enable_answer为true时生效
+
+	Desc *string `json:"desc,omitempty"` // 字段描述
 }
 
 type SchemaPropertyBuilder struct {
-	name                string // 属性名
-	nameFlag            bool
-	type_               string // 属性类型
-	typeFlag            bool
-	isSearchable        bool // 该属性是否可用作搜索，默认为 false
-	isSearchableFlag    bool
-	isSortable          bool // 该属性是否可用作搜索结果排序，默认为 false。如果为 true，需要再配置 sortOptions
-	isSortableFlag      bool
-	isReturnable        bool // 该属性是否可用作返回字段，为 false 时，该字段不会被召回和展示。默认为 false
-	isReturnableFlag    bool
-	sortOptions         *SchemaSortOptions // 属性排序的可选配置，当 is_sortable 为 true 时，该字段为必填字段
-	sortOptionsFlag     bool
+	name     string // 属性名
+	nameFlag bool
+
+	type_    string // 属性类型
+	typeFlag bool
+
+	isSearchable     bool // 该属性是否可用作搜索，默认为 false
+	isSearchableFlag bool
+
+	isSortable     bool // 该属性是否可用作搜索结果排序，默认为 false。如果为 true，需要再配置 sortOptions
+	isSortableFlag bool
+
+	isReturnable     bool // 该属性是否可用作返回字段，为 false 时，该字段不会被召回和展示。默认为 false
+	isReturnableFlag bool
+
+	sortOptions     *SchemaSortOptions // 属性排序的可选配置，当 is_sortable 为 true 时，该字段为必填字段
+	sortOptionsFlag bool
+
 	typeDefinitions     *SchemaTypeDefinitions // 相关类型数据的定义和约束
 	typeDefinitionsFlag bool
-	searchOptions       *SchemaSearchOptions // 属性搜索的可选配置，当 is_searchable 为 true 时，该字段为必填参数
-	searchOptionsFlag   bool
-	isFilterable        bool // 该属性是否可用作返回字段，为 false 时，该字段不会被筛选。默认为 false
-	isFilterableFlag    bool
-	filterOptions       *SchemaFilterOptions // 属性筛选的可选配置，当 is_searchable 为 true 时，该字段为必填参数
-	filterOptionsFlag   bool
-	answerOption        *SchemaFieldAnswerOption // 问答产品设置，仅在datasource中enable_answer为true时生效
-	answerOptionFlag    bool
-	desc                string // 字段描述
-	descFlag            bool
+
+	searchOptions     *SchemaSearchOptions // 属性搜索的可选配置，当 is_searchable 为 true 时，该字段为必填参数
+	searchOptionsFlag bool
+
+	isFilterable     bool // 该属性是否可用作返回字段，为 false 时，该字段不会被筛选。默认为 false
+	isFilterableFlag bool
+
+	filterOptions     *SchemaFilterOptions // 属性筛选的可选配置，当 is_searchable 为 true 时，该字段为必填参数
+	filterOptionsFlag bool
+
+	answerOption     *SchemaFieldAnswerOption // 问答产品设置，仅在datasource中enable_answer为true时生效
+	answerOptionFlag bool
+
+	desc     string // 字段描述
+	descFlag bool
 }
 
 func NewSchemaPropertyBuilder() *SchemaPropertyBuilder {
@@ -4227,24 +4565,32 @@ func (builder *SchemaPropertyBuilder) Build() *SchemaProperty {
 }
 
 type SchemaSearchOptions struct {
-	EnableSemanticMatch     *bool `json:"enable_semantic_match,omitempty"`      // 是否支持语义切词召回。默认不支持（推荐使用在长文本的场景）
-	EnableExactMatch        *bool `json:"enable_exact_match,omitempty"`         // 是否支持精确匹配。默认不支持（推荐使用在短文本、需要精确查找的场景）
-	EnablePrefixMatch       *bool `json:"enable_prefix_match,omitempty"`        // 是否支持前缀匹配（短文本的默认的分词/召回策略。前缀长度为 1-12）
+	EnableSemanticMatch *bool `json:"enable_semantic_match,omitempty"` // 是否支持语义切词召回。默认不支持（推荐使用在长文本的场景）
+
+	EnableExactMatch *bool `json:"enable_exact_match,omitempty"` // 是否支持精确匹配。默认不支持（推荐使用在短文本、需要精确查找的场景）
+
+	EnablePrefixMatch *bool `json:"enable_prefix_match,omitempty"` // 是否支持前缀匹配（短文本的默认的分词/召回策略。前缀长度为 1-12）
+
 	EnableNumberSuffixMatch *bool `json:"enable_number_suffix_match,omitempty"` // 是否支持数据后缀匹配。默认不支持（推荐使用在短文本、有数字后缀查找的场景。后缀长度为3-12）
-	EnableCamelMatch        *bool `json:"enable_camel_match,omitempty"`         // 是否支持驼峰英文匹配。默认不支持（推荐使用在短文本，且包含驼峰形式英文的查找场景）
+
+	EnableCamelMatch *bool `json:"enable_camel_match,omitempty"` // 是否支持驼峰英文匹配。默认不支持（推荐使用在短文本，且包含驼峰形式英文的查找场景）
 }
 
 type SchemaSearchOptionsBuilder struct {
-	enableSemanticMatch         bool // 是否支持语义切词召回。默认不支持（推荐使用在长文本的场景）
-	enableSemanticMatchFlag     bool
-	enableExactMatch            bool // 是否支持精确匹配。默认不支持（推荐使用在短文本、需要精确查找的场景）
-	enableExactMatchFlag        bool
-	enablePrefixMatch           bool // 是否支持前缀匹配（短文本的默认的分词/召回策略。前缀长度为 1-12）
-	enablePrefixMatchFlag       bool
+	enableSemanticMatch     bool // 是否支持语义切词召回。默认不支持（推荐使用在长文本的场景）
+	enableSemanticMatchFlag bool
+
+	enableExactMatch     bool // 是否支持精确匹配。默认不支持（推荐使用在短文本、需要精确查找的场景）
+	enableExactMatchFlag bool
+
+	enablePrefixMatch     bool // 是否支持前缀匹配（短文本的默认的分词/召回策略。前缀长度为 1-12）
+	enablePrefixMatchFlag bool
+
 	enableNumberSuffixMatch     bool // 是否支持数据后缀匹配。默认不支持（推荐使用在短文本、有数字后缀查找的场景。后缀长度为3-12）
 	enableNumberSuffixMatchFlag bool
-	enableCamelMatch            bool // 是否支持驼峰英文匹配。默认不支持（推荐使用在短文本，且包含驼峰形式英文的查找场景）
-	enableCamelMatchFlag        bool
+
+	enableCamelMatch     bool // 是否支持驼峰英文匹配。默认不支持（推荐使用在短文本，且包含驼峰形式英文的查找场景）
+	enableCamelMatchFlag bool
 }
 
 func NewSchemaSearchOptionsBuilder() *SchemaSearchOptionsBuilder {
@@ -4323,15 +4669,17 @@ func (builder *SchemaSearchOptionsBuilder) Build() *SchemaSearchOptions {
 }
 
 type SchemaSortOptions struct {
-	Priority *int    `json:"priority,omitempty"` // 排序的优先级，可选范围为 0~4，0为最高优先级。如果优先级相同，则随机进行排序。默认为0
-	Order    *string `json:"order,omitempty"`    // 排序的顺序。默认为 desc
+	Priority *int `json:"priority,omitempty"` // 排序的优先级，可选范围为 0~4，0为最高优先级。如果优先级相同，则随机进行排序。默认为0
+
+	Order *string `json:"order,omitempty"` // 排序的顺序。默认为 desc
 }
 
 type SchemaSortOptionsBuilder struct {
 	priority     int // 排序的优先级，可选范围为 0~4，0为最高优先级。如果优先级相同，则随机进行排序。默认为0
 	priorityFlag bool
-	order        string // 排序的顺序。默认为 desc
-	orderFlag    bool
+
+	order     string // 排序的顺序。默认为 desc
+	orderFlag bool
 }
 
 func NewSchemaSortOptionsBuilder() *SchemaSortOptionsBuilder {
@@ -4371,18 +4719,22 @@ func (builder *SchemaSortOptionsBuilder) Build() *SchemaSortOptions {
 }
 
 type SchemaTagOptions struct {
-	Name  *string `json:"name,omitempty"`  // tag 对应的枚举值名称
+	Name *string `json:"name,omitempty"` // tag 对应的枚举值名称
+
 	Color *string `json:"color,omitempty"` // 标签对应的颜色
-	Text  *string `json:"text,omitempty"`  // 标签中展示的文本
+
+	Text *string `json:"text,omitempty"` // 标签中展示的文本
 }
 
 type SchemaTagOptionsBuilder struct {
-	name      string // tag 对应的枚举值名称
-	nameFlag  bool
+	name     string // tag 对应的枚举值名称
+	nameFlag bool
+
 	color     string // 标签对应的颜色
 	colorFlag bool
-	text      string // 标签中展示的文本
-	textFlag  bool
+
+	text     string // 标签中展示的文本
+	textFlag bool
 }
 
 func NewSchemaTagOptionsBuilder() *SchemaTagOptionsBuilder {
@@ -4435,13 +4787,15 @@ func (builder *SchemaTagOptionsBuilder) Build() *SchemaTagOptions {
 }
 
 type SchemaTypeDefinitions struct {
-	Tag     []*SchemaTagOptions  `json:"tag,omitempty"`      // 标签类型的定义
+	Tag []*SchemaTagOptions `json:"tag,omitempty"` // 标签类型的定义
+
 	UserIds *SchemaUserIdsOption `json:"user_ids,omitempty"` // 用户身份标识
 }
 
 type SchemaTypeDefinitionsBuilder struct {
-	tag         []*SchemaTagOptions // 标签类型的定义
-	tagFlag     bool
+	tag     []*SchemaTagOptions // 标签类型的定义
+	tagFlag bool
+
 	userIds     *SchemaUserIdsOption // 用户身份标识
 	userIdsFlag bool
 }
@@ -4514,18 +4868,24 @@ func (builder *SchemaUserIdsOptionBuilder) Build() *SchemaUserIdsOption {
 
 type SeperatePassage struct {
 	PassageId *string `json:"passage_id,omitempty"` // passage_id
-	ObjId     *string `json:"obj_id,omitempty"`     // obj_id
-	Content   *string `json:"content,omitempty"`    // 内容
-	NumTokens *int    `json:"num_tokens,omitempty"` // passage的token数量
+
+	ObjId *string `json:"obj_id,omitempty"` // obj_id
+
+	Content *string `json:"content,omitempty"` // 内容
+
+	NumTokens *int `json:"num_tokens,omitempty"` // passage的token数量
 }
 
 type SeperatePassageBuilder struct {
 	passageId     string // passage_id
 	passageIdFlag bool
-	objId         string // obj_id
-	objIdFlag     bool
-	content       string // 内容
-	contentFlag   bool
+
+	objId     string // obj_id
+	objIdFlag bool
+
+	content     string // 内容
+	contentFlag bool
+
 	numTokens     int // passage的token数量
 	numTokensFlag bool
 }
@@ -4594,14 +4954,16 @@ func (builder *SeperatePassageBuilder) Build() *SeperatePassage {
 
 type Status struct {
 	FromStatus *string `json:"from_status,omitempty"` // from_status
-	ToStatus   *string `json:"to_status,omitempty"`   // to_status
+
+	ToStatus *string `json:"to_status,omitempty"` // to_status
 }
 
 type StatusBuilder struct {
 	fromStatus     string // from_status
 	fromStatusFlag bool
-	toStatus       string // to_status
-	toStatusFlag   bool
+
+	toStatus     string // to_status
+	toStatusFlag bool
 }
 
 func NewStatusBuilder() *StatusBuilder {
@@ -4641,40 +5003,60 @@ func (builder *StatusBuilder) Build() *Status {
 }
 
 type SystemInfo struct {
-	Time       *string `json:"time,omitempty"`        // 用户时间
-	TimeZone   *string `json:"time_zone,omitempty"`   // 用户时区
-	Lang       *string `json:"lang,omitempty"`        // 用户问题的语种
-	Brand      *string `json:"brand,omitempty"`       // 客户端品牌
-	Weekday    *string `json:"weekday,omitempty"`     // 星期信息
-	SessionId  *string `json:"session_id,omitempty"`  // 一次话题的唯一标识
+	Time *string `json:"time,omitempty"` // 用户时间
+
+	TimeZone *string `json:"time_zone,omitempty"` // 用户时区
+
+	Lang *string `json:"lang,omitempty"` // 用户问题的语种
+
+	Brand *string `json:"brand,omitempty"` // 客户端品牌
+
+	Weekday *string `json:"weekday,omitempty"` // 星期信息
+
+	SessionId *string `json:"session_id,omitempty"` // 一次话题的唯一标识
+
 	ShadowName *string `json:"shadow_name,omitempty"` // 用户赋予飞飞的名字
-	MsgId      *string `json:"msg_id,omitempty"`      // 消息 ID
-	AgentId    *string `json:"agent_id,omitempty"`    // 场景 ID
-	Locale     *string `json:"locale,omitempty"`      // locale
+
+	MsgId *string `json:"msg_id,omitempty"` // 消息 ID
+
+	AgentId *string `json:"agent_id,omitempty"` // 场景 ID
+
+	Locale *string `json:"locale,omitempty"` // locale
+
 	AppVersion *string `json:"app_version,omitempty"` // app_version 客户端版本
 }
 
 type SystemInfoBuilder struct {
-	time           string // 用户时间
-	timeFlag       bool
-	timeZone       string // 用户时区
-	timeZoneFlag   bool
-	lang           string // 用户问题的语种
-	langFlag       bool
-	brand          string // 客户端品牌
-	brandFlag      bool
-	weekday        string // 星期信息
-	weekdayFlag    bool
-	sessionId      string // 一次话题的唯一标识
-	sessionIdFlag  bool
+	time     string // 用户时间
+	timeFlag bool
+
+	timeZone     string // 用户时区
+	timeZoneFlag bool
+
+	lang     string // 用户问题的语种
+	langFlag bool
+
+	brand     string // 客户端品牌
+	brandFlag bool
+
+	weekday     string // 星期信息
+	weekdayFlag bool
+
+	sessionId     string // 一次话题的唯一标识
+	sessionIdFlag bool
+
 	shadowName     string // 用户赋予飞飞的名字
 	shadowNameFlag bool
-	msgId          string // 消息 ID
-	msgIdFlag      bool
-	agentId        string // 场景 ID
-	agentIdFlag    bool
-	locale         string // locale
-	localeFlag     bool
+
+	msgId     string // 消息 ID
+	msgIdFlag bool
+
+	agentId     string // 场景 ID
+	agentIdFlag bool
+
+	locale     string // locale
+	localeFlag bool
+
 	appVersion     string // app_version 客户端版本
 	appVersionFlag bool
 }
@@ -4837,26 +5219,36 @@ type TemplateCardVariables struct {
 
 type UserInfo struct {
 	UserLanguage *string `json:"user_language,omitempty"` // 用户使用语言类型
-	Timezone     *string `json:"timezone,omitempty"`      // 用户时区
-	UserId       *string `json:"user_id,omitempty"`       // 用户id
-	UserOpenId   *string `json:"user_open_id,omitempty"`  // 用户open id
-	TenantId     *string `json:"tenant_id,omitempty"`     // 租户id
-	Locale       *string `json:"locale,omitempty"`        // 地区
+
+	Timezone *string `json:"timezone,omitempty"` // 用户时区
+
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	UserOpenId *string `json:"user_open_id,omitempty"` // 用户open id
+
+	TenantId *string `json:"tenant_id,omitempty"` // 租户id
+
+	Locale *string `json:"locale,omitempty"` // 地区
 }
 
 type UserInfoBuilder struct {
 	userLanguage     string // 用户使用语言类型
 	userLanguageFlag bool
-	timezone         string // 用户时区
-	timezoneFlag     bool
-	userId           string // 用户id
-	userIdFlag       bool
-	userOpenId       string // 用户open id
-	userOpenIdFlag   bool
-	tenantId         string // 租户id
-	tenantIdFlag     bool
-	locale           string // 地区
-	localeFlag       bool
+
+	timezone     string // 用户时区
+	timezoneFlag bool
+
+	userId     string // 用户id
+	userIdFlag bool
+
+	userOpenId     string // 用户open id
+	userOpenIdFlag bool
+
+	tenantId     string // 租户id
+	tenantIdFlag bool
+
+	locale     string // 地区
+	localeFlag bool
 }
 
 func NewUserInfoBuilder() *UserInfoBuilder {
@@ -4948,15 +5340,17 @@ func (builder *UserInfoBuilder) Build() *UserInfo {
 }
 
 type WebPassageParam struct {
-	Searchable *bool    `json:"searchable,omitempty"` // 是否要搜索网页
-	Domains    []string `json:"domains,omitempty"`    // 搜索特定网页
+	Searchable *bool `json:"searchable,omitempty"` // 是否要搜索网页
+
+	Domains []string `json:"domains,omitempty"` // 搜索特定网页
 }
 
 type WebPassageParamBuilder struct {
 	searchable     bool // 是否要搜索网页
 	searchableFlag bool
-	domains        []string // 搜索特定网页
-	domainsFlag    bool
+
+	domains     []string // 搜索特定网页
+	domainsFlag bool
 }
 
 func NewWebPassageParamBuilder() *WebPassageParamBuilder {
@@ -4995,42 +5389,62 @@ func (builder *WebPassageParamBuilder) Build() *WebPassageParam {
 }
 
 type WikiPassageParam struct {
-	Searchable         *bool    `json:"searchable,omitempty"`           // 是否要搜索wiki
-	SpaceIds           []string `json:"space_ids,omitempty"`            // 搜索特定空间的wiki
-	ObjIds             []string `json:"obj_ids,omitempty"`              // 在特定的wiki内搜索（仅限内部使用，有需求请用wiki_tokens）
-	WikiTokens         []string `json:"wiki_tokens,omitempty"`          // 在特定的wiki内搜索
-	NodeTokens         []string `json:"node_tokens,omitempty"`          // 在特定的wiki节点范围内搜索
-	ExcludedSpaceIds   []string `json:"excluded_space_ids,omitempty"`   // 排除space空间id
-	ExcludedObjIds     []string `json:"excluded_obj_ids,omitempty"`     // 排除文档id
+	Searchable *bool `json:"searchable,omitempty"` // 是否要搜索wiki
+
+	SpaceIds []string `json:"space_ids,omitempty"` // 搜索特定空间的wiki
+
+	ObjIds []string `json:"obj_ids,omitempty"` // 在特定的wiki内搜索（仅限内部使用，有需求请用wiki_tokens）
+
+	WikiTokens []string `json:"wiki_tokens,omitempty"` // 在特定的wiki内搜索
+
+	NodeTokens []string `json:"node_tokens,omitempty"` // 在特定的wiki节点范围内搜索
+
+	ExcludedSpaceIds []string `json:"excluded_space_ids,omitempty"` // 排除space空间id
+
+	ExcludedObjIds []string `json:"excluded_obj_ids,omitempty"` // 排除文档id
+
 	ExcludedWikiTokens []string `json:"excluded_wiki_tokens,omitempty"` // 排除wiki的token
+
 	ExcludedNodeTokens []string `json:"excluded_node_tokens,omitempty"` // 排除wiki的node token
-	EnableCrossTenant  *bool    `json:"enable_cross_tenant,omitempty"`  // 是否跨租户
-	OnlySearchPublic   *bool    `json:"only_search_public,omitempty"`   // 是否只搜公开
+
+	EnableCrossTenant *bool `json:"enable_cross_tenant,omitempty"` // 是否跨租户
+
+	OnlySearchPublic *bool `json:"only_search_public,omitempty"` // 是否只搜公开
 }
 
 type WikiPassageParamBuilder struct {
-	searchable             bool // 是否要搜索wiki
-	searchableFlag         bool
-	spaceIds               []string // 搜索特定空间的wiki
-	spaceIdsFlag           bool
-	objIds                 []string // 在特定的wiki内搜索（仅限内部使用，有需求请用wiki_tokens）
-	objIdsFlag             bool
-	wikiTokens             []string // 在特定的wiki内搜索
-	wikiTokensFlag         bool
-	nodeTokens             []string // 在特定的wiki节点范围内搜索
-	nodeTokensFlag         bool
-	excludedSpaceIds       []string // 排除space空间id
-	excludedSpaceIdsFlag   bool
-	excludedObjIds         []string // 排除文档id
-	excludedObjIdsFlag     bool
+	searchable     bool // 是否要搜索wiki
+	searchableFlag bool
+
+	spaceIds     []string // 搜索特定空间的wiki
+	spaceIdsFlag bool
+
+	objIds     []string // 在特定的wiki内搜索（仅限内部使用，有需求请用wiki_tokens）
+	objIdsFlag bool
+
+	wikiTokens     []string // 在特定的wiki内搜索
+	wikiTokensFlag bool
+
+	nodeTokens     []string // 在特定的wiki节点范围内搜索
+	nodeTokensFlag bool
+
+	excludedSpaceIds     []string // 排除space空间id
+	excludedSpaceIdsFlag bool
+
+	excludedObjIds     []string // 排除文档id
+	excludedObjIdsFlag bool
+
 	excludedWikiTokens     []string // 排除wiki的token
 	excludedWikiTokensFlag bool
+
 	excludedNodeTokens     []string // 排除wiki的node token
 	excludedNodeTokensFlag bool
-	enableCrossTenant      bool // 是否跨租户
-	enableCrossTenantFlag  bool
-	onlySearchPublic       bool // 是否只搜公开
-	onlySearchPublicFlag   bool
+
+	enableCrossTenant     bool // 是否跨租户
+	enableCrossTenantFlag bool
+
+	onlySearchPublic     bool // 是否只搜公开
+	onlySearchPublicFlag bool
 }
 
 func NewWikiPassageParamBuilder() *WikiPassageParamBuilder {
@@ -5293,9 +5707,11 @@ type CreateAppReq struct {
 }
 
 type CreateAppRespData struct {
-	Items     []string `json:"items,omitempty"`      // app_id列表
-	PageToken *string  `json:"page_token,omitempty"` // 翻页 token，传入返回下一页，首页不需要传入
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否还有下一页
+	Items []string `json:"items,omitempty"` // app_id列表
+
+	PageToken *string `json:"page_token,omitempty"` // 翻页 token，传入返回下一页，首页不需要传入
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页
 }
 
 type CreateAppResp struct {
@@ -5500,9 +5916,11 @@ type ListDataSourceReq struct {
 }
 
 type ListDataSourceRespData struct {
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否有更多数据
-	PageToken *string       `json:"page_token,omitempty"` // 取数据的凭证
-	Items     []*DataSource `json:"items,omitempty"`      // 数据源中的数据记录
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
+
+	PageToken *string `json:"page_token,omitempty"` // 取数据的凭证
+
+	Items []*DataSource `json:"items,omitempty"` // 数据源中的数据记录
 }
 
 type ListDataSourceResp struct {
@@ -5516,22 +5934,29 @@ func (resp *ListDataSourceResp) Success() bool {
 }
 
 type PatchDataSourceReqBodyBuilder struct {
-	name                string // 数据源的展示名称
-	nameFlag            bool
-	state               int // 数据源状态，0-已上线，1-未上线
-	stateFlag           bool
-	description         string // 对于数据源的描述
-	descriptionFlag     bool
-	iconUrl             string // 数据源在 search tab 上的展示图标路径
-	iconUrlFlag         bool
-	i18nName            *I18nMeta // 数据源名称多语言配置，json格式，key为语言locale，value为对应文案，例如{"zh_cn":"测试数据源", "en_us":"Test DataSource"}
-	i18nNameFlag        bool
+	name     string // 数据源的展示名称
+	nameFlag bool
+
+	state     int // 数据源状态，0-已上线，1-未上线
+	stateFlag bool
+
+	description     string // 对于数据源的描述
+	descriptionFlag bool
+
+	iconUrl     string // 数据源在 search tab 上的展示图标路径
+	iconUrlFlag bool
+
+	i18nName     *I18nMeta // 数据源名称多语言配置，json格式，key为语言locale，value为对应文案，例如{"zh_cn":"测试数据源", "en_us":"Test DataSource"}
+	i18nNameFlag bool
+
 	i18nDescription     *I18nMeta // 数据源描述多语言配置，json格式，key为语言locale，value为对应文案，例如{"zh_cn":"搜索测试数据源相关数据", "en_us":"Search data from Test DataSource"}
 	i18nDescriptionFlag bool
-	connectorParam      *ConnectorParam // 修改connector的相关配置
-	connectorParamFlag  bool
-	enableAnswer        bool // 是否使用问答服务
-	enableAnswerFlag    bool
+
+	connectorParam     *ConnectorParam // 修改connector的相关配置
+	connectorParamFlag bool
+
+	enableAnswer     bool // 是否使用问答服务
+	enableAnswerFlag bool
 }
 
 func NewPatchDataSourceReqBodyBuilder() *PatchDataSourceReqBodyBuilder {
@@ -5802,14 +6227,21 @@ func (builder *PatchDataSourceReqBuilder) Build() *PatchDataSourceReq {
 }
 
 type PatchDataSourceReqBody struct {
-	Name            *string         `json:"name,omitempty"`             // 数据源的展示名称
-	State           *int            `json:"state,omitempty"`            // 数据源状态，0-已上线，1-未上线
-	Description     *string         `json:"description,omitempty"`      // 对于数据源的描述
-	IconUrl         *string         `json:"icon_url,omitempty"`         // 数据源在 search tab 上的展示图标路径
-	I18nName        *I18nMeta       `json:"i18n_name,omitempty"`        // 数据源名称多语言配置，json格式，key为语言locale，value为对应文案，例如{"zh_cn":"测试数据源", "en_us":"Test DataSource"}
-	I18nDescription *I18nMeta       `json:"i18n_description,omitempty"` // 数据源描述多语言配置，json格式，key为语言locale，value为对应文案，例如{"zh_cn":"搜索测试数据源相关数据", "en_us":"Search data from Test DataSource"}
-	ConnectorParam  *ConnectorParam `json:"connector_param,omitempty"`  // 修改connector的相关配置
-	EnableAnswer    *bool           `json:"enable_answer,omitempty"`    // 是否使用问答服务
+	Name *string `json:"name,omitempty"` // 数据源的展示名称
+
+	State *int `json:"state,omitempty"` // 数据源状态，0-已上线，1-未上线
+
+	Description *string `json:"description,omitempty"` // 对于数据源的描述
+
+	IconUrl *string `json:"icon_url,omitempty"` // 数据源在 search tab 上的展示图标路径
+
+	I18nName *I18nMeta `json:"i18n_name,omitempty"` // 数据源名称多语言配置，json格式，key为语言locale，value为对应文案，例如{"zh_cn":"测试数据源", "en_us":"Test DataSource"}
+
+	I18nDescription *I18nMeta `json:"i18n_description,omitempty"` // 数据源描述多语言配置，json格式，key为语言locale，value为对应文案，例如{"zh_cn":"搜索测试数据源相关数据", "en_us":"Search data from Test DataSource"}
+
+	ConnectorParam *ConnectorParam `json:"connector_param,omitempty"` // 修改connector的相关配置
+
+	EnableAnswer *bool `json:"enable_answer,omitempty"` // 是否使用问答服务
 }
 
 type PatchDataSourceReq struct {
@@ -5985,24 +6417,32 @@ func (resp *GetDataSourceItemResp) Success() bool {
 }
 
 type CreateMessageReqBodyBuilder struct {
-	query            string // 搜索关键词
-	queryFlag        bool
-	fromIds          []string // 消息来自user_id列表
-	fromIdsFlag      bool
-	chatIds          []string // 消息所在chat_id列表
-	chatIdsFlag      bool
-	messageType      string // 消息类型(file/image/media)
-	messageTypeFlag  bool
+	query     string // 搜索关键词
+	queryFlag bool
+
+	fromIds     []string // 消息来自user_id列表
+	fromIdsFlag bool
+
+	chatIds     []string // 消息所在chat_id列表
+	chatIdsFlag bool
+
+	messageType     string // 消息类型(file/image/media)
+	messageTypeFlag bool
+
 	atChatterIds     []string // at用户user_id列表
 	atChatterIdsFlag bool
-	fromType         string // 消息来自类型(bot/user)
-	fromTypeFlag     bool
-	chatType         string // 会话类型(group_chat/p2p_chat)
-	chatTypeFlag     bool
-	startTime        string // 消息发送起始时间
-	startTimeFlag    bool
-	endTime          string // 消息发送结束时间
-	endTimeFlag      bool
+
+	fromType     string // 消息来自类型(bot/user)
+	fromTypeFlag bool
+
+	chatType     string // 会话类型(group_chat/p2p_chat)
+	chatTypeFlag bool
+
+	startTime     string // 消息发送起始时间
+	startTimeFlag bool
+
+	endTime     string // 消息发送结束时间
+	endTimeFlag bool
 }
 
 func NewCreateMessageReqBodyBuilder() *CreateMessageReqBodyBuilder {
@@ -6314,15 +6754,23 @@ func (builder *CreateMessageReqBuilder) Build() *CreateMessageReq {
 }
 
 type CreateMessageReqBody struct {
-	Query        *string  `json:"query,omitempty"`          // 搜索关键词
-	FromIds      []string `json:"from_ids,omitempty"`       // 消息来自user_id列表
-	ChatIds      []string `json:"chat_ids,omitempty"`       // 消息所在chat_id列表
-	MessageType  *string  `json:"message_type,omitempty"`   // 消息类型(file/image/media)
+	Query *string `json:"query,omitempty"` // 搜索关键词
+
+	FromIds []string `json:"from_ids,omitempty"` // 消息来自user_id列表
+
+	ChatIds []string `json:"chat_ids,omitempty"` // 消息所在chat_id列表
+
+	MessageType *string `json:"message_type,omitempty"` // 消息类型(file/image/media)
+
 	AtChatterIds []string `json:"at_chatter_ids,omitempty"` // at用户user_id列表
-	FromType     *string  `json:"from_type,omitempty"`      // 消息来自类型(bot/user)
-	ChatType     *string  `json:"chat_type,omitempty"`      // 会话类型(group_chat/p2p_chat)
-	StartTime    *string  `json:"start_time,omitempty"`     // 消息发送起始时间
-	EndTime      *string  `json:"end_time,omitempty"`       // 消息发送结束时间
+
+	FromType *string `json:"from_type,omitempty"` // 消息来自类型(bot/user)
+
+	ChatType *string `json:"chat_type,omitempty"` // 会话类型(group_chat/p2p_chat)
+
+	StartTime *string `json:"start_time,omitempty"` // 消息发送起始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 消息发送结束时间
 }
 
 type CreateMessageReq struct {
@@ -6331,9 +6779,11 @@ type CreateMessageReq struct {
 }
 
 type CreateMessageRespData struct {
-	Items     []string `json:"items,omitempty"`      // 消息id列表
-	PageToken *string  `json:"page_token,omitempty"` // 翻页 token，传入返回下一页，首页不需要传入
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否还有下一页
+	Items []string `json:"items,omitempty"` // 消息id列表
+
+	PageToken *string `json:"page_token,omitempty"` // 翻页 token，传入返回下一页，首页不需要传入
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页
 }
 
 type CreateMessageResp struct {
@@ -6489,8 +6939,9 @@ func (resp *GetSchemaResp) Success() bool {
 }
 
 type PatchSchemaReqBodyBuilder struct {
-	display        *SchemaDisplay // 数据展示相关配置
-	displayFlag    bool
+	display     *SchemaDisplay // 数据展示相关配置
+	displayFlag bool
+
 	properties     []*PatchSchemaProperty // 数据范式的属性定义
 	propertiesFlag bool
 }
@@ -6607,7 +7058,8 @@ func (builder *PatchSchemaReqBuilder) Build() *PatchSchemaReq {
 }
 
 type PatchSchemaReqBody struct {
-	Display    *SchemaDisplay         `json:"display,omitempty"`    // 数据展示相关配置
+	Display *SchemaDisplay `json:"display,omitempty"` // 数据展示相关配置
+
 	Properties []*PatchSchemaProperty `json:"properties,omitempty"` // 数据范式的属性定义
 }
 

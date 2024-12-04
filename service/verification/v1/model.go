@@ -18,13 +18,15 @@ import (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -62,13 +64,15 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type Verification struct {
-	Name            *string `json:"name,omitempty"`             // 企业主体名称
-	HasVerification *bool   `json:"has_verification,omitempty"` // 企业是否完成认证； true 表示已经完成认证，false 表示未认证
+	Name *string `json:"name,omitempty"` // 企业主体名称
+
+	HasVerification *bool `json:"has_verification,omitempty"` // 企业是否完成认证； true 表示已经完成认证，false 表示未认证
 }
 
 type VerificationBuilder struct {
-	name                string // 企业主体名称
-	nameFlag            bool
+	name     string // 企业主体名称
+	nameFlag bool
+
 	hasVerification     bool // 企业是否完成认证； true 表示已经完成认证，false 表示未认证
 	hasVerificationFlag bool
 }
@@ -110,31 +114,45 @@ func (builder *VerificationBuilder) Build() *Verification {
 }
 
 type VerificationDetail struct {
-	VerificationType   *int    `json:"verification_type,omitempty"`   // 认证类型
-	VerificationSource *int    `json:"verification_source,omitempty"` // 认证方式
-	OrgName            *string `json:"org_name,omitempty"`            // 工商名称
-	Usci               *string `json:"usci,omitempty"`                // 统一工商信用代码
-	OrgType            *int    `json:"org_type,omitempty"`            // 企业类型
-	LegalPersonName    *string `json:"legal_person_name,omitempty"`   // 法人姓名
-	EnterpriseLicense  *string `json:"enterprise_license,omitempty"`  // 企业经营许可证
+	VerificationType *int `json:"verification_type,omitempty"` // 认证类型
+
+	VerificationSource *int `json:"verification_source,omitempty"` // 认证方式
+
+	OrgName *string `json:"org_name,omitempty"` // 工商名称
+
+	Usci *string `json:"usci,omitempty"` // 统一工商信用代码
+
+	OrgType *int `json:"org_type,omitempty"` // 企业类型
+
+	LegalPersonName *string `json:"legal_person_name,omitempty"` // 法人姓名
+
+	EnterpriseLicense *string `json:"enterprise_license,omitempty"` // 企业经营许可证
+
 	VerificationLetter *string `json:"verification_letter,omitempty"` // 认证公函
 }
 
 type VerificationDetailBuilder struct {
-	verificationType       int // 认证类型
-	verificationTypeFlag   bool
+	verificationType     int // 认证类型
+	verificationTypeFlag bool
+
 	verificationSource     int // 认证方式
 	verificationSourceFlag bool
-	orgName                string // 工商名称
-	orgNameFlag            bool
-	usci                   string // 统一工商信用代码
-	usciFlag               bool
-	orgType                int // 企业类型
-	orgTypeFlag            bool
-	legalPersonName        string // 法人姓名
-	legalPersonNameFlag    bool
-	enterpriseLicense      string // 企业经营许可证
-	enterpriseLicenseFlag  bool
+
+	orgName     string // 工商名称
+	orgNameFlag bool
+
+	usci     string // 统一工商信用代码
+	usciFlag bool
+
+	orgType     int // 企业类型
+	orgTypeFlag bool
+
+	legalPersonName     string // 法人姓名
+	legalPersonNameFlag bool
+
+	enterpriseLicense     string // 企业经营许可证
+	enterpriseLicenseFlag bool
+
 	verificationLetter     string // 认证公函
 	verificationLetterFlag bool
 }

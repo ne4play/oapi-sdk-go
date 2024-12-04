@@ -44,13 +44,15 @@ const (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -88,16 +90,20 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type FormContent struct {
-	FieldId    *string `json:"field_id,omitempty"`    // 表单字段ID
-	FieldName  *string `json:"field_name,omitempty"`  // 表单字段名称
+	FieldId *string `json:"field_id,omitempty"` // 表单字段ID
+
+	FieldName *string `json:"field_name,omitempty"` // 表单字段名称
+
 	FieldValue *string `json:"field_value,omitempty"` // 表单字段值
 }
 
 type FormContentBuilder struct {
-	fieldId        string // 表单字段ID
-	fieldIdFlag    bool
-	fieldName      string // 表单字段名称
-	fieldNameFlag  bool
+	fieldId     string // 表单字段ID
+	fieldIdFlag bool
+
+	fieldName     string // 表单字段名称
+	fieldNameFlag bool
+
 	fieldValue     string // 表单字段值
 	fieldValueFlag bool
 }
@@ -153,12 +159,14 @@ func (builder *FormContentBuilder) Build() *FormContent {
 
 type FormField struct {
 	Name *string `json:"name,omitempty"` // 字段名称
+
 	Type *string `json:"type,omitempty"` // 字段类型
 }
 
 type FormFieldBuilder struct {
 	name     string // 字段名称
 	nameFlag bool
+
 	type_    string // 字段类型
 	typeFlag bool
 }
@@ -200,72 +208,112 @@ func (builder *FormFieldBuilder) Build() *FormField {
 }
 
 type Rule struct {
-	RuleId                  *string      `json:"rule_id,omitempty"`                    // 规则唯一标识
-	Name                    *string      `json:"name,omitempty"`                       // 规则名称
-	IconName                *string      `json:"icon_name,omitempty"`                  // 规则图标
-	CreatedAt               *int         `json:"created_at,omitempty"`                 // 创建时间
-	CreatorUserId           *string      `json:"creator_user_id,omitempty"`            // 创建人ID
-	CreatorUserName         *string      `json:"creator_user_name,omitempty"`          // 创建人名称
-	OwnerUserId             *string      `json:"owner_user_id,omitempty"`              // 规则所有者ID
-	OwnerUserName           *string      `json:"owner_user_name,omitempty"`            // 规则所有者名称
-	FormSchema              []*FormField `json:"form_schema,omitempty"`                // 表单定义
-	IsDeleted               *int         `json:"is_deleted,omitempty"`                 // 规则是否已删除
-	NeedReportUserIds       []string     `json:"need_report_user_ids,omitempty"`       // 需要汇报的用户ID列表
-	NeedReportDepartmentIds []string     `json:"need_report_department_ids,omitempty"` // 需要汇报的部门ID列表（如果id为0，表示全员）
-	NeedReportChatIds       []string     `json:"need_report_chat_ids,omitempty"`       // 需要汇报的群ID列表
-	CcUserIds               []string     `json:"cc_user_ids,omitempty"`                // 抄送用户ID列表
-	CcDepartmentIds         []string     `json:"cc_department_ids,omitempty"`          // 抄送部门ID列表
-	ToUserIds               []string     `json:"to_user_ids,omitempty"`                // 汇报对象用户ID列表
-	ToChatIds               []string     `json:"to_chat_ids,omitempty"`                // 汇报对象群ID列表
-	ToLeaders               []int        `json:"to_leaders,omitempty"`                 // 上级汇报对象，0表示第一级，依次类推，最大为5表示第六级
-	ToDepartmentOwners      []int        `json:"to_department_owners,omitempty"`       // 部门负责人汇报对象，0表示第一级，依次类推，最大为5表示第六级
-	ManagerUserIds          []string     `json:"manager_user_ids,omitempty"`           // 规则管理员用户ID列表
-	CcChatIds               []string     `json:"cc_chat_ids,omitempty"`                // 抄送群ID列表
+	RuleId *string `json:"rule_id,omitempty"` // 规则唯一标识
+
+	Name *string `json:"name,omitempty"` // 规则名称
+
+	IconName *string `json:"icon_name,omitempty"` // 规则图标
+
+	CreatedAt *int `json:"created_at,omitempty"` // 创建时间
+
+	CreatorUserId *string `json:"creator_user_id,omitempty"` // 创建人ID
+
+	CreatorUserName *string `json:"creator_user_name,omitempty"` // 创建人名称
+
+	OwnerUserId *string `json:"owner_user_id,omitempty"` // 规则所有者ID
+
+	OwnerUserName *string `json:"owner_user_name,omitempty"` // 规则所有者名称
+
+	FormSchema []*FormField `json:"form_schema,omitempty"` // 表单定义
+
+	IsDeleted *int `json:"is_deleted,omitempty"` // 规则是否已删除
+
+	NeedReportUserIds []string `json:"need_report_user_ids,omitempty"` // 需要汇报的用户ID列表
+
+	NeedReportDepartmentIds []string `json:"need_report_department_ids,omitempty"` // 需要汇报的部门ID列表（如果id为0，表示全员）
+
+	NeedReportChatIds []string `json:"need_report_chat_ids,omitempty"` // 需要汇报的群ID列表
+
+	CcUserIds []string `json:"cc_user_ids,omitempty"` // 抄送用户ID列表
+
+	CcDepartmentIds []string `json:"cc_department_ids,omitempty"` // 抄送部门ID列表
+
+	ToUserIds []string `json:"to_user_ids,omitempty"` // 汇报对象用户ID列表
+
+	ToChatIds []string `json:"to_chat_ids,omitempty"` // 汇报对象群ID列表
+
+	ToLeaders []int `json:"to_leaders,omitempty"` // 上级汇报对象，0表示第一级，依次类推，最大为5表示第六级
+
+	ToDepartmentOwners []int `json:"to_department_owners,omitempty"` // 部门负责人汇报对象，0表示第一级，依次类推，最大为5表示第六级
+
+	ManagerUserIds []string `json:"manager_user_ids,omitempty"` // 规则管理员用户ID列表
+
+	CcChatIds []string `json:"cc_chat_ids,omitempty"` // 抄送群ID列表
 }
 
 type RuleBuilder struct {
-	ruleId                      string // 规则唯一标识
-	ruleIdFlag                  bool
-	name                        string // 规则名称
-	nameFlag                    bool
-	iconName                    string // 规则图标
-	iconNameFlag                bool
-	createdAt                   int // 创建时间
-	createdAtFlag               bool
-	creatorUserId               string // 创建人ID
-	creatorUserIdFlag           bool
-	creatorUserName             string // 创建人名称
-	creatorUserNameFlag         bool
-	ownerUserId                 string // 规则所有者ID
-	ownerUserIdFlag             bool
-	ownerUserName               string // 规则所有者名称
-	ownerUserNameFlag           bool
-	formSchema                  []*FormField // 表单定义
-	formSchemaFlag              bool
-	isDeleted                   int // 规则是否已删除
-	isDeletedFlag               bool
-	needReportUserIds           []string // 需要汇报的用户ID列表
-	needReportUserIdsFlag       bool
+	ruleId     string // 规则唯一标识
+	ruleIdFlag bool
+
+	name     string // 规则名称
+	nameFlag bool
+
+	iconName     string // 规则图标
+	iconNameFlag bool
+
+	createdAt     int // 创建时间
+	createdAtFlag bool
+
+	creatorUserId     string // 创建人ID
+	creatorUserIdFlag bool
+
+	creatorUserName     string // 创建人名称
+	creatorUserNameFlag bool
+
+	ownerUserId     string // 规则所有者ID
+	ownerUserIdFlag bool
+
+	ownerUserName     string // 规则所有者名称
+	ownerUserNameFlag bool
+
+	formSchema     []*FormField // 表单定义
+	formSchemaFlag bool
+
+	isDeleted     int // 规则是否已删除
+	isDeletedFlag bool
+
+	needReportUserIds     []string // 需要汇报的用户ID列表
+	needReportUserIdsFlag bool
+
 	needReportDepartmentIds     []string // 需要汇报的部门ID列表（如果id为0，表示全员）
 	needReportDepartmentIdsFlag bool
-	needReportChatIds           []string // 需要汇报的群ID列表
-	needReportChatIdsFlag       bool
-	ccUserIds                   []string // 抄送用户ID列表
-	ccUserIdsFlag               bool
-	ccDepartmentIds             []string // 抄送部门ID列表
-	ccDepartmentIdsFlag         bool
-	toUserIds                   []string // 汇报对象用户ID列表
-	toUserIdsFlag               bool
-	toChatIds                   []string // 汇报对象群ID列表
-	toChatIdsFlag               bool
-	toLeaders                   []int // 上级汇报对象，0表示第一级，依次类推，最大为5表示第六级
-	toLeadersFlag               bool
-	toDepartmentOwners          []int // 部门负责人汇报对象，0表示第一级，依次类推，最大为5表示第六级
-	toDepartmentOwnersFlag      bool
-	managerUserIds              []string // 规则管理员用户ID列表
-	managerUserIdsFlag          bool
-	ccChatIds                   []string // 抄送群ID列表
-	ccChatIdsFlag               bool
+
+	needReportChatIds     []string // 需要汇报的群ID列表
+	needReportChatIdsFlag bool
+
+	ccUserIds     []string // 抄送用户ID列表
+	ccUserIdsFlag bool
+
+	ccDepartmentIds     []string // 抄送部门ID列表
+	ccDepartmentIdsFlag bool
+
+	toUserIds     []string // 汇报对象用户ID列表
+	toUserIdsFlag bool
+
+	toChatIds     []string // 汇报对象群ID列表
+	toChatIdsFlag bool
+
+	toLeaders     []int // 上级汇报对象，0表示第一级，依次类推，最大为5表示第六级
+	toLeadersFlag bool
+
+	toDepartmentOwners     []int // 部门负责人汇报对象，0表示第一级，依次类推，最大为5表示第六级
+	toDepartmentOwnersFlag bool
+
+	managerUserIds     []string // 规则管理员用户ID列表
+	managerUserIdsFlag bool
+
+	ccChatIds     []string // 抄送群ID列表
+	ccChatIdsFlag bool
 }
 
 func NewRuleBuilder() *RuleBuilder {
@@ -540,42 +588,62 @@ func (builder *RuleBuilder) Build() *Rule {
 }
 
 type Task struct {
-	TaskId         *string        `json:"task_id,omitempty"`         // 汇报任务ID
-	RuleName       *string        `json:"rule_name,omitempty"`       // 规则名称
-	FromUserId     *string        `json:"from_user_id,omitempty"`    // 汇报用户ID
-	FromUserName   *string        `json:"from_user_name,omitempty"`  // 汇报用户名称
-	DepartmentName *string        `json:"department_name,omitempty"` // 汇报用户部门名称
-	CommitTime     *int           `json:"commit_time,omitempty"`     // 提交时间时间戳
-	FormContents   []*FormContent `json:"form_contents,omitempty"`   // 汇报表单内容
-	RuleId         *string        `json:"rule_id,omitempty"`         // 汇报规则ID
-	DepartmentIds  []string       `json:"department_ids,omitempty"`  // 部门id
-	ToUserIds      []string       `json:"to_user_ids,omitempty"`     // 汇报给谁
-	ToUserNames    []string       `json:"to_user_names,omitempty"`   // 汇报给谁的名字
+	TaskId *string `json:"task_id,omitempty"` // 汇报任务ID
+
+	RuleName *string `json:"rule_name,omitempty"` // 规则名称
+
+	FromUserId *string `json:"from_user_id,omitempty"` // 汇报用户ID
+
+	FromUserName *string `json:"from_user_name,omitempty"` // 汇报用户名称
+
+	DepartmentName *string `json:"department_name,omitempty"` // 汇报用户部门名称
+
+	CommitTime *int `json:"commit_time,omitempty"` // 提交时间时间戳
+
+	FormContents []*FormContent `json:"form_contents,omitempty"` // 汇报表单内容
+
+	RuleId *string `json:"rule_id,omitempty"` // 汇报规则ID
+
+	DepartmentIds []string `json:"department_ids,omitempty"` // 部门id
+
+	ToUserIds []string `json:"to_user_ids,omitempty"` // 汇报给谁
+
+	ToUserNames []string `json:"to_user_names,omitempty"` // 汇报给谁的名字
 }
 
 type TaskBuilder struct {
-	taskId             string // 汇报任务ID
-	taskIdFlag         bool
-	ruleName           string // 规则名称
-	ruleNameFlag       bool
-	fromUserId         string // 汇报用户ID
-	fromUserIdFlag     bool
-	fromUserName       string // 汇报用户名称
-	fromUserNameFlag   bool
+	taskId     string // 汇报任务ID
+	taskIdFlag bool
+
+	ruleName     string // 规则名称
+	ruleNameFlag bool
+
+	fromUserId     string // 汇报用户ID
+	fromUserIdFlag bool
+
+	fromUserName     string // 汇报用户名称
+	fromUserNameFlag bool
+
 	departmentName     string // 汇报用户部门名称
 	departmentNameFlag bool
-	commitTime         int // 提交时间时间戳
-	commitTimeFlag     bool
-	formContents       []*FormContent // 汇报表单内容
-	formContentsFlag   bool
-	ruleId             string // 汇报规则ID
-	ruleIdFlag         bool
-	departmentIds      []string // 部门id
-	departmentIdsFlag  bool
-	toUserIds          []string // 汇报给谁
-	toUserIdsFlag      bool
-	toUserNames        []string // 汇报给谁的名字
-	toUserNamesFlag    bool
+
+	commitTime     int // 提交时间时间戳
+	commitTimeFlag bool
+
+	formContents     []*FormContent // 汇报表单内容
+	formContentsFlag bool
+
+	ruleId     string // 汇报规则ID
+	ruleIdFlag bool
+
+	departmentIds     []string // 部门id
+	departmentIdsFlag bool
+
+	toUserIds     []string // 汇报给谁
+	toUserIdsFlag bool
+
+	toUserNames     []string // 汇报给谁的名字
+	toUserNamesFlag bool
 }
 
 func NewTaskBuilder() *TaskBuilder {
@@ -910,16 +978,21 @@ func (resp *RemoveRuleViewResp) Success() bool {
 type QueryTaskReqBodyBuilder struct {
 	commitStartTime     int // 提交开始时间时间戳
 	commitStartTimeFlag bool
-	commitEndTime       int // 提交结束时间时间戳
-	commitEndTimeFlag   bool
-	ruleId              string // 汇报规则ID
-	ruleIdFlag          bool
-	userId              string // 用户ID
-	userIdFlag          bool
-	pageToken           string // 分页标识符
-	pageTokenFlag       bool
-	pageSize            int // 单次分页返回的条数
-	pageSizeFlag        bool
+
+	commitEndTime     int // 提交结束时间时间戳
+	commitEndTimeFlag bool
+
+	ruleId     string // 汇报规则ID
+	ruleIdFlag bool
+
+	userId     string // 用户ID
+	userIdFlag bool
+
+	pageToken     string // 分页标识符
+	pageTokenFlag bool
+
+	pageSize     int // 单次分页返回的条数
+	pageSizeFlag bool
 }
 
 func NewQueryTaskReqBodyBuilder() *QueryTaskReqBodyBuilder {
@@ -1138,12 +1211,17 @@ func (builder *QueryTaskReqBuilder) Build() *QueryTaskReq {
 }
 
 type QueryTaskReqBody struct {
-	CommitStartTime *int    `json:"commit_start_time,omitempty"` // 提交开始时间时间戳
-	CommitEndTime   *int    `json:"commit_end_time,omitempty"`   // 提交结束时间时间戳
-	RuleId          *string `json:"rule_id,omitempty"`           // 汇报规则ID
-	UserId          *string `json:"user_id,omitempty"`           // 用户ID
-	PageToken       *string `json:"page_token,omitempty"`        // 分页标识符
-	PageSize        *int    `json:"page_size,omitempty"`         // 单次分页返回的条数
+	CommitStartTime *int `json:"commit_start_time,omitempty"` // 提交开始时间时间戳
+
+	CommitEndTime *int `json:"commit_end_time,omitempty"` // 提交结束时间时间戳
+
+	RuleId *string `json:"rule_id,omitempty"` // 汇报规则ID
+
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标识符
+
+	PageSize *int `json:"page_size,omitempty"` // 单次分页返回的条数
 }
 
 type QueryTaskReq struct {
@@ -1152,8 +1230,10 @@ type QueryTaskReq struct {
 }
 
 type QueryTaskRespData struct {
-	Items     []*Task `json:"items,omitempty"`      // 任务列表
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否有下一页数据
+	Items []*Task `json:"items,omitempty"` // 任务列表
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
 	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
 }
 

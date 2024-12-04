@@ -65,25 +65,35 @@ const (
 )
 
 type Agent struct {
-	Id          *string `json:"id,omitempty"`           // user id
-	AvatarUrl   *string `json:"avatar_url,omitempty"`   // user avatar url
-	Name        *string `json:"name,omitempty"`         // user name
-	Email       *string `json:"email,omitempty"`        // user email
-	Department  *string `json:"department,omitempty"`   // user department
+	Id *string `json:"id,omitempty"` // user id
+
+	AvatarUrl *string `json:"avatar_url,omitempty"` // user avatar url
+
+	Name *string `json:"name,omitempty"` // user name
+
+	Email *string `json:"email,omitempty"` // user email
+
+	Department *string `json:"department,omitempty"` // user department
+
 	CompanyName *string `json:"company_name,omitempty"` // company
 }
 
 type AgentBuilder struct {
-	id              string // user id
-	idFlag          bool
-	avatarUrl       string // user avatar url
-	avatarUrlFlag   bool
-	name            string // user name
-	nameFlag        bool
-	email           string // user email
-	emailFlag       bool
-	department      string // user department
-	departmentFlag  bool
+	id     string // user id
+	idFlag bool
+
+	avatarUrl     string // user avatar url
+	avatarUrlFlag bool
+
+	name     string // user name
+	nameFlag bool
+
+	email     string // user email
+	emailFlag bool
+
+	department     string // user department
+	departmentFlag bool
+
 	companyName     string // company
 	companyNameFlag bool
 }
@@ -177,19 +187,25 @@ func (builder *AgentBuilder) Build() *Agent {
 }
 
 type AgentSchedules struct {
-	Status      *int                  `json:"status,omitempty"`       // status of agent
-	Agent       *AgentUser            `json:"agent,omitempty"`        // agent info
-	Schedule    []*WeekdaySchedule    `json:"schedule,omitempty"`     // day schedule
+	Status *int `json:"status,omitempty"` // status of agent
+
+	Agent *AgentUser `json:"agent,omitempty"` // agent info
+
+	Schedule []*WeekdaySchedule `json:"schedule,omitempty"` // day schedule
+
 	AgentSkills []*AgentSkillLessInfo `json:"agent_skills,omitempty"` // agent skills
 }
 
 type AgentSchedulesBuilder struct {
-	status          int // status of agent
-	statusFlag      bool
-	agent           *AgentUser // agent info
-	agentFlag       bool
-	schedule        []*WeekdaySchedule // day schedule
-	scheduleFlag    bool
+	status     int // status of agent
+	statusFlag bool
+
+	agent     *AgentUser // agent info
+	agentFlag bool
+
+	schedule     []*WeekdaySchedule // day schedule
+	scheduleFlag bool
+
 	agentSkills     []*AgentSkillLessInfo // agent skills
 	agentSkillsFlag bool
 }
@@ -254,19 +270,25 @@ func (builder *AgentSchedulesBuilder) Build() *AgentSchedules {
 }
 
 type AgentSchedule struct {
-	Status      *int                  `json:"status,omitempty"`       // 客服状态, 1 - online客服, 2 - offline(手动)客服, 3 - off duty(下班)自动处于非服务时间段
-	Agent       *AgentUser            `json:"agent,omitempty"`        // 客服信息
-	Schedule    []*WeekdaySchedule    `json:"schedule,omitempty"`     // 工作日程列表
+	Status *int `json:"status,omitempty"` // 客服状态, 1 - online客服, 2 - offline(手动)客服, 3 - off duty(下班)自动处于非服务时间段
+
+	Agent *AgentUser `json:"agent,omitempty"` // 客服信息
+
+	Schedule []*WeekdaySchedule `json:"schedule,omitempty"` // 工作日程列表
+
 	AgentSkills []*AgentSkillLessInfo `json:"agent_skills,omitempty"` // 客服技能
 }
 
 type AgentScheduleBuilder struct {
-	status          int // 客服状态, 1 - online客服, 2 - offline(手动)客服, 3 - off duty(下班)自动处于非服务时间段
-	statusFlag      bool
-	agent           *AgentUser // 客服信息
-	agentFlag       bool
-	schedule        []*WeekdaySchedule // 工作日程列表
-	scheduleFlag    bool
+	status     int // 客服状态, 1 - online客服, 2 - offline(手动)客服, 3 - off duty(下班)自动处于非服务时间段
+	statusFlag bool
+
+	agent     *AgentUser // 客服信息
+	agentFlag bool
+
+	schedule     []*WeekdaySchedule // 工作日程列表
+	scheduleFlag bool
+
 	agentSkills     []*AgentSkillLessInfo // 客服技能
 	agentSkillsFlag bool
 }
@@ -331,16 +353,20 @@ func (builder *AgentScheduleBuilder) Build() *AgentSchedule {
 }
 
 type AgentScheduleUpdateInfo struct {
-	AgentId       *string            `json:"agent_id,omitempty"`        // 客服id;;[可以以普通用户身份在服务台发起工单，从工单详情里面获取用户guest.id](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/get)
-	Schedule      []*WeekdaySchedule `json:"schedule,omitempty"`        // 工作日程列表
-	AgentSkillIds []string           `json:"agent_skill_ids,omitempty"` // 客服技能 ids
+	AgentId *string `json:"agent_id,omitempty"` // 客服id;;[可以以普通用户身份在服务台发起工单，从工单详情里面获取用户guest.id](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/get)
+
+	Schedule []*WeekdaySchedule `json:"schedule,omitempty"` // 工作日程列表
+
+	AgentSkillIds []string `json:"agent_skill_ids,omitempty"` // 客服技能 ids
 }
 
 type AgentScheduleUpdateInfoBuilder struct {
-	agentId           string // 客服id;;[可以以普通用户身份在服务台发起工单，从工单详情里面获取用户guest.id](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/get)
-	agentIdFlag       bool
-	schedule          []*WeekdaySchedule // 工作日程列表
-	scheduleFlag      bool
+	agentId     string // 客服id;;[可以以普通用户身份在服务台发起工单，从工单详情里面获取用户guest.id](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/get)
+	agentIdFlag bool
+
+	schedule     []*WeekdaySchedule // 工作日程列表
+	scheduleFlag bool
+
 	agentSkillIds     []string // 客服技能 ids
 	agentSkillIdsFlag bool
 }
@@ -393,30 +419,42 @@ func (builder *AgentScheduleUpdateInfoBuilder) Build() *AgentScheduleUpdateInfo 
 }
 
 type AgentSkill struct {
-	Id         *string           `json:"id,omitempty"`          // 技能id
-	HelpdeskId *string           `json:"helpdesk_id,omitempty"` // helpdesk id
-	Name       *string           `json:"name,omitempty"`        // 技能名
-	Rules      []*AgentSkillRule `json:"rules,omitempty"`       // 技能rules
-	AgentIds   []string          `json:"agent_ids,omitempty"`   // 具有此技能的客服ids
-	IsDefault  *bool             `json:"is_default,omitempty"`  // 默认技能
-	Agents     []*Agent          `json:"agents,omitempty"`      // 客服 info
+	Id *string `json:"id,omitempty"` // 技能id
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // helpdesk id
+
+	Name *string `json:"name,omitempty"` // 技能名
+
+	Rules []*AgentSkillRule `json:"rules,omitempty"` // 技能rules
+
+	AgentIds []string `json:"agent_ids,omitempty"` // 具有此技能的客服ids
+
+	IsDefault *bool `json:"is_default,omitempty"` // 默认技能
+
+	Agents []*Agent `json:"agents,omitempty"` // 客服 info
 }
 
 type AgentSkillBuilder struct {
-	id             string // 技能id
-	idFlag         bool
+	id     string // 技能id
+	idFlag bool
+
 	helpdeskId     string // helpdesk id
 	helpdeskIdFlag bool
-	name           string // 技能名
-	nameFlag       bool
-	rules          []*AgentSkillRule // 技能rules
-	rulesFlag      bool
-	agentIds       []string // 具有此技能的客服ids
-	agentIdsFlag   bool
-	isDefault      bool // 默认技能
-	isDefaultFlag  bool
-	agents         []*Agent // 客服 info
-	agentsFlag     bool
+
+	name     string // 技能名
+	nameFlag bool
+
+	rules     []*AgentSkillRule // 技能rules
+	rulesFlag bool
+
+	agentIds     []string // 具有此技能的客服ids
+	agentIdsFlag bool
+
+	isDefault     bool // 默认技能
+	isDefaultFlag bool
+
+	agents     []*Agent // 客服 info
+	agentsFlag bool
 }
 
 func NewAgentSkillBuilder() *AgentSkillBuilder {
@@ -518,16 +556,20 @@ func (builder *AgentSkillBuilder) Build() *AgentSkill {
 }
 
 type AgentSkillLessInfo struct {
-	Id        *string `json:"id,omitempty"`         // 客服技能 id
-	Name      *string `json:"name,omitempty"`       // 客服技能名
-	IsDefault *bool   `json:"is_default,omitempty"` // 是默认技能
+	Id *string `json:"id,omitempty"` // 客服技能 id
+
+	Name *string `json:"name,omitempty"` // 客服技能名
+
+	IsDefault *bool `json:"is_default,omitempty"` // 是默认技能
 }
 
 type AgentSkillLessInfoBuilder struct {
-	id            string // 客服技能 id
-	idFlag        bool
-	name          string // 客服技能名
-	nameFlag      bool
+	id     string // 客服技能 id
+	idFlag bool
+
+	name     string // 客服技能名
+	nameFlag bool
+
 	isDefault     bool // 是默认技能
 	isDefaultFlag bool
 }
@@ -582,27 +624,37 @@ func (builder *AgentSkillLessInfoBuilder) Build() *AgentSkillLessInfo {
 }
 
 type AgentSkillRule struct {
-	Id               *string `json:"id,omitempty"`                // rule id, 参考[获取客服技能rules](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/agent_skill_rule/list) 用于获取rules options
-	SelectedOperator *int    `json:"selected_operator,omitempty"` // 运算符比较, 参考[客服技能运算符选项](https://open.feishu.cn/document/ukTMukTMukTM/ucDOyYjL3gjM24yN4IjN/operator-options)
-	OperatorOptions  []int   `json:"operator_options,omitempty"`  // rule操作数value，[客服技能及运算符](https://open.feishu.cn/document/ukTMukTMukTM/ucDOyYjL3gjM24yN4IjN/operator-options)
-	Operand          *string `json:"operand,omitempty"`           // rule 操作数的值
-	Category         *int    `json:"category,omitempty"`          // rule 类型，1-知识库，2-工单信息，3-用户飞书信息
-	DisplayName      *string `json:"display_name,omitempty"`      // rule 名
+	Id *string `json:"id,omitempty"` // rule id, 参考[获取客服技能rules](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/agent_skill_rule/list) 用于获取rules options
+
+	SelectedOperator *int `json:"selected_operator,omitempty"` // 运算符比较, 参考[客服技能运算符选项](https://open.feishu.cn/document/ukTMukTMukTM/ucDOyYjL3gjM24yN4IjN/operator-options)
+
+	OperatorOptions []int `json:"operator_options,omitempty"` // rule操作数value，[客服技能及运算符](https://open.feishu.cn/document/ukTMukTMukTM/ucDOyYjL3gjM24yN4IjN/operator-options)
+
+	Operand *string `json:"operand,omitempty"` // rule 操作数的值
+
+	Category *int `json:"category,omitempty"` // rule 类型，1-知识库，2-工单信息，3-用户飞书信息
+
+	DisplayName *string `json:"display_name,omitempty"` // rule 名
 }
 
 type AgentSkillRuleBuilder struct {
-	id                   string // rule id, 参考[获取客服技能rules](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/agent_skill_rule/list) 用于获取rules options
-	idFlag               bool
+	id     string // rule id, 参考[获取客服技能rules](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/agent_skill_rule/list) 用于获取rules options
+	idFlag bool
+
 	selectedOperator     int // 运算符比较, 参考[客服技能运算符选项](https://open.feishu.cn/document/ukTMukTMukTM/ucDOyYjL3gjM24yN4IjN/operator-options)
 	selectedOperatorFlag bool
-	operatorOptions      []int // rule操作数value，[客服技能及运算符](https://open.feishu.cn/document/ukTMukTMukTM/ucDOyYjL3gjM24yN4IjN/operator-options)
-	operatorOptionsFlag  bool
-	operand              string // rule 操作数的值
-	operandFlag          bool
-	category             int // rule 类型，1-知识库，2-工单信息，3-用户飞书信息
-	categoryFlag         bool
-	displayName          string // rule 名
-	displayNameFlag      bool
+
+	operatorOptions     []int // rule操作数value，[客服技能及运算符](https://open.feishu.cn/document/ukTMukTMukTM/ucDOyYjL3gjM24yN4IjN/operator-options)
+	operatorOptionsFlag bool
+
+	operand     string // rule 操作数的值
+	operandFlag bool
+
+	category     int // rule 类型，1-知识库，2-工单信息，3-用户飞书信息
+	categoryFlag bool
+
+	displayName     string // rule 名
+	displayNameFlag bool
 }
 
 func NewAgentSkillRuleBuilder() *AgentSkillRuleBuilder {
@@ -693,25 +745,35 @@ func (builder *AgentSkillRuleBuilder) Build() *AgentSkillRule {
 }
 
 type AgentUser struct {
-	Id          *string `json:"id,omitempty"`           // 客服 id
-	AvatarUrl   *string `json:"avatar_url,omitempty"`   // avatar url
-	Name        *string `json:"name,omitempty"`         // 客服名字
-	Email       *string `json:"email,omitempty"`        // email
-	Department  *string `json:"department,omitempty"`   // 部门
+	Id *string `json:"id,omitempty"` // 客服 id
+
+	AvatarUrl *string `json:"avatar_url,omitempty"` // avatar url
+
+	Name *string `json:"name,omitempty"` // 客服名字
+
+	Email *string `json:"email,omitempty"` // email
+
+	Department *string `json:"department,omitempty"` // 部门
+
 	CompanyName *string `json:"company_name,omitempty"` // 公司名
 }
 
 type AgentUserBuilder struct {
-	id              string // 客服 id
-	idFlag          bool
-	avatarUrl       string // avatar url
-	avatarUrlFlag   bool
-	name            string // 客服名字
-	nameFlag        bool
-	email           string // email
-	emailFlag       bool
-	department      string // 部门
-	departmentFlag  bool
+	id     string // 客服 id
+	idFlag bool
+
+	avatarUrl     string // avatar url
+	avatarUrlFlag bool
+
+	name     string // 客服名字
+	nameFlag bool
+
+	email     string // email
+	emailFlag bool
+
+	department     string // 部门
+	departmentFlag bool
+
 	companyName     string // 公司名
 	companyNameFlag bool
 }
@@ -805,19 +867,25 @@ func (builder *AgentUserBuilder) Build() *AgentUser {
 }
 
 type BotMessage struct {
-	MsgType     *string `json:"msg_type,omitempty"`     // 消息类型
-	Content     *string `json:"content,omitempty"`      // 消息内容，json格式结构序列化成string。格式说明参考: [发送消息content说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
-	ReceiverId  *string `json:"receiver_id,omitempty"`  // 接收消息用户id
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型
+
+	Content *string `json:"content,omitempty"` // 消息内容，json格式结构序列化成string。格式说明参考: [发送消息content说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
+
+	ReceiverId *string `json:"receiver_id,omitempty"` // 接收消息用户id
+
 	ReceiveType *string `json:"receive_type,omitempty"` // 接收消息方式，chat(服务台专属服务群)或user(服务台机器人私聊)。若选择专属服务群，用户有正在处理的工单将会发送失败。默认以chat方式发送。
 }
 
 type BotMessageBuilder struct {
-	msgType         string // 消息类型
-	msgTypeFlag     bool
-	content         string // 消息内容，json格式结构序列化成string。格式说明参考: [发送消息content说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
-	contentFlag     bool
-	receiverId      string // 接收消息用户id
-	receiverIdFlag  bool
+	msgType     string // 消息类型
+	msgTypeFlag bool
+
+	content     string // 消息内容，json格式结构序列化成string。格式说明参考: [发送消息content说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
+	contentFlag bool
+
+	receiverId     string // 接收消息用户id
+	receiverIdFlag bool
+
 	receiveType     string // 接收消息方式，chat(服务台专属服务群)或user(服务台机器人私聊)。若选择专属服务群，用户有正在处理的工单将会发送失败。默认以chat方式发送。
 	receiveTypeFlag bool
 }
@@ -886,26 +954,36 @@ func (builder *BotMessageBuilder) Build() *BotMessage {
 
 type Category struct {
 	CategoryId *string `json:"category_id,omitempty"` // 知识库分类ID
-	Id         *string `json:"id,omitempty"`          // 知识库分类ID，（旧版，请使用category_id）
-	Name       *string `json:"name,omitempty"`        // 名称
-	ParentId   *string `json:"parent_id,omitempty"`   // 父知识库分类ID
+
+	Id *string `json:"id,omitempty"` // 知识库分类ID，（旧版，请使用category_id）
+
+	Name *string `json:"name,omitempty"` // 名称
+
+	ParentId *string `json:"parent_id,omitempty"` // 父知识库分类ID
+
 	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 服务台ID
-	Language   *string `json:"language,omitempty"`    // 语言
+
+	Language *string `json:"language,omitempty"` // 语言
 }
 
 type CategoryBuilder struct {
 	categoryId     string // 知识库分类ID
 	categoryIdFlag bool
-	id             string // 知识库分类ID，（旧版，请使用category_id）
-	idFlag         bool
-	name           string // 名称
-	nameFlag       bool
-	parentId       string // 父知识库分类ID
-	parentIdFlag   bool
+
+	id     string // 知识库分类ID，（旧版，请使用category_id）
+	idFlag bool
+
+	name     string // 名称
+	nameFlag bool
+
+	parentId     string // 父知识库分类ID
+	parentIdFlag bool
+
 	helpdeskId     string // 服务台ID
 	helpdeskIdFlag bool
-	language       string // 语言
-	languageFlag   bool
+
+	language     string // 语言
+	languageFlag bool
 }
 
 func NewCategoryBuilder() *CategoryBuilder {
@@ -997,27 +1075,37 @@ func (builder *CategoryBuilder) Build() *Category {
 }
 
 type Comments struct {
-	Content       *string `json:"content,omitempty"`         // 备注
-	CreatedAt     *int    `json:"created_at,omitempty"`      // 备注时间，单位毫秒
-	Id            *int    `json:"id,omitempty"`              // 备注ID
+	Content *string `json:"content,omitempty"` // 备注
+
+	CreatedAt *int `json:"created_at,omitempty"` // 备注时间，单位毫秒
+
+	Id *int `json:"id,omitempty"` // 备注ID
+
 	UserAvatarUrl *string `json:"user_avatar_url,omitempty"` // 备注人头像
-	UserName      *string `json:"user_name,omitempty"`       // 备注人姓名
-	UserId        *int    `json:"user_id,omitempty"`         // 备注人ID
+
+	UserName *string `json:"user_name,omitempty"` // 备注人姓名
+
+	UserId *int `json:"user_id,omitempty"` // 备注人ID
 }
 
 type CommentsBuilder struct {
-	content           string // 备注
-	contentFlag       bool
-	createdAt         int // 备注时间，单位毫秒
-	createdAtFlag     bool
-	id                int // 备注ID
-	idFlag            bool
+	content     string // 备注
+	contentFlag bool
+
+	createdAt     int // 备注时间，单位毫秒
+	createdAtFlag bool
+
+	id     int // 备注ID
+	idFlag bool
+
 	userAvatarUrl     string // 备注人头像
 	userAvatarUrlFlag bool
-	userName          string // 备注人姓名
-	userNameFlag      bool
-	userId            int // 备注人ID
-	userIdFlag        bool
+
+	userName     string // 备注人姓名
+	userNameFlag bool
+
+	userId     int // 备注人ID
+	userIdFlag bool
 }
 
 func NewCommentsBuilder() *CommentsBuilder {
@@ -1109,30 +1197,42 @@ func (builder *CommentsBuilder) Build() *Comments {
 }
 
 type CustomizedFieldDisplayItem struct {
-	Id          *string `json:"id,omitempty"`           // 自定义字段ID
-	Value       *string `json:"value,omitempty"`        // 自定义字段值
-	KeyName     *string `json:"key_name,omitempty"`     // 键名
+	Id *string `json:"id,omitempty"` // 自定义字段ID
+
+	Value *string `json:"value,omitempty"` // 自定义字段值
+
+	KeyName *string `json:"key_name,omitempty"` // 键名
+
 	DisplayName *string `json:"display_name,omitempty"` // 展示名称
-	Position    *int    `json:"position,omitempty"`     // 展示位置
-	Required    *bool   `json:"required,omitempty"`     // 是否必填
-	Editable    *bool   `json:"editable,omitempty"`     // 是否可修改
+
+	Position *int `json:"position,omitempty"` // 展示位置
+
+	Required *bool `json:"required,omitempty"` // 是否必填
+
+	Editable *bool `json:"editable,omitempty"` // 是否可修改
 }
 
 type CustomizedFieldDisplayItemBuilder struct {
-	id              string // 自定义字段ID
-	idFlag          bool
-	value           string // 自定义字段值
-	valueFlag       bool
-	keyName         string // 键名
-	keyNameFlag     bool
+	id     string // 自定义字段ID
+	idFlag bool
+
+	value     string // 自定义字段值
+	valueFlag bool
+
+	keyName     string // 键名
+	keyNameFlag bool
+
 	displayName     string // 展示名称
 	displayNameFlag bool
-	position        int // 展示位置
-	positionFlag    bool
-	required        bool // 是否必填
-	requiredFlag    bool
-	editable        bool // 是否可修改
-	editableFlag    bool
+
+	position     int // 展示位置
+	positionFlag bool
+
+	required     bool // 是否必填
+	requiredFlag bool
+
+	editable     bool // 是否可修改
+	editableFlag bool
 }
 
 func NewCustomizedFieldDisplayItemBuilder() *CustomizedFieldDisplayItemBuilder {
@@ -1237,13 +1337,15 @@ func (builder *CustomizedFieldDisplayItemBuilder) Build() *CustomizedFieldDispla
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -1281,13 +1383,15 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type Event struct {
-	Type    *string `json:"type,omitempty"`    // 事件类型
+	Type *string `json:"type,omitempty"` // 事件类型
+
 	Subtype *string `json:"subtype,omitempty"` // 事件子类型
 }
 
 type EventBuilder struct {
-	type_       string // 事件类型
-	typeFlag    bool
+	type_    string // 事件类型
+	typeFlag bool
+
 	subtype     string // 事件子类型
 	subtypeFlag bool
 }
@@ -1329,48 +1433,72 @@ func (builder *EventBuilder) Build() *Event {
 }
 
 type Faq struct {
-	FaqId          *string     `json:"faq_id,omitempty"`          // 知识库ID
-	Id             *string     `json:"id,omitempty"`              // 知识库旧版ID，请使用faq_id
-	HelpdeskId     *string     `json:"helpdesk_id,omitempty"`     // 服务台ID
-	Question       *string     `json:"question,omitempty"`        // 问题
-	Answer         *string     `json:"answer,omitempty"`          // 答案
+	FaqId *string `json:"faq_id,omitempty"` // 知识库ID
+
+	Id *string `json:"id,omitempty"` // 知识库旧版ID，请使用faq_id
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 服务台ID
+
+	Question *string `json:"question,omitempty"` // 问题
+
+	Answer *string `json:"answer,omitempty"` // 答案
+
 	AnswerRichtext []*Richtext `json:"answer_richtext,omitempty"` // 富文本答案
-	CreateTime     *int        `json:"create_time,omitempty"`     // 创建时间
-	UpdateTime     *int        `json:"update_time,omitempty"`     // 修改时间
-	Categories     []*Category `json:"categories,omitempty"`      // 分类
-	Tags           []string    `json:"tags,omitempty"`            // 相似问题列表
-	ExpireTime     *int        `json:"expire_time,omitempty"`     // 失效时间
-	UpdateUser     *TicketUser `json:"update_user,omitempty"`     // 更新用户
-	CreateUser     *TicketUser `json:"create_user,omitempty"`     // 创建用户
+
+	CreateTime *int `json:"create_time,omitempty"` // 创建时间
+
+	UpdateTime *int `json:"update_time,omitempty"` // 修改时间
+
+	Categories []*Category `json:"categories,omitempty"` // 分类
+
+	Tags []string `json:"tags,omitempty"` // 相似问题列表
+
+	ExpireTime *int `json:"expire_time,omitempty"` // 失效时间
+
+	UpdateUser *TicketUser `json:"update_user,omitempty"` // 更新用户
+
+	CreateUser *TicketUser `json:"create_user,omitempty"` // 创建用户
 }
 
 type FaqBuilder struct {
-	faqId              string // 知识库ID
-	faqIdFlag          bool
-	id                 string // 知识库旧版ID，请使用faq_id
-	idFlag             bool
-	helpdeskId         string // 服务台ID
-	helpdeskIdFlag     bool
-	question           string // 问题
-	questionFlag       bool
-	answer             string // 答案
-	answerFlag         bool
+	faqId     string // 知识库ID
+	faqIdFlag bool
+
+	id     string // 知识库旧版ID，请使用faq_id
+	idFlag bool
+
+	helpdeskId     string // 服务台ID
+	helpdeskIdFlag bool
+
+	question     string // 问题
+	questionFlag bool
+
+	answer     string // 答案
+	answerFlag bool
+
 	answerRichtext     []*Richtext // 富文本答案
 	answerRichtextFlag bool
-	createTime         int // 创建时间
-	createTimeFlag     bool
-	updateTime         int // 修改时间
-	updateTimeFlag     bool
-	categories         []*Category // 分类
-	categoriesFlag     bool
-	tags               []string // 相似问题列表
-	tagsFlag           bool
-	expireTime         int // 失效时间
-	expireTimeFlag     bool
-	updateUser         *TicketUser // 更新用户
-	updateUserFlag     bool
-	createUser         *TicketUser // 创建用户
-	createUserFlag     bool
+
+	createTime     int // 创建时间
+	createTimeFlag bool
+
+	updateTime     int // 修改时间
+	updateTimeFlag bool
+
+	categories     []*Category // 分类
+	categoriesFlag bool
+
+	tags     []string // 相似问题列表
+	tagsFlag bool
+
+	expireTime     int // 失效时间
+	expireTimeFlag bool
+
+	updateUser     *TicketUser // 更新用户
+	updateUserFlag bool
+
+	createUser     *TicketUser // 创建用户
+	createUserFlag bool
 }
 
 func NewFaqBuilder() *FaqBuilder {
@@ -1548,24 +1676,32 @@ func (builder *FaqBuilder) Build() *Faq {
 }
 
 type FaqCreateInfo struct {
-	CategoryId     *string  `json:"category_id,omitempty"`     // faq category id
-	Question       *string  `json:"question,omitempty"`        // faq question
-	Answer         *string  `json:"answer,omitempty"`          // faq answer
-	AnswerRichtext *string  `json:"answer_richtext,omitempty"` // faq answer in richtext
-	Tags           []string `json:"tags,omitempty"`            // faq tags
+	CategoryId *string `json:"category_id,omitempty"` // faq category id
+
+	Question *string `json:"question,omitempty"` // faq question
+
+	Answer *string `json:"answer,omitempty"` // faq answer
+
+	AnswerRichtext *string `json:"answer_richtext,omitempty"` // faq answer in richtext
+
+	Tags []string `json:"tags,omitempty"` // faq tags
 }
 
 type FaqCreateInfoBuilder struct {
-	categoryId         string // faq category id
-	categoryIdFlag     bool
-	question           string // faq question
-	questionFlag       bool
-	answer             string // faq answer
-	answerFlag         bool
+	categoryId     string // faq category id
+	categoryIdFlag bool
+
+	question     string // faq question
+	questionFlag bool
+
+	answer     string // faq answer
+	answerFlag bool
+
 	answerRichtext     string // faq answer in richtext
 	answerRichtextFlag bool
-	tags               []string // faq tags
-	tagsFlag           bool
+
+	tags     []string // faq tags
+	tagsFlag bool
 }
 
 func NewFaqCreateInfoBuilder() *FaqCreateInfoBuilder {
@@ -1643,24 +1779,32 @@ func (builder *FaqCreateInfoBuilder) Build() *FaqCreateInfo {
 }
 
 type FaqUpdateInfo struct {
-	CategoryId     *string     `json:"category_id,omitempty"`     // 知识库分类ID
-	Question       *string     `json:"question,omitempty"`        // 问题
-	Answer         *string     `json:"answer,omitempty"`          // 答案
+	CategoryId *string `json:"category_id,omitempty"` // 知识库分类ID
+
+	Question *string `json:"question,omitempty"` // 问题
+
+	Answer *string `json:"answer,omitempty"` // 答案
+
 	AnswerRichtext []*Richtext `json:"answer_richtext,omitempty"` // 富文本答案和答案必须有一个必填。Json Array格式，富文本结构请见[了解更多: 富文本](https://open.feishu.cn/document/ukTMukTMukTM/uITM0YjLyEDN24iMxQjN)
-	Tags           []string    `json:"tags,omitempty"`            // 相似问题
+
+	Tags []string `json:"tags,omitempty"` // 相似问题
 }
 
 type FaqUpdateInfoBuilder struct {
-	categoryId         string // 知识库分类ID
-	categoryIdFlag     bool
-	question           string // 问题
-	questionFlag       bool
-	answer             string // 答案
-	answerFlag         bool
+	categoryId     string // 知识库分类ID
+	categoryIdFlag bool
+
+	question     string // 问题
+	questionFlag bool
+
+	answer     string // 答案
+	answerFlag bool
+
 	answerRichtext     []*Richtext // 富文本答案和答案必须有一个必填。Json Array格式，富文本结构请见[了解更多: 富文本](https://open.feishu.cn/document/ukTMukTMukTM/uITM0YjLyEDN24iMxQjN)
 	answerRichtextFlag bool
-	tags               []string // 相似问题
-	tagsFlag           bool
+
+	tags     []string // 相似问题
+	tagsFlag bool
 }
 
 func NewFaqUpdateInfoBuilder() *FaqUpdateInfoBuilder {
@@ -1738,15 +1882,19 @@ func (builder *FaqUpdateInfoBuilder) Build() *FaqUpdateInfo {
 
 type I18n struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文描述
+
 	EnUs *string `json:"en_us,omitempty"` // 英文描述
+
 	JaJp *string `json:"ja_jp,omitempty"` // 日文描述
 }
 
 type I18nBuilder struct {
 	zhCn     string // 中文描述
 	zhCnFlag bool
+
 	enUs     string // 英文描述
 	enUsFlag bool
+
 	jaJp     string // 日文描述
 	jaJpFlag bool
 }
@@ -1801,69 +1949,107 @@ func (builder *I18nBuilder) Build() *I18n {
 }
 
 type Notification struct {
-	Id                          *string                   `json:"id,omitempty"`                              // 非必填，创建成功后返回
-	JobName                     *string                   `json:"job_name,omitempty"`                        // 必填，任务名称
-	Status                      *int                      `json:"status,omitempty"`                          // 非必填，创建成功后返回
-	CreateUser                  *NotificationUser         `json:"create_user,omitempty"`                     // 非必填，创建人
-	CreatedAt                   *string                   `json:"created_at,omitempty"`                      // 非必填，创建时间（毫秒时间戳）
-	UpdateUser                  *NotificationUser         `json:"update_user,omitempty"`                     // 非必填，更新用户
-	UpdatedAt                   *string                   `json:"updated_at,omitempty"`                      // 非必填，更新时间（毫秒时间戳）
-	TargetUserCount             *int                      `json:"target_user_count,omitempty"`               // 非必填，目标推送用户总数
-	SentUserCount               *int                      `json:"sent_user_count,omitempty"`                 // 非必填，已推送用户总数
-	ReadUserCount               *int                      `json:"read_user_count,omitempty"`                 // 非必填，已读用户总数
-	SendAt                      *string                   `json:"send_at,omitempty"`                         // 非必填，推送任务触发时间（毫秒时间戳）
-	PushContent                 *string                   `json:"push_content,omitempty"`                    // 必填，推送内容，详见：https://open.feishu.cn/tool/cardbuilder?from=howtoguide
-	PushType                    *int                      `json:"push_type,omitempty"`                       // 必填，;0（定时推送：push_scope不能等于3） 1（新人入职推送：push_scope必须等于1或者3；new_staff_scope_type不能为空）
-	PushScopeType               *int                      `json:"push_scope_type,omitempty"`                 // 必填，;推送范围（服务台私信） 0：组织内全部成员（user_list和department_list必须为空） 1：不推送任何成员（user_list和department_list必须为空，chat_list不可为空） 2：推送到部分成员（user_list或department_list不能为空） 3：入职新人 以上四种状态，chat_list都相对独立，只有在推送范围为1时，必须需要设置chat_list
-	NewStaffScopeType           *int                      `json:"new_staff_scope_type,omitempty"`            // 非必填，;新人入职范围类型（push_type为1时生效） 0：组织内所有新人 1：组织内特定的部门（new_staff_scope_department_list 字段不能为空）
+	Id *string `json:"id,omitempty"` // 非必填，创建成功后返回
+
+	JobName *string `json:"job_name,omitempty"` // 必填，任务名称
+
+	Status *int `json:"status,omitempty"` // 非必填，创建成功后返回
+
+	CreateUser *NotificationUser `json:"create_user,omitempty"` // 非必填，创建人
+
+	CreatedAt *string `json:"created_at,omitempty"` // 非必填，创建时间（毫秒时间戳）
+
+	UpdateUser *NotificationUser `json:"update_user,omitempty"` // 非必填，更新用户
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 非必填，更新时间（毫秒时间戳）
+
+	TargetUserCount *int `json:"target_user_count,omitempty"` // 非必填，目标推送用户总数
+
+	SentUserCount *int `json:"sent_user_count,omitempty"` // 非必填，已推送用户总数
+
+	ReadUserCount *int `json:"read_user_count,omitempty"` // 非必填，已读用户总数
+
+	SendAt *string `json:"send_at,omitempty"` // 非必填，推送任务触发时间（毫秒时间戳）
+
+	PushContent *string `json:"push_content,omitempty"` // 必填，推送内容，详见：https://open.feishu.cn/tool/cardbuilder?from=howtoguide
+
+	PushType *int `json:"push_type,omitempty"` // 必填，;0（定时推送：push_scope不能等于3） 1（新人入职推送：push_scope必须等于1或者3；new_staff_scope_type不能为空）
+
+	PushScopeType *int `json:"push_scope_type,omitempty"` // 必填，;推送范围（服务台私信） 0：组织内全部成员（user_list和department_list必须为空） 1：不推送任何成员（user_list和department_list必须为空，chat_list不可为空） 2：推送到部分成员（user_list或department_list不能为空） 3：入职新人 以上四种状态，chat_list都相对独立，只有在推送范围为1时，必须需要设置chat_list
+
+	NewStaffScopeType *int `json:"new_staff_scope_type,omitempty"` // 非必填，;新人入职范围类型（push_type为1时生效） 0：组织内所有新人 1：组织内特定的部门（new_staff_scope_department_list 字段不能为空）
+
 	NewStaffScopeDepartmentList []*NotificationDepartment `json:"new_staff_scope_department_list,omitempty"` // 非必填，新人入职生效部门列表
-	UserList                    []*NotificationUser       `json:"user_list,omitempty"`                       // 非必填，push推送到成员列表
-	DepartmentList              []*NotificationDepartment `json:"department_list,omitempty"`                 // 非必填，push推送到的部门信息列表
-	ChatList                    []*NotificationChat       `json:"chat_list,omitempty"`                       // 非必填，push推送到的会话列表(群)
-	Ext                         *string                   `json:"ext,omitempty"`                             // 非必填，预留扩展字段
+
+	UserList []*NotificationUser `json:"user_list,omitempty"` // 非必填，push推送到成员列表
+
+	DepartmentList []*NotificationDepartment `json:"department_list,omitempty"` // 非必填，push推送到的部门信息列表
+
+	ChatList []*NotificationChat `json:"chat_list,omitempty"` // 非必填，push推送到的会话列表(群)
+
+	Ext *string `json:"ext,omitempty"` // 非必填，预留扩展字段
 }
 
 type NotificationBuilder struct {
-	id                              string // 非必填，创建成功后返回
-	idFlag                          bool
-	jobName                         string // 必填，任务名称
-	jobNameFlag                     bool
-	status                          int // 非必填，创建成功后返回
-	statusFlag                      bool
-	createUser                      *NotificationUser // 非必填，创建人
-	createUserFlag                  bool
-	createdAt                       string // 非必填，创建时间（毫秒时间戳）
-	createdAtFlag                   bool
-	updateUser                      *NotificationUser // 非必填，更新用户
-	updateUserFlag                  bool
-	updatedAt                       string // 非必填，更新时间（毫秒时间戳）
-	updatedAtFlag                   bool
-	targetUserCount                 int // 非必填，目标推送用户总数
-	targetUserCountFlag             bool
-	sentUserCount                   int // 非必填，已推送用户总数
-	sentUserCountFlag               bool
-	readUserCount                   int // 非必填，已读用户总数
-	readUserCountFlag               bool
-	sendAt                          string // 非必填，推送任务触发时间（毫秒时间戳）
-	sendAtFlag                      bool
-	pushContent                     string // 必填，推送内容，详见：https://open.feishu.cn/tool/cardbuilder?from=howtoguide
-	pushContentFlag                 bool
-	pushType                        int // 必填，;0（定时推送：push_scope不能等于3） 1（新人入职推送：push_scope必须等于1或者3；new_staff_scope_type不能为空）
-	pushTypeFlag                    bool
-	pushScopeType                   int // 必填，;推送范围（服务台私信） 0：组织内全部成员（user_list和department_list必须为空） 1：不推送任何成员（user_list和department_list必须为空，chat_list不可为空） 2：推送到部分成员（user_list或department_list不能为空） 3：入职新人 以上四种状态，chat_list都相对独立，只有在推送范围为1时，必须需要设置chat_list
-	pushScopeTypeFlag               bool
-	newStaffScopeType               int // 非必填，;新人入职范围类型（push_type为1时生效） 0：组织内所有新人 1：组织内特定的部门（new_staff_scope_department_list 字段不能为空）
-	newStaffScopeTypeFlag           bool
+	id     string // 非必填，创建成功后返回
+	idFlag bool
+
+	jobName     string // 必填，任务名称
+	jobNameFlag bool
+
+	status     int // 非必填，创建成功后返回
+	statusFlag bool
+
+	createUser     *NotificationUser // 非必填，创建人
+	createUserFlag bool
+
+	createdAt     string // 非必填，创建时间（毫秒时间戳）
+	createdAtFlag bool
+
+	updateUser     *NotificationUser // 非必填，更新用户
+	updateUserFlag bool
+
+	updatedAt     string // 非必填，更新时间（毫秒时间戳）
+	updatedAtFlag bool
+
+	targetUserCount     int // 非必填，目标推送用户总数
+	targetUserCountFlag bool
+
+	sentUserCount     int // 非必填，已推送用户总数
+	sentUserCountFlag bool
+
+	readUserCount     int // 非必填，已读用户总数
+	readUserCountFlag bool
+
+	sendAt     string // 非必填，推送任务触发时间（毫秒时间戳）
+	sendAtFlag bool
+
+	pushContent     string // 必填，推送内容，详见：https://open.feishu.cn/tool/cardbuilder?from=howtoguide
+	pushContentFlag bool
+
+	pushType     int // 必填，;0（定时推送：push_scope不能等于3） 1（新人入职推送：push_scope必须等于1或者3；new_staff_scope_type不能为空）
+	pushTypeFlag bool
+
+	pushScopeType     int // 必填，;推送范围（服务台私信） 0：组织内全部成员（user_list和department_list必须为空） 1：不推送任何成员（user_list和department_list必须为空，chat_list不可为空） 2：推送到部分成员（user_list或department_list不能为空） 3：入职新人 以上四种状态，chat_list都相对独立，只有在推送范围为1时，必须需要设置chat_list
+	pushScopeTypeFlag bool
+
+	newStaffScopeType     int // 非必填，;新人入职范围类型（push_type为1时生效） 0：组织内所有新人 1：组织内特定的部门（new_staff_scope_department_list 字段不能为空）
+	newStaffScopeTypeFlag bool
+
 	newStaffScopeDepartmentList     []*NotificationDepartment // 非必填，新人入职生效部门列表
 	newStaffScopeDepartmentListFlag bool
-	userList                        []*NotificationUser // 非必填，push推送到成员列表
-	userListFlag                    bool
-	departmentList                  []*NotificationDepartment // 非必填，push推送到的部门信息列表
-	departmentListFlag              bool
-	chatList                        []*NotificationChat // 非必填，push推送到的会话列表(群)
-	chatListFlag                    bool
-	ext                             string // 非必填，预留扩展字段
-	extFlag                         bool
+
+	userList     []*NotificationUser // 非必填，push推送到成员列表
+	userListFlag bool
+
+	departmentList     []*NotificationDepartment // 非必填，push推送到的部门信息列表
+	departmentListFlag bool
+
+	chatList     []*NotificationChat // 非必填，push推送到的会话列表(群)
+	chatListFlag bool
+
+	ext     string // 非必填，预留扩展字段
+	extFlag bool
 }
 
 func NewNotificationBuilder() *NotificationBuilder {
@@ -2132,14 +2318,16 @@ func (builder *NotificationBuilder) Build() *Notification {
 
 type NotificationChat struct {
 	ChatId *string `json:"chat_id,omitempty"` // 非必填，会话ID
-	Name   *string `json:"name,omitempty"`    // 非必填，会话名称
+
+	Name *string `json:"name,omitempty"` // 非必填，会话名称
 }
 
 type NotificationChatBuilder struct {
 	chatId     string // 非必填，会话ID
 	chatIdFlag bool
-	name       string // 非必填，会话名称
-	nameFlag   bool
+
+	name     string // 非必填，会话名称
+	nameFlag bool
 }
 
 func NewNotificationChatBuilder() *NotificationChatBuilder {
@@ -2180,14 +2368,16 @@ func (builder *NotificationChatBuilder) Build() *NotificationChat {
 
 type NotificationDepartment struct {
 	DepartmentId *string `json:"department_id,omitempty"` // 部门ID
-	Name         *string `json:"name,omitempty"`          // 非必填，部门名称
+
+	Name *string `json:"name,omitempty"` // 非必填，部门名称
 }
 
 type NotificationDepartmentBuilder struct {
 	departmentId     string // 部门ID
 	departmentIdFlag bool
-	name             string // 非必填，部门名称
-	nameFlag         bool
+
+	name     string // 非必填，部门名称
+	nameFlag bool
 }
 
 func NewNotificationDepartmentBuilder() *NotificationDepartmentBuilder {
@@ -2227,18 +2417,22 @@ func (builder *NotificationDepartmentBuilder) Build() *NotificationDepartment {
 }
 
 type NotificationUser struct {
-	UserId    *string `json:"user_id,omitempty"`    // 非必填，用户id
+	UserId *string `json:"user_id,omitempty"` // 非必填，用户id
+
 	AvatarUrl *string `json:"avatar_url,omitempty"` // 非必填，头像地址
-	Name      *string `json:"name,omitempty"`       // 非必填，用户名称
+
+	Name *string `json:"name,omitempty"` // 非必填，用户名称
 }
 
 type NotificationUserBuilder struct {
-	userId        string // 非必填，用户id
-	userIdFlag    bool
+	userId     string // 非必填，用户id
+	userIdFlag bool
+
 	avatarUrl     string // 非必填，头像地址
 	avatarUrlFlag bool
-	name          string // 非必填，用户名称
-	nameFlag      bool
+
+	name     string // 非必填，用户名称
+	nameFlag bool
 }
 
 func NewNotificationUserBuilder() *NotificationUserBuilder {
@@ -2292,14 +2486,16 @@ func (builder *NotificationUserBuilder) Build() *NotificationUser {
 
 type Richtext struct {
 	Content *string `json:"content,omitempty"` // 内容
-	Type    *string `json:"type,omitempty"`    // 类型
+
+	Type *string `json:"type,omitempty"` // 类型
 }
 
 type RichtextBuilder struct {
 	content     string // 内容
 	contentFlag bool
-	type_       string // 类型
-	typeFlag    bool
+
+	type_    string // 类型
+	typeFlag bool
 }
 
 func NewRichtextBuilder() *RichtextBuilder {
@@ -2339,87 +2535,137 @@ func (builder *RichtextBuilder) Build() *Richtext {
 }
 
 type Ticket struct {
-	TicketId                   *string                       `json:"ticket_id,omitempty"`                     // 工单ID;;[可以从工单列表里面取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/list);;[也可以订阅工单创建事件获取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/events/created)
-	HelpdeskId                 *string                       `json:"helpdesk_id,omitempty"`                   // 服务台ID
-	Guest                      *TicketUser                   `json:"guest,omitempty"`                         // 工单创建用户
-	Comments                   *Comments                     `json:"comments,omitempty"`                      // 备注
-	TicketType                 *int                          `json:"ticket_type,omitempty"`                   // 工单阶段：1. 机器人 2. 人工
-	Status                     *int                          `json:"status,omitempty"`                        // 工单状态，1：已创建 2: 处理中 3: 排队中 4：待定 5：待用户响应 50: 被机器人关闭 51: 被客服关闭 52: 用户自己关闭
-	Score                      *int                          `json:"score,omitempty"`                         // 工单评分，1：不满意，2:一般，3:满意
-	CreatedAt                  *int64                        `json:"created_at,omitempty"`                    // 工单创建时间
-	UpdatedAt                  *int64                        `json:"updated_at,omitempty"`                    // 工单更新时间，没有值时为-1
-	ClosedAt                   *int64                        `json:"closed_at,omitempty"`                     // 工单结束时间
-	DissatisfactionReason      *I18n                         `json:"dissatisfaction_reason,omitempty"`        // 不满意原因
-	Agents                     []*TicketUser                 `json:"agents,omitempty"`                        // 工单客服
-	Channel                    *int                          `json:"channel,omitempty"`                       // 工单渠道，描述：;9：Open API 2：二维码 14：分享 13：搜索 其他数字：其他渠道
-	Solve                      *int                          `json:"solve,omitempty"`                         // 工单是否解决 1:没解决 2:已解决
-	ClosedBy                   *TicketUser                   `json:"closed_by,omitempty"`                     // 关单用户ID
-	Collaborators              []*TicketUser                 `json:"collaborators,omitempty"`                 // 工单协作者
-	CustomizedFields           []*CustomizedFieldDisplayItem `json:"customized_fields,omitempty"`             // 自定义字段列表，没有值时不设置  ;下拉菜单的value对应工单字段里面的children.display_name;[获取全部工单自定义字段](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket_customized_field/list-ticket-customized-fields)
-	AgentServiceDuration       *float64                      `json:"agent_service_duration,omitempty"`        // 客服服务时长，客服最后一次回复时间距离客服进入时间间隔，单位分钟
-	AgentFirstResponseDuration *int64                        `json:"agent_first_response_duration,omitempty"` // 客服首次回复时间距离客服进入时间的间隔(秒)
-	BotServiceDuration         *int64                        `json:"bot_service_duration,omitempty"`          // 机器人服务时间：客服进入时间距离工单创建时间的间隔，单位秒
-	AgentResolutionTime        *int64                        `json:"agent_resolution_time,omitempty"`         // 客服解决时长，关单时间距离客服进入时间的间隔，单位秒
-	ActualProcessingTime       *int64                        `json:"actual_processing_time,omitempty"`        // 工单实际处理时间：从客服进入到关单，单位秒
-	AgentEntryTime             *int64                        `json:"agent_entry_time,omitempty"`              // 客服进入时间，单位毫秒
-	AgentFirstResponseTime     *int64                        `json:"agent_first_response_time,omitempty"`     // 客服首次回复时间，单位毫秒
-	AgentLastResponseTime      *int64                        `json:"agent_last_response_time,omitempty"`      // 客服最后回复时间，单位毫秒
-	AgentOwner                 *TicketUser                   `json:"agent_owner,omitempty"`                   // 主责客服
+	TicketId *string `json:"ticket_id,omitempty"` // 工单ID;;[可以从工单列表里面取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/list);;[也可以订阅工单创建事件获取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/events/created)
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 服务台ID
+
+	Guest *TicketUser `json:"guest,omitempty"` // 工单创建用户
+
+	Comments *Comments `json:"comments,omitempty"` // 备注
+
+	TicketType *int `json:"ticket_type,omitempty"` // 工单阶段：1. 机器人 2. 人工
+
+	Status *int `json:"status,omitempty"` // 工单状态，1：已创建 2: 处理中 3: 排队中 4：待定 5：待用户响应 50: 被机器人关闭 51: 被客服关闭 52: 用户自己关闭
+
+	Score *int `json:"score,omitempty"` // 工单评分，1：不满意，2:一般，3:满意
+
+	CreatedAt *int64 `json:"created_at,omitempty"` // 工单创建时间
+
+	UpdatedAt *int64 `json:"updated_at,omitempty"` // 工单更新时间，没有值时为-1
+
+	ClosedAt *int64 `json:"closed_at,omitempty"` // 工单结束时间
+
+	DissatisfactionReason *I18n `json:"dissatisfaction_reason,omitempty"` // 不满意原因
+
+	Agents []*TicketUser `json:"agents,omitempty"` // 工单客服
+
+	Channel *int `json:"channel,omitempty"` // 工单渠道，描述：;9：Open API 2：二维码 14：分享 13：搜索 其他数字：其他渠道
+
+	Solve *int `json:"solve,omitempty"` // 工单是否解决 1:没解决 2:已解决
+
+	ClosedBy *TicketUser `json:"closed_by,omitempty"` // 关单用户ID
+
+	Collaborators []*TicketUser `json:"collaborators,omitempty"` // 工单协作者
+
+	CustomizedFields []*CustomizedFieldDisplayItem `json:"customized_fields,omitempty"` // 自定义字段列表，没有值时不设置  ;下拉菜单的value对应工单字段里面的children.display_name;[获取全部工单自定义字段](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket_customized_field/list-ticket-customized-fields)
+
+	AgentServiceDuration *float64 `json:"agent_service_duration,omitempty"` // 客服服务时长，客服最后一次回复时间距离客服进入时间间隔，单位分钟
+
+	AgentFirstResponseDuration *int64 `json:"agent_first_response_duration,omitempty"` // 客服首次回复时间距离客服进入时间的间隔(秒)
+
+	BotServiceDuration *int64 `json:"bot_service_duration,omitempty"` // 机器人服务时间：客服进入时间距离工单创建时间的间隔，单位秒
+
+	AgentResolutionTime *int64 `json:"agent_resolution_time,omitempty"` // 客服解决时长，关单时间距离客服进入时间的间隔，单位秒
+
+	ActualProcessingTime *int64 `json:"actual_processing_time,omitempty"` // 工单实际处理时间：从客服进入到关单，单位秒
+
+	AgentEntryTime *int64 `json:"agent_entry_time,omitempty"` // 客服进入时间，单位毫秒
+
+	AgentFirstResponseTime *int64 `json:"agent_first_response_time,omitempty"` // 客服首次回复时间，单位毫秒
+
+	AgentLastResponseTime *int64 `json:"agent_last_response_time,omitempty"` // 客服最后回复时间，单位毫秒
+
+	AgentOwner *TicketUser `json:"agent_owner,omitempty"` // 主责客服
 }
 
 type TicketBuilder struct {
-	ticketId                       string // 工单ID;;[可以从工单列表里面取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/list);;[也可以订阅工单创建事件获取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/events/created)
-	ticketIdFlag                   bool
-	helpdeskId                     string // 服务台ID
-	helpdeskIdFlag                 bool
-	guest                          *TicketUser // 工单创建用户
-	guestFlag                      bool
-	comments                       *Comments // 备注
-	commentsFlag                   bool
-	ticketType                     int // 工单阶段：1. 机器人 2. 人工
-	ticketTypeFlag                 bool
-	status                         int // 工单状态，1：已创建 2: 处理中 3: 排队中 4：待定 5：待用户响应 50: 被机器人关闭 51: 被客服关闭 52: 用户自己关闭
-	statusFlag                     bool
-	score                          int // 工单评分，1：不满意，2:一般，3:满意
-	scoreFlag                      bool
-	createdAt                      int64 // 工单创建时间
-	createdAtFlag                  bool
-	updatedAt                      int64 // 工单更新时间，没有值时为-1
-	updatedAtFlag                  bool
-	closedAt                       int64 // 工单结束时间
-	closedAtFlag                   bool
-	dissatisfactionReason          *I18n // 不满意原因
-	dissatisfactionReasonFlag      bool
-	agents                         []*TicketUser // 工单客服
-	agentsFlag                     bool
-	channel                        int // 工单渠道，描述：;9：Open API 2：二维码 14：分享 13：搜索 其他数字：其他渠道
-	channelFlag                    bool
-	solve                          int // 工单是否解决 1:没解决 2:已解决
-	solveFlag                      bool
-	closedBy                       *TicketUser // 关单用户ID
-	closedByFlag                   bool
-	collaborators                  []*TicketUser // 工单协作者
-	collaboratorsFlag              bool
-	customizedFields               []*CustomizedFieldDisplayItem // 自定义字段列表，没有值时不设置  ;下拉菜单的value对应工单字段里面的children.display_name;[获取全部工单自定义字段](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket_customized_field/list-ticket-customized-fields)
-	customizedFieldsFlag           bool
-	agentServiceDuration           float64 // 客服服务时长，客服最后一次回复时间距离客服进入时间间隔，单位分钟
-	agentServiceDurationFlag       bool
+	ticketId     string // 工单ID;;[可以从工单列表里面取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/list);;[也可以订阅工单创建事件获取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/events/created)
+	ticketIdFlag bool
+
+	helpdeskId     string // 服务台ID
+	helpdeskIdFlag bool
+
+	guest     *TicketUser // 工单创建用户
+	guestFlag bool
+
+	comments     *Comments // 备注
+	commentsFlag bool
+
+	ticketType     int // 工单阶段：1. 机器人 2. 人工
+	ticketTypeFlag bool
+
+	status     int // 工单状态，1：已创建 2: 处理中 3: 排队中 4：待定 5：待用户响应 50: 被机器人关闭 51: 被客服关闭 52: 用户自己关闭
+	statusFlag bool
+
+	score     int // 工单评分，1：不满意，2:一般，3:满意
+	scoreFlag bool
+
+	createdAt     int64 // 工单创建时间
+	createdAtFlag bool
+
+	updatedAt     int64 // 工单更新时间，没有值时为-1
+	updatedAtFlag bool
+
+	closedAt     int64 // 工单结束时间
+	closedAtFlag bool
+
+	dissatisfactionReason     *I18n // 不满意原因
+	dissatisfactionReasonFlag bool
+
+	agents     []*TicketUser // 工单客服
+	agentsFlag bool
+
+	channel     int // 工单渠道，描述：;9：Open API 2：二维码 14：分享 13：搜索 其他数字：其他渠道
+	channelFlag bool
+
+	solve     int // 工单是否解决 1:没解决 2:已解决
+	solveFlag bool
+
+	closedBy     *TicketUser // 关单用户ID
+	closedByFlag bool
+
+	collaborators     []*TicketUser // 工单协作者
+	collaboratorsFlag bool
+
+	customizedFields     []*CustomizedFieldDisplayItem // 自定义字段列表，没有值时不设置  ;下拉菜单的value对应工单字段里面的children.display_name;[获取全部工单自定义字段](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket_customized_field/list-ticket-customized-fields)
+	customizedFieldsFlag bool
+
+	agentServiceDuration     float64 // 客服服务时长，客服最后一次回复时间距离客服进入时间间隔，单位分钟
+	agentServiceDurationFlag bool
+
 	agentFirstResponseDuration     int64 // 客服首次回复时间距离客服进入时间的间隔(秒)
 	agentFirstResponseDurationFlag bool
-	botServiceDuration             int64 // 机器人服务时间：客服进入时间距离工单创建时间的间隔，单位秒
-	botServiceDurationFlag         bool
-	agentResolutionTime            int64 // 客服解决时长，关单时间距离客服进入时间的间隔，单位秒
-	agentResolutionTimeFlag        bool
-	actualProcessingTime           int64 // 工单实际处理时间：从客服进入到关单，单位秒
-	actualProcessingTimeFlag       bool
-	agentEntryTime                 int64 // 客服进入时间，单位毫秒
-	agentEntryTimeFlag             bool
-	agentFirstResponseTime         int64 // 客服首次回复时间，单位毫秒
-	agentFirstResponseTimeFlag     bool
-	agentLastResponseTime          int64 // 客服最后回复时间，单位毫秒
-	agentLastResponseTimeFlag      bool
-	agentOwner                     *TicketUser // 主责客服
-	agentOwnerFlag                 bool
+
+	botServiceDuration     int64 // 机器人服务时间：客服进入时间距离工单创建时间的间隔，单位秒
+	botServiceDurationFlag bool
+
+	agentResolutionTime     int64 // 客服解决时长，关单时间距离客服进入时间的间隔，单位秒
+	agentResolutionTimeFlag bool
+
+	actualProcessingTime     int64 // 工单实际处理时间：从客服进入到关单，单位秒
+	actualProcessingTimeFlag bool
+
+	agentEntryTime     int64 // 客服进入时间，单位毫秒
+	agentEntryTimeFlag bool
+
+	agentFirstResponseTime     int64 // 客服首次回复时间，单位毫秒
+	agentFirstResponseTimeFlag bool
+
+	agentLastResponseTime     int64 // 客服最后回复时间，单位毫秒
+	agentLastResponseTimeFlag bool
+
+	agentOwner     *TicketUser // 主责客服
+	agentOwnerFlag bool
 }
 
 func NewTicketBuilder() *TicketBuilder {
@@ -2763,33 +3009,47 @@ func (builder *TicketBuilder) Build() *Ticket {
 }
 
 type TicketMessage struct {
-	Id          *string `json:"id,omitempty"`           // 工单消息ID
-	MessageId   *string `json:"message_id,omitempty"`   // chat消息ID
+	Id *string `json:"id,omitempty"` // 工单消息ID
+
+	MessageId *string `json:"message_id,omitempty"` // chat消息ID
+
 	MessageType *string `json:"message_type,omitempty"` // 消息类型；text：纯文本；post：富文本
-	CreatedAt   *int    `json:"created_at,omitempty"`   // 创建时间
-	Content     *string `json:"content,omitempty"`      // 内容
-	UserName    *string `json:"user_name,omitempty"`    // 用户名
-	AvatarUrl   *string `json:"avatar_url,omitempty"`   // 用户图片url
-	UserId      *string `json:"user_id,omitempty"`      // 用户open ID
+
+	CreatedAt *int `json:"created_at,omitempty"` // 创建时间
+
+	Content *string `json:"content,omitempty"` // 内容
+
+	UserName *string `json:"user_name,omitempty"` // 用户名
+
+	AvatarUrl *string `json:"avatar_url,omitempty"` // 用户图片url
+
+	UserId *string `json:"user_id,omitempty"` // 用户open ID
 }
 
 type TicketMessageBuilder struct {
-	id              string // 工单消息ID
-	idFlag          bool
-	messageId       string // chat消息ID
-	messageIdFlag   bool
+	id     string // 工单消息ID
+	idFlag bool
+
+	messageId     string // chat消息ID
+	messageIdFlag bool
+
 	messageType     string // 消息类型；text：纯文本；post：富文本
 	messageTypeFlag bool
-	createdAt       int // 创建时间
-	createdAtFlag   bool
-	content         string // 内容
-	contentFlag     bool
-	userName        string // 用户名
-	userNameFlag    bool
-	avatarUrl       string // 用户图片url
-	avatarUrlFlag   bool
-	userId          string // 用户open ID
-	userIdFlag      bool
+
+	createdAt     int // 创建时间
+	createdAtFlag bool
+
+	content     string // 内容
+	contentFlag bool
+
+	userName     string // 用户名
+	userNameFlag bool
+
+	avatarUrl     string // 用户图片url
+	avatarUrlFlag bool
+
+	userId     string // 用户open ID
+	userIdFlag bool
 }
 
 func NewTicketMessageBuilder() *TicketMessageBuilder {
@@ -2907,54 +3167,82 @@ func (builder *TicketMessageBuilder) Build() *TicketMessage {
 }
 
 type TicketCustomizedField struct {
-	TicketCustomizedFieldId *string     `json:"ticket_customized_field_id,omitempty"` // 工单自定义字段ID
-	HelpdeskId              *string     `json:"helpdesk_id,omitempty"`                // 服务台ID
-	KeyName                 *string     `json:"key_name,omitempty"`                   // 键名
-	DisplayName             *string     `json:"display_name,omitempty"`               // 名称
-	Position                *string     `json:"position,omitempty"`                   // 字段在列表后台管理列表中的位置
-	FieldType               *string     `json:"field_type,omitempty"`                 // 类型;;string - 单行文本;;multiline - 多行文本;;dropdown - 下拉列表;;dropdown_nested - 级联下拉
-	Description             *string     `json:"description,omitempty"`                // 描述
-	Visible                 *bool       `json:"visible,omitempty"`                    // 是否可见
-	Editable                *bool       `json:"editable,omitempty"`                   // 是否可以修改
-	Required                *bool       `json:"required,omitempty"`                   // 是否必填
-	CreatedAt               *string     `json:"created_at,omitempty"`                 // 创建时间
-	UpdatedAt               *string     `json:"updated_at,omitempty"`                 // 更新时间
-	CreatedBy               *TicketUser `json:"created_by,omitempty"`                 // 创建用户
-	UpdatedBy               *TicketUser `json:"updated_by,omitempty"`                 // 更新用户
-	DropdownAllowMultiple   *bool       `json:"dropdown_allow_multiple,omitempty"`    // 是否支持多选，仅在字段类型是dropdown的时候有效
+	TicketCustomizedFieldId *string `json:"ticket_customized_field_id,omitempty"` // 工单自定义字段ID
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 服务台ID
+
+	KeyName *string `json:"key_name,omitempty"` // 键名
+
+	DisplayName *string `json:"display_name,omitempty"` // 名称
+
+	Position *string `json:"position,omitempty"` // 字段在列表后台管理列表中的位置
+
+	FieldType *string `json:"field_type,omitempty"` // 类型;;string - 单行文本;;multiline - 多行文本;;dropdown - 下拉列表;;dropdown_nested - 级联下拉
+
+	Description *string `json:"description,omitempty"` // 描述
+
+	Visible *bool `json:"visible,omitempty"` // 是否可见
+
+	Editable *bool `json:"editable,omitempty"` // 是否可以修改
+
+	Required *bool `json:"required,omitempty"` // 是否必填
+
+	CreatedAt *string `json:"created_at,omitempty"` // 创建时间
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 更新时间
+
+	CreatedBy *TicketUser `json:"created_by,omitempty"` // 创建用户
+
+	UpdatedBy *TicketUser `json:"updated_by,omitempty"` // 更新用户
+
+	DropdownAllowMultiple *bool `json:"dropdown_allow_multiple,omitempty"` // 是否支持多选，仅在字段类型是dropdown的时候有效
 }
 
 type TicketCustomizedFieldBuilder struct {
 	ticketCustomizedFieldId     string // 工单自定义字段ID
 	ticketCustomizedFieldIdFlag bool
-	helpdeskId                  string // 服务台ID
-	helpdeskIdFlag              bool
-	keyName                     string // 键名
-	keyNameFlag                 bool
-	displayName                 string // 名称
-	displayNameFlag             bool
-	position                    string // 字段在列表后台管理列表中的位置
-	positionFlag                bool
-	fieldType                   string // 类型;;string - 单行文本;;multiline - 多行文本;;dropdown - 下拉列表;;dropdown_nested - 级联下拉
-	fieldTypeFlag               bool
-	description                 string // 描述
-	descriptionFlag             bool
-	visible                     bool // 是否可见
-	visibleFlag                 bool
-	editable                    bool // 是否可以修改
-	editableFlag                bool
-	required                    bool // 是否必填
-	requiredFlag                bool
-	createdAt                   string // 创建时间
-	createdAtFlag               bool
-	updatedAt                   string // 更新时间
-	updatedAtFlag               bool
-	createdBy                   *TicketUser // 创建用户
-	createdByFlag               bool
-	updatedBy                   *TicketUser // 更新用户
-	updatedByFlag               bool
-	dropdownAllowMultiple       bool // 是否支持多选，仅在字段类型是dropdown的时候有效
-	dropdownAllowMultipleFlag   bool
+
+	helpdeskId     string // 服务台ID
+	helpdeskIdFlag bool
+
+	keyName     string // 键名
+	keyNameFlag bool
+
+	displayName     string // 名称
+	displayNameFlag bool
+
+	position     string // 字段在列表后台管理列表中的位置
+	positionFlag bool
+
+	fieldType     string // 类型;;string - 单行文本;;multiline - 多行文本;;dropdown - 下拉列表;;dropdown_nested - 级联下拉
+	fieldTypeFlag bool
+
+	description     string // 描述
+	descriptionFlag bool
+
+	visible     bool // 是否可见
+	visibleFlag bool
+
+	editable     bool // 是否可以修改
+	editableFlag bool
+
+	required     bool // 是否必填
+	requiredFlag bool
+
+	createdAt     string // 创建时间
+	createdAtFlag bool
+
+	updatedAt     string // 更新时间
+	updatedAtFlag bool
+
+	createdBy     *TicketUser // 创建用户
+	createdByFlag bool
+
+	updatedBy     *TicketUser // 更新用户
+	updatedByFlag bool
+
+	dropdownAllowMultiple     bool // 是否支持多选，仅在字段类型是dropdown的时候有效
+	dropdownAllowMultipleFlag bool
 }
 
 func NewTicketCustomizedFieldBuilder() *TicketCustomizedFieldBuilder {
@@ -3161,57 +3449,87 @@ func (builder *TicketCustomizedFieldBuilder) Build() *TicketCustomizedField {
 }
 
 type TicketEvent struct {
-	TicketId         *string                       `json:"ticket_id,omitempty"`         // 工单ID;;[可以从工单列表里面取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/list);;[也可以订阅工单创建事件获取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/events/created)
-	HelpdeskId       *string                       `json:"helpdesk_id,omitempty"`       // 服务台id
-	Guest            *TicketUserEvent              `json:"guest,omitempty"`             // 用户id
-	Stage            *int                          `json:"stage,omitempty"`             // 工单阶段：1. 机器人 2. 人工
-	Status           *int                          `json:"status,omitempty"`            // 工单状态，1：已创建 2: 处理中 3: 排队中 4：待定 5：待用户响应 50: 被机器人关闭 51: 被客服关闭 52: 用户自己关闭
-	Score            *int                          `json:"score,omitempty"`             // 工单评分，1：不满意，2:一般，3:满意
-	CreatedAt        *int                          `json:"created_at,omitempty"`        // 创建时间
-	UpdatedAt        *int                          `json:"updated_at,omitempty"`        // 工单更新时间，没有值时为-1
-	ClosedAt         *int                          `json:"closed_at,omitempty"`         // 关单时间
-	Agents           []*TicketUserEvent            `json:"agents,omitempty"`            // agents of this ticket
-	Channel          *int                          `json:"channel,omitempty"`           // 工单渠道，描述：9：Open API 2：二维码 14：分享 13：搜索 其他数字：其他渠道
-	Solve            *int                          `json:"solve,omitempty"`             // 工单是否解决 1:没解决 2:已解决
-	ClosedBy         *TicketUserEvent              `json:"closed_by,omitempty"`         // closed user of this ticket
-	Collaborators    []*TicketUserEvent            `json:"collaborators,omitempty"`     // collaborators of this ticket
+	TicketId *string `json:"ticket_id,omitempty"` // 工单ID;;[可以从工单列表里面取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/list);;[也可以订阅工单创建事件获取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/events/created)
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 服务台id
+
+	Guest *TicketUserEvent `json:"guest,omitempty"` // 用户id
+
+	Stage *int `json:"stage,omitempty"` // 工单阶段：1. 机器人 2. 人工
+
+	Status *int `json:"status,omitempty"` // 工单状态，1：已创建 2: 处理中 3: 排队中 4：待定 5：待用户响应 50: 被机器人关闭 51: 被客服关闭 52: 用户自己关闭
+
+	Score *int `json:"score,omitempty"` // 工单评分，1：不满意，2:一般，3:满意
+
+	CreatedAt *int `json:"created_at,omitempty"` // 创建时间
+
+	UpdatedAt *int `json:"updated_at,omitempty"` // 工单更新时间，没有值时为-1
+
+	ClosedAt *int `json:"closed_at,omitempty"` // 关单时间
+
+	Agents []*TicketUserEvent `json:"agents,omitempty"` // agents of this ticket
+
+	Channel *int `json:"channel,omitempty"` // 工单渠道，描述：9：Open API 2：二维码 14：分享 13：搜索 其他数字：其他渠道
+
+	Solve *int `json:"solve,omitempty"` // 工单是否解决 1:没解决 2:已解决
+
+	ClosedBy *TicketUserEvent `json:"closed_by,omitempty"` // closed user of this ticket
+
+	Collaborators []*TicketUserEvent `json:"collaborators,omitempty"` // collaborators of this ticket
+
 	CustomizedFields []*CustomizedFieldDisplayItem `json:"customized_fields,omitempty"` // 自定义字段
-	ChatId           *string                       `json:"chat_id,omitempty"`           // oc_xxxxxxx
+
+	ChatId *string `json:"chat_id,omitempty"` // oc_xxxxxxx
 }
 
 type TicketEventBuilder struct {
-	ticketId             string // 工单ID;;[可以从工单列表里面取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/list);;[也可以订阅工单创建事件获取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/events/created)
-	ticketIdFlag         bool
-	helpdeskId           string // 服务台id
-	helpdeskIdFlag       bool
-	guest                *TicketUserEvent // 用户id
-	guestFlag            bool
-	stage                int // 工单阶段：1. 机器人 2. 人工
-	stageFlag            bool
-	status               int // 工单状态，1：已创建 2: 处理中 3: 排队中 4：待定 5：待用户响应 50: 被机器人关闭 51: 被客服关闭 52: 用户自己关闭
-	statusFlag           bool
-	score                int // 工单评分，1：不满意，2:一般，3:满意
-	scoreFlag            bool
-	createdAt            int // 创建时间
-	createdAtFlag        bool
-	updatedAt            int // 工单更新时间，没有值时为-1
-	updatedAtFlag        bool
-	closedAt             int // 关单时间
-	closedAtFlag         bool
-	agents               []*TicketUserEvent // agents of this ticket
-	agentsFlag           bool
-	channel              int // 工单渠道，描述：9：Open API 2：二维码 14：分享 13：搜索 其他数字：其他渠道
-	channelFlag          bool
-	solve                int // 工单是否解决 1:没解决 2:已解决
-	solveFlag            bool
-	closedBy             *TicketUserEvent // closed user of this ticket
-	closedByFlag         bool
-	collaborators        []*TicketUserEvent // collaborators of this ticket
-	collaboratorsFlag    bool
+	ticketId     string // 工单ID;;[可以从工单列表里面取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/list);;[也可以订阅工单创建事件获取](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/events/created)
+	ticketIdFlag bool
+
+	helpdeskId     string // 服务台id
+	helpdeskIdFlag bool
+
+	guest     *TicketUserEvent // 用户id
+	guestFlag bool
+
+	stage     int // 工单阶段：1. 机器人 2. 人工
+	stageFlag bool
+
+	status     int // 工单状态，1：已创建 2: 处理中 3: 排队中 4：待定 5：待用户响应 50: 被机器人关闭 51: 被客服关闭 52: 用户自己关闭
+	statusFlag bool
+
+	score     int // 工单评分，1：不满意，2:一般，3:满意
+	scoreFlag bool
+
+	createdAt     int // 创建时间
+	createdAtFlag bool
+
+	updatedAt     int // 工单更新时间，没有值时为-1
+	updatedAtFlag bool
+
+	closedAt     int // 关单时间
+	closedAtFlag bool
+
+	agents     []*TicketUserEvent // agents of this ticket
+	agentsFlag bool
+
+	channel     int // 工单渠道，描述：9：Open API 2：二维码 14：分享 13：搜索 其他数字：其他渠道
+	channelFlag bool
+
+	solve     int // 工单是否解决 1:没解决 2:已解决
+	solveFlag bool
+
+	closedBy     *TicketUserEvent // closed user of this ticket
+	closedByFlag bool
+
+	collaborators     []*TicketUserEvent // collaborators of this ticket
+	collaboratorsFlag bool
+
 	customizedFields     []*CustomizedFieldDisplayItem // 自定义字段
 	customizedFieldsFlag bool
-	chatId               string // oc_xxxxxxx
-	chatIdFlag           bool
+
+	chatId     string // oc_xxxxxxx
+	chatIdFlag bool
 }
 
 func NewTicketEventBuilder() *TicketEventBuilder {
@@ -3428,16 +3746,20 @@ func (builder *TicketEventBuilder) Build() *TicketEvent {
 }
 
 type TicketEventUpdateInfo struct {
-	Stage     *int `json:"stage,omitempty"`      // ticket stage
-	Status    *int `json:"status,omitempty"`     // ticket status
+	Stage *int `json:"stage,omitempty"` // ticket stage
+
+	Status *int `json:"status,omitempty"` // ticket status
+
 	UpdatedAt *int `json:"updated_at,omitempty"` // ticket update time
 }
 
 type TicketEventUpdateInfoBuilder struct {
-	stage         int // ticket stage
-	stageFlag     bool
-	status        int // ticket status
-	statusFlag    bool
+	stage     int // ticket stage
+	stageFlag bool
+
+	status     int // ticket status
+	statusFlag bool
+
 	updatedAt     int // ticket update time
 	updatedAtFlag bool
 }
@@ -3492,21 +3814,27 @@ func (builder *TicketEventUpdateInfoBuilder) Build() *TicketEventUpdateInfo {
 }
 
 type TicketMessageContent struct {
-	Content   *string  `json:"content,omitempty"`    // 内容
-	MsgType   *string  `json:"msg_type,omitempty"`   // 消息类型；text：纯文本；post：富文本；image：图片
+	Content *string `json:"content,omitempty"` // 内容
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型；text：纯文本；post：富文本；image：图片
+
 	ImageKeys []string `json:"image_keys,omitempty"` // 图片ID
-	ImageKey  *string  `json:"image_key,omitempty"`  // 图片ID
+
+	ImageKey *string `json:"image_key,omitempty"` // 图片ID
 }
 
 type TicketMessageContentBuilder struct {
-	content       string // 内容
-	contentFlag   bool
-	msgType       string // 消息类型；text：纯文本；post：富文本；image：图片
-	msgTypeFlag   bool
+	content     string // 内容
+	contentFlag bool
+
+	msgType     string // 消息类型；text：纯文本；post：富文本；image：图片
+	msgTypeFlag bool
+
 	imageKeys     []string // 图片ID
 	imageKeysFlag bool
-	imageKey      string // 图片ID
-	imageKeyFlag  bool
+
+	imageKey     string // 图片ID
+	imageKeyFlag bool
 }
 
 func NewTicketMessageContentBuilder() *TicketMessageContentBuilder {
@@ -3571,42 +3899,62 @@ func (builder *TicketMessageContentBuilder) Build() *TicketMessageContent {
 }
 
 type TicketMessageEvent struct {
-	TicketMessageId *string               `json:"ticket_message_id,omitempty"` // ticket message id
-	MessageId       *string               `json:"message_id,omitempty"`        // open message id
-	MsgType         *string               `json:"msg_type,omitempty"`          // message type, text is the only supported type
-	Position        *string               `json:"position,omitempty"`          // position of the message
-	SenderId        *UserId               `json:"sender_id,omitempty"`         // 用户 ID
-	SenderType      *int                  `json:"sender_type,omitempty"`       // sender type, 1 for bot, 2 for guest, 3 for agent
-	Text            *string               `json:"text,omitempty"`              // message content
-	Ticket          *Ticket               `json:"ticket,omitempty"`            // ticket related information
-	EventId         *string               `json:"event_id,omitempty"`          // event id
-	ChatId          *string               `json:"chat_id,omitempty"`           // chat id
-	Content         *TicketMessageContent `json:"content,omitempty"`           // message content
+	TicketMessageId *string `json:"ticket_message_id,omitempty"` // ticket message id
+
+	MessageId *string `json:"message_id,omitempty"` // open message id
+
+	MsgType *string `json:"msg_type,omitempty"` // message type, text is the only supported type
+
+	Position *string `json:"position,omitempty"` // position of the message
+
+	SenderId *UserId `json:"sender_id,omitempty"` // 用户 ID
+
+	SenderType *int `json:"sender_type,omitempty"` // sender type, 1 for bot, 2 for guest, 3 for agent
+
+	Text *string `json:"text,omitempty"` // message content
+
+	Ticket *Ticket `json:"ticket,omitempty"` // ticket related information
+
+	EventId *string `json:"event_id,omitempty"` // event id
+
+	ChatId *string `json:"chat_id,omitempty"` // chat id
+
+	Content *TicketMessageContent `json:"content,omitempty"` // message content
 }
 
 type TicketMessageEventBuilder struct {
 	ticketMessageId     string // ticket message id
 	ticketMessageIdFlag bool
-	messageId           string // open message id
-	messageIdFlag       bool
-	msgType             string // message type, text is the only supported type
-	msgTypeFlag         bool
-	position            string // position of the message
-	positionFlag        bool
-	senderId            *UserId // 用户 ID
-	senderIdFlag        bool
-	senderType          int // sender type, 1 for bot, 2 for guest, 3 for agent
-	senderTypeFlag      bool
-	text                string // message content
-	textFlag            bool
-	ticket              *Ticket // ticket related information
-	ticketFlag          bool
-	eventId             string // event id
-	eventIdFlag         bool
-	chatId              string // chat id
-	chatIdFlag          bool
-	content             *TicketMessageContent // message content
-	contentFlag         bool
+
+	messageId     string // open message id
+	messageIdFlag bool
+
+	msgType     string // message type, text is the only supported type
+	msgTypeFlag bool
+
+	position     string // position of the message
+	positionFlag bool
+
+	senderId     *UserId // 用户 ID
+	senderIdFlag bool
+
+	senderType     int // sender type, 1 for bot, 2 for guest, 3 for agent
+	senderTypeFlag bool
+
+	text     string // message content
+	textFlag bool
+
+	ticket     *Ticket // ticket related information
+	ticketFlag bool
+
+	eventId     string // event id
+	eventIdFlag bool
+
+	chatId     string // chat id
+	chatIdFlag bool
+
+	content     *TicketMessageContent // message content
+	contentFlag bool
 }
 
 func NewTicketMessageEventBuilder() *TicketMessageEventBuilder {
@@ -3760,30 +4108,42 @@ func (builder *TicketMessageEventBuilder) Build() *TicketMessageEvent {
 }
 
 type TicketUser struct {
-	Id         *string `json:"id,omitempty"`         // 用户ID
-	AvatarUrl  *string `json:"avatar_url,omitempty"` // 用户头像url
-	Name       *string `json:"name,omitempty"`       // 用户名
-	Email      *string `json:"email,omitempty"`      // 用户邮箱
+	Id *string `json:"id,omitempty"` // 用户ID
+
+	AvatarUrl *string `json:"avatar_url,omitempty"` // 用户头像url
+
+	Name *string `json:"name,omitempty"` // 用户名
+
+	Email *string `json:"email,omitempty"` // 用户邮箱
+
 	Department *string `json:"department,omitempty"` // 所在部门名称
-	City       *string `json:"city,omitempty"`       // 城市
-	Country    *string `json:"country,omitempty"`    // 国家代号(CountryCode)，参考：http://www.mamicode.com/info-detail-2186501.html
+
+	City *string `json:"city,omitempty"` // 城市
+
+	Country *string `json:"country,omitempty"` // 国家代号(CountryCode)，参考：http://www.mamicode.com/info-detail-2186501.html
 }
 
 type TicketUserBuilder struct {
-	id             string // 用户ID
-	idFlag         bool
-	avatarUrl      string // 用户头像url
-	avatarUrlFlag  bool
-	name           string // 用户名
-	nameFlag       bool
-	email          string // 用户邮箱
-	emailFlag      bool
+	id     string // 用户ID
+	idFlag bool
+
+	avatarUrl     string // 用户头像url
+	avatarUrlFlag bool
+
+	name     string // 用户名
+	nameFlag bool
+
+	email     string // 用户邮箱
+	emailFlag bool
+
 	department     string // 所在部门名称
 	departmentFlag bool
-	city           string // 城市
-	cityFlag       bool
-	country        string // 国家代号(CountryCode)，参考：http://www.mamicode.com/info-detail-2186501.html
-	countryFlag    bool
+
+	city     string // 城市
+	cityFlag bool
+
+	country     string // 国家代号(CountryCode)，参考：http://www.mamicode.com/info-detail-2186501.html
+	countryFlag bool
 }
 
 func NewTicketUserBuilder() *TicketUserBuilder {
@@ -3888,21 +4248,27 @@ func (builder *TicketUserBuilder) Build() *TicketUser {
 }
 
 type TicketUserEvent struct {
-	Id        *UserId `json:"id,omitempty"`         // id
+	Id *UserId `json:"id,omitempty"` // id
+
 	AvatarUrl *string `json:"avatar_url,omitempty"` // user avartal url
-	Name      *string `json:"name,omitempty"`       // 名称
-	Email     *string `json:"email,omitempty"`      // user email
+
+	Name *string `json:"name,omitempty"` // 名称
+
+	Email *string `json:"email,omitempty"` // user email
 }
 
 type TicketUserEventBuilder struct {
-	id            *UserId // id
-	idFlag        bool
+	id     *UserId // id
+	idFlag bool
+
 	avatarUrl     string // user avartal url
 	avatarUrlFlag bool
-	name          string // 名称
-	nameFlag      bool
-	email         string // user email
-	emailFlag     bool
+
+	name     string // 名称
+	nameFlag bool
+
+	email     string // user email
+	emailFlag bool
 }
 
 func NewTicketUserEventBuilder() *TicketUserEventBuilder {
@@ -3968,47 +4334,71 @@ func (builder *TicketUserEventBuilder) Build() *TicketUserEvent {
 
 type UserCustomizedField struct {
 	UserCustomizedFieldId *string `json:"user_customized_field_id,omitempty"` // 字段ID
-	Id                    *string `json:"id,omitempty"`                       // 旧字段ID，向后兼容用
-	HelpdeskId            *string `json:"helpdesk_id,omitempty"`              // 服务台ID
-	KeyName               *string `json:"key_name,omitempty"`                 // 字段键
-	DisplayName           *string `json:"display_name,omitempty"`             // 字段展示名称
-	Position              *string `json:"position,omitempty"`                 // 字段在列表中的展示位置
-	FieldType             *string `json:"field_type,omitempty"`               // 字段类型
-	Description           *string `json:"description,omitempty"`              // 字段描述信息
-	Visible               *bool   `json:"visible,omitempty"`                  // 字段是否可见
-	Editable              *bool   `json:"editable,omitempty"`                 // 字段是否可编辑
-	Required              *bool   `json:"required,omitempty"`                 // 字段是否必填
-	CreatedAt             *string `json:"created_at,omitempty"`               // 字段创建时间
-	UpdatedAt             *string `json:"updated_at,omitempty"`               // 字段修改时间
+
+	Id *string `json:"id,omitempty"` // 旧字段ID，向后兼容用
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 服务台ID
+
+	KeyName *string `json:"key_name,omitempty"` // 字段键
+
+	DisplayName *string `json:"display_name,omitempty"` // 字段展示名称
+
+	Position *string `json:"position,omitempty"` // 字段在列表中的展示位置
+
+	FieldType *string `json:"field_type,omitempty"` // 字段类型
+
+	Description *string `json:"description,omitempty"` // 字段描述信息
+
+	Visible *bool `json:"visible,omitempty"` // 字段是否可见
+
+	Editable *bool `json:"editable,omitempty"` // 字段是否可编辑
+
+	Required *bool `json:"required,omitempty"` // 字段是否必填
+
+	CreatedAt *string `json:"created_at,omitempty"` // 字段创建时间
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 字段修改时间
 }
 
 type UserCustomizedFieldBuilder struct {
 	userCustomizedFieldId     string // 字段ID
 	userCustomizedFieldIdFlag bool
-	id                        string // 旧字段ID，向后兼容用
-	idFlag                    bool
-	helpdeskId                string // 服务台ID
-	helpdeskIdFlag            bool
-	keyName                   string // 字段键
-	keyNameFlag               bool
-	displayName               string // 字段展示名称
-	displayNameFlag           bool
-	position                  string // 字段在列表中的展示位置
-	positionFlag              bool
-	fieldType                 string // 字段类型
-	fieldTypeFlag             bool
-	description               string // 字段描述信息
-	descriptionFlag           bool
-	visible                   bool // 字段是否可见
-	visibleFlag               bool
-	editable                  bool // 字段是否可编辑
-	editableFlag              bool
-	required                  bool // 字段是否必填
-	requiredFlag              bool
-	createdAt                 string // 字段创建时间
-	createdAtFlag             bool
-	updatedAt                 string // 字段修改时间
-	updatedAtFlag             bool
+
+	id     string // 旧字段ID，向后兼容用
+	idFlag bool
+
+	helpdeskId     string // 服务台ID
+	helpdeskIdFlag bool
+
+	keyName     string // 字段键
+	keyNameFlag bool
+
+	displayName     string // 字段展示名称
+	displayNameFlag bool
+
+	position     string // 字段在列表中的展示位置
+	positionFlag bool
+
+	fieldType     string // 字段类型
+	fieldTypeFlag bool
+
+	description     string // 字段描述信息
+	descriptionFlag bool
+
+	visible     bool // 字段是否可见
+	visibleFlag bool
+
+	editable     bool // 字段是否可编辑
+	editableFlag bool
+
+	required     bool // 字段是否必填
+	requiredFlag bool
+
+	createdAt     string // 字段创建时间
+	createdAtFlag bool
+
+	updatedAt     string // 字段修改时间
+	updatedAtFlag bool
 }
 
 func NewUserCustomizedFieldBuilder() *UserCustomizedFieldBuilder {
@@ -4191,16 +4581,20 @@ func (builder *UserCustomizedFieldBuilder) Build() *UserCustomizedField {
 }
 
 type UserId struct {
-	UserId  *string `json:"user_id,omitempty"`  //
-	OpenId  *string `json:"open_id,omitempty"`  //
+	UserId *string `json:"user_id,omitempty"` //
+
+	OpenId *string `json:"open_id,omitempty"` //
+
 	UnionId *string `json:"union_id,omitempty"` //
 }
 
 type UserIdBuilder struct {
-	userId      string //
-	userIdFlag  bool
-	openId      string //
-	openIdFlag  bool
+	userId     string //
+	userIdFlag bool
+
+	openId     string //
+	openIdFlag bool
+
 	unionId     string //
 	unionIdFlag bool
 }
@@ -4249,13 +4643,15 @@ func (builder *UserIdBuilder) Build() *UserId {
 }
 
 type UserQueryFaqInfo struct {
-	Id    *string  `json:"id,omitempty"`    // faq服务台内唯一标识
+	Id *string `json:"id,omitempty"` // faq服务台内唯一标识
+
 	Score *float64 `json:"score,omitempty"` // faq匹配得分
 }
 
 type UserQueryFaqInfoBuilder struct {
-	id        string // faq服务台内唯一标识
-	idFlag    bool
+	id     string // faq服务台内唯一标识
+	idFlag bool
+
 	score     float64 // faq匹配得分
 	scoreFlag bool
 }
@@ -4298,17 +4694,21 @@ func (builder *UserQueryFaqInfoBuilder) Build() *UserQueryFaqInfo {
 
 type WeekdaySchedule struct {
 	StartTime *string `json:"start_time,omitempty"` // 开始时间, format 00:00 - 23:59
-	EndTime   *string `json:"end_time,omitempty"`   // 结束时间, format 00:00 - 23:59
-	Weekday   *int    `json:"weekday,omitempty"`    // 星期几, 1 - Monday, 2 - Tuesday, 3 - Wednesday, 4 - Thursday, 5 - Friday, 6 - Saturday, 7 - Sunday, 9 - Everday, 10 - Weekday, 11 - Weekend
+
+	EndTime *string `json:"end_time,omitempty"` // 结束时间, format 00:00 - 23:59
+
+	Weekday *int `json:"weekday,omitempty"` // 星期几, 1 - Monday, 2 - Tuesday, 3 - Wednesday, 4 - Thursday, 5 - Friday, 6 - Saturday, 7 - Sunday, 9 - Everday, 10 - Weekday, 11 - Weekend
 }
 
 type WeekdayScheduleBuilder struct {
 	startTime     string // 开始时间, format 00:00 - 23:59
 	startTimeFlag bool
-	endTime       string // 结束时间, format 00:00 - 23:59
-	endTimeFlag   bool
-	weekday       int // 星期几, 1 - Monday, 2 - Tuesday, 3 - Wednesday, 4 - Thursday, 5 - Friday, 6 - Saturday, 7 - Sunday, 9 - Everday, 10 - Weekday, 11 - Weekend
-	weekdayFlag   bool
+
+	endTime     string // 结束时间, format 00:00 - 23:59
+	endTimeFlag bool
+
+	weekday     int // 星期几, 1 - Monday, 2 - Tuesday, 3 - Wednesday, 4 - Thursday, 5 - Friday, 6 - Saturday, 7 - Sunday, 9 - Everday, 10 - Weekday, 11 - Weekend
+	weekdayFlag bool
 }
 
 func NewWeekdayScheduleBuilder() *WeekdayScheduleBuilder {
@@ -4825,10 +5225,12 @@ func (resp *ListAgentScheduleResp) Success() bool {
 }
 
 type CreateAgentSkillReqBodyBuilder struct {
-	name         string // 技能名
-	nameFlag     bool
-	rules        []*AgentSkillRule // 技能rules
-	rulesFlag    bool
+	name     string // 技能名
+	nameFlag bool
+
+	rules     []*AgentSkillRule // 技能rules
+	rulesFlag bool
+
 	agentIds     []string // 客服 ids
 	agentIdsFlag bool
 }
@@ -4962,9 +5364,11 @@ func (builder *CreateAgentSkillReqBuilder) Build() *CreateAgentSkillReq {
 }
 
 type CreateAgentSkillReqBody struct {
-	Name     *string           `json:"name,omitempty"`      // 技能名
-	Rules    []*AgentSkillRule `json:"rules,omitempty"`     // 技能rules
-	AgentIds []string          `json:"agent_ids,omitempty"` // 客服 ids
+	Name *string `json:"name,omitempty"` // 技能名
+
+	Rules []*AgentSkillRule `json:"rules,omitempty"` // 技能rules
+
+	AgentIds []string `json:"agent_ids,omitempty"` // 客服 ids
 }
 
 type CreateAgentSkillReq struct {
@@ -5385,10 +5789,14 @@ type GetCategoryReq struct {
 
 type GetCategoryRespData struct {
 	CategoryId *string `json:"category_id,omitempty"` // category id
-	Id         *string `json:"id,omitempty"`          // category id, for backward compatibility
-	Name       *string `json:"name,omitempty"`        // category name
+
+	Id *string `json:"id,omitempty"` // category id, for backward compatibility
+
+	Name *string `json:"name,omitempty"` // category name
+
 	HelpdeskId *string `json:"helpdesk_id,omitempty"` // helpdesk id
-	Language   *string `json:"language,omitempty"`    // category language
+
+	Language *string `json:"language,omitempty"` // category language
 }
 
 type GetCategoryResp struct {
@@ -6041,11 +6449,15 @@ type ListFaqReq struct {
 }
 
 type ListFaqRespData struct {
-	HasMore   *bool   `json:"has_more,omitempty"`   // if there's next page
+	HasMore *bool `json:"has_more,omitempty"` // if there's next page
+
 	PageToken *string `json:"page_token,omitempty"` // the next page token
-	PageSize  *int    `json:"page_size,omitempty"`  // 实际返回的FAQ数量
-	Total     *int    `json:"total,omitempty"`      // 总数
-	Items     []*Faq  `json:"items,omitempty"`      // 知识库列表
+
+	PageSize *int `json:"page_size,omitempty"` // 实际返回的FAQ数量
+
+	Total *int `json:"total,omitempty"` // 总数
+
+	Items []*Faq `json:"items,omitempty"` // 知识库列表
 }
 
 type ListFaqResp struct {
@@ -6233,9 +6645,11 @@ type SearchFaqReq struct {
 }
 
 type SearchFaqRespData struct {
-	HasMore   *bool   `json:"has_more,omitempty"`   // if there's next page
+	HasMore *bool `json:"has_more,omitempty"` // if there's next page
+
 	PageToken *string `json:"page_token,omitempty"` // the next page token
-	Items     []*Faq  `json:"items,omitempty"`      // 知识库列表
+
+	Items []*Faq `json:"items,omitempty"` // 知识库列表
 }
 
 type SearchFaqResp struct {
@@ -6440,7 +6854,8 @@ type CreateNotificationReq struct {
 
 type CreateNotificationRespData struct {
 	NotificationId *string `json:"notification_id,omitempty"` // 创建成功后的唯一id
-	Status         *int    `json:"status,omitempty"`          // 当前状态
+
+	Status *int `json:"status,omitempty"` // 当前状态
 }
 
 type CreateNotificationResp struct {
@@ -6603,8 +7018,9 @@ type GetNotificationReq struct {
 }
 
 type GetNotificationRespData struct {
-	Notification    *Notification `json:"notification,omitempty"`      // push任务详情
-	ApprovalAppLink *string       `json:"approval_app_link,omitempty"` // 审批链接
+	Notification *Notification `json:"notification,omitempty"` // push任务详情
+
+	ApprovalAppLink *string `json:"approval_app_link,omitempty"` // 审批链接
 }
 
 type GetNotificationResp struct {
@@ -6833,8 +7249,9 @@ func (resp *SubmitApproveNotificationResp) Success() bool {
 type AnswerUserQueryTicketReqBodyBuilder struct {
 	eventId     string // 事件ID,可从订阅事件中提取
 	eventIdFlag bool
-	faqs        []*UserQueryFaqInfo // faq结果列表
-	faqsFlag    bool
+
+	faqs     []*UserQueryFaqInfo // faq结果列表
+	faqsFlag bool
 }
 
 func NewAnswerUserQueryTicketReqBodyBuilder() *AnswerUserQueryTicketReqBodyBuilder {
@@ -6949,8 +7366,9 @@ func (builder *AnswerUserQueryTicketReqBuilder) Build() *AnswerUserQueryTicketRe
 }
 
 type AnswerUserQueryTicketReqBody struct {
-	EventId *string             `json:"event_id,omitempty"` // 事件ID,可从订阅事件中提取
-	Faqs    []*UserQueryFaqInfo `json:"faqs,omitempty"`     // faq结果列表
+	EventId *string `json:"event_id,omitempty"` // 事件ID,可从订阅事件中提取
+
+	Faqs []*UserQueryFaqInfo `json:"faqs,omitempty"` // faq结果列表
 }
 
 type AnswerUserQueryTicketReq struct {
@@ -7000,7 +7418,8 @@ type CustomizedFieldsTicketReq struct {
 }
 
 type CustomizedFieldsTicketRespData struct {
-	UserCustomizedFields   []*UserCustomizedField   `json:"user_customized_fields,omitempty"`   // 用户自定义字段
+	UserCustomizedFields []*UserCustomizedField `json:"user_customized_fields,omitempty"` // 用户自定义字段
+
 	TicketCustomizedFields []*TicketCustomizedField `json:"ticket_customized_fields,omitempty"` // 自定义工单字段
 }
 
@@ -7225,7 +7644,8 @@ type ListTicketReq struct {
 }
 
 type ListTicketRespData struct {
-	Total   *int      `json:"total,omitempty"`   // 工单总数 (单次请求最大为10000条)
+	Total *int `json:"total,omitempty"` // 工单总数 (单次请求最大为10000条)
+
 	Tickets []*Ticket `json:"tickets,omitempty"` // 工单
 }
 
@@ -7240,14 +7660,17 @@ func (resp *ListTicketResp) Success() bool {
 }
 
 type StartServiceTicketReqBodyBuilder struct {
-	humanService        bool // 是否直接进入人工(若appointed_agents填写了，该值为必填)
-	humanServiceFlag    bool
+	humanService     bool // 是否直接进入人工(若appointed_agents填写了，该值为必填)
+	humanServiceFlag bool
+
 	appointedAgents     []string // 客服 open ids (获取方式参考[获取单个用户信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/get))，human_service需要为true
 	appointedAgentsFlag bool
-	openId              string // 用户 open id,(获取方式参考[获取单个用户信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/get))
-	openIdFlag          bool
-	customizedInfo      string // 工单来源自定义信息，长度限制1024字符，如设置，[获取工单详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/get)会返回此信息
-	customizedInfoFlag  bool
+
+	openId     string // 用户 open id,(获取方式参考[获取单个用户信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/get))
+	openIdFlag bool
+
+	customizedInfo     string // 工单来源自定义信息，长度限制1024字符，如设置，[获取工单详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/get)会返回此信息
+	customizedInfoFlag bool
 }
 
 func NewStartServiceTicketReqBodyBuilder() *StartServiceTicketReqBodyBuilder {
@@ -7405,10 +7828,13 @@ func (builder *StartServiceTicketReqBuilder) Build() *StartServiceTicketReq {
 }
 
 type StartServiceTicketReqBody struct {
-	HumanService    *bool    `json:"human_service,omitempty"`    // 是否直接进入人工(若appointed_agents填写了，该值为必填)
+	HumanService *bool `json:"human_service,omitempty"` // 是否直接进入人工(若appointed_agents填写了，该值为必填)
+
 	AppointedAgents []string `json:"appointed_agents,omitempty"` // 客服 open ids (获取方式参考[获取单个用户信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/get))，human_service需要为true
-	OpenId          *string  `json:"open_id,omitempty"`          // 用户 open id,(获取方式参考[获取单个用户信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/get))
-	CustomizedInfo  *string  `json:"customized_info,omitempty"`  // 工单来源自定义信息，长度限制1024字符，如设置，[获取工单详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/get)会返回此信息
+
+	OpenId *string `json:"open_id,omitempty"` // 用户 open id,(获取方式参考[获取单个用户信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/get))
+
+	CustomizedInfo *string `json:"customized_info,omitempty"` // 工单来源自定义信息，长度限制1024字符，如设置，[获取工单详情](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/helpdesk-v1/ticket/get)会返回此信息
 }
 
 type StartServiceTicketReq struct {
@@ -7503,20 +7929,26 @@ func (resp *TicketImageTicketResp) WriteFile(fileName string) error {
 }
 
 type UpdateTicketReqBodyBuilder struct {
-	status               int // new status, 1: 已创建, 2: 处理中, 3: 排队中, 5: 待定, 50: 机器人关闭工单, 51: 关闭工单
-	statusFlag           bool
-	tagNames             []string // 新标签名
-	tagNamesFlag         bool
-	comment              string // 新评论
-	commentFlag          bool
+	status     int // new status, 1: 已创建, 2: 处理中, 3: 排队中, 5: 待定, 50: 机器人关闭工单, 51: 关闭工单
+	statusFlag bool
+
+	tagNames     []string // 新标签名
+	tagNamesFlag bool
+
+	comment     string // 新评论
+	commentFlag bool
+
 	customizedFields     []*CustomizedFieldDisplayItem // 自定义字段
 	customizedFieldsFlag bool
-	ticketType           int // ticket stage
-	ticketTypeFlag       bool
-	solved               int // 工单是否解决，1: 未解决, 2: 已解决
-	solvedFlag           bool
-	channel              int // 工单来源渠道ID
-	channelFlag          bool
+
+	ticketType     int // ticket stage
+	ticketTypeFlag bool
+
+	solved     int // 工单是否解决，1: 未解决, 2: 已解决
+	solvedFlag bool
+
+	channel     int // 工单来源渠道ID
+	channelFlag bool
 }
 
 func NewUpdateTicketReqBodyBuilder() *UpdateTicketReqBodyBuilder {
@@ -7761,13 +8193,19 @@ func (builder *UpdateTicketReqBuilder) Build() *UpdateTicketReq {
 }
 
 type UpdateTicketReqBody struct {
-	Status           *int                          `json:"status,omitempty"`            // new status, 1: 已创建, 2: 处理中, 3: 排队中, 5: 待定, 50: 机器人关闭工单, 51: 关闭工单
-	TagNames         []string                      `json:"tag_names,omitempty"`         // 新标签名
-	Comment          *string                       `json:"comment,omitempty"`           // 新评论
+	Status *int `json:"status,omitempty"` // new status, 1: 已创建, 2: 处理中, 3: 排队中, 5: 待定, 50: 机器人关闭工单, 51: 关闭工单
+
+	TagNames []string `json:"tag_names,omitempty"` // 新标签名
+
+	Comment *string `json:"comment,omitempty"` // 新评论
+
 	CustomizedFields []*CustomizedFieldDisplayItem `json:"customized_fields,omitempty"` // 自定义字段
-	TicketType       *int                          `json:"ticket_type,omitempty"`       // ticket stage
-	Solved           *int                          `json:"solved,omitempty"`            // 工单是否解决，1: 未解决, 2: 已解决
-	Channel          *int                          `json:"channel,omitempty"`           // 工单来源渠道ID
+
+	TicketType *int `json:"ticket_type,omitempty"` // ticket stage
+
+	Solved *int `json:"solved,omitempty"` // 工单是否解决，1: 未解决, 2: 已解决
+
+	Channel *int `json:"channel,omitempty"` // 工单来源渠道ID
 }
 
 type UpdateTicketReq struct {
@@ -7787,6 +8225,7 @@ func (resp *UpdateTicketResp) Success() bool {
 type CreateTicketMessageReqBodyBuilder struct {
 	msgType     string // 消息类型；text：纯文本；post：富文本
 	msgTypeFlag bool
+
 	content     string // - 纯文本，参考[发送文本消息](https://open.feishu.cn/document/ukTMukTMukTM/uUjNz4SN2MjL1YzM)中的content；;- 富文本，参考[发送富文本消息](https://open.feishu.cn/document/ukTMukTMukTM/uMDMxEjLzATMx4yMwETM)中的content
 	contentFlag bool
 }
@@ -7904,7 +8343,8 @@ func (builder *CreateTicketMessageReqBuilder) Build() *CreateTicketMessageReq {
 
 type CreateTicketMessageReqBody struct {
 	MsgType *string `json:"msg_type,omitempty"` // 消息类型；text：纯文本；post：富文本
-	Content *string `json:"content,omitempty"`  // - 纯文本，参考[发送文本消息](https://open.feishu.cn/document/ukTMukTMukTM/uUjNz4SN2MjL1YzM)中的content；;- 富文本，参考[发送富文本消息](https://open.feishu.cn/document/ukTMukTMukTM/uMDMxEjLzATMx4yMwETM)中的content
+
+	Content *string `json:"content,omitempty"` // - 纯文本，参考[发送文本消息](https://open.feishu.cn/document/ukTMukTMukTM/uUjNz4SN2MjL1YzM)中的content；;- 富文本，参考[发送富文本消息](https://open.feishu.cn/document/ukTMukTMukTM/uMDMxEjLzATMx4yMwETM)中的content
 }
 
 type CreateTicketMessageReq struct {
@@ -7993,7 +8433,8 @@ type ListTicketMessageReq struct {
 
 type ListTicketMessageRespData struct {
 	Messages []*TicketMessage `json:"messages,omitempty"` // 工单消息列表
-	Total    *int             `json:"total,omitempty"`    // 消息总数
+
+	Total *int `json:"total,omitempty"` // 消息总数
 }
 
 type ListTicketMessageResp struct {
@@ -8121,21 +8562,35 @@ type GetTicketCustomizedFieldReq struct {
 }
 
 type GetTicketCustomizedFieldRespData struct {
-	TicketCustomizedFieldId *string     `json:"ticket_customized_field_id,omitempty"` // ticket customized field id
-	HelpdeskId              *string     `json:"helpdesk_id,omitempty"`                // help desk id
-	KeyName                 *string     `json:"key_name,omitempty"`                   // key name
-	DisplayName             *string     `json:"display_name,omitempty"`               // display name
-	Position                *string     `json:"position,omitempty"`                   // the position of ticket customized field in the page
-	FieldType               *string     `json:"field_type,omitempty"`                 // type of the field
-	Description             *string     `json:"description,omitempty"`                // description of the field
-	Visible                 *bool       `json:"visible,omitempty"`                    // if the field is visible
-	Editable                *bool       `json:"editable,omitempty"`                   // if the field is editable
-	Required                *bool       `json:"required,omitempty"`                   // if the field is required
-	CreatedAt               *string     `json:"created_at,omitempty"`                 // the time when the field is created
-	UpdatedAt               *string     `json:"updated_at,omitempty"`                 // the time when the field is updated
-	CreatedBy               *TicketUser `json:"created_by,omitempty"`                 // the user who created the ticket customized field
-	UpdatedBy               *TicketUser `json:"updated_by,omitempty"`                 // the user who recently updated the ticket customized field
-	DropdownAllowMultiple   *bool       `json:"dropdown_allow_multiple,omitempty"`    // if the dropdown field supports multi-select
+	TicketCustomizedFieldId *string `json:"ticket_customized_field_id,omitempty"` // ticket customized field id
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // help desk id
+
+	KeyName *string `json:"key_name,omitempty"` // key name
+
+	DisplayName *string `json:"display_name,omitempty"` // display name
+
+	Position *string `json:"position,omitempty"` // the position of ticket customized field in the page
+
+	FieldType *string `json:"field_type,omitempty"` // type of the field
+
+	Description *string `json:"description,omitempty"` // description of the field
+
+	Visible *bool `json:"visible,omitempty"` // if the field is visible
+
+	Editable *bool `json:"editable,omitempty"` // if the field is editable
+
+	Required *bool `json:"required,omitempty"` // if the field is required
+
+	CreatedAt *string `json:"created_at,omitempty"` // the time when the field is created
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // the time when the field is updated
+
+	CreatedBy *TicketUser `json:"created_by,omitempty"` // the user who created the ticket customized field
+
+	UpdatedBy *TicketUser `json:"updated_by,omitempty"` // the user who recently updated the ticket customized field
+
+	DropdownAllowMultiple *bool `json:"dropdown_allow_multiple,omitempty"` // if the dropdown field supports multi-select
 }
 
 type GetTicketCustomizedFieldResp struct {
@@ -8256,9 +8711,11 @@ type ListTicketCustomizedFieldReq struct {
 }
 
 type ListTicketCustomizedFieldRespData struct {
-	HasMore       *bool                    `json:"has_more,omitempty"`        // whether there is more data
-	NextPageToken *string                  `json:"next_page_token,omitempty"` // 下一分页标识
-	Items         []*TicketCustomizedField `json:"items,omitempty"`           // 工单自定义字段列表
+	HasMore *bool `json:"has_more,omitempty"` // whether there is more data
+
+	NextPageToken *string `json:"next_page_token,omitempty"` // 下一分页标识
+
+	Items []*TicketCustomizedField `json:"items,omitempty"` // 工单自定义字段列表
 }
 
 type ListTicketCustomizedFieldResp struct {
@@ -8323,8 +8780,10 @@ func (resp *PatchTicketCustomizedFieldResp) Success() bool {
 
 type P2NotificationApproveV1Data struct {
 	NotificationId *string `json:"notification_id,omitempty"` // 推送任务唯一ID
-	HelpdeskId     *string `json:"helpdesk_id,omitempty"`     // 服务台唯一ID
-	ApproveStatus  *string `json:"approve_status,omitempty"`  // REJECTED(审核不通过);APPROVED(审核通过);CANCELED(取消审核);DELETED(删除审核)
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 服务台唯一ID
+
+	ApproveStatus *string `json:"approve_status,omitempty"` // REJECTED(审核不通过);APPROVED(审核通过);CANCELED(取消审核);DELETED(删除审核)
 }
 
 type P2NotificationApproveV1 struct {
@@ -8338,19 +8797,31 @@ func (m *P2NotificationApproveV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2TicketCreatedV1Data struct {
-	TicketId         *string                       `json:"ticket_id,omitempty"`         // ticket id
-	HelpdeskId       *string                       `json:"helpdesk_id,omitempty"`       // helpdesk id
-	Guest            *TicketUserEvent              `json:"guest,omitempty"`             // guest of this ticket
-	Stage            *int                          `json:"stage,omitempty"`             // ticket stage
-	Status           *int                          `json:"status,omitempty"`            // ticket status
-	Score            *int                          `json:"score,omitempty"`             // ticket score
-	CreatedAt        *int                          `json:"created_at,omitempty"`        // the time when the ticket is created
-	UpdatedAt        *int                          `json:"updated_at,omitempty"`        // the time when the ticket is updated
-	ClosedAt         *int                          `json:"closed_at,omitempty"`         // the time when the ticket is closed
-	Channel          *int                          `json:"channel,omitempty"`           // the ticket channel
-	Solve            *int                          `json:"solve,omitempty"`             // if ticket is solved
+	TicketId *string `json:"ticket_id,omitempty"` // ticket id
+
+	HelpdeskId *string `json:"helpdesk_id,omitempty"` // helpdesk id
+
+	Guest *TicketUserEvent `json:"guest,omitempty"` // guest of this ticket
+
+	Stage *int `json:"stage,omitempty"` // ticket stage
+
+	Status *int `json:"status,omitempty"` // ticket status
+
+	Score *int `json:"score,omitempty"` // ticket score
+
+	CreatedAt *int `json:"created_at,omitempty"` // the time when the ticket is created
+
+	UpdatedAt *int `json:"updated_at,omitempty"` // the time when the ticket is updated
+
+	ClosedAt *int `json:"closed_at,omitempty"` // the time when the ticket is closed
+
+	Channel *int `json:"channel,omitempty"` // the ticket channel
+
+	Solve *int `json:"solve,omitempty"` // if ticket is solved
+
 	CustomizedFields []*CustomizedFieldDisplayItem `json:"customized_fields,omitempty"` // ticket customized fields
-	ChatId           *string                       `json:"chat_id,omitempty"`           //
+
+	ChatId *string `json:"chat_id,omitempty"` //
 }
 
 type P2TicketCreatedV1 struct {
@@ -8364,7 +8835,8 @@ func (m *P2TicketCreatedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2TicketUpdatedV1Data struct {
-	Object    *TicketEvent           `json:"object,omitempty"`     // ticket after update
+	Object *TicketEvent `json:"object,omitempty"` // ticket after update
+
 	OldObject *TicketEventUpdateInfo `json:"old_object,omitempty"` // ticket before update, only has updated fields
 }
 
@@ -8379,17 +8851,27 @@ func (m *P2TicketUpdatedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2TicketMessageCreatedV1Data struct {
-	TicketMessageId *string               `json:"ticket_message_id,omitempty"` // ticket message id
-	MessageId       *string               `json:"message_id,omitempty"`        // open message id
-	MsgType         *string               `json:"msg_type,omitempty"`          // message type, text is the only supported type
-	Position        *string               `json:"position,omitempty"`          // position of the message
-	SenderId        *UserId               `json:"sender_id,omitempty"`         // sender's open id, omitted if the sender is the bot
-	SenderType      *int                  `json:"sender_type,omitempty"`       // sender type, 1 for bot, 2 for guest, 3 for agent
-	Text            *string               `json:"text,omitempty"`              // message content
-	Ticket          *Ticket               `json:"ticket,omitempty"`            // ticket related information
-	EventId         *string               `json:"event_id,omitempty"`          // event id
-	ChatId          *string               `json:"chat_id,omitempty"`           // chat id
-	Content         *TicketMessageContent `json:"content,omitempty"`           // message content
+	TicketMessageId *string `json:"ticket_message_id,omitempty"` // ticket message id
+
+	MessageId *string `json:"message_id,omitempty"` // open message id
+
+	MsgType *string `json:"msg_type,omitempty"` // message type, text is the only supported type
+
+	Position *string `json:"position,omitempty"` // position of the message
+
+	SenderId *UserId `json:"sender_id,omitempty"` // sender's open id, omitted if the sender is the bot
+
+	SenderType *int `json:"sender_type,omitempty"` // sender type, 1 for bot, 2 for guest, 3 for agent
+
+	Text *string `json:"text,omitempty"` // message content
+
+	Ticket *Ticket `json:"ticket,omitempty"` // ticket related information
+
+	EventId *string `json:"event_id,omitempty"` // event id
+
+	ChatId *string `json:"chat_id,omitempty"` // chat id
+
+	Content *TicketMessageContent `json:"content,omitempty"` // message content
 }
 
 type P2TicketMessageCreatedV1 struct {

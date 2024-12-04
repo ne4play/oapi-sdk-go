@@ -18,31 +18,45 @@ import (
 )
 
 type AdminLog struct {
-	UniqueId        *string `json:"unique_id,omitempty"`        // 唯一id
-	UserId          *string `json:"user_id,omitempty"`          // 管理员id
-	CategoryName    *string `json:"category_name,omitempty"`    // 一级类目
-	EventName       *string `json:"event_name,omitempty"`       // 事件名称
-	IpAddress       *string `json:"ip_address,omitempty"`       // ip地址
-	CreateTime      *string `json:"create_time,omitempty"`      // 创建时间戳
-	Content         *string `json:"content,omitempty"`          // 事件详情
-	OperationStatus *int    `json:"operation_status,omitempty"` // 操作状态
+	UniqueId *string `json:"unique_id,omitempty"` // 唯一id
+
+	UserId *string `json:"user_id,omitempty"` // 管理员id
+
+	CategoryName *string `json:"category_name,omitempty"` // 一级类目
+
+	EventName *string `json:"event_name,omitempty"` // 事件名称
+
+	IpAddress *string `json:"ip_address,omitempty"` // ip地址
+
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间戳
+
+	Content *string `json:"content,omitempty"` // 事件详情
+
+	OperationStatus *int `json:"operation_status,omitempty"` // 操作状态
 }
 
 type AdminLogBuilder struct {
-	uniqueId            string // 唯一id
-	uniqueIdFlag        bool
-	userId              string // 管理员id
-	userIdFlag          bool
-	categoryName        string // 一级类目
-	categoryNameFlag    bool
-	eventName           string // 事件名称
-	eventNameFlag       bool
-	ipAddress           string // ip地址
-	ipAddressFlag       bool
-	createTime          string // 创建时间戳
-	createTimeFlag      bool
-	content             string // 事件详情
-	contentFlag         bool
+	uniqueId     string // 唯一id
+	uniqueIdFlag bool
+
+	userId     string // 管理员id
+	userIdFlag bool
+
+	categoryName     string // 一级类目
+	categoryNameFlag bool
+
+	eventName     string // 事件名称
+	eventNameFlag bool
+
+	ipAddress     string // ip地址
+	ipAddressFlag bool
+
+	createTime     string // 创建时间戳
+	createTimeFlag bool
+
+	content     string // 事件详情
+	contentFlag bool
+
 	operationStatus     int // 操作状态
 	operationStatusFlag bool
 }
@@ -193,22 +207,30 @@ func (builder *ApiAuditCommonDrawersBuilder) Build() *ApiAuditCommonDrawers {
 }
 
 type ApiAuditDrawerInfo struct {
-	InfoKey    *string `json:"info_key,omitempty"`     // key信息
-	InfoVal    *string `json:"info_val,omitempty"`     // val值
+	InfoKey *string `json:"info_key,omitempty"` // key信息
+
+	InfoVal *string `json:"info_val,omitempty"` // val值
+
 	KeyI18nKey *string `json:"key_i18n_key,omitempty"` // key对应的i18nkey
-	ValType    *string `json:"val_type,omitempty"`     // val类型
+
+	ValType *string `json:"val_type,omitempty"` // val类型
+
 	ValI18nKey *string `json:"val_i18n_key,omitempty"` // val对应的i18nkey
 }
 
 type ApiAuditDrawerInfoBuilder struct {
-	infoKey        string // key信息
-	infoKeyFlag    bool
-	infoVal        string // val值
-	infoValFlag    bool
+	infoKey     string // key信息
+	infoKeyFlag bool
+
+	infoVal     string // val值
+	infoValFlag bool
+
 	keyI18nKey     string // key对应的i18nkey
 	keyI18nKeyFlag bool
-	valType        string // val类型
-	valTypeFlag    bool
+
+	valType     string // val类型
+	valTypeFlag bool
+
 	valI18nKey     string // val对应的i18nkey
 	valI18nKeyFlag bool
 }
@@ -289,30 +311,42 @@ func (builder *ApiAuditDrawerInfoBuilder) Build() *ApiAuditDrawerInfo {
 }
 
 type AppDlpExecuteLog struct {
-	EventName   *string             `json:"event_name,omitempty"`   // 事件名称
-	UserId      *string             `json:"user_id,omitempty"`      // 用户的open_id
-	ExecuteTime *string             `json:"execute_time,omitempty"` // 执行时间
-	ActionName  *string             `json:"action_name,omitempty"`  // 执行动作
-	HitPolicies []string            `json:"hit_policies,omitempty"` // 命中策略列表
-	EntityId    *string             `json:"entity_id,omitempty"`    // 指令id
-	Evidences   *DlpExecuteEvidence `json:"evidences,omitempty"`    // 证据
+	EventName *string `json:"event_name,omitempty"` // 事件名称
+
+	UserId *string `json:"user_id,omitempty"` // 用户的open_id
+
+	ExecuteTime *string `json:"execute_time,omitempty"` // 执行时间
+
+	ActionName *string `json:"action_name,omitempty"` // 执行动作
+
+	HitPolicies []string `json:"hit_policies,omitempty"` // 命中策略列表
+
+	EntityId *string `json:"entity_id,omitempty"` // 指令id
+
+	Evidences *DlpExecuteEvidence `json:"evidences,omitempty"` // 证据
 }
 
 type AppDlpExecuteLogBuilder struct {
-	eventName       string // 事件名称
-	eventNameFlag   bool
-	userId          string // 用户的open_id
-	userIdFlag      bool
+	eventName     string // 事件名称
+	eventNameFlag bool
+
+	userId     string // 用户的open_id
+	userIdFlag bool
+
 	executeTime     string // 执行时间
 	executeTimeFlag bool
-	actionName      string // 执行动作
-	actionNameFlag  bool
+
+	actionName     string // 执行动作
+	actionNameFlag bool
+
 	hitPolicies     []string // 命中策略列表
 	hitPoliciesFlag bool
-	entityId        string // 指令id
-	entityIdFlag    bool
-	evidences       *DlpExecuteEvidence // 证据
-	evidencesFlag   bool
+
+	entityId     string // 指令id
+	entityIdFlag bool
+
+	evidences     *DlpExecuteEvidence // 证据
+	evidencesFlag bool
 }
 
 func NewAppDlpExecuteLogBuilder() *AppDlpExecuteLogBuilder {
@@ -415,69 +449,107 @@ func (builder *AppDlpExecuteLogBuilder) Build() *AppDlpExecuteLog {
 }
 
 type AuditAndroidContext struct {
-	Udid            *string `json:"udid,omitempty"`              // UDID
-	Did             *string `json:"did,omitempty"`               // 设备ID
-	AppVer          *string `json:"app_ver,omitempty"`           // app的版本
-	Ver             *string `json:"ver,omitempty"`               // SecSDK版本
-	Region          *string `json:"region,omitempty"`            // 设备语言
-	IdI             *string `json:"id_i,omitempty"`              // 安卓版本号
-	IdR             *string `json:"id_r,omitempty"`              // 安卓版本
-	HwBrand         *string `json:"hw_brand,omitempty"`          // Brand
-	HwManuf         *string `json:"hw_manuf,omitempty"`          // 制造商
-	Wifip           *string `json:"wifip,omitempty"`             // wifi ip
-	RouteIip        *string `json:"route_iip,omitempty"`         // 路由IP
-	RouteGip        *string `json:"route_gip,omitempty"`         // 路由网关IP
-	EnvSu           *string `json:"env_su,omitempty"`            // 表示当前是否root
-	EnvTz           *string `json:"env_tz,omitempty"`            // 手机系统时区
-	EnvMl           *string `json:"env_ml,omitempty"`            // 手机系统语言
-	Location        *string `json:"location,omitempty"`          // GPS经纬度
-	ActiveIp        *string `json:"active_ip,omitempty"`         // 当前设备活跃ip
-	ActiveIpDetail  *string `json:"active_ip_detail,omitempty"`  // 当前设备活跃ip对应网卡类型
+	Udid *string `json:"udid,omitempty"` // UDID
+
+	Did *string `json:"did,omitempty"` // 设备ID
+
+	AppVer *string `json:"app_ver,omitempty"` // app的版本
+
+	Ver *string `json:"ver,omitempty"` // SecSDK版本
+
+	Region *string `json:"region,omitempty"` // 设备语言
+
+	IdI *string `json:"id_i,omitempty"` // 安卓版本号
+
+	IdR *string `json:"id_r,omitempty"` // 安卓版本
+
+	HwBrand *string `json:"hw_brand,omitempty"` // Brand
+
+	HwManuf *string `json:"hw_manuf,omitempty"` // 制造商
+
+	Wifip *string `json:"wifip,omitempty"` // wifi ip
+
+	RouteIip *string `json:"route_iip,omitempty"` // 路由IP
+
+	RouteGip *string `json:"route_gip,omitempty"` // 路由网关IP
+
+	EnvSu *string `json:"env_su,omitempty"` // 表示当前是否root
+
+	EnvTz *string `json:"env_tz,omitempty"` // 手机系统时区
+
+	EnvMl *string `json:"env_ml,omitempty"` // 手机系统语言
+
+	Location *string `json:"location,omitempty"` // GPS经纬度
+
+	ActiveIp *string `json:"active_ip,omitempty"` // 当前设备活跃ip
+
+	ActiveIpDetail *string `json:"active_ip_detail,omitempty"` // 当前设备活跃ip对应网卡类型
+
 	CellBaseStation *string `json:"cell_base_station,omitempty"` // 基站信息
-	IP              *string `json:"IP,omitempty"`                // 公网ip
+
+	IP *string `json:"IP,omitempty"` // 公网ip
 }
 
 type AuditAndroidContextBuilder struct {
-	udid                string // UDID
-	udidFlag            bool
-	did                 string // 设备ID
-	didFlag             bool
-	appVer              string // app的版本
-	appVerFlag          bool
-	ver                 string // SecSDK版本
-	verFlag             bool
-	region              string // 设备语言
-	regionFlag          bool
-	idI                 string // 安卓版本号
-	idIFlag             bool
-	idR                 string // 安卓版本
-	idRFlag             bool
-	hwBrand             string // Brand
-	hwBrandFlag         bool
-	hwManuf             string // 制造商
-	hwManufFlag         bool
-	wifip               string // wifi ip
-	wifipFlag           bool
-	routeIip            string // 路由IP
-	routeIipFlag        bool
-	routeGip            string // 路由网关IP
-	routeGipFlag        bool
-	envSu               string // 表示当前是否root
-	envSuFlag           bool
-	envTz               string // 手机系统时区
-	envTzFlag           bool
-	envMl               string // 手机系统语言
-	envMlFlag           bool
-	location            string // GPS经纬度
-	locationFlag        bool
-	activeIp            string // 当前设备活跃ip
-	activeIpFlag        bool
-	activeIpDetail      string // 当前设备活跃ip对应网卡类型
-	activeIpDetailFlag  bool
+	udid     string // UDID
+	udidFlag bool
+
+	did     string // 设备ID
+	didFlag bool
+
+	appVer     string // app的版本
+	appVerFlag bool
+
+	ver     string // SecSDK版本
+	verFlag bool
+
+	region     string // 设备语言
+	regionFlag bool
+
+	idI     string // 安卓版本号
+	idIFlag bool
+
+	idR     string // 安卓版本
+	idRFlag bool
+
+	hwBrand     string // Brand
+	hwBrandFlag bool
+
+	hwManuf     string // 制造商
+	hwManufFlag bool
+
+	wifip     string // wifi ip
+	wifipFlag bool
+
+	routeIip     string // 路由IP
+	routeIipFlag bool
+
+	routeGip     string // 路由网关IP
+	routeGipFlag bool
+
+	envSu     string // 表示当前是否root
+	envSuFlag bool
+
+	envTz     string // 手机系统时区
+	envTzFlag bool
+
+	envMl     string // 手机系统语言
+	envMlFlag bool
+
+	location     string // GPS经纬度
+	locationFlag bool
+
+	activeIp     string // 当前设备活跃ip
+	activeIpFlag bool
+
+	activeIpDetail     string // 当前设备活跃ip对应网卡类型
+	activeIpDetailFlag bool
+
 	cellBaseStation     string // 基站信息
 	cellBaseStationFlag bool
-	iP                  string // 公网ip
-	iPFlag              bool
+
+	iP     string // 公网ip
+	iPFlag bool
 }
 
 func NewAuditAndroidContextBuilder() *AuditAndroidContextBuilder {
@@ -751,22 +823,30 @@ func (builder *AuditAndroidContextBuilder) Build() *AuditAndroidContext {
 }
 
 type AuditContext struct {
-	TerminalType   *int                 `json:"terminal_type,omitempty"`   // 终端类型
-	IosContext     *AuditIosContext     `json:"ios_context,omitempty"`     // ios的环境信息
-	PcContext      *AuditPcContext      `json:"pc_context,omitempty"`      // pc的环境信息
-	WebContext     *AuditWebContext     `json:"web_context,omitempty"`     // web的环境信息
+	TerminalType *int `json:"terminal_type,omitempty"` // 终端类型
+
+	IosContext *AuditIosContext `json:"ios_context,omitempty"` // ios的环境信息
+
+	PcContext *AuditPcContext `json:"pc_context,omitempty"` // pc的环境信息
+
+	WebContext *AuditWebContext `json:"web_context,omitempty"` // web的环境信息
+
 	AndroidContext *AuditAndroidContext `json:"android_context,omitempty"` // android的环境信息
 }
 
 type AuditContextBuilder struct {
-	terminalType       int // 终端类型
-	terminalTypeFlag   bool
-	iosContext         *AuditIosContext // ios的环境信息
-	iosContextFlag     bool
-	pcContext          *AuditPcContext // pc的环境信息
-	pcContextFlag      bool
-	webContext         *AuditWebContext // web的环境信息
-	webContextFlag     bool
+	terminalType     int // 终端类型
+	terminalTypeFlag bool
+
+	iosContext     *AuditIosContext // ios的环境信息
+	iosContextFlag bool
+
+	pcContext     *AuditPcContext // pc的环境信息
+	pcContextFlag bool
+
+	webContext     *AuditWebContext // web的环境信息
+	webContextFlag bool
+
 	androidContext     *AuditAndroidContext // android的环境信息
 	androidContextFlag bool
 }
@@ -843,21 +923,27 @@ func (builder *AuditContextBuilder) Build() *AuditContext {
 }
 
 type AuditDetail struct {
-	Mc          *string `json:"mc,omitempty"`           // mac地址
+	Mc *string `json:"mc,omitempty"` // mac地址
+
 	DeviceModel *string `json:"device_model,omitempty"` // 设备模型
-	Os          *string `json:"os,omitempty"`           // 操作系统
-	City        *string `json:"city,omitempty"`         // ip属地
+
+	Os *string `json:"os,omitempty"` // 操作系统
+
+	City *string `json:"city,omitempty"` // ip属地
 }
 
 type AuditDetailBuilder struct {
-	mc              string // mac地址
-	mcFlag          bool
+	mc     string // mac地址
+	mcFlag bool
+
 	deviceModel     string // 设备模型
 	deviceModelFlag bool
-	os              string // 操作系统
-	osFlag          bool
-	city            string // ip属地
-	cityFlag        bool
+
+	os     string // 操作系统
+	osFlag bool
+
+	city     string // ip属地
+	cityFlag bool
 }
 
 func NewAuditDetailBuilder() *AuditDetailBuilder {
@@ -923,37 +1009,55 @@ func (builder *AuditDetailBuilder) Build() *AuditDetail {
 }
 
 type AuditEventExtend struct {
-	CommentType                 *string `json:"comment_type,omitempty"`                     // 评论类型
-	AppDetail                   *string `json:"app_detail,omitempty"`                       // app信息
-	TwoStepValidation           *bool   `json:"two_step_validation,omitempty"`              // 是否两步验证
-	LoginMethod                 *string `json:"login_method,omitempty"`                     // 登录方式
-	NewPeopleNumInVideo         *int    `json:"new_people_num_in_video,omitempty"`          // 创建新的{x}人会议/通话
-	ExternalPeopleNumInVideo    *int    `json:"external_people_num_in_video,omitempty"`     // 将{x}名外部用户加入/退出通话
-	ExternalPeopleNumInChat     *int    `json:"external_people_num_in_chat,omitempty"`      // 将{x}名外部用户加入/退出群组
-	JoinGroup                   *int    `json:"join_group,omitempty"`                       // 创建{x}人数的群组
-	QuitGroup                   *int    `json:"quit_group,omitempty"`                       // 解散{x}人数的群组
-	ExternalPeopleNumInDocShare *int    `json:"external_people_num_in_doc_share,omitempty"` // 分享文档给{x}名外部用户
+	CommentType *string `json:"comment_type,omitempty"` // 评论类型
+
+	AppDetail *string `json:"app_detail,omitempty"` // app信息
+
+	TwoStepValidation *bool `json:"two_step_validation,omitempty"` // 是否两步验证
+
+	LoginMethod *string `json:"login_method,omitempty"` // 登录方式
+
+	NewPeopleNumInVideo *int `json:"new_people_num_in_video,omitempty"` // 创建新的{x}人会议/通话
+
+	ExternalPeopleNumInVideo *int `json:"external_people_num_in_video,omitempty"` // 将{x}名外部用户加入/退出通话
+
+	ExternalPeopleNumInChat *int `json:"external_people_num_in_chat,omitempty"` // 将{x}名外部用户加入/退出群组
+
+	JoinGroup *int `json:"join_group,omitempty"` // 创建{x}人数的群组
+
+	QuitGroup *int `json:"quit_group,omitempty"` // 解散{x}人数的群组
+
+	ExternalPeopleNumInDocShare *int `json:"external_people_num_in_doc_share,omitempty"` // 分享文档给{x}名外部用户
 }
 
 type AuditEventExtendBuilder struct {
-	commentType                     string // 评论类型
-	commentTypeFlag                 bool
-	appDetail                       string // app信息
-	appDetailFlag                   bool
-	twoStepValidation               bool // 是否两步验证
-	twoStepValidationFlag           bool
-	loginMethod                     string // 登录方式
-	loginMethodFlag                 bool
-	newPeopleNumInVideo             int // 创建新的{x}人会议/通话
-	newPeopleNumInVideoFlag         bool
-	externalPeopleNumInVideo        int // 将{x}名外部用户加入/退出通话
-	externalPeopleNumInVideoFlag    bool
-	externalPeopleNumInChat         int // 将{x}名外部用户加入/退出群组
-	externalPeopleNumInChatFlag     bool
-	joinGroup                       int // 创建{x}人数的群组
-	joinGroupFlag                   bool
-	quitGroup                       int // 解散{x}人数的群组
-	quitGroupFlag                   bool
+	commentType     string // 评论类型
+	commentTypeFlag bool
+
+	appDetail     string // app信息
+	appDetailFlag bool
+
+	twoStepValidation     bool // 是否两步验证
+	twoStepValidationFlag bool
+
+	loginMethod     string // 登录方式
+	loginMethodFlag bool
+
+	newPeopleNumInVideo     int // 创建新的{x}人会议/通话
+	newPeopleNumInVideoFlag bool
+
+	externalPeopleNumInVideo     int // 将{x}名外部用户加入/退出通话
+	externalPeopleNumInVideoFlag bool
+
+	externalPeopleNumInChat     int // 将{x}名外部用户加入/退出群组
+	externalPeopleNumInChatFlag bool
+
+	joinGroup     int // 创建{x}人数的群组
+	joinGroupFlag bool
+
+	quitGroup     int // 解散{x}人数的群组
+	quitGroupFlag bool
+
 	externalPeopleNumInDocShare     int // 分享文档给{x}名外部用户
 	externalPeopleNumInDocShareFlag bool
 }
@@ -1099,63 +1203,97 @@ func (builder *AuditEventExtendBuilder) Build() *AuditEventExtend {
 }
 
 type AuditInfo struct {
-	EventName       *string                 `json:"event_name,omitempty"`        // 事件名称
-	DepartmentIds   []string                `json:"department_ids,omitempty"`    // 用户所属部门的ID列表
-	EventModule     *int                    `json:"event_module,omitempty"`      // 模块
-	OperatorType    *int                    `json:"operator_type,omitempty"`     // 操作人类型
-	OperatorValue   *string                 `json:"operator_value,omitempty"`    // 操作人id
-	Objects         []*AuditObjectEntity    `json:"objects,omitempty"`           // 操作对象列表
-	Recipients      []*AuditRecipientEntity `json:"recipients,omitempty"`        // 接收者对象列表
-	EventTime       *int                    `json:"event_time,omitempty"`        // 事件时间
-	Ip              *string                 `json:"ip,omitempty"`                // ip信息
-	OperatorApp     *string                 `json:"operator_app,omitempty"`      // 第三方isvID
-	AuditContext    *AuditContext           `json:"audit_context,omitempty"`     // 环境信息
-	Extend          *AuditEventExtend       `json:"extend,omitempty"`            // 事件级别的扩展
-	EventId         *string                 `json:"event_id,omitempty"`          // 事件id
-	OperatorAppName *string                 `json:"operator_app_name,omitempty"` // 第三方isv名称
-	UniqueId        *string                 `json:"unique_id,omitempty"`         // 唯一id
-	CommonDrawers   *ApiAuditCommonDrawers  `json:"common_drawers,omitempty"`    // 扩展字段信息
-	AuditDetail     *AuditDetail            `json:"audit_detail,omitempty"`      // 日志扩展信息
-	OperatorTenant  *string                 `json:"operator_tenant,omitempty"`   // 操作人企业编号
+	EventName *string `json:"event_name,omitempty"` // 事件名称
+
+	DepartmentIds []string `json:"department_ids,omitempty"` // 用户所属部门的ID列表
+
+	EventModule *int `json:"event_module,omitempty"` // 模块
+
+	OperatorType *int `json:"operator_type,omitempty"` // 操作人类型
+
+	OperatorValue *string `json:"operator_value,omitempty"` // 操作人id
+
+	Objects []*AuditObjectEntity `json:"objects,omitempty"` // 操作对象列表
+
+	Recipients []*AuditRecipientEntity `json:"recipients,omitempty"` // 接收者对象列表
+
+	EventTime *int `json:"event_time,omitempty"` // 事件时间
+
+	Ip *string `json:"ip,omitempty"` // ip信息
+
+	OperatorApp *string `json:"operator_app,omitempty"` // 第三方isvID
+
+	AuditContext *AuditContext `json:"audit_context,omitempty"` // 环境信息
+
+	Extend *AuditEventExtend `json:"extend,omitempty"` // 事件级别的扩展
+
+	EventId *string `json:"event_id,omitempty"` // 事件id
+
+	OperatorAppName *string `json:"operator_app_name,omitempty"` // 第三方isv名称
+
+	UniqueId *string `json:"unique_id,omitempty"` // 唯一id
+
+	CommonDrawers *ApiAuditCommonDrawers `json:"common_drawers,omitempty"` // 扩展字段信息
+
+	AuditDetail *AuditDetail `json:"audit_detail,omitempty"` // 日志扩展信息
+
+	OperatorTenant *string `json:"operator_tenant,omitempty"` // 操作人企业编号
 }
 
 type AuditInfoBuilder struct {
-	eventName           string // 事件名称
-	eventNameFlag       bool
-	departmentIds       []string // 用户所属部门的ID列表
-	departmentIdsFlag   bool
-	eventModule         int // 模块
-	eventModuleFlag     bool
-	operatorType        int // 操作人类型
-	operatorTypeFlag    bool
-	operatorValue       string // 操作人id
-	operatorValueFlag   bool
-	objects             []*AuditObjectEntity // 操作对象列表
-	objectsFlag         bool
-	recipients          []*AuditRecipientEntity // 接收者对象列表
-	recipientsFlag      bool
-	eventTime           int // 事件时间
-	eventTimeFlag       bool
-	ip                  string // ip信息
-	ipFlag              bool
-	operatorApp         string // 第三方isvID
-	operatorAppFlag     bool
-	auditContext        *AuditContext // 环境信息
-	auditContextFlag    bool
-	extend              *AuditEventExtend // 事件级别的扩展
-	extendFlag          bool
-	eventId             string // 事件id
-	eventIdFlag         bool
+	eventName     string // 事件名称
+	eventNameFlag bool
+
+	departmentIds     []string // 用户所属部门的ID列表
+	departmentIdsFlag bool
+
+	eventModule     int // 模块
+	eventModuleFlag bool
+
+	operatorType     int // 操作人类型
+	operatorTypeFlag bool
+
+	operatorValue     string // 操作人id
+	operatorValueFlag bool
+
+	objects     []*AuditObjectEntity // 操作对象列表
+	objectsFlag bool
+
+	recipients     []*AuditRecipientEntity // 接收者对象列表
+	recipientsFlag bool
+
+	eventTime     int // 事件时间
+	eventTimeFlag bool
+
+	ip     string // ip信息
+	ipFlag bool
+
+	operatorApp     string // 第三方isvID
+	operatorAppFlag bool
+
+	auditContext     *AuditContext // 环境信息
+	auditContextFlag bool
+
+	extend     *AuditEventExtend // 事件级别的扩展
+	extendFlag bool
+
+	eventId     string // 事件id
+	eventIdFlag bool
+
 	operatorAppName     string // 第三方isv名称
 	operatorAppNameFlag bool
-	uniqueId            string // 唯一id
-	uniqueIdFlag        bool
-	commonDrawers       *ApiAuditCommonDrawers // 扩展字段信息
-	commonDrawersFlag   bool
-	auditDetail         *AuditDetail // 日志扩展信息
-	auditDetailFlag     bool
-	operatorTenant      string // 操作人企业编号
-	operatorTenantFlag  bool
+
+	uniqueId     string // 唯一id
+	uniqueIdFlag bool
+
+	commonDrawers     *ApiAuditCommonDrawers // 扩展字段信息
+	commonDrawersFlag bool
+
+	auditDetail     *AuditDetail // 日志扩展信息
+	auditDetailFlag bool
+
+	operatorTenant     string // 操作人企业编号
+	operatorTenantFlag bool
 }
 
 func NewAuditInfoBuilder() *AuditInfoBuilder {
@@ -1396,54 +1534,82 @@ func (builder *AuditInfoBuilder) Build() *AuditInfo {
 }
 
 type AuditIosContext struct {
-	Udid            *string `json:"udid,omitempty"`              // UDID
-	Did             *string `json:"did,omitempty"`               // 设备ID
-	AppVer          *string `json:"app_ver,omitempty"`           // app的版本
-	Ver             *string `json:"ver,omitempty"`               // SecSDK版本
-	Os              *string `json:"os,omitempty"`                // 系统类型及版本
-	STZone          *string `json:"STZone,omitempty"`            // 系统时区
-	ML              *string `json:"ML,omitempty"`                // 当前语言
-	Sjd             *string `json:"sjd,omitempty"`               // 是否越狱
-	Proxyip         *string `json:"proxyip,omitempty"`           // 代理ip
-	Wifip           *string `json:"wifip,omitempty"`             // wifi ip
-	Location        *string `json:"location,omitempty"`          // GPS经纬度
-	ActiveIp        *string `json:"active_ip,omitempty"`         // 当前设备活跃ip
-	ActiveIpDetail  *string `json:"active_ip_detail,omitempty"`  // 当前设备活跃ip对应网卡类型
+	Udid *string `json:"udid,omitempty"` // UDID
+
+	Did *string `json:"did,omitempty"` // 设备ID
+
+	AppVer *string `json:"app_ver,omitempty"` // app的版本
+
+	Ver *string `json:"ver,omitempty"` // SecSDK版本
+
+	Os *string `json:"os,omitempty"` // 系统类型及版本
+
+	STZone *string `json:"STZone,omitempty"` // 系统时区
+
+	ML *string `json:"ML,omitempty"` // 当前语言
+
+	Sjd *string `json:"sjd,omitempty"` // 是否越狱
+
+	Proxyip *string `json:"proxyip,omitempty"` // 代理ip
+
+	Wifip *string `json:"wifip,omitempty"` // wifi ip
+
+	Location *string `json:"location,omitempty"` // GPS经纬度
+
+	ActiveIp *string `json:"active_ip,omitempty"` // 当前设备活跃ip
+
+	ActiveIpDetail *string `json:"active_ip_detail,omitempty"` // 当前设备活跃ip对应网卡类型
+
 	CellBaseStation *string `json:"cell_base_station,omitempty"` // 基站信息
-	IP              *string `json:"IP,omitempty"`                // 公网ip
+
+	IP *string `json:"IP,omitempty"` // 公网ip
 }
 
 type AuditIosContextBuilder struct {
-	udid                string // UDID
-	udidFlag            bool
-	did                 string // 设备ID
-	didFlag             bool
-	appVer              string // app的版本
-	appVerFlag          bool
-	ver                 string // SecSDK版本
-	verFlag             bool
-	os                  string // 系统类型及版本
-	osFlag              bool
-	sTZone              string // 系统时区
-	sTZoneFlag          bool
-	mL                  string // 当前语言
-	mLFlag              bool
-	sjd                 string // 是否越狱
-	sjdFlag             bool
-	proxyip             string // 代理ip
-	proxyipFlag         bool
-	wifip               string // wifi ip
-	wifipFlag           bool
-	location            string // GPS经纬度
-	locationFlag        bool
-	activeIp            string // 当前设备活跃ip
-	activeIpFlag        bool
-	activeIpDetail      string // 当前设备活跃ip对应网卡类型
-	activeIpDetailFlag  bool
+	udid     string // UDID
+	udidFlag bool
+
+	did     string // 设备ID
+	didFlag bool
+
+	appVer     string // app的版本
+	appVerFlag bool
+
+	ver     string // SecSDK版本
+	verFlag bool
+
+	os     string // 系统类型及版本
+	osFlag bool
+
+	sTZone     string // 系统时区
+	sTZoneFlag bool
+
+	mL     string // 当前语言
+	mLFlag bool
+
+	sjd     string // 是否越狱
+	sjdFlag bool
+
+	proxyip     string // 代理ip
+	proxyipFlag bool
+
+	wifip     string // wifi ip
+	wifipFlag bool
+
+	location     string // GPS经纬度
+	locationFlag bool
+
+	activeIp     string // 当前设备活跃ip
+	activeIpFlag bool
+
+	activeIpDetail     string // 当前设备活跃ip对应网卡类型
+	activeIpDetailFlag bool
+
 	cellBaseStation     string // 基站信息
 	cellBaseStationFlag bool
-	iP                  string // 公网ip
-	iPFlag              bool
+
+	iP     string // 公网ip
+	iPFlag bool
 }
 
 func NewAuditIosContextBuilder() *AuditIosContextBuilder {
@@ -1652,48 +1818,72 @@ func (builder *AuditIosContextBuilder) Build() *AuditIosContext {
 }
 
 type AuditObjectDetail struct {
-	CloneSource                  *string `json:"clone_source,omitempty"`                    // 克隆来源
-	TextDetail                   *string `json:"text_detail,omitempty"`                     // 其他文本
-	FileName                     *string `json:"file_name,omitempty"`                       // 文件名称
-	ThirdPartyAppID              *string `json:"third_party_appID,omitempty"`               // 第三方APPID
-	ContainFileNum               *int    `json:"contain_file_num,omitempty"`                // 文件或文件夹数量
-	PermissionSettingType        *string `json:"permission_setting_type,omitempty"`         // 链接分享设置
-	PermissionExternalAccessType *bool   `json:"permission_external_access_Type,omitempty"` // 是否开启外部访问设置
-	PermissionShareType          *string `json:"permission_share_type,omitempty"`           // 分享设置
-	FileServiceSource            *string `json:"file_service_source,omitempty"`             // file上传业务来源
-	OkrDownloadContent           *string `json:"okr_download_content,omitempty"`            // 下载OKR时的内容范围
-	ContainerType                *string `json:"container_type,omitempty"`                  // 容器类型,标识是否wiki
-	ContainerId                  *string `json:"container_id,omitempty"`                    // 容器id,wiki标识字段
-	CurrentPage                  *string `json:"current_page,omitempty"`                    // 截屏、录制的开始页面
+	CloneSource *string `json:"clone_source,omitempty"` // 克隆来源
+
+	TextDetail *string `json:"text_detail,omitempty"` // 其他文本
+
+	FileName *string `json:"file_name,omitempty"` // 文件名称
+
+	ThirdPartyAppID *string `json:"third_party_appID,omitempty"` // 第三方APPID
+
+	ContainFileNum *int `json:"contain_file_num,omitempty"` // 文件或文件夹数量
+
+	PermissionSettingType *string `json:"permission_setting_type,omitempty"` // 链接分享设置
+
+	PermissionExternalAccessType *bool `json:"permission_external_access_Type,omitempty"` // 是否开启外部访问设置
+
+	PermissionShareType *string `json:"permission_share_type,omitempty"` // 分享设置
+
+	FileServiceSource *string `json:"file_service_source,omitempty"` // file上传业务来源
+
+	OkrDownloadContent *string `json:"okr_download_content,omitempty"` // 下载OKR时的内容范围
+
+	ContainerType *string `json:"container_type,omitempty"` // 容器类型,标识是否wiki
+
+	ContainerId *string `json:"container_id,omitempty"` // 容器id,wiki标识字段
+
+	CurrentPage *string `json:"current_page,omitempty"` // 截屏、录制的开始页面
 }
 
 type AuditObjectDetailBuilder struct {
-	cloneSource                      string // 克隆来源
-	cloneSourceFlag                  bool
-	textDetail                       string // 其他文本
-	textDetailFlag                   bool
-	fileName                         string // 文件名称
-	fileNameFlag                     bool
-	thirdPartyAppID                  string // 第三方APPID
-	thirdPartyAppIDFlag              bool
-	containFileNum                   int // 文件或文件夹数量
-	containFileNumFlag               bool
-	permissionSettingType            string // 链接分享设置
-	permissionSettingTypeFlag        bool
+	cloneSource     string // 克隆来源
+	cloneSourceFlag bool
+
+	textDetail     string // 其他文本
+	textDetailFlag bool
+
+	fileName     string // 文件名称
+	fileNameFlag bool
+
+	thirdPartyAppID     string // 第三方APPID
+	thirdPartyAppIDFlag bool
+
+	containFileNum     int // 文件或文件夹数量
+	containFileNumFlag bool
+
+	permissionSettingType     string // 链接分享设置
+	permissionSettingTypeFlag bool
+
 	permissionExternalAccessType     bool // 是否开启外部访问设置
 	permissionExternalAccessTypeFlag bool
-	permissionShareType              string // 分享设置
-	permissionShareTypeFlag          bool
-	fileServiceSource                string // file上传业务来源
-	fileServiceSourceFlag            bool
-	okrDownloadContent               string // 下载OKR时的内容范围
-	okrDownloadContentFlag           bool
-	containerType                    string // 容器类型,标识是否wiki
-	containerTypeFlag                bool
-	containerId                      string // 容器id,wiki标识字段
-	containerIdFlag                  bool
-	currentPage                      string // 截屏、录制的开始页面
-	currentPageFlag                  bool
+
+	permissionShareType     string // 分享设置
+	permissionShareTypeFlag bool
+
+	fileServiceSource     string // file上传业务来源
+	fileServiceSourceFlag bool
+
+	okrDownloadContent     string // 下载OKR时的内容范围
+	okrDownloadContentFlag bool
+
+	containerType     string // 容器类型,标识是否wiki
+	containerTypeFlag bool
+
+	containerId     string // 容器id,wiki标识字段
+	containerIdFlag bool
+
+	currentPage     string // 截屏、录制的开始页面
+	currentPageFlag bool
 }
 
 func NewAuditObjectDetailBuilder() *AuditObjectDetailBuilder {
@@ -1876,24 +2066,32 @@ func (builder *AuditObjectDetailBuilder) Build() *AuditObjectDetail {
 }
 
 type AuditObjectEntity struct {
-	ObjectType   *string            `json:"object_type,omitempty"`   // 操作对象类型
-	ObjectValue  *string            `json:"object_value,omitempty"`  // 操作对象值，可能存在 department_id、user_id 等，需要进行 lark_id 的转换
+	ObjectType *string `json:"object_type,omitempty"` // 操作对象类型
+
+	ObjectValue *string `json:"object_value,omitempty"` // 操作对象值，可能存在 department_id、user_id 等，需要进行 lark_id 的转换
+
 	ObjectDetail *AuditObjectDetail `json:"object_detail,omitempty"` // object 详情
-	ObjectName   *string            `json:"object_name,omitempty"`   // 操作对象名称，如会话名、文档名等
-	ObjectOwner  *string            `json:"object_owner,omitempty"`  // 操作对象的所有者
+
+	ObjectName *string `json:"object_name,omitempty"` // 操作对象名称，如会话名、文档名等
+
+	ObjectOwner *string `json:"object_owner,omitempty"` // 操作对象的所有者
 }
 
 type AuditObjectEntityBuilder struct {
-	objectType       string // 操作对象类型
-	objectTypeFlag   bool
-	objectValue      string // 操作对象值，可能存在 department_id、user_id 等，需要进行 lark_id 的转换
-	objectValueFlag  bool
+	objectType     string // 操作对象类型
+	objectTypeFlag bool
+
+	objectValue     string // 操作对象值，可能存在 department_id、user_id 等，需要进行 lark_id 的转换
+	objectValueFlag bool
+
 	objectDetail     *AuditObjectDetail // object 详情
 	objectDetailFlag bool
-	objectName       string // 操作对象名称，如会话名、文档名等
-	objectNameFlag   bool
-	objectOwner      string // 操作对象的所有者
-	objectOwnerFlag  bool
+
+	objectName     string // 操作对象名称，如会话名、文档名等
+	objectNameFlag bool
+
+	objectOwner     string // 操作对象的所有者
+	objectOwnerFlag bool
 }
 
 func NewAuditObjectEntityBuilder() *AuditObjectEntityBuilder {
@@ -1971,33 +2169,47 @@ func (builder *AuditObjectEntityBuilder) Build() *AuditObjectEntity {
 }
 
 type AuditPcContext struct {
-	Udid   *string `json:"udid,omitempty"`    // UDID
-	Did    *string `json:"did,omitempty"`     // 设备ID
+	Udid *string `json:"udid,omitempty"` // UDID
+
+	Did *string `json:"did,omitempty"` // 设备ID
+
 	AppVer *string `json:"app_ver,omitempty"` // app的版本
-	Ver    *string `json:"ver,omitempty"`     // SecSDK版本
-	Os     *string `json:"os,omitempty"`      // 客户端类型
-	Wifip  *string `json:"wifip,omitempty"`   // wifi ip
-	Region *string `json:"region,omitempty"`  // 设备区域
-	IP     *string `json:"IP,omitempty"`      // 公网ip
+
+	Ver *string `json:"ver,omitempty"` // SecSDK版本
+
+	Os *string `json:"os,omitempty"` // 客户端类型
+
+	Wifip *string `json:"wifip,omitempty"` // wifi ip
+
+	Region *string `json:"region,omitempty"` // 设备区域
+
+	IP *string `json:"IP,omitempty"` // 公网ip
 }
 
 type AuditPcContextBuilder struct {
-	udid       string // UDID
-	udidFlag   bool
-	did        string // 设备ID
-	didFlag    bool
+	udid     string // UDID
+	udidFlag bool
+
+	did     string // 设备ID
+	didFlag bool
+
 	appVer     string // app的版本
 	appVerFlag bool
-	ver        string // SecSDK版本
-	verFlag    bool
-	os         string // 客户端类型
-	osFlag     bool
-	wifip      string // wifi ip
-	wifipFlag  bool
+
+	ver     string // SecSDK版本
+	verFlag bool
+
+	os     string // 客户端类型
+	osFlag bool
+
+	wifip     string // wifi ip
+	wifipFlag bool
+
 	region     string // 设备区域
 	regionFlag bool
-	iP         string // 公网ip
-	iPFlag     bool
+
+	iP     string // 公网ip
+	iPFlag bool
 }
 
 func NewAuditPcContextBuilder() *AuditPcContextBuilder {
@@ -2147,16 +2359,20 @@ func (builder *AuditRecipientDetailBuilder) Build() *AuditRecipientDetail {
 }
 
 type AuditRecipientEntity struct {
-	RecipientType   *string               `json:"recipient_type,omitempty"`   // 接收者对象类型
-	RecipientValue  *string               `json:"recipient_value,omitempty"`  // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+	RecipientType *string `json:"recipient_type,omitempty"` // 接收者对象类型
+
+	RecipientValue *string `json:"recipient_value,omitempty"` // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+
 	RecipientDetail *AuditRecipientDetail `json:"recipient_detail,omitempty"` // recipient 详情
 }
 
 type AuditRecipientEntityBuilder struct {
-	recipientType       string // 接收者对象类型
-	recipientTypeFlag   bool
-	recipientValue      string // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
-	recipientValueFlag  bool
+	recipientType     string // 接收者对象类型
+	recipientTypeFlag bool
+
+	recipientValue     string // 接收者对象值，可能存在department_id、user_id等，需要进行lark_id的转换
+	recipientValueFlag bool
+
 	recipientDetail     *AuditRecipientDetail // recipient 详情
 	recipientDetailFlag bool
 }
@@ -2211,14 +2427,16 @@ func (builder *AuditRecipientEntityBuilder) Build() *AuditRecipientEntity {
 
 type AuditWebContext struct {
 	UserAgent *string `json:"user_agent,omitempty"` // UA信息
-	IP        *string `json:"IP,omitempty"`         // 本机IP
+
+	IP *string `json:"IP,omitempty"` // 本机IP
 }
 
 type AuditWebContextBuilder struct {
 	userAgent     string // UA信息
 	userAgentFlag bool
-	iP            string // 本机IP
-	iPFlag        bool
+
+	iP     string // 本机IP
+	iPFlag bool
 }
 
 func NewAuditWebContextBuilder() *AuditWebContextBuilder {
@@ -2258,19 +2476,25 @@ func (builder *AuditWebContextBuilder) Build() *AuditWebContext {
 }
 
 type CreateMigrationEntity struct {
-	Id          *string `json:"id,omitempty"`           // 实体的 id
-	Type        *string `json:"type,omitempty"`         // 实体的类型
-	Location    *string `json:"location,omitempty"`     // 实体的数据驻留地
+	Id *string `json:"id,omitempty"` // 实体的 id
+
+	Type *string `json:"type,omitempty"` // 实体的类型
+
+	Location *string `json:"location,omitempty"` // 实体的数据驻留地
+
 	MailAddress *string `json:"mail_address,omitempty"` // 实体类型为 mailbox 时，返回 mail address，如果没有，则返回空
 }
 
 type CreateMigrationEntityBuilder struct {
-	id              string // 实体的 id
-	idFlag          bool
-	type_           string // 实体的类型
-	typeFlag        bool
-	location        string // 实体的数据驻留地
-	locationFlag    bool
+	id     string // 实体的 id
+	idFlag bool
+
+	type_    string // 实体的类型
+	typeFlag bool
+
+	location     string // 实体的数据驻留地
+	locationFlag bool
+
 	mailAddress     string // 实体类型为 mailbox 时，返回 mail address，如果没有，则返回空
 	mailAddressFlag bool
 }
@@ -2338,18 +2562,22 @@ func (builder *CreateMigrationEntityBuilder) Build() *CreateMigrationEntity {
 }
 
 type CreateMigrationItems struct {
-	TaskId     *string                `json:"task_id,omitempty"`     // 迁移任务的 id
-	TaskStatus *string                `json:"task_status,omitempty"` // 任务状态。任务创建成功固定返回 create ，若已存在其他待执行任务，则返回已存在任务的状态
-	Entity     *CreateMigrationEntity `json:"entity,omitempty"`      // 实体
+	TaskId *string `json:"task_id,omitempty"` // 迁移任务的 id
+
+	TaskStatus *string `json:"task_status,omitempty"` // 任务状态。任务创建成功固定返回 create ，若已存在其他待执行任务，则返回已存在任务的状态
+
+	Entity *CreateMigrationEntity `json:"entity,omitempty"` // 实体
 }
 
 type CreateMigrationItemsBuilder struct {
-	taskId         string // 迁移任务的 id
-	taskIdFlag     bool
+	taskId     string // 迁移任务的 id
+	taskIdFlag bool
+
 	taskStatus     string // 任务状态。任务创建成功固定返回 create ，若已存在其他待执行任务，则返回已存在任务的状态
 	taskStatusFlag bool
-	entity         *CreateMigrationEntity // 实体
-	entityFlag     bool
+
+	entity     *CreateMigrationEntity // 实体
+	entityFlag bool
 }
 
 func NewCreateMigrationItemsBuilder() *CreateMigrationItemsBuilder {
@@ -2402,12 +2630,14 @@ func (builder *CreateMigrationItemsBuilder) Build() *CreateMigrationItems {
 
 type DataArchivingMessage struct {
 	SeqId *string `json:"seq_id,omitempty"` // 序号ID
-	Limit *int    `json:"limit,omitempty"`  // | 分页数量，单次拉取消息数，最大值1000 示例值：100 | | --- |
+
+	Limit *int `json:"limit,omitempty"` // | 分页数量，单次拉取消息数，最大值1000 示例值：100 | | --- |
 }
 
 type DataArchivingMessageBuilder struct {
 	seqId     string // 序号ID
 	seqIdFlag bool
+
 	limit     int // | 分页数量，单次拉取消息数，最大值1000 示例值：100 | | --- |
 	limitFlag bool
 }
@@ -2449,51 +2679,77 @@ func (builder *DataArchivingMessageBuilder) Build() *DataArchivingMessage {
 }
 
 type DataArchivingMessageStruct struct {
-	MessageId         *string                  `json:"message_id,omitempty"`           // 消息id
-	MessageType       *int                     `json:"message_type,omitempty"`         // 消息类型
-	SenderInfo        *DataArchivingUserStruct `json:"sender_info,omitempty"`          // 发送者信息
-	ReceiverIds       []string                 `json:"receiver_ids,omitempty"`         // 接受者信息
-	ActionType        *string                  `json:"action_type,omitempty"`          // 操作类型
-	ChatId            *string                  `json:"chat_id,omitempty"`              // 会话ID
-	ActionTime        *string                  `json:"action_time,omitempty"`          // 消息动作时间戳ms
-	IsSuperChat       *bool                    `json:"is_super_chat,omitempty"`        // 是否超大群
-	IsCrossTenantChat *bool                    `json:"is_cross_tenant_chat,omitempty"` // 是否跨租户群
-	ChatName          *string                  `json:"chat_name,omitempty"`            // 会话名称
-	Content           *string                  `json:"content,omitempty"`              // 文本内容
-	ChatMode          *string                  `json:"chat_mode,omitempty"`            // 会话类型
-	ReactionType      *string                  `json:"reaction_type,omitempty"`        // reaction类型
-	ParentMsgId       *string                  `json:"parent_msg_id,omitempty"`        // 父id
+	MessageId *string `json:"message_id,omitempty"` // 消息id
+
+	MessageType *int `json:"message_type,omitempty"` // 消息类型
+
+	SenderInfo *DataArchivingUserStruct `json:"sender_info,omitempty"` // 发送者信息
+
+	ReceiverIds []string `json:"receiver_ids,omitempty"` // 接受者信息
+
+	ActionType *string `json:"action_type,omitempty"` // 操作类型
+
+	ChatId *string `json:"chat_id,omitempty"` // 会话ID
+
+	ActionTime *string `json:"action_time,omitempty"` // 消息动作时间戳ms
+
+	IsSuperChat *bool `json:"is_super_chat,omitempty"` // 是否超大群
+
+	IsCrossTenantChat *bool `json:"is_cross_tenant_chat,omitempty"` // 是否跨租户群
+
+	ChatName *string `json:"chat_name,omitempty"` // 会话名称
+
+	Content *string `json:"content,omitempty"` // 文本内容
+
+	ChatMode *string `json:"chat_mode,omitempty"` // 会话类型
+
+	ReactionType *string `json:"reaction_type,omitempty"` // reaction类型
+
+	ParentMsgId *string `json:"parent_msg_id,omitempty"` // 父id
 }
 
 type DataArchivingMessageStructBuilder struct {
-	messageId             string // 消息id
-	messageIdFlag         bool
-	messageType           int // 消息类型
-	messageTypeFlag       bool
-	senderInfo            *DataArchivingUserStruct // 发送者信息
-	senderInfoFlag        bool
-	receiverIds           []string // 接受者信息
-	receiverIdsFlag       bool
-	actionType            string // 操作类型
-	actionTypeFlag        bool
-	chatId                string // 会话ID
-	chatIdFlag            bool
-	actionTime            string // 消息动作时间戳ms
-	actionTimeFlag        bool
-	isSuperChat           bool // 是否超大群
-	isSuperChatFlag       bool
+	messageId     string // 消息id
+	messageIdFlag bool
+
+	messageType     int // 消息类型
+	messageTypeFlag bool
+
+	senderInfo     *DataArchivingUserStruct // 发送者信息
+	senderInfoFlag bool
+
+	receiverIds     []string // 接受者信息
+	receiverIdsFlag bool
+
+	actionType     string // 操作类型
+	actionTypeFlag bool
+
+	chatId     string // 会话ID
+	chatIdFlag bool
+
+	actionTime     string // 消息动作时间戳ms
+	actionTimeFlag bool
+
+	isSuperChat     bool // 是否超大群
+	isSuperChatFlag bool
+
 	isCrossTenantChat     bool // 是否跨租户群
 	isCrossTenantChatFlag bool
-	chatName              string // 会话名称
-	chatNameFlag          bool
-	content               string // 文本内容
-	contentFlag           bool
-	chatMode              string // 会话类型
-	chatModeFlag          bool
-	reactionType          string // reaction类型
-	reactionTypeFlag      bool
-	parentMsgId           string // 父id
-	parentMsgIdFlag       bool
+
+	chatName     string // 会话名称
+	chatNameFlag bool
+
+	content     string // 文本内容
+	contentFlag bool
+
+	chatMode     string // 会话类型
+	chatModeFlag bool
+
+	reactionType     string // reaction类型
+	reactionTypeFlag bool
+
+	parentMsgId     string // 父id
+	parentMsgIdFlag bool
 }
 
 func NewDataArchivingMessageStructBuilder() *DataArchivingMessageStructBuilder {
@@ -2719,15 +2975,19 @@ func (builder *DataArchivingUserBuilder) Build() *DataArchivingUser {
 
 type DataArchivingUserStruct struct {
 	Type *string `json:"type,omitempty"` // 类型
-	Id   *string `json:"id,omitempty"`   // 值
+
+	Id *string `json:"id,omitempty"` // 值
+
 	Name *string `json:"name,omitempty"` // 姓名
 }
 
 type DataArchivingUserStructBuilder struct {
 	type_    string // 类型
 	typeFlag bool
-	id       string // 值
-	idFlag   bool
+
+	id     string // 值
+	idFlag bool
+
 	name     string // 姓名
 	nameFlag bool
 }
@@ -2782,13 +3042,15 @@ func (builder *DataArchivingUserStructBuilder) Build() *DataArchivingUserStruct 
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -2826,69 +3088,107 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type DeviceApplyRecord struct {
-	ApplyId            *string `json:"apply_id,omitempty"`             // 设备申请单id
+	ApplyId *string `json:"apply_id,omitempty"` // 设备申请单id
+
 	DeviceTerminalType *string `json:"device_terminal_type,omitempty"` // 设备类型
-	Model              *string `json:"model,omitempty"`                // 设备型号
-	SerialNumber       *string `json:"serial_number,omitempty"`        // 生产序列号
-	Uuid               *string `json:"uuid,omitempty"`                 // 主板UUID
-	MacAddress         *string `json:"mac_address,omitempty"`          // Mac地址
-	Imei               *string `json:"imei,omitempty"`                 // 国际移动设备识别码
-	AndroidId          *string `json:"android_id,omitempty"`           // Android 标识符
-	GoogleAid          *string `json:"google_aid,omitempty"`           // google广告id
-	Idfa               *string `json:"idfa,omitempty"`                 // Ios广告主标识符
-	Idfv               *string `json:"idfv,omitempty"`                 // Ios 供应商标识符
-	ApplyStatus        *string `json:"apply_status,omitempty"`         // 申报状态
-	Operator           *UserId `json:"operator,omitempty"`             // 申请人
-	ApplyTime          *string `json:"apply_time,omitempty"`           // 申请时间
-	DiskSerialNumber   *string `json:"disk_serial_number,omitempty"`   // 硬盘序列号
-	DeviceOwnership    *string `json:"device_ownership,omitempty"`     // 设备归属
-	DeviceSystem       *string `json:"device_system,omitempty"`        // 操作系统
-	DeviceName         *string `json:"device_name,omitempty"`          // 设备名称
-	DeviceRecordId     *string `json:"device_record_id,omitempty"`     // 设备单ID
-	Aaid               *string `json:"aaid,omitempty"`                 // 鸿蒙系统应用匿名标识符
+
+	Model *string `json:"model,omitempty"` // 设备型号
+
+	SerialNumber *string `json:"serial_number,omitempty"` // 生产序列号
+
+	Uuid *string `json:"uuid,omitempty"` // 主板UUID
+
+	MacAddress *string `json:"mac_address,omitempty"` // Mac地址
+
+	Imei *string `json:"imei,omitempty"` // 国际移动设备识别码
+
+	AndroidId *string `json:"android_id,omitempty"` // Android 标识符
+
+	GoogleAid *string `json:"google_aid,omitempty"` // google广告id
+
+	Idfa *string `json:"idfa,omitempty"` // Ios广告主标识符
+
+	Idfv *string `json:"idfv,omitempty"` // Ios 供应商标识符
+
+	ApplyStatus *string `json:"apply_status,omitempty"` // 申报状态
+
+	Operator *UserId `json:"operator,omitempty"` // 申请人
+
+	ApplyTime *string `json:"apply_time,omitempty"` // 申请时间
+
+	DiskSerialNumber *string `json:"disk_serial_number,omitempty"` // 硬盘序列号
+
+	DeviceOwnership *string `json:"device_ownership,omitempty"` // 设备归属
+
+	DeviceSystem *string `json:"device_system,omitempty"` // 操作系统
+
+	DeviceName *string `json:"device_name,omitempty"` // 设备名称
+
+	DeviceRecordId *string `json:"device_record_id,omitempty"` // 设备单ID
+
+	Aaid *string `json:"aaid,omitempty"` // 鸿蒙系统应用匿名标识符
 }
 
 type DeviceApplyRecordBuilder struct {
-	applyId                string // 设备申请单id
-	applyIdFlag            bool
+	applyId     string // 设备申请单id
+	applyIdFlag bool
+
 	deviceTerminalType     string // 设备类型
 	deviceTerminalTypeFlag bool
-	model                  string // 设备型号
-	modelFlag              bool
-	serialNumber           string // 生产序列号
-	serialNumberFlag       bool
-	uuid                   string // 主板UUID
-	uuidFlag               bool
-	macAddress             string // Mac地址
-	macAddressFlag         bool
-	imei                   string // 国际移动设备识别码
-	imeiFlag               bool
-	androidId              string // Android 标识符
-	androidIdFlag          bool
-	googleAid              string // google广告id
-	googleAidFlag          bool
-	idfa                   string // Ios广告主标识符
-	idfaFlag               bool
-	idfv                   string // Ios 供应商标识符
-	idfvFlag               bool
-	applyStatus            string // 申报状态
-	applyStatusFlag        bool
-	operator               *UserId // 申请人
-	operatorFlag           bool
-	applyTime              string // 申请时间
-	applyTimeFlag          bool
-	diskSerialNumber       string // 硬盘序列号
-	diskSerialNumberFlag   bool
-	deviceOwnership        string // 设备归属
-	deviceOwnershipFlag    bool
-	deviceSystem           string // 操作系统
-	deviceSystemFlag       bool
-	deviceName             string // 设备名称
-	deviceNameFlag         bool
-	deviceRecordId         string // 设备单ID
-	deviceRecordIdFlag     bool
-	aaid                   string // 鸿蒙系统应用匿名标识符
-	aaidFlag               bool
+
+	model     string // 设备型号
+	modelFlag bool
+
+	serialNumber     string // 生产序列号
+	serialNumberFlag bool
+
+	uuid     string // 主板UUID
+	uuidFlag bool
+
+	macAddress     string // Mac地址
+	macAddressFlag bool
+
+	imei     string // 国际移动设备识别码
+	imeiFlag bool
+
+	androidId     string // Android 标识符
+	androidIdFlag bool
+
+	googleAid     string // google广告id
+	googleAidFlag bool
+
+	idfa     string // Ios广告主标识符
+	idfaFlag bool
+
+	idfv     string // Ios 供应商标识符
+	idfvFlag bool
+
+	applyStatus     string // 申报状态
+	applyStatusFlag bool
+
+	operator     *UserId // 申请人
+	operatorFlag bool
+
+	applyTime     string // 申请时间
+	applyTimeFlag bool
+
+	diskSerialNumber     string // 硬盘序列号
+	diskSerialNumberFlag bool
+
+	deviceOwnership     string // 设备归属
+	deviceOwnershipFlag bool
+
+	deviceSystem     string // 操作系统
+	deviceSystemFlag bool
+
+	deviceName     string // 设备名称
+	deviceNameFlag bool
+
+	deviceRecordId     string // 设备单ID
+	deviceRecordIdFlag bool
+
+	aaid     string // 鸿蒙系统应用匿名标识符
+	aaidFlag bool
 }
 
 func NewDeviceApplyRecordBuilder() *DeviceApplyRecordBuilder {
@@ -3161,69 +3461,107 @@ func (builder *DeviceApplyRecordBuilder) Build() *DeviceApplyRecord {
 }
 
 type DeviceRecord struct {
-	DeviceRecordId     *string `json:"device_record_id,omitempty"`     // 设备主键id
+	DeviceRecordId *string `json:"device_record_id,omitempty"` // 设备主键id
+
 	DeviceTerminalType *string `json:"device_terminal_type,omitempty"` // 设备类型
-	DeviceSystem       *string `json:"device_system,omitempty"`        // 操作系统
-	Model              *string `json:"model,omitempty"`                // 设备型号
-	DeviceName         *string `json:"device_name,omitempty"`          // 设备名称
-	SerialNumber       *string `json:"serial_number,omitempty"`        // 生产序列号
-	Uuid               *string `json:"uuid,omitempty"`                 // 主板UUID
-	MacAddress         *string `json:"mac_address,omitempty"`          // Mac地址
-	Imei               *string `json:"imei,omitempty"`                 // 国际移动设备识别码
-	AndroidId          *string `json:"android_id,omitempty"`           // Android 标识符
-	GoogleAid          *string `json:"google_aid,omitempty"`           // google广告id
-	Idfa               *string `json:"idfa,omitempty"`                 // Ios广告主标识符
-	Idfv               *string `json:"idfv,omitempty"`                 // Ios 供应商标识符
-	DeviceOwnership    *string `json:"device_ownership,omitempty"`     // 设备归属
-	DeviceSource       *string `json:"device_source,omitempty"`        // 设备来源
-	RegisterTime       *string `json:"register_time,omitempty"`        // 注册时间
-	DeviceCredibility  *string `json:"device_credibility,omitempty"`   // 设备状态
-	Version            *string `json:"version,omitempty"`              // 设备记录版本
-	DiskSerialNumber   *string `json:"disk_serial_number,omitempty"`   // 硬盘序列号
-	Aaid               *string `json:"aaid,omitempty"`                 // 鸿蒙系统应用匿名标识符
+
+	DeviceSystem *string `json:"device_system,omitempty"` // 操作系统
+
+	Model *string `json:"model,omitempty"` // 设备型号
+
+	DeviceName *string `json:"device_name,omitempty"` // 设备名称
+
+	SerialNumber *string `json:"serial_number,omitempty"` // 生产序列号
+
+	Uuid *string `json:"uuid,omitempty"` // 主板UUID
+
+	MacAddress *string `json:"mac_address,omitempty"` // Mac地址
+
+	Imei *string `json:"imei,omitempty"` // 国际移动设备识别码
+
+	AndroidId *string `json:"android_id,omitempty"` // Android 标识符
+
+	GoogleAid *string `json:"google_aid,omitempty"` // google广告id
+
+	Idfa *string `json:"idfa,omitempty"` // Ios广告主标识符
+
+	Idfv *string `json:"idfv,omitempty"` // Ios 供应商标识符
+
+	DeviceOwnership *string `json:"device_ownership,omitempty"` // 设备归属
+
+	DeviceSource *string `json:"device_source,omitempty"` // 设备来源
+
+	RegisterTime *string `json:"register_time,omitempty"` // 注册时间
+
+	DeviceCredibility *string `json:"device_credibility,omitempty"` // 设备状态
+
+	Version *string `json:"version,omitempty"` // 设备记录版本
+
+	DiskSerialNumber *string `json:"disk_serial_number,omitempty"` // 硬盘序列号
+
+	Aaid *string `json:"aaid,omitempty"` // 鸿蒙系统应用匿名标识符
 }
 
 type DeviceRecordBuilder struct {
-	deviceRecordId         string // 设备主键id
-	deviceRecordIdFlag     bool
+	deviceRecordId     string // 设备主键id
+	deviceRecordIdFlag bool
+
 	deviceTerminalType     string // 设备类型
 	deviceTerminalTypeFlag bool
-	deviceSystem           string // 操作系统
-	deviceSystemFlag       bool
-	model                  string // 设备型号
-	modelFlag              bool
-	deviceName             string // 设备名称
-	deviceNameFlag         bool
-	serialNumber           string // 生产序列号
-	serialNumberFlag       bool
-	uuid                   string // 主板UUID
-	uuidFlag               bool
-	macAddress             string // Mac地址
-	macAddressFlag         bool
-	imei                   string // 国际移动设备识别码
-	imeiFlag               bool
-	androidId              string // Android 标识符
-	androidIdFlag          bool
-	googleAid              string // google广告id
-	googleAidFlag          bool
-	idfa                   string // Ios广告主标识符
-	idfaFlag               bool
-	idfv                   string // Ios 供应商标识符
-	idfvFlag               bool
-	deviceOwnership        string // 设备归属
-	deviceOwnershipFlag    bool
-	deviceSource           string // 设备来源
-	deviceSourceFlag       bool
-	registerTime           string // 注册时间
-	registerTimeFlag       bool
-	deviceCredibility      string // 设备状态
-	deviceCredibilityFlag  bool
-	version                string // 设备记录版本
-	versionFlag            bool
-	diskSerialNumber       string // 硬盘序列号
-	diskSerialNumberFlag   bool
-	aaid                   string // 鸿蒙系统应用匿名标识符
-	aaidFlag               bool
+
+	deviceSystem     string // 操作系统
+	deviceSystemFlag bool
+
+	model     string // 设备型号
+	modelFlag bool
+
+	deviceName     string // 设备名称
+	deviceNameFlag bool
+
+	serialNumber     string // 生产序列号
+	serialNumberFlag bool
+
+	uuid     string // 主板UUID
+	uuidFlag bool
+
+	macAddress     string // Mac地址
+	macAddressFlag bool
+
+	imei     string // 国际移动设备识别码
+	imeiFlag bool
+
+	androidId     string // Android 标识符
+	androidIdFlag bool
+
+	googleAid     string // google广告id
+	googleAidFlag bool
+
+	idfa     string // Ios广告主标识符
+	idfaFlag bool
+
+	idfv     string // Ios 供应商标识符
+	idfvFlag bool
+
+	deviceOwnership     string // 设备归属
+	deviceOwnershipFlag bool
+
+	deviceSource     string // 设备来源
+	deviceSourceFlag bool
+
+	registerTime     string // 注册时间
+	registerTimeFlag bool
+
+	deviceCredibility     string // 设备状态
+	deviceCredibilityFlag bool
+
+	version     string // 设备记录版本
+	versionFlag bool
+
+	diskSerialNumber     string // 硬盘序列号
+	diskSerialNumberFlag bool
+
+	aaid     string // 鸿蒙系统应用匿名标识符
+	aaidFlag bool
 }
 
 func NewDeviceRecordBuilder() *DeviceRecordBuilder {
@@ -3497,24 +3835,32 @@ func (builder *DeviceRecordBuilder) Build() *DeviceRecord {
 }
 
 type DirectoryItems struct {
-	EntityId         *string `json:"entity_id,omitempty"`          // 实体的 id
-	MailAddress      *string `json:"mail_address,omitempty"`       // 邮箱地址。当通过 mailbox 查询实体时，返回 mail address，如果没有，则返回空。
-	EntityLocation   *string `json:"entity_location,omitempty"`    // 实体的数据驻留地
+	EntityId *string `json:"entity_id,omitempty"` // 实体的 id
+
+	MailAddress *string `json:"mail_address,omitempty"` // 邮箱地址。当通过 mailbox 查询实体时，返回 mail address，如果没有，则返回空。
+
+	EntityLocation *string `json:"entity_location,omitempty"` // 实体的数据驻留地
+
 	EntityCreateTime *string `json:"entity_create_time,omitempty"` // 实体创建时间（毫秒级时间戳）
-	EntityType       *string `json:"entity_type,omitempty"`        // 实体的类型
+
+	EntityType *string `json:"entity_type,omitempty"` // 实体的类型
 }
 
 type DirectoryItemsBuilder struct {
-	entityId             string // 实体的 id
-	entityIdFlag         bool
-	mailAddress          string // 邮箱地址。当通过 mailbox 查询实体时，返回 mail address，如果没有，则返回空。
-	mailAddressFlag      bool
-	entityLocation       string // 实体的数据驻留地
-	entityLocationFlag   bool
+	entityId     string // 实体的 id
+	entityIdFlag bool
+
+	mailAddress     string // 邮箱地址。当通过 mailbox 查询实体时，返回 mail address，如果没有，则返回空。
+	mailAddressFlag bool
+
+	entityLocation     string // 实体的数据驻留地
+	entityLocationFlag bool
+
 	entityCreateTime     string // 实体创建时间（毫秒级时间戳）
 	entityCreateTimeFlag bool
-	entityType           string // 实体的类型
-	entityTypeFlag       bool
+
+	entityType     string // 实体的类型
+	entityTypeFlag bool
 }
 
 func NewDirectoryItemsBuilder() *DirectoryItemsBuilder {
@@ -3593,21 +3939,27 @@ func (builder *DirectoryItemsBuilder) Build() *DirectoryItems {
 }
 
 type DlpDetectModeProofContext struct {
-	DetectMode    *int               `json:"detect_mode,omitempty"`    // 检测类型
-	DetectName    *string            `json:"detect_name,omitempty"`    // 检测类型名称
+	DetectMode *int `json:"detect_mode,omitempty"` // 检测类型
+
+	DetectName *string `json:"detect_name,omitempty"` // 检测类型名称
+
 	ProofContexts []*DlpProofContext `json:"proof_contexts,omitempty"` // 命中片段
-	HitCount      *int               `json:"hit_count,omitempty"`      // 命中次数
+
+	HitCount *int `json:"hit_count,omitempty"` // 命中次数
 }
 
 type DlpDetectModeProofContextBuilder struct {
-	detectMode        int // 检测类型
-	detectModeFlag    bool
-	detectName        string // 检测类型名称
-	detectNameFlag    bool
+	detectMode     int // 检测类型
+	detectModeFlag bool
+
+	detectName     string // 检测类型名称
+	detectNameFlag bool
+
 	proofContexts     []*DlpProofContext // 命中片段
 	proofContextsFlag bool
-	hitCount          int // 命中次数
-	hitCountFlag      bool
+
+	hitCount     int // 命中次数
+	hitCountFlag bool
 }
 
 func NewDlpDetectModeProofContextBuilder() *DlpDetectModeProofContextBuilder {
@@ -3672,31 +4024,45 @@ func (builder *DlpDetectModeProofContextBuilder) Build() *DlpDetectModeProofCont
 }
 
 type DlpEvidenceDetail struct {
-	KeywordHits     []string             `json:"keyword_hits,omitempty"`       // 命中关键词
-	RegularHits     []string             `json:"regular_hits,omitempty"`       // 命中正则表达式
-	SensitiveHits   []string             `json:"sensitive_hits,omitempty"`     // 命中敏感信息类型
-	FileSizeHits    []string             `json:"file_size_hits,omitempty"`     // 命中文件大小
-	FileTypeHits    []string             `json:"file_type_hits,omitempty"`     // 命中文件类型
-	FileNameExtHits []string             `json:"file_name_ext_hits,omitempty"` // 命中文件拓展名
-	TriggerSnippets []*DlpPolicyHitProof `json:"trigger_snippets,omitempty"`   // 命中片段
-	SecureLabelHits []string             `json:"secure_label_hits,omitempty"`  // 命中密级标签
+	KeywordHits []string `json:"keyword_hits,omitempty"` // 命中关键词
+
+	RegularHits []string `json:"regular_hits,omitempty"` // 命中正则表达式
+
+	SensitiveHits []string `json:"sensitive_hits,omitempty"` // 命中敏感信息类型
+
+	FileSizeHits []string `json:"file_size_hits,omitempty"` // 命中文件大小
+
+	FileTypeHits []string `json:"file_type_hits,omitempty"` // 命中文件类型
+
+	FileNameExtHits []string `json:"file_name_ext_hits,omitempty"` // 命中文件拓展名
+
+	TriggerSnippets []*DlpPolicyHitProof `json:"trigger_snippets,omitempty"` // 命中片段
+
+	SecureLabelHits []string `json:"secure_label_hits,omitempty"` // 命中密级标签
 }
 
 type DlpEvidenceDetailBuilder struct {
-	keywordHits         []string // 命中关键词
-	keywordHitsFlag     bool
-	regularHits         []string // 命中正则表达式
-	regularHitsFlag     bool
-	sensitiveHits       []string // 命中敏感信息类型
-	sensitiveHitsFlag   bool
-	fileSizeHits        []string // 命中文件大小
-	fileSizeHitsFlag    bool
-	fileTypeHits        []string // 命中文件类型
-	fileTypeHitsFlag    bool
+	keywordHits     []string // 命中关键词
+	keywordHitsFlag bool
+
+	regularHits     []string // 命中正则表达式
+	regularHitsFlag bool
+
+	sensitiveHits     []string // 命中敏感信息类型
+	sensitiveHitsFlag bool
+
+	fileSizeHits     []string // 命中文件大小
+	fileSizeHitsFlag bool
+
+	fileTypeHits     []string // 命中文件类型
+	fileTypeHitsFlag bool
+
 	fileNameExtHits     []string // 命中文件拓展名
 	fileNameExtHitsFlag bool
+
 	triggerSnippets     []*DlpPolicyHitProof // 命中片段
 	triggerSnippetsFlag bool
+
 	secureLabelHits     []string // 命中密级标签
 	secureLabelHitsFlag bool
 }
@@ -3808,16 +4174,20 @@ func (builder *DlpEvidenceDetailBuilder) Build() *DlpEvidenceDetail {
 }
 
 type DlpExecuteEvidence struct {
-	KeywordHits   []string `json:"keyword_hits,omitempty"`   // 关键字
-	RegularHits   []string `json:"regular_hits,omitempty"`   // 正则表达式列表
+	KeywordHits []string `json:"keyword_hits,omitempty"` // 关键字
+
+	RegularHits []string `json:"regular_hits,omitempty"` // 正则表达式列表
+
 	SensitiveHits []string `json:"sensitive_hits,omitempty"` // 敏感信息类型列表
 }
 
 type DlpExecuteEvidenceBuilder struct {
-	keywordHits       []string // 关键字
-	keywordHitsFlag   bool
-	regularHits       []string // 正则表达式列表
-	regularHitsFlag   bool
+	keywordHits     []string // 关键字
+	keywordHitsFlag bool
+
+	regularHits     []string // 正则表达式列表
+	regularHitsFlag bool
+
 	sensitiveHits     []string // 敏感信息类型列表
 	sensitiveHitsFlag bool
 }
@@ -3869,93 +4239,147 @@ func (builder *DlpExecuteEvidenceBuilder) Build() *DlpExecuteEvidence {
 }
 
 type DlpExecuteLog struct {
-	ApplicableService *string            `json:"applicable_service,omitempty"`  // 应用业务线
-	UserName          *string            `json:"user_name,omitempty"`           // 用户名
-	UserId            *string            `json:"user_id,omitempty"`             // 用户id
-	Trigger           *string            `json:"trigger,omitempty"`             // 触发条件
-	Time              *string            `json:"time,omitempty"`                // 时间
-	SystemAction      *string            `json:"system_action,omitempty"`       // 系统执行动作
-	SenderName        *string            `json:"sender_name,omitempty"`         // 消息发送者名称
-	SenderId          *string            `json:"sender_id,omitempty"`           // 消息发送者ID
-	RecipientName     *string            `json:"recipient_name,omitempty"`      // 消息接收者名称
-	RecipientId       *string            `json:"recipient_id,omitempty"`        // 消息接收者ID
-	ChatName          *string            `json:"chat_name,omitempty"`           // 会话名称
-	ChatId            *string            `json:"chat_id,omitempty"`             // 会话ID
-	MessageId         *string            `json:"message_id,omitempty"`          // 消息ID
-	MessageContent    *string            `json:"message_content,omitempty"`     // 消息内容
-	AliasIngroup      *string            `json:"alias_ingroup,omitempty"`       // 群昵称
-	GroupDescription  *string            `json:"group_description,omitempty"`   // 群描述
-	GroupTabContent   *string            `json:"group_tab_content,omitempty"`   // 群标签页内容
-	FileName          *string            `json:"file_name,omitempty"`           // 文件名称
-	FileKey           *string            `json:"file_key,omitempty"`            // 文件key
-	DocumentOwnerName *string            `json:"document_owner_name,omitempty"` // 文档所有者名称
-	DocumentOwnerId   *string            `json:"document_owner_id,omitempty"`   // 文档所有者ID
-	DocumentName      *string            `json:"document_name,omitempty"`       // 文档名称
-	DocumentType      *string            `json:"document_type,omitempty"`       // 云文档类型，如文档、电子表格等
-	DocumentLink      *string            `json:"document_link,omitempty"`       // 文档链接
-	EvidenceDetail    *DlpEvidenceDetail `json:"evidence_detail,omitempty"`     // 证据详情
-	HitPolicies       []*DlpHitPolicy    `json:"hit_policies,omitempty"`        // 命中策略
-	FileToken         *string            `json:"file_token,omitempty"`          // 文件token
-	TriggerEventType  *string            `json:"trigger_event_type,omitempty"`  // 触发事件类型
+	ApplicableService *string `json:"applicable_service,omitempty"` // 应用业务线
+
+	UserName *string `json:"user_name,omitempty"` // 用户名
+
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	Trigger *string `json:"trigger,omitempty"` // 触发条件
+
+	Time *string `json:"time,omitempty"` // 时间
+
+	SystemAction *string `json:"system_action,omitempty"` // 系统执行动作
+
+	SenderName *string `json:"sender_name,omitempty"` // 消息发送者名称
+
+	SenderId *string `json:"sender_id,omitempty"` // 消息发送者ID
+
+	RecipientName *string `json:"recipient_name,omitempty"` // 消息接收者名称
+
+	RecipientId *string `json:"recipient_id,omitempty"` // 消息接收者ID
+
+	ChatName *string `json:"chat_name,omitempty"` // 会话名称
+
+	ChatId *string `json:"chat_id,omitempty"` // 会话ID
+
+	MessageId *string `json:"message_id,omitempty"` // 消息ID
+
+	MessageContent *string `json:"message_content,omitempty"` // 消息内容
+
+	AliasIngroup *string `json:"alias_ingroup,omitempty"` // 群昵称
+
+	GroupDescription *string `json:"group_description,omitempty"` // 群描述
+
+	GroupTabContent *string `json:"group_tab_content,omitempty"` // 群标签页内容
+
+	FileName *string `json:"file_name,omitempty"` // 文件名称
+
+	FileKey *string `json:"file_key,omitempty"` // 文件key
+
+	DocumentOwnerName *string `json:"document_owner_name,omitempty"` // 文档所有者名称
+
+	DocumentOwnerId *string `json:"document_owner_id,omitempty"` // 文档所有者ID
+
+	DocumentName *string `json:"document_name,omitempty"` // 文档名称
+
+	DocumentType *string `json:"document_type,omitempty"` // 云文档类型，如文档、电子表格等
+
+	DocumentLink *string `json:"document_link,omitempty"` // 文档链接
+
+	EvidenceDetail *DlpEvidenceDetail `json:"evidence_detail,omitempty"` // 证据详情
+
+	HitPolicies []*DlpHitPolicy `json:"hit_policies,omitempty"` // 命中策略
+
+	FileToken *string `json:"file_token,omitempty"` // 文件token
+
+	TriggerEventType *string `json:"trigger_event_type,omitempty"` // 触发事件类型
 }
 
 type DlpExecuteLogBuilder struct {
 	applicableService     string // 应用业务线
 	applicableServiceFlag bool
-	userName              string // 用户名
-	userNameFlag          bool
-	userId                string // 用户id
-	userIdFlag            bool
-	trigger               string // 触发条件
-	triggerFlag           bool
-	time                  string // 时间
-	timeFlag              bool
-	systemAction          string // 系统执行动作
-	systemActionFlag      bool
-	senderName            string // 消息发送者名称
-	senderNameFlag        bool
-	senderId              string // 消息发送者ID
-	senderIdFlag          bool
-	recipientName         string // 消息接收者名称
-	recipientNameFlag     bool
-	recipientId           string // 消息接收者ID
-	recipientIdFlag       bool
-	chatName              string // 会话名称
-	chatNameFlag          bool
-	chatId                string // 会话ID
-	chatIdFlag            bool
-	messageId             string // 消息ID
-	messageIdFlag         bool
-	messageContent        string // 消息内容
-	messageContentFlag    bool
-	aliasIngroup          string // 群昵称
-	aliasIngroupFlag      bool
-	groupDescription      string // 群描述
-	groupDescriptionFlag  bool
-	groupTabContent       string // 群标签页内容
-	groupTabContentFlag   bool
-	fileName              string // 文件名称
-	fileNameFlag          bool
-	fileKey               string // 文件key
-	fileKeyFlag           bool
+
+	userName     string // 用户名
+	userNameFlag bool
+
+	userId     string // 用户id
+	userIdFlag bool
+
+	trigger     string // 触发条件
+	triggerFlag bool
+
+	time     string // 时间
+	timeFlag bool
+
+	systemAction     string // 系统执行动作
+	systemActionFlag bool
+
+	senderName     string // 消息发送者名称
+	senderNameFlag bool
+
+	senderId     string // 消息发送者ID
+	senderIdFlag bool
+
+	recipientName     string // 消息接收者名称
+	recipientNameFlag bool
+
+	recipientId     string // 消息接收者ID
+	recipientIdFlag bool
+
+	chatName     string // 会话名称
+	chatNameFlag bool
+
+	chatId     string // 会话ID
+	chatIdFlag bool
+
+	messageId     string // 消息ID
+	messageIdFlag bool
+
+	messageContent     string // 消息内容
+	messageContentFlag bool
+
+	aliasIngroup     string // 群昵称
+	aliasIngroupFlag bool
+
+	groupDescription     string // 群描述
+	groupDescriptionFlag bool
+
+	groupTabContent     string // 群标签页内容
+	groupTabContentFlag bool
+
+	fileName     string // 文件名称
+	fileNameFlag bool
+
+	fileKey     string // 文件key
+	fileKeyFlag bool
+
 	documentOwnerName     string // 文档所有者名称
 	documentOwnerNameFlag bool
-	documentOwnerId       string // 文档所有者ID
-	documentOwnerIdFlag   bool
-	documentName          string // 文档名称
-	documentNameFlag      bool
-	documentType          string // 云文档类型，如文档、电子表格等
-	documentTypeFlag      bool
-	documentLink          string // 文档链接
-	documentLinkFlag      bool
-	evidenceDetail        *DlpEvidenceDetail // 证据详情
-	evidenceDetailFlag    bool
-	hitPolicies           []*DlpHitPolicy // 命中策略
-	hitPoliciesFlag       bool
-	fileToken             string // 文件token
-	fileTokenFlag         bool
-	triggerEventType      string // 触发事件类型
-	triggerEventTypeFlag  bool
+
+	documentOwnerId     string // 文档所有者ID
+	documentOwnerIdFlag bool
+
+	documentName     string // 文档名称
+	documentNameFlag bool
+
+	documentType     string // 云文档类型，如文档、电子表格等
+	documentTypeFlag bool
+
+	documentLink     string // 文档链接
+	documentLinkFlag bool
+
+	evidenceDetail     *DlpEvidenceDetail // 证据详情
+	evidenceDetailFlag bool
+
+	hitPolicies     []*DlpHitPolicy // 命中策略
+	hitPoliciesFlag bool
+
+	fileToken     string // 文件token
+	fileTokenFlag bool
+
+	triggerEventType     string // 触发事件类型
+	triggerEventTypeFlag bool
 }
 
 func NewDlpExecuteLogBuilder() *DlpExecuteLogBuilder {
@@ -4331,13 +4755,15 @@ func (builder *DlpExecuteLogBuilder) Build() *DlpExecuteLog {
 }
 
 type DlpHitPolicy struct {
-	PolicyId   *string `json:"policy_id,omitempty"`   // 策略ID
+	PolicyId *string `json:"policy_id,omitempty"` // 策略ID
+
 	PolicyName *string `json:"policy_name,omitempty"` // 策略名称
 }
 
 type DlpHitPolicyBuilder struct {
-	policyId       string // 策略ID
-	policyIdFlag   bool
+	policyId     string // 策略ID
+	policyIdFlag bool
+
 	policyName     string // 策略名称
 	policyNameFlag bool
 }
@@ -4379,13 +4805,15 @@ func (builder *DlpHitPolicyBuilder) Build() *DlpHitPolicy {
 }
 
 type DlpPolicyHitProof struct {
-	PolicyId                *string                      `json:"policy_id,omitempty"`                  // dlp策略ID
+	PolicyId *string `json:"policy_id,omitempty"` // dlp策略ID
+
 	DetectModeProofContexts []*DlpDetectModeProofContext `json:"detect_mode_proof_contexts,omitempty"` // 命中片段证据详情
 }
 
 type DlpPolicyHitProofBuilder struct {
-	policyId                    string // dlp策略ID
-	policyIdFlag                bool
+	policyId     string // dlp策略ID
+	policyIdFlag bool
+
 	detectModeProofContexts     []*DlpDetectModeProofContext // 命中片段证据详情
 	detectModeProofContextsFlag bool
 }
@@ -4426,13 +4854,15 @@ func (builder *DlpPolicyHitProofBuilder) Build() *DlpPolicyHitProof {
 }
 
 type DlpProofContext struct {
-	HitContent     *string `json:"hit_content,omitempty"`     // 命中内容
+	HitContent *string `json:"hit_content,omitempty"` // 命中内容
+
 	ContextSnippet *string `json:"context_snippet,omitempty"` // 上下文片段
 }
 
 type DlpProofContextBuilder struct {
-	hitContent         string // 命中内容
-	hitContentFlag     bool
+	hitContent     string // 命中内容
+	hitContentFlag bool
+
 	contextSnippet     string // 上下文片段
 	contextSnippetFlag bool
 }
@@ -4474,27 +4904,37 @@ func (builder *DlpProofContextBuilder) Build() *DlpProofContext {
 }
 
 type Document struct {
-	Token        *string     `json:"token,omitempty"`         // 文档唯一标识token
-	Title        *string     `json:"title,omitempty"`         // 文档标题
-	UpdateTime   *int        `json:"update_time,omitempty"`   // 文档更新时间戳
-	ObjectStatus *int        `json:"object_status,omitempty"` // 文档状态
-	ObjectType   *int        `json:"object_type,omitempty"`   // 文档类型
-	Owner        *SimpleUser `json:"owner,omitempty"`         // 文档所有者
+	Token *string `json:"token,omitempty"` // 文档唯一标识token
+
+	Title *string `json:"title,omitempty"` // 文档标题
+
+	UpdateTime *int `json:"update_time,omitempty"` // 文档更新时间戳
+
+	ObjectStatus *int `json:"object_status,omitempty"` // 文档状态
+
+	ObjectType *int `json:"object_type,omitempty"` // 文档类型
+
+	Owner *SimpleUser `json:"owner,omitempty"` // 文档所有者
 }
 
 type DocumentBuilder struct {
-	token            string // 文档唯一标识token
-	tokenFlag        bool
-	title            string // 文档标题
-	titleFlag        bool
-	updateTime       int // 文档更新时间戳
-	updateTimeFlag   bool
+	token     string // 文档唯一标识token
+	tokenFlag bool
+
+	title     string // 文档标题
+	titleFlag bool
+
+	updateTime     int // 文档更新时间戳
+	updateTimeFlag bool
+
 	objectStatus     int // 文档状态
 	objectStatusFlag bool
-	objectType       int // 文档类型
-	objectTypeFlag   bool
-	owner            *SimpleUser // 文档所有者
-	ownerFlag        bool
+
+	objectType     int // 文档类型
+	objectTypeFlag bool
+
+	owner     *SimpleUser // 文档所有者
+	ownerFlag bool
 }
 
 func NewDocumentBuilder() *DocumentBuilder {
@@ -4617,25 +5057,35 @@ func (builder *DownloadTokenBuilder) Build() *DownloadToken {
 }
 
 type Email struct {
-	Id           *string `json:"id,omitempty"`            // email ID
-	Title        *string `json:"title,omitempty"`         // email 标题
-	OwnerType    *int    `json:"owner_type,omitempty"`    // email owner类型
-	CreateTime   *string `json:"create_time,omitempty"`   // email 创建时间, 单位秒
-	OwnerUserId  *string `json:"owner_user_id,omitempty"` // 企业用户ID
+	Id *string `json:"id,omitempty"` // email ID
+
+	Title *string `json:"title,omitempty"` // email 标题
+
+	OwnerType *int `json:"owner_type,omitempty"` // email owner类型
+
+	CreateTime *string `json:"create_time,omitempty"` // email 创建时间, 单位秒
+
+	OwnerUserId *string `json:"owner_user_id,omitempty"` // 企业用户ID
+
 	OwnerAddress *string `json:"owner_address,omitempty"` // 公共邮箱地址
 }
 
 type EmailBuilder struct {
-	id               string // email ID
-	idFlag           bool
-	title            string // email 标题
-	titleFlag        bool
-	ownerType        int // email owner类型
-	ownerTypeFlag    bool
-	createTime       string // email 创建时间, 单位秒
-	createTimeFlag   bool
-	ownerUserId      string // 企业用户ID
-	ownerUserIdFlag  bool
+	id     string // email ID
+	idFlag bool
+
+	title     string // email 标题
+	titleFlag bool
+
+	ownerType     int // email owner类型
+	ownerTypeFlag bool
+
+	createTime     string // email 创建时间, 单位秒
+	createTimeFlag bool
+
+	ownerUserId     string // 企业用户ID
+	ownerUserIdFlag bool
+
 	ownerAddress     string // 公共邮箱地址
 	ownerAddressFlag bool
 }
@@ -4729,30 +5179,42 @@ func (builder *EmailBuilder) Build() *Email {
 }
 
 type EmailFilter struct {
-	OwnerUseridList  []string   `json:"owner_userid_list,omitempty"`  // 企业用户列表
-	OwnerAddressList []string   `json:"owner_address_list,omitempty"` // 公共邮箱列表
-	TimeRange        *TimeRange `json:"time_range,omitempty"`         // 查询时间范围
-	Senders          []string   `json:"senders,omitempty"`            // 发件人邮箱列表
-	Recipients       []string   `json:"recipients,omitempty"`         // 收件人邮箱列表
-	EmailTitle       *string    `json:"email_title,omitempty"`        // 邮件标题
-	EmailId          *string    `json:"email_id,omitempty"`           // 邮件ID
+	OwnerUseridList []string `json:"owner_userid_list,omitempty"` // 企业用户列表
+
+	OwnerAddressList []string `json:"owner_address_list,omitempty"` // 公共邮箱列表
+
+	TimeRange *TimeRange `json:"time_range,omitempty"` // 查询时间范围
+
+	Senders []string `json:"senders,omitempty"` // 发件人邮箱列表
+
+	Recipients []string `json:"recipients,omitempty"` // 收件人邮箱列表
+
+	EmailTitle *string `json:"email_title,omitempty"` // 邮件标题
+
+	EmailId *string `json:"email_id,omitempty"` // 邮件ID
 }
 
 type EmailFilterBuilder struct {
-	ownerUseridList      []string // 企业用户列表
-	ownerUseridListFlag  bool
+	ownerUseridList     []string // 企业用户列表
+	ownerUseridListFlag bool
+
 	ownerAddressList     []string // 公共邮箱列表
 	ownerAddressListFlag bool
-	timeRange            *TimeRange // 查询时间范围
-	timeRangeFlag        bool
-	senders              []string // 发件人邮箱列表
-	sendersFlag          bool
-	recipients           []string // 收件人邮箱列表
-	recipientsFlag       bool
-	emailTitle           string // 邮件标题
-	emailTitleFlag       bool
-	emailId              string // 邮件ID
-	emailIdFlag          bool
+
+	timeRange     *TimeRange // 查询时间范围
+	timeRangeFlag bool
+
+	senders     []string // 发件人邮箱列表
+	sendersFlag bool
+
+	recipients     []string // 收件人邮箱列表
+	recipientsFlag bool
+
+	emailTitle     string // 邮件标题
+	emailTitleFlag bool
+
+	emailId     string // 邮件ID
+	emailIdFlag bool
 }
 
 func NewEmailFilterBuilder() *EmailFilterBuilder {
@@ -4855,24 +5317,32 @@ type File struct {
 }
 
 type FileRiskDetectionRecord struct {
-	RecordId          *string `json:"record_id,omitempty"`            // 文件送检记录主键
-	FileUrl           *string `json:"file_url,omitempty"`             // 文件下载链接
+	RecordId *string `json:"record_id,omitempty"` // 文件送检记录主键
+
+	FileUrl *string `json:"file_url,omitempty"` // 文件下载链接
+
 	FileUrlExpireTime *string `json:"file_url_expire_time,omitempty"` // 文件下载链接失效时间戳（秒）
-	FileSize          *string `json:"file_size,omitempty"`            // 文件大小（字节）
-	TriggerReason     *int    `json:"trigger_reason,omitempty"`       // 触发送检原因
+
+	FileSize *string `json:"file_size,omitempty"` // 文件大小（字节）
+
+	TriggerReason *int `json:"trigger_reason,omitempty"` // 触发送检原因
 }
 
 type FileRiskDetectionRecordBuilder struct {
-	recordId              string // 文件送检记录主键
-	recordIdFlag          bool
-	fileUrl               string // 文件下载链接
-	fileUrlFlag           bool
+	recordId     string // 文件送检记录主键
+	recordIdFlag bool
+
+	fileUrl     string // 文件下载链接
+	fileUrlFlag bool
+
 	fileUrlExpireTime     string // 文件下载链接失效时间戳（秒）
 	fileUrlExpireTimeFlag bool
-	fileSize              string // 文件大小（字节）
-	fileSizeFlag          bool
-	triggerReason         int // 触发送检原因
-	triggerReasonFlag     bool
+
+	fileSize     string // 文件大小（字节）
+	fileSizeFlag bool
+
+	triggerReason     int // 触发送检原因
+	triggerReasonFlag bool
 }
 
 func NewFileRiskDetectionRecordBuilder() *FileRiskDetectionRecordBuilder {
@@ -4951,13 +5421,15 @@ func (builder *FileRiskDetectionRecordBuilder) Build() *FileRiskDetectionRecord 
 }
 
 type FileRiskDetectionRecordResult struct {
-	Status  *string `json:"status,omitempty"`   // 检测状态
+	Status *string `json:"status,omitempty"` // 检测状态
+
 	RiskTag *string `json:"risk_tag,omitempty"` // 风险类型
 }
 
 type FileRiskDetectionRecordResultBuilder struct {
-	status      string // 检测状态
-	statusFlag  bool
+	status     string // 检测状态
+	statusFlag bool
+
 	riskTag     string // 风险类型
 	riskTagFlag bool
 }
@@ -4999,33 +5471,47 @@ func (builder *FileRiskDetectionRecordResultBuilder) Build() *FileRiskDetectionR
 }
 
 type GwCommon struct {
-	Locale            *string `json:"locale,omitempty"`              // 地区
-	ReportTime        *string `json:"report_time,omitempty"`         // 上报时间戳（单位：纳秒）
-	SessionUuid       *string `json:"session_uuid,omitempty"`        // session唯一id
-	TerminalType      *string `json:"terminal_type,omitempty"`       // 终端类型
-	UserId            *UserId `json:"user_id,omitempty"`             // 用户ID
+	Locale *string `json:"locale,omitempty"` // 地区
+
+	ReportTime *string `json:"report_time,omitempty"` // 上报时间戳（单位：纳秒）
+
+	SessionUuid *string `json:"session_uuid,omitempty"` // session唯一id
+
+	TerminalType *string `json:"terminal_type,omitempty"` // 终端类型
+
+	UserId *UserId `json:"user_id,omitempty"` // 用户ID
+
 	OpenplatformAppId *string `json:"openplatform_app_id,omitempty"` // 开放平台应用ID
-	RequestId         *string `json:"request_id,omitempty"`          // 请求标识
-	LogId             *string `json:"log_id,omitempty"`              // 链路标识
+
+	RequestId *string `json:"request_id,omitempty"` // 请求标识
+
+	LogId *string `json:"log_id,omitempty"` // 链路标识
 }
 
 type GwCommonBuilder struct {
-	locale                string // 地区
-	localeFlag            bool
-	reportTime            string // 上报时间戳（单位：纳秒）
-	reportTimeFlag        bool
-	sessionUuid           string // session唯一id
-	sessionUuidFlag       bool
-	terminalType          string // 终端类型
-	terminalTypeFlag      bool
-	userId                *UserId // 用户ID
-	userIdFlag            bool
+	locale     string // 地区
+	localeFlag bool
+
+	reportTime     string // 上报时间戳（单位：纳秒）
+	reportTimeFlag bool
+
+	sessionUuid     string // session唯一id
+	sessionUuidFlag bool
+
+	terminalType     string // 终端类型
+	terminalTypeFlag bool
+
+	userId     *UserId // 用户ID
+	userIdFlag bool
+
 	openplatformAppId     string // 开放平台应用ID
 	openplatformAppIdFlag bool
-	requestId             string // 请求标识
-	requestIdFlag         bool
-	logId                 string // 链路标识
-	logIdFlag             bool
+
+	requestId     string // 请求标识
+	requestIdFlag bool
+
+	logId     string // 链路标识
+	logIdFlag bool
 }
 
 func NewGwCommonBuilder() *GwCommonBuilder {
@@ -5142,39 +5628,57 @@ func (builder *GwCommonBuilder) Build() *GwCommon {
 }
 
 type GwRequest struct {
-	Host       *string  `json:"host,omitempty"`        // 域名
-	Path       *string  `json:"path,omitempty"`        // 请求路径
+	Host *string `json:"host,omitempty"` // 域名
+
+	Path *string `json:"path,omitempty"` // 请求路径
+
 	PathParams []*Param `json:"path_params,omitempty"` // 路径中的参数
-	Query      *string  `json:"query,omitempty"`       // 请求经网关解析后的query参数
-	Method     *string  `json:"method,omitempty"`      // 请求方法
-	UserAgent  *string  `json:"user_agent,omitempty"`  // 访问用户代理字段
-	ClientIp   *string  `json:"client_ip,omitempty"`   // 来源页面地址
-	Referer    *string  `json:"referer,omitempty"`     // referer防盗链
-	Origin     *string  `json:"origin,omitempty"`      // 来源页面域名
-	Header     *string  `json:"header,omitempty"`      // 请求头
+
+	Query *string `json:"query,omitempty"` // 请求经网关解析后的query参数
+
+	Method *string `json:"method,omitempty"` // 请求方法
+
+	UserAgent *string `json:"user_agent,omitempty"` // 访问用户代理字段
+
+	ClientIp *string `json:"client_ip,omitempty"` // 来源页面地址
+
+	Referer *string `json:"referer,omitempty"` // referer防盗链
+
+	Origin *string `json:"origin,omitempty"` // 来源页面域名
+
+	Header *string `json:"header,omitempty"` // 请求头
 }
 
 type GwRequestBuilder struct {
-	host           string // 域名
-	hostFlag       bool
-	path           string // 请求路径
-	pathFlag       bool
+	host     string // 域名
+	hostFlag bool
+
+	path     string // 请求路径
+	pathFlag bool
+
 	pathParams     []*Param // 路径中的参数
 	pathParamsFlag bool
-	query          string // 请求经网关解析后的query参数
-	queryFlag      bool
-	method         string // 请求方法
-	methodFlag     bool
-	userAgent      string // 访问用户代理字段
-	userAgentFlag  bool
-	clientIp       string // 来源页面地址
-	clientIpFlag   bool
-	referer        string // referer防盗链
-	refererFlag    bool
-	origin         string // 来源页面域名
-	originFlag     bool
-	header         string // 请求头
-	headerFlag     bool
+
+	query     string // 请求经网关解析后的query参数
+	queryFlag bool
+
+	method     string // 请求方法
+	methodFlag bool
+
+	userAgent     string // 访问用户代理字段
+	userAgentFlag bool
+
+	clientIp     string // 来源页面地址
+	clientIpFlag bool
+
+	referer     string // referer防盗链
+	refererFlag bool
+
+	origin     string // 来源页面域名
+	originFlag bool
+
+	header     string // 请求头
+	headerFlag bool
 }
 
 func NewGwRequestBuilder() *GwRequestBuilder {
@@ -5317,15 +5821,17 @@ func (builder *GwRequestBuilder) Build() *GwRequest {
 }
 
 type GwResponse struct {
-	StatusCode *int    `json:"status_code,omitempty"` // HTTP响应状态码
-	Header     *string `json:"header,omitempty"`      // 返回头
+	StatusCode *int `json:"status_code,omitempty"` // HTTP响应状态码
+
+	Header *string `json:"header,omitempty"` // 返回头
 }
 
 type GwResponseBuilder struct {
 	statusCode     int // HTTP响应状态码
 	statusCodeFlag bool
-	header         string // 返回头
-	headerFlag     bool
+
+	header     string // 返回头
+	headerFlag bool
 }
 
 func NewGwResponseBuilder() *GwResponseBuilder {
@@ -5366,20 +5872,26 @@ func (builder *GwResponseBuilder) Build() *GwResponse {
 
 type KeyPerson struct {
 	KeyPersonId *string `json:"key_person_id,omitempty"` // 高管的用户ID
-	Name        *string `json:"name,omitempty"`          // 用户姓名
-	Email       *string `json:"email,omitempty"`         // 邮箱地址
-	AvatarUrl   *string `json:"avatar_url,omitempty"`    // 头像图片链接
+
+	Name *string `json:"name,omitempty"` // 用户姓名
+
+	Email *string `json:"email,omitempty"` // 邮箱地址
+
+	AvatarUrl *string `json:"avatar_url,omitempty"` // 头像图片链接
 }
 
 type KeyPersonBuilder struct {
 	keyPersonId     string // 高管的用户ID
 	keyPersonIdFlag bool
-	name            string // 用户姓名
-	nameFlag        bool
-	email           string // 邮箱地址
-	emailFlag       bool
-	avatarUrl       string // 头像图片链接
-	avatarUrlFlag   bool
+
+	name     string // 用户姓名
+	nameFlag bool
+
+	email     string // 邮箱地址
+	emailFlag bool
+
+	avatarUrl     string // 头像图片链接
+	avatarUrlFlag bool
 }
 
 func NewKeyPersonBuilder() *KeyPersonBuilder {
@@ -5445,25 +5957,35 @@ func (builder *KeyPersonBuilder) Build() *KeyPerson {
 }
 
 type ListOpenapiLogRequest struct {
-	ApiKeys   []string `json:"api_keys,omitempty"`   // 飞书开放平台定义的API
-	StartTime *int     `json:"start_time,omitempty"` // 以秒为单位的起始时间戳
-	EndTime   *int     `json:"end_time,omitempty"`   // 以秒为单位的终止时间戳
-	AppId     *string  `json:"app_id,omitempty"`     // 在开发者后台——凭证与基础信息页面查看的app_id（cli_xxx），指调用openapi的应用
-	PageSize  *int     `json:"page_size,omitempty"`  // 分页大小
-	PageToken *string  `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；当返回的has_more为true时，会返回新的page_token，再次调用接口，传入这个page_token，将获得下一页数据
+	ApiKeys []string `json:"api_keys,omitempty"` // 飞书开放平台定义的API
+
+	StartTime *int `json:"start_time,omitempty"` // 以秒为单位的起始时间戳
+
+	EndTime *int `json:"end_time,omitempty"` // 以秒为单位的终止时间戳
+
+	AppId *string `json:"app_id,omitempty"` // 在开发者后台——凭证与基础信息页面查看的app_id（cli_xxx），指调用openapi的应用
+
+	PageSize *int `json:"page_size,omitempty"` // 分页大小
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；当返回的has_more为true时，会返回新的page_token，再次调用接口，传入这个page_token，将获得下一页数据
 }
 
 type ListOpenapiLogRequestBuilder struct {
-	apiKeys       []string // 飞书开放平台定义的API
-	apiKeysFlag   bool
+	apiKeys     []string // 飞书开放平台定义的API
+	apiKeysFlag bool
+
 	startTime     int // 以秒为单位的起始时间戳
 	startTimeFlag bool
-	endTime       int // 以秒为单位的终止时间戳
-	endTimeFlag   bool
-	appId         string // 在开发者后台——凭证与基础信息页面查看的app_id（cli_xxx），指调用openapi的应用
-	appIdFlag     bool
-	pageSize      int // 分页大小
-	pageSizeFlag  bool
+
+	endTime     int // 以秒为单位的终止时间戳
+	endTimeFlag bool
+
+	appId     string // 在开发者后台——凭证与基础信息页面查看的app_id（cli_xxx），指调用openapi的应用
+	appIdFlag bool
+
+	pageSize     int // 分页大小
+	pageSizeFlag bool
+
 	pageToken     string // 分页标记，第一次请求不填，表示从头开始遍历；当返回的has_more为true时，会返回新的page_token，再次调用接口，传入这个page_token，将获得下一页数据
 	pageTokenFlag bool
 }
@@ -5557,29 +6079,41 @@ func (builder *ListOpenapiLogRequestBuilder) Build() *ListOpenapiLogRequest {
 
 type Message struct {
 	OpenMessageId *string `json:"open_message_id,omitempty"` // 消息ID(open_message_id)
-	Text          *string `json:"text,omitempty"`            // 文本内容
-	OpenChatId    *string `json:"open_chat_id,omitempty"`    // 会话ID(open_chat_id)
-	ChatName      *string `json:"chat_name,omitempty"`       // 会话名称
-	ChatType      *int    `json:"chat_type,omitempty"`       // 会话类型
-	Owner         *User   `json:"owner,omitempty"`           // 消息发送人
-	CreateTime    *string `json:"create_time,omitempty"`     // 创建时间(秒级时间戳)
+
+	Text *string `json:"text,omitempty"` // 文本内容
+
+	OpenChatId *string `json:"open_chat_id,omitempty"` // 会话ID(open_chat_id)
+
+	ChatName *string `json:"chat_name,omitempty"` // 会话名称
+
+	ChatType *int `json:"chat_type,omitempty"` // 会话类型
+
+	Owner *User `json:"owner,omitempty"` // 消息发送人
+
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间(秒级时间戳)
 }
 
 type MessageBuilder struct {
 	openMessageId     string // 消息ID(open_message_id)
 	openMessageIdFlag bool
-	text              string // 文本内容
-	textFlag          bool
-	openChatId        string // 会话ID(open_chat_id)
-	openChatIdFlag    bool
-	chatName          string // 会话名称
-	chatNameFlag      bool
-	chatType          int // 会话类型
-	chatTypeFlag      bool
-	owner             *User // 消息发送人
-	ownerFlag         bool
-	createTime        string // 创建时间(秒级时间戳)
-	createTimeFlag    bool
+
+	text     string // 文本内容
+	textFlag bool
+
+	openChatId     string // 会话ID(open_chat_id)
+	openChatIdFlag bool
+
+	chatName     string // 会话名称
+	chatNameFlag bool
+
+	chatType     int // 会话类型
+	chatTypeFlag bool
+
+	owner     *User // 消息发送人
+	ownerFlag bool
+
+	createTime     string // 创建时间(秒级时间戳)
+	createTimeFlag bool
 }
 
 func NewMessageBuilder() *MessageBuilder {
@@ -5683,28 +6217,40 @@ func (builder *MessageBuilder) Build() *Message {
 }
 
 type MigrationEntity struct {
-	Id          *string `json:"id,omitempty"`           // 迁移的实体 id
-	Location    *string `json:"location,omitempty"`     // 实体的数据驻留地
-	Type        *string `json:"type,omitempty"`         // 实体的类型
-	CreatorId   *string `json:"creator_id,omitempty"`   // 创建者的 id
+	Id *string `json:"id,omitempty"` // 迁移的实体 id
+
+	Location *string `json:"location,omitempty"` // 实体的数据驻留地
+
+	Type *string `json:"type,omitempty"` // 实体的类型
+
+	CreatorId *string `json:"creator_id,omitempty"` // 创建者的 id
+
 	CreatorType *string `json:"creator_type,omitempty"` // 创建者的类型
-	CreateTime  *string `json:"create_time,omitempty"`  // 实体创建时间（毫秒级时间戳）
+
+	CreateTime *string `json:"create_time,omitempty"` // 实体创建时间（毫秒级时间戳）
+
 	MailAddress *string `json:"mail_address,omitempty"` // 实体类型为 mailbox 时，返回 mail address，如果没有，则返回空
 }
 
 type MigrationEntityBuilder struct {
-	id              string // 迁移的实体 id
-	idFlag          bool
-	location        string // 实体的数据驻留地
-	locationFlag    bool
-	type_           string // 实体的类型
-	typeFlag        bool
-	creatorId       string // 创建者的 id
-	creatorIdFlag   bool
+	id     string // 迁移的实体 id
+	idFlag bool
+
+	location     string // 实体的数据驻留地
+	locationFlag bool
+
+	type_    string // 实体的类型
+	typeFlag bool
+
+	creatorId     string // 创建者的 id
+	creatorIdFlag bool
+
 	creatorType     string // 创建者的类型
 	creatorTypeFlag bool
-	createTime      string // 实体创建时间（毫秒级时间戳）
-	createTimeFlag  bool
+
+	createTime     string // 实体创建时间（毫秒级时间戳）
+	createTimeFlag bool
+
 	mailAddress     string // 实体类型为 mailbox 时，返回 mail address，如果没有，则返回空
 	mailAddressFlag bool
 }
@@ -5811,21 +6357,27 @@ func (builder *MigrationEntityBuilder) Build() *MigrationEntity {
 }
 
 type MigrationItems struct {
-	TaskId     *string          `json:"task_id,omitempty"`     // 迁移任务的 id
-	TaskStatus *string          `json:"task_status,omitempty"` // 任务状态
-	Entity     *MigrationEntity `json:"entity,omitempty"`      // 实体。当 entity 因为物理删除等原因找不到了，则不返回 entity 这个 obejct。
-	Message    *string          `json:"message,omitempty"`     // 只有当 task status 为 stop 时，返回 entity 找不到的信息。
+	TaskId *string `json:"task_id,omitempty"` // 迁移任务的 id
+
+	TaskStatus *string `json:"task_status,omitempty"` // 任务状态
+
+	Entity *MigrationEntity `json:"entity,omitempty"` // 实体。当 entity 因为物理删除等原因找不到了，则不返回 entity 这个 obejct。
+
+	Message *string `json:"message,omitempty"` // 只有当 task status 为 stop 时，返回 entity 找不到的信息。
 }
 
 type MigrationItemsBuilder struct {
-	taskId         string // 迁移任务的 id
-	taskIdFlag     bool
+	taskId     string // 迁移任务的 id
+	taskIdFlag bool
+
 	taskStatus     string // 任务状态
 	taskStatusFlag bool
-	entity         *MigrationEntity // 实体。当 entity 因为物理删除等原因找不到了，则不返回 entity 这个 obejct。
-	entityFlag     bool
-	message        string // 只有当 task status 为 stop 时，返回 entity 找不到的信息。
-	messageFlag    bool
+
+	entity     *MigrationEntity // 实体。当 entity 因为物理删除等原因找不到了，则不返回 entity 这个 obejct。
+	entityFlag bool
+
+	message     string // 只有当 task status 为 stop 时，返回 entity 找不到的信息。
+	messageFlag bool
 }
 
 func NewMigrationItemsBuilder() *MigrationItemsBuilder {
@@ -5891,14 +6443,16 @@ func (builder *MigrationItemsBuilder) Build() *MigrationItems {
 
 type Notification struct {
 	IdempotentKey *string `json:"idempotent_key,omitempty"` // 幂等建
-	Content       *string `json:"content,omitempty"`        // 通知内容
+
+	Content *string `json:"content,omitempty"` // 通知内容
 }
 
 type NotificationBuilder struct {
 	idempotentKey     string // 幂等建
 	idempotentKeyFlag bool
-	content           string // 通知内容
-	contentFlag       bool
+
+	content     string // 通知内容
+	contentFlag bool
 }
 
 func NewNotificationBuilder() *NotificationBuilder {
@@ -5938,25 +6492,35 @@ func (builder *NotificationBuilder) Build() *Notification {
 }
 
 type OpenapiLog struct {
-	Id        *string           `json:"id,omitempty"`         // openapi日志唯一标识
-	ApiKey    *string           `json:"api_key,omitempty"`    // 飞书开放平台定义的API
-	EventTime *int              `json:"event_time,omitempty"` // 日志产生的时间，以秒为单位的时间戳
-	AppId     *string           `json:"app_id,omitempty"`     // 在开发者后台——凭证与基础信息页面查看的app_id（cli_xxxxx）
-	Ip        *string           `json:"ip,omitempty"`         // 发起调用api的ip地址
+	Id *string `json:"id,omitempty"` // openapi日志唯一标识
+
+	ApiKey *string `json:"api_key,omitempty"` // 飞书开放平台定义的API
+
+	EventTime *int `json:"event_time,omitempty"` // 日志产生的时间，以秒为单位的时间戳
+
+	AppId *string `json:"app_id,omitempty"` // 在开发者后台——凭证与基础信息页面查看的app_id（cli_xxxxx）
+
+	Ip *string `json:"ip,omitempty"` // 发起调用api的ip地址
+
 	LogDetail *OpenapiLogDetail `json:"log_detail,omitempty"` // openapi调用日志详情
 }
 
 type OpenapiLogBuilder struct {
-	id            string // openapi日志唯一标识
-	idFlag        bool
-	apiKey        string // 飞书开放平台定义的API
-	apiKeyFlag    bool
+	id     string // openapi日志唯一标识
+	idFlag bool
+
+	apiKey     string // 飞书开放平台定义的API
+	apiKeyFlag bool
+
 	eventTime     int // 日志产生的时间，以秒为单位的时间戳
 	eventTimeFlag bool
-	appId         string // 在开发者后台——凭证与基础信息页面查看的app_id（cli_xxxxx）
-	appIdFlag     bool
-	ip            string // 发起调用api的ip地址
-	ipFlag        bool
+
+	appId     string // 在开发者后台——凭证与基础信息页面查看的app_id（cli_xxxxx）
+	appIdFlag bool
+
+	ip     string // 发起调用api的ip地址
+	ipFlag bool
+
 	logDetail     *OpenapiLogDetail // openapi调用日志详情
 	logDetailFlag bool
 }
@@ -6049,27 +6613,37 @@ func (builder *OpenapiLogBuilder) Build() *OpenapiLog {
 }
 
 type OpenapiLogDetail struct {
-	Path       *string `json:"path,omitempty"`        // http请求路径
-	Method     *string `json:"method,omitempty"`      // http请求方法
+	Path *string `json:"path,omitempty"` // http请求路径
+
+	Method *string `json:"method,omitempty"` // http请求方法
+
 	QueryParam *string `json:"query_param,omitempty"` // http查询参数
-	Payload    *string `json:"payload,omitempty"`     // http请求体
-	StatusCode *int    `json:"status_code,omitempty"` // http状态码
-	Response   *string `json:"response,omitempty"`    // http响应体，仅返回code，msg，error信息等
+
+	Payload *string `json:"payload,omitempty"` // http请求体
+
+	StatusCode *int `json:"status_code,omitempty"` // http状态码
+
+	Response *string `json:"response,omitempty"` // http响应体，仅返回code，msg，error信息等
 }
 
 type OpenapiLogDetailBuilder struct {
-	path           string // http请求路径
-	pathFlag       bool
-	method         string // http请求方法
-	methodFlag     bool
+	path     string // http请求路径
+	pathFlag bool
+
+	method     string // http请求方法
+	methodFlag bool
+
 	queryParam     string // http查询参数
 	queryParamFlag bool
-	payload        string // http请求体
-	payloadFlag    bool
+
+	payload     string // http请求体
+	payloadFlag bool
+
 	statusCode     int // http状态码
 	statusCodeFlag bool
-	response       string // http响应体，仅返回code，msg，error信息等
-	responseFlag   bool
+
+	response     string // http响应体，仅返回code，msg，error信息等
+	responseFlag bool
 }
 
 func NewOpenapiLogDetailBuilder() *OpenapiLogDetailBuilder {
@@ -6161,13 +6735,15 @@ func (builder *OpenapiLogDetailBuilder) Build() *OpenapiLogDetail {
 }
 
 type Param struct {
-	Key   *string `json:"key,omitempty"`   // key
+	Key *string `json:"key,omitempty"` // key
+
 	Value *string `json:"value,omitempty"` // value
 }
 
 type ParamBuilder struct {
-	key       string // key
-	keyFlag   bool
+	key     string // key
+	keyFlag bool
+
 	value     string // value
 	valueFlag bool
 }
@@ -6209,18 +6785,22 @@ func (builder *ParamBuilder) Build() *Param {
 }
 
 type SecurityLogError struct {
-	Request  *GwRequest  `json:"request,omitempty"`  // 请求体
+	Request *GwRequest `json:"request,omitempty"` // 请求体
+
 	Response *GwResponse `json:"response,omitempty"` // 响应体
-	Common   *GwCommon   `json:"common,omitempty"`   // 通用参数
+
+	Common *GwCommon `json:"common,omitempty"` // 通用参数
 }
 
 type SecurityLogErrorBuilder struct {
-	request      *GwRequest // 请求体
-	requestFlag  bool
+	request     *GwRequest // 请求体
+	requestFlag bool
+
 	response     *GwResponse // 响应体
 	responseFlag bool
-	common       *GwCommon // 通用参数
-	commonFlag   bool
+
+	common     *GwCommon // 通用参数
+	commonFlag bool
 }
 
 func NewSecurityLogErrorBuilder() *SecurityLogErrorBuilder {
@@ -6270,13 +6850,15 @@ func (builder *SecurityLogErrorBuilder) Build() *SecurityLogError {
 }
 
 type SimpleUser struct {
-	Id   *string `json:"id,omitempty"`   // 用户id
+	Id *string `json:"id,omitempty"` // 用户id
+
 	Name *string `json:"name,omitempty"` // 用户名
 }
 
 type SimpleUserBuilder struct {
-	id       string // 用户id
-	idFlag   bool
+	id     string // 用户id
+	idFlag bool
+
 	name     string // 用户名
 	nameFlag bool
 }
@@ -6319,14 +6901,16 @@ func (builder *SimpleUserBuilder) Build() *SimpleUser {
 
 type TaskStatus struct {
 	FailureReason *string `json:"failure_reason,omitempty"` // 任务失败原因
-	StatusCode    *int    `json:"status_code,omitempty"`    // 任务状态码
+
+	StatusCode *int `json:"status_code,omitempty"` // 任务状态码
 }
 
 type TaskStatusBuilder struct {
 	failureReason     string // 任务失败原因
 	failureReasonFlag bool
-	statusCode        int // 任务状态码
-	statusCodeFlag    bool
+
+	statusCode     int // 任务状态码
+	statusCodeFlag bool
 }
 
 func NewTaskStatusBuilder() *TaskStatusBuilder {
@@ -6397,24 +6981,32 @@ func (builder *TenantBuilder) Build() *Tenant {
 }
 
 type TenantThirdPartyEncryptionApp struct {
-	VendorName       *string `json:"vendor_name,omitempty"`        // 加密服务提供商的名字
-	Status           *int    `json:"status,omitempty"`             // 服务状态
+	VendorName *string `json:"vendor_name,omitempty"` // 加密服务提供商的名字
+
+	Status *int `json:"status,omitempty"` // 服务状态
+
 	ServiceStartTime *string `json:"service_start_time,omitempty"` // 服务开始时间（Unix秒级时间戳）
-	ServiceEndTime   *string `json:"service_end_time,omitempty"`   // 服务结束时间（Unix秒级时间戳）
-	Config           *string `json:"config,omitempty"`             // 服务商SDK需要的特化的SDK配置，status=1时必填
+
+	ServiceEndTime *string `json:"service_end_time,omitempty"` // 服务结束时间（Unix秒级时间戳）
+
+	Config *string `json:"config,omitempty"` // 服务商SDK需要的特化的SDK配置，status=1时必填
 }
 
 type TenantThirdPartyEncryptionAppBuilder struct {
-	vendorName           string // 加密服务提供商的名字
-	vendorNameFlag       bool
-	status               int // 服务状态
-	statusFlag           bool
+	vendorName     string // 加密服务提供商的名字
+	vendorNameFlag bool
+
+	status     int // 服务状态
+	statusFlag bool
+
 	serviceStartTime     string // 服务开始时间（Unix秒级时间戳）
 	serviceStartTimeFlag bool
-	serviceEndTime       string // 服务结束时间（Unix秒级时间戳）
-	serviceEndTimeFlag   bool
-	config               string // 服务商SDK需要的特化的SDK配置，status=1时必填
-	configFlag           bool
+
+	serviceEndTime     string // 服务结束时间（Unix秒级时间戳）
+	serviceEndTimeFlag bool
+
+	config     string // 服务商SDK需要的特化的SDK配置，status=1时必填
+	configFlag bool
 }
 
 func NewTenantThirdPartyEncryptionAppBuilder() *TenantThirdPartyEncryptionAppBuilder {
@@ -6494,14 +7086,16 @@ func (builder *TenantThirdPartyEncryptionAppBuilder) Build() *TenantThirdPartyEn
 
 type TimeRange struct {
 	Start *string `json:"start,omitempty"` // 开始时间(秒)
-	End   *string `json:"end,omitempty"`   // 结束时间(秒)
+
+	End *string `json:"end,omitempty"` // 结束时间(秒)
 }
 
 type TimeRangeBuilder struct {
 	start     string // 开始时间(秒)
 	startFlag bool
-	end       string // 结束时间(秒)
-	endFlag   bool
+
+	end     string // 结束时间(秒)
+	endFlag bool
 }
 
 func NewTimeRangeBuilder() *TimeRangeBuilder {
@@ -6541,19 +7135,25 @@ func (builder *TimeRangeBuilder) Build() *TimeRange {
 }
 
 type User struct {
-	UserId    *string `json:"user_id,omitempty"`    // 用户ID
-	Name      *string `json:"name,omitempty"`       // 用户姓名
-	Email     *string `json:"email,omitempty"`      // 邮箱地址
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	Name *string `json:"name,omitempty"` // 用户姓名
+
+	Email *string `json:"email,omitempty"` // 邮箱地址
+
 	AvatarUrl *string `json:"avatar_url,omitempty"` // 头像图片链接
 }
 
 type UserBuilder struct {
-	userId        string // 用户ID
-	userIdFlag    bool
-	name          string // 用户姓名
-	nameFlag      bool
-	email         string // 邮箱地址
-	emailFlag     bool
+	userId     string // 用户ID
+	userIdFlag bool
+
+	name     string // 用户姓名
+	nameFlag bool
+
+	email     string // 邮箱地址
+	emailFlag bool
+
 	avatarUrl     string // 头像图片链接
 	avatarUrlFlag bool
 }
@@ -6621,16 +7221,20 @@ func (builder *UserBuilder) Build() *User {
 }
 
 type UserId struct {
-	UserId  *string `json:"user_id,omitempty"`  //
-	OpenId  *string `json:"open_id,omitempty"`  //
+	UserId *string `json:"user_id,omitempty"` //
+
+	OpenId *string `json:"open_id,omitempty"` //
+
 	UnionId *string `json:"union_id,omitempty"` //
 }
 
 type UserIdBuilder struct {
-	userId      string //
-	userIdFlag  bool
-	openId      string //
-	openIdFlag  bool
+	userId     string //
+	userIdFlag bool
+
+	openId     string //
+	openIdFlag bool
+
 	unionId     string //
 	unionIdFlag bool
 }
@@ -6679,22 +7283,30 @@ func (builder *UserIdBuilder) Build() *UserId {
 }
 
 type UserMigration struct {
-	UserId   *string `json:"user_id,omitempty"`  // 用户 id
-	DestGeo  *string `json:"dest_geo,omitempty"` // 目标地理位置区域
-	TaskId   *string `json:"task_id,omitempty"`  // 最新迁移任务 id
-	Status   *string `json:"status,omitempty"`   // 用户迁移状态
-	Progress *int    `json:"progress,omitempty"` // 用户迁移进度
+	UserId *string `json:"user_id,omitempty"` // 用户 id
+
+	DestGeo *string `json:"dest_geo,omitempty"` // 目标地理位置区域
+
+	TaskId *string `json:"task_id,omitempty"` // 最新迁移任务 id
+
+	Status *string `json:"status,omitempty"` // 用户迁移状态
+
+	Progress *int `json:"progress,omitempty"` // 用户迁移进度
 }
 
 type UserMigrationBuilder struct {
-	userId       string // 用户 id
-	userIdFlag   bool
-	destGeo      string // 目标地理位置区域
-	destGeoFlag  bool
-	taskId       string // 最新迁移任务 id
-	taskIdFlag   bool
-	status       string // 用户迁移状态
-	statusFlag   bool
+	userId     string // 用户 id
+	userIdFlag bool
+
+	destGeo     string // 目标地理位置区域
+	destGeoFlag bool
+
+	taskId     string // 最新迁移任务 id
+	taskIdFlag bool
+
+	status     string // 用户迁移状态
+	statusFlag bool
+
 	progress     int // 用户迁移进度
 	progressFlag bool
 }
@@ -6775,19 +7387,25 @@ func (builder *UserMigrationBuilder) Build() *UserMigration {
 }
 
 type VaultExportFile struct {
-	Name        *string `json:"name,omitempty"`         // 文件名
-	Size        *string `json:"size,omitempty"`         // 文件大小
-	Url         *string `json:"url,omitempty"`          // 文件tos uri
+	Name *string `json:"name,omitempty"` // 文件名
+
+	Size *string `json:"size,omitempty"` // 文件大小
+
+	Url *string `json:"url,omitempty"` // 文件tos uri
+
 	DownloadUrl *string `json:"download_url,omitempty"` // 文件下载的链接(临时链接，数分钟后失效)
 }
 
 type VaultExportFileBuilder struct {
-	name            string // 文件名
-	nameFlag        bool
-	size            string // 文件大小
-	sizeFlag        bool
-	url             string // 文件tos uri
-	urlFlag         bool
+	name     string // 文件名
+	nameFlag bool
+
+	size     string // 文件大小
+	sizeFlag bool
+
+	url     string // 文件tos uri
+	urlFlag bool
+
 	downloadUrl     string // 文件下载的链接(临时链接，数分钟后失效)
 	downloadUrlFlag bool
 }
@@ -6855,36 +7473,52 @@ func (builder *VaultExportFileBuilder) Build() *VaultExportFile {
 }
 
 type VaultTask struct {
-	TaskId     *string            `json:"task_id,omitempty"`     // 任务id
-	Name       *string            `json:"name,omitempty"`        // 任务名
-	Size       *string            `json:"size,omitempty"`        // 任务文件总大小
-	ValidDays  *int               `json:"valid_days,omitempty"`  // 任务有效天数
-	CreateTime *string            `json:"create_time,omitempty"` // 任务创建时间戳
-	ExtractKey *string            `json:"extract_key,omitempty"` // 文件包解压密码
-	Creator    *SimpleUser        `json:"creator,omitempty"`     // 任务创建者
-	Files      []*VaultExportFile `json:"files,omitempty"`       // 导出任务文件列表
-	Status     *TaskStatus        `json:"status,omitempty"`      // 导出任务状态信息
+	TaskId *string `json:"task_id,omitempty"` // 任务id
+
+	Name *string `json:"name,omitempty"` // 任务名
+
+	Size *string `json:"size,omitempty"` // 任务文件总大小
+
+	ValidDays *int `json:"valid_days,omitempty"` // 任务有效天数
+
+	CreateTime *string `json:"create_time,omitempty"` // 任务创建时间戳
+
+	ExtractKey *string `json:"extract_key,omitempty"` // 文件包解压密码
+
+	Creator *SimpleUser `json:"creator,omitempty"` // 任务创建者
+
+	Files []*VaultExportFile `json:"files,omitempty"` // 导出任务文件列表
+
+	Status *TaskStatus `json:"status,omitempty"` // 导出任务状态信息
 }
 
 type VaultTaskBuilder struct {
-	taskId         string // 任务id
-	taskIdFlag     bool
-	name           string // 任务名
-	nameFlag       bool
-	size           string // 任务文件总大小
-	sizeFlag       bool
-	validDays      int // 任务有效天数
-	validDaysFlag  bool
+	taskId     string // 任务id
+	taskIdFlag bool
+
+	name     string // 任务名
+	nameFlag bool
+
+	size     string // 任务文件总大小
+	sizeFlag bool
+
+	validDays     int // 任务有效天数
+	validDaysFlag bool
+
 	createTime     string // 任务创建时间戳
 	createTimeFlag bool
+
 	extractKey     string // 文件包解压密码
 	extractKeyFlag bool
-	creator        *SimpleUser // 任务创建者
-	creatorFlag    bool
-	files          []*VaultExportFile // 导出任务文件列表
-	filesFlag      bool
-	status         *TaskStatus // 导出任务状态信息
-	statusFlag     bool
+
+	creator     *SimpleUser // 任务创建者
+	creatorFlag bool
+
+	files     []*VaultExportFile // 导出任务文件列表
+	filesFlag bool
+
+	status     *TaskStatus // 导出任务状态信息
+	statusFlag bool
 }
 
 func NewVaultTaskBuilder() *VaultTaskBuilder {
@@ -7043,9 +7677,11 @@ type ListDataOpenapiLogReq struct {
 }
 
 type ListDataOpenapiLogRespData struct {
-	Items     []*OpenapiLog `json:"items,omitempty"`      // openapi日志列表
-	PageToken *string       `json:"page_token,omitempty"` // 分页标记
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否有更多数据
+	Items []*OpenapiLog `json:"items,omitempty"` // openapi日志列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
 }
 
 type ListDataOpenapiLogResp struct {

@@ -38,21 +38,27 @@ const (
 )
 
 type Attachment struct {
-	Id       *string `json:"id,omitempty"`        // 下载文件所需要的 Token
+	Id *string `json:"id,omitempty"` // 下载文件所需要的 Token
+
 	MimeType *string `json:"mime_type,omitempty"` // 文件类型
-	Name     *string `json:"name,omitempty"`      // 名称
-	Size     *int64  `json:"size,omitempty"`      // 大小
+
+	Name *string `json:"name,omitempty"` // 名称
+
+	Size *int64 `json:"size,omitempty"` // 大小
 }
 
 type AttachmentBuilder struct {
-	id           string // 下载文件所需要的 Token
-	idFlag       bool
+	id     string // 下载文件所需要的 Token
+	idFlag bool
+
 	mimeType     string // 文件类型
 	mimeTypeFlag bool
-	name         string // 名称
-	nameFlag     bool
-	size         int64 // 大小
-	sizeFlag     bool
+
+	name     string // 名称
+	nameFlag bool
+
+	size     int64 // 大小
+	sizeFlag bool
 }
 
 func NewAttachmentBuilder() *AttachmentBuilder {
@@ -118,13 +124,15 @@ func (builder *AttachmentBuilder) Build() *Attachment {
 }
 
 type ContractCompany struct {
-	Id   *int64  `json:"id,omitempty"`   // 公司 ID
+	Id *int64 `json:"id,omitempty"` // 公司 ID
+
 	Name *string `json:"name,omitempty"` // 公司名称
 }
 
 type ContractCompanyBuilder struct {
-	id       int64 // 公司 ID
-	idFlag   bool
+	id     int64 // 公司 ID
+	idFlag bool
+
 	name     string // 公司名称
 	nameFlag bool
 }
@@ -166,19 +174,25 @@ func (builder *ContractCompanyBuilder) Build() *ContractCompany {
 }
 
 type CustomFields struct {
-	Key   *string `json:"key,omitempty"`   // 自定义字段key
+	Key *string `json:"key,omitempty"` // 自定义字段key
+
 	Label *string `json:"label,omitempty"` // 自定义字段名称
-	Type  *string `json:"type,omitempty"`  // 自定义字段类型
+
+	Type *string `json:"type,omitempty"` // 自定义字段类型
+
 	Value *string `json:"value,omitempty"` // 根据 type 不同，结构不同，不同 type 对应的数据结构在 type 的枚举值中有描述
 }
 
 type CustomFieldsBuilder struct {
-	key       string // 自定义字段key
-	keyFlag   bool
+	key     string // 自定义字段key
+	keyFlag bool
+
 	label     string // 自定义字段名称
 	labelFlag bool
-	type_     string // 自定义字段类型
-	typeFlag  bool
+
+	type_    string // 自定义字段类型
+	typeFlag bool
+
 	value     string // 根据 type 不同，结构不同，不同 type 对应的数据结构在 type 的枚举值中有描述
 	valueFlag bool
 }
@@ -246,13 +260,15 @@ func (builder *CustomFieldsBuilder) Build() *CustomFields {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -290,27 +306,37 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type Education struct {
-	Level  *int    `json:"level,omitempty"`  // 学历
+	Level *int `json:"level,omitempty"` // 学历
+
 	School *string `json:"school,omitempty"` // 毕业学校
-	Major  *string `json:"major,omitempty"`  // 专业
-	Degree *int    `json:"degree,omitempty"` // 学位
-	Start  *string `json:"start,omitempty"`  // 开始日期
-	End    *string `json:"end,omitempty"`    // 结束日期
+
+	Major *string `json:"major,omitempty"` // 专业
+
+	Degree *int `json:"degree,omitempty"` // 学位
+
+	Start *string `json:"start,omitempty"` // 开始日期
+
+	End *string `json:"end,omitempty"` // 结束日期
 }
 
 type EducationBuilder struct {
-	level      int // 学历
-	levelFlag  bool
+	level     int // 学历
+	levelFlag bool
+
 	school     string // 毕业学校
 	schoolFlag bool
-	major      string // 专业
-	majorFlag  bool
+
+	major     string // 专业
+	majorFlag bool
+
 	degree     int // 学位
 	degreeFlag bool
-	start      string // 开始日期
-	startFlag  bool
-	end        string // 结束日期
-	endFlag    bool
+
+	start     string // 开始日期
+	startFlag bool
+
+	end     string // 结束日期
+	endFlag bool
 }
 
 func NewEducationBuilder() *EducationBuilder {
@@ -402,18 +428,22 @@ func (builder *EducationBuilder) Build() *Education {
 }
 
 type EmergencyContact struct {
-	Name         *string `json:"name,omitempty"`         // 紧急联系人姓名
-	Relationship *int    `json:"relationship,omitempty"` // 与紧急联系人的关系
-	Mobile       *string `json:"mobile,omitempty"`       // 手机号
+	Name *string `json:"name,omitempty"` // 紧急联系人姓名
+
+	Relationship *int `json:"relationship,omitempty"` // 与紧急联系人的关系
+
+	Mobile *string `json:"mobile,omitempty"` // 手机号
 }
 
 type EmergencyContactBuilder struct {
-	name             string // 紧急联系人姓名
-	nameFlag         bool
+	name     string // 紧急联系人姓名
+	nameFlag bool
+
 	relationship     int // 与紧急联系人的关系
 	relationshipFlag bool
-	mobile           string // 手机号
-	mobileFlag       bool
+
+	mobile     string // 手机号
+	mobileFlag bool
 }
 
 func NewEmergencyContactBuilder() *EmergencyContactBuilder {
@@ -466,16 +496,20 @@ func (builder *EmergencyContactBuilder) Build() *EmergencyContact {
 }
 
 type Employee struct {
-	UserId       *string         `json:"user_id,omitempty"`       // 员工的用户 ID;;;user_id_type 为 user_id 时返回 user_id；;;;user_id_type 为 open_id 时返回 open_id；;;;user_id_type 为 union_id 时返回 union_id；;;;「待入职」和「已取消入职」的员工，此字段值为 null
-	SystemFields *SystemFields   `json:"system_fields,omitempty"` // 系统字段
+	UserId *string `json:"user_id,omitempty"` // 员工的用户 ID;;;user_id_type 为 user_id 时返回 user_id；;;;user_id_type 为 open_id 时返回 open_id；;;;user_id_type 为 union_id 时返回 union_id；;;;「待入职」和「已取消入职」的员工，此字段值为 null
+
+	SystemFields *SystemFields `json:"system_fields,omitempty"` // 系统字段
+
 	CustomFields []*CustomFields `json:"custom_fields,omitempty"` // 自定义字段
 }
 
 type EmployeeBuilder struct {
-	userId           string // 员工的用户 ID;;;user_id_type 为 user_id 时返回 user_id；;;;user_id_type 为 open_id 时返回 open_id；;;;user_id_type 为 union_id 时返回 union_id；;;;「待入职」和「已取消入职」的员工，此字段值为 null
-	userIdFlag       bool
+	userId     string // 员工的用户 ID;;;user_id_type 为 user_id 时返回 user_id；;;;user_id_type 为 open_id 时返回 open_id；;;;user_id_type 为 union_id 时返回 union_id；;;;「待入职」和「已取消入职」的员工，此字段值为 null
+	userIdFlag bool
+
 	systemFields     *SystemFields // 系统字段
 	systemFieldsFlag bool
+
 	customFields     []*CustomFields // 自定义字段
 	customFieldsFlag bool
 }
@@ -528,13 +562,15 @@ func (builder *EmployeeBuilder) Build() *Employee {
 }
 
 type Job struct {
-	Id   *int64  `json:"id,omitempty"`   // 职位 ID
+	Id *int64 `json:"id,omitempty"` // 职位 ID
+
 	Name *string `json:"name,omitempty"` // 职位名称
 }
 
 type JobBuilder struct {
-	id       int64 // 职位 ID
-	idFlag   bool
+	id     int64 // 职位 ID
+	idFlag bool
+
 	name     string // 职位名称
 	nameFlag bool
 }
@@ -576,13 +612,15 @@ func (builder *JobBuilder) Build() *Job {
 }
 
 type JobLevel struct {
-	Id   *int64  `json:"id,omitempty"`   // 职级 ID
+	Id *int64 `json:"id,omitempty"` // 职级 ID
+
 	Name *string `json:"name,omitempty"` // 职级名称
 }
 
 type JobLevelBuilder struct {
-	id       int64 // 职级 ID
-	idFlag   bool
+	id     int64 // 职级 ID
+	idFlag bool
+
 	name     string // 职级名称
 	nameFlag bool
 }
@@ -625,15 +663,19 @@ func (builder *JobLevelBuilder) Build() *JobLevel {
 
 type Manager struct {
 	UserId *string `json:"user_id,omitempty"` // 上级的用户 ID（user_id）
-	Name   *string `json:"name,omitempty"`    // 中文名
+
+	Name *string `json:"name,omitempty"` // 中文名
+
 	EnName *string `json:"en_name,omitempty"` // 英文名
 }
 
 type ManagerBuilder struct {
 	userId     string // 上级的用户 ID（user_id）
 	userIdFlag bool
-	name       string // 中文名
-	nameFlag   bool
+
+	name     string // 中文名
+	nameFlag bool
+
 	enName     string // 英文名
 	enNameFlag bool
 }
@@ -689,14 +731,16 @@ func (builder *ManagerBuilder) Build() *Manager {
 
 type NativeRegion struct {
 	IsoCode *string `json:"iso_code,omitempty"` // ISO 编码
-	Name    *string `json:"name,omitempty"`     // 名称
+
+	Name *string `json:"name,omitempty"` // 名称
 }
 
 type NativeRegionBuilder struct {
 	isoCode     string // ISO 编码
 	isoCodeFlag bool
-	name        string // 名称
-	nameFlag    bool
+
+	name     string // 名称
+	nameFlag bool
 }
 
 func NewNativeRegionBuilder() *NativeRegionBuilder {
@@ -736,192 +780,312 @@ func (builder *NativeRegionBuilder) Build() *NativeRegion {
 }
 
 type SystemFields struct {
-	Name                    *string             `json:"name,omitempty"`                      // 中文姓名
-	EnName                  *string             `json:"en_name,omitempty"`                   // 英文姓名
-	Email                   *string             `json:"email,omitempty"`                     // 邮箱
-	Mobile                  *string             `json:"mobile,omitempty"`                    // 手机号码
-	DepartmentId            *string             `json:"department_id,omitempty"`             // 部门的飞书 open_department_id
-	Manager                 *Manager            `json:"manager,omitempty"`                   // 上级
-	Job                     *Job                `json:"job,omitempty"`                       // 职位
-	JobLevel                *JobLevel           `json:"job_level,omitempty"`                 // 职级
-	WorkLocation            *WorkLocation       `json:"work_location,omitempty"`             // 工作地点
-	Gender                  *int                `json:"gender,omitempty"`                    // 性别
-	Birthday                *string             `json:"birthday,omitempty"`                  // 出生日期
-	NativeRegion            *NativeRegion       `json:"native_region,omitempty"`             // 籍贯
-	Ethnicity               *int                `json:"ethnicity,omitempty"`                 // 民族
-	MaritalStatus           *int                `json:"marital_status,omitempty"`            // 婚姻状况
-	PoliticalStatus         *int                `json:"political_status,omitempty"`          // 政治面貌
-	EnteredWorkforceDate    *string             `json:"entered_workforce_date,omitempty"`    // 参加工作日期
-	IdType                  *int                `json:"id_type,omitempty"`                   // 证件类型
-	IdNumber                *string             `json:"id_number,omitempty"`                 // 证件号
-	HukouType               *int                `json:"hukou_type,omitempty"`                // 户口类型
-	HukouLocation           *string             `json:"hukou_location,omitempty"`            // 户口所在地
-	BankAccountNumber       *string             `json:"bank_account_number,omitempty"`       // 银行卡号
-	BankName                *string             `json:"bank_name,omitempty"`                 // 开户行
-	SocialSecurityAccount   *string             `json:"social_security_account,omitempty"`   // 社保账号
-	ProvidentFundAccount    *string             `json:"provident_fund_account,omitempty"`    // 公积金账号
-	EmployeeNo              *string             `json:"employee_no,omitempty"`               // 工号
-	EmployeeType            *int                `json:"employee_type,omitempty"`             // 雇员类型
-	Status                  *int                `json:"status,omitempty"`                    // 员工状态
-	HireDate                *string             `json:"hire_date,omitempty"`                 // 入职日期
-	ProbationMonths         *float64            `json:"probation_months,omitempty"`          // 试用期（月）
-	ConversionDate          *string             `json:"conversion_date,omitempty"`           // 转正日期
-	Application             *int                `json:"application,omitempty"`               // 转正申请
-	ApplicationStatus       *int                `json:"application_status,omitempty"`        // 转正状态
-	LastDay                 *string             `json:"last_day,omitempty"`                  // 离职日期
-	DepartureType           *int                `json:"departure_type,omitempty"`            // 离职类型
-	DepartureReason         *int                `json:"departure_reason,omitempty"`          // 离职原因
-	DepartureNotes          *string             `json:"departure_notes,omitempty"`           // 离职备注
-	ContractCompany         *ContractCompany    `json:"contract_company,omitempty"`          // 合同公司
-	ContractType            *int                `json:"contract_type,omitempty"`             // 合同类型
-	ContractStartDate       *string             `json:"contract_start_date,omitempty"`       // 合同开始日期
-	ContractExpirationDate  *string             `json:"contract_expiration_date,omitempty"`  // 合同到期日期
-	ContractSignTimes       *int                `json:"contract_sign_times,omitempty"`       // 劳动合同签订次数
-	PersonalEmail           *string             `json:"personal_email,omitempty"`            // 个人邮箱
-	FamilyAddress           *string             `json:"family_address,omitempty"`            // 家庭地址
-	PrimaryEmergencyContact *EmergencyContact   `json:"primary_emergency_contact,omitempty"` // 主要紧急联系人
-	EmergencyContact        []*EmergencyContact `json:"emergency_contact,omitempty"`         // 紧急联系人
-	HighestLevelOfEdu       *Education          `json:"highest_level_of_edu,omitempty"`      // 最高学历
-	Education               []*Education        `json:"education,omitempty"`                 // 教育经历
-	FormerWorkExp           *WorkExperience     `json:"former_work_exp,omitempty"`           // 前工作经历
-	WorkExp                 []*WorkExperience   `json:"work_exp,omitempty"`                  // 工作经历
-	IdPhotoPoSide           []*Attachment       `json:"id_photo_po_side,omitempty"`          // 身份证照片（人像面）
-	IdPhotoEmSide           []*Attachment       `json:"id_photo_em_side,omitempty"`          // 身份证照片（国徽面）
-	IdPhoto                 []*Attachment       `json:"id_photo,omitempty"`                  // 证件照
-	DiplomaPhoto            []*Attachment       `json:"diploma_photo,omitempty"`             // 学位证书
-	GraduationCert          []*Attachment       `json:"graduation_cert,omitempty"`           // 毕业证书
-	CertOfMerit             []*Attachment       `json:"cert_of_merit,omitempty"`             // 奖励证明
-	OffboardingFile         []*Attachment       `json:"offboarding_file,omitempty"`          // 离职证明
-	CancelOnboardingReason  *int                `json:"cancel_onboarding_reason,omitempty"`  // 取消入职原因
-	CancelOnboardingNotes   *string             `json:"cancel_onboarding_notes,omitempty"`   // 取消入职备注
-	EmployeeFormStatus      *int                `json:"employee_form_status,omitempty"`      // 入职登记表状态
-	CreateTime              *int64              `json:"create_time,omitempty"`               // 创建时间
-	UpdateTime              *int64              `json:"update_time,omitempty"`               // 更新时间
+	Name *string `json:"name,omitempty"` // 中文姓名
+
+	EnName *string `json:"en_name,omitempty"` // 英文姓名
+
+	Email *string `json:"email,omitempty"` // 邮箱
+
+	Mobile *string `json:"mobile,omitempty"` // 手机号码
+
+	DepartmentId *string `json:"department_id,omitempty"` // 部门的飞书 open_department_id
+
+	Manager *Manager `json:"manager,omitempty"` // 上级
+
+	Job *Job `json:"job,omitempty"` // 职位
+
+	JobLevel *JobLevel `json:"job_level,omitempty"` // 职级
+
+	WorkLocation *WorkLocation `json:"work_location,omitempty"` // 工作地点
+
+	Gender *int `json:"gender,omitempty"` // 性别
+
+	Birthday *string `json:"birthday,omitempty"` // 出生日期
+
+	NativeRegion *NativeRegion `json:"native_region,omitempty"` // 籍贯
+
+	Ethnicity *int `json:"ethnicity,omitempty"` // 民族
+
+	MaritalStatus *int `json:"marital_status,omitempty"` // 婚姻状况
+
+	PoliticalStatus *int `json:"political_status,omitempty"` // 政治面貌
+
+	EnteredWorkforceDate *string `json:"entered_workforce_date,omitempty"` // 参加工作日期
+
+	IdType *int `json:"id_type,omitempty"` // 证件类型
+
+	IdNumber *string `json:"id_number,omitempty"` // 证件号
+
+	HukouType *int `json:"hukou_type,omitempty"` // 户口类型
+
+	HukouLocation *string `json:"hukou_location,omitempty"` // 户口所在地
+
+	BankAccountNumber *string `json:"bank_account_number,omitempty"` // 银行卡号
+
+	BankName *string `json:"bank_name,omitempty"` // 开户行
+
+	SocialSecurityAccount *string `json:"social_security_account,omitempty"` // 社保账号
+
+	ProvidentFundAccount *string `json:"provident_fund_account,omitempty"` // 公积金账号
+
+	EmployeeNo *string `json:"employee_no,omitempty"` // 工号
+
+	EmployeeType *int `json:"employee_type,omitempty"` // 雇员类型
+
+	Status *int `json:"status,omitempty"` // 员工状态
+
+	HireDate *string `json:"hire_date,omitempty"` // 入职日期
+
+	ProbationMonths *float64 `json:"probation_months,omitempty"` // 试用期（月）
+
+	ConversionDate *string `json:"conversion_date,omitempty"` // 转正日期
+
+	Application *int `json:"application,omitempty"` // 转正申请
+
+	ApplicationStatus *int `json:"application_status,omitempty"` // 转正状态
+
+	LastDay *string `json:"last_day,omitempty"` // 离职日期
+
+	DepartureType *int `json:"departure_type,omitempty"` // 离职类型
+
+	DepartureReason *int `json:"departure_reason,omitempty"` // 离职原因
+
+	DepartureNotes *string `json:"departure_notes,omitempty"` // 离职备注
+
+	ContractCompany *ContractCompany `json:"contract_company,omitempty"` // 合同公司
+
+	ContractType *int `json:"contract_type,omitempty"` // 合同类型
+
+	ContractStartDate *string `json:"contract_start_date,omitempty"` // 合同开始日期
+
+	ContractExpirationDate *string `json:"contract_expiration_date,omitempty"` // 合同到期日期
+
+	ContractSignTimes *int `json:"contract_sign_times,omitempty"` // 劳动合同签订次数
+
+	PersonalEmail *string `json:"personal_email,omitempty"` // 个人邮箱
+
+	FamilyAddress *string `json:"family_address,omitempty"` // 家庭地址
+
+	PrimaryEmergencyContact *EmergencyContact `json:"primary_emergency_contact,omitempty"` // 主要紧急联系人
+
+	EmergencyContact []*EmergencyContact `json:"emergency_contact,omitempty"` // 紧急联系人
+
+	HighestLevelOfEdu *Education `json:"highest_level_of_edu,omitempty"` // 最高学历
+
+	Education []*Education `json:"education,omitempty"` // 教育经历
+
+	FormerWorkExp *WorkExperience `json:"former_work_exp,omitempty"` // 前工作经历
+
+	WorkExp []*WorkExperience `json:"work_exp,omitempty"` // 工作经历
+
+	IdPhotoPoSide []*Attachment `json:"id_photo_po_side,omitempty"` // 身份证照片（人像面）
+
+	IdPhotoEmSide []*Attachment `json:"id_photo_em_side,omitempty"` // 身份证照片（国徽面）
+
+	IdPhoto []*Attachment `json:"id_photo,omitempty"` // 证件照
+
+	DiplomaPhoto []*Attachment `json:"diploma_photo,omitempty"` // 学位证书
+
+	GraduationCert []*Attachment `json:"graduation_cert,omitempty"` // 毕业证书
+
+	CertOfMerit []*Attachment `json:"cert_of_merit,omitempty"` // 奖励证明
+
+	OffboardingFile []*Attachment `json:"offboarding_file,omitempty"` // 离职证明
+
+	CancelOnboardingReason *int `json:"cancel_onboarding_reason,omitempty"` // 取消入职原因
+
+	CancelOnboardingNotes *string `json:"cancel_onboarding_notes,omitempty"` // 取消入职备注
+
+	EmployeeFormStatus *int `json:"employee_form_status,omitempty"` // 入职登记表状态
+
+	CreateTime *int64 `json:"create_time,omitempty"` // 创建时间
+
+	UpdateTime *int64 `json:"update_time,omitempty"` // 更新时间
 }
 
 type SystemFieldsBuilder struct {
-	name                        string // 中文姓名
-	nameFlag                    bool
-	enName                      string // 英文姓名
-	enNameFlag                  bool
-	email                       string // 邮箱
-	emailFlag                   bool
-	mobile                      string // 手机号码
-	mobileFlag                  bool
-	departmentId                string // 部门的飞书 open_department_id
-	departmentIdFlag            bool
-	manager                     *Manager // 上级
-	managerFlag                 bool
-	job                         *Job // 职位
-	jobFlag                     bool
-	jobLevel                    *JobLevel // 职级
-	jobLevelFlag                bool
-	workLocation                *WorkLocation // 工作地点
-	workLocationFlag            bool
-	gender                      int // 性别
-	genderFlag                  bool
-	birthday                    string // 出生日期
-	birthdayFlag                bool
-	nativeRegion                *NativeRegion // 籍贯
-	nativeRegionFlag            bool
-	ethnicity                   int // 民族
-	ethnicityFlag               bool
-	maritalStatus               int // 婚姻状况
-	maritalStatusFlag           bool
-	politicalStatus             int // 政治面貌
-	politicalStatusFlag         bool
-	enteredWorkforceDate        string // 参加工作日期
-	enteredWorkforceDateFlag    bool
-	idType                      int // 证件类型
-	idTypeFlag                  bool
-	idNumber                    string // 证件号
-	idNumberFlag                bool
-	hukouType                   int // 户口类型
-	hukouTypeFlag               bool
-	hukouLocation               string // 户口所在地
-	hukouLocationFlag           bool
-	bankAccountNumber           string // 银行卡号
-	bankAccountNumberFlag       bool
-	bankName                    string // 开户行
-	bankNameFlag                bool
-	socialSecurityAccount       string // 社保账号
-	socialSecurityAccountFlag   bool
-	providentFundAccount        string // 公积金账号
-	providentFundAccountFlag    bool
-	employeeNo                  string // 工号
-	employeeNoFlag              bool
-	employeeType                int // 雇员类型
-	employeeTypeFlag            bool
-	status                      int // 员工状态
-	statusFlag                  bool
-	hireDate                    string // 入职日期
-	hireDateFlag                bool
-	probationMonths             float64 // 试用期（月）
-	probationMonthsFlag         bool
-	conversionDate              string // 转正日期
-	conversionDateFlag          bool
-	application                 int // 转正申请
-	applicationFlag             bool
-	applicationStatus           int // 转正状态
-	applicationStatusFlag       bool
-	lastDay                     string // 离职日期
-	lastDayFlag                 bool
-	departureType               int // 离职类型
-	departureTypeFlag           bool
-	departureReason             int // 离职原因
-	departureReasonFlag         bool
-	departureNotes              string // 离职备注
-	departureNotesFlag          bool
-	contractCompany             *ContractCompany // 合同公司
-	contractCompanyFlag         bool
-	contractType                int // 合同类型
-	contractTypeFlag            bool
-	contractStartDate           string // 合同开始日期
-	contractStartDateFlag       bool
-	contractExpirationDate      string // 合同到期日期
-	contractExpirationDateFlag  bool
-	contractSignTimes           int // 劳动合同签订次数
-	contractSignTimesFlag       bool
-	personalEmail               string // 个人邮箱
-	personalEmailFlag           bool
-	familyAddress               string // 家庭地址
-	familyAddressFlag           bool
+	name     string // 中文姓名
+	nameFlag bool
+
+	enName     string // 英文姓名
+	enNameFlag bool
+
+	email     string // 邮箱
+	emailFlag bool
+
+	mobile     string // 手机号码
+	mobileFlag bool
+
+	departmentId     string // 部门的飞书 open_department_id
+	departmentIdFlag bool
+
+	manager     *Manager // 上级
+	managerFlag bool
+
+	job     *Job // 职位
+	jobFlag bool
+
+	jobLevel     *JobLevel // 职级
+	jobLevelFlag bool
+
+	workLocation     *WorkLocation // 工作地点
+	workLocationFlag bool
+
+	gender     int // 性别
+	genderFlag bool
+
+	birthday     string // 出生日期
+	birthdayFlag bool
+
+	nativeRegion     *NativeRegion // 籍贯
+	nativeRegionFlag bool
+
+	ethnicity     int // 民族
+	ethnicityFlag bool
+
+	maritalStatus     int // 婚姻状况
+	maritalStatusFlag bool
+
+	politicalStatus     int // 政治面貌
+	politicalStatusFlag bool
+
+	enteredWorkforceDate     string // 参加工作日期
+	enteredWorkforceDateFlag bool
+
+	idType     int // 证件类型
+	idTypeFlag bool
+
+	idNumber     string // 证件号
+	idNumberFlag bool
+
+	hukouType     int // 户口类型
+	hukouTypeFlag bool
+
+	hukouLocation     string // 户口所在地
+	hukouLocationFlag bool
+
+	bankAccountNumber     string // 银行卡号
+	bankAccountNumberFlag bool
+
+	bankName     string // 开户行
+	bankNameFlag bool
+
+	socialSecurityAccount     string // 社保账号
+	socialSecurityAccountFlag bool
+
+	providentFundAccount     string // 公积金账号
+	providentFundAccountFlag bool
+
+	employeeNo     string // 工号
+	employeeNoFlag bool
+
+	employeeType     int // 雇员类型
+	employeeTypeFlag bool
+
+	status     int // 员工状态
+	statusFlag bool
+
+	hireDate     string // 入职日期
+	hireDateFlag bool
+
+	probationMonths     float64 // 试用期（月）
+	probationMonthsFlag bool
+
+	conversionDate     string // 转正日期
+	conversionDateFlag bool
+
+	application     int // 转正申请
+	applicationFlag bool
+
+	applicationStatus     int // 转正状态
+	applicationStatusFlag bool
+
+	lastDay     string // 离职日期
+	lastDayFlag bool
+
+	departureType     int // 离职类型
+	departureTypeFlag bool
+
+	departureReason     int // 离职原因
+	departureReasonFlag bool
+
+	departureNotes     string // 离职备注
+	departureNotesFlag bool
+
+	contractCompany     *ContractCompany // 合同公司
+	contractCompanyFlag bool
+
+	contractType     int // 合同类型
+	contractTypeFlag bool
+
+	contractStartDate     string // 合同开始日期
+	contractStartDateFlag bool
+
+	contractExpirationDate     string // 合同到期日期
+	contractExpirationDateFlag bool
+
+	contractSignTimes     int // 劳动合同签订次数
+	contractSignTimesFlag bool
+
+	personalEmail     string // 个人邮箱
+	personalEmailFlag bool
+
+	familyAddress     string // 家庭地址
+	familyAddressFlag bool
+
 	primaryEmergencyContact     *EmergencyContact // 主要紧急联系人
 	primaryEmergencyContactFlag bool
-	emergencyContact            []*EmergencyContact // 紧急联系人
-	emergencyContactFlag        bool
-	highestLevelOfEdu           *Education // 最高学历
-	highestLevelOfEduFlag       bool
-	education                   []*Education // 教育经历
-	educationFlag               bool
-	formerWorkExp               *WorkExperience // 前工作经历
-	formerWorkExpFlag           bool
-	workExp                     []*WorkExperience // 工作经历
-	workExpFlag                 bool
-	idPhotoPoSide               []*Attachment // 身份证照片（人像面）
-	idPhotoPoSideFlag           bool
-	idPhotoEmSide               []*Attachment // 身份证照片（国徽面）
-	idPhotoEmSideFlag           bool
-	idPhoto                     []*Attachment // 证件照
-	idPhotoFlag                 bool
-	diplomaPhoto                []*Attachment // 学位证书
-	diplomaPhotoFlag            bool
-	graduationCert              []*Attachment // 毕业证书
-	graduationCertFlag          bool
-	certOfMerit                 []*Attachment // 奖励证明
-	certOfMeritFlag             bool
-	offboardingFile             []*Attachment // 离职证明
-	offboardingFileFlag         bool
-	cancelOnboardingReason      int // 取消入职原因
-	cancelOnboardingReasonFlag  bool
-	cancelOnboardingNotes       string // 取消入职备注
-	cancelOnboardingNotesFlag   bool
-	employeeFormStatus          int // 入职登记表状态
-	employeeFormStatusFlag      bool
-	createTime                  int64 // 创建时间
-	createTimeFlag              bool
-	updateTime                  int64 // 更新时间
-	updateTimeFlag              bool
+
+	emergencyContact     []*EmergencyContact // 紧急联系人
+	emergencyContactFlag bool
+
+	highestLevelOfEdu     *Education // 最高学历
+	highestLevelOfEduFlag bool
+
+	education     []*Education // 教育经历
+	educationFlag bool
+
+	formerWorkExp     *WorkExperience // 前工作经历
+	formerWorkExpFlag bool
+
+	workExp     []*WorkExperience // 工作经历
+	workExpFlag bool
+
+	idPhotoPoSide     []*Attachment // 身份证照片（人像面）
+	idPhotoPoSideFlag bool
+
+	idPhotoEmSide     []*Attachment // 身份证照片（国徽面）
+	idPhotoEmSideFlag bool
+
+	idPhoto     []*Attachment // 证件照
+	idPhotoFlag bool
+
+	diplomaPhoto     []*Attachment // 学位证书
+	diplomaPhotoFlag bool
+
+	graduationCert     []*Attachment // 毕业证书
+	graduationCertFlag bool
+
+	certOfMerit     []*Attachment // 奖励证明
+	certOfMeritFlag bool
+
+	offboardingFile     []*Attachment // 离职证明
+	offboardingFileFlag bool
+
+	cancelOnboardingReason     int // 取消入职原因
+	cancelOnboardingReasonFlag bool
+
+	cancelOnboardingNotes     string // 取消入职备注
+	cancelOnboardingNotesFlag bool
+
+	employeeFormStatus     int // 入职登记表状态
+	employeeFormStatusFlag bool
+
+	createTime     int64 // 创建时间
+	createTimeFlag bool
+
+	updateTime     int64 // 更新时间
+	updateTimeFlag bool
 }
 
 func NewSystemFieldsBuilder() *SystemFieldsBuilder {
@@ -1709,25 +1873,35 @@ func (builder *SystemFieldsBuilder) Build() *SystemFields {
 }
 
 type WorkExperience struct {
-	Company     *string `json:"company,omitempty"`     // 公司
-	Department  *string `json:"department,omitempty"`  // 部门
-	Job         *string `json:"job,omitempty"`         // 职位
-	Start       *string `json:"start,omitempty"`       // 开始日期
-	End         *string `json:"end,omitempty"`         // 截止日期
+	Company *string `json:"company,omitempty"` // 公司
+
+	Department *string `json:"department,omitempty"` // 部门
+
+	Job *string `json:"job,omitempty"` // 职位
+
+	Start *string `json:"start,omitempty"` // 开始日期
+
+	End *string `json:"end,omitempty"` // 截止日期
+
 	Description *string `json:"description,omitempty"` // 工作描述
 }
 
 type WorkExperienceBuilder struct {
-	company         string // 公司
-	companyFlag     bool
-	department      string // 部门
-	departmentFlag  bool
-	job             string // 职位
-	jobFlag         bool
-	start           string // 开始日期
-	startFlag       bool
-	end             string // 截止日期
-	endFlag         bool
+	company     string // 公司
+	companyFlag bool
+
+	department     string // 部门
+	departmentFlag bool
+
+	job     string // 职位
+	jobFlag bool
+
+	start     string // 开始日期
+	startFlag bool
+
+	end     string // 截止日期
+	endFlag bool
+
 	description     string // 工作描述
 	descriptionFlag bool
 }
@@ -1821,13 +1995,15 @@ func (builder *WorkExperienceBuilder) Build() *WorkExperience {
 }
 
 type WorkLocation struct {
-	Id   *int64  `json:"id,omitempty"`   // 工作地点 ID
+	Id *int64 `json:"id,omitempty"` // 工作地点 ID
+
 	Name *string `json:"name,omitempty"` // 工作地点名称
 }
 
 type WorkLocationBuilder struct {
-	id       int64 // 工作地点 ID
-	idFlag   bool
+	id     int64 // 工作地点 ID
+	idFlag bool
+
 	name     string // 工作地点名称
 	nameFlag bool
 }
@@ -2037,9 +2213,11 @@ type ListEmployeeReq struct {
 }
 
 type ListEmployeeRespData struct {
-	Items     []*Employee `json:"items,omitempty"`      // 员工列表
-	PageToken *string     `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否有下一页数据
+	Items []*Employee `json:"items,omitempty"` // 员工列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下次请求需要带上的分页标记
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
 }
 
 type ListEmployeeResp struct {

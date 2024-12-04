@@ -39,16 +39,20 @@ const (
 )
 
 type Credentials struct {
-	Email  *string `json:"email,omitempty"`   // 邮箱
-	Mobile *string `json:"mobile,omitempty"`  // 手机号
+	Email *string `json:"email,omitempty"` // 邮箱
+
+	Mobile *string `json:"mobile,omitempty"` // 手机号
+
 	UserId *string `json:"user_id,omitempty"` // 用户id
 }
 
 type CredentialsBuilder struct {
-	email      string // 邮箱
-	emailFlag  bool
+	email     string // 邮箱
+	emailFlag bool
+
 	mobile     string // 手机号
 	mobileFlag bool
+
 	userId     string // 用户id
 	userIdFlag bool
 }
@@ -103,13 +107,15 @@ func (builder *CredentialsBuilder) Build() *Credentials {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -147,13 +153,15 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type Device struct {
-	DeviceId       *string `json:"device_id,omitempty"`        // 当前设备ID
+	DeviceId *string `json:"device_id,omitempty"` // 当前设备ID
+
 	LegacyDeviceId *string `json:"legacy_device_id,omitempty"` // 历史使用的设备ID
 }
 
 type DeviceBuilder struct {
-	deviceId           string // 当前设备ID
-	deviceIdFlag       bool
+	deviceId     string // 当前设备ID
+	deviceIdFlag bool
+
 	legacyDeviceId     string // 历史使用的设备ID
 	legacyDeviceIdFlag bool
 }
@@ -230,21 +238,27 @@ func (builder *IdpCredentialIdBuilder) Build() *IdpCredentialId {
 }
 
 type MaskSession struct {
-	CreateTime   *string `json:"create_time,omitempty"`   // 创建时间
-	TerminalType *int    `json:"terminal_type,omitempty"` // 客户端类型
-	UserId       *string `json:"user_id,omitempty"`       // 用户ID
-	Sid          *string `json:"sid,omitempty"`           // 需要登出的 session 标识符
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间
+
+	TerminalType *int `json:"terminal_type,omitempty"` // 客户端类型
+
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	Sid *string `json:"sid,omitempty"` // 需要登出的 session 标识符
 }
 
 type MaskSessionBuilder struct {
-	createTime       string // 创建时间
-	createTimeFlag   bool
+	createTime     string // 创建时间
+	createTimeFlag bool
+
 	terminalType     int // 客户端类型
 	terminalTypeFlag bool
-	userId           string // 用户ID
-	userIdFlag       bool
-	sid              string // 需要登出的 session 标识符
-	sidFlag          bool
+
+	userId     string // 用户ID
+	userIdFlag bool
+
+	sid     string // 需要登出的 session 标识符
+	sidFlag bool
 }
 
 func NewMaskSessionBuilder() *MaskSessionBuilder {
@@ -312,16 +326,21 @@ func (builder *MaskSessionBuilder) Build() *MaskSession {
 type LogoutSessionReqBodyBuilder struct {
 	idpCredentialId     string // idp 侧的唯一标识
 	idpCredentialIdFlag bool
-	logoutType          int // 登出的方式
-	logoutTypeFlag      bool
-	terminalType        []int // 登出的客户端类型，默认全部登出，1-桌面端，2-网页端，3-安卓移动端，4-Apple移动端 5-服务端 6-旧版小程序端 8-其他移动端
-	terminalTypeFlag    bool
-	userId              string // user_id
-	userIdFlag          bool
-	logoutReason        int // 登出原因
-	logoutReasonFlag    bool
-	sid                 string // 需要精确登出的 session 标识符
-	sidFlag             bool
+
+	logoutType     int // 登出的方式
+	logoutTypeFlag bool
+
+	terminalType     []int // 登出的客户端类型，默认全部登出，1-桌面端，2-网页端，3-安卓移动端，4-Apple移动端 5-服务端 6-旧版小程序端 8-其他移动端
+	terminalTypeFlag bool
+
+	userId     string // user_id
+	userIdFlag bool
+
+	logoutReason     int // 登出原因
+	logoutReasonFlag bool
+
+	sid     string // 需要精确登出的 session 标识符
+	sidFlag bool
 }
 
 func NewLogoutSessionReqBodyBuilder() *LogoutSessionReqBodyBuilder {
@@ -540,11 +559,16 @@ func (builder *LogoutSessionReqBuilder) Build() *LogoutSessionReq {
 
 type LogoutSessionReqBody struct {
 	IdpCredentialId *string `json:"idp_credential_id,omitempty"` // idp 侧的唯一标识
-	LogoutType      *int    `json:"logout_type,omitempty"`       // 登出的方式
-	TerminalType    []int   `json:"terminal_type,omitempty"`     // 登出的客户端类型，默认全部登出，1-桌面端，2-网页端，3-安卓移动端，4-Apple移动端 5-服务端 6-旧版小程序端 8-其他移动端
-	UserId          *string `json:"user_id,omitempty"`           // user_id
-	LogoutReason    *int    `json:"logout_reason,omitempty"`     // 登出原因
-	Sid             *string `json:"sid,omitempty"`               // 需要精确登出的 session 标识符
+
+	LogoutType *int `json:"logout_type,omitempty"` // 登出的方式
+
+	TerminalType []int `json:"terminal_type,omitempty"` // 登出的客户端类型，默认全部登出，1-桌面端，2-网页端，3-安卓移动端，4-Apple移动端 5-服务端 6-旧版小程序端 8-其他移动端
+
+	UserId *string `json:"user_id,omitempty"` // user_id
+
+	LogoutReason *int `json:"logout_reason,omitempty"` // 登出原因
+
+	Sid *string `json:"sid,omitempty"` // 需要精确登出的 session 标识符
 }
 
 type LogoutSessionReq struct {

@@ -453,19 +453,25 @@ const (
 )
 
 type AvatarInfo struct {
-	Avatar72     *string `json:"avatar_72,omitempty"`     // 72*72像素头像链接
-	Avatar240    *string `json:"avatar_240,omitempty"`    // 240*240像素头像链接
-	Avatar640    *string `json:"avatar_640,omitempty"`    // 640*640像素头像链接
+	Avatar72 *string `json:"avatar_72,omitempty"` // 72*72像素头像链接
+
+	Avatar240 *string `json:"avatar_240,omitempty"` // 240*240像素头像链接
+
+	Avatar640 *string `json:"avatar_640,omitempty"` // 640*640像素头像链接
+
 	AvatarOrigin *string `json:"avatar_origin,omitempty"` // 原始头像链接
 }
 
 type AvatarInfoBuilder struct {
-	avatar72         string // 72*72像素头像链接
-	avatar72Flag     bool
-	avatar240        string // 240*240像素头像链接
-	avatar240Flag    bool
-	avatar640        string // 640*640像素头像链接
-	avatar640Flag    bool
+	avatar72     string // 72*72像素头像链接
+	avatar72Flag bool
+
+	avatar240     string // 240*240像素头像链接
+	avatar240Flag bool
+
+	avatar640     string // 640*640像素头像链接
+	avatar640Flag bool
+
 	avatarOrigin     string // 原始头像链接
 	avatarOriginFlag bool
 }
@@ -533,27 +539,37 @@ func (builder *AvatarInfoBuilder) Build() *AvatarInfo {
 }
 
 type CollaborationTenant struct {
-	TenantKey   *string     `json:"tenant_key,omitempty"`   // 关联租户ID
-	Name        *string     `json:"name,omitempty"`         // 关联租户实际名称
-	Nickname    *string     `json:"nickname,omitempty"`     // 别名
-	ConnectTime *int        `json:"connect_time,omitempty"` // 关联时间
-	Avatar      *AvatarInfo `json:"avatar,omitempty"`       // 租户icon信息
-	Brand       *string     `json:"brand,omitempty"`        // 租户品牌
+	TenantKey *string `json:"tenant_key,omitempty"` // 关联租户ID
+
+	Name *string `json:"name,omitempty"` // 关联租户实际名称
+
+	Nickname *string `json:"nickname,omitempty"` // 别名
+
+	ConnectTime *int `json:"connect_time,omitempty"` // 关联时间
+
+	Avatar *AvatarInfo `json:"avatar,omitempty"` // 租户icon信息
+
+	Brand *string `json:"brand,omitempty"` // 租户品牌
 }
 
 type CollaborationTenantBuilder struct {
-	tenantKey       string // 关联租户ID
-	tenantKeyFlag   bool
-	name            string // 关联租户实际名称
-	nameFlag        bool
-	nickname        string // 别名
-	nicknameFlag    bool
+	tenantKey     string // 关联租户ID
+	tenantKeyFlag bool
+
+	name     string // 关联租户实际名称
+	nameFlag bool
+
+	nickname     string // 别名
+	nicknameFlag bool
+
 	connectTime     int // 关联时间
 	connectTimeFlag bool
-	avatar          *AvatarInfo // 租户icon信息
-	avatarFlag      bool
-	brand           string // 租户品牌
-	brandFlag       bool
+
+	avatar     *AvatarInfo // 租户icon信息
+	avatarFlag bool
+
+	brand     string // 租户品牌
+	brandFlag bool
 }
 
 func NewCollaborationTenantBuilder() *CollaborationTenantBuilder {
@@ -644,13 +660,15 @@ func (builder *CollaborationTenantBuilder) Build() *CollaborationTenant {
 }
 
 type ConfidentialMember struct {
-	UserId         *string `json:"user_id,omitempty"`         // 用户ID
-	IsConfidential *bool   `json:"is_confidential,omitempty"` // 是否机密
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	IsConfidential *bool `json:"is_confidential,omitempty"` // 是否机密
 }
 
 type ConfidentialMemberBuilder struct {
-	userId             string // 用户ID
-	userIdFlag         bool
+	userId     string // 用户ID
+	userIdFlag bool
+
 	isConfidential     bool // 是否机密
 	isConfidentialFlag bool
 }
@@ -692,19 +710,25 @@ func (builder *ConfidentialMemberBuilder) Build() *ConfidentialMember {
 }
 
 type CustomAttr struct {
-	Id       *string            `json:"id,omitempty"`        // 自定义字段id
-	Type     *string            `json:"type,omitempty"`      // 自定义字段类型，可选值有:;- `TEXT`：纯文本，用于纯文本描述人员，如备注;- `HREF`：静态 URL，用于人员 Profile 跳转链接;- `ENUMERATION`：枚举，用于结构化描述人员，如民族;- `GENERIC_USER`：用户，用于描述人和人关系，如 HRBP;- `PICTURE_ENUM`：枚举图片，以结构化的图片描述人员，如在人员 Profile 展示荣誉徽章
-	Options  *CustomAttrOptions `json:"options,omitempty"`   // 选项定义，当type为`ENUMERATION`或者`PICTURE_ENUM`时此项有值，列举所有可选项
-	I18nName []*I18nContent     `json:"i18n_name,omitempty"` // 自定义字段的字段名称
+	Id *string `json:"id,omitempty"` // 自定义字段id
+
+	Type *string `json:"type,omitempty"` // 自定义字段类型，可选值有:;- `TEXT`：纯文本，用于纯文本描述人员，如备注;- `HREF`：静态 URL，用于人员 Profile 跳转链接;- `ENUMERATION`：枚举，用于结构化描述人员，如民族;- `GENERIC_USER`：用户，用于描述人和人关系，如 HRBP;- `PICTURE_ENUM`：枚举图片，以结构化的图片描述人员，如在人员 Profile 展示荣誉徽章
+
+	Options *CustomAttrOptions `json:"options,omitempty"` // 选项定义，当type为`ENUMERATION`或者`PICTURE_ENUM`时此项有值，列举所有可选项
+
+	I18nName []*I18nContent `json:"i18n_name,omitempty"` // 自定义字段的字段名称
 }
 
 type CustomAttrBuilder struct {
-	id           string // 自定义字段id
-	idFlag       bool
-	type_        string // 自定义字段类型，可选值有:;- `TEXT`：纯文本，用于纯文本描述人员，如备注;- `HREF`：静态 URL，用于人员 Profile 跳转链接;- `ENUMERATION`：枚举，用于结构化描述人员，如民族;- `GENERIC_USER`：用户，用于描述人和人关系，如 HRBP;- `PICTURE_ENUM`：枚举图片，以结构化的图片描述人员，如在人员 Profile 展示荣誉徽章
-	typeFlag     bool
-	options      *CustomAttrOptions // 选项定义，当type为`ENUMERATION`或者`PICTURE_ENUM`时此项有值，列举所有可选项
-	optionsFlag  bool
+	id     string // 自定义字段id
+	idFlag bool
+
+	type_    string // 自定义字段类型，可选值有:;- `TEXT`：纯文本，用于纯文本描述人员，如备注;- `HREF`：静态 URL，用于人员 Profile 跳转链接;- `ENUMERATION`：枚举，用于结构化描述人员，如民族;- `GENERIC_USER`：用户，用于描述人和人关系，如 HRBP;- `PICTURE_ENUM`：枚举图片，以结构化的图片描述人员，如在人员 Profile 展示荣誉徽章
+	typeFlag bool
+
+	options     *CustomAttrOptions // 选项定义，当type为`ENUMERATION`或者`PICTURE_ENUM`时此项有值，列举所有可选项
+	optionsFlag bool
+
 	i18nName     []*I18nContent // 自定义字段的字段名称
 	i18nNameFlag bool
 }
@@ -771,14 +795,16 @@ func (builder *CustomAttrBuilder) Build() *CustomAttr {
 
 type CustomAttrEvent struct {
 	ContactFieldKey []string `json:"contact_field_key,omitempty"` // 通讯录字段键值
-	AllowOpenQuery  *bool    `json:"allow_open_query,omitempty"`  // 开关是否打开
+
+	AllowOpenQuery *bool `json:"allow_open_query,omitempty"` // 开关是否打开
 }
 
 type CustomAttrEventBuilder struct {
 	contactFieldKey     []string // 通讯录字段键值
 	contactFieldKeyFlag bool
-	allowOpenQuery      bool // 开关是否打开
-	allowOpenQueryFlag  bool
+
+	allowOpenQuery     bool // 开关是否打开
+	allowOpenQueryFlag bool
 }
 
 func NewCustomAttrEventBuilder() *CustomAttrEventBuilder {
@@ -817,13 +843,15 @@ func (builder *CustomAttrEventBuilder) Build() *CustomAttrEvent {
 }
 
 type CustomAttrGenericUser struct {
-	Id   *string `json:"id,omitempty"`   // 用户的user_id ，具体参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	Type *int    `json:"type,omitempty"` // 用户类型:  ;1：用户;;目前固定为1，表示用户类型
+	Id *string `json:"id,omitempty"` // 用户的user_id ，具体参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	Type *int `json:"type,omitempty"` // 用户类型:  ;1：用户;;目前固定为1，表示用户类型
 }
 
 type CustomAttrGenericUserBuilder struct {
-	id       string // 用户的user_id ，具体参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	idFlag   bool
+	id     string // 用户的user_id ，具体参见[用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	idFlag bool
+
 	type_    int // 用户类型:  ;1：用户;;目前固定为1，表示用户类型
 	typeFlag bool
 }
@@ -865,18 +893,22 @@ func (builder *CustomAttrGenericUserBuilder) Build() *CustomAttrGenericUser {
 }
 
 type CustomAttrOption struct {
-	Id    *string `json:"id,omitempty"`    // 枚举类型选项id
+	Id *string `json:"id,omitempty"` // 枚举类型选项id
+
 	Value *string `json:"value,omitempty"` // 枚举选项值，当option_type为`TEXT`为文本值，当option_type为`PICTURE`时为图片链接
-	Name  *string `json:"name,omitempty"`  // 名称，仅option_type为PICTURE时有效
+
+	Name *string `json:"name,omitempty"` // 名称，仅option_type为PICTURE时有效
 }
 
 type CustomAttrOptionBuilder struct {
-	id        string // 枚举类型选项id
-	idFlag    bool
+	id     string // 枚举类型选项id
+	idFlag bool
+
 	value     string // 枚举选项值，当option_type为`TEXT`为文本值，当option_type为`PICTURE`时为图片链接
 	valueFlag bool
-	name      string // 名称，仅option_type为PICTURE时有效
-	nameFlag  bool
+
+	name     string // 名称，仅option_type为PICTURE时有效
+	nameFlag bool
 }
 
 func NewCustomAttrOptionBuilder() *CustomAttrOptionBuilder {
@@ -929,18 +961,22 @@ func (builder *CustomAttrOptionBuilder) Build() *CustomAttrOption {
 }
 
 type CustomAttrOptions struct {
-	DefaultOptionId *string             `json:"default_option_id,omitempty"` // 默认选项id
-	OptionType      *string             `json:"option_type,omitempty"`       // 选项类型
-	Options         []*CustomAttrOption `json:"options,omitempty"`           // 选项列表
+	DefaultOptionId *string `json:"default_option_id,omitempty"` // 默认选项id
+
+	OptionType *string `json:"option_type,omitempty"` // 选项类型
+
+	Options []*CustomAttrOption `json:"options,omitempty"` // 选项列表
 }
 
 type CustomAttrOptionsBuilder struct {
 	defaultOptionId     string // 默认选项id
 	defaultOptionIdFlag bool
-	optionType          string // 选项类型
-	optionTypeFlag      bool
-	options             []*CustomAttrOption // 选项列表
-	optionsFlag         bool
+
+	optionType     string // 选项类型
+	optionTypeFlag bool
+
+	options     []*CustomAttrOption // 选项列表
+	optionsFlag bool
 }
 
 func NewCustomAttrOptionsBuilder() *CustomAttrOptionsBuilder {
@@ -992,24 +1028,32 @@ func (builder *CustomAttrOptionsBuilder) Build() *CustomAttrOptions {
 }
 
 type DeparmentCount struct {
-	DepartmentId          *string `json:"department_id,omitempty"`           //
-	DirectDepartmentCount *int    `json:"direct_department_count,omitempty"` // 部门下的直属部门数量
-	DirectUserCount       *int    `json:"direct_user_count,omitempty"`       // 部门下的直属成员数量，包含部门负责人
-	DepartmentCount       *int    `json:"department_count,omitempty"`        // 部门下所有部门的数量，包含递归的子部门
-	UserCount             *int    `json:"user_count,omitempty"`              // 部门下所有成员数，包含递归子部门的成员，包含部门负责人
+	DepartmentId *string `json:"department_id,omitempty"` //
+
+	DirectDepartmentCount *int `json:"direct_department_count,omitempty"` // 部门下的直属部门数量
+
+	DirectUserCount *int `json:"direct_user_count,omitempty"` // 部门下的直属成员数量，包含部门负责人
+
+	DepartmentCount *int `json:"department_count,omitempty"` // 部门下所有部门的数量，包含递归的子部门
+
+	UserCount *int `json:"user_count,omitempty"` // 部门下所有成员数，包含递归子部门的成员，包含部门负责人
 }
 
 type DeparmentCountBuilder struct {
-	departmentId              string //
-	departmentIdFlag          bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	directDepartmentCount     int // 部门下的直属部门数量
 	directDepartmentCountFlag bool
-	directUserCount           int // 部门下的直属成员数量，包含部门负责人
-	directUserCountFlag       bool
-	departmentCount           int // 部门下所有部门的数量，包含递归的子部门
-	departmentCountFlag       bool
-	userCount                 int // 部门下所有成员数，包含递归子部门的成员，包含部门负责人
-	userCountFlag             bool
+
+	directUserCount     int // 部门下的直属成员数量，包含部门负责人
+	directUserCountFlag bool
+
+	departmentCount     int // 部门下所有部门的数量，包含递归的子部门
+	departmentCountFlag bool
+
+	userCount     int // 部门下所有成员数，包含递归子部门的成员，包含部门负责人
+	userCountFlag bool
 }
 
 func NewDeparmentCountBuilder() *DeparmentCountBuilder {
@@ -1086,57 +1130,87 @@ func (builder *DeparmentCountBuilder) Build() *DeparmentCount {
 }
 
 type Department struct {
-	Name                   *string             `json:"name,omitempty"`                      // 部门名称
-	I18nName               *DepartmentI18nName `json:"i18n_name,omitempty"`                 // 国际化的部门名称
-	ParentDepartmentId     *string             `json:"parent_department_id,omitempty"`      // 父部门的ID;;* 在根部门下创建新部门，该参数值为 “0”
-	DepartmentId           *string             `json:"department_id,omitempty"`             // 本部门的自定义部门ID;;注意：除需要满足正则规则外，同时不能以`od-`开头
-	OpenDepartmentId       *string             `json:"open_department_id,omitempty"`        // 部门的open_id，类型与通过请求的查询参数传入的department_id_type相同
-	LeaderUserId           *string             `json:"leader_user_id,omitempty"`            // 部门主管用户ID
-	ChatId                 *string             `json:"chat_id,omitempty"`                   // 部门群ID
-	Order                  *string             `json:"order,omitempty"`                     // 部门的排序，即部门在其同级部门的展示顺序
-	UnitIds                []string            `json:"unit_ids,omitempty"`                  // 部门单位自定义ID列表，当前只支持一个
-	MemberCount            *int                `json:"member_count,omitempty"`              // 部门下用户的个数
-	Status                 *DepartmentStatus   `json:"status,omitempty"`                    // 部门状态
-	CreateGroupChat        *bool               `json:"create_group_chat,omitempty"`         // 是否创建部门群，默认不创建
-	Leaders                []*DepartmentLeader `json:"leaders,omitempty"`                   // 部门负责人
-	GroupChatEmployeeTypes []int               `json:"group_chat_employee_types,omitempty"` // 部门群雇员类型限制。[]空列表时，表示为无任何雇员类型。类型字段可包含以下值，支持多个类型值；若有多个，用英文','分隔：;1、正式员工;2、实习生;3、外包;4、劳务;5、顾问;6、其他自定义类型字段，可通过下方接口获取到该租户的自定义员工类型的名称，参见[获取人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/employee_type_enum/list)。
-	DepartmentHrbps        []string            `json:"department_hrbps,omitempty"`          // 部门HRBP
-	PrimaryMemberCount     *int                `json:"primary_member_count,omitempty"`      // 部门下主属用户的个数
+	Name *string `json:"name,omitempty"` // 部门名称
+
+	I18nName *DepartmentI18nName `json:"i18n_name,omitempty"` // 国际化的部门名称
+
+	ParentDepartmentId *string `json:"parent_department_id,omitempty"` // 父部门的ID;;* 在根部门下创建新部门，该参数值为 “0”
+
+	DepartmentId *string `json:"department_id,omitempty"` // 本部门的自定义部门ID;;注意：除需要满足正则规则外，同时不能以`od-`开头
+
+	OpenDepartmentId *string `json:"open_department_id,omitempty"` // 部门的open_id，类型与通过请求的查询参数传入的department_id_type相同
+
+	LeaderUserId *string `json:"leader_user_id,omitempty"` // 部门主管用户ID
+
+	ChatId *string `json:"chat_id,omitempty"` // 部门群ID
+
+	Order *string `json:"order,omitempty"` // 部门的排序，即部门在其同级部门的展示顺序
+
+	UnitIds []string `json:"unit_ids,omitempty"` // 部门单位自定义ID列表，当前只支持一个
+
+	MemberCount *int `json:"member_count,omitempty"` // 部门下用户的个数
+
+	Status *DepartmentStatus `json:"status,omitempty"` // 部门状态
+
+	CreateGroupChat *bool `json:"create_group_chat,omitempty"` // 是否创建部门群，默认不创建
+
+	Leaders []*DepartmentLeader `json:"leaders,omitempty"` // 部门负责人
+
+	GroupChatEmployeeTypes []int `json:"group_chat_employee_types,omitempty"` // 部门群雇员类型限制。[]空列表时，表示为无任何雇员类型。类型字段可包含以下值，支持多个类型值；若有多个，用英文','分隔：;1、正式员工;2、实习生;3、外包;4、劳务;5、顾问;6、其他自定义类型字段，可通过下方接口获取到该租户的自定义员工类型的名称，参见[获取人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/employee_type_enum/list)。
+
+	DepartmentHrbps []string `json:"department_hrbps,omitempty"` // 部门HRBP
+
+	PrimaryMemberCount *int `json:"primary_member_count,omitempty"` // 部门下主属用户的个数
 }
 
 type DepartmentBuilder struct {
-	name                       string // 部门名称
-	nameFlag                   bool
-	i18nName                   *DepartmentI18nName // 国际化的部门名称
-	i18nNameFlag               bool
-	parentDepartmentId         string // 父部门的ID;;* 在根部门下创建新部门，该参数值为 “0”
-	parentDepartmentIdFlag     bool
-	departmentId               string // 本部门的自定义部门ID;;注意：除需要满足正则规则外，同时不能以`od-`开头
-	departmentIdFlag           bool
-	openDepartmentId           string // 部门的open_id，类型与通过请求的查询参数传入的department_id_type相同
-	openDepartmentIdFlag       bool
-	leaderUserId               string // 部门主管用户ID
-	leaderUserIdFlag           bool
-	chatId                     string // 部门群ID
-	chatIdFlag                 bool
-	order                      string // 部门的排序，即部门在其同级部门的展示顺序
-	orderFlag                  bool
-	unitIds                    []string // 部门单位自定义ID列表，当前只支持一个
-	unitIdsFlag                bool
-	memberCount                int // 部门下用户的个数
-	memberCountFlag            bool
-	status                     *DepartmentStatus // 部门状态
-	statusFlag                 bool
-	createGroupChat            bool // 是否创建部门群，默认不创建
-	createGroupChatFlag        bool
-	leaders                    []*DepartmentLeader // 部门负责人
-	leadersFlag                bool
+	name     string // 部门名称
+	nameFlag bool
+
+	i18nName     *DepartmentI18nName // 国际化的部门名称
+	i18nNameFlag bool
+
+	parentDepartmentId     string // 父部门的ID;;* 在根部门下创建新部门，该参数值为 “0”
+	parentDepartmentIdFlag bool
+
+	departmentId     string // 本部门的自定义部门ID;;注意：除需要满足正则规则外，同时不能以`od-`开头
+	departmentIdFlag bool
+
+	openDepartmentId     string // 部门的open_id，类型与通过请求的查询参数传入的department_id_type相同
+	openDepartmentIdFlag bool
+
+	leaderUserId     string // 部门主管用户ID
+	leaderUserIdFlag bool
+
+	chatId     string // 部门群ID
+	chatIdFlag bool
+
+	order     string // 部门的排序，即部门在其同级部门的展示顺序
+	orderFlag bool
+
+	unitIds     []string // 部门单位自定义ID列表，当前只支持一个
+	unitIdsFlag bool
+
+	memberCount     int // 部门下用户的个数
+	memberCountFlag bool
+
+	status     *DepartmentStatus // 部门状态
+	statusFlag bool
+
+	createGroupChat     bool // 是否创建部门群，默认不创建
+	createGroupChatFlag bool
+
+	leaders     []*DepartmentLeader // 部门负责人
+	leadersFlag bool
+
 	groupChatEmployeeTypes     []int // 部门群雇员类型限制。[]空列表时，表示为无任何雇员类型。类型字段可包含以下值，支持多个类型值；若有多个，用英文','分隔：;1、正式员工;2、实习生;3、外包;4、劳务;5、顾问;6、其他自定义类型字段，可通过下方接口获取到该租户的自定义员工类型的名称，参见[获取人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/employee_type_enum/list)。
 	groupChatEmployeeTypesFlag bool
-	departmentHrbps            []string // 部门HRBP
-	departmentHrbpsFlag        bool
-	primaryMemberCount         int // 部门下主属用户的个数
-	primaryMemberCountFlag     bool
+
+	departmentHrbps     []string // 部门HRBP
+	departmentHrbpsFlag bool
+
+	primaryMemberCount     int // 部门下主属用户的个数
+	primaryMemberCountFlag bool
 }
 
 func NewDepartmentBuilder() *DepartmentBuilder {
@@ -1352,15 +1426,17 @@ func (builder *DepartmentBuilder) Build() *Department {
 }
 
 type DepartmentLeader struct {
-	LeaderType *int    `json:"leaderType,omitempty"` // 负责人类型
-	LeaderID   *string `json:"leaderID,omitempty"`   // 负责人ID
+	LeaderType *int `json:"leaderType,omitempty"` // 负责人类型
+
+	LeaderID *string `json:"leaderID,omitempty"` // 负责人ID
 }
 
 type DepartmentLeaderBuilder struct {
 	leaderType     int // 负责人类型
 	leaderTypeFlag bool
-	leaderID       string // 负责人ID
-	leaderIDFlag   bool
+
+	leaderID     string // 负责人ID
+	leaderIDFlag bool
 }
 
 func NewDepartmentLeaderBuilder() *DepartmentLeaderBuilder {
@@ -1400,24 +1476,32 @@ func (builder *DepartmentLeaderBuilder) Build() *DepartmentLeader {
 }
 
 type DepartmentCount struct {
-	DepartmentId          *string `json:"department_id,omitempty"`           // 部门ID
-	DirectDepartmentCount *int    `json:"direct_department_count,omitempty"` // 部门下的直属部门数量
-	DirectUserCount       *int    `json:"direct_user_count,omitempty"`       // 部门下的直属成员数量，包含部门负责人
-	DepartmentCount       *int    `json:"department_count,omitempty"`        // 部门下所有部门的数量，包含递归的子部门
-	UserCount             *int    `json:"user_count,omitempty"`              // 部门下所有成员数，包含递归子部门的成员，包含部门负责人
+	DepartmentId *string `json:"department_id,omitempty"` // 部门ID
+
+	DirectDepartmentCount *int `json:"direct_department_count,omitempty"` // 部门下的直属部门数量
+
+	DirectUserCount *int `json:"direct_user_count,omitempty"` // 部门下的直属成员数量，包含部门负责人
+
+	DepartmentCount *int `json:"department_count,omitempty"` // 部门下所有部门的数量，包含递归的子部门
+
+	UserCount *int `json:"user_count,omitempty"` // 部门下所有成员数，包含递归子部门的成员，包含部门负责人
 }
 
 type DepartmentCountBuilder struct {
-	departmentId              string // 部门ID
-	departmentIdFlag          bool
+	departmentId     string // 部门ID
+	departmentIdFlag bool
+
 	directDepartmentCount     int // 部门下的直属部门数量
 	directDepartmentCountFlag bool
-	directUserCount           int // 部门下的直属成员数量，包含部门负责人
-	directUserCountFlag       bool
-	departmentCount           int // 部门下所有部门的数量，包含递归的子部门
-	departmentCountFlag       bool
-	userCount                 int // 部门下所有成员数，包含递归子部门的成员，包含部门负责人
-	userCountFlag             bool
+
+	directUserCount     int // 部门下的直属成员数量，包含部门负责人
+	directUserCountFlag bool
+
+	departmentCount     int // 部门下所有部门的数量，包含递归的子部门
+	departmentCountFlag bool
+
+	userCount     int // 部门下所有成员数，包含递归子部门的成员，包含部门负责人
+	userCountFlag bool
 }
 
 func NewDepartmentCountBuilder() *DepartmentCountBuilder {
@@ -1496,16 +1580,20 @@ func (builder *DepartmentCountBuilder) Build() *DepartmentCount {
 }
 
 type DepartmentDetail struct {
-	DepartmentId   *string             `json:"department_id,omitempty"`   // 部门ID
+	DepartmentId *string `json:"department_id,omitempty"` // 部门ID
+
 	DepartmentName *DepartmentPathName `json:"department_name,omitempty"` // 部门名
-	DepartmentPath *DepartmentPath     `json:"department_path,omitempty"` // 部门路径
+
+	DepartmentPath *DepartmentPath `json:"department_path,omitempty"` // 部门路径
 }
 
 type DepartmentDetailBuilder struct {
-	departmentId       string // 部门ID
-	departmentIdFlag   bool
+	departmentId     string // 部门ID
+	departmentIdFlag bool
+
 	departmentName     *DepartmentPathName // 部门名
 	departmentNameFlag bool
+
 	departmentPath     *DepartmentPath // 部门路径
 	departmentPathFlag bool
 }
@@ -1558,39 +1646,60 @@ func (builder *DepartmentDetailBuilder) Build() *DepartmentDetail {
 }
 
 type DepartmentEvent struct {
-	Name               *string `json:"name,omitempty"`                 // 部门名称
-	ParentDepartmentId *string `json:"parent_department_id,omitempty"` // 父部门的部门open_department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	DepartmentId       *string `json:"department_id,omitempty"`        // 本部门的department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	OpenDepartmentId   *string `json:"open_department_id,omitempty"`   // 部门的open_department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	LeaderUserId       *string `json:"leader_user_id,omitempty"`       // 部门主管用户open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	ChatId             *string `json:"chat_id,omitempty"`              // 部门群ID
-	Order              *int    `json:"order,omitempty"`                // 部门的排序
+	Name *string `json:"name,omitempty"` // 部门名称
 
-	Status          *DepartmentStatus   `json:"status,omitempty"`           // 部门状态
-	Leaders         []*DepartmentLeader `json:"leaders,omitempty"`          // 部门负责人
-	DepartmentHrbps []*UserId           `json:"department_hrbps,omitempty"` // 部门HRBP
+	ParentDepartmentId *string `json:"parent_department_id,omitempty"` // 父部门的部门open_department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+
+	DepartmentId *string `json:"department_id,omitempty"` // 本部门的department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+
+	OpenDepartmentId *string `json:"open_department_id,omitempty"` // 部门的open_department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+
+	LeaderUserId *string `json:"leader_user_id,omitempty"` // 部门主管用户open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	ChatId *string `json:"chat_id,omitempty"` // 部门群ID
+
+	Order *int `json:"order,omitempty"` // 部门的排序
+
+	UnitIds []string `json:"unit_ids,omitempty"` // 部门单位自定义ID列表，当前只支持一个
+
+	Status *DepartmentStatus `json:"status,omitempty"` // 部门状态
+
+	Leaders []*DepartmentLeader `json:"leaders,omitempty"` // 部门负责人
+
+	DepartmentHrbps []*UserId `json:"department_hrbps,omitempty"` // 部门HRBP
 }
 
 type DepartmentEventBuilder struct {
-	name                   string // 部门名称
-	nameFlag               bool
+	name     string // 部门名称
+	nameFlag bool
+
 	parentDepartmentId     string // 父部门的部门open_department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
 	parentDepartmentIdFlag bool
-	departmentId           string // 本部门的department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	departmentIdFlag       bool
-	openDepartmentId       string // 部门的open_department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	openDepartmentIdFlag   bool
-	leaderUserId           string // 部门主管用户open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	leaderUserIdFlag       bool
-	chatId                 string // 部门群ID
-	chatIdFlag             bool
-	order                  int // 部门的排序
-	orderFlag              bool
 
-	status              *DepartmentStatus // 部门状态
-	statusFlag          bool
-	leaders             []*DepartmentLeader // 部门负责人
-	leadersFlag         bool
+	departmentId     string // 本部门的department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+	departmentIdFlag bool
+
+	openDepartmentId     string // 部门的open_department_id [部门相关ID概念](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+	openDepartmentIdFlag bool
+
+	leaderUserId     string // 部门主管用户open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	leaderUserIdFlag bool
+
+	chatId     string // 部门群ID
+	chatIdFlag bool
+
+	order     int // 部门的排序
+	orderFlag bool
+
+	unitIds     []string // 部门单位自定义ID列表，当前只支持一个
+	unitIdsFlag bool
+
+	status     *DepartmentStatus // 部门状态
+	statusFlag bool
+
+	leaders     []*DepartmentLeader // 部门负责人
+	leadersFlag bool
+
 	departmentHrbps     []*UserId // 部门HRBP
 	departmentHrbpsFlag bool
 }
@@ -1660,6 +1769,15 @@ func (builder *DepartmentEventBuilder) ChatId(chatId string) *DepartmentEventBui
 func (builder *DepartmentEventBuilder) Order(order int) *DepartmentEventBuilder {
 	builder.order = order
 	builder.orderFlag = true
+	return builder
+}
+
+// 部门单位自定义ID列表，当前只支持一个
+//
+// 示例值：
+func (builder *DepartmentEventBuilder) UnitIds(unitIds []string) *DepartmentEventBuilder {
+	builder.unitIds = unitIds
+	builder.unitIdsFlag = true
 	return builder
 }
 
@@ -1735,15 +1853,19 @@ func (builder *DepartmentEventBuilder) Build() *DepartmentEvent {
 
 type DepartmentI18nName struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 部门的中文名
+
 	JaJp *string `json:"ja_jp,omitempty"` // 部门的日文名
+
 	EnUs *string `json:"en_us,omitempty"` // 部门的英文名
 }
 
 type DepartmentI18nNameBuilder struct {
 	zhCn     string // 部门的中文名
 	zhCnFlag bool
+
 	jaJp     string // 部门的日文名
 	jaJpFlag bool
+
 	enUs     string // 部门的英文名
 	enUsFlag bool
 }
@@ -1798,13 +1920,15 @@ func (builder *DepartmentI18nNameBuilder) Build() *DepartmentI18nName {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -1842,15 +1966,17 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type DepartmentParent struct {
-	DepartmentId *string  `json:"department_id,omitempty"` // 部门ID
-	ParentIds    []string `json:"parent_ids,omitempty"`    // 父部门ID列表，从直接父部门到根部门
+	DepartmentId *string `json:"department_id,omitempty"` // 部门ID
+
+	ParentIds []string `json:"parent_ids,omitempty"` // 父部门ID列表，从直接父部门到根部门
 }
 
 type DepartmentParentBuilder struct {
 	departmentId     string // 部门ID
 	departmentIdFlag bool
-	parentIds        []string // 父部门ID列表，从直接父部门到根部门
-	parentIdsFlag    bool
+
+	parentIds     []string // 父部门ID列表，从直接父部门到根部门
+	parentIdsFlag bool
 }
 
 func NewDepartmentParentBuilder() *DepartmentParentBuilder {
@@ -1889,13 +2015,15 @@ func (builder *DepartmentParentBuilder) Build() *DepartmentParent {
 }
 
 type DepartmentPath struct {
-	DepartmentIds      []string            `json:"department_ids,omitempty"`       // 部门路径IDs
+	DepartmentIds []string `json:"department_ids,omitempty"` // 部门路径IDs
+
 	DepartmentPathName *DepartmentPathName `json:"department_path_name,omitempty"` // 部门路径名字
 }
 
 type DepartmentPathBuilder struct {
-	departmentIds          []string // 部门路径IDs
-	departmentIdsFlag      bool
+	departmentIds     []string // 部门路径IDs
+	departmentIdsFlag bool
+
 	departmentPathName     *DepartmentPathName // 部门路径名字
 	departmentPathNameFlag bool
 }
@@ -1935,13 +2063,15 @@ func (builder *DepartmentPathBuilder) Build() *DepartmentPath {
 }
 
 type DepartmentPathName struct {
-	Name     *string             `json:"name,omitempty"`      // 部门名
+	Name *string `json:"name,omitempty"` // 部门名
+
 	I18nName *DepartmentI18nName `json:"i18n_name,omitempty"` // 部门国际化名
 }
 
 type DepartmentPathNameBuilder struct {
-	name         string // 部门名
-	nameFlag     bool
+	name     string // 部门名
+	nameFlag bool
+
 	i18nName     *DepartmentI18nName // 部门国际化名
 	i18nNameFlag bool
 }
@@ -2014,16 +2144,20 @@ func (builder *DepartmentStatusBuilder) Build() *DepartmentStatus {
 }
 
 type DepartmentUnit struct {
-	UnitId   *string `json:"unit_id,omitempty"`   // 部门单元自定义ID
+	UnitId *string `json:"unit_id,omitempty"` // 部门单元自定义ID
+
 	UnitType *string `json:"unit_type,omitempty"` // 部门单元类型
+
 	UnitName *string `json:"unit_name,omitempty"` // 部门单元名称
 }
 
 type DepartmentUnitBuilder struct {
-	unitId       string // 部门单元自定义ID
-	unitIdFlag   bool
+	unitId     string // 部门单元自定义ID
+	unitIdFlag bool
+
 	unitType     string // 部门单元类型
 	unitTypeFlag bool
+
 	unitName     string // 部门单元名称
 	unitNameFlag bool
 }
@@ -2078,21 +2212,27 @@ func (builder *DepartmentUnitBuilder) Build() *DepartmentUnit {
 }
 
 type DynamicGroupExpression struct {
-	Field    *string  `json:"field,omitempty"`    // 动态用户组表达式的左值，属性名称
-	Operator *string  `json:"operator,omitempty"` // 操作符，表示左值进行什么操作
-	Value    *string  `json:"value,omitempty"`    // 值，单个结果，用于单值运算，比如：等于操作
-	Values   []string `json:"values,omitempty"`   // 值，多个结果，用于多值操作，比如属于
+	Field *string `json:"field,omitempty"` // 动态用户组表达式的左值，属性名称
+
+	Operator *string `json:"operator,omitempty"` // 操作符，表示左值进行什么操作
+
+	Value *string `json:"value,omitempty"` // 值，单个结果，用于单值运算，比如：等于操作
+
+	Values []string `json:"values,omitempty"` // 值，多个结果，用于多值操作，比如属于
 }
 
 type DynamicGroupExpressionBuilder struct {
-	field        string // 动态用户组表达式的左值，属性名称
-	fieldFlag    bool
+	field     string // 动态用户组表达式的左值，属性名称
+	fieldFlag bool
+
 	operator     string // 操作符，表示左值进行什么操作
 	operatorFlag bool
-	value        string // 值，单个结果，用于单值运算，比如：等于操作
-	valueFlag    bool
-	values       []string // 值，多个结果，用于多值操作，比如属于
-	valuesFlag   bool
+
+	value     string // 值，单个结果，用于单值运算，比如：等于操作
+	valueFlag bool
+
+	values     []string // 值，多个结果，用于多值操作，比如属于
+	valuesFlag bool
 }
 
 func NewDynamicGroupExpressionBuilder() *DynamicGroupExpressionBuilder {
@@ -2157,21 +2297,27 @@ func (builder *DynamicGroupExpressionBuilder) Build() *DynamicGroupExpression {
 }
 
 type DynamicGroupRule struct {
-	DepartmentLevel *string                   `json:"department_level,omitempty"` // 动态用户组匹配部门层级
-	Expressions     []*DynamicGroupExpression `json:"expressions,omitempty"`      // 动态用户组规则表达式
-	JoinerRule      *string                   `json:"joiner_rule,omitempty"`      // 动态用户组表达式组合关系
-	GroupStatus     *string                   `json:"group_status,omitempty"`     // 动态用户组计算状态，只读，创建、更新用户组时不需要填写
+	DepartmentLevel *string `json:"department_level,omitempty"` // 动态用户组匹配部门层级
+
+	Expressions []*DynamicGroupExpression `json:"expressions,omitempty"` // 动态用户组规则表达式
+
+	JoinerRule *string `json:"joiner_rule,omitempty"` // 动态用户组表达式组合关系
+
+	GroupStatus *string `json:"group_status,omitempty"` // 动态用户组计算状态，只读，创建、更新用户组时不需要填写
 }
 
 type DynamicGroupRuleBuilder struct {
 	departmentLevel     string // 动态用户组匹配部门层级
 	departmentLevelFlag bool
-	expressions         []*DynamicGroupExpression // 动态用户组规则表达式
-	expressionsFlag     bool
-	joinerRule          string // 动态用户组表达式组合关系
-	joinerRuleFlag      bool
-	groupStatus         string // 动态用户组计算状态，只读，创建、更新用户组时不需要填写
-	groupStatusFlag     bool
+
+	expressions     []*DynamicGroupExpression // 动态用户组规则表达式
+	expressionsFlag bool
+
+	joinerRule     string // 动态用户组表达式组合关系
+	joinerRuleFlag bool
+
+	groupStatus     string // 动态用户组计算状态，只读，创建、更新用户组时不需要填写
+	groupStatusFlag bool
 }
 
 func NewDynamicGroupRuleBuilder() *DynamicGroupRuleBuilder {
@@ -2236,25 +2382,35 @@ func (builder *DynamicGroupRuleBuilder) Build() *DynamicGroupRule {
 }
 
 type EmployeeTypeEnum struct {
-	EnumId      *string        `json:"enum_id,omitempty"`      // 枚举值id
-	EnumValue   *string        `json:"enum_value,omitempty"`   // 枚举的编号值，创建新的人员类型后，系统生成对应编号。对应[创建用户接口](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/create)中用户信息的employee_type字段值
-	Content     *string        `json:"content,omitempty"`      // 枚举内容
-	EnumType    *int           `json:"enum_type,omitempty"`    // 类型
-	EnumStatus  *int           `json:"enum_status,omitempty"`  // 使用状态
+	EnumId *string `json:"enum_id,omitempty"` // 枚举值id
+
+	EnumValue *string `json:"enum_value,omitempty"` // 枚举的编号值，创建新的人员类型后，系统生成对应编号。对应[创建用户接口](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/create)中用户信息的employee_type字段值
+
+	Content *string `json:"content,omitempty"` // 枚举内容
+
+	EnumType *int `json:"enum_type,omitempty"` // 类型
+
+	EnumStatus *int `json:"enum_status,omitempty"` // 使用状态
+
 	I18nContent []*I18nContent `json:"i18n_content,omitempty"` // i18n定义
 }
 
 type EmployeeTypeEnumBuilder struct {
-	enumId          string // 枚举值id
-	enumIdFlag      bool
-	enumValue       string // 枚举的编号值，创建新的人员类型后，系统生成对应编号。对应[创建用户接口](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/create)中用户信息的employee_type字段值
-	enumValueFlag   bool
-	content         string // 枚举内容
-	contentFlag     bool
-	enumType        int // 类型
-	enumTypeFlag    bool
-	enumStatus      int // 使用状态
-	enumStatusFlag  bool
+	enumId     string // 枚举值id
+	enumIdFlag bool
+
+	enumValue     string // 枚举的编号值，创建新的人员类型后，系统生成对应编号。对应[创建用户接口](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/create)中用户信息的employee_type字段值
+	enumValueFlag bool
+
+	content     string // 枚举内容
+	contentFlag bool
+
+	enumType     int // 类型
+	enumTypeFlag bool
+
+	enumStatus     int // 使用状态
+	enumStatusFlag bool
+
 	i18nContent     []*I18nContent // i18n定义
 	i18nContentFlag bool
 }
@@ -2347,13 +2503,15 @@ func (builder *EmployeeTypeEnumBuilder) Build() *EmployeeTypeEnum {
 }
 
 type FunctionalRole struct {
-	RoleId   *string `json:"role_id,omitempty"`   // 角色内部ID
+	RoleId *string `json:"role_id,omitempty"` // 角色内部ID
+
 	RoleName *string `json:"role_name,omitempty"` // 角色名称
 }
 
 type FunctionalRoleBuilder struct {
-	roleId       string // 角色内部ID
-	roleIdFlag   bool
+	roleId     string // 角色内部ID
+	roleIdFlag bool
+
 	roleName     string // 角色名称
 	roleNameFlag bool
 }
@@ -2395,16 +2553,20 @@ func (builder *FunctionalRoleBuilder) Build() *FunctionalRole {
 }
 
 type FunctionalRoleMember struct {
-	UserId        *string  `json:"user_id,omitempty"`        // 成员ID
-	ScopeType     *string  `json:"scope_type,omitempty"`     // 管理范围的类型
+	UserId *string `json:"user_id,omitempty"` // 成员ID
+
+	ScopeType *string `json:"scope_type,omitempty"` // 管理范围的类型
+
 	DepartmentIds []string `json:"department_ids,omitempty"` // 表示该角色成员的管理范围，scope_type为“指定范围”时，返回该值
 }
 
 type FunctionalRoleMemberBuilder struct {
-	userId            string // 成员ID
-	userIdFlag        bool
-	scopeType         string // 管理范围的类型
-	scopeTypeFlag     bool
+	userId     string // 成员ID
+	userIdFlag bool
+
+	scopeType     string // 管理范围的类型
+	scopeTypeFlag bool
+
 	departmentIds     []string // 表示该角色成员的管理范围，scope_type为“指定范围”时，返回该值
 	departmentIdsFlag bool
 }
@@ -2459,12 +2621,14 @@ func (builder *FunctionalRoleMemberBuilder) Build() *FunctionalRoleMember {
 
 type FunctionalRoleMemberResult struct {
 	UserId *string `json:"user_id,omitempty"` // 用户ID
-	Reason *int    `json:"reason,omitempty"`  // 成员处理结果
+
+	Reason *int `json:"reason,omitempty"` // 成员处理结果
 }
 
 type FunctionalRoleMemberResultBuilder struct {
 	userId     string // 用户ID
 	userIdFlag bool
+
 	reason     int // 成员处理结果
 	reasonFlag bool
 }
@@ -2506,29 +2670,54 @@ func (builder *FunctionalRoleMemberResultBuilder) Build() *FunctionalRoleMemberR
 }
 
 type Group struct {
-	Id                    *string `json:"id,omitempty"`                      // 用户组ID
-	Name                  *string `json:"name,omitempty"`                    // 用户组名字
-	Description           *string `json:"description,omitempty"`             // 用户组描述
-	MemberUserCount       *int    `json:"member_user_count,omitempty"`       // 用户组成员中用户的数量
-	MemberDepartmentCount *int    `json:"member_department_count,omitempty"` // 普通用户组成员中部门的数量，动态用户组成员中没有部门。
-	Type                  *int    `json:"type,omitempty"`                    // 用户组的类型
+	Id *string `json:"id,omitempty"` // 用户组ID
+
+	Name *string `json:"name,omitempty"` // 用户组名字
+
+	Description *string `json:"description,omitempty"` // 用户组描述
+
+	MemberUserCount *int `json:"member_user_count,omitempty"` // 用户组成员中用户的数量
+
+	MemberDepartmentCount *int `json:"member_department_count,omitempty"` // 普通用户组成员中部门的数量，动态用户组成员中没有部门。
+
+	Type *int `json:"type,omitempty"` // 用户组的类型
+
+	DynamicGroupRule *DynamicGroupRule `json:"dynamic_group_rule,omitempty"` // 动态用户组的规则
+
+	VisibleScope *GroupVisibleScope `json:"visible_scope,omitempty"` // 用户组指定可见范围
+
+	DepartmentScopeList []string `json:"department_scope_list,omitempty"` // 部门范围
 
 	GroupId *string `json:"group_id,omitempty"` // 自定义用户组ID
 }
 
 type GroupBuilder struct {
-	id                        string // 用户组ID
-	idFlag                    bool
-	name                      string // 用户组名字
-	nameFlag                  bool
-	description               string // 用户组描述
-	descriptionFlag           bool
-	memberUserCount           int // 用户组成员中用户的数量
-	memberUserCountFlag       bool
+	id     string // 用户组ID
+	idFlag bool
+
+	name     string // 用户组名字
+	nameFlag bool
+
+	description     string // 用户组描述
+	descriptionFlag bool
+
+	memberUserCount     int // 用户组成员中用户的数量
+	memberUserCountFlag bool
+
 	memberDepartmentCount     int // 普通用户组成员中部门的数量，动态用户组成员中没有部门。
 	memberDepartmentCountFlag bool
-	type_                     int // 用户组的类型
-	typeFlag                  bool
+
+	type_    int // 用户组的类型
+	typeFlag bool
+
+	dynamicGroupRule     *DynamicGroupRule // 动态用户组的规则
+	dynamicGroupRuleFlag bool
+
+	visibleScope     *GroupVisibleScope // 用户组指定可见范围
+	visibleScopeFlag bool
+
+	departmentScopeList     []string // 部门范围
+	departmentScopeListFlag bool
 
 	groupId     string // 自定义用户组ID
 	groupIdFlag bool
@@ -2593,6 +2782,33 @@ func (builder *GroupBuilder) Type(type_ int) *GroupBuilder {
 	return builder
 }
 
+// 动态用户组的规则
+//
+// 示例值：
+func (builder *GroupBuilder) DynamicGroupRule(dynamicGroupRule *DynamicGroupRule) *GroupBuilder {
+	builder.dynamicGroupRule = dynamicGroupRule
+	builder.dynamicGroupRuleFlag = true
+	return builder
+}
+
+// 用户组指定可见范围
+//
+// 示例值：
+func (builder *GroupBuilder) VisibleScope(visibleScope *GroupVisibleScope) *GroupBuilder {
+	builder.visibleScope = visibleScope
+	builder.visibleScopeFlag = true
+	return builder
+}
+
+// 部门范围
+//
+// 示例值：
+func (builder *GroupBuilder) DepartmentScopeList(departmentScopeList []string) *GroupBuilder {
+	builder.departmentScopeList = departmentScopeList
+	builder.departmentScopeListFlag = true
+	return builder
+}
+
 // 自定义用户组ID
 //
 // 示例值：4ba51ab38648f9cd
@@ -2638,14 +2854,16 @@ func (builder *GroupBuilder) Build() *Group {
 
 type GroupEvent struct {
 	UserGroupId *string `json:"user_group_id,omitempty"` // 用户组的自定义ID
-	Name        *string `json:"name,omitempty"`          // 用户组的名称
+
+	Name *string `json:"name,omitempty"` // 用户组的名称
 }
 
 type GroupEventBuilder struct {
 	userGroupId     string // 用户组的自定义ID
 	userGroupIdFlag bool
-	name            string // 用户组的名称
-	nameFlag        bool
+
+	name     string // 用户组的名称
+	nameFlag bool
 }
 
 func NewGroupEventBuilder() *GroupEventBuilder {
@@ -2685,21 +2903,27 @@ func (builder *GroupEventBuilder) Build() *GroupEvent {
 }
 
 type GroupVisibleScope struct {
-	VisibleScopeType   *string  `json:"visible_scope_type,omitempty"`  // 可见范围的 id 类型，包用户、部门两类
-	VisibleUsers       []string `json:"visible_users,omitempty"`       // 指定可见用户组的用户 ID列表
+	VisibleScopeType *string `json:"visible_scope_type,omitempty"` // 可见范围的 id 类型，包用户、部门两类
+
+	VisibleUsers []string `json:"visible_users,omitempty"` // 指定可见用户组的用户 ID列表
+
 	VisibleDepartments []string `json:"visible_departments,omitempty"` // 指定可见用户组的部门 ID 列表
-	SceneTypes         []int    `json:"scene_types,omitempty"`         // 用户组可用范围
+
+	SceneTypes []int `json:"scene_types,omitempty"` // 用户组可用范围
 }
 
 type GroupVisibleScopeBuilder struct {
-	visibleScopeType       string // 可见范围的 id 类型，包用户、部门两类
-	visibleScopeTypeFlag   bool
-	visibleUsers           []string // 指定可见用户组的用户 ID列表
-	visibleUsersFlag       bool
+	visibleScopeType     string // 可见范围的 id 类型，包用户、部门两类
+	visibleScopeTypeFlag bool
+
+	visibleUsers     []string // 指定可见用户组的用户 ID列表
+	visibleUsersFlag bool
+
 	visibleDepartments     []string // 指定可见用户组的部门 ID 列表
 	visibleDepartmentsFlag bool
-	sceneTypes             []int // 用户组可用范围
-	sceneTypesFlag         bool
+
+	sceneTypes     []int // 用户组可用范围
+	sceneTypesFlag bool
 }
 
 func NewGroupVisibleScopeBuilder() *GroupVisibleScopeBuilder {
@@ -2763,14 +2987,16 @@ func (builder *GroupVisibleScopeBuilder) Build() *GroupVisibleScope {
 
 type I18nContent struct {
 	Locale *string `json:"locale,omitempty"` // 语言版本
-	Value  *string `json:"value,omitempty"`  // 字段名
+
+	Value *string `json:"value,omitempty"` // 字段名
 }
 
 type I18nContentBuilder struct {
 	locale     string // 语言版本
 	localeFlag bool
-	value      string // 字段名
-	valueFlag  bool
+
+	value     string // 字段名
+	valueFlag bool
 }
 
 func NewI18nContentBuilder() *I18nContentBuilder {
@@ -2810,30 +3036,42 @@ func (builder *I18nContentBuilder) Build() *I18nContent {
 }
 
 type JobFamily struct {
-	Name              *string        `json:"name,omitempty"`                 // 序列名称。1-100字符，支持中、英文及符号
-	Description       *string        `json:"description,omitempty"`          // 序列描述，描述序列详情信息
-	ParentJobFamilyId *string        `json:"parent_job_family_id,omitempty"` // 上级序列ID。需是该租户的序列ID列表中的值，对应唯一的序列名称。
-	Status            *bool          `json:"status,omitempty"`               // 是否启用
-	I18nName          []*I18nContent `json:"i18n_name,omitempty"`            // 多语言序列名称
-	I18nDescription   []*I18nContent `json:"i18n_description,omitempty"`     // 多语言描述
-	JobFamilyId       *string        `json:"job_family_id,omitempty"`        // 职级序列ID
+	Name *string `json:"name,omitempty"` // 序列名称。1-100字符，支持中、英文及符号
+
+	Description *string `json:"description,omitempty"` // 序列描述，描述序列详情信息
+
+	ParentJobFamilyId *string `json:"parent_job_family_id,omitempty"` // 上级序列ID。需是该租户的序列ID列表中的值，对应唯一的序列名称。
+
+	Status *bool `json:"status,omitempty"` // 是否启用
+
+	I18nName []*I18nContent `json:"i18n_name,omitempty"` // 多语言序列名称
+
+	I18nDescription []*I18nContent `json:"i18n_description,omitempty"` // 多语言描述
+
+	JobFamilyId *string `json:"job_family_id,omitempty"` // 职级序列ID
 }
 
 type JobFamilyBuilder struct {
-	name                  string // 序列名称。1-100字符，支持中、英文及符号
-	nameFlag              bool
-	description           string // 序列描述，描述序列详情信息
-	descriptionFlag       bool
+	name     string // 序列名称。1-100字符，支持中、英文及符号
+	nameFlag bool
+
+	description     string // 序列描述，描述序列详情信息
+	descriptionFlag bool
+
 	parentJobFamilyId     string // 上级序列ID。需是该租户的序列ID列表中的值，对应唯一的序列名称。
 	parentJobFamilyIdFlag bool
-	status                bool // 是否启用
-	statusFlag            bool
-	i18nName              []*I18nContent // 多语言序列名称
-	i18nNameFlag          bool
-	i18nDescription       []*I18nContent // 多语言描述
-	i18nDescriptionFlag   bool
-	jobFamilyId           string // 职级序列ID
-	jobFamilyIdFlag       bool
+
+	status     bool // 是否启用
+	statusFlag bool
+
+	i18nName     []*I18nContent // 多语言序列名称
+	i18nNameFlag bool
+
+	i18nDescription     []*I18nContent // 多语言描述
+	i18nDescriptionFlag bool
+
+	jobFamilyId     string // 职级序列ID
+	jobFamilyIdFlag bool
 }
 
 func NewJobFamilyBuilder() *JobFamilyBuilder {
@@ -2936,28 +3174,40 @@ func (builder *JobFamilyBuilder) Build() *JobFamily {
 }
 
 type JobLevel struct {
-	Name            *string        `json:"name,omitempty"`             // 职级名称
-	Description     *string        `json:"description,omitempty"`      // 职级描述
-	Order           *int           `json:"order,omitempty"`            // 职级的排序，可填入自然数100-100000的数值，系统按照数值大小从小到大排序。不填写该字段时，默认新增排序在当前职级列表中最后位（最大值）
-	Status          *bool          `json:"status,omitempty"`           // 是否启用
-	JobLevelId      *string        `json:"job_level_id,omitempty"`     // 职级ID
-	I18nName        []*I18nContent `json:"i18n_name,omitempty"`        // 多语言名称
+	Name *string `json:"name,omitempty"` // 职级名称
+
+	Description *string `json:"description,omitempty"` // 职级描述
+
+	Order *int `json:"order,omitempty"` // 职级的排序，可填入自然数100-100000的数值，系统按照数值大小从小到大排序。不填写该字段时，默认新增排序在当前职级列表中最后位（最大值）
+
+	Status *bool `json:"status,omitempty"` // 是否启用
+
+	JobLevelId *string `json:"job_level_id,omitempty"` // 职级ID
+
+	I18nName []*I18nContent `json:"i18n_name,omitempty"` // 多语言名称
+
 	I18nDescription []*I18nContent `json:"i18n_description,omitempty"` // 多语言描述
 }
 
 type JobLevelBuilder struct {
-	name                string // 职级名称
-	nameFlag            bool
-	description         string // 职级描述
-	descriptionFlag     bool
-	order               int // 职级的排序，可填入自然数100-100000的数值，系统按照数值大小从小到大排序。不填写该字段时，默认新增排序在当前职级列表中最后位（最大值）
-	orderFlag           bool
-	status              bool // 是否启用
-	statusFlag          bool
-	jobLevelId          string // 职级ID
-	jobLevelIdFlag      bool
-	i18nName            []*I18nContent // 多语言名称
-	i18nNameFlag        bool
+	name     string // 职级名称
+	nameFlag bool
+
+	description     string // 职级描述
+	descriptionFlag bool
+
+	order     int // 职级的排序，可填入自然数100-100000的数值，系统按照数值大小从小到大排序。不填写该字段时，默认新增排序在当前职级列表中最后位（最大值）
+	orderFlag bool
+
+	status     bool // 是否启用
+	statusFlag bool
+
+	jobLevelId     string // 职级ID
+	jobLevelIdFlag bool
+
+	i18nName     []*I18nContent // 多语言名称
+	i18nNameFlag bool
+
 	i18nDescription     []*I18nContent // 多语言描述
 	i18nDescriptionFlag bool
 }
@@ -3062,21 +3312,27 @@ func (builder *JobLevelBuilder) Build() *JobLevel {
 }
 
 type JobTitle struct {
-	JobTitleId *string        `json:"job_title_id,omitempty"` // 职务ID
-	Name       *string        `json:"name,omitempty"`         // 职务名称。1-100字符，支持中、英文及符号
-	I18nName   []*I18nContent `json:"i18n_name,omitempty"`    // 多语言职务名称
-	Status     *bool          `json:"status,omitempty"`       // 是否启用
+	JobTitleId *string `json:"job_title_id,omitempty"` // 职务ID
+
+	Name *string `json:"name,omitempty"` // 职务名称。1-100字符，支持中、英文及符号
+
+	I18nName []*I18nContent `json:"i18n_name,omitempty"` // 多语言职务名称
+
+	Status *bool `json:"status,omitempty"` // 是否启用
 }
 
 type JobTitleBuilder struct {
 	jobTitleId     string // 职务ID
 	jobTitleIdFlag bool
-	name           string // 职务名称。1-100字符，支持中、英文及符号
-	nameFlag       bool
-	i18nName       []*I18nContent // 多语言职务名称
-	i18nNameFlag   bool
-	status         bool // 是否启用
-	statusFlag     bool
+
+	name     string // 职务名称。1-100字符，支持中、英文及符号
+	nameFlag bool
+
+	i18nName     []*I18nContent // 多语言职务名称
+	i18nNameFlag bool
+
+	status     bool // 是否启用
+	statusFlag bool
 }
 
 func NewJobTitleBuilder() *JobTitleBuilder {
@@ -3142,14 +3398,16 @@ func (builder *JobTitleBuilder) Build() *JobTitle {
 
 type MemberResult struct {
 	MemberId *string `json:"member_id,omitempty"` // 成员ID
-	Code     *int    `json:"code,omitempty"`      // 结果响应码，0表示成功
+
+	Code *int `json:"code,omitempty"` // 结果响应码，0表示成功
 }
 
 type MemberResultBuilder struct {
 	memberId     string // 成员ID
 	memberIdFlag bool
-	code         int // 结果响应码，0表示成功
-	codeFlag     bool
+
+	code     int // 结果响应码，0表示成功
+	codeFlag bool
 }
 
 func NewMemberResultBuilder() *MemberResultBuilder {
@@ -3189,16 +3447,20 @@ func (builder *MemberResultBuilder) Build() *MemberResult {
 }
 
 type Memberlist struct {
-	MemberId     *string `json:"member_id,omitempty"`      // 成员ID
-	MemberType   *string `json:"member_type,omitempty"`    // 用户组成员的类型，取值为 user或department。
+	MemberId *string `json:"member_id,omitempty"` // 成员ID
+
+	MemberType *string `json:"member_type,omitempty"` // 用户组成员的类型，取值为 user或department。
+
 	MemberIdType *string `json:"member_id_type,omitempty"` // 当member_type为user时，member_id_type表示user_id_type，可选值为open_id, union_id, user_id。仅在请求参数中有效，响应体中不会返回此参数。
 }
 
 type MemberlistBuilder struct {
-	memberId         string // 成员ID
-	memberIdFlag     bool
-	memberType       string // 用户组成员的类型，取值为 user或department。
-	memberTypeFlag   bool
+	memberId     string // 成员ID
+	memberIdFlag bool
+
+	memberType     string // 用户组成员的类型，取值为 user或department。
+	memberTypeFlag bool
+
 	memberIdType     string // 当member_type为user时，member_id_type表示user_id_type，可选值为open_id, union_id, user_id。仅在请求参数中有效，响应体中不会返回此参数。
 	memberIdTypeFlag bool
 }
@@ -3254,12 +3516,14 @@ func (builder *MemberlistBuilder) Build() *Memberlist {
 
 type NotificationOption struct {
 	Channels []string `json:"channels,omitempty"` // 通道列表
-	Language *string  `json:"language,omitempty"` // 语言类型
+
+	Language *string `json:"language,omitempty"` // 语言类型
 }
 
 type NotificationOptionBuilder struct {
 	channels     []string // 通道列表
 	channelsFlag bool
+
 	language     string // 语言类型
 	languageFlag bool
 }
@@ -3300,13 +3564,15 @@ func (builder *NotificationOptionBuilder) Build() *NotificationOption {
 }
 
 type OldDepartmentObject struct {
-	Status           *DepartmentStatus `json:"status,omitempty"`             // 部门状态
-	OpenDepartmentId *string           `json:"open_department_id,omitempty"` // 部门open_id
+	Status *DepartmentStatus `json:"status,omitempty"` // 部门状态
+
+	OpenDepartmentId *string `json:"open_department_id,omitempty"` // 部门open_id
 }
 
 type OldDepartmentObjectBuilder struct {
-	status               *DepartmentStatus // 部门状态
-	statusFlag           bool
+	status     *DepartmentStatus // 部门状态
+	statusFlag bool
+
 	openDepartmentId     string // 部门open_id
 	openDepartmentIdFlag bool
 }
@@ -3348,14 +3614,16 @@ func (builder *OldDepartmentObjectBuilder) Build() *OldDepartmentObject {
 
 type OldUserObject struct {
 	DepartmentIds []string `json:"department_ids,omitempty"` // 用户所属部门的ID列表
-	OpenId        *string  `json:"open_id,omitempty"`        // 用户open_id
+
+	OpenId *string `json:"open_id,omitempty"` // 用户open_id
 }
 
 type OldUserObjectBuilder struct {
 	departmentIds     []string // 用户所属部门的ID列表
 	departmentIdsFlag bool
-	openId            string // 用户open_id
-	openIdFlag        bool
+
+	openId     string // 用户open_id
+	openIdFlag bool
 }
 
 func NewOldUserObjectBuilder() *OldUserObjectBuilder {
@@ -3395,15 +3663,19 @@ func (builder *OldUserObjectBuilder) Build() *OldUserObject {
 
 type ProductI18nName struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 席位中文名
+
 	JaJp *string `json:"ja_jp,omitempty"` // 席位日文名
+
 	EnUs *string `json:"en_us,omitempty"` // 席位英文名
 }
 
 type ProductI18nNameBuilder struct {
 	zhCn     string // 席位中文名
 	zhCnFlag bool
+
 	jaJp     string // 席位日文名
 	jaJpFlag bool
+
 	enUs     string // 席位英文名
 	enUsFlag bool
 }
@@ -3458,13 +3730,15 @@ func (builder *ProductI18nNameBuilder) Build() *ProductI18nName {
 }
 
 type ResourceAccept struct {
-	ProcessingType *string `json:"processing_type,omitempty"`  // 资源处理类型
+	ProcessingType *string `json:"processing_type,omitempty"` // 资源处理类型
+
 	AcceptorUserId *string `json:"acceptor_user_id,omitempty"` // 转移资源时，资源接收者
 }
 
 type ResourceAcceptBuilder struct {
 	processingType     string // 资源处理类型
 	processingTypeFlag bool
+
 	acceptorUserId     string // 转移资源时，资源接收者
 	acceptorUserIdFlag bool
 }
@@ -3506,13 +3780,15 @@ func (builder *ResourceAcceptBuilder) Build() *ResourceAccept {
 }
 
 type ResourceAcceptor struct {
-	ProcessingType *string `json:"processing_type,omitempty"`  // 邮件处理方式
+	ProcessingType *string `json:"processing_type,omitempty"` // 邮件处理方式
+
 	AcceptorUserId *string `json:"acceptor_user_id,omitempty"` // 在 processing_type 为 1 （转移资源时），邮件资源接收者
 }
 
 type ResourceAcceptorBuilder struct {
 	processingType     string // 邮件处理方式
 	processingTypeFlag bool
+
 	acceptorUserId     string // 在 processing_type 为 1 （转移资源时），邮件资源接收者
 	acceptorUserIdFlag bool
 }
@@ -3555,17 +3831,21 @@ func (builder *ResourceAcceptorBuilder) Build() *ResourceAcceptor {
 
 type Scope struct {
 	Departments []*Department `json:"departments,omitempty"` // 部门对象
-	Users       []*User       `json:"users,omitempty"`       // 用户对象
-	UserGroups  []*UserGroup  `json:"user_groups,omitempty"` // 用户组对象
+
+	Users []*User `json:"users,omitempty"` // 用户对象
+
+	UserGroups []*UserGroup `json:"user_groups,omitempty"` // 用户组对象
 }
 
 type ScopeBuilder struct {
 	departments     []*Department // 部门对象
 	departmentsFlag bool
-	users           []*User // 用户对象
-	usersFlag       bool
-	userGroups      []*UserGroup // 用户组对象
-	userGroupsFlag  bool
+
+	users     []*User // 用户对象
+	usersFlag bool
+
+	userGroups     []*UserGroup // 用户组对象
+	userGroupsFlag bool
 }
 
 func NewScopeBuilder() *ScopeBuilder {
@@ -3615,21 +3895,27 @@ func (builder *ScopeBuilder) Build() *Scope {
 }
 
 type ShareDepartment struct {
-	OpenId   *string             `json:"open_id,omitempty"`   // 共享部门的open id
-	Name     *string             `json:"name,omitempty"`      // 部门名称
+	OpenId *string `json:"open_id,omitempty"` // 共享部门的open id
+
+	Name *string `json:"name,omitempty"` // 部门名称
+
 	I18nName *DepartmentI18nName `json:"i18n_name,omitempty"` // 国际化的部门名称
-	Order    *string             `json:"order,omitempty"`     // 部门的排序
+
+	Order *string `json:"order,omitempty"` // 部门的排序
 }
 
 type ShareDepartmentBuilder struct {
-	openId       string // 共享部门的open id
-	openIdFlag   bool
-	name         string // 部门名称
-	nameFlag     bool
+	openId     string // 共享部门的open id
+	openIdFlag bool
+
+	name     string // 部门名称
+	nameFlag bool
+
 	i18nName     *DepartmentI18nName // 国际化的部门名称
 	i18nNameFlag bool
-	order        string // 部门的排序
-	orderFlag    bool
+
+	order     string // 部门的排序
+	orderFlag bool
 }
 
 func NewShareDepartmentBuilder() *ShareDepartmentBuilder {
@@ -3694,19 +3980,25 @@ func (builder *ShareDepartmentBuilder) Build() *ShareDepartment {
 }
 
 type ShareUser struct {
-	OpenId *string     `json:"open_id,omitempty"` // 用户的open_id
-	Name   *string     `json:"name,omitempty"`    // 用户的名称
-	EnName *string     `json:"en_name,omitempty"` // 英文名
-	Avatar *AvatarInfo `json:"avatar,omitempty"`  // 用户头像信息
+	OpenId *string `json:"open_id,omitempty"` // 用户的open_id
+
+	Name *string `json:"name,omitempty"` // 用户的名称
+
+	EnName *string `json:"en_name,omitempty"` // 英文名
+
+	Avatar *AvatarInfo `json:"avatar,omitempty"` // 用户头像信息
 }
 
 type ShareUserBuilder struct {
 	openId     string // 用户的open_id
 	openIdFlag bool
-	name       string // 用户的名称
-	nameFlag   bool
+
+	name     string // 用户的名称
+	nameFlag bool
+
 	enName     string // 英文名
 	enNameFlag bool
+
 	avatar     *AvatarInfo // 用户头像信息
 	avatarFlag bool
 }
@@ -3773,16 +4065,20 @@ func (builder *ShareUserBuilder) Build() *ShareUser {
 }
 
 type Unit struct {
-	UnitId   *string `json:"unit_id,omitempty"`   // 单位ID
-	Name     *string `json:"name,omitempty"`      // 单位的名字
+	UnitId *string `json:"unit_id,omitempty"` // 单位ID
+
+	Name *string `json:"name,omitempty"` // 单位的名字
+
 	UnitType *string `json:"unit_type,omitempty"` // 单位的类型
 }
 
 type UnitBuilder struct {
-	unitId       string // 单位ID
-	unitIdFlag   bool
-	name         string // 单位的名字
-	nameFlag     bool
+	unitId     string // 单位ID
+	unitIdFlag bool
+
+	name     string // 单位的名字
+	nameFlag bool
+
 	unitType     string // 单位的类型
 	unitTypeFlag bool
 }
@@ -3837,13 +4133,15 @@ func (builder *UnitBuilder) Build() *Unit {
 }
 
 type UnitDepartment struct {
-	UnitId       *string `json:"unit_id,omitempty"`       // 单位ID
+	UnitId *string `json:"unit_id,omitempty"` // 单位ID
+
 	DepartmentId *string `json:"department_id,omitempty"` // 部门ID
 }
 
 type UnitDepartmentBuilder struct {
-	unitId           string // 单位ID
-	unitIdFlag       bool
+	unitId     string // 单位ID
+	unitIdFlag bool
+
 	departmentId     string // 部门ID
 	departmentIdFlag bool
 }
@@ -3885,115 +4183,205 @@ func (builder *UnitDepartmentBuilder) Build() *UnitDepartment {
 }
 
 type User struct {
-	UnionId         *string     `json:"union_id,omitempty"`          // 用户的union_id，应用开发商发布的不同应用中同一用户的标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	UserId          *string     `json:"user_id,omitempty"`           // 用户的user_id，租户内用户的唯一标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	OpenId          *string     `json:"open_id,omitempty"`           // 用户的open_id，应用内用户的唯一标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	Name            *string     `json:"name,omitempty"`              // 用户名
-	EnName          *string     `json:"en_name,omitempty"`           // 英文名
-	Nickname        *string     `json:"nickname,omitempty"`          // 别名
-	Email           *string     `json:"email,omitempty"`             // 邮箱;;注意：;1. 非中国大陆手机号成员必须同时添加邮箱;2. 邮箱不可重复
-	Mobile          *string     `json:"mobile,omitempty"`            // 手机号，在本企业内不可重复；未认证企业仅支持添加中国大陆手机号，通过飞书认证的企业允许添加海外手机号，注意国际电话区号前缀中必须包含加号 +
-	MobileVisible   *bool       `json:"mobile_visible,omitempty"`    // 手机号码可见性，true 为可见，false 为不可见，目前默认为 true。不可见时，组织员工将无法查看该员工的手机号码
-	Gender          *int        `json:"gender,omitempty"`            // 性别
-	AvatarKey       *string     `json:"avatar_key,omitempty"`        // 头像的文件Key，可通过“消息与群组/消息/图片信息”中的“上传图片”接口上传并获取头像文件 Key;;“上传图片”功能参见[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)
-	Avatar          *AvatarInfo `json:"avatar,omitempty"`            // 用户头像信息
-	Status          *UserStatus `json:"status,omitempty"`            // 用户状态，枚举类型，包括is_frozen、is_resigned、is_activated、is_exited 。;;用户状态转移参见：[用户状态图](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/field-overview#4302b5a1)
-	DepartmentIds   []string    `json:"department_ids,omitempty"`    // 用户所属部门的ID列表，一个用户可属于多个部门。;;ID值的类型与查询参数中的department_id_type 对应。;;不同 ID 的说明与department_id的获取方式参见 [部门ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	LeaderUserId    *string     `json:"leader_user_id,omitempty"`    // 用户的直接主管的用户ID，ID值与查询参数中的user_id_type 对应。;;不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;获取方式参见[如何获取user_id](https://open.feishu.cn/document/home/user-identity-introduction/how-to-get)
-	City            *string     `json:"city,omitempty"`              // 工作城市
-	Country         *string     `json:"country,omitempty"`           // 国家或地区Code缩写，具体写入格式请参考 [国家/地区码表](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/country-code-description)
-	WorkStation     *string     `json:"work_station,omitempty"`      // 工位
-	JoinTime        *int        `json:"join_time,omitempty"`         // 入职时间，时间戳格式，表示从1970年1月1日开始所经过的秒数
-	IsTenantManager *bool       `json:"is_tenant_manager,omitempty"` // 是否是租户超级管理员
-	EmployeeNo      *string     `json:"employee_no,omitempty"`       // 工号
-	EmployeeType    *int        `json:"employee_type,omitempty"`     // 员工类型，可选值有：;- `1`：正式员工;- `2`：实习生;- `3`：外包;- `4`：劳务;- `5`：顾问   ;同时可读取到自定义员工类型的 int 值，可通过下方接口获取到该租户的自定义员工类型的名称，参见[获取人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/employee_type_enum/list)
+	UnionId *string `json:"union_id,omitempty"` // 用户的union_id，应用开发商发布的不同应用中同一用户的标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
 
-	Orders          []*UserOrder      `json:"orders,omitempty"`           // 用户排序信息。;;用于标记通讯录下组织架构的人员顺序，人员可能存在多个部门中，且有不同的排序。
-	CustomAttrs     []*UserCustomAttr `json:"custom_attrs,omitempty"`     // 自定义字段，请确保你的组织管理员已在管理后台/组织架构/成员字段管理/自定义字段管理/全局设置中开启了“允许开放平台 API 调用“，否则该字段不会生效/返回。;;更多详情参见[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
-	EnterpriseEmail *string           `json:"enterprise_email,omitempty"` // 企业邮箱，请先确保已在管理后台启用飞书邮箱服务;;创建用户时，企业邮箱的使用方式参见[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
+	UserId *string `json:"user_id,omitempty"` // 用户的user_id，租户内用户的唯一标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	OpenId *string `json:"open_id,omitempty"` // 用户的open_id，应用内用户的唯一标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	Name *string `json:"name,omitempty"` // 用户名
+
+	EnName *string `json:"en_name,omitempty"` // 英文名
+
+	Nickname *string `json:"nickname,omitempty"` // 别名
+
+	Email *string `json:"email,omitempty"` // 邮箱;;注意：;1. 非中国大陆手机号成员必须同时添加邮箱;2. 邮箱不可重复
+
+	Mobile *string `json:"mobile,omitempty"` // 手机号，在本企业内不可重复；未认证企业仅支持添加中国大陆手机号，通过飞书认证的企业允许添加海外手机号，注意国际电话区号前缀中必须包含加号 +
+
+	MobileVisible *bool `json:"mobile_visible,omitempty"` // 手机号码可见性，true 为可见，false 为不可见，目前默认为 true。不可见时，组织员工将无法查看该员工的手机号码
+
+	Gender *int `json:"gender,omitempty"` // 性别
+
+	AvatarKey *string `json:"avatar_key,omitempty"` // 头像的文件Key，可通过“消息与群组/消息/图片信息”中的“上传图片”接口上传并获取头像文件 Key;;“上传图片”功能参见[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)
+
+	Avatar *AvatarInfo `json:"avatar,omitempty"` // 用户头像信息
+
+	Status *UserStatus `json:"status,omitempty"` // 用户状态，枚举类型，包括is_frozen、is_resigned、is_activated、is_exited 。;;用户状态转移参见：[用户状态图](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/field-overview#4302b5a1)
+
+	DepartmentIds []string `json:"department_ids,omitempty"` // 用户所属部门的ID列表，一个用户可属于多个部门。;;ID值的类型与查询参数中的department_id_type 对应。;;不同 ID 的说明与department_id的获取方式参见 [部门ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+
+	LeaderUserId *string `json:"leader_user_id,omitempty"` // 用户的直接主管的用户ID，ID值与查询参数中的user_id_type 对应。;;不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;获取方式参见[如何获取user_id](https://open.feishu.cn/document/home/user-identity-introduction/how-to-get)
+
+	City *string `json:"city,omitempty"` // 工作城市
+
+	Country *string `json:"country,omitempty"` // 国家或地区Code缩写，具体写入格式请参考 [国家/地区码表](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/country-code-description)
+
+	WorkStation *string `json:"work_station,omitempty"` // 工位
+
+	JoinTime *int `json:"join_time,omitempty"` // 入职时间，时间戳格式，表示从1970年1月1日开始所经过的秒数
+
+	IsTenantManager *bool `json:"is_tenant_manager,omitempty"` // 是否是租户超级管理员
+
+	EmployeeNo *string `json:"employee_no,omitempty"` // 工号
+
+	EmployeeType *int `json:"employee_type,omitempty"` // 员工类型，可选值有：;- `1`：正式员工;- `2`：实习生;- `3`：外包;- `4`：劳务;- `5`：顾问   ;同时可读取到自定义员工类型的 int 值，可通过下方接口获取到该租户的自定义员工类型的名称，参见[获取人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/employee_type_enum/list)
+
+	Positions []*UserPosition `json:"positions,omitempty"` // 职位信息
+
+	Orders []*UserOrder `json:"orders,omitempty"` // 用户排序信息。;;用于标记通讯录下组织架构的人员顺序，人员可能存在多个部门中，且有不同的排序。
+
+	CustomAttrs []*UserCustomAttr `json:"custom_attrs,omitempty"` // 自定义字段，请确保你的组织管理员已在管理后台/组织架构/成员字段管理/自定义字段管理/全局设置中开启了“允许开放平台 API 调用“，否则该字段不会生效/返回。;;更多详情参见[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
+
+	EnterpriseEmail *string `json:"enterprise_email,omitempty"` // 企业邮箱，请先确保已在管理后台启用飞书邮箱服务;;创建用户时，企业邮箱的使用方式参见[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
+
+	IdpType *string `json:"idp_type,omitempty"` // 租户类型
+
+	TimeZone *string `json:"time_zone,omitempty"` // 用户时区
+
+	Description *string `json:"description,omitempty"` // 用户签名
 
 	JobTitle *string `json:"job_title,omitempty"` // 职务
 
-	IsFrozen                *bool               `json:"is_frozen,omitempty"`                   // 是否暂停用户
-	Geo                     *string             `json:"geo,omitempty"`                         // 数据驻留地
-	JobLevelId              *string             `json:"job_level_id,omitempty"`                // 职级ID
-	JobFamilyId             *string             `json:"job_family_id,omitempty"`               // 序列ID
-	SubscriptionIds         []string            `json:"subscription_ids,omitempty"`            // 分配给用户的席位ID列表
-	AssignInfo              []*UserAssignInfo   `json:"assign_info,omitempty"`                 // 用户席位列表
-	DepartmentPath          []*DepartmentDetail `json:"department_path,omitempty"`             // 部门路径
-	DottedLineLeaderUserIds []string            `json:"dotted_line_leader_user_ids,omitempty"` // 虚线上级ID
+	NeedSendNotification *bool `json:"need_send_notification,omitempty"` // 是否发送提示消息
+
+	NotificationOption *NotificationOption `json:"notification_option,omitempty"` //
+
+	IsFrozen *bool `json:"is_frozen,omitempty"` // 是否暂停用户
+
+	Geo *string `json:"geo,omitempty"` // 数据驻留地
+
+	JobLevelId *string `json:"job_level_id,omitempty"` // 职级ID
+
+	JobFamilyId *string `json:"job_family_id,omitempty"` // 序列ID
+
+	SubscriptionIds []string `json:"subscription_ids,omitempty"` // 分配给用户的席位ID列表
+
+	AssignInfo []*UserAssignInfo `json:"assign_info,omitempty"` // 用户席位列表
+
+	DepartmentPath []*DepartmentDetail `json:"department_path,omitempty"` // 部门路径
+
+	DottedLineLeaderUserIds []string `json:"dotted_line_leader_user_ids,omitempty"` // 虚线上级ID
 }
 
 type UserBuilder struct {
-	unionId             string // 用户的union_id，应用开发商发布的不同应用中同一用户的标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	unionIdFlag         bool
-	userId              string // 用户的user_id，租户内用户的唯一标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	userIdFlag          bool
-	openId              string // 用户的open_id，应用内用户的唯一标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	openIdFlag          bool
-	name                string // 用户名
-	nameFlag            bool
-	enName              string // 英文名
-	enNameFlag          bool
-	nickname            string // 别名
-	nicknameFlag        bool
-	email               string // 邮箱;;注意：;1. 非中国大陆手机号成员必须同时添加邮箱;2. 邮箱不可重复
-	emailFlag           bool
-	mobile              string // 手机号，在本企业内不可重复；未认证企业仅支持添加中国大陆手机号，通过飞书认证的企业允许添加海外手机号，注意国际电话区号前缀中必须包含加号 +
-	mobileFlag          bool
-	mobileVisible       bool // 手机号码可见性，true 为可见，false 为不可见，目前默认为 true。不可见时，组织员工将无法查看该员工的手机号码
-	mobileVisibleFlag   bool
-	gender              int // 性别
-	genderFlag          bool
-	avatarKey           string // 头像的文件Key，可通过“消息与群组/消息/图片信息”中的“上传图片”接口上传并获取头像文件 Key;;“上传图片”功能参见[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)
-	avatarKeyFlag       bool
-	avatar              *AvatarInfo // 用户头像信息
-	avatarFlag          bool
-	status              *UserStatus // 用户状态，枚举类型，包括is_frozen、is_resigned、is_activated、is_exited 。;;用户状态转移参见：[用户状态图](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/field-overview#4302b5a1)
-	statusFlag          bool
-	departmentIds       []string // 用户所属部门的ID列表，一个用户可属于多个部门。;;ID值的类型与查询参数中的department_id_type 对应。;;不同 ID 的说明与department_id的获取方式参见 [部门ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	departmentIdsFlag   bool
-	leaderUserId        string // 用户的直接主管的用户ID，ID值与查询参数中的user_id_type 对应。;;不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;获取方式参见[如何获取user_id](https://open.feishu.cn/document/home/user-identity-introduction/how-to-get)
-	leaderUserIdFlag    bool
-	city                string // 工作城市
-	cityFlag            bool
-	country             string // 国家或地区Code缩写，具体写入格式请参考 [国家/地区码表](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/country-code-description)
-	countryFlag         bool
-	workStation         string // 工位
-	workStationFlag     bool
-	joinTime            int // 入职时间，时间戳格式，表示从1970年1月1日开始所经过的秒数
-	joinTimeFlag        bool
+	unionId     string // 用户的union_id，应用开发商发布的不同应用中同一用户的标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	unionIdFlag bool
+
+	userId     string // 用户的user_id，租户内用户的唯一标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	userIdFlag bool
+
+	openId     string // 用户的open_id，应用内用户的唯一标识，不同ID的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	openIdFlag bool
+
+	name     string // 用户名
+	nameFlag bool
+
+	enName     string // 英文名
+	enNameFlag bool
+
+	nickname     string // 别名
+	nicknameFlag bool
+
+	email     string // 邮箱;;注意：;1. 非中国大陆手机号成员必须同时添加邮箱;2. 邮箱不可重复
+	emailFlag bool
+
+	mobile     string // 手机号，在本企业内不可重复；未认证企业仅支持添加中国大陆手机号，通过飞书认证的企业允许添加海外手机号，注意国际电话区号前缀中必须包含加号 +
+	mobileFlag bool
+
+	mobileVisible     bool // 手机号码可见性，true 为可见，false 为不可见，目前默认为 true。不可见时，组织员工将无法查看该员工的手机号码
+	mobileVisibleFlag bool
+
+	gender     int // 性别
+	genderFlag bool
+
+	avatarKey     string // 头像的文件Key，可通过“消息与群组/消息/图片信息”中的“上传图片”接口上传并获取头像文件 Key;;“上传图片”功能参见[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)
+	avatarKeyFlag bool
+
+	avatar     *AvatarInfo // 用户头像信息
+	avatarFlag bool
+
+	status     *UserStatus // 用户状态，枚举类型，包括is_frozen、is_resigned、is_activated、is_exited 。;;用户状态转移参见：[用户状态图](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/field-overview#4302b5a1)
+	statusFlag bool
+
+	departmentIds     []string // 用户所属部门的ID列表，一个用户可属于多个部门。;;ID值的类型与查询参数中的department_id_type 对应。;;不同 ID 的说明与department_id的获取方式参见 [部门ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+	departmentIdsFlag bool
+
+	leaderUserId     string // 用户的直接主管的用户ID，ID值与查询参数中的user_id_type 对应。;;不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;获取方式参见[如何获取user_id](https://open.feishu.cn/document/home/user-identity-introduction/how-to-get)
+	leaderUserIdFlag bool
+
+	city     string // 工作城市
+	cityFlag bool
+
+	country     string // 国家或地区Code缩写，具体写入格式请参考 [国家/地区码表](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/user/country-code-description)
+	countryFlag bool
+
+	workStation     string // 工位
+	workStationFlag bool
+
+	joinTime     int // 入职时间，时间戳格式，表示从1970年1月1日开始所经过的秒数
+	joinTimeFlag bool
+
 	isTenantManager     bool // 是否是租户超级管理员
 	isTenantManagerFlag bool
-	employeeNo          string // 工号
-	employeeNoFlag      bool
-	employeeType        int // 员工类型，可选值有：;- `1`：正式员工;- `2`：实习生;- `3`：外包;- `4`：劳务;- `5`：顾问   ;同时可读取到自定义员工类型的 int 值，可通过下方接口获取到该租户的自定义员工类型的名称，参见[获取人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/employee_type_enum/list)
-	employeeTypeFlag    bool
 
-	orders              []*UserOrder // 用户排序信息。;;用于标记通讯录下组织架构的人员顺序，人员可能存在多个部门中，且有不同的排序。
-	ordersFlag          bool
-	customAttrs         []*UserCustomAttr // 自定义字段，请确保你的组织管理员已在管理后台/组织架构/成员字段管理/自定义字段管理/全局设置中开启了“允许开放平台 API 调用“，否则该字段不会生效/返回。;;更多详情参见[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
-	customAttrsFlag     bool
+	employeeNo     string // 工号
+	employeeNoFlag bool
+
+	employeeType     int // 员工类型，可选值有：;- `1`：正式员工;- `2`：实习生;- `3`：外包;- `4`：劳务;- `5`：顾问   ;同时可读取到自定义员工类型的 int 值，可通过下方接口获取到该租户的自定义员工类型的名称，参见[获取人员类型](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/employee_type_enum/list)
+	employeeTypeFlag bool
+
+	positions     []*UserPosition // 职位信息
+	positionsFlag bool
+
+	orders     []*UserOrder // 用户排序信息。;;用于标记通讯录下组织架构的人员顺序，人员可能存在多个部门中，且有不同的排序。
+	ordersFlag bool
+
+	customAttrs     []*UserCustomAttr // 自定义字段，请确保你的组织管理员已在管理后台/组织架构/成员字段管理/自定义字段管理/全局设置中开启了“允许开放平台 API 调用“，否则该字段不会生效/返回。;;更多详情参见[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
+	customAttrsFlag bool
+
 	enterpriseEmail     string // 企业邮箱，请先确保已在管理后台启用飞书邮箱服务;;创建用户时，企业邮箱的使用方式参见[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
 	enterpriseEmailFlag bool
+
+	idpType     string // 租户类型
+	idpTypeFlag bool
+
+	timeZone     string // 用户时区
+	timeZoneFlag bool
+
+	description     string // 用户签名
+	descriptionFlag bool
 
 	jobTitle     string // 职务
 	jobTitleFlag bool
 
-	isFrozen                    bool // 是否暂停用户
-	isFrozenFlag                bool
-	geo                         string // 数据驻留地
-	geoFlag                     bool
-	jobLevelId                  string // 职级ID
-	jobLevelIdFlag              bool
-	jobFamilyId                 string // 序列ID
-	jobFamilyIdFlag             bool
-	subscriptionIds             []string // 分配给用户的席位ID列表
-	subscriptionIdsFlag         bool
-	assignInfo                  []*UserAssignInfo // 用户席位列表
-	assignInfoFlag              bool
-	departmentPath              []*DepartmentDetail // 部门路径
-	departmentPathFlag          bool
+	needSendNotification     bool // 是否发送提示消息
+	needSendNotificationFlag bool
+
+	notificationOption     *NotificationOption //
+	notificationOptionFlag bool
+
+	isFrozen     bool // 是否暂停用户
+	isFrozenFlag bool
+
+	geo     string // 数据驻留地
+	geoFlag bool
+
+	jobLevelId     string // 职级ID
+	jobLevelIdFlag bool
+
+	jobFamilyId     string // 序列ID
+	jobFamilyIdFlag bool
+
+	subscriptionIds     []string // 分配给用户的席位ID列表
+	subscriptionIdsFlag bool
+
+	assignInfo     []*UserAssignInfo // 用户席位列表
+	assignInfoFlag bool
+
+	departmentPath     []*DepartmentDetail // 部门路径
+	departmentPathFlag bool
+
 	dottedLineLeaderUserIds     []string // 虚线上级ID
 	dottedLineLeaderUserIdsFlag bool
 }
@@ -4201,6 +4589,15 @@ func (builder *UserBuilder) EmployeeType(employeeType int) *UserBuilder {
 	return builder
 }
 
+// 职位信息
+//
+// 示例值：
+func (builder *UserBuilder) Positions(positions []*UserPosition) *UserBuilder {
+	builder.positions = positions
+	builder.positionsFlag = true
+	return builder
+}
+
 // 用户排序信息。;;用于标记通讯录下组织架构的人员顺序，人员可能存在多个部门中，且有不同的排序。
 //
 // 示例值：
@@ -4228,12 +4625,55 @@ func (builder *UserBuilder) EnterpriseEmail(enterpriseEmail string) *UserBuilder
 	return builder
 }
 
+// 租户类型
+//
+// 示例值：6645182361178734852
+func (builder *UserBuilder) IdpType(idpType string) *UserBuilder {
+	builder.idpType = idpType
+	builder.idpTypeFlag = true
+	return builder
+}
+
+// 用户时区
+//
+// 示例值：
+func (builder *UserBuilder) TimeZone(timeZone string) *UserBuilder {
+	builder.timeZone = timeZone
+	builder.timeZoneFlag = true
+	return builder
+}
+
+// 用户签名
+//
+// 示例值：xxx
+func (builder *UserBuilder) Description(description string) *UserBuilder {
+	builder.description = description
+	builder.descriptionFlag = true
+	return builder
+}
+
 // 职务
 //
 // 示例值：xxxxx
 func (builder *UserBuilder) JobTitle(jobTitle string) *UserBuilder {
 	builder.jobTitle = jobTitle
 	builder.jobTitleFlag = true
+	return builder
+}
+
+// 是否发送提示消息
+//
+// 示例值：true
+func (builder *UserBuilder) NeedSendNotification(needSendNotification bool) *UserBuilder {
+	builder.needSendNotification = needSendNotification
+	builder.needSendNotificationFlag = true
+	return builder
+}
+
+// 示例值：
+func (builder *UserBuilder) NotificationOption(notificationOption *NotificationOption) *UserBuilder {
+	builder.notificationOption = notificationOption
+	builder.notificationOptionFlag = true
 	return builder
 }
 
@@ -4445,27 +4885,37 @@ func (builder *UserBuilder) Build() *User {
 }
 
 type UserAssignInfo struct {
-	SubscriptionId *string          `json:"subscription_id,omitempty"`  // 席位id
-	LicensePlanKey *string          `json:"license_plan_key,omitempty"` // license_plan_key
-	ProductName    *string          `json:"product_name,omitempty"`     // 席位名称
-	I18nName       *ProductI18nName `json:"i18n_name,omitempty"`        // 国际化名称
-	StartTime      *string          `json:"start_time,omitempty"`       // 席位起始时间
-	EndTime        *string          `json:"end_time,omitempty"`         // 席位结束时间
+	SubscriptionId *string `json:"subscription_id,omitempty"` // 席位id
+
+	LicensePlanKey *string `json:"license_plan_key,omitempty"` // license_plan_key
+
+	ProductName *string `json:"product_name,omitempty"` // 席位名称
+
+	I18nName *ProductI18nName `json:"i18n_name,omitempty"` // 国际化名称
+
+	StartTime *string `json:"start_time,omitempty"` // 席位起始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 席位结束时间
 }
 
 type UserAssignInfoBuilder struct {
 	subscriptionId     string // 席位id
 	subscriptionIdFlag bool
+
 	licensePlanKey     string // license_plan_key
 	licensePlanKeyFlag bool
-	productName        string // 席位名称
-	productNameFlag    bool
-	i18nName           *ProductI18nName // 国际化名称
-	i18nNameFlag       bool
-	startTime          string // 席位起始时间
-	startTimeFlag      bool
-	endTime            string // 席位结束时间
-	endTimeFlag        bool
+
+	productName     string // 席位名称
+	productNameFlag bool
+
+	i18nName     *ProductI18nName // 国际化名称
+	i18nNameFlag bool
+
+	startTime     string // 席位起始时间
+	startTimeFlag bool
+
+	endTime     string // 席位结束时间
+	endTimeFlag bool
 }
 
 func NewUserAssignInfoBuilder() *UserAssignInfoBuilder {
@@ -4556,19 +5006,25 @@ func (builder *UserAssignInfoBuilder) Build() *UserAssignInfo {
 }
 
 type UserContactInfo struct {
-	UserId *string     `json:"user_id,omitempty"` // 用户id，值为user_id_type所指定的类型。如果查询的手机号、邮箱不存在，或者无权限查看对应的用户，则此项为空。
-	Mobile *string     `json:"mobile,omitempty"`  // 手机号，通过手机号查询时返回
-	Email  *string     `json:"email,omitempty"`   // 邮箱，通过邮箱查询时返回
-	Status *UserStatus `json:"status,omitempty"`  // 用户状态
+	UserId *string `json:"user_id,omitempty"` // 用户id，值为user_id_type所指定的类型。如果查询的手机号、邮箱不存在，或者无权限查看对应的用户，则此项为空。
+
+	Mobile *string `json:"mobile,omitempty"` // 手机号，通过手机号查询时返回
+
+	Email *string `json:"email,omitempty"` // 邮箱，通过邮箱查询时返回
+
+	Status *UserStatus `json:"status,omitempty"` // 用户状态
 }
 
 type UserContactInfoBuilder struct {
 	userId     string // 用户id，值为user_id_type所指定的类型。如果查询的手机号、邮箱不存在，或者无权限查看对应的用户，则此项为空。
 	userIdFlag bool
+
 	mobile     string // 手机号，通过手机号查询时返回
 	mobileFlag bool
-	email      string // 邮箱，通过邮箱查询时返回
-	emailFlag  bool
+
+	email     string // 邮箱，通过邮箱查询时返回
+	emailFlag bool
+
 	status     *UserStatus // 用户状态
 	statusFlag bool
 }
@@ -4635,16 +5091,20 @@ func (builder *UserContactInfoBuilder) Build() *UserContactInfo {
 }
 
 type UserCustomAttr struct {
-	Type  *string              `json:"type,omitempty"`  // 自定义字段类型   ;- `TEXT`：文本;- `HREF`：网页;- `ENUMERATION`：枚举;- `PICTURE_ENUM`：图片;- `GENERIC_USER`：用户;;具体说明参见常见问题的[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
-	Id    *string              `json:"id,omitempty"`    // 自定义字段ID
+	Type *string `json:"type,omitempty"` // 自定义字段类型   ;- `TEXT`：文本;- `HREF`：网页;- `ENUMERATION`：枚举;- `PICTURE_ENUM`：图片;- `GENERIC_USER`：用户;;具体说明参见常见问题的[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
+
+	Id *string `json:"id,omitempty"` // 自定义字段ID
+
 	Value *UserCustomAttrValue `json:"value,omitempty"` // 自定义字段取值
 }
 
 type UserCustomAttrBuilder struct {
-	type_     string // 自定义字段类型   ;- `TEXT`：文本;- `HREF`：网页;- `ENUMERATION`：枚举;- `PICTURE_ENUM`：图片;- `GENERIC_USER`：用户;;具体说明参见常见问题的[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
-	typeFlag  bool
-	id        string // 自定义字段ID
-	idFlag    bool
+	type_    string // 自定义字段类型   ;- `TEXT`：文本;- `HREF`：网页;- `ENUMERATION`：枚举;- `PICTURE_ENUM`：图片;- `GENERIC_USER`：用户;;具体说明参见常见问题的[用户接口相关问题](https://open.feishu.cn/document/ugTN1YjL4UTN24CO1UjN/uQzN1YjL0cTN24CN3UjN#77061525)
+	typeFlag bool
+
+	id     string // 自定义字段ID
+	idFlag bool
+
 	value     *UserCustomAttrValue // 自定义字段取值
 	valueFlag bool
 }
@@ -4698,31 +5158,45 @@ func (builder *UserCustomAttrBuilder) Build() *UserCustomAttr {
 }
 
 type UserCustomAttrValue struct {
-	Text        *string                `json:"text,omitempty"`         // 字段类型为`TEXT`时该参数定义字段值，必填；字段类型为`HREF`时该参数定义网页标题，必填
-	Url         *string                `json:"url,omitempty"`          // 字段类型为 HREF 时，该参数定义默认 URL，例如手机端跳转小程序，PC端跳转网页
-	PcUrl       *string                `json:"pc_url,omitempty"`       // 字段类型为 HREF 时，该参数定义PC端 URL
-	OptionId    *string                `json:"option_id,omitempty"`    // 字段类型为 ENUMERATION 或 PICTURE_ENUM 时，该参数定义选项值
-	OptionValue *string                `json:"option_value,omitempty"` // 选项类型的值。;;表示 成员详情/自定义字段 中选项选中的值
-	Name        *string                `json:"name,omitempty"`         // 选项类型为图片时，表示图片的名称
-	PictureUrl  *string                `json:"picture_url,omitempty"`  // 图片链接
+	Text *string `json:"text,omitempty"` // 字段类型为`TEXT`时该参数定义字段值，必填；字段类型为`HREF`时该参数定义网页标题，必填
+
+	Url *string `json:"url,omitempty"` // 字段类型为 HREF 时，该参数定义默认 URL，例如手机端跳转小程序，PC端跳转网页
+
+	PcUrl *string `json:"pc_url,omitempty"` // 字段类型为 HREF 时，该参数定义PC端 URL
+
+	OptionId *string `json:"option_id,omitempty"` // 字段类型为 ENUMERATION 或 PICTURE_ENUM 时，该参数定义选项值
+
+	OptionValue *string `json:"option_value,omitempty"` // 选项类型的值。;;表示 成员详情/自定义字段 中选项选中的值
+
+	Name *string `json:"name,omitempty"` // 选项类型为图片时，表示图片的名称
+
+	PictureUrl *string `json:"picture_url,omitempty"` // 图片链接
+
 	GenericUser *CustomAttrGenericUser `json:"generic_user,omitempty"` // 字段类型为 GENERIC_USER 时，该参数定义引用人员
 }
 
 type UserCustomAttrValueBuilder struct {
-	text            string // 字段类型为`TEXT`时该参数定义字段值，必填；字段类型为`HREF`时该参数定义网页标题，必填
-	textFlag        bool
-	url             string // 字段类型为 HREF 时，该参数定义默认 URL，例如手机端跳转小程序，PC端跳转网页
-	urlFlag         bool
-	pcUrl           string // 字段类型为 HREF 时，该参数定义PC端 URL
-	pcUrlFlag       bool
-	optionId        string // 字段类型为 ENUMERATION 或 PICTURE_ENUM 时，该参数定义选项值
-	optionIdFlag    bool
+	text     string // 字段类型为`TEXT`时该参数定义字段值，必填；字段类型为`HREF`时该参数定义网页标题，必填
+	textFlag bool
+
+	url     string // 字段类型为 HREF 时，该参数定义默认 URL，例如手机端跳转小程序，PC端跳转网页
+	urlFlag bool
+
+	pcUrl     string // 字段类型为 HREF 时，该参数定义PC端 URL
+	pcUrlFlag bool
+
+	optionId     string // 字段类型为 ENUMERATION 或 PICTURE_ENUM 时，该参数定义选项值
+	optionIdFlag bool
+
 	optionValue     string // 选项类型的值。;;表示 成员详情/自定义字段 中选项选中的值
 	optionValueFlag bool
-	name            string // 选项类型为图片时，表示图片的名称
-	nameFlag        bool
-	pictureUrl      string // 图片链接
-	pictureUrlFlag  bool
+
+	name     string // 选项类型为图片时，表示图片的名称
+	nameFlag bool
+
+	pictureUrl     string // 图片链接
+	pictureUrlFlag bool
+
 	genericUser     *CustomAttrGenericUser // 字段类型为 GENERIC_USER 时，该参数定义引用人员
 	genericUserFlag bool
 }
@@ -4841,16 +5315,20 @@ func (builder *UserCustomAttrValueBuilder) Build() *UserCustomAttrValue {
 }
 
 type UserDepartmentInfo struct {
-	DepartmentId    *string `json:"department_id,omitempty"`    // 对应的部门ID
-	UserOrder       *int    `json:"user_order,omitempty"`       // 用户在部门内的排序
-	DepartmentOrder *int    `json:"department_order,omitempty"` // 用户的部门间的排序
+	DepartmentId *string `json:"department_id,omitempty"` // 对应的部门ID
+
+	UserOrder *int `json:"user_order,omitempty"` // 用户在部门内的排序
+
+	DepartmentOrder *int `json:"department_order,omitempty"` // 用户的部门间的排序
 }
 
 type UserDepartmentInfoBuilder struct {
-	departmentId        string // 对应的部门ID
-	departmentIdFlag    bool
-	userOrder           int // 用户在部门内的排序
-	userOrderFlag       bool
+	departmentId     string // 对应的部门ID
+	departmentIdFlag bool
+
+	userOrder     int // 用户在部门内的排序
+	userOrderFlag bool
+
 	departmentOrder     int // 用户的部门间的排序
 	departmentOrderFlag bool
 }
@@ -4905,93 +5383,155 @@ func (builder *UserDepartmentInfoBuilder) Build() *UserDepartmentInfo {
 }
 
 type UserEvent struct {
-	OpenId          *string `json:"open_id,omitempty"`          // 用户的open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	UnionId         *string `json:"union_id,omitempty"`         // 用户的union_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	UserId          *string `json:"user_id,omitempty"`          // 租户内用户的唯一标识 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	Name            *string `json:"name,omitempty"`             // 用户名
-	EnName          *string `json:"en_name,omitempty"`          // 英文名
-	Nickname        *string `json:"nickname,omitempty"`         // 别名
-	Email           *string `json:"email,omitempty"`            // 邮箱
+	OpenId *string `json:"open_id,omitempty"` // 用户的open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	UnionId *string `json:"union_id,omitempty"` // 用户的union_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	UserId *string `json:"user_id,omitempty"` // 租户内用户的唯一标识 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	Name *string `json:"name,omitempty"` // 用户名
+
+	EnName *string `json:"en_name,omitempty"` // 英文名
+
+	Nickname *string `json:"nickname,omitempty"` // 别名
+
+	Email *string `json:"email,omitempty"` // 邮箱
+
 	EnterpriseEmail *string `json:"enterprise_email,omitempty"` // 企业邮箱
-	JobTitle        *string `json:"job_title,omitempty"`        // 职务
-	Mobile          *string `json:"mobile,omitempty"`           // 手机号
 
-	Gender        *int        `json:"gender,omitempty"`         // 性别
-	Avatar        *AvatarInfo `json:"avatar,omitempty"`         // 用户头像信息
-	Status        *UserStatus `json:"status,omitempty"`         // 用户状态
-	DepartmentIds []string    `json:"department_ids,omitempty"` // 用户所属部门的ID列表
-	LeaderUserId  *string     `json:"leader_user_id,omitempty"` // 用户的直接主管的用户open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	City          *string     `json:"city,omitempty"`           // 城市
-	Country       *string     `json:"country,omitempty"`        // 国家
-	WorkStation   *string     `json:"work_station,omitempty"`   // 工位
-	JoinTime      *int        `json:"join_time,omitempty"`      // 入职时间
+	JobTitle *string `json:"job_title,omitempty"` // 职务
 
-	EmployeeNo   *string `json:"employee_no,omitempty"`   // 工号
-	EmployeeType *int    `json:"employee_type,omitempty"` // 员工类型
+	Mobile *string `json:"mobile,omitempty"` // 手机号
+
+	MobileVisible *bool `json:"mobile_visible,omitempty"` // 手机号码可见性，true 为可见，false 为不可见，目前默认为 true。不可见时，组织员工将无法查看该员工的手机号码
+
+	Gender *int `json:"gender,omitempty"` // 性别
+
+	Avatar *AvatarInfo `json:"avatar,omitempty"` // 用户头像信息
+
+	Status *UserStatus `json:"status,omitempty"` // 用户状态
+
+	DepartmentIds []string `json:"department_ids,omitempty"` // 用户所属部门的ID列表
+
+	LeaderUserId *string `json:"leader_user_id,omitempty"` // 用户的直接主管的用户open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	City *string `json:"city,omitempty"` // 城市
+
+	Country *string `json:"country,omitempty"` // 国家
+
+	WorkStation *string `json:"work_station,omitempty"` // 工位
+
+	JoinTime *int `json:"join_time,omitempty"` // 入职时间
+
+	IsTenantManager *bool `json:"is_tenant_manager,omitempty"` // 是否是租户管理员
+
+	EmployeeNo *string `json:"employee_no,omitempty"` // 工号
+
+	EmployeeType *int `json:"employee_type,omitempty"` // 员工类型
+
+	Positions []*UserPosition `json:"positions,omitempty"` // 职位信息
 
 	Orders []*UserOrder `json:"orders,omitempty"` // 用户排序信息
 
-	CustomAttrs             []*UserCustomAttr `json:"custom_attrs,omitempty"`                // 自定义属性
-	JobLevelId              *string           `json:"job_level_id,omitempty"`                // 职级ID
-	JobFamilyId             *string           `json:"job_family_id,omitempty"`               // 序列ID
-	DottedLineLeaderUserIds []string          `json:"dotted_line_leader_user_ids,omitempty"` // 虚线上级ID
+	TimeZone *string `json:"time_zone,omitempty"` // 时区
+
+	CustomAttrs []*UserCustomAttr `json:"custom_attrs,omitempty"` // 自定义属性
+
+	JobLevelId *string `json:"job_level_id,omitempty"` // 职级ID
+
+	JobFamilyId *string `json:"job_family_id,omitempty"` // 序列ID
+
+	DottedLineLeaderUserIds []string `json:"dotted_line_leader_user_ids,omitempty"` // 虚线上级ID
 }
 
 type UserEventBuilder struct {
-	openId              string // 用户的open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	openIdFlag          bool
-	unionId             string // 用户的union_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	unionIdFlag         bool
-	userId              string // 租户内用户的唯一标识 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	userIdFlag          bool
-	name                string // 用户名
-	nameFlag            bool
-	enName              string // 英文名
-	enNameFlag          bool
-	nickname            string // 别名
-	nicknameFlag        bool
-	email               string // 邮箱
-	emailFlag           bool
+	openId     string // 用户的open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	openIdFlag bool
+
+	unionId     string // 用户的union_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	unionIdFlag bool
+
+	userId     string // 租户内用户的唯一标识 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	userIdFlag bool
+
+	name     string // 用户名
+	nameFlag bool
+
+	enName     string // 英文名
+	enNameFlag bool
+
+	nickname     string // 别名
+	nicknameFlag bool
+
+	email     string // 邮箱
+	emailFlag bool
+
 	enterpriseEmail     string // 企业邮箱
 	enterpriseEmailFlag bool
-	jobTitle            string // 职务
-	jobTitleFlag        bool
-	mobile              string // 手机号
-	mobileFlag          bool
 
-	gender            int // 性别
-	genderFlag        bool
-	avatar            *AvatarInfo // 用户头像信息
-	avatarFlag        bool
-	status            *UserStatus // 用户状态
-	statusFlag        bool
+	jobTitle     string // 职务
+	jobTitleFlag bool
+
+	mobile     string // 手机号
+	mobileFlag bool
+
+	mobileVisible     bool // 手机号码可见性，true 为可见，false 为不可见，目前默认为 true。不可见时，组织员工将无法查看该员工的手机号码
+	mobileVisibleFlag bool
+
+	gender     int // 性别
+	genderFlag bool
+
+	avatar     *AvatarInfo // 用户头像信息
+	avatarFlag bool
+
+	status     *UserStatus // 用户状态
+	statusFlag bool
+
 	departmentIds     []string // 用户所属部门的ID列表
 	departmentIdsFlag bool
-	leaderUserId      string // 用户的直接主管的用户open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	leaderUserIdFlag  bool
-	city              string // 城市
-	cityFlag          bool
-	country           string // 国家
-	countryFlag       bool
-	workStation       string // 工位
-	workStationFlag   bool
-	joinTime          int // 入职时间
-	joinTimeFlag      bool
 
-	employeeNo       string // 工号
-	employeeNoFlag   bool
+	leaderUserId     string // 用户的直接主管的用户open_id [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	leaderUserIdFlag bool
+
+	city     string // 城市
+	cityFlag bool
+
+	country     string // 国家
+	countryFlag bool
+
+	workStation     string // 工位
+	workStationFlag bool
+
+	joinTime     int // 入职时间
+	joinTimeFlag bool
+
+	isTenantManager     bool // 是否是租户管理员
+	isTenantManagerFlag bool
+
+	employeeNo     string // 工号
+	employeeNoFlag bool
+
 	employeeType     int // 员工类型
 	employeeTypeFlag bool
+
+	positions     []*UserPosition // 职位信息
+	positionsFlag bool
 
 	orders     []*UserOrder // 用户排序信息
 	ordersFlag bool
 
-	customAttrs                 []*UserCustomAttr // 自定义属性
-	customAttrsFlag             bool
-	jobLevelId                  string // 职级ID
-	jobLevelIdFlag              bool
-	jobFamilyId                 string // 序列ID
-	jobFamilyIdFlag             bool
+	timeZone     string // 时区
+	timeZoneFlag bool
+
+	customAttrs     []*UserCustomAttr // 自定义属性
+	customAttrsFlag bool
+
+	jobLevelId     string // 职级ID
+	jobLevelIdFlag bool
+
+	jobFamilyId     string // 序列ID
+	jobFamilyIdFlag bool
+
 	dottedLineLeaderUserIds     []string // 虚线上级ID
 	dottedLineLeaderUserIdsFlag bool
 }
@@ -5091,6 +5631,15 @@ func (builder *UserEventBuilder) Mobile(mobile string) *UserEventBuilder {
 	return builder
 }
 
+// 手机号码可见性，true 为可见，false 为不可见，目前默认为 true。不可见时，组织员工将无法查看该员工的手机号码
+//
+// 示例值：false
+func (builder *UserEventBuilder) MobileVisible(mobileVisible bool) *UserEventBuilder {
+	builder.mobileVisible = mobileVisible
+	builder.mobileVisibleFlag = true
+	return builder
+}
+
 // 性别
 //
 // 示例值：1
@@ -5172,6 +5721,15 @@ func (builder *UserEventBuilder) JoinTime(joinTime int) *UserEventBuilder {
 	return builder
 }
 
+// 是否是租户管理员
+//
+// 示例值：false
+func (builder *UserEventBuilder) IsTenantManager(isTenantManager bool) *UserEventBuilder {
+	builder.isTenantManager = isTenantManager
+	builder.isTenantManagerFlag = true
+	return builder
+}
+
 // 工号
 //
 // 示例值：e33ggbyz
@@ -5190,12 +5748,30 @@ func (builder *UserEventBuilder) EmployeeType(employeeType int) *UserEventBuilde
 	return builder
 }
 
+// 职位信息
+//
+// 示例值：
+func (builder *UserEventBuilder) Positions(positions []*UserPosition) *UserEventBuilder {
+	builder.positions = positions
+	builder.positionsFlag = true
+	return builder
+}
+
 // 用户排序信息
 //
 // 示例值：
 func (builder *UserEventBuilder) Orders(orders []*UserOrder) *UserEventBuilder {
 	builder.orders = orders
 	builder.ordersFlag = true
+	return builder
+}
+
+// 时区
+//
+// 示例值：
+func (builder *UserEventBuilder) TimeZone(timeZone string) *UserEventBuilder {
+	builder.timeZone = timeZone
+	builder.timeZoneFlag = true
 	return builder
 }
 
@@ -5344,23 +5920,31 @@ func (builder *UserEventBuilder) Build() *UserEvent {
 
 type UserGroup struct {
 	UserGroupId *string `json:"user_group_id,omitempty"` // 用户组的自定义ID
-	Name        *string `json:"name,omitempty"`          // 用户组的名称
-	Type        *int    `json:"type,omitempty"`          // 用户组的类型
-	MemberCount *int    `json:"member_count,omitempty"`  // 成员数量
-	Status      *int    `json:"status,omitempty"`        // 用户组状态
+
+	Name *string `json:"name,omitempty"` // 用户组的名称
+
+	Type *int `json:"type,omitempty"` // 用户组的类型
+
+	MemberCount *int `json:"member_count,omitempty"` // 成员数量
+
+	Status *int `json:"status,omitempty"` // 用户组状态
 }
 
 type UserGroupBuilder struct {
 	userGroupId     string // 用户组的自定义ID
 	userGroupIdFlag bool
-	name            string // 用户组的名称
-	nameFlag        bool
-	type_           int // 用户组的类型
-	typeFlag        bool
+
+	name     string // 用户组的名称
+	nameFlag bool
+
+	type_    int // 用户组的类型
+	typeFlag bool
+
 	memberCount     int // 成员数量
 	memberCountFlag bool
-	status          int // 用户组状态
-	statusFlag      bool
+
+	status     int // 用户组状态
+	statusFlag bool
 }
 
 func NewUserGroupBuilder() *UserGroupBuilder {
@@ -5443,15 +6027,19 @@ type UserGroupMember struct {
 
 type UserI18nName struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 用户的中文名
+
 	JaJp *string `json:"ja_jp,omitempty"` // 用户的日文名
+
 	EnUs *string `json:"en_us,omitempty"` // 用户的英文名
 }
 
 type UserI18nNameBuilder struct {
 	zhCn     string // 用户的中文名
 	zhCnFlag bool
+
 	jaJp     string // 用户的日文名
 	jaJpFlag bool
+
 	enUs     string // 用户的英文名
 	enUsFlag bool
 }
@@ -5506,16 +6094,20 @@ func (builder *UserI18nNameBuilder) Build() *UserI18nName {
 }
 
 type UserId struct {
-	UserId  *string `json:"user_id,omitempty"`  //
-	OpenId  *string `json:"open_id,omitempty"`  //
+	UserId *string `json:"user_id,omitempty"` //
+
+	OpenId *string `json:"open_id,omitempty"` //
+
 	UnionId *string `json:"union_id,omitempty"` //
 }
 
 type UserIdBuilder struct {
-	userId      string //
-	userIdFlag  bool
-	openId      string //
-	openIdFlag  bool
+	userId     string //
+	userIdFlag bool
+
+	openId     string //
+	openIdFlag bool
+
 	unionId     string //
 	unionIdFlag bool
 }
@@ -5564,21 +6156,27 @@ func (builder *UserIdBuilder) Build() *UserId {
 }
 
 type UserOrder struct {
-	DepartmentId    *string `json:"department_id,omitempty"`    // 排序信息对应的部门ID， ID值与查询参数中的department_id_type 对应。;;表示用户所在的、且需要排序的部门。;;不同 ID 的说明参见及获取方式参见 [部门ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview)
-	UserOrder       *int    `json:"user_order,omitempty"`       // 用户在其直属部门内的排序，数值越大，排序越靠前
-	DepartmentOrder *int    `json:"department_order,omitempty"` // 用户所属的多个部门间的排序，数值越大，排序越靠前
-	IsPrimaryDept   *bool   `json:"is_primary_dept,omitempty"`  // 是否为用户主部门
+	DepartmentId *string `json:"department_id,omitempty"` // 排序信息对应的部门ID， ID值与查询参数中的department_id_type 对应。;;表示用户所在的、且需要排序的部门。;;不同 ID 的说明参见及获取方式参见 [部门ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview)
+
+	UserOrder *int `json:"user_order,omitempty"` // 用户在其直属部门内的排序，数值越大，排序越靠前
+
+	DepartmentOrder *int `json:"department_order,omitempty"` // 用户所属的多个部门间的排序，数值越大，排序越靠前
+
+	IsPrimaryDept *bool `json:"is_primary_dept,omitempty"` // 是否为用户主部门
 }
 
 type UserOrderBuilder struct {
-	departmentId        string // 排序信息对应的部门ID， ID值与查询参数中的department_id_type 对应。;;表示用户所在的、且需要排序的部门。;;不同 ID 的说明参见及获取方式参见 [部门ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview)
-	departmentIdFlag    bool
-	userOrder           int // 用户在其直属部门内的排序，数值越大，排序越靠前
-	userOrderFlag       bool
+	departmentId     string // 排序信息对应的部门ID， ID值与查询参数中的department_id_type 对应。;;表示用户所在的、且需要排序的部门。;;不同 ID 的说明参见及获取方式参见 [部门ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview)
+	departmentIdFlag bool
+
+	userOrder     int // 用户在其直属部门内的排序，数值越大，排序越靠前
+	userOrderFlag bool
+
 	departmentOrder     int // 用户所属的多个部门间的排序，数值越大，排序越靠前
 	departmentOrderFlag bool
-	isPrimaryDept       bool // 是否为用户主部门
-	isPrimaryDeptFlag   bool
+
+	isPrimaryDept     bool // 是否为用户主部门
+	isPrimaryDeptFlag bool
 }
 
 func NewUserOrderBuilder() *UserOrderBuilder {
@@ -5644,27 +6242,37 @@ func (builder *UserOrderBuilder) Build() *UserOrder {
 }
 
 type UserPosition struct {
-	PositionCode       *string `json:"position_code,omitempty"`        // 岗位Code
-	PositionName       *string `json:"position_name,omitempty"`        // 岗位名称
-	DepartmentId       *string `json:"department_id,omitempty"`        // 岗位部门ID
-	LeaderUserId       *string `json:"leader_user_id,omitempty"`       // 上级领导ID
+	PositionCode *string `json:"position_code,omitempty"` // 岗位Code
+
+	PositionName *string `json:"position_name,omitempty"` // 岗位名称
+
+	DepartmentId *string `json:"department_id,omitempty"` // 岗位部门ID
+
+	LeaderUserId *string `json:"leader_user_id,omitempty"` // 上级领导ID
+
 	LeaderPositionCode *string `json:"leader_position_code,omitempty"` // 本岗位领导的岗位code
-	IsMajor            *bool   `json:"is_major,omitempty"`             // 是否主岗，只允许一个主岗sd
+
+	IsMajor *bool `json:"is_major,omitempty"` // 是否主岗，只允许一个主岗sd
 }
 
 type UserPositionBuilder struct {
-	positionCode           string // 岗位Code
-	positionCodeFlag       bool
-	positionName           string // 岗位名称
-	positionNameFlag       bool
-	departmentId           string // 岗位部门ID
-	departmentIdFlag       bool
-	leaderUserId           string // 上级领导ID
-	leaderUserIdFlag       bool
+	positionCode     string // 岗位Code
+	positionCodeFlag bool
+
+	positionName     string // 岗位名称
+	positionNameFlag bool
+
+	departmentId     string // 岗位部门ID
+	departmentIdFlag bool
+
+	leaderUserId     string // 上级领导ID
+	leaderUserIdFlag bool
+
 	leaderPositionCode     string // 本岗位领导的岗位code
 	leaderPositionCodeFlag bool
-	isMajor                bool // 是否主岗，只允许一个主岗sd
-	isMajorFlag            bool
+
+	isMajor     bool // 是否主岗，只允许一个主岗sd
+	isMajorFlag bool
 }
 
 func NewUserPositionBuilder() *UserPositionBuilder {
@@ -5756,24 +6364,32 @@ func (builder *UserPositionBuilder) Build() *UserPosition {
 }
 
 type UserStatus struct {
-	IsFrozen    *bool `json:"is_frozen,omitempty"`    // 是否暂停
-	IsResigned  *bool `json:"is_resigned,omitempty"`  // 是否离职
+	IsFrozen *bool `json:"is_frozen,omitempty"` // 是否暂停
+
+	IsResigned *bool `json:"is_resigned,omitempty"` // 是否离职
+
 	IsActivated *bool `json:"is_activated,omitempty"` // 是否激活
-	IsExited    *bool `json:"is_exited,omitempty"`    // 是否主动退出，主动退出一段时间后用户会自动转为已离职
-	IsUnjoin    *bool `json:"is_unjoin,omitempty"`    // 是否未加入，需要用户自主确认才能加入团队
+
+	IsExited *bool `json:"is_exited,omitempty"` // 是否主动退出，主动退出一段时间后用户会自动转为已离职
+
+	IsUnjoin *bool `json:"is_unjoin,omitempty"` // 是否未加入，需要用户自主确认才能加入团队
 }
 
 type UserStatusBuilder struct {
-	isFrozen        bool // 是否暂停
-	isFrozenFlag    bool
-	isResigned      bool // 是否离职
-	isResignedFlag  bool
+	isFrozen     bool // 是否暂停
+	isFrozenFlag bool
+
+	isResigned     bool // 是否离职
+	isResignedFlag bool
+
 	isActivated     bool // 是否激活
 	isActivatedFlag bool
-	isExited        bool // 是否主动退出，主动退出一段时间后用户会自动转为已离职
-	isExitedFlag    bool
-	isUnjoin        bool // 是否未加入，需要用户自主确认才能加入团队
-	isUnjoinFlag    bool
+
+	isExited     bool // 是否主动退出，主动退出一段时间后用户会自动转为已离职
+	isExitedFlag bool
+
+	isUnjoin     bool // 是否未加入，需要用户自主确认才能加入团队
+	isUnjoinFlag bool
 }
 
 func NewUserStatusBuilder() *UserStatusBuilder {
@@ -5852,21 +6468,27 @@ func (builder *UserStatusBuilder) Build() *UserStatus {
 }
 
 type WorkCity struct {
-	WorkCityId *string        `json:"work_city_id,omitempty"` // 工作城市ID
-	Name       *string        `json:"name,omitempty"`         // 工作城市名称。1-100字符，支持中、英文及符号
-	I18nName   []*I18nContent `json:"i18n_name,omitempty"`    // 多语言工作城市
-	Status     *bool          `json:"status,omitempty"`       // 是否启用
+	WorkCityId *string `json:"work_city_id,omitempty"` // 工作城市ID
+
+	Name *string `json:"name,omitempty"` // 工作城市名称。1-100字符，支持中、英文及符号
+
+	I18nName []*I18nContent `json:"i18n_name,omitempty"` // 多语言工作城市
+
+	Status *bool `json:"status,omitempty"` // 是否启用
 }
 
 type WorkCityBuilder struct {
 	workCityId     string // 工作城市ID
 	workCityIdFlag bool
-	name           string // 工作城市名称。1-100字符，支持中、英文及符号
-	nameFlag       bool
-	i18nName       []*I18nContent // 多语言工作城市
-	i18nNameFlag   bool
-	status         bool // 是否启用
-	statusFlag     bool
+
+	name     string // 工作城市名称。1-100字符，支持中、英文及符号
+	nameFlag bool
+
+	i18nName     []*I18nContent // 多语言工作城市
+	i18nNameFlag bool
+
+	status     bool // 是否启用
+	statusFlag bool
 }
 
 func NewWorkCityBuilder() *WorkCityBuilder {
@@ -5981,9 +6603,11 @@ type ListCustomAttrReq struct {
 }
 
 type ListCustomAttrRespData struct {
-	Items     []*CustomAttr `json:"items,omitempty"`      // 自定义字段定义
-	PageToken *string       `json:"page_token,omitempty"` // 分页标记
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否还有下一页
+	Items []*CustomAttr `json:"items,omitempty"` // 自定义字段定义
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页
 }
 
 type ListCustomAttrResp struct {
@@ -6144,9 +6768,11 @@ type ChildrenDepartmentReq struct {
 }
 
 type ChildrenDepartmentRespData struct {
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string       `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*Department `json:"items,omitempty"`      // 部门列表
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*Department `json:"items,omitempty"` // 部门列表
 }
 
 type ChildrenDepartmentResp struct {
@@ -6426,9 +7052,11 @@ type ListDepartmentReq struct {
 }
 
 type ListDepartmentRespData struct {
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string       `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*Department `json:"items,omitempty"`      //
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*Department `json:"items,omitempty"` //
 }
 
 type ListDepartmentResp struct {
@@ -6516,9 +7144,11 @@ type ParentDepartmentReq struct {
 }
 
 type ParentDepartmentRespData struct {
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否有下一页数据
-	PageToken *string       `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*Department `json:"items,omitempty"`      //
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*Department `json:"items,omitempty"` //
 }
 
 type ParentDepartmentResp struct {
@@ -6737,9 +7367,11 @@ type SearchDepartmentReq struct {
 }
 
 type SearchDepartmentRespData struct {
-	Items     []*Department `json:"items,omitempty"`      //
-	PageToken *string       `json:"page_token,omitempty"` // 翻页 token，传入返回下一页，首页不需要传入
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否还有下一页
+	Items []*Department `json:"items,omitempty"` //
+
+	PageToken *string `json:"page_token,omitempty"` // 翻页 token，传入返回下一页，首页不需要传入
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页
 }
 
 type SearchDepartmentResp struct {
@@ -7186,9 +7818,11 @@ type ListEmployeeTypeEnumReq struct {
 }
 
 type ListEmployeeTypeEnumRespData struct {
-	Items     []*EmployeeTypeEnum `json:"items,omitempty"`      // 枚举数据
-	HasMore   *bool               `json:"has_more,omitempty"`   // 是否下一页
-	PageToken *string             `json:"page_token,omitempty"` // 分页token
+	Items []*EmployeeTypeEnum `json:"items,omitempty"` // 枚举数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否下一页
+
+	PageToken *string `json:"page_token,omitempty"` // 分页token
 }
 
 type ListEmployeeTypeEnumResp struct {
@@ -7896,9 +8530,11 @@ type ListFunctionalRoleMemberReq struct {
 }
 
 type ListFunctionalRoleMemberRespData struct {
-	Members   []*FunctionalRoleMember `json:"members,omitempty"`    // 角色成员列表
-	PageToken *string                 `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
-	HasMore   *bool                   `json:"has_more,omitempty"`   // 是否还有值
+	Members []*FunctionalRoleMember `json:"members,omitempty"` // 角色成员列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有值
 }
 
 type ListFunctionalRoleMemberResp struct {
@@ -7912,8 +8548,9 @@ func (resp *ListFunctionalRoleMemberResp) Success() bool {
 }
 
 type ScopesFunctionalRoleMemberReqBodyBuilder struct {
-	members         []string // 角色修改的角色成员列表（一批用户的UserID列表)
-	membersFlag     bool
+	members     []string // 角色修改的角色成员列表（一批用户的UserID列表)
+	membersFlag bool
+
 	departments     []string // 角色内用户的管理范围
 	departmentsFlag bool
 }
@@ -8046,7 +8683,8 @@ func (builder *ScopesFunctionalRoleMemberReqBuilder) Build() *ScopesFunctionalRo
 }
 
 type ScopesFunctionalRoleMemberReqBody struct {
-	Members     []string `json:"members,omitempty"`     // 角色修改的角色成员列表（一批用户的UserID列表)
+	Members []string `json:"members,omitempty"` // 角色修改的角色成员列表（一批用户的UserID列表)
+
 	Departments []string `json:"departments,omitempty"` // 角色内用户的管理范围
 }
 
@@ -8302,8 +8940,10 @@ type MemberBelongGroupReq struct {
 
 type MemberBelongGroupRespData struct {
 	GroupList []string `json:"group_list,omitempty"` // 用户组ID列表
-	PageToken *string  `json:"page_token,omitempty"` // 分页查询Token
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否有更多结果
+
+	PageToken *string `json:"page_token,omitempty"` // 分页查询Token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多结果
 }
 
 type MemberBelongGroupResp struct {
@@ -8442,9 +9082,11 @@ type SimplelistGroupReq struct {
 }
 
 type SimplelistGroupRespData struct {
-	Grouplist []*Group `json:"grouplist,omitempty"`  // 用户组列表
-	PageToken *string  `json:"page_token,omitempty"` // 下次分页获取的page_token
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否还需要分页获取
+	Grouplist []*Group `json:"grouplist,omitempty"` // 用户组列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下次分页获取的page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还需要分页获取
 }
 
 type SimplelistGroupResp struct {
@@ -8458,12 +9100,14 @@ func (resp *SimplelistGroupResp) Success() bool {
 }
 
 type AddGroupMemberReqBodyBuilder struct {
-	memberType       string // 用户组成员的类型，取值为 user
-	memberTypeFlag   bool
+	memberType     string // 用户组成员的类型，取值为 user
+	memberTypeFlag bool
+
 	memberIdType     string // 当member_type =user时候，member_id_type表示user_id_type，枚举值为open_id, union_id, user_id
 	memberIdTypeFlag bool
-	memberId         string // 添加的成员ID
-	memberIdFlag     bool
+
+	memberId     string // 添加的成员ID
+	memberIdFlag bool
 }
 
 func NewAddGroupMemberReqBodyBuilder() *AddGroupMemberReqBodyBuilder {
@@ -8604,9 +9248,11 @@ func (builder *AddGroupMemberReqBuilder) Build() *AddGroupMemberReq {
 }
 
 type AddGroupMemberReqBody struct {
-	MemberType   *string `json:"member_type,omitempty"`    // 用户组成员的类型，取值为 user
+	MemberType *string `json:"member_type,omitempty"` // 用户组成员的类型，取值为 user
+
 	MemberIdType *string `json:"member_id_type,omitempty"` // 当member_type =user时候，member_id_type表示user_id_type，枚举值为open_id, union_id, user_id
-	MemberId     *string `json:"member_id,omitempty"`      // 添加的成员ID
+
+	MemberId *string `json:"member_id,omitempty"` // 添加的成员ID
 }
 
 type AddGroupMemberReq struct {
@@ -8845,10 +9491,12 @@ func (resp *BatchRemoveGroupMemberResp) Success() bool {
 }
 
 type RemoveGroupMemberReqBodyBuilder struct {
-	memberType       string // 用户组成员的类型，取值为 user
-	memberTypeFlag   bool
-	memberId         string // 操作移除的用户组成员ID
-	memberIdFlag     bool
+	memberType     string // 用户组成员的类型，取值为 user
+	memberTypeFlag bool
+
+	memberId     string // 操作移除的用户组成员ID
+	memberIdFlag bool
+
 	memberIdType     string // 当member_type =user时候，member_id_type表示user_id_type，枚举值为open_id, union_id, user_id
 	memberIdTypeFlag bool
 }
@@ -8991,8 +9639,10 @@ func (builder *RemoveGroupMemberReqBuilder) Build() *RemoveGroupMemberReq {
 }
 
 type RemoveGroupMemberReqBody struct {
-	MemberType   *string `json:"member_type,omitempty"`    // 用户组成员的类型，取值为 user
-	MemberId     *string `json:"member_id,omitempty"`      // 操作移除的用户组成员ID
+	MemberType *string `json:"member_type,omitempty"` // 用户组成员的类型，取值为 user
+
+	MemberId *string `json:"member_id,omitempty"` // 操作移除的用户组成员ID
+
 	MemberIdType *string `json:"member_id_type,omitempty"` // 当member_type =user时候，member_id_type表示user_id_type，枚举值为open_id, union_id, user_id
 }
 
@@ -9077,8 +9727,10 @@ type SimplelistGroupMemberReq struct {
 
 type SimplelistGroupMemberRespData struct {
 	Memberlist []*Memberlist `json:"memberlist,omitempty"` // 成员列表
-	PageToken  *string       `json:"page_token,omitempty"` // 下次分页获取的page_token
-	HasMore    *bool         `json:"has_more,omitempty"`   // 是否还需要分页获取
+
+	PageToken *string `json:"page_token,omitempty"` // 下次分页获取的page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还需要分页获取
 }
 
 type SimplelistGroupMemberResp struct {
@@ -9282,9 +9934,11 @@ type ListJobFamilyReq struct {
 }
 
 type ListJobFamilyRespData struct {
-	Items     []*JobFamily `json:"items,omitempty"`      // 序列信息
-	PageToken *string      `json:"page_token,omitempty"` // 下一页分页的token
-	HasMore   *bool        `json:"has_more,omitempty"`   // 是否有下一页数据
+	Items []*JobFamily `json:"items,omitempty"` // 序列信息
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
 }
 
 type ListJobFamilyResp struct {
@@ -9542,9 +10196,11 @@ type ListJobLevelReq struct {
 }
 
 type ListJobLevelRespData struct {
-	Items     []*JobLevel `json:"items,omitempty"`      // 职级列表
-	PageToken *string     `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*JobLevel `json:"items,omitempty"` // 职级列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListJobLevelResp struct {
@@ -9708,9 +10364,11 @@ type ListJobTitleReq struct {
 }
 
 type ListJobTitleRespData struct {
-	Items     []*JobTitle `json:"items,omitempty"`      // 职务列表
-	PageToken *string     `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*JobTitle `json:"items,omitempty"` // 职务列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListJobTitleResp struct {
@@ -9781,10 +10439,14 @@ type ListScopeReq struct {
 
 type ListScopeRespData struct {
 	DepartmentIds []string `json:"department_ids,omitempty"` // 已授权部门列表，授权范围为全员可见时返回的是当前企业的所有一级部门列表
-	UserIds       []string `json:"user_ids,omitempty"`       // 已授权用户列表，应用申请了获取用户user_id 权限时返回；当授权范围为全员可见时返回的是当前企业所有顶级部门用户列表
-	GroupIds      []string `json:"group_ids,omitempty"`      // 已授权的用户组，授权范围为全员可见时返回的是当前企业所有用户组
-	HasMore       *bool    `json:"has_more,omitempty"`       // 是否还有更多项
-	PageToken     *string  `json:"page_token,omitempty"`     // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token
+
+	UserIds []string `json:"user_ids,omitempty"` // 已授权用户列表，应用申请了获取用户user_id 权限时返回；当授权范围为全员可见时返回的是当前企业所有顶级部门用户列表
+
+	GroupIds []string `json:"group_ids,omitempty"` // 已授权的用户组，授权范围为全员可见时返回的是当前企业所有用户组
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token
 }
 
 type ListScopeResp struct {
@@ -9798,10 +10460,12 @@ func (resp *ListScopeResp) Success() bool {
 }
 
 type BindDepartmentUnitReqBodyBuilder struct {
-	unitId               string // 单位ID
-	unitIdFlag           bool
-	departmentId         string // 单位关联的部门ID
-	departmentIdFlag     bool
+	unitId     string // 单位ID
+	unitIdFlag bool
+
+	departmentId     string // 单位关联的部门ID
+	departmentIdFlag bool
+
 	departmentIdType     string // 此次调用中使用的部门ID的类型
 	departmentIdTypeFlag bool
 }
@@ -9935,8 +10599,10 @@ func (builder *BindDepartmentUnitReqBuilder) Build() *BindDepartmentUnitReq {
 }
 
 type BindDepartmentUnitReqBody struct {
-	UnitId           *string `json:"unit_id,omitempty"`            // 单位ID
-	DepartmentId     *string `json:"department_id,omitempty"`      // 单位关联的部门ID
+	UnitId *string `json:"unit_id,omitempty"` // 单位ID
+
+	DepartmentId *string `json:"department_id,omitempty"` // 单位关联的部门ID
+
 	DepartmentIdType *string `json:"department_id_type,omitempty"` // 此次调用中使用的部门ID的类型
 }
 
@@ -9955,10 +10621,12 @@ func (resp *BindDepartmentUnitResp) Success() bool {
 }
 
 type CreateUnitReqBodyBuilder struct {
-	unitId       string // 单位ID。可自定义，不传时默认自动生成。1-64字节范围大小，需为数字字母
-	unitIdFlag   bool
-	name         string // 单位的名字，长度范围为1-100个字符
-	nameFlag     bool
+	unitId     string // 单位ID。可自定义，不传时默认自动生成。1-64字节范围大小，需为数字字母
+	unitIdFlag bool
+
+	name     string // 单位的名字，长度范围为1-100个字符
+	nameFlag bool
+
 	unitType     string // 单位类型，长度范围为1-100个字符，创建后不可修改
 	unitTypeFlag bool
 }
@@ -10092,8 +10760,10 @@ func (builder *CreateUnitReqBuilder) Build() *CreateUnitReq {
 }
 
 type CreateUnitReqBody struct {
-	UnitId   *string `json:"unit_id,omitempty"`   // 单位ID。可自定义，不传时默认自动生成。1-64字节范围大小，需为数字字母
-	Name     *string `json:"name,omitempty"`      // 单位的名字，长度范围为1-100个字符
+	UnitId *string `json:"unit_id,omitempty"` // 单位ID。可自定义，不传时默认自动生成。1-64字节范围大小，需为数字字母
+
+	Name *string `json:"name,omitempty"` // 单位的名字，长度范围为1-100个字符
+
 	UnitType *string `json:"unit_type,omitempty"` // 单位类型，长度范围为1-100个字符，创建后不可修改
 }
 
@@ -10244,8 +10914,10 @@ type ListUnitReq struct {
 }
 
 type ListUnitRespData struct {
-	Unitlist  []*Unit `json:"unitlist,omitempty"`   // 单位列表
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有分页数据
+	Unitlist []*Unit `json:"unitlist,omitempty"` // 单位列表
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有分页数据
+
 	PageToken *string `json:"page_token,omitempty"` // 分页下次调用的page_token值
 }
 
@@ -10317,8 +10989,10 @@ type ListDepartmentUnitReq struct {
 
 type ListDepartmentUnitRespData struct {
 	Departmentlist []*UnitDepartment `json:"departmentlist,omitempty"` // 单位绑定的部门列表
-	HasMore        *bool             `json:"has_more,omitempty"`       // 是否还有分页数据
-	PageToken      *string           `json:"page_token,omitempty"`     // 下次分页请求标记
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有分页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 下次分页请求标记
 }
 
 type ListDepartmentUnitResp struct {
@@ -10440,10 +11114,12 @@ func (resp *PatchUnitResp) Success() bool {
 }
 
 type UnbindDepartmentUnitReqBodyBuilder struct {
-	unitId               string // 单位ID
-	unitIdFlag           bool
-	departmentId         string // 预解除关联的部门ID
-	departmentIdFlag     bool
+	unitId     string // 单位ID
+	unitIdFlag bool
+
+	departmentId     string // 预解除关联的部门ID
+	departmentIdFlag bool
+
 	departmentIdType     string // 此次调用中使用的部门ID的类型
 	departmentIdTypeFlag bool
 }
@@ -10577,8 +11253,10 @@ func (builder *UnbindDepartmentUnitReqBuilder) Build() *UnbindDepartmentUnitReq 
 }
 
 type UnbindDepartmentUnitReqBody struct {
-	UnitId           *string `json:"unit_id,omitempty"`            // 单位ID
-	DepartmentId     *string `json:"department_id,omitempty"`      // 预解除关联的部门ID
+	UnitId *string `json:"unit_id,omitempty"` // 单位ID
+
+	DepartmentId *string `json:"department_id,omitempty"` // 预解除关联的部门ID
+
 	DepartmentIdType *string `json:"department_id_type,omitempty"` // 此次调用中使用的部门ID的类型
 }
 
@@ -10661,10 +11339,12 @@ func (resp *BatchUserResp) Success() bool {
 }
 
 type BatchGetIdUserReqBodyBuilder struct {
-	emails              []string // 要查询的用户邮箱，最多 50 条。;;注意，emails与mobiles相互独立，每条用户邮箱返回对应的用户ID。;;本接口返回的用户ID数量为emails数量与mobiles数量的和。
-	emailsFlag          bool
-	mobiles             []string // 要查询的用户手机号，最多 50 条。;;注意;1. emails与mobiles相互独立，每条用户手机号返回对应的用户ID。;2.  非中国大陆地区的手机号需要添加以 “+” 开头的国家 / 地区代码。
-	mobilesFlag         bool
+	emails     []string // 要查询的用户邮箱，最多 50 条。;;注意，emails与mobiles相互独立，每条用户邮箱返回对应的用户ID。;;本接口返回的用户ID数量为emails数量与mobiles数量的和。
+	emailsFlag bool
+
+	mobiles     []string // 要查询的用户手机号，最多 50 条。;;注意;1. emails与mobiles相互独立，每条用户手机号返回对应的用户ID。;2.  非中国大陆地区的手机号需要添加以 “+” 开头的国家 / 地区代码。
+	mobilesFlag bool
+
 	includeResigned     bool // 查询结果包含离职员工，可查询离职用户的ID
 	includeResignedFlag bool
 }
@@ -10807,9 +11487,11 @@ func (builder *BatchGetIdUserReqBuilder) Build() *BatchGetIdUserReq {
 }
 
 type BatchGetIdUserReqBody struct {
-	Emails          []string `json:"emails,omitempty"`           // 要查询的用户邮箱，最多 50 条。;;注意，emails与mobiles相互独立，每条用户邮箱返回对应的用户ID。;;本接口返回的用户ID数量为emails数量与mobiles数量的和。
-	Mobiles         []string `json:"mobiles,omitempty"`          // 要查询的用户手机号，最多 50 条。;;注意;1. emails与mobiles相互独立，每条用户手机号返回对应的用户ID。;2.  非中国大陆地区的手机号需要添加以 “+” 开头的国家 / 地区代码。
-	IncludeResigned *bool    `json:"include_resigned,omitempty"` // 查询结果包含离职员工，可查询离职用户的ID
+	Emails []string `json:"emails,omitempty"` // 要查询的用户邮箱，最多 50 条。;;注意，emails与mobiles相互独立，每条用户邮箱返回对应的用户ID。;;本接口返回的用户ID数量为emails数量与mobiles数量的和。
+
+	Mobiles []string `json:"mobiles,omitempty"` // 要查询的用户手机号，最多 50 条。;;注意;1. emails与mobiles相互独立，每条用户手机号返回对应的用户ID。;2.  非中国大陆地区的手机号需要添加以 “+” 开头的国家 / 地区代码。
+
+	IncludeResigned *bool `json:"include_resigned,omitempty"` // 查询结果包含离职员工，可查询离职用户的ID
 }
 
 type BatchGetIdUserReq struct {
@@ -10905,22 +11587,30 @@ func (resp *CreateUserResp) Success() bool {
 type DeleteUserReqBodyBuilder struct {
 	departmentChatAcceptorUserId     string // 部门群接收者。被删除用户为部门群群主时，转让群主给指定接收者，不指定接收者则默认转让给群内第一个入群的人
 	departmentChatAcceptorUserIdFlag bool
-	externalChatAcceptorUserId       string // 外部群接收者。被删除用户为外部群群主时，转让群主给指定接收者，不指定接收者则默认转让给群内与被删除用户在同一组织的第一个入群的人，如果组织内只有该用户在群里，则解散外部群
-	externalChatAcceptorUserIdFlag   bool
-	docsAcceptorUserId               string // 文档接收者。用户被删除时，其拥有的文档转让给接收者。不指定接收者则默认转让给直属上级，如果无直属上级则将文档资源保留在该用户名下。
-	docsAcceptorUserIdFlag           bool
-	calendarAcceptorUserId           string // 日程接收者。用户被删除时，其拥有的日程转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除日程资源。
-	calendarAcceptorUserIdFlag       bool
-	applicationAcceptorUserId        string // 应用接受者。用户被删除时，其创建的应用转让给接收者，不指定接收者则默认转让给直属上级。如果无直属上级则保留应用在该用户名下，但该用户无法登录开发者后台进行应用管理，管理员可以在管理后台手动转移应用给其他人。
-	applicationAcceptorUserIdFlag    bool
-	minutesAcceptorUserId            string // 妙记接收者。用户被删除时，其拥有的妙记资源转让给接收者。如果不指定接收者，则默认转让给直属上级。如果无直属上级则将妙记保留在该用户名下。
-	minutesAcceptorUserIdFlag        bool
-	surveyAcceptorUserId             string // 飞书问卷接收者。用户被删除时，其拥有的飞书问卷资源转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除飞书问卷资源。
-	surveyAcceptorUserIdFlag         bool
-	emailAcceptor                    *ResourceAcceptor // 用户邮件资源处理方式。用户被删除时，根据传递的操作指令对其拥有的邮件资源做对应处理。未传递指令时默认将邮件资源转让给直属上级，如果无直属上级则保留邮件资源在该用户名下。
-	emailAcceptorFlag                bool
-	anycrossAcceptorUserId           string // 用户集成平台资源接收者
-	anycrossAcceptorUserIdFlag       bool
+
+	externalChatAcceptorUserId     string // 外部群接收者。被删除用户为外部群群主时，转让群主给指定接收者，不指定接收者则默认转让给群内与被删除用户在同一组织的第一个入群的人，如果组织内只有该用户在群里，则解散外部群
+	externalChatAcceptorUserIdFlag bool
+
+	docsAcceptorUserId     string // 文档接收者。用户被删除时，其拥有的文档转让给接收者。不指定接收者则默认转让给直属上级，如果无直属上级则将文档资源保留在该用户名下。
+	docsAcceptorUserIdFlag bool
+
+	calendarAcceptorUserId     string // 日程接收者。用户被删除时，其拥有的日程转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除日程资源。
+	calendarAcceptorUserIdFlag bool
+
+	applicationAcceptorUserId     string // 应用接受者。用户被删除时，其创建的应用转让给接收者，不指定接收者则默认转让给直属上级。如果无直属上级则保留应用在该用户名下，但该用户无法登录开发者后台进行应用管理，管理员可以在管理后台手动转移应用给其他人。
+	applicationAcceptorUserIdFlag bool
+
+	minutesAcceptorUserId     string // 妙记接收者。用户被删除时，其拥有的妙记资源转让给接收者。如果不指定接收者，则默认转让给直属上级。如果无直属上级则将妙记保留在该用户名下。
+	minutesAcceptorUserIdFlag bool
+
+	surveyAcceptorUserId     string // 飞书问卷接收者。用户被删除时，其拥有的飞书问卷资源转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除飞书问卷资源。
+	surveyAcceptorUserIdFlag bool
+
+	emailAcceptor     *ResourceAcceptor // 用户邮件资源处理方式。用户被删除时，根据传递的操作指令对其拥有的邮件资源做对应处理。未传递指令时默认将邮件资源转让给直属上级，如果无直属上级则保留邮件资源在该用户名下。
+	emailAcceptorFlag bool
+
+	anycrossAcceptorUserId     string // 用户集成平台资源接收者
+	anycrossAcceptorUserIdFlag bool
 }
 
 func NewDeleteUserReqBodyBuilder() *DeleteUserReqBodyBuilder {
@@ -11226,15 +11916,23 @@ func (builder *DeleteUserReqBuilder) Build() *DeleteUserReq {
 }
 
 type DeleteUserReqBody struct {
-	DepartmentChatAcceptorUserId *string           `json:"department_chat_acceptor_user_id,omitempty"` // 部门群接收者。被删除用户为部门群群主时，转让群主给指定接收者，不指定接收者则默认转让给群内第一个入群的人
-	ExternalChatAcceptorUserId   *string           `json:"external_chat_acceptor_user_id,omitempty"`   // 外部群接收者。被删除用户为外部群群主时，转让群主给指定接收者，不指定接收者则默认转让给群内与被删除用户在同一组织的第一个入群的人，如果组织内只有该用户在群里，则解散外部群
-	DocsAcceptorUserId           *string           `json:"docs_acceptor_user_id,omitempty"`            // 文档接收者。用户被删除时，其拥有的文档转让给接收者。不指定接收者则默认转让给直属上级，如果无直属上级则将文档资源保留在该用户名下。
-	CalendarAcceptorUserId       *string           `json:"calendar_acceptor_user_id,omitempty"`        // 日程接收者。用户被删除时，其拥有的日程转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除日程资源。
-	ApplicationAcceptorUserId    *string           `json:"application_acceptor_user_id,omitempty"`     // 应用接受者。用户被删除时，其创建的应用转让给接收者，不指定接收者则默认转让给直属上级。如果无直属上级则保留应用在该用户名下，但该用户无法登录开发者后台进行应用管理，管理员可以在管理后台手动转移应用给其他人。
-	MinutesAcceptorUserId        *string           `json:"minutes_acceptor_user_id,omitempty"`         // 妙记接收者。用户被删除时，其拥有的妙记资源转让给接收者。如果不指定接收者，则默认转让给直属上级。如果无直属上级则将妙记保留在该用户名下。
-	SurveyAcceptorUserId         *string           `json:"survey_acceptor_user_id,omitempty"`          // 飞书问卷接收者。用户被删除时，其拥有的飞书问卷资源转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除飞书问卷资源。
-	EmailAcceptor                *ResourceAcceptor `json:"email_acceptor,omitempty"`                   // 用户邮件资源处理方式。用户被删除时，根据传递的操作指令对其拥有的邮件资源做对应处理。未传递指令时默认将邮件资源转让给直属上级，如果无直属上级则保留邮件资源在该用户名下。
-	AnycrossAcceptorUserId       *string           `json:"anycross_acceptor_user_id,omitempty"`        // 用户集成平台资源接收者
+	DepartmentChatAcceptorUserId *string `json:"department_chat_acceptor_user_id,omitempty"` // 部门群接收者。被删除用户为部门群群主时，转让群主给指定接收者，不指定接收者则默认转让给群内第一个入群的人
+
+	ExternalChatAcceptorUserId *string `json:"external_chat_acceptor_user_id,omitempty"` // 外部群接收者。被删除用户为外部群群主时，转让群主给指定接收者，不指定接收者则默认转让给群内与被删除用户在同一组织的第一个入群的人，如果组织内只有该用户在群里，则解散外部群
+
+	DocsAcceptorUserId *string `json:"docs_acceptor_user_id,omitempty"` // 文档接收者。用户被删除时，其拥有的文档转让给接收者。不指定接收者则默认转让给直属上级，如果无直属上级则将文档资源保留在该用户名下。
+
+	CalendarAcceptorUserId *string `json:"calendar_acceptor_user_id,omitempty"` // 日程接收者。用户被删除时，其拥有的日程转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除日程资源。
+
+	ApplicationAcceptorUserId *string `json:"application_acceptor_user_id,omitempty"` // 应用接受者。用户被删除时，其创建的应用转让给接收者，不指定接收者则默认转让给直属上级。如果无直属上级则保留应用在该用户名下，但该用户无法登录开发者后台进行应用管理，管理员可以在管理后台手动转移应用给其他人。
+
+	MinutesAcceptorUserId *string `json:"minutes_acceptor_user_id,omitempty"` // 妙记接收者。用户被删除时，其拥有的妙记资源转让给接收者。如果不指定接收者，则默认转让给直属上级。如果无直属上级则将妙记保留在该用户名下。
+
+	SurveyAcceptorUserId *string `json:"survey_acceptor_user_id,omitempty"` // 飞书问卷接收者。用户被删除时，其拥有的飞书问卷资源转让给接收者，不指定接收者则默认转让给直属上级，如果无直属上级则直接删除飞书问卷资源。
+
+	EmailAcceptor *ResourceAcceptor `json:"email_acceptor,omitempty"` // 用户邮件资源处理方式。用户被删除时，根据传递的操作指令对其拥有的邮件资源做对应处理。未传递指令时默认将邮件资源转让给直属上级，如果无直属上级则保留邮件资源在该用户名下。
+
+	AnycrossAcceptorUserId *string `json:"anycross_acceptor_user_id,omitempty"` // 用户集成平台资源接收者
 }
 
 type DeleteUserReq struct {
@@ -11326,9 +12024,11 @@ type FindByDepartmentUserReq struct {
 }
 
 type FindByDepartmentUserRespData struct {
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否有下一页数据
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
 	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*User `json:"items,omitempty"`      // 用户信息列表
+
+	Items []*User `json:"items,omitempty"` // 用户信息列表
 }
 
 type FindByDepartmentUserResp struct {
@@ -11479,9 +12179,11 @@ type ListUserReq struct {
 }
 
 type ListUserRespData struct {
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否有下一页数据
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页数据
+
 	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*User `json:"items,omitempty"`      //
+
+	Items []*User `json:"items,omitempty"` //
 }
 
 type ListUserResp struct {
@@ -11567,8 +12269,9 @@ func (resp *PatchUserResp) Success() bool {
 }
 
 type ResurrectUserReqBodyBuilder struct {
-	departments         []*UserDepartmentInfo // 指定恢复后用户所在部门
-	departmentsFlag     bool
+	departments     []*UserDepartmentInfo // 指定恢复后用户所在部门
+	departmentsFlag bool
+
 	subscriptionIds     []string // 指定恢复后分配的席位
 	subscriptionIdsFlag bool
 }
@@ -11702,8 +12405,9 @@ func (builder *ResurrectUserReqBuilder) Build() *ResurrectUserReq {
 }
 
 type ResurrectUserReqBody struct {
-	Departments     []*UserDepartmentInfo `json:"departments,omitempty"`      // 指定恢复后用户所在部门
-	SubscriptionIds []string              `json:"subscription_ids,omitempty"` // 指定恢复后分配的席位
+	Departments []*UserDepartmentInfo `json:"departments,omitempty"` // 指定恢复后用户所在部门
+
+	SubscriptionIds []string `json:"subscription_ids,omitempty"` // 指定恢复后分配的席位
 }
 
 type ResurrectUserReq struct {
@@ -12005,9 +12709,11 @@ type ListWorkCityReq struct {
 }
 
 type ListWorkCityRespData struct {
-	Items     []*WorkCity `json:"items,omitempty"`      // 工作城市列表
-	PageToken *string     `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*WorkCity `json:"items,omitempty"` // 工作城市列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListWorkCityResp struct {
@@ -12021,7 +12727,8 @@ func (resp *ListWorkCityResp) Success() bool {
 }
 
 type P2CustomAttrEventUpdatedV3Data struct {
-	Object    *CustomAttrEvent `json:"object,omitempty"`     // 变更后信息
+	Object *CustomAttrEvent `json:"object,omitempty"` // 变更后信息
+
 	OldObject *CustomAttrEvent `json:"old_object,omitempty"` // 变更前信息
 }
 
@@ -12050,7 +12757,8 @@ func (m *P2DepartmentCreatedV3) RawReq(req *larkevent.EventReq) {
 }
 
 type P2DepartmentDeletedV3Data struct {
-	Object    *DepartmentEvent     `json:"object,omitempty"`     // 部门信息
+	Object *DepartmentEvent `json:"object,omitempty"` // 部门信息
+
 	OldObject *OldDepartmentObject `json:"old_object,omitempty"` // 部门被删除前的信息
 }
 
@@ -12065,7 +12773,8 @@ func (m *P2DepartmentDeletedV3) RawReq(req *larkevent.EventReq) {
 }
 
 type P2DepartmentUpdatedV3Data struct {
-	Object    *DepartmentEvent `json:"object,omitempty"`     // 更新后信息
+	Object *DepartmentEvent `json:"object,omitempty"` // 更新后信息
+
 	OldObject *DepartmentEvent `json:"old_object,omitempty"` // 更新前信息
 }
 
@@ -12081,6 +12790,7 @@ func (m *P2DepartmentUpdatedV3) RawReq(req *larkevent.EventReq) {
 
 type P2EmployeeTypeEnumActivedV3Data struct {
 	OldEnum *EmployeeTypeEnum `json:"old_enum,omitempty"` // 旧枚举类型
+
 	NewEnum *EmployeeTypeEnum `json:"new_enum,omitempty"` // 新枚举类型
 }
 
@@ -12110,6 +12820,7 @@ func (m *P2EmployeeTypeEnumCreatedV3) RawReq(req *larkevent.EventReq) {
 
 type P2EmployeeTypeEnumDeactivatedV3Data struct {
 	OldEnum *EmployeeTypeEnum `json:"old_enum,omitempty"` // 旧枚举类型
+
 	NewEnum *EmployeeTypeEnum `json:"new_enum,omitempty"` // 新枚举类型
 }
 
@@ -12139,6 +12850,7 @@ func (m *P2EmployeeTypeEnumDeletedV3) RawReq(req *larkevent.EventReq) {
 
 type P2EmployeeTypeEnumUpdatedV3Data struct {
 	OldEnum *EmployeeTypeEnum `json:"old_enum,omitempty"` // 旧枚举类型
+
 	NewEnum *EmployeeTypeEnum `json:"new_enum,omitempty"` // 新枚举类型
 }
 
@@ -12153,7 +12865,8 @@ func (m *P2EmployeeTypeEnumUpdatedV3) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ScopeUpdatedV3Data struct {
-	Added   *Scope `json:"added,omitempty"`   // 当通讯录范围权限变更时，新增的对象
+	Added *Scope `json:"added,omitempty"` // 当通讯录范围权限变更时，新增的对象
+
 	Removed *Scope `json:"removed,omitempty"` // 当通讯录范围权限发生变更时，移除的对象
 }
 
@@ -12182,7 +12895,8 @@ func (m *P2UserCreatedV3) RawReq(req *larkevent.EventReq) {
 }
 
 type P2UserDeletedV3Data struct {
-	Object    *UserEvent     `json:"object,omitempty"`     // 员工信息
+	Object *UserEvent `json:"object,omitempty"` // 员工信息
+
 	OldObject *OldUserObject `json:"old_object,omitempty"` // 删除前信息
 }
 
@@ -12197,7 +12911,8 @@ func (m *P2UserDeletedV3) RawReq(req *larkevent.EventReq) {
 }
 
 type P2UserUpdatedV3Data struct {
-	Object    *UserEvent `json:"object,omitempty"`     // 变更后信息
+	Object *UserEvent `json:"object,omitempty"` // 变更后信息
+
 	OldObject *UserEvent `json:"old_object,omitempty"` // 变更前信息，body中只包含有变更的字段
 }
 

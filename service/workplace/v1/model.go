@@ -21,12 +21,14 @@ import (
 
 type AccessData struct {
 	Pv *int `json:"pv,omitempty"` // 访问次数
+
 	Uv *int `json:"uv,omitempty"` // 访问用户数(去重)
 }
 
 type AccessDataBuilder struct {
 	pv     int // 访问次数
 	pvFlag bool
+
 	uv     int // 访问用户数(去重)
 	uvFlag bool
 }
@@ -68,16 +70,20 @@ func (builder *AccessDataBuilder) Build() *AccessData {
 }
 
 type BlockAccessData struct {
-	Date       *string     `json:"date,omitempty"`        // 时间,精确到天,格式yyyy-MM-dd
-	BlockId    *string     `json:"block_id,omitempty"`    // 小组件id
+	Date *string `json:"date,omitempty"` // 时间,精确到天,格式yyyy-MM-dd
+
+	BlockId *string `json:"block_id,omitempty"` // 小组件id
+
 	AccessData *AccessData `json:"access_data,omitempty"` // block访问数据信息。
 }
 
 type BlockAccessDataBuilder struct {
-	date           string // 时间,精确到天,格式yyyy-MM-dd
-	dateFlag       bool
-	blockId        string // 小组件id
-	blockIdFlag    bool
+	date     string // 时间,精确到天,格式yyyy-MM-dd
+	dateFlag bool
+
+	blockId     string // 小组件id
+	blockIdFlag bool
+
 	accessData     *AccessData // block访问数据信息。
 	accessDataFlag bool
 }
@@ -131,19 +137,25 @@ func (builder *BlockAccessDataBuilder) Build() *BlockAccessData {
 }
 
 type CustomWorkplaceAccessData struct {
-	CustomWorkplaceId   *string     `json:"custom_workplace_id,omitempty"`   // 定制工作台ID
-	AccessData          *AccessData `json:"access_data,omitempty"`           // 访问数据
-	Date                *string     `json:"date,omitempty"`                  // 时间,精确到天,格式yyyy-MM-dd
+	CustomWorkplaceId *string `json:"custom_workplace_id,omitempty"` // 定制工作台ID
+
+	AccessData *AccessData `json:"access_data,omitempty"` // 访问数据
+
+	Date *string `json:"date,omitempty"` // 时间,精确到天,格式yyyy-MM-dd
+
 	CustomWorkplaceName []*I18nName `json:"custom_workplace_name,omitempty"` // 定制工作台多语言名字。
 }
 
 type CustomWorkplaceAccessDataBuilder struct {
-	customWorkplaceId       string // 定制工作台ID
-	customWorkplaceIdFlag   bool
-	accessData              *AccessData // 访问数据
-	accessDataFlag          bool
-	date                    string // 时间,精确到天,格式yyyy-MM-dd
-	dateFlag                bool
+	customWorkplaceId     string // 定制工作台ID
+	customWorkplaceIdFlag bool
+
+	accessData     *AccessData // 访问数据
+	accessDataFlag bool
+
+	date     string // 时间,精确到天,格式yyyy-MM-dd
+	dateFlag bool
+
 	customWorkplaceName     []*I18nName // 定制工作台多语言名字。
 	customWorkplaceNameFlag bool
 }
@@ -209,13 +221,15 @@ func (builder *CustomWorkplaceAccessDataBuilder) Build() *CustomWorkplaceAccessD
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -254,14 +268,16 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type I18nName struct {
 	Language *string `json:"language,omitempty"` // ISO 639-1的语言代码。比如zh表示中文。
-	Name     *string `json:"name,omitempty"`     // 名字
+
+	Name *string `json:"name,omitempty"` // 名字
 }
 
 type I18nNameBuilder struct {
 	language     string // ISO 639-1的语言代码。比如zh表示中文。
 	languageFlag bool
-	name         string // 名字
-	nameFlag     bool
+
+	name     string // 名字
+	nameFlag bool
 }
 
 func NewI18nNameBuilder() *I18nNameBuilder {
@@ -301,13 +317,15 @@ func (builder *I18nNameBuilder) Build() *I18nName {
 }
 
 type Rule struct {
-	IsAllVisible         *bool    `json:"is_all_visible,omitempty"`         // 是否全员接收通知
+	IsAllVisible *bool `json:"is_all_visible,omitempty"` // 是否全员接收通知
+
 	VisibleDepartmentIds []string `json:"visible_department_ids,omitempty"` // 可接收通知的部门id列表，上限为500个
 }
 
 type RuleBuilder struct {
-	isAllVisible             bool // 是否全员接收通知
-	isAllVisibleFlag         bool
+	isAllVisible     bool // 是否全员接收通知
+	isAllVisibleFlag bool
+
 	visibleDepartmentIds     []string // 可接收通知的部门id列表，上限为500个
 	visibleDepartmentIdsFlag bool
 }
@@ -348,13 +366,15 @@ func (builder *RuleBuilder) Build() *Rule {
 }
 
 type TemplateWorkplaceAccessData struct {
-	TplId      *string     `json:"tpl_id,omitempty"`      // 定制工作台ID
+	TplId *string `json:"tpl_id,omitempty"` // 定制工作台ID
+
 	AccessData *AccessData `json:"access_data,omitempty"` // 访问数据
 }
 
 type TemplateWorkplaceAccessDataBuilder struct {
-	tplId          string // 定制工作台ID
-	tplIdFlag      bool
+	tplId     string // 定制工作台ID
+	tplIdFlag bool
+
 	accessData     *AccessData // 访问数据
 	accessDataFlag bool
 }
@@ -395,16 +415,20 @@ func (builder *TemplateWorkplaceAccessDataBuilder) Build() *TemplateWorkplaceAcc
 }
 
 type WorkplaceAccessData struct {
-	Date             *string     `json:"date,omitempty"`              // 时间,精确到天,格式yyyy-MM-dd
-	AllWorkplace     *AccessData `json:"all_workplace,omitempty"`     // 全部工作台的访问数据
+	Date *string `json:"date,omitempty"` // 时间,精确到天,格式yyyy-MM-dd
+
+	AllWorkplace *AccessData `json:"all_workplace,omitempty"` // 全部工作台的访问数据
+
 	DefaultWorkplace *AccessData `json:"default_workplace,omitempty"` // 默认工作台的访问数据
 }
 
 type WorkplaceAccessDataBuilder struct {
-	date                 string // 时间,精确到天,格式yyyy-MM-dd
-	dateFlag             bool
-	allWorkplace         *AccessData // 全部工作台的访问数据
-	allWorkplaceFlag     bool
+	date     string // 时间,精确到天,格式yyyy-MM-dd
+	dateFlag bool
+
+	allWorkplace     *AccessData // 全部工作台的访问数据
+	allWorkplaceFlag bool
+
 	defaultWorkplace     *AccessData // 默认工作台的访问数据
 	defaultWorkplaceFlag bool
 }
@@ -458,20 +482,26 @@ func (builder *WorkplaceAccessDataBuilder) Build() *WorkplaceAccessData {
 
 type WorkplaceTenantNotification struct {
 	NotificationId *string `json:"notification_id,omitempty"` // 通知id
-	Content        *string `json:"content,omitempty"`         // 通知内容 json 格式
-	ExpireTime     *string `json:"expire_time,omitempty"`     // 自动过期删除的时间戳(秒)
-	Rule           *Rule   `json:"rule,omitempty"`            // 配置可接收到通知的规则
+
+	Content *string `json:"content,omitempty"` // 通知内容 json 格式
+
+	ExpireTime *string `json:"expire_time,omitempty"` // 自动过期删除的时间戳(秒)
+
+	Rule *Rule `json:"rule,omitempty"` // 配置可接收到通知的规则
 }
 
 type WorkplaceTenantNotificationBuilder struct {
 	notificationId     string // 通知id
 	notificationIdFlag bool
-	content            string // 通知内容 json 格式
-	contentFlag        bool
-	expireTime         string // 自动过期删除的时间戳(秒)
-	expireTimeFlag     bool
-	rule               *Rule // 配置可接收到通知的规则
-	ruleFlag           bool
+
+	content     string // 通知内容 json 格式
+	contentFlag bool
+
+	expireTime     string // 自动过期删除的时间戳(秒)
+	expireTimeFlag bool
+
+	rule     *Rule // 配置可接收到通知的规则
+	ruleFlag bool
 }
 
 func NewWorkplaceTenantNotificationBuilder() *WorkplaceTenantNotificationBuilder {
@@ -537,17 +567,21 @@ func (builder *WorkplaceTenantNotificationBuilder) Build() *WorkplaceTenantNotif
 
 type WorkplaceUserNotification struct {
 	NotificationId *string `json:"notification_id,omitempty"` // 通知 id
-	Content        *string `json:"content,omitempty"`         // 通知内容 json 格式
-	ExpireTime     *string `json:"expire_time,omitempty"`     // 自动过期删除的时间戳(秒)
+
+	Content *string `json:"content,omitempty"` // 通知内容 json 格式
+
+	ExpireTime *string `json:"expire_time,omitempty"` // 自动过期删除的时间戳(秒)
 }
 
 type WorkplaceUserNotificationBuilder struct {
 	notificationId     string // 通知 id
 	notificationIdFlag bool
-	content            string // 通知内容 json 格式
-	contentFlag        bool
-	expireTime         string // 自动过期删除的时间戳(秒)
-	expireTimeFlag     bool
+
+	content     string // 通知内容 json 格式
+	contentFlag bool
+
+	expireTime     string // 自动过期删除的时间戳(秒)
+	expireTimeFlag bool
 }
 
 func NewWorkplaceUserNotificationBuilder() *WorkplaceUserNotificationBuilder {
@@ -664,9 +698,11 @@ type SearchCustomWorkplaceAccessDataReq struct {
 }
 
 type SearchCustomWorkplaceAccessDataRespData struct {
-	Items     []*CustomWorkplaceAccessData `json:"items,omitempty"`      // 定制工作台访问数据
-	HasMore   *bool                        `json:"has_more,omitempty"`   // 是否还有下一页数据
-	PageToken *string                      `json:"page_token,omitempty"` // 分页标记，存在下一页时返回
+	Items []*CustomWorkplaceAccessData `json:"items,omitempty"` // 定制工作台访问数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，存在下一页时返回
 }
 
 type SearchCustomWorkplaceAccessDataResp struct {
@@ -736,9 +772,11 @@ type SearchWorkplaceAccessDataReq struct {
 }
 
 type SearchWorkplaceAccessDataRespData struct {
-	Items     []*WorkplaceAccessData `json:"items,omitempty"`      // 工作台访问数据
-	HasMore   *bool                  `json:"has_more,omitempty"`   // 是否还有下一页数据
-	PageToken *string                `json:"page_token,omitempty"` // 分页标记，存在下一页时返回。
+	Items []*WorkplaceAccessData `json:"items,omitempty"` // 工作台访问数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，存在下一页时返回。
 }
 
 type SearchWorkplaceAccessDataResp struct {
@@ -816,9 +854,11 @@ type SearchWorkplaceBlockAccessDataReq struct {
 }
 
 type SearchWorkplaceBlockAccessDataRespData struct {
-	Items     []*BlockAccessData `json:"items,omitempty"`      // 工作台中block的访问数据
-	HasMore   *bool              `json:"has_more,omitempty"`   // 是否还有下一页数据
-	PageToken *string            `json:"page_token,omitempty"` // 分页标记，存在下一页时返回
+	Items []*BlockAccessData `json:"items,omitempty"` // 工作台中block的访问数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页数据
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，存在下一页时返回
 }
 
 type SearchWorkplaceBlockAccessDataResp struct {

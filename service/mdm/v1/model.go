@@ -32,22 +32,30 @@ const (
 )
 
 type Appendix struct {
-	FileId      *string `json:"file_id,omitempty"`      // 文件id(文件的唯一标识)
-	FileName    *string `json:"file_name,omitempty"`    // 文件名称
-	FileType    *string `json:"file_type,omitempty"`    // 文件类型
-	FileSize    *int    `json:"file_size,omitempty"`    // 文件大小
+	FileId *string `json:"file_id,omitempty"` // 文件id(文件的唯一标识)
+
+	FileName *string `json:"file_name,omitempty"` // 文件名称
+
+	FileType *string `json:"file_type,omitempty"` // 文件类型
+
+	FileSize *int `json:"file_size,omitempty"` // 文件大小
+
 	DownloadUrl *string `json:"download_url,omitempty"` // 文件下载地址
 }
 
 type AppendixBuilder struct {
-	fileId          string // 文件id(文件的唯一标识)
-	fileIdFlag      bool
-	fileName        string // 文件名称
-	fileNameFlag    bool
-	fileType        string // 文件类型
-	fileTypeFlag    bool
-	fileSize        int // 文件大小
-	fileSizeFlag    bool
+	fileId     string // 文件id(文件的唯一标识)
+	fileIdFlag bool
+
+	fileName     string // 文件名称
+	fileNameFlag bool
+
+	fileType     string // 文件类型
+	fileTypeFlag bool
+
+	fileSize     int // 文件大小
+	fileSizeFlag bool
+
 	downloadUrl     string // 文件下载地址
 	downloadUrlFlag bool
 }
@@ -128,33 +136,47 @@ func (builder *AppendixBuilder) Build() *Appendix {
 }
 
 type Company struct {
-	CompanyCode     *string `json:"company_code,omitempty"`      // 公司编码
-	CompanyName     *string `json:"company_name,omitempty"`      // 公司名称
-	CompanyUid      *string `json:"company_uid,omitempty"`       // 公司唯一ID
+	CompanyCode *string `json:"company_code,omitempty"` // 公司编码
+
+	CompanyName *string `json:"company_name,omitempty"` // 公司名称
+
+	CompanyUid *string `json:"company_uid,omitempty"` // 公司唯一ID
+
 	LegalEntityCode *string `json:"legal_entity_code,omitempty"` // 法人实体编码
-	CoAreaCode      *string `json:"co_area_code,omitempty"`      // 控制范围编码
-	CurrencyCode    *string `json:"currency_code,omitempty"`     // 币种三字码
-	CountryCode     *string `json:"country_code,omitempty"`      // 国家二字码
-	CompanyNameEn   *string `json:"company_name_en,omitempty"`   // 公司英文名
+
+	CoAreaCode *string `json:"co_area_code,omitempty"` // 控制范围编码
+
+	CurrencyCode *string `json:"currency_code,omitempty"` // 币种三字码
+
+	CountryCode *string `json:"country_code,omitempty"` // 国家二字码
+
+	CompanyNameEn *string `json:"company_name_en,omitempty"` // 公司英文名
 }
 
 type CompanyBuilder struct {
-	companyCode         string // 公司编码
-	companyCodeFlag     bool
-	companyName         string // 公司名称
-	companyNameFlag     bool
-	companyUid          string // 公司唯一ID
-	companyUidFlag      bool
+	companyCode     string // 公司编码
+	companyCodeFlag bool
+
+	companyName     string // 公司名称
+	companyNameFlag bool
+
+	companyUid     string // 公司唯一ID
+	companyUidFlag bool
+
 	legalEntityCode     string // 法人实体编码
 	legalEntityCodeFlag bool
-	coAreaCode          string // 控制范围编码
-	coAreaCodeFlag      bool
-	currencyCode        string // 币种三字码
-	currencyCodeFlag    bool
-	countryCode         string // 国家二字码
-	countryCodeFlag     bool
-	companyNameEn       string // 公司英文名
-	companyNameEnFlag   bool
+
+	coAreaCode     string // 控制范围编码
+	coAreaCodeFlag bool
+
+	currencyCode     string // 币种三字码
+	currencyCodeFlag bool
+
+	countryCode     string // 国家二字码
+	countryCodeFlag bool
+
+	companyNameEn     string // 公司英文名
+	companyNameEnFlag bool
 }
 
 func NewCompanyBuilder() *CompanyBuilder {
@@ -272,39 +294,57 @@ func (builder *CompanyBuilder) Build() *Company {
 }
 
 type CompanyAsset struct {
-	AssetUid        *string `json:"asset_uid,omitempty"`          // 资产唯一ID
-	AssetSubNo      *string `json:"asset_sub_no,omitempty"`       // 资产子编码
-	AssetType       *string `json:"asset_type,omitempty"`         // 资产类型编码
-	AssetTypeName   *string `json:"asset_type_name,omitempty"`    // 资产类型描述
-	AssetName       *string `json:"asset_name,omitempty"`         // 资产描述
-	Quantity        *int    `json:"quantity,omitempty"`           // 资产数量
-	Unit            *string `json:"unit,omitempty"`               // 资产计量单位
-	CompanyUid      *string `json:"company_uid,omitempty"`        // 资产所属公司的唯一ID
+	AssetUid *string `json:"asset_uid,omitempty"` // 资产唯一ID
+
+	AssetSubNo *string `json:"asset_sub_no,omitempty"` // 资产子编码
+
+	AssetType *string `json:"asset_type,omitempty"` // 资产类型编码
+
+	AssetTypeName *string `json:"asset_type_name,omitempty"` // 资产类型描述
+
+	AssetName *string `json:"asset_name,omitempty"` // 资产描述
+
+	Quantity *int `json:"quantity,omitempty"` // 资产数量
+
+	Unit *string `json:"unit,omitempty"` // 资产计量单位
+
+	CompanyUid *string `json:"company_uid,omitempty"` // 资产所属公司的唯一ID
+
 	AssetTypeNameEn *string `json:"asset_type_name_en,omitempty"` // 资产类型英文描述
-	AssetNo         *string `json:"asset_no,omitempty"`           // 资产编码
+
+	AssetNo *string `json:"asset_no,omitempty"` // 资产编码
 }
 
 type CompanyAssetBuilder struct {
-	assetUid            string // 资产唯一ID
-	assetUidFlag        bool
-	assetSubNo          string // 资产子编码
-	assetSubNoFlag      bool
-	assetType           string // 资产类型编码
-	assetTypeFlag       bool
-	assetTypeName       string // 资产类型描述
-	assetTypeNameFlag   bool
-	assetName           string // 资产描述
-	assetNameFlag       bool
-	quantity            int // 资产数量
-	quantityFlag        bool
-	unit                string // 资产计量单位
-	unitFlag            bool
-	companyUid          string // 资产所属公司的唯一ID
-	companyUidFlag      bool
+	assetUid     string // 资产唯一ID
+	assetUidFlag bool
+
+	assetSubNo     string // 资产子编码
+	assetSubNoFlag bool
+
+	assetType     string // 资产类型编码
+	assetTypeFlag bool
+
+	assetTypeName     string // 资产类型描述
+	assetTypeNameFlag bool
+
+	assetName     string // 资产描述
+	assetNameFlag bool
+
+	quantity     int // 资产数量
+	quantityFlag bool
+
+	unit     string // 资产计量单位
+	unitFlag bool
+
+	companyUid     string // 资产所属公司的唯一ID
+	companyUidFlag bool
+
 	assetTypeNameEn     string // 资产类型英文描述
 	assetTypeNameEnFlag bool
-	assetNo             string // 资产编码
-	assetNoFlag         bool
+
+	assetNo     string // 资产编码
+	assetNoFlag bool
 }
 
 func NewCompanyAssetBuilder() *CompanyAssetBuilder {
@@ -448,45 +488,67 @@ func (builder *CompanyAssetBuilder) Build() *CompanyAsset {
 }
 
 type CompanyCompanyBankAccount struct {
-	CompanyBankAccountUid *string       `json:"company_bank_account_uid,omitempty"` // 公司银行账号唯一ID
-	CompanyUid            *string       `json:"company_uid,omitempty"`              // 公司唯一ID
-	Account               *string       `json:"account,omitempty"`                  // 银行账号
-	Iban                  *string       `json:"iban,omitempty"`                     // 国际银行账号
-	AccountName           *string       `json:"account_name,omitempty"`             // 开户名
-	CurrencyCode          *string       `json:"currency_code,omitempty"`            // 币种三字码
-	LocalRoutingCode      *string       `json:"local_routing_code,omitempty"`       // 银行本地清算代码
-	GlAccountCode         *string       `json:"gl_account_code,omitempty"`          // 总账科目编码
-	ClearingAccountCode   *string       `json:"clearing_account_code,omitempty"`    // 清算科目编码
-	Swift                 *string       `json:"swift,omitempty"`                    // swift
-	AccountAttriDesc      *string       `json:"account_attri_desc,omitempty"`       // 账户属性描述
-	I18nAccountAttriDesc  []*I18nStruct `json:"i18n_account_attri_desc,omitempty"`  // 账户属性描述多语言
+	CompanyBankAccountUid *string `json:"company_bank_account_uid,omitempty"` // 公司银行账号唯一ID
+
+	CompanyUid *string `json:"company_uid,omitempty"` // 公司唯一ID
+
+	Account *string `json:"account,omitempty"` // 银行账号
+
+	Iban *string `json:"iban,omitempty"` // 国际银行账号
+
+	AccountName *string `json:"account_name,omitempty"` // 开户名
+
+	CurrencyCode *string `json:"currency_code,omitempty"` // 币种三字码
+
+	LocalRoutingCode *string `json:"local_routing_code,omitempty"` // 银行本地清算代码
+
+	GlAccountCode *string `json:"gl_account_code,omitempty"` // 总账科目编码
+
+	ClearingAccountCode *string `json:"clearing_account_code,omitempty"` // 清算科目编码
+
+	Swift *string `json:"swift,omitempty"` // swift
+
+	AccountAttriDesc *string `json:"account_attri_desc,omitempty"` // 账户属性描述
+
+	I18nAccountAttriDesc []*I18nStruct `json:"i18n_account_attri_desc,omitempty"` // 账户属性描述多语言
 }
 
 type CompanyCompanyBankAccountBuilder struct {
 	companyBankAccountUid     string // 公司银行账号唯一ID
 	companyBankAccountUidFlag bool
-	companyUid                string // 公司唯一ID
-	companyUidFlag            bool
-	account                   string // 银行账号
-	accountFlag               bool
-	iban                      string // 国际银行账号
-	ibanFlag                  bool
-	accountName               string // 开户名
-	accountNameFlag           bool
-	currencyCode              string // 币种三字码
-	currencyCodeFlag          bool
-	localRoutingCode          string // 银行本地清算代码
-	localRoutingCodeFlag      bool
-	glAccountCode             string // 总账科目编码
-	glAccountCodeFlag         bool
-	clearingAccountCode       string // 清算科目编码
-	clearingAccountCodeFlag   bool
-	swift                     string // swift
-	swiftFlag                 bool
-	accountAttriDesc          string // 账户属性描述
-	accountAttriDescFlag      bool
-	i18nAccountAttriDesc      []*I18nStruct // 账户属性描述多语言
-	i18nAccountAttriDescFlag  bool
+
+	companyUid     string // 公司唯一ID
+	companyUidFlag bool
+
+	account     string // 银行账号
+	accountFlag bool
+
+	iban     string // 国际银行账号
+	ibanFlag bool
+
+	accountName     string // 开户名
+	accountNameFlag bool
+
+	currencyCode     string // 币种三字码
+	currencyCodeFlag bool
+
+	localRoutingCode     string // 银行本地清算代码
+	localRoutingCodeFlag bool
+
+	glAccountCode     string // 总账科目编码
+	glAccountCodeFlag bool
+
+	clearingAccountCode     string // 清算科目编码
+	clearingAccountCodeFlag bool
+
+	swift     string // swift
+	swiftFlag bool
+
+	accountAttriDesc     string // 账户属性描述
+	accountAttriDescFlag bool
+
+	i18nAccountAttriDesc     []*I18nStruct // 账户属性描述多语言
+	i18nAccountAttriDescFlag bool
 }
 
 func NewCompanyCompanyBankAccountBuilder() *CompanyCompanyBankAccountBuilder {
@@ -655,36 +717,52 @@ func (builder *CompanyCompanyBankAccountBuilder) Build() *CompanyCompanyBankAcco
 }
 
 type Config struct {
-	FieldCode     *string `json:"field_code,omitempty"`     // 字段编码
-	FieldName     *string `json:"field_name,omitempty"`     // 字段名称
-	Module        *int    `json:"module,omitempty"`         // 模块分组
+	FieldCode *string `json:"field_code,omitempty"` // 字段编码
+
+	FieldName *string `json:"field_name,omitempty"` // 字段名称
+
+	Module *int `json:"module,omitempty"` // 模块分组
+
 	FieldDescribe *string `json:"field_describe,omitempty"` // 字段描述
-	Sys           *int    `json:"sys,omitempty"`            // 是否系统字段
-	FieldType     *int    `json:"field_type,omitempty"`     // 字段类型
-	Required      *int    `json:"required,omitempty"`       // 是否必填
-	Status        *int    `json:"status,omitempty"`         // 是否启用
-	FieldVersion  *int    `json:"field_version,omitempty"`  // 当前最新版本号
+
+	Sys *int `json:"sys,omitempty"` // 是否系统字段
+
+	FieldType *int `json:"field_type,omitempty"` // 字段类型
+
+	Required *int `json:"required,omitempty"` // 是否必填
+
+	Status *int `json:"status,omitempty"` // 是否启用
+
+	FieldVersion *int `json:"field_version,omitempty"` // 当前最新版本号
 }
 
 type ConfigBuilder struct {
-	fieldCode         string // 字段编码
-	fieldCodeFlag     bool
-	fieldName         string // 字段名称
-	fieldNameFlag     bool
-	module            int // 模块分组
-	moduleFlag        bool
+	fieldCode     string // 字段编码
+	fieldCodeFlag bool
+
+	fieldName     string // 字段名称
+	fieldNameFlag bool
+
+	module     int // 模块分组
+	moduleFlag bool
+
 	fieldDescribe     string // 字段描述
 	fieldDescribeFlag bool
-	sys               int // 是否系统字段
-	sysFlag           bool
-	fieldType         int // 字段类型
-	fieldTypeFlag     bool
-	required          int // 是否必填
-	requiredFlag      bool
-	status            int // 是否启用
-	statusFlag        bool
-	fieldVersion      int // 当前最新版本号
-	fieldVersionFlag  bool
+
+	sys     int // 是否系统字段
+	sysFlag bool
+
+	fieldType     int // 字段类型
+	fieldTypeFlag bool
+
+	required     int // 是否必填
+	requiredFlag bool
+
+	status     int // 是否启用
+	statusFlag bool
+
+	fieldVersion     int // 当前最新版本号
+	fieldVersionFlag bool
 }
 
 func NewConfigBuilder() *ConfigBuilder {
@@ -815,44 +893,67 @@ func (builder *ConfigBuilder) Build() *Config {
 }
 
 type CostCenter struct {
-	CostCenterUid          *string       `json:"cost_center_uid,omitempty"`           // 成本中心唯一ID
-	CostCenterCode         *string       `json:"cost_center_code,omitempty"`          // 成本中心编码
-	I18nCostCenterName     []*I18nStruct `json:"i18n_cost_center_name,omitempty"`     // 成本中心名称多语言配置
-	ResponsibleUserUnionId *string       `json:"responsible_user_union_id,omitempty"` // 负责人union id，详细说明参见[union id说明](https://open.feishu.cn/document/home/user-identity-introduction/union-id)
-	CoAreaCode             *string       `json:"co_area_code,omitempty"`              // 控制范围编码
+	CostCenterUid *string `json:"cost_center_uid,omitempty"` // 成本中心唯一ID
 
-	ProfitCenterCode *string  `json:"profit_center_code,omitempty"` // 利润中心编码
-	BusinessArea     *string  `json:"business_area,omitempty"`      // 业务范围
-	FeeType          *string  `json:"fee_type,omitempty"`           // 费用类型
-	ValidTo          *string  `json:"valid_to,omitempty"`           // 有效期至（yyyy-MM-dd）
-	CostCenterName   *string  `json:"cost_center_name,omitempty"`   // 成本中心名称
-	CompanyCodeList  []string `json:"company_code_list,omitempty"`  // 公司编码列表
+	CostCenterCode *string `json:"cost_center_code,omitempty"` // 成本中心编码
+
+	I18nCostCenterName []*I18nStruct `json:"i18n_cost_center_name,omitempty"` // 成本中心名称多语言配置
+
+	ResponsibleUserUnionId *string `json:"responsible_user_union_id,omitempty"` // 负责人union id，详细说明参见[union id说明](https://open.feishu.cn/document/home/user-identity-introduction/union-id)
+
+	CoAreaCode *string `json:"co_area_code,omitempty"` // 控制范围编码
+
+	CompanyCode *string `json:"company_code,omitempty"` // 公司编码
+
+	ProfitCenterCode *string `json:"profit_center_code,omitempty"` // 利润中心编码
+
+	BusinessArea *string `json:"business_area,omitempty"` // 业务范围
+
+	FeeType *string `json:"fee_type,omitempty"` // 费用类型
+
+	ValidTo *string `json:"valid_to,omitempty"` // 有效期至（yyyy-MM-dd）
+
+	CostCenterName *string `json:"cost_center_name,omitempty"` // 成本中心名称
+
+	CompanyCodeList []string `json:"company_code_list,omitempty"` // 公司编码列表
 }
 
 type CostCenterBuilder struct {
-	costCenterUid              string // 成本中心唯一ID
-	costCenterUidFlag          bool
-	costCenterCode             string // 成本中心编码
-	costCenterCodeFlag         bool
-	i18nCostCenterName         []*I18nStruct // 成本中心名称多语言配置
-	i18nCostCenterNameFlag     bool
+	costCenterUid     string // 成本中心唯一ID
+	costCenterUidFlag bool
+
+	costCenterCode     string // 成本中心编码
+	costCenterCodeFlag bool
+
+	i18nCostCenterName     []*I18nStruct // 成本中心名称多语言配置
+	i18nCostCenterNameFlag bool
+
 	responsibleUserUnionId     string // 负责人union id，详细说明参见[union id说明](https://open.feishu.cn/document/home/user-identity-introduction/union-id)
 	responsibleUserUnionIdFlag bool
-	coAreaCode                 string // 控制范围编码
-	coAreaCodeFlag             bool
+
+	coAreaCode     string // 控制范围编码
+	coAreaCodeFlag bool
+
+	companyCode     string // 公司编码
+	companyCodeFlag bool
 
 	profitCenterCode     string // 利润中心编码
 	profitCenterCodeFlag bool
-	businessArea         string // 业务范围
-	businessAreaFlag     bool
-	feeType              string // 费用类型
-	feeTypeFlag          bool
-	validTo              string // 有效期至（yyyy-MM-dd）
-	validToFlag          bool
-	costCenterName       string // 成本中心名称
-	costCenterNameFlag   bool
-	companyCodeList      []string // 公司编码列表
-	companyCodeListFlag  bool
+
+	businessArea     string // 业务范围
+	businessAreaFlag bool
+
+	feeType     string // 费用类型
+	feeTypeFlag bool
+
+	validTo     string // 有效期至（yyyy-MM-dd）
+	validToFlag bool
+
+	costCenterName     string // 成本中心名称
+	costCenterNameFlag bool
+
+	companyCodeList     []string // 公司编码列表
+	companyCodeListFlag bool
 }
 
 func NewCostCenterBuilder() *CostCenterBuilder {
@@ -902,6 +1003,15 @@ func (builder *CostCenterBuilder) ResponsibleUserUnionId(responsibleUserUnionId 
 func (builder *CostCenterBuilder) CoAreaCode(coAreaCode string) *CostCenterBuilder {
 	builder.coAreaCode = coAreaCode
 	builder.coAreaCodeFlag = true
+	return builder
+}
+
+// 公司编码
+//
+// 示例值：1001
+func (builder *CostCenterBuilder) CompanyCode(companyCode string) *CostCenterBuilder {
+	builder.companyCode = companyCode
+	builder.companyCodeFlag = true
 	return builder
 }
 
@@ -1009,23 +1119,31 @@ func (builder *CostCenterBuilder) Build() *CostCenter {
 
 type DepartmentCostCenterRelationship struct {
 	DepartmentCostCenterRelationshipUid *string `json:"department_cost_center_relationship_uid,omitempty"` // 部门成本中心关系唯一ID
-	CompanyCode                         *string `json:"company_code,omitempty"`                            // 公司编码
-	OpenDepartmentId                    *string `json:"open_department_id,omitempty"`                      // 部门open id，详细说明参见[部门 ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	CostCenterCode                      *string `json:"cost_center_code,omitempty"`                        // 成本中心代码
-	DepartmentId                        *string `json:"department_id,omitempty"`                           // 部门id，详细说明参见[部门 ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+
+	CompanyCode *string `json:"company_code,omitempty"` // 公司编码
+
+	OpenDepartmentId *string `json:"open_department_id,omitempty"` // 部门open id，详细说明参见[部门 ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+
+	CostCenterCode *string `json:"cost_center_code,omitempty"` // 成本中心代码
+
+	DepartmentId *string `json:"department_id,omitempty"` // 部门id，详细说明参见[部门 ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
 }
 
 type DepartmentCostCenterRelationshipBuilder struct {
 	departmentCostCenterRelationshipUid     string // 部门成本中心关系唯一ID
 	departmentCostCenterRelationshipUidFlag bool
-	companyCode                             string // 公司编码
-	companyCodeFlag                         bool
-	openDepartmentId                        string // 部门open id，详细说明参见[部门 ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	openDepartmentIdFlag                    bool
-	costCenterCode                          string // 成本中心代码
-	costCenterCodeFlag                      bool
-	departmentId                            string // 部门id，详细说明参见[部门 ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
-	departmentIdFlag                        bool
+
+	companyCode     string // 公司编码
+	companyCodeFlag bool
+
+	openDepartmentId     string // 部门open id，详细说明参见[部门 ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+	openDepartmentIdFlag bool
+
+	costCenterCode     string // 成本中心代码
+	costCenterCodeFlag bool
+
+	departmentId     string // 部门id，详细说明参见[部门 ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/contact-v3/department/field-overview#23857fe0)
+	departmentIdFlag bool
 }
 
 func NewDepartmentCostCenterRelationshipBuilder() *DepartmentCostCenterRelationshipBuilder {
@@ -1104,13 +1222,15 @@ func (builder *DepartmentCostCenterRelationshipBuilder) Build() *DepartmentCostC
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -1148,33 +1268,47 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type ExtendField struct {
-	FieldType  *int        `json:"field_type,omitempty"`  // 字段类型
-	FieldValue *string     `json:"field_value,omitempty"` // 字段类型为 单行文本框(0)、多行文本框(1)、单选框(3)、下拉单选框(5) 时的值
-	Options    []string    `json:"options,omitempty"`     // 字段类型为 多选框(4) 下拉多选(6) 时的值
-	Num        *float64    `json:"num,omitempty"`         // 字段类型为 数字(2) 时的值
-	Date       *string     `json:"date,omitempty"`        // 字段类型是 日期(7)时候的值
-	RangeDate  []string    `json:"range_date,omitempty"`  // 字段类型是 日期区间(8) 时候的值	数组长度为2	  0-startTime   1-endTime
-	FieldCode  *string     `json:"field_code,omitempty"`  // 字段编码
-	Appendix   []*Appendix `json:"appendix,omitempty"`    // 附件列表 字段类型是 附件(12) 时候的值
+	FieldType *int `json:"field_type,omitempty"` // 字段类型
+
+	FieldValue *string `json:"field_value,omitempty"` // 字段类型为 单行文本框(0)、多行文本框(1)、单选框(3)、下拉单选框(5) 时的值
+
+	Options []string `json:"options,omitempty"` // 字段类型为 多选框(4) 下拉多选(6) 时的值
+
+	Num *float64 `json:"num,omitempty"` // 字段类型为 数字(2) 时的值
+
+	Date *string `json:"date,omitempty"` // 字段类型是 日期(7)时候的值
+
+	RangeDate []string `json:"range_date,omitempty"` // 字段类型是 日期区间(8) 时候的值	数组长度为2	  0-startTime   1-endTime
+
+	FieldCode *string `json:"field_code,omitempty"` // 字段编码
+
+	Appendix []*Appendix `json:"appendix,omitempty"` // 附件列表 字段类型是 附件(12) 时候的值
 }
 
 type ExtendFieldBuilder struct {
-	fieldType      int // 字段类型
-	fieldTypeFlag  bool
+	fieldType     int // 字段类型
+	fieldTypeFlag bool
+
 	fieldValue     string // 字段类型为 单行文本框(0)、多行文本框(1)、单选框(3)、下拉单选框(5) 时的值
 	fieldValueFlag bool
-	options        []string // 字段类型为 多选框(4) 下拉多选(6) 时的值
-	optionsFlag    bool
-	num            float64 // 字段类型为 数字(2) 时的值
-	numFlag        bool
-	date           string // 字段类型是 日期(7)时候的值
-	dateFlag       bool
-	rangeDate      []string // 字段类型是 日期区间(8) 时候的值	数组长度为2	  0-startTime   1-endTime
-	rangeDateFlag  bool
-	fieldCode      string // 字段编码
-	fieldCodeFlag  bool
-	appendix       []*Appendix // 附件列表 字段类型是 附件(12) 时候的值
-	appendixFlag   bool
+
+	options     []string // 字段类型为 多选框(4) 下拉多选(6) 时的值
+	optionsFlag bool
+
+	num     float64 // 字段类型为 数字(2) 时的值
+	numFlag bool
+
+	date     string // 字段类型是 日期(7)时候的值
+	dateFlag bool
+
+	rangeDate     []string // 字段类型是 日期区间(8) 时候的值	数组长度为2	  0-startTime   1-endTime
+	rangeDateFlag bool
+
+	fieldCode     string // 字段编码
+	fieldCodeFlag bool
+
+	appendix     []*Appendix // 附件列表 字段类型是 附件(12) 时候的值
+	appendixFlag bool
 }
 
 func NewExtendFieldBuilder() *ExtendFieldBuilder {
@@ -1290,23 +1424,31 @@ func (builder *ExtendFieldBuilder) Build() *ExtendField {
 
 type FixedExchangeRate struct {
 	SourceCurrency *string `json:"source_currency,omitempty"` // 原始币种代码
+
 	TargetCurrency *string `json:"target_currency,omitempty"` // 目标币种代码
-	EffectiveDate  *string `json:"effective_date,omitempty"`  // 换算日期
-	ExchangeRate   *string `json:"exchange_rate,omitempty"`   // 汇率值，保留10位小数
-	Status         *int    `json:"status,omitempty"`          // 状态，枚举值：1_生效，0_失效
+
+	EffectiveDate *string `json:"effective_date,omitempty"` // 换算日期
+
+	ExchangeRate *string `json:"exchange_rate,omitempty"` // 汇率值，保留10位小数
+
+	Status *int `json:"status,omitempty"` // 状态，枚举值：1_生效，0_失效
 }
 
 type FixedExchangeRateBuilder struct {
 	sourceCurrency     string // 原始币种代码
 	sourceCurrencyFlag bool
+
 	targetCurrency     string // 目标币种代码
 	targetCurrencyFlag bool
-	effectiveDate      string // 换算日期
-	effectiveDateFlag  bool
-	exchangeRate       string // 汇率值，保留10位小数
-	exchangeRateFlag   bool
-	status             int // 状态，枚举值：1_生效，0_失效
-	statusFlag         bool
+
+	effectiveDate     string // 换算日期
+	effectiveDateFlag bool
+
+	exchangeRate     string // 汇率值，保留10位小数
+	exchangeRateFlag bool
+
+	status     int // 状态，枚举值：1_生效，0_失效
+	statusFlag bool
 }
 
 func NewFixedExchangeRateBuilder() *FixedExchangeRateBuilder {
@@ -1385,27 +1527,37 @@ func (builder *FixedExchangeRateBuilder) Build() *FixedExchangeRate {
 }
 
 type GlAccount struct {
-	GlAccountUid      *string       `json:"gl_account_uid,omitempty"`       // 会计科目唯一ID
-	GlAccount         *string       `json:"gl_account,omitempty"`           // 会计科目编码
-	GlAccountName     *string       `json:"gl_account_name,omitempty"`      // 会计科目名称
+	GlAccountUid *string `json:"gl_account_uid,omitempty"` // 会计科目唯一ID
+
+	GlAccount *string `json:"gl_account,omitempty"` // 会计科目编码
+
+	GlAccountName *string `json:"gl_account_name,omitempty"` // 会计科目名称
+
 	I18nGlAccountName []*I18nStruct `json:"i18n_gl_account_name,omitempty"` // 会计科目名称多语言
-	Type              *string       `json:"type,omitempty"`                 // 会计科目类型
-	ValidTo           *string       `json:"valid_to,omitempty"`             // 有效期至，格式：yyyy-MM-dd
+
+	Type *string `json:"type,omitempty"` // 会计科目类型
+
+	ValidTo *string `json:"valid_to,omitempty"` // 有效期至，格式：yyyy-MM-dd
 }
 
 type GlAccountBuilder struct {
-	glAccountUid          string // 会计科目唯一ID
-	glAccountUidFlag      bool
-	glAccount             string // 会计科目编码
-	glAccountFlag         bool
-	glAccountName         string // 会计科目名称
-	glAccountNameFlag     bool
+	glAccountUid     string // 会计科目唯一ID
+	glAccountUidFlag bool
+
+	glAccount     string // 会计科目编码
+	glAccountFlag bool
+
+	glAccountName     string // 会计科目名称
+	glAccountNameFlag bool
+
 	i18nGlAccountName     []*I18nStruct // 会计科目名称多语言
 	i18nGlAccountNameFlag bool
-	type_                 string // 会计科目类型
-	typeFlag              bool
-	validTo               string // 有效期至，格式：yyyy-MM-dd
-	validToFlag           bool
+
+	type_    string // 会计科目类型
+	typeFlag bool
+
+	validTo     string // 有效期至，格式：yyyy-MM-dd
+	validToFlag bool
 }
 
 func NewGlAccountBuilder() *GlAccountBuilder {
@@ -1496,21 +1648,27 @@ func (builder *GlAccountBuilder) Build() *GlAccount {
 }
 
 type GlAccountCompanyRelationship struct {
-	GlAccountCode                   *string `json:"gl_account_code,omitempty"`                     // 会计科目编码
-	CompanyCode                     *string `json:"company_code,omitempty"`                        // 公司编码
+	GlAccountCode *string `json:"gl_account_code,omitempty"` // 会计科目编码
+
+	CompanyCode *string `json:"company_code,omitempty"` // 公司编码
+
 	GlAccountCompanyRelationshipUid *string `json:"gl_account_company_relationship_uid,omitempty"` // 会计科目公司关系唯一ID
-	ValidTo                         *string `json:"valid_to,omitempty"`                            // 有效期至，格式：yyyy-MM-dd
+
+	ValidTo *string `json:"valid_to,omitempty"` // 有效期至，格式：yyyy-MM-dd
 }
 
 type GlAccountCompanyRelationshipBuilder struct {
-	glAccountCode                       string // 会计科目编码
-	glAccountCodeFlag                   bool
-	companyCode                         string // 公司编码
-	companyCodeFlag                     bool
+	glAccountCode     string // 会计科目编码
+	glAccountCodeFlag bool
+
+	companyCode     string // 公司编码
+	companyCodeFlag bool
+
 	glAccountCompanyRelationshipUid     string // 会计科目公司关系唯一ID
 	glAccountCompanyRelationshipUidFlag bool
-	validTo                             string // 有效期至，格式：yyyy-MM-dd
-	validToFlag                         bool
+
+	validTo     string // 有效期至，格式：yyyy-MM-dd
+	validToFlag bool
 }
 
 func NewGlAccountCompanyRelationshipBuilder() *GlAccountCompanyRelationshipBuilder {
@@ -1577,17 +1735,21 @@ func (builder *GlAccountCompanyRelationshipBuilder) Build() *GlAccountCompanyRel
 
 type I18nStruct struct {
 	LangLocale *string `json:"lang_locale,omitempty"` // 语言编码
-	Value      *string `json:"value,omitempty"`       // 描述
-	ValidTo    *string `json:"valid_to,omitempty"`    // 有效期至，格式：yyyy-MM-dd
+
+	Value *string `json:"value,omitempty"` // 描述
+
+	ValidTo *string `json:"valid_to,omitempty"` // 有效期至，格式：yyyy-MM-dd
 }
 
 type I18nStructBuilder struct {
 	langLocale     string // 语言编码
 	langLocaleFlag bool
-	value          string // 描述
-	valueFlag      bool
-	validTo        string // 有效期至，格式：yyyy-MM-dd
-	validToFlag    bool
+
+	value     string // 描述
+	valueFlag bool
+
+	validTo     string // 有效期至，格式：yyyy-MM-dd
+	validToFlag bool
 }
 
 func NewI18nStructBuilder() *I18nStructBuilder {
@@ -1640,30 +1802,42 @@ func (builder *I18nStructBuilder) Build() *I18nStruct {
 }
 
 type InternalOrder struct {
-	InternalOrderUid       *string `json:"internal_order_uid,omitempty"`        // 内部订单唯一ID
-	InternalOrderCode      *string `json:"internal_order_code,omitempty"`       // 内部订单编码
-	InternalOrderName      *string `json:"internal_order_name,omitempty"`       // 内部订单名称
-	Type                   *string `json:"type,omitempty"`                      // 内部订单类型
+	InternalOrderUid *string `json:"internal_order_uid,omitempty"` // 内部订单唯一ID
+
+	InternalOrderCode *string `json:"internal_order_code,omitempty"` // 内部订单编码
+
+	InternalOrderName *string `json:"internal_order_name,omitempty"` // 内部订单名称
+
+	Type *string `json:"type,omitempty"` // 内部订单类型
+
 	ResponsibleUserUnionId *string `json:"responsible_user_union_id,omitempty"` // 负责人union id，详细说明参见[union id说明](https://open.feishu.cn/document/home/user-identity-introduction/union-id)
-	CompanyCode            *string `json:"company_code,omitempty"`              // 关联公司唯一ID
-	CoAreaCode             *string `json:"co_area_code,omitempty"`              // 控制范围编码
+
+	CompanyCode *string `json:"company_code,omitempty"` // 关联公司唯一ID
+
+	CoAreaCode *string `json:"co_area_code,omitempty"` // 控制范围编码
 }
 
 type InternalOrderBuilder struct {
-	internalOrderUid           string // 内部订单唯一ID
-	internalOrderUidFlag       bool
-	internalOrderCode          string // 内部订单编码
-	internalOrderCodeFlag      bool
-	internalOrderName          string // 内部订单名称
-	internalOrderNameFlag      bool
-	type_                      string // 内部订单类型
-	typeFlag                   bool
+	internalOrderUid     string // 内部订单唯一ID
+	internalOrderUidFlag bool
+
+	internalOrderCode     string // 内部订单编码
+	internalOrderCodeFlag bool
+
+	internalOrderName     string // 内部订单名称
+	internalOrderNameFlag bool
+
+	type_    string // 内部订单类型
+	typeFlag bool
+
 	responsibleUserUnionId     string // 负责人union id，详细说明参见[union id说明](https://open.feishu.cn/document/home/user-identity-introduction/union-id)
 	responsibleUserUnionIdFlag bool
-	companyCode                string // 关联公司唯一ID
-	companyCodeFlag            bool
-	coAreaCode                 string // 控制范围编码
-	coAreaCodeFlag             bool
+
+	companyCode     string // 关联公司唯一ID
+	companyCodeFlag bool
+
+	coAreaCode     string // 控制范围编码
+	coAreaCodeFlag bool
 }
 
 func NewInternalOrderBuilder() *InternalOrderBuilder {
@@ -1768,69 +1942,107 @@ func (builder *InternalOrderBuilder) Build() *InternalOrder {
 }
 
 type LegalEntity struct {
-	Id                *string            `json:"id,omitempty"`                 // 法人实体id
-	LegalEntity       *string            `json:"legal_entity,omitempty"`       // 法人实体编码(根据配置会有不同的生成规则)
-	LegalEntityText   *string            `json:"legal_entity_text,omitempty"`  // 法人实体名称
-	ShortText         *string            `json:"short_text,omitempty"`         // 法人实体英文名称
-	CertificationType *string            `json:"certification_type,omitempty"` // 证件类型
-	CertificationId   *string            `json:"certification_id,omitempty"`   // 证件id
-	LegalPerson       *string            `json:"legal_person,omitempty"`       // 法人
-	Country           *string            `json:"country,omitempty"`            // 国家
-	Province          *string            `json:"province,omitempty"`           // 省份
-	City              *string            `json:"city,omitempty"`               // 城市
-	Address           *string            `json:"address,omitempty"`            // 地址
-	TaxpayerType      *string            `json:"taxpayer_type,omitempty"`      // 纳税人类型
-	Telephone         *string            `json:"telephone,omitempty"`          // 联系电话
-	BankId            *string            `json:"bank_id,omitempty"`            // 银行内部Id
-	BankName          *string            `json:"bank_name,omitempty"`          // 开户银行名称
-	BankAccount       *string            `json:"bank_account,omitempty"`       // 开户行账号
-	Status            *int               `json:"status,omitempty"`             // 状态
-	LegalEntityBanks  []*LegalEntityBank `json:"legal_entity_banks,omitempty"` // 银行账户列表
-	ExtendInfo        []*ExtendField     `json:"extend_info,omitempty"`        // 扩展字段相关信息列表
-	Appendix          []*Appendix        `json:"appendix,omitempty"`           // 附件列表
+	Id *string `json:"id,omitempty"` // 法人实体id
+
+	LegalEntity *string `json:"legal_entity,omitempty"` // 法人实体编码(根据配置会有不同的生成规则)
+
+	LegalEntityText *string `json:"legal_entity_text,omitempty"` // 法人实体名称
+
+	ShortText *string `json:"short_text,omitempty"` // 法人实体英文名称
+
+	CertificationType *string `json:"certification_type,omitempty"` // 证件类型
+
+	CertificationId *string `json:"certification_id,omitempty"` // 证件id
+
+	LegalPerson *string `json:"legal_person,omitempty"` // 法人
+
+	Country *string `json:"country,omitempty"` // 国家
+
+	Province *string `json:"province,omitempty"` // 省份
+
+	City *string `json:"city,omitempty"` // 城市
+
+	Address *string `json:"address,omitempty"` // 地址
+
+	TaxpayerType *string `json:"taxpayer_type,omitempty"` // 纳税人类型
+
+	Telephone *string `json:"telephone,omitempty"` // 联系电话
+
+	BankId *string `json:"bank_id,omitempty"` // 银行内部Id
+
+	BankName *string `json:"bank_name,omitempty"` // 开户银行名称
+
+	BankAccount *string `json:"bank_account,omitempty"` // 开户行账号
+
+	Status *int `json:"status,omitempty"` // 状态
+
+	LegalEntityBanks []*LegalEntityBank `json:"legal_entity_banks,omitempty"` // 银行账户列表
+
+	ExtendInfo []*ExtendField `json:"extend_info,omitempty"` // 扩展字段相关信息列表
+
+	Appendix []*Appendix `json:"appendix,omitempty"` // 附件列表
 }
 
 type LegalEntityBuilder struct {
-	id                    string // 法人实体id
-	idFlag                bool
-	legalEntity           string // 法人实体编码(根据配置会有不同的生成规则)
-	legalEntityFlag       bool
-	legalEntityText       string // 法人实体名称
-	legalEntityTextFlag   bool
-	shortText             string // 法人实体英文名称
-	shortTextFlag         bool
+	id     string // 法人实体id
+	idFlag bool
+
+	legalEntity     string // 法人实体编码(根据配置会有不同的生成规则)
+	legalEntityFlag bool
+
+	legalEntityText     string // 法人实体名称
+	legalEntityTextFlag bool
+
+	shortText     string // 法人实体英文名称
+	shortTextFlag bool
+
 	certificationType     string // 证件类型
 	certificationTypeFlag bool
-	certificationId       string // 证件id
-	certificationIdFlag   bool
-	legalPerson           string // 法人
-	legalPersonFlag       bool
-	country               string // 国家
-	countryFlag           bool
-	province              string // 省份
-	provinceFlag          bool
-	city                  string // 城市
-	cityFlag              bool
-	address               string // 地址
-	addressFlag           bool
-	taxpayerType          string // 纳税人类型
-	taxpayerTypeFlag      bool
-	telephone             string // 联系电话
-	telephoneFlag         bool
-	bankId                string // 银行内部Id
-	bankIdFlag            bool
-	bankName              string // 开户银行名称
-	bankNameFlag          bool
-	bankAccount           string // 开户行账号
-	bankAccountFlag       bool
-	status                int // 状态
-	statusFlag            bool
-	legalEntityBanks      []*LegalEntityBank // 银行账户列表
-	legalEntityBanksFlag  bool
-	extendInfo            []*ExtendField // 扩展字段相关信息列表
-	extendInfoFlag        bool
-	appendix              []*Appendix // 附件列表
-	appendixFlag          bool
+
+	certificationId     string // 证件id
+	certificationIdFlag bool
+
+	legalPerson     string // 法人
+	legalPersonFlag bool
+
+	country     string // 国家
+	countryFlag bool
+
+	province     string // 省份
+	provinceFlag bool
+
+	city     string // 城市
+	cityFlag bool
+
+	address     string // 地址
+	addressFlag bool
+
+	taxpayerType     string // 纳税人类型
+	taxpayerTypeFlag bool
+
+	telephone     string // 联系电话
+	telephoneFlag bool
+
+	bankId     string // 银行内部Id
+	bankIdFlag bool
+
+	bankName     string // 开户银行名称
+	bankNameFlag bool
+
+	bankAccount     string // 开户行账号
+	bankAccountFlag bool
+
+	status     int // 状态
+	statusFlag bool
+
+	legalEntityBanks     []*LegalEntityBank // 银行账户列表
+	legalEntityBanksFlag bool
+
+	extendInfo     []*ExtendField // 扩展字段相关信息列表
+	extendInfoFlag bool
+
+	appendix     []*Appendix // 附件列表
+	appendixFlag bool
 }
 
 func NewLegalEntityBuilder() *LegalEntityBuilder {
@@ -2101,58 +2313,90 @@ func (builder *LegalEntityBuilder) Build() *LegalEntity {
 }
 
 type LegalEntityBank struct {
-	Id                   *string        `json:"id,omitempty"`                     // 法人实体银行账户id
-	CompanyCode          *string        `json:"company_code,omitempty"`           // 公司编码
-	BankId               *string        `json:"bank_id,omitempty"`                // 银行Id
-	BankCode             *string        `json:"bank_code,omitempty"`              // 银联号
-	BankName             *string        `json:"bank_name,omitempty"`              // 银行名称
-	BankAcronym          *string        `json:"bank_acronym,omitempty"`           // 总行英文缩写
-	Country              *string        `json:"country,omitempty"`                // 国家
-	AccountName          *string        `json:"account_name,omitempty"`           // 账户名称
-	BankAccount          *string        `json:"bank_account,omitempty"`           // 银行账号
-	SwiftCode            *string        `json:"swift_code,omitempty"`             // 银行SWIFT编码
-	BankControlCode      *string        `json:"bank_control_code,omitempty"`      // 银行控制码
-	ExtendInfo           []*ExtendField `json:"extend_info,omitempty"`            // 扩展字段相关信息列表
-	IbanAccount          *string        `json:"iban_account,omitempty"`           // IBAN账号
-	Currency             *string        `json:"currency,omitempty"`               // 币种
-	GlAccount            *string        `json:"gl_account,omitempty"`             // 总账科目编码
-	ClearingAccount      *string        `json:"clearing_account,omitempty"`       // 清算科目编码
-	AccountAttributeDesc *string        `json:"account_attribute_desc,omitempty"` // 账户属性描述
+	Id *string `json:"id,omitempty"` // 法人实体银行账户id
+
+	CompanyCode *string `json:"company_code,omitempty"` // 公司编码
+
+	BankId *string `json:"bank_id,omitempty"` // 银行Id
+
+	BankCode *string `json:"bank_code,omitempty"` // 银联号
+
+	BankName *string `json:"bank_name,omitempty"` // 银行名称
+
+	BankAcronym *string `json:"bank_acronym,omitempty"` // 总行英文缩写
+
+	Country *string `json:"country,omitempty"` // 国家
+
+	AccountName *string `json:"account_name,omitempty"` // 账户名称
+
+	BankAccount *string `json:"bank_account,omitempty"` // 银行账号
+
+	SwiftCode *string `json:"swift_code,omitempty"` // 银行SWIFT编码
+
+	BankControlCode *string `json:"bank_control_code,omitempty"` // 银行控制码
+
+	ExtendInfo []*ExtendField `json:"extend_info,omitempty"` // 扩展字段相关信息列表
+
+	IbanAccount *string `json:"iban_account,omitempty"` // IBAN账号
+
+	Currency *string `json:"currency,omitempty"` // 币种
+
+	GlAccount *string `json:"gl_account,omitempty"` // 总账科目编码
+
+	ClearingAccount *string `json:"clearing_account,omitempty"` // 清算科目编码
+
+	AccountAttributeDesc *string `json:"account_attribute_desc,omitempty"` // 账户属性描述
 }
 
 type LegalEntityBankBuilder struct {
-	id                       string // 法人实体银行账户id
-	idFlag                   bool
-	companyCode              string // 公司编码
-	companyCodeFlag          bool
-	bankId                   string // 银行Id
-	bankIdFlag               bool
-	bankCode                 string // 银联号
-	bankCodeFlag             bool
-	bankName                 string // 银行名称
-	bankNameFlag             bool
-	bankAcronym              string // 总行英文缩写
-	bankAcronymFlag          bool
-	country                  string // 国家
-	countryFlag              bool
-	accountName              string // 账户名称
-	accountNameFlag          bool
-	bankAccount              string // 银行账号
-	bankAccountFlag          bool
-	swiftCode                string // 银行SWIFT编码
-	swiftCodeFlag            bool
-	bankControlCode          string // 银行控制码
-	bankControlCodeFlag      bool
-	extendInfo               []*ExtendField // 扩展字段相关信息列表
-	extendInfoFlag           bool
-	ibanAccount              string // IBAN账号
-	ibanAccountFlag          bool
-	currency                 string // 币种
-	currencyFlag             bool
-	glAccount                string // 总账科目编码
-	glAccountFlag            bool
-	clearingAccount          string // 清算科目编码
-	clearingAccountFlag      bool
+	id     string // 法人实体银行账户id
+	idFlag bool
+
+	companyCode     string // 公司编码
+	companyCodeFlag bool
+
+	bankId     string // 银行Id
+	bankIdFlag bool
+
+	bankCode     string // 银联号
+	bankCodeFlag bool
+
+	bankName     string // 银行名称
+	bankNameFlag bool
+
+	bankAcronym     string // 总行英文缩写
+	bankAcronymFlag bool
+
+	country     string // 国家
+	countryFlag bool
+
+	accountName     string // 账户名称
+	accountNameFlag bool
+
+	bankAccount     string // 银行账号
+	bankAccountFlag bool
+
+	swiftCode     string // 银行SWIFT编码
+	swiftCodeFlag bool
+
+	bankControlCode     string // 银行控制码
+	bankControlCodeFlag bool
+
+	extendInfo     []*ExtendField // 扩展字段相关信息列表
+	extendInfoFlag bool
+
+	ibanAccount     string // IBAN账号
+	ibanAccountFlag bool
+
+	currency     string // 币种
+	currencyFlag bool
+
+	glAccount     string // 总账科目编码
+	glAccountFlag bool
+
+	clearingAccount     string // 清算科目编码
+	clearingAccountFlag bool
+
 	accountAttributeDesc     string // 账户属性描述
 	accountAttributeDescFlag bool
 }
@@ -2389,14 +2633,16 @@ func (builder *LegalEntityBankBuilder) Build() *LegalEntityBank {
 
 type MultiLanguage struct {
 	Language *string `json:"language,omitempty"` // 语言枚举
-	Value    *string `json:"value,omitempty"`    // 语言对应的value
+
+	Value *string `json:"value,omitempty"` // 语言对应的value
 }
 
 type MultiLanguageBuilder struct {
 	language     string // 语言枚举
 	languageFlag bool
-	value        string // 语言对应的value
-	valueFlag    bool
+
+	value     string // 语言对应的value
+	valueFlag bool
 }
 
 func NewMultiLanguageBuilder() *MultiLanguageBuilder {
@@ -2468,54 +2714,82 @@ func (builder *OpenApiUpdateVendorBuilder) Build() *OpenApiUpdateVendor {
 }
 
 type Project struct {
-	ProjectUid                 *string                      `json:"project_uid,omitempty"`                   // 项目唯一id
-	Code                       *string                      `json:"code,omitempty"`                          // 项目编码
-	Name                       *string                      `json:"name,omitempty"`                          // 项目名称
-	Type                       *string                      `json:"type,omitempty"`                          // 项目类型名称
-	ResponsibleUserUnionId     *string                      `json:"responsible_user_union_id,omitempty"`     // 负责人id
-	StartDay                   *string                      `json:"start_day,omitempty"`                     // 项目开始日期(yyyy-MM-dd)
-	EndDay                     *string                      `json:"end_day,omitempty"`                       // 项目截止日期(yyyy-MM-dd)
-	ParentCode                 *string                      `json:"parent_code,omitempty"`                   // 父项目节点
-	Level                      *int                         `json:"level,omitempty"`                         // 项目层级
-	LevelInfo                  *string                      `json:"level_info,omitempty"`                    // 项目层级详情
-	Status                     *int                         `json:"status,omitempty"`                        // 项目状态
-	ExtendInfo                 []*ExtendField               `json:"extend_info,omitempty"`                   // 扩展字段值信息
-	IsAllCompany               *bool                        `json:"is_all_company,omitempty"`                // 是否全部公司
+	ProjectUid *string `json:"project_uid,omitempty"` // 项目唯一id
+
+	Code *string `json:"code,omitempty"` // 项目编码
+
+	Name *string `json:"name,omitempty"` // 项目名称
+
+	Type *string `json:"type,omitempty"` // 项目类型名称
+
+	ResponsibleUserUnionId *string `json:"responsible_user_union_id,omitempty"` // 负责人id
+
+	StartDay *string `json:"start_day,omitempty"` // 项目开始日期(yyyy-MM-dd)
+
+	EndDay *string `json:"end_day,omitempty"` // 项目截止日期(yyyy-MM-dd)
+
+	ParentCode *string `json:"parent_code,omitempty"` // 父项目节点
+
+	Level *int `json:"level,omitempty"` // 项目层级
+
+	LevelInfo *string `json:"level_info,omitempty"` // 项目层级详情
+
+	Status *int `json:"status,omitempty"` // 项目状态
+
+	ExtendInfo []*ExtendField `json:"extend_info,omitempty"` // 扩展字段值信息
+
+	IsAllCompany *bool `json:"is_all_company,omitempty"` // 是否全部公司
+
 	ProjectCompanyDeptMappings []*ProjectCompanyDeptMapping `json:"project_company_dept_mappings,omitempty"` // 项目公司部门关系列表
-	MultiLanguageName          []*MultiLanguage             `json:"multi_language_name,omitempty"`           // 名称多语言
+
+	MultiLanguageName []*MultiLanguage `json:"multi_language_name,omitempty"` // 名称多语言
 }
 
 type ProjectBuilder struct {
-	projectUid                     string // 项目唯一id
-	projectUidFlag                 bool
-	code                           string // 项目编码
-	codeFlag                       bool
-	name                           string // 项目名称
-	nameFlag                       bool
-	type_                          string // 项目类型名称
-	typeFlag                       bool
-	responsibleUserUnionId         string // 负责人id
-	responsibleUserUnionIdFlag     bool
-	startDay                       string // 项目开始日期(yyyy-MM-dd)
-	startDayFlag                   bool
-	endDay                         string // 项目截止日期(yyyy-MM-dd)
-	endDayFlag                     bool
-	parentCode                     string // 父项目节点
-	parentCodeFlag                 bool
-	level                          int // 项目层级
-	levelFlag                      bool
-	levelInfo                      string // 项目层级详情
-	levelInfoFlag                  bool
-	status                         int // 项目状态
-	statusFlag                     bool
-	extendInfo                     []*ExtendField // 扩展字段值信息
-	extendInfoFlag                 bool
-	isAllCompany                   bool // 是否全部公司
-	isAllCompanyFlag               bool
+	projectUid     string // 项目唯一id
+	projectUidFlag bool
+
+	code     string // 项目编码
+	codeFlag bool
+
+	name     string // 项目名称
+	nameFlag bool
+
+	type_    string // 项目类型名称
+	typeFlag bool
+
+	responsibleUserUnionId     string // 负责人id
+	responsibleUserUnionIdFlag bool
+
+	startDay     string // 项目开始日期(yyyy-MM-dd)
+	startDayFlag bool
+
+	endDay     string // 项目截止日期(yyyy-MM-dd)
+	endDayFlag bool
+
+	parentCode     string // 父项目节点
+	parentCodeFlag bool
+
+	level     int // 项目层级
+	levelFlag bool
+
+	levelInfo     string // 项目层级详情
+	levelInfoFlag bool
+
+	status     int // 项目状态
+	statusFlag bool
+
+	extendInfo     []*ExtendField // 扩展字段值信息
+	extendInfoFlag bool
+
+	isAllCompany     bool // 是否全部公司
+	isAllCompanyFlag bool
+
 	projectCompanyDeptMappings     []*ProjectCompanyDeptMapping // 项目公司部门关系列表
 	projectCompanyDeptMappingsFlag bool
-	multiLanguageName              []*MultiLanguage // 名称多语言
-	multiLanguageNameFlag          bool
+
+	multiLanguageName     []*MultiLanguage // 名称多语言
+	multiLanguageNameFlag bool
 }
 
 func NewProjectBuilder() *ProjectBuilder {
@@ -2721,19 +2995,25 @@ func (builder *ProjectBuilder) Build() *Project {
 }
 
 type ProjectCompanyDeptMapping struct {
-	ProjectUnionId    *string `json:"project_union_id,omitempty"`    // 项目unionId
-	CompanyUnionId    *string `json:"company_union_id,omitempty"`    // 公司unionId
-	IsAllDepartment   *bool   `json:"is_all_department,omitempty"`   // 是否全部部门
+	ProjectUnionId *string `json:"project_union_id,omitempty"` // 项目unionId
+
+	CompanyUnionId *string `json:"company_union_id,omitempty"` // 公司unionId
+
+	IsAllDepartment *bool `json:"is_all_department,omitempty"` // 是否全部部门
+
 	DepartmentUnionId *string `json:"department_union_id,omitempty"` // 部门unionId
 }
 
 type ProjectCompanyDeptMappingBuilder struct {
-	projectUnionId        string // 项目unionId
-	projectUnionIdFlag    bool
-	companyUnionId        string // 公司unionId
-	companyUnionIdFlag    bool
-	isAllDepartment       bool // 是否全部部门
-	isAllDepartmentFlag   bool
+	projectUnionId     string // 项目unionId
+	projectUnionIdFlag bool
+
+	companyUnionId     string // 公司unionId
+	companyUnionIdFlag bool
+
+	isAllDepartment     bool // 是否全部部门
+	isAllDepartmentFlag bool
+
 	departmentUnionId     string // 部门unionId
 	departmentUnionIdFlag bool
 }
@@ -2801,21 +3081,27 @@ func (builder *ProjectCompanyDeptMappingBuilder) Build() *ProjectCompanyDeptMapp
 }
 
 type UserAuthDataRelation struct {
-	RootDimensionType *string  `json:"root_dimension_type,omitempty"` // 数据类型编码
+	RootDimensionType *string `json:"root_dimension_type,omitempty"` // 数据类型编码
+
 	SubDimensionTypes []string `json:"sub_dimension_types,omitempty"` // 数据编码列表
+
 	AuthorizedUserIds []string `json:"authorized_user_ids,omitempty"` // 授权人的lark id
-	UamsAppId         *string  `json:"uams_app_id,omitempty"`         // uams系统中应用id
+
+	UamsAppId *string `json:"uams_app_id,omitempty"` // uams系统中应用id
 }
 
 type UserAuthDataRelationBuilder struct {
 	rootDimensionType     string // 数据类型编码
 	rootDimensionTypeFlag bool
+
 	subDimensionTypes     []string // 数据编码列表
 	subDimensionTypesFlag bool
+
 	authorizedUserIds     []string // 授权人的lark id
 	authorizedUserIdsFlag bool
-	uamsAppId             string // uams系统中应用id
-	uamsAppIdFlag         bool
+
+	uamsAppId     string // uams系统中应用id
+	uamsAppIdFlag bool
 }
 
 func NewUserAuthDataRelationBuilder() *UserAuthDataRelationBuilder {
@@ -2879,117 +3165,187 @@ func (builder *UserAuthDataRelationBuilder) Build() *UserAuthDataRelation {
 }
 
 type Vendor struct {
-	Id                        *string              `json:"id,omitempty"`                           // 交易方id，创建交易方时不填，修改交易方时必填
-	AdCountry                 *string              `json:"ad_country,omitempty"`                   // 交易方注册国家
-	AdProvince                *string              `json:"ad_province,omitempty"`                  // 交易方注册省份
-	AdCity                    *string              `json:"ad_city,omitempty"`                      // 交易方注册城市
-	Address                   *string              `json:"address,omitempty"`                      // 详细地址
-	AdPostcode                *string              `json:"ad_postcode,omitempty"`                  // 交易方注册地址邮编
-	LegalPerson               *string              `json:"legal_person,omitempty"`                 // 法人名称
-	CertificationType         *string              `json:"certification_type,omitempty"`           // 证件类型
-	CertificationId           *string              `json:"certification_id,omitempty"`             // 证件ID
-	ContactPerson             *string              `json:"contact_person,omitempty"`               // 联系人
-	ContactTelephone          *string              `json:"contact_telephone,omitempty"`            // 联系电话
-	ContactMobilePhone        *string              `json:"contact_mobile_phone,omitempty"`         // 联系移动电话
-	Fax                       *string              `json:"fax,omitempty"`                          // 传真
-	EMail                     *string              `json:"e_mail,omitempty"`                       // 邮箱
-	Status                    *int                 `json:"status,omitempty"`                       // 状态
-	Vendor                    *string              `json:"vendor,omitempty"`                       // 交易方编码
-	VendorText                *string              `json:"vendor_text,omitempty"`                  // 交易方名称
-	ShortText                 *string              `json:"short_text,omitempty"`                   // 交易方简称
-	VendorType                *string              `json:"vendor_type,omitempty"`                  // 交易方类型（多个枚举时，采用逗号分隔）
-	VendorCategory            *string              `json:"vendor_category,omitempty"`              // 交易方类别
-	VendorNature              *string              `json:"vendor_nature,omitempty"`                // 交易方性质
-	LinkedEmployee            *string              `json:"linked_employee,omitempty"`              // 关联员工
-	LinkedCustomer            *string              `json:"linked_customer,omitempty"`              // 关联客户
-	AssociatedWithLegalEntity *bool                `json:"associated_with_legal_entity,omitempty"` // 是否关联法人主体
-	ExtendInfo                []*ExtendField       `json:"extend_info,omitempty"`                  // 扩展字段相关信息列表,每个扩展字段需要填入【field_code】、【field_type】、【field_value】三个信息，其中【field_code】和【field_type】需要与用户【字段配置】(获取配置字段的开放平台接口：https://open.feishu.cn/open-apis/mdm/v1/config/config_list)中扩展字段（sys = 1）相关联（目前不支持附件类型的扩展信息）
-	VendorAccounts            []*VendorAccount     `json:"vendor_accounts,omitempty"`              // 银行账户列表
-	VendorAddresses           []*VendorAddress     `json:"vendor_addresses,omitempty"`             // 地址列表
-	VendorCompanyViews        []*VendorCompanyView `json:"vendor_company_views,omitempty"`         // 公司视图列表
-	VendorContacts            []*VendorContact     `json:"vendor_contacts,omitempty"`              // 联系人列表
-	GlAccount                 *string              `json:"gl_account,omitempty"`                   // 总账科目
-	DownPaymentTerm           *string              `json:"down_payment_term,omitempty"`            // 预付条件
-	PaymentTerm               *string              `json:"payment_term,omitempty"`                 // 付款条件
-	VendorSiteCode            *string              `json:"vendor_site_code,omitempty"`             // 交易方site code
-	Appendix                  []*Appendix          `json:"appendix,omitempty"`                     // 附件列表
-	IsRisked                  *bool                `json:"is_risked,omitempty"`                    // 是否标记风险
-	OwnerDepts                []string             `json:"owner_depts,omitempty"`                  // 所属部门
+	Id *string `json:"id,omitempty"` // 交易方id，创建交易方时不填，修改交易方时必填
+
+	AdCountry *string `json:"ad_country,omitempty"` // 交易方注册国家
+
+	AdProvince *string `json:"ad_province,omitempty"` // 交易方注册省份
+
+	AdCity *string `json:"ad_city,omitempty"` // 交易方注册城市
+
+	Address *string `json:"address,omitempty"` // 详细地址
+
+	AdPostcode *string `json:"ad_postcode,omitempty"` // 交易方注册地址邮编
+
+	LegalPerson *string `json:"legal_person,omitempty"` // 法人名称
+
+	CertificationType *string `json:"certification_type,omitempty"` // 证件类型
+
+	CertificationId *string `json:"certification_id,omitempty"` // 证件ID
+
+	ContactPerson *string `json:"contact_person,omitempty"` // 联系人
+
+	ContactTelephone *string `json:"contact_telephone,omitempty"` // 联系电话
+
+	ContactMobilePhone *string `json:"contact_mobile_phone,omitempty"` // 联系移动电话
+
+	Fax *string `json:"fax,omitempty"` // 传真
+
+	EMail *string `json:"e_mail,omitempty"` // 邮箱
+
+	Status *int `json:"status,omitempty"` // 状态
+
+	Vendor *string `json:"vendor,omitempty"` // 交易方编码
+
+	VendorText *string `json:"vendor_text,omitempty"` // 交易方名称
+
+	ShortText *string `json:"short_text,omitempty"` // 交易方简称
+
+	VendorType *string `json:"vendor_type,omitempty"` // 交易方类型（多个枚举时，采用逗号分隔）
+
+	VendorCategory *string `json:"vendor_category,omitempty"` // 交易方类别
+
+	VendorNature *string `json:"vendor_nature,omitempty"` // 交易方性质
+
+	LinkedEmployee *string `json:"linked_employee,omitempty"` // 关联员工
+
+	LinkedCustomer *string `json:"linked_customer,omitempty"` // 关联客户
+
+	AssociatedWithLegalEntity *bool `json:"associated_with_legal_entity,omitempty"` // 是否关联法人主体
+
+	ExtendInfo []*ExtendField `json:"extend_info,omitempty"` // 扩展字段相关信息列表,每个扩展字段需要填入【field_code】、【field_type】、【field_value】三个信息，其中【field_code】和【field_type】需要与用户【字段配置】(获取配置字段的开放平台接口：https://open.feishu.cn/open-apis/mdm/v1/config/config_list)中扩展字段（sys = 1）相关联（目前不支持附件类型的扩展信息）
+
+	VendorAccounts []*VendorAccount `json:"vendor_accounts,omitempty"` // 银行账户列表
+
+	VendorAddresses []*VendorAddress `json:"vendor_addresses,omitempty"` // 地址列表
+
+	VendorCompanyViews []*VendorCompanyView `json:"vendor_company_views,omitempty"` // 公司视图列表
+
+	VendorContacts []*VendorContact `json:"vendor_contacts,omitempty"` // 联系人列表
+
+	GlAccount *string `json:"gl_account,omitempty"` // 总账科目
+
+	DownPaymentTerm *string `json:"down_payment_term,omitempty"` // 预付条件
+
+	PaymentTerm *string `json:"payment_term,omitempty"` // 付款条件
+
+	VendorSiteCode *string `json:"vendor_site_code,omitempty"` // 交易方site code
+
+	Appendix []*Appendix `json:"appendix,omitempty"` // 附件列表
+
+	IsRisked *bool `json:"is_risked,omitempty"` // 是否标记风险
+
+	OwnerDepts []string `json:"owner_depts,omitempty"` // 所属部门
 }
 
 type VendorBuilder struct {
-	id                            string // 交易方id，创建交易方时不填，修改交易方时必填
-	idFlag                        bool
-	adCountry                     string // 交易方注册国家
-	adCountryFlag                 bool
-	adProvince                    string // 交易方注册省份
-	adProvinceFlag                bool
-	adCity                        string // 交易方注册城市
-	adCityFlag                    bool
-	address                       string // 详细地址
-	addressFlag                   bool
-	adPostcode                    string // 交易方注册地址邮编
-	adPostcodeFlag                bool
-	legalPerson                   string // 法人名称
-	legalPersonFlag               bool
-	certificationType             string // 证件类型
-	certificationTypeFlag         bool
-	certificationId               string // 证件ID
-	certificationIdFlag           bool
-	contactPerson                 string // 联系人
-	contactPersonFlag             bool
-	contactTelephone              string // 联系电话
-	contactTelephoneFlag          bool
-	contactMobilePhone            string // 联系移动电话
-	contactMobilePhoneFlag        bool
-	fax                           string // 传真
-	faxFlag                       bool
-	eMail                         string // 邮箱
-	eMailFlag                     bool
-	status                        int // 状态
-	statusFlag                    bool
-	vendor                        string // 交易方编码
-	vendorFlag                    bool
-	vendorText                    string // 交易方名称
-	vendorTextFlag                bool
-	shortText                     string // 交易方简称
-	shortTextFlag                 bool
-	vendorType                    string // 交易方类型（多个枚举时，采用逗号分隔）
-	vendorTypeFlag                bool
-	vendorCategory                string // 交易方类别
-	vendorCategoryFlag            bool
-	vendorNature                  string // 交易方性质
-	vendorNatureFlag              bool
-	linkedEmployee                string // 关联员工
-	linkedEmployeeFlag            bool
-	linkedCustomer                string // 关联客户
-	linkedCustomerFlag            bool
+	id     string // 交易方id，创建交易方时不填，修改交易方时必填
+	idFlag bool
+
+	adCountry     string // 交易方注册国家
+	adCountryFlag bool
+
+	adProvince     string // 交易方注册省份
+	adProvinceFlag bool
+
+	adCity     string // 交易方注册城市
+	adCityFlag bool
+
+	address     string // 详细地址
+	addressFlag bool
+
+	adPostcode     string // 交易方注册地址邮编
+	adPostcodeFlag bool
+
+	legalPerson     string // 法人名称
+	legalPersonFlag bool
+
+	certificationType     string // 证件类型
+	certificationTypeFlag bool
+
+	certificationId     string // 证件ID
+	certificationIdFlag bool
+
+	contactPerson     string // 联系人
+	contactPersonFlag bool
+
+	contactTelephone     string // 联系电话
+	contactTelephoneFlag bool
+
+	contactMobilePhone     string // 联系移动电话
+	contactMobilePhoneFlag bool
+
+	fax     string // 传真
+	faxFlag bool
+
+	eMail     string // 邮箱
+	eMailFlag bool
+
+	status     int // 状态
+	statusFlag bool
+
+	vendor     string // 交易方编码
+	vendorFlag bool
+
+	vendorText     string // 交易方名称
+	vendorTextFlag bool
+
+	shortText     string // 交易方简称
+	shortTextFlag bool
+
+	vendorType     string // 交易方类型（多个枚举时，采用逗号分隔）
+	vendorTypeFlag bool
+
+	vendorCategory     string // 交易方类别
+	vendorCategoryFlag bool
+
+	vendorNature     string // 交易方性质
+	vendorNatureFlag bool
+
+	linkedEmployee     string // 关联员工
+	linkedEmployeeFlag bool
+
+	linkedCustomer     string // 关联客户
+	linkedCustomerFlag bool
+
 	associatedWithLegalEntity     bool // 是否关联法人主体
 	associatedWithLegalEntityFlag bool
-	extendInfo                    []*ExtendField // 扩展字段相关信息列表,每个扩展字段需要填入【field_code】、【field_type】、【field_value】三个信息，其中【field_code】和【field_type】需要与用户【字段配置】(获取配置字段的开放平台接口：https://open.feishu.cn/open-apis/mdm/v1/config/config_list)中扩展字段（sys = 1）相关联（目前不支持附件类型的扩展信息）
-	extendInfoFlag                bool
-	vendorAccounts                []*VendorAccount // 银行账户列表
-	vendorAccountsFlag            bool
-	vendorAddresses               []*VendorAddress // 地址列表
-	vendorAddressesFlag           bool
-	vendorCompanyViews            []*VendorCompanyView // 公司视图列表
-	vendorCompanyViewsFlag        bool
-	vendorContacts                []*VendorContact // 联系人列表
-	vendorContactsFlag            bool
-	glAccount                     string // 总账科目
-	glAccountFlag                 bool
-	downPaymentTerm               string // 预付条件
-	downPaymentTermFlag           bool
-	paymentTerm                   string // 付款条件
-	paymentTermFlag               bool
-	vendorSiteCode                string // 交易方site code
-	vendorSiteCodeFlag            bool
-	appendix                      []*Appendix // 附件列表
-	appendixFlag                  bool
-	isRisked                      bool // 是否标记风险
-	isRiskedFlag                  bool
-	ownerDepts                    []string // 所属部门
-	ownerDeptsFlag                bool
+
+	extendInfo     []*ExtendField // 扩展字段相关信息列表,每个扩展字段需要填入【field_code】、【field_type】、【field_value】三个信息，其中【field_code】和【field_type】需要与用户【字段配置】(获取配置字段的开放平台接口：https://open.feishu.cn/open-apis/mdm/v1/config/config_list)中扩展字段（sys = 1）相关联（目前不支持附件类型的扩展信息）
+	extendInfoFlag bool
+
+	vendorAccounts     []*VendorAccount // 银行账户列表
+	vendorAccountsFlag bool
+
+	vendorAddresses     []*VendorAddress // 地址列表
+	vendorAddressesFlag bool
+
+	vendorCompanyViews     []*VendorCompanyView // 公司视图列表
+	vendorCompanyViewsFlag bool
+
+	vendorContacts     []*VendorContact // 联系人列表
+	vendorContactsFlag bool
+
+	glAccount     string // 总账科目
+	glAccountFlag bool
+
+	downPaymentTerm     string // 预付条件
+	downPaymentTermFlag bool
+
+	paymentTerm     string // 付款条件
+	paymentTermFlag bool
+
+	vendorSiteCode     string // 交易方site code
+	vendorSiteCodeFlag bool
+
+	appendix     []*Appendix // 附件列表
+	appendixFlag bool
+
+	isRisked     bool // 是否标记风险
+	isRiskedFlag bool
+
+	ownerDepts     []string // 所属部门
+	ownerDeptsFlag bool
 }
 
 func NewVendorBuilder() *VendorBuilder {
@@ -3464,48 +3820,72 @@ func (builder *VendorBuilder) Build() *Vendor {
 }
 
 type VendorAccount struct {
-	Id              *string        `json:"id,omitempty"`                // 交易方银行账户id,修改信息时当前的账户id均必填，新增的账户id不填
-	Account         *string        `json:"account,omitempty"`           // 账号
-	Iban            *string        `json:"iban,omitempty"`              // 国际银行账号
-	AccountName     *string        `json:"account_name,omitempty"`      // 账户名
-	BankId          *string        `json:"bank_id,omitempty"`           // 银行内部Id
-	BankCode        *string        `json:"bank_code,omitempty"`         // 银联号
-	SwiftCode       *string        `json:"swift_code,omitempty"`        // 银行Swift编码
-	VendorSiteCode  *string        `json:"vendor_site_code,omitempty"`  // 交易方siteCode
-	BankName        *string        `json:"bank_name,omitempty"`         // 银行名称
-	BankAcronym     *string        `json:"bank_acronym,omitempty"`      // 银行简码
-	Country         *string        `json:"country,omitempty"`           // 国家
-	BankControlCode *string        `json:"bank_control_code,omitempty"` // 银行控制码
-	ExtendInfo      []*ExtendField `json:"extend_info,omitempty"`       // 扩展字段相关信息列表
+	Id *string `json:"id,omitempty"` // 交易方银行账户id,修改信息时当前的账户id均必填，新增的账户id不填
+
+	Account *string `json:"account,omitempty"` // 账号
+
+	Iban *string `json:"iban,omitempty"` // 国际银行账号
+
+	AccountName *string `json:"account_name,omitempty"` // 账户名
+
+	BankId *string `json:"bank_id,omitempty"` // 银行内部Id
+
+	BankCode *string `json:"bank_code,omitempty"` // 银联号
+
+	SwiftCode *string `json:"swift_code,omitempty"` // 银行Swift编码
+
+	VendorSiteCode *string `json:"vendor_site_code,omitempty"` // 交易方siteCode
+
+	BankName *string `json:"bank_name,omitempty"` // 银行名称
+
+	BankAcronym *string `json:"bank_acronym,omitempty"` // 银行简码
+
+	Country *string `json:"country,omitempty"` // 国家
+
+	BankControlCode *string `json:"bank_control_code,omitempty"` // 银行控制码
+
+	ExtendInfo []*ExtendField `json:"extend_info,omitempty"` // 扩展字段相关信息列表
 }
 
 type VendorAccountBuilder struct {
-	id                  string // 交易方银行账户id,修改信息时当前的账户id均必填，新增的账户id不填
-	idFlag              bool
-	account             string // 账号
-	accountFlag         bool
-	iban                string // 国际银行账号
-	ibanFlag            bool
-	accountName         string // 账户名
-	accountNameFlag     bool
-	bankId              string // 银行内部Id
-	bankIdFlag          bool
-	bankCode            string // 银联号
-	bankCodeFlag        bool
-	swiftCode           string // 银行Swift编码
-	swiftCodeFlag       bool
-	vendorSiteCode      string // 交易方siteCode
-	vendorSiteCodeFlag  bool
-	bankName            string // 银行名称
-	bankNameFlag        bool
-	bankAcronym         string // 银行简码
-	bankAcronymFlag     bool
-	country             string // 国家
-	countryFlag         bool
+	id     string // 交易方银行账户id,修改信息时当前的账户id均必填，新增的账户id不填
+	idFlag bool
+
+	account     string // 账号
+	accountFlag bool
+
+	iban     string // 国际银行账号
+	ibanFlag bool
+
+	accountName     string // 账户名
+	accountNameFlag bool
+
+	bankId     string // 银行内部Id
+	bankIdFlag bool
+
+	bankCode     string // 银联号
+	bankCodeFlag bool
+
+	swiftCode     string // 银行Swift编码
+	swiftCodeFlag bool
+
+	vendorSiteCode     string // 交易方siteCode
+	vendorSiteCodeFlag bool
+
+	bankName     string // 银行名称
+	bankNameFlag bool
+
+	bankAcronym     string // 银行简码
+	bankAcronymFlag bool
+
+	country     string // 国家
+	countryFlag bool
+
 	bankControlCode     string // 银行控制码
 	bankControlCodeFlag bool
-	extendInfo          []*ExtendField // 扩展字段相关信息列表
-	extendInfoFlag      bool
+
+	extendInfo     []*ExtendField // 扩展字段相关信息列表
+	extendInfoFlag bool
 }
 
 func NewVendorAccountBuilder() *VendorAccountBuilder {
@@ -3687,28 +4067,40 @@ func (builder *VendorAccountBuilder) Build() *VendorAccount {
 }
 
 type VendorAddress struct {
-	Id         *string        `json:"id,omitempty"`          // 交易方地址id
-	Country    *string        `json:"country,omitempty"`     // 国家
-	Province   *string        `json:"province,omitempty"`    // 省份
-	City       *string        `json:"city,omitempty"`        // 城市
-	County     *string        `json:"county,omitempty"`      // 县
-	Address    *string        `json:"address,omitempty"`     // 详细地址
+	Id *string `json:"id,omitempty"` // 交易方地址id
+
+	Country *string `json:"country,omitempty"` // 国家
+
+	Province *string `json:"province,omitempty"` // 省份
+
+	City *string `json:"city,omitempty"` // 城市
+
+	County *string `json:"county,omitempty"` // 县
+
+	Address *string `json:"address,omitempty"` // 详细地址
+
 	ExtendInfo []*ExtendField `json:"extend_info,omitempty"` // 扩展字段相关信息列表
 }
 
 type VendorAddressBuilder struct {
-	id             string // 交易方地址id
-	idFlag         bool
-	country        string // 国家
-	countryFlag    bool
-	province       string // 省份
-	provinceFlag   bool
-	city           string // 城市
-	cityFlag       bool
-	county         string // 县
-	countyFlag     bool
-	address        string // 详细地址
-	addressFlag    bool
+	id     string // 交易方地址id
+	idFlag bool
+
+	country     string // 国家
+	countryFlag bool
+
+	province     string // 省份
+	provinceFlag bool
+
+	city     string // 城市
+	cityFlag bool
+
+	county     string // 县
+	countyFlag bool
+
+	address     string // 详细地址
+	addressFlag bool
+
 	extendInfo     []*ExtendField // 扩展字段相关信息列表
 	extendInfoFlag bool
 }
@@ -3814,30 +4206,42 @@ func (builder *VendorAddressBuilder) Build() *VendorAddress {
 }
 
 type VendorCompanyView struct {
-	Id              *string        `json:"id,omitempty"`                // 交易方公司视图id
-	CompanyCode     *string        `json:"company_code,omitempty"`      // 公司代码
-	GlAccount       *string        `json:"gl_account,omitempty"`        // 总账科目
-	VendorSiteCode  *string        `json:"vendor_site_code,omitempty"`  // 交易方sitecode
-	PaymentTerm     *string        `json:"payment_term,omitempty"`      // 付款条件信息
-	DownPaymentTerm *string        `json:"down_payment_term,omitempty"` // 预付条件
-	ExtendInfo      []*ExtendField `json:"extend_info,omitempty"`       // 扩展字段相关信息列表
+	Id *string `json:"id,omitempty"` // 交易方公司视图id
+
+	CompanyCode *string `json:"company_code,omitempty"` // 公司代码
+
+	GlAccount *string `json:"gl_account,omitempty"` // 总账科目
+
+	VendorSiteCode *string `json:"vendor_site_code,omitempty"` // 交易方sitecode
+
+	PaymentTerm *string `json:"payment_term,omitempty"` // 付款条件信息
+
+	DownPaymentTerm *string `json:"down_payment_term,omitempty"` // 预付条件
+
+	ExtendInfo []*ExtendField `json:"extend_info,omitempty"` // 扩展字段相关信息列表
 }
 
 type VendorCompanyViewBuilder struct {
-	id                  string // 交易方公司视图id
-	idFlag              bool
-	companyCode         string // 公司代码
-	companyCodeFlag     bool
-	glAccount           string // 总账科目
-	glAccountFlag       bool
-	vendorSiteCode      string // 交易方sitecode
-	vendorSiteCodeFlag  bool
-	paymentTerm         string // 付款条件信息
-	paymentTermFlag     bool
+	id     string // 交易方公司视图id
+	idFlag bool
+
+	companyCode     string // 公司代码
+	companyCodeFlag bool
+
+	glAccount     string // 总账科目
+	glAccountFlag bool
+
+	vendorSiteCode     string // 交易方sitecode
+	vendorSiteCodeFlag bool
+
+	paymentTerm     string // 付款条件信息
+	paymentTermFlag bool
+
 	downPaymentTerm     string // 预付条件
 	downPaymentTermFlag bool
-	extendInfo          []*ExtendField // 扩展字段相关信息列表
-	extendInfoFlag      bool
+
+	extendInfo     []*ExtendField // 扩展字段相关信息列表
+	extendInfoFlag bool
 }
 
 func NewVendorCompanyViewBuilder() *VendorCompanyViewBuilder {
@@ -3941,28 +4345,40 @@ func (builder *VendorCompanyViewBuilder) Build() *VendorCompanyView {
 }
 
 type VendorContact struct {
-	Id         *string        `json:"id,omitempty"`          // 交易方联系人id
-	Name       *string        `json:"name,omitempty"`        // 姓名
-	Position   *string        `json:"position,omitempty"`    // 职位
-	Email      *string        `json:"email,omitempty"`       // 邮箱
-	Phone      *string        `json:"phone,omitempty"`       // 手机号
-	Remark     *string        `json:"remark,omitempty"`      // 备注
+	Id *string `json:"id,omitempty"` // 交易方联系人id
+
+	Name *string `json:"name,omitempty"` // 姓名
+
+	Position *string `json:"position,omitempty"` // 职位
+
+	Email *string `json:"email,omitempty"` // 邮箱
+
+	Phone *string `json:"phone,omitempty"` // 手机号
+
+	Remark *string `json:"remark,omitempty"` // 备注
+
 	ExtendInfo []*ExtendField `json:"extend_info,omitempty"` // 扩展字段相关信息列表
 }
 
 type VendorContactBuilder struct {
-	id             string // 交易方联系人id
-	idFlag         bool
-	name           string // 姓名
-	nameFlag       bool
-	position       string // 职位
-	positionFlag   bool
-	email          string // 邮箱
-	emailFlag      bool
-	phone          string // 手机号
-	phoneFlag      bool
-	remark         string // 备注
-	remarkFlag     bool
+	id     string // 交易方联系人id
+	idFlag bool
+
+	name     string // 姓名
+	nameFlag bool
+
+	position     string // 职位
+	positionFlag bool
+
+	email     string // 邮箱
+	emailFlag bool
+
+	phone     string // 手机号
+	phoneFlag bool
+
+	remark     string // 备注
+	remarkFlag bool
+
 	extendInfo     []*ExtendField // 扩展字段相关信息列表
 	extendInfoFlag bool
 }

@@ -98,15 +98,17 @@ func (builder *AbbreviationBuilder) Build() *Abbreviation {
 }
 
 type AigcConfig struct {
-	NeedReview *bool   `json:"need_review,omitempty"` // 是否需要人工审核
-	RepoId     *string `json:"repo_id,omitempty"`     // 词库ID
+	NeedReview *bool `json:"need_review,omitempty"` // 是否需要人工审核
+
+	RepoId *string `json:"repo_id,omitempty"` // 词库ID
 }
 
 type AigcConfigBuilder struct {
 	needReview     bool // 是否需要人工审核
 	needReviewFlag bool
-	repoId         string // 词库ID
-	repoIdFlag     bool
+
+	repoId     string // 词库ID
+	repoIdFlag bool
 }
 
 func NewAigcConfigBuilder() *AigcConfigBuilder {
@@ -178,19 +180,25 @@ func (builder *BaikeImageBuilder) Build() *BaikeImage {
 }
 
 type Classification struct {
-	Id        *string        `json:"id,omitempty"`         // 唯一分类 ID
-	Name      *string        `json:"name,omitempty"`       // 分类名称
-	FatherId  *string        `json:"father_id,omitempty"`  // 父级分类的 ID
+	Id *string `json:"id,omitempty"` // 唯一分类 ID
+
+	Name *string `json:"name,omitempty"` // 分类名称
+
+	FatherId *string `json:"father_id,omitempty"` // 父级分类的 ID
+
 	I18nNames []*I18nClsName `json:"i18n_names,omitempty"` // 国际化分类名
 }
 
 type ClassificationBuilder struct {
-	id            string // 唯一分类 ID
-	idFlag        bool
-	name          string // 分类名称
-	nameFlag      bool
-	fatherId      string // 父级分类的 ID
-	fatherIdFlag  bool
+	id     string // 唯一分类 ID
+	idFlag bool
+
+	name     string // 分类名称
+	nameFlag bool
+
+	fatherId     string // 父级分类的 ID
+	fatherIdFlag bool
+
 	i18nNames     []*I18nClsName // 国际化分类名
 	i18nNamesFlag bool
 }
@@ -258,12 +266,14 @@ func (builder *ClassificationBuilder) Build() *Classification {
 
 type ClassificationFilter struct {
 	Include []string `json:"include,omitempty"` // 需要获取的分类
+
 	Exclude []string `json:"exclude,omitempty"` // 需要排除的分类
 }
 
 type ClassificationFilterBuilder struct {
 	include     []string // 需要获取的分类
 	includeFlag bool
+
 	exclude     []string // 需要排除的分类
 	excludeFlag bool
 }
@@ -303,16 +313,20 @@ func (builder *ClassificationFilterBuilder) Build() *ClassificationFilter {
 }
 
 type CorrectError struct {
-	Type         *int           `json:"type,omitempty"`          //
-	Total        *int           `json:"total,omitempty"`         // 该类型错误在请求时间周期内的累计数量
+	Type *int `json:"type,omitempty"` //
+
+	Total *int `json:"total,omitempty"` // 该类型错误在请求时间周期内的累计数量
+
 	CorrectPairs []*CorrectPair `json:"correct_pairs,omitempty"` // 该类型错误在周期内具体的纠错对
 }
 
 type CorrectErrorBuilder struct {
-	type_            int //
-	typeFlag         bool
-	total            int // 该类型错误在请求时间周期内的累计数量
-	totalFlag        bool
+	type_    int //
+	typeFlag bool
+
+	total     int // 该类型错误在请求时间周期内的累计数量
+	totalFlag bool
+
 	correctPairs     []*CorrectPair // 该类型错误在周期内具体的纠错对
 	correctPairsFlag bool
 }
@@ -364,25 +378,35 @@ func (builder *CorrectErrorBuilder) Build() *CorrectError {
 }
 
 type CorrectInfo struct {
-	CorrectTotal   *int          `json:"correct_total,omitempty"`    // 用户英文纠错数总数
-	EachdayCorrect []int         `json:"eachday_correct,omitempty"`  // 时间区间内每一天纠错数
-	GrammarError   *CorrectError `json:"grammar_error,omitempty"`    // 语法错误相关统计信息
-	SpellError     *CorrectError `json:"spell_error,omitempty"`      // 拼写错误相关统计信息
-	NounError      *CorrectError `json:"noun_error,omitempty"`       // 单复数错误相关统计信息
+	CorrectTotal *int `json:"correct_total,omitempty"` // 用户英文纠错数总数
+
+	EachdayCorrect []int `json:"eachday_correct,omitempty"` // 时间区间内每一天纠错数
+
+	GrammarError *CorrectError `json:"grammar_error,omitempty"` // 语法错误相关统计信息
+
+	SpellError *CorrectError `json:"spell_error,omitempty"` // 拼写错误相关统计信息
+
+	NounError *CorrectError `json:"noun_error,omitempty"` // 单复数错误相关统计信息
+
 	VerbTenseError *CorrectError `json:"verb_tense_error,omitempty"` // 时态错误相关统计信息
 }
 
 type CorrectInfoBuilder struct {
-	correctTotal       int // 用户英文纠错数总数
-	correctTotalFlag   bool
+	correctTotal     int // 用户英文纠错数总数
+	correctTotalFlag bool
+
 	eachdayCorrect     []int // 时间区间内每一天纠错数
 	eachdayCorrectFlag bool
-	grammarError       *CorrectError // 语法错误相关统计信息
-	grammarErrorFlag   bool
-	spellError         *CorrectError // 拼写错误相关统计信息
-	spellErrorFlag     bool
-	nounError          *CorrectError // 单复数错误相关统计信息
-	nounErrorFlag      bool
+
+	grammarError     *CorrectError // 语法错误相关统计信息
+	grammarErrorFlag bool
+
+	spellError     *CorrectError // 拼写错误相关统计信息
+	spellErrorFlag bool
+
+	nounError     *CorrectError // 单复数错误相关统计信息
+	nounErrorFlag bool
+
 	verbTenseError     *CorrectError // 时态错误相关统计信息
 	verbTenseErrorFlag bool
 }
@@ -472,17 +496,21 @@ func (builder *CorrectInfoBuilder) Build() *CorrectInfo {
 
 type CorrectPair struct {
 	SourceText *string `json:"source_text,omitempty"` // 被纠错的原词
+
 	TargetText *string `json:"target_text,omitempty"` // 纠错建议替换的新词
-	Total      *int    `json:"total,omitempty"`       // 纠错对在周期内出现的次数
+
+	Total *int `json:"total,omitempty"` // 纠错对在周期内出现的次数
 }
 
 type CorrectPairBuilder struct {
 	sourceText     string // 被纠错的原词
 	sourceTextFlag bool
+
 	targetText     string // 纠错建议替换的新词
 	targetTextFlag bool
-	total          int // 纠错对在周期内出现的次数
-	totalFlag      bool
+
+	total     int // 纠错对在周期内出现的次数
+	totalFlag bool
 }
 
 func NewCorrectPairBuilder() *CorrectPairBuilder {
@@ -535,13 +563,15 @@ func (builder *CorrectPairBuilder) Build() *CorrectPair {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -580,14 +610,16 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type DisplayStatus struct {
 	AllowHighlight *bool `json:"allow_highlight,omitempty"` // 是否允许在 IM 和 Doc 等场景进行高亮提示
-	AllowSearch    *bool `json:"allow_search,omitempty"`    // 是否允许在飞书中被搜索到
+
+	AllowSearch *bool `json:"allow_search,omitempty"` // 是否允许在飞书中被搜索到
 }
 
 type DisplayStatusBuilder struct {
 	allowHighlight     bool // 是否允许在 IM 和 Doc 等场景进行高亮提示
 	allowHighlightFlag bool
-	allowSearch        bool // 是否允许在飞书中被搜索到
-	allowSearchFlag    bool
+
+	allowSearch     bool // 是否允许在飞书中被搜索到
+	allowSearchFlag bool
 }
 
 func NewDisplayStatusBuilder() *DisplayStatusBuilder {
@@ -694,48 +726,72 @@ type DocContainer struct {
 }
 
 type DocContent struct {
-	Id          *string       `json:"id,omitempty"`           // 节点ID
-	Children    []string      `json:"children,omitempty"`     // 子节点
-	ContentType *int          `json:"content_type,omitempty"` // 内容类型
-	Text        *DocText      `json:"text,omitempty"`         // 纯文本
-	Heading     *DocHeading   `json:"heading,omitempty"`      // 标题
-	Bullet      *DocBullet    `json:"bullet,omitempty"`       // 无序列表
-	Ordered     *DocRodered   `json:"ordered,omitempty"`      // 有序列表
-	Code        *DocCode      `json:"code,omitempty"`         // 代码块
-	Link        *DocLink      `json:"link,omitempty"`         // 链接
-	Image       *DocImage     `json:"image,omitempty"`        // 图片
-	User        *DocUser      `json:"user,omitempty"`         // 用户
-	Divider     *DocDivider   `json:"divider,omitempty"`      // 分割线
-	Container   *DocContainer `json:"container,omitempty"`    // 容器
+	Id *string `json:"id,omitempty"` // 节点ID
+
+	Children []string `json:"children,omitempty"` // 子节点
+
+	ContentType *int `json:"content_type,omitempty"` // 内容类型
+
+	Text *DocText `json:"text,omitempty"` // 纯文本
+
+	Heading *DocHeading `json:"heading,omitempty"` // 标题
+
+	Bullet *DocBullet `json:"bullet,omitempty"` // 无序列表
+
+	Ordered *DocRodered `json:"ordered,omitempty"` // 有序列表
+
+	Code *DocCode `json:"code,omitempty"` // 代码块
+
+	Link *DocLink `json:"link,omitempty"` // 链接
+
+	Image *DocImage `json:"image,omitempty"` // 图片
+
+	User *DocUser `json:"user,omitempty"` // 用户
+
+	Divider *DocDivider `json:"divider,omitempty"` // 分割线
+
+	Container *DocContainer `json:"container,omitempty"` // 容器
 }
 
 type DocContentBuilder struct {
-	id              string // 节点ID
-	idFlag          bool
-	children        []string // 子节点
-	childrenFlag    bool
+	id     string // 节点ID
+	idFlag bool
+
+	children     []string // 子节点
+	childrenFlag bool
+
 	contentType     int // 内容类型
 	contentTypeFlag bool
-	text            *DocText // 纯文本
-	textFlag        bool
-	heading         *DocHeading // 标题
-	headingFlag     bool
-	bullet          *DocBullet // 无序列表
-	bulletFlag      bool
-	ordered         *DocRodered // 有序列表
-	orderedFlag     bool
-	code            *DocCode // 代码块
-	codeFlag        bool
-	link            *DocLink // 链接
-	linkFlag        bool
-	image           *DocImage // 图片
-	imageFlag       bool
-	user            *DocUser // 用户
-	userFlag        bool
-	divider         *DocDivider // 分割线
-	dividerFlag     bool
-	container       *DocContainer // 容器
-	containerFlag   bool
+
+	text     *DocText // 纯文本
+	textFlag bool
+
+	heading     *DocHeading // 标题
+	headingFlag bool
+
+	bullet     *DocBullet // 无序列表
+	bulletFlag bool
+
+	ordered     *DocRodered // 有序列表
+	orderedFlag bool
+
+	code     *DocCode // 代码块
+	codeFlag bool
+
+	link     *DocLink // 链接
+	linkFlag bool
+
+	image     *DocImage // 图片
+	imageFlag bool
+
+	user     *DocUser // 用户
+	userFlag bool
+
+	divider     *DocDivider // 分割线
+	dividerFlag bool
+
+	container     *DocContainer // 容器
+	containerFlag bool
 }
 
 func NewDocContentBuilder() *DocContentBuilder {
@@ -907,22 +963,30 @@ func (builder *DocContentBuilder) Build() *DocContent {
 }
 
 type DocData struct {
-	DocToken      *string       `json:"doc_token,omitempty"`       // 文档token
-	CreatedAt     *string       `json:"created_at,omitempty"`      // 文档创建时间
-	UpdatedAt     *string       `json:"updated_at,omitempty"`      // 文档最后更新时间
-	DocContents   []*DocContent `json:"doc_contents,omitempty"`    // 文档数据
-	RootContentId *string       `json:"root_content_id,omitempty"` // 根节点ID
+	DocToken *string `json:"doc_token,omitempty"` // 文档token
+
+	CreatedAt *string `json:"created_at,omitempty"` // 文档创建时间
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 文档最后更新时间
+
+	DocContents []*DocContent `json:"doc_contents,omitempty"` // 文档数据
+
+	RootContentId *string `json:"root_content_id,omitempty"` // 根节点ID
 }
 
 type DocDataBuilder struct {
-	docToken          string // 文档token
-	docTokenFlag      bool
-	createdAt         string // 文档创建时间
-	createdAtFlag     bool
-	updatedAt         string // 文档最后更新时间
-	updatedAtFlag     bool
-	docContents       []*DocContent // 文档数据
-	docContentsFlag   bool
+	docToken     string // 文档token
+	docTokenFlag bool
+
+	createdAt     string // 文档创建时间
+	createdAtFlag bool
+
+	updatedAt     string // 文档最后更新时间
+	updatedAtFlag bool
+
+	docContents     []*DocContent // 文档数据
+	docContentsFlag bool
+
 	rootContentId     string // 根节点ID
 	rootContentIdFlag bool
 }
@@ -1005,13 +1069,15 @@ type DocDivider struct {
 }
 
 type DocHeading struct {
-	Text         *string `json:"text,omitempty"`          // 标题文本内容
-	HeadingLevel *int    `json:"heading_level,omitempty"` // 标题等级
+	Text *string `json:"text,omitempty"` // 标题文本内容
+
+	HeadingLevel *int `json:"heading_level,omitempty"` // 标题等级
 }
 
 type DocHeadingBuilder struct {
-	text             string // 标题文本内容
-	textFlag         bool
+	text     string // 标题文本内容
+	textFlag bool
+
 	headingLevel     int // 标题等级
 	headingLevelFlag bool
 }
@@ -1086,14 +1152,16 @@ func (builder *DocImageBuilder) Build() *DocImage {
 
 type DocLink struct {
 	Title *string `json:"title,omitempty"` // 链接标题
-	Url   *string `json:"url,omitempty"`   // 链接URL
+
+	Url *string `json:"url,omitempty"` // 链接URL
 }
 
 type DocLinkBuilder struct {
 	title     string // 链接标题
 	titleFlag bool
-	url       string // 链接URL
-	urlFlag   bool
+
+	url     string // 链接URL
+	urlFlag bool
 }
 
 func NewDocLinkBuilder() *DocLinkBuilder {
@@ -1230,14 +1298,16 @@ func (builder *DocUserBuilder) Build() *DocUser {
 
 type Draft struct {
 	DraftId *string `json:"draft_id,omitempty"` // 草稿 Id
-	Entity  *Entity `json:"entity,omitempty"`   // 实体词
+
+	Entity *Entity `json:"entity,omitempty"` // 实体词
 }
 
 type DraftBuilder struct {
 	draftId     string // 草稿 Id
 	draftIdFlag bool
-	entity      *Entity // 实体词
-	entityFlag  bool
+
+	entity     *Entity // 实体词
+	entityFlag bool
 }
 
 func NewDraftBuilder() *DraftBuilder {
@@ -1276,53 +1346,82 @@ func (builder *DraftBuilder) Build() *Draft {
 }
 
 type Entity struct {
-	Id       *string `json:"id,omitempty"`        // 实体词 Id
+	Id *string `json:"id,omitempty"` // 实体词 Id
+
 	MainKeys []*Term `json:"main_keys,omitempty"` // 词条名
 
-	Aliases     []*Term          `json:"aliases,omitempty"`      // 别名
-	Description *string          `json:"description,omitempty"`  // 详情描述
-	Creator     *string          `json:"creator,omitempty"`      // 创建者
-	CreateTime  *string          `json:"create_time,omitempty"`  // 词条创建时间（秒级时间戳）
-	Updater     *string          `json:"updater,omitempty"`      // 最近一次更新者
-	UpdateTime  *string          `json:"update_time,omitempty"`  // 最近一次更新词条时间（秒级时间戳）
-	RelatedMeta *RelatedMeta     `json:"related_meta,omitempty"` // 相关数据
-	Statistics  *Statistics      `json:"statistics,omitempty"`   // 统计数据
-	OuterInfo   *OuterInfo       `json:"outer_info,omitempty"`   // 外部 id 关联数据
-	RichText    *string          `json:"rich_text,omitempty"`    // 富文本格式（当填写富文本内容时，description字段将会失效可不填写），支持的格式参考[企业百科指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/baike-v1/overview)中的释义部分
-	Source      *int             `json:"source,omitempty"`       // 词条的创建来源，1：用户主动创建，2：批量导入，3：官方词，4：OpenAPI 创建
-	I18nDescs   []*I18nEntryDesc `json:"i18n_descs,omitempty"`   // 国际化的词条释义
+	FullNames []*Term `json:"full_names,omitempty"` // 全称
+
+	Aliases []*Term `json:"aliases,omitempty"` // 别名
+
+	Description *string `json:"description,omitempty"` // 详情描述
+
+	Creator *string `json:"creator,omitempty"` // 创建者
+
+	CreateTime *string `json:"create_time,omitempty"` // 词条创建时间（秒级时间戳）
+
+	Updater *string `json:"updater,omitempty"` // 最近一次更新者
+
+	UpdateTime *string `json:"update_time,omitempty"` // 最近一次更新词条时间（秒级时间戳）
+
+	RelatedMeta *RelatedMeta `json:"related_meta,omitempty"` // 相关数据
+
+	Statistics *Statistics `json:"statistics,omitempty"` // 统计数据
+
+	OuterInfo *OuterInfo `json:"outer_info,omitempty"` // 外部 id 关联数据
+
+	RichText *string `json:"rich_text,omitempty"` // 富文本格式（当填写富文本内容时，description字段将会失效可不填写），支持的格式参考[企业百科指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/baike-v1/overview)中的释义部分
+
+	Source *int `json:"source,omitempty"` // 词条的创建来源，1：用户主动创建，2：批量导入，3：官方词，4：OpenAPI 创建
+
+	I18nDescs []*I18nEntryDesc `json:"i18n_descs,omitempty"` // 国际化的词条释义
 }
 
 type EntityBuilder struct {
-	id           string // 实体词 Id
-	idFlag       bool
+	id     string // 实体词 Id
+	idFlag bool
+
 	mainKeys     []*Term // 词条名
 	mainKeysFlag bool
 
-	aliases         []*Term // 别名
-	aliasesFlag     bool
+	fullNames     []*Term // 全称
+	fullNamesFlag bool
+
+	aliases     []*Term // 别名
+	aliasesFlag bool
+
 	description     string // 详情描述
 	descriptionFlag bool
-	creator         string // 创建者
-	creatorFlag     bool
-	createTime      string // 词条创建时间（秒级时间戳）
-	createTimeFlag  bool
-	updater         string // 最近一次更新者
-	updaterFlag     bool
-	updateTime      string // 最近一次更新词条时间（秒级时间戳）
-	updateTimeFlag  bool
+
+	creator     string // 创建者
+	creatorFlag bool
+
+	createTime     string // 词条创建时间（秒级时间戳）
+	createTimeFlag bool
+
+	updater     string // 最近一次更新者
+	updaterFlag bool
+
+	updateTime     string // 最近一次更新词条时间（秒级时间戳）
+	updateTimeFlag bool
+
 	relatedMeta     *RelatedMeta // 相关数据
 	relatedMetaFlag bool
-	statistics      *Statistics // 统计数据
-	statisticsFlag  bool
-	outerInfo       *OuterInfo // 外部 id 关联数据
-	outerInfoFlag   bool
-	richText        string // 富文本格式（当填写富文本内容时，description字段将会失效可不填写），支持的格式参考[企业百科指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/baike-v1/overview)中的释义部分
-	richTextFlag    bool
-	source          int // 词条的创建来源，1：用户主动创建，2：批量导入，3：官方词，4：OpenAPI 创建
-	sourceFlag      bool
-	i18nDescs       []*I18nEntryDesc // 国际化的词条释义
-	i18nDescsFlag   bool
+
+	statistics     *Statistics // 统计数据
+	statisticsFlag bool
+
+	outerInfo     *OuterInfo // 外部 id 关联数据
+	outerInfoFlag bool
+
+	richText     string // 富文本格式（当填写富文本内容时，description字段将会失效可不填写），支持的格式参考[企业百科指南](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/baike-v1/overview)中的释义部分
+	richTextFlag bool
+
+	source     int // 词条的创建来源，1：用户主动创建，2：批量导入，3：官方词，4：OpenAPI 创建
+	sourceFlag bool
+
+	i18nDescs     []*I18nEntryDesc // 国际化的词条释义
+	i18nDescsFlag bool
 }
 
 func NewEntityBuilder() *EntityBuilder {
@@ -1345,6 +1444,15 @@ func (builder *EntityBuilder) Id(id string) *EntityBuilder {
 func (builder *EntityBuilder) MainKeys(mainKeys []*Term) *EntityBuilder {
 	builder.mainKeys = mainKeys
 	builder.mainKeysFlag = true
+	return builder
+}
+
+// 全称
+//
+// 示例值：
+func (builder *EntityBuilder) FullNames(fullNames []*Term) *EntityBuilder {
+	builder.fullNames = fullNames
+	builder.fullNamesFlag = true
 	return builder
 }
 
@@ -1513,22 +1621,30 @@ func (builder *EntityBuilder) Build() *Entity {
 }
 
 type EntityCardData struct {
-	Card         *string `json:"card,omitempty"`          // 根据请求的渲染类型进行渲染后的词条卡片数据
-	Id           *string `json:"id,omitempty"`            // 卡片对应词条的id
-	Key          *string `json:"key,omitempty"`           // 用户点击的高亮词条
-	CardType     *int    `json:"card_type,omitempty"`     // 词条卡片类型
+	Card *string `json:"card,omitempty"` // 根据请求的渲染类型进行渲染后的词条卡片数据
+
+	Id *string `json:"id,omitempty"` // 卡片对应词条的id
+
+	Key *string `json:"key,omitempty"` // 用户点击的高亮词条
+
+	CardType *int `json:"card_type,omitempty"` // 词条卡片类型
+
 	TemplateName *string `json:"template_name,omitempty"` // 卡片模版名
 }
 
 type EntityCardDataBuilder struct {
-	card             string // 根据请求的渲染类型进行渲染后的词条卡片数据
-	cardFlag         bool
-	id               string // 卡片对应词条的id
-	idFlag           bool
-	key              string // 用户点击的高亮词条
-	keyFlag          bool
-	cardType         int // 词条卡片类型
-	cardTypeFlag     bool
+	card     string // 根据请求的渲染类型进行渲染后的词条卡片数据
+	cardFlag bool
+
+	id     string // 卡片对应词条的id
+	idFlag bool
+
+	key     string // 用户点击的高亮词条
+	keyFlag bool
+
+	cardType     int // 词条卡片类型
+	cardTypeFlag bool
+
 	templateName     string // 卡片模版名
 	templateNameFlag bool
 }
@@ -1609,13 +1725,15 @@ func (builder *EntityCardDataBuilder) Build() *EntityCardData {
 }
 
 type EntityWord struct {
-	Name    *string  `json:"name,omitempty"`    // 抽取出的词条名
+	Name *string `json:"name,omitempty"` // 抽取出的词条名
+
 	Aliases []string `json:"aliases,omitempty"` // 词条可能的推荐别名
 }
 
 type EntityWordBuilder struct {
-	name        string // 抽取出的词条名
-	nameFlag    bool
+	name     string // 抽取出的词条名
+	nameFlag bool
+
 	aliases     []string // 词条可能的推荐别名
 	aliasesFlag bool
 }
@@ -1656,13 +1774,15 @@ func (builder *EntityWordBuilder) Build() *EntityWord {
 }
 
 type File struct {
-	Name *string   `json:"name,omitempty"` // 文件名称，当前仅支持上传图片且图片格式为以下六种：icon、bmp、gif、png、jpeg、webp
+	Name *string `json:"name,omitempty"` // 文件名称，当前仅支持上传图片且图片格式为以下六种：icon、bmp、gif、png、jpeg、webp
+
 	File io.Reader `json:"file,omitempty"` // 二进制文件内容，高宽像素在 320-4096 像素之间，大小在 3KB-10MB 的图片
 }
 
 type FileBuilder struct {
 	name     string // 文件名称，当前仅支持上传图片且图片格式为以下六种：icon、bmp、gif、png、jpeg、webp
 	nameFlag bool
+
 	file     io.Reader // 二进制文件内容，高宽像素在 320-4096 像素之间，大小在 3KB-10MB 的图片
 	fileFlag bool
 }
@@ -1703,15 +1823,17 @@ func (builder *FileBuilder) Build() *File {
 }
 
 type I18nClsName struct {
-	Language *int    `json:"language,omitempty"` // 语言类型
-	Name     *string `json:"name,omitempty"`     // 分类名
+	Language *int `json:"language,omitempty"` // 语言类型
+
+	Name *string `json:"name,omitempty"` // 分类名
 }
 
 type I18nClsNameBuilder struct {
 	language     int // 语言类型
 	languageFlag bool
-	name         string // 分类名
-	nameFlag     bool
+
+	name     string // 分类名
+	nameFlag bool
 }
 
 func NewI18nClsNameBuilder() *I18nClsNameBuilder {
@@ -1751,18 +1873,22 @@ func (builder *I18nClsNameBuilder) Build() *I18nClsName {
 }
 
 type I18nEntryDesc struct {
-	Language    *int    `json:"language,omitempty"`    // 语言类型
+	Language *int `json:"language,omitempty"` // 语言类型
+
 	Description *string `json:"description,omitempty"` // 纯文本释义
-	RichText    *string `json:"rich_text,omitempty"`   // 富文本描述
+
+	RichText *string `json:"rich_text,omitempty"` // 富文本描述
 }
 
 type I18nEntryDescBuilder struct {
-	language        int // 语言类型
-	languageFlag    bool
+	language     int // 语言类型
+	languageFlag bool
+
 	description     string // 纯文本释义
 	descriptionFlag bool
-	richText        string // 富文本描述
-	richTextFlag    bool
+
+	richText     string // 富文本描述
+	richTextFlag bool
 }
 
 func NewI18nEntryDescBuilder() *I18nEntryDescBuilder {
@@ -1816,14 +1942,16 @@ func (builder *I18nEntryDescBuilder) Build() *I18nEntryDesc {
 
 type MatchInfo struct {
 	EntityId *string `json:"entity_id,omitempty"` // 实体词 id
-	Type     *int    `json:"type,omitempty"`      // 匹配中的字段
+
+	Type *int `json:"type,omitempty"` // 匹配中的字段
 }
 
 type MatchInfoBuilder struct {
 	entityId     string // 实体词 id
 	entityIdFlag bool
-	type_        int // 匹配中的字段
-	typeFlag     bool
+
+	type_    int // 匹配中的字段
+	typeFlag bool
 }
 
 func NewMatchInfoBuilder() *MatchInfoBuilder {
@@ -1864,14 +1992,16 @@ func (builder *MatchInfoBuilder) Build() *MatchInfo {
 
 type OuterInfo struct {
 	Provider *string `json:"provider,omitempty"` // 数据提供方（不能包含中横线 "-"）
-	OuterId  *string `json:"outer_id,omitempty"` // 唯一标识，可用来和其他平台的内容进行绑定。需保证和百科词条唯一对应（不能包含中横线 "-"）
+
+	OuterId *string `json:"outer_id,omitempty"` // 唯一标识，可用来和其他平台的内容进行绑定。需保证和百科词条唯一对应（不能包含中横线 "-"）
 }
 
 type OuterInfoBuilder struct {
 	provider     string // 数据提供方（不能包含中横线 "-"）
 	providerFlag bool
-	outerId      string // 唯一标识，可用来和其他平台的内容进行绑定。需保证和百科词条唯一对应（不能包含中横线 "-"）
-	outerIdFlag  bool
+
+	outerId     string // 唯一标识，可用来和其他平台的内容进行绑定。需保证和百科词条唯一对应（不能包含中横线 "-"）
+	outerIdFlag bool
 }
 
 func NewOuterInfoBuilder() *OuterInfoBuilder {
@@ -1911,18 +2041,22 @@ func (builder *OuterInfoBuilder) Build() *OuterInfo {
 }
 
 type Phrase struct {
-	Name      *string  `json:"name,omitempty"`       // 文本中切分出的百科词条名称
+	Name *string `json:"name,omitempty"` // 文本中切分出的百科词条名称
+
 	EntityIds []string `json:"entity_ids,omitempty"` // 实体词 id 列表
-	Span      *Span    `json:"span,omitempty"`       // 实体词所在位置
+
+	Span *Span `json:"span,omitempty"` // 实体词所在位置
 }
 
 type PhraseBuilder struct {
-	name          string // 文本中切分出的百科词条名称
-	nameFlag      bool
+	name     string // 文本中切分出的百科词条名称
+	nameFlag bool
+
 	entityIds     []string // 实体词 id 列表
 	entityIdsFlag bool
-	span          *Span // 实体词所在位置
-	spanFlag      bool
+
+	span     *Span // 实体词所在位置
+	spanFlag bool
 }
 
 func NewPhraseBuilder() *PhraseBuilder {
@@ -1973,18 +2107,22 @@ func (builder *PhraseBuilder) Build() *Phrase {
 }
 
 type Referer struct {
-	Id    *string `json:"id,omitempty"`    // 数据 id
+	Id *string `json:"id,omitempty"` // 数据 id
+
 	Title *string `json:"title,omitempty"` // 标题
-	Url   *string `json:"url,omitempty"`   // 链接地址
+
+	Url *string `json:"url,omitempty"` // 链接地址
 }
 
 type RefererBuilder struct {
-	id        string // 数据 id
-	idFlag    bool
+	id     string // 数据 id
+	idFlag bool
+
 	title     string // 标题
 	titleFlag bool
-	url       string // 链接地址
-	urlFlag   bool
+
+	url     string // 链接地址
+	urlFlag bool
 }
 
 func NewRefererBuilder() *RefererBuilder {
@@ -2037,33 +2175,47 @@ func (builder *RefererBuilder) Build() *Referer {
 }
 
 type RelatedMeta struct {
-	Users           []*Referer        `json:"users,omitempty"`           // 关联用户信息
-	Chats           []*Referer        `json:"chats,omitempty"`           // 关联群组信息
-	Docs            []*Referer        `json:"docs,omitempty"`            // 关联文档信息
-	Oncalls         []*Referer        `json:"oncalls,omitempty"`         // 关联值班者信息
-	Links           []*Referer        `json:"links,omitempty"`           // 关联链接信息
-	Abbreviations   []*Abbreviation   `json:"abbreviations,omitempty"`   // 相关词条信息
+	Users []*Referer `json:"users,omitempty"` // 关联用户信息
+
+	Chats []*Referer `json:"chats,omitempty"` // 关联群组信息
+
+	Docs []*Referer `json:"docs,omitempty"` // 关联文档信息
+
+	Oncalls []*Referer `json:"oncalls,omitempty"` // 关联值班者信息
+
+	Links []*Referer `json:"links,omitempty"` // 关联链接信息
+
+	Abbreviations []*Abbreviation `json:"abbreviations,omitempty"` // 相关词条信息
+
 	Classifications []*Classification `json:"classifications,omitempty"` // 所属分类信息（不支持传入一级分类。词条不可同时属于同一个一级分类下的多个二级分类，一级分类下的二级分类互斥）
-	Images          []*BaikeImage     `json:"images,omitempty"`          // 上传的相关图片
+
+	Images []*BaikeImage `json:"images,omitempty"` // 上传的相关图片
 }
 
 type RelatedMetaBuilder struct {
-	users               []*Referer // 关联用户信息
-	usersFlag           bool
-	chats               []*Referer // 关联群组信息
-	chatsFlag           bool
-	docs                []*Referer // 关联文档信息
-	docsFlag            bool
-	oncalls             []*Referer // 关联值班者信息
-	oncallsFlag         bool
-	links               []*Referer // 关联链接信息
-	linksFlag           bool
-	abbreviations       []*Abbreviation // 相关词条信息
-	abbreviationsFlag   bool
+	users     []*Referer // 关联用户信息
+	usersFlag bool
+
+	chats     []*Referer // 关联群组信息
+	chatsFlag bool
+
+	docs     []*Referer // 关联文档信息
+	docsFlag bool
+
+	oncalls     []*Referer // 关联值班者信息
+	oncallsFlag bool
+
+	links     []*Referer // 关联链接信息
+	linksFlag bool
+
+	abbreviations     []*Abbreviation // 相关词条信息
+	abbreviationsFlag bool
+
 	classifications     []*Classification // 所属分类信息（不支持传入一级分类。词条不可同时属于同一个一级分类下的多个二级分类，一级分类下的二级分类互斥）
 	classificationsFlag bool
-	images              []*BaikeImage // 上传的相关图片
-	imagesFlag          bool
+
+	images     []*BaikeImage // 上传的相关图片
+	imagesFlag bool
 }
 
 func NewRelatedMetaBuilder() *RelatedMetaBuilder {
@@ -2173,13 +2325,15 @@ func (builder *RelatedMetaBuilder) Build() *RelatedMeta {
 }
 
 type Repo struct {
-	Id   *string `json:"id,omitempty"`   // 词库 id
+	Id *string `json:"id,omitempty"` // 词库 id
+
 	Name *string `json:"name,omitempty"` // 词库名
 }
 
 type RepoBuilder struct {
-	id       string // 词库 id
-	idFlag   bool
+	id     string // 词库 id
+	idFlag bool
+
 	name     string // 词库名
 	nameFlag bool
 }
@@ -2222,14 +2376,16 @@ func (builder *RepoBuilder) Build() *Repo {
 
 type Span struct {
 	Start *int `json:"start,omitempty"` // 偏移量开始位置，从 0 开始计数（编码格式采用 utf-8）
-	End   *int `json:"end,omitempty"`   // 偏移量结束位置，从 0 开始计数（编码格式采用 utf-8）
+
+	End *int `json:"end,omitempty"` // 偏移量结束位置，从 0 开始计数（编码格式采用 utf-8）
 }
 
 type SpanBuilder struct {
 	start     int // 偏移量开始位置，从 0 开始计数（编码格式采用 utf-8）
 	startFlag bool
-	end       int // 偏移量结束位置，从 0 开始计数（编码格式采用 utf-8）
-	endFlag   bool
+
+	end     int // 偏移量结束位置，从 0 开始计数（编码格式采用 utf-8）
+	endFlag bool
 }
 
 func NewSpanBuilder() *SpanBuilder {
@@ -2269,21 +2425,27 @@ func (builder *SpanBuilder) Build() *Span {
 }
 
 type StatisticalReport struct {
-	DateInterval *int         `json:"date_interval,omitempty"` // 请求时间区间
-	WordInfo     *WordInfo    `json:"word_info,omitempty"`     // 词汇量相关数据
-	CorrectInfo  *CorrectInfo `json:"correct_info,omitempty"`  // 纠错相关数据
-	UpdateDate   *string      `json:"update_date,omitempty"`   // 天维度的时间戳，用于确认数据最近一次更新时间
+	DateInterval *int `json:"date_interval,omitempty"` // 请求时间区间
+
+	WordInfo *WordInfo `json:"word_info,omitempty"` // 词汇量相关数据
+
+	CorrectInfo *CorrectInfo `json:"correct_info,omitempty"` // 纠错相关数据
+
+	UpdateDate *string `json:"update_date,omitempty"` // 天维度的时间戳，用于确认数据最近一次更新时间
 }
 
 type StatisticalReportBuilder struct {
 	dateInterval     int // 请求时间区间
 	dateIntervalFlag bool
-	wordInfo         *WordInfo // 词汇量相关数据
-	wordInfoFlag     bool
-	correctInfo      *CorrectInfo // 纠错相关数据
-	correctInfoFlag  bool
-	updateDate       string // 天维度的时间戳，用于确认数据最近一次更新时间
-	updateDateFlag   bool
+
+	wordInfo     *WordInfo // 词汇量相关数据
+	wordInfoFlag bool
+
+	correctInfo     *CorrectInfo // 纠错相关数据
+	correctInfoFlag bool
+
+	updateDate     string // 天维度的时间戳，用于确认数据最近一次更新时间
+	updateDateFlag bool
 }
 
 func NewStatisticalReportBuilder() *StatisticalReportBuilder {
@@ -2347,13 +2509,15 @@ func (builder *StatisticalReportBuilder) Build() *StatisticalReport {
 }
 
 type Statistics struct {
-	LikeCount    *int `json:"like_count,omitempty"`    // 点赞数量
+	LikeCount *int `json:"like_count,omitempty"` // 点赞数量
+
 	DislikeCount *int `json:"dislike_count,omitempty"` // 点踩数量
 }
 
 type StatisticsBuilder struct {
-	likeCount        int // 点赞数量
-	likeCountFlag    bool
+	likeCount     int // 点赞数量
+	likeCountFlag bool
+
 	dislikeCount     int // 点踩数量
 	dislikeCountFlag bool
 }
@@ -2395,13 +2559,15 @@ func (builder *StatisticsBuilder) Build() *Statistics {
 }
 
 type Term struct {
-	Key           *string        `json:"key,omitempty"`            // 名称
+	Key *string `json:"key,omitempty"` // 名称
+
 	DisplayStatus *DisplayStatus `json:"display_status,omitempty"` // 展示状态
 }
 
 type TermBuilder struct {
-	key               string // 名称
-	keyFlag           bool
+	key     string // 名称
+	keyFlag bool
+
 	displayStatus     *DisplayStatus // 展示状态
 	displayStatusFlag bool
 }
@@ -2442,57 +2608,87 @@ func (builder *TermBuilder) Build() *Term {
 }
 
 type WordInfo struct {
-	InputTotal                   *int     `json:"input_total,omitempty"`                       // 用户输入的总词汇量
-	DedupInputTotal              *int     `json:"dedup_input_total,omitempty"`                 // 用户输入的去重后的总词汇量
-	EachdayInput                 []int    `json:"eachday_input,omitempty"`                     // 时间区间内每一天发送的英文词数，时间是由远到近。以七天数据为例：下标6为昨天，下标5位前天以此类推
-	EachdayDedupInput            []int    `json:"eachday_dedup_input,omitempty"`               // 时间区间内每一天发送的归一化去重后的英文词数，时间是由远到近。以七天数据为例：下标6为昨天，下标5位前天以此类推
-	SendMessageTotal             *int     `json:"send_message_total,omitempty"`                // 发送的消息总数
-	SendEnMessageTotal           *int     `json:"send_en_message_total,omitempty"`             // 发送的英语消息总数
-	ReceiveMessageTotal          *int     `json:"receive_message_total,omitempty"`             // 接收消息的数量
-	ReceiveEnMessageTotal        *int     `json:"receive_en_message_total,omitempty"`          // 接收英文消息的数量
-	HistoryWordsTotal            *int     `json:"history_words_total,omitempty"`               // 历史总计英语词数（包含新增）
-	NewWordsTotal                *int     `json:"new_words_total,omitempty"`                   // 新增英语词数
-	EachdaySendEnMessage         []int    `json:"eachday_send_en_message,omitempty"`           // 时间区间内每一天发送的英语消息数
-	EachdaySendMessage           []int    `json:"eachday_send_message,omitempty"`              // 时间区间内每一天发送的消息数
-	EachdayReceiveEnMessage      []int    `json:"eachday_receive_en_message,omitempty"`        // 时间区间内每一天接收的英文消息数
-	EachdayReceiveMessage        []int    `json:"eachday_receive_message,omitempty"`           // 时间区间内每一天接收的英文消息数
+	InputTotal *int `json:"input_total,omitempty"` // 用户输入的总词汇量
+
+	DedupInputTotal *int `json:"dedup_input_total,omitempty"` // 用户输入的去重后的总词汇量
+
+	EachdayInput []int `json:"eachday_input,omitempty"` // 时间区间内每一天发送的英文词数，时间是由远到近。以七天数据为例：下标6为昨天，下标5位前天以此类推
+
+	EachdayDedupInput []int `json:"eachday_dedup_input,omitempty"` // 时间区间内每一天发送的归一化去重后的英文词数，时间是由远到近。以七天数据为例：下标6为昨天，下标5位前天以此类推
+
+	SendMessageTotal *int `json:"send_message_total,omitempty"` // 发送的消息总数
+
+	SendEnMessageTotal *int `json:"send_en_message_total,omitempty"` // 发送的英语消息总数
+
+	ReceiveMessageTotal *int `json:"receive_message_total,omitempty"` // 接收消息的数量
+
+	ReceiveEnMessageTotal *int `json:"receive_en_message_total,omitempty"` // 接收英文消息的数量
+
+	HistoryWordsTotal *int `json:"history_words_total,omitempty"` // 历史总计英语词数（包含新增）
+
+	NewWordsTotal *int `json:"new_words_total,omitempty"` // 新增英语词数
+
+	EachdaySendEnMessage []int `json:"eachday_send_en_message,omitempty"` // 时间区间内每一天发送的英语消息数
+
+	EachdaySendMessage []int `json:"eachday_send_message,omitempty"` // 时间区间内每一天发送的消息数
+
+	EachdayReceiveEnMessage []int `json:"eachday_receive_en_message,omitempty"` // 时间区间内每一天接收的英文消息数
+
+	EachdayReceiveMessage []int `json:"eachday_receive_message,omitempty"` // 时间区间内每一天接收的英文消息数
+
 	SendEngMessageRateRingGrowth *float64 `json:"send_eng_message_rate_ring_growth,omitempty"` // 发送消息占比环比增长变化
-	SendEngWordsRingGrowth       *int     `json:"send_eng_words_ring_growth,omitempty"`        // 发送英文单词数环比增长变化
+
+	SendEngWordsRingGrowth *int `json:"send_eng_words_ring_growth,omitempty"` // 发送英文单词数环比增长变化
 }
 
 type WordInfoBuilder struct {
-	inputTotal                       int // 用户输入的总词汇量
-	inputTotalFlag                   bool
-	dedupInputTotal                  int // 用户输入的去重后的总词汇量
-	dedupInputTotalFlag              bool
-	eachdayInput                     []int // 时间区间内每一天发送的英文词数，时间是由远到近。以七天数据为例：下标6为昨天，下标5位前天以此类推
-	eachdayInputFlag                 bool
-	eachdayDedupInput                []int // 时间区间内每一天发送的归一化去重后的英文词数，时间是由远到近。以七天数据为例：下标6为昨天，下标5位前天以此类推
-	eachdayDedupInputFlag            bool
-	sendMessageTotal                 int // 发送的消息总数
-	sendMessageTotalFlag             bool
-	sendEnMessageTotal               int // 发送的英语消息总数
-	sendEnMessageTotalFlag           bool
-	receiveMessageTotal              int // 接收消息的数量
-	receiveMessageTotalFlag          bool
-	receiveEnMessageTotal            int // 接收英文消息的数量
-	receiveEnMessageTotalFlag        bool
-	historyWordsTotal                int // 历史总计英语词数（包含新增）
-	historyWordsTotalFlag            bool
-	newWordsTotal                    int // 新增英语词数
-	newWordsTotalFlag                bool
-	eachdaySendEnMessage             []int // 时间区间内每一天发送的英语消息数
-	eachdaySendEnMessageFlag         bool
-	eachdaySendMessage               []int // 时间区间内每一天发送的消息数
-	eachdaySendMessageFlag           bool
-	eachdayReceiveEnMessage          []int // 时间区间内每一天接收的英文消息数
-	eachdayReceiveEnMessageFlag      bool
-	eachdayReceiveMessage            []int // 时间区间内每一天接收的英文消息数
-	eachdayReceiveMessageFlag        bool
+	inputTotal     int // 用户输入的总词汇量
+	inputTotalFlag bool
+
+	dedupInputTotal     int // 用户输入的去重后的总词汇量
+	dedupInputTotalFlag bool
+
+	eachdayInput     []int // 时间区间内每一天发送的英文词数，时间是由远到近。以七天数据为例：下标6为昨天，下标5位前天以此类推
+	eachdayInputFlag bool
+
+	eachdayDedupInput     []int // 时间区间内每一天发送的归一化去重后的英文词数，时间是由远到近。以七天数据为例：下标6为昨天，下标5位前天以此类推
+	eachdayDedupInputFlag bool
+
+	sendMessageTotal     int // 发送的消息总数
+	sendMessageTotalFlag bool
+
+	sendEnMessageTotal     int // 发送的英语消息总数
+	sendEnMessageTotalFlag bool
+
+	receiveMessageTotal     int // 接收消息的数量
+	receiveMessageTotalFlag bool
+
+	receiveEnMessageTotal     int // 接收英文消息的数量
+	receiveEnMessageTotalFlag bool
+
+	historyWordsTotal     int // 历史总计英语词数（包含新增）
+	historyWordsTotalFlag bool
+
+	newWordsTotal     int // 新增英语词数
+	newWordsTotalFlag bool
+
+	eachdaySendEnMessage     []int // 时间区间内每一天发送的英语消息数
+	eachdaySendEnMessageFlag bool
+
+	eachdaySendMessage     []int // 时间区间内每一天发送的消息数
+	eachdaySendMessageFlag bool
+
+	eachdayReceiveEnMessage     []int // 时间区间内每一天接收的英文消息数
+	eachdayReceiveEnMessageFlag bool
+
+	eachdayReceiveMessage     []int // 时间区间内每一天接收的英文消息数
+	eachdayReceiveMessageFlag bool
+
 	sendEngMessageRateRingGrowth     float64 // 发送消息占比环比增长变化
 	sendEngMessageRateRingGrowthFlag bool
-	sendEngWordsRingGrowth           int // 发送英文单词数环比增长变化
-	sendEngWordsRingGrowthFlag       bool
+
+	sendEngWordsRingGrowth     int // 发送英文单词数环比增长变化
+	sendEngWordsRingGrowthFlag bool
 }
 
 func NewWordInfoBuilder() *WordInfoBuilder {
@@ -2766,9 +2962,11 @@ type ListClassificationReq struct {
 }
 
 type ListClassificationRespData struct {
-	Items     []*Classification `json:"items,omitempty"`      // 分类list
-	PageToken *string           `json:"page_token,omitempty"` // 分页标记，当还有下一页时会返回新的 page_token，否则 page_token 为空
-	HasMore   *bool             `json:"has_more,omitempty"`   // 是否有下一页
+	Items []*Classification `json:"items,omitempty"` // 分类list
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当还有下一页时会返回新的 page_token，否则 page_token 为空
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
 }
 
 type ListClassificationResp struct {
@@ -3275,9 +3473,11 @@ type ListEntityReq struct {
 }
 
 type ListEntityRespData struct {
-	Entities  []*Entity `json:"entities,omitempty"`   // 词条列表
-	PageToken *string   `json:"page_token,omitempty"` // 分页标记，当还有下一页时会返回新的 page_token，否则 page_token 为空
-	HasMore   *bool     `json:"has_more,omitempty"`   // 是否有下一页
+	Entities []*Entity `json:"entities,omitempty"` // 词条列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当还有下一页时会返回新的 page_token，否则 page_token 为空
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
 }
 
 type ListEntityResp struct {
@@ -3403,14 +3603,17 @@ func (resp *MatchEntityResp) Success() bool {
 }
 
 type SearchEntityReqBodyBuilder struct {
-	query                    string // 搜索关键词
-	queryFlag                bool
+	query     string // 搜索关键词
+	queryFlag bool
+
 	classificationFilter     *ClassificationFilter // 分类筛选
 	classificationFilterFlag bool
-	sources                  []int // 词条的创建来源，1：用户主动创建，2：批量导入，3：官方词，4：OpenAPI 创建
-	sourcesFlag              bool
-	creators                 []string // 创建者
-	creatorsFlag             bool
+
+	sources     []int // 词条的创建来源，1：用户主动创建，2：批量导入，3：官方词，4：OpenAPI 创建
+	sourcesFlag bool
+
+	creators     []string // 创建者
+	creatorsFlag bool
 }
 
 func NewSearchEntityReqBodyBuilder() *SearchEntityReqBodyBuilder {
@@ -3608,10 +3811,13 @@ func (builder *SearchEntityReqBuilder) Build() *SearchEntityReq {
 }
 
 type SearchEntityReqBody struct {
-	Query                *string               `json:"query,omitempty"`                 // 搜索关键词
+	Query *string `json:"query,omitempty"` // 搜索关键词
+
 	ClassificationFilter *ClassificationFilter `json:"classification_filter,omitempty"` // 分类筛选
-	Sources              []int                 `json:"sources,omitempty"`               // 词条的创建来源，1：用户主动创建，2：批量导入，3：官方词，4：OpenAPI 创建
-	Creators             []string              `json:"creators,omitempty"`              // 创建者
+
+	Sources []int `json:"sources,omitempty"` // 词条的创建来源，1：用户主动创建，2：批量导入，3：官方词，4：OpenAPI 创建
+
+	Creators []string `json:"creators,omitempty"` // 创建者
 }
 
 type SearchEntityReq struct {
@@ -3622,9 +3828,11 @@ type SearchEntityReq struct {
 }
 
 type SearchEntityRespData struct {
-	Entities  []*Entity `json:"entities,omitempty"`   // 数据数组
-	PageToken *string   `json:"page_token,omitempty"` // 分页标记，当还有下一页时会返回新的 page_token，否则 page_token 为空
-	HasMore   *bool     `json:"has_more,omitempty"`   // 是否有下一页
+	Entities []*Entity `json:"entities,omitempty"` // 数据数组
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当还有下一页时会返回新的 page_token，否则 page_token 为空
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
 }
 
 type SearchEntityResp struct {

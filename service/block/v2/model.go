@@ -20,13 +20,15 @@ import (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -64,48 +66,72 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type Entity struct {
-	BlockId     *string `json:"block_id,omitempty"`      // block 唯一标识
-	Title       *string `json:"title,omitempty"`         // 标题
+	BlockId *string `json:"block_id,omitempty"` // block 唯一标识
+
+	Title *string `json:"title,omitempty"` // 标题
+
 	BlockTypeId *string `json:"block_type_id,omitempty"` // block 类型ID
-	SourceData  *string `json:"source_data,omitempty"`   // 业务数据 json
-	SourceMeta  *string `json:"source_meta,omitempty"`   // 元数据 json
-	Version     *string `json:"version,omitempty"`       // 版本号(自增)
-	SourceLink  *string `json:"source_link,omitempty"`   // 链接
-	Summary     *string `json:"summary,omitempty"`       // 总括
-	Preview     *string `json:"preview,omitempty"`       // 预览
-	I18nSummay  *string `json:"i18n_summay,omitempty"`   // 综述 json
-	I18nPreview *string `json:"i18n_preview,omitempty"`  // 预览 json
-	Owner       *string `json:"owner,omitempty"`         // 所有者
-	Extra       *string `json:"extra,omitempty"`         // 扩展字段 json
+
+	SourceData *string `json:"source_data,omitempty"` // 业务数据 json
+
+	SourceMeta *string `json:"source_meta,omitempty"` // 元数据 json
+
+	Version *string `json:"version,omitempty"` // 版本号(自增)
+
+	SourceLink *string `json:"source_link,omitempty"` // 链接
+
+	Summary *string `json:"summary,omitempty"` // 总括
+
+	Preview *string `json:"preview,omitempty"` // 预览
+
+	I18nSummay *string `json:"i18n_summay,omitempty"` // 综述 json
+
+	I18nPreview *string `json:"i18n_preview,omitempty"` // 预览 json
+
+	Owner *string `json:"owner,omitempty"` // 所有者
+
+	Extra *string `json:"extra,omitempty"` // 扩展字段 json
 }
 
 type EntityBuilder struct {
-	blockId         string // block 唯一标识
-	blockIdFlag     bool
-	title           string // 标题
-	titleFlag       bool
+	blockId     string // block 唯一标识
+	blockIdFlag bool
+
+	title     string // 标题
+	titleFlag bool
+
 	blockTypeId     string // block 类型ID
 	blockTypeIdFlag bool
-	sourceData      string // 业务数据 json
-	sourceDataFlag  bool
-	sourceMeta      string // 元数据 json
-	sourceMetaFlag  bool
-	version         string // 版本号(自增)
-	versionFlag     bool
-	sourceLink      string // 链接
-	sourceLinkFlag  bool
-	summary         string // 总括
-	summaryFlag     bool
-	preview         string // 预览
-	previewFlag     bool
-	i18nSummay      string // 综述 json
-	i18nSummayFlag  bool
+
+	sourceData     string // 业务数据 json
+	sourceDataFlag bool
+
+	sourceMeta     string // 元数据 json
+	sourceMetaFlag bool
+
+	version     string // 版本号(自增)
+	versionFlag bool
+
+	sourceLink     string // 链接
+	sourceLinkFlag bool
+
+	summary     string // 总括
+	summaryFlag bool
+
+	preview     string // 预览
+	previewFlag bool
+
+	i18nSummay     string // 综述 json
+	i18nSummayFlag bool
+
 	i18nPreview     string // 预览 json
 	i18nPreviewFlag bool
-	owner           string // 所有者
-	ownerFlag       bool
-	extra           string // 扩展字段 json
-	extraFlag       bool
+
+	owner     string // 所有者
+	ownerFlag bool
+
+	extra     string // 扩展字段 json
+	extraFlag bool
 }
 
 func NewEntityBuilder() *EntityBuilder {
@@ -288,24 +314,32 @@ func (builder *EntityBuilder) Build() *Entity {
 }
 
 type Message struct {
-	Body     *string  `json:"body,omitempty"`     // 协同数据内容
-	Version  *string  `json:"version,omitempty"`  // 版本号(自增)
-	BlockId  *string  `json:"block_id,omitempty"` // entity实体ID
-	Resource *string  `json:"resource,omitempty"` // 业务来源
-	OpenIds  []string `json:"open_ids,omitempty"` // 推送用户列表
+	Body *string `json:"body,omitempty"` // 协同数据内容
+
+	Version *string `json:"version,omitempty"` // 版本号(自增)
+
+	BlockId *string `json:"block_id,omitempty"` // entity实体ID
+
+	Resource *string `json:"resource,omitempty"` // 业务来源
+
+	OpenIds []string `json:"open_ids,omitempty"` // 推送用户列表
 }
 
 type MessageBuilder struct {
-	body         string // 协同数据内容
-	bodyFlag     bool
-	version      string // 版本号(自增)
-	versionFlag  bool
-	blockId      string // entity实体ID
-	blockIdFlag  bool
+	body     string // 协同数据内容
+	bodyFlag bool
+
+	version     string // 版本号(自增)
+	versionFlag bool
+
+	blockId     string // entity实体ID
+	blockIdFlag bool
+
 	resource     string // 业务来源
 	resourceFlag bool
-	openIds      []string // 推送用户列表
-	openIdsFlag  bool
+
+	openIds     []string // 推送用户列表
+	openIdsFlag bool
 }
 
 func NewMessageBuilder() *MessageBuilder {
@@ -383,30 +417,41 @@ func (builder *MessageBuilder) Build() *Message {
 }
 
 type CreateEntityReqBodyBuilder struct {
-	title           string // 标题
-	titleFlag       bool
+	title     string // 标题
+	titleFlag bool
+
 	blockTypeId     string // block 类型ID
 	blockTypeIdFlag bool
-	sourceData      string // 内容
-	sourceDataFlag  bool
-	sourceMeta      string // 元数据
-	sourceMetaFlag  bool
-	version         string // 版本号(自增值)
-	versionFlag     bool
-	sourceLink      string // block原链接
-	sourceLinkFlag  bool
-	owner           string // 所有者
-	ownerFlag       bool
-	extra           string // 扩展字段
-	extraFlag       bool
+
+	sourceData     string // 内容
+	sourceDataFlag bool
+
+	sourceMeta     string // 元数据
+	sourceMetaFlag bool
+
+	version     string // 版本号(自增值)
+	versionFlag bool
+
+	sourceLink     string // block原链接
+	sourceLinkFlag bool
+
+	owner     string // 所有者
+	ownerFlag bool
+
+	extra     string // 扩展字段
+	extraFlag bool
+
 	i18nSummary     string // 国际化概括
 	i18nSummaryFlag bool
+
 	i18nPreview     string // 国际化预览
 	i18nPreviewFlag bool
-	summary         string // 概括
-	summaryFlag     bool
-	preview         string // 预览
-	previewFlag     bool
+
+	summary     string // 概括
+	summaryFlag bool
+
+	preview     string // 预览
+	previewFlag bool
 }
 
 func NewCreateEntityReqBodyBuilder() *CreateEntityReqBodyBuilder {
@@ -772,18 +817,29 @@ func (builder *CreateEntityReqBuilder) Build() *CreateEntityReq {
 }
 
 type CreateEntityReqBody struct {
-	Title       *string `json:"title,omitempty"`         // 标题
+	Title *string `json:"title,omitempty"` // 标题
+
 	BlockTypeId *string `json:"block_type_id,omitempty"` // block 类型ID
-	SourceData  *string `json:"source_data,omitempty"`   // 内容
-	SourceMeta  *string `json:"source_meta,omitempty"`   // 元数据
-	Version     *string `json:"version,omitempty"`       // 版本号(自增值)
-	SourceLink  *string `json:"source_link,omitempty"`   // block原链接
-	Owner       *string `json:"owner,omitempty"`         // 所有者
-	Extra       *string `json:"extra,omitempty"`         // 扩展字段
-	I18nSummary *string `json:"i18n_summary,omitempty"`  // 国际化概括
-	I18nPreview *string `json:"i18n_preview,omitempty"`  // 国际化预览
-	Summary     *string `json:"summary,omitempty"`       // 概括
-	Preview     *string `json:"preview,omitempty"`       // 预览
+
+	SourceData *string `json:"source_data,omitempty"` // 内容
+
+	SourceMeta *string `json:"source_meta,omitempty"` // 元数据
+
+	Version *string `json:"version,omitempty"` // 版本号(自增值)
+
+	SourceLink *string `json:"source_link,omitempty"` // block原链接
+
+	Owner *string `json:"owner,omitempty"` // 所有者
+
+	Extra *string `json:"extra,omitempty"` // 扩展字段
+
+	I18nSummary *string `json:"i18n_summary,omitempty"` // 国际化概括
+
+	I18nPreview *string `json:"i18n_preview,omitempty"` // 国际化预览
+
+	Summary *string `json:"summary,omitempty"` // 概括
+
+	Preview *string `json:"preview,omitempty"` // 预览
 }
 
 type CreateEntityReq struct {

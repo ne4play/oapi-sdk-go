@@ -24,17 +24,21 @@ import (
 
 type AilyKnowledgeAskProcessData struct {
 	ChartDsls []string `json:"chart_dsls,omitempty"` // 有数据分析时，根据数据生成的图表描述，按markdown语义描述
-	Chunks    []string `json:"chunks,omitempty"`     // 召回的知识视图切片的文本数据
-	SqlData   []string `json:"sql_data,omitempty"`   // 有数据分析时，查询到数据结果，每个元素为 json 序列化后的数据结果
+
+	Chunks []string `json:"chunks,omitempty"` // 召回的知识视图切片的文本数据
+
+	SqlData []string `json:"sql_data,omitempty"` // 有数据分析时，查询到数据结果，每个元素为 json 序列化后的数据结果
 }
 
 type AilyKnowledgeAskProcessDataBuilder struct {
 	chartDsls     []string // 有数据分析时，根据数据生成的图表描述，按markdown语义描述
 	chartDslsFlag bool
-	chunks        []string // 召回的知识视图切片的文本数据
-	chunksFlag    bool
-	sqlData       []string // 有数据分析时，查询到数据结果，每个元素为 json 序列化后的数据结果
-	sqlDataFlag   bool
+
+	chunks     []string // 召回的知识视图切片的文本数据
+	chunksFlag bool
+
+	sqlData     []string // 有数据分析时，查询到数据结果，每个元素为 json 序列化后的数据结果
+	sqlDataFlag bool
 }
 
 func NewAilyKnowledgeAskProcessDataBuilder() *AilyKnowledgeAskProcessDataBuilder {
@@ -85,14 +89,16 @@ func (builder *AilyKnowledgeAskProcessDataBuilder) Build() *AilyKnowledgeAskProc
 
 type AilyKnowledgeDataset struct {
 	ApiName *string `json:"api_name,omitempty"` // 分析表ID
-	Title   *string `json:"title,omitempty"`    // 分析表标题
+
+	Title *string `json:"title,omitempty"` // 分析表标题
 }
 
 type AilyKnowledgeDatasetBuilder struct {
 	apiName     string // 分析表ID
 	apiNameFlag bool
-	title       string // 分析表标题
-	titleFlag   bool
+
+	title     string // 分析表标题
+	titleFlag bool
 }
 
 func NewAilyKnowledgeDatasetBuilder() *AilyKnowledgeDatasetBuilder {
@@ -133,14 +139,16 @@ func (builder *AilyKnowledgeDatasetBuilder) Build() *AilyKnowledgeDataset {
 
 type AilyKnowledgeDatatable struct {
 	ApiName *string `json:"api_name,omitempty"` // 数据表ID
-	Title   *string `json:"title,omitempty"`    // 数据表标题
+
+	Title *string `json:"title,omitempty"` // 数据表标题
 }
 
 type AilyKnowledgeDatatableBuilder struct {
 	apiName     string // 数据表ID
 	apiNameFlag bool
-	title       string // 数据表标题
-	titleFlag   bool
+
+	title     string // 数据表标题
+	titleFlag bool
 }
 
 func NewAilyKnowledgeDatatableBuilder() *AilyKnowledgeDatatableBuilder {
@@ -181,20 +189,26 @@ func (builder *AilyKnowledgeDatatableBuilder) Build() *AilyKnowledgeDatatable {
 
 type AilyKnowledgeDocs struct {
 	Title *string `json:"title,omitempty"` // 标题
-	Type  *string `json:"type,omitempty"`  // 飞书云文档类型
+
+	Type *string `json:"type,omitempty"` // 飞书云文档类型
+
 	Token *string `json:"token,omitempty"` // 飞书云文档标识
-	Url   *string `json:"url,omitempty"`   // 链接
+
+	Url *string `json:"url,omitempty"` // 链接
 }
 
 type AilyKnowledgeDocsBuilder struct {
 	title     string // 标题
 	titleFlag bool
-	type_     string // 飞书云文档类型
-	typeFlag  bool
+
+	type_    string // 飞书云文档类型
+	typeFlag bool
+
 	token     string // 飞书云文档标识
 	tokenFlag bool
-	url       string // 链接
-	urlFlag   bool
+
+	url     string // 链接
+	urlFlag bool
 }
 
 func NewAilyKnowledgeDocsBuilder() *AilyKnowledgeDocsBuilder {
@@ -261,14 +275,16 @@ func (builder *AilyKnowledgeDocsBuilder) Build() *AilyKnowledgeDocs {
 
 type AilyKnowledgeFaq struct {
 	Question *string `json:"question,omitempty"` // 匹配问题
-	Answer   *string `json:"answer,omitempty"`   // 匹配描述
+
+	Answer *string `json:"answer,omitempty"` // 匹配描述
 }
 
 type AilyKnowledgeFaqBuilder struct {
 	question     string // 匹配问题
 	questionFlag bool
-	answer       string // 匹配描述
-	answerFlag   bool
+
+	answer     string // 匹配描述
+	answerFlag bool
 }
 
 func NewAilyKnowledgeFaqBuilder() *AilyKnowledgeFaqBuilder {
@@ -308,19 +324,25 @@ func (builder *AilyKnowledgeFaqBuilder) Build() *AilyKnowledgeFaq {
 }
 
 type AilyKnowledgeFile struct {
-	Title     *string `json:"title,omitempty"`      // 标题
-	MimeType  *string `json:"mime_type,omitempty"`  // 文件mime类型
-	Content   *string `json:"content,omitempty"`    // 文件内容
+	Title *string `json:"title,omitempty"` // 标题
+
+	MimeType *string `json:"mime_type,omitempty"` // 文件mime类型
+
+	Content *string `json:"content,omitempty"` // 文件内容
+
 	SourceUrl *string `json:"source_url,omitempty"` // 文件来源URL
 }
 
 type AilyKnowledgeFileBuilder struct {
-	title         string // 标题
-	titleFlag     bool
-	mimeType      string // 文件mime类型
-	mimeTypeFlag  bool
-	content       string // 文件内容
-	contentFlag   bool
+	title     string // 标题
+	titleFlag bool
+
+	mimeType     string // 文件mime类型
+	mimeTypeFlag bool
+
+	content     string // 文件内容
+	contentFlag bool
+
 	sourceUrl     string // 文件来源URL
 	sourceUrlFlag bool
 }
@@ -389,17 +411,21 @@ func (builder *AilyKnowledgeFileBuilder) Build() *AilyKnowledgeFile {
 
 type AilyKnowledgeFolder struct {
 	Title *string `json:"title,omitempty"` // 文件夹标题
+
 	Token *string `json:"token,omitempty"` // 文件夹标识
-	Url   *string `json:"url,omitempty"`   // 链接
+
+	Url *string `json:"url,omitempty"` // 链接
 }
 
 type AilyKnowledgeFolderBuilder struct {
 	title     string // 文件夹标题
 	titleFlag bool
+
 	token     string // 文件夹标识
 	tokenFlag bool
-	url       string // 链接
-	urlFlag   bool
+
+	url     string // 链接
+	urlFlag bool
 }
 
 func NewAilyKnowledgeFolderBuilder() *AilyKnowledgeFolderBuilder {
@@ -453,14 +479,16 @@ func (builder *AilyKnowledgeFolderBuilder) Build() *AilyKnowledgeFolder {
 
 type AilyKnowledgeHelpdesk struct {
 	HelpdeskId *string `json:"helpdesk_id,omitempty"` // 服务台ID
-	Title      *string `json:"title,omitempty"`       // 服务台标题
+
+	Title *string `json:"title,omitempty"` // 服务台标题
 }
 
 type AilyKnowledgeHelpdeskBuilder struct {
 	helpdeskId     string // 服务台ID
 	helpdeskIdFlag bool
-	title          string // 服务台标题
-	titleFlag      bool
+
+	title     string // 服务台标题
+	titleFlag bool
 }
 
 func NewAilyKnowledgeHelpdeskBuilder() *AilyKnowledgeHelpdeskBuilder {
@@ -532,13 +560,15 @@ func (builder *AilyKnowledgeMessageBuilder) Build() *AilyKnowledgeMessage {
 }
 
 type AilyKnowledgeWeb struct {
-	Url   *string `json:"url,omitempty"`   // 链接
+	Url *string `json:"url,omitempty"` // 链接
+
 	Title *string `json:"title,omitempty"` // 网页标题
 }
 
 type AilyKnowledgeWebBuilder struct {
-	url       string // 链接
-	urlFlag   bool
+	url     string // 链接
+	urlFlag bool
+
 	title     string // 网页标题
 	titleFlag bool
 }
@@ -580,16 +610,20 @@ func (builder *AilyKnowledgeWebBuilder) Build() *AilyKnowledgeWeb {
 }
 
 type AilyKnowledgeWikiSpace struct {
-	Title   *string              `json:"title,omitempty"`    // 知识空间标题
-	SpaceId *string              `json:"space_id,omitempty"` // 知识空间ID
+	Title *string `json:"title,omitempty"` // 知识空间标题
+
+	SpaceId *string `json:"space_id,omitempty"` // 知识空间ID
+
 	SubDocs []*AilyKnowledgeDocs `json:"sub_docs,omitempty"` // 子节点
 }
 
 type AilyKnowledgeWikiSpaceBuilder struct {
-	title       string // 知识空间标题
-	titleFlag   bool
+	title     string // 知识空间标题
+	titleFlag bool
+
 	spaceId     string // 知识空间ID
 	spaceIdFlag bool
+
 	subDocs     []*AilyKnowledgeDocs // 子节点
 	subDocsFlag bool
 }
@@ -643,24 +677,32 @@ func (builder *AilyKnowledgeWikiSpaceBuilder) Build() *AilyKnowledgeWikiSpace {
 }
 
 type AilyMention struct {
-	EntityId         *string `json:"entity_id,omitempty"`         // 实体 ID
+	EntityId *string `json:"entity_id,omitempty"` // 实体 ID
+
 	IdentityProvider *string `json:"identity_provider,omitempty"` // 身份提供者
-	Key              *string `json:"key,omitempty"`               // 被@实体在消息体中的占位符
-	Name             *string `json:"name,omitempty"`              // 被@实体的名称
-	AilyId           *string `json:"aily_id,omitempty"`           // Aily 账号体系下的 ID
+
+	Key *string `json:"key,omitempty"` // 被@实体在消息体中的占位符
+
+	Name *string `json:"name,omitempty"` // 被@实体的名称
+
+	AilyId *string `json:"aily_id,omitempty"` // Aily 账号体系下的 ID
 }
 
 type AilyMentionBuilder struct {
-	entityId             string // 实体 ID
-	entityIdFlag         bool
+	entityId     string // 实体 ID
+	entityIdFlag bool
+
 	identityProvider     string // 身份提供者
 	identityProviderFlag bool
-	key                  string // 被@实体在消息体中的占位符
-	keyFlag              bool
-	name                 string // 被@实体的名称
-	nameFlag             bool
-	ailyId               string // Aily 账号体系下的 ID
-	ailyIdFlag           bool
+
+	key     string // 被@实体在消息体中的占位符
+	keyFlag bool
+
+	name     string // 被@实体的名称
+	nameFlag bool
+
+	ailyId     string // Aily 账号体系下的 ID
+	ailyIdFlag bool
 }
 
 func NewAilyMentionBuilder() *AilyMentionBuilder {
@@ -739,45 +781,67 @@ func (builder *AilyMentionBuilder) Build() *AilyMention {
 }
 
 type AilyMessage struct {
-	Id             *string            `json:"id,omitempty"`               // 消息 ID
-	SessionId      *string            `json:"session_id,omitempty"`       // 会话 ID
-	RunId          *string            `json:"run_id,omitempty"`           // 运行 ID
-	ContentType    *string            `json:"content_type,omitempty"`     // 消息内容类型
-	Content        *string            `json:"content,omitempty"`          // 消息内容
-	Files          []*AilyMessageFile `json:"files,omitempty"`            // 消息中包含的文件
-	QuoteMessageId *string            `json:"quote_message_id,omitempty"` // 引用的消息 ID
-	Sender         *AilySender        `json:"sender,omitempty"`           // 发送者
-	Mentions       []*AilyMention     `json:"mentions,omitempty"`         // 被@的实体
-	PlainText      *string            `json:"plain_text,omitempty"`       // 消息体的纯文本表达
-	CreatedAt      *string            `json:"created_at,omitempty"`       // 消息的创建时间，毫秒时间戳
-	Status         *string            `json:"status,omitempty"`           // 状态
+	Id *string `json:"id,omitempty"` // 消息 ID
+
+	SessionId *string `json:"session_id,omitempty"` // 会话 ID
+
+	RunId *string `json:"run_id,omitempty"` // 运行 ID
+
+	ContentType *string `json:"content_type,omitempty"` // 消息内容类型
+
+	Content *string `json:"content,omitempty"` // 消息内容
+
+	Files []*AilyMessageFile `json:"files,omitempty"` // 消息中包含的文件
+
+	QuoteMessageId *string `json:"quote_message_id,omitempty"` // 引用的消息 ID
+
+	Sender *AilySender `json:"sender,omitempty"` // 发送者
+
+	Mentions []*AilyMention `json:"mentions,omitempty"` // 被@的实体
+
+	PlainText *string `json:"plain_text,omitempty"` // 消息体的纯文本表达
+
+	CreatedAt *string `json:"created_at,omitempty"` // 消息的创建时间，毫秒时间戳
+
+	Status *string `json:"status,omitempty"` // 状态
 }
 
 type AilyMessageBuilder struct {
-	id                 string // 消息 ID
-	idFlag             bool
-	sessionId          string // 会话 ID
-	sessionIdFlag      bool
-	runId              string // 运行 ID
-	runIdFlag          bool
-	contentType        string // 消息内容类型
-	contentTypeFlag    bool
-	content            string // 消息内容
-	contentFlag        bool
-	files              []*AilyMessageFile // 消息中包含的文件
-	filesFlag          bool
+	id     string // 消息 ID
+	idFlag bool
+
+	sessionId     string // 会话 ID
+	sessionIdFlag bool
+
+	runId     string // 运行 ID
+	runIdFlag bool
+
+	contentType     string // 消息内容类型
+	contentTypeFlag bool
+
+	content     string // 消息内容
+	contentFlag bool
+
+	files     []*AilyMessageFile // 消息中包含的文件
+	filesFlag bool
+
 	quoteMessageId     string // 引用的消息 ID
 	quoteMessageIdFlag bool
-	sender             *AilySender // 发送者
-	senderFlag         bool
-	mentions           []*AilyMention // 被@的实体
-	mentionsFlag       bool
-	plainText          string // 消息体的纯文本表达
-	plainTextFlag      bool
-	createdAt          string // 消息的创建时间，毫秒时间戳
-	createdAtFlag      bool
-	status             string // 状态
-	statusFlag         bool
+
+	sender     *AilySender // 发送者
+	senderFlag bool
+
+	mentions     []*AilyMention // 被@的实体
+	mentionsFlag bool
+
+	plainText     string // 消息体的纯文本表达
+	plainTextFlag bool
+
+	createdAt     string // 消息的创建时间，毫秒时间戳
+	createdAtFlag bool
+
+	status     string // 状态
+	statusFlag bool
 }
 
 func NewAilyMessageBuilder() *AilyMessageBuilder {
@@ -944,25 +1008,35 @@ func (builder *AilyMessageBuilder) Build() *AilyMessage {
 }
 
 type AilyMessageFile struct {
-	Id         *string                 `json:"id,omitempty"`          // 文件 ID
-	MimeType   *string                 `json:"mime_type,omitempty"`   // 文件类型，参见 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-	FileName   *string                 `json:"file_name,omitempty"`   // 文件名
-	Metadata   *string                 `json:"metadata,omitempty"`    // 其他透传信息
-	CreatedAt  *string                 `json:"created_at,omitempty"`  // 文件的创建时间，毫秒时间戳
+	Id *string `json:"id,omitempty"` // 文件 ID
+
+	MimeType *string `json:"mime_type,omitempty"` // 文件类型，参见 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+
+	FileName *string `json:"file_name,omitempty"` // 文件名
+
+	Metadata *string `json:"metadata,omitempty"` // 其他透传信息
+
+	CreatedAt *string `json:"created_at,omitempty"` // 文件的创建时间，毫秒时间戳
+
 	PreviewUrl *AilyMessageFilePreview `json:"preview_url,omitempty"` // 文件预览链接
 }
 
 type AilyMessageFileBuilder struct {
-	id             string // 文件 ID
-	idFlag         bool
-	mimeType       string // 文件类型，参见 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-	mimeTypeFlag   bool
-	fileName       string // 文件名
-	fileNameFlag   bool
-	metadata       string // 其他透传信息
-	metadataFlag   bool
-	createdAt      string // 文件的创建时间，毫秒时间戳
-	createdAtFlag  bool
+	id     string // 文件 ID
+	idFlag bool
+
+	mimeType     string // 文件类型，参见 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+	mimeTypeFlag bool
+
+	fileName     string // 文件名
+	fileNameFlag bool
+
+	metadata     string // 其他透传信息
+	metadataFlag bool
+
+	createdAt     string // 文件的创建时间，毫秒时间戳
+	createdAtFlag bool
+
 	previewUrl     *AilyMessageFilePreview // 文件预览链接
 	previewUrlFlag bool
 }
@@ -1087,13 +1161,15 @@ func (builder *AilyMessageFileFilterBuilder) Build() *AilyMessageFileFilter {
 }
 
 type AilyMessageFilePreview struct {
-	Url       *string `json:"url,omitempty"`        // 文件的 URL
+	Url *string `json:"url,omitempty"` // 文件的 URL
+
 	ExpiredAt *string `json:"expired_at,omitempty"` // url 过期时间，秒时间戳
 }
 
 type AilyMessageFilePreviewBuilder struct {
-	url           string // 文件的 URL
-	urlFlag       bool
+	url     string // 文件的 URL
+	urlFlag bool
+
 	expiredAt     string // url 过期时间，秒时间戳
 	expiredAtFlag bool
 }
@@ -1135,13 +1211,15 @@ func (builder *AilyMessageFilePreviewBuilder) Build() *AilyMessageFilePreview {
 }
 
 type AilyMessageFilter struct {
-	RunId              *string `json:"run_id,omitempty"`               // 运行 ID
-	WithPartialMessage *bool   `json:"with_partial_message,omitempty"` // 返回生成中的消息
+	RunId *string `json:"run_id,omitempty"` // 运行 ID
+
+	WithPartialMessage *bool `json:"with_partial_message,omitempty"` // 返回生成中的消息
 }
 
 type AilyMessageFilterBuilder struct {
-	runId                  string // 运行 ID
-	runIdFlag              bool
+	runId     string // 运行 ID
+	runIdFlag bool
+
 	withPartialMessage     bool // 返回生成中的消息
 	withPartialMessageFlag bool
 }
@@ -1183,21 +1261,27 @@ func (builder *AilyMessageFilterBuilder) Build() *AilyMessageFilter {
 }
 
 type AilySender struct {
-	EntityId         *string `json:"entity_id,omitempty"`         // 实体 ID
+	EntityId *string `json:"entity_id,omitempty"` // 实体 ID
+
 	IdentityProvider *string `json:"identity_provider,omitempty"` // 身份提供者
-	SenderType       *string `json:"sender_type,omitempty"`       // 发送人类型
-	AilyId           *string `json:"aily_id,omitempty"`           // Aily 账号体系下的 ID
+
+	SenderType *string `json:"sender_type,omitempty"` // 发送人类型
+
+	AilyId *string `json:"aily_id,omitempty"` // Aily 账号体系下的 ID
 }
 
 type AilySenderBuilder struct {
-	entityId             string // 实体 ID
-	entityIdFlag         bool
+	entityId     string // 实体 ID
+	entityIdFlag bool
+
 	identityProvider     string // 身份提供者
 	identityProviderFlag bool
-	senderType           string // 发送人类型
-	senderTypeFlag       bool
-	ailyId               string // Aily 账号体系下的 ID
-	ailyIdFlag           bool
+
+	senderType     string // 发送人类型
+	senderTypeFlag bool
+
+	ailyId     string // Aily 账号体系下的 ID
+	ailyIdFlag bool
 }
 
 func NewAilySenderBuilder() *AilySenderBuilder {
@@ -1263,27 +1347,37 @@ func (builder *AilySenderBuilder) Build() *AilySender {
 }
 
 type AilySession struct {
-	Id             *string `json:"id,omitempty"`              // 会话 ID
-	CreatedAt      *string `json:"created_at,omitempty"`      // 会话的创建时间，毫秒时间戳
-	ModifiedAt     *string `json:"modified_at,omitempty"`     // 会话的上次更新时间，毫秒时间戳
-	CreatedBy      *string `json:"created_by,omitempty"`      // 会话的创建人
+	Id *string `json:"id,omitempty"` // 会话 ID
+
+	CreatedAt *string `json:"created_at,omitempty"` // 会话的创建时间，毫秒时间戳
+
+	ModifiedAt *string `json:"modified_at,omitempty"` // 会话的上次更新时间，毫秒时间戳
+
+	CreatedBy *string `json:"created_by,omitempty"` // 会话的创建人
+
 	ChannelContext *string `json:"channel_context,omitempty"` // 渠道上下文
-	Metadata       *string `json:"metadata,omitempty"`        // 其他透传信息
+
+	Metadata *string `json:"metadata,omitempty"` // 其他透传信息
 }
 
 type AilySessionBuilder struct {
-	id                 string // 会话 ID
-	idFlag             bool
-	createdAt          string // 会话的创建时间，毫秒时间戳
-	createdAtFlag      bool
-	modifiedAt         string // 会话的上次更新时间，毫秒时间戳
-	modifiedAtFlag     bool
-	createdBy          string // 会话的创建人
-	createdByFlag      bool
+	id     string // 会话 ID
+	idFlag bool
+
+	createdAt     string // 会话的创建时间，毫秒时间戳
+	createdAtFlag bool
+
+	modifiedAt     string // 会话的上次更新时间，毫秒时间戳
+	modifiedAtFlag bool
+
+	createdBy     string // 会话的创建人
+	createdByFlag bool
+
 	channelContext     string // 渠道上下文
 	channelContextFlag bool
-	metadata           string // 其他透传信息
-	metadataFlag       bool
+
+	metadata     string // 其他透传信息
+	metadataFlag bool
 }
 
 func NewAilySessionBuilder() *AilySessionBuilder {
@@ -1375,13 +1469,15 @@ func (builder *AilySessionBuilder) Build() *AilySession {
 }
 
 type App struct {
-	Id    *string `json:"id,omitempty"`    // aily app_id
+	Id *string `json:"id,omitempty"` // aily app_id
+
 	Label *string `json:"label,omitempty"` // 应用名称
 }
 
 type AppBuilder struct {
-	id        string // aily app_id
-	idFlag    bool
+	id     string // aily app_id
+	idFlag bool
+
 	label     string // 应用名称
 	labelFlag bool
 }
@@ -1424,20 +1520,26 @@ func (builder *AppBuilder) Build() *App {
 
 type BuiltinAction struct {
 	BuiltinActionType *string `json:"builtin_action_type,omitempty"` // 内置的消息交互类型
-	Enable            *bool   `json:"enable,omitempty"`              // 是否可交互
-	ActionStatus      *string `json:"action_status,omitempty"`       // action 状态
-	Extra             *string `json:"extra,omitempty"`               // action 的其它信息
+
+	Enable *bool `json:"enable,omitempty"` // 是否可交互
+
+	ActionStatus *string `json:"action_status,omitempty"` // action 状态
+
+	Extra *string `json:"extra,omitempty"` // action 的其它信息
 }
 
 type BuiltinActionBuilder struct {
 	builtinActionType     string // 内置的消息交互类型
 	builtinActionTypeFlag bool
-	enable                bool // 是否可交互
-	enableFlag            bool
-	actionStatus          string // action 状态
-	actionStatusFlag      bool
-	extra                 string // action 的其它信息
-	extraFlag             bool
+
+	enable     bool // 是否可交互
+	enableFlag bool
+
+	actionStatus     string // action 状态
+	actionStatusFlag bool
+
+	extra     string // action 的其它信息
+	extraFlag bool
 }
 
 func NewBuiltinActionBuilder() *BuiltinActionBuilder {
@@ -1535,42 +1637,65 @@ func (builder *ChannelBuilder) Build() *Channel {
 }
 
 type DataAsset struct {
-	DataAssetId         *string           `json:"data_asset_id,omitempty"`         // 数据知识ID
-	Label               map[string]string `json:"label,omitempty"`                 // 数据知识标题
-	Description         map[string]string `json:"description,omitempty"`           // 数据知识描述
-	DataSourceType      *string           `json:"data_source_type,omitempty"`      // 数据资源类型
-	ConnectStatus       *string           `json:"connect_status,omitempty"`        // 数据连接状态
-	Tags                []*DataAssetTag   `json:"tags,omitempty"`                  // 数据知识分类列表
-	Items               []*DataAssetItem  `json:"items,omitempty"`                 // 数据知识项列表
-	ConnectFailedReason *string           `json:"connect_failed_reason,omitempty"` // 连接状态失败信息
+	DataAssetId *string `json:"data_asset_id,omitempty"` // 数据知识ID
+
+	Label map[string]string `json:"label,omitempty"` // 数据知识标题
+
+	Description map[string]string `json:"description,omitempty"` // 数据知识描述
+
+	DataSourceType *string `json:"data_source_type,omitempty"` // 数据资源类型
+
+	ConnectStatus *string `json:"connect_status,omitempty"` // 数据连接状态
+
+	Tags []*DataAssetTag `json:"tags,omitempty"` // 数据知识分类列表
+
+	Items []*DataAssetItem `json:"items,omitempty"` // 数据知识项列表
+
+	ConnectFailedReason *string `json:"connect_failed_reason,omitempty"` // 连接状态失败信息
+
+	ImportKnowledgeSetting *DataAssetImportKnowledgeSetting `json:"import_knowledge_setting,omitempty"` // 知识导入配置
 
 	ConnectType *string `json:"connect_type,omitempty"` // 数据连接类型
+
 	CreatedTime *string `json:"created_time,omitempty"` // 创建时间，毫秒时间戳
+
 	UpdatedTime *string `json:"updated_time,omitempty"` // 更新时间，毫秒时间戳
 }
 
 type DataAssetBuilder struct {
-	dataAssetId             string // 数据知识ID
-	dataAssetIdFlag         bool
-	label                   map[string]string // 数据知识标题
-	labelFlag               bool
-	description             map[string]string // 数据知识描述
-	descriptionFlag         bool
-	dataSourceType          string // 数据资源类型
-	dataSourceTypeFlag      bool
-	connectStatus           string // 数据连接状态
-	connectStatusFlag       bool
-	tags                    []*DataAssetTag // 数据知识分类列表
-	tagsFlag                bool
-	items                   []*DataAssetItem // 数据知识项列表
-	itemsFlag               bool
+	dataAssetId     string // 数据知识ID
+	dataAssetIdFlag bool
+
+	label     map[string]string // 数据知识标题
+	labelFlag bool
+
+	description     map[string]string // 数据知识描述
+	descriptionFlag bool
+
+	dataSourceType     string // 数据资源类型
+	dataSourceTypeFlag bool
+
+	connectStatus     string // 数据连接状态
+	connectStatusFlag bool
+
+	tags     []*DataAssetTag // 数据知识分类列表
+	tagsFlag bool
+
+	items     []*DataAssetItem // 数据知识项列表
+	itemsFlag bool
+
 	connectFailedReason     string // 连接状态失败信息
 	connectFailedReasonFlag bool
 
+	importKnowledgeSetting     *DataAssetImportKnowledgeSetting // 知识导入配置
+	importKnowledgeSettingFlag bool
+
 	connectType     string // 数据连接类型
 	connectTypeFlag bool
+
 	createdTime     string // 创建时间，毫秒时间戳
 	createdTimeFlag bool
+
 	updatedTime     string // 更新时间，毫秒时间戳
 	updatedTimeFlag bool
 }
@@ -1652,6 +1777,15 @@ func (builder *DataAssetBuilder) ConnectFailedReason(connectFailedReason string)
 	return builder
 }
 
+// 知识导入配置
+//
+// 示例值：
+func (builder *DataAssetBuilder) ImportKnowledgeSetting(importKnowledgeSetting *DataAssetImportKnowledgeSetting) *DataAssetBuilder {
+	builder.importKnowledgeSetting = importKnowledgeSetting
+	builder.importKnowledgeSettingFlag = true
+	return builder
+}
+
 // 数据连接类型
 //
 // 示例值：direct
@@ -1726,13 +1860,15 @@ func (builder *DataAssetBuilder) Build() *DataAsset {
 }
 
 type DataAssetFile struct {
-	Token    *string `json:"token,omitempty"`     // 文件token
+	Token *string `json:"token,omitempty"` // 文件token
+
 	MimeType *string `json:"mime_type,omitempty"` // 文件内容类型
 }
 
 type DataAssetFileBuilder struct {
-	token        string // 文件token
-	tokenFlag    bool
+	token     string // 文件token
+	tokenFlag bool
+
 	mimeType     string // 文件内容类型
 	mimeTypeFlag bool
 }
@@ -1774,24 +1910,32 @@ func (builder *DataAssetFileBuilder) Build() *DataAssetFile {
 }
 
 type DataAssetImportKnowledgeFile struct {
-	Title    *string `json:"title,omitempty"`     // 文件标题
-	Token    *string `json:"token,omitempty"`     // 上传文件获取到的token。和content二选一，优先使用token。
-	Content  *string `json:"content,omitempty"`   // 文件内容。和token二选一，优先使用token。有长度限制，大文件优先使用token方式。
+	Title *string `json:"title,omitempty"` // 文件标题
+
+	Token *string `json:"token,omitempty"` // 上传文件获取到的token。和content二选一，优先使用token。
+
+	Content *string `json:"content,omitempty"` // 文件内容。和token二选一，优先使用token。有长度限制，大文件优先使用token方式。
+
 	MimeType *string `json:"mime_type,omitempty"` // 文件内容对应的 MIME 类型，使用token方式必须填写
-	Url      *string `json:"url,omitempty"`       // 文件源的URL
+
+	Url *string `json:"url,omitempty"` // 文件源的URL
 }
 
 type DataAssetImportKnowledgeFileBuilder struct {
-	title        string // 文件标题
-	titleFlag    bool
-	token        string // 上传文件获取到的token。和content二选一，优先使用token。
-	tokenFlag    bool
-	content      string // 文件内容。和token二选一，优先使用token。有长度限制，大文件优先使用token方式。
-	contentFlag  bool
+	title     string // 文件标题
+	titleFlag bool
+
+	token     string // 上传文件获取到的token。和content二选一，优先使用token。
+	tokenFlag bool
+
+	content     string // 文件内容。和token二选一，优先使用token。有长度限制，大文件优先使用token方式。
+	contentFlag bool
+
 	mimeType     string // 文件内容对应的 MIME 类型，使用token方式必须填写
 	mimeTypeFlag bool
-	url          string // 文件源的URL
-	urlFlag      bool
+
+	url     string // 文件源的URL
+	urlFlag bool
 }
 
 func NewDataAssetImportKnowledgeFileBuilder() *DataAssetImportKnowledgeFileBuilder {
@@ -1902,19 +2046,27 @@ func (builder *DataAssetImportKnowledgeHelpdeskBuilder) Build() *DataAssetImport
 }
 
 type DataAssetImportKnowledgeLarkDoc struct {
-	Type        *string `json:"type,omitempty"`          // 云文档类型
-	Token       *string `json:"token,omitempty"`         // 云文档标识
-	WithSubDocs *bool   `json:"with_sub_docs,omitempty"` // 是否包含子文档，只有wiki类型的云文档支持
+	Type *string `json:"type,omitempty"` // 云文档类型
 
+	Token *string `json:"token,omitempty"` // 云文档标识
+
+	WithSubDocs *bool `json:"with_sub_docs,omitempty"` // 是否包含子文档，只有wiki类型的云文档支持
+
+	Url *string `json:"url,omitempty"` // 文档链接
 }
 
 type DataAssetImportKnowledgeLarkDocBuilder struct {
-	type_           string // 云文档类型
-	typeFlag        bool
-	token           string // 云文档标识
-	tokenFlag       bool
+	type_    string // 云文档类型
+	typeFlag bool
+
+	token     string // 云文档标识
+	tokenFlag bool
+
 	withSubDocs     bool // 是否包含子文档，只有wiki类型的云文档支持
 	withSubDocsFlag bool
+
+	url     string // 文档链接
+	urlFlag bool
 }
 
 func NewDataAssetImportKnowledgeLarkDocBuilder() *DataAssetImportKnowledgeLarkDocBuilder {
@@ -1949,6 +2101,15 @@ func (builder *DataAssetImportKnowledgeLarkDocBuilder) WithSubDocs(withSubDocs b
 	return builder
 }
 
+// 文档链接
+//
+// 示例值：https://abc.feihsu.cn/docx/abcd123
+func (builder *DataAssetImportKnowledgeLarkDocBuilder) Url(url string) *DataAssetImportKnowledgeLarkDocBuilder {
+	builder.url = url
+	builder.urlFlag = true
+	return builder
+}
+
 func (builder *DataAssetImportKnowledgeLarkDocBuilder) Build() *DataAssetImportKnowledgeLarkDoc {
 	req := &DataAssetImportKnowledgeLarkDoc{}
 	if builder.typeFlag {
@@ -1968,24 +2129,32 @@ func (builder *DataAssetImportKnowledgeLarkDocBuilder) Build() *DataAssetImportK
 }
 
 type DataAssetImportKnowledgeSetting struct {
-	ChunkSetting  *DataAssetKnowledgeChunkSetting   `json:"chunk_setting,omitempty"`   // 知识切片配置
-	File          *DataAssetImportKnowledgeFile     `json:"file,omitempty"`            // 知识导入-文件
-	LarkDoc       *DataAssetImportKnowledgeLarkDoc  `json:"lark_doc,omitempty"`        // 知识导入-飞书云文档
-	LarkWikiSpace *DataAssetImportKnowledgeWiki     `json:"lark_wiki_space,omitempty"` // 知识导入-飞书知识空间
-	LarkHelpdesk  *DataAssetImportKnowledgeHelpdesk `json:"lark_helpdesk,omitempty"`   // 知识导入-飞书服务台
+	ChunkSetting *DataAssetKnowledgeChunkSetting `json:"chunk_setting,omitempty"` // 知识切片配置
+
+	File *DataAssetImportKnowledgeFile `json:"file,omitempty"` // 知识导入-文件
+
+	LarkDoc *DataAssetImportKnowledgeLarkDoc `json:"lark_doc,omitempty"` // 知识导入-飞书云文档
+
+	LarkWikiSpace *DataAssetImportKnowledgeWiki `json:"lark_wiki_space,omitempty"` // 知识导入-飞书知识空间
+
+	LarkHelpdesk *DataAssetImportKnowledgeHelpdesk `json:"lark_helpdesk,omitempty"` // 知识导入-飞书服务台
 }
 
 type DataAssetImportKnowledgeSettingBuilder struct {
-	chunkSetting      *DataAssetKnowledgeChunkSetting // 知识切片配置
-	chunkSettingFlag  bool
-	file              *DataAssetImportKnowledgeFile // 知识导入-文件
-	fileFlag          bool
-	larkDoc           *DataAssetImportKnowledgeLarkDoc // 知识导入-飞书云文档
-	larkDocFlag       bool
+	chunkSetting     *DataAssetKnowledgeChunkSetting // 知识切片配置
+	chunkSettingFlag bool
+
+	file     *DataAssetImportKnowledgeFile // 知识导入-文件
+	fileFlag bool
+
+	larkDoc     *DataAssetImportKnowledgeLarkDoc // 知识导入-飞书云文档
+	larkDocFlag bool
+
 	larkWikiSpace     *DataAssetImportKnowledgeWiki // 知识导入-飞书知识空间
 	larkWikiSpaceFlag bool
-	larkHelpdesk      *DataAssetImportKnowledgeHelpdesk // 知识导入-飞书服务台
-	larkHelpdeskFlag  bool
+
+	larkHelpdesk     *DataAssetImportKnowledgeHelpdesk // 知识导入-飞书服务台
+	larkHelpdeskFlag bool
 }
 
 func NewDataAssetImportKnowledgeSettingBuilder() *DataAssetImportKnowledgeSettingBuilder {
@@ -2059,18 +2228,22 @@ func (builder *DataAssetImportKnowledgeSettingBuilder) Build() *DataAssetImportK
 }
 
 type DataAssetImportKnowledgeWiki struct {
-	SpaceId *string                               `json:"space_id,omitempty"` // 飞书知识空间ID
+	SpaceId *string `json:"space_id,omitempty"` // 飞书知识空间ID
+
 	SubDocs []*DataAssetImportKnowledgeWikiSubDoc `json:"sub_docs,omitempty"` // 指定知识空间子节点时使用
-	Url     *string                               `json:"url,omitempty"`      // 知识空间URL
+
+	Url *string `json:"url,omitempty"` // 知识空间URL
 }
 
 type DataAssetImportKnowledgeWikiBuilder struct {
 	spaceId     string // 飞书知识空间ID
 	spaceIdFlag bool
+
 	subDocs     []*DataAssetImportKnowledgeWikiSubDoc // 指定知识空间子节点时使用
 	subDocsFlag bool
-	url         string // 知识空间URL
-	urlFlag     bool
+
+	url     string // 知识空间URL
+	urlFlag bool
 }
 
 func NewDataAssetImportKnowledgeWikiBuilder() *DataAssetImportKnowledgeWikiBuilder {
@@ -2122,18 +2295,22 @@ func (builder *DataAssetImportKnowledgeWikiBuilder) Build() *DataAssetImportKnow
 }
 
 type DataAssetImportKnowledgeWikiSubDoc struct {
-	Type  *string `json:"type,omitempty"`  // 云文档类型，只支持wiki中的云文档
+	Type *string `json:"type,omitempty"` // 云文档类型，只支持wiki中的云文档
+
 	Token *string `json:"token,omitempty"` // 云文档标识
-	Url   *string `json:"url,omitempty"`   // 云文档链接
+
+	Url *string `json:"url,omitempty"` // 云文档链接
 }
 
 type DataAssetImportKnowledgeWikiSubDocBuilder struct {
-	type_     string // 云文档类型，只支持wiki中的云文档
-	typeFlag  bool
+	type_    string // 云文档类型，只支持wiki中的云文档
+	typeFlag bool
+
 	token     string // 云文档标识
 	tokenFlag bool
-	url       string // 云文档链接
-	urlFlag   bool
+
+	url     string // 云文档链接
+	urlFlag bool
 }
 
 func NewDataAssetImportKnowledgeWikiSubDocBuilder() *DataAssetImportKnowledgeWikiSubDocBuilder {
@@ -2186,24 +2363,32 @@ func (builder *DataAssetImportKnowledgeWikiSubDocBuilder) Build() *DataAssetImpo
 }
 
 type DataAssetItem struct {
-	DataAssetItemId *string              `json:"data_asset_item_id,omitempty"` // 数据知识项ID
-	ApiName         *string              `json:"api_name,omitempty"`           // 数据知识项标识
-	Label           map[string]string    `json:"label,omitempty"`              // 数据知识项标题
-	Description     map[string]string    `json:"description,omitempty"`        // 数据知识项描述
-	Resources       []*DataAssetResource `json:"resources,omitempty"`          // 数据知识资源
+	DataAssetItemId *string `json:"data_asset_item_id,omitempty"` // 数据知识项ID
+
+	ApiName *string `json:"api_name,omitempty"` // 数据知识项标识
+
+	Label map[string]string `json:"label,omitempty"` // 数据知识项标题
+
+	Description map[string]string `json:"description,omitempty"` // 数据知识项描述
+
+	Resources []*DataAssetResource `json:"resources,omitempty"` // 数据知识资源
 }
 
 type DataAssetItemBuilder struct {
 	dataAssetItemId     string // 数据知识项ID
 	dataAssetItemIdFlag bool
-	apiName             string // 数据知识项标识
-	apiNameFlag         bool
-	label               map[string]string // 数据知识项标题
-	labelFlag           bool
-	description         map[string]string // 数据知识项描述
-	descriptionFlag     bool
-	resources           []*DataAssetResource // 数据知识资源
-	resourcesFlag       bool
+
+	apiName     string // 数据知识项标识
+	apiNameFlag bool
+
+	label     map[string]string // 数据知识项标题
+	labelFlag bool
+
+	description     map[string]string // 数据知识项描述
+	descriptionFlag bool
+
+	resources     []*DataAssetResource // 数据知识资源
+	resourcesFlag bool
 }
 
 func NewDataAssetItemBuilder() *DataAssetItemBuilder {
@@ -2279,21 +2464,27 @@ func (builder *DataAssetItemBuilder) Build() *DataAssetItem {
 }
 
 type DataAssetKnowledgeChunkSetting struct {
-	RuleType     *string `json:"rule_type,omitempty"`     // 切片规则
+	RuleType *string `json:"rule_type,omitempty"` // 切片规则
+
 	SeparateType *string `json:"separate_type,omitempty"` // 切片分割符类型
-	Size         *int    `json:"size,omitempty"`          // 分段最大长度（字符），按标识符切片时必须填写
-	Overlap      *int    `json:"overlap,omitempty"`       // 分段重叠字符数，按标识符切片时必须填写，不能超过size的数值
+
+	Size *int `json:"size,omitempty"` // 分段最大长度（字符），按标识符切片时必须填写
+
+	Overlap *int `json:"overlap,omitempty"` // 分段重叠字符数，按标识符切片时必须填写，不能超过size的数值
 }
 
 type DataAssetKnowledgeChunkSettingBuilder struct {
-	ruleType         string // 切片规则
-	ruleTypeFlag     bool
+	ruleType     string // 切片规则
+	ruleTypeFlag bool
+
 	separateType     string // 切片分割符类型
 	separateTypeFlag bool
-	size             int // 分段最大长度（字符），按标识符切片时必须填写
-	sizeFlag         bool
-	overlap          int // 分段重叠字符数，按标识符切片时必须填写，不能超过size的数值
-	overlapFlag      bool
+
+	size     int // 分段最大长度（字符），按标识符切片时必须填写
+	sizeFlag bool
+
+	overlap     int // 分段重叠字符数，按标识符切片时必须填写，不能超过size的数值
+	overlapFlag bool
 }
 
 func NewDataAssetKnowledgeChunkSettingBuilder() *DataAssetKnowledgeChunkSettingBuilder {
@@ -2361,12 +2552,17 @@ func (builder *DataAssetKnowledgeChunkSettingBuilder) Build() *DataAssetKnowledg
 type DataAssetResource struct {
 	ResourceId *string `json:"resource_id,omitempty"` // 数据知识资源ID
 
+	ResouceType *string `json:"resouce_type,omitempty"` // 数据知识资源类型
+
 	ResourceType *string `json:"resource_type,omitempty"` // 数据知识资源类型
 }
 
 type DataAssetResourceBuilder struct {
 	resourceId     string // 数据知识资源ID
 	resourceIdFlag bool
+
+	resouceType     string // 数据知识资源类型
+	resouceTypeFlag bool
 
 	resourceType     string // 数据知识资源类型
 	resourceTypeFlag bool
@@ -2383,6 +2579,15 @@ func NewDataAssetResourceBuilder() *DataAssetResourceBuilder {
 func (builder *DataAssetResourceBuilder) ResourceId(resourceId string) *DataAssetResourceBuilder {
 	builder.resourceId = resourceId
 	builder.resourceIdFlag = true
+	return builder
+}
+
+// 数据知识资源类型
+//
+// 示例值：dataset
+func (builder *DataAssetResourceBuilder) ResouceType(resouceType string) *DataAssetResourceBuilder {
+	builder.resouceType = resouceType
+	builder.resouceTypeFlag = true
 	return builder
 }
 
@@ -2411,14 +2616,16 @@ func (builder *DataAssetResourceBuilder) Build() *DataAssetResource {
 
 type DataAssetTag struct {
 	DataAssetTagId *string `json:"data_asset_tag_id,omitempty"` // 数据知识分类名称
-	Name           *string `json:"name,omitempty"`              // 数据知识分类ID
+
+	Name *string `json:"name,omitempty"` // 数据知识分类ID
 }
 
 type DataAssetTagBuilder struct {
 	dataAssetTagId     string // 数据知识分类名称
 	dataAssetTagIdFlag bool
-	name               string // 数据知识分类ID
-	nameFlag           bool
+
+	name     string // 数据知识分类ID
+	nameFlag bool
 }
 
 func NewDataAssetTagBuilder() *DataAssetTagBuilder {
@@ -2458,13 +2665,15 @@ func (builder *DataAssetTagBuilder) Build() *DataAssetTag {
 }
 
 type DatasetSource struct {
-	Type     *string        `json:"type,omitempty"`     // 分析表类型：object/external/dataflow
+	Type *string `json:"type,omitempty"` // 分析表类型：object/external/dataflow
+
 	Settings *SourceSetting `json:"settings,omitempty"` // 分析表数据源信息配置
 }
 
 type DatasetSourceBuilder struct {
-	type_        string // 分析表类型：object/external/dataflow
-	typeFlag     bool
+	type_    string // 分析表类型：object/external/dataflow
+	typeFlag bool
+
 	settings     *SourceSetting // 分析表数据源信息配置
 	settingsFlag bool
 }
@@ -2505,13 +2714,15 @@ func (builder *DatasetSourceBuilder) Build() *DatasetSource {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -2549,27 +2760,37 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type Field struct {
-	ApiName       *string           `json:"api_name,omitempty"`       // 字段标识
-	Label         map[string]string `json:"label,omitempty"`          // 字段名称
-	AiDescription *string           `json:"ai_description,omitempty"` // 字段描述信息
-	AccessItems   []string          `json:"access_items,omitempty"`   // 字段值读写权限
-	TypeName      *string           `json:"type_name,omitempty"`      // 字段的类型
-	FieldSetting  *FieldSetting     `json:"field_setting,omitempty"`  // 字段的属性
+	ApiName *string `json:"api_name,omitempty"` // 字段标识
+
+	Label map[string]string `json:"label,omitempty"` // 字段名称
+
+	AiDescription *string `json:"ai_description,omitempty"` // 字段描述信息
+
+	AccessItems []string `json:"access_items,omitempty"` // 字段值读写权限
+
+	TypeName *string `json:"type_name,omitempty"` // 字段的类型
+
+	FieldSetting *FieldSetting `json:"field_setting,omitempty"` // 字段的属性
 }
 
 type FieldBuilder struct {
-	apiName           string // 字段标识
-	apiNameFlag       bool
-	label             map[string]string // 字段名称
-	labelFlag         bool
+	apiName     string // 字段标识
+	apiNameFlag bool
+
+	label     map[string]string // 字段名称
+	labelFlag bool
+
 	aiDescription     string // 字段描述信息
 	aiDescriptionFlag bool
-	accessItems       []string // 字段值读写权限
-	accessItemsFlag   bool
-	typeName          string // 字段的类型
-	typeNameFlag      bool
-	fieldSetting      *FieldSetting // 字段的属性
-	fieldSettingFlag  bool
+
+	accessItems     []string // 字段值读写权限
+	accessItemsFlag bool
+
+	typeName     string // 字段的类型
+	typeNameFlag bool
+
+	fieldSetting     *FieldSetting // 字段的属性
+	fieldSettingFlag bool
 }
 
 func NewFieldBuilder() *FieldBuilder {
@@ -2658,33 +2879,47 @@ func (builder *FieldBuilder) Build() *Field {
 }
 
 type FieldSetting struct {
-	Required            *bool    `json:"required,omitempty"`               // 必填属性
-	Unique              *bool    `json:"unique,omitempty"`                 // 唯一性属性
-	CaseSensitive       *bool    `json:"case_sensitive,omitempty"`         // 大小写敏感的唯一性
-	TextMaxLength       *int     `json:"text_max_length,omitempty"`        // 文本最大长度
-	Multiple            *bool    `json:"multiple,omitempty"`               // 是否多值
-	LookupObjectApiName *string  `json:"lookup_object_api_name,omitempty"` // 关联对象的标识
-	Options             []string `json:"options,omitempty"`                // 选项字段的选项值
-	Detail              *string  `json:"detail,omitempty"`                 // 属性扩展信息
+	Required *bool `json:"required,omitempty"` // 必填属性
+
+	Unique *bool `json:"unique,omitempty"` // 唯一性属性
+
+	CaseSensitive *bool `json:"case_sensitive,omitempty"` // 大小写敏感的唯一性
+
+	TextMaxLength *int `json:"text_max_length,omitempty"` // 文本最大长度
+
+	Multiple *bool `json:"multiple,omitempty"` // 是否多值
+
+	LookupObjectApiName *string `json:"lookup_object_api_name,omitempty"` // 关联对象的标识
+
+	Options []string `json:"options,omitempty"` // 选项字段的选项值
+
+	Detail *string `json:"detail,omitempty"` // 属性扩展信息
 }
 
 type FieldSettingBuilder struct {
-	required                bool // 必填属性
-	requiredFlag            bool
-	unique                  bool // 唯一性属性
-	uniqueFlag              bool
-	caseSensitive           bool // 大小写敏感的唯一性
-	caseSensitiveFlag       bool
-	textMaxLength           int // 文本最大长度
-	textMaxLengthFlag       bool
-	multiple                bool // 是否多值
-	multipleFlag            bool
+	required     bool // 必填属性
+	requiredFlag bool
+
+	unique     bool // 唯一性属性
+	uniqueFlag bool
+
+	caseSensitive     bool // 大小写敏感的唯一性
+	caseSensitiveFlag bool
+
+	textMaxLength     int // 文本最大长度
+	textMaxLengthFlag bool
+
+	multiple     bool // 是否多值
+	multipleFlag bool
+
 	lookupObjectApiName     string // 关联对象的标识
 	lookupObjectApiNameFlag bool
-	options                 []string // 选项字段的选项值
-	optionsFlag             bool
-	detail                  string // 属性扩展信息
-	detailFlag              bool
+
+	options     []string // 选项字段的选项值
+	optionsFlag bool
+
+	detail     string // 属性扩展信息
+	detailFlag bool
 }
 
 func NewFieldSettingBuilder() *FieldSettingBuilder {
@@ -2801,30 +3036,42 @@ func (builder *FieldSettingBuilder) Build() *FieldSetting {
 }
 
 type Intent struct {
-	Id          *string       `json:"id,omitempty"`           // 意图 id
-	CreatedAt   *string       `json:"created_at,omitempty"`   // 意图创建时间，毫秒时间戳
-	SessionId   *string       `json:"session_id,omitempty"`   // 意图所属会话 id
-	Status      *string       `json:"status,omitempty"`       // 意图状态
-	SubStatus   *string       `json:"sub_status,omitempty"`   // 意图子状态
-	ChannelType *string       `json:"channel_type,omitempty"` // 渠道类型
-	Error       *MessageError `json:"error,omitempty"`        // 意图失败原因
+	Id *string `json:"id,omitempty"` // 意图 id
+
+	CreatedAt *string `json:"created_at,omitempty"` // 意图创建时间，毫秒时间戳
+
+	SessionId *string `json:"session_id,omitempty"` // 意图所属会话 id
+
+	Status *string `json:"status,omitempty"` // 意图状态
+
+	SubStatus *string `json:"sub_status,omitempty"` // 意图子状态
+
+	ChannelType *string `json:"channel_type,omitempty"` // 渠道类型
+
+	Error *MessageError `json:"error,omitempty"` // 意图失败原因
 }
 
 type IntentBuilder struct {
-	id              string // 意图 id
-	idFlag          bool
-	createdAt       string // 意图创建时间，毫秒时间戳
-	createdAtFlag   bool
-	sessionId       string // 意图所属会话 id
-	sessionIdFlag   bool
-	status          string // 意图状态
-	statusFlag      bool
-	subStatus       string // 意图子状态
-	subStatusFlag   bool
+	id     string // 意图 id
+	idFlag bool
+
+	createdAt     string // 意图创建时间，毫秒时间戳
+	createdAtFlag bool
+
+	sessionId     string // 意图所属会话 id
+	sessionIdFlag bool
+
+	status     string // 意图状态
+	statusFlag bool
+
+	subStatus     string // 意图子状态
+	subStatusFlag bool
+
 	channelType     string // 渠道类型
 	channelTypeFlag bool
-	error           *MessageError // 意图失败原因
-	errorFlag       bool
+
+	error     *MessageError // 意图失败原因
+	errorFlag bool
 }
 
 func NewIntentBuilder() *IntentBuilder {
@@ -2928,57 +3175,87 @@ func (builder *IntentBuilder) Build() *Intent {
 }
 
 type Kctx struct {
-	TenantId               *int    `json:"tenant_id,omitempty"`                 // 租户 id
-	UserId                 *int    `json:"user_id,omitempty"`                   // 用户 id
-	TenantDomainName       *string `json:"tenant_domain_name,omitempty"`        // 租户域名
-	UserSetting            *string `json:"user_setting,omitempty"`              // 用户设置
-	LangId                 *int    `json:"lang_id,omitempty"`                   // 语言
-	RequestId              *string `json:"request_id,omitempty"`                // 请求 id
-	Host                   *string `json:"host,omitempty"`                      // 域名
+	TenantId *int `json:"tenant_id,omitempty"` // 租户 id
+
+	UserId *int `json:"user_id,omitempty"` // 用户 id
+
+	TenantDomainName *string `json:"tenant_domain_name,omitempty"` // 租户域名
+
+	UserSetting *string `json:"user_setting,omitempty"` // 用户设置
+
+	LangId *int `json:"lang_id,omitempty"` // 语言
+
+	RequestId *string `json:"request_id,omitempty"` // 请求 id
+
+	Host *string `json:"host,omitempty"` // 域名
+
 	TenantResourceRouteKey *string `json:"tenant_resource_route_key,omitempty"` // 资源路由 key
-	Namespace              *string `json:"namespace,omitempty"`                 // 命名空间
-	TenantType             *int    `json:"tenant_type,omitempty"`               // 租户类型
-	TransactionId          *int    `json:"transaction_id,omitempty"`            // 事务ID
-	ConsistencyRetryType   *string `json:"ConsistencyRetryType,omitempty"`      // consistency retry type
-	PsmLink                *string `json:"PsmLink,omitempty"`                   // psm link
-	BreakoutRetryPsm       *string `json:"BreakoutRetryPsm,omitempty"`          // breakout retry psm
-	CredentialID           *string `json:"CredentialID,omitempty"`              // credential id
-	AuthenticationType     *string `json:"AuthenticationType,omitempty"`        // 鉴权类型
+
+	Namespace *string `json:"namespace,omitempty"` // 命名空间
+
+	TenantType *int `json:"tenant_type,omitempty"` // 租户类型
+
+	TransactionId *int `json:"transaction_id,omitempty"` // 事务ID
+
+	ConsistencyRetryType *string `json:"ConsistencyRetryType,omitempty"` // consistency retry type
+
+	PsmLink *string `json:"PsmLink,omitempty"` // psm link
+
+	BreakoutRetryPsm *string `json:"BreakoutRetryPsm,omitempty"` // breakout retry psm
+
+	CredentialID *string `json:"CredentialID,omitempty"` // credential id
+
+	AuthenticationType *string `json:"AuthenticationType,omitempty"` // 鉴权类型
 }
 
 type KctxBuilder struct {
-	tenantId                   int // 租户 id
-	tenantIdFlag               bool
-	userId                     int // 用户 id
-	userIdFlag                 bool
-	tenantDomainName           string // 租户域名
-	tenantDomainNameFlag       bool
-	userSetting                string // 用户设置
-	userSettingFlag            bool
-	langId                     int // 语言
-	langIdFlag                 bool
-	requestId                  string // 请求 id
-	requestIdFlag              bool
-	host                       string // 域名
-	hostFlag                   bool
+	tenantId     int // 租户 id
+	tenantIdFlag bool
+
+	userId     int // 用户 id
+	userIdFlag bool
+
+	tenantDomainName     string // 租户域名
+	tenantDomainNameFlag bool
+
+	userSetting     string // 用户设置
+	userSettingFlag bool
+
+	langId     int // 语言
+	langIdFlag bool
+
+	requestId     string // 请求 id
+	requestIdFlag bool
+
+	host     string // 域名
+	hostFlag bool
+
 	tenantResourceRouteKey     string // 资源路由 key
 	tenantResourceRouteKeyFlag bool
-	namespace                  string // 命名空间
-	namespaceFlag              bool
-	tenantType                 int // 租户类型
-	tenantTypeFlag             bool
-	transactionId              int // 事务ID
-	transactionIdFlag          bool
-	consistencyRetryType       string // consistency retry type
-	consistencyRetryTypeFlag   bool
-	psmLink                    string // psm link
-	psmLinkFlag                bool
-	breakoutRetryPsm           string // breakout retry psm
-	breakoutRetryPsmFlag       bool
-	credentialID               string // credential id
-	credentialIDFlag           bool
-	authenticationType         string // 鉴权类型
-	authenticationTypeFlag     bool
+
+	namespace     string // 命名空间
+	namespaceFlag bool
+
+	tenantType     int // 租户类型
+	tenantTypeFlag bool
+
+	transactionId     int // 事务ID
+	transactionIdFlag bool
+
+	consistencyRetryType     string // consistency retry type
+	consistencyRetryTypeFlag bool
+
+	psmLink     string // psm link
+	psmLinkFlag bool
+
+	breakoutRetryPsm     string // breakout retry psm
+	breakoutRetryPsmFlag bool
+
+	credentialID     string // credential id
+	credentialIDFlag bool
+
+	authenticationType     string // 鉴权类型
+	authenticationTypeFlag bool
 }
 
 func NewKctxBuilder() *KctxBuilder {
@@ -3200,60 +3477,92 @@ func (builder *KctxBuilder) Build() *Kctx {
 }
 
 type Knowledge struct {
-	Id              *string                 `json:"id,omitempty"`                // 知识ID
-	KnowledgeBaseId *string                 `json:"knowledge_base_id,omitempty"` // 知识库ID
-	Status          *string                 `json:"status,omitempty"`            // 学习状态
-	Title           *string                 `json:"title,omitempty"`             // 知识标题
-	Type            *string                 `json:"type,omitempty"`              // 知识类型
-	File            *AilyKnowledgeFile      `json:"file,omitempty"`              // 文件信息
-	Docs            *AilyKnowledgeDocs      `json:"docs,omitempty"`              // 飞书云文档信息
-	WikiSpace       *AilyKnowledgeWikiSpace `json:"wiki_space,omitempty"`        // 飞书知识空间信息
-	Folder          *AilyKnowledgeFolder    `json:"folder,omitempty"`            // 飞书文件夹信息
-	Helpdesk        *AilyKnowledgeHelpdesk  `json:"helpdesk,omitempty"`          // 飞书服务台信息
-	Datatable       *AilyKnowledgeDatatable `json:"datatable,omitempty"`         // 智能伙伴数据表
-	Dataset         *AilyKnowledgeDataset   `json:"dataset,omitempty"`           // 智能伙伴分析表
-	Web             *AilyKnowledgeWeb       `json:"web,omitempty"`               // 网页信息
-	ChunkCount      *int                    `json:"chunk_count,omitempty"`       // 切片数量
-	CreateTime      *int                    `json:"create_time,omitempty"`       // 创建时间
-	UpdateTime      *int                    `json:"update_time,omitempty"`       // 更新时间
-	FailMessage     *string                 `json:"fail_message,omitempty"`      // 学习失败提示
+	Id *string `json:"id,omitempty"` // 知识ID
+
+	KnowledgeBaseId *string `json:"knowledge_base_id,omitempty"` // 知识库ID
+
+	Status *string `json:"status,omitempty"` // 学习状态
+
+	Title *string `json:"title,omitempty"` // 知识标题
+
+	Type *string `json:"type,omitempty"` // 知识类型
+
+	File *AilyKnowledgeFile `json:"file,omitempty"` // 文件信息
+
+	Docs *AilyKnowledgeDocs `json:"docs,omitempty"` // 飞书云文档信息
+
+	WikiSpace *AilyKnowledgeWikiSpace `json:"wiki_space,omitempty"` // 飞书知识空间信息
+
+	Folder *AilyKnowledgeFolder `json:"folder,omitempty"` // 飞书文件夹信息
+
+	Helpdesk *AilyKnowledgeHelpdesk `json:"helpdesk,omitempty"` // 飞书服务台信息
+
+	Datatable *AilyKnowledgeDatatable `json:"datatable,omitempty"` // 智能伙伴数据表
+
+	Dataset *AilyKnowledgeDataset `json:"dataset,omitempty"` // 智能伙伴分析表
+
+	Web *AilyKnowledgeWeb `json:"web,omitempty"` // 网页信息
+
+	ChunkCount *int `json:"chunk_count,omitempty"` // 切片数量
+
+	CreateTime *int `json:"create_time,omitempty"` // 创建时间
+
+	UpdateTime *int `json:"update_time,omitempty"` // 更新时间
+
+	FailMessage *string `json:"fail_message,omitempty"` // 学习失败提示
 }
 
 type KnowledgeBuilder struct {
-	id                  string // 知识ID
-	idFlag              bool
+	id     string // 知识ID
+	idFlag bool
+
 	knowledgeBaseId     string // 知识库ID
 	knowledgeBaseIdFlag bool
-	status              string // 学习状态
-	statusFlag          bool
-	title               string // 知识标题
-	titleFlag           bool
-	type_               string // 知识类型
-	typeFlag            bool
-	file                *AilyKnowledgeFile // 文件信息
-	fileFlag            bool
-	docs                *AilyKnowledgeDocs // 飞书云文档信息
-	docsFlag            bool
-	wikiSpace           *AilyKnowledgeWikiSpace // 飞书知识空间信息
-	wikiSpaceFlag       bool
-	folder              *AilyKnowledgeFolder // 飞书文件夹信息
-	folderFlag          bool
-	helpdesk            *AilyKnowledgeHelpdesk // 飞书服务台信息
-	helpdeskFlag        bool
-	datatable           *AilyKnowledgeDatatable // 智能伙伴数据表
-	datatableFlag       bool
-	dataset             *AilyKnowledgeDataset // 智能伙伴分析表
-	datasetFlag         bool
-	web                 *AilyKnowledgeWeb // 网页信息
-	webFlag             bool
-	chunkCount          int // 切片数量
-	chunkCountFlag      bool
-	createTime          int // 创建时间
-	createTimeFlag      bool
-	updateTime          int // 更新时间
-	updateTimeFlag      bool
-	failMessage         string // 学习失败提示
-	failMessageFlag     bool
+
+	status     string // 学习状态
+	statusFlag bool
+
+	title     string // 知识标题
+	titleFlag bool
+
+	type_    string // 知识类型
+	typeFlag bool
+
+	file     *AilyKnowledgeFile // 文件信息
+	fileFlag bool
+
+	docs     *AilyKnowledgeDocs // 飞书云文档信息
+	docsFlag bool
+
+	wikiSpace     *AilyKnowledgeWikiSpace // 飞书知识空间信息
+	wikiSpaceFlag bool
+
+	folder     *AilyKnowledgeFolder // 飞书文件夹信息
+	folderFlag bool
+
+	helpdesk     *AilyKnowledgeHelpdesk // 飞书服务台信息
+	helpdeskFlag bool
+
+	datatable     *AilyKnowledgeDatatable // 智能伙伴数据表
+	datatableFlag bool
+
+	dataset     *AilyKnowledgeDataset // 智能伙伴分析表
+	datasetFlag bool
+
+	web     *AilyKnowledgeWeb // 网页信息
+	webFlag bool
+
+	chunkCount     int // 切片数量
+	chunkCountFlag bool
+
+	createTime     int // 创建时间
+	createTimeFlag bool
+
+	updateTime     int // 更新时间
+	updateTimeFlag bool
+
+	failMessage     string // 学习失败提示
+	failMessageFlag bool
 }
 
 func NewKnowledgeBuilder() *KnowledgeBuilder {
@@ -3480,42 +3789,62 @@ func (builder *KnowledgeBuilder) Build() *Knowledge {
 }
 
 type Message struct {
-	Id              *string          `json:"id,omitempty"`               // 消息 id
-	Title           *string          `json:"title,omitempty"`            // 消息标题
-	Content         *string          `json:"content,omitempty"`          // 消息内容
-	MessageStatus   *string          `json:"message_status,omitempty"`   // 消息状态
-	BuiltinActions  []*BuiltinAction `json:"builtin_actions,omitempty"`  // 消息上可接收的 action
-	SkillBaseInfos  []*SkillBaseInfo `json:"skill_base_infos,omitempty"` // 使用的 skill 信息
+	Id *string `json:"id,omitempty"` // 消息 id
+
+	Title *string `json:"title,omitempty"` // 消息标题
+
+	Content *string `json:"content,omitempty"` // 消息内容
+
+	MessageStatus *string `json:"message_status,omitempty"` // 消息状态
+
+	BuiltinActions []*BuiltinAction `json:"builtin_actions,omitempty"` // 消息上可接收的 action
+
+	SkillBaseInfos []*SkillBaseInfo `json:"skill_base_infos,omitempty"` // 使用的 skill 信息
+
 	MessageProgress *MessageProgress `json:"message_progress,omitempty"` // 进度条消息
-	Sender          *Sender          `json:"sender,omitempty"`           // 发送者信息
-	Error           *MessageError    `json:"error,omitempty"`            // 错误信息
-	TriggerType     *string          `json:"trigger_type,omitempty"`     // 触发类型
-	Visibility      *string          `json:"visibility,omitempty"`       // 消息的可见性
+
+	Sender *Sender `json:"sender,omitempty"` // 发送者信息
+
+	Error *MessageError `json:"error,omitempty"` // 错误信息
+
+	TriggerType *string `json:"trigger_type,omitempty"` // 触发类型
+
+	Visibility *string `json:"visibility,omitempty"` // 消息的可见性
 }
 
 type MessageBuilder struct {
-	id                  string // 消息 id
-	idFlag              bool
-	title               string // 消息标题
-	titleFlag           bool
-	content             string // 消息内容
-	contentFlag         bool
-	messageStatus       string // 消息状态
-	messageStatusFlag   bool
-	builtinActions      []*BuiltinAction // 消息上可接收的 action
-	builtinActionsFlag  bool
-	skillBaseInfos      []*SkillBaseInfo // 使用的 skill 信息
-	skillBaseInfosFlag  bool
+	id     string // 消息 id
+	idFlag bool
+
+	title     string // 消息标题
+	titleFlag bool
+
+	content     string // 消息内容
+	contentFlag bool
+
+	messageStatus     string // 消息状态
+	messageStatusFlag bool
+
+	builtinActions     []*BuiltinAction // 消息上可接收的 action
+	builtinActionsFlag bool
+
+	skillBaseInfos     []*SkillBaseInfo // 使用的 skill 信息
+	skillBaseInfosFlag bool
+
 	messageProgress     *MessageProgress // 进度条消息
 	messageProgressFlag bool
-	sender              *Sender // 发送者信息
-	senderFlag          bool
-	error               *MessageError // 错误信息
-	errorFlag           bool
-	triggerType         string // 触发类型
-	triggerTypeFlag     bool
-	visibility          string // 消息的可见性
-	visibilityFlag      bool
+
+	sender     *Sender // 发送者信息
+	senderFlag bool
+
+	error     *MessageError // 错误信息
+	errorFlag bool
+
+	triggerType     string // 触发类型
+	triggerTypeFlag bool
+
+	visibility     string // 消息的可见性
+	visibilityFlag bool
 }
 
 func NewMessageBuilder() *MessageBuilder {
@@ -3667,24 +3996,32 @@ func (builder *MessageBuilder) Build() *Message {
 }
 
 type MessageError struct {
-	Code      *string `json:"code,omitempty"`       // 错误码
-	Message   *string `json:"message,omitempty"`    // 错误消息
+	Code *string `json:"code,omitempty"` // 错误码
+
+	Message *string `json:"message,omitempty"` // 错误消息
+
 	ErrorType *string `json:"error_type,omitempty"` // 错误类型
-	LogId     *string `json:"log_id,omitempty"`     // 反馈码
-	Title     *string `json:"title,omitempty"`      // 错误标题
+
+	LogId *string `json:"log_id,omitempty"` // 反馈码
+
+	Title *string `json:"title,omitempty"` // 错误标题
 }
 
 type MessageErrorBuilder struct {
-	code          string // 错误码
-	codeFlag      bool
-	message       string // 错误消息
-	messageFlag   bool
+	code     string // 错误码
+	codeFlag bool
+
+	message     string // 错误消息
+	messageFlag bool
+
 	errorType     string // 错误类型
 	errorTypeFlag bool
-	logId         string // 反馈码
-	logIdFlag     bool
-	title         string // 错误标题
-	titleFlag     bool
+
+	logId     string // 反馈码
+	logIdFlag bool
+
+	title     string // 错误标题
+	titleFlag bool
 }
 
 func NewMessageErrorBuilder() *MessageErrorBuilder {
@@ -3763,13 +4100,15 @@ func (builder *MessageErrorBuilder) Build() *MessageError {
 }
 
 type MessageProgress struct {
-	ProgressType  *string         `json:"progress_type,omitempty"`  // 进度条类型
+	ProgressType *string `json:"progress_type,omitempty"` // 进度条类型
+
 	ProgressItems []*ProgressItem `json:"progress_items,omitempty"` // 进度条项
 }
 
 type MessageProgressBuilder struct {
-	progressType      string // 进度条类型
-	progressTypeFlag  bool
+	progressType     string // 进度条类型
+	progressTypeFlag bool
+
 	progressItems     []*ProgressItem // 进度条项
 	progressItemsFlag bool
 }
@@ -3810,21 +4149,27 @@ func (builder *MessageProgressBuilder) Build() *MessageProgress {
 }
 
 type MessageWithOperation struct {
-	Message       *Message `json:"message,omitempty"`        // 消息内容
-	OperationType *string  `json:"operation_type,omitempty"` // 操作类型
-	OperationId   *string  `json:"operation_id,omitempty"`   // 操作 id
-	IntentId      *string  `json:"intent_id,omitempty"`      // 产生操作的意图 id
+	Message *Message `json:"message,omitempty"` // 消息内容
+
+	OperationType *string `json:"operation_type,omitempty"` // 操作类型
+
+	OperationId *string `json:"operation_id,omitempty"` // 操作 id
+
+	IntentId *string `json:"intent_id,omitempty"` // 产生操作的意图 id
 }
 
 type MessageWithOperationBuilder struct {
-	message           *Message // 消息内容
-	messageFlag       bool
+	message     *Message // 消息内容
+	messageFlag bool
+
 	operationType     string // 操作类型
 	operationTypeFlag bool
-	operationId       string // 操作 id
-	operationIdFlag   bool
-	intentId          string // 产生操作的意图 id
-	intentIdFlag      bool
+
+	operationId     string // 操作 id
+	operationIdFlag bool
+
+	intentId     string // 产生操作的意图 id
+	intentIdFlag bool
 }
 
 func NewMessageWithOperationBuilder() *MessageWithOperationBuilder {
@@ -3889,13 +4234,15 @@ func (builder *MessageWithOperationBuilder) Build() *MessageWithOperation {
 }
 
 type ObjectSetting struct {
-	DisplayName *string  `json:"display_name,omitempty"` // 数据表展示字段
+	DisplayName *string `json:"display_name,omitempty"` // 数据表展示字段
+
 	FieldOrders []string `json:"field_orders,omitempty"` // 字段顺序
 }
 
 type ObjectSettingBuilder struct {
 	displayName     string // 数据表展示字段
 	displayNameFlag bool
+
 	fieldOrders     []string // 字段顺序
 	fieldOrdersFlag bool
 }
@@ -3936,13 +4283,15 @@ func (builder *ObjectSettingBuilder) Build() *ObjectSetting {
 }
 
 type OrderCondition struct {
-	Field     *string `json:"field,omitempty"`     // 字段名
+	Field *string `json:"field,omitempty"` // 字段名
+
 	Direction *string `json:"direction,omitempty"` // 排序方式
 }
 
 type OrderConditionBuilder struct {
-	field         string // 字段名
-	fieldFlag     bool
+	field     string // 字段名
+	fieldFlag bool
+
 	direction     string // 排序方式
 	directionFlag bool
 }
@@ -3984,36 +4333,52 @@ func (builder *OrderConditionBuilder) Build() *OrderCondition {
 }
 
 type ProgressItem struct {
-	ProgressItemState *string  `json:"progress_item_state,omitempty"` // 进度条项状态
-	Content           *string  `json:"content,omitempty"`             // 进度条项内容
-	SkillId           *string  `json:"skill_id,omitempty"`            // 选中的技能 id
-	NodeId            *string  `json:"node_id,omitempty"`             // 节点 id
-	NodeType          *string  `json:"node_type,omitempty"`           // 节点类型
-	Input             *string  `json:"input,omitempty"`               // 节点输入，调试模式返回
-	Output            *string  `json:"output,omitempty"`              // 节点输出，调试模式返回
-	Usages            []string `json:"usages,omitempty"`              // 节点的时间以及 Token 消耗
-	SkillStrategy     *string  `json:"skill_strategy,omitempty"`      // 技能选择策略
+	ProgressItemState *string `json:"progress_item_state,omitempty"` // 进度条项状态
+
+	Content *string `json:"content,omitempty"` // 进度条项内容
+
+	SkillId *string `json:"skill_id,omitempty"` // 选中的技能 id
+
+	NodeId *string `json:"node_id,omitempty"` // 节点 id
+
+	NodeType *string `json:"node_type,omitempty"` // 节点类型
+
+	Input *string `json:"input,omitempty"` // 节点输入，调试模式返回
+
+	Output *string `json:"output,omitempty"` // 节点输出，调试模式返回
+
+	Usages []string `json:"usages,omitempty"` // 节点的时间以及 Token 消耗
+
+	SkillStrategy *string `json:"skill_strategy,omitempty"` // 技能选择策略
 }
 
 type ProgressItemBuilder struct {
 	progressItemState     string // 进度条项状态
 	progressItemStateFlag bool
-	content               string // 进度条项内容
-	contentFlag           bool
-	skillId               string // 选中的技能 id
-	skillIdFlag           bool
-	nodeId                string // 节点 id
-	nodeIdFlag            bool
-	nodeType              string // 节点类型
-	nodeTypeFlag          bool
-	input                 string // 节点输入，调试模式返回
-	inputFlag             bool
-	output                string // 节点输出，调试模式返回
-	outputFlag            bool
-	usages                []string // 节点的时间以及 Token 消耗
-	usagesFlag            bool
-	skillStrategy         string // 技能选择策略
-	skillStrategyFlag     bool
+
+	content     string // 进度条项内容
+	contentFlag bool
+
+	skillId     string // 选中的技能 id
+	skillIdFlag bool
+
+	nodeId     string // 节点 id
+	nodeIdFlag bool
+
+	nodeType     string // 节点类型
+	nodeTypeFlag bool
+
+	input     string // 节点输入，调试模式返回
+	inputFlag bool
+
+	output     string // 节点输出，调试模式返回
+	outputFlag bool
+
+	usages     []string // 节点的时间以及 Token 消耗
+	usagesFlag bool
+
+	skillStrategy     string // 技能选择策略
+	skillStrategyFlag bool
 }
 
 func NewProgressItemBuilder() *ProgressItemBuilder {
@@ -4143,13 +4508,15 @@ func (builder *ProgressItemBuilder) Build() *ProgressItem {
 }
 
 type RecordError struct {
-	Code    *string `json:"code,omitempty"`    // 内部错误码
+	Code *string `json:"code,omitempty"` // 内部错误码
+
 	Message *string `json:"message,omitempty"` // 错误文本
 }
 
 type RecordErrorBuilder struct {
-	code        string // 内部错误码
-	codeFlag    bool
+	code     string // 内部错误码
+	codeFlag bool
+
 	message     string // 错误文本
 	messageFlag bool
 }
@@ -4191,13 +4558,15 @@ func (builder *RecordErrorBuilder) Build() *RecordError {
 }
 
 type RecordQueryOption struct {
-	StringifyNumber     *bool `json:"stringify_number,omitempty"`      // 是否以字符串形式返回数字
+	StringifyNumber *bool `json:"stringify_number,omitempty"` // 是否以字符串形式返回数字
+
 	NormalizeColumnName *bool `json:"normalize_column_name,omitempty"` // 返回的列名是否去除特殊字符
 }
 
 type RecordQueryOptionBuilder struct {
-	stringifyNumber         bool // 是否以字符串形式返回数字
-	stringifyNumberFlag     bool
+	stringifyNumber     bool // 是否以字符串形式返回数字
+	stringifyNumberFlag bool
+
 	normalizeColumnName     bool // 返回的列名是否去除特殊字符
 	normalizeColumnNameFlag bool
 }
@@ -4239,21 +4608,27 @@ func (builder *RecordQueryOptionBuilder) Build() *RecordQueryOption {
 }
 
 type RecordResult struct {
-	Success         *bool          `json:"success,omitempty"`           // 是否成功
-	PrimaryKeyValue *string        `json:"primary_key_value,omitempty"` // 记录失败的唯一键对应值
-	Errors          []*RecordError `json:"errors,omitempty"`            // 记录失败的第一条报错
-	Id              *string        `json:"_id,omitempty"`               // 记录的内部 id
+	Success *bool `json:"success,omitempty"` // 是否成功
+
+	PrimaryKeyValue *string `json:"primary_key_value,omitempty"` // 记录失败的唯一键对应值
+
+	Errors []*RecordError `json:"errors,omitempty"` // 记录失败的第一条报错
+
+	Id *string `json:"_id,omitempty"` // 记录的内部 id
 }
 
 type RecordResultBuilder struct {
-	success             bool // 是否成功
-	successFlag         bool
+	success     bool // 是否成功
+	successFlag bool
+
 	primaryKeyValue     string // 记录失败的唯一键对应值
 	primaryKeyValueFlag bool
-	errors              []*RecordError // 记录失败的第一条报错
-	errorsFlag          bool
-	id                  string // 记录的内部 id
-	idFlag              bool
+
+	errors     []*RecordError // 记录失败的第一条报错
+	errorsFlag bool
+
+	id     string // 记录的内部 id
+	idFlag bool
 }
 
 func NewRecordResultBuilder() *RecordResultBuilder {
@@ -4318,36 +4693,52 @@ func (builder *RecordResultBuilder) Build() *RecordResult {
 }
 
 type Run struct {
-	Id        *string   `json:"id,omitempty"`         // 运行 ID
-	CreatedAt *string   `json:"created_at,omitempty"` // 运行的创建时间，毫秒时间戳
-	AppId     *string   `json:"app_id,omitempty"`     // 应用 ID
-	SessionId *string   `json:"session_id,omitempty"` // 会话 ID
-	Status    *string   `json:"status,omitempty"`     // 状态
-	StartedAt *string   `json:"started_at,omitempty"` // 开始时间，毫秒时间戳
-	EndedAt   *string   `json:"ended_at,omitempty"`   // 结束时间，毫秒时间戳
-	Error     *RunError `json:"error,omitempty"`      // 失败时的错误信息
-	Metadata  *string   `json:"metadata,omitempty"`   // 其他透传信息
+	Id *string `json:"id,omitempty"` // 运行 ID
+
+	CreatedAt *string `json:"created_at,omitempty"` // 运行的创建时间，毫秒时间戳
+
+	AppId *string `json:"app_id,omitempty"` // 应用 ID
+
+	SessionId *string `json:"session_id,omitempty"` // 会话 ID
+
+	Status *string `json:"status,omitempty"` // 状态
+
+	StartedAt *string `json:"started_at,omitempty"` // 开始时间，毫秒时间戳
+
+	EndedAt *string `json:"ended_at,omitempty"` // 结束时间，毫秒时间戳
+
+	Error *RunError `json:"error,omitempty"` // 失败时的错误信息
+
+	Metadata *string `json:"metadata,omitempty"` // 其他透传信息
 }
 
 type RunBuilder struct {
-	id            string // 运行 ID
-	idFlag        bool
+	id     string // 运行 ID
+	idFlag bool
+
 	createdAt     string // 运行的创建时间，毫秒时间戳
 	createdAtFlag bool
-	appId         string // 应用 ID
-	appIdFlag     bool
+
+	appId     string // 应用 ID
+	appIdFlag bool
+
 	sessionId     string // 会话 ID
 	sessionIdFlag bool
-	status        string // 状态
-	statusFlag    bool
+
+	status     string // 状态
+	statusFlag bool
+
 	startedAt     string // 开始时间，毫秒时间戳
 	startedAtFlag bool
-	endedAt       string // 结束时间，毫秒时间戳
-	endedAtFlag   bool
-	error         *RunError // 失败时的错误信息
-	errorFlag     bool
-	metadata      string // 其他透传信息
-	metadataFlag  bool
+
+	endedAt     string // 结束时间，毫秒时间戳
+	endedAtFlag bool
+
+	error     *RunError // 失败时的错误信息
+	errorFlag bool
+
+	metadata     string // 其他透传信息
+	metadataFlag bool
 }
 
 func NewRunBuilder() *RunBuilder {
@@ -4477,13 +4868,15 @@ func (builder *RunBuilder) Build() *Run {
 }
 
 type RunError struct {
-	Code    *string `json:"code,omitempty"`    // 错误码
+	Code *string `json:"code,omitempty"` // 错误码
+
 	Message *string `json:"message,omitempty"` // 错误信息
 }
 
 type RunErrorBuilder struct {
-	code        string // 错误码
-	codeFlag    bool
+	code     string // 错误码
+	codeFlag bool
+
 	message     string // 错误信息
 	messageFlag bool
 }
@@ -4525,24 +4918,32 @@ func (builder *RunErrorBuilder) Build() *RunError {
 }
 
 type Sender struct {
-	Id         *string `json:"id,omitempty"`          // 发送人 id
+	Id *string `json:"id,omitempty"` // 发送人 id
+
 	SenderType *string `json:"sender_type,omitempty"` // 发送者类型
-	Name       *string `json:"name,omitempty"`        // 发送者名称
-	Desc       *string `json:"desc,omitempty"`        // 发送者描述
-	SenderId   *string `json:"sender_id,omitempty"`   // 发送者id
+
+	Name *string `json:"name,omitempty"` // 发送者名称
+
+	Desc *string `json:"desc,omitempty"` // 发送者描述
+
+	SenderId *string `json:"sender_id,omitempty"` // 发送者id
 }
 
 type SenderBuilder struct {
-	id             string // 发送人 id
-	idFlag         bool
+	id     string // 发送人 id
+	idFlag bool
+
 	senderType     string // 发送者类型
 	senderTypeFlag bool
-	name           string // 发送者名称
-	nameFlag       bool
-	desc           string // 发送者描述
-	descFlag       bool
-	senderId       string // 发送者id
-	senderIdFlag   bool
+
+	name     string // 发送者名称
+	nameFlag bool
+
+	desc     string // 发送者描述
+	descFlag bool
+
+	senderId     string // 发送者id
+	senderIdFlag bool
 }
 
 func NewSenderBuilder() *SenderBuilder {
@@ -4621,36 +5022,52 @@ func (builder *SenderBuilder) Build() *Sender {
 }
 
 type Session struct {
-	Id             *string `json:"id,omitempty"`               // session 的唯一标识
-	CreatedAt      *string `json:"created_at,omitempty"`       // session 的创建时间，毫秒时间戳
-	EffectedAt     *string `json:"effected_at,omitempty"`      // session 的过期时间，毫秒时间戳
-	Type           *string `json:"type,omitempty"`             // session 类型
-	Status         *string `json:"status,omitempty"`           // session 状态
+	Id *string `json:"id,omitempty"` // session 的唯一标识
+
+	CreatedAt *string `json:"created_at,omitempty"` // session 的创建时间，毫秒时间戳
+
+	EffectedAt *string `json:"effected_at,omitempty"` // session 的过期时间，毫秒时间戳
+
+	Type *string `json:"type,omitempty"` // session 类型
+
+	Status *string `json:"status,omitempty"` // session 状态
+
 	ActiveIntentId *string `json:"active_intent_id,omitempty"` // 当前运行中的意图 id
-	ChannelType    *string `json:"channel_type,omitempty"`     // 渠道类型
-	EnableDebug    *bool   `json:"enable_debug,omitempty"`     // 是否开启调试模式
-	Kvs            *string `json:"kvs,omitempty"`              // 会话中的自定义 kv 对，包括创建时传入的渠道上下文
+
+	ChannelType *string `json:"channel_type,omitempty"` // 渠道类型
+
+	EnableDebug *bool `json:"enable_debug,omitempty"` // 是否开启调试模式
+
+	Kvs *string `json:"kvs,omitempty"` // 会话中的自定义 kv 对，包括创建时传入的渠道上下文
 }
 
 type SessionBuilder struct {
-	id                 string // session 的唯一标识
-	idFlag             bool
-	createdAt          string // session 的创建时间，毫秒时间戳
-	createdAtFlag      bool
-	effectedAt         string // session 的过期时间，毫秒时间戳
-	effectedAtFlag     bool
-	type_              string // session 类型
-	typeFlag           bool
-	status             string // session 状态
-	statusFlag         bool
+	id     string // session 的唯一标识
+	idFlag bool
+
+	createdAt     string // session 的创建时间，毫秒时间戳
+	createdAtFlag bool
+
+	effectedAt     string // session 的过期时间，毫秒时间戳
+	effectedAtFlag bool
+
+	type_    string // session 类型
+	typeFlag bool
+
+	status     string // session 状态
+	statusFlag bool
+
 	activeIntentId     string // 当前运行中的意图 id
 	activeIntentIdFlag bool
-	channelType        string // 渠道类型
-	channelTypeFlag    bool
-	enableDebug        bool // 是否开启调试模式
-	enableDebugFlag    bool
-	kvs                string // 会话中的自定义 kv 对，包括创建时传入的渠道上下文
-	kvsFlag            bool
+
+	channelType     string // 渠道类型
+	channelTypeFlag bool
+
+	enableDebug     bool // 是否开启调试模式
+	enableDebugFlag bool
+
+	kvs     string // 会话中的自定义 kv 对，包括创建时传入的渠道上下文
+	kvsFlag bool
 }
 
 func NewSessionBuilder() *SessionBuilder {
@@ -4781,25 +5198,35 @@ func (builder *SessionBuilder) Build() *Session {
 }
 
 type Skill struct {
-	Id           *string  `json:"id,omitempty"`            // 技能 ID
-	Label        *string  `json:"label,omitempty"`         // 技能名称
-	Description  *string  `json:"description,omitempty"`   // 技能描述
-	Samples      []string `json:"samples,omitempty"`       // 用户提问示例
-	InputSchema  *string  `json:"input_schema,omitempty"`  // 技能入参定义
-	OutputSchema *string  `json:"output_schema,omitempty"` // 技能出参定义
+	Id *string `json:"id,omitempty"` // 技能 ID
+
+	Label *string `json:"label,omitempty"` // 技能名称
+
+	Description *string `json:"description,omitempty"` // 技能描述
+
+	Samples []string `json:"samples,omitempty"` // 用户提问示例
+
+	InputSchema *string `json:"input_schema,omitempty"` // 技能入参定义
+
+	OutputSchema *string `json:"output_schema,omitempty"` // 技能出参定义
 }
 
 type SkillBuilder struct {
-	id               string // 技能 ID
-	idFlag           bool
-	label            string // 技能名称
-	labelFlag        bool
-	description      string // 技能描述
-	descriptionFlag  bool
-	samples          []string // 用户提问示例
-	samplesFlag      bool
-	inputSchema      string // 技能入参定义
-	inputSchemaFlag  bool
+	id     string // 技能 ID
+	idFlag bool
+
+	label     string // 技能名称
+	labelFlag bool
+
+	description     string // 技能描述
+	descriptionFlag bool
+
+	samples     []string // 用户提问示例
+	samplesFlag bool
+
+	inputSchema     string // 技能入参定义
+	inputSchemaFlag bool
+
 	outputSchema     string // 技能出参定义
 	outputSchemaFlag bool
 }
@@ -4892,19 +5319,25 @@ func (builder *SkillBuilder) Build() *Skill {
 }
 
 type SkillBaseInfo struct {
-	Name        *string `json:"name,omitempty"`         // 技能名称
-	SkillId     *string `json:"skill_id,omitempty"`     // 技能 id
-	Type        *string `json:"type,omitempty"`         // 技能类型
+	Name *string `json:"name,omitempty"` // 技能名称
+
+	SkillId *string `json:"skill_id,omitempty"` // 技能 id
+
+	Type *string `json:"type,omitempty"` // 技能类型
+
 	BuiltinType *string `json:"builtin_type,omitempty"` // 内置技能类型
 }
 
 type SkillBaseInfoBuilder struct {
-	name            string // 技能名称
-	nameFlag        bool
-	skillId         string // 技能 id
-	skillIdFlag     bool
-	type_           string // 技能类型
-	typeFlag        bool
+	name     string // 技能名称
+	nameFlag bool
+
+	skillId     string // 技能 id
+	skillIdFlag bool
+
+	type_    string // 技能类型
+	typeFlag bool
+
 	builtinType     string // 内置技能类型
 	builtinTypeFlag bool
 }
@@ -4973,20 +5406,26 @@ func (builder *SkillBaseInfoBuilder) Build() *SkillBaseInfo {
 
 type SkillCall struct {
 	SkillCallId *string `json:"skill_call_id,omitempty"` // 中断调用 schema
-	Input       *string `json:"input,omitempty"`         // 用户对中断的响应内容
-	WaitingType *string `json:"waiting_type,omitempty"`  // WAITING_USER_MESSAGE or WAITING_USER_RESPOND
-	InputDsl    *string `json:"input_dsl,omitempty"`     // input 的 DSL，用户可参考 DSL 来写 input
+
+	Input *string `json:"input,omitempty"` // 用户对中断的响应内容
+
+	WaitingType *string `json:"waiting_type,omitempty"` // WAITING_USER_MESSAGE or WAITING_USER_RESPOND
+
+	InputDsl *string `json:"input_dsl,omitempty"` // input 的 DSL，用户可参考 DSL 来写 input
 }
 
 type SkillCallBuilder struct {
 	skillCallId     string // 中断调用 schema
 	skillCallIdFlag bool
-	input           string // 用户对中断的响应内容
-	inputFlag       bool
+
+	input     string // 用户对中断的响应内容
+	inputFlag bool
+
 	waitingType     string // WAITING_USER_MESSAGE or WAITING_USER_RESPOND
 	waitingTypeFlag bool
-	inputDsl        string // input 的 DSL，用户可参考 DSL 来写 input
-	inputDslFlag    bool
+
+	inputDsl     string // input 的 DSL，用户可参考 DSL 来写 input
+	inputDslFlag bool
 }
 
 func NewSkillCallBuilder() *SkillCallBuilder {
@@ -5052,16 +5491,20 @@ func (builder *SkillCallBuilder) Build() *SkillCall {
 }
 
 type SkillGlobalVariable struct {
-	Query   *string  `json:"query,omitempty"`   // 触发技能的消息文本
-	Files   []string `json:"files,omitempty"`   // 触发技能的消息文件
+	Query *string `json:"query,omitempty"` // 触发技能的消息文本
+
+	Files []string `json:"files,omitempty"` // 触发技能的消息文件
+
 	Channel *Channel `json:"channel,omitempty"` // 渠道信息
 }
 
 type SkillGlobalVariableBuilder struct {
-	query       string // 触发技能的消息文本
-	queryFlag   bool
-	files       []string // 触发技能的消息文件
-	filesFlag   bool
+	query     string // 触发技能的消息文本
+	queryFlag bool
+
+	files     []string // 触发技能的消息文件
+	filesFlag bool
+
 	channel     *Channel // 渠道信息
 	channelFlag bool
 }
@@ -5115,20 +5558,26 @@ func (builder *SkillGlobalVariableBuilder) Build() *SkillGlobalVariable {
 
 type SkillInstance struct {
 	SkillInstanceId *string `json:"skill_instance_id,omitempty"` // skill_instance 的唯一标识
-	Status          *string `json:"status,omitempty"`            // skill_instance 的状态
-	Input           *string `json:"input,omitempty"`             // skill_instance 的输入，结构需要符合 skill 的 input schema
-	Output          *string `json:"output,omitempty"`            // skill_instance 的输出，结构需要符合 skill 的 output schema
+
+	Status *string `json:"status,omitempty"` // skill_instance 的状态
+
+	Input *string `json:"input,omitempty"` // skill_instance 的输入，结构需要符合 skill 的 input schema
+
+	Output *string `json:"output,omitempty"` // skill_instance 的输出，结构需要符合 skill 的 output schema
 }
 
 type SkillInstanceBuilder struct {
 	skillInstanceId     string // skill_instance 的唯一标识
 	skillInstanceIdFlag bool
-	status              string // skill_instance 的状态
-	statusFlag          bool
-	input               string // skill_instance 的输入，结构需要符合 skill 的 input schema
-	inputFlag           bool
-	output              string // skill_instance 的输出，结构需要符合 skill 的 output schema
-	outputFlag          bool
+
+	status     string // skill_instance 的状态
+	statusFlag bool
+
+	input     string // skill_instance 的输入，结构需要符合 skill 的 input schema
+	inputFlag bool
+
+	output     string // skill_instance 的输出，结构需要符合 skill 的 output schema
+	outputFlag bool
 }
 
 func NewSkillInstanceBuilder() *SkillInstanceBuilder {
@@ -5194,28 +5643,40 @@ func (builder *SkillInstanceBuilder) Build() *SkillInstance {
 }
 
 type SourceSetting struct {
-	ApiId                     *string           `json:"api_id,omitempty"`                       // 分表数据源api_id
-	ApiName                   *string           `json:"api_name,omitempty"`                     // 分表数据源api_name
-	Label                     map[string]string `json:"label,omitempty"`                        // 分表数据源名称，国际化文本
-	FromType                  *string           `json:"from_type,omitempty"`                    // 数据源具体来源
-	AuthKey                   *string           `json:"auth_key,omitempty"`                     // 外部数据源的凭证key
-	AuthName                  map[string]string `json:"auth_name,omitempty"`                    // 外部数据源的凭证名称，国际化文本（同上）
-	DataSourceIntegrationType *string           `json:"data_source_integration_type,omitempty"` // 外部数据源和对接方式 - direct: 直连 - Import: 导入
+	ApiId *string `json:"api_id,omitempty"` // 分表数据源api_id
+
+	ApiName *string `json:"api_name,omitempty"` // 分表数据源api_name
+
+	Label map[string]string `json:"label,omitempty"` // 分表数据源名称，国际化文本
+
+	FromType *string `json:"from_type,omitempty"` // 数据源具体来源
+
+	AuthKey *string `json:"auth_key,omitempty"` // 外部数据源的凭证key
+
+	AuthName map[string]string `json:"auth_name,omitempty"` // 外部数据源的凭证名称，国际化文本（同上）
+
+	DataSourceIntegrationType *string `json:"data_source_integration_type,omitempty"` // 外部数据源和对接方式 - direct: 直连 - Import: 导入
 }
 
 type SourceSettingBuilder struct {
-	apiId                         string // 分表数据源api_id
-	apiIdFlag                     bool
-	apiName                       string // 分表数据源api_name
-	apiNameFlag                   bool
-	label                         map[string]string // 分表数据源名称，国际化文本
-	labelFlag                     bool
-	fromType                      string // 数据源具体来源
-	fromTypeFlag                  bool
-	authKey                       string // 外部数据源的凭证key
-	authKeyFlag                   bool
-	authName                      map[string]string // 外部数据源的凭证名称，国际化文本（同上）
-	authNameFlag                  bool
+	apiId     string // 分表数据源api_id
+	apiIdFlag bool
+
+	apiName     string // 分表数据源api_name
+	apiNameFlag bool
+
+	label     map[string]string // 分表数据源名称，国际化文本
+	labelFlag bool
+
+	fromType     string // 数据源具体来源
+	fromTypeFlag bool
+
+	authKey     string // 外部数据源的凭证key
+	authKeyFlag bool
+
+	authName     map[string]string // 外部数据源的凭证名称，国际化文本（同上）
+	authNameFlag bool
+
 	dataSourceIntegrationType     string // 外部数据源和对接方式 - direct: 直连 - Import: 导入
 	dataSourceIntegrationTypeFlag bool
 }
@@ -5320,13 +5781,15 @@ func (builder *SourceSettingBuilder) Build() *SourceSetting {
 }
 
 type Suggestion struct {
-	Content *string `json:"content,omitempty"`  // 推荐的内容
+	Content *string `json:"content,omitempty"` // 推荐的内容
+
 	SkillId *string `json:"skill_id,omitempty"` // 推荐的技能
 }
 
 type SuggestionBuilder struct {
 	content     string // 推荐的内容
 	contentFlag bool
+
 	skillId     string // 推荐的技能
 	skillIdFlag bool
 }
@@ -5368,27 +5831,37 @@ func (builder *SuggestionBuilder) Build() *Suggestion {
 }
 
 type Table struct {
-	TableType     *string           `json:"table_type,omitempty"`     // 表类型，分为 "datatable"、"dataset"
-	ApiName       *string           `json:"api_name,omitempty"`       // 数据表标识
-	Label         map[string]string `json:"label,omitempty"`          // 数据表名称
-	AccessItems   []string          `json:"access_items,omitempty"`   // 数据表读写权限
-	AiDescription *string           `json:"ai_description,omitempty"` // 数据表描述信息
-	Fields        []*Field          `json:"fields,omitempty"`         // 数据表下的字段列表，获取数据表元信息详情时才会返回
+	TableType *string `json:"table_type,omitempty"` // 表类型，分为 "datatable"、"dataset"
+
+	ApiName *string `json:"api_name,omitempty"` // 数据表标识
+
+	Label map[string]string `json:"label,omitempty"` // 数据表名称
+
+	AccessItems []string `json:"access_items,omitempty"` // 数据表读写权限
+
+	AiDescription *string `json:"ai_description,omitempty"` // 数据表描述信息
+
+	Fields []*Field `json:"fields,omitempty"` // 数据表下的字段列表，获取数据表元信息详情时才会返回
 }
 
 type TableBuilder struct {
-	tableType         string // 表类型，分为 "datatable"、"dataset"
-	tableTypeFlag     bool
-	apiName           string // 数据表标识
-	apiNameFlag       bool
-	label             map[string]string // 数据表名称
-	labelFlag         bool
-	accessItems       []string // 数据表读写权限
-	accessItemsFlag   bool
+	tableType     string // 表类型，分为 "datatable"、"dataset"
+	tableTypeFlag bool
+
+	apiName     string // 数据表标识
+	apiNameFlag bool
+
+	label     map[string]string // 数据表名称
+	labelFlag bool
+
+	accessItems     []string // 数据表读写权限
+	accessItemsFlag bool
+
 	aiDescription     string // 数据表描述信息
 	aiDescriptionFlag bool
-	fields            []*Field // 数据表下的字段列表，获取数据表元信息详情时才会返回
-	fieldsFlag        bool
+
+	fields     []*Field // 数据表下的字段列表，获取数据表元信息详情时才会返回
+	fieldsFlag bool
 }
 
 func NewTableBuilder() *TableBuilder {
@@ -5479,8 +5952,9 @@ func (builder *TableBuilder) Build() *Table {
 type CreateAilySessionReqBodyBuilder struct {
 	channelContext     string // 渠道上下文
 	channelContextFlag bool
-	metadata           string // 其他透传信息
-	metadataFlag       bool
+
+	metadata     string // 其他透传信息
+	metadataFlag bool
 }
 
 func NewCreateAilySessionReqBodyBuilder() *CreateAilySessionReqBodyBuilder {
@@ -5587,7 +6061,8 @@ func (builder *CreateAilySessionReqBuilder) Build() *CreateAilySessionReq {
 
 type CreateAilySessionReqBody struct {
 	ChannelContext *string `json:"channel_context,omitempty"` // 渠道上下文
-	Metadata       *string `json:"metadata,omitempty"`        // 其他透传信息
+
+	Metadata *string `json:"metadata,omitempty"` // 其他透传信息
 }
 
 type CreateAilySessionReq struct {
@@ -5699,8 +6174,9 @@ func (resp *GetAilySessionResp) Success() bool {
 type UpdateAilySessionReqBodyBuilder struct {
 	channelContext     string // 渠道上下文
 	channelContextFlag bool
-	metadata           string // 其他透传信息
-	metadataFlag       bool
+
+	metadata     string // 其他透传信息
+	metadataFlag bool
 }
 
 func NewUpdateAilySessionReqBodyBuilder() *UpdateAilySessionReqBodyBuilder {
@@ -5816,7 +6292,8 @@ func (builder *UpdateAilySessionReqBuilder) Build() *UpdateAilySessionReq {
 
 type UpdateAilySessionReqBody struct {
 	ChannelContext *string `json:"channel_context,omitempty"` // 渠道上下文
-	Metadata       *string `json:"metadata,omitempty"`        // 其他透传信息
+
+	Metadata *string `json:"metadata,omitempty"` // 其他透传信息
 }
 
 type UpdateAilySessionReq struct {
@@ -5839,18 +6316,23 @@ func (resp *UpdateAilySessionResp) Success() bool {
 }
 
 type CreateAilySessionAilyMessageReqBodyBuilder struct {
-	idempotentId       string // 幂等id，同一 session 下相同的幂等 id 算一条消息，有效期72h
-	idempotentIdFlag   bool
-	contentType        string // 消息内容类型
-	contentTypeFlag    bool
-	content            string // 消息内容
-	contentFlag        bool
-	fileIds            []string // 消息中包含的文件 ID 列表
-	fileIdsFlag        bool
+	idempotentId     string // 幂等id，同一 session 下相同的幂等 id 算一条消息，有效期72h
+	idempotentIdFlag bool
+
+	contentType     string // 消息内容类型
+	contentTypeFlag bool
+
+	content     string // 消息内容
+	contentFlag bool
+
+	fileIds     []string // 消息中包含的文件 ID 列表
+	fileIdsFlag bool
+
 	quoteMessageId     string // 引用的消息 ID
 	quoteMessageIdFlag bool
-	mentions           []*AilyMention // 被@的实体
-	mentionsFlag       bool
+
+	mentions     []*AilyMention // 被@的实体
+	mentionsFlag bool
 }
 
 func NewCreateAilySessionAilyMessageReqBodyBuilder() *CreateAilySessionAilyMessageReqBodyBuilder {
@@ -6069,12 +6551,17 @@ func (builder *CreateAilySessionAilyMessageReqBuilder) Build() *CreateAilySessio
 }
 
 type CreateAilySessionAilyMessageReqBody struct {
-	IdempotentId   *string        `json:"idempotent_id,omitempty"`    // 幂等id，同一 session 下相同的幂等 id 算一条消息，有效期72h
-	ContentType    *string        `json:"content_type,omitempty"`     // 消息内容类型
-	Content        *string        `json:"content,omitempty"`          // 消息内容
-	FileIds        []string       `json:"file_ids,omitempty"`         // 消息中包含的文件 ID 列表
-	QuoteMessageId *string        `json:"quote_message_id,omitempty"` // 引用的消息 ID
-	Mentions       []*AilyMention `json:"mentions,omitempty"`         // 被@的实体
+	IdempotentId *string `json:"idempotent_id,omitempty"` // 幂等id，同一 session 下相同的幂等 id 算一条消息，有效期72h
+
+	ContentType *string `json:"content_type,omitempty"` // 消息内容类型
+
+	Content *string `json:"content,omitempty"` // 消息内容
+
+	FileIds []string `json:"file_ids,omitempty"` // 消息中包含的文件 ID 列表
+
+	QuoteMessageId *string `json:"quote_message_id,omitempty"` // 引用的消息 ID
+
+	Mentions []*AilyMention `json:"mentions,omitempty"` // 被@的实体
 }
 
 type CreateAilySessionAilyMessageReq struct {
@@ -6226,9 +6713,11 @@ type ListAilySessionAilyMessageReq struct {
 }
 
 type ListAilySessionAilyMessageRespData struct {
-	Messages  []*AilyMessage `json:"messages,omitempty"`   // 消息列表
-	PageToken *string        `json:"page_token,omitempty"` // 下一页的起始偏移量
-	HasMore   *bool          `json:"has_more,omitempty"`   // 是否还有更多数据
+	Messages []*AilyMessage `json:"messages,omitempty"` // 消息列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页的起始偏移量
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多数据
 }
 
 type ListAilySessionAilyMessageResp struct {
@@ -6296,14 +6785,17 @@ func (resp *CancelAilySessionRunResp) Success() bool {
 }
 
 type CreateAilySessionRunReqBodyBuilder struct {
-	appId          string // 应用 ID
-	appIdFlag      bool
-	skillId        string // 技能 ID
-	skillIdFlag    bool
+	appId     string // 应用 ID
+	appIdFlag bool
+
+	skillId     string // 技能 ID
+	skillIdFlag bool
+
 	skillInput     string // 指定技能 ID 时可以同时指定技能输入
 	skillInputFlag bool
-	metadata       string // 其他透传信息
-	metadataFlag   bool
+
+	metadata     string // 其他透传信息
+	metadataFlag bool
 }
 
 func NewCreateAilySessionRunReqBodyBuilder() *CreateAilySessionRunReqBodyBuilder {
@@ -6470,10 +6962,13 @@ func (builder *CreateAilySessionRunReqBuilder) Build() *CreateAilySessionRunReq 
 }
 
 type CreateAilySessionRunReqBody struct {
-	AppId      *string `json:"app_id,omitempty"`      // 应用 ID
-	SkillId    *string `json:"skill_id,omitempty"`    // 技能 ID
+	AppId *string `json:"app_id,omitempty"` // 应用 ID
+
+	SkillId *string `json:"skill_id,omitempty"` // 技能 ID
+
 	SkillInput *string `json:"skill_input,omitempty"` // 指定技能 ID 时可以同时指定技能输入
-	Metadata   *string `json:"metadata,omitempty"`    // 其他透传信息
+
+	Metadata *string `json:"metadata,omitempty"` // 其他透传信息
 }
 
 type CreateAilySessionRunReq struct {
@@ -6609,9 +7104,11 @@ type ListAilySessionRunReq struct {
 }
 
 type ListAilySessionRunRespData struct {
-	Runs      []*Run  `json:"runs,omitempty"`       // 运行列表
+	Runs []*Run `json:"runs,omitempty"` // 运行列表
+
 	PageToken *string `json:"page_token,omitempty"` // 下一页的起始偏移量
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有更多数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多数据
 }
 
 type ListAilySessionRunResp struct {
@@ -6736,9 +7233,11 @@ type ListAppDataAssetReq struct {
 }
 
 type ListAppDataAssetRespData struct {
-	Items     []*DataAsset `json:"items,omitempty"`      // 数据知识列表
-	PageToken *string      `json:"page_token,omitempty"` // has_more=true，可使用page_token继续查询
-	HasMore   *bool        `json:"has_more,omitempty"`   // 是否有更多
+	Items []*DataAsset `json:"items,omitempty"` // 数据知识列表
+
+	PageToken *string `json:"page_token,omitempty"` // has_more=true，可使用page_token继续查询
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多
 }
 
 type ListAppDataAssetResp struct {
@@ -6829,9 +7328,11 @@ type ListAppDataAssetTagReq struct {
 }
 
 type ListAppDataAssetTagRespData struct {
-	Items     []*DataAssetTag `json:"items,omitempty"`      // 数据知识分类列表
-	PageToken *string         `json:"page_token,omitempty"` // has_more=true，可使用 page_token继续查询
-	HasMore   *bool           `json:"has_more,omitempty"`   // 是否有更多
+	Items []*DataAssetTag `json:"items,omitempty"` // 数据知识分类列表
+
+	PageToken *string `json:"page_token,omitempty"` // has_more=true，可使用 page_token继续查询
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多
 }
 
 type ListAppDataAssetTagResp struct {
@@ -6845,10 +7346,12 @@ func (resp *ListAppDataAssetTagResp) Success() bool {
 }
 
 type AskAppKnowledgeReqBodyBuilder struct {
-	message             *AilyKnowledgeMessage // 输入消息（当前仅支持纯文本输入）
-	messageFlag         bool
-	dataAssetIds        []string // 控制知识问答所依据的数据知识范围
-	dataAssetIdsFlag    bool
+	message     *AilyKnowledgeMessage // 输入消息（当前仅支持纯文本输入）
+	messageFlag bool
+
+	dataAssetIds     []string // 控制知识问答所依据的数据知识范围
+	dataAssetIdsFlag bool
+
 	dataAssetTagIds     []string // 控制知识问答所依据的数据知识分类范围
 	dataAssetTagIdsFlag bool
 }
@@ -6991,9 +7494,11 @@ func (builder *AskAppKnowledgeReqBuilder) Build() *AskAppKnowledgeReq {
 }
 
 type AskAppKnowledgeReqBody struct {
-	Message         *AilyKnowledgeMessage `json:"message,omitempty"`            // 输入消息（当前仅支持纯文本输入）
-	DataAssetIds    []string              `json:"data_asset_ids,omitempty"`     // 控制知识问答所依据的数据知识范围
-	DataAssetTagIds []string              `json:"data_asset_tag_ids,omitempty"` // 控制知识问答所依据的数据知识分类范围
+	Message *AilyKnowledgeMessage `json:"message,omitempty"` // 输入消息（当前仅支持纯文本输入）
+
+	DataAssetIds []string `json:"data_asset_ids,omitempty"` // 控制知识问答所依据的数据知识范围
+
+	DataAssetTagIds []string `json:"data_asset_tag_ids,omitempty"` // 控制知识问答所依据的数据知识分类范围
 }
 
 type AskAppKnowledgeReq struct {
@@ -7002,12 +7507,17 @@ type AskAppKnowledgeReq struct {
 }
 
 type AskAppKnowledgeRespData struct {
-	Status      *string                      `json:"status,omitempty"`       // 响应状态，枚举值
-	FinishType  *string                      `json:"finish_type,omitempty"`  // 结束类型，枚举值
-	Message     *AilyKnowledgeMessage        `json:"message,omitempty"`      // 响应消息
+	Status *string `json:"status,omitempty"` // 响应状态，枚举值
+
+	FinishType *string `json:"finish_type,omitempty"` // 结束类型，枚举值
+
+	Message *AilyKnowledgeMessage `json:"message,omitempty"` // 响应消息
+
 	ProcessData *AilyKnowledgeAskProcessData `json:"process_data,omitempty"` // 知识问答运行过程结构化数据，status=finished 且 finish_type=qa 时返回
-	FaqResult   *AilyKnowledgeFaq            `json:"faq_result,omitempty"`   // 匹配标准问答对结果，status=finished 且 finish_type=faq时返回
-	HasAnswer   *bool                        `json:"has_answer,omitempty"`   // 是否有结果，true 则 代表 message 中的内容是通过配置知识而生成的
+
+	FaqResult *AilyKnowledgeFaq `json:"faq_result,omitempty"` // 匹配标准问答对结果，status=finished 且 finish_type=faq时返回
+
+	HasAnswer *bool `json:"has_answer,omitempty"` // 是否有结果，true 则 代表 message 中的内容是通过配置知识而生成的
 }
 
 type AskAppKnowledgeResp struct {
@@ -7134,9 +7644,11 @@ type ListAppSkillReq struct {
 }
 
 type ListAppSkillRespData struct {
-	Skills    []*Skill `json:"skills,omitempty"`     // 技能列表
-	PageToken *string  `json:"page_token,omitempty"` // 下一页的起始偏移量
-	HasMore   *bool    `json:"has_more,omitempty"`   // 是否还有更多数据
+	Skills []*Skill `json:"skills,omitempty"` // 技能列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页的起始偏移量
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多数据
 }
 
 type ListAppSkillResp struct {
@@ -7152,8 +7664,9 @@ func (resp *ListAppSkillResp) Success() bool {
 type StartAppSkillReqBodyBuilder struct {
 	globalVariable     *SkillGlobalVariable // 技能的全局变量
 	globalVariableFlag bool
-	input              string // 技能的自定义变量
-	inputFlag          bool
+
+	input     string // 技能的自定义变量
+	inputFlag bool
 }
 
 func NewStartAppSkillReqBodyBuilder() *StartAppSkillReqBodyBuilder {
@@ -7277,7 +7790,8 @@ func (builder *StartAppSkillReqBuilder) Build() *StartAppSkillReq {
 
 type StartAppSkillReqBody struct {
 	GlobalVariable *SkillGlobalVariable `json:"global_variable,omitempty"` // 技能的全局变量
-	Input          *string              `json:"input,omitempty"`           // 技能的自定义变量
+
+	Input *string `json:"input,omitempty"` // 技能的自定义变量
 }
 
 type StartAppSkillReq struct {
@@ -7287,6 +7801,7 @@ type StartAppSkillReq struct {
 
 type StartAppSkillRespData struct {
 	Output *string `json:"output,omitempty"` // 技能的输出
+
 	Status *string `json:"status,omitempty"` // 技能的执行状态
 }
 

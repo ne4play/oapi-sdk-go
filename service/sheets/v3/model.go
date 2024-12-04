@@ -27,12 +27,14 @@ const (
 
 type AddSheet struct {
 	Title *string `json:"title,omitempty"` // 工作表标题
-	Index *int    `json:"index,omitempty"` // 工作表位置
+
+	Index *int `json:"index,omitempty"` // 工作表位置
 }
 
 type AddSheetBuilder struct {
 	title     string // 工作表标题
 	titleFlag bool
+
 	index     int // 工作表位置
 	indexFlag bool
 }
@@ -75,14 +77,16 @@ func (builder *AddSheetBuilder) Build() *AddSheet {
 
 type AlignmentStyle struct {
 	HorizontalAlignment *string `json:"horizontal_alignment,omitempty"` // 水平对齐策略
-	VerticalAlignment   *string `json:"vertical_alignment,omitempty"`   // 垂直对齐策略
+
+	VerticalAlignment *string `json:"vertical_alignment,omitempty"` // 垂直对齐策略
 }
 
 type AlignmentStyleBuilder struct {
 	horizontalAlignment     string // 水平对齐策略
 	horizontalAlignmentFlag bool
-	verticalAlignment       string // 垂直对齐策略
-	verticalAlignmentFlag   bool
+
+	verticalAlignment     string // 垂直对齐策略
+	verticalAlignmentFlag bool
 }
 
 func NewAlignmentStyleBuilder() *AlignmentStyleBuilder {
@@ -122,16 +126,20 @@ func (builder *AlignmentStyleBuilder) Build() *AlignmentStyle {
 }
 
 type AppendDimension struct {
-	MajorDimension    *string `json:"major_dimension,omitempty"`     // 操作行还是列，取值：ROWS、COLUMNS
-	Length            *int    `json:"length,omitempty"`              // 数量
-	InheritFromBefore *bool   `json:"inherit_from_before,omitempty"` // 是否继承上一行/列的样式
+	MajorDimension *string `json:"major_dimension,omitempty"` // 操作行还是列，取值：ROWS、COLUMNS
+
+	Length *int `json:"length,omitempty"` // 数量
+
+	InheritFromBefore *bool `json:"inherit_from_before,omitempty"` // 是否继承上一行/列的样式
 }
 
 type AppendDimensionBuilder struct {
-	majorDimension        string // 操作行还是列，取值：ROWS、COLUMNS
-	majorDimensionFlag    bool
-	length                int // 数量
-	lengthFlag            bool
+	majorDimension     string // 操作行还是列，取值：ROWS、COLUMNS
+	majorDimensionFlag bool
+
+	length     int // 数量
+	lengthFlag bool
+
 	inheritFromBefore     bool // 是否继承上一行/列的样式
 	inheritFromBeforeFlag bool
 }
@@ -187,14 +195,16 @@ func (builder *AppendDimensionBuilder) Build() *AppendDimension {
 
 type BitableProperties struct {
 	BitableToken *string `json:"bitable_token,omitempty"` // 多维表格token
-	TableId      *string `json:"table_id,omitempty"`      // 数据表id
+
+	TableId *string `json:"table_id,omitempty"` // 数据表id
 }
 
 type BitablePropertiesBuilder struct {
 	bitableToken     string // 多维表格token
 	bitableTokenFlag bool
-	tableId          string // 数据表id
-	tableIdFlag      bool
+
+	tableId     string // 数据表id
+	tableIdFlag bool
 }
 
 func NewBitablePropertiesBuilder() *BitablePropertiesBuilder {
@@ -234,19 +244,25 @@ func (builder *BitablePropertiesBuilder) Build() *BitableProperties {
 }
 
 type BoolRuleValue struct {
-	Type       *string `json:"type,omitempty"`        // 条件值类型
-	Number     *string `json:"number,omitempty"`      // 数值，当type=Number时必须有
-	Text       *string `json:"text,omitempty"`        // 文本，当type=Text时必须有
+	Type *string `json:"type,omitempty"` // 条件值类型
+
+	Number *string `json:"number,omitempty"` // 数值，当type=Number时必须有
+
+	Text *string `json:"text,omitempty"` // 文本，当type=Text时必须有
+
 	TimePeriod *string `json:"time_period,omitempty"` // 时间区间
 }
 
 type BoolRuleValueBuilder struct {
-	type_          string // 条件值类型
-	typeFlag       bool
-	number         string // 数值，当type=Number时必须有
-	numberFlag     bool
-	text           string // 文本，当type=Text时必须有
-	textFlag       bool
+	type_    string // 条件值类型
+	typeFlag bool
+
+	number     string // 数值，当type=Number时必须有
+	numberFlag bool
+
+	text     string // 文本，当type=Text时必须有
+	textFlag bool
+
 	timePeriod     string // 时间区间
 	timePeriodFlag bool
 }
@@ -314,13 +330,15 @@ func (builder *BoolRuleValueBuilder) Build() *BoolRuleValue {
 }
 
 type BooleanRuleCondition struct {
-	Type                     *string          `json:"type,omitempty"`                       // 条件格式类型
+	Type *string `json:"type,omitempty"` // 条件格式类型
+
 	BooleanConditionalValues []*BoolRuleValue `json:"boolean_conditional_values,omitempty"` // 条件格式值，根据条件格式类型传入相应的值
 }
 
 type BooleanRuleConditionBuilder struct {
-	type_                        string // 条件格式类型
-	typeFlag                     bool
+	type_    string // 条件格式类型
+	typeFlag bool
+
 	booleanConditionalValues     []*BoolRuleValue // 条件格式值，根据条件格式类型传入相应的值
 	booleanConditionalValuesFlag bool
 }
@@ -361,19 +379,25 @@ func (builder *BooleanRuleConditionBuilder) Build() *BooleanRuleCondition {
 }
 
 type BorderStyle struct {
-	Top    *TopBorderStyle    `json:"top,omitempty"`    // 上边框样式
-	Left   *LeftBorderStyle   `json:"left,omitempty"`   // 左边框样式
-	Right  *RightBorderStyle  `json:"right,omitempty"`  // 右边框样式
+	Top *TopBorderStyle `json:"top,omitempty"` // 上边框样式
+
+	Left *LeftBorderStyle `json:"left,omitempty"` // 左边框样式
+
+	Right *RightBorderStyle `json:"right,omitempty"` // 右边框样式
+
 	Bottom *BottomBorderStyle `json:"bottom,omitempty"` // 下边框样式
 }
 
 type BorderStyleBuilder struct {
-	top        *TopBorderStyle // 上边框样式
-	topFlag    bool
-	left       *LeftBorderStyle // 左边框样式
-	leftFlag   bool
-	right      *RightBorderStyle // 右边框样式
-	rightFlag  bool
+	top     *TopBorderStyle // 上边框样式
+	topFlag bool
+
+	left     *LeftBorderStyle // 左边框样式
+	leftFlag bool
+
+	right     *RightBorderStyle // 右边框样式
+	rightFlag bool
+
 	bottom     *BottomBorderStyle // 下边框样式
 	bottomFlag bool
 }
@@ -438,12 +462,14 @@ func (builder *BorderStyleBuilder) Build() *BorderStyle {
 
 type BottomBorderStyle struct {
 	Style *string `json:"style,omitempty"` // 边框样式
+
 	Color *string `json:"color,omitempty"` // 边框颜色
 }
 
 type BottomBorderStyleBuilder struct {
 	style     string // 边框样式
 	styleFlag bool
+
 	color     string // 边框颜色
 	colorFlag bool
 }
@@ -485,25 +511,35 @@ func (builder *BottomBorderStyleBuilder) Build() *BottomBorderStyle {
 }
 
 type CellFontStyle struct {
-	Bold            *bool   `json:"bold,omitempty"`             // 是否加粗
-	Italic          *bool   `json:"italic,omitempty"`           // 是否斜体
-	Strikethrough   *bool   `json:"strikethrough,omitempty"`    // 是否设置删除线
-	Underline       *bool   `json:"underline,omitempty"`        // 是否展示下划线
+	Bold *bool `json:"bold,omitempty"` // 是否加粗
+
+	Italic *bool `json:"italic,omitempty"` // 是否斜体
+
+	Strikethrough *bool `json:"strikethrough,omitempty"` // 是否设置删除线
+
+	Underline *bool `json:"underline,omitempty"` // 是否展示下划线
+
 	ForegroundColor *string `json:"foreground_color,omitempty"` // 字体颜色
+
 	BackgroundColor *string `json:"background_color,omitempty"` // 背景颜色
 }
 
 type CellFontStyleBuilder struct {
-	bold                bool // 是否加粗
-	boldFlag            bool
-	italic              bool // 是否斜体
-	italicFlag          bool
-	strikethrough       bool // 是否设置删除线
-	strikethroughFlag   bool
-	underline           bool // 是否展示下划线
-	underlineFlag       bool
+	bold     bool // 是否加粗
+	boldFlag bool
+
+	italic     bool // 是否斜体
+	italicFlag bool
+
+	strikethrough     bool // 是否设置删除线
+	strikethroughFlag bool
+
+	underline     bool // 是否展示下划线
+	underlineFlag bool
+
 	foregroundColor     string // 字体颜色
 	foregroundColorFlag bool
+
 	backgroundColor     string // 背景颜色
 	backgroundColorFlag bool
 }
@@ -597,24 +633,32 @@ func (builder *CellFontStyleBuilder) Build() *CellFontStyle {
 }
 
 type CellStyle struct {
-	FontStyle      *CellFontStyle  `json:"font_style,omitempty"`      // 字体样式
-	BorderStyle    *BorderStyle    `json:"border_style,omitempty"`    // 边框颜色
+	FontStyle *CellFontStyle `json:"font_style,omitempty"` // 字体样式
+
+	BorderStyle *BorderStyle `json:"border_style,omitempty"` // 边框颜色
+
 	AlignmentStyle *AlignmentStyle `json:"alignment_style,omitempty"` // 对齐方式
-	WrapStrategy   *string         `json:"wrap_strategy,omitempty"`   // 文本换行
-	Format         *string         `json:"format,omitempty"`          // 数字格式
+
+	WrapStrategy *string `json:"wrap_strategy,omitempty"` // 文本换行
+
+	Format *string `json:"format,omitempty"` // 数字格式
 }
 
 type CellStyleBuilder struct {
-	fontStyle          *CellFontStyle // 字体样式
-	fontStyleFlag      bool
-	borderStyle        *BorderStyle // 边框颜色
-	borderStyleFlag    bool
+	fontStyle     *CellFontStyle // 字体样式
+	fontStyleFlag bool
+
+	borderStyle     *BorderStyle // 边框颜色
+	borderStyleFlag bool
+
 	alignmentStyle     *AlignmentStyle // 对齐方式
 	alignmentStyleFlag bool
-	wrapStrategy       string // 文本换行
-	wrapStrategyFlag   bool
-	format             string // 数字格式
-	formatFlag         bool
+
+	wrapStrategy     string // 文本换行
+	wrapStrategyFlag bool
+
+	format     string // 数字格式
+	formatFlag bool
 }
 
 func NewCellStyleBuilder() *CellStyleBuilder {
@@ -690,42 +734,62 @@ func (builder *CellStyleBuilder) Build() *CellStyle {
 }
 
 type CellValue struct {
-	Type            *string          `json:"type,omitempty"`             // 元素类型
-	Text            *Text            `json:"text,omitempty"`             //
-	MentionUser     *MentionUser     `json:"mention_user,omitempty"`     //
+	Type *string `json:"type,omitempty"` // 元素类型
+
+	Text *Text `json:"text,omitempty"` //
+
+	MentionUser *MentionUser `json:"mention_user,omitempty"` //
+
 	MentionDocument *MentionDocument `json:"mention_document,omitempty"` //
-	Value           *ValueElement    `json:"value,omitempty"`            //
-	DateTime        *DateTime        `json:"date_time,omitempty"`        //
-	File            *File            `json:"file,omitempty"`             //
-	Image           *Image           `json:"image,omitempty"`            //
-	Link            *Link            `json:"link,omitempty"`             //
-	Reminder        *Reminder        `json:"reminder,omitempty"`         //
-	Formula         *Formula         `json:"formula,omitempty"`          //
+
+	Value *ValueElement `json:"value,omitempty"` //
+
+	DateTime *DateTime `json:"date_time,omitempty"` //
+
+	File *File `json:"file,omitempty"` //
+
+	Image *Image `json:"image,omitempty"` //
+
+	Link *Link `json:"link,omitempty"` //
+
+	Reminder *Reminder `json:"reminder,omitempty"` //
+
+	Formula *Formula `json:"formula,omitempty"` //
 }
 
 type CellValueBuilder struct {
-	type_               string // 元素类型
-	typeFlag            bool
-	text                *Text //
-	textFlag            bool
-	mentionUser         *MentionUser //
-	mentionUserFlag     bool
+	type_    string // 元素类型
+	typeFlag bool
+
+	text     *Text //
+	textFlag bool
+
+	mentionUser     *MentionUser //
+	mentionUserFlag bool
+
 	mentionDocument     *MentionDocument //
 	mentionDocumentFlag bool
-	value               *ValueElement //
-	valueFlag           bool
-	dateTime            *DateTime //
-	dateTimeFlag        bool
-	file                *File //
-	fileFlag            bool
-	image               *Image //
-	imageFlag           bool
-	link                *Link //
-	linkFlag            bool
-	reminder            *Reminder //
-	reminderFlag        bool
-	formula             *Formula //
-	formulaFlag         bool
+
+	value     *ValueElement //
+	valueFlag bool
+
+	dateTime     *DateTime //
+	dateTimeFlag bool
+
+	file     *File //
+	fileFlag bool
+
+	image     *Image //
+	imageFlag bool
+
+	link     *Link //
+	linkFlag bool
+
+	reminder     *Reminder //
+	reminderFlag bool
+
+	formula     *Formula //
+	formulaFlag bool
 }
 
 func NewCellValueBuilder() *CellValueBuilder {
@@ -852,13 +916,15 @@ func (builder *CellValueBuilder) Build() *CellValue {
 }
 
 type Checkbox struct {
-	DataValidationId   *int    `json:"data_validation_id,omitempty"`   // 数据校验ID
+	DataValidationId *int `json:"data_validation_id,omitempty"` // 数据校验ID
+
 	DataValiditonValue *string `json:"data_validiton_value,omitempty"` // 复选框值
 }
 
 type CheckboxBuilder struct {
-	dataValidationId       int // 数据校验ID
-	dataValidationIdFlag   bool
+	dataValidationId     int // 数据校验ID
+	dataValidationIdFlag bool
+
 	dataValiditonValue     string // 复选框值
 	dataValiditonValueFlag bool
 }
@@ -993,18 +1059,22 @@ func (builder *ClearStyleRangesBuilder) Build() *ClearStyleRanges {
 }
 
 type Condition struct {
-	FilterType  *string  `json:"filter_type,omitempty"`  // 筛选类型
-	CompareType *string  `json:"compare_type,omitempty"` // 比较类型
-	Expected    []string `json:"expected,omitempty"`     // 筛选参数
+	FilterType *string `json:"filter_type,omitempty"` // 筛选类型
+
+	CompareType *string `json:"compare_type,omitempty"` // 比较类型
+
+	Expected []string `json:"expected,omitempty"` // 筛选参数
 }
 
 type ConditionBuilder struct {
-	filterType      string // 筛选类型
-	filterTypeFlag  bool
+	filterType     string // 筛选类型
+	filterTypeFlag bool
+
 	compareType     string // 比较类型
 	compareTypeFlag bool
-	expected        []string // 筛选参数
-	expectedFlag    bool
+
+	expected     []string // 筛选参数
+	expectedFlag bool
 }
 
 func NewConditionBuilder() *ConditionBuilder {
@@ -1056,21 +1126,27 @@ func (builder *ConditionBuilder) Build() *Condition {
 }
 
 type ConditionalFormat struct {
-	ConditionalFormatId   *string                 `json:"conditional_format_id,omitempty"`   // 条件格式ID
-	ConditionalFormatRule *ConditionalFormatRule  `json:"conditional_format_rule,omitempty"` // 条件格式
-	Index                 *int                    `json:"index,omitempty"`                   // 规则索引位置，默认为最后一个
-	Ranges                *ConditionalFormatRange `json:"ranges,omitempty"`                  // 条件格式应用范围
+	ConditionalFormatId *string `json:"conditional_format_id,omitempty"` // 条件格式ID
+
+	ConditionalFormatRule *ConditionalFormatRule `json:"conditional_format_rule,omitempty"` // 条件格式
+
+	Index *int `json:"index,omitempty"` // 规则索引位置，默认为最后一个
+
+	Ranges *ConditionalFormatRange `json:"ranges,omitempty"` // 条件格式应用范围
 }
 
 type ConditionalFormatBuilder struct {
-	conditionalFormatId       string // 条件格式ID
-	conditionalFormatIdFlag   bool
+	conditionalFormatId     string // 条件格式ID
+	conditionalFormatIdFlag bool
+
 	conditionalFormatRule     *ConditionalFormatRule // 条件格式
 	conditionalFormatRuleFlag bool
-	index                     int // 规则索引位置，默认为最后一个
-	indexFlag                 bool
-	ranges                    *ConditionalFormatRange // 条件格式应用范围
-	rangesFlag                bool
+
+	index     int // 规则索引位置，默认为最后一个
+	indexFlag bool
+
+	ranges     *ConditionalFormatRange // 条件格式应用范围
+	rangesFlag bool
 }
 
 func NewConditionalFormatBuilder() *ConditionalFormatBuilder {
@@ -1134,24 +1210,32 @@ func (builder *ConditionalFormatBuilder) Build() *ConditionalFormat {
 }
 
 type ConditionalFormatRange struct {
-	SheetId          *string `json:"sheet_id,omitempty"`           // 工作表ID
-	StartRowIndex    *int    `json:"start_row_index,omitempty"`    // 起始行索引
-	EndRowIndex      *int    `json:"end_row_index,omitempty"`      // 结束行索引
-	StartColumnIndex *int    `json:"start_column_index,omitempty"` // 起始列索引
-	EndColumnIndex   *int    `json:"end_column_index,omitempty"`   // 结束列索引
+	SheetId *string `json:"sheet_id,omitempty"` // 工作表ID
+
+	StartRowIndex *int `json:"start_row_index,omitempty"` // 起始行索引
+
+	EndRowIndex *int `json:"end_row_index,omitempty"` // 结束行索引
+
+	StartColumnIndex *int `json:"start_column_index,omitempty"` // 起始列索引
+
+	EndColumnIndex *int `json:"end_column_index,omitempty"` // 结束列索引
 }
 
 type ConditionalFormatRangeBuilder struct {
-	sheetId              string // 工作表ID
-	sheetIdFlag          bool
-	startRowIndex        int // 起始行索引
-	startRowIndexFlag    bool
-	endRowIndex          int // 结束行索引
-	endRowIndexFlag      bool
+	sheetId     string // 工作表ID
+	sheetIdFlag bool
+
+	startRowIndex     int // 起始行索引
+	startRowIndexFlag bool
+
+	endRowIndex     int // 结束行索引
+	endRowIndexFlag bool
+
 	startColumnIndex     int // 起始列索引
 	startColumnIndexFlag bool
-	endColumnIndex       int // 结束列索引
-	endColumnIndexFlag   bool
+
+	endColumnIndex     int // 结束列索引
+	endColumnIndexFlag bool
 }
 
 func NewConditionalFormatRangeBuilder() *ConditionalFormatRangeBuilder {
@@ -1231,14 +1315,16 @@ func (builder *ConditionalFormatRangeBuilder) Build() *ConditionalFormatRange {
 
 type ConditionalFormatRule struct {
 	BooleanRule *BooleanRuleCondition `json:"boolean_rule,omitempty"` // 布尔类型条件格式
-	Type        *string               `json:"type,omitempty"`         // 条件格式类型
+
+	Type *string `json:"type,omitempty"` // 条件格式类型
 }
 
 type ConditionalFormatRuleBuilder struct {
 	booleanRule     *BooleanRuleCondition // 布尔类型条件格式
 	booleanRuleFlag bool
-	type_           string // 条件格式类型
-	typeFlag        bool
+
+	type_    string // 条件格式类型
+	typeFlag bool
 }
 
 func NewConditionalFormatRuleBuilder() *ConditionalFormatRuleBuilder {
@@ -1278,26 +1364,36 @@ func (builder *ConditionalFormatRuleBuilder) Build() *ConditionalFormatRule {
 
 type ConditionalFormatStyle struct {
 	BackgroundColor *string `json:"background_color,omitempty"` // 背景颜色
+
 	ForegroundColor *string `json:"foreground_color,omitempty"` // 字体颜色
-	Underline       *bool   `json:"underline,omitempty"`        // 是否设置下划线
-	Bold            *bool   `json:"bold,omitempty"`             // 是否加粗
-	Italic          *bool   `json:"italic,omitempty"`           // 是否设置斜体
-	Strikethrough   *bool   `json:"strikethrough,omitempty"`    // 是否设置删除线
+
+	Underline *bool `json:"underline,omitempty"` // 是否设置下划线
+
+	Bold *bool `json:"bold,omitempty"` // 是否加粗
+
+	Italic *bool `json:"italic,omitempty"` // 是否设置斜体
+
+	Strikethrough *bool `json:"strikethrough,omitempty"` // 是否设置删除线
 }
 
 type ConditionalFormatStyleBuilder struct {
 	backgroundColor     string // 背景颜色
 	backgroundColorFlag bool
+
 	foregroundColor     string // 字体颜色
 	foregroundColorFlag bool
-	underline           bool // 是否设置下划线
-	underlineFlag       bool
-	bold                bool // 是否加粗
-	boldFlag            bool
-	italic              bool // 是否设置斜体
-	italicFlag          bool
-	strikethrough       bool // 是否设置删除线
-	strikethroughFlag   bool
+
+	underline     bool // 是否设置下划线
+	underlineFlag bool
+
+	bold     bool // 是否加粗
+	boldFlag bool
+
+	italic     bool // 是否设置斜体
+	italicFlag bool
+
+	strikethrough     bool // 是否设置删除线
+	strikethroughFlag bool
 }
 
 func NewConditionalFormatStyleBuilder() *ConditionalFormatStyleBuilder {
@@ -1389,15 +1485,17 @@ func (builder *ConditionalFormatStyleBuilder) Build() *ConditionalFormatStyle {
 }
 
 type CreateDataValidation struct {
-	Range *string         `json:"range,omitempty"` // 数据校验设置的范围
-	Rule  *DataValidation `json:"rule,omitempty"`  // 数据校验规则
+	Range *string `json:"range,omitempty"` // 数据校验设置的范围
+
+	Rule *DataValidation `json:"rule,omitempty"` // 数据校验规则
 }
 
 type CreateDataValidationBuilder struct {
 	range_    string // 数据校验设置的范围
 	rangeFlag bool
-	rule      *DataValidation // 数据校验规则
-	ruleFlag  bool
+
+	rule     *DataValidation // 数据校验规则
+	ruleFlag bool
 }
 
 func NewCreateDataValidationBuilder() *CreateDataValidationBuilder {
@@ -1436,16 +1534,20 @@ func (builder *CreateDataValidationBuilder) Build() *CreateDataValidation {
 }
 
 type CreateSheetFilter struct {
-	Range     *string    `json:"range,omitempty"`     // 筛选应用范围
-	Col       *string    `json:"col,omitempty"`       // 设置筛选条件的列
+	Range *string `json:"range,omitempty"` // 筛选应用范围
+
+	Col *string `json:"col,omitempty"` // 设置筛选条件的列
+
 	Condition *Condition `json:"condition,omitempty"` // 筛选的条件
 }
 
 type CreateSheetFilterBuilder struct {
-	range_        string // 筛选应用范围
-	rangeFlag     bool
-	col           string // 设置筛选条件的列
-	colFlag       bool
+	range_    string // 筛选应用范围
+	rangeFlag bool
+
+	col     string // 设置筛选条件的列
+	colFlag bool
+
 	condition     *Condition // 筛选的条件
 	conditionFlag bool
 }
@@ -1499,21 +1601,27 @@ func (builder *CreateSheetFilterBuilder) Build() *CreateSheetFilter {
 }
 
 type DataValidation struct {
-	DataValidationId   *int                `json:"data_validation_id,omitempty"`   // 数据校验ID
+	DataValidationId *int `json:"data_validation_id,omitempty"` // 数据校验ID
+
 	DataValidationRule *DataValidationRule `json:"data_validation_rule,omitempty"` // 数据校验规则
-	Strict             *string             `json:"strict,omitempty"`               // 校验模式，数据非法时是否拒绝输入
-	HelpText           *string             `json:"help_text,omitempty"`            // 输入提示
+
+	Strict *string `json:"strict,omitempty"` // 校验模式，数据非法时是否拒绝输入
+
+	HelpText *string `json:"help_text,omitempty"` // 输入提示
 }
 
 type DataValidationBuilder struct {
-	dataValidationId       int // 数据校验ID
-	dataValidationIdFlag   bool
+	dataValidationId     int // 数据校验ID
+	dataValidationIdFlag bool
+
 	dataValidationRule     *DataValidationRule // 数据校验规则
 	dataValidationRuleFlag bool
-	strict                 string // 校验模式，数据非法时是否拒绝输入
-	strictFlag             bool
-	helpText               string // 输入提示
-	helpTextFlag           bool
+
+	strict     string // 校验模式，数据非法时是否拒绝输入
+	strictFlag bool
+
+	helpText     string // 输入提示
+	helpTextFlag bool
 }
 
 func NewDataValidationBuilder() *DataValidationBuilder {
@@ -1578,16 +1686,20 @@ func (builder *DataValidationBuilder) Build() *DataValidation {
 }
 
 type DataValidationRule struct {
-	Type           *string         `json:"type,omitempty"`            // 数据校验类型
-	SingleOption   *SingleOption   `json:"single_option,omitempty"`   // 单选
+	Type *string `json:"type,omitempty"` // 数据校验类型
+
+	SingleOption *SingleOption `json:"single_option,omitempty"` // 单选
+
 	MultipleOption *MultipleOption `json:"multiple_option,omitempty"` // 多选
 }
 
 type DataValidationRuleBuilder struct {
-	type_              string // 数据校验类型
-	typeFlag           bool
-	singleOption       *SingleOption // 单选
-	singleOptionFlag   bool
+	type_    string // 数据校验类型
+	typeFlag bool
+
+	singleOption     *SingleOption // 单选
+	singleOptionFlag bool
+
 	multipleOption     *MultipleOption // 多选
 	multipleOptionFlag bool
 }
@@ -1641,12 +1753,14 @@ func (builder *DataValidationRuleBuilder) Build() *DataValidationRule {
 
 type DataValidationValue struct {
 	OptionValue *string `json:"option_value,omitempty"` // 选项值
+
 	OptionColor *string `json:"option_color,omitempty"` // 选项颜色
 }
 
 type DataValidationValueBuilder struct {
 	optionValue     string // 选项值
 	optionValueFlag bool
+
 	optionColor     string // 选项颜色
 	optionColorFlag bool
 }
@@ -1720,13 +1834,15 @@ func (builder *DateTimeBuilder) Build() *DateTime {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -1765,17 +1881,21 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type Dimension struct {
 	MajorDimension *string `json:"major_dimension,omitempty"` // 操作行还是列，取值：ROWS、COLUMNS
-	StartIndex     *int    `json:"start_index,omitempty"`     // 起始行或者列号
-	EndIndex       *int    `json:"end_index,omitempty"`       // 结束行或者列号
+
+	StartIndex *int `json:"start_index,omitempty"` // 起始行或者列号
+
+	EndIndex *int `json:"end_index,omitempty"` // 结束行或者列号
 }
 
 type DimensionBuilder struct {
 	majorDimension     string // 操作行还是列，取值：ROWS、COLUMNS
 	majorDimensionFlag bool
-	startIndex         int // 起始行或者列号
-	startIndexFlag     bool
-	endIndex           int // 结束行或者列号
-	endIndexFlag       bool
+
+	startIndex     int // 起始行或者列号
+	startIndexFlag bool
+
+	endIndex     int // 结束行或者列号
+	endIndexFlag bool
 }
 
 func NewDimensionBuilder() *DimensionBuilder {
@@ -1828,13 +1948,15 @@ func (builder *DimensionBuilder) Build() *Dimension {
 }
 
 type DimensionProperties struct {
-	Hidden    *bool `json:"hidden,omitempty"`     // 是否隐藏
-	PixelSize *int  `json:"pixel_size,omitempty"` // 行/列像素大小
+	Hidden *bool `json:"hidden,omitempty"` // 是否隐藏
+
+	PixelSize *int `json:"pixel_size,omitempty"` // 行/列像素大小
 }
 
 type DimensionPropertiesBuilder struct {
-	hidden        bool // 是否隐藏
-	hiddenFlag    bool
+	hidden     bool // 是否隐藏
+	hiddenFlag bool
+
 	pixelSize     int // 行/列像素大小
 	pixelSizeFlag bool
 }
@@ -1876,16 +1998,20 @@ func (builder *DimensionPropertiesBuilder) Build() *DimensionProperties {
 }
 
 type File struct {
-	FileToken    *string       `json:"file_token,omitempty"`    // 附件token
-	Name         *string       `json:"name,omitempty"`          // 附件名称
+	FileToken *string `json:"file_token,omitempty"` // 附件token
+
+	Name *string `json:"name,omitempty"` // 附件名称
+
 	SegmentStyle *SegmentStyle `json:"segment_style,omitempty"` //
 }
 
 type FileBuilder struct {
-	fileToken        string // 附件token
-	fileTokenFlag    bool
-	name             string // 附件名称
-	nameFlag         bool
+	fileToken     string // 附件token
+	fileTokenFlag bool
+
+	name     string // 附件名称
+	nameFlag bool
+
 	segmentStyle     *SegmentStyle //
 	segmentStyleFlag bool
 }
@@ -1937,13 +2063,15 @@ func (builder *FileBuilder) Build() *File {
 }
 
 type FilterInfo struct {
-	Col        *string      `json:"col,omitempty"`        // 设置了筛选条件的列
+	Col *string `json:"col,omitempty"` // 设置了筛选条件的列
+
 	Conditions []*Condition `json:"conditions,omitempty"` // 筛选条件
 }
 
 type FilterInfoBuilder struct {
-	col            string // 设置了筛选条件的列
-	colFlag        bool
+	col     string // 设置了筛选条件的列
+	colFlag bool
+
 	conditions     []*Condition // 筛选条件
 	conditionsFlag bool
 }
@@ -1984,18 +2112,22 @@ func (builder *FilterInfoBuilder) Build() *FilterInfo {
 }
 
 type FilterView struct {
-	FilterViewId   *string `json:"filter_view_id,omitempty"`   // 筛选视图 id
+	FilterViewId *string `json:"filter_view_id,omitempty"` // 筛选视图 id
+
 	FilterViewName *string `json:"filter_view_name,omitempty"` // 筛选视图名字
-	Range          *string `json:"range,omitempty"`            // 筛选视图的筛选范围
+
+	Range *string `json:"range,omitempty"` // 筛选视图的筛选范围
 }
 
 type FilterViewBuilder struct {
-	filterViewId       string // 筛选视图 id
-	filterViewIdFlag   bool
+	filterViewId     string // 筛选视图 id
+	filterViewIdFlag bool
+
 	filterViewName     string // 筛选视图名字
 	filterViewNameFlag bool
-	range_             string // 筛选视图的筛选范围
-	rangeFlag          bool
+
+	range_    string // 筛选视图的筛选范围
+	rangeFlag bool
 }
 
 func NewFilterViewBuilder() *FilterViewBuilder {
@@ -2048,21 +2180,27 @@ func (builder *FilterViewBuilder) Build() *FilterView {
 }
 
 type FilterViewCondition struct {
-	ConditionId *string  `json:"condition_id,omitempty"` // 设置筛选条件的列，使用字母号
-	FilterType  *string  `json:"filter_type,omitempty"`  // 筛选类型
-	CompareType *string  `json:"compare_type,omitempty"` // 比较类型
-	Expected    []string `json:"expected,omitempty"`     // 筛选参数
+	ConditionId *string `json:"condition_id,omitempty"` // 设置筛选条件的列，使用字母号
+
+	FilterType *string `json:"filter_type,omitempty"` // 筛选类型
+
+	CompareType *string `json:"compare_type,omitempty"` // 比较类型
+
+	Expected []string `json:"expected,omitempty"` // 筛选参数
 }
 
 type FilterViewConditionBuilder struct {
 	conditionId     string // 设置筛选条件的列，使用字母号
 	conditionIdFlag bool
-	filterType      string // 筛选类型
-	filterTypeFlag  bool
+
+	filterType     string // 筛选类型
+	filterTypeFlag bool
+
 	compareType     string // 比较类型
 	compareTypeFlag bool
-	expected        []string // 筛选参数
-	expectedFlag    bool
+
+	expected     []string // 筛选参数
+	expectedFlag bool
 }
 
 func NewFilterViewConditionBuilder() *FilterViewConditionBuilder {
@@ -2128,14 +2266,16 @@ func (builder *FilterViewConditionBuilder) Build() *FilterViewCondition {
 
 type Find struct {
 	FindCondition *FindCondition `json:"find_condition,omitempty"` // 查找条件
-	Find          *string        `json:"find,omitempty"`           // 查找的字符串，当`search_by_regex`字段为 true 时，该字段为正则表达式
+
+	Find *string `json:"find,omitempty"` // 查找的字符串，当`search_by_regex`字段为 true 时，该字段为正则表达式
 }
 
 type FindBuilder struct {
 	findCondition     *FindCondition // 查找条件
 	findConditionFlag bool
-	find              string // 查找的字符串，当`search_by_regex`字段为 true 时，该字段为正则表达式
-	findFlag          bool
+
+	find     string // 查找的字符串，当`search_by_regex`字段为 true 时，该字段为正则表达式
+	findFlag bool
 }
 
 func NewFindBuilder() *FindBuilder {
@@ -2174,22 +2314,30 @@ func (builder *FindBuilder) Build() *Find {
 }
 
 type FindCondition struct {
-	Range           *string `json:"range,omitempty"`             // 查找范围，参考 [名词解释 Range](https://open.feishu.cn/document/ukTMukTMukTM/uATMzUjLwEzM14CMxMTN/overview)
-	MatchCase       *bool   `json:"match_case,omitempty"`        // 是否忽略大小写，默认为 false;- `true`：表示忽略字符串中字母大小写差异;- `false`：表示区分字符串中字母大小写
-	MatchEntireCell *bool   `json:"match_entire_cell,omitempty"` // 是否完全匹配整个单元格，默认值为 false;- `true`：表示完全匹配单元格，比如 find 取值为 "hello"，则单元格中的内容必须为 "hello";- `false`：表示允许部分匹配单元格，比如 find 取值为 "hello"，则单元格中的内容包含 "hello" 即可
-	SearchByRegex   *bool   `json:"search_by_regex,omitempty"`   // 是否为正则匹配，默认值为 false;- `true`：表示使用正则匹配;- `false`：表示不使用正则匹配
-	IncludeFormulas *bool   `json:"include_formulas,omitempty"`  // 是否仅搜索单元格公式，默认值为 false;- `true`：表示仅搜索单元格公式;- `false`：表示仅搜索单元格内容
+	Range *string `json:"range,omitempty"` // 查找范围，参考 [名词解释 Range](https://open.feishu.cn/document/ukTMukTMukTM/uATMzUjLwEzM14CMxMTN/overview)
+
+	MatchCase *bool `json:"match_case,omitempty"` // 是否忽略大小写，默认为 false;- `true`：表示忽略字符串中字母大小写差异;- `false`：表示区分字符串中字母大小写
+
+	MatchEntireCell *bool `json:"match_entire_cell,omitempty"` // 是否完全匹配整个单元格，默认值为 false;- `true`：表示完全匹配单元格，比如 find 取值为 "hello"，则单元格中的内容必须为 "hello";- `false`：表示允许部分匹配单元格，比如 find 取值为 "hello"，则单元格中的内容包含 "hello" 即可
+
+	SearchByRegex *bool `json:"search_by_regex,omitempty"` // 是否为正则匹配，默认值为 false;- `true`：表示使用正则匹配;- `false`：表示不使用正则匹配
+
+	IncludeFormulas *bool `json:"include_formulas,omitempty"` // 是否仅搜索单元格公式，默认值为 false;- `true`：表示仅搜索单元格公式;- `false`：表示仅搜索单元格内容
 }
 
 type FindConditionBuilder struct {
-	range_              string // 查找范围，参考 [名词解释 Range](https://open.feishu.cn/document/ukTMukTMukTM/uATMzUjLwEzM14CMxMTN/overview)
-	rangeFlag           bool
-	matchCase           bool // 是否忽略大小写，默认为 false;- `true`：表示忽略字符串中字母大小写差异;- `false`：表示区分字符串中字母大小写
-	matchCaseFlag       bool
+	range_    string // 查找范围，参考 [名词解释 Range](https://open.feishu.cn/document/ukTMukTMukTM/uATMzUjLwEzM14CMxMTN/overview)
+	rangeFlag bool
+
+	matchCase     bool // 是否忽略大小写，默认为 false;- `true`：表示忽略字符串中字母大小写差异;- `false`：表示区分字符串中字母大小写
+	matchCaseFlag bool
+
 	matchEntireCell     bool // 是否完全匹配整个单元格，默认值为 false;- `true`：表示完全匹配单元格，比如 find 取值为 "hello"，则单元格中的内容必须为 "hello";- `false`：表示允许部分匹配单元格，比如 find 取值为 "hello"，则单元格中的内容包含 "hello" 即可
 	matchEntireCellFlag bool
-	searchByRegex       bool // 是否为正则匹配，默认值为 false;- `true`：表示使用正则匹配;- `false`：表示不使用正则匹配
-	searchByRegexFlag   bool
+
+	searchByRegex     bool // 是否为正则匹配，默认值为 false;- `true`：表示使用正则匹配;- `false`：表示不使用正则匹配
+	searchByRegexFlag bool
+
 	includeFormulas     bool // 是否仅搜索单元格公式，默认值为 false;- `true`：表示仅搜索单元格公式;- `false`：表示仅搜索单元格内容
 	includeFormulasFlag bool
 }
@@ -2270,18 +2418,22 @@ func (builder *FindConditionBuilder) Build() *FindCondition {
 }
 
 type FindReplaceResult struct {
-	MatchedCells        []string `json:"matched_cells,omitempty"`         // 符合查找条件的单元格数组，不包含公式，例如["A1", "A2"...]
+	MatchedCells []string `json:"matched_cells,omitempty"` // 符合查找条件的单元格数组，不包含公式，例如["A1", "A2"...]
+
 	MatchedFormulaCells []string `json:"matched_formula_cells,omitempty"` // 符合查找条件的含有公式的单元格数组，例如["B3", "H7"...]
-	RowsCount           *int     `json:"rows_count,omitempty"`            // 符合查找条件的总行数
+
+	RowsCount *int `json:"rows_count,omitempty"` // 符合查找条件的总行数
 }
 
 type FindReplaceResultBuilder struct {
-	matchedCells            []string // 符合查找条件的单元格数组，不包含公式，例如["A1", "A2"...]
-	matchedCellsFlag        bool
+	matchedCells     []string // 符合查找条件的单元格数组，不包含公式，例如["A1", "A2"...]
+	matchedCellsFlag bool
+
 	matchedFormulaCells     []string // 符合查找条件的含有公式的单元格数组，例如["B3", "H7"...]
 	matchedFormulaCellsFlag bool
-	rowsCount               int // 符合查找条件的总行数
-	rowsCountFlag           bool
+
+	rowsCount     int // 符合查找条件的总行数
+	rowsCountFlag bool
 }
 
 func NewFindReplaceResultBuilder() *FindReplaceResultBuilder {
@@ -2332,30 +2484,42 @@ func (builder *FindReplaceResultBuilder) Build() *FindReplaceResult {
 }
 
 type FloatImage struct {
-	FloatImageId    *string  `json:"float_image_id,omitempty"`    // 浮动图片 id
-	FloatImageToken *string  `json:"float_image_token,omitempty"` // 【更新时不用传，创建需要】浮动图片 token，需要先上传图片到表格获得此 token 之后再进行浮动图片的相关操作
-	Range           *string  `json:"range,omitempty"`             // 浮动图片的左上角单元格定位，只支持一个单元格
-	Width           *float64 `json:"width,omitempty"`             // 浮动图片的宽度，大于等于 20px
-	Height          *float64 `json:"height,omitempty"`            // 浮动图片的高度，大于等于 20px
-	OffsetX         *float64 `json:"offset_x,omitempty"`          // 浮动图片左上角所在位置相对于所在单元格左上角的横向偏移，大于等于0且小于所在单元格的宽度
-	OffsetY         *float64 `json:"offset_y,omitempty"`          // 浮动图片左上角所在位置相对于所在单元格左上角的纵向偏移，大于等于0且小于所在单元格的高度
+	FloatImageId *string `json:"float_image_id,omitempty"` // 浮动图片 id
+
+	FloatImageToken *string `json:"float_image_token,omitempty"` // 【更新时不用传，创建需要】浮动图片 token，需要先上传图片到表格获得此 token 之后再进行浮动图片的相关操作
+
+	Range *string `json:"range,omitempty"` // 浮动图片的左上角单元格定位，只支持一个单元格
+
+	Width *float64 `json:"width,omitempty"` // 浮动图片的宽度，大于等于 20px
+
+	Height *float64 `json:"height,omitempty"` // 浮动图片的高度，大于等于 20px
+
+	OffsetX *float64 `json:"offset_x,omitempty"` // 浮动图片左上角所在位置相对于所在单元格左上角的横向偏移，大于等于0且小于所在单元格的宽度
+
+	OffsetY *float64 `json:"offset_y,omitempty"` // 浮动图片左上角所在位置相对于所在单元格左上角的纵向偏移，大于等于0且小于所在单元格的高度
 }
 
 type FloatImageBuilder struct {
-	floatImageId        string // 浮动图片 id
-	floatImageIdFlag    bool
+	floatImageId     string // 浮动图片 id
+	floatImageIdFlag bool
+
 	floatImageToken     string // 【更新时不用传，创建需要】浮动图片 token，需要先上传图片到表格获得此 token 之后再进行浮动图片的相关操作
 	floatImageTokenFlag bool
-	range_              string // 浮动图片的左上角单元格定位，只支持一个单元格
-	rangeFlag           bool
-	width               float64 // 浮动图片的宽度，大于等于 20px
-	widthFlag           bool
-	height              float64 // 浮动图片的高度，大于等于 20px
-	heightFlag          bool
-	offsetX             float64 // 浮动图片左上角所在位置相对于所在单元格左上角的横向偏移，大于等于0且小于所在单元格的宽度
-	offsetXFlag         bool
-	offsetY             float64 // 浮动图片左上角所在位置相对于所在单元格左上角的纵向偏移，大于等于0且小于所在单元格的高度
-	offsetYFlag         bool
+
+	range_    string // 浮动图片的左上角单元格定位，只支持一个单元格
+	rangeFlag bool
+
+	width     float64 // 浮动图片的宽度，大于等于 20px
+	widthFlag bool
+
+	height     float64 // 浮动图片的高度，大于等于 20px
+	heightFlag bool
+
+	offsetX     float64 // 浮动图片左上角所在位置相对于所在单元格左上角的横向偏移，大于等于0且小于所在单元格的宽度
+	offsetXFlag bool
+
+	offsetY     float64 // 浮动图片左上角所在位置相对于所在单元格左上角的纵向偏移，大于等于0且小于所在单元格的高度
+	offsetYFlag bool
 }
 
 func NewFloatImageBuilder() *FloatImageBuilder {
@@ -2460,16 +2624,20 @@ func (builder *FloatImageBuilder) Build() *FloatImage {
 }
 
 type Formula struct {
-	Formula       *string `json:"formula,omitempty"`        // 公式
-	FormulaValue  *string `json:"formula_value,omitempty"`  // 公式结果
+	Formula *string `json:"formula,omitempty"` // 公式
+
+	FormulaValue *string `json:"formula_value,omitempty"` // 公式结果
+
 	AffectedRange *string `json:"affected_range,omitempty"` // 公式影响的范围
 }
 
 type FormulaBuilder struct {
-	formula           string // 公式
-	formulaFlag       bool
-	formulaValue      string // 公式结果
-	formulaValueFlag  bool
+	formula     string // 公式
+	formulaFlag bool
+
+	formulaValue     string // 公式结果
+	formulaValueFlag bool
+
 	affectedRange     string // 公式影响的范围
 	affectedRangeFlag bool
 }
@@ -2524,21 +2692,27 @@ func (builder *FormulaBuilder) Build() *Formula {
 }
 
 type GetSpreadsheet struct {
-	Title   *string `json:"title,omitempty"`    // 电子表格标题
+	Title *string `json:"title,omitempty"` // 电子表格标题
+
 	OwnerId *string `json:"owner_id,omitempty"` // 电子表格owner
-	Token   *string `json:"token,omitempty"`    // 电子表格token
-	Url     *string `json:"url,omitempty"`      // 电子表格url
+
+	Token *string `json:"token,omitempty"` // 电子表格token
+
+	Url *string `json:"url,omitempty"` // 电子表格url
 }
 
 type GetSpreadsheetBuilder struct {
-	title       string // 电子表格标题
-	titleFlag   bool
+	title     string // 电子表格标题
+	titleFlag bool
+
 	ownerId     string // 电子表格owner
 	ownerIdFlag bool
-	token       string // 电子表格token
-	tokenFlag   bool
-	url         string // 电子表格url
-	urlFlag     bool
+
+	token     string // 电子表格token
+	tokenFlag bool
+
+	url     string // 电子表格url
+	urlFlag bool
 }
 
 func NewGetSpreadsheetBuilder() *GetSpreadsheetBuilder {
@@ -2604,21 +2778,27 @@ func (builder *GetSpreadsheetBuilder) Build() *GetSpreadsheet {
 }
 
 type GridProperties struct {
-	FrozenRowCount    *int `json:"frozen_row_count,omitempty"`    // 冻结的行数量
+	FrozenRowCount *int `json:"frozen_row_count,omitempty"` // 冻结的行数量
+
 	FrozenColumnCount *int `json:"frozen_column_count,omitempty"` // 冻结的列数量
-	RowCount          *int `json:"row_count,omitempty"`           // 工作表的行数
-	ColumnCount       *int `json:"column_count,omitempty"`        // 工作表的列数量
+
+	RowCount *int `json:"row_count,omitempty"` // 工作表的行数
+
+	ColumnCount *int `json:"column_count,omitempty"` // 工作表的列数量
 }
 
 type GridPropertiesBuilder struct {
-	frozenRowCount        int // 冻结的行数量
-	frozenRowCountFlag    bool
+	frozenRowCount     int // 冻结的行数量
+	frozenRowCountFlag bool
+
 	frozenColumnCount     int // 冻结的列数量
 	frozenColumnCountFlag bool
-	rowCount              int // 工作表的行数
-	rowCountFlag          bool
-	columnCount           int // 工作表的列数量
-	columnCountFlag       bool
+
+	rowCount     int // 工作表的行数
+	rowCountFlag bool
+
+	columnCount     int // 工作表的列数量
+	columnCountFlag bool
 }
 
 func NewGridPropertiesBuilder() *GridPropertiesBuilder {
@@ -2717,14 +2897,16 @@ func (builder *ImageBuilder) Build() *Image {
 
 type InsertDimension struct {
 	DimensionRange *Dimension `json:"dimension_range,omitempty"` // 行列操作的维度
-	InheritFrom    *string    `json:"inherit_from,omitempty"`    // 是否继承上/下一行/列样式
+
+	InheritFrom *string `json:"inherit_from,omitempty"` // 是否继承上/下一行/列样式
 }
 
 type InsertDimensionBuilder struct {
 	dimensionRange     *Dimension // 行列操作的维度
 	dimensionRangeFlag bool
-	inheritFrom        string // 是否继承上/下一行/列样式
-	inheritFromFlag    bool
+
+	inheritFrom     string // 是否继承上/下一行/列样式
+	inheritFromFlag bool
 }
 
 func NewInsertDimensionBuilder() *InsertDimensionBuilder {
@@ -2764,12 +2946,14 @@ func (builder *InsertDimensionBuilder) Build() *InsertDimension {
 
 type LeftBorderStyle struct {
 	Style *string `json:"style,omitempty"` // 边框样式
+
 	Color *string `json:"color,omitempty"` // 边框颜色
 }
 
 type LeftBorderStyleBuilder struct {
 	style     string // 边框样式
 	styleFlag bool
+
 	color     string // 边框颜色
 	colorFlag bool
 }
@@ -2811,16 +2995,20 @@ func (builder *LeftBorderStyleBuilder) Build() *LeftBorderStyle {
 }
 
 type Link struct {
-	Text          *string         `json:"text,omitempty"`           // 文本
-	Link          *string         `json:"link,omitempty"`           // 链接
+	Text *string `json:"text,omitempty"` // 文本
+
+	Link *string `json:"link,omitempty"` // 链接
+
 	SegmentStyles []*SegmentStyle `json:"segment_styles,omitempty"` //
 }
 
 type LinkBuilder struct {
-	text              string // 文本
-	textFlag          bool
-	link              string // 链接
-	linkFlag          bool
+	text     string // 文本
+	textFlag bool
+
+	link     string // 链接
+	linkFlag bool
+
 	segmentStyles     []*SegmentStyle //
 	segmentStylesFlag bool
 }
@@ -2872,19 +3060,25 @@ func (builder *LinkBuilder) Build() *Link {
 }
 
 type MentionDocument struct {
-	Title        *string       `json:"title,omitempty"`         // 文档标题
-	ObjectType   *string       `json:"object_type,omitempty"`   // 文档类型
-	Token        *string       `json:"token,omitempty"`         // 文档token
+	Title *string `json:"title,omitempty"` // 文档标题
+
+	ObjectType *string `json:"object_type,omitempty"` // 文档类型
+
+	Token *string `json:"token,omitempty"` // 文档token
+
 	SegmentStyle *SegmentStyle `json:"segment_style,omitempty"` //
 }
 
 type MentionDocumentBuilder struct {
-	title            string // 文档标题
-	titleFlag        bool
-	objectType       string // 文档类型
-	objectTypeFlag   bool
-	token            string // 文档token
-	tokenFlag        bool
+	title     string // 文档标题
+	titleFlag bool
+
+	objectType     string // 文档类型
+	objectTypeFlag bool
+
+	token     string // 文档token
+	tokenFlag bool
+
 	segmentStyle     *SegmentStyle //
 	segmentStyleFlag bool
 }
@@ -2949,19 +3143,25 @@ func (builder *MentionDocumentBuilder) Build() *MentionDocument {
 }
 
 type MentionUser struct {
-	Name         *string       `json:"name,omitempty"`          // 用户名
-	UserId       *string       `json:"user_id,omitempty"`       // 用户id
-	Notify       *bool         `json:"notify,omitempty"`        // 是否通知用户
+	Name *string `json:"name,omitempty"` // 用户名
+
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	Notify *bool `json:"notify,omitempty"` // 是否通知用户
+
 	SegmentStyle *SegmentStyle `json:"segment_style,omitempty"` // 局部样式
 }
 
 type MentionUserBuilder struct {
-	name             string // 用户名
-	nameFlag         bool
-	userId           string // 用户id
-	userIdFlag       bool
-	notify           bool // 是否通知用户
-	notifyFlag       bool
+	name     string // 用户名
+	nameFlag bool
+
+	userId     string // 用户id
+	userIdFlag bool
+
+	notify     bool // 是否通知用户
+	notifyFlag bool
+
 	segmentStyle     *SegmentStyle // 局部样式
 	segmentStyleFlag bool
 }
@@ -3028,13 +3228,15 @@ func (builder *MentionUserBuilder) Build() *MentionUser {
 }
 
 type MergeCell struct {
-	Range     *MergeRange `json:"range,omitempty"`      // 合并单元格的范围
-	MergeType *string     `json:"merge_type,omitempty"` // 合并单元格类型
+	Range *MergeRange `json:"range,omitempty"` // 合并单元格的范围
+
+	MergeType *string `json:"merge_type,omitempty"` // 合并单元格类型
 }
 
 type MergeCellBuilder struct {
-	range_        *MergeRange // 合并单元格的范围
-	rangeFlag     bool
+	range_    *MergeRange // 合并单元格的范围
+	rangeFlag bool
+
 	mergeType     string // 合并单元格类型
 	mergeTypeFlag bool
 }
@@ -3075,21 +3277,27 @@ func (builder *MergeCellBuilder) Build() *MergeCell {
 }
 
 type MergeRange struct {
-	StartRowIndex    *int `json:"start_row_index,omitempty"`    // 起始行
-	EndRowIndex      *int `json:"end_row_index,omitempty"`      // 结束行
+	StartRowIndex *int `json:"start_row_index,omitempty"` // 起始行
+
+	EndRowIndex *int `json:"end_row_index,omitempty"` // 结束行
+
 	StartColumnIndex *int `json:"start_column_index,omitempty"` // 起始列
-	EndColumnIndex   *int `json:"end_column_index,omitempty"`   // 结束列
+
+	EndColumnIndex *int `json:"end_column_index,omitempty"` // 结束列
 }
 
 type MergeRangeBuilder struct {
-	startRowIndex        int // 起始行
-	startRowIndexFlag    bool
-	endRowIndex          int // 结束行
-	endRowIndexFlag      bool
+	startRowIndex     int // 起始行
+	startRowIndexFlag bool
+
+	endRowIndex     int // 结束行
+	endRowIndexFlag bool
+
 	startColumnIndex     int // 起始列
 	startColumnIndexFlag bool
-	endColumnIndex       int // 结束列
-	endColumnIndexFlag   bool
+
+	endColumnIndex     int // 结束列
+	endColumnIndexFlag bool
 }
 
 func NewMergeRangeBuilder() *MergeRangeBuilder {
@@ -3155,13 +3363,15 @@ func (builder *MergeRangeBuilder) Build() *MergeRange {
 }
 
 type MoveDimension struct {
-	Source           *Dimension `json:"source,omitempty"`            // 移动源位置参数
-	DestinationIndex *int       `json:"destination_index,omitempty"` // 移动的目标位置行或者列号
+	Source *Dimension `json:"source,omitempty"` // 移动源位置参数
+
+	DestinationIndex *int `json:"destination_index,omitempty"` // 移动的目标位置行或者列号
 }
 
 type MoveDimensionBuilder struct {
-	source               *Dimension // 移动源位置参数
-	sourceFlag           bool
+	source     *Dimension // 移动源位置参数
+	sourceFlag bool
+
 	destinationIndex     int // 移动的目标位置行或者列号
 	destinationIndexFlag bool
 }
@@ -3233,21 +3443,27 @@ func (builder *MultiRangeBuilder) Build() *MultiRange {
 }
 
 type MultipleOption struct {
-	Type                 *string                `json:"type,omitempty"`                   // 多选类型
-	Range                *string                `json:"range,omitempty"`                  // 数据引用范围，当type=MultipleOfRange时必须有
+	Type *string `json:"type,omitempty"` // 多选类型
+
+	Range *string `json:"range,omitempty"` // 数据引用范围，当type=MultipleOfRange时必须有
+
 	DataValidationValues []*DataValidationValue `json:"data_validation_values,omitempty"` // 多选列表，当type=MultipleOfList时必须有
-	Properties           *OptionProperties      `json:"properties,omitempty"`             // 属性
+
+	Properties *OptionProperties `json:"properties,omitempty"` // 属性
 }
 
 type MultipleOptionBuilder struct {
-	type_                    string // 多选类型
-	typeFlag                 bool
-	range_                   string // 数据引用范围，当type=MultipleOfRange时必须有
-	rangeFlag                bool
+	type_    string // 多选类型
+	typeFlag bool
+
+	range_    string // 数据引用范围，当type=MultipleOfRange时必须有
+	rangeFlag bool
+
 	dataValidationValues     []*DataValidationValue // 多选列表，当type=MultipleOfList时必须有
 	dataValidationValuesFlag bool
-	properties               *OptionProperties // 属性
-	propertiesFlag           bool
+
+	properties     *OptionProperties // 属性
+	propertiesFlag bool
 }
 
 func NewMultipleOptionBuilder() *MultipleOptionBuilder {
@@ -3343,18 +3559,22 @@ func (builder *OptionPropertiesBuilder) Build() *OptionProperties {
 }
 
 type PatchConditionalFormat struct {
-	Ranges                []*ConditionalFormatRange `json:"ranges,omitempty"`                  // 条件格式应用范围
-	ConditionalFormatRule *ConditionalFormatRule    `json:"conditional_format_rule,omitempty"` // 条件格式规则
-	Index                 *int                      `json:"index,omitempty"`                   // 条件格式索引位置
+	Ranges []*ConditionalFormatRange `json:"ranges,omitempty"` // 条件格式应用范围
+
+	ConditionalFormatRule *ConditionalFormatRule `json:"conditional_format_rule,omitempty"` // 条件格式规则
+
+	Index *int `json:"index,omitempty"` // 条件格式索引位置
 }
 
 type PatchConditionalFormatBuilder struct {
-	ranges                    []*ConditionalFormatRange // 条件格式应用范围
-	rangesFlag                bool
+	ranges     []*ConditionalFormatRange // 条件格式应用范围
+	rangesFlag bool
+
 	conditionalFormatRule     *ConditionalFormatRule // 条件格式规则
 	conditionalFormatRuleFlag bool
-	index                     int // 条件格式索引位置
-	indexFlag                 bool
+
+	index     int // 条件格式索引位置
+	indexFlag bool
 }
 
 func NewPatchConditionalFormatBuilder() *PatchConditionalFormatBuilder {
@@ -3406,17 +3626,21 @@ func (builder *PatchConditionalFormatBuilder) Build() *PatchConditionalFormat {
 
 type PatchDataValidation struct {
 	DataValidationRule *DataValidationRule `json:"data_validation_rule,omitempty"` // 数据校验规则
-	Strict             *bool               `json:"strict,omitempty"`               // 校验模式，数据非法时是否拒绝输入
-	HelpText           *string             `json:"help_text,omitempty"`            // 帮助文本
+
+	Strict *bool `json:"strict,omitempty"` // 校验模式，数据非法时是否拒绝输入
+
+	HelpText *string `json:"help_text,omitempty"` // 帮助文本
 }
 
 type PatchDataValidationBuilder struct {
 	dataValidationRule     *DataValidationRule // 数据校验规则
 	dataValidationRuleFlag bool
-	strict                 bool // 校验模式，数据非法时是否拒绝输入
-	strictFlag             bool
-	helpText               string // 帮助文本
-	helpTextFlag           bool
+
+	strict     bool // 校验模式，数据非法时是否拒绝输入
+	strictFlag bool
+
+	helpText     string // 帮助文本
+	helpTextFlag bool
 }
 
 func NewPatchDataValidationBuilder() *PatchDataValidationBuilder {
@@ -3468,16 +3692,20 @@ func (builder *PatchDataValidationBuilder) Build() *PatchDataValidation {
 }
 
 type PatchProtectedRange struct {
-	Description      *string           `json:"description,omitempty"`       // 保护范围描述
-	ProtectedRows    *ProtectedRows    `json:"protected_rows,omitempty"`    // 保护行范围
+	Description *string `json:"description,omitempty"` // 保护范围描述
+
+	ProtectedRows *ProtectedRows `json:"protected_rows,omitempty"` // 保护行范围
+
 	ProtectedColumns *ProtectedColumns `json:"protected_columns,omitempty"` // 保护列范围
 }
 
 type PatchProtectedRangeBuilder struct {
-	description          string // 保护范围描述
-	descriptionFlag      bool
-	protectedRows        *ProtectedRows // 保护行范围
-	protectedRowsFlag    bool
+	description     string // 保护范围描述
+	descriptionFlag bool
+
+	protectedRows     *ProtectedRows // 保护行范围
+	protectedRowsFlag bool
+
 	protectedColumns     *ProtectedColumns // 保护列范围
 	protectedColumnsFlag bool
 }
@@ -3530,16 +3758,20 @@ func (builder *PatchProtectedRangeBuilder) Build() *PatchProtectedRange {
 }
 
 type PatchProtectedRangeEditors struct {
-	Type          *string                `json:"type,omitempty"`           // 修改类型
-	AddEditors    *ProtectedRangeEditors `json:"add_editors,omitempty"`    // 增加可编辑人员
+	Type *string `json:"type,omitempty"` // 修改类型
+
+	AddEditors *ProtectedRangeEditors `json:"add_editors,omitempty"` // 增加可编辑人员
+
 	RemoveEditors *ProtectedRangeEditors `json:"remove_editors,omitempty"` // 删除可编辑人员
 }
 
 type PatchProtectedRangeEditorsBuilder struct {
-	type_             string // 修改类型
-	typeFlag          bool
-	addEditors        *ProtectedRangeEditors // 增加可编辑人员
-	addEditorsFlag    bool
+	type_    string // 修改类型
+	typeFlag bool
+
+	addEditors     *ProtectedRangeEditors // 增加可编辑人员
+	addEditorsFlag bool
+
 	removeEditors     *ProtectedRangeEditors // 删除可编辑人员
 	removeEditorsFlag bool
 }
@@ -3592,13 +3824,15 @@ func (builder *PatchProtectedRangeEditorsBuilder) Build() *PatchProtectedRangeEd
 }
 
 type PlainTextValueRange struct {
-	Range  *string    `json:"range,omitempty"`  // 范围
+	Range *string `json:"range,omitempty"` // 范围
+
 	Values [][]string `json:"values,omitempty"` // 数据
 }
 
 type PlainTextValueRangeBuilder struct {
-	range_     string // 范围
-	rangeFlag  bool
+	range_    string // 范围
+	rangeFlag bool
+
 	values     [][]string // 数据
 	valuesFlag bool
 }
@@ -3639,18 +3873,22 @@ func (builder *PlainTextValueRangeBuilder) Build() *PlainTextValueRange {
 }
 
 type ProtectedColumns struct {
-	SheetId    *string `json:"sheet_id,omitempty"`    // 工作表ID
-	StartIndex *int    `json:"start_index,omitempty"` // 起始列
-	EndIndex   *int    `json:"end_index,omitempty"`   // 结束列
+	SheetId *string `json:"sheet_id,omitempty"` // 工作表ID
+
+	StartIndex *int `json:"start_index,omitempty"` // 起始列
+
+	EndIndex *int `json:"end_index,omitempty"` // 结束列
 }
 
 type ProtectedColumnsBuilder struct {
-	sheetId        string // 工作表ID
-	sheetIdFlag    bool
+	sheetId     string // 工作表ID
+	sheetIdFlag bool
+
 	startIndex     int // 起始列
 	startIndexFlag bool
-	endIndex       int // 结束列
-	endIndexFlag   bool
+
+	endIndex     int // 结束列
+	endIndexFlag bool
 }
 
 func NewProtectedColumnsBuilder() *ProtectedColumnsBuilder {
@@ -3703,30 +3941,42 @@ func (builder *ProtectedColumnsBuilder) Build() *ProtectedColumns {
 }
 
 type ProtectedRange struct {
-	ProtectedId        *string                `json:"protected_id,omitempty"`        // 保护范围ID
-	Description        *string                `json:"description,omitempty"`         // 保护范围描述
-	ProtectedDimension *string                `json:"protected_dimension,omitempty"` // 保护类型
-	ProtectedRows      *ProtectedRows         `json:"protected_rows,omitempty"`      // 保护行范围
-	ProtectedColumns   *ProtectedColumns      `json:"protected_columns,omitempty"`   // 保护列范围
-	ProtectedSheet     *ProtectedSheet        `json:"protected_sheet,omitempty"`     // 保护工作表范围
-	Editors            *ProtectedRangeEditors `json:"editors,omitempty"`             // 保护范围可编辑用户
+	ProtectedId *string `json:"protected_id,omitempty"` // 保护范围ID
+
+	Description *string `json:"description,omitempty"` // 保护范围描述
+
+	ProtectedDimension *string `json:"protected_dimension,omitempty"` // 保护类型
+
+	ProtectedRows *ProtectedRows `json:"protected_rows,omitempty"` // 保护行范围
+
+	ProtectedColumns *ProtectedColumns `json:"protected_columns,omitempty"` // 保护列范围
+
+	ProtectedSheet *ProtectedSheet `json:"protected_sheet,omitempty"` // 保护工作表范围
+
+	Editors *ProtectedRangeEditors `json:"editors,omitempty"` // 保护范围可编辑用户
 }
 
 type ProtectedRangeBuilder struct {
-	protectedId            string // 保护范围ID
-	protectedIdFlag        bool
-	description            string // 保护范围描述
-	descriptionFlag        bool
+	protectedId     string // 保护范围ID
+	protectedIdFlag bool
+
+	description     string // 保护范围描述
+	descriptionFlag bool
+
 	protectedDimension     string // 保护类型
 	protectedDimensionFlag bool
-	protectedRows          *ProtectedRows // 保护行范围
-	protectedRowsFlag      bool
-	protectedColumns       *ProtectedColumns // 保护列范围
-	protectedColumnsFlag   bool
-	protectedSheet         *ProtectedSheet // 保护工作表范围
-	protectedSheetFlag     bool
-	editors                *ProtectedRangeEditors // 保护范围可编辑用户
-	editorsFlag            bool
+
+	protectedRows     *ProtectedRows // 保护行范围
+	protectedRowsFlag bool
+
+	protectedColumns     *ProtectedColumns // 保护列范围
+	protectedColumnsFlag bool
+
+	protectedSheet     *ProtectedSheet // 保护工作表范围
+	protectedSheetFlag bool
+
+	editors     *ProtectedRangeEditors // 保护范围可编辑用户
+	editorsFlag bool
 }
 
 func NewProtectedRangeBuilder() *ProtectedRangeBuilder {
@@ -3827,18 +4077,22 @@ func (builder *ProtectedRangeBuilder) Build() *ProtectedRange {
 }
 
 type ProtectedRangeEditors struct {
-	Users       []string `json:"users,omitempty"`       // 可编辑人员
+	Users []string `json:"users,omitempty"` // 可编辑人员
+
 	Departments []string `json:"departments,omitempty"` // 可编辑部门
-	Chats       []string `json:"chats,omitempty"`       // 可编辑群
+
+	Chats []string `json:"chats,omitempty"` // 可编辑群
 }
 
 type ProtectedRangeEditorsBuilder struct {
-	users           []string // 可编辑人员
-	usersFlag       bool
+	users     []string // 可编辑人员
+	usersFlag bool
+
 	departments     []string // 可编辑部门
 	departmentsFlag bool
-	chats           []string // 可编辑群
-	chatsFlag       bool
+
+	chats     []string // 可编辑群
+	chatsFlag bool
 }
 
 func NewProtectedRangeEditorsBuilder() *ProtectedRangeEditorsBuilder {
@@ -3888,18 +4142,22 @@ func (builder *ProtectedRangeEditorsBuilder) Build() *ProtectedRangeEditors {
 }
 
 type ProtectedRows struct {
-	SheetId    *string `json:"sheet_id,omitempty"`    // 工作表ID
-	StartIndex *int    `json:"start_index,omitempty"` // 起始行
-	EndIndex   *int    `json:"end_index,omitempty"`   // 结束行
+	SheetId *string `json:"sheet_id,omitempty"` // 工作表ID
+
+	StartIndex *int `json:"start_index,omitempty"` // 起始行
+
+	EndIndex *int `json:"end_index,omitempty"` // 结束行
 }
 
 type ProtectedRowsBuilder struct {
-	sheetId        string // 工作表ID
-	sheetIdFlag    bool
+	sheetId     string // 工作表ID
+	sheetIdFlag bool
+
 	startIndex     int // 起始行
 	startIndexFlag bool
-	endIndex       int // 结束行
-	endIndexFlag   bool
+
+	endIndex     int // 结束行
+	endIndexFlag bool
 }
 
 func NewProtectedRowsBuilder() *ProtectedRowsBuilder {
@@ -3984,19 +4242,25 @@ func (builder *ProtectedSheetBuilder) Build() *ProtectedSheet {
 }
 
 type Reminder struct {
-	NotifyDateTime *string  `json:"notify_date_time,omitempty"` // 时间日期
-	NotifyUserId   []string `json:"notify_user_id,omitempty"`   // 提醒人员
-	NotifyText     *string  `json:"notify_text,omitempty"`      // 提醒内容
-	NotifyStrategy *string  `json:"notify_strategy,omitempty"`  // 提醒策略
+	NotifyDateTime *string `json:"notify_date_time,omitempty"` // 时间日期
+
+	NotifyUserId []string `json:"notify_user_id,omitempty"` // 提醒人员
+
+	NotifyText *string `json:"notify_text,omitempty"` // 提醒内容
+
+	NotifyStrategy *string `json:"notify_strategy,omitempty"` // 提醒策略
 }
 
 type ReminderBuilder struct {
 	notifyDateTime     string // 时间日期
 	notifyDateTimeFlag bool
-	notifyUserId       []string // 提醒人员
-	notifyUserIdFlag   bool
-	notifyText         string // 提醒内容
-	notifyTextFlag     bool
+
+	notifyUserId     []string // 提醒人员
+	notifyUserIdFlag bool
+
+	notifyText     string // 提醒内容
+	notifyTextFlag bool
+
 	notifyStrategy     string // 提醒策略
 	notifyStrategyFlag bool
 }
@@ -4064,17 +4328,21 @@ func (builder *ReminderBuilder) Build() *Reminder {
 
 type Replace struct {
 	FindCondition *FindCondition `json:"find_condition,omitempty"` // 查找条件
-	Find          *string        `json:"find,omitempty"`           // 查找的字符串
-	Replacement   *string        `json:"replacement,omitempty"`    // 替换的字符串
+
+	Find *string `json:"find,omitempty"` // 查找的字符串
+
+	Replacement *string `json:"replacement,omitempty"` // 替换的字符串
 }
 
 type ReplaceBuilder struct {
 	findCondition     *FindCondition // 查找条件
 	findConditionFlag bool
-	find              string // 查找的字符串
-	findFlag          bool
-	replacement       string // 替换的字符串
-	replacementFlag   bool
+
+	find     string // 查找的字符串
+	findFlag bool
+
+	replacement     string // 替换的字符串
+	replacementFlag bool
 }
 
 func NewReplaceBuilder() *ReplaceBuilder {
@@ -4126,13 +4394,15 @@ func (builder *ReplaceBuilder) Build() *Replace {
 }
 
 type RichTextValueRange struct {
-	Range  *string          `json:"range,omitempty"`  // 范围
+	Range *string `json:"range,omitempty"` // 范围
+
 	Values [][][]*CellValue `json:"values,omitempty"` // 数据
 }
 
 type RichTextValueRangeBuilder struct {
-	range_     string // 范围
-	rangeFlag  bool
+	range_    string // 范围
+	rangeFlag bool
+
 	values     [][][]*CellValue // 数据
 	valuesFlag bool
 }
@@ -4205,12 +4475,14 @@ func (builder *RichValueBuilder) Build() *RichValue {
 
 type RightBorderStyle struct {
 	Style *string `json:"style,omitempty"` // 边框样式
+
 	Color *string `json:"color,omitempty"` // 边框颜色
 }
 
 type RightBorderStyleBuilder struct {
 	style     string // 边框样式
 	styleFlag bool
+
 	color     string // 边框颜色
 	colorFlag bool
 }
@@ -4252,15 +4524,17 @@ func (builder *RightBorderStyleBuilder) Build() *RightBorderStyle {
 }
 
 type SegmentStyle struct {
-	AffectedText *string            `json:"affected_text,omitempty"` // 影响的文本
-	Style        *SegmentStyleStyle `json:"style,omitempty"`         // 样式
+	AffectedText *string `json:"affected_text,omitempty"` // 影响的文本
+
+	Style *SegmentStyleStyle `json:"style,omitempty"` // 样式
 }
 
 type SegmentStyleBuilder struct {
 	affectedText     string // 影响的文本
 	affectedTextFlag bool
-	style            *SegmentStyleStyle // 样式
-	styleFlag        bool
+
+	style     *SegmentStyleStyle // 样式
+	styleFlag bool
 }
 
 func NewSegmentStyleBuilder() *SegmentStyleBuilder {
@@ -4299,27 +4573,37 @@ func (builder *SegmentStyleBuilder) Build() *SegmentStyle {
 }
 
 type SegmentStyleStyle struct {
-	Bold          *bool   `json:"bold,omitempty"`           // 加粗
-	Italic        *bool   `json:"italic,omitempty"`         // 斜体
-	StrikeThrough *bool   `json:"strike_through,omitempty"` // 删除线
-	Underline     *bool   `json:"underline,omitempty"`      // 下划线
-	ForeColor     *string `json:"fore_color,omitempty"`     // 字体颜色
-	FontSize      *int    `json:"font_size,omitempty"`      // 字体大小
+	Bold *bool `json:"bold,omitempty"` // 加粗
+
+	Italic *bool `json:"italic,omitempty"` // 斜体
+
+	StrikeThrough *bool `json:"strike_through,omitempty"` // 删除线
+
+	Underline *bool `json:"underline,omitempty"` // 下划线
+
+	ForeColor *string `json:"fore_color,omitempty"` // 字体颜色
+
+	FontSize *int `json:"font_size,omitempty"` // 字体大小
 }
 
 type SegmentStyleStyleBuilder struct {
-	bold              bool // 加粗
-	boldFlag          bool
-	italic            bool // 斜体
-	italicFlag        bool
+	bold     bool // 加粗
+	boldFlag bool
+
+	italic     bool // 斜体
+	italicFlag bool
+
 	strikeThrough     bool // 删除线
 	strikeThroughFlag bool
-	underline         bool // 下划线
-	underlineFlag     bool
-	foreColor         string // 字体颜色
-	foreColorFlag     bool
-	fontSize          int // 字体大小
-	fontSizeFlag      bool
+
+	underline     bool // 下划线
+	underlineFlag bool
+
+	foreColor     string // 字体颜色
+	foreColorFlag bool
+
+	fontSize     int // 字体大小
+	fontSizeFlag bool
 }
 
 func NewSegmentStyleStyleBuilder() *SegmentStyleStyleBuilder {
@@ -4411,30 +4695,42 @@ func (builder *SegmentStyleStyleBuilder) Build() *SegmentStyleStyle {
 }
 
 type Sheet struct {
-	SheetId        *string         `json:"sheet_id,omitempty"`        // 工作表id
-	Title          *string         `json:"title,omitempty"`           // 工作表标题
-	Index          *int            `json:"index,omitempty"`           // 工作表索引位置，索引从 0 开始计数。
-	Hidden         *bool           `json:"hidden,omitempty"`          // 工作表是否被隐藏;- `true`：表示被隐藏;- `false`：表示未被隐藏
+	SheetId *string `json:"sheet_id,omitempty"` // 工作表id
+
+	Title *string `json:"title,omitempty"` // 工作表标题
+
+	Index *int `json:"index,omitempty"` // 工作表索引位置，索引从 0 开始计数。
+
+	Hidden *bool `json:"hidden,omitempty"` // 工作表是否被隐藏;- `true`：表示被隐藏;- `false`：表示未被隐藏
+
 	GridProperties *GridProperties `json:"grid_properties,omitempty"` // 单元格属性
-	ResourceType   *string         `json:"resource_type,omitempty"`   // 工作表类型;- `sheet`：工作表;- `bitable`：多维表格，[多维表格概述](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/bitable-overview);- `#UNSUPPORTED_TYPE`：不支持的类型
-	Merges         []*MergeRange   `json:"merges,omitempty"`          // 合并单元格的相关信息
+
+	ResourceType *string `json:"resource_type,omitempty"` // 工作表类型;- `sheet`：工作表;- `bitable`：多维表格，[多维表格概述](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/bitable-overview);- `#UNSUPPORTED_TYPE`：不支持的类型
+
+	Merges []*MergeRange `json:"merges,omitempty"` // 合并单元格的相关信息
 }
 
 type SheetBuilder struct {
-	sheetId            string // 工作表id
-	sheetIdFlag        bool
-	title              string // 工作表标题
-	titleFlag          bool
-	index              int // 工作表索引位置，索引从 0 开始计数。
-	indexFlag          bool
-	hidden             bool // 工作表是否被隐藏;- `true`：表示被隐藏;- `false`：表示未被隐藏
-	hiddenFlag         bool
+	sheetId     string // 工作表id
+	sheetIdFlag bool
+
+	title     string // 工作表标题
+	titleFlag bool
+
+	index     int // 工作表索引位置，索引从 0 开始计数。
+	indexFlag bool
+
+	hidden     bool // 工作表是否被隐藏;- `true`：表示被隐藏;- `false`：表示未被隐藏
+	hiddenFlag bool
+
 	gridProperties     *GridProperties // 单元格属性
 	gridPropertiesFlag bool
-	resourceType       string // 工作表类型;- `sheet`：工作表;- `bitable`：多维表格，[多维表格概述](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/bitable-overview);- `#UNSUPPORTED_TYPE`：不支持的类型
-	resourceTypeFlag   bool
-	merges             []*MergeRange // 合并单元格的相关信息
-	mergesFlag         bool
+
+	resourceType     string // 工作表类型;- `sheet`：工作表;- `bitable`：多维表格，[多维表格概述](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/bitable-overview);- `#UNSUPPORTED_TYPE`：不支持的类型
+	resourceTypeFlag bool
+
+	merges     []*MergeRange // 合并单元格的相关信息
+	mergesFlag bool
 }
 
 func NewSheetBuilder() *SheetBuilder {
@@ -4537,18 +4833,22 @@ func (builder *SheetBuilder) Build() *Sheet {
 }
 
 type SheetFilterInfo struct {
-	Range           *string       `json:"range,omitempty"`             // 筛选应用范围
-	FilteredOutRows []int         `json:"filtered_out_rows,omitempty"` // 筛选出来隐藏的行
-	FilterInfos     []*FilterInfo `json:"filter_infos,omitempty"`      // sheet的筛选条件
+	Range *string `json:"range,omitempty"` // 筛选应用范围
+
+	FilteredOutRows []int `json:"filtered_out_rows,omitempty"` // 筛选出来隐藏的行
+
+	FilterInfos []*FilterInfo `json:"filter_infos,omitempty"` // sheet的筛选条件
 }
 
 type SheetFilterInfoBuilder struct {
-	range_              string // 筛选应用范围
-	rangeFlag           bool
+	range_    string // 筛选应用范围
+	rangeFlag bool
+
 	filteredOutRows     []int // 筛选出来隐藏的行
 	filteredOutRowsFlag bool
-	filterInfos         []*FilterInfo // sheet的筛选条件
-	filterInfosFlag     bool
+
+	filterInfos     []*FilterInfo // sheet的筛选条件
+	filterInfosFlag bool
 }
 
 func NewSheetFilterInfoBuilder() *SheetFilterInfoBuilder {
@@ -4599,19 +4899,25 @@ func (builder *SheetFilterInfoBuilder) Build() *SheetFilterInfo {
 }
 
 type SheetProperties struct {
-	RowCount          *int `json:"row_count,omitempty"`           // 工作表行数
-	ColumnCount       *int `json:"column_count,omitempty"`        // 工作表列数
-	FrozenRowCount    *int `json:"frozen_row_count,omitempty"`    // 冻结行数
+	RowCount *int `json:"row_count,omitempty"` // 工作表行数
+
+	ColumnCount *int `json:"column_count,omitempty"` // 工作表列数
+
+	FrozenRowCount *int `json:"frozen_row_count,omitempty"` // 冻结行数
+
 	FrozenColumnCount *int `json:"frozen_column_count,omitempty"` // 冻结列数
 }
 
 type SheetPropertiesBuilder struct {
-	rowCount              int // 工作表行数
-	rowCountFlag          bool
-	columnCount           int // 工作表列数
-	columnCountFlag       bool
-	frozenRowCount        int // 冻结行数
-	frozenRowCountFlag    bool
+	rowCount     int // 工作表行数
+	rowCountFlag bool
+
+	columnCount     int // 工作表列数
+	columnCountFlag bool
+
+	frozenRowCount     int // 冻结行数
+	frozenRowCountFlag bool
+
 	frozenColumnCount     int // 冻结列数
 	frozenColumnCountFlag bool
 }
@@ -4679,21 +4985,27 @@ func (builder *SheetPropertiesBuilder) Build() *SheetProperties {
 }
 
 type SingleOption struct {
-	Type                 *string                `json:"type,omitempty"`                   // 单选类型
-	Range                *string                `json:"range,omitempty"`                  // 引用数据的范围，当type=OneOfRange时必须存在
+	Type *string `json:"type,omitempty"` // 单选类型
+
+	Range *string `json:"range,omitempty"` // 引用数据的范围，当type=OneOfRange时必须存在
+
 	DataValidationValues []*DataValidationValue `json:"data_validation_values,omitempty"` // 选项
-	Properties           *OptionProperties      `json:"properties,omitempty"`             // 属性
+
+	Properties *OptionProperties `json:"properties,omitempty"` // 属性
 }
 
 type SingleOptionBuilder struct {
-	type_                    string // 单选类型
-	typeFlag                 bool
-	range_                   string // 引用数据的范围，当type=OneOfRange时必须存在
-	rangeFlag                bool
+	type_    string // 单选类型
+	typeFlag bool
+
+	range_    string // 引用数据的范围，当type=OneOfRange时必须存在
+	rangeFlag bool
+
 	dataValidationValues     []*DataValidationValue // 选项
 	dataValidationValuesFlag bool
-	properties               *OptionProperties // 属性
-	propertiesFlag           bool
+
+	properties     *OptionProperties // 属性
+	propertiesFlag bool
 }
 
 func NewSingleOptionBuilder() *SingleOptionBuilder {
@@ -4757,19 +5069,25 @@ func (builder *SingleOptionBuilder) Build() *SingleOption {
 }
 
 type Spreadsheet struct {
-	Title            *string `json:"title,omitempty"`             // 表格标题
-	FolderToken      *string `json:"folder_token,omitempty"`      // 文件夹token，获取方式见[如何获取云文档资源相关 token](https://open.feishu.cn/document/ukTMukTMukTM/uczNzUjL3czM14yN3MTN)
-	Url              *string `json:"url,omitempty"`               // 文档url
+	Title *string `json:"title,omitempty"` // 表格标题
+
+	FolderToken *string `json:"folder_token,omitempty"` // 文件夹token，获取方式见[如何获取云文档资源相关 token](https://open.feishu.cn/document/ukTMukTMukTM/uczNzUjL3czM14yN3MTN)
+
+	Url *string `json:"url,omitempty"` // 文档url
+
 	SpreadsheetToken *string `json:"spreadsheet_token,omitempty"` // 表格token
 }
 
 type SpreadsheetBuilder struct {
-	title                string // 表格标题
-	titleFlag            bool
-	folderToken          string // 文件夹token，获取方式见[如何获取云文档资源相关 token](https://open.feishu.cn/document/ukTMukTMukTM/uczNzUjL3czM14yN3MTN)
-	folderTokenFlag      bool
-	url                  string // 文档url
-	urlFlag              bool
+	title     string // 表格标题
+	titleFlag bool
+
+	folderToken     string // 文件夹token，获取方式见[如何获取云文档资源相关 token](https://open.feishu.cn/document/ukTMukTMukTM/uczNzUjL3czM14yN3MTN)
+	folderTokenFlag bool
+
+	url     string // 文档url
+	urlFlag bool
+
 	spreadsheetToken     string // 表格token
 	spreadsheetTokenFlag bool
 }
@@ -4837,13 +5155,15 @@ func (builder *SpreadsheetBuilder) Build() *Spreadsheet {
 }
 
 type Style struct {
-	Range  *string        `json:"range,omitempty"`  // 范围
+	Range *string `json:"range,omitempty"` // 范围
+
 	Styles [][]*CellStyle `json:"styles,omitempty"` // 单元格样式
 }
 
 type StyleBuilder struct {
-	range_     string // 范围
-	rangeFlag  bool
+	range_    string // 范围
+	rangeFlag bool
+
 	styles     [][]*CellStyle // 单元格样式
 	stylesFlag bool
 }
@@ -4915,13 +5235,15 @@ func (builder *StyleRangesBuilder) Build() *StyleRanges {
 }
 
 type Text struct {
-	Text         *string       `json:"text,omitempty"`          // 文本值
+	Text *string `json:"text,omitempty"` // 文本值
+
 	SegmentStyle *SegmentStyle `json:"segment_style,omitempty"` //
 }
 
 type TextBuilder struct {
-	text             string // 文本值
-	textFlag         bool
+	text     string // 文本值
+	textFlag bool
+
 	segmentStyle     *SegmentStyle //
 	segmentStyleFlag bool
 }
@@ -4961,12 +5283,14 @@ func (builder *TextBuilder) Build() *Text {
 
 type TopBorderStyle struct {
 	Style *string `json:"style,omitempty"` // 边框样式
+
 	Color *string `json:"color,omitempty"` // 边框颜色
 }
 
 type TopBorderStyleBuilder struct {
 	style     string // 边框样式
 	styleFlag bool
+
 	color     string // 边框颜色
 	colorFlag bool
 }
@@ -5008,15 +5332,17 @@ func (builder *TopBorderStyleBuilder) Build() *TopBorderStyle {
 }
 
 type UpdateDimensionProperties struct {
-	DimensionRange *Dimension           `json:"dimension_range,omitempty"` // 需要更新的行列信息
-	Properties     *DimensionProperties `json:"properties,omitempty"`      // 更新的属性
+	DimensionRange *Dimension `json:"dimension_range,omitempty"` // 需要更新的行列信息
+
+	Properties *DimensionProperties `json:"properties,omitempty"` // 更新的属性
 }
 
 type UpdateDimensionPropertiesBuilder struct {
 	dimensionRange     *Dimension // 需要更新的行列信息
 	dimensionRangeFlag bool
-	properties         *DimensionProperties // 更新的属性
-	propertiesFlag     bool
+
+	properties     *DimensionProperties // 更新的属性
+	propertiesFlag bool
 }
 
 func NewUpdateDimensionPropertiesBuilder() *UpdateDimensionPropertiesBuilder {
@@ -5054,13 +5380,15 @@ func (builder *UpdateDimensionPropertiesBuilder) Build() *UpdateDimensionPropert
 }
 
 type UpdateGridProperties struct {
-	FrozenRowCount    *int `json:"frozen_row_count,omitempty"`    // 冻结行数
+	FrozenRowCount *int `json:"frozen_row_count,omitempty"` // 冻结行数
+
 	FrozenColumnCount *int `json:"frozen_column_count,omitempty"` // 冻结列数
 }
 
 type UpdateGridPropertiesBuilder struct {
-	frozenRowCount        int // 冻结行数
-	frozenRowCountFlag    bool
+	frozenRowCount     int // 冻结行数
+	frozenRowCountFlag bool
+
 	frozenColumnCount     int // 冻结列数
 	frozenColumnCountFlag bool
 }
@@ -5102,13 +5430,15 @@ func (builder *UpdateGridPropertiesBuilder) Build() *UpdateGridProperties {
 }
 
 type UpdateSheetFilter struct {
-	Col       *string    `json:"col,omitempty"`       // 更新筛选条件的列
+	Col *string `json:"col,omitempty"` // 更新筛选条件的列
+
 	Condition *Condition `json:"condition,omitempty"` // 筛选条件
 }
 
 type UpdateSheetFilterBuilder struct {
-	col           string // 更新筛选条件的列
-	colFlag       bool
+	col     string // 更新筛选条件的列
+	colFlag bool
+
 	condition     *Condition // 筛选条件
 	conditionFlag bool
 }
@@ -5181,13 +5511,15 @@ func (builder *UpdateSpreadsheetPropertiesBuilder) Build() *UpdateSpreadsheetPro
 }
 
 type Value struct {
-	Range  *string          `json:"range,omitempty"`  // 范围
+	Range *string `json:"range,omitempty"` // 范围
+
 	Values [][][]*CellValue `json:"values,omitempty"` // 数据，数据结构参见[单元格数据结构](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/sheets-v3/spreadsheet-sheet-value/cell-data-structure)
 }
 
 type ValueBuilder struct {
-	range_     string // 范围
-	rangeFlag  bool
+	range_    string // 范围
+	rangeFlag bool
+
 	values     [][][]*CellValue // 数据，数据结构参见[单元格数据结构](https://open.feishu.cn/document/ukTMukTMukTM/uUDN04SN0QjL1QDN/sheets-v3/spreadsheet-sheet-value/cell-data-structure)
 	valuesFlag bool
 }
@@ -5260,13 +5592,15 @@ func (builder *ValueElementBuilder) Build() *ValueElement {
 }
 
 type ValueElementSingleOption struct {
-	DataValidationId   *int    `json:"data_validation_id,omitempty"`   // 数据校验ID
+	DataValidationId *int `json:"data_validation_id,omitempty"` // 数据校验ID
+
 	DataValiditonValue *string `json:"data_validiton_value,omitempty"` // 选项值
 }
 
 type ValueElementSingleOptionBuilder struct {
-	dataValidationId       int // 数据校验ID
-	dataValidationIdFlag   bool
+	dataValidationId     int // 数据校验ID
+	dataValidationIdFlag bool
+
 	dataValiditonValue     string // 选项值
 	dataValiditonValueFlag bool
 }

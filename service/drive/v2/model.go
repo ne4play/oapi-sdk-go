@@ -88,13 +88,15 @@ const (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -133,29 +135,41 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type ExportJob struct {
 	FileExtension *string `json:"file_extension,omitempty"` // 导出文件扩展名
-	Token         *string `json:"token,omitempty"`          // 导出文档 token
-	Type          *string `json:"type,omitempty"`           // 导出文档类型
-	FileName      *string `json:"file_name,omitempty"`      // 导出文件名
-	FileToken     *string `json:"file_token,omitempty"`     // 导出文件 Drive Token
-	JobErrorMsg   *string `json:"job_error_msg,omitempty"`  // 任务失败原因
-	JobStatus     *int    `json:"job_status,omitempty"`     // 任务状态
+
+	Token *string `json:"token,omitempty"` // 导出文档 token
+
+	Type *string `json:"type,omitempty"` // 导出文档类型
+
+	FileName *string `json:"file_name,omitempty"` // 导出文件名
+
+	FileToken *string `json:"file_token,omitempty"` // 导出文件 Drive Token
+
+	JobErrorMsg *string `json:"job_error_msg,omitempty"` // 任务失败原因
+
+	JobStatus *int `json:"job_status,omitempty"` // 任务状态
 }
 
 type ExportJobBuilder struct {
 	fileExtension     string // 导出文件扩展名
 	fileExtensionFlag bool
-	token             string // 导出文档 token
-	tokenFlag         bool
-	type_             string // 导出文档类型
-	typeFlag          bool
-	fileName          string // 导出文件名
-	fileNameFlag      bool
-	fileToken         string // 导出文件 Drive Token
-	fileTokenFlag     bool
-	jobErrorMsg       string // 任务失败原因
-	jobErrorMsgFlag   bool
-	jobStatus         int // 任务状态
-	jobStatusFlag     bool
+
+	token     string // 导出文档 token
+	tokenFlag bool
+
+	type_    string // 导出文档类型
+	typeFlag bool
+
+	fileName     string // 导出文件名
+	fileNameFlag bool
+
+	fileToken     string // 导出文件 Drive Token
+	fileTokenFlag bool
+
+	jobErrorMsg     string // 任务失败原因
+	jobErrorMsgFlag bool
+
+	jobStatus     int // 任务状态
+	jobStatusFlag bool
 }
 
 func NewExportJobBuilder() *ExportJobBuilder {
@@ -260,25 +274,35 @@ func (builder *ExportJobBuilder) Build() *ExportJob {
 }
 
 type FileLike struct {
-	UserId             *string `json:"user_id,omitempty"`              // 用户 ID
-	LastLikedTime      *string `json:"last_liked_time,omitempty"`      // 用户最后点赞时间，秒级时间戳
-	UserName           *string `json:"user_name,omitempty"`            // 用户名字，用户信息被脱敏时此值不会返回
-	UserEnName         *string `json:"user_en_name,omitempty"`         // 用户英文名字，用户信息被脱敏时此值不会返回
-	UserAvatarUrl      *string `json:"user_avatar_url,omitempty"`      // 用户头像，用户信息被脱敏时此值不会返回
-	UserIsDesensitized *bool   `json:"user_is_desensitized,omitempty"` // 用户信息是否脱敏
+	UserId *string `json:"user_id,omitempty"` // 用户 ID
+
+	LastLikedTime *string `json:"last_liked_time,omitempty"` // 用户最后点赞时间，秒级时间戳
+
+	UserName *string `json:"user_name,omitempty"` // 用户名字，用户信息被脱敏时此值不会返回
+
+	UserEnName *string `json:"user_en_name,omitempty"` // 用户英文名字，用户信息被脱敏时此值不会返回
+
+	UserAvatarUrl *string `json:"user_avatar_url,omitempty"` // 用户头像，用户信息被脱敏时此值不会返回
+
+	UserIsDesensitized *bool `json:"user_is_desensitized,omitempty"` // 用户信息是否脱敏
 }
 
 type FileLikeBuilder struct {
-	userId                 string // 用户 ID
-	userIdFlag             bool
-	lastLikedTime          string // 用户最后点赞时间，秒级时间戳
-	lastLikedTimeFlag      bool
-	userName               string // 用户名字，用户信息被脱敏时此值不会返回
-	userNameFlag           bool
-	userEnName             string // 用户英文名字，用户信息被脱敏时此值不会返回
-	userEnNameFlag         bool
-	userAvatarUrl          string // 用户头像，用户信息被脱敏时此值不会返回
-	userAvatarUrlFlag      bool
+	userId     string // 用户 ID
+	userIdFlag bool
+
+	lastLikedTime     string // 用户最后点赞时间，秒级时间戳
+	lastLikedTimeFlag bool
+
+	userName     string // 用户名字，用户信息被脱敏时此值不会返回
+	userNameFlag bool
+
+	userEnName     string // 用户英文名字，用户信息被脱敏时此值不会返回
+	userEnNameFlag bool
+
+	userAvatarUrl     string // 用户头像，用户信息被脱敏时此值不会返回
+	userAvatarUrlFlag bool
+
 	userIsDesensitized     bool // 用户信息是否脱敏
 	userIsDesensitizedFlag bool
 }
@@ -372,36 +396,52 @@ func (builder *FileLikeBuilder) Build() *FileLike {
 }
 
 type ImportJob struct {
-	FileExtension *string              `json:"file_extension,omitempty"` // 导入文件扩展名
-	FileToken     *string              `json:"file_token,omitempty"`     // 导入文件 Drive File Token
-	Type          *string              `json:"type,omitempty"`           // 导入文档类型
-	FileName      *string              `json:"file_name,omitempty"`      // 导入目标云文档文件名，若为空使用 Drive 文件名
-	Point         *ImportJobMountPoint `json:"point,omitempty"`          // 挂载点
-	JobStatus     *int                 `json:"job_status,omitempty"`     // 任务状态
-	JobErrorMsg   *string              `json:"job_error_msg,omitempty"`  // 任务失败原因
-	Token         *string              `json:"token,omitempty"`          // 导入云文档 Token
-	Url           *string              `json:"url,omitempty"`            // 导入云文档 URL
+	FileExtension *string `json:"file_extension,omitempty"` // 导入文件扩展名
+
+	FileToken *string `json:"file_token,omitempty"` // 导入文件 Drive File Token
+
+	Type *string `json:"type,omitempty"` // 导入文档类型
+
+	FileName *string `json:"file_name,omitempty"` // 导入目标云文档文件名，若为空使用 Drive 文件名
+
+	Point *ImportJobMountPoint `json:"point,omitempty"` // 挂载点
+
+	JobStatus *int `json:"job_status,omitempty"` // 任务状态
+
+	JobErrorMsg *string `json:"job_error_msg,omitempty"` // 任务失败原因
+
+	Token *string `json:"token,omitempty"` // 导入云文档 Token
+
+	Url *string `json:"url,omitempty"` // 导入云文档 URL
 }
 
 type ImportJobBuilder struct {
 	fileExtension     string // 导入文件扩展名
 	fileExtensionFlag bool
-	fileToken         string // 导入文件 Drive File Token
-	fileTokenFlag     bool
-	type_             string // 导入文档类型
-	typeFlag          bool
-	fileName          string // 导入目标云文档文件名，若为空使用 Drive 文件名
-	fileNameFlag      bool
-	point             *ImportJobMountPoint // 挂载点
-	pointFlag         bool
-	jobStatus         int // 任务状态
-	jobStatusFlag     bool
-	jobErrorMsg       string // 任务失败原因
-	jobErrorMsgFlag   bool
-	token             string // 导入云文档 Token
-	tokenFlag         bool
-	url               string // 导入云文档 URL
-	urlFlag           bool
+
+	fileToken     string // 导入文件 Drive File Token
+	fileTokenFlag bool
+
+	type_    string // 导入文档类型
+	typeFlag bool
+
+	fileName     string // 导入目标云文档文件名，若为空使用 Drive 文件名
+	fileNameFlag bool
+
+	point     *ImportJobMountPoint // 挂载点
+	pointFlag bool
+
+	jobStatus     int // 任务状态
+	jobStatusFlag bool
+
+	jobErrorMsg     string // 任务失败原因
+	jobErrorMsgFlag bool
+
+	token     string // 导入云文档 Token
+	tokenFlag bool
+
+	url     string // 导入云文档 URL
+	urlFlag bool
 }
 
 func NewImportJobBuilder() *ImportJobBuilder {
@@ -531,15 +571,17 @@ func (builder *ImportJobBuilder) Build() *ImportJob {
 }
 
 type ImportJobMountPoint struct {
-	MountType *int    `json:"mount_type,omitempty"` // 挂载类型
-	MountKey  *string `json:"mount_key,omitempty"`  // 挂载位置，对于 mount_type=1 ，云空间目录 Token ，空表示根目录
+	MountType *int `json:"mount_type,omitempty"` // 挂载类型
+
+	MountKey *string `json:"mount_key,omitempty"` // 挂载位置，对于 mount_type=1 ，云空间目录 Token ，空表示根目录
 }
 
 type ImportJobMountPointBuilder struct {
 	mountType     int // 挂载类型
 	mountTypeFlag bool
-	mountKey      string // 挂载位置，对于 mount_type=1 ，云空间目录 Token ，空表示根目录
-	mountKeyFlag  bool
+
+	mountKey     string // 挂载位置，对于 mount_type=1 ，云空间目录 Token ，空表示根目录
+	mountKeyFlag bool
 }
 
 func NewImportJobMountPointBuilder() *ImportJobMountPointBuilder {
@@ -580,24 +622,34 @@ func (builder *ImportJobMountPointBuilder) Build() *ImportJobMountPoint {
 
 type MyLike struct {
 	LastLikedTime *string `json:"last_liked_time,omitempty"` // 用户最后点赞时间，秒级时间戳
-	FileToken     *string `json:"file_token,omitempty"`      // 点赞的文件 token
-	FileType      *string `json:"file_type,omitempty"`       // 点赞的文件类型
-	FileName      *string `json:"file_name,omitempty"`       // 点赞的文件名，无文件阅读权限时不返回此字段
-	FileUrl       *string `json:"file_url,omitempty"`        // 点赞的文件链接，无文件阅读权限时不返回此字段
-	FileIsDeleted *bool   `json:"file_is_deleted,omitempty"` // 点赞的文件是否已被删除
+
+	FileToken *string `json:"file_token,omitempty"` // 点赞的文件 token
+
+	FileType *string `json:"file_type,omitempty"` // 点赞的文件类型
+
+	FileName *string `json:"file_name,omitempty"` // 点赞的文件名，无文件阅读权限时不返回此字段
+
+	FileUrl *string `json:"file_url,omitempty"` // 点赞的文件链接，无文件阅读权限时不返回此字段
+
+	FileIsDeleted *bool `json:"file_is_deleted,omitempty"` // 点赞的文件是否已被删除
 }
 
 type MyLikeBuilder struct {
 	lastLikedTime     string // 用户最后点赞时间，秒级时间戳
 	lastLikedTimeFlag bool
-	fileToken         string // 点赞的文件 token
-	fileTokenFlag     bool
-	fileType          string // 点赞的文件类型
-	fileTypeFlag      bool
-	fileName          string // 点赞的文件名，无文件阅读权限时不返回此字段
-	fileNameFlag      bool
-	fileUrl           string // 点赞的文件链接，无文件阅读权限时不返回此字段
-	fileUrlFlag       bool
+
+	fileToken     string // 点赞的文件 token
+	fileTokenFlag bool
+
+	fileType     string // 点赞的文件类型
+	fileTypeFlag bool
+
+	fileName     string // 点赞的文件名，无文件阅读权限时不返回此字段
+	fileNameFlag bool
+
+	fileUrl     string // 点赞的文件链接，无文件阅读权限时不返回此字段
+	fileUrlFlag bool
+
 	fileIsDeleted     bool // 点赞的文件是否已被删除
 	fileIsDeletedFlag bool
 }
@@ -691,33 +743,47 @@ func (builder *MyLikeBuilder) Build() *MyLike {
 }
 
 type PermissionPublic struct {
-	ExternalAccessEntity     *string `json:"external_access_entity,omitempty"`     // 允许内容被分享到组织外
-	SecurityEntity           *string `json:"security_entity,omitempty"`            // 谁可以创建副本、打印、下载
-	CommentEntity            *string `json:"comment_entity,omitempty"`             // 谁可以评论
-	ShareEntity              *string `json:"share_entity,omitempty"`               // 谁可以添加和管理协作者-组织维度
+	ExternalAccessEntity *string `json:"external_access_entity,omitempty"` // 允许内容被分享到组织外
+
+	SecurityEntity *string `json:"security_entity,omitempty"` // 谁可以创建副本、打印、下载
+
+	CommentEntity *string `json:"comment_entity,omitempty"` // 谁可以评论
+
+	ShareEntity *string `json:"share_entity,omitempty"` // 谁可以添加和管理协作者-组织维度
+
 	ManageCollaboratorEntity *string `json:"manage_collaborator_entity,omitempty"` // 谁可以添加和管理协作者-协作者维度
-	LinkShareEntity          *string `json:"link_share_entity,omitempty"`          // 链接分享设置
-	CopyEntity               *string `json:"copy_entity,omitempty"`                // 谁可以复制内容
-	LockSwitch               *bool   `json:"lock_switch,omitempty"`                // 节点是否已加锁，加锁之后不再继承父级页面的权限
+
+	LinkShareEntity *string `json:"link_share_entity,omitempty"` // 链接分享设置
+
+	CopyEntity *string `json:"copy_entity,omitempty"` // 谁可以复制内容
+
+	LockSwitch *bool `json:"lock_switch,omitempty"` // 节点是否已加锁，加锁之后不再继承父级页面的权限
 }
 
 type PermissionPublicBuilder struct {
-	externalAccessEntity         string // 允许内容被分享到组织外
-	externalAccessEntityFlag     bool
-	securityEntity               string // 谁可以创建副本、打印、下载
-	securityEntityFlag           bool
-	commentEntity                string // 谁可以评论
-	commentEntityFlag            bool
-	shareEntity                  string // 谁可以添加和管理协作者-组织维度
-	shareEntityFlag              bool
+	externalAccessEntity     string // 允许内容被分享到组织外
+	externalAccessEntityFlag bool
+
+	securityEntity     string // 谁可以创建副本、打印、下载
+	securityEntityFlag bool
+
+	commentEntity     string // 谁可以评论
+	commentEntityFlag bool
+
+	shareEntity     string // 谁可以添加和管理协作者-组织维度
+	shareEntityFlag bool
+
 	manageCollaboratorEntity     string // 谁可以添加和管理协作者-协作者维度
 	manageCollaboratorEntityFlag bool
-	linkShareEntity              string // 链接分享设置
-	linkShareEntityFlag          bool
-	copyEntity                   string // 谁可以复制内容
-	copyEntityFlag               bool
-	lockSwitch                   bool // 节点是否已加锁，加锁之后不再继承父级页面的权限
-	lockSwitchFlag               bool
+
+	linkShareEntity     string // 链接分享设置
+	linkShareEntityFlag bool
+
+	copyEntity     string // 谁可以复制内容
+	copyEntityFlag bool
+
+	lockSwitch     bool // 节点是否已加锁，加锁之后不再继承父级页面的权限
+	lockSwitchFlag bool
 }
 
 func NewPermissionPublicBuilder() *PermissionPublicBuilder {
@@ -835,13 +901,15 @@ func (builder *PermissionPublicBuilder) Build() *PermissionPublic {
 }
 
 type SecureLabel struct {
-	Id   *string `json:"id,omitempty"`   // 密级标签 ID
+	Id *string `json:"id,omitempty"` // 密级标签 ID
+
 	Name *string `json:"name,omitempty"` // 密级标签名称
 }
 
 type SecureLabelBuilder struct {
-	id       string // 密级标签 ID
-	idFlag   bool
+	id     string // 密级标签 ID
+	idFlag bool
+
 	name     string // 密级标签名称
 	nameFlag bool
 }

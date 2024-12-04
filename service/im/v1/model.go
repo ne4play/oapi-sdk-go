@@ -277,16 +277,20 @@ const (
 )
 
 type BatchMessage struct {
-	BatchMessageId      *string              `json:"batch_message_id,omitempty"`      // 批量发消息的批次号，代表某次批量发送消息的唯一标识
-	BatchSendProgress   *BatchSendProgress   `json:"batch_send_progress,omitempty"`   // 发送进度
+	BatchMessageId *string `json:"batch_message_id,omitempty"` // 批量发消息的批次号，代表某次批量发送消息的唯一标识
+
+	BatchSendProgress *BatchSendProgress `json:"batch_send_progress,omitempty"` // 发送进度
+
 	BatchRecallProgress *BatchRecallProgress `json:"batch_recall_progress,omitempty"` // 撤回进度
 }
 
 type BatchMessageBuilder struct {
-	batchMessageId          string // 批量发消息的批次号，代表某次批量发送消息的唯一标识
-	batchMessageIdFlag      bool
-	batchSendProgress       *BatchSendProgress // 发送进度
-	batchSendProgressFlag   bool
+	batchMessageId     string // 批量发消息的批次号，代表某次批量发送消息的唯一标识
+	batchMessageIdFlag bool
+
+	batchSendProgress     *BatchSendProgress // 发送进度
+	batchSendProgressFlag bool
+
 	batchRecallProgress     *BatchRecallProgress // 撤回进度
 	batchRecallProgressFlag bool
 }
@@ -339,13 +343,15 @@ func (builder *BatchMessageBuilder) Build() *BatchMessage {
 }
 
 type BatchMessageReadUser struct {
-	ReadCount  *string `json:"read_count,omitempty"`  // 已读的人数
+	ReadCount *string `json:"read_count,omitempty"` // 已读的人数
+
 	TotalCount *string `json:"total_count,omitempty"` // 推送的总人数
 }
 
 type BatchMessageReadUserBuilder struct {
-	readCount      string // 已读的人数
-	readCountFlag  bool
+	readCount     string // 已读的人数
+	readCountFlag bool
+
 	totalCount     string // 推送的总人数
 	totalCountFlag bool
 }
@@ -387,13 +393,15 @@ func (builder *BatchMessageReadUserBuilder) Build() *BatchMessageReadUser {
 }
 
 type BatchMessageRecallProgress struct {
-	Recall      *bool `json:"recall,omitempty"`       // 该条批量消息是否被执行过撤回操作
-	RecallCount *int  `json:"recall_count,omitempty"` // 已经成功撤回的消息数量
+	Recall *bool `json:"recall,omitempty"` // 该条批量消息是否被执行过撤回操作
+
+	RecallCount *int `json:"recall_count,omitempty"` // 已经成功撤回的消息数量
 }
 
 type BatchMessageRecallProgressBuilder struct {
-	recall          bool // 该条批量消息是否被执行过撤回操作
-	recallFlag      bool
+	recall     bool // 该条批量消息是否被执行过撤回操作
+	recallFlag bool
+
 	recallCount     int // 已经成功撤回的消息数量
 	recallCountFlag bool
 }
@@ -435,18 +443,22 @@ func (builder *BatchMessageRecallProgressBuilder) Build() *BatchMessageRecallPro
 }
 
 type BatchMessageSendProgress struct {
-	ValidUserIdsCount   *int `json:"valid_user_ids_count,omitempty"`   // 批量请求中有效的userid数量(包含机器人不可见用户);;;;**注意**： ;当valid_user_ids_count为0有两种情况：;* 批量任务还没有开始被调度（请等待一会再调用该接口）;* 批量发送消息时传入的所有openIDs、employeID、departmentiIDs都不包含有效的用户
+	ValidUserIdsCount *int `json:"valid_user_ids_count,omitempty"` // 批量请求中有效的userid数量(包含机器人不可见用户);;;;**注意**： ;当valid_user_ids_count为0有两种情况：;* 批量任务还没有开始被调度（请等待一会再调用该接口）;* 批量发送消息时传入的所有openIDs、employeID、departmentiIDs都不包含有效的用户
+
 	SuccessUserIdsCount *int `json:"success_user_ids_count,omitempty"` // 已经成功给用户发送成功的消息数量;;;;**注意**：最终success_user_ids_count不一定等于valid_user_ids_count, 因为valid_user_ids_count包含了对机器人不可见的用户
-	ReadUserIdsCount    *int `json:"read_user_ids_count,omitempty"`    // 已读信息用户数量
+
+	ReadUserIdsCount *int `json:"read_user_ids_count,omitempty"` // 已读信息用户数量
 }
 
 type BatchMessageSendProgressBuilder struct {
-	validUserIdsCount       int // 批量请求中有效的userid数量(包含机器人不可见用户);;;;**注意**： ;当valid_user_ids_count为0有两种情况：;* 批量任务还没有开始被调度（请等待一会再调用该接口）;* 批量发送消息时传入的所有openIDs、employeID、departmentiIDs都不包含有效的用户
-	validUserIdsCountFlag   bool
+	validUserIdsCount     int // 批量请求中有效的userid数量(包含机器人不可见用户);;;;**注意**： ;当valid_user_ids_count为0有两种情况：;* 批量任务还没有开始被调度（请等待一会再调用该接口）;* 批量发送消息时传入的所有openIDs、employeID、departmentiIDs都不包含有效的用户
+	validUserIdsCountFlag bool
+
 	successUserIdsCount     int // 已经成功给用户发送成功的消息数量;;;;**注意**：最终success_user_ids_count不一定等于valid_user_ids_count, 因为valid_user_ids_count包含了对机器人不可见的用户
 	successUserIdsCountFlag bool
-	readUserIdsCount        int // 已读信息用户数量
-	readUserIdsCountFlag    bool
+
+	readUserIdsCount     int // 已读信息用户数量
+	readUserIdsCountFlag bool
 }
 
 func NewBatchMessageSendProgressBuilder() *BatchMessageSendProgressBuilder {
@@ -499,13 +511,15 @@ func (builder *BatchMessageSendProgressBuilder) Build() *BatchMessageSendProgres
 }
 
 type BatchRecallProgress struct {
-	RecallCount      *string `json:"recall_count,omitempty"`       // 撤回成功的消息条数
+	RecallCount *string `json:"recall_count,omitempty"` // 撤回成功的消息条数
+
 	TotalRecallCount *string `json:"total_recall_count,omitempty"` // 计划撤回的消息条数
 }
 
 type BatchRecallProgressBuilder struct {
-	recallCount          string // 撤回成功的消息条数
-	recallCountFlag      bool
+	recallCount     string // 撤回成功的消息条数
+	recallCountFlag bool
+
 	totalRecallCount     string // 计划撤回的消息条数
 	totalRecallCountFlag bool
 }
@@ -547,13 +561,15 @@ func (builder *BatchRecallProgressBuilder) Build() *BatchRecallProgress {
 }
 
 type BatchSendProgress struct {
-	SendCount      *string `json:"send_count,omitempty"`       // 发送成功的消息条数
+	SendCount *string `json:"send_count,omitempty"` // 发送成功的消息条数
+
 	TotalSendCount *string `json:"total_send_count,omitempty"` // 总的计划发送的消息条数
 }
 
 type BatchSendProgressBuilder struct {
-	sendCount          string // 发送成功的消息条数
-	sendCountFlag      bool
+	sendCount     string // 发送成功的消息条数
+	sendCountFlag bool
+
 	totalSendCount     string // 总的计划发送的消息条数
 	totalSendCountFlag bool
 }
@@ -595,43 +611,67 @@ func (builder *BatchSendProgressBuilder) Build() *BatchSendProgress {
 }
 
 type Chat struct {
-	ChatId         *string    `json:"chat_id,omitempty"`           // chat_id of the conversation
-	Avatar         *string    `json:"avatar,omitempty"`            // avatar of the conversation
-	Name           *string    `json:"name,omitempty"`              // name of the conversation
-	Description    *string    `json:"description,omitempty"`       // description of the conversation
-	I18nNames      *I18nNames `json:"i18n_names,omitempty"`        // i18_names of the conversation
-	OnlyOwnerAdd   *bool      `json:"only_owner_add,omitempty"`    // whether only the owner of the converation can add others
-	ShareAllowed   *bool      `json:"share_allowed,omitempty"`     // whether the converation can be shared
-	OnlyOwnerAtAll *bool      `json:"only_owner_at_all,omitempty"` // whether only the owner of the converation can @all
-	OnlyOwnerEdit  *bool      `json:"only_owner_edit,omitempty"`   // whether only the owner of the converation can edit the converation info
-	OwnerUserId    *string    `json:"owner_user_id,omitempty"`     // owner_id
-	Type           *string    `json:"type,omitempty"`              // type
+	ChatId *string `json:"chat_id,omitempty"` // chat_id of the conversation
 
+	Avatar *string `json:"avatar,omitempty"` // avatar of the conversation
+
+	Name *string `json:"name,omitempty"` // name of the conversation
+
+	Description *string `json:"description,omitempty"` // description of the conversation
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // i18_names of the conversation
+
+	OnlyOwnerAdd *bool `json:"only_owner_add,omitempty"` // whether only the owner of the converation can add others
+
+	ShareAllowed *bool `json:"share_allowed,omitempty"` // whether the converation can be shared
+
+	OnlyOwnerAtAll *bool `json:"only_owner_at_all,omitempty"` // whether only the owner of the converation can @all
+
+	OnlyOwnerEdit *bool `json:"only_owner_edit,omitempty"` // whether only the owner of the converation can edit the converation info
+
+	OwnerUserId *string `json:"owner_user_id,omitempty"` // owner_id
+
+	Type *string `json:"type,omitempty"` // type
+
+	Labels []string `json:"labels,omitempty"` // 群标签
 }
 
 type ChatBuilder struct {
-	chatId             string // chat_id of the conversation
-	chatIdFlag         bool
-	avatar             string // avatar of the conversation
-	avatarFlag         bool
-	name               string // name of the conversation
-	nameFlag           bool
-	description        string // description of the conversation
-	descriptionFlag    bool
-	i18nNames          *I18nNames // i18_names of the conversation
-	i18nNamesFlag      bool
-	onlyOwnerAdd       bool // whether only the owner of the converation can add others
-	onlyOwnerAddFlag   bool
-	shareAllowed       bool // whether the converation can be shared
-	shareAllowedFlag   bool
+	chatId     string // chat_id of the conversation
+	chatIdFlag bool
+
+	avatar     string // avatar of the conversation
+	avatarFlag bool
+
+	name     string // name of the conversation
+	nameFlag bool
+
+	description     string // description of the conversation
+	descriptionFlag bool
+
+	i18nNames     *I18nNames // i18_names of the conversation
+	i18nNamesFlag bool
+
+	onlyOwnerAdd     bool // whether only the owner of the converation can add others
+	onlyOwnerAddFlag bool
+
+	shareAllowed     bool // whether the converation can be shared
+	shareAllowedFlag bool
+
 	onlyOwnerAtAll     bool // whether only the owner of the converation can @all
 	onlyOwnerAtAllFlag bool
-	onlyOwnerEdit      bool // whether only the owner of the converation can edit the converation info
-	onlyOwnerEditFlag  bool
-	ownerUserId        string // owner_id
-	ownerUserIdFlag    bool
-	type_              string // type
-	typeFlag           bool
+
+	onlyOwnerEdit     bool // whether only the owner of the converation can edit the converation info
+	onlyOwnerEditFlag bool
+
+	ownerUserId     string // owner_id
+	ownerUserIdFlag bool
+
+	type_    string // type
+	typeFlag bool
+
+	labels     []string // 群标签
+	labelsFlag bool
 }
 
 func NewChatBuilder() *ChatBuilder {
@@ -735,6 +775,15 @@ func (builder *ChatBuilder) OwnerUserId(ownerUserId string) *ChatBuilder {
 func (builder *ChatBuilder) Type(type_ string) *ChatBuilder {
 	builder.type_ = type_
 	builder.typeFlag = true
+	return builder
+}
+
+// 群标签
+//
+// 示例值：
+func (builder *ChatBuilder) Labels(labels []string) *ChatBuilder {
+	builder.labels = labels
+	builder.labelsFlag = true
 	return builder
 }
 
@@ -887,18 +936,22 @@ func (builder *ChatMemberBotBuilder) Build() *ChatMemberBot {
 }
 
 type ChatMemberUser struct {
-	Name      *string `json:"name,omitempty"`       // 用户名字
+	Name *string `json:"name,omitempty"` // 用户名字
+
 	TenantKey *string `json:"tenant_key,omitempty"` // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	UserId    *UserId `json:"user_id,omitempty"`    // 用户 ID
+
+	UserId *UserId `json:"user_id,omitempty"` // 用户 ID
 }
 
 type ChatMemberUserBuilder struct {
-	name          string // 用户名字
-	nameFlag      bool
+	name     string // 用户名字
+	nameFlag bool
+
 	tenantKey     string // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
 	tenantKeyFlag bool
-	userId        *UserId // 用户 ID
-	userIdFlag    bool
+
+	userId     *UserId // 用户 ID
+	userIdFlag bool
 }
 
 func NewChatMemberUserBuilder() *ChatMemberUserBuilder {
@@ -1013,24 +1066,32 @@ func (builder *ChatMenuTreeBuilder) Build() *ChatMenuTree {
 }
 
 type ChatTab struct {
-	TabId      *string         `json:"tab_id,omitempty"`      // Tab ID
-	TabName    *string         `json:"tab_name,omitempty"`    // Tab名称;;**注意**：会话标签页的名称不能超过30个字符
-	TabType    *string         `json:"tab_type,omitempty"`    // Tab类型
+	TabId *string `json:"tab_id,omitempty"` // Tab ID
+
+	TabName *string `json:"tab_name,omitempty"` // Tab名称;;**注意**：会话标签页的名称不能超过30个字符
+
+	TabType *string `json:"tab_type,omitempty"` // Tab类型
+
 	TabContent *ChatTabContent `json:"tab_content,omitempty"` // Tab内容
-	TabConfig  *ChatTabConfig  `json:"tab_config,omitempty"`  // Tab的配置
+
+	TabConfig *ChatTabConfig `json:"tab_config,omitempty"` // Tab的配置
 }
 
 type ChatTabBuilder struct {
-	tabId          string // Tab ID
-	tabIdFlag      bool
-	tabName        string // Tab名称;;**注意**：会话标签页的名称不能超过30个字符
-	tabNameFlag    bool
-	tabType        string // Tab类型
-	tabTypeFlag    bool
+	tabId     string // Tab ID
+	tabIdFlag bool
+
+	tabName     string // Tab名称;;**注意**：会话标签页的名称不能超过30个字符
+	tabNameFlag bool
+
+	tabType     string // Tab类型
+	tabTypeFlag bool
+
 	tabContent     *ChatTabContent // Tab内容
 	tabContentFlag bool
-	tabConfig      *ChatTabConfig // Tab的配置
-	tabConfigFlag  bool
+
+	tabConfig     *ChatTabConfig // Tab的配置
+	tabConfigFlag bool
 }
 
 func NewChatTabBuilder() *ChatTabBuilder {
@@ -1108,14 +1169,16 @@ func (builder *ChatTabBuilder) Build() *ChatTab {
 
 type ChatTopNotice struct {
 	ActionType *string `json:"action_type,omitempty"` // 置顶的类型;;**注意**：;- 选择 ==消息类型== 时必须填写`message_id`字段;- 选择 ==群公告类型== 时填写的`message_id`将被忽略
-	MessageId  *string `json:"message_id,omitempty"`  // 消息ID，详情参见[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+
+	MessageId *string `json:"message_id,omitempty"` // 消息ID，详情参见[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
 }
 
 type ChatTopNoticeBuilder struct {
 	actionType     string // 置顶的类型;;**注意**：;- 选择 ==消息类型== 时必须填写`message_id`字段;- 选择 ==群公告类型== 时填写的`message_id`将被忽略
 	actionTypeFlag bool
-	messageId      string // 消息ID，详情参见[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	messageIdFlag  bool
+
+	messageId     string // 消息ID，详情参见[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+	messageIdFlag bool
 }
 
 func NewChatTopNoticeBuilder() *ChatTopNoticeBuilder {
@@ -1155,56 +1218,87 @@ func (builder *ChatTopNoticeBuilder) Build() *ChatTopNotice {
 }
 
 type ChatChange struct {
-	Avatar                 *string    `json:"avatar,omitempty"`                   // 群头像
-	Name                   *string    `json:"name,omitempty"`                     // 群名称
-	Description            *string    `json:"description,omitempty"`              // 群描述
-	I18nNames              *I18nNames `json:"i18n_names,omitempty"`               // 群国际化名称
-	AddMemberPermission    *string    `json:"add_member_permission,omitempty"`    // 加人入群权限(all_members/only_owner/unknown)
-	ShareCardPermission    *string    `json:"share_card_permission,omitempty"`    // 群分享权限(allowed/not_allowed/unknown)
-	AtAllPermission        *string    `json:"at_all_permission,omitempty"`        // at 所有人权限(all_members/only_owner/unknown)
-	EditPermission         *string    `json:"edit_permission,omitempty"`          // 群编辑权限(all_members/only_owner/unknown)
-	MembershipApproval     *string    `json:"membership_approval,omitempty"`      // 加群审批(no_approval_required/approval_required)
-	JoinMessageVisibility  *string    `json:"join_message_visibility,omitempty"`  // 入群消息可见性(only_owner/all_members/not_anyone)
-	LeaveMessageVisibility *string    `json:"leave_message_visibility,omitempty"` // 出群消息可见性(only_owner/all_members/not_anyone)
-	ModerationPermission   *string    `json:"moderation_permission,omitempty"`    // 发言权限(all_members/only_owner)
-	OwnerId                *UserId    `json:"owner_id,omitempty"`                 // 用户 ID
+	Avatar *string `json:"avatar,omitempty"` // 群头像
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	Description *string `json:"description,omitempty"` // 群描述
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
+
+	AddMemberPermission *string `json:"add_member_permission,omitempty"` // 加人入群权限(all_members/only_owner/unknown)
+
+	ShareCardPermission *string `json:"share_card_permission,omitempty"` // 群分享权限(allowed/not_allowed/unknown)
+
+	AtAllPermission *string `json:"at_all_permission,omitempty"` // at 所有人权限(all_members/only_owner/unknown)
+
+	EditPermission *string `json:"edit_permission,omitempty"` // 群编辑权限(all_members/only_owner/unknown)
+
+	MembershipApproval *string `json:"membership_approval,omitempty"` // 加群审批(no_approval_required/approval_required)
+
+	JoinMessageVisibility *string `json:"join_message_visibility,omitempty"` // 入群消息可见性(only_owner/all_members/not_anyone)
+
+	LeaveMessageVisibility *string `json:"leave_message_visibility,omitempty"` // 出群消息可见性(only_owner/all_members/not_anyone)
+
+	ModerationPermission *string `json:"moderation_permission,omitempty"` // 发言权限(all_members/only_owner)
+
+	OwnerId *UserId `json:"owner_id,omitempty"` // 用户 ID
+
+	Labels []string `json:"labels,omitempty"` // 群标签
 
 	RestrictedModeSetting *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"` // 防泄密模式设置
-	GroupMessageType      *string                `json:"group_message_type,omitempty"`      // 群消息模式
+
+	GroupMessageType *string `json:"group_message_type,omitempty"` // 群消息模式
 }
 
 type ChatChangeBuilder struct {
-	avatar                     string // 群头像
-	avatarFlag                 bool
-	name                       string // 群名称
-	nameFlag                   bool
-	description                string // 群描述
-	descriptionFlag            bool
-	i18nNames                  *I18nNames // 群国际化名称
-	i18nNamesFlag              bool
-	addMemberPermission        string // 加人入群权限(all_members/only_owner/unknown)
-	addMemberPermissionFlag    bool
-	shareCardPermission        string // 群分享权限(allowed/not_allowed/unknown)
-	shareCardPermissionFlag    bool
-	atAllPermission            string // at 所有人权限(all_members/only_owner/unknown)
-	atAllPermissionFlag        bool
-	editPermission             string // 群编辑权限(all_members/only_owner/unknown)
-	editPermissionFlag         bool
-	membershipApproval         string // 加群审批(no_approval_required/approval_required)
-	membershipApprovalFlag     bool
-	joinMessageVisibility      string // 入群消息可见性(only_owner/all_members/not_anyone)
-	joinMessageVisibilityFlag  bool
+	avatar     string // 群头像
+	avatarFlag bool
+
+	name     string // 群名称
+	nameFlag bool
+
+	description     string // 群描述
+	descriptionFlag bool
+
+	i18nNames     *I18nNames // 群国际化名称
+	i18nNamesFlag bool
+
+	addMemberPermission     string // 加人入群权限(all_members/only_owner/unknown)
+	addMemberPermissionFlag bool
+
+	shareCardPermission     string // 群分享权限(allowed/not_allowed/unknown)
+	shareCardPermissionFlag bool
+
+	atAllPermission     string // at 所有人权限(all_members/only_owner/unknown)
+	atAllPermissionFlag bool
+
+	editPermission     string // 群编辑权限(all_members/only_owner/unknown)
+	editPermissionFlag bool
+
+	membershipApproval     string // 加群审批(no_approval_required/approval_required)
+	membershipApprovalFlag bool
+
+	joinMessageVisibility     string // 入群消息可见性(only_owner/all_members/not_anyone)
+	joinMessageVisibilityFlag bool
+
 	leaveMessageVisibility     string // 出群消息可见性(only_owner/all_members/not_anyone)
 	leaveMessageVisibilityFlag bool
-	moderationPermission       string // 发言权限(all_members/only_owner)
-	moderationPermissionFlag   bool
-	ownerId                    *UserId // 用户 ID
-	ownerIdFlag                bool
+
+	moderationPermission     string // 发言权限(all_members/only_owner)
+	moderationPermissionFlag bool
+
+	ownerId     *UserId // 用户 ID
+	ownerIdFlag bool
+
+	labels     []string // 群标签
+	labelsFlag bool
 
 	restrictedModeSetting     *RestrictedModeSetting // 防泄密模式设置
 	restrictedModeSettingFlag bool
-	groupMessageType          string // 群消息模式
-	groupMessageTypeFlag      bool
+
+	groupMessageType     string // 群消息模式
+	groupMessageTypeFlag bool
 }
 
 func NewChatChangeBuilder() *ChatChangeBuilder {
@@ -1329,6 +1423,15 @@ func (builder *ChatChangeBuilder) OwnerId(ownerId *UserId) *ChatChangeBuilder {
 	return builder
 }
 
+// 群标签
+//
+// 示例值：
+func (builder *ChatChangeBuilder) Labels(labels []string) *ChatChangeBuilder {
+	builder.labels = labels
+	builder.labelsFlag = true
+	return builder
+}
+
 // 防泄密模式设置
 //
 // 示例值：
@@ -1411,24 +1514,32 @@ func (builder *ChatChangeBuilder) Build() *ChatChange {
 }
 
 type ChatMenuItem struct {
-	ActionType   *string                   `json:"action_type,omitempty"`   // 菜单类型
+	ActionType *string `json:"action_type,omitempty"` // 菜单类型
+
 	RedirectLink *ChatMenuItemRedirectLink `json:"redirect_link,omitempty"` // 跳转链接
-	ImageKey     *string                   `json:"image_key,omitempty"`     // image_key，通过 [上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create) 接口上传message类型图片获取image_key
-	Name         *string                   `json:"name,omitempty"`          // 名称，一级菜单名称字符数要在1到8范围内，二级菜单名称字符数要在1到24范围内;;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	I18nNames    *I18nNames                `json:"i18n_names,omitempty"`    // 国际化名称，一级菜单名称字符数要在1到8范围内，二级菜单名称字符数要在1到24范围内;;**注意：**;- 1中文=2英文=2其他语言字符=2字符
+
+	ImageKey *string `json:"image_key,omitempty"` // image_key，通过 [上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create) 接口上传message类型图片获取image_key
+
+	Name *string `json:"name,omitempty"` // 名称，一级菜单名称字符数要在1到8范围内，二级菜单名称字符数要在1到24范围内;;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 国际化名称，一级菜单名称字符数要在1到8范围内，二级菜单名称字符数要在1到24范围内;;**注意：**;- 1中文=2英文=2其他语言字符=2字符
 }
 
 type ChatMenuItemBuilder struct {
-	actionType       string // 菜单类型
-	actionTypeFlag   bool
+	actionType     string // 菜单类型
+	actionTypeFlag bool
+
 	redirectLink     *ChatMenuItemRedirectLink // 跳转链接
 	redirectLinkFlag bool
-	imageKey         string // image_key，通过 [上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create) 接口上传message类型图片获取image_key
-	imageKeyFlag     bool
-	name             string // 名称，一级菜单名称字符数要在1到8范围内，二级菜单名称字符数要在1到24范围内;;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
-	nameFlag         bool
-	i18nNames        *I18nNames // 国际化名称，一级菜单名称字符数要在1到8范围内，二级菜单名称字符数要在1到24范围内;;**注意：**;- 1中文=2英文=2其他语言字符=2字符
-	i18nNamesFlag    bool
+
+	imageKey     string // image_key，通过 [上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create) 接口上传message类型图片获取image_key
+	imageKeyFlag bool
+
+	name     string // 名称，一级菜单名称字符数要在1到8范围内，二级菜单名称字符数要在1到24范围内;;;**注意：** ;- 1中文=2英文=2其他语言字符=2字符
+	nameFlag bool
+
+	i18nNames     *I18nNames // 国际化名称，一级菜单名称字符数要在1到8范围内，二级菜单名称字符数要在1到24范围内;;**注意：**;- 1中文=2英文=2其他语言字符=2字符
+	i18nNamesFlag bool
 }
 
 func NewChatMenuItemBuilder() *ChatMenuItemBuilder {
@@ -1505,24 +1616,32 @@ func (builder *ChatMenuItemBuilder) Build() *ChatMenuItem {
 }
 
 type ChatMenuItemRedirectLink struct {
-	CommonUrl  *string `json:"common_url,omitempty"`  // 公用跳转链接，必须以http开头。
-	IosUrl     *string `json:"ios_url,omitempty"`     // IOS端跳转链接，当该字段不设置时，IOS端会使用common_url。必须以http开头。
+	CommonUrl *string `json:"common_url,omitempty"` // 公用跳转链接，必须以http开头。
+
+	IosUrl *string `json:"ios_url,omitempty"` // IOS端跳转链接，当该字段不设置时，IOS端会使用common_url。必须以http开头。
+
 	AndroidUrl *string `json:"android_url,omitempty"` // Android端跳转链接，当该字段不设置时，Android端会使用common_url。必须以http开头。
-	PcUrl      *string `json:"pc_url,omitempty"`      // PC端跳转链接，当该字段不设置时，PC端会使用common_url。必须以http开头。
-	WebUrl     *string `json:"web_url,omitempty"`     // Web端跳转链接，当该字段不设置时，Web端会使用common_url。必须以http开头。
+
+	PcUrl *string `json:"pc_url,omitempty"` // PC端跳转链接，当该字段不设置时，PC端会使用common_url。必须以http开头。
+
+	WebUrl *string `json:"web_url,omitempty"` // Web端跳转链接，当该字段不设置时，Web端会使用common_url。必须以http开头。
 }
 
 type ChatMenuItemRedirectLinkBuilder struct {
-	commonUrl      string // 公用跳转链接，必须以http开头。
-	commonUrlFlag  bool
-	iosUrl         string // IOS端跳转链接，当该字段不设置时，IOS端会使用common_url。必须以http开头。
-	iosUrlFlag     bool
+	commonUrl     string // 公用跳转链接，必须以http开头。
+	commonUrlFlag bool
+
+	iosUrl     string // IOS端跳转链接，当该字段不设置时，IOS端会使用common_url。必须以http开头。
+	iosUrlFlag bool
+
 	androidUrl     string // Android端跳转链接，当该字段不设置时，Android端会使用common_url。必须以http开头。
 	androidUrlFlag bool
-	pcUrl          string // PC端跳转链接，当该字段不设置时，PC端会使用common_url。必须以http开头。
-	pcUrlFlag      bool
-	webUrl         string // Web端跳转链接，当该字段不设置时，Web端会使用common_url。必须以http开头。
-	webUrlFlag     bool
+
+	pcUrl     string // PC端跳转链接，当该字段不设置时，PC端会使用common_url。必须以http开头。
+	pcUrlFlag bool
+
+	webUrl     string // Web端跳转链接，当该字段不设置时，Web端会使用common_url。必须以http开头。
+	webUrlFlag bool
 }
 
 func NewChatMenuItemRedirectLinkBuilder() *ChatMenuItemRedirectLinkBuilder {
@@ -1601,15 +1720,17 @@ func (builder *ChatMenuItemRedirectLinkBuilder) Build() *ChatMenuItemRedirectLin
 }
 
 type ChatMenuSecondLevel struct {
-	ChatMenuSecondLevelId *string       `json:"chat_menu_second_level_id,omitempty"` // 二级菜单ID
-	ChatMenuItem          *ChatMenuItem `json:"chat_menu_item,omitempty"`            // 二级菜单信息
+	ChatMenuSecondLevelId *string `json:"chat_menu_second_level_id,omitempty"` // 二级菜单ID
+
+	ChatMenuItem *ChatMenuItem `json:"chat_menu_item,omitempty"` // 二级菜单信息
 }
 
 type ChatMenuSecondLevelBuilder struct {
 	chatMenuSecondLevelId     string // 二级菜单ID
 	chatMenuSecondLevelIdFlag bool
-	chatMenuItem              *ChatMenuItem // 二级菜单信息
-	chatMenuItemFlag          bool
+
+	chatMenuItem     *ChatMenuItem // 二级菜单信息
+	chatMenuItemFlag bool
 }
 
 func NewChatMenuSecondLevelBuilder() *ChatMenuSecondLevelBuilder {
@@ -1648,18 +1769,22 @@ func (builder *ChatMenuSecondLevelBuilder) Build() *ChatMenuSecondLevel {
 }
 
 type ChatMenuTopLevel struct {
-	ChatMenuTopLevelId *string                `json:"chat_menu_top_level_id,omitempty"` // 一级菜单ID
-	ChatMenuItem       *ChatMenuItem          `json:"chat_menu_item,omitempty"`         // 一级菜单信息
-	Children           []*ChatMenuSecondLevel `json:"children,omitempty"`               // 二级菜单列表
+	ChatMenuTopLevelId *string `json:"chat_menu_top_level_id,omitempty"` // 一级菜单ID
+
+	ChatMenuItem *ChatMenuItem `json:"chat_menu_item,omitempty"` // 一级菜单信息
+
+	Children []*ChatMenuSecondLevel `json:"children,omitempty"` // 二级菜单列表
 }
 
 type ChatMenuTopLevelBuilder struct {
 	chatMenuTopLevelId     string // 一级菜单ID
 	chatMenuTopLevelIdFlag bool
-	chatMenuItem           *ChatMenuItem // 一级菜单信息
-	chatMenuItemFlag       bool
-	children               []*ChatMenuSecondLevel // 二级菜单列表
-	childrenFlag           bool
+
+	chatMenuItem     *ChatMenuItem // 一级菜单信息
+	chatMenuItemFlag bool
+
+	children     []*ChatMenuSecondLevel // 二级菜单列表
+	childrenFlag bool
 }
 
 func NewChatMenuTopLevelBuilder() *ChatMenuTopLevelBuilder {
@@ -1710,13 +1835,15 @@ func (builder *ChatMenuTopLevelBuilder) Build() *ChatMenuTopLevel {
 }
 
 type ChatTabConfig struct {
-	IconKey   *string `json:"icon_key,omitempty"`    // 群Tab图标
-	IsBuiltIn *bool   `json:"is_built_in,omitempty"` // 群tab是否App内嵌打开
+	IconKey *string `json:"icon_key,omitempty"` // 群Tab图标
+
+	IsBuiltIn *bool `json:"is_built_in,omitempty"` // 群tab是否App内嵌打开
 }
 
 type ChatTabConfigBuilder struct {
-	iconKey       string // 群Tab图标
-	iconKeyFlag   bool
+	iconKey     string // 群Tab图标
+	iconKeyFlag bool
+
 	isBuiltIn     bool // 群tab是否App内嵌打开
 	isBuiltInFlag bool
 }
@@ -1758,21 +1885,27 @@ func (builder *ChatTabConfigBuilder) Build() *ChatTabConfig {
 }
 
 type ChatTabContent struct {
-	Url           *string `json:"url,omitempty"`            // URL类型
-	Doc           *string `json:"doc,omitempty"`            // Doc链接
+	Url *string `json:"url,omitempty"` // URL类型
+
+	Doc *string `json:"doc,omitempty"` // Doc链接
+
 	MeetingMinute *string `json:"meeting_minute,omitempty"` // 会议纪要
-	Task          *string `json:"task,omitempty"`           // 任务
+
+	Task *string `json:"task,omitempty"` // 任务
 }
 
 type ChatTabContentBuilder struct {
-	url               string // URL类型
-	urlFlag           bool
-	doc               string // Doc链接
-	docFlag           bool
+	url     string // URL类型
+	urlFlag bool
+
+	doc     string // Doc链接
+	docFlag bool
+
 	meetingMinute     string // 会议纪要
 	meetingMinuteFlag bool
-	task              string // 任务
-	taskFlag          bool
+
+	task     string // 任务
+	taskFlag bool
 }
 
 func NewChatTabContentBuilder() *ChatTabContentBuilder {
@@ -1839,14 +1972,16 @@ func (builder *ChatTabContentBuilder) Build() *ChatTabContent {
 
 type Crc32Item struct {
 	PartId *string `json:"part_id,omitempty"` // 分片编号（1开始）
-	Crc32  *string `json:"crc32,omitempty"`   // crc32校验
+
+	Crc32 *string `json:"crc32,omitempty"` // crc32校验
 }
 
 type Crc32ItemBuilder struct {
 	partId     string // 分片编号（1开始）
 	partIdFlag bool
-	crc32      string // crc32校验
-	crc32Flag  bool
+
+	crc32     string // crc32校验
+	crc32Flag bool
 }
 
 func NewCrc32ItemBuilder() *Crc32ItemBuilder {
@@ -1886,13 +2021,15 @@ func (builder *Crc32ItemBuilder) Build() *Crc32Item {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -1962,45 +2099,67 @@ func (builder *EmojiBuilder) Build() *Emoji {
 }
 
 type EventMessage struct {
-	MessageId   *string         `json:"message_id,omitempty"`   // 消息的open_message_id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	RootId      *string         `json:"root_id,omitempty"`      // 根消息id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	ParentId    *string         `json:"parent_id,omitempty"`    // 父消息的id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	CreateTime  *string         `json:"create_time,omitempty"`  // 消息发送时间（毫秒）
-	UpdateTime  *string         `json:"update_time,omitempty"`  // 消息更新时间（毫秒）
-	ChatId      *string         `json:"chat_id,omitempty"`      // 消息所在的群组 ID
-	ThreadId    *string         `json:"thread_id,omitempty"`    // 消息所属的话题 ID
-	ChatType    *string         `json:"chat_type,omitempty"`    // 消息所在的群组类型;;**可选值有**：;- `p2p`：单聊;- `group`： 群组;- `topic_group`：话题群
-	MessageType *string         `json:"message_type,omitempty"` // 消息类型
-	Content     *string         `json:"content,omitempty"`      // 消息内容, json 格式 ;[各类型消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/events/message_content)
-	Mentions    []*MentionEvent `json:"mentions,omitempty"`     // 被提及用户的信息
-	UserAgent   *string         `json:"user_agent,omitempty"`   // 用户代理
+	MessageId *string `json:"message_id,omitempty"` // 消息的open_message_id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+
+	RootId *string `json:"root_id,omitempty"` // 根消息id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+
+	ParentId *string `json:"parent_id,omitempty"` // 父消息的id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+
+	CreateTime *string `json:"create_time,omitempty"` // 消息发送时间（毫秒）
+
+	UpdateTime *string `json:"update_time,omitempty"` // 消息更新时间（毫秒）
+
+	ChatId *string `json:"chat_id,omitempty"` // 消息所在的群组 ID
+
+	ThreadId *string `json:"thread_id,omitempty"` // 消息所属的话题 ID
+
+	ChatType *string `json:"chat_type,omitempty"` // 消息所在的群组类型;;**可选值有**：;- `p2p`：单聊;- `group`： 群组;- `topic_group`：话题群
+
+	MessageType *string `json:"message_type,omitempty"` // 消息类型
+
+	Content *string `json:"content,omitempty"` // 消息内容, json 格式 ;[各类型消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/events/message_content)
+
+	Mentions []*MentionEvent `json:"mentions,omitempty"` // 被提及用户的信息
+
+	UserAgent *string `json:"user_agent,omitempty"` // 用户代理
 }
 
 type EventMessageBuilder struct {
-	messageId       string // 消息的open_message_id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	messageIdFlag   bool
-	rootId          string // 根消息id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	rootIdFlag      bool
-	parentId        string // 父消息的id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	parentIdFlag    bool
-	createTime      string // 消息发送时间（毫秒）
-	createTimeFlag  bool
-	updateTime      string // 消息更新时间（毫秒）
-	updateTimeFlag  bool
-	chatId          string // 消息所在的群组 ID
-	chatIdFlag      bool
-	threadId        string // 消息所属的话题 ID
-	threadIdFlag    bool
-	chatType        string // 消息所在的群组类型;;**可选值有**：;- `p2p`：单聊;- `group`： 群组;- `topic_group`：话题群
-	chatTypeFlag    bool
+	messageId     string // 消息的open_message_id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+	messageIdFlag bool
+
+	rootId     string // 根消息id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+	rootIdFlag bool
+
+	parentId     string // 父消息的id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+	parentIdFlag bool
+
+	createTime     string // 消息发送时间（毫秒）
+	createTimeFlag bool
+
+	updateTime     string // 消息更新时间（毫秒）
+	updateTimeFlag bool
+
+	chatId     string // 消息所在的群组 ID
+	chatIdFlag bool
+
+	threadId     string // 消息所属的话题 ID
+	threadIdFlag bool
+
+	chatType     string // 消息所在的群组类型;;**可选值有**：;- `p2p`：单聊;- `group`： 群组;- `topic_group`：话题群
+	chatTypeFlag bool
+
 	messageType     string // 消息类型
 	messageTypeFlag bool
-	content         string // 消息内容, json 格式 ;[各类型消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/events/message_content)
-	contentFlag     bool
-	mentions        []*MentionEvent // 被提及用户的信息
-	mentionsFlag    bool
-	userAgent       string // 用户代理
-	userAgentFlag   bool
+
+	content     string // 消息内容, json 格式 ;[各类型消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/events/message_content)
+	contentFlag bool
+
+	mentions     []*MentionEvent // 被提及用户的信息
+	mentionsFlag bool
+
+	userAgent     string // 用户代理
+	userAgentFlag bool
 }
 
 func NewEventMessageBuilder() *EventMessageBuilder {
@@ -2169,16 +2328,20 @@ func (builder *EventMessageBuilder) Build() *EventMessage {
 }
 
 type EventMessageReader struct {
-	ReaderId  *UserId `json:"reader_id,omitempty"`  // 用户 ID
-	ReadTime  *string `json:"read_time,omitempty"`  // 阅读时间
+	ReaderId *UserId `json:"reader_id,omitempty"` // 用户 ID
+
+	ReadTime *string `json:"read_time,omitempty"` // 阅读时间
+
 	TenantKey *string `json:"tenant_key,omitempty"` // 租户key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
 }
 
 type EventMessageReaderBuilder struct {
-	readerId      *UserId // 用户 ID
-	readerIdFlag  bool
-	readTime      string // 阅读时间
-	readTimeFlag  bool
+	readerId     *UserId // 用户 ID
+	readerIdFlag bool
+
+	readTime     string // 阅读时间
+	readTimeFlag bool
+
 	tenantKey     string // 租户key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
 	tenantKeyFlag bool
 }
@@ -2232,18 +2395,22 @@ func (builder *EventMessageReaderBuilder) Build() *EventMessageReader {
 }
 
 type EventSender struct {
-	SenderId   *UserId `json:"sender_id,omitempty"`   // 用户 ID
+	SenderId *UserId `json:"sender_id,omitempty"` // 用户 ID
+
 	SenderType *string `json:"sender_type,omitempty"` // 消息发送者类型。目前只支持用户(user)发送的消息。
-	TenantKey  *string `json:"tenant_key,omitempty"`  // tenant key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
+
+	TenantKey *string `json:"tenant_key,omitempty"` // tenant key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
 }
 
 type EventSenderBuilder struct {
-	senderId       *UserId // 用户 ID
-	senderIdFlag   bool
+	senderId     *UserId // 用户 ID
+	senderIdFlag bool
+
 	senderType     string // 消息发送者类型。目前只支持用户(user)发送的消息。
 	senderTypeFlag bool
-	tenantKey      string // tenant key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
-	tenantKeyFlag  bool
+
+	tenantKey     string // tenant key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
+	tenantKeyFlag bool
 }
 
 func NewEventSenderBuilder() *EventSenderBuilder {
@@ -2298,13 +2465,15 @@ type File struct {
 }
 
 type FollowUp struct {
-	Content      *string        `json:"content,omitempty"`       // 内容
+	Content *string `json:"content,omitempty"` // 内容
+
 	I18nContents []*I18nContent `json:"i18n_contents,omitempty"` // 多语言内容
 }
 
 type FollowUpBuilder struct {
-	content          string // 内容
-	contentFlag      bool
+	content     string // 内容
+	contentFlag bool
+
 	i18nContents     []*I18nContent // 多语言内容
 	i18nContentsFlag bool
 }
@@ -2345,13 +2514,15 @@ func (builder *FollowUpBuilder) Build() *FollowUp {
 }
 
 type I18nContent struct {
-	Content  *string `json:"content,omitempty"`  // 内容
+	Content *string `json:"content,omitempty"` // 内容
+
 	Language *string `json:"language,omitempty"` // 语言
 }
 
 type I18nContentBuilder struct {
-	content      string // 内容
-	contentFlag  bool
+	content     string // 内容
+	contentFlag bool
+
 	language     string // 语言
 	languageFlag bool
 }
@@ -2394,15 +2565,19 @@ func (builder *I18nContentBuilder) Build() *I18nContent {
 
 type I18nNames struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文名
+
 	EnUs *string `json:"en_us,omitempty"` // 英文名
+
 	JaJp *string `json:"ja_jp,omitempty"` // 日文名
 }
 
 type I18nNamesBuilder struct {
 	zhCn     string // 中文名
 	zhCnFlag bool
+
 	enUs     string // 英文名
 	enUsFlag bool
+
 	jaJp     string // 日文名
 	jaJpFlag bool
 }
@@ -2457,72 +2632,112 @@ func (builder *I18nNamesBuilder) Build() *I18nNames {
 }
 
 type ImDepthData struct {
-	PDate                   *string  `json:"p_date,omitempty"`                      // 分区日期
-	DepartmentId            *string  `json:"department_id,omitempty"`               // 部门id
-	DepartmentPath          *string  `json:"department_path,omitempty"`             // 部门路径
-	SendMsgRate             *float64 `json:"send_msg_rate,omitempty"`               // 发消息用户渗透率
-	AvgSendMsgCnt           *float64 `json:"avg_send_msg_cnt,omitempty"`            // 人均发消息数量
-	PcSendMsgRate           *float64 `json:"pc_send_msg_rate,omitempty"`            // 仅 PC 端的发消息用户渗透率
-	PcAvgSendMsgCnt         *float64 `json:"pc_avg_send_msg_cnt,omitempty"`         // 仅 PC 端的人均发消息数量
-	MobileSendMsgRate       *float64 `json:"mobile_send_msg_rate,omitempty"`        // 仅移动端的发消息用户渗透率
-	MobileAvgSendMsgCnt     *float64 `json:"mobile_avg_send_msg_cnt,omitempty"`     // 仅移动端的人均发消息数量
+	PDate *string `json:"p_date,omitempty"` // 分区日期
+
+	DepartmentId *string `json:"department_id,omitempty"` // 部门id
+
+	DepartmentPath *string `json:"department_path,omitempty"` // 部门路径
+
+	SendMsgRate *float64 `json:"send_msg_rate,omitempty"` // 发消息用户渗透率
+
+	AvgSendMsgCnt *float64 `json:"avg_send_msg_cnt,omitempty"` // 人均发消息数量
+
+	PcSendMsgRate *float64 `json:"pc_send_msg_rate,omitempty"` // 仅 PC 端的发消息用户渗透率
+
+	PcAvgSendMsgCnt *float64 `json:"pc_avg_send_msg_cnt,omitempty"` // 仅 PC 端的人均发消息数量
+
+	MobileSendMsgRate *float64 `json:"mobile_send_msg_rate,omitempty"` // 仅移动端的发消息用户渗透率
+
+	MobileAvgSendMsgCnt *float64 `json:"mobile_avg_send_msg_cnt,omitempty"` // 仅移动端的人均发消息数量
+
 	MeetingGroupSendMsgRate *float64 `json:"meeting_group_send_msg_rate,omitempty"` // 会议群发消息用户渗透率
-	TenantGroupSendMsgRate  *float64 `json:"tenant_group_send_msg_rate,omitempty"`  // 全员群发消息用户渗透率
-	DeptGroupSendMsgRate    *float64 `json:"dept_group_send_msg_rate,omitempty"`    // 部门群发消息用户渗透率
-	TopicGroupSendMsgRate   *float64 `json:"topic_group_send_msg_rate,omitempty"`   // 话题群发消息用户渗透率
-	GroupAtMsgRate          *float64 `json:"group_at_msg_rate,omitempty"`           // 群聊中 @ 消息占比
-	GroupReplyMsgRate       *float64 `json:"group_reply_msg_rate,omitempty"`        // 群聊中回复消息占比
-	ReactionRate            *float64 `json:"reaction_rate,omitempty"`               // 发送 reaction 用户渗透率
-	P2pSendMsgRate          *float64 `json:"p2p_send_msg_rate,omitempty"`           // 发送单聊消息占比
-	ImgSendMsgRate          *float64 `json:"img_send_msg_rate,omitempty"`           // 图片消息用户渗透率
-	FileSendMsgRate         *float64 `json:"file_send_msg_rate,omitempty"`          // 文件消息用户渗透率
-	StickerSendMsgRate      *float64 `json:"sticker_send_msg_rate,omitempty"`       // 表情包消息用户渗透率
-	PostSendMsgRate         *float64 `json:"post_send_msg_rate,omitempty"`          // 富文本消息用户渗透率
+
+	TenantGroupSendMsgRate *float64 `json:"tenant_group_send_msg_rate,omitempty"` // 全员群发消息用户渗透率
+
+	DeptGroupSendMsgRate *float64 `json:"dept_group_send_msg_rate,omitempty"` // 部门群发消息用户渗透率
+
+	TopicGroupSendMsgRate *float64 `json:"topic_group_send_msg_rate,omitempty"` // 话题群发消息用户渗透率
+
+	GroupAtMsgRate *float64 `json:"group_at_msg_rate,omitempty"` // 群聊中 @ 消息占比
+
+	GroupReplyMsgRate *float64 `json:"group_reply_msg_rate,omitempty"` // 群聊中回复消息占比
+
+	ReactionRate *float64 `json:"reaction_rate,omitempty"` // 发送 reaction 用户渗透率
+
+	P2pSendMsgRate *float64 `json:"p2p_send_msg_rate,omitempty"` // 发送单聊消息占比
+
+	ImgSendMsgRate *float64 `json:"img_send_msg_rate,omitempty"` // 图片消息用户渗透率
+
+	FileSendMsgRate *float64 `json:"file_send_msg_rate,omitempty"` // 文件消息用户渗透率
+
+	StickerSendMsgRate *float64 `json:"sticker_send_msg_rate,omitempty"` // 表情包消息用户渗透率
+
+	PostSendMsgRate *float64 `json:"post_send_msg_rate,omitempty"` // 富文本消息用户渗透率
 }
 
 type ImDepthDataBuilder struct {
-	pDate                       string // 分区日期
-	pDateFlag                   bool
-	departmentId                string // 部门id
-	departmentIdFlag            bool
-	departmentPath              string // 部门路径
-	departmentPathFlag          bool
-	sendMsgRate                 float64 // 发消息用户渗透率
-	sendMsgRateFlag             bool
-	avgSendMsgCnt               float64 // 人均发消息数量
-	avgSendMsgCntFlag           bool
-	pcSendMsgRate               float64 // 仅 PC 端的发消息用户渗透率
-	pcSendMsgRateFlag           bool
-	pcAvgSendMsgCnt             float64 // 仅 PC 端的人均发消息数量
-	pcAvgSendMsgCntFlag         bool
-	mobileSendMsgRate           float64 // 仅移动端的发消息用户渗透率
-	mobileSendMsgRateFlag       bool
-	mobileAvgSendMsgCnt         float64 // 仅移动端的人均发消息数量
-	mobileAvgSendMsgCntFlag     bool
+	pDate     string // 分区日期
+	pDateFlag bool
+
+	departmentId     string // 部门id
+	departmentIdFlag bool
+
+	departmentPath     string // 部门路径
+	departmentPathFlag bool
+
+	sendMsgRate     float64 // 发消息用户渗透率
+	sendMsgRateFlag bool
+
+	avgSendMsgCnt     float64 // 人均发消息数量
+	avgSendMsgCntFlag bool
+
+	pcSendMsgRate     float64 // 仅 PC 端的发消息用户渗透率
+	pcSendMsgRateFlag bool
+
+	pcAvgSendMsgCnt     float64 // 仅 PC 端的人均发消息数量
+	pcAvgSendMsgCntFlag bool
+
+	mobileSendMsgRate     float64 // 仅移动端的发消息用户渗透率
+	mobileSendMsgRateFlag bool
+
+	mobileAvgSendMsgCnt     float64 // 仅移动端的人均发消息数量
+	mobileAvgSendMsgCntFlag bool
+
 	meetingGroupSendMsgRate     float64 // 会议群发消息用户渗透率
 	meetingGroupSendMsgRateFlag bool
-	tenantGroupSendMsgRate      float64 // 全员群发消息用户渗透率
-	tenantGroupSendMsgRateFlag  bool
-	deptGroupSendMsgRate        float64 // 部门群发消息用户渗透率
-	deptGroupSendMsgRateFlag    bool
-	topicGroupSendMsgRate       float64 // 话题群发消息用户渗透率
-	topicGroupSendMsgRateFlag   bool
-	groupAtMsgRate              float64 // 群聊中 @ 消息占比
-	groupAtMsgRateFlag          bool
-	groupReplyMsgRate           float64 // 群聊中回复消息占比
-	groupReplyMsgRateFlag       bool
-	reactionRate                float64 // 发送 reaction 用户渗透率
-	reactionRateFlag            bool
-	p2pSendMsgRate              float64 // 发送单聊消息占比
-	p2pSendMsgRateFlag          bool
-	imgSendMsgRate              float64 // 图片消息用户渗透率
-	imgSendMsgRateFlag          bool
-	fileSendMsgRate             float64 // 文件消息用户渗透率
-	fileSendMsgRateFlag         bool
-	stickerSendMsgRate          float64 // 表情包消息用户渗透率
-	stickerSendMsgRateFlag      bool
-	postSendMsgRate             float64 // 富文本消息用户渗透率
-	postSendMsgRateFlag         bool
+
+	tenantGroupSendMsgRate     float64 // 全员群发消息用户渗透率
+	tenantGroupSendMsgRateFlag bool
+
+	deptGroupSendMsgRate     float64 // 部门群发消息用户渗透率
+	deptGroupSendMsgRateFlag bool
+
+	topicGroupSendMsgRate     float64 // 话题群发消息用户渗透率
+	topicGroupSendMsgRateFlag bool
+
+	groupAtMsgRate     float64 // 群聊中 @ 消息占比
+	groupAtMsgRateFlag bool
+
+	groupReplyMsgRate     float64 // 群聊中回复消息占比
+	groupReplyMsgRateFlag bool
+
+	reactionRate     float64 // 发送 reaction 用户渗透率
+	reactionRateFlag bool
+
+	p2pSendMsgRate     float64 // 发送单聊消息占比
+	p2pSendMsgRateFlag bool
+
+	imgSendMsgRate     float64 // 图片消息用户渗透率
+	imgSendMsgRateFlag bool
+
+	fileSendMsgRate     float64 // 文件消息用户渗透率
+	fileSendMsgRateFlag bool
+
+	stickerSendMsgRate     float64 // 表情包消息用户渗透率
+	stickerSendMsgRateFlag bool
+
+	postSendMsgRate     float64 // 富文本消息用户渗透率
+	postSendMsgRateFlag bool
 }
 
 func NewImDepthDataBuilder() *ImDepthDataBuilder {
@@ -2812,35 +3027,54 @@ type Image struct {
 }
 
 type ListChat struct {
-	ChatId      *string `json:"chat_id,omitempty"`       // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	Avatar      *string `json:"avatar,omitempty"`        // 群头像 URL
-	Name        *string `json:"name,omitempty"`          // 群名称
-	Description *string `json:"description,omitempty"`   // 群描述
-	OwnerId     *string `json:"owner_id,omitempty"`      // 群主 ID
+	ChatId *string `json:"chat_id,omitempty"` // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	Avatar *string `json:"avatar,omitempty"` // 群头像 URL
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	Description *string `json:"description,omitempty"` // 群描述
+
+	OwnerId *string `json:"owner_id,omitempty"` // 群主 ID
+
 	OwnerIdType *string `json:"owner_id_type,omitempty"` // 群主 ID 类型
-	External    *bool   `json:"external,omitempty"`      // 是否是外部群
-	TenantKey   *string `json:"tenant_key,omitempty"`    // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	TenantKey *string `json:"tenant_key,omitempty"` // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	Labels []string `json:"labels,omitempty"` // 群标签
 
 	ChatStatus *string `json:"chat_status,omitempty"` // 群状态
 }
 
 type ListChatBuilder struct {
-	chatId          string // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	chatIdFlag      bool
-	avatar          string // 群头像 URL
-	avatarFlag      bool
-	name            string // 群名称
-	nameFlag        bool
+	chatId     string // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+	chatIdFlag bool
+
+	avatar     string // 群头像 URL
+	avatarFlag bool
+
+	name     string // 群名称
+	nameFlag bool
+
 	description     string // 群描述
 	descriptionFlag bool
-	ownerId         string // 群主 ID
-	ownerIdFlag     bool
+
+	ownerId     string // 群主 ID
+	ownerIdFlag bool
+
 	ownerIdType     string // 群主 ID 类型
 	ownerIdTypeFlag bool
-	external        bool // 是否是外部群
-	externalFlag    bool
-	tenantKey       string // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	tenantKeyFlag   bool
+
+	external     bool // 是否是外部群
+	externalFlag bool
+
+	tenantKey     string // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+	tenantKeyFlag bool
+
+	labels     []string // 群标签
+	labelsFlag bool
 
 	chatStatus     string // 群状态
 	chatStatusFlag bool
@@ -2923,6 +3157,15 @@ func (builder *ListChatBuilder) TenantKey(tenantKey string) *ListChatBuilder {
 	return builder
 }
 
+// 群标签
+//
+// 示例值：
+func (builder *ListChatBuilder) Labels(labels []string) *ListChatBuilder {
+	builder.labels = labels
+	builder.labelsFlag = true
+	return builder
+}
+
 // 群状态
 //
 // 示例值：normal
@@ -2976,14 +3219,16 @@ func (builder *ListChatBuilder) Build() *ListChat {
 
 type ListEventModerator struct {
 	TenantKey *string `json:"tenant_key,omitempty"` // 租户 Key
-	UserId    *UserId `json:"user_id,omitempty"`    // 用户 ID
+
+	UserId *UserId `json:"user_id,omitempty"` // 用户 ID
 }
 
 type ListEventModeratorBuilder struct {
 	tenantKey     string // 租户 Key
 	tenantKeyFlag bool
-	userId        *UserId // 用户 ID
-	userIdFlag    bool
+
+	userId     *UserId // 用户 ID
+	userIdFlag bool
 }
 
 func NewListEventModeratorBuilder() *ListEventModeratorBuilder {
@@ -3023,20 +3268,26 @@ func (builder *ListEventModeratorBuilder) Build() *ListEventModerator {
 
 type ListMember struct {
 	MemberIdType *string `json:"member_id_type,omitempty"` // 成员的用户 ID 类型，与查询参数中的 member_id_type 相同。取值为：`open_id`、`user_id`、`union_id`其中之一。
-	MemberId     *string `json:"member_id,omitempty"`      // 成员的用户ID，ID值与查询参数中的 member_id_type 对应。;;不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	Name         *string `json:"name,omitempty"`           // 名字
-	TenantKey    *string `json:"tenant_key,omitempty"`     // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	MemberId *string `json:"member_id,omitempty"` // 成员的用户ID，ID值与查询参数中的 member_id_type 对应。;;不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+
+	Name *string `json:"name,omitempty"` // 名字
+
+	TenantKey *string `json:"tenant_key,omitempty"` // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
 }
 
 type ListMemberBuilder struct {
 	memberIdType     string // 成员的用户 ID 类型，与查询参数中的 member_id_type 相同。取值为：`open_id`、`user_id`、`union_id`其中之一。
 	memberIdTypeFlag bool
-	memberId         string // 成员的用户ID，ID值与查询参数中的 member_id_type 对应。;;不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
-	memberIdFlag     bool
-	name             string // 名字
-	nameFlag         bool
-	tenantKey        string // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	tenantKeyFlag    bool
+
+	memberId     string // 成员的用户ID，ID值与查询参数中的 member_id_type 对应。;;不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction)
+	memberIdFlag bool
+
+	name     string // 名字
+	nameFlag bool
+
+	tenantKey     string // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+	tenantKeyFlag bool
 }
 
 func NewListMemberBuilder() *ListMemberBuilder {
@@ -3103,17 +3354,21 @@ func (builder *ListMemberBuilder) Build() *ListMember {
 
 type ListModerator struct {
 	UserIdType *string `json:"user_id_type,omitempty"` // 可发言用户 ID 类型
-	UserId     *string `json:"user_id,omitempty"`      // 可发言用户 ID
-	TenantKey  *string `json:"tenant_key,omitempty"`   // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	UserId *string `json:"user_id,omitempty"` // 可发言用户 ID
+
+	TenantKey *string `json:"tenant_key,omitempty"` // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
 }
 
 type ListModeratorBuilder struct {
 	userIdType     string // 可发言用户 ID 类型
 	userIdTypeFlag bool
-	userId         string // 可发言用户 ID
-	userIdFlag     bool
-	tenantKey      string // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	tenantKeyFlag  bool
+
+	userId     string // 可发言用户 ID
+	userIdFlag bool
+
+	tenantKey     string // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+	tenantKeyFlag bool
 }
 
 func NewListModeratorBuilder() *ListModeratorBuilder {
@@ -3166,13 +3421,15 @@ func (builder *ListModeratorBuilder) Build() *ListModerator {
 }
 
 type ListNotifyStatus struct {
-	UserId           *UserId `json:"user_id,omitempty"`            // 用户id
+	UserId *UserId `json:"user_id,omitempty"` // 用户id
+
 	NotifyStatusType *string `json:"notify_status_type,omitempty"` // 加急状态类型
 }
 
 type ListNotifyStatusBuilder struct {
-	userId               *UserId // 用户id
-	userIdFlag           bool
+	userId     *UserId // 用户id
+	userIdFlag bool
+
 	notifyStatusType     string // 加急状态类型
 	notifyStatusTypeFlag bool
 }
@@ -3213,22 +3470,30 @@ func (builder *ListNotifyStatusBuilder) Build() *ListNotifyStatus {
 }
 
 type Mention struct {
-	Key       *string `json:"key,omitempty"`        // 被@的用户或机器人的序号。例如，第3个被@到的成员，值为“@_user_3”
-	Id        *string `json:"id,omitempty"`         // 被@的用户或者机器人的open_id
-	IdType    *string `json:"id_type,omitempty"`    // 被@的用户或机器人 id 类型，目前仅支持 `open_id` ([什么是 Open ID？](https://open.feishu.cn/document/home/user-identity-introduction/open-id))
-	Name      *string `json:"name,omitempty"`       // 被@的用户或机器人的姓名
+	Key *string `json:"key,omitempty"` // 被@的用户或机器人的序号。例如，第3个被@到的成员，值为“@_user_3”
+
+	Id *string `json:"id,omitempty"` // 被@的用户或者机器人的open_id
+
+	IdType *string `json:"id_type,omitempty"` // 被@的用户或机器人 id 类型，目前仅支持 `open_id` ([什么是 Open ID？](https://open.feishu.cn/document/home/user-identity-introduction/open-id))
+
+	Name *string `json:"name,omitempty"` // 被@的用户或机器人的姓名
+
 	TenantKey *string `json:"tenant_key,omitempty"` // 为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
 }
 
 type MentionBuilder struct {
-	key           string // 被@的用户或机器人的序号。例如，第3个被@到的成员，值为“@_user_3”
-	keyFlag       bool
-	id            string // 被@的用户或者机器人的open_id
-	idFlag        bool
-	idType        string // 被@的用户或机器人 id 类型，目前仅支持 `open_id` ([什么是 Open ID？](https://open.feishu.cn/document/home/user-identity-introduction/open-id))
-	idTypeFlag    bool
-	name          string // 被@的用户或机器人的姓名
-	nameFlag      bool
+	key     string // 被@的用户或机器人的序号。例如，第3个被@到的成员，值为“@_user_3”
+	keyFlag bool
+
+	id     string // 被@的用户或者机器人的open_id
+	idFlag bool
+
+	idType     string // 被@的用户或机器人 id 类型，目前仅支持 `open_id` ([什么是 Open ID？](https://open.feishu.cn/document/home/user-identity-introduction/open-id))
+	idTypeFlag bool
+
+	name     string // 被@的用户或机器人的姓名
+	nameFlag bool
+
 	tenantKey     string // 为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
 	tenantKeyFlag bool
 }
@@ -3309,19 +3574,25 @@ func (builder *MentionBuilder) Build() *Mention {
 }
 
 type MentionEvent struct {
-	Key       *string `json:"key,omitempty"`        // mention key
-	Id        *UserId `json:"id,omitempty"`         // 用户 ID
-	Name      *string `json:"name,omitempty"`       // 用户姓名
+	Key *string `json:"key,omitempty"` // mention key
+
+	Id *UserId `json:"id,omitempty"` // 用户 ID
+
+	Name *string `json:"name,omitempty"` // 用户姓名
+
 	TenantKey *string `json:"tenant_key,omitempty"` // tenant key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
 }
 
 type MentionEventBuilder struct {
-	key           string // mention key
-	keyFlag       bool
-	id            *UserId // 用户 ID
-	idFlag        bool
-	name          string // 用户姓名
-	nameFlag      bool
+	key     string // mention key
+	keyFlag bool
+
+	id     *UserId // 用户 ID
+	idFlag bool
+
+	name     string // 用户姓名
+	nameFlag bool
+
 	tenantKey     string // tenant key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
 	tenantKeyFlag bool
 }
@@ -3388,49 +3659,75 @@ func (builder *MentionEventBuilder) Build() *MentionEvent {
 }
 
 type Message struct {
-	MessageId      *string      `json:"message_id,omitempty"`       // 消息id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	RootId         *string      `json:"root_id,omitempty"`          // 根消息id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	ParentId       *string      `json:"parent_id,omitempty"`        // 父消息的id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	ThreadId       *string      `json:"thread_id,omitempty"`        // 消息所属的话题 ID
-	MsgType        *string      `json:"msg_type,omitempty"`         // 消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，类型定义请参考[接收消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/events/message_content)
-	CreateTime     *string      `json:"create_time,omitempty"`      // 消息生成的时间戳（毫秒）
-	UpdateTime     *string      `json:"update_time,omitempty"`      // 消息更新的时间戳（毫秒）
-	Deleted        *bool        `json:"deleted,omitempty"`          // 消息是否被撤回
-	Updated        *bool        `json:"updated,omitempty"`          // 消息是否被更新
-	ChatId         *string      `json:"chat_id,omitempty"`          // 所属的群
-	Sender         *Sender      `json:"sender,omitempty"`           // 发送者，可以是用户或应用
-	Body           *MessageBody `json:"body,omitempty"`             // 消息内容
-	Mentions       []*Mention   `json:"mentions,omitempty"`         // 被@的用户或机器人的id列表
-	UpperMessageId *string      `json:"upper_message_id,omitempty"` // 合并转发消息中，上一层级的消息id message_id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+	MessageId *string `json:"message_id,omitempty"` // 消息id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+
+	RootId *string `json:"root_id,omitempty"` // 根消息id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+
+	ParentId *string `json:"parent_id,omitempty"` // 父消息的id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+
+	ThreadId *string `json:"thread_id,omitempty"` // 消息所属的话题 ID
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，类型定义请参考[接收消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/events/message_content)
+
+	CreateTime *string `json:"create_time,omitempty"` // 消息生成的时间戳（毫秒）
+
+	UpdateTime *string `json:"update_time,omitempty"` // 消息更新的时间戳（毫秒）
+
+	Deleted *bool `json:"deleted,omitempty"` // 消息是否被撤回
+
+	Updated *bool `json:"updated,omitempty"` // 消息是否被更新
+
+	ChatId *string `json:"chat_id,omitempty"` // 所属的群
+
+	Sender *Sender `json:"sender,omitempty"` // 发送者，可以是用户或应用
+
+	Body *MessageBody `json:"body,omitempty"` // 消息内容
+
+	Mentions []*Mention `json:"mentions,omitempty"` // 被@的用户或机器人的id列表
+
+	UpperMessageId *string `json:"upper_message_id,omitempty"` // 合并转发消息中，上一层级的消息id message_id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
 }
 
 type MessageBuilder struct {
-	messageId          string // 消息id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	messageIdFlag      bool
-	rootId             string // 根消息id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	rootIdFlag         bool
-	parentId           string // 父消息的id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
-	parentIdFlag       bool
-	threadId           string // 消息所属的话题 ID
-	threadIdFlag       bool
-	msgType            string // 消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，类型定义请参考[接收消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/events/message_content)
-	msgTypeFlag        bool
-	createTime         string // 消息生成的时间戳（毫秒）
-	createTimeFlag     bool
-	updateTime         string // 消息更新的时间戳（毫秒）
-	updateTimeFlag     bool
-	deleted            bool // 消息是否被撤回
-	deletedFlag        bool
-	updated            bool // 消息是否被更新
-	updatedFlag        bool
-	chatId             string // 所属的群
-	chatIdFlag         bool
-	sender             *Sender // 发送者，可以是用户或应用
-	senderFlag         bool
-	body               *MessageBody // 消息内容
-	bodyFlag           bool
-	mentions           []*Mention // 被@的用户或机器人的id列表
-	mentionsFlag       bool
+	messageId     string // 消息id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+	messageIdFlag bool
+
+	rootId     string // 根消息id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+	rootIdFlag bool
+
+	parentId     string // 父消息的id，用于回复消息场景，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
+	parentIdFlag bool
+
+	threadId     string // 消息所属的话题 ID
+	threadIdFlag bool
+
+	msgType     string // 消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，类型定义请参考[接收消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/events/message_content)
+	msgTypeFlag bool
+
+	createTime     string // 消息生成的时间戳（毫秒）
+	createTimeFlag bool
+
+	updateTime     string // 消息更新的时间戳（毫秒）
+	updateTimeFlag bool
+
+	deleted     bool // 消息是否被撤回
+	deletedFlag bool
+
+	updated     bool // 消息是否被更新
+	updatedFlag bool
+
+	chatId     string // 所属的群
+	chatIdFlag bool
+
+	sender     *Sender // 发送者，可以是用户或应用
+	senderFlag bool
+
+	body     *MessageBody // 消息内容
+	bodyFlag bool
+
+	mentions     []*Mention // 被@的用户或机器人的id列表
+	mentionsFlag bool
+
 	upperMessageId     string // 合并转发消息中，上一层级的消息id message_id，说明参见：[消息ID说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/intro#ac79c1c2)
 	upperMessageIdFlag bool
 }
@@ -3625,19 +3922,25 @@ func (builder *MessageBuilder) Build() *Message {
 }
 
 type MessageReaction struct {
-	ReactionId   *string   `json:"reaction_id,omitempty"`   // reaction资源ID
-	Operator     *Operator `json:"operator,omitempty"`      // 添加reaction的操作人
-	ActionTime   *string   `json:"action_time,omitempty"`   // reaction动作的的unix timestamp(单位:ms)
-	ReactionType *Emoji    `json:"reaction_type,omitempty"` // reaction资源类型
+	ReactionId *string `json:"reaction_id,omitempty"` // reaction资源ID
+
+	Operator *Operator `json:"operator,omitempty"` // 添加reaction的操作人
+
+	ActionTime *string `json:"action_time,omitempty"` // reaction动作的的unix timestamp(单位:ms)
+
+	ReactionType *Emoji `json:"reaction_type,omitempty"` // reaction资源类型
 }
 
 type MessageReactionBuilder struct {
-	reactionId       string // reaction资源ID
-	reactionIdFlag   bool
-	operator         *Operator // 添加reaction的操作人
-	operatorFlag     bool
-	actionTime       string // reaction动作的的unix timestamp(单位:ms)
-	actionTimeFlag   bool
+	reactionId     string // reaction资源ID
+	reactionIdFlag bool
+
+	operator     *Operator // 添加reaction的操作人
+	operatorFlag bool
+
+	actionTime     string // reaction动作的的unix timestamp(单位:ms)
+	actionTimeFlag bool
+
 	reactionType     *Emoji // reaction资源类型
 	reactionTypeFlag bool
 }
@@ -3738,13 +4041,15 @@ func (builder *MessageBodyBuilder) Build() *MessageBody {
 }
 
 type ModeratorList struct {
-	AddedMemberList   []*ListEventModerator `json:"added_member_list,omitempty"`   // 被添加进可发言名单的用户列表（列表中一定会有owner）
+	AddedMemberList []*ListEventModerator `json:"added_member_list,omitempty"` // 被添加进可发言名单的用户列表（列表中一定会有owner）
+
 	RemovedMemberList []*ListEventModerator `json:"removed_member_list,omitempty"` // 被移除出可发言名单的用户列表
 }
 
 type ModeratorListBuilder struct {
-	addedMemberList       []*ListEventModerator // 被添加进可发言名单的用户列表（列表中一定会有owner）
-	addedMemberListFlag   bool
+	addedMemberList     []*ListEventModerator // 被添加进可发言名单的用户列表（列表中一定会有owner）
+	addedMemberListFlag bool
+
 	removedMemberList     []*ListEventModerator // 被移除出可发言名单的用户列表
 	removedMemberListFlag bool
 }
@@ -3784,64 +4089,100 @@ func (builder *ModeratorListBuilder) Build() *ModeratorList {
 }
 
 type MsgProcessData struct {
-	PDate                   *string  `json:"p_date,omitempty"`                        // 分区日期
-	DepartmentId            *string  `json:"department_id,omitempty"`                 // 部门id
-	DepartmentPath          *string  `json:"department_path,omitempty"`               // 部门路径
-	AvgImpMsgReadRate12h    *float64 `json:"avg_imp_msg_read_rate_12h,omitempty"`     // 人均重要消息 12 小时阅读率
-	MsgReadRate12h          *float64 `json:"msg_read_rate_12h,omitempty"`             // 人均 12 小时阅读率
-	AvgReceiveMsgCnt        *float64 `json:"avg_receive_msg_cnt,omitempty"`           // 人均接收消息数
-	AvgReadMsgCnt           *float64 `json:"avg_read_msg_cnt,omitempty"`              // 人均阅读消息数
-	AvgImpReadMsgCnt        *float64 `json:"avg_imp_read_msg_cnt,omitempty"`          // 人均重要消息阅读数
-	AvgImpReceiveMsgCnt     *float64 `json:"avg_imp_receive_msg_cnt,omitempty"`       // 人均重要消息接收数
-	HighLoadRate            *float64 `json:"high_load_rate,omitempty"`                // 信息高负载员工占比
-	BigGroupMsgRate         *float64 `json:"big_group_msg_rate,omitempty"`            // 大群（100人以上）消息占比
-	BigGroupTopicMsgRate    *float64 `json:"big_group_topic_msg_rate,omitempty"`      // 大群消息中话题消息占比
-	AvgReceiveBotMsgCnt     *float64 `json:"avg_receive_bot_msg_cnt,omitempty"`       // 人均接收 bot 消息数
+	PDate *string `json:"p_date,omitempty"` // 分区日期
+
+	DepartmentId *string `json:"department_id,omitempty"` // 部门id
+
+	DepartmentPath *string `json:"department_path,omitempty"` // 部门路径
+
+	AvgImpMsgReadRate12h *float64 `json:"avg_imp_msg_read_rate_12h,omitempty"` // 人均重要消息 12 小时阅读率
+
+	MsgReadRate12h *float64 `json:"msg_read_rate_12h,omitempty"` // 人均 12 小时阅读率
+
+	AvgReceiveMsgCnt *float64 `json:"avg_receive_msg_cnt,omitempty"` // 人均接收消息数
+
+	AvgReadMsgCnt *float64 `json:"avg_read_msg_cnt,omitempty"` // 人均阅读消息数
+
+	AvgImpReadMsgCnt *float64 `json:"avg_imp_read_msg_cnt,omitempty"` // 人均重要消息阅读数
+
+	AvgImpReceiveMsgCnt *float64 `json:"avg_imp_receive_msg_cnt,omitempty"` // 人均重要消息接收数
+
+	HighLoadRate *float64 `json:"high_load_rate,omitempty"` // 信息高负载员工占比
+
+	BigGroupMsgRate *float64 `json:"big_group_msg_rate,omitempty"` // 大群（100人以上）消息占比
+
+	BigGroupTopicMsgRate *float64 `json:"big_group_topic_msg_rate,omitempty"` // 大群消息中话题消息占比
+
+	AvgReceiveBotMsgCnt *float64 `json:"avg_receive_bot_msg_cnt,omitempty"` // 人均接收 bot 消息数
+
 	AvgBotImpMsgReadRate12h *float64 `json:"avg_bot_imp_msg_read_rate_12h,omitempty"` // 重要 bot 消息 12 小时阅读率
-	ReceiveBotMsgRate       *float64 `json:"receive_bot_msg_rate,omitempty"`          // 接收 bot 消息占比
-	UseChatBoxRate          *float64 `json:"use_chat_box_rate,omitempty"`             // 会话盒子使用率
-	ReceiveMuteMsgRate      *float64 `json:"receive_mute_msg_rate,omitempty"`         // 接收消息中 mute 消息占比
-	ReadMuteMsgRate         *float64 `json:"read_mute_msg_rate,omitempty"`            // 阅读消息中 mute 消息占比
-	AvgReceiveImpMsgChatCnt *float64 `json:"avg_receive_imp_msg_chat_cnt,omitempty"`  // 人均有重要消息的会话数
+
+	ReceiveBotMsgRate *float64 `json:"receive_bot_msg_rate,omitempty"` // 接收 bot 消息占比
+
+	UseChatBoxRate *float64 `json:"use_chat_box_rate,omitempty"` // 会话盒子使用率
+
+	ReceiveMuteMsgRate *float64 `json:"receive_mute_msg_rate,omitempty"` // 接收消息中 mute 消息占比
+
+	ReadMuteMsgRate *float64 `json:"read_mute_msg_rate,omitempty"` // 阅读消息中 mute 消息占比
+
+	AvgReceiveImpMsgChatCnt *float64 `json:"avg_receive_imp_msg_chat_cnt,omitempty"` // 人均有重要消息的会话数
 }
 
 type MsgProcessDataBuilder struct {
-	pDate                       string // 分区日期
-	pDateFlag                   bool
-	departmentId                string // 部门id
-	departmentIdFlag            bool
-	departmentPath              string // 部门路径
-	departmentPathFlag          bool
-	avgImpMsgReadRate12h        float64 // 人均重要消息 12 小时阅读率
-	avgImpMsgReadRate12hFlag    bool
-	msgReadRate12h              float64 // 人均 12 小时阅读率
-	msgReadRate12hFlag          bool
-	avgReceiveMsgCnt            float64 // 人均接收消息数
-	avgReceiveMsgCntFlag        bool
-	avgReadMsgCnt               float64 // 人均阅读消息数
-	avgReadMsgCntFlag           bool
-	avgImpReadMsgCnt            float64 // 人均重要消息阅读数
-	avgImpReadMsgCntFlag        bool
-	avgImpReceiveMsgCnt         float64 // 人均重要消息接收数
-	avgImpReceiveMsgCntFlag     bool
-	highLoadRate                float64 // 信息高负载员工占比
-	highLoadRateFlag            bool
-	bigGroupMsgRate             float64 // 大群（100人以上）消息占比
-	bigGroupMsgRateFlag         bool
-	bigGroupTopicMsgRate        float64 // 大群消息中话题消息占比
-	bigGroupTopicMsgRateFlag    bool
-	avgReceiveBotMsgCnt         float64 // 人均接收 bot 消息数
-	avgReceiveBotMsgCntFlag     bool
+	pDate     string // 分区日期
+	pDateFlag bool
+
+	departmentId     string // 部门id
+	departmentIdFlag bool
+
+	departmentPath     string // 部门路径
+	departmentPathFlag bool
+
+	avgImpMsgReadRate12h     float64 // 人均重要消息 12 小时阅读率
+	avgImpMsgReadRate12hFlag bool
+
+	msgReadRate12h     float64 // 人均 12 小时阅读率
+	msgReadRate12hFlag bool
+
+	avgReceiveMsgCnt     float64 // 人均接收消息数
+	avgReceiveMsgCntFlag bool
+
+	avgReadMsgCnt     float64 // 人均阅读消息数
+	avgReadMsgCntFlag bool
+
+	avgImpReadMsgCnt     float64 // 人均重要消息阅读数
+	avgImpReadMsgCntFlag bool
+
+	avgImpReceiveMsgCnt     float64 // 人均重要消息接收数
+	avgImpReceiveMsgCntFlag bool
+
+	highLoadRate     float64 // 信息高负载员工占比
+	highLoadRateFlag bool
+
+	bigGroupMsgRate     float64 // 大群（100人以上）消息占比
+	bigGroupMsgRateFlag bool
+
+	bigGroupTopicMsgRate     float64 // 大群消息中话题消息占比
+	bigGroupTopicMsgRateFlag bool
+
+	avgReceiveBotMsgCnt     float64 // 人均接收 bot 消息数
+	avgReceiveBotMsgCntFlag bool
+
 	avgBotImpMsgReadRate12h     float64 // 重要 bot 消息 12 小时阅读率
 	avgBotImpMsgReadRate12hFlag bool
-	receiveBotMsgRate           float64 // 接收 bot 消息占比
-	receiveBotMsgRateFlag       bool
-	useChatBoxRate              float64 // 会话盒子使用率
-	useChatBoxRateFlag          bool
-	receiveMuteMsgRate          float64 // 接收消息中 mute 消息占比
-	receiveMuteMsgRateFlag      bool
-	readMuteMsgRate             float64 // 阅读消息中 mute 消息占比
-	readMuteMsgRateFlag         bool
+
+	receiveBotMsgRate     float64 // 接收 bot 消息占比
+	receiveBotMsgRateFlag bool
+
+	useChatBoxRate     float64 // 会话盒子使用率
+	useChatBoxRateFlag bool
+
+	receiveMuteMsgRate     float64 // 接收消息中 mute 消息占比
+	receiveMuteMsgRateFlag bool
+
+	readMuteMsgRate     float64 // 阅读消息中 mute 消息占比
+	readMuteMsgRateFlag bool
+
 	avgReceiveImpMsgChatCnt     float64 // 人均有重要消息的会话数
 	avgReceiveImpMsgChatCntFlag bool
 }
@@ -4104,13 +4445,15 @@ func (builder *MsgProcessDataBuilder) Build() *MsgProcessData {
 }
 
 type Operator struct {
-	OperatorId   *string `json:"operator_id,omitempty"`   // 操作人ID
+	OperatorId *string `json:"operator_id,omitempty"` // 操作人ID
+
 	OperatorType *string `json:"operator_type,omitempty"` // 操作人身份，用户或应用
 }
 
 type OperatorBuilder struct {
-	operatorId       string // 操作人ID
-	operatorIdFlag   bool
+	operatorId     string // 操作人ID
+	operatorIdFlag bool
+
 	operatorType     string // 操作人身份，用户或应用
 	operatorTypeFlag bool
 }
@@ -4152,24 +4495,32 @@ func (builder *OperatorBuilder) Build() *Operator {
 }
 
 type Pin struct {
-	MessageId      *string `json:"message_id,omitempty"`       // Pin的消息ID
-	ChatId         *string `json:"chat_id,omitempty"`          // Pin消息所在的群聊ID
-	OperatorId     *string `json:"operator_id,omitempty"`      // Pin的操作人ID
+	MessageId *string `json:"message_id,omitempty"` // Pin的消息ID
+
+	ChatId *string `json:"chat_id,omitempty"` // Pin消息所在的群聊ID
+
+	OperatorId *string `json:"operator_id,omitempty"` // Pin的操作人ID
+
 	OperatorIdType *string `json:"operator_id_type,omitempty"` // Pin的操作人ID类型。当Pin的操作人为用户时，为==open_id==；当Pin的操作人为机器人时，为==app_id==
-	CreateTime     *string `json:"create_time,omitempty"`      // Pin的创建时间（毫秒级时间戳）
+
+	CreateTime *string `json:"create_time,omitempty"` // Pin的创建时间（毫秒级时间戳）
 }
 
 type PinBuilder struct {
-	messageId          string // Pin的消息ID
-	messageIdFlag      bool
-	chatId             string // Pin消息所在的群聊ID
-	chatIdFlag         bool
-	operatorId         string // Pin的操作人ID
-	operatorIdFlag     bool
+	messageId     string // Pin的消息ID
+	messageIdFlag bool
+
+	chatId     string // Pin消息所在的群聊ID
+	chatIdFlag bool
+
+	operatorId     string // Pin的操作人ID
+	operatorIdFlag bool
+
 	operatorIdType     string // Pin的操作人ID类型。当Pin的操作人为用户时，为==open_id==；当Pin的操作人为机器人时，为==app_id==
 	operatorIdTypeFlag bool
-	createTime         string // Pin的创建时间（毫秒级时间戳）
-	createTimeFlag     bool
+
+	createTime     string // Pin的创建时间（毫秒级时间戳）
+	createTimeFlag bool
 }
 
 func NewPinBuilder() *PinBuilder {
@@ -4248,13 +4599,15 @@ func (builder *PinBuilder) Build() *Pin {
 }
 
 type PinedMessage struct {
-	Pin     *Pin     `json:"pin,omitempty"`     // Pin的操作信息
+	Pin *Pin `json:"pin,omitempty"` // Pin的操作信息
+
 	Message *Message `json:"message,omitempty"` // 被Pin的消息实体
 }
 
 type PinedMessageBuilder struct {
-	pin         *Pin // Pin的操作信息
-	pinFlag     bool
+	pin     *Pin // Pin的操作信息
+	pinFlag bool
+
 	message     *Message // 被Pin的消息实体
 	messageFlag bool
 }
@@ -4295,20 +4648,26 @@ func (builder *PinedMessageBuilder) Build() *PinedMessage {
 
 type ReadUser struct {
 	UserIdType *string `json:"user_id_type,omitempty"` // 用户id类型
-	UserId     *string `json:"user_id,omitempty"`      // 用户id
-	Timestamp  *string `json:"timestamp,omitempty"`    // 阅读时间
-	TenantKey  *string `json:"tenant_key,omitempty"`   // tenant key
+
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	Timestamp *string `json:"timestamp,omitempty"` // 阅读时间
+
+	TenantKey *string `json:"tenant_key,omitempty"` // tenant key
 }
 
 type ReadUserBuilder struct {
 	userIdType     string // 用户id类型
 	userIdTypeFlag bool
-	userId         string // 用户id
-	userIdFlag     bool
-	timestamp      string // 阅读时间
-	timestampFlag  bool
-	tenantKey      string // tenant key
-	tenantKeyFlag  bool
+
+	userId     string // 用户id
+	userIdFlag bool
+
+	timestamp     string // 阅读时间
+	timestampFlag bool
+
+	tenantKey     string // tenant key
+	tenantKeyFlag bool
 }
 
 func NewReadUserBuilder() *ReadUserBuilder {
@@ -4374,21 +4733,27 @@ func (builder *ReadUserBuilder) Build() *ReadUser {
 }
 
 type RestrictedModeSetting struct {
-	Status                         *bool   `json:"status,omitempty"`                            // 防泄密模式是否开启
+	Status *bool `json:"status,omitempty"` // 防泄密模式是否开启
+
 	ScreenshotHasPermissionSetting *string `json:"screenshot_has_permission_setting,omitempty"` // 允许截屏录屏
-	DownloadHasPermissionSetting   *string `json:"download_has_permission_setting,omitempty"`   // 允许下载消息中图片、视频和文件
-	MessageHasPermissionSetting    *string `json:"message_has_permission_setting,omitempty"`    // 允许复制和转发消息
+
+	DownloadHasPermissionSetting *string `json:"download_has_permission_setting,omitempty"` // 允许下载消息中图片、视频和文件
+
+	MessageHasPermissionSetting *string `json:"message_has_permission_setting,omitempty"` // 允许复制和转发消息
 }
 
 type RestrictedModeSettingBuilder struct {
-	status                             bool // 防泄密模式是否开启
-	statusFlag                         bool
+	status     bool // 防泄密模式是否开启
+	statusFlag bool
+
 	screenshotHasPermissionSetting     string // 允许截屏录屏
 	screenshotHasPermissionSettingFlag bool
-	downloadHasPermissionSetting       string // 允许下载消息中图片、视频和文件
-	downloadHasPermissionSettingFlag   bool
-	messageHasPermissionSetting        string // 允许复制和转发消息
-	messageHasPermissionSettingFlag    bool
+
+	downloadHasPermissionSetting     string // 允许下载消息中图片、视频和文件
+	downloadHasPermissionSettingFlag bool
+
+	messageHasPermissionSetting     string // 允许复制和转发消息
+	messageHasPermissionSettingFlag bool
 }
 
 func NewRestrictedModeSettingBuilder() *RestrictedModeSettingBuilder {
@@ -4454,21 +4819,27 @@ func (builder *RestrictedModeSettingBuilder) Build() *RestrictedModeSetting {
 }
 
 type Sender struct {
-	Id         *string `json:"id,omitempty"`          // 该字段标识发送者的id
-	IdType     *string `json:"id_type,omitempty"`     // 该字段标识发送者的id类型;;**可选值有：**;- `open_id`;- `app_id`
+	Id *string `json:"id,omitempty"` // 该字段标识发送者的id
+
+	IdType *string `json:"id_type,omitempty"` // 该字段标识发送者的id类型;;**可选值有：**;- `open_id`;- `app_id`
+
 	SenderType *string `json:"sender_type,omitempty"` // 该字段标识发送者的类型;;**可选值有：**;- `user`: 用户;- `app`: 应用;- `anonymous`: 匿名;- `unknown`: 未知
-	TenantKey  *string `json:"tenant_key,omitempty"`  // 为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
+
+	TenantKey *string `json:"tenant_key,omitempty"` // 为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
 }
 
 type SenderBuilder struct {
-	id             string // 该字段标识发送者的id
-	idFlag         bool
-	idType         string // 该字段标识发送者的id类型;;**可选值有：**;- `open_id`;- `app_id`
-	idTypeFlag     bool
+	id     string // 该字段标识发送者的id
+	idFlag bool
+
+	idType     string // 该字段标识发送者的id类型;;**可选值有：**;- `open_id`;- `app_id`
+	idTypeFlag bool
+
 	senderType     string // 该字段标识发送者的类型;;**可选值有：**;- `user`: 用户;- `app`: 应用;- `anonymous`: 匿名;- `unknown`: 未知
 	senderTypeFlag bool
-	tenantKey      string // 为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
-	tenantKeyFlag  bool
+
+	tenantKey     string // 为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
+	tenantKeyFlag bool
 }
 
 func NewSenderBuilder() *SenderBuilder {
@@ -4534,13 +4905,15 @@ func (builder *SenderBuilder) Build() *Sender {
 }
 
 type SpecialFocus struct {
-	Id     *string `json:"id,omitempty"`      // 成员ID
+	Id *string `json:"id,omitempty"` // 成员ID
+
 	IdType *string `json:"id_type,omitempty"` // 成员ID类型。根据member_id_type参数返回`open_id`、`user_id`或`union_id`类型的用户ID；机器人返回`app_id`
 }
 
 type SpecialFocusBuilder struct {
-	id         string // 成员ID
-	idFlag     bool
+	id     string // 成员ID
+	idFlag bool
+
 	idType     string // 成员ID类型。根据member_id_type参数返回`open_id`、`user_id`或`union_id`类型的用户ID；机器人返回`app_id`
 	idTypeFlag bool
 }
@@ -4582,16 +4955,20 @@ func (builder *SpecialFocusBuilder) Build() *SpecialFocus {
 }
 
 type SpecialFocusUnread struct {
-	Id          *string `json:"id,omitempty"`           // 成员ID
-	IdType      *string `json:"id_type,omitempty"`      // 成员ID类型。根据 ==member_id_type== 参数返回`open_id`、`user_id`或`union_id`类型的用户ID；机器人返回`app_id`
+	Id *string `json:"id,omitempty"` // 成员ID
+
+	IdType *string `json:"id_type,omitempty"` // 成员ID类型。根据 ==member_id_type== 参数返回`open_id`、`user_id`或`union_id`类型的用户ID；机器人返回`app_id`
+
 	UnreadCount *string `json:"unread_count,omitempty"` // 未读数
 }
 
 type SpecialFocusUnreadBuilder struct {
-	id              string // 成员ID
-	idFlag          bool
-	idType          string // 成员ID类型。根据 ==member_id_type== 参数返回`open_id`、`user_id`或`union_id`类型的用户ID；机器人返回`app_id`
-	idTypeFlag      bool
+	id     string // 成员ID
+	idFlag bool
+
+	idType     string // 成员ID类型。根据 ==member_id_type== 参数返回`open_id`、`user_id`或`union_id`类型的用户ID；机器人返回`app_id`
+	idTypeFlag bool
+
 	unreadCount     string // 未读数
 	unreadCountFlag bool
 }
@@ -4646,16 +5023,20 @@ func (builder *SpecialFocusUnreadBuilder) Build() *SpecialFocusUnread {
 }
 
 type Thread struct {
-	ThreadId   *string `json:"thread_id,omitempty"`   // 话题ID
-	ChatId     *string `json:"chat_id,omitempty"`     // 话题所属的群聊ID
+	ThreadId *string `json:"thread_id,omitempty"` // 话题ID
+
+	ChatId *string `json:"chat_id,omitempty"` // 话题所属的群聊ID
+
 	UpdateTime *string `json:"update_time,omitempty"` // 话题更新时间
 }
 
 type ThreadBuilder struct {
-	threadId       string // 话题ID
-	threadIdFlag   bool
-	chatId         string // 话题所属的群聊ID
-	chatIdFlag     bool
+	threadId     string // 话题ID
+	threadIdFlag bool
+
+	chatId     string // 话题所属的群聊ID
+	chatIdFlag bool
+
 	updateTime     string // 话题更新时间
 	updateTimeFlag bool
 }
@@ -4710,30 +5091,42 @@ func (builder *ThreadBuilder) Build() *Thread {
 }
 
 type Toolkit struct {
-	ToolkitId    *string              `json:"toolkit_id,omitempty"`    // 快捷组件ID
-	ImageKey     *string              `json:"image_key,omitempty"`     // 快捷组件小图标 ;;上传message类型的图片[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)
-	ToolkitName  *string              `json:"toolkit_name,omitempty"`  // 快捷组件名称
-	I18nName     *I18nNames           `json:"i18n_name,omitempty"`     // 国际化名称
-	ToolkitType  *string              `json:"toolkit_type,omitempty"`  // 快捷组件类型
+	ToolkitId *string `json:"toolkit_id,omitempty"` // 快捷组件ID
+
+	ImageKey *string `json:"image_key,omitempty"` // 快捷组件小图标 ;;上传message类型的图片[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)
+
+	ToolkitName *string `json:"toolkit_name,omitempty"` // 快捷组件名称
+
+	I18nName *I18nNames `json:"i18n_name,omitempty"` // 国际化名称
+
+	ToolkitType *string `json:"toolkit_type,omitempty"` // 快捷组件类型
+
 	RedirectLink *ToolkitRedirectLink `json:"redirect_link,omitempty"` // 跳转类型快捷组件
-	Callback     *ToolkitCallback     `json:"callback,omitempty"`      // 回调类型快捷组件
+
+	Callback *ToolkitCallback `json:"callback,omitempty"` // 回调类型快捷组件
 }
 
 type ToolkitBuilder struct {
-	toolkitId        string // 快捷组件ID
-	toolkitIdFlag    bool
-	imageKey         string // 快捷组件小图标 ;;上传message类型的图片[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)
-	imageKeyFlag     bool
-	toolkitName      string // 快捷组件名称
-	toolkitNameFlag  bool
-	i18nName         *I18nNames // 国际化名称
-	i18nNameFlag     bool
-	toolkitType      string // 快捷组件类型
-	toolkitTypeFlag  bool
+	toolkitId     string // 快捷组件ID
+	toolkitIdFlag bool
+
+	imageKey     string // 快捷组件小图标 ;;上传message类型的图片[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)
+	imageKeyFlag bool
+
+	toolkitName     string // 快捷组件名称
+	toolkitNameFlag bool
+
+	i18nName     *I18nNames // 国际化名称
+	i18nNameFlag bool
+
+	toolkitType     string // 快捷组件类型
+	toolkitTypeFlag bool
+
 	redirectLink     *ToolkitRedirectLink // 跳转类型快捷组件
 	redirectLinkFlag bool
-	callback         *ToolkitCallback // 回调类型快捷组件
-	callbackFlag     bool
+
+	callback     *ToolkitCallback // 回调类型快捷组件
+	callbackFlag bool
 }
 
 func NewToolkitBuilder() *ToolkitBuilder {
@@ -4835,13 +5228,15 @@ func (builder *ToolkitBuilder) Build() *Toolkit {
 }
 
 type ToolkitCallback struct {
-	Webhook   *string `json:"webhook,omitempty"`    // 回调地址
+	Webhook *string `json:"webhook,omitempty"` // 回调地址
+
 	ActionKey *string `json:"action_key,omitempty"` // 开发者自己识别的action_key，标识快捷组件的作用，回调时会把该字段带到回调地址
 }
 
 type ToolkitCallbackBuilder struct {
-	webhook       string // 回调地址
-	webhookFlag   bool
+	webhook     string // 回调地址
+	webhookFlag bool
+
 	actionKey     string // 开发者自己识别的action_key，标识快捷组件的作用，回调时会把该字段带到回调地址
 	actionKeyFlag bool
 }
@@ -4946,16 +5341,20 @@ func (builder *UrgentReceiversBuilder) Build() *UrgentReceivers {
 }
 
 type UserId struct {
-	UserId  *string `json:"user_id,omitempty"`  //
-	OpenId  *string `json:"open_id,omitempty"`  //
+	UserId *string `json:"user_id,omitempty"` //
+
+	OpenId *string `json:"open_id,omitempty"` //
+
 	UnionId *string `json:"union_id,omitempty"` //
 }
 
 type UserIdBuilder struct {
-	userId      string //
-	userIdFlag  bool
-	openId      string //
-	openIdFlag  bool
+	userId     string //
+	userIdFlag bool
+
+	openId     string //
+	openIdFlag bool
+
 	unionId     string //
 	unionIdFlag bool
 }
@@ -5004,18 +5403,22 @@ func (builder *UserIdBuilder) Build() *UserId {
 }
 
 type Widget struct {
-	WidgetId   *string    `json:"widget_id,omitempty"`   // 小组件ID
-	WidgetType *string    `json:"widget_type,omitempty"` // 小组件类型
-	WidgetUrl  *WidgetUrl `json:"widget_url,omitempty"`  // 小组件链接，必须以http开头
+	WidgetId *string `json:"widget_id,omitempty"` // 小组件ID
+
+	WidgetType *string `json:"widget_type,omitempty"` // 小组件类型
+
+	WidgetUrl *WidgetUrl `json:"widget_url,omitempty"` // 小组件链接，必须以http开头
 }
 
 type WidgetBuilder struct {
-	widgetId       string // 小组件ID
-	widgetIdFlag   bool
+	widgetId     string // 小组件ID
+	widgetIdFlag bool
+
 	widgetType     string // 小组件类型
 	widgetTypeFlag bool
-	widgetUrl      *WidgetUrl // 小组件链接，必须以http开头
-	widgetUrlFlag  bool
+
+	widgetUrl     *WidgetUrl // 小组件链接，必须以http开头
+	widgetUrlFlag bool
 }
 
 func NewWidgetBuilder() *WidgetBuilder {
@@ -5172,7 +5575,8 @@ type GetProgressBatchMessageReq struct {
 }
 
 type GetProgressBatchMessageRespData struct {
-	BatchMessageSendProgress   *BatchMessageSendProgress   `json:"batch_message_send_progress,omitempty"`   // 消息发送进度
+	BatchMessageSendProgress *BatchMessageSendProgress `json:"batch_message_send_progress,omitempty"` // 消息发送进度
+
 	BatchMessageRecallProgress *BatchMessageRecallProgress `json:"batch_message_recall_progress,omitempty"` // 消息撤回进度
 }
 
@@ -5233,42 +5637,71 @@ func (resp *ReadUserBatchMessageResp) Success() bool {
 }
 
 type CreateChatReqBodyBuilder struct {
-	avatar               string // 群头像对应的 Image Key，可通过[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)获取（注意：上传图片的 ==image_type== 需要指定为 ==avatar==）
-	avatarFlag           bool
-	name                 string // 群名称;; **注意：** ;- 公开群名称的长度不得少于2个字符;- 私有群若未填写群名称，群名称默认设置为 ”`(无主题)`“
-	nameFlag             bool
-	description          string // 群描述
-	descriptionFlag      bool
-	i18nNames            *I18nNames // 群国际化名称
-	i18nNamesFlag        bool
-	ownerId              string // 创建群时指定的群主，不填时指定建群的机器人为群主。群主 ID值应与查询参数中的 ==user_id_type== 对应；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取用户的Open ID
-	ownerIdFlag          bool
-	userIdList           []string // 创建群时邀请的群成员，ID 类型在查询参数 ==user_id_type== 中指定；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取用户的Open ID;;**注意**：;- 最多同时邀请 50 个用户;- 为便于在客户端查看效果，建议调试接口时加入开发者自身ID
-	userIdListFlag       bool
-	botIdList            []string // 创建群时邀请的群机器人；可参考[如何获取应用的 App ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-app-id)来获取应用的App ID; ;**注意：** ;- 拉机器人入群请使用`app_id`;- 最多同时邀请5个机器人，并且群组最多容纳 15 个机器人
-	botIdListFlag        bool
+	avatar     string // 群头像对应的 Image Key，可通过[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)获取（注意：上传图片的 ==image_type== 需要指定为 ==avatar==）
+	avatarFlag bool
+
+	name     string // 群名称;; **注意：** ;- 公开群名称的长度不得少于2个字符;- 私有群若未填写群名称，群名称默认设置为 ”`(无主题)`“
+	nameFlag bool
+
+	description     string // 群描述
+	descriptionFlag bool
+
+	i18nNames     *I18nNames // 群国际化名称
+	i18nNamesFlag bool
+
+	ownerId     string // 创建群时指定的群主，不填时指定建群的机器人为群主。群主 ID值应与查询参数中的 ==user_id_type== 对应；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取用户的Open ID
+	ownerIdFlag bool
+
+	userIdList     []string // 创建群时邀请的群成员，ID 类型在查询参数 ==user_id_type== 中指定；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取用户的Open ID;;**注意**：;- 最多同时邀请 50 个用户;- 为便于在客户端查看效果，建议调试接口时加入开发者自身ID
+	userIdListFlag bool
+
+	botIdList     []string // 创建群时邀请的群机器人；可参考[如何获取应用的 App ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-app-id)来获取应用的App ID; ;**注意：** ;- 拉机器人入群请使用`app_id`;- 最多同时邀请5个机器人，并且群组最多容纳 15 个机器人
+	botIdListFlag bool
+
 	groupMessageType     string // 群消息模式
 	groupMessageTypeFlag bool
-	chatMode             string // 群模式;;**可选值有**：;- `group`：群组
-	chatModeFlag         bool
-	chatType             string // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
-	chatTypeFlag         bool
 
-	joinMessageVisibility      string // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
-	joinMessageVisibilityFlag  bool
+	chatMode     string // 群模式;;**可选值有**：;- `group`：群组
+	chatModeFlag bool
+
+	chatType     string // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
+	chatTypeFlag bool
+
+	external     bool // 是否是外部群
+	externalFlag bool
+
+	joinMessageVisibility     string // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
+	joinMessageVisibilityFlag bool
+
 	leaveMessageVisibility     string // 退群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
 	leaveMessageVisibilityFlag bool
-	membershipApproval         string // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
-	membershipApprovalFlag     bool
 
-	restrictedModeSetting      *RestrictedModeSetting // 防泄密模式设置
-	restrictedModeSettingFlag  bool
-	urgentSetting              string // 谁可以加急
-	urgentSettingFlag          bool
+	membershipApproval     string // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
+	membershipApprovalFlag bool
+
+	labels     []string // 群标签
+	labelsFlag bool
+
+	toolkitIds     []string // 群快捷组件列表
+	toolkitIdsFlag bool
+
+	restrictedModeSetting     *RestrictedModeSetting // 防泄密模式设置
+	restrictedModeSettingFlag bool
+
+	urgentSetting     string // 谁可以加急
+	urgentSettingFlag bool
+
 	videoConferenceSetting     string // 谁可以发起视频会议
 	videoConferenceSettingFlag bool
-	editPermission             string // 谁可以编辑群信息
-	editPermissionFlag         bool
+
+	editPermission     string // 谁可以编辑群信息
+	editPermissionFlag bool
+
+	chatTags     []string // 群标签
+	chatTagsFlag bool
+
+	pinManageSetting     string // 谁可以管理置顶
+	pinManageSettingFlag bool
 
 	hideMemberCountSetting     string // 隐藏群成员人数设置
 	hideMemberCountSettingFlag bool
@@ -5828,25 +6261,49 @@ func (builder *CreateChatReqBuilder) Build() *CreateChatReq {
 }
 
 type CreateChatReqBody struct {
-	Avatar           *string    `json:"avatar,omitempty"`             // 群头像对应的 Image Key，可通过[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)获取（注意：上传图片的 ==image_type== 需要指定为 ==avatar==）
-	Name             *string    `json:"name,omitempty"`               // 群名称;; **注意：** ;- 公开群名称的长度不得少于2个字符;- 私有群若未填写群名称，群名称默认设置为 ”`(无主题)`“
-	Description      *string    `json:"description,omitempty"`        // 群描述
-	I18nNames        *I18nNames `json:"i18n_names,omitempty"`         // 群国际化名称
-	OwnerId          *string    `json:"owner_id,omitempty"`           // 创建群时指定的群主，不填时指定建群的机器人为群主。群主 ID值应与查询参数中的 ==user_id_type== 对应；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取用户的Open ID
-	UserIdList       []string   `json:"user_id_list,omitempty"`       // 创建群时邀请的群成员，ID 类型在查询参数 ==user_id_type== 中指定；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取用户的Open ID;;**注意**：;- 最多同时邀请 50 个用户;- 为便于在客户端查看效果，建议调试接口时加入开发者自身ID
-	BotIdList        []string   `json:"bot_id_list,omitempty"`        // 创建群时邀请的群机器人；可参考[如何获取应用的 App ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-app-id)来获取应用的App ID; ;**注意：** ;- 拉机器人入群请使用`app_id`;- 最多同时邀请5个机器人，并且群组最多容纳 15 个机器人
-	GroupMessageType *string    `json:"group_message_type,omitempty"` // 群消息模式
-	ChatMode         *string    `json:"chat_mode,omitempty"`          // 群模式;;**可选值有**：;- `group`：群组
-	ChatType         *string    `json:"chat_type,omitempty"`          // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
+	Avatar *string `json:"avatar,omitempty"` // 群头像对应的 Image Key，可通过[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)获取（注意：上传图片的 ==image_type== 需要指定为 ==avatar==）
 
-	JoinMessageVisibility  *string `json:"join_message_visibility,omitempty"`  // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
+	Name *string `json:"name,omitempty"` // 群名称;; **注意：** ;- 公开群名称的长度不得少于2个字符;- 私有群若未填写群名称，群名称默认设置为 ”`(无主题)`“
+
+	Description *string `json:"description,omitempty"` // 群描述
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
+
+	OwnerId *string `json:"owner_id,omitempty"` // 创建群时指定的群主，不填时指定建群的机器人为群主。群主 ID值应与查询参数中的 ==user_id_type== 对应；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取用户的Open ID
+
+	UserIdList []string `json:"user_id_list,omitempty"` // 创建群时邀请的群成员，ID 类型在查询参数 ==user_id_type== 中指定；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取用户的Open ID;;**注意**：;- 最多同时邀请 50 个用户;- 为便于在客户端查看效果，建议调试接口时加入开发者自身ID
+
+	BotIdList []string `json:"bot_id_list,omitempty"` // 创建群时邀请的群机器人；可参考[如何获取应用的 App ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-app-id)来获取应用的App ID; ;**注意：** ;- 拉机器人入群请使用`app_id`;- 最多同时邀请5个机器人，并且群组最多容纳 15 个机器人
+
+	GroupMessageType *string `json:"group_message_type,omitempty"` // 群消息模式
+
+	ChatMode *string `json:"chat_mode,omitempty"` // 群模式;;**可选值有**：;- `group`：群组
+
+	ChatType *string `json:"chat_type,omitempty"` // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	JoinMessageVisibility *string `json:"join_message_visibility,omitempty"` // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
+
 	LeaveMessageVisibility *string `json:"leave_message_visibility,omitempty"` // 退群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
-	MembershipApproval     *string `json:"membership_approval,omitempty"`      // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
 
-	RestrictedModeSetting  *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"`  // 防泄密模式设置
-	UrgentSetting          *string                `json:"urgent_setting,omitempty"`           // 谁可以加急
-	VideoConferenceSetting *string                `json:"video_conference_setting,omitempty"` // 谁可以发起视频会议
-	EditPermission         *string                `json:"edit_permission,omitempty"`          // 谁可以编辑群信息
+	MembershipApproval *string `json:"membership_approval,omitempty"` // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
+
+	Labels []string `json:"labels,omitempty"` // 群标签
+
+	ToolkitIds []string `json:"toolkit_ids,omitempty"` // 群快捷组件列表
+
+	RestrictedModeSetting *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"` // 防泄密模式设置
+
+	UrgentSetting *string `json:"urgent_setting,omitempty"` // 谁可以加急
+
+	VideoConferenceSetting *string `json:"video_conference_setting,omitempty"` // 谁可以发起视频会议
+
+	EditPermission *string `json:"edit_permission,omitempty"` // 谁可以编辑群信息
+
+	ChatTags []string `json:"chat_tags,omitempty"` // 群标签
+
+	PinManageSetting *string `json:"pin_manage_setting,omitempty"` // 谁可以管理置顶
 
 	HideMemberCountSetting *string `json:"hide_member_count_setting,omitempty"` // 隐藏群成员人数设置
 }
@@ -5857,33 +6314,61 @@ type CreateChatReq struct {
 }
 
 type CreateChatRespData struct {
-	ChatId                 *string    `json:"chat_id,omitempty"`                  // 群 ID，详情参见：[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	Avatar                 *string    `json:"avatar,omitempty"`                   // 群头像 URL
-	Name                   *string    `json:"name,omitempty"`                     // 群名称
-	Description            *string    `json:"description,omitempty"`              // 群描述
-	I18nNames              *I18nNames `json:"i18n_names,omitempty"`               // 群国际化名称
-	OwnerId                *string    `json:"owner_id,omitempty"`                 // 群主 ID，ID值与查询参数中的 ==user_id_type== 对应；不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;**注意**：当群主是机器人时，该字段不返回
-	OwnerIdType            *string    `json:"owner_id_type,omitempty"`            // 群主 ID 对应的ID类型，与查询参数中的 ==user_id_type== 相同。取值为：`open_id`、`user_id`、`union_id`其中之一;;**注意**：当群主是机器人时，该字段不返回
-	UrgentSetting          *string    `json:"urgent_setting,omitempty"`           // 谁可以加急
-	VideoConferenceSetting *string    `json:"video_conference_setting,omitempty"` // 谁可以发起视频会议
+	ChatId *string `json:"chat_id,omitempty"` // 群 ID，详情参见：[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
 
-	AddMemberPermission    *string `json:"add_member_permission,omitempty"`    // 拉 用户或机器人 入群权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	ShareCardPermission    *string `json:"share_card_permission,omitempty"`    // 群分享权限;;**可选值有**：;- `allowed`：允许;- `not_allowed`：不允许
-	AtAllPermission        *string `json:"at_all_permission,omitempty"`        // at 所有人权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	EditPermission         *string `json:"edit_permission,omitempty"`          // 群编辑权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	GroupMessageType       *string `json:"group_message_type,omitempty"`       // 群消息模式
-	ChatMode               *string `json:"chat_mode,omitempty"`                // 群模式;;**可选值有**：;- `group`：群组
-	ChatType               *string `json:"chat_type,omitempty"`                // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
-	ChatTag                *string `json:"chat_tag,omitempty"`                 // 群标签，如有多个，则按照下列顺序返回第一个;;**可选值有**：;- `inner`：内部群;- `tenant`：公司群;- `department`：部门群;- `edu`：教育群;- `meeting`：会议群;- `customer_service`：客服群
-	External               *bool   `json:"external,omitempty"`                 // 是否是外部群
-	TenantKey              *string `json:"tenant_key,omitempty"`               // 租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
-	JoinMessageVisibility  *string `json:"join_message_visibility,omitempty"`  // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
+	Avatar *string `json:"avatar,omitempty"` // 群头像 URL
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	Description *string `json:"description,omitempty"` // 群描述
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
+
+	OwnerId *string `json:"owner_id,omitempty"` // 群主 ID，ID值与查询参数中的 ==user_id_type== 对应；不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;**注意**：当群主是机器人时，该字段不返回
+
+	OwnerIdType *string `json:"owner_id_type,omitempty"` // 群主 ID 对应的ID类型，与查询参数中的 ==user_id_type== 相同。取值为：`open_id`、`user_id`、`union_id`其中之一;;**注意**：当群主是机器人时，该字段不返回
+
+	UrgentSetting *string `json:"urgent_setting,omitempty"` // 谁可以加急
+
+	VideoConferenceSetting *string `json:"video_conference_setting,omitempty"` // 谁可以发起视频会议
+
+	PinManageSetting *string `json:"pin_manage_setting,omitempty"` // 谁可以管理置顶
+
+	AddMemberPermission *string `json:"add_member_permission,omitempty"` // 拉 用户或机器人 入群权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+
+	ShareCardPermission *string `json:"share_card_permission,omitempty"` // 群分享权限;;**可选值有**：;- `allowed`：允许;- `not_allowed`：不允许
+
+	AtAllPermission *string `json:"at_all_permission,omitempty"` // at 所有人权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+
+	EditPermission *string `json:"edit_permission,omitempty"` // 群编辑权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+
+	GroupMessageType *string `json:"group_message_type,omitempty"` // 群消息模式
+
+	ChatMode *string `json:"chat_mode,omitempty"` // 群模式;;**可选值有**：;- `group`：群组
+
+	ChatType *string `json:"chat_type,omitempty"` // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
+
+	ChatTag *string `json:"chat_tag,omitempty"` // 群标签，如有多个，则按照下列顺序返回第一个;;**可选值有**：;- `inner`：内部群;- `tenant`：公司群;- `department`：部门群;- `edu`：教育群;- `meeting`：会议群;- `customer_service`：客服群
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	TenantKey *string `json:"tenant_key,omitempty"` // 租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用里面的唯一标识
+
+	JoinMessageVisibility *string `json:"join_message_visibility,omitempty"` // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
+
 	LeaveMessageVisibility *string `json:"leave_message_visibility,omitempty"` // 出群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
-	MembershipApproval     *string `json:"membership_approval,omitempty"`      // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
-	ModerationPermission   *string `json:"moderation_permission,omitempty"`    // 发言权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员;- `moderator_list`：指定群成员
 
-	RestrictedModeSetting  *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"`   // 防泄密模式设置
-	HideMemberCountSetting *string                `json:"hide_member_count_setting,omitempty"` // 隐藏群成员人数设置
+	MembershipApproval *string `json:"membership_approval,omitempty"` // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
+
+	ModerationPermission *string `json:"moderation_permission,omitempty"` // 发言权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员;- `moderator_list`：指定群成员
+
+	Labels []string `json:"labels,omitempty"` // 群标签
+
+	ToolkitIds []string `json:"toolkit_ids,omitempty"` // 群快捷组件列表
+
+	RestrictedModeSetting *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"` // 防泄密模式设置
+
+	HideMemberCountSetting *string `json:"hide_member_count_setting,omitempty"` // 隐藏群成员人数设置
 }
 
 type CreateChatResp struct {
@@ -5979,37 +6464,69 @@ type GetChatReq struct {
 }
 
 type GetChatRespData struct {
-	Avatar                 *string    `json:"avatar,omitempty"`                   // 群头像 URL
-	Name                   *string    `json:"name,omitempty"`                     // 群名称
-	Description            *string    `json:"description,omitempty"`              // 群描述
-	I18nNames              *I18nNames `json:"i18n_names,omitempty"`               // 群国际化名称
-	AddMemberPermission    *string    `json:"add_member_permission,omitempty"`    // 群成员添加权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员;;**注意**：单聊不返回该字段
-	ShareCardPermission    *string    `json:"share_card_permission,omitempty"`    // 群分享权限;;**可选值有**：;- `allowed`：允许;- `not_allowed`：不允许;;**注意**：单聊不返回该字段
-	AtAllPermission        *string    `json:"at_all_permission,omitempty"`        // at 所有人权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员;;**注意**：单聊不返回该字段
-	EditPermission         *string    `json:"edit_permission,omitempty"`          // 群编辑权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	OwnerIdType            *string    `json:"owner_id_type,omitempty"`            // 群主 ID 对应的ID类型，与查询参数中的 ==user_id_type== 相同。取值为：`open_id`、`user_id`、`union_id`其中之一;;**注意**：;- 当群主是机器人时不返回该字段;- 单聊不返回该字段
-	OwnerId                *string    `json:"owner_id,omitempty"`                 // 群主 ID，ID值与查询参数中的 ==user_id_type== 对应；不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;**注意**：;- 当群主是机器人时不返回该字段;- 单聊不返回该字段
-	UserManagerIdList      []string   `json:"user_manager_id_list,omitempty"`     // 用户管理员列表
-	BotManagerIdList       []string   `json:"bot_manager_id_list,omitempty"`      // 机器人管理员列表
-	GroupMessageType       *string    `json:"group_message_type,omitempty"`       // 群消息模式
-	ChatMode               *string    `json:"chat_mode,omitempty"`                // 群模式;;**可选值有**：;- `group`：群组;- `topic`: 话题;- `p2p`: 单聊
-	ChatType               *string    `json:"chat_type,omitempty"`                // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群;;**注意**：单聊不返回该字段
-	ChatTag                *string    `json:"chat_tag,omitempty"`                 // 群标签，如有多个，则按照下列顺序返回第一个;;**可选值有**：;- `inner`：内部群;- `tenant`：公司群;- `department`：部门群;- `edu`：教育群;- `meeting`：会议群;- `customer_service`：客服群;;**注意**：单聊不返回该字段
-	JoinMessageVisibility  *string    `json:"join_message_visibility,omitempty"`  // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见;;**注意**：单聊不返回该字段
-	LeaveMessageVisibility *string    `json:"leave_message_visibility,omitempty"` // 出群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见;;**注意**：单聊不返回该字段
-	MembershipApproval     *string    `json:"membership_approval,omitempty"`      // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批;;**注意**：单聊不返回该字段
-	ModerationPermission   *string    `json:"moderation_permission,omitempty"`    // 发言权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员;- `moderator_list`：指定群成员
-	External               *bool      `json:"external,omitempty"`                 // 是否是外部群
-	TenantKey              *string    `json:"tenant_key,omitempty"`               // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	UserCount              *string    `json:"user_count,omitempty"`               // 群成员人数
-	BotCount               *string    `json:"bot_count,omitempty"`                // 群机器人数
+	Avatar *string `json:"avatar,omitempty"` // 群头像 URL
 
-	RestrictedModeSetting  *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"`  // 防泄密模式设置
-	UrgentSetting          *string                `json:"urgent_setting,omitempty"`           // 谁可以加急
-	VideoConferenceSetting *string                `json:"video_conference_setting,omitempty"` // 谁可以发起视频会议
+	Name *string `json:"name,omitempty"` // 群名称
+
+	Description *string `json:"description,omitempty"` // 群描述
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
+
+	AddMemberPermission *string `json:"add_member_permission,omitempty"` // 群成员添加权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员;;**注意**：单聊不返回该字段
+
+	ShareCardPermission *string `json:"share_card_permission,omitempty"` // 群分享权限;;**可选值有**：;- `allowed`：允许;- `not_allowed`：不允许;;**注意**：单聊不返回该字段
+
+	AtAllPermission *string `json:"at_all_permission,omitempty"` // at 所有人权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员;;**注意**：单聊不返回该字段
+
+	EditPermission *string `json:"edit_permission,omitempty"` // 群编辑权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+
+	OwnerIdType *string `json:"owner_id_type,omitempty"` // 群主 ID 对应的ID类型，与查询参数中的 ==user_id_type== 相同。取值为：`open_id`、`user_id`、`union_id`其中之一;;**注意**：;- 当群主是机器人时不返回该字段;- 单聊不返回该字段
+
+	OwnerId *string `json:"owner_id,omitempty"` // 群主 ID，ID值与查询参数中的 ==user_id_type== 对应；不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);;**注意**：;- 当群主是机器人时不返回该字段;- 单聊不返回该字段
+
+	UserManagerIdList []string `json:"user_manager_id_list,omitempty"` // 用户管理员列表
+
+	BotManagerIdList []string `json:"bot_manager_id_list,omitempty"` // 机器人管理员列表
+
+	GroupMessageType *string `json:"group_message_type,omitempty"` // 群消息模式
+
+	ChatMode *string `json:"chat_mode,omitempty"` // 群模式;;**可选值有**：;- `group`：群组;- `topic`: 话题;- `p2p`: 单聊
+
+	ChatType *string `json:"chat_type,omitempty"` // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群;;**注意**：单聊不返回该字段
+
+	ChatTag *string `json:"chat_tag,omitempty"` // 群标签，如有多个，则按照下列顺序返回第一个;;**可选值有**：;- `inner`：内部群;- `tenant`：公司群;- `department`：部门群;- `edu`：教育群;- `meeting`：会议群;- `customer_service`：客服群;;**注意**：单聊不返回该字段
+
+	JoinMessageVisibility *string `json:"join_message_visibility,omitempty"` // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见;;**注意**：单聊不返回该字段
+
+	LeaveMessageVisibility *string `json:"leave_message_visibility,omitempty"` // 出群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见;;**注意**：单聊不返回该字段
+
+	MembershipApproval *string `json:"membership_approval,omitempty"` // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批;;**注意**：单聊不返回该字段
+
+	ModerationPermission *string `json:"moderation_permission,omitempty"` // 发言权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员;- `moderator_list`：指定群成员
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	TenantKey *string `json:"tenant_key,omitempty"` // 租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	UserCount *string `json:"user_count,omitempty"` // 群成员人数
+
+	BotCount *string `json:"bot_count,omitempty"` // 群机器人数
+
+	Labels []string `json:"labels,omitempty"` // 群标签
+
+	ToolkitIds []string `json:"toolkit_ids,omitempty"` // 群快捷组件列表
+
+	RestrictedModeSetting *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"` // 防泄密模式设置
+
+	UrgentSetting *string `json:"urgent_setting,omitempty"` // 谁可以加急
+
+	VideoConferenceSetting *string `json:"video_conference_setting,omitempty"` // 谁可以发起视频会议
+
+	PinManageSetting *string `json:"pin_manage_setting,omitempty"` // 谁可以管理置顶
 
 	HideMemberCountSetting *string `json:"hide_member_count_setting,omitempty"` // 隐藏群成员人数设置
-	ChatStatus             *string `json:"chat_status,omitempty"`               // 群状态
+
+	ChatStatus *string `json:"chat_status,omitempty"` // 群状态
 }
 
 type GetChatResp struct {
@@ -6122,9 +6639,11 @@ type LinkChatReq struct {
 }
 
 type LinkChatRespData struct {
-	ShareLink   *string `json:"share_link,omitempty"`   // 群分享链接
-	ExpireTime  *string `json:"expire_time,omitempty"`  // 分享链接过期时间戳（秒级）
-	IsPermanent *bool   `json:"is_permanent,omitempty"` // 分享链接是否永久有效
+	ShareLink *string `json:"share_link,omitempty"` // 群分享链接
+
+	ExpireTime *string `json:"expire_time,omitempty"` // 分享链接过期时间戳（秒级）
+
+	IsPermanent *bool `json:"is_permanent,omitempty"` // 分享链接是否永久有效
 }
 
 type LinkChatResp struct {
@@ -6204,9 +6723,11 @@ type ListChatReq struct {
 }
 
 type ListChatRespData struct {
-	Items     []*ListChat `json:"items,omitempty"`      // chat 列表
-	PageToken *string     `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*ListChat `json:"items,omitempty"` // chat 列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
 }
 
 type ListChatResp struct {
@@ -6286,9 +6807,11 @@ type SearchChatReq struct {
 }
 
 type SearchChatRespData struct {
-	Items     []*ListChat `json:"items,omitempty"`      // chat 列表
-	PageToken *string     `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否还有更多群组
+	Items []*ListChat `json:"items,omitempty"` // chat 列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多群组
 }
 
 type SearchChatResp struct {
@@ -6302,41 +6825,65 @@ func (resp *SearchChatResp) Success() bool {
 }
 
 type UpdateChatReqBodyBuilder struct {
-	avatar                     string // 群头像对应的 Image Key，可通过[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)获取（注意：上传图片的 ==image_type== 需要指定为 ==avatar==）
-	avatarFlag                 bool
-	name                       string // 群名称
-	nameFlag                   bool
-	description                string // 群描述
-	descriptionFlag            bool
-	i18nNames                  *I18nNames // 群国际化名称
-	i18nNamesFlag              bool
-	addMemberPermission        string // 邀请用户或机器人入群权限;;注意：;- 若值设置为`only_owner`，则share_card_permission只能设置为`not_allowed`;- 若值设置为`all_members`，则share_card_permission只能设置为`allowed`;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	addMemberPermissionFlag    bool
-	shareCardPermission        string // 群分享权限;;**可选值有**：;- `allowed`：允许;- `not_allowed`：不允许
-	shareCardPermissionFlag    bool
-	atAllPermission            string // at 所有人权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	atAllPermissionFlag        bool
-	editPermission             string // 群编辑权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	editPermissionFlag         bool
-	ownerId                    string // 新群主 ID
-	ownerIdFlag                bool
-	joinMessageVisibility      string // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
-	joinMessageVisibilityFlag  bool
+	avatar     string // 群头像对应的 Image Key，可通过[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)获取（注意：上传图片的 ==image_type== 需要指定为 ==avatar==）
+	avatarFlag bool
+
+	name     string // 群名称
+	nameFlag bool
+
+	description     string // 群描述
+	descriptionFlag bool
+
+	i18nNames     *I18nNames // 群国际化名称
+	i18nNamesFlag bool
+
+	addMemberPermission     string // 邀请用户或机器人入群权限;;注意：;- 若值设置为`only_owner`，则share_card_permission只能设置为`not_allowed`;- 若值设置为`all_members`，则share_card_permission只能设置为`allowed`;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+	addMemberPermissionFlag bool
+
+	shareCardPermission     string // 群分享权限;;**可选值有**：;- `allowed`：允许;- `not_allowed`：不允许
+	shareCardPermissionFlag bool
+
+	atAllPermission     string // at 所有人权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+	atAllPermissionFlag bool
+
+	editPermission     string // 群编辑权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+	editPermissionFlag bool
+
+	ownerId     string // 新群主 ID
+	ownerIdFlag bool
+
+	joinMessageVisibility     string // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
+	joinMessageVisibilityFlag bool
+
 	leaveMessageVisibility     string // 出群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
 	leaveMessageVisibilityFlag bool
-	membershipApproval         string // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
-	membershipApprovalFlag     bool
 
-	restrictedModeSetting      *RestrictedModeSetting // 防泄密模式设置
-	restrictedModeSettingFlag  bool
-	chatType                   string // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
-	chatTypeFlag               bool
-	groupMessageType           string // 群消息模式
-	groupMessageTypeFlag       bool
-	urgentSetting              string // 谁可以加急
-	urgentSettingFlag          bool
+	membershipApproval     string // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
+	membershipApprovalFlag bool
+
+	labels     []string // 群标签
+	labelsFlag bool
+
+	toolkitIds     []string // 群快捷组件列表
+	toolkitIdsFlag bool
+
+	restrictedModeSetting     *RestrictedModeSetting // 防泄密模式设置
+	restrictedModeSettingFlag bool
+
+	chatType     string // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
+	chatTypeFlag bool
+
+	groupMessageType     string // 群消息模式
+	groupMessageTypeFlag bool
+
+	urgentSetting     string // 谁可以加急
+	urgentSettingFlag bool
+
 	videoConferenceSetting     string // 谁可以发起视频会议
 	videoConferenceSettingFlag bool
+
+	pinManageSetting     string // 谁可以管理置顶
+	pinManageSettingFlag bool
 
 	hideMemberCountSetting     string // 隐藏群成员人数设置
 	hideMemberCountSettingFlag bool
@@ -6885,24 +7432,45 @@ func (builder *UpdateChatReqBuilder) Build() *UpdateChatReq {
 }
 
 type UpdateChatReqBody struct {
-	Avatar                 *string    `json:"avatar,omitempty"`                   // 群头像对应的 Image Key，可通过[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)获取（注意：上传图片的 ==image_type== 需要指定为 ==avatar==）
-	Name                   *string    `json:"name,omitempty"`                     // 群名称
-	Description            *string    `json:"description,omitempty"`              // 群描述
-	I18nNames              *I18nNames `json:"i18n_names,omitempty"`               // 群国际化名称
-	AddMemberPermission    *string    `json:"add_member_permission,omitempty"`    // 邀请用户或机器人入群权限;;注意：;- 若值设置为`only_owner`，则share_card_permission只能设置为`not_allowed`;- 若值设置为`all_members`，则share_card_permission只能设置为`allowed`;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	ShareCardPermission    *string    `json:"share_card_permission,omitempty"`    // 群分享权限;;**可选值有**：;- `allowed`：允许;- `not_allowed`：不允许
-	AtAllPermission        *string    `json:"at_all_permission,omitempty"`        // at 所有人权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	EditPermission         *string    `json:"edit_permission,omitempty"`          // 群编辑权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
-	OwnerId                *string    `json:"owner_id,omitempty"`                 // 新群主 ID
-	JoinMessageVisibility  *string    `json:"join_message_visibility,omitempty"`  // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
-	LeaveMessageVisibility *string    `json:"leave_message_visibility,omitempty"` // 出群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
-	MembershipApproval     *string    `json:"membership_approval,omitempty"`      // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
+	Avatar *string `json:"avatar,omitempty"` // 群头像对应的 Image Key，可通过[上传图片](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/image/create)获取（注意：上传图片的 ==image_type== 需要指定为 ==avatar==）
 
-	RestrictedModeSetting  *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"`  // 防泄密模式设置
-	ChatType               *string                `json:"chat_type,omitempty"`                // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
-	GroupMessageType       *string                `json:"group_message_type,omitempty"`       // 群消息模式
-	UrgentSetting          *string                `json:"urgent_setting,omitempty"`           // 谁可以加急
-	VideoConferenceSetting *string                `json:"video_conference_setting,omitempty"` // 谁可以发起视频会议
+	Name *string `json:"name,omitempty"` // 群名称
+
+	Description *string `json:"description,omitempty"` // 群描述
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
+
+	AddMemberPermission *string `json:"add_member_permission,omitempty"` // 邀请用户或机器人入群权限;;注意：;- 若值设置为`only_owner`，则share_card_permission只能设置为`not_allowed`;- 若值设置为`all_members`，则share_card_permission只能设置为`allowed`;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+
+	ShareCardPermission *string `json:"share_card_permission,omitempty"` // 群分享权限;;**可选值有**：;- `allowed`：允许;- `not_allowed`：不允许
+
+	AtAllPermission *string `json:"at_all_permission,omitempty"` // at 所有人权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+
+	EditPermission *string `json:"edit_permission,omitempty"` // 群编辑权限;;**可选值有**：;- `only_owner`：仅群主和管理员;- `all_members`：所有成员
+
+	OwnerId *string `json:"owner_id,omitempty"` // 新群主 ID
+
+	JoinMessageVisibility *string `json:"join_message_visibility,omitempty"` // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
+
+	LeaveMessageVisibility *string `json:"leave_message_visibility,omitempty"` // 出群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
+
+	MembershipApproval *string `json:"membership_approval,omitempty"` // 加群审批;;**可选值有**：;- `no_approval_required`：无需审批;- `approval_required`：需要审批
+
+	Labels []string `json:"labels,omitempty"` // 群标签
+
+	ToolkitIds []string `json:"toolkit_ids,omitempty"` // 群快捷组件列表
+
+	RestrictedModeSetting *RestrictedModeSetting `json:"restricted_mode_setting,omitempty"` // 防泄密模式设置
+
+	ChatType *string `json:"chat_type,omitempty"` // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
+
+	GroupMessageType *string `json:"group_message_type,omitempty"` // 群消息模式
+
+	UrgentSetting *string `json:"urgent_setting,omitempty"` // 谁可以加急
+
+	VideoConferenceSetting *string `json:"video_conference_setting,omitempty"` // 谁可以发起视频会议
+
+	PinManageSetting *string `json:"pin_manage_setting,omitempty"` // 谁可以管理置顶
 
 	HideMemberCountSetting *string `json:"hide_member_count_setting,omitempty"` // 隐藏群成员人数设置
 }
@@ -6963,14 +7531,21 @@ type GetChatAnnouncementReq struct {
 }
 
 type GetChatAnnouncementRespData struct {
-	Content        *string `json:"content,omitempty"`          // 云文档序列化信息
-	Revision       *string `json:"revision,omitempty"`         // 文档当前版本号 纯数字
-	CreateTime     *string `json:"create_time,omitempty"`      // 文档生成的时间戳（秒）
-	UpdateTime     *string `json:"update_time,omitempty"`      // 文档更新的时间戳（秒）
-	OwnerIdType    *string `json:"owner_id_type,omitempty"`    // 文档所有者的 ID 类型;;- 如果所有者是用户，则与查询参数中的user_id_type 相同；取值为`open_id` `user_id` `union_id` 其中之一，不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);- 如果所有者是机器人，为机器人应用的 `app_id`，详情参见  [获取应用身份访问凭证](https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/g)
-	OwnerId        *string `json:"owner_id,omitempty"`         // 文档所有者 ID，ID 值与owner_id_type 中的ID类型对应
+	Content *string `json:"content,omitempty"` // 云文档序列化信息
+
+	Revision *string `json:"revision,omitempty"` // 文档当前版本号 纯数字
+
+	CreateTime *string `json:"create_time,omitempty"` // 文档生成的时间戳（秒）
+
+	UpdateTime *string `json:"update_time,omitempty"` // 文档更新的时间戳（秒）
+
+	OwnerIdType *string `json:"owner_id_type,omitempty"` // 文档所有者的 ID 类型;;- 如果所有者是用户，则与查询参数中的user_id_type 相同；取值为`open_id` `user_id` `union_id` 其中之一，不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);- 如果所有者是机器人，为机器人应用的 `app_id`，详情参见  [获取应用身份访问凭证](https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/g)
+
+	OwnerId *string `json:"owner_id,omitempty"` // 文档所有者 ID，ID 值与owner_id_type 中的ID类型对应
+
 	ModifierIdType *string `json:"modifier_id_type,omitempty"` // 文档最新修改者 id 类型;; - 如果修改者是用户，则与查询参数中的user_id_type 相同；取值为`open_id` `user_id` `union_id` 其中之一，不同 ID 的说明参见 [用户相关的 ID 概念](https://open.feishu.cn/document/home/user-identity-introduction/introduction);- 如果修改者是机器人，为机器人应用的 `app_id`，详情参见  [获取应用身份访问凭证](https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/g)
-	ModifierId     *string `json:"modifier_id,omitempty"`      // 文档最新修改者 ID，ID 值与modifier_id_type 中的ID类型对应
+
+	ModifierId *string `json:"modifier_id,omitempty"` // 文档最新修改者 ID，ID 值与modifier_id_type 中的ID类型对应
 }
 
 type GetChatAnnouncementResp struct {
@@ -6986,6 +7561,7 @@ func (resp *GetChatAnnouncementResp) Success() bool {
 type PatchChatAnnouncementReqBodyBuilder struct {
 	revision     string // 文档当前版本号 int64 类型，[获取群公告信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-announcement/get)接口会返回
 	revisionFlag bool
+
 	requests     []string // 修改文档请求的序列化字段;;更新公告信息的格式和更新[云文档](https://open.feishu.cn/document/ukTMukTMukTM/uYDM2YjL2AjN24iNwYjN)格式相同
 	requestsFlag bool
 }
@@ -7102,7 +7678,8 @@ func (builder *PatchChatAnnouncementReqBuilder) Build() *PatchChatAnnouncementRe
 }
 
 type PatchChatAnnouncementReqBody struct {
-	Revision *string  `json:"revision,omitempty"` // 文档当前版本号 int64 类型，[获取群公告信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-announcement/get)接口会返回
+	Revision *string `json:"revision,omitempty"` // 文档当前版本号 int64 类型，[获取群公告信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-announcement/get)接口会返回
+
 	Requests []string `json:"requests,omitempty"` // 修改文档请求的序列化字段;;更新公告信息的格式和更新[云文档](https://open.feishu.cn/document/ukTMukTMukTM/uYDM2YjL2AjN24iNwYjN)格式相同
 }
 
@@ -7229,7 +7806,8 @@ type AddManagersChatManagersReq struct {
 }
 
 type AddManagersChatManagersRespData struct {
-	ChatManagers    []string `json:"chat_managers,omitempty"`     // 群目前用户类型的管理员 id
+	ChatManagers []string `json:"chat_managers,omitempty"` // 群目前用户类型的管理员 id
+
 	ChatBotManagers []string `json:"chat_bot_managers,omitempty"` // 群目前机器人类型的管理员 id
 }
 
@@ -7352,7 +7930,8 @@ type DeleteManagersChatManagersReq struct {
 }
 
 type DeleteManagersChatManagersRespData struct {
-	ChatManagers    []string `json:"chat_managers,omitempty"`     // 群目前用户类型的管理员 id
+	ChatManagers []string `json:"chat_managers,omitempty"` // 群目前用户类型的管理员 id
+
 	ChatBotManagers []string `json:"chat_bot_managers,omitempty"` // 群目前机器人类型的管理员 id
 }
 
@@ -7483,8 +8062,10 @@ type CreateChatMembersReq struct {
 }
 
 type CreateChatMembersRespData struct {
-	InvalidIdList         []string `json:"invalid_id_list,omitempty"`          // 无效成员列表;;**注意**：;- 当`success_type=0`时，`invalid_id_list`只包含已离职的用户ID;- 当`success_type=1`时，`invalid_id_list`中包含已离职的、不可见的、应用未激活的ID
-	NotExistedIdList      []string `json:"not_existed_id_list,omitempty"`      // ID不存在的成员列表
+	InvalidIdList []string `json:"invalid_id_list,omitempty"` // 无效成员列表;;**注意**：;- 当`success_type=0`时，`invalid_id_list`只包含已离职的用户ID;- 当`success_type=1`时，`invalid_id_list`中包含已离职的、不可见的、应用未激活的ID
+
+	NotExistedIdList []string `json:"not_existed_id_list,omitempty"` // ID不存在的成员列表
+
 	PendingApprovalIdList []string `json:"pending_approval_id_list,omitempty"` // 等待群主或管理员审批的成员ID列表
 }
 
@@ -7688,10 +8269,13 @@ type GetChatMembersReq struct {
 }
 
 type GetChatMembersRespData struct {
-	Items       []*ListMember `json:"items,omitempty"`        // 成员列表
-	PageToken   *string       `json:"page_token,omitempty"`   // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore     *bool         `json:"has_more,omitempty"`     // 是否还有更多项
-	MemberTotal *int          `json:"member_total,omitempty"` // 成员总数
+	Items []*ListMember `json:"items,omitempty"` // 成员列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
+
+	MemberTotal *int `json:"member_total,omitempty"` // 成员总数
 }
 
 type GetChatMembersResp struct {
@@ -7794,6 +8378,7 @@ func (resp *MeJoinChatMembersResp) Success() bool {
 type PatchChatMenuItemReqBodyBuilder struct {
 	updateFields     []string // 要修改的字段
 	updateFieldsFlag bool
+
 	chatMenuItem     *ChatMenuItem // 元信息
 	chatMenuItemFlag bool
 }
@@ -7918,7 +8503,8 @@ func (builder *PatchChatMenuItemReqBuilder) Build() *PatchChatMenuItemReq {
 }
 
 type PatchChatMenuItemReqBody struct {
-	UpdateFields []string      `json:"update_fields,omitempty"`  // 要修改的字段
+	UpdateFields []string `json:"update_fields,omitempty"` // 要修改的字段
+
 	ChatMenuItem *ChatMenuItem `json:"chat_menu_item,omitempty"` // 元信息
 }
 
@@ -8394,10 +8980,13 @@ type GetChatModerationReq struct {
 }
 
 type GetChatModerationRespData struct {
-	ModerationSetting *string          `json:"moderation_setting,omitempty"` // 群发言模式（all_members/only_owner/moderator_list，其中 moderator_list 表示部分用户可发言的模式）
-	PageToken         *string          `json:"page_token,omitempty"`         // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
-	HasMore           *bool            `json:"has_more,omitempty"`           // 是否还有更多项
-	Items             []*ListModerator `json:"items,omitempty"`              // 可发言用户列表
+	ModerationSetting *string `json:"moderation_setting,omitempty"` // 群发言模式（all_members/only_owner/moderator_list，其中 moderator_list 表示部分用户可发言的模式）
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
+
+	Items []*ListModerator `json:"items,omitempty"` // 可发言用户列表
 }
 
 type GetChatModerationResp struct {
@@ -8411,10 +9000,12 @@ func (resp *GetChatModerationResp) Success() bool {
 }
 
 type UpdateChatModerationReqBodyBuilder struct {
-	moderationSetting        string // 群发言模式（all_members/only_owner/moderator_list，其中 moderator_list 表示部分用户可发言的模式）
-	moderationSettingFlag    bool
-	moderatorAddedList       []string // 选择部分用户可发言模式时，添加的可发言用户列表（自动过滤不在群内的用户）
-	moderatorAddedListFlag   bool
+	moderationSetting     string // 群发言模式（all_members/only_owner/moderator_list，其中 moderator_list 表示部分用户可发言的模式）
+	moderationSettingFlag bool
+
+	moderatorAddedList     []string // 选择部分用户可发言模式时，添加的可发言用户列表（自动过滤不在群内的用户）
+	moderatorAddedListFlag bool
+
 	moderatorRemovedList     []string // 选择部分用户可发言模式时，移除的可发言用户列表（自动过滤不在群内的用户）
 	moderatorRemovedListFlag bool
 }
@@ -8566,8 +9157,10 @@ func (builder *UpdateChatModerationReqBuilder) Build() *UpdateChatModerationReq 
 }
 
 type UpdateChatModerationReqBody struct {
-	ModerationSetting    *string  `json:"moderation_setting,omitempty"`     // 群发言模式（all_members/only_owner/moderator_list，其中 moderator_list 表示部分用户可发言的模式）
-	ModeratorAddedList   []string `json:"moderator_added_list,omitempty"`   // 选择部分用户可发言模式时，添加的可发言用户列表（自动过滤不在群内的用户）
+	ModerationSetting *string `json:"moderation_setting,omitempty"` // 群发言模式（all_members/only_owner/moderator_list，其中 moderator_list 表示部分用户可发言的模式）
+
+	ModeratorAddedList []string `json:"moderator_added_list,omitempty"` // 选择部分用户可发言模式时，添加的可发言用户列表（自动过滤不在群内的用户）
+
 	ModeratorRemovedList []string `json:"moderator_removed_list,omitempty"` // 选择部分用户可发言模式时，移除的可发言用户列表（自动过滤不在群内的用户）
 }
 
@@ -9235,12 +9828,15 @@ func (resp *PutTopNoticeChatTopNoticeResp) Success() bool {
 type CreateFileReqBodyBuilder struct {
 	fileType     string // 文件类型
 	fileTypeFlag bool
+
 	fileName     string // 带后缀的文件名
 	fileNameFlag bool
+
 	duration     int // 文件的时长（视频、音频），单位:毫秒。不填充时无法显示具体时长。
 	durationFlag bool
-	file         io.Reader // 文件内容
-	fileFlag     bool
+
+	file     io.Reader // 文件内容
+	fileFlag bool
 }
 
 func NewCreateFileReqBodyBuilder() *CreateFileReqBodyBuilder {
@@ -9402,10 +9998,13 @@ func (builder *CreateFileReqBuilder) Build() *CreateFileReq {
 }
 
 type CreateFileReqBody struct {
-	FileType *string   `json:"file_type,omitempty"` // 文件类型
-	FileName *string   `json:"file_name,omitempty"` // 带后缀的文件名
-	Duration *int      `json:"duration,omitempty"`  // 文件的时长（视频、音频），单位:毫秒。不填充时无法显示具体时长。
-	File     io.Reader `json:"file,omitempty"`      // 文件内容
+	FileType *string `json:"file_type,omitempty"` // 文件类型
+
+	FileName *string `json:"file_name,omitempty"` // 带后缀的文件名
+
+	Duration *int `json:"duration,omitempty"` // 文件的时长（视频、音频），单位:毫秒。不填充时无法显示具体时长。
+
+	File io.Reader `json:"file,omitempty"` // 文件内容
 }
 
 type CreateFileReq struct {
@@ -9486,8 +10085,9 @@ func (resp *GetFileResp) WriteFile(fileName string) error {
 type CreateImageReqBodyBuilder struct {
 	imageType     string // 图片类型
 	imageTypeFlag bool
-	image         io.Reader // 图片内容;; **注意：** 上传的图片大小不能超过10MB
-	imageFlag     bool
+
+	image     io.Reader // 图片内容;; **注意：** 上传的图片大小不能超过10MB
+	imageFlag bool
 }
 
 func NewCreateImageReqBodyBuilder() *CreateImageReqBodyBuilder {
@@ -9597,8 +10197,9 @@ func (builder *CreateImageReqBuilder) Build() *CreateImageReq {
 }
 
 type CreateImageReqBody struct {
-	ImageType *string   `json:"image_type,omitempty"` // 图片类型
-	Image     io.Reader `json:"image,omitempty"`      // 图片内容;; **注意：** 上传的图片大小不能超过10MB
+	ImageType *string `json:"image_type,omitempty"` // 图片类型
+
+	Image io.Reader `json:"image,omitempty"` // 图片内容;; **注意：** 上传的图片大小不能超过10MB
 }
 
 type CreateImageReq struct {
@@ -9679,12 +10280,15 @@ func (resp *GetImageResp) WriteFile(fileName string) error {
 type CreateMessageReqBodyBuilder struct {
 	receiveId     string // 消息接收者的ID，ID类型应与查询参数==receive_id_type== 对应；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取消息接收者的Open ID
 	receiveIdFlag bool
-	msgType       string // 消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，类型定义请参考[发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
-	msgTypeFlag   bool
-	content       string // 消息内容，json结构序列化后的字符串。不同msg_type对应不同内容。消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，具体格式说明参考：[发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json);;<b>请求体大小限制</b>：;- 文本消息请求体最大不能超过150KB;- 卡片及富文本消息请求体最大不能超过30KB
-	contentFlag   bool
-	uuid          string // 由开发者生成的唯一字符串序列，用于发送消息请求去重；持有相同uuid的请求1小时内至多成功执行一次
-	uuidFlag      bool
+
+	msgType     string // 消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，类型定义请参考[发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
+	msgTypeFlag bool
+
+	content     string // 消息内容，json结构序列化后的字符串。不同msg_type对应不同内容。消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，具体格式说明参考：[发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json);;<b>请求体大小限制</b>：;- 文本消息请求体最大不能超过150KB;- 卡片及富文本消息请求体最大不能超过30KB
+	contentFlag bool
+
+	uuid     string // 由开发者生成的唯一字符串序列，用于发送消息请求去重；持有相同uuid的请求1小时内至多成功执行一次
+	uuidFlag bool
 }
 
 func NewCreateMessageReqBodyBuilder() *CreateMessageReqBodyBuilder {
@@ -9852,9 +10456,12 @@ func (builder *CreateMessageReqBuilder) Build() *CreateMessageReq {
 
 type CreateMessageReqBody struct {
 	ReceiveId *string `json:"receive_id,omitempty"` // 消息接收者的ID，ID类型应与查询参数==receive_id_type== 对应；当ID类型为`open_id`时，可参考[如何获取 Open ID？](https://open.feishu.cn/document/uAjLw4CM/ugTN1YjL4UTN24CO1UjN/trouble-shooting/how-to-obtain-openid)来获取消息接收者的Open ID
-	MsgType   *string `json:"msg_type,omitempty"`   // 消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，类型定义请参考[发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
-	Content   *string `json:"content,omitempty"`    // 消息内容，json结构序列化后的字符串。不同msg_type对应不同内容。消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，具体格式说明参考：[发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json);;<b>请求体大小限制</b>：;- 文本消息请求体最大不能超过150KB;- 卡片及富文本消息请求体最大不能超过30KB
-	Uuid      *string `json:"uuid,omitempty"`       // 由开发者生成的唯一字符串序列，用于发送消息请求去重；持有相同uuid的请求1小时内至多成功执行一次
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，类型定义请参考[发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
+
+	Content *string `json:"content,omitempty"` // 消息内容，json结构序列化后的字符串。不同msg_type对应不同内容。消息类型 包括：text、post、image、file、audio、media、sticker、interactive、share_chat、share_user等，具体格式说明参考：[发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json);;<b>请求体大小限制</b>：;- 文本消息请求体最大不能超过150KB;- 卡片及富文本消息请求体最大不能超过30KB
+
+	Uuid *string `json:"uuid,omitempty"` // 由开发者生成的唯一字符串序列，用于发送消息请求去重；持有相同uuid的请求1小时内至多成功执行一次
 }
 
 type CreateMessageReq struct {
@@ -9863,20 +10470,33 @@ type CreateMessageReq struct {
 }
 
 type CreateMessageRespData struct {
-	MessageId      *string      `json:"message_id,omitempty"`       // 消息id open_message_id
-	RootId         *string      `json:"root_id,omitempty"`          // 根消息id open_message_id
-	ParentId       *string      `json:"parent_id,omitempty"`        // 父消息的id open_message_id
-	ThreadId       *string      `json:"thread_id,omitempty"`        // 消息所属的话题 ID
-	MsgType        *string      `json:"msg_type,omitempty"`         // 消息类型 text post card image等等
-	CreateTime     *string      `json:"create_time,omitempty"`      // 消息生成的时间戳(毫秒)
-	UpdateTime     *string      `json:"update_time,omitempty"`      // 消息更新的时间戳
-	Deleted        *bool        `json:"deleted,omitempty"`          // 消息是否被撤回
-	Updated        *bool        `json:"updated,omitempty"`          // 消息是否被更新
-	ChatId         *string      `json:"chat_id,omitempty"`          // 所属的群
-	Sender         *Sender      `json:"sender,omitempty"`           // 发送者，可以是用户或应用
-	Body           *MessageBody `json:"body,omitempty"`             // 消息内容,json结构
-	Mentions       []*Mention   `json:"mentions,omitempty"`         // 被艾特的人或应用的id
-	UpperMessageId *string      `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
+	MessageId *string `json:"message_id,omitempty"` // 消息id open_message_id
+
+	RootId *string `json:"root_id,omitempty"` // 根消息id open_message_id
+
+	ParentId *string `json:"parent_id,omitempty"` // 父消息的id open_message_id
+
+	ThreadId *string `json:"thread_id,omitempty"` // 消息所属的话题 ID
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型 text post card image等等
+
+	CreateTime *string `json:"create_time,omitempty"` // 消息生成的时间戳(毫秒)
+
+	UpdateTime *string `json:"update_time,omitempty"` // 消息更新的时间戳
+
+	Deleted *bool `json:"deleted,omitempty"` // 消息是否被撤回
+
+	Updated *bool `json:"updated,omitempty"` // 消息是否被更新
+
+	ChatId *string `json:"chat_id,omitempty"` // 所属的群
+
+	Sender *Sender `json:"sender,omitempty"` // 发送者，可以是用户或应用
+
+	Body *MessageBody `json:"body,omitempty"` // 消息内容,json结构
+
+	Mentions []*Mention `json:"mentions,omitempty"` // 被艾特的人或应用的id
+
+	UpperMessageId *string `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
 }
 
 type CreateMessageResp struct {
@@ -10047,20 +10667,33 @@ type ForwardMessageReq struct {
 }
 
 type ForwardMessageRespData struct {
-	MessageId      *string      `json:"message_id,omitempty"`       // 消息id open_message_id
-	RootId         *string      `json:"root_id,omitempty"`          // 根消息id open_message_id
-	ParentId       *string      `json:"parent_id,omitempty"`        // 父消息的id open_message_id
-	ThreadId       *string      `json:"thread_id,omitempty"`        // 消息所属的话题 ID
-	MsgType        *string      `json:"msg_type,omitempty"`         // 消息类型 text post card image等等
-	CreateTime     *string      `json:"create_time,omitempty"`      // 消息生成的时间戳(毫秒)
-	UpdateTime     *string      `json:"update_time,omitempty"`      // 消息更新的时间戳
-	Deleted        *bool        `json:"deleted,omitempty"`          // 消息是否被撤回
-	Updated        *bool        `json:"updated,omitempty"`          // 消息是否被更新
-	ChatId         *string      `json:"chat_id,omitempty"`          // 所属的群
-	Sender         *Sender      `json:"sender,omitempty"`           // 发送者，可以是用户或应用
-	Body           *MessageBody `json:"body,omitempty"`             // 消息内容,json结构
-	Mentions       []*Mention   `json:"mentions,omitempty"`         // 被艾特的人或应用的id
-	UpperMessageId *string      `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
+	MessageId *string `json:"message_id,omitempty"` // 消息id open_message_id
+
+	RootId *string `json:"root_id,omitempty"` // 根消息id open_message_id
+
+	ParentId *string `json:"parent_id,omitempty"` // 父消息的id open_message_id
+
+	ThreadId *string `json:"thread_id,omitempty"` // 消息所属的话题 ID
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型 text post card image等等
+
+	CreateTime *string `json:"create_time,omitempty"` // 消息生成的时间戳(毫秒)
+
+	UpdateTime *string `json:"update_time,omitempty"` // 消息更新的时间戳
+
+	Deleted *bool `json:"deleted,omitempty"` // 消息是否被撤回
+
+	Updated *bool `json:"updated,omitempty"` // 消息是否被更新
+
+	ChatId *string `json:"chat_id,omitempty"` // 所属的群
+
+	Sender *Sender `json:"sender,omitempty"` // 发送者，可以是用户或应用
+
+	Body *MessageBody `json:"body,omitempty"` // 消息内容,json结构
+
+	Mentions []*Mention `json:"mentions,omitempty"` // 被艾特的人或应用的id
+
+	UpperMessageId *string `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
 }
 
 type ForwardMessageResp struct {
@@ -10219,9 +10852,11 @@ type ListMessageReq struct {
 }
 
 type ListMessageRespData struct {
-	HasMore   *bool      `json:"has_more,omitempty"`   // 是否还有后续翻页
-	PageToken *string    `json:"page_token,omitempty"` // 下一页分页的token
-	Items     []*Message `json:"items,omitempty"`      // message[]
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有后续翻页
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
+
+	Items []*Message `json:"items,omitempty"` // message[]
 }
 
 type ListMessageResp struct {
@@ -10235,8 +10870,9 @@ func (resp *ListMessageResp) Success() bool {
 }
 
 type MergeForwardMessageReqBodyBuilder struct {
-	receiveId         string // 依据receive_id_type的值，填写对应的转发目标的ID
-	receiveIdFlag     bool
+	receiveId     string // 依据receive_id_type的值，填写对应的转发目标的ID
+	receiveIdFlag bool
+
 	messageIdList     []string // 要转发的消息ID列表
 	messageIdListFlag bool
 }
@@ -10361,7 +10997,8 @@ func (builder *MergeForwardMessageReqBuilder) Build() *MergeForwardMessageReq {
 }
 
 type MergeForwardMessageReqBody struct {
-	ReceiveId     *string  `json:"receive_id,omitempty"`      // 依据receive_id_type的值，填写对应的转发目标的ID
+	ReceiveId *string `json:"receive_id,omitempty"` // 依据receive_id_type的值，填写对应的转发目标的ID
+
 	MessageIdList []string `json:"message_id_list,omitempty"` // 要转发的消息ID列表
 }
 
@@ -10371,7 +11008,8 @@ type MergeForwardMessageReq struct {
 }
 
 type MergeForwardMessageRespData struct {
-	Message              *Message `json:"message,omitempty"`                 // 合并转发生成的新消息
+	Message *Message `json:"message,omitempty"` // 合并转发生成的新消息
+
 	InvalidMessageIdList []string `json:"invalid_message_id_list,omitempty"` // 无效的消息ID列表
 }
 
@@ -10658,9 +11296,11 @@ type ReadUsersMessageReq struct {
 }
 
 type ReadUsersMessageRespData struct {
-	Items     []*ReadUser `json:"items,omitempty"`      // -
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否还有下一页
-	PageToken *string     `json:"page_token,omitempty"` // 下一页分页的token
+	Items []*ReadUser `json:"items,omitempty"` // -
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页分页的token
 }
 
 type ReadUsersMessageResp struct {
@@ -10674,14 +11314,17 @@ func (resp *ReadUsersMessageResp) Success() bool {
 }
 
 type ReplyMessageReqBodyBuilder struct {
-	content           string // 消息内容 json 格式，格式说明参考: [发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
-	contentFlag       bool
-	msgType           string // 消息类型，包括：text、post、image、file、audio、media、sticker、interactive、share_card、share_user
-	msgTypeFlag       bool
+	content     string // 消息内容 json 格式，格式说明参考: [发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
+	contentFlag bool
+
+	msgType     string // 消息类型，包括：text、post、image、file、audio、media、sticker、interactive、share_card、share_user
+	msgTypeFlag bool
+
 	replyInThread     bool // 是否以话题形式回复；若群聊已经是话题模式，则自动回复该条消息所在的话题
 	replyInThreadFlag bool
-	uuid              string // 由开发者生成的唯一字符串序列，用于回复消息请求去重；持有相同uuid的请求1小时内至多成功执行一次
-	uuidFlag          bool
+
+	uuid     string // 由开发者生成的唯一字符串序列，用于回复消息请求去重；持有相同uuid的请求1小时内至多成功执行一次
+	uuidFlag bool
 }
 
 func NewReplyMessageReqBodyBuilder() *ReplyMessageReqBodyBuilder {
@@ -10848,10 +11491,13 @@ func (builder *ReplyMessageReqBuilder) Build() *ReplyMessageReq {
 }
 
 type ReplyMessageReqBody struct {
-	Content       *string `json:"content,omitempty"`         // 消息内容 json 格式，格式说明参考: [发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
-	MsgType       *string `json:"msg_type,omitempty"`        // 消息类型，包括：text、post、image、file、audio、media、sticker、interactive、share_card、share_user
-	ReplyInThread *bool   `json:"reply_in_thread,omitempty"` // 是否以话题形式回复；若群聊已经是话题模式，则自动回复该条消息所在的话题
-	Uuid          *string `json:"uuid,omitempty"`            // 由开发者生成的唯一字符串序列，用于回复消息请求去重；持有相同uuid的请求1小时内至多成功执行一次
+	Content *string `json:"content,omitempty"` // 消息内容 json 格式，格式说明参考: [发送消息Content](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json)
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型，包括：text、post、image、file、audio、media、sticker、interactive、share_card、share_user
+
+	ReplyInThread *bool `json:"reply_in_thread,omitempty"` // 是否以话题形式回复；若群聊已经是话题模式，则自动回复该条消息所在的话题
+
+	Uuid *string `json:"uuid,omitempty"` // 由开发者生成的唯一字符串序列，用于回复消息请求去重；持有相同uuid的请求1小时内至多成功执行一次
 }
 
 type ReplyMessageReq struct {
@@ -10860,20 +11506,33 @@ type ReplyMessageReq struct {
 }
 
 type ReplyMessageRespData struct {
-	MessageId      *string      `json:"message_id,omitempty"`       // 消息id open_message_id
-	RootId         *string      `json:"root_id,omitempty"`          // 根消息id open_message_id
-	ParentId       *string      `json:"parent_id,omitempty"`        // 父消息的id open_message_id
-	ThreadId       *string      `json:"thread_id,omitempty"`        // 消息所属的话题 ID
-	MsgType        *string      `json:"msg_type,omitempty"`         // 消息类型 text post card image等等
-	CreateTime     *string      `json:"create_time,omitempty"`      // 消息生成的时间戳(毫秒)
-	UpdateTime     *string      `json:"update_time,omitempty"`      // 消息更新的时间戳
-	Deleted        *bool        `json:"deleted,omitempty"`          // 消息是否被撤回
-	Updated        *bool        `json:"updated,omitempty"`          // 消息是否被更新
-	ChatId         *string      `json:"chat_id,omitempty"`          // 所属的群
-	Sender         *Sender      `json:"sender,omitempty"`           // 发送者，可以是用户或应用
-	Body           *MessageBody `json:"body,omitempty"`             // 消息内容,json结构
-	Mentions       []*Mention   `json:"mentions,omitempty"`         // 被艾特的人或应用的id
-	UpperMessageId *string      `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
+	MessageId *string `json:"message_id,omitempty"` // 消息id open_message_id
+
+	RootId *string `json:"root_id,omitempty"` // 根消息id open_message_id
+
+	ParentId *string `json:"parent_id,omitempty"` // 父消息的id open_message_id
+
+	ThreadId *string `json:"thread_id,omitempty"` // 消息所属的话题 ID
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型 text post card image等等
+
+	CreateTime *string `json:"create_time,omitempty"` // 消息生成的时间戳(毫秒)
+
+	UpdateTime *string `json:"update_time,omitempty"` // 消息更新的时间戳
+
+	Deleted *bool `json:"deleted,omitempty"` // 消息是否被撤回
+
+	Updated *bool `json:"updated,omitempty"` // 消息是否被更新
+
+	ChatId *string `json:"chat_id,omitempty"` // 所属的群
+
+	Sender *Sender `json:"sender,omitempty"` // 发送者，可以是用户或应用
+
+	Body *MessageBody `json:"body,omitempty"` // 消息内容,json结构
+
+	Mentions []*Mention `json:"mentions,omitempty"` // 被艾特的人或应用的id
+
+	UpperMessageId *string `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
 }
 
 type ReplyMessageResp struct {
@@ -10889,6 +11548,7 @@ func (resp *ReplyMessageResp) Success() bool {
 type UpdateMessageReqBodyBuilder struct {
 	msgType     string // 消息的类型，仅支持文本(text)和富文本(post)类型
 	msgTypeFlag bool
+
 	content     string // 消息内容，JSON 格式
 	contentFlag bool
 }
@@ -11006,7 +11666,8 @@ func (builder *UpdateMessageReqBuilder) Build() *UpdateMessageReq {
 
 type UpdateMessageReqBody struct {
 	MsgType *string `json:"msg_type,omitempty"` // 消息的类型，仅支持文本(text)和富文本(post)类型
-	Content *string `json:"content,omitempty"`  // 消息内容，JSON 格式
+
+	Content *string `json:"content,omitempty"` // 消息内容，JSON 格式
 }
 
 type UpdateMessageReq struct {
@@ -11015,20 +11676,33 @@ type UpdateMessageReq struct {
 }
 
 type UpdateMessageRespData struct {
-	MessageId      *string      `json:"message_id,omitempty"`       // 消息id open_message_id
-	RootId         *string      `json:"root_id,omitempty"`          // 根消息id open_message_id
-	ParentId       *string      `json:"parent_id,omitempty"`        // 父消息的id open_message_id
-	ThreadId       *string      `json:"thread_id,omitempty"`        // 消息所属的话题 ID
-	MsgType        *string      `json:"msg_type,omitempty"`         // 消息类型 text post card image等等
-	CreateTime     *string      `json:"create_time,omitempty"`      // 消息生成的时间戳(毫秒)
-	UpdateTime     *string      `json:"update_time,omitempty"`      // 消息更新的时间戳
-	Deleted        *bool        `json:"deleted,omitempty"`          // 消息是否被撤回
-	Updated        *bool        `json:"updated,omitempty"`          // 消息是否被更新
-	ChatId         *string      `json:"chat_id,omitempty"`          // 所属的群
-	Sender         *Sender      `json:"sender,omitempty"`           // 发送者，可以是用户或应用
-	Body           *MessageBody `json:"body,omitempty"`             // 消息内容,json结构
-	Mentions       []*Mention   `json:"mentions,omitempty"`         // 被艾特的人或应用的id
-	UpperMessageId *string      `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
+	MessageId *string `json:"message_id,omitempty"` // 消息id open_message_id
+
+	RootId *string `json:"root_id,omitempty"` // 根消息id open_message_id
+
+	ParentId *string `json:"parent_id,omitempty"` // 父消息的id open_message_id
+
+	ThreadId *string `json:"thread_id,omitempty"` // 消息所属的话题 ID
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型 text post card image等等
+
+	CreateTime *string `json:"create_time,omitempty"` // 消息生成的时间戳(毫秒)
+
+	UpdateTime *string `json:"update_time,omitempty"` // 消息更新的时间戳
+
+	Deleted *bool `json:"deleted,omitempty"` // 消息是否被撤回
+
+	Updated *bool `json:"updated,omitempty"` // 消息是否被更新
+
+	ChatId *string `json:"chat_id,omitempty"` // 所属的群
+
+	Sender *Sender `json:"sender,omitempty"` // 发送者，可以是用户或应用
+
+	Body *MessageBody `json:"body,omitempty"` // 消息内容,json结构
+
+	Mentions []*Mention `json:"mentions,omitempty"` // 被艾特的人或应用的id
+
+	UpperMessageId *string `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
 }
 
 type UpdateMessageResp struct {
@@ -11333,10 +12007,13 @@ type CreateMessageReactionReq struct {
 }
 
 type CreateMessageReactionRespData struct {
-	ReactionId   *string   `json:"reaction_id,omitempty"`   // reaction资源ID
-	Operator     *Operator `json:"operator,omitempty"`      // 添加reaction的操作人
-	ActionTime   *string   `json:"action_time,omitempty"`   // reaction动作的的unix timestamp(单位:ms)
-	ReactionType *Emoji    `json:"reaction_type,omitempty"` // reaction资源类型
+	ReactionId *string `json:"reaction_id,omitempty"` // reaction资源ID
+
+	Operator *Operator `json:"operator,omitempty"` // 添加reaction的操作人
+
+	ActionTime *string `json:"action_time,omitempty"` // reaction动作的的unix timestamp(单位:ms)
+
+	ReactionType *Emoji `json:"reaction_type,omitempty"` // reaction资源类型
 }
 
 type CreateMessageReactionResp struct {
@@ -11390,10 +12067,13 @@ type DeleteMessageReactionReq struct {
 }
 
 type DeleteMessageReactionRespData struct {
-	ReactionId   *string   `json:"reaction_id,omitempty"`   // reaction资源ID
-	Operator     *Operator `json:"operator,omitempty"`      // 添加reaction的操作人
-	ActionTime   *string   `json:"action_time,omitempty"`   // reaction动作的的unix timestamp(单位:ms)
-	ReactionType *Emoji    `json:"reaction_type,omitempty"` // reaction资源类型
+	ReactionId *string `json:"reaction_id,omitempty"` // reaction资源ID
+
+	Operator *Operator `json:"operator,omitempty"` // 添加reaction的操作人
+
+	ActionTime *string `json:"action_time,omitempty"` // reaction动作的的unix timestamp(单位:ms)
+
+	ReactionType *Emoji `json:"reaction_type,omitempty"` // reaction资源类型
 }
 
 type DeleteMessageReactionResp struct {
@@ -11482,9 +12162,11 @@ type ListMessageReactionReq struct {
 }
 
 type ListMessageReactionRespData struct {
-	Items     []*MessageReaction `json:"items,omitempty"`      //  查询指定reaction_type返回的reaction列表
-	HasMore   *bool              `json:"has_more,omitempty"`   // 是否还有后续翻页
-	PageToken *string            `json:"page_token,omitempty"` //  下一页分页的token
+	Items []*MessageReaction `json:"items,omitempty"` //  查询指定reaction_type返回的reaction列表
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有后续翻页
+
+	PageToken *string `json:"page_token,omitempty"` //  下一页分页的token
 }
 
 type ListMessageReactionResp struct {
@@ -11790,8 +12472,10 @@ type ListPinReq struct {
 }
 
 type ListPinRespData struct {
-	Items     []*Pin  `json:"items,omitempty"`      // Pin的操作信息
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有更多项
+	Items []*Pin `json:"items,omitempty"` // Pin的操作信息
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
+
 	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
 }
 
@@ -11922,20 +12606,33 @@ type ForwardThreadReq struct {
 }
 
 type ForwardThreadRespData struct {
-	MessageId      *string      `json:"message_id,omitempty"`       // 消息id open_message_id
-	RootId         *string      `json:"root_id,omitempty"`          // 根消息id open_message_id
-	ParentId       *string      `json:"parent_id,omitempty"`        // 父消息的id open_message_id
-	ThreadId       *string      `json:"thread_id,omitempty"`        // 消息所属的话题 ID
-	MsgType        *string      `json:"msg_type,omitempty"`         // 消息类型 text post card image等等
-	CreateTime     *string      `json:"create_time,omitempty"`      // 消息生成的时间戳(毫秒)
-	UpdateTime     *string      `json:"update_time,omitempty"`      // 消息更新的时间戳
-	Deleted        *bool        `json:"deleted,omitempty"`          // 消息是否被撤回
-	Updated        *bool        `json:"updated,omitempty"`          // 消息是否被更新
-	ChatId         *string      `json:"chat_id,omitempty"`          // 所属的群
-	Sender         *Sender      `json:"sender,omitempty"`           // 发送者，可以是用户或应用
-	Body           *MessageBody `json:"body,omitempty"`             // 消息内容,json结构
-	Mentions       []*Mention   `json:"mentions,omitempty"`         // 被艾特的人或应用的id
-	UpperMessageId *string      `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
+	MessageId *string `json:"message_id,omitempty"` // 消息id open_message_id
+
+	RootId *string `json:"root_id,omitempty"` // 根消息id open_message_id
+
+	ParentId *string `json:"parent_id,omitempty"` // 父消息的id open_message_id
+
+	ThreadId *string `json:"thread_id,omitempty"` // 消息所属的话题 ID
+
+	MsgType *string `json:"msg_type,omitempty"` // 消息类型 text post card image等等
+
+	CreateTime *string `json:"create_time,omitempty"` // 消息生成的时间戳(毫秒)
+
+	UpdateTime *string `json:"update_time,omitempty"` // 消息更新的时间戳
+
+	Deleted *bool `json:"deleted,omitempty"` // 消息是否被撤回
+
+	Updated *bool `json:"updated,omitempty"` // 消息是否被更新
+
+	ChatId *string `json:"chat_id,omitempty"` // 所属的群
+
+	Sender *Sender `json:"sender,omitempty"` // 发送者，可以是用户或应用
+
+	Body *MessageBody `json:"body,omitempty"` // 消息内容,json结构
+
+	Mentions []*Mention `json:"mentions,omitempty"` // 被艾特的人或应用的id
+
+	UpperMessageId *string `json:"upper_message_id,omitempty"` // 合并消息的上一层级消息id open_message_id
 }
 
 type ForwardThreadResp struct {
@@ -11949,12 +12646,17 @@ func (resp *ForwardThreadResp) Success() bool {
 }
 
 type P2ChatDisbandedV1Data struct {
-	ChatId            *string    `json:"chat_id,omitempty"`             // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	OperatorId        *UserId    `json:"operator_id,omitempty"`         // 操作者的ID
-	External          *bool      `json:"external,omitempty"`            // 被解散的群是否是外部群
-	OperatorTenantKey *string    `json:"operator_tenant_key,omitempty"` // 操作者的租户 Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	Name              *string    `json:"name,omitempty"`                // 群名称
-	I18nNames         *I18nNames `json:"i18n_names,omitempty"`          // 群国际化名称
+	ChatId *string `json:"chat_id,omitempty"` // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	OperatorId *UserId `json:"operator_id,omitempty"` // 操作者的ID
+
+	External *bool `json:"external,omitempty"` // 被解散的群是否是外部群
+
+	OperatorTenantKey *string `json:"operator_tenant_key,omitempty"` // 操作者的租户 Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
 }
 
 type P2ChatDisbandedV1 struct {
@@ -11968,13 +12670,19 @@ func (m *P2ChatDisbandedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ChatUpdatedV1Data struct {
-	ChatId            *string        `json:"chat_id,omitempty"`             // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	OperatorId        *UserId        `json:"operator_id,omitempty"`         // 用户 ID
-	External          *bool          `json:"external,omitempty"`            // 是否是外部群
-	OperatorTenantKey *string        `json:"operator_tenant_key,omitempty"` // 操作者租户 Key
-	AfterChange       *ChatChange    `json:"after_change,omitempty"`        // 更新后的群信息
-	BeforeChange      *ChatChange    `json:"before_change,omitempty"`       // 更新前的群信息
-	ModeratorList     *ModeratorList `json:"moderator_list,omitempty"`      // 群可发言成员名单的变更信息
+	ChatId *string `json:"chat_id,omitempty"` // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	OperatorId *UserId `json:"operator_id,omitempty"` // 用户 ID
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	OperatorTenantKey *string `json:"operator_tenant_key,omitempty"` // 操作者租户 Key
+
+	AfterChange *ChatChange `json:"after_change,omitempty"` // 更新后的群信息
+
+	BeforeChange *ChatChange `json:"before_change,omitempty"` // 更新前的群信息
+
+	ModeratorList *ModeratorList `json:"moderator_list,omitempty"` // 群可发言成员名单的变更信息
 }
 
 type P2ChatUpdatedV1 struct {
@@ -11988,9 +12696,12 @@ func (m *P2ChatUpdatedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ChatAccessEventBotP2pChatEnteredV1Data struct {
-	ChatId                *string `json:"chat_id,omitempty"`                  // 群组ID
-	OperatorId            *UserId `json:"operator_id,omitempty"`              // 进入与机器人会话的操作人ID
-	LastMessageId         *string `json:"last_message_id,omitempty"`          // 会话内用户可见的最新消息ID
+	ChatId *string `json:"chat_id,omitempty"` // 群组ID
+
+	OperatorId *UserId `json:"operator_id,omitempty"` // 进入与机器人会话的操作人ID
+
+	LastMessageId *string `json:"last_message_id,omitempty"` // 会话内用户可见的最新消息ID
+
 	LastMessageCreateTime *string `json:"last_message_create_time,omitempty"` // 会话内用户可见的最新消息发送时间，毫秒时间戳
 }
 
@@ -12005,12 +12716,17 @@ func (m *P2ChatAccessEventBotP2pChatEnteredV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ChatMemberBotAddedV1Data struct {
-	ChatId            *string    `json:"chat_id,omitempty"`             // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	OperatorId        *UserId    `json:"operator_id,omitempty"`         // 用户 ID
-	External          *bool      `json:"external,omitempty"`            // 是否是外部群
-	OperatorTenantKey *string    `json:"operator_tenant_key,omitempty"` // 操作者的租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	Name              *string    `json:"name,omitempty"`                // 群名称
-	I18nNames         *I18nNames `json:"i18n_names,omitempty"`          // 群国际化名称
+	ChatId *string `json:"chat_id,omitempty"` // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	OperatorId *UserId `json:"operator_id,omitempty"` // 用户 ID
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	OperatorTenantKey *string `json:"operator_tenant_key,omitempty"` // 操作者的租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
 }
 
 type P2ChatMemberBotAddedV1 struct {
@@ -12024,12 +12740,17 @@ func (m *P2ChatMemberBotAddedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ChatMemberBotDeletedV1Data struct {
-	ChatId            *string    `json:"chat_id,omitempty"`             // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	OperatorId        *UserId    `json:"operator_id,omitempty"`         // 用户 ID
-	External          *bool      `json:"external,omitempty"`            // 是否是外部群
-	OperatorTenantKey *string    `json:"operator_tenant_key,omitempty"` // 操作者租户 Key
-	Name              *string    `json:"name,omitempty"`                // 群名称
-	I18nNames         *I18nNames `json:"i18n_names,omitempty"`          // 群国际化名称
+	ChatId *string `json:"chat_id,omitempty"` // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	OperatorId *UserId `json:"operator_id,omitempty"` // 用户 ID
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	OperatorTenantKey *string `json:"operator_tenant_key,omitempty"` // 操作者租户 Key
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
 }
 
 type P2ChatMemberBotDeletedV1 struct {
@@ -12043,13 +12764,19 @@ func (m *P2ChatMemberBotDeletedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ChatMemberUserAddedV1Data struct {
-	ChatId            *string           `json:"chat_id,omitempty"`             // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	OperatorId        *UserId           `json:"operator_id,omitempty"`         // 用户 ID
-	External          *bool             `json:"external,omitempty"`            // 是否是外部群
-	OperatorTenantKey *string           `json:"operator_tenant_key,omitempty"` // 操作者租户 Key
-	Users             []*ChatMemberUser `json:"users,omitempty"`               // 被添加的用户列表
-	Name              *string           `json:"name,omitempty"`                // 群名称
-	I18nNames         *I18nNames        `json:"i18n_names,omitempty"`          // 群国际化名称
+	ChatId *string `json:"chat_id,omitempty"` // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	OperatorId *UserId `json:"operator_id,omitempty"` // 用户 ID
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	OperatorTenantKey *string `json:"operator_tenant_key,omitempty"` // 操作者租户 Key
+
+	Users []*ChatMemberUser `json:"users,omitempty"` // 被添加的用户列表
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
 }
 
 type P2ChatMemberUserAddedV1 struct {
@@ -12063,13 +12790,19 @@ func (m *P2ChatMemberUserAddedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ChatMemberUserDeletedV1Data struct {
-	ChatId            *string           `json:"chat_id,omitempty"`             // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	OperatorId        *UserId           `json:"operator_id,omitempty"`         // 用户 ID
-	External          *bool             `json:"external,omitempty"`            // 是否是外部群
-	OperatorTenantKey *string           `json:"operator_tenant_key,omitempty"` // 操作者的租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	Users             []*ChatMemberUser `json:"users,omitempty"`               // 被移除用户列表
-	Name              *string           `json:"name,omitempty"`                // 群名称
-	I18nNames         *I18nNames        `json:"i18n_names,omitempty"`          // 群国际化名称
+	ChatId *string `json:"chat_id,omitempty"` // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	OperatorId *UserId `json:"operator_id,omitempty"` // 用户 ID
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	OperatorTenantKey *string `json:"operator_tenant_key,omitempty"` // 操作者的租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	Users []*ChatMemberUser `json:"users,omitempty"` // 被移除用户列表
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
 }
 
 type P2ChatMemberUserDeletedV1 struct {
@@ -12083,13 +12816,19 @@ func (m *P2ChatMemberUserDeletedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2ChatMemberUserWithdrawnV1Data struct {
-	ChatId            *string           `json:"chat_id,omitempty"`             // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
-	OperatorId        *UserId           `json:"operator_id,omitempty"`         // 用户 ID
-	External          *bool             `json:"external,omitempty"`            // 是否是外部群
-	OperatorTenantKey *string           `json:"operator_tenant_key,omitempty"` // 操作者的租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
-	Users             []*ChatMemberUser `json:"users,omitempty"`               // 被撤销加群的用户列表
-	Name              *string           `json:"name,omitempty"`                // 群名称
-	I18nNames         *I18nNames        `json:"i18n_names,omitempty"`          // 群国际化名称
+	ChatId *string `json:"chat_id,omitempty"` // 群组 ID，详情参见[群ID 说明](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/chat-id-description)
+
+	OperatorId *UserId `json:"operator_id,omitempty"` // 用户 ID
+
+	External *bool `json:"external,omitempty"` // 是否是外部群
+
+	OperatorTenantKey *string `json:"operator_tenant_key,omitempty"` // 操作者的租户Key，为租户在飞书上的唯一标识，用来换取对应的tenant_access_token，也可以用作租户在应用中的唯一标识
+
+	Users []*ChatMemberUser `json:"users,omitempty"` // 被撤销加群的用户列表
+
+	Name *string `json:"name,omitempty"` // 群名称
+
+	I18nNames *I18nNames `json:"i18n_names,omitempty"` // 群国际化名称
 }
 
 type P2ChatMemberUserWithdrawnV1 struct {
@@ -12103,8 +12842,9 @@ func (m *P2ChatMemberUserWithdrawnV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MessageReadV1Data struct {
-	Reader        *EventMessageReader `json:"reader,omitempty"`          // -
-	MessageIdList []string            `json:"message_id_list,omitempty"` // 消息列表
+	Reader *EventMessageReader `json:"reader,omitempty"` // -
+
+	MessageIdList []string `json:"message_id_list,omitempty"` // 消息列表
 }
 
 type P2MessageReadV1 struct {
@@ -12118,9 +12858,12 @@ func (m *P2MessageReadV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MessageRecalledV1Data struct {
-	MessageId  *string `json:"message_id,omitempty"`  // 消息ID
-	ChatId     *string `json:"chat_id,omitempty"`     // 群ID
+	MessageId *string `json:"message_id,omitempty"` // 消息ID
+
+	ChatId *string `json:"chat_id,omitempty"` // 群ID
+
 	RecallTime *string `json:"recall_time,omitempty"` // 撤回事件
+
 	RecallType *string `json:"recall_type,omitempty"` // 撤回类型
 }
 
@@ -12135,7 +12878,8 @@ func (m *P2MessageRecalledV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MessageReceiveV1Data struct {
-	Sender  *EventSender  `json:"sender,omitempty"`  // 事件的发送者
+	Sender *EventSender `json:"sender,omitempty"` // 事件的发送者
+
 	Message *EventMessage `json:"message,omitempty"` // 事件中包含的消息内容
 }
 
@@ -12150,12 +12894,17 @@ func (m *P2MessageReceiveV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MessageReactionCreatedV1Data struct {
-	MessageId    *string `json:"message_id,omitempty"`    // 消息的 open_message_id
-	ReactionType *Emoji  `json:"reaction_type,omitempty"` // 表情回复的资源类型
+	MessageId *string `json:"message_id,omitempty"` // 消息的 open_message_id
+
+	ReactionType *Emoji `json:"reaction_type,omitempty"` // 表情回复的资源类型
+
 	OperatorType *string `json:"operator_type,omitempty"` // 操作人类型;;注意事项：;- 如果操作人类型是"user"，则会返回 ==user_id==;- 如果操作人类型是"app"，则会返回 ==app_id==
-	UserId       *UserId `json:"user_id,omitempty"`       // 用户 ID
-	AppId        *string `json:"app_id,omitempty"`        // 应用 ID
-	ActionTime   *string `json:"action_time,omitempty"`   // 添加表情回复时间戳（单位：ms）
+
+	UserId *UserId `json:"user_id,omitempty"` // 用户 ID
+
+	AppId *string `json:"app_id,omitempty"` // 应用 ID
+
+	ActionTime *string `json:"action_time,omitempty"` // 添加表情回复时间戳（单位：ms）
 }
 
 type P2MessageReactionCreatedV1 struct {
@@ -12169,12 +12918,17 @@ func (m *P2MessageReactionCreatedV1) RawReq(req *larkevent.EventReq) {
 }
 
 type P2MessageReactionDeletedV1Data struct {
-	MessageId    *string `json:"message_id,omitempty"`    // 消息的 open_message_id
-	ReactionType *Emoji  `json:"reaction_type,omitempty"` // 表情回复的资源类型
+	MessageId *string `json:"message_id,omitempty"` // 消息的 open_message_id
+
+	ReactionType *Emoji `json:"reaction_type,omitempty"` // 表情回复的资源类型
+
 	OperatorType *string `json:"operator_type,omitempty"` // 操作人类型;;注意事项：;- 如果操作人类型是"user"，则会返回 ==user_id==;- 如果操作人类型是"app"，则会返回 ==app_id==
-	UserId       *UserId `json:"user_id,omitempty"`       // 用户 ID
-	AppId        *string `json:"app_id,omitempty"`        // 应用 ID
-	ActionTime   *string `json:"action_time,omitempty"`   // 表情回复被添加时的时间戳（单位：ms）
+
+	UserId *UserId `json:"user_id,omitempty"` // 用户 ID
+
+	AppId *string `json:"app_id,omitempty"` // 应用 ID
+
+	ActionTime *string `json:"action_time,omitempty"` // 表情回复被添加时的时间戳（单位：ms）
 }
 
 type P2MessageReactionDeletedV1 struct {

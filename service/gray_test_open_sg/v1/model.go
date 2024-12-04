@@ -23,13 +23,15 @@ import (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -68,17 +70,21 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type Level struct {
 	Level *string `json:"level,omitempty"` // string
-	Body  *string `json:"body,omitempty"`  // body
-	Type  *string `json:"type,omitempty"`  // type
+
+	Body *string `json:"body,omitempty"` // body
+
+	Type *string `json:"type,omitempty"` // type
 }
 
 type LevelBuilder struct {
 	level     string // string
 	levelFlag bool
-	body      string // body
-	bodyFlag  bool
-	type_     string // type
-	typeFlag  bool
+
+	body     string // body
+	bodyFlag bool
+
+	type_    string // type
+	typeFlag bool
 }
 
 func NewLevelBuilder() *LevelBuilder {
@@ -131,21 +137,27 @@ func (builder *LevelBuilder) Build() *Level {
 }
 
 type Moto struct {
-	MotoId   *string `json:"moto_id,omitempty"`   // desc
-	Id       *string `json:"id,omitempty"`        // desc2
+	MotoId *string `json:"moto_id,omitempty"` // desc
+
+	Id *string `json:"id,omitempty"` // desc2
+
 	UserName *string `json:"user_name,omitempty"` // name
-	Type     *string `json:"type,omitempty"`      // type
+
+	Type *string `json:"type,omitempty"` // type
 }
 
 type MotoBuilder struct {
-	motoId       string // desc
-	motoIdFlag   bool
-	id           string // desc2
-	idFlag       bool
+	motoId     string // desc
+	motoIdFlag bool
+
+	id     string // desc2
+	idFlag bool
+
 	userName     string // name
 	userNameFlag bool
-	type_        string // type
-	typeFlag     bool
+
+	type_    string // type
+	typeFlag bool
 }
 
 func NewMotoBuilder() *MotoBuilder {
@@ -386,9 +398,11 @@ type ListMotoReq struct {
 }
 
 type ListMotoRespData struct {
-	Items     []string `json:"items,omitempty"`      // desc
-	PageToken *string  `json:"page_token,omitempty"` //
-	HasMore   *bool    `json:"has_more,omitempty"`   //
+	Items []string `json:"items,omitempty"` // desc
+
+	PageToken *string `json:"page_token,omitempty"` //
+
+	HasMore *bool `json:"has_more,omitempty"` //
 }
 
 type ListMotoResp struct {

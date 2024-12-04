@@ -26,13 +26,15 @@ const (
 )
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -71,17 +73,21 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type Identity struct {
 	IdentityName *string `json:"identity_name,omitempty"` // user identity name
+
 	IdentityCode *string `json:"identity_code,omitempty"` // user identity code
-	Mobile       *string `json:"mobile,omitempty"`        // user mobile
+
+	Mobile *string `json:"mobile,omitempty"` // user mobile
 }
 
 type IdentityBuilder struct {
 	identityName     string // user identity name
 	identityNameFlag bool
+
 	identityCode     string // user identity code
 	identityCodeFlag bool
-	mobile           string // user mobile
-	mobileFlag       bool
+
+	mobile     string // user mobile
+	mobileFlag bool
 }
 
 func NewIdentityBuilder() *IdentityBuilder {
@@ -136,10 +142,12 @@ func (builder *IdentityBuilder) Build() *Identity {
 type CreateIdentityReqBodyBuilder struct {
 	identityName     string // 姓名
 	identityNameFlag bool
+
 	identityCode     string // 身份证号
 	identityCodeFlag bool
-	mobile           string // 手机号
-	mobileFlag       bool
+
+	mobile     string // 手机号
+	mobileFlag bool
 }
 
 func NewCreateIdentityReqBodyBuilder() *CreateIdentityReqBodyBuilder {
@@ -289,8 +297,10 @@ func (builder *CreateIdentityReqBuilder) Build() *CreateIdentityReq {
 
 type CreateIdentityReqBody struct {
 	IdentityName *string `json:"identity_name,omitempty"` // 姓名
+
 	IdentityCode *string `json:"identity_code,omitempty"` // 身份证号
-	Mobile       *string `json:"mobile,omitempty"`        // 手机号
+
+	Mobile *string `json:"mobile,omitempty"` // 手机号
 }
 
 type CreateIdentityReq struct {

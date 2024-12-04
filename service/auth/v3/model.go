@@ -24,13 +24,15 @@ type AppTicket struct {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -69,23 +71,31 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type RevokeTokenEvent struct {
 	RevokeTokenType *string `json:"revoke_token_type,omitempty"` // 撤销token的类型
-	RevokeReason    *string `json:"revoke_reason,omitempty"`     // 撤销token的原因
-	OpenId          *string `json:"open_id,omitempty"`           // 用户open_id
-	UnionId         *string `json:"union_id,omitempty"`          // 用户union_id
-	UserId          *string `json:"user_id,omitempty"`           // 租户内用户的唯一标识
+
+	RevokeReason *string `json:"revoke_reason,omitempty"` // 撤销token的原因
+
+	OpenId *string `json:"open_id,omitempty"` // 用户open_id
+
+	UnionId *string `json:"union_id,omitempty"` // 用户union_id
+
+	UserId *string `json:"user_id,omitempty"` // 租户内用户的唯一标识
 }
 
 type RevokeTokenEventBuilder struct {
 	revokeTokenType     string // 撤销token的类型
 	revokeTokenTypeFlag bool
-	revokeReason        string // 撤销token的原因
-	revokeReasonFlag    bool
-	openId              string // 用户open_id
-	openIdFlag          bool
-	unionId             string // 用户union_id
-	unionIdFlag         bool
-	userId              string // 租户内用户的唯一标识
-	userIdFlag          bool
+
+	revokeReason     string // 撤销token的原因
+	revokeReasonFlag bool
+
+	openId     string // 用户open_id
+	openIdFlag bool
+
+	unionId     string // 用户union_id
+	unionIdFlag bool
+
+	userId     string // 租户内用户的唯一标识
+	userIdFlag bool
 }
 
 func NewRevokeTokenEventBuilder() *RevokeTokenEventBuilder {
@@ -167,10 +177,12 @@ type TenantAccessToken struct {
 }
 
 type CreateAppAccessTokenReqBodyBuilder struct {
-	appId         string // 应用唯一标识，创建应用后获得。有关app_id 的详细介绍。
-	appIdFlag     bool
+	appId     string // 应用唯一标识，创建应用后获得。有关app_id 的详细介绍。
+	appIdFlag bool
+
 	appSecret     string // 应用秘钥，创建应用后获得。
 	appSecretFlag bool
+
 	appTicket     string // 平台定时推送给应用的临时凭证，通过事件监听机制获得。
 	appTicketFlag bool
 }
@@ -303,8 +315,10 @@ func (builder *CreateAppAccessTokenReqBuilder) Build() *CreateAppAccessTokenReq 
 }
 
 type CreateAppAccessTokenReqBody struct {
-	AppId     *string `json:"app_id,omitempty"`     // 应用唯一标识，创建应用后获得。有关app_id 的详细介绍。
+	AppId *string `json:"app_id,omitempty"` // 应用唯一标识，创建应用后获得。有关app_id 的详细介绍。
+
 	AppSecret *string `json:"app_secret,omitempty"` // 应用秘钥，创建应用后获得。
+
 	AppTicket *string `json:"app_ticket,omitempty"` // 平台定时推送给应用的临时凭证，通过事件监听机制获得。
 }
 
@@ -323,8 +337,9 @@ func (resp *CreateAppAccessTokenResp) Success() bool {
 }
 
 type InternalAppAccessTokenReqBodyBuilder struct {
-	appId         string // 应用唯一标识，创建应用后获得。
-	appIdFlag     bool
+	appId     string // 应用唯一标识，创建应用后获得。
+	appIdFlag bool
+
 	appSecret     string // 应用秘钥，创建应用后获得。
 	appSecretFlag bool
 }
@@ -431,7 +446,8 @@ func (builder *InternalAppAccessTokenReqBuilder) Build() *InternalAppAccessToken
 }
 
 type InternalAppAccessTokenReqBody struct {
-	AppId     *string `json:"app_id,omitempty"`     // 应用唯一标识，创建应用后获得。
+	AppId *string `json:"app_id,omitempty"` // 应用唯一标识，创建应用后获得。
+
 	AppSecret *string `json:"app_secret,omitempty"` // 应用秘钥，创建应用后获得。
 }
 
@@ -450,8 +466,9 @@ func (resp *InternalAppAccessTokenResp) Success() bool {
 }
 
 type ResendAppTicketReqBodyBuilder struct {
-	appId         string // 应用唯一标识，创建应用后获得
-	appIdFlag     bool
+	appId     string // 应用唯一标识，创建应用后获得
+	appIdFlag bool
+
 	appSecret     string // 应用秘钥，创建应用后获得
 	appSecretFlag bool
 }
@@ -558,7 +575,8 @@ func (builder *ResendAppTicketReqBuilder) Build() *ResendAppTicketReq {
 }
 
 type ResendAppTicketReqBody struct {
-	AppId     *string `json:"app_id,omitempty"`     // 应用唯一标识，创建应用后获得
+	AppId *string `json:"app_id,omitempty"` // 应用唯一标识，创建应用后获得
+
 	AppSecret *string `json:"app_secret,omitempty"` // 应用秘钥，创建应用后获得
 }
 
@@ -579,8 +597,9 @@ func (resp *ResendAppTicketResp) Success() bool {
 type CreateTenantAccessTokenReqBodyBuilder struct {
 	appAccessToken     string // 应用访问凭证，通过商店应用获取 app_access_token接口获取。
 	appAccessTokenFlag bool
-	tenantKey          string // 租户在飞书上的唯一标识，也可以理解为企业标识可以通过如下方式获取：  业开通应用时，开放平台推送给应用，具体可参考【首次启用应用】事件； 用户登录到小程序、H5 应用或者浏览器应用时，在用户的身份信息中获取。
-	tenantKeyFlag      bool
+
+	tenantKey     string // 租户在飞书上的唯一标识，也可以理解为企业标识可以通过如下方式获取：  业开通应用时，开放平台推送给应用，具体可参考【首次启用应用】事件； 用户登录到小程序、H5 应用或者浏览器应用时，在用户的身份信息中获取。
+	tenantKeyFlag bool
 }
 
 func NewCreateTenantAccessTokenReqBodyBuilder() *CreateTenantAccessTokenReqBodyBuilder {
@@ -686,7 +705,8 @@ func (builder *CreateTenantAccessTokenReqBuilder) Build() *CreateTenantAccessTok
 
 type CreateTenantAccessTokenReqBody struct {
 	AppAccessToken *string `json:"app_access_token,omitempty"` // 应用访问凭证，通过商店应用获取 app_access_token接口获取。
-	TenantKey      *string `json:"tenant_key,omitempty"`       // 租户在飞书上的唯一标识，也可以理解为企业标识可以通过如下方式获取：  业开通应用时，开放平台推送给应用，具体可参考【首次启用应用】事件； 用户登录到小程序、H5 应用或者浏览器应用时，在用户的身份信息中获取。
+
+	TenantKey *string `json:"tenant_key,omitempty"` // 租户在飞书上的唯一标识，也可以理解为企业标识可以通过如下方式获取：  业开通应用时，开放平台推送给应用，具体可参考【首次启用应用】事件； 用户登录到小程序、H5 应用或者浏览器应用时，在用户的身份信息中获取。
 }
 
 type CreateTenantAccessTokenReq struct {
@@ -704,8 +724,9 @@ func (resp *CreateTenantAccessTokenResp) Success() bool {
 }
 
 type InternalTenantAccessTokenReqBodyBuilder struct {
-	appId         string // 应用唯一标识，创建应用后获得。
-	appIdFlag     bool
+	appId     string // 应用唯一标识，创建应用后获得。
+	appIdFlag bool
+
 	appSecret     string // 应用秘钥，创建应用后获得。
 	appSecretFlag bool
 }
@@ -812,7 +833,8 @@ func (builder *InternalTenantAccessTokenReqBuilder) Build() *InternalTenantAcces
 }
 
 type InternalTenantAccessTokenReqBody struct {
-	AppId     *string `json:"app_id,omitempty"`     // 应用唯一标识，创建应用后获得。
+	AppId *string `json:"app_id,omitempty"` // 应用唯一标识，创建应用后获得。
+
 	AppSecret *string `json:"app_secret,omitempty"` // 应用秘钥，创建应用后获得。
 }
 

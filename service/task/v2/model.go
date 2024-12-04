@@ -97,28 +97,40 @@ const (
 )
 
 type ActivityRecord struct {
-	Key            *int    `json:"key,omitempty"`              // 动态类型的key
-	Content        *string `json:"content,omitempty"`          // 动态的内容
-	CreatedAt      *string `json:"created_at,omitempty"`       // 动态的发生的时间戳(ms)
-	OpUser         *Member `json:"op_user,omitempty"`          // 动态发起者
-	KeyName        *string `json:"key_name,omitempty"`         // key对应的名称
+	Key *int `json:"key,omitempty"` // 动态类型的key
+
+	Content *string `json:"content,omitempty"` // 动态的内容
+
+	CreatedAt *string `json:"created_at,omitempty"` // 动态的发生的时间戳(ms)
+
+	OpUser *Member `json:"op_user,omitempty"` // 动态发起者
+
+	KeyName *string `json:"key_name,omitempty"` // key对应的名称
+
 	TargetTaskGuid *string `json:"target_task_guid,omitempty"` // 动态相关的任务的guid。当动态是一个任务的动态时有值。
+
 	TargetTaskName *string `json:"target_task_name,omitempty"` // target_task_guid对应的任务的名称。当target_task_guid有值时会提供。
 }
 
 type ActivityRecordBuilder struct {
-	key                int // 动态类型的key
-	keyFlag            bool
-	content            string // 动态的内容
-	contentFlag        bool
-	createdAt          string // 动态的发生的时间戳(ms)
-	createdAtFlag      bool
-	opUser             *Member // 动态发起者
-	opUserFlag         bool
-	keyName            string // key对应的名称
-	keyNameFlag        bool
+	key     int // 动态类型的key
+	keyFlag bool
+
+	content     string // 动态的内容
+	contentFlag bool
+
+	createdAt     string // 动态的发生的时间戳(ms)
+	createdAtFlag bool
+
+	opUser     *Member // 动态发起者
+	opUserFlag bool
+
+	keyName     string // key对应的名称
+	keyNameFlag bool
+
 	targetTaskGuid     string // 动态相关的任务的guid。当动态是一个任务的动态时有值。
 	targetTaskGuidFlag bool
+
 	targetTaskName     string // target_task_guid对应的任务的名称。当target_task_guid有值时会提供。
 	targetTaskNameFlag bool
 }
@@ -224,36 +236,52 @@ func (builder *ActivityRecordBuilder) Build() *ActivityRecord {
 }
 
 type Attachment struct {
-	Guid       *string   `json:"guid,omitempty"`        // 附件guid
-	FileToken  *string   `json:"file_token,omitempty"`  // 附件在云文档系统中的token
-	Name       *string   `json:"name,omitempty"`        // 附件名
-	Size       *int      `json:"size,omitempty"`        // 附件的字节大小
-	Resource   *Resource `json:"resource,omitempty"`    // 附件归属的资源
-	Uploader   *Member   `json:"uploader,omitempty"`    // 附件上传者
-	IsCover    *bool     `json:"is_cover,omitempty"`    // 是否是封面图
-	UploadedAt *string   `json:"uploaded_at,omitempty"` // 上传时间戳(ms)
-	Url        *string   `json:"url,omitempty"`         // 附件的临时下载url，有效时间3分钟，且只允许调用3次进行附件下载。只有在获取附件时会动态生成。
+	Guid *string `json:"guid,omitempty"` // 附件guid
+
+	FileToken *string `json:"file_token,omitempty"` // 附件在云文档系统中的token
+
+	Name *string `json:"name,omitempty"` // 附件名
+
+	Size *int `json:"size,omitempty"` // 附件的字节大小
+
+	Resource *Resource `json:"resource,omitempty"` // 附件归属的资源
+
+	Uploader *Member `json:"uploader,omitempty"` // 附件上传者
+
+	IsCover *bool `json:"is_cover,omitempty"` // 是否是封面图
+
+	UploadedAt *string `json:"uploaded_at,omitempty"` // 上传时间戳(ms)
+
+	Url *string `json:"url,omitempty"` // 附件的临时下载url，有效时间3分钟，且只允许调用3次进行附件下载。只有在获取附件时会动态生成。
 }
 
 type AttachmentBuilder struct {
-	guid           string // 附件guid
-	guidFlag       bool
-	fileToken      string // 附件在云文档系统中的token
-	fileTokenFlag  bool
-	name           string // 附件名
-	nameFlag       bool
-	size           int // 附件的字节大小
-	sizeFlag       bool
-	resource       *Resource // 附件归属的资源
-	resourceFlag   bool
-	uploader       *Member // 附件上传者
-	uploaderFlag   bool
-	isCover        bool // 是否是封面图
-	isCoverFlag    bool
+	guid     string // 附件guid
+	guidFlag bool
+
+	fileToken     string // 附件在云文档系统中的token
+	fileTokenFlag bool
+
+	name     string // 附件名
+	nameFlag bool
+
+	size     int // 附件的字节大小
+	sizeFlag bool
+
+	resource     *Resource // 附件归属的资源
+	resourceFlag bool
+
+	uploader     *Member // 附件上传者
+	uploaderFlag bool
+
+	isCover     bool // 是否是封面图
+	isCoverFlag bool
+
 	uploadedAt     string // 上传时间戳(ms)
 	uploadedAtFlag bool
-	url            string // 附件的临时下载url，有效时间3分钟，且只允许调用3次进行附件下载。只有在获取附件时会动态生成。
-	urlFlag        bool
+
+	url     string // 附件的临时下载url，有效时间3分钟，且只允许调用3次进行附件下载。只有在获取附件时会动态生成。
+	urlFlag bool
 }
 
 func NewAttachmentBuilder() *AttachmentBuilder {
@@ -382,33 +410,47 @@ func (builder *AttachmentBuilder) Build() *Attachment {
 }
 
 type Comment struct {
-	Id               *string `json:"id,omitempty"`                  // 评论id
-	Content          *string `json:"content,omitempty"`             // 评论内容
-	Creator          *Member `json:"creator,omitempty"`             // 评论创建人
+	Id *string `json:"id,omitempty"` // 评论id
+
+	Content *string `json:"content,omitempty"` // 评论内容
+
+	Creator *Member `json:"creator,omitempty"` // 评论创建人
+
 	ReplyToCommentId *string `json:"reply_to_comment_id,omitempty"` // 被回复评论的id。如果不是回复评论，则为空。
-	CreatedAt        *string `json:"created_at,omitempty"`          // 评论创建时间戳（ms)
-	UpdatedAt        *string `json:"updated_at,omitempty"`          // 评论更新时间戳（ms）
-	ResourceType     *string `json:"resource_type,omitempty"`       // 任务关联的资源类型
-	ResourceId       *string `json:"resource_id,omitempty"`         // 任务关联的资源ID
+
+	CreatedAt *string `json:"created_at,omitempty"` // 评论创建时间戳（ms)
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 评论更新时间戳（ms）
+
+	ResourceType *string `json:"resource_type,omitempty"` // 任务关联的资源类型
+
+	ResourceId *string `json:"resource_id,omitempty"` // 任务关联的资源ID
 }
 
 type CommentBuilder struct {
-	id                   string // 评论id
-	idFlag               bool
-	content              string // 评论内容
-	contentFlag          bool
-	creator              *Member // 评论创建人
-	creatorFlag          bool
+	id     string // 评论id
+	idFlag bool
+
+	content     string // 评论内容
+	contentFlag bool
+
+	creator     *Member // 评论创建人
+	creatorFlag bool
+
 	replyToCommentId     string // 被回复评论的id。如果不是回复评论，则为空。
 	replyToCommentIdFlag bool
-	createdAt            string // 评论创建时间戳（ms)
-	createdAtFlag        bool
-	updatedAt            string // 评论更新时间戳（ms）
-	updatedAtFlag        bool
-	resourceType         string // 任务关联的资源类型
-	resourceTypeFlag     bool
-	resourceId           string // 任务关联的资源ID
-	resourceIdFlag       bool
+
+	createdAt     string // 评论创建时间戳（ms)
+	createdAtFlag bool
+
+	updatedAt     string // 评论更新时间戳（ms）
+	updatedAtFlag bool
+
+	resourceType     string // 任务关联的资源类型
+	resourceTypeFlag bool
+
+	resourceId     string // 任务关联的资源ID
+	resourceIdFlag bool
 }
 
 func NewCommentBuilder() *CommentBuilder {
@@ -525,16 +567,20 @@ func (builder *CommentBuilder) Build() *Comment {
 }
 
 type CustomComplete struct {
-	Pc      *CustomCompleteItem `json:"pc,omitempty"`      // pc客户端自定义完成配置（含mac和windows）
-	Ios     *CustomCompleteItem `json:"ios,omitempty"`     // ios端的自定义完成配置
+	Pc *CustomCompleteItem `json:"pc,omitempty"` // pc客户端自定义完成配置（含mac和windows）
+
+	Ios *CustomCompleteItem `json:"ios,omitempty"` // ios端的自定义完成配置
+
 	Android *CustomCompleteItem `json:"android,omitempty"` // android端的自定义完成配置
 }
 
 type CustomCompleteBuilder struct {
-	pc          *CustomCompleteItem // pc客户端自定义完成配置（含mac和windows）
-	pcFlag      bool
-	ios         *CustomCompleteItem // ios端的自定义完成配置
-	iosFlag     bool
+	pc     *CustomCompleteItem // pc客户端自定义完成配置（含mac和windows）
+	pcFlag bool
+
+	ios     *CustomCompleteItem // ios端的自定义完成配置
+	iosFlag bool
+
 	android     *CustomCompleteItem // android端的自定义完成配置
 	androidFlag bool
 }
@@ -586,15 +632,17 @@ func (builder *CustomCompleteBuilder) Build() *CustomComplete {
 }
 
 type CustomCompleteItem struct {
-	Href *string   `json:"href,omitempty"` // 自定义完成的跳转url
-	Tip  *I18nText `json:"tip,omitempty"`  // 自定义完成的弹出提示为
+	Href *string `json:"href,omitempty"` // 自定义完成的跳转url
+
+	Tip *I18nText `json:"tip,omitempty"` // 自定义完成的弹出提示为
 }
 
 type CustomCompleteItemBuilder struct {
 	href     string // 自定义完成的跳转url
 	hrefFlag bool
-	tip      *I18nText // 自定义完成的弹出提示为
-	tipFlag  bool
+
+	tip     *I18nText // 自定义完成的弹出提示为
+	tipFlag bool
 }
 
 func NewCustomCompleteItemBuilder() *CustomCompleteItemBuilder {
@@ -633,45 +681,67 @@ func (builder *CustomCompleteItemBuilder) Build() *CustomCompleteItem {
 }
 
 type CustomField struct {
-	Guid                *string          `json:"guid,omitempty"`                  // 自定义字段的GUID
-	Name                *string          `json:"name,omitempty"`                  // 自定义字段名称
-	Type                *string          `json:"type,omitempty"`                  // 自定义字段类型
-	NumberSetting       *NumberSetting   `json:"number_setting,omitempty"`        // 数字类型的字段设置
-	MemberSetting       *MemberSetting   `json:"member_setting,omitempty"`        // 人员类型的字段设置
-	DatetimeSetting     *DatetimeSetting `json:"datetime_setting,omitempty"`      // 时间日期类型的字段设置
-	SingleSelectSetting *SelectSetting   `json:"single_select_setting,omitempty"` // 单选类型的字段设置
-	MultiSelectSetting  *SelectSetting   `json:"multi_select_setting,omitempty"`  // 多选类型的字段设置
-	Creator             *Member          `json:"creator,omitempty"`               // 创建人
-	CreatedAt           *string          `json:"created_at,omitempty"`            // 自定义字段创建的时间戳(ms)
-	UpdatedAt           *string          `json:"updated_at,omitempty"`            // 自定义字段的更新时间戳(ms)
-	TextSetting         *TextSetting     `json:"text_setting,omitempty"`          // 文本字段配置
+	Guid *string `json:"guid,omitempty"` // 自定义字段的GUID
+
+	Name *string `json:"name,omitempty"` // 自定义字段名称
+
+	Type *string `json:"type,omitempty"` // 自定义字段类型
+
+	NumberSetting *NumberSetting `json:"number_setting,omitempty"` // 数字类型的字段设置
+
+	MemberSetting *MemberSetting `json:"member_setting,omitempty"` // 人员类型的字段设置
+
+	DatetimeSetting *DatetimeSetting `json:"datetime_setting,omitempty"` // 时间日期类型的字段设置
+
+	SingleSelectSetting *SelectSetting `json:"single_select_setting,omitempty"` // 单选类型的字段设置
+
+	MultiSelectSetting *SelectSetting `json:"multi_select_setting,omitempty"` // 多选类型的字段设置
+
+	Creator *Member `json:"creator,omitempty"` // 创建人
+
+	CreatedAt *string `json:"created_at,omitempty"` // 自定义字段创建的时间戳(ms)
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 自定义字段的更新时间戳(ms)
+
+	TextSetting *TextSetting `json:"text_setting,omitempty"` // 文本字段配置
 }
 
 type CustomFieldBuilder struct {
-	guid                    string // 自定义字段的GUID
-	guidFlag                bool
-	name                    string // 自定义字段名称
-	nameFlag                bool
-	type_                   string // 自定义字段类型
-	typeFlag                bool
-	numberSetting           *NumberSetting // 数字类型的字段设置
-	numberSettingFlag       bool
-	memberSetting           *MemberSetting // 人员类型的字段设置
-	memberSettingFlag       bool
-	datetimeSetting         *DatetimeSetting // 时间日期类型的字段设置
-	datetimeSettingFlag     bool
+	guid     string // 自定义字段的GUID
+	guidFlag bool
+
+	name     string // 自定义字段名称
+	nameFlag bool
+
+	type_    string // 自定义字段类型
+	typeFlag bool
+
+	numberSetting     *NumberSetting // 数字类型的字段设置
+	numberSettingFlag bool
+
+	memberSetting     *MemberSetting // 人员类型的字段设置
+	memberSettingFlag bool
+
+	datetimeSetting     *DatetimeSetting // 时间日期类型的字段设置
+	datetimeSettingFlag bool
+
 	singleSelectSetting     *SelectSetting // 单选类型的字段设置
 	singleSelectSettingFlag bool
-	multiSelectSetting      *SelectSetting // 多选类型的字段设置
-	multiSelectSettingFlag  bool
-	creator                 *Member // 创建人
-	creatorFlag             bool
-	createdAt               string // 自定义字段创建的时间戳(ms)
-	createdAtFlag           bool
-	updatedAt               string // 自定义字段的更新时间戳(ms)
-	updatedAtFlag           bool
-	textSetting             *TextSetting // 文本字段配置
-	textSettingFlag         bool
+
+	multiSelectSetting     *SelectSetting // 多选类型的字段设置
+	multiSelectSettingFlag bool
+
+	creator     *Member // 创建人
+	creatorFlag bool
+
+	createdAt     string // 自定义字段创建的时间戳(ms)
+	createdAtFlag bool
+
+	updatedAt     string // 自定义字段的更新时间戳(ms)
+	updatedAtFlag bool
+
+	textSetting     *TextSetting // 文本字段配置
+	textSettingFlag bool
 }
 
 func NewCustomFieldBuilder() *CustomFieldBuilder {
@@ -834,36 +904,52 @@ func (builder *CustomFieldBuilder) Build() *CustomField {
 }
 
 type CustomFieldValue struct {
-	Guid              *string   `json:"guid,omitempty"`                // 字段GUID
-	Type              *string   `json:"type,omitempty"`                // 自定义字段类型，支持"member", "datetime", "number", "single_select", "multi_select"五种类型
-	NumberValue       *string   `json:"number_value,omitempty"`        // 数字类型的自定义字段值，填写一个合法数字的字符串表示，空字符串表示设为空。
-	DatetimeValue     *string   `json:"datetime_value,omitempty"`      // 日期类型自定义字段值。可以输入一个表示日期的以毫秒为单位的字符串。设为空字符串表示设为空。
-	MemberValue       []*Member `json:"member_value,omitempty"`        // 人员类型的自定义字段值，可以设置1个或多个用户的id（遵循member格式，只支持user类型）。当该字段的设置为“不能多选”时只能输入一个值。设为空数组表示设为空。
-	SingleSelectValue *string   `json:"single_select_value,omitempty"` // 单选类型字段值，填写一个字段选项的option_guid。设置为空字符串表示设为空。
-	MultiSelectValue  []string  `json:"multi_select_value,omitempty"`  // 多选类型字段值，可以填写一个或多个本字段的option_guid。设为空数组表示设为空。
-	Name              *string   `json:"name,omitempty"`                // 自定义字段名
-	TextValue         *string   `json:"text_value,omitempty"`          // 文本类型字段值。可以输入一段文本。空字符串表示清空。
+	Guid *string `json:"guid,omitempty"` // 字段GUID
+
+	Type *string `json:"type,omitempty"` // 自定义字段类型，支持"member", "datetime", "number", "single_select", "multi_select"五种类型
+
+	NumberValue *string `json:"number_value,omitempty"` // 数字类型的自定义字段值，填写一个合法数字的字符串表示，空字符串表示设为空。
+
+	DatetimeValue *string `json:"datetime_value,omitempty"` // 日期类型自定义字段值。可以输入一个表示日期的以毫秒为单位的字符串。设为空字符串表示设为空。
+
+	MemberValue []*Member `json:"member_value,omitempty"` // 人员类型的自定义字段值，可以设置1个或多个用户的id（遵循member格式，只支持user类型）。当该字段的设置为“不能多选”时只能输入一个值。设为空数组表示设为空。
+
+	SingleSelectValue *string `json:"single_select_value,omitempty"` // 单选类型字段值，填写一个字段选项的option_guid。设置为空字符串表示设为空。
+
+	MultiSelectValue []string `json:"multi_select_value,omitempty"` // 多选类型字段值，可以填写一个或多个本字段的option_guid。设为空数组表示设为空。
+
+	Name *string `json:"name,omitempty"` // 自定义字段名
+
+	TextValue *string `json:"text_value,omitempty"` // 文本类型字段值。可以输入一段文本。空字符串表示清空。
 }
 
 type CustomFieldValueBuilder struct {
-	guid                  string // 字段GUID
-	guidFlag              bool
-	type_                 string // 自定义字段类型，支持"member", "datetime", "number", "single_select", "multi_select"五种类型
-	typeFlag              bool
-	numberValue           string // 数字类型的自定义字段值，填写一个合法数字的字符串表示，空字符串表示设为空。
-	numberValueFlag       bool
-	datetimeValue         string // 日期类型自定义字段值。可以输入一个表示日期的以毫秒为单位的字符串。设为空字符串表示设为空。
-	datetimeValueFlag     bool
-	memberValue           []*Member // 人员类型的自定义字段值，可以设置1个或多个用户的id（遵循member格式，只支持user类型）。当该字段的设置为“不能多选”时只能输入一个值。设为空数组表示设为空。
-	memberValueFlag       bool
+	guid     string // 字段GUID
+	guidFlag bool
+
+	type_    string // 自定义字段类型，支持"member", "datetime", "number", "single_select", "multi_select"五种类型
+	typeFlag bool
+
+	numberValue     string // 数字类型的自定义字段值，填写一个合法数字的字符串表示，空字符串表示设为空。
+	numberValueFlag bool
+
+	datetimeValue     string // 日期类型自定义字段值。可以输入一个表示日期的以毫秒为单位的字符串。设为空字符串表示设为空。
+	datetimeValueFlag bool
+
+	memberValue     []*Member // 人员类型的自定义字段值，可以设置1个或多个用户的id（遵循member格式，只支持user类型）。当该字段的设置为“不能多选”时只能输入一个值。设为空数组表示设为空。
+	memberValueFlag bool
+
 	singleSelectValue     string // 单选类型字段值，填写一个字段选项的option_guid。设置为空字符串表示设为空。
 	singleSelectValueFlag bool
-	multiSelectValue      []string // 多选类型字段值，可以填写一个或多个本字段的option_guid。设为空数组表示设为空。
-	multiSelectValueFlag  bool
-	name                  string // 自定义字段名
-	nameFlag              bool
-	textValue             string // 文本类型字段值。可以输入一段文本。空字符串表示清空。
-	textValueFlag         bool
+
+	multiSelectValue     []string // 多选类型字段值，可以填写一个或多个本字段的option_guid。设为空数组表示设为空。
+	multiSelectValueFlag bool
+
+	name     string // 自定义字段名
+	nameFlag bool
+
+	textValue     string // 文本类型字段值。可以输入一段文本。空字符串表示清空。
+	textValueFlag bool
 }
 
 func NewCustomFieldValueBuilder() *CustomFieldValueBuilder {
@@ -1024,13 +1110,15 @@ func (builder *DatetimeSettingBuilder) Build() *DatetimeSetting {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -1068,13 +1156,15 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 }
 
 type DocxSource struct {
-	Token   *string `json:"token,omitempty"`    // 任务关联的文档token，要求：如果使用tenant_access_token请求，则请求机器人有文档编辑权限；如果使用user_access_token，则请求用户有文档的编辑权限
+	Token *string `json:"token,omitempty"` // 任务关联的文档token，要求：如果使用tenant_access_token请求，则请求机器人有文档编辑权限；如果使用user_access_token，则请求用户有文档的编辑权限
+
 	BlockId *string `json:"block_id,omitempty"` // 任务关联的文档block_id，要求block_id存在于token对应文档中、且block_id没有绑定过其他的任务
 }
 
 type DocxSourceBuilder struct {
-	token       string // 任务关联的文档token，要求：如果使用tenant_access_token请求，则请求机器人有文档编辑权限；如果使用user_access_token，则请求用户有文档的编辑权限
-	tokenFlag   bool
+	token     string // 任务关联的文档token，要求：如果使用tenant_access_token请求，则请求机器人有文档编辑权限；如果使用user_access_token，则请求用户有文档的编辑权限
+	tokenFlag bool
+
 	blockId     string // 任务关联的文档block_id，要求block_id存在于token对应文档中、且block_id没有绑定过其他的任务
 	blockIdFlag bool
 }
@@ -1116,15 +1206,17 @@ func (builder *DocxSourceBuilder) Build() *DocxSource {
 }
 
 type Due struct {
-	Timestamp *string `json:"timestamp,omitempty"`  // 截止时间/日期的时间戳，距1970-01-01 00:00:00的毫秒数。如果截止时间是一个日期，需要把日期转换成时间戳，并设置 is_all_day=true
-	IsAllDay  *bool   `json:"is_all_day,omitempty"` // 是否截止到一个日期。如果设为true，timestamp中只有日期的部分会被解析和存储。
+	Timestamp *string `json:"timestamp,omitempty"` // 截止时间/日期的时间戳，距1970-01-01 00:00:00的毫秒数。如果截止时间是一个日期，需要把日期转换成时间戳，并设置 is_all_day=true
+
+	IsAllDay *bool `json:"is_all_day,omitempty"` // 是否截止到一个日期。如果设为true，timestamp中只有日期的部分会被解析和存储。
 }
 
 type DueBuilder struct {
 	timestamp     string // 截止时间/日期的时间戳，距1970-01-01 00:00:00的毫秒数。如果截止时间是一个日期，需要把日期转换成时间戳，并设置 is_all_day=true
 	timestampFlag bool
-	isAllDay      bool // 是否截止到一个日期。如果设为true，timestamp中只有日期的部分会被解析和存储。
-	isAllDayFlag  bool
+
+	isAllDay     bool // 是否截止到一个日期。如果设为true，timestamp中只有日期的部分会被解析和存储。
+	isAllDayFlag bool
 }
 
 func NewDueBuilder() *DueBuilder {
@@ -1196,13 +1288,15 @@ func (builder *DummyBuilder) Build() *Dummy {
 }
 
 type Href struct {
-	Url   *string `json:"url,omitempty"`   // 链接对应的地址
+	Url *string `json:"url,omitempty"` // 链接对应的地址
+
 	Title *string `json:"title,omitempty"` // 链接对应的标题
 }
 
 type HrefBuilder struct {
-	url       string // 链接对应的地址
-	urlFlag   bool
+	url     string // 链接对应的地址
+	urlFlag bool
+
 	title     string // 链接对应的标题
 	titleFlag bool
 }
@@ -1245,42 +1339,64 @@ func (builder *HrefBuilder) Build() *Href {
 
 type I18nText struct {
 	EnUs *string `json:"en_us,omitempty"` // 英文
+
 	ZhCn *string `json:"zh_cn,omitempty"` // 中文
+
 	ZhHk *string `json:"zh_hk,omitempty"` // 中文（香港地区）
+
 	ZhTw *string `json:"zh_tw,omitempty"` // 中文（台湾地区）
+
 	JaJp *string `json:"ja_jp,omitempty"` // 日语
+
 	FrFr *string `json:"fr_fr,omitempty"` // 法语
+
 	ItIt *string `json:"it_it,omitempty"` // 意大利语
+
 	DeDe *string `json:"de_de,omitempty"` // 德语
+
 	RuRu *string `json:"ru_ru,omitempty"` // 俄语
+
 	ThTh *string `json:"th_th,omitempty"` // 泰语
+
 	EsEs *string `json:"es_es,omitempty"` // 西班牙语
+
 	KoKr *string `json:"ko_kr,omitempty"` // 韩语
 }
 
 type I18nTextBuilder struct {
 	enUs     string // 英文
 	enUsFlag bool
+
 	zhCn     string // 中文
 	zhCnFlag bool
+
 	zhHk     string // 中文（香港地区）
 	zhHkFlag bool
+
 	zhTw     string // 中文（台湾地区）
 	zhTwFlag bool
+
 	jaJp     string // 日语
 	jaJpFlag bool
+
 	frFr     string // 法语
 	frFrFlag bool
+
 	itIt     string // 意大利语
 	itItFlag bool
+
 	deDe     string // 德语
 	deDeFlag bool
+
 	ruRu     string // 俄语
 	ruRuFlag bool
+
 	thTh     string // 泰语
 	thThFlag bool
+
 	esEs     string // 西班牙语
 	esEsFlag bool
+
 	koKr     string // 韩语
 	koKrFlag bool
 }
@@ -1452,18 +1568,22 @@ func (builder *I18nTextBuilder) Build() *I18nText {
 }
 
 type InputAttachment struct {
-	ResourceType *string   `json:"resource_type,omitempty"` // 附件归属资源的类型
-	ResourceId   *string   `json:"resource_id,omitempty"`   // 附件要归属资源的id。例如，要给任务添加附件，这里要填入任务的全局唯一ID
-	File         io.Reader `json:"file,omitempty"`          // 要上传的文件
+	ResourceType *string `json:"resource_type,omitempty"` // 附件归属资源的类型
+
+	ResourceId *string `json:"resource_id,omitempty"` // 附件要归属资源的id。例如，要给任务添加附件，这里要填入任务的全局唯一ID
+
+	File io.Reader `json:"file,omitempty"` // 要上传的文件
 }
 
 type InputAttachmentBuilder struct {
 	resourceType     string // 附件归属资源的类型
 	resourceTypeFlag bool
-	resourceId       string // 附件要归属资源的id。例如，要给任务添加附件，这里要填入任务的全局唯一ID
-	resourceIdFlag   bool
-	file             io.Reader // 要上传的文件
-	fileFlag         bool
+
+	resourceId     string // 附件要归属资源的id。例如，要给任务添加附件，这里要填入任务的全局唯一ID
+	resourceIdFlag bool
+
+	file     io.Reader // 要上传的文件
+	fileFlag bool
 }
 
 func NewInputAttachmentBuilder() *InputAttachmentBuilder {
@@ -1515,21 +1635,27 @@ func (builder *InputAttachmentBuilder) Build() *InputAttachment {
 }
 
 type InputComment struct {
-	Content          *string `json:"content,omitempty"`             // 评论内容
+	Content *string `json:"content,omitempty"` // 评论内容
+
 	ReplyToCommentId *string `json:"reply_to_comment_id,omitempty"` // 回复给评论的id
-	ResourceType     *string `json:"resource_type,omitempty"`       // 评论归属的资源类型
-	ResourceId       *string `json:"resource_id,omitempty"`         // 评论归属的资源ID
+
+	ResourceType *string `json:"resource_type,omitempty"` // 评论归属的资源类型
+
+	ResourceId *string `json:"resource_id,omitempty"` // 评论归属的资源ID
 }
 
 type InputCommentBuilder struct {
-	content              string // 评论内容
-	contentFlag          bool
+	content     string // 评论内容
+	contentFlag bool
+
 	replyToCommentId     string // 回复给评论的id
 	replyToCommentIdFlag bool
-	resourceType         string // 评论归属的资源类型
-	resourceTypeFlag     bool
-	resourceId           string // 评论归属的资源ID
-	resourceIdFlag       bool
+
+	resourceType     string // 评论归属的资源类型
+	resourceTypeFlag bool
+
+	resourceId     string // 评论归属的资源ID
+	resourceIdFlag bool
 }
 
 func NewInputCommentBuilder() *InputCommentBuilder {
@@ -1595,39 +1721,57 @@ func (builder *InputCommentBuilder) Build() *InputComment {
 }
 
 type InputCustomField struct {
-	ResourceType        *string          `json:"resource_type,omitempty"`         // 自定义字段归属的资源类型
-	ResourceId          *string          `json:"resource_id,omitempty"`           // 自定义字段归属的资源id，目前必然是tasklist_guid
-	Name                *string          `json:"name,omitempty"`                  // 字段名称
-	Type                *string          `json:"type,omitempty"`                  // 字段类型
-	NumberSetting       *NumberSetting   `json:"number_setting,omitempty"`        // 数字类型的字段设置
-	MemberSetting       *MemberSetting   `json:"member_setting,omitempty"`        // 人员类型的字段设置
-	DatetimeSetting     *DatetimeSetting `json:"datetime_setting,omitempty"`      // 时间日期类型的字段设置
-	SingleSelectSetting *SelectSetting   `json:"single_select_setting,omitempty"` // 单选类型的字段设置
-	MultiSelectSetting  *SelectSetting   `json:"multi_select_setting,omitempty"`  // 多选类型的字段设置
-	TextSetting         *TextSetting     `json:"text_setting,omitempty"`          // 文本类型
+	ResourceType *string `json:"resource_type,omitempty"` // 自定义字段归属的资源类型
+
+	ResourceId *string `json:"resource_id,omitempty"` // 自定义字段归属的资源id，目前必然是tasklist_guid
+
+	Name *string `json:"name,omitempty"` // 字段名称
+
+	Type *string `json:"type,omitempty"` // 字段类型
+
+	NumberSetting *NumberSetting `json:"number_setting,omitempty"` // 数字类型的字段设置
+
+	MemberSetting *MemberSetting `json:"member_setting,omitempty"` // 人员类型的字段设置
+
+	DatetimeSetting *DatetimeSetting `json:"datetime_setting,omitempty"` // 时间日期类型的字段设置
+
+	SingleSelectSetting *SelectSetting `json:"single_select_setting,omitempty"` // 单选类型的字段设置
+
+	MultiSelectSetting *SelectSetting `json:"multi_select_setting,omitempty"` // 多选类型的字段设置
+
+	TextSetting *TextSetting `json:"text_setting,omitempty"` // 文本类型
 }
 
 type InputCustomFieldBuilder struct {
-	resourceType            string // 自定义字段归属的资源类型
-	resourceTypeFlag        bool
-	resourceId              string // 自定义字段归属的资源id，目前必然是tasklist_guid
-	resourceIdFlag          bool
-	name                    string // 字段名称
-	nameFlag                bool
-	type_                   string // 字段类型
-	typeFlag                bool
-	numberSetting           *NumberSetting // 数字类型的字段设置
-	numberSettingFlag       bool
-	memberSetting           *MemberSetting // 人员类型的字段设置
-	memberSettingFlag       bool
-	datetimeSetting         *DatetimeSetting // 时间日期类型的字段设置
-	datetimeSettingFlag     bool
+	resourceType     string // 自定义字段归属的资源类型
+	resourceTypeFlag bool
+
+	resourceId     string // 自定义字段归属的资源id，目前必然是tasklist_guid
+	resourceIdFlag bool
+
+	name     string // 字段名称
+	nameFlag bool
+
+	type_    string // 字段类型
+	typeFlag bool
+
+	numberSetting     *NumberSetting // 数字类型的字段设置
+	numberSettingFlag bool
+
+	memberSetting     *MemberSetting // 人员类型的字段设置
+	memberSettingFlag bool
+
+	datetimeSetting     *DatetimeSetting // 时间日期类型的字段设置
+	datetimeSettingFlag bool
+
 	singleSelectSetting     *SelectSetting // 单选类型的字段设置
 	singleSelectSettingFlag bool
-	multiSelectSetting      *SelectSetting // 多选类型的字段设置
-	multiSelectSettingFlag  bool
-	textSetting             *TextSetting // 文本类型
-	textSettingFlag         bool
+
+	multiSelectSetting     *SelectSetting // 多选类型的字段设置
+	multiSelectSettingFlag bool
+
+	textSetting     *TextSetting // 文本类型
+	textSettingFlag bool
 }
 
 func NewInputCustomFieldBuilder() *InputCustomFieldBuilder {
@@ -1765,30 +1909,42 @@ func (builder *InputCustomFieldBuilder) Build() *InputCustomField {
 }
 
 type InputCustomFieldValue struct {
-	Guid              *string   `json:"guid,omitempty"`                // 自定义字段guid
-	NumberValue       *string   `json:"number_value,omitempty"`        // 数字类型的自定义字段值，填写一个合法数字的字符串表示，空字符串表示设为空。
-	MemberValue       []*Member `json:"member_value,omitempty"`        // 人员类型的自定义字段值。可以设置1个或多个用户的id（遵循member格式，只支持user类型）。当字段设为只不能多选时只能输入一个值。设为空数组表示设为空。
-	DatetimeValue     *string   `json:"datetime_value,omitempty"`      // 日期类型自定义字段值，可以输入一个表示日期的以毫秒为单位的字符串。设为空字符串表示设为空。
-	SingleSelectValue *string   `json:"single_select_value,omitempty"` // 单选类型字段值，填写一个字段选项的option_guid。设置为空字符串表示设为空。
-	MultiSelectValue  []string  `json:"multi_select_value,omitempty"`  // 多选类型字段值，可以填写一个或多个本字段的option_guid。设为空数组表示设为空。
-	TextValue         *string   `json:"text_value,omitempty"`          // 文本类型字段值。可以填写最多3000字符。使用空字符串表示设为空。
+	Guid *string `json:"guid,omitempty"` // 自定义字段guid
+
+	NumberValue *string `json:"number_value,omitempty"` // 数字类型的自定义字段值，填写一个合法数字的字符串表示，空字符串表示设为空。
+
+	MemberValue []*Member `json:"member_value,omitempty"` // 人员类型的自定义字段值。可以设置1个或多个用户的id（遵循member格式，只支持user类型）。当字段设为只不能多选时只能输入一个值。设为空数组表示设为空。
+
+	DatetimeValue *string `json:"datetime_value,omitempty"` // 日期类型自定义字段值，可以输入一个表示日期的以毫秒为单位的字符串。设为空字符串表示设为空。
+
+	SingleSelectValue *string `json:"single_select_value,omitempty"` // 单选类型字段值，填写一个字段选项的option_guid。设置为空字符串表示设为空。
+
+	MultiSelectValue []string `json:"multi_select_value,omitempty"` // 多选类型字段值，可以填写一个或多个本字段的option_guid。设为空数组表示设为空。
+
+	TextValue *string `json:"text_value,omitempty"` // 文本类型字段值。可以填写最多3000字符。使用空字符串表示设为空。
 }
 
 type InputCustomFieldValueBuilder struct {
-	guid                  string // 自定义字段guid
-	guidFlag              bool
-	numberValue           string // 数字类型的自定义字段值，填写一个合法数字的字符串表示，空字符串表示设为空。
-	numberValueFlag       bool
-	memberValue           []*Member // 人员类型的自定义字段值。可以设置1个或多个用户的id（遵循member格式，只支持user类型）。当字段设为只不能多选时只能输入一个值。设为空数组表示设为空。
-	memberValueFlag       bool
-	datetimeValue         string // 日期类型自定义字段值，可以输入一个表示日期的以毫秒为单位的字符串。设为空字符串表示设为空。
-	datetimeValueFlag     bool
+	guid     string // 自定义字段guid
+	guidFlag bool
+
+	numberValue     string // 数字类型的自定义字段值，填写一个合法数字的字符串表示，空字符串表示设为空。
+	numberValueFlag bool
+
+	memberValue     []*Member // 人员类型的自定义字段值。可以设置1个或多个用户的id（遵循member格式，只支持user类型）。当字段设为只不能多选时只能输入一个值。设为空数组表示设为空。
+	memberValueFlag bool
+
+	datetimeValue     string // 日期类型自定义字段值，可以输入一个表示日期的以毫秒为单位的字符串。设为空字符串表示设为空。
+	datetimeValueFlag bool
+
 	singleSelectValue     string // 单选类型字段值，填写一个字段选项的option_guid。设置为空字符串表示设为空。
 	singleSelectValueFlag bool
-	multiSelectValue      []string // 多选类型字段值，可以填写一个或多个本字段的option_guid。设为空数组表示设为空。
-	multiSelectValueFlag  bool
-	textValue             string // 文本类型字段值。可以填写最多3000字符。使用空字符串表示设为空。
-	textValueFlag         bool
+
+	multiSelectValue     []string // 多选类型字段值，可以填写一个或多个本字段的option_guid。设为空数组表示设为空。
+	multiSelectValueFlag bool
+
+	textValue     string // 文本类型字段值。可以填写最多3000字符。使用空字符串表示设为空。
+	textValueFlag bool
 }
 
 func NewInputCustomFieldValueBuilder() *InputCustomFieldValueBuilder {
@@ -1891,24 +2047,32 @@ func (builder *InputCustomFieldValueBuilder) Build() *InputCustomFieldValue {
 }
 
 type InputOption struct {
-	Name         *string `json:"name,omitempty"`          // 选项名称
-	ColorIndex   *int    `json:"color_index,omitempty"`   // 颜色索引值，支持0～54中的一个数字。如果不填写，则会随机选一个。
+	Name *string `json:"name,omitempty"` // 选项名称
+
+	ColorIndex *int `json:"color_index,omitempty"` // 颜色索引值，支持0～54中的一个数字。如果不填写，则会随机选一个。
+
 	InsertBefore *string `json:"insert_before,omitempty"` // 要放到某个option之前的option_guid
-	InsertAfter  *string `json:"insert_after,omitempty"`  // 要放到某个option之后的option_guid
-	IsHidden     *bool   `json:"is_hidden,omitempty"`     // 是否隐藏
+
+	InsertAfter *string `json:"insert_after,omitempty"` // 要放到某个option之后的option_guid
+
+	IsHidden *bool `json:"is_hidden,omitempty"` // 是否隐藏
 }
 
 type InputOptionBuilder struct {
-	name             string // 选项名称
-	nameFlag         bool
-	colorIndex       int // 颜色索引值，支持0～54中的一个数字。如果不填写，则会随机选一个。
-	colorIndexFlag   bool
+	name     string // 选项名称
+	nameFlag bool
+
+	colorIndex     int // 颜色索引值，支持0～54中的一个数字。如果不填写，则会随机选一个。
+	colorIndexFlag bool
+
 	insertBefore     string // 要放到某个option之前的option_guid
 	insertBeforeFlag bool
-	insertAfter      string // 要放到某个option之后的option_guid
-	insertAfterFlag  bool
-	isHidden         bool // 是否隐藏
-	isHiddenFlag     bool
+
+	insertAfter     string // 要放到某个option之后的option_guid
+	insertAfterFlag bool
+
+	isHidden     bool // 是否隐藏
+	isHiddenFlag bool
 }
 
 func NewInputOptionBuilder() *InputOptionBuilder {
@@ -1987,24 +2151,32 @@ func (builder *InputOptionBuilder) Build() *InputOption {
 }
 
 type InputSection struct {
-	Name         *string `json:"name,omitempty"`          // 自定义分组名
+	Name *string `json:"name,omitempty"` // 自定义分组名
+
 	ResourceType *string `json:"resource_type,omitempty"` // 自定义分组的资源类型
-	ResourceId   *string `json:"resource_id,omitempty"`   // 自定义分组要归属的资源id
+
+	ResourceId *string `json:"resource_id,omitempty"` // 自定义分组要归属的资源id
+
 	InsertBefore *string `json:"insert_before,omitempty"` // 要将新分组插入到自定义分分组的前面的目标分组的guid。insert_before/insert_after二选一。也可以都不设置。都不设置时表示将新分组查到对应容器的最前面。
-	InsertAfter  *string `json:"insert_after,omitempty"`  // 要将新分组插入到自定义分分组的后面的目标分组的guid。insert_before/insert_after二选一。也可以都不设置。都不设置时表示将新分组查到对应容器的最前面。
+
+	InsertAfter *string `json:"insert_after,omitempty"` // 要将新分组插入到自定义分分组的后面的目标分组的guid。insert_before/insert_after二选一。也可以都不设置。都不设置时表示将新分组查到对应容器的最前面。
 }
 
 type InputSectionBuilder struct {
-	name             string // 自定义分组名
-	nameFlag         bool
+	name     string // 自定义分组名
+	nameFlag bool
+
 	resourceType     string // 自定义分组的资源类型
 	resourceTypeFlag bool
-	resourceId       string // 自定义分组要归属的资源id
-	resourceIdFlag   bool
+
+	resourceId     string // 自定义分组要归属的资源id
+	resourceIdFlag bool
+
 	insertBefore     string // 要将新分组插入到自定义分分组的前面的目标分组的guid。insert_before/insert_after二选一。也可以都不设置。都不设置时表示将新分组查到对应容器的最前面。
 	insertBeforeFlag bool
-	insertAfter      string // 要将新分组插入到自定义分分组的后面的目标分组的guid。insert_before/insert_after二选一。也可以都不设置。都不设置时表示将新分组查到对应容器的最前面。
-	insertAfterFlag  bool
+
+	insertAfter     string // 要将新分组插入到自定义分分组的后面的目标分组的guid。insert_before/insert_after二选一。也可以都不设置。都不设置时表示将新分组查到对应容器的最前面。
+	insertAfterFlag bool
 }
 
 func NewInputSectionBuilder() *InputSectionBuilder {
@@ -2083,60 +2255,92 @@ func (builder *InputSectionBuilder) Build() *InputSection {
 }
 
 type InputTask struct {
-	Summary        *string                  `json:"summary,omitempty"`         // 任务标题
-	Description    *string                  `json:"description,omitempty"`     // 任务描述
-	Due            *Due                     `json:"due,omitempty"`             // 任务截止时间戳(ms)，截止时间戳和截止日期选择一个填写。
-	Origin         *Origin                  `json:"origin,omitempty"`          // 任务关联的第三方平台来源信息
-	Extra          *string                  `json:"extra,omitempty"`           // 调用者可以传入的任意附带到任务上的数据。在获取任务详情时会原样返回。
-	CompletedAt    *string                  `json:"completed_at,omitempty"`    // 任务的完成时刻时间戳(ms)
-	Members        []*Member                `json:"members,omitempty"`         // 负责人ID列表
-	RepeatRule     *string                  `json:"repeat_rule,omitempty"`     // 如果设置，则该任务为“重复任务”。该字段表示了重复任务的重复规则。
-	CustomComplete *CustomComplete          `json:"custom_complete,omitempty"` // 如果设置，则将任务设计为“自定义完成”。用户在任务中心点击“完成”时，不会直接完成任务，而是跳转到第三方配置好的地址或者现实自定义提示。
-	Tasklists      []*TaskInTasklistInfo    `json:"tasklists,omitempty"`       // 任务所在清单的信息
-	ClientToken    *string                  `json:"client_token,omitempty"`    // 幂等token，如果填写则触发幂等行为。
-	Start          *Start                   `json:"start,omitempty"`           // 任务的开始时间(ms)
-	Reminders      []*Reminder              `json:"reminders,omitempty"`       // 任务提醒
-	Mode           *int                     `json:"mode,omitempty"`            // 任务的完成模式。1 - 会签任务；2 - 或签任务
-	IsMilestone    *bool                    `json:"is_milestone,omitempty"`    // 是否是里程碑任务
-	CustomFields   []*InputCustomFieldValue `json:"custom_fields,omitempty"`   // 自定义字段值
-	DocxSource     *DocxSource              `json:"docx_source,omitempty"`     // 任务的新版云文档来源
+	Summary *string `json:"summary,omitempty"` // 任务标题
+
+	Description *string `json:"description,omitempty"` // 任务描述
+
+	Due *Due `json:"due,omitempty"` // 任务截止时间戳(ms)，截止时间戳和截止日期选择一个填写。
+
+	Origin *Origin `json:"origin,omitempty"` // 任务关联的第三方平台来源信息
+
+	Extra *string `json:"extra,omitempty"` // 调用者可以传入的任意附带到任务上的数据。在获取任务详情时会原样返回。
+
+	CompletedAt *string `json:"completed_at,omitempty"` // 任务的完成时刻时间戳(ms)
+
+	Members []*Member `json:"members,omitempty"` // 负责人ID列表
+
+	RepeatRule *string `json:"repeat_rule,omitempty"` // 如果设置，则该任务为“重复任务”。该字段表示了重复任务的重复规则。
+
+	CustomComplete *CustomComplete `json:"custom_complete,omitempty"` // 如果设置，则将任务设计为“自定义完成”。用户在任务中心点击“完成”时，不会直接完成任务，而是跳转到第三方配置好的地址或者现实自定义提示。
+
+	Tasklists []*TaskInTasklistInfo `json:"tasklists,omitempty"` // 任务所在清单的信息
+
+	ClientToken *string `json:"client_token,omitempty"` // 幂等token，如果填写则触发幂等行为。
+
+	Start *Start `json:"start,omitempty"` // 任务的开始时间(ms)
+
+	Reminders []*Reminder `json:"reminders,omitempty"` // 任务提醒
+
+	Mode *int `json:"mode,omitempty"` // 任务的完成模式。1 - 会签任务；2 - 或签任务
+
+	IsMilestone *bool `json:"is_milestone,omitempty"` // 是否是里程碑任务
+
+	CustomFields []*InputCustomFieldValue `json:"custom_fields,omitempty"` // 自定义字段值
+
+	DocxSource *DocxSource `json:"docx_source,omitempty"` // 任务的新版云文档来源
 }
 
 type InputTaskBuilder struct {
-	summary            string // 任务标题
-	summaryFlag        bool
-	description        string // 任务描述
-	descriptionFlag    bool
-	due                *Due // 任务截止时间戳(ms)，截止时间戳和截止日期选择一个填写。
-	dueFlag            bool
-	origin             *Origin // 任务关联的第三方平台来源信息
-	originFlag         bool
-	extra              string // 调用者可以传入的任意附带到任务上的数据。在获取任务详情时会原样返回。
-	extraFlag          bool
-	completedAt        string // 任务的完成时刻时间戳(ms)
-	completedAtFlag    bool
-	members            []*Member // 负责人ID列表
-	membersFlag        bool
-	repeatRule         string // 如果设置，则该任务为“重复任务”。该字段表示了重复任务的重复规则。
-	repeatRuleFlag     bool
+	summary     string // 任务标题
+	summaryFlag bool
+
+	description     string // 任务描述
+	descriptionFlag bool
+
+	due     *Due // 任务截止时间戳(ms)，截止时间戳和截止日期选择一个填写。
+	dueFlag bool
+
+	origin     *Origin // 任务关联的第三方平台来源信息
+	originFlag bool
+
+	extra     string // 调用者可以传入的任意附带到任务上的数据。在获取任务详情时会原样返回。
+	extraFlag bool
+
+	completedAt     string // 任务的完成时刻时间戳(ms)
+	completedAtFlag bool
+
+	members     []*Member // 负责人ID列表
+	membersFlag bool
+
+	repeatRule     string // 如果设置，则该任务为“重复任务”。该字段表示了重复任务的重复规则。
+	repeatRuleFlag bool
+
 	customComplete     *CustomComplete // 如果设置，则将任务设计为“自定义完成”。用户在任务中心点击“完成”时，不会直接完成任务，而是跳转到第三方配置好的地址或者现实自定义提示。
 	customCompleteFlag bool
-	tasklists          []*TaskInTasklistInfo // 任务所在清单的信息
-	tasklistsFlag      bool
-	clientToken        string // 幂等token，如果填写则触发幂等行为。
-	clientTokenFlag    bool
-	start              *Start // 任务的开始时间(ms)
-	startFlag          bool
-	reminders          []*Reminder // 任务提醒
-	remindersFlag      bool
-	mode               int // 任务的完成模式。1 - 会签任务；2 - 或签任务
-	modeFlag           bool
-	isMilestone        bool // 是否是里程碑任务
-	isMilestoneFlag    bool
-	customFields       []*InputCustomFieldValue // 自定义字段值
-	customFieldsFlag   bool
-	docxSource         *DocxSource // 任务的新版云文档来源
-	docxSourceFlag     bool
+
+	tasklists     []*TaskInTasklistInfo // 任务所在清单的信息
+	tasklistsFlag bool
+
+	clientToken     string // 幂等token，如果填写则触发幂等行为。
+	clientTokenFlag bool
+
+	start     *Start // 任务的开始时间(ms)
+	startFlag bool
+
+	reminders     []*Reminder // 任务提醒
+	remindersFlag bool
+
+	mode     int // 任务的完成模式。1 - 会签任务；2 - 或签任务
+	modeFlag bool
+
+	isMilestone     bool // 是否是里程碑任务
+	isMilestoneFlag bool
+
+	customFields     []*InputCustomFieldValue // 自定义字段值
+	customFieldsFlag bool
+
+	docxSource     *DocxSource // 任务的新版云文档来源
+	docxSourceFlag bool
 }
 
 func NewInputTaskBuilder() *InputTaskBuilder {
@@ -2362,21 +2566,27 @@ func (builder *InputTaskBuilder) Build() *InputTask {
 }
 
 type InputTasklist struct {
-	Name        *string   `json:"name,omitempty"`         // 清单名称
-	ClientToken *string   `json:"client_token,omitempty"` // 幂等token，如果提供则实现幂等行为
-	Members     []*Member `json:"members,omitempty"`      // 清单的成员列表
-	Owner       *Member   `json:"owner,omitempty"`        // 清单所有者
+	Name *string `json:"name,omitempty"` // 清单名称
+
+	ClientToken *string `json:"client_token,omitempty"` // 幂等token，如果提供则实现幂等行为
+
+	Members []*Member `json:"members,omitempty"` // 清单的成员列表
+
+	Owner *Member `json:"owner,omitempty"` // 清单所有者
 }
 
 type InputTasklistBuilder struct {
-	name            string // 清单名称
-	nameFlag        bool
+	name     string // 清单名称
+	nameFlag bool
+
 	clientToken     string // 幂等token，如果提供则实现幂等行为
 	clientTokenFlag bool
-	members         []*Member // 清单的成员列表
-	membersFlag     bool
-	owner           *Member // 清单所有者
-	ownerFlag       bool
+
+	members     []*Member // 清单的成员列表
+	membersFlag bool
+
+	owner     *Member // 清单所有者
+	ownerFlag bool
 }
 
 func NewInputTasklistBuilder() *InputTasklistBuilder {
@@ -2440,19 +2650,25 @@ func (builder *InputTasklistBuilder) Build() *InputTasklist {
 }
 
 type Member struct {
-	Id   *string `json:"id,omitempty"`   // 表示member的id
+	Id *string `json:"id,omitempty"` // 表示member的id
+
 	Type *string `json:"type,omitempty"` // 成员的类型
+
 	Role *string `json:"role,omitempty"` // 成员角色
+
 	Name *string `json:"name,omitempty"` // 成员名称
 }
 
 type MemberBuilder struct {
-	id       string // 表示member的id
-	idFlag   bool
+	id     string // 表示member的id
+	idFlag bool
+
 	type_    string // 成员的类型
 	typeFlag bool
+
 	role     string // 成员角色
 	roleFlag bool
+
 	name     string // 成员名称
 	nameFlag bool
 }
@@ -2552,24 +2768,32 @@ func (builder *MemberSettingBuilder) Build() *MemberSetting {
 }
 
 type NumberSetting struct {
-	Format               *string `json:"format,omitempty"`                 // 数字展示的格式
-	CustomSymbol         *string `json:"custom_symbol,omitempty"`          // 自定义符号。只有`format`设为custom时才会生效。
+	Format *string `json:"format,omitempty"` // 数字展示的格式
+
+	CustomSymbol *string `json:"custom_symbol,omitempty"` // 自定义符号。只有`format`设为custom时才会生效。
+
 	CustomSymbolPosition *string `json:"custom_symbol_position,omitempty"` // 自定义符号显示的位置。
-	Separator            *string `json:"separator,omitempty"`              // 分隔符样式
-	DecimalCount         *int    `json:"decimal_count,omitempty"`          // 保留小数位数。输入的数字值的小数位数如果比该设置多，多余的位数将被四舍五入后舍弃。如果`format`为"percentage"，表示变为百分数之后的小数位数。
+
+	Separator *string `json:"separator,omitempty"` // 分隔符样式
+
+	DecimalCount *int `json:"decimal_count,omitempty"` // 保留小数位数。输入的数字值的小数位数如果比该设置多，多余的位数将被四舍五入后舍弃。如果`format`为"percentage"，表示变为百分数之后的小数位数。
 }
 
 type NumberSettingBuilder struct {
-	format                   string // 数字展示的格式
-	formatFlag               bool
-	customSymbol             string // 自定义符号。只有`format`设为custom时才会生效。
-	customSymbolFlag         bool
+	format     string // 数字展示的格式
+	formatFlag bool
+
+	customSymbol     string // 自定义符号。只有`format`设为custom时才会生效。
+	customSymbolFlag bool
+
 	customSymbolPosition     string // 自定义符号显示的位置。
 	customSymbolPositionFlag bool
-	separator                string // 分隔符样式
-	separatorFlag            bool
-	decimalCount             int // 保留小数位数。输入的数字值的小数位数如果比该设置多，多余的位数将被四舍五入后舍弃。如果`format`为"percentage"，表示变为百分数之后的小数位数。
-	decimalCountFlag         bool
+
+	separator     string // 分隔符样式
+	separatorFlag bool
+
+	decimalCount     int // 保留小数位数。输入的数字值的小数位数如果比该设置多，多余的位数将被四舍五入后舍弃。如果`format`为"percentage"，表示变为百分数之后的小数位数。
+	decimalCountFlag bool
 }
 
 func NewNumberSettingBuilder() *NumberSettingBuilder {
@@ -2648,21 +2872,27 @@ func (builder *NumberSettingBuilder) Build() *NumberSetting {
 }
 
 type Option struct {
-	Guid       *string `json:"guid,omitempty"`        // 选项的GUID
-	Name       *string `json:"name,omitempty"`        // 选项名称，不能为空，最大50个字符
-	ColorIndex *int    `json:"color_index,omitempty"` // 选项的颜色索引值，可以是0～54中的一个数字。如果不填写则会随机选一个。
-	IsHidden   *bool   `json:"is_hidden,omitempty"`   // 选项是否隐藏。隐藏后的选项在界面不可见，也不可以再通过openapi将字段值设为该选项。
+	Guid *string `json:"guid,omitempty"` // 选项的GUID
+
+	Name *string `json:"name,omitempty"` // 选项名称，不能为空，最大50个字符
+
+	ColorIndex *int `json:"color_index,omitempty"` // 选项的颜色索引值，可以是0～54中的一个数字。如果不填写则会随机选一个。
+
+	IsHidden *bool `json:"is_hidden,omitempty"` // 选项是否隐藏。隐藏后的选项在界面不可见，也不可以再通过openapi将字段值设为该选项。
 }
 
 type OptionBuilder struct {
-	guid           string // 选项的GUID
-	guidFlag       bool
-	name           string // 选项名称，不能为空，最大50个字符
-	nameFlag       bool
+	guid     string // 选项的GUID
+	guidFlag bool
+
+	name     string // 选项名称，不能为空，最大50个字符
+	nameFlag bool
+
 	colorIndex     int // 选项的颜色索引值，可以是0～54中的一个数字。如果不填写则会随机选一个。
 	colorIndexFlag bool
-	isHidden       bool // 选项是否隐藏。隐藏后的选项在界面不可见，也不可以再通过openapi将字段值设为该选项。
-	isHiddenFlag   bool
+
+	isHidden     bool // 选项是否隐藏。隐藏后的选项在界面不可见，也不可以再通过openapi将字段值设为该选项。
+	isHiddenFlag bool
 }
 
 func NewOptionBuilder() *OptionBuilder {
@@ -2729,14 +2959,16 @@ func (builder *OptionBuilder) Build() *Option {
 
 type Origin struct {
 	PlatformI18nName *I18nText `json:"platform_i18n_name,omitempty"` // 任务导入来源的名称，用于在任务中心详情页展示。需提供多语言版本。
-	Href             *Href     `json:"href,omitempty"`               // 任务关联的来源平台详情页链接
+
+	Href *Href `json:"href,omitempty"` // 任务关联的来源平台详情页链接
 }
 
 type OriginBuilder struct {
 	platformI18nName     *I18nText // 任务导入来源的名称，用于在任务中心详情页展示。需提供多语言版本。
 	platformI18nNameFlag bool
-	href                 *Href // 任务关联的来源平台详情页链接
-	hrefFlag             bool
+
+	href     *Href // 任务关联的来源平台详情页链接
+	hrefFlag bool
 }
 
 func NewOriginBuilder() *OriginBuilder {
@@ -2774,13 +3006,15 @@ func (builder *OriginBuilder) Build() *Origin {
 }
 
 type Reminder struct {
-	Id                 *string `json:"id,omitempty"`                   // 提醒时间设置的 ID
-	RelativeFireMinute *int    `json:"relative_fire_minute,omitempty"` // 相对于截止时间的提醒时间分钟数。例如30表示截止时间前30分钟提醒；0表示截止时提醒。
+	Id *string `json:"id,omitempty"` // 提醒时间设置的 ID
+
+	RelativeFireMinute *int `json:"relative_fire_minute,omitempty"` // 相对于截止时间的提醒时间分钟数。例如30表示截止时间前30分钟提醒；0表示截止时提醒。
 }
 
 type ReminderBuilder struct {
-	id                     string // 提醒时间设置的 ID
-	idFlag                 bool
+	id     string // 提醒时间设置的 ID
+	idFlag bool
+
 	relativeFireMinute     int // 相对于截止时间的提醒时间分钟数。例如30表示截止时间前30分钟提醒；0表示截止时提醒。
 	relativeFireMinuteFlag bool
 }
@@ -2823,14 +3057,16 @@ func (builder *ReminderBuilder) Build() *Reminder {
 
 type Resource struct {
 	Type *string `json:"type,omitempty"` // 资源类型
-	Id   *string `json:"id,omitempty"`   // 资源ID
+
+	Id *string `json:"id,omitempty"` // 资源ID
 }
 
 type ResourceBuilder struct {
 	type_    string // 资源类型
 	typeFlag bool
-	id       string // 资源ID
-	idFlag   bool
+
+	id     string // 资源ID
+	idFlag bool
 }
 
 func NewResourceBuilder() *ResourceBuilder {
@@ -2870,33 +3106,47 @@ func (builder *ResourceBuilder) Build() *Resource {
 }
 
 type Section struct {
-	Guid         *string          `json:"guid,omitempty"`          // 自定义分组的guid
-	Name         *string          `json:"name,omitempty"`          // 自定义分组的名字
-	ResourceType *string          `json:"resource_type,omitempty"` // 资源类型
-	IsDefault    *bool            `json:"is_default,omitempty"`    // 分组是否为默认自定义分组
-	Creator      *Member          `json:"creator,omitempty"`       // 自定义分组的创建者
-	Tasklist     *TasklistSummary `json:"tasklist,omitempty"`      // 如果该分组归属于清单，展示清单的简要信息
-	CreatedAt    *string          `json:"created_at,omitempty"`    // 自定义分组创建时间戳(ms)
-	UpdatedAt    *string          `json:"updated_at,omitempty"`    // 自定义分组最近一次更新时间戳(ms)
+	Guid *string `json:"guid,omitempty"` // 自定义分组的guid
+
+	Name *string `json:"name,omitempty"` // 自定义分组的名字
+
+	ResourceType *string `json:"resource_type,omitempty"` // 资源类型
+
+	IsDefault *bool `json:"is_default,omitempty"` // 分组是否为默认自定义分组
+
+	Creator *Member `json:"creator,omitempty"` // 自定义分组的创建者
+
+	Tasklist *TasklistSummary `json:"tasklist,omitempty"` // 如果该分组归属于清单，展示清单的简要信息
+
+	CreatedAt *string `json:"created_at,omitempty"` // 自定义分组创建时间戳(ms)
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 自定义分组最近一次更新时间戳(ms)
 }
 
 type SectionBuilder struct {
-	guid             string // 自定义分组的guid
-	guidFlag         bool
-	name             string // 自定义分组的名字
-	nameFlag         bool
+	guid     string // 自定义分组的guid
+	guidFlag bool
+
+	name     string // 自定义分组的名字
+	nameFlag bool
+
 	resourceType     string // 资源类型
 	resourceTypeFlag bool
-	isDefault        bool // 分组是否为默认自定义分组
-	isDefaultFlag    bool
-	creator          *Member // 自定义分组的创建者
-	creatorFlag      bool
-	tasklist         *TasklistSummary // 如果该分组归属于清单，展示清单的简要信息
-	tasklistFlag     bool
-	createdAt        string // 自定义分组创建时间戳(ms)
-	createdAtFlag    bool
-	updatedAt        string // 自定义分组最近一次更新时间戳(ms)
-	updatedAtFlag    bool
+
+	isDefault     bool // 分组是否为默认自定义分组
+	isDefaultFlag bool
+
+	creator     *Member // 自定义分组的创建者
+	creatorFlag bool
+
+	tasklist     *TasklistSummary // 如果该分组归属于清单，展示清单的简要信息
+	tasklistFlag bool
+
+	createdAt     string // 自定义分组创建时间戳(ms)
+	createdAtFlag bool
+
+	updatedAt     string // 自定义分组最近一次更新时间戳(ms)
+	updatedAtFlag bool
 }
 
 func NewSectionBuilder() *SectionBuilder {
@@ -3012,16 +3262,20 @@ func (builder *SectionBuilder) Build() *Section {
 }
 
 type SectionSummary struct {
-	Guid      *string `json:"guid,omitempty"`       // 自定义分组的全局唯一ID
-	Name      *string `json:"name,omitempty"`       // 自定义分组的名称
-	IsDefault *bool   `json:"is_default,omitempty"` // 是否是默认分组
+	Guid *string `json:"guid,omitempty"` // 自定义分组的全局唯一ID
+
+	Name *string `json:"name,omitempty"` // 自定义分组的名称
+
+	IsDefault *bool `json:"is_default,omitempty"` // 是否是默认分组
 }
 
 type SectionSummaryBuilder struct {
-	guid          string // 自定义分组的全局唯一ID
-	guidFlag      bool
-	name          string // 自定义分组的名称
-	nameFlag      bool
+	guid     string // 自定义分组的全局唯一ID
+	guidFlag bool
+
+	name     string // 自定义分组的名称
+	nameFlag bool
+
 	isDefault     bool // 是否是默认分组
 	isDefaultFlag bool
 }
@@ -3107,15 +3361,17 @@ func (builder *SelectSettingBuilder) Build() *SelectSetting {
 }
 
 type Start struct {
-	Timestamp *string `json:"timestamp,omitempty"`  // 开始时间/日期的时间戳，距1970-01-01 00:00:00的毫秒数。如果开始时间是一个日期，需要把日期转换成时间戳，并设置 is_all_day=true
-	IsAllDay  *bool   `json:"is_all_day,omitempty"` // 是否开始于一个日期。如果设为true，timestamp中只有日期的部分会被解析和存储。
+	Timestamp *string `json:"timestamp,omitempty"` // 开始时间/日期的时间戳，距1970-01-01 00:00:00的毫秒数。如果开始时间是一个日期，需要把日期转换成时间戳，并设置 is_all_day=true
+
+	IsAllDay *bool `json:"is_all_day,omitempty"` // 是否开始于一个日期。如果设为true，timestamp中只有日期的部分会被解析和存储。
 }
 
 type StartBuilder struct {
 	timestamp     string // 开始时间/日期的时间戳，距1970-01-01 00:00:00的毫秒数。如果开始时间是一个日期，需要把日期转换成时间戳，并设置 is_all_day=true
 	timestampFlag bool
-	isAllDay      bool // 是否开始于一个日期。如果设为true，timestamp中只有日期的部分会被解析和存储。
-	isAllDayFlag  bool
+
+	isAllDay     bool // 是否开始于一个日期。如果设为true，timestamp中只有日期的部分会被解析和存储。
+	isAllDayFlag bool
 }
 
 func NewStartBuilder() *StartBuilder {
@@ -3155,91 +3411,145 @@ func (builder *StartBuilder) Build() *Start {
 }
 
 type Task struct {
-	Guid            *string               `json:"guid,omitempty"`             // 任务guid，任务的唯一ID
-	Summary         *string               `json:"summary,omitempty"`          // 任务标题
-	Description     *string               `json:"description,omitempty"`      // 任务描述
-	Due             *Due                  `json:"due,omitempty"`              // 任务截止时间
-	Reminders       []*Reminder           `json:"reminders,omitempty"`        // 任务的提醒配置列表。目前每个任务最多有1个。
-	Creator         *Member               `json:"creator,omitempty"`          // 任务创建者
-	Members         []*Member             `json:"members,omitempty"`          // 任务成员列表
-	CompletedAt     *string               `json:"completed_at,omitempty"`     // 任务完成的时间戳(ms)
-	Attachments     []*Attachment         `json:"attachments,omitempty"`      // 任务的附件列表
-	Origin          *Origin               `json:"origin,omitempty"`           // 任务关联的第三方平台来源信息。创建是设置后就不可更改。
-	Extra           *string               `json:"extra,omitempty"`            // 任务附带的自定义数据。
-	Tasklists       []*TaskInTasklistInfo `json:"tasklists,omitempty"`        // 任务所属清单的名字。调用者只能看到有权限访问的清单的列表。
-	RepeatRule      *string               `json:"repeat_rule,omitempty"`      // 如果任务为重复任务，返回重复任务的配置
-	ParentTaskGuid  *string               `json:"parent_task_guid,omitempty"` // 如果当前任务为某个任务的子任务，返回父任务的guid
-	Mode            *int                  `json:"mode,omitempty"`             // 任务的模式。1 - 会签任务；2 - 或签任务
-	Source          *int                  `json:"source,omitempty"`           // 任务创建的来源
-	CustomComplete  *CustomComplete       `json:"custom_complete,omitempty"`  // 任务的自定义完成配置
-	TaskId          *string               `json:"task_id,omitempty"`          // 任务界面上的代码
-	CreatedAt       *string               `json:"created_at,omitempty"`       // 任务创建时间戳(ms)
-	UpdatedAt       *string               `json:"updated_at,omitempty"`       // 任务最后一次更新的时间戳(ms)
-	Status          *string               `json:"status,omitempty"`           // 任务的状态，支持"todo"和"done"两种状态
-	Url             *string               `json:"url,omitempty"`              // 任务的分享链接
-	Start           *Start                `json:"start,omitempty"`            // 任务的开始时间
-	SubtaskCount    *int                  `json:"subtask_count,omitempty"`    // 该任务的子任务的个数。
-	IsMilestone     *bool                 `json:"is_milestone,omitempty"`     // 是否是里程碑任务
-	CustomFields    []*CustomFieldValue   `json:"custom_fields,omitempty"`    // 任务的自定义字段值
-	Dependencies    []*TaskDependency     `json:"dependencies,omitempty"`     // 任务依赖
-	AssigneeRelated []*TaskAssignee       `json:"assignee_related,omitempty"` // 任务执行者相关信息，如会签任务各执行者完成时间等
+	Guid *string `json:"guid,omitempty"` // 任务guid，任务的唯一ID
+
+	Summary *string `json:"summary,omitempty"` // 任务标题
+
+	Description *string `json:"description,omitempty"` // 任务描述
+
+	Due *Due `json:"due,omitempty"` // 任务截止时间
+
+	Reminders []*Reminder `json:"reminders,omitempty"` // 任务的提醒配置列表。目前每个任务最多有1个。
+
+	Creator *Member `json:"creator,omitempty"` // 任务创建者
+
+	Members []*Member `json:"members,omitempty"` // 任务成员列表
+
+	CompletedAt *string `json:"completed_at,omitempty"` // 任务完成的时间戳(ms)
+
+	Attachments []*Attachment `json:"attachments,omitempty"` // 任务的附件列表
+
+	Origin *Origin `json:"origin,omitempty"` // 任务关联的第三方平台来源信息。创建是设置后就不可更改。
+
+	Extra *string `json:"extra,omitempty"` // 任务附带的自定义数据。
+
+	Tasklists []*TaskInTasklistInfo `json:"tasklists,omitempty"` // 任务所属清单的名字。调用者只能看到有权限访问的清单的列表。
+
+	RepeatRule *string `json:"repeat_rule,omitempty"` // 如果任务为重复任务，返回重复任务的配置
+
+	ParentTaskGuid *string `json:"parent_task_guid,omitempty"` // 如果当前任务为某个任务的子任务，返回父任务的guid
+
+	Mode *int `json:"mode,omitempty"` // 任务的模式。1 - 会签任务；2 - 或签任务
+
+	Source *int `json:"source,omitempty"` // 任务创建的来源
+
+	CustomComplete *CustomComplete `json:"custom_complete,omitempty"` // 任务的自定义完成配置
+
+	TaskId *string `json:"task_id,omitempty"` // 任务界面上的代码
+
+	CreatedAt *string `json:"created_at,omitempty"` // 任务创建时间戳(ms)
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 任务最后一次更新的时间戳(ms)
+
+	Status *string `json:"status,omitempty"` // 任务的状态，支持"todo"和"done"两种状态
+
+	Url *string `json:"url,omitempty"` // 任务的分享链接
+
+	Start *Start `json:"start,omitempty"` // 任务的开始时间
+
+	SubtaskCount *int `json:"subtask_count,omitempty"` // 该任务的子任务的个数。
+
+	IsMilestone *bool `json:"is_milestone,omitempty"` // 是否是里程碑任务
+
+	CustomFields []*CustomFieldValue `json:"custom_fields,omitempty"` // 任务的自定义字段值
+
+	Dependencies []*TaskDependency `json:"dependencies,omitempty"` // 任务依赖
+
+	AssigneeRelated []*TaskAssignee `json:"assignee_related,omitempty"` // 任务执行者相关信息，如会签任务各执行者完成时间等
 }
 
 type TaskBuilder struct {
-	guid                string // 任务guid，任务的唯一ID
-	guidFlag            bool
-	summary             string // 任务标题
-	summaryFlag         bool
-	description         string // 任务描述
-	descriptionFlag     bool
-	due                 *Due // 任务截止时间
-	dueFlag             bool
-	reminders           []*Reminder // 任务的提醒配置列表。目前每个任务最多有1个。
-	remindersFlag       bool
-	creator             *Member // 任务创建者
-	creatorFlag         bool
-	members             []*Member // 任务成员列表
-	membersFlag         bool
-	completedAt         string // 任务完成的时间戳(ms)
-	completedAtFlag     bool
-	attachments         []*Attachment // 任务的附件列表
-	attachmentsFlag     bool
-	origin              *Origin // 任务关联的第三方平台来源信息。创建是设置后就不可更改。
-	originFlag          bool
-	extra               string // 任务附带的自定义数据。
-	extraFlag           bool
-	tasklists           []*TaskInTasklistInfo // 任务所属清单的名字。调用者只能看到有权限访问的清单的列表。
-	tasklistsFlag       bool
-	repeatRule          string // 如果任务为重复任务，返回重复任务的配置
-	repeatRuleFlag      bool
-	parentTaskGuid      string // 如果当前任务为某个任务的子任务，返回父任务的guid
-	parentTaskGuidFlag  bool
-	mode                int // 任务的模式。1 - 会签任务；2 - 或签任务
-	modeFlag            bool
-	source              int // 任务创建的来源
-	sourceFlag          bool
-	customComplete      *CustomComplete // 任务的自定义完成配置
-	customCompleteFlag  bool
-	taskId              string // 任务界面上的代码
-	taskIdFlag          bool
-	createdAt           string // 任务创建时间戳(ms)
-	createdAtFlag       bool
-	updatedAt           string // 任务最后一次更新的时间戳(ms)
-	updatedAtFlag       bool
-	status              string // 任务的状态，支持"todo"和"done"两种状态
-	statusFlag          bool
-	url                 string // 任务的分享链接
-	urlFlag             bool
-	start               *Start // 任务的开始时间
-	startFlag           bool
-	subtaskCount        int // 该任务的子任务的个数。
-	subtaskCountFlag    bool
-	isMilestone         bool // 是否是里程碑任务
-	isMilestoneFlag     bool
-	customFields        []*CustomFieldValue // 任务的自定义字段值
-	customFieldsFlag    bool
-	dependencies        []*TaskDependency // 任务依赖
-	dependenciesFlag    bool
+	guid     string // 任务guid，任务的唯一ID
+	guidFlag bool
+
+	summary     string // 任务标题
+	summaryFlag bool
+
+	description     string // 任务描述
+	descriptionFlag bool
+
+	due     *Due // 任务截止时间
+	dueFlag bool
+
+	reminders     []*Reminder // 任务的提醒配置列表。目前每个任务最多有1个。
+	remindersFlag bool
+
+	creator     *Member // 任务创建者
+	creatorFlag bool
+
+	members     []*Member // 任务成员列表
+	membersFlag bool
+
+	completedAt     string // 任务完成的时间戳(ms)
+	completedAtFlag bool
+
+	attachments     []*Attachment // 任务的附件列表
+	attachmentsFlag bool
+
+	origin     *Origin // 任务关联的第三方平台来源信息。创建是设置后就不可更改。
+	originFlag bool
+
+	extra     string // 任务附带的自定义数据。
+	extraFlag bool
+
+	tasklists     []*TaskInTasklistInfo // 任务所属清单的名字。调用者只能看到有权限访问的清单的列表。
+	tasklistsFlag bool
+
+	repeatRule     string // 如果任务为重复任务，返回重复任务的配置
+	repeatRuleFlag bool
+
+	parentTaskGuid     string // 如果当前任务为某个任务的子任务，返回父任务的guid
+	parentTaskGuidFlag bool
+
+	mode     int // 任务的模式。1 - 会签任务；2 - 或签任务
+	modeFlag bool
+
+	source     int // 任务创建的来源
+	sourceFlag bool
+
+	customComplete     *CustomComplete // 任务的自定义完成配置
+	customCompleteFlag bool
+
+	taskId     string // 任务界面上的代码
+	taskIdFlag bool
+
+	createdAt     string // 任务创建时间戳(ms)
+	createdAtFlag bool
+
+	updatedAt     string // 任务最后一次更新的时间戳(ms)
+	updatedAtFlag bool
+
+	status     string // 任务的状态，支持"todo"和"done"两种状态
+	statusFlag bool
+
+	url     string // 任务的分享链接
+	urlFlag bool
+
+	start     *Start // 任务的开始时间
+	startFlag bool
+
+	subtaskCount     int // 该任务的子任务的个数。
+	subtaskCountFlag bool
+
+	isMilestone     bool // 是否是里程碑任务
+	isMilestoneFlag bool
+
+	customFields     []*CustomFieldValue // 任务的自定义字段值
+	customFieldsFlag bool
+
+	dependencies     []*TaskDependency // 任务依赖
+	dependenciesFlag bool
+
 	assigneeRelated     []*TaskAssignee // 任务执行者相关信息，如会签任务各执行者完成时间等
 	assigneeRelatedFlag bool
 }
@@ -3610,13 +3920,15 @@ type TaskSubtask struct {
 }
 
 type TaskAssignee struct {
-	Id          *string `json:"id,omitempty"`           // 任务执行者的id
+	Id *string `json:"id,omitempty"` // 任务执行者的id
+
 	CompletedAt *string `json:"completed_at,omitempty"` // 会签任务中执行者完成的时间戳(ms)
 }
 
 type TaskAssigneeBuilder struct {
-	id              string // 任务执行者的id
-	idFlag          bool
+	id     string // 任务执行者的id
+	idFlag bool
+
 	completedAt     string // 会签任务中执行者完成的时间戳(ms)
 	completedAtFlag bool
 }
@@ -3658,13 +3970,15 @@ func (builder *TaskAssigneeBuilder) Build() *TaskAssignee {
 }
 
 type TaskDependency struct {
-	Type     *string `json:"type,omitempty"`      // 依赖类型
+	Type *string `json:"type,omitempty"` // 依赖类型
+
 	TaskGuid *string `json:"task_guid,omitempty"` // 依赖任务的GUID
 }
 
 type TaskDependencyBuilder struct {
-	type_        string // 依赖类型
-	typeFlag     bool
+	type_    string // 依赖类型
+	typeFlag bool
+
 	taskGuid     string // 依赖任务的GUID
 	taskGuidFlag bool
 }
@@ -3707,14 +4021,16 @@ func (builder *TaskDependencyBuilder) Build() *TaskDependency {
 
 type TaskInTasklistInfo struct {
 	TasklistGuid *string `json:"tasklist_guid,omitempty"` // 任务所在清单的guid
-	SectionGuid  *string `json:"section_guid,omitempty"`  // 任务所在清单的自定义分组guid
+
+	SectionGuid *string `json:"section_guid,omitempty"` // 任务所在清单的自定义分组guid
 }
 
 type TaskInTasklistInfoBuilder struct {
 	tasklistGuid     string // 任务所在清单的guid
 	tasklistGuidFlag bool
-	sectionGuid      string // 任务所在清单的自定义分组guid
-	sectionGuidFlag  bool
+
+	sectionGuid     string // 任务所在清单的自定义分组guid
+	sectionGuidFlag bool
 }
 
 func NewTaskInTasklistInfoBuilder() *TaskInTasklistInfoBuilder {
@@ -3754,16 +4070,20 @@ func (builder *TaskInTasklistInfoBuilder) Build() *TaskInTasklistInfo {
 }
 
 type TaskStatistics struct {
-	TotalTasksCount            *int `json:"total_tasks_count,omitempty"`             // 任务总数
-	TotalCompletedTasksCount   *int `json:"total_completed_tasks_count,omitempty"`   // 已完成任务的数量
+	TotalTasksCount *int `json:"total_tasks_count,omitempty"` // 任务总数
+
+	TotalCompletedTasksCount *int `json:"total_completed_tasks_count,omitempty"` // 已完成任务的数量
+
 	TotalUncompletedTasksCount *int `json:"total_uncompleted_tasks_count,omitempty"` // 未完成任务的数量
 }
 
 type TaskStatisticsBuilder struct {
-	totalTasksCount                int // 任务总数
-	totalTasksCountFlag            bool
-	totalCompletedTasksCount       int // 已完成任务的数量
-	totalCompletedTasksCountFlag   bool
+	totalTasksCount     int // 任务总数
+	totalTasksCountFlag bool
+
+	totalCompletedTasksCount     int // 已完成任务的数量
+	totalCompletedTasksCountFlag bool
+
 	totalUncompletedTasksCount     int // 未完成任务的数量
 	totalUncompletedTasksCountFlag bool
 }
@@ -3818,28 +4138,40 @@ func (builder *TaskStatisticsBuilder) Build() *TaskStatistics {
 }
 
 type TaskSummary struct {
-	Guid         *string   `json:"guid,omitempty"`          // 任务GUID
-	Summary      *string   `json:"summary,omitempty"`       // 任务的标题
-	CompletedAt  *string   `json:"completed_at,omitempty"`  // 任务完成的时间戳(ms)，为0表示未完成
-	Start        *Start    `json:"start,omitempty"`         // 任务开始时间
-	Due          *Due      `json:"due,omitempty"`           // 任务截止时间
-	Members      []*Member `json:"members,omitempty"`       // 任务成员列表
-	SubtaskCount *int      `json:"subtask_count,omitempty"` // 子任务的个数
+	Guid *string `json:"guid,omitempty"` // 任务GUID
+
+	Summary *string `json:"summary,omitempty"` // 任务的标题
+
+	CompletedAt *string `json:"completed_at,omitempty"` // 任务完成的时间戳(ms)，为0表示未完成
+
+	Start *Start `json:"start,omitempty"` // 任务开始时间
+
+	Due *Due `json:"due,omitempty"` // 任务截止时间
+
+	Members []*Member `json:"members,omitempty"` // 任务成员列表
+
+	SubtaskCount *int `json:"subtask_count,omitempty"` // 子任务的个数
 }
 
 type TaskSummaryBuilder struct {
-	guid             string // 任务GUID
-	guidFlag         bool
-	summary          string // 任务的标题
-	summaryFlag      bool
-	completedAt      string // 任务完成的时间戳(ms)，为0表示未完成
-	completedAtFlag  bool
-	start            *Start // 任务开始时间
-	startFlag        bool
-	due              *Due // 任务截止时间
-	dueFlag          bool
-	members          []*Member // 任务成员列表
-	membersFlag      bool
+	guid     string // 任务GUID
+	guidFlag bool
+
+	summary     string // 任务的标题
+	summaryFlag bool
+
+	completedAt     string // 任务完成的时间戳(ms)，为0表示未完成
+	completedAtFlag bool
+
+	start     *Start // 任务开始时间
+	startFlag bool
+
+	due     *Due // 任务截止时间
+	dueFlag bool
+
+	members     []*Member // 任务成员列表
+	membersFlag bool
+
 	subtaskCount     int // 子任务的个数
 	subtaskCountFlag bool
 }
@@ -3943,31 +4275,45 @@ func (builder *TaskSummaryBuilder) Build() *TaskSummary {
 }
 
 type Tasklist struct {
-	Guid      *string   `json:"guid,omitempty"`       // 清单的全局唯一ID
-	Name      *string   `json:"name,omitempty"`       // 清单名
-	Creator   *Member   `json:"creator,omitempty"`    // 清单创建者
-	Owner     *Member   `json:"owner,omitempty"`      // 清单负责人
-	Members   []*Member `json:"members,omitempty"`    // 清单协作人
-	Url       *string   `json:"url,omitempty"`        // 该清单分享的applink
-	CreatedAt *string   `json:"created_at,omitempty"` // 清单创建时间戳(ms)
-	UpdatedAt *string   `json:"updated_at,omitempty"` // 清单最后一次更新时间戳（ms)
+	Guid *string `json:"guid,omitempty"` // 清单的全局唯一ID
+
+	Name *string `json:"name,omitempty"` // 清单名
+
+	Creator *Member `json:"creator,omitempty"` // 清单创建者
+
+	Owner *Member `json:"owner,omitempty"` // 清单负责人
+
+	Members []*Member `json:"members,omitempty"` // 清单协作人
+
+	Url *string `json:"url,omitempty"` // 该清单分享的applink
+
+	CreatedAt *string `json:"created_at,omitempty"` // 清单创建时间戳(ms)
+
+	UpdatedAt *string `json:"updated_at,omitempty"` // 清单最后一次更新时间戳（ms)
 }
 
 type TasklistBuilder struct {
-	guid          string // 清单的全局唯一ID
-	guidFlag      bool
-	name          string // 清单名
-	nameFlag      bool
-	creator       *Member // 清单创建者
-	creatorFlag   bool
-	owner         *Member // 清单负责人
-	ownerFlag     bool
-	members       []*Member // 清单协作人
-	membersFlag   bool
-	url           string // 该清单分享的applink
-	urlFlag       bool
+	guid     string // 清单的全局唯一ID
+	guidFlag bool
+
+	name     string // 清单名
+	nameFlag bool
+
+	creator     *Member // 清单创建者
+	creatorFlag bool
+
+	owner     *Member // 清单负责人
+	ownerFlag bool
+
+	members     []*Member // 清单协作人
+	membersFlag bool
+
+	url     string // 该清单分享的applink
+	urlFlag bool
+
 	createdAt     string // 清单创建时间戳(ms)
 	createdAtFlag bool
+
 	updatedAt     string // 清单最后一次更新时间戳（ms)
 	updatedAtFlag bool
 }
@@ -4084,24 +4430,32 @@ func (builder *TasklistBuilder) Build() *Tasklist {
 }
 
 type TasklistActivitySubscription struct {
-	Guid        *string   `json:"guid,omitempty"`         // 订阅guid
-	Name        *string   `json:"name,omitempty"`         // 订阅名称
-	Subscribers []*Member `json:"subscribers,omitempty"`  // 订阅者
-	IncludeKeys []int     `json:"include_keys,omitempty"` // 要订阅的清单动态类型
-	Disabled    *bool     `json:"disabled,omitempty"`     // 该订阅是否为停用
+	Guid *string `json:"guid,omitempty"` // 订阅guid
+
+	Name *string `json:"name,omitempty"` // 订阅名称
+
+	Subscribers []*Member `json:"subscribers,omitempty"` // 订阅者
+
+	IncludeKeys []int `json:"include_keys,omitempty"` // 要订阅的清单动态类型
+
+	Disabled *bool `json:"disabled,omitempty"` // 该订阅是否为停用
 }
 
 type TasklistActivitySubscriptionBuilder struct {
-	guid            string // 订阅guid
-	guidFlag        bool
-	name            string // 订阅名称
-	nameFlag        bool
+	guid     string // 订阅guid
+	guidFlag bool
+
+	name     string // 订阅名称
+	nameFlag bool
+
 	subscribers     []*Member // 订阅者
 	subscribersFlag bool
+
 	includeKeys     []int // 要订阅的清单动态类型
 	includeKeysFlag bool
-	disabled        bool // 该订阅是否为停用
-	disabledFlag    bool
+
+	disabled     bool // 该订阅是否为停用
+	disabledFlag bool
 }
 
 func NewTasklistActivitySubscriptionBuilder() *TasklistActivitySubscriptionBuilder {
@@ -4179,12 +4533,14 @@ func (builder *TasklistActivitySubscriptionBuilder) Build() *TasklistActivitySub
 
 type TasklistSummary struct {
 	Guid *string `json:"guid,omitempty"` // 清单的全局唯一ID
+
 	Name *string `json:"name,omitempty"` // 清单名字
 }
 
 type TasklistSummaryBuilder struct {
 	guid     string // 清单的全局唯一ID
 	guidFlag bool
+
 	name     string // 清单名字
 	nameFlag bool
 }
@@ -4399,9 +4755,11 @@ type ListAttachmentReq struct {
 }
 
 type ListAttachmentRespData struct {
-	Items     []*Attachment `json:"items,omitempty"`      // 附件列表
-	PageToken *string       `json:"page_token,omitempty"` // 获取下一页的分页标记，无更多数据时返回空
-	HasMore   *bool         `json:"has_more,omitempty"`   // 是否有更多数据
+	Items []*Attachment `json:"items,omitempty"` // 附件列表
+
+	PageToken *string `json:"page_token,omitempty"` // 获取下一页的分页标记，无更多数据时返回空
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
 }
 
 type ListAttachmentResp struct {
@@ -4701,9 +5059,11 @@ type ListCommentReq struct {
 }
 
 type ListCommentRespData struct {
-	Items     []*Comment `json:"items,omitempty"`      // 评论列表数据
-	PageToken *string    `json:"page_token,omitempty"` // 用于获取下一页的分页标记，当has_more为false时为空
-	HasMore   *bool      `json:"has_more,omitempty"`   // 是否还有更多数据
+	Items []*Comment `json:"items,omitempty"` // 评论列表数据
+
+	PageToken *string `json:"page_token,omitempty"` // 用于获取下一页的分页标记，当has_more为false时为空
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多数据
 }
 
 type ListCommentResp struct {
@@ -4717,8 +5077,9 @@ func (resp *ListCommentResp) Success() bool {
 }
 
 type PatchCommentReqBodyBuilder struct {
-	comment          *InputComment // 要更新的评论数据，支持更新content, md_content
-	commentFlag      bool
+	comment     *InputComment // 要更新的评论数据，支持更新content, md_content
+	commentFlag bool
+
 	updateFields     []string // 要更新的字段
 	updateFieldsFlag bool
 }
@@ -4843,8 +5204,9 @@ func (builder *PatchCommentReqBuilder) Build() *PatchCommentReq {
 }
 
 type PatchCommentReqBody struct {
-	Comment      *InputComment `json:"comment,omitempty"`       // 要更新的评论数据，支持更新content, md_content
-	UpdateFields []string      `json:"update_fields,omitempty"` // 要更新的字段
+	Comment *InputComment `json:"comment,omitempty"` // 要更新的评论数据，支持更新content, md_content
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 要更新的字段
 }
 
 type PatchCommentReq struct {
@@ -4869,8 +5231,9 @@ func (resp *PatchCommentResp) Success() bool {
 type AddCustomFieldReqBodyBuilder struct {
 	resourceType     string // 要将自定义字段添加到一个资源的资源类型。目前只支持tasklist
 	resourceTypeFlag bool
-	resourceId       string // 要将自定义字段添加到的资源id，目前只支持tasklist_guid
-	resourceIdFlag   bool
+
+	resourceId     string // 要将自定义字段添加到的资源id，目前只支持tasklist_guid
+	resourceIdFlag bool
 }
 
 func NewAddCustomFieldReqBodyBuilder() *AddCustomFieldReqBodyBuilder {
@@ -4985,7 +5348,8 @@ func (builder *AddCustomFieldReqBuilder) Build() *AddCustomFieldReq {
 
 type AddCustomFieldReqBody struct {
 	ResourceType *string `json:"resource_type,omitempty"` // 要将自定义字段添加到一个资源的资源类型。目前只支持tasklist
-	ResourceId   *string `json:"resource_id,omitempty"`   // 要将自定义字段添加到的资源id，目前只支持tasklist_guid
+
+	ResourceId *string `json:"resource_id,omitempty"` // 要将自定义字段添加到的资源id，目前只支持tasklist_guid
 }
 
 type AddCustomFieldReq struct {
@@ -5186,9 +5550,11 @@ type ListCustomFieldReq struct {
 }
 
 type ListCustomFieldRespData struct {
-	Items     []*CustomField `json:"items,omitempty"`      // 返回的自定义字段列表
-	PageToken *string        `json:"page_token,omitempty"` // 用于获取下一页数据的page_token
-	HasMore   *bool          `json:"has_more,omitempty"`   // 是否有下一页的数据
+	Items []*CustomField `json:"items,omitempty"` // 返回的自定义字段列表
+
+	PageToken *string `json:"page_token,omitempty"` // 用于获取下一页数据的page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页的数据
 }
 
 type ListCustomFieldResp struct {
@@ -5202,8 +5568,9 @@ func (resp *ListCustomFieldResp) Success() bool {
 }
 
 type PatchCustomFieldReqBodyBuilder struct {
-	customField      *InputCustomField // 要修改的自定义字段数据
-	customFieldFlag  bool
+	customField     *InputCustomField // 要修改的自定义字段数据
+	customFieldFlag bool
+
 	updateFields     []string // 要修改的自定义字段类型，支持name, member_setting, number_setting, datetime_setting, single_select_setting, multi_select_setting
 	updateFieldsFlag bool
 }
@@ -5328,8 +5695,9 @@ func (builder *PatchCustomFieldReqBuilder) Build() *PatchCustomFieldReq {
 }
 
 type PatchCustomFieldReqBody struct {
-	CustomField  *InputCustomField `json:"custom_field,omitempty"`  // 要修改的自定义字段数据
-	UpdateFields []string          `json:"update_fields,omitempty"` // 要修改的自定义字段类型，支持name, member_setting, number_setting, datetime_setting, single_select_setting, multi_select_setting
+	CustomField *InputCustomField `json:"custom_field,omitempty"` // 要修改的自定义字段数据
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 要修改的自定义字段类型，支持name, member_setting, number_setting, datetime_setting, single_select_setting, multi_select_setting
 }
 
 type PatchCustomFieldReq struct {
@@ -5354,8 +5722,9 @@ func (resp *PatchCustomFieldResp) Success() bool {
 type RemoveCustomFieldReqBodyBuilder struct {
 	resourceType     string // 要从某个资源移除自定义字段的资源类型，目前只支持清单"tasklist"。
 	resourceTypeFlag bool
-	resourceId       string // 要从某个资源移除自定义字段的资源id，`resource_type`为"tasklist"时，需填写清单的GUID
-	resourceIdFlag   bool
+
+	resourceId     string // 要从某个资源移除自定义字段的资源id，`resource_type`为"tasklist"时，需填写清单的GUID
+	resourceIdFlag bool
 }
 
 func NewRemoveCustomFieldReqBodyBuilder() *RemoveCustomFieldReqBodyBuilder {
@@ -5470,7 +5839,8 @@ func (builder *RemoveCustomFieldReqBuilder) Build() *RemoveCustomFieldReq {
 
 type RemoveCustomFieldReqBody struct {
 	ResourceType *string `json:"resource_type,omitempty"` // 要从某个资源移除自定义字段的资源类型，目前只支持清单"tasklist"。
-	ResourceId   *string `json:"resource_id,omitempty"`   // 要从某个资源移除自定义字段的资源id，`resource_type`为"tasklist"时，需填写清单的GUID
+
+	ResourceId *string `json:"resource_id,omitempty"` // 要从某个资源移除自定义字段的资源id，`resource_type`为"tasklist"时，需填写清单的GUID
 }
 
 type RemoveCustomFieldReq struct {
@@ -5542,8 +5912,9 @@ func (resp *CreateCustomFieldOptionResp) Success() bool {
 }
 
 type PatchCustomFieldOptionReqBodyBuilder struct {
-	option           *InputOption // 要更新的option数据
-	optionFlag       bool
+	option     *InputOption // 要更新的option数据
+	optionFlag bool
+
 	updateFields     []string // 要更新的字段名，支持name,color,is_hidden,insert_before,insert_after
 	updateFieldsFlag bool
 }
@@ -5667,8 +6038,9 @@ func (builder *PatchCustomFieldOptionReqBuilder) Build() *PatchCustomFieldOption
 }
 
 type PatchCustomFieldOptionReqBody struct {
-	Option       *InputOption `json:"option,omitempty"`        // 要更新的option数据
-	UpdateFields []string     `json:"update_fields,omitempty"` // 要更新的字段名，支持name,color,is_hidden,insert_before,insert_after
+	Option *InputOption `json:"option,omitempty"` // 要更新的option数据
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 要更新的字段名，支持name,color,is_hidden,insert_before,insert_after
 }
 
 type PatchCustomFieldOptionReq struct {
@@ -5915,9 +6287,11 @@ type ListSectionReq struct {
 }
 
 type ListSectionRespData struct {
-	Items     []*SectionSummary `json:"items,omitempty"`      // 自定义分组的摘要列表
-	PageToken *string           `json:"page_token,omitempty"` // 获取下一页数据的分页标记，没有更多数据时返回空
-	HasMore   *bool             `json:"has_more,omitempty"`   // 是否有更多数据
+	Items []*SectionSummary `json:"items,omitempty"` // 自定义分组的摘要列表
+
+	PageToken *string `json:"page_token,omitempty"` // 获取下一页数据的分页标记，没有更多数据时返回空
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
 }
 
 type ListSectionResp struct {
@@ -5931,8 +6305,9 @@ func (resp *ListSectionResp) Success() bool {
 }
 
 type PatchSectionReqBodyBuilder struct {
-	section          *InputSection // 要更新的自定义分组的数据，仅支持name, insert_after, insert_before
-	sectionFlag      bool
+	section     *InputSection // 要更新的自定义分组的数据，仅支持name, insert_after, insert_before
+	sectionFlag bool
+
 	updateFields     []string // 要更新的字段名
 	updateFieldsFlag bool
 }
@@ -6057,8 +6432,9 @@ func (builder *PatchSectionReqBuilder) Build() *PatchSectionReq {
 }
 
 type PatchSectionReqBody struct {
-	Section      *InputSection `json:"section,omitempty"`       // 要更新的自定义分组的数据，仅支持name, insert_after, insert_before
-	UpdateFields []string      `json:"update_fields,omitempty"` // 要更新的字段名
+	Section *InputSection `json:"section,omitempty"` // 要更新的自定义分组的数据，仅支持name, insert_after, insert_before
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 要更新的字段名
 }
 
 type PatchSectionReq struct {
@@ -6172,9 +6548,11 @@ type TasksSectionReq struct {
 }
 
 type TasksSectionRespData struct {
-	Items     []*TaskSummary `json:"items,omitempty"`      // 任务摘要信息
-	PageToken *string        `json:"page_token,omitempty"` // 获取下一页的分页标记，无更多数据时返回空
-	HasMore   *bool          `json:"has_more,omitempty"`   // 是否有更多数据
+	Items []*TaskSummary `json:"items,omitempty"` // 任务摘要信息
+
+	PageToken *string `json:"page_token,omitempty"` // 获取下一页的分页标记，无更多数据时返回空
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
 }
 
 type TasksSectionResp struct {
@@ -6300,8 +6678,9 @@ func (resp *AddDependenciesTaskResp) Success() bool {
 }
 
 type AddMembersTaskReqBodyBuilder struct {
-	members         []*Member // 要添加的members列表
-	membersFlag     bool
+	members     []*Member // 要添加的members列表
+	membersFlag bool
+
 	clientToken     string // 幂等token，如果提供则实现幂等行为
 	clientTokenFlag bool
 }
@@ -6426,8 +6805,9 @@ func (builder *AddMembersTaskReqBuilder) Build() *AddMembersTaskReq {
 }
 
 type AddMembersTaskReqBody struct {
-	Members     []*Member `json:"members,omitempty"`      // 要添加的members列表
-	ClientToken *string   `json:"client_token,omitempty"` // 幂等token，如果提供则实现幂等行为
+	Members []*Member `json:"members,omitempty"` // 要添加的members列表
+
+	ClientToken *string `json:"client_token,omitempty"` // 幂等token，如果提供则实现幂等行为
 }
 
 type AddMembersTaskReq struct {
@@ -6573,8 +6953,9 @@ func (resp *AddRemindersTaskResp) Success() bool {
 type AddTasklistTaskReqBodyBuilder struct {
 	tasklistGuid     string // 要添加到的清单的全局唯一ID
 	tasklistGuidFlag bool
-	sectionGuid      string // 要添加到清单的自定义分组全局唯一ID，如不填写表示添加到默认分组
-	sectionGuidFlag  bool
+
+	sectionGuid     string // 要添加到清单的自定义分组全局唯一ID，如不填写表示添加到默认分组
+	sectionGuidFlag bool
 }
 
 func NewAddTasklistTaskReqBodyBuilder() *AddTasklistTaskReqBodyBuilder {
@@ -6698,7 +7079,8 @@ func (builder *AddTasklistTaskReqBuilder) Build() *AddTasklistTaskReq {
 
 type AddTasklistTaskReqBody struct {
 	TasklistGuid *string `json:"tasklist_guid,omitempty"` // 要添加到的清单的全局唯一ID
-	SectionGuid  *string `json:"section_guid,omitempty"`  // 要添加到清单的自定义分组全局唯一ID，如不填写表示添加到默认分组
+
+	SectionGuid *string `json:"section_guid,omitempty"` // 要添加到清单的自定义分组全局唯一ID，如不填写表示添加到默认分组
 }
 
 type AddTasklistTaskReq struct {
@@ -6945,9 +7327,11 @@ type ListTaskReq struct {
 }
 
 type ListTaskRespData struct {
-	Items     []*Task `json:"items,omitempty"`      // 返回的任务列表
+	Items []*Task `json:"items,omitempty"` // 返回的任务列表
+
 	PageToken *string `json:"page_token,omitempty"` // 获取下一次分页的分页标记
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否有更多数据
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
 }
 
 type ListTaskResp struct {
@@ -6961,8 +7345,9 @@ func (resp *ListTaskResp) Success() bool {
 }
 
 type PatchTaskReqBodyBuilder struct {
-	task             *InputTask // 要更新的任务数据，只需要写明要更新的字段
-	taskFlag         bool
+	task     *InputTask // 要更新的任务数据，只需要写明要更新的字段
+	taskFlag bool
+
 	updateFields     []string // 要更新的字段名称。支持summary, description, due, start, completed_at, extra, repeat_rule, custom_complete, mode, is_milestone, custom_fields。
 	updateFieldsFlag bool
 }
@@ -7087,8 +7472,9 @@ func (builder *PatchTaskReqBuilder) Build() *PatchTaskReq {
 }
 
 type PatchTaskReqBody struct {
-	Task         *InputTask `json:"task,omitempty"`          // 要更新的任务数据，只需要写明要更新的字段
-	UpdateFields []string   `json:"update_fields,omitempty"` // 要更新的字段名称。支持summary, description, due, start, completed_at, extra, repeat_rule, custom_complete, mode, is_milestone, custom_fields。
+	Task *InputTask `json:"task,omitempty"` // 要更新的任务数据，只需要写明要更新的字段
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 要更新的字段名称。支持summary, description, due, start, completed_at, extra, repeat_rule, custom_complete, mode, is_milestone, custom_fields。
 }
 
 type PatchTaskReq struct {
@@ -7762,9 +8148,11 @@ type ListTaskSubtaskReq struct {
 }
 
 type ListTaskSubtaskRespData struct {
-	Items     []*Task `json:"items,omitempty"`      // 子任务列表
+	Items []*Task `json:"items,omitempty"` // 子任务列表
+
 	PageToken *string `json:"page_token,omitempty"` // 用于返回下一个分页的token
-	HasMore   *bool   `json:"has_more,omitempty"`   // 是否还有下一页数据。
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一页数据。
 }
 
 type ListTaskSubtaskResp struct {
@@ -8107,9 +8495,11 @@ type ListTasklistReq struct {
 }
 
 type ListTasklistRespData struct {
-	Items     []*Tasklist `json:"items,omitempty"`      // 清单数据列表
-	PageToken *string     `json:"page_token,omitempty"` // 用于获取下一页的分页标记
-	HasMore   *bool       `json:"has_more,omitempty"`   // 是否有更多数据
+	Items []*Tasklist `json:"items,omitempty"` // 清单数据列表
+
+	PageToken *string `json:"page_token,omitempty"` // 用于获取下一页的分页标记
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
 }
 
 type ListTasklistResp struct {
@@ -8123,10 +8513,12 @@ func (resp *ListTasklistResp) Success() bool {
 }
 
 type PatchTasklistReqBodyBuilder struct {
-	tasklist              *InputTasklist // 要更新清单的数据
-	tasklistFlag          bool
-	updateFields          []string // 要更新的字段名，只支持更新"owner", "name"两个字段
-	updateFieldsFlag      bool
+	tasklist     *InputTasklist // 要更新清单的数据
+	tasklistFlag bool
+
+	updateFields     []string // 要更新的字段名，只支持更新"owner", "name"两个字段
+	updateFieldsFlag bool
+
 	originOwnerToRole     string // 该字段表示如果更新了新的负责人，则将原负责人设为指定的协作人角色。仅在update_fields包含owner字段时生效。根据清单的角色设计方式，不允许提前为清单的负责人添加其他角色，但负责人更新后，原有负责人会无法访问该清单。该字段可以帮助避免原负责人彻底退出清单。
 	originOwnerToRoleFlag bool
 }
@@ -8277,9 +8669,11 @@ func (builder *PatchTasklistReqBuilder) Build() *PatchTasklistReq {
 }
 
 type PatchTasklistReqBody struct {
-	Tasklist          *InputTasklist `json:"tasklist,omitempty"`             // 要更新清单的数据
-	UpdateFields      []string       `json:"update_fields,omitempty"`        // 要更新的字段名，只支持更新"owner", "name"两个字段
-	OriginOwnerToRole *string        `json:"origin_owner_to_role,omitempty"` // 该字段表示如果更新了新的负责人，则将原负责人设为指定的协作人角色。仅在update_fields包含owner字段时生效。根据清单的角色设计方式，不允许提前为清单的负责人添加其他角色，但负责人更新后，原有负责人会无法访问该清单。该字段可以帮助避免原负责人彻底退出清单。
+	Tasklist *InputTasklist `json:"tasklist,omitempty"` // 要更新清单的数据
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 要更新的字段名，只支持更新"owner", "name"两个字段
+
+	OriginOwnerToRole *string `json:"origin_owner_to_role,omitempty"` // 该字段表示如果更新了新的负责人，则将原负责人设为指定的协作人角色。仅在update_fields包含owner字段时生效。根据清单的角色设计方式，不允许提前为清单的负责人添加其他角色，但负责人更新后，原有负责人会无法访问该清单。该字段可以帮助避免原负责人彻底退出清单。
 }
 
 type PatchTasklistReq struct {
@@ -8504,9 +8898,11 @@ type TasksTasklistReq struct {
 }
 
 type TasksTasklistRespData struct {
-	Items     []*TaskSummary `json:"items,omitempty"`      // 任务摘要数据
-	PageToken *string        `json:"page_token,omitempty"` // 用于获取下一页的分页标记，最后一页时发返回空
-	HasMore   *bool          `json:"has_more,omitempty"`   // 是否有更多数据
+	Items []*TaskSummary `json:"items,omitempty"` // 任务摘要数据
+
+	PageToken *string `json:"page_token,omitempty"` // 用于获取下一页的分页标记，最后一页时发返回空
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有更多数据
 }
 
 type TasksTasklistResp struct {
@@ -8760,8 +9156,9 @@ func (resp *ListTasklistActivitySubscriptionResp) Success() bool {
 type PatchTasklistActivitySubscriptionReqBodyBuilder struct {
 	activitySubscription     *TasklistActivitySubscription // 要更新的订阅数据
 	activitySubscriptionFlag bool
-	updateFields             []string // 要更新的字段
-	updateFieldsFlag         bool
+
+	updateFields     []string // 要更新的字段
+	updateFieldsFlag bool
 }
 
 func NewPatchTasklistActivitySubscriptionReqBodyBuilder() *PatchTasklistActivitySubscriptionReqBodyBuilder {
@@ -8893,7 +9290,8 @@ func (builder *PatchTasklistActivitySubscriptionReqBuilder) Build() *PatchTaskli
 
 type PatchTasklistActivitySubscriptionReqBody struct {
 	ActivitySubscription *TasklistActivitySubscription `json:"activity_subscription,omitempty"` // 要更新的订阅数据
-	UpdateFields         []string                      `json:"update_fields,omitempty"`         // 要更新的字段
+
+	UpdateFields []string `json:"update_fields,omitempty"` // 要更新的字段
 }
 
 type PatchTasklistActivitySubscriptionReq struct {

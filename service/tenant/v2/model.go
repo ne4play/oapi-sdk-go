@@ -19,20 +19,26 @@ import (
 
 type Avatar struct {
 	AvatarOrigin *string `json:"avatar_origin,omitempty"` // 企业头像
-	Avatar72     *string `json:"avatar_72,omitempty"`     // 企业头像 72x72
-	Avatar240    *string `json:"avatar_240,omitempty"`    // 企业头像 240x240
-	Avatar640    *string `json:"avatar_640,omitempty"`    // 企业头像 640x640
+
+	Avatar72 *string `json:"avatar_72,omitempty"` // 企业头像 72x72
+
+	Avatar240 *string `json:"avatar_240,omitempty"` // 企业头像 240x240
+
+	Avatar640 *string `json:"avatar_640,omitempty"` // 企业头像 640x640
 }
 
 type AvatarBuilder struct {
 	avatarOrigin     string // 企业头像
 	avatarOriginFlag bool
-	avatar72         string // 企业头像 72x72
-	avatar72Flag     bool
-	avatar240        string // 企业头像 240x240
-	avatar240Flag    bool
-	avatar640        string // 企业头像 640x640
-	avatar640Flag    bool
+
+	avatar72     string // 企业头像 72x72
+	avatar72Flag bool
+
+	avatar240     string // 企业头像 240x240
+	avatar240Flag bool
+
+	avatar640     string // 企业头像 640x640
+	avatar640Flag bool
 }
 
 func NewAvatarBuilder() *AvatarBuilder {
@@ -98,13 +104,15 @@ func (builder *AvatarBuilder) Build() *Avatar {
 }
 
 type DepartmentId struct {
-	DepartmentId     *string `json:"department_id,omitempty"`      //
+	DepartmentId *string `json:"department_id,omitempty"` //
+
 	OpenDepartmentId *string `json:"open_department_id,omitempty"` //
 }
 
 type DepartmentIdBuilder struct {
-	departmentId         string //
-	departmentIdFlag     bool
+	departmentId     string //
+	departmentIdFlag bool
+
 	openDepartmentId     string //
 	openDepartmentIdFlag bool
 }
@@ -143,15 +151,19 @@ func (builder *DepartmentIdBuilder) Build() *DepartmentId {
 
 type ProductI18nName struct {
 	ZhCn *string `json:"zh_cn,omitempty"` // 商业化产品的中文名
+
 	JaJp *string `json:"ja_jp,omitempty"` // 商业化产品的日文名
+
 	EnUs *string `json:"en_us,omitempty"` // 商业化产品的英文名
 }
 
 type ProductI18nNameBuilder struct {
 	zhCn     string // 商业化产品的中文名
 	zhCnFlag bool
+
 	jaJp     string // 商业化产品的日文名
 	jaJpFlag bool
+
 	enUs     string // 商业化产品的英文名
 	enUsFlag bool
 }
@@ -206,27 +218,37 @@ func (builder *ProductI18nNameBuilder) Build() *ProductI18nName {
 }
 
 type Tenant struct {
-	Name      *string `json:"name,omitempty"`       // 企业名称
+	Name *string `json:"name,omitempty"` // 企业名称
+
 	DisplayId *string `json:"display_id,omitempty"` // 企业编号，平台内唯一
-	TenantTag *int    `json:"tenant_tag,omitempty"` // 个人版/团队版标志
+
+	TenantTag *int `json:"tenant_tag,omitempty"` // 个人版/团队版标志
+
 	TenantKey *string `json:"tenant_key,omitempty"` // 企业标识
-	Avatar    *Avatar `json:"avatar,omitempty"`     // 企业头像
-	Domain    *string `json:"domain,omitempty"`     // 企业完整域名。企业域名可用于企业成员访问管理后台、云文档等含URL地址的网页。
+
+	Avatar *Avatar `json:"avatar,omitempty"` // 企业头像
+
+	Domain *string `json:"domain,omitempty"` // 企业完整域名。企业域名可用于企业成员访问管理后台、云文档等含URL地址的网页。
 }
 
 type TenantBuilder struct {
-	name          string // 企业名称
-	nameFlag      bool
+	name     string // 企业名称
+	nameFlag bool
+
 	displayId     string // 企业编号，平台内唯一
 	displayIdFlag bool
+
 	tenantTag     int // 个人版/团队版标志
 	tenantTagFlag bool
+
 	tenantKey     string // 企业标识
 	tenantKeyFlag bool
-	avatar        *Avatar // 企业头像
-	avatarFlag    bool
-	domain        string // 企业完整域名。企业域名可用于企业成员访问管理后台、云文档等含URL地址的网页。
-	domainFlag    bool
+
+	avatar     *Avatar // 企业头像
+	avatarFlag bool
+
+	domain     string // 企业完整域名。企业域名可用于企业成员访问管理后台、云文档等含URL地址的网页。
+	domainFlag bool
 }
 
 func NewTenantBuilder() *TenantBuilder {
@@ -317,33 +339,47 @@ func (builder *TenantBuilder) Build() *Tenant {
 }
 
 type TenantAssignInfo struct {
-	SubscriptionId *string          `json:"subscription_id,omitempty"`  // 席位id
-	LicensePlanKey *string          `json:"license_plan_key,omitempty"` // license_plan_key
-	ProductName    *string          `json:"product_name,omitempty"`     // 商业化产品名称
-	I18nName       *ProductI18nName `json:"i18n_name,omitempty"`        // 国际化名称
-	TotalSeats     *string          `json:"total_seats,omitempty"`      // 席位总数
-	AssignedSeats  *string          `json:"assigned_seats,omitempty"`   // 已分配席位数
-	StartTime      *string          `json:"start_time,omitempty"`       // 席位起始时间
-	EndTime        *string          `json:"end_time,omitempty"`         // 席位结束时间
+	SubscriptionId *string `json:"subscription_id,omitempty"` // 席位id
+
+	LicensePlanKey *string `json:"license_plan_key,omitempty"` // license_plan_key
+
+	ProductName *string `json:"product_name,omitempty"` // 商业化产品名称
+
+	I18nName *ProductI18nName `json:"i18n_name,omitempty"` // 国际化名称
+
+	TotalSeats *string `json:"total_seats,omitempty"` // 席位总数
+
+	AssignedSeats *string `json:"assigned_seats,omitempty"` // 已分配席位数
+
+	StartTime *string `json:"start_time,omitempty"` // 席位起始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 席位结束时间
 }
 
 type TenantAssignInfoBuilder struct {
 	subscriptionId     string // 席位id
 	subscriptionIdFlag bool
+
 	licensePlanKey     string // license_plan_key
 	licensePlanKeyFlag bool
-	productName        string // 商业化产品名称
-	productNameFlag    bool
-	i18nName           *ProductI18nName // 国际化名称
-	i18nNameFlag       bool
-	totalSeats         string // 席位总数
-	totalSeatsFlag     bool
-	assignedSeats      string // 已分配席位数
-	assignedSeatsFlag  bool
-	startTime          string // 席位起始时间
-	startTimeFlag      bool
-	endTime            string // 席位结束时间
-	endTimeFlag        bool
+
+	productName     string // 商业化产品名称
+	productNameFlag bool
+
+	i18nName     *ProductI18nName // 国际化名称
+	i18nNameFlag bool
+
+	totalSeats     string // 席位总数
+	totalSeatsFlag bool
+
+	assignedSeats     string // 已分配席位数
+	assignedSeatsFlag bool
+
+	startTime     string // 席位起始时间
+	startTimeFlag bool
+
+	endTime     string // 席位结束时间
+	endTimeFlag bool
 }
 
 func NewTenantAssignInfoBuilder() *TenantAssignInfoBuilder {
