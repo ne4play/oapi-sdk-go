@@ -416,7 +416,7 @@ func (c *Client) handleDataFrame(ctx context.Context, frame Frame) {
 
 	var err error
 	var rsp interface{}
-	start := time.Now().UnixMilli()
+	start := time.Now().UnixNano() / int64(time.Millisecond) // 兼容 go < 1.17
 	switch MessageType(type_) {
 	case MessageTypeEvent:
 		rsp, err = c.eventHandler.Do(ctx, pl)
@@ -425,7 +425,7 @@ func (c *Client) handleDataFrame(ctx context.Context, frame Frame) {
 	default:
 		return
 	}
-	end := time.Now().UnixMilli()
+	end := time.Now().UnixNano() / int64(time.Millisecond)
 	hs.Add(HeaderBizRt, strconv.FormatInt(end-start, 10))
 
 	resp := NewResponseByCode(http.StatusOK)
