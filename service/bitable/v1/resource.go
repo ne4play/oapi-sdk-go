@@ -19,6 +19,7 @@ type V1 struct {
 	AppTableFormField *appTableFormField // 表单
 	AppTableRecord    *appTableRecord    // 记录
 	AppTableView      *appTableView      // 视图
+	AppWorkflow       *appWorkflow       // app.workflow
 }
 
 func New(config *larkcore.Config) *V1 {
@@ -33,6 +34,7 @@ func New(config *larkcore.Config) *V1 {
 		AppTableFormField: &appTableFormField{config: config},
 		AppTableRecord:    &appTableRecord{config: config},
 		AppTableView:      &appTableView{config: config},
+		AppWorkflow:       &appWorkflow{config: config},
 	}
 }
 
@@ -64,6 +66,9 @@ type appTableRecord struct {
 	config *larkcore.Config
 }
 type appTableView struct {
+	config *larkcore.Config
+}
+type appWorkflow struct {
 	config *larkcore.Config
 }
 
@@ -1334,6 +1339,58 @@ func (a *appTableView) Patch(ctx context.Context, req *PatchAppTableViewReq, opt
 	}
 	// 反序列响应结果
 	resp := &PatchAppTableViewResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// List
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=bitable&resource=app.workflow&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/bitablev1/list_appWorkflow.go
+func (a *appWorkflow) List(ctx context.Context, req *ListAppWorkflowReq, options ...larkcore.RequestOptionFunc) (*ListAppWorkflowResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/bitable/v1/apps/:app_token/workflows"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListAppWorkflowResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Update
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=update&project=bitable&resource=app.workflow&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/bitablev1/update_appWorkflow.go
+func (a *appWorkflow) Update(ctx context.Context, req *UpdateAppWorkflowReq, options ...larkcore.RequestOptionFunc) (*UpdateAppWorkflowResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/bitable/v1/apps/:app_token/workflows/:workflow_id"
+	apiReq.HttpMethod = http.MethodPut
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeUser, larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &UpdateAppWorkflowResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, a.config)
 	if err != nil {
 		return nil, err

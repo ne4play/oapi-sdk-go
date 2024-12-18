@@ -13594,6 +13594,30 @@ type OffboardingInfo struct {
 	BlockReasonExplanation *string `json:"block_reason_explanation,omitempty"` // 屏蔽原因说明
 
 	CustomFields []*CustomFieldData `json:"custom_fields,omitempty"` // 自定义字段
+
+	RetainAccount *bool `json:"retain_account,omitempty"` // 离职是否保留飞书账号
+
+	SocialInsuranceEndDate *string `json:"social_insurance_end_date,omitempty"` // 社保停保年月
+
+	ProvidentFundEndDate *string `json:"provident_fund_end_date,omitempty"` // 公积金截止年月
+
+	EnforceNoncompeteAgreement *bool `json:"enforce_noncompete_agreement,omitempty"` // 是否启动竞业
+
+	NoncompeteAgreementId *string `json:"noncompete_agreement_id,omitempty"` // 竞业合同ID
+
+	NoncompeteAgreementCompany *string `json:"noncompete_agreement_company,omitempty"` // 竞业公司ID
+
+	NoncompeteAgreementStartDate *string `json:"noncompete_agreement_start_date,omitempty"` // 竞业开始日期
+
+	NoncompeteAgreementEndDate *string `json:"noncompete_agreement_end_date,omitempty"` // 竞业结束日期
+
+	SignType *Enum `json:"sign_type,omitempty"` // 签署方式
+
+	SignatureFile *string `json:"signature_file,omitempty"` // 签署文件ID列表
+
+	LastAttendanceDate *string `json:"last_attendance_date,omitempty"` // 最后出勤日
+
+	IsTransferWithWorkforce *bool `json:"is_transfer_with_workforce,omitempty"` // 是否带编转移
 }
 
 type OffboardingInfoBuilder struct {
@@ -13632,6 +13656,42 @@ type OffboardingInfoBuilder struct {
 
 	customFields     []*CustomFieldData // 自定义字段
 	customFieldsFlag bool
+
+	retainAccount     bool // 离职是否保留飞书账号
+	retainAccountFlag bool
+
+	socialInsuranceEndDate     string // 社保停保年月
+	socialInsuranceEndDateFlag bool
+
+	providentFundEndDate     string // 公积金截止年月
+	providentFundEndDateFlag bool
+
+	enforceNoncompeteAgreement     bool // 是否启动竞业
+	enforceNoncompeteAgreementFlag bool
+
+	noncompeteAgreementId     string // 竞业合同ID
+	noncompeteAgreementIdFlag bool
+
+	noncompeteAgreementCompany     string // 竞业公司ID
+	noncompeteAgreementCompanyFlag bool
+
+	noncompeteAgreementStartDate     string // 竞业开始日期
+	noncompeteAgreementStartDateFlag bool
+
+	noncompeteAgreementEndDate     string // 竞业结束日期
+	noncompeteAgreementEndDateFlag bool
+
+	signType     *Enum // 签署方式
+	signTypeFlag bool
+
+	signatureFile     string // 签署文件ID列表
+	signatureFileFlag bool
+
+	lastAttendanceDate     string // 最后出勤日
+	lastAttendanceDateFlag bool
+
+	isTransferWithWorkforce     bool // 是否带编转移
+	isTransferWithWorkforceFlag bool
 }
 
 func NewOffboardingInfoBuilder() *OffboardingInfoBuilder {
@@ -13747,6 +13807,114 @@ func (builder *OffboardingInfoBuilder) CustomFields(customFields []*CustomFieldD
 	return builder
 }
 
+// 离职是否保留飞书账号
+//
+// 示例值：false
+func (builder *OffboardingInfoBuilder) RetainAccount(retainAccount bool) *OffboardingInfoBuilder {
+	builder.retainAccount = retainAccount
+	builder.retainAccountFlag = true
+	return builder
+}
+
+// 社保停保年月
+//
+// 示例值：2022-02
+func (builder *OffboardingInfoBuilder) SocialInsuranceEndDate(socialInsuranceEndDate string) *OffboardingInfoBuilder {
+	builder.socialInsuranceEndDate = socialInsuranceEndDate
+	builder.socialInsuranceEndDateFlag = true
+	return builder
+}
+
+// 公积金截止年月
+//
+// 示例值：2022-02
+func (builder *OffboardingInfoBuilder) ProvidentFundEndDate(providentFundEndDate string) *OffboardingInfoBuilder {
+	builder.providentFundEndDate = providentFundEndDate
+	builder.providentFundEndDateFlag = true
+	return builder
+}
+
+// 是否启动竞业
+//
+// 示例值：false
+func (builder *OffboardingInfoBuilder) EnforceNoncompeteAgreement(enforceNoncompeteAgreement bool) *OffboardingInfoBuilder {
+	builder.enforceNoncompeteAgreement = enforceNoncompeteAgreement
+	builder.enforceNoncompeteAgreementFlag = true
+	return builder
+}
+
+// 竞业合同ID
+//
+// 示例值：123
+func (builder *OffboardingInfoBuilder) NoncompeteAgreementId(noncompeteAgreementId string) *OffboardingInfoBuilder {
+	builder.noncompeteAgreementId = noncompeteAgreementId
+	builder.noncompeteAgreementIdFlag = true
+	return builder
+}
+
+// 竞业公司ID
+//
+// 示例值：123
+func (builder *OffboardingInfoBuilder) NoncompeteAgreementCompany(noncompeteAgreementCompany string) *OffboardingInfoBuilder {
+	builder.noncompeteAgreementCompany = noncompeteAgreementCompany
+	builder.noncompeteAgreementCompanyFlag = true
+	return builder
+}
+
+// 竞业开始日期
+//
+// 示例值：2022-02-08
+func (builder *OffboardingInfoBuilder) NoncompeteAgreementStartDate(noncompeteAgreementStartDate string) *OffboardingInfoBuilder {
+	builder.noncompeteAgreementStartDate = noncompeteAgreementStartDate
+	builder.noncompeteAgreementStartDateFlag = true
+	return builder
+}
+
+// 竞业结束日期
+//
+// 示例值：2022-02-08
+func (builder *OffboardingInfoBuilder) NoncompeteAgreementEndDate(noncompeteAgreementEndDate string) *OffboardingInfoBuilder {
+	builder.noncompeteAgreementEndDate = noncompeteAgreementEndDate
+	builder.noncompeteAgreementEndDateFlag = true
+	return builder
+}
+
+// 签署方式
+//
+// 示例值：2022-02-08
+func (builder *OffboardingInfoBuilder) SignType(signType *Enum) *OffboardingInfoBuilder {
+	builder.signType = signType
+	builder.signTypeFlag = true
+	return builder
+}
+
+// 签署文件ID列表
+//
+// 示例值：["123","456"]
+func (builder *OffboardingInfoBuilder) SignatureFile(signatureFile string) *OffboardingInfoBuilder {
+	builder.signatureFile = signatureFile
+	builder.signatureFileFlag = true
+	return builder
+}
+
+// 最后出勤日
+//
+// 示例值：2022-02-08
+func (builder *OffboardingInfoBuilder) LastAttendanceDate(lastAttendanceDate string) *OffboardingInfoBuilder {
+	builder.lastAttendanceDate = lastAttendanceDate
+	builder.lastAttendanceDateFlag = true
+	return builder
+}
+
+// 是否带编转移
+//
+// 示例值：false
+func (builder *OffboardingInfoBuilder) IsTransferWithWorkforce(isTransferWithWorkforce bool) *OffboardingInfoBuilder {
+	builder.isTransferWithWorkforce = isTransferWithWorkforce
+	builder.isTransferWithWorkforceFlag = true
+	return builder
+}
+
 func (builder *OffboardingInfoBuilder) Build() *OffboardingInfo {
 	req := &OffboardingInfo{}
 	if builder.employmentIdFlag {
@@ -13791,6 +13959,53 @@ func (builder *OffboardingInfoBuilder) Build() *OffboardingInfo {
 	}
 	if builder.customFieldsFlag {
 		req.CustomFields = builder.customFields
+	}
+	if builder.retainAccountFlag {
+		req.RetainAccount = &builder.retainAccount
+
+	}
+	if builder.socialInsuranceEndDateFlag {
+		req.SocialInsuranceEndDate = &builder.socialInsuranceEndDate
+
+	}
+	if builder.providentFundEndDateFlag {
+		req.ProvidentFundEndDate = &builder.providentFundEndDate
+
+	}
+	if builder.enforceNoncompeteAgreementFlag {
+		req.EnforceNoncompeteAgreement = &builder.enforceNoncompeteAgreement
+
+	}
+	if builder.noncompeteAgreementIdFlag {
+		req.NoncompeteAgreementId = &builder.noncompeteAgreementId
+
+	}
+	if builder.noncompeteAgreementCompanyFlag {
+		req.NoncompeteAgreementCompany = &builder.noncompeteAgreementCompany
+
+	}
+	if builder.noncompeteAgreementStartDateFlag {
+		req.NoncompeteAgreementStartDate = &builder.noncompeteAgreementStartDate
+
+	}
+	if builder.noncompeteAgreementEndDateFlag {
+		req.NoncompeteAgreementEndDate = &builder.noncompeteAgreementEndDate
+
+	}
+	if builder.signTypeFlag {
+		req.SignType = builder.signType
+	}
+	if builder.signatureFileFlag {
+		req.SignatureFile = &builder.signatureFile
+
+	}
+	if builder.lastAttendanceDateFlag {
+		req.LastAttendanceDate = &builder.lastAttendanceDate
+
+	}
+	if builder.isTransferWithWorkforceFlag {
+		req.IsTransferWithWorkforce = &builder.isTransferWithWorkforce
+
 	}
 	return req
 }
@@ -26002,6 +26217,12 @@ type SearchOffboardingReqBodyBuilder struct {
 	applyInitiatingTimeEnd     string // 离职审批发起时间 - 搜索范围结束
 	applyInitiatingTimeEndFlag bool
 
+	applyFinishedTimeStart     string // 离职审批结束时间 - 搜索范围开始，需要与搜索范围结束一同使用
+	applyFinishedTimeStartFlag bool
+
+	applyFinishedTimeEnd     string // 离职审批结束时间 - 搜索范围结束
+	applyFinishedTimeEndFlag bool
+
 	expectedOffboardingDateStart     string // 期望离职日期-搜索范围开始，需要与搜索范围结束一同使用
 	expectedOffboardingDateStartFlag bool
 
@@ -26053,6 +26274,24 @@ func (builder *SearchOffboardingReqBodyBuilder) ApplyInitiatingTimeStart(applyIn
 func (builder *SearchOffboardingReqBodyBuilder) ApplyInitiatingTimeEnd(applyInitiatingTimeEnd string) *SearchOffboardingReqBodyBuilder {
 	builder.applyInitiatingTimeEnd = applyInitiatingTimeEnd
 	builder.applyInitiatingTimeEndFlag = true
+	return builder
+}
+
+// 离职审批结束时间 - 搜索范围开始，需要与搜索范围结束一同使用
+//
+// 示例值：1641007353
+func (builder *SearchOffboardingReqBodyBuilder) ApplyFinishedTimeStart(applyFinishedTimeStart string) *SearchOffboardingReqBodyBuilder {
+	builder.applyFinishedTimeStart = applyFinishedTimeStart
+	builder.applyFinishedTimeStartFlag = true
+	return builder
+}
+
+// 离职审批结束时间 - 搜索范围结束
+//
+// 示例值：1641007353
+func (builder *SearchOffboardingReqBodyBuilder) ApplyFinishedTimeEnd(applyFinishedTimeEnd string) *SearchOffboardingReqBodyBuilder {
+	builder.applyFinishedTimeEnd = applyFinishedTimeEnd
+	builder.applyFinishedTimeEndFlag = true
 	return builder
 }
 
@@ -26130,6 +26369,12 @@ func (builder *SearchOffboardingReqBodyBuilder) Build() *SearchOffboardingReqBod
 	if builder.applyInitiatingTimeEndFlag {
 		req.ApplyInitiatingTimeEnd = &builder.applyInitiatingTimeEnd
 	}
+	if builder.applyFinishedTimeStartFlag {
+		req.ApplyFinishedTimeStart = &builder.applyFinishedTimeStart
+	}
+	if builder.applyFinishedTimeEndFlag {
+		req.ApplyFinishedTimeEnd = &builder.applyFinishedTimeEnd
+	}
 	if builder.expectedOffboardingDateStartFlag {
 		req.ExpectedOffboardingDateStart = &builder.expectedOffboardingDateStart
 	}
@@ -26161,6 +26406,10 @@ type SearchOffboardingPathReqBodyBuilder struct {
 	applyInitiatingTimeStartFlag     bool
 	applyInitiatingTimeEnd           string
 	applyInitiatingTimeEndFlag       bool
+	applyFinishedTimeStart           string
+	applyFinishedTimeStartFlag       bool
+	applyFinishedTimeEnd             string
+	applyFinishedTimeEndFlag         bool
 	expectedOffboardingDateStart     string
 	expectedOffboardingDateStartFlag bool
 	expectedOffboardingDateEnd       string
@@ -26206,6 +26455,24 @@ func (builder *SearchOffboardingPathReqBodyBuilder) ApplyInitiatingTimeStart(app
 func (builder *SearchOffboardingPathReqBodyBuilder) ApplyInitiatingTimeEnd(applyInitiatingTimeEnd string) *SearchOffboardingPathReqBodyBuilder {
 	builder.applyInitiatingTimeEnd = applyInitiatingTimeEnd
 	builder.applyInitiatingTimeEndFlag = true
+	return builder
+}
+
+// 离职审批结束时间 - 搜索范围开始，需要与搜索范围结束一同使用
+//
+// 示例值：1641007353
+func (builder *SearchOffboardingPathReqBodyBuilder) ApplyFinishedTimeStart(applyFinishedTimeStart string) *SearchOffboardingPathReqBodyBuilder {
+	builder.applyFinishedTimeStart = applyFinishedTimeStart
+	builder.applyFinishedTimeStartFlag = true
+	return builder
+}
+
+// 离职审批结束时间 - 搜索范围结束
+//
+// 示例值：1641007353
+func (builder *SearchOffboardingPathReqBodyBuilder) ApplyFinishedTimeEnd(applyFinishedTimeEnd string) *SearchOffboardingPathReqBodyBuilder {
+	builder.applyFinishedTimeEnd = applyFinishedTimeEnd
+	builder.applyFinishedTimeEndFlag = true
 	return builder
 }
 
@@ -26282,6 +26549,12 @@ func (builder *SearchOffboardingPathReqBodyBuilder) Build() (*SearchOffboardingR
 	}
 	if builder.applyInitiatingTimeEndFlag {
 		req.ApplyInitiatingTimeEnd = &builder.applyInitiatingTimeEnd
+	}
+	if builder.applyFinishedTimeStartFlag {
+		req.ApplyFinishedTimeStart = &builder.applyFinishedTimeStart
+	}
+	if builder.applyFinishedTimeEndFlag {
+		req.ApplyFinishedTimeEnd = &builder.applyFinishedTimeEnd
 	}
 	if builder.expectedOffboardingDateStartFlag {
 		req.ExpectedOffboardingDateStart = &builder.expectedOffboardingDateStart
@@ -26373,6 +26646,10 @@ type SearchOffboardingReqBody struct {
 	ApplyInitiatingTimeStart *string `json:"apply_initiating_time_start,omitempty"` // 离职审批发起时间-搜索范围开始，需要与搜索范围结束一同使用
 
 	ApplyInitiatingTimeEnd *string `json:"apply_initiating_time_end,omitempty"` // 离职审批发起时间 - 搜索范围结束
+
+	ApplyFinishedTimeStart *string `json:"apply_finished_time_start,omitempty"` // 离职审批结束时间 - 搜索范围开始，需要与搜索范围结束一同使用
+
+	ApplyFinishedTimeEnd *string `json:"apply_finished_time_end,omitempty"` // 离职审批结束时间 - 搜索范围结束
 
 	ExpectedOffboardingDateStart *string `json:"expected_offboarding_date_start,omitempty"` // 期望离职日期-搜索范围开始，需要与搜索范围结束一同使用
 
@@ -28278,6 +28555,8 @@ type P2CommonDataMetaDataUpdatedV1Data struct {
 	ApiName *string `json:"api_name,omitempty"` // 对象 API Name
 
 	FieldChanges []string `json:"field_changes,omitempty"` // 变更的字段
+
+	MetadataType *string `json:"metadata_type,omitempty"` // 变更的元数据类型
 }
 
 type P2CommonDataMetaDataUpdatedV1 struct {

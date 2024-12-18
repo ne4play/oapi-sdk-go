@@ -68,6 +68,7 @@ const (
 const (
 	EmployeeTypeCreateUserApprovalEmployeeId = "employee_id" // 员工employeeId
 	EmployeeTypeCreateUserApprovalEmployeeNo = "employee_no" // 员工工号
+	EmployeeTypeCreateUserApprovalOpenId     = "open_id"     // 用户在某个应用中的身份
 )
 
 const (
@@ -88,11 +89,17 @@ const (
 const (
 	EmployeeTypeQueryUserApprovalEmployeeId = "employee_id" // 员工employeeId
 	EmployeeTypeQueryUserApprovalEmployeeNo = "employee_no" // 员工工号
+	EmployeeTypeQueryUserApprovalOpenId     = "open_id"     // 用户在某个应用中的身份
 )
 
 const (
 	EmployeeTypeBatchCreateUserDailyShiftEmployeeId = "employee_id" // 员工employeeId
 	EmployeeTypeBatchCreateUserDailyShiftEmployeeNo = "employee_no" // 员工工号
+)
+
+const (
+	EmployeeTypeBatchCreateTempUserDailyShiftEmployeeID = "employee_id" // employee_id
+	EmployeeTypeBatchCreateTempUserDailyShiftEmployeeNo = "employee_no" // employee_no
 )
 
 const (
@@ -5566,6 +5573,56 @@ func (builder *PunchTimeSimpleRuleBuilder) Build() *PunchTimeSimpleRule {
 	return req
 }
 
+type RegionPlace struct {
+	RegionLevel *string `json:"region_level,omitempty"` // 地理位置的等级 国家｜省｜市｜区 一共四个级别
+
+	RegionId *string `json:"region_id,omitempty"` // 地理位置的id，从标准地理库获取
+}
+
+type RegionPlaceBuilder struct {
+	regionLevel     string // 地理位置的等级 国家｜省｜市｜区 一共四个级别
+	regionLevelFlag bool
+
+	regionId     string // 地理位置的id，从标准地理库获取
+	regionIdFlag bool
+}
+
+func NewRegionPlaceBuilder() *RegionPlaceBuilder {
+	builder := &RegionPlaceBuilder{}
+	return builder
+}
+
+// 地理位置的等级 国家｜省｜市｜区 一共四个级别
+//
+// 示例值：l1
+func (builder *RegionPlaceBuilder) RegionLevel(regionLevel string) *RegionPlaceBuilder {
+	builder.regionLevel = regionLevel
+	builder.regionLevelFlag = true
+	return builder
+}
+
+// 地理位置的id，从标准地理库获取
+//
+// 示例值：6863333418483058189
+func (builder *RegionPlaceBuilder) RegionId(regionId string) *RegionPlaceBuilder {
+	builder.regionId = regionId
+	builder.regionIdFlag = true
+	return builder
+}
+
+func (builder *RegionPlaceBuilder) Build() *RegionPlace {
+	req := &RegionPlace{}
+	if builder.regionLevelFlag {
+		req.RegionLevel = &builder.regionLevel
+
+	}
+	if builder.regionIdFlag {
+		req.RegionId = &builder.regionId
+
+	}
+	return req
+}
+
 type ReportData struct {
 	UserId *string `json:"user_id,omitempty"` // 用户ID
 
@@ -5710,6 +5767,56 @@ func (builder *RestRuleBuilder) Build() *RestRule {
 	}
 	if builder.restEndTimeFlag {
 		req.RestEndTime = &builder.restEndTime
+
+	}
+	return req
+}
+
+type RestTimeFlexibleConfig struct {
+	NeedFlexible *bool `json:"need_flexible,omitempty"` // 是否有弹性
+
+	LateMins *int `json:"late_mins,omitempty"` // 向后弹的时间
+}
+
+type RestTimeFlexibleConfigBuilder struct {
+	needFlexible     bool // 是否有弹性
+	needFlexibleFlag bool
+
+	lateMins     int // 向后弹的时间
+	lateMinsFlag bool
+}
+
+func NewRestTimeFlexibleConfigBuilder() *RestTimeFlexibleConfigBuilder {
+	builder := &RestTimeFlexibleConfigBuilder{}
+	return builder
+}
+
+// 是否有弹性
+//
+// 示例值：false
+func (builder *RestTimeFlexibleConfigBuilder) NeedFlexible(needFlexible bool) *RestTimeFlexibleConfigBuilder {
+	builder.needFlexible = needFlexible
+	builder.needFlexibleFlag = true
+	return builder
+}
+
+// 向后弹的时间
+//
+// 示例值：0
+func (builder *RestTimeFlexibleConfigBuilder) LateMins(lateMins int) *RestTimeFlexibleConfigBuilder {
+	builder.lateMins = lateMins
+	builder.lateMinsFlag = true
+	return builder
+}
+
+func (builder *RestTimeFlexibleConfigBuilder) Build() *RestTimeFlexibleConfig {
+	req := &RestTimeFlexibleConfig{}
+	if builder.needFlexibleFlag {
+		req.NeedFlexible = &builder.needFlexible
+
+	}
+	if builder.lateMinsFlag {
+		req.LateMins = &builder.lateMins
 
 	}
 	return req
@@ -6018,6 +6125,8 @@ type Shift struct {
 	LateOffLateOnSetting *LateOffLateOnSetting `json:"late_off_late_on_setting,omitempty"` // 晚走次日晚到配置规则
 
 	Id *string `json:"id,omitempty"` // 班次id(更新班次时需要传递)
+
+	RestTimeFlexibleConfigs []*RestTimeFlexibleConfig `json:"rest_time_flexible_configs,omitempty"` // 休息弹性设置
 }
 
 type ShiftBuilder struct {
@@ -6077,6 +6186,9 @@ type ShiftBuilder struct {
 
 	id     string // 班次id(更新班次时需要传递)
 	idFlag bool
+
+	restTimeFlexibleConfigs     []*RestTimeFlexibleConfig // 休息弹性设置
+	restTimeFlexibleConfigsFlag bool
 }
 
 func NewShiftBuilder() *ShiftBuilder {
@@ -6255,6 +6367,15 @@ func (builder *ShiftBuilder) Id(id string) *ShiftBuilder {
 	return builder
 }
 
+// 休息弹性设置
+//
+// 示例值：
+func (builder *ShiftBuilder) RestTimeFlexibleConfigs(restTimeFlexibleConfigs []*RestTimeFlexibleConfig) *ShiftBuilder {
+	builder.restTimeFlexibleConfigs = restTimeFlexibleConfigs
+	builder.restTimeFlexibleConfigsFlag = true
+	return builder
+}
+
 func (builder *ShiftBuilder) Build() *Shift {
 	req := &Shift{}
 	if builder.shiftIdFlag {
@@ -6322,6 +6443,9 @@ func (builder *ShiftBuilder) Build() *Shift {
 	if builder.idFlag {
 		req.Id = &builder.id
 
+	}
+	if builder.restTimeFlexibleConfigsFlag {
+		req.RestTimeFlexibleConfigs = builder.restTimeFlexibleConfigs
 	}
 	return req
 }
@@ -9688,6 +9812,16 @@ type UserTrip struct {
 	CancelProcessId []string `json:"cancel_process_id,omitempty"` // 撤销流程实例 ID
 
 	ProcessId []string `json:"process_id,omitempty"` // 发起流程实例 ID
+
+	Departure *RegionPlace `json:"departure,omitempty"` // 出发地（只有一个）
+
+	Destinations []*RegionPlace `json:"destinations,omitempty"` // 目的地（可写多个）
+
+	Transportation []int `json:"transportation,omitempty"` // 交通工具（1 飞机，2 火车，3 汽车，4 高铁/动车，5 船，6 其他）
+
+	TripType *int `json:"trip_type,omitempty"` // 出差类型(1:单程 2:往返)
+
+	Remarks *string `json:"remarks,omitempty"` // 出差备注
 }
 
 type UserTripBuilder struct {
@@ -9720,6 +9854,21 @@ type UserTripBuilder struct {
 
 	processId     []string // 发起流程实例 ID
 	processIdFlag bool
+
+	departure     *RegionPlace // 出发地（只有一个）
+	departureFlag bool
+
+	destinations     []*RegionPlace // 目的地（可写多个）
+	destinationsFlag bool
+
+	transportation     []int // 交通工具（1 飞机，2 火车，3 汽车，4 高铁/动车，5 船，6 其他）
+	transportationFlag bool
+
+	tripType     int // 出差类型(1:单程 2:往返)
+	tripTypeFlag bool
+
+	remarks     string // 出差备注
+	remarksFlag bool
 }
 
 func NewUserTripBuilder() *UserTripBuilder {
@@ -9817,6 +9966,51 @@ func (builder *UserTripBuilder) ProcessId(processId []string) *UserTripBuilder {
 	return builder
 }
 
+// 出发地（只有一个）
+//
+// 示例值：
+func (builder *UserTripBuilder) Departure(departure *RegionPlace) *UserTripBuilder {
+	builder.departure = departure
+	builder.departureFlag = true
+	return builder
+}
+
+// 目的地（可写多个）
+//
+// 示例值：
+func (builder *UserTripBuilder) Destinations(destinations []*RegionPlace) *UserTripBuilder {
+	builder.destinations = destinations
+	builder.destinationsFlag = true
+	return builder
+}
+
+// 交通工具（1 飞机，2 火车，3 汽车，4 高铁/动车，5 船，6 其他）
+//
+// 示例值：
+func (builder *UserTripBuilder) Transportation(transportation []int) *UserTripBuilder {
+	builder.transportation = transportation
+	builder.transportationFlag = true
+	return builder
+}
+
+// 出差类型(1:单程 2:往返)
+//
+// 示例值：1
+func (builder *UserTripBuilder) TripType(tripType int) *UserTripBuilder {
+	builder.tripType = tripType
+	builder.tripTypeFlag = true
+	return builder
+}
+
+// 出差备注
+//
+// 示例值：出差备注
+func (builder *UserTripBuilder) Remarks(remarks string) *UserTripBuilder {
+	builder.remarks = remarks
+	builder.remarksFlag = true
+	return builder
+}
+
 func (builder *UserTripBuilder) Build() *UserTrip {
 	req := &UserTrip{}
 	if builder.approvalIdFlag {
@@ -9855,6 +10049,23 @@ func (builder *UserTripBuilder) Build() *UserTrip {
 	}
 	if builder.processIdFlag {
 		req.ProcessId = builder.processId
+	}
+	if builder.departureFlag {
+		req.Departure = builder.departure
+	}
+	if builder.destinationsFlag {
+		req.Destinations = builder.destinations
+	}
+	if builder.transportationFlag {
+		req.Transportation = builder.transportation
+	}
+	if builder.tripTypeFlag {
+		req.TripType = &builder.tripType
+
+	}
+	if builder.remarksFlag {
+		req.Remarks = &builder.remarks
+
 	}
 	return req
 }
@@ -12397,6 +12608,8 @@ type GetShiftRespData struct {
 	LateOffLateOnSetting *LateOffLateOnSetting `json:"late_off_late_on_setting,omitempty"` // 晚走次日晚到配置规则
 
 	Id *string `json:"id,omitempty"` // 班次id(更新班次时需要传递)
+
+	RestTimeFlexibleConfigs []*RestTimeFlexibleConfig `json:"rest_time_flexible_configs,omitempty"` // 休息弹性设置
 }
 
 type GetShiftResp struct {
@@ -12547,6 +12760,8 @@ type QueryShiftRespData struct {
 	LateOffLateOnSetting *LateOffLateOnSetting `json:"late_off_late_on_setting,omitempty"` // 晚走次日晚到配置规则
 
 	Id *string `json:"id,omitempty"` // 班次id(更新班次时需要传递)
+
+	RestTimeFlexibleConfigs []*RestTimeFlexibleConfig `json:"rest_time_flexible_configs,omitempty"` // 休息弹性设置
 }
 
 type QueryShiftResp struct {
@@ -13112,6 +13327,149 @@ type BatchCreateUserDailyShiftResp struct {
 }
 
 func (resp *BatchCreateUserDailyShiftResp) Success() bool {
+	return resp.Code == 0
+}
+
+type BatchCreateTempUserDailyShiftReqBodyBuilder struct {
+	userTmpDailyShifts     []*UserTmpDailyShift // 临时班表信息列表（数量限制50以内）
+	userTmpDailyShiftsFlag bool
+
+	operatorId     string // 操作人uid
+	operatorIdFlag bool
+}
+
+func NewBatchCreateTempUserDailyShiftReqBodyBuilder() *BatchCreateTempUserDailyShiftReqBodyBuilder {
+	builder := &BatchCreateTempUserDailyShiftReqBodyBuilder{}
+	return builder
+}
+
+// 临时班表信息列表（数量限制50以内）
+//
+// 示例值：
+func (builder *BatchCreateTempUserDailyShiftReqBodyBuilder) UserTmpDailyShifts(userTmpDailyShifts []*UserTmpDailyShift) *BatchCreateTempUserDailyShiftReqBodyBuilder {
+	builder.userTmpDailyShifts = userTmpDailyShifts
+	builder.userTmpDailyShiftsFlag = true
+	return builder
+}
+
+// 操作人uid
+//
+// 示例值：dd31248a
+func (builder *BatchCreateTempUserDailyShiftReqBodyBuilder) OperatorId(operatorId string) *BatchCreateTempUserDailyShiftReqBodyBuilder {
+	builder.operatorId = operatorId
+	builder.operatorIdFlag = true
+	return builder
+}
+
+func (builder *BatchCreateTempUserDailyShiftReqBodyBuilder) Build() *BatchCreateTempUserDailyShiftReqBody {
+	req := &BatchCreateTempUserDailyShiftReqBody{}
+	if builder.userTmpDailyShiftsFlag {
+		req.UserTmpDailyShifts = builder.userTmpDailyShifts
+	}
+	if builder.operatorIdFlag {
+		req.OperatorId = &builder.operatorId
+	}
+	return req
+}
+
+type BatchCreateTempUserDailyShiftPathReqBodyBuilder struct {
+	userTmpDailyShifts     []*UserTmpDailyShift
+	userTmpDailyShiftsFlag bool
+	operatorId             string
+	operatorIdFlag         bool
+}
+
+func NewBatchCreateTempUserDailyShiftPathReqBodyBuilder() *BatchCreateTempUserDailyShiftPathReqBodyBuilder {
+	builder := &BatchCreateTempUserDailyShiftPathReqBodyBuilder{}
+	return builder
+}
+
+// 临时班表信息列表（数量限制50以内）
+//
+// 示例值：
+func (builder *BatchCreateTempUserDailyShiftPathReqBodyBuilder) UserTmpDailyShifts(userTmpDailyShifts []*UserTmpDailyShift) *BatchCreateTempUserDailyShiftPathReqBodyBuilder {
+	builder.userTmpDailyShifts = userTmpDailyShifts
+	builder.userTmpDailyShiftsFlag = true
+	return builder
+}
+
+// 操作人uid
+//
+// 示例值：dd31248a
+func (builder *BatchCreateTempUserDailyShiftPathReqBodyBuilder) OperatorId(operatorId string) *BatchCreateTempUserDailyShiftPathReqBodyBuilder {
+	builder.operatorId = operatorId
+	builder.operatorIdFlag = true
+	return builder
+}
+
+func (builder *BatchCreateTempUserDailyShiftPathReqBodyBuilder) Build() (*BatchCreateTempUserDailyShiftReqBody, error) {
+	req := &BatchCreateTempUserDailyShiftReqBody{}
+	if builder.userTmpDailyShiftsFlag {
+		req.UserTmpDailyShifts = builder.userTmpDailyShifts
+	}
+	if builder.operatorIdFlag {
+		req.OperatorId = &builder.operatorId
+	}
+	return req, nil
+}
+
+type BatchCreateTempUserDailyShiftReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *BatchCreateTempUserDailyShiftReqBody
+}
+
+func NewBatchCreateTempUserDailyShiftReqBuilder() *BatchCreateTempUserDailyShiftReqBuilder {
+	builder := &BatchCreateTempUserDailyShiftReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 请求体和响应体中的 user_id 的员工工号类型
+//
+// 示例值：employee_id
+func (builder *BatchCreateTempUserDailyShiftReqBuilder) EmployeeType(employeeType string) *BatchCreateTempUserDailyShiftReqBuilder {
+	builder.apiReq.QueryParams.Set("employee_type", fmt.Sprint(employeeType))
+	return builder
+}
+
+func (builder *BatchCreateTempUserDailyShiftReqBuilder) Body(body *BatchCreateTempUserDailyShiftReqBody) *BatchCreateTempUserDailyShiftReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *BatchCreateTempUserDailyShiftReqBuilder) Build() *BatchCreateTempUserDailyShiftReq {
+	req := &BatchCreateTempUserDailyShiftReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type BatchCreateTempUserDailyShiftReqBody struct {
+	UserTmpDailyShifts []*UserTmpDailyShift `json:"user_tmp_daily_shifts,omitempty"` // 临时班表信息列表（数量限制50以内）
+
+	OperatorId *string `json:"operator_id,omitempty"` // 操作人uid
+}
+
+type BatchCreateTempUserDailyShiftReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *BatchCreateTempUserDailyShiftReqBody `body:""`
+}
+
+type BatchCreateTempUserDailyShiftRespData struct {
+	UserTmpDailyShifts []*UserTmpDailyShift `json:"user_tmp_daily_shifts,omitempty"` // 临时班表信息列表
+}
+
+type BatchCreateTempUserDailyShiftResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *BatchCreateTempUserDailyShiftRespData `json:"data"` // 业务数据
+}
+
+func (resp *BatchCreateTempUserDailyShiftResp) Success() bool {
 	return resp.Code == 0
 }
 

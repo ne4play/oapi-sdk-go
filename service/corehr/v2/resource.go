@@ -46,11 +46,17 @@ type V2 struct {
 	Process                           *process                           // process
 	ProcessApprover                   *processApprover                   // process.approver
 	ProcessCc                         *processCc                         // process.cc
+	ProcessExtra                      *processExtra                      // process.extra
 	ProcessFormVariableData           *processFormVariableData           // process.form_variable_data
 	ProcessNode                       *processNode                       // process.node
 	ProcessStatus                     *processStatus                     // process.status
+	ProcessTransfer                   *processTransfer                   // process.transfer
+	ProcessRevoke                     *processRevoke                     // process_revoke
+	ProcessWithdraw                   *processWithdraw                   // process_withdraw
+	ReportDetailRow                   *reportDetailRow                   // report_detail_row
 	WorkforcePlan                     *workforcePlan                     // workforce_plan
 	WorkforcePlanDetail               *workforcePlanDetail               // workforce_plan_detail
+	WorkforcePlanDetailRow            *workforcePlanDetailRow            // workforce_plan_detail_row
 }
 
 func New(config *larkcore.Config) *V2 {
@@ -92,11 +98,17 @@ func New(config *larkcore.Config) *V2 {
 		Process:                           &process{config: config},
 		ProcessApprover:                   &processApprover{config: config},
 		ProcessCc:                         &processCc{config: config},
+		ProcessExtra:                      &processExtra{config: config},
 		ProcessFormVariableData:           &processFormVariableData{config: config},
 		ProcessNode:                       &processNode{config: config},
 		ProcessStatus:                     &processStatus{config: config},
+		ProcessTransfer:                   &processTransfer{config: config},
+		ProcessRevoke:                     &processRevoke{config: config},
+		ProcessWithdraw:                   &processWithdraw{config: config},
+		ReportDetailRow:                   &reportDetailRow{config: config},
 		WorkforcePlan:                     &workforcePlan{config: config},
 		WorkforcePlanDetail:               &workforcePlanDetail{config: config},
+		WorkforcePlanDetailRow:            &workforcePlanDetailRow{config: config},
 	}
 }
 
@@ -211,6 +223,9 @@ type processApprover struct {
 type processCc struct {
 	config *larkcore.Config
 }
+type processExtra struct {
+	config *larkcore.Config
+}
 type processFormVariableData struct {
 	config *larkcore.Config
 }
@@ -220,10 +235,25 @@ type processNode struct {
 type processStatus struct {
 	config *larkcore.Config
 }
+type processTransfer struct {
+	config *larkcore.Config
+}
+type processRevoke struct {
+	config *larkcore.Config
+}
+type processWithdraw struct {
+	config *larkcore.Config
+}
+type reportDetailRow struct {
+	config *larkcore.Config
+}
 type workforcePlan struct {
 	config *larkcore.Config
 }
 type workforcePlanDetail struct {
+	config *larkcore.Config
+}
+type workforcePlanDetailRow struct {
 	config *larkcore.Config
 }
 
@@ -1603,6 +1633,58 @@ func (j *job) List(ctx context.Context, req *ListJobReq, options ...larkcore.Req
 	return resp, err
 }
 
+// Create
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=create&project=corehr&resource=job_change&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/create_jobChange.go
+func (j *jobChange) Create(ctx context.Context, req *CreateJobChangeReq, options ...larkcore.RequestOptionFunc) (*CreateJobChangeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/job_changes"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, j.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &CreateJobChangeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, j.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Revoke
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=revoke&project=corehr&resource=job_change&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/revoke_jobChange.go
+func (j *jobChange) Revoke(ctx context.Context, req *RevokeJobChangeReq, options ...larkcore.RequestOptionFunc) (*RevokeJobChangeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/job_changes/:job_change_id/revoke"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, j.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &RevokeJobChangeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, j.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Search
 //
 // - 获取员工异动列表
@@ -2553,6 +2635,32 @@ func (p *processApprover) Update(ctx context.Context, req *UpdateProcessApprover
 	return resp, err
 }
 
+// Update
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=update&project=corehr&resource=process.extra&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/update_processExtra.go
+func (p *processExtra) Update(ctx context.Context, req *UpdateProcessExtraReq, options ...larkcore.RequestOptionFunc) (*UpdateProcessExtraResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/processes/:process_id/extra"
+	apiReq.HttpMethod = http.MethodPut
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, p.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &UpdateProcessExtraResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Get
 //
 // -
@@ -2573,6 +2681,136 @@ func (p *processFormVariableData) Get(ctx context.Context, req *GetProcessFormVa
 	// 反序列响应结果
 	resp := &GetProcessFormVariableDataResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Update
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=update&project=corehr&resource=process.transfer&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/update_processTransfer.go
+func (p *processTransfer) Update(ctx context.Context, req *UpdateProcessTransferReq, options ...larkcore.RequestOptionFunc) (*UpdateProcessTransferResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/processes/:process_id/transfer"
+	apiReq.HttpMethod = http.MethodPut
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, p.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &UpdateProcessTransferResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Update
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=update&project=corehr&resource=process_revoke&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/update_processRevoke.go
+func (p *processRevoke) Update(ctx context.Context, req *UpdateProcessRevokeReq, options ...larkcore.RequestOptionFunc) (*UpdateProcessRevokeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/process_revoke/:process_id"
+	apiReq.HttpMethod = http.MethodPut
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, p.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &UpdateProcessRevokeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Update
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=update&project=corehr&resource=process_withdraw&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/update_processWithdraw.go
+func (p *processWithdraw) Update(ctx context.Context, req *UpdateProcessWithdrawReq, options ...larkcore.RequestOptionFunc) (*UpdateProcessWithdrawResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/process_withdraw/:process_id"
+	apiReq.HttpMethod = http.MethodPut
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, p.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &UpdateProcessWithdrawResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// BatchDelete
+//
+// - 批量删除填报行
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batchDelete&project=corehr&resource=report_detail_row&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/batchDelete_reportDetailRow.go
+func (r *reportDetailRow) BatchDelete(ctx context.Context, req *BatchDeleteReportDetailRowReq, options ...larkcore.RequestOptionFunc) (*BatchDeleteReportDetailRowResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/report_detail_row/batchDelete"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, r.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchDeleteReportDetailRowResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, r.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// BatchSave
+//
+// - 批量创建/更新填报行
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batchSave&project=corehr&resource=report_detail_row&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/batchSave_reportDetailRow.go
+func (r *reportDetailRow) BatchSave(ctx context.Context, req *BatchSaveReportDetailRowReq, options ...larkcore.RequestOptionFunc) (*BatchSaveReportDetailRowResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/report_detail_row/batchSave"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, r.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchSaveReportDetailRowResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, r.config)
 	if err != nil {
 		return nil, err
 	}
@@ -2604,6 +2842,14 @@ func (w *workforcePlan) List(ctx context.Context, req *ListWorkforcePlanReq, opt
 	}
 	return resp, err
 }
+func (w *workforcePlan) ListByIterator(ctx context.Context, req *ListWorkforcePlanReq, options ...larkcore.RequestOptionFunc) (*ListWorkforcePlanIterator, error) {
+	return &ListWorkforcePlanIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: w.List,
+		options:  options,
+		limit:    req.Limit}, nil
+}
 
 // Batch
 //
@@ -2624,6 +2870,58 @@ func (w *workforcePlanDetail) Batch(ctx context.Context, req *BatchWorkforcePlan
 	}
 	// 反序列响应结果
 	resp := &BatchWorkforcePlanDetailResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, w.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// BatchDelete
+//
+// - 批量删除明细行
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batchDelete&project=corehr&resource=workforce_plan_detail_row&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/batchDelete_workforcePlanDetailRow.go
+func (w *workforcePlanDetailRow) BatchDelete(ctx context.Context, req *BatchDeleteWorkforcePlanDetailRowReq, options ...larkcore.RequestOptionFunc) (*BatchDeleteWorkforcePlanDetailRowResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/workforce_plan_detail_row/batchDelete"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, w.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchDeleteWorkforcePlanDetailRowResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, w.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// BatchSave
+//
+// - 批量创建/更新明细行
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batchSave&project=corehr&resource=workforce_plan_detail_row&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/batchSave_workforcePlanDetailRow.go
+func (w *workforcePlanDetailRow) BatchSave(ctx context.Context, req *BatchSaveWorkforcePlanDetailRowReq, options ...larkcore.RequestOptionFunc) (*BatchSaveWorkforcePlanDetailRowResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/workforce_plan_detail_row/batchSave"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, w.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchSaveWorkforcePlanDetailRowResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, w.config)
 	if err != nil {
 		return nil, err

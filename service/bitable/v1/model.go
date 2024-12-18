@@ -8798,6 +8798,184 @@ func (resp *PatchAppTableViewResp) Success() bool {
 	return resp.Code == 0
 }
 
+type ListAppWorkflowReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewListAppWorkflowReqBuilder() *ListAppWorkflowReqBuilder {
+	builder := &ListAppWorkflowReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// bitable app token
+//
+// 示例值：appbcbWCzen6D8dezhoCH2RpMAh
+func (builder *ListAppWorkflowReqBuilder) AppToken(appToken string) *ListAppWorkflowReqBuilder {
+	builder.apiReq.PathParams.Set("app_token", fmt.Sprint(appToken))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该page_token 获取查询结果
+//
+// 示例值：
+func (builder *ListAppWorkflowReqBuilder) PageToken(pageToken string) *ListAppWorkflowReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：
+func (builder *ListAppWorkflowReqBuilder) PageSize(pageSize int) *ListAppWorkflowReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+func (builder *ListAppWorkflowReqBuilder) Build() *ListAppWorkflowReq {
+	req := &ListAppWorkflowReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListAppWorkflowReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type ListAppWorkflowRespData struct {
+	Workflows []*AppWorkflow `json:"workflows,omitempty"` // 自动化工作流信息
+}
+
+type ListAppWorkflowResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListAppWorkflowRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListAppWorkflowResp) Success() bool {
+	return resp.Code == 0
+}
+
+type UpdateAppWorkflowReqBodyBuilder struct {
+	status     string // 自动化状态
+	statusFlag bool
+}
+
+func NewUpdateAppWorkflowReqBodyBuilder() *UpdateAppWorkflowReqBodyBuilder {
+	builder := &UpdateAppWorkflowReqBodyBuilder{}
+	return builder
+}
+
+// 自动化状态
+//
+// 示例值：Enable
+func (builder *UpdateAppWorkflowReqBodyBuilder) Status(status string) *UpdateAppWorkflowReqBodyBuilder {
+	builder.status = status
+	builder.statusFlag = true
+	return builder
+}
+
+func (builder *UpdateAppWorkflowReqBodyBuilder) Build() *UpdateAppWorkflowReqBody {
+	req := &UpdateAppWorkflowReqBody{}
+	if builder.statusFlag {
+		req.Status = &builder.status
+	}
+	return req
+}
+
+type UpdateAppWorkflowPathReqBodyBuilder struct {
+	status     string
+	statusFlag bool
+}
+
+func NewUpdateAppWorkflowPathReqBodyBuilder() *UpdateAppWorkflowPathReqBodyBuilder {
+	builder := &UpdateAppWorkflowPathReqBodyBuilder{}
+	return builder
+}
+
+// 自动化状态
+//
+// 示例值：Enable
+func (builder *UpdateAppWorkflowPathReqBodyBuilder) Status(status string) *UpdateAppWorkflowPathReqBodyBuilder {
+	builder.status = status
+	builder.statusFlag = true
+	return builder
+}
+
+func (builder *UpdateAppWorkflowPathReqBodyBuilder) Build() (*UpdateAppWorkflowReqBody, error) {
+	req := &UpdateAppWorkflowReqBody{}
+	if builder.statusFlag {
+		req.Status = &builder.status
+	}
+	return req, nil
+}
+
+type UpdateAppWorkflowReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *UpdateAppWorkflowReqBody
+}
+
+func NewUpdateAppWorkflowReqBuilder() *UpdateAppWorkflowReqBuilder {
+	builder := &UpdateAppWorkflowReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// bitable app token
+//
+// 示例值：appbcbWCzen6D8dezh
+func (builder *UpdateAppWorkflowReqBuilder) AppToken(appToken string) *UpdateAppWorkflowReqBuilder {
+	builder.apiReq.PathParams.Set("app_token", fmt.Sprint(appToken))
+	return builder
+}
+
+// workflow_id
+//
+// 示例值：730887xxxx552638996
+func (builder *UpdateAppWorkflowReqBuilder) WorkflowId(workflowId string) *UpdateAppWorkflowReqBuilder {
+	builder.apiReq.PathParams.Set("workflow_id", fmt.Sprint(workflowId))
+	return builder
+}
+
+func (builder *UpdateAppWorkflowReqBuilder) Body(body *UpdateAppWorkflowReqBody) *UpdateAppWorkflowReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *UpdateAppWorkflowReqBuilder) Build() *UpdateAppWorkflowReq {
+	req := &UpdateAppWorkflowReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type UpdateAppWorkflowReqBody struct {
+	Status *string `json:"status,omitempty"` // 自动化状态
+}
+
+type UpdateAppWorkflowReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *UpdateAppWorkflowReqBody `body:""`
+}
+
+type UpdateAppWorkflowResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *UpdateAppWorkflowResp) Success() bool {
+	return resp.Code == 0
+}
+
 type ListAppDashboardIterator struct {
 	nextPageToken *string
 	items         []*AppDashboard

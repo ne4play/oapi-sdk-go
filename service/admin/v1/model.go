@@ -334,6 +334,8 @@ type AdminDeptStat struct {
 	QuickSearchCount *string `json:"quick_search_count,omitempty"` // 综搜次数
 
 	TabSearchCount *string `json:"tab_search_count,omitempty"` // 垂搜次数
+
+	ProductVersion *string `json:"product_version,omitempty"` // 产品版本名称
 }
 
 type AdminDeptStatBuilder struct {
@@ -462,6 +464,9 @@ type AdminDeptStatBuilder struct {
 
 	tabSearchCount     string // 垂搜次数
 	tabSearchCountFlag bool
+
+	productVersion     string // 产品版本名称
+	productVersionFlag bool
 }
 
 func NewAdminDeptStatBuilder() *AdminDeptStatBuilder {
@@ -847,6 +852,15 @@ func (builder *AdminDeptStatBuilder) TabSearchCount(tabSearchCount string) *Admi
 	return builder
 }
 
+// 产品版本名称
+//
+// 示例值：全部产品版本
+func (builder *AdminDeptStatBuilder) ProductVersion(productVersion string) *AdminDeptStatBuilder {
+	builder.productVersion = productVersion
+	builder.productVersionFlag = true
+	return builder
+}
+
 func (builder *AdminDeptStatBuilder) Build() *AdminDeptStat {
 	req := &AdminDeptStat{}
 	if builder.dateFlag {
@@ -1015,6 +1029,10 @@ func (builder *AdminDeptStatBuilder) Build() *AdminDeptStat {
 	}
 	if builder.tabSearchCountFlag {
 		req.TabSearchCount = &builder.tabSearchCount
+
+	}
+	if builder.productVersionFlag {
+		req.ProductVersion = &builder.productVersion
 
 	}
 	return req
@@ -1837,7 +1855,7 @@ func NewAnnualReportMapFloatBuilder() *AnnualReportMapFloatBuilder {
 
 // 年份
 //
-// 示例值：2022
+// 示例值：2024
 func (builder *AnnualReportMapFloatBuilder) Year(year string) *AnnualReportMapFloatBuilder {
 	builder.year = year
 	builder.yearFlag = true
@@ -1846,7 +1864,7 @@ func (builder *AnnualReportMapFloatBuilder) Year(year string) *AnnualReportMapFl
 
 // float64类型数据
 //
-// 示例值：100.1
+// 示例值：88.88
 func (builder *AnnualReportMapFloatBuilder) Num(num float64) *AnnualReportMapFloatBuilder {
 	builder.num = num
 	builder.numFlag = true
@@ -1887,7 +1905,7 @@ func NewAnnualReportMapIntBuilder() *AnnualReportMapIntBuilder {
 
 // 年份
 //
-// 示例值："2022"
+// 示例值：2024
 func (builder *AnnualReportMapIntBuilder) Year(year string) *AnnualReportMapIntBuilder {
 	builder.year = year
 	builder.yearFlag = true
@@ -1896,7 +1914,7 @@ func (builder *AnnualReportMapIntBuilder) Year(year string) *AnnualReportMapIntB
 
 // int64类型数据
 //
-// 示例值：100
+// 示例值：88
 func (builder *AnnualReportMapIntBuilder) Count(count string) *AnnualReportMapIntBuilder {
 	builder.count = count
 	builder.countFlag = true
@@ -2841,6 +2859,8 @@ type AuditInfo struct {
 	AuditDetail *AuditDetail `json:"audit_detail,omitempty"` // 日志扩展信息
 
 	OperatorTenant *string `json:"operator_tenant,omitempty"` // 操作人企业编号
+
+	OperatorDetail *OperatorDetail `json:"operator_detail,omitempty"` // 操作人详情
 }
 
 type AuditInfoBuilder struct {
@@ -2897,6 +2917,9 @@ type AuditInfoBuilder struct {
 
 	operatorTenant     string // 操作人企业编号
 	operatorTenantFlag bool
+
+	operatorDetail     *OperatorDetail // 操作人详情
+	operatorDetailFlag bool
 }
 
 func NewAuditInfoBuilder() *AuditInfoBuilder {
@@ -3066,6 +3089,15 @@ func (builder *AuditInfoBuilder) OperatorTenant(operatorTenant string) *AuditInf
 	return builder
 }
 
+// 操作人详情
+//
+// 示例值：
+func (builder *AuditInfoBuilder) OperatorDetail(operatorDetail *OperatorDetail) *AuditInfoBuilder {
+	builder.operatorDetail = operatorDetail
+	builder.operatorDetailFlag = true
+	return builder
+}
+
 func (builder *AuditInfoBuilder) Build() *AuditInfo {
 	req := &AuditInfo{}
 	if builder.eventIdFlag {
@@ -3132,6 +3164,9 @@ func (builder *AuditInfoBuilder) Build() *AuditInfo {
 	if builder.operatorTenantFlag {
 		req.OperatorTenant = &builder.operatorTenant
 
+	}
+	if builder.operatorDetailFlag {
+		req.OperatorDetail = builder.operatorDetail
 	}
 	return req
 }
@@ -4690,6 +4725,104 @@ func (builder *I18nBuilder) Build() *I18n {
 	return req
 }
 
+type OperatorDetail struct {
+	OperatorName *OperatorName `json:"operator_name,omitempty"` // 操作人名字信息
+
+	TenantName *string `json:"tenant_name,omitempty"` // 操作人租户名
+}
+
+type OperatorDetailBuilder struct {
+	operatorName     *OperatorName // 操作人名字信息
+	operatorNameFlag bool
+
+	tenantName     string // 操作人租户名
+	tenantNameFlag bool
+}
+
+func NewOperatorDetailBuilder() *OperatorDetailBuilder {
+	builder := &OperatorDetailBuilder{}
+	return builder
+}
+
+// 操作人名字信息
+//
+// 示例值：
+func (builder *OperatorDetailBuilder) OperatorName(operatorName *OperatorName) *OperatorDetailBuilder {
+	builder.operatorName = operatorName
+	builder.operatorNameFlag = true
+	return builder
+}
+
+// 操作人租户名
+//
+// 示例值：明日头条
+func (builder *OperatorDetailBuilder) TenantName(tenantName string) *OperatorDetailBuilder {
+	builder.tenantName = tenantName
+	builder.tenantNameFlag = true
+	return builder
+}
+
+func (builder *OperatorDetailBuilder) Build() *OperatorDetail {
+	req := &OperatorDetail{}
+	if builder.operatorNameFlag {
+		req.OperatorName = builder.operatorName
+	}
+	if builder.tenantNameFlag {
+		req.TenantName = &builder.tenantName
+
+	}
+	return req
+}
+
+type OperatorName struct {
+	DefaultName *string `json:"default_name,omitempty"` // 操作人默认名
+
+	I18nValue *I18n `json:"i18n_value,omitempty"` // 操作人 i18n 名字 map
+}
+
+type OperatorNameBuilder struct {
+	defaultName     string // 操作人默认名
+	defaultNameFlag bool
+
+	i18nValue     *I18n // 操作人 i18n 名字 map
+	i18nValueFlag bool
+}
+
+func NewOperatorNameBuilder() *OperatorNameBuilder {
+	builder := &OperatorNameBuilder{}
+	return builder
+}
+
+// 操作人默认名
+//
+// 示例值：11
+func (builder *OperatorNameBuilder) DefaultName(defaultName string) *OperatorNameBuilder {
+	builder.defaultName = defaultName
+	builder.defaultNameFlag = true
+	return builder
+}
+
+// 操作人 i18n 名字 map
+//
+// 示例值：
+func (builder *OperatorNameBuilder) I18nValue(i18nValue *I18n) *OperatorNameBuilder {
+	builder.i18nValue = i18nValue
+	builder.i18nValueFlag = true
+	return builder
+}
+
+func (builder *OperatorNameBuilder) Build() *OperatorName {
+	req := &OperatorName{}
+	if builder.defaultNameFlag {
+		req.DefaultName = &builder.defaultName
+
+	}
+	if builder.i18nValueFlag {
+		req.I18nValue = builder.i18nValue
+	}
+	return req
+}
+
 type Password struct {
 	EntEmailPassword *string `json:"ent_email_password,omitempty"` // 企业邮箱密码
 }
@@ -4980,6 +5113,8 @@ type Task struct {
 	OriginalUserEmail *string `json:"original_user_email,omitempty"` // 文档原所有者邮箱
 
 	TargetOwnerEmail *string `json:"target_owner_email,omitempty"` // 文档新所有者邮箱
+
+	Type *int `json:"type,omitempty"` // 任务类型
 }
 
 type TaskBuilder struct {
@@ -5003,6 +5138,9 @@ type TaskBuilder struct {
 
 	targetOwnerEmail     string // 文档新所有者邮箱
 	targetOwnerEmailFlag bool
+
+	type_    int // 任务类型
+	typeFlag bool
 }
 
 func NewTaskBuilder() *TaskBuilder {
@@ -5012,7 +5150,7 @@ func NewTaskBuilder() *TaskBuilder {
 
 // 文档原所有者ID
 //
-// 示例值：
+// 示例值：1
 func (builder *TaskBuilder) OriginalUserId(originalUserId string) *TaskBuilder {
 	builder.originalUserId = originalUserId
 	builder.originalUserIdFlag = true
@@ -5021,7 +5159,7 @@ func (builder *TaskBuilder) OriginalUserId(originalUserId string) *TaskBuilder {
 
 // 目标用户ID
 //
-// 示例值：
+// 示例值：2
 func (builder *TaskBuilder) TargetOwnerId(targetOwnerId string) *TaskBuilder {
 	builder.targetOwnerId = targetOwnerId
 	builder.targetOwnerIdFlag = true
@@ -5039,7 +5177,7 @@ func (builder *TaskBuilder) FileList(fileList []*File) *TaskBuilder {
 
 // 任务id
 //
-// 示例值：
+// 示例值：123
 func (builder *TaskBuilder) TaskId(taskId string) *TaskBuilder {
 	builder.taskId = taskId
 	builder.taskIdFlag = true
@@ -5057,7 +5195,7 @@ func (builder *TaskBuilder) Status(status int) *TaskBuilder {
 
 // 文档原所有者邮箱
 //
-// 示例值：
+// 示例值：xxx
 func (builder *TaskBuilder) OriginalUserEmail(originalUserEmail string) *TaskBuilder {
 	builder.originalUserEmail = originalUserEmail
 	builder.originalUserEmailFlag = true
@@ -5066,10 +5204,19 @@ func (builder *TaskBuilder) OriginalUserEmail(originalUserEmail string) *TaskBui
 
 // 文档新所有者邮箱
 //
-// 示例值：
+// 示例值：xxx
 func (builder *TaskBuilder) TargetOwnerEmail(targetOwnerEmail string) *TaskBuilder {
 	builder.targetOwnerEmail = targetOwnerEmail
 	builder.targetOwnerEmailFlag = true
+	return builder
+}
+
+// 任务类型
+//
+// 示例值：1,2
+func (builder *TaskBuilder) Type(type_ int) *TaskBuilder {
+	builder.type_ = type_
+	builder.typeFlag = true
 	return builder
 }
 
@@ -5100,6 +5247,10 @@ func (builder *TaskBuilder) Build() *Task {
 	}
 	if builder.targetOwnerEmailFlag {
 		req.TargetOwnerEmail = &builder.targetOwnerEmail
+
+	}
+	if builder.typeFlag {
+		req.Type = &builder.type_
 
 	}
 	return req
@@ -5179,6 +5330,8 @@ type UserAnnualReport struct {
 	Year2022 *UserReport2022 `json:"year_2022,omitempty"` // 2022用户年度报告
 
 	Year2023 *UserReport2023 `json:"year_2023,omitempty"` // 2023用户年度报告
+
+	Year2024 *UserReport2024 `json:"year_2024,omitempty"` // 2024用户年度报告
 }
 
 type UserAnnualReportBuilder struct {
@@ -5190,6 +5343,9 @@ type UserAnnualReportBuilder struct {
 
 	year2023     *UserReport2023 // 2023用户年度报告
 	year2023Flag bool
+
+	year2024     *UserReport2024 // 2024用户年度报告
+	year2024Flag bool
 }
 
 func NewUserAnnualReportBuilder() *UserAnnualReportBuilder {
@@ -5224,6 +5380,15 @@ func (builder *UserAnnualReportBuilder) Year2023(year2023 *UserReport2023) *User
 	return builder
 }
 
+// 2024用户年度报告
+//
+// 示例值：
+func (builder *UserAnnualReportBuilder) Year2024(year2024 *UserReport2024) *UserAnnualReportBuilder {
+	builder.year2024 = year2024
+	builder.year2024Flag = true
+	return builder
+}
+
 func (builder *UserAnnualReportBuilder) Build() *UserAnnualReport {
 	req := &UserAnnualReport{}
 	if builder.year2021Flag {
@@ -5234,6 +5399,9 @@ func (builder *UserAnnualReportBuilder) Build() *UserAnnualReport {
 	}
 	if builder.year2023Flag {
 		req.Year2023 = builder.year2023
+	}
+	if builder.year2024Flag {
+		req.Year2024 = builder.year2024
 	}
 	return req
 }
@@ -7214,6 +7382,817 @@ func (builder *UserReport2023Builder) Build() *UserReport2023 {
 	return req
 }
 
+type UserReport2024 struct {
+	UserId *string `json:"user_id,omitempty"` // 用户ID
+
+	TenantAllCnt *string `json:"tenant_all_cnt,omitempty"` // 所在租户目前的总人数(已激活、未离职)
+
+	UserRegisterDate *string `json:"user_register_date,omitempty"` // 用户的飞书激活日期(yyyyMMdd,201909之前的用户可能是空)
+
+	FeishuDayCnt *string `json:"feishu_day_cnt,omitempty"` // 飞书使用天数(激活日期到现在的天数)。
+
+	DurationCnt2 []*AnnualReportMapFloat `json:"duration_cnt_2,omitempty"` // 全年总活跃时长(格式0.01h,包含2023、2024各年统计数据)。
+
+	ImSendMsgCnt2 []*AnnualReportMapInt `json:"im_send_msg_cnt_2,omitempty"` // 全年发出消息数(包含2023、2024各年统计数据)。
+
+	AvgImSendMsgCnt2 []*AnnualReportMapFloat `json:"avg_im_send_msg_cnt_2,omitempty"` // 全年工作日日均发消息数(包含2023、2024各年统计数据)。
+
+	ImTalkedChatCnt *string `json:"im_talked_chat_cnt,omitempty"` // 2024年内,发过言的群组数
+
+	ImPrivateChatCnt *string `json:"im_private_chat_cnt,omitempty"` // 2024年内,私聊过的个人数(本人发过消息)。
+
+	ImEmojiTop1 *string `json:"im_emoji_top1,omitempty"` // 2024年内,消息对话中使用次数最多的表情。
+
+	ImEmojiTop1Cnt2 []*AnnualReportMapInt `json:"im_emoji_top1_cnt_2,omitempty"` // 使用次数第一多表情计数(包含2023、2024各年统计数据)。
+
+	ImEmojiTop2 *string `json:"im_emoji_top2,omitempty"` // 2024年内,消息对话中使用次数第二多的表情。
+
+	ImEmojiTop2Cnt2 []*AnnualReportMapInt `json:"im_emoji_top2_cnt_2,omitempty"` // 使用次数第二多表情计数(包含2023、2024各年统计数据)。
+
+	ImEmojiTop3 *string `json:"im_emoji_top3,omitempty"` // 2024年内,消息对话中使用次数第三多的表情。
+
+	ImEmojiTop3Cnt2 []*AnnualReportMapInt `json:"im_emoji_top3_cnt_2,omitempty"` // 使用次数第三多表情计数(包含2023、2024各年统计数据)。
+
+	ImPositiveReactionCnt2 []*AnnualReportMapInt `json:"im_positive_reaction_cnt_2,omitempty"` // 全年在消息中收到他人点赞的数量(包含2023、2024各年统计数据)。
+
+	ImPositiveReactionCntRank *string `json:"im_positive_reaction_cnt_rank,omitempty"` // 2024年内,收到点赞的数量,在租户内的排名。
+
+	ImPositiveReactionCntDenominator *string `json:"im_positive_reaction_cnt_denominator,omitempty"` // 2024年内,收到点赞排名的分母(已激活未离职人员中,此指标大于0的人数)。
+
+	BusyDay *string `json:"busy_day,omitempty"` // 2024年内,处理消息最多的一天(yyyyMMdd)。
+
+	BusyDaySendMsgCnt *string `json:"busy_day_send_msg_cnt,omitempty"` // 2024年内,一天最多处理了多少条消息。
+
+	CcmCreateCnt2 []*AnnualReportMapInt `json:"ccm_create_cnt_2,omitempty"` // 全年创建文档数(包含2023、2024各年统计数据)。
+
+	CcmCreateViewedUcnt *string `json:"ccm_create_viewed_ucnt,omitempty"` // 2024年内,本人创建的文档被多少人浏览。
+
+	CcmCreateLikedCnt *string `json:"ccm_create_liked_cnt,omitempty"` // 2024年内,本人创建的文档被点赞的合计次数。
+
+	CcmCreateLikedMaxCnt *string `json:"ccm_create_liked_max_cnt,omitempty"` // 2024年内,本人创建的文档被点赞的次数最大值。
+
+	VcJoinMeetingCnt *string `json:"vc_join_meeting_cnt,omitempty"` // 2024年内,本人参与过的视频会议数(包含本人、非本人发起)。
+
+	VcAllMeetingDuration2 []*AnnualReportMapFloat `json:"vc_all_meeting_duration_2,omitempty"` // 本人参与会议的总时长(包含2023、2024各年统计数据)。
+
+	VcJoinMeetingAllUserCnt *string `json:"vc_join_meeting_all_user_cnt,omitempty"` // 2024年内,本人参与会议的去重参会人数(不含本人)。
+
+	VcLastMeetingTime *string `json:"vc_last_meeting_time,omitempty"` // 2024年内,最晚一次会议结束的时间(yyyyMMdd HH:mm,5点之前数据计入前一天)。
+
+	BaseCreateFcnt2 []*AnnualReportMapInt `json:"base_create_fcnt_2,omitempty"` // 本人全年创建的多维表格数量(包含2023、2024各年统计数据)。
+
+	BaseViewFcnt *string `json:"base_view_fcnt,omitempty"` // 2024年内,本人创建的多维表格被多少人访问过。
+
+	BaseCreateDashboardCnt *string `json:"base_create_dashboard_cnt,omitempty"` // 2024年内,本人创建的仪表盘数量。
+
+	BaseCreateDashboardRank *string `json:"base_create_dashboard_rank,omitempty"` // 2024年内,本人创建仪表盘数量,在租户内的排名。
+
+	BaseCreateDashboardRankUcnt *string `json:"base_create_dashboard_rank_ucnt,omitempty"` // 2024年内,本人创建仪表盘数量,在租户内排名的分母(已激活未离职人员中,此指标大于0的人数)。
+
+	BaseCreateChatCnt *string `json:"base_create_chat_cnt,omitempty"` // 2024年内,本人创建的仪表盘内的图表总数量。
+
+	BaseWorkflowInsCnt *string `json:"base_workflow_ins_cnt,omitempty"` // 2024年内,本人创建的多维表格自动化流程总运行次数。
+
+	BaseWorkflowInsRank *string `json:"base_workflow_ins_rank,omitempty"` // 2024年内,本人创建的多维表格自动化流程,总运行次数在租户内的排名。
+
+	BaseWorkflowInsRankUcnt *string `json:"base_workflow_ins_rank_ucnt,omitempty"` // 2024年内,自动化流程运行次数排名的分母(已激活未离职人员中,此指标大于0的人数)。
+
+	VcAllReadNotesCnt *string `json:"vc_all_read_notes_cnt,omitempty"` // 2024年内,本人阅读智能会议纪要的篇数。
+
+	MeegoRoleWiCntV2 []*AnnualReportMapInt `json:"meego_role_wi_cnt_v2,omitempty"` // 本人全年参与过的项目数量(包含2023、2024各年统计数据)。
+
+	MeegoCommonWiUcnt *string `json:"meego_common_wi_ucnt,omitempty"` // 2024年内,本人参与过的项目的合作人数
+
+	MeegoWorkflowWiCnt *string `json:"meego_workflow_wi_cnt,omitempty"` // 2024年内,本人流转过的节点/状态对应的实例数。
+
+	PeopleInterviewNum2 []*AnnualReportMapInt `json:"people_interview_num_2,omitempty"` // 本人全年面试场次(包含2023、2024各年统计数据)。
+
+	PeopleInterviewNumRank *string `json:"people_interview_num_rank,omitempty"` // 2024年内,本人面试场次在租户内的排名。
+
+	PeopleInterviewNumRankUcnt *string `json:"people_interview_num_rank_ucnt,omitempty"` // 2024年内,本人面试场次在租户内排名的分母(已激活未离职人员中,此指标大于0的人数)。
+
+	PeopleInterviewOfferNum2 []*AnnualReportMapInt `json:"people_interview_offer_num_2,omitempty"` // 本人面试之后成功发出offer的数量(包含2023、2024各年统计数据)。
+}
+
+type UserReport2024Builder struct {
+	userId     string // 用户ID
+	userIdFlag bool
+
+	tenantAllCnt     string // 所在租户目前的总人数(已激活、未离职)
+	tenantAllCntFlag bool
+
+	userRegisterDate     string // 用户的飞书激活日期(yyyyMMdd,201909之前的用户可能是空)
+	userRegisterDateFlag bool
+
+	feishuDayCnt     string // 飞书使用天数(激活日期到现在的天数)。
+	feishuDayCntFlag bool
+
+	durationCnt2     []*AnnualReportMapFloat // 全年总活跃时长(格式0.01h,包含2023、2024各年统计数据)。
+	durationCnt2Flag bool
+
+	imSendMsgCnt2     []*AnnualReportMapInt // 全年发出消息数(包含2023、2024各年统计数据)。
+	imSendMsgCnt2Flag bool
+
+	avgImSendMsgCnt2     []*AnnualReportMapFloat // 全年工作日日均发消息数(包含2023、2024各年统计数据)。
+	avgImSendMsgCnt2Flag bool
+
+	imTalkedChatCnt     string // 2024年内,发过言的群组数
+	imTalkedChatCntFlag bool
+
+	imPrivateChatCnt     string // 2024年内,私聊过的个人数(本人发过消息)。
+	imPrivateChatCntFlag bool
+
+	imEmojiTop1     string // 2024年内,消息对话中使用次数最多的表情。
+	imEmojiTop1Flag bool
+
+	imEmojiTop1Cnt2     []*AnnualReportMapInt // 使用次数第一多表情计数(包含2023、2024各年统计数据)。
+	imEmojiTop1Cnt2Flag bool
+
+	imEmojiTop2     string // 2024年内,消息对话中使用次数第二多的表情。
+	imEmojiTop2Flag bool
+
+	imEmojiTop2Cnt2     []*AnnualReportMapInt // 使用次数第二多表情计数(包含2023、2024各年统计数据)。
+	imEmojiTop2Cnt2Flag bool
+
+	imEmojiTop3     string // 2024年内,消息对话中使用次数第三多的表情。
+	imEmojiTop3Flag bool
+
+	imEmojiTop3Cnt2     []*AnnualReportMapInt // 使用次数第三多表情计数(包含2023、2024各年统计数据)。
+	imEmojiTop3Cnt2Flag bool
+
+	imPositiveReactionCnt2     []*AnnualReportMapInt // 全年在消息中收到他人点赞的数量(包含2023、2024各年统计数据)。
+	imPositiveReactionCnt2Flag bool
+
+	imPositiveReactionCntRank     string // 2024年内,收到点赞的数量,在租户内的排名。
+	imPositiveReactionCntRankFlag bool
+
+	imPositiveReactionCntDenominator     string // 2024年内,收到点赞排名的分母(已激活未离职人员中,此指标大于0的人数)。
+	imPositiveReactionCntDenominatorFlag bool
+
+	busyDay     string // 2024年内,处理消息最多的一天(yyyyMMdd)。
+	busyDayFlag bool
+
+	busyDaySendMsgCnt     string // 2024年内,一天最多处理了多少条消息。
+	busyDaySendMsgCntFlag bool
+
+	ccmCreateCnt2     []*AnnualReportMapInt // 全年创建文档数(包含2023、2024各年统计数据)。
+	ccmCreateCnt2Flag bool
+
+	ccmCreateViewedUcnt     string // 2024年内,本人创建的文档被多少人浏览。
+	ccmCreateViewedUcntFlag bool
+
+	ccmCreateLikedCnt     string // 2024年内,本人创建的文档被点赞的合计次数。
+	ccmCreateLikedCntFlag bool
+
+	ccmCreateLikedMaxCnt     string // 2024年内,本人创建的文档被点赞的次数最大值。
+	ccmCreateLikedMaxCntFlag bool
+
+	vcJoinMeetingCnt     string // 2024年内,本人参与过的视频会议数(包含本人、非本人发起)。
+	vcJoinMeetingCntFlag bool
+
+	vcAllMeetingDuration2     []*AnnualReportMapFloat // 本人参与会议的总时长(包含2023、2024各年统计数据)。
+	vcAllMeetingDuration2Flag bool
+
+	vcJoinMeetingAllUserCnt     string // 2024年内,本人参与会议的去重参会人数(不含本人)。
+	vcJoinMeetingAllUserCntFlag bool
+
+	vcLastMeetingTime     string // 2024年内,最晚一次会议结束的时间(yyyyMMdd HH:mm,5点之前数据计入前一天)。
+	vcLastMeetingTimeFlag bool
+
+	baseCreateFcnt2     []*AnnualReportMapInt // 本人全年创建的多维表格数量(包含2023、2024各年统计数据)。
+	baseCreateFcnt2Flag bool
+
+	baseViewFcnt     string // 2024年内,本人创建的多维表格被多少人访问过。
+	baseViewFcntFlag bool
+
+	baseCreateDashboardCnt     string // 2024年内,本人创建的仪表盘数量。
+	baseCreateDashboardCntFlag bool
+
+	baseCreateDashboardRank     string // 2024年内,本人创建仪表盘数量,在租户内的排名。
+	baseCreateDashboardRankFlag bool
+
+	baseCreateDashboardRankUcnt     string // 2024年内,本人创建仪表盘数量,在租户内排名的分母(已激活未离职人员中,此指标大于0的人数)。
+	baseCreateDashboardRankUcntFlag bool
+
+	baseCreateChatCnt     string // 2024年内,本人创建的仪表盘内的图表总数量。
+	baseCreateChatCntFlag bool
+
+	baseWorkflowInsCnt     string // 2024年内,本人创建的多维表格自动化流程总运行次数。
+	baseWorkflowInsCntFlag bool
+
+	baseWorkflowInsRank     string // 2024年内,本人创建的多维表格自动化流程,总运行次数在租户内的排名。
+	baseWorkflowInsRankFlag bool
+
+	baseWorkflowInsRankUcnt     string // 2024年内,自动化流程运行次数排名的分母(已激活未离职人员中,此指标大于0的人数)。
+	baseWorkflowInsRankUcntFlag bool
+
+	vcAllReadNotesCnt     string // 2024年内,本人阅读智能会议纪要的篇数。
+	vcAllReadNotesCntFlag bool
+
+	meegoRoleWiCntV2     []*AnnualReportMapInt // 本人全年参与过的项目数量(包含2023、2024各年统计数据)。
+	meegoRoleWiCntV2Flag bool
+
+	meegoCommonWiUcnt     string // 2024年内,本人参与过的项目的合作人数
+	meegoCommonWiUcntFlag bool
+
+	meegoWorkflowWiCnt     string // 2024年内,本人流转过的节点/状态对应的实例数。
+	meegoWorkflowWiCntFlag bool
+
+	peopleInterviewNum2     []*AnnualReportMapInt // 本人全年面试场次(包含2023、2024各年统计数据)。
+	peopleInterviewNum2Flag bool
+
+	peopleInterviewNumRank     string // 2024年内,本人面试场次在租户内的排名。
+	peopleInterviewNumRankFlag bool
+
+	peopleInterviewNumRankUcnt     string // 2024年内,本人面试场次在租户内排名的分母(已激活未离职人员中,此指标大于0的人数)。
+	peopleInterviewNumRankUcntFlag bool
+
+	peopleInterviewOfferNum2     []*AnnualReportMapInt // 本人面试之后成功发出offer的数量(包含2023、2024各年统计数据)。
+	peopleInterviewOfferNum2Flag bool
+}
+
+func NewUserReport2024Builder() *UserReport2024Builder {
+	builder := &UserReport2024Builder{}
+	return builder
+}
+
+// 用户ID
+//
+// 示例值：ou_7dab8a3d3cdcc9da365777c7ad535d62
+func (builder *UserReport2024Builder) UserId(userId string) *UserReport2024Builder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 所在租户目前的总人数(已激活、未离职)
+//
+// 示例值：6888
+func (builder *UserReport2024Builder) TenantAllCnt(tenantAllCnt string) *UserReport2024Builder {
+	builder.tenantAllCnt = tenantAllCnt
+	builder.tenantAllCntFlag = true
+	return builder
+}
+
+// 用户的飞书激活日期(yyyyMMdd,201909之前的用户可能是空)
+//
+// 示例值：20180808
+func (builder *UserReport2024Builder) UserRegisterDate(userRegisterDate string) *UserReport2024Builder {
+	builder.userRegisterDate = userRegisterDate
+	builder.userRegisterDateFlag = true
+	return builder
+}
+
+// 飞书使用天数(激活日期到现在的天数)。
+//
+// 示例值：8889
+func (builder *UserReport2024Builder) FeishuDayCnt(feishuDayCnt string) *UserReport2024Builder {
+	builder.feishuDayCnt = feishuDayCnt
+	builder.feishuDayCntFlag = true
+	return builder
+}
+
+// 全年总活跃时长(格式0.01h,包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66.66},{"year":"2024","num":88.88}]
+func (builder *UserReport2024Builder) DurationCnt2(durationCnt2 []*AnnualReportMapFloat) *UserReport2024Builder {
+	builder.durationCnt2 = durationCnt2
+	builder.durationCnt2Flag = true
+	return builder
+}
+
+// 全年发出消息数(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) ImSendMsgCnt2(imSendMsgCnt2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.imSendMsgCnt2 = imSendMsgCnt2
+	builder.imSendMsgCnt2Flag = true
+	return builder
+}
+
+// 全年工作日日均发消息数(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66.66},{"year":"2024","num":88.88}]
+func (builder *UserReport2024Builder) AvgImSendMsgCnt2(avgImSendMsgCnt2 []*AnnualReportMapFloat) *UserReport2024Builder {
+	builder.avgImSendMsgCnt2 = avgImSendMsgCnt2
+	builder.avgImSendMsgCnt2Flag = true
+	return builder
+}
+
+// 2024年内,发过言的群组数
+//
+// 示例值：168
+func (builder *UserReport2024Builder) ImTalkedChatCnt(imTalkedChatCnt string) *UserReport2024Builder {
+	builder.imTalkedChatCnt = imTalkedChatCnt
+	builder.imTalkedChatCntFlag = true
+	return builder
+}
+
+// 2024年内,私聊过的个人数(本人发过消息)。
+//
+// 示例值：168
+func (builder *UserReport2024Builder) ImPrivateChatCnt(imPrivateChatCnt string) *UserReport2024Builder {
+	builder.imPrivateChatCnt = imPrivateChatCnt
+	builder.imPrivateChatCntFlag = true
+	return builder
+}
+
+// 2024年内,消息对话中使用次数最多的表情。
+//
+// 示例值：thumbsup
+func (builder *UserReport2024Builder) ImEmojiTop1(imEmojiTop1 string) *UserReport2024Builder {
+	builder.imEmojiTop1 = imEmojiTop1
+	builder.imEmojiTop1Flag = true
+	return builder
+}
+
+// 使用次数第一多表情计数(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) ImEmojiTop1Cnt2(imEmojiTop1Cnt2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.imEmojiTop1Cnt2 = imEmojiTop1Cnt2
+	builder.imEmojiTop1Cnt2Flag = true
+	return builder
+}
+
+// 2024年内,消息对话中使用次数第二多的表情。
+//
+// 示例值：jiayi
+func (builder *UserReport2024Builder) ImEmojiTop2(imEmojiTop2 string) *UserReport2024Builder {
+	builder.imEmojiTop2 = imEmojiTop2
+	builder.imEmojiTop2Flag = true
+	return builder
+}
+
+// 使用次数第二多表情计数(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) ImEmojiTop2Cnt2(imEmojiTop2Cnt2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.imEmojiTop2Cnt2 = imEmojiTop2Cnt2
+	builder.imEmojiTop2Cnt2Flag = true
+	return builder
+}
+
+// 2024年内,消息对话中使用次数第三多的表情。
+//
+// 示例值：love
+func (builder *UserReport2024Builder) ImEmojiTop3(imEmojiTop3 string) *UserReport2024Builder {
+	builder.imEmojiTop3 = imEmojiTop3
+	builder.imEmojiTop3Flag = true
+	return builder
+}
+
+// 使用次数第三多表情计数(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) ImEmojiTop3Cnt2(imEmojiTop3Cnt2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.imEmojiTop3Cnt2 = imEmojiTop3Cnt2
+	builder.imEmojiTop3Cnt2Flag = true
+	return builder
+}
+
+// 全年在消息中收到他人点赞的数量(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) ImPositiveReactionCnt2(imPositiveReactionCnt2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.imPositiveReactionCnt2 = imPositiveReactionCnt2
+	builder.imPositiveReactionCnt2Flag = true
+	return builder
+}
+
+// 2024年内,收到点赞的数量,在租户内的排名。
+//
+// 示例值：168
+func (builder *UserReport2024Builder) ImPositiveReactionCntRank(imPositiveReactionCntRank string) *UserReport2024Builder {
+	builder.imPositiveReactionCntRank = imPositiveReactionCntRank
+	builder.imPositiveReactionCntRankFlag = true
+	return builder
+}
+
+// 2024年内,收到点赞排名的分母(已激活未离职人员中,此指标大于0的人数)。
+//
+// 示例值：168
+func (builder *UserReport2024Builder) ImPositiveReactionCntDenominator(imPositiveReactionCntDenominator string) *UserReport2024Builder {
+	builder.imPositiveReactionCntDenominator = imPositiveReactionCntDenominator
+	builder.imPositiveReactionCntDenominatorFlag = true
+	return builder
+}
+
+// 2024年内,处理消息最多的一天(yyyyMMdd)。
+//
+// 示例值：20240808
+func (builder *UserReport2024Builder) BusyDay(busyDay string) *UserReport2024Builder {
+	builder.busyDay = busyDay
+	builder.busyDayFlag = true
+	return builder
+}
+
+// 2024年内,一天最多处理了多少条消息。
+//
+// 示例值：888
+func (builder *UserReport2024Builder) BusyDaySendMsgCnt(busyDaySendMsgCnt string) *UserReport2024Builder {
+	builder.busyDaySendMsgCnt = busyDaySendMsgCnt
+	builder.busyDaySendMsgCntFlag = true
+	return builder
+}
+
+// 全年创建文档数(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) CcmCreateCnt2(ccmCreateCnt2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.ccmCreateCnt2 = ccmCreateCnt2
+	builder.ccmCreateCnt2Flag = true
+	return builder
+}
+
+// 2024年内,本人创建的文档被多少人浏览。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) CcmCreateViewedUcnt(ccmCreateViewedUcnt string) *UserReport2024Builder {
+	builder.ccmCreateViewedUcnt = ccmCreateViewedUcnt
+	builder.ccmCreateViewedUcntFlag = true
+	return builder
+}
+
+// 2024年内,本人创建的文档被点赞的合计次数。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) CcmCreateLikedCnt(ccmCreateLikedCnt string) *UserReport2024Builder {
+	builder.ccmCreateLikedCnt = ccmCreateLikedCnt
+	builder.ccmCreateLikedCntFlag = true
+	return builder
+}
+
+// 2024年内,本人创建的文档被点赞的次数最大值。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) CcmCreateLikedMaxCnt(ccmCreateLikedMaxCnt string) *UserReport2024Builder {
+	builder.ccmCreateLikedMaxCnt = ccmCreateLikedMaxCnt
+	builder.ccmCreateLikedMaxCntFlag = true
+	return builder
+}
+
+// 2024年内,本人参与过的视频会议数(包含本人、非本人发起)。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) VcJoinMeetingCnt(vcJoinMeetingCnt string) *UserReport2024Builder {
+	builder.vcJoinMeetingCnt = vcJoinMeetingCnt
+	builder.vcJoinMeetingCntFlag = true
+	return builder
+}
+
+// 本人参与会议的总时长(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66.66},{"year":"2024","num":88.88}]
+func (builder *UserReport2024Builder) VcAllMeetingDuration2(vcAllMeetingDuration2 []*AnnualReportMapFloat) *UserReport2024Builder {
+	builder.vcAllMeetingDuration2 = vcAllMeetingDuration2
+	builder.vcAllMeetingDuration2Flag = true
+	return builder
+}
+
+// 2024年内,本人参与会议的去重参会人数(不含本人)。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) VcJoinMeetingAllUserCnt(vcJoinMeetingAllUserCnt string) *UserReport2024Builder {
+	builder.vcJoinMeetingAllUserCnt = vcJoinMeetingAllUserCnt
+	builder.vcJoinMeetingAllUserCntFlag = true
+	return builder
+}
+
+// 2024年内,最晚一次会议结束的时间(yyyyMMdd HH:mm,5点之前数据计入前一天)。
+//
+// 示例值：20240808 23:00
+func (builder *UserReport2024Builder) VcLastMeetingTime(vcLastMeetingTime string) *UserReport2024Builder {
+	builder.vcLastMeetingTime = vcLastMeetingTime
+	builder.vcLastMeetingTimeFlag = true
+	return builder
+}
+
+// 本人全年创建的多维表格数量(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) BaseCreateFcnt2(baseCreateFcnt2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.baseCreateFcnt2 = baseCreateFcnt2
+	builder.baseCreateFcnt2Flag = true
+	return builder
+}
+
+// 2024年内,本人创建的多维表格被多少人访问过。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) BaseViewFcnt(baseViewFcnt string) *UserReport2024Builder {
+	builder.baseViewFcnt = baseViewFcnt
+	builder.baseViewFcntFlag = true
+	return builder
+}
+
+// 2024年内,本人创建的仪表盘数量。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) BaseCreateDashboardCnt(baseCreateDashboardCnt string) *UserReport2024Builder {
+	builder.baseCreateDashboardCnt = baseCreateDashboardCnt
+	builder.baseCreateDashboardCntFlag = true
+	return builder
+}
+
+// 2024年内,本人创建仪表盘数量,在租户内的排名。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) BaseCreateDashboardRank(baseCreateDashboardRank string) *UserReport2024Builder {
+	builder.baseCreateDashboardRank = baseCreateDashboardRank
+	builder.baseCreateDashboardRankFlag = true
+	return builder
+}
+
+// 2024年内,本人创建仪表盘数量,在租户内排名的分母(已激活未离职人员中,此指标大于0的人数)。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) BaseCreateDashboardRankUcnt(baseCreateDashboardRankUcnt string) *UserReport2024Builder {
+	builder.baseCreateDashboardRankUcnt = baseCreateDashboardRankUcnt
+	builder.baseCreateDashboardRankUcntFlag = true
+	return builder
+}
+
+// 2024年内,本人创建的仪表盘内的图表总数量。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) BaseCreateChatCnt(baseCreateChatCnt string) *UserReport2024Builder {
+	builder.baseCreateChatCnt = baseCreateChatCnt
+	builder.baseCreateChatCntFlag = true
+	return builder
+}
+
+// 2024年内,本人创建的多维表格自动化流程总运行次数。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) BaseWorkflowInsCnt(baseWorkflowInsCnt string) *UserReport2024Builder {
+	builder.baseWorkflowInsCnt = baseWorkflowInsCnt
+	builder.baseWorkflowInsCntFlag = true
+	return builder
+}
+
+// 2024年内,本人创建的多维表格自动化流程,总运行次数在租户内的排名。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) BaseWorkflowInsRank(baseWorkflowInsRank string) *UserReport2024Builder {
+	builder.baseWorkflowInsRank = baseWorkflowInsRank
+	builder.baseWorkflowInsRankFlag = true
+	return builder
+}
+
+// 2024年内,自动化流程运行次数排名的分母(已激活未离职人员中,此指标大于0的人数)。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) BaseWorkflowInsRankUcnt(baseWorkflowInsRankUcnt string) *UserReport2024Builder {
+	builder.baseWorkflowInsRankUcnt = baseWorkflowInsRankUcnt
+	builder.baseWorkflowInsRankUcntFlag = true
+	return builder
+}
+
+// 2024年内,本人阅读智能会议纪要的篇数。
+//
+// 示例值：188
+func (builder *UserReport2024Builder) VcAllReadNotesCnt(vcAllReadNotesCnt string) *UserReport2024Builder {
+	builder.vcAllReadNotesCnt = vcAllReadNotesCnt
+	builder.vcAllReadNotesCntFlag = true
+	return builder
+}
+
+// 本人全年参与过的项目数量(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) MeegoRoleWiCntV2(meegoRoleWiCntV2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.meegoRoleWiCntV2 = meegoRoleWiCntV2
+	builder.meegoRoleWiCntV2Flag = true
+	return builder
+}
+
+// 2024年内,本人参与过的项目的合作人数
+//
+// 示例值：88
+func (builder *UserReport2024Builder) MeegoCommonWiUcnt(meegoCommonWiUcnt string) *UserReport2024Builder {
+	builder.meegoCommonWiUcnt = meegoCommonWiUcnt
+	builder.meegoCommonWiUcntFlag = true
+	return builder
+}
+
+// 2024年内,本人流转过的节点/状态对应的实例数。
+//
+// 示例值：288
+func (builder *UserReport2024Builder) MeegoWorkflowWiCnt(meegoWorkflowWiCnt string) *UserReport2024Builder {
+	builder.meegoWorkflowWiCnt = meegoWorkflowWiCnt
+	builder.meegoWorkflowWiCntFlag = true
+	return builder
+}
+
+// 本人全年面试场次(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) PeopleInterviewNum2(peopleInterviewNum2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.peopleInterviewNum2 = peopleInterviewNum2
+	builder.peopleInterviewNum2Flag = true
+	return builder
+}
+
+// 2024年内,本人面试场次在租户内的排名。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) PeopleInterviewNumRank(peopleInterviewNumRank string) *UserReport2024Builder {
+	builder.peopleInterviewNumRank = peopleInterviewNumRank
+	builder.peopleInterviewNumRankFlag = true
+	return builder
+}
+
+// 2024年内,本人面试场次在租户内排名的分母(已激活未离职人员中,此指标大于0的人数)。
+//
+// 示例值：88
+func (builder *UserReport2024Builder) PeopleInterviewNumRankUcnt(peopleInterviewNumRankUcnt string) *UserReport2024Builder {
+	builder.peopleInterviewNumRankUcnt = peopleInterviewNumRankUcnt
+	builder.peopleInterviewNumRankUcntFlag = true
+	return builder
+}
+
+// 本人面试之后成功发出offer的数量(包含2023、2024各年统计数据)。
+//
+// 示例值：[{"year":"2023","num",66},{"year":"2024","num":88}]
+func (builder *UserReport2024Builder) PeopleInterviewOfferNum2(peopleInterviewOfferNum2 []*AnnualReportMapInt) *UserReport2024Builder {
+	builder.peopleInterviewOfferNum2 = peopleInterviewOfferNum2
+	builder.peopleInterviewOfferNum2Flag = true
+	return builder
+}
+
+func (builder *UserReport2024Builder) Build() *UserReport2024 {
+	req := &UserReport2024{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.tenantAllCntFlag {
+		req.TenantAllCnt = &builder.tenantAllCnt
+
+	}
+	if builder.userRegisterDateFlag {
+		req.UserRegisterDate = &builder.userRegisterDate
+
+	}
+	if builder.feishuDayCntFlag {
+		req.FeishuDayCnt = &builder.feishuDayCnt
+
+	}
+	if builder.durationCnt2Flag {
+		req.DurationCnt2 = builder.durationCnt2
+	}
+	if builder.imSendMsgCnt2Flag {
+		req.ImSendMsgCnt2 = builder.imSendMsgCnt2
+	}
+	if builder.avgImSendMsgCnt2Flag {
+		req.AvgImSendMsgCnt2 = builder.avgImSendMsgCnt2
+	}
+	if builder.imTalkedChatCntFlag {
+		req.ImTalkedChatCnt = &builder.imTalkedChatCnt
+
+	}
+	if builder.imPrivateChatCntFlag {
+		req.ImPrivateChatCnt = &builder.imPrivateChatCnt
+
+	}
+	if builder.imEmojiTop1Flag {
+		req.ImEmojiTop1 = &builder.imEmojiTop1
+
+	}
+	if builder.imEmojiTop1Cnt2Flag {
+		req.ImEmojiTop1Cnt2 = builder.imEmojiTop1Cnt2
+	}
+	if builder.imEmojiTop2Flag {
+		req.ImEmojiTop2 = &builder.imEmojiTop2
+
+	}
+	if builder.imEmojiTop2Cnt2Flag {
+		req.ImEmojiTop2Cnt2 = builder.imEmojiTop2Cnt2
+	}
+	if builder.imEmojiTop3Flag {
+		req.ImEmojiTop3 = &builder.imEmojiTop3
+
+	}
+	if builder.imEmojiTop3Cnt2Flag {
+		req.ImEmojiTop3Cnt2 = builder.imEmojiTop3Cnt2
+	}
+	if builder.imPositiveReactionCnt2Flag {
+		req.ImPositiveReactionCnt2 = builder.imPositiveReactionCnt2
+	}
+	if builder.imPositiveReactionCntRankFlag {
+		req.ImPositiveReactionCntRank = &builder.imPositiveReactionCntRank
+
+	}
+	if builder.imPositiveReactionCntDenominatorFlag {
+		req.ImPositiveReactionCntDenominator = &builder.imPositiveReactionCntDenominator
+
+	}
+	if builder.busyDayFlag {
+		req.BusyDay = &builder.busyDay
+
+	}
+	if builder.busyDaySendMsgCntFlag {
+		req.BusyDaySendMsgCnt = &builder.busyDaySendMsgCnt
+
+	}
+	if builder.ccmCreateCnt2Flag {
+		req.CcmCreateCnt2 = builder.ccmCreateCnt2
+	}
+	if builder.ccmCreateViewedUcntFlag {
+		req.CcmCreateViewedUcnt = &builder.ccmCreateViewedUcnt
+
+	}
+	if builder.ccmCreateLikedCntFlag {
+		req.CcmCreateLikedCnt = &builder.ccmCreateLikedCnt
+
+	}
+	if builder.ccmCreateLikedMaxCntFlag {
+		req.CcmCreateLikedMaxCnt = &builder.ccmCreateLikedMaxCnt
+
+	}
+	if builder.vcJoinMeetingCntFlag {
+		req.VcJoinMeetingCnt = &builder.vcJoinMeetingCnt
+
+	}
+	if builder.vcAllMeetingDuration2Flag {
+		req.VcAllMeetingDuration2 = builder.vcAllMeetingDuration2
+	}
+	if builder.vcJoinMeetingAllUserCntFlag {
+		req.VcJoinMeetingAllUserCnt = &builder.vcJoinMeetingAllUserCnt
+
+	}
+	if builder.vcLastMeetingTimeFlag {
+		req.VcLastMeetingTime = &builder.vcLastMeetingTime
+
+	}
+	if builder.baseCreateFcnt2Flag {
+		req.BaseCreateFcnt2 = builder.baseCreateFcnt2
+	}
+	if builder.baseViewFcntFlag {
+		req.BaseViewFcnt = &builder.baseViewFcnt
+
+	}
+	if builder.baseCreateDashboardCntFlag {
+		req.BaseCreateDashboardCnt = &builder.baseCreateDashboardCnt
+
+	}
+	if builder.baseCreateDashboardRankFlag {
+		req.BaseCreateDashboardRank = &builder.baseCreateDashboardRank
+
+	}
+	if builder.baseCreateDashboardRankUcntFlag {
+		req.BaseCreateDashboardRankUcnt = &builder.baseCreateDashboardRankUcnt
+
+	}
+	if builder.baseCreateChatCntFlag {
+		req.BaseCreateChatCnt = &builder.baseCreateChatCnt
+
+	}
+	if builder.baseWorkflowInsCntFlag {
+		req.BaseWorkflowInsCnt = &builder.baseWorkflowInsCnt
+
+	}
+	if builder.baseWorkflowInsRankFlag {
+		req.BaseWorkflowInsRank = &builder.baseWorkflowInsRank
+
+	}
+	if builder.baseWorkflowInsRankUcntFlag {
+		req.BaseWorkflowInsRankUcnt = &builder.baseWorkflowInsRankUcnt
+
+	}
+	if builder.vcAllReadNotesCntFlag {
+		req.VcAllReadNotesCnt = &builder.vcAllReadNotesCnt
+
+	}
+	if builder.meegoRoleWiCntV2Flag {
+		req.MeegoRoleWiCntV2 = builder.meegoRoleWiCntV2
+	}
+	if builder.meegoCommonWiUcntFlag {
+		req.MeegoCommonWiUcnt = &builder.meegoCommonWiUcnt
+
+	}
+	if builder.meegoWorkflowWiCntFlag {
+		req.MeegoWorkflowWiCnt = &builder.meegoWorkflowWiCnt
+
+	}
+	if builder.peopleInterviewNum2Flag {
+		req.PeopleInterviewNum2 = builder.peopleInterviewNum2
+	}
+	if builder.peopleInterviewNumRankFlag {
+		req.PeopleInterviewNumRank = &builder.peopleInterviewNumRank
+
+	}
+	if builder.peopleInterviewNumRankUcntFlag {
+		req.PeopleInterviewNumRankUcnt = &builder.peopleInterviewNumRankUcnt
+
+	}
+	if builder.peopleInterviewOfferNum2Flag {
+		req.PeopleInterviewOfferNum2 = builder.peopleInterviewOfferNum2
+	}
+	return req
+}
+
 type ListAdminDeptStatReqBuilder struct {
 	apiReq *larkcore.ApiReq
 }
@@ -7288,6 +8267,14 @@ func (builder *ListAdminDeptStatReqBuilder) PageToken(pageToken string) *ListAdm
 // 示例值：cn
 func (builder *ListAdminDeptStatReqBuilder) TargetGeo(targetGeo string) *ListAdminDeptStatReqBuilder {
 	builder.apiReq.QueryParams.Set("target_geo", fmt.Sprint(targetGeo))
+	return builder
+}
+
+// 是否返回分产品版本数据
+//
+// 示例值：true
+func (builder *ListAdminDeptStatReqBuilder) WithProductVersion(withProductVersion bool) *ListAdminDeptStatReqBuilder {
+	builder.apiReq.QueryParams.Set("with_product_version", fmt.Sprint(withProductVersion))
 	return builder
 }
 

@@ -2428,6 +2428,56 @@ func (builder *ImageDetailBuilder) Build() *ImageDetail {
 	return req
 }
 
+type KvEntity struct {
+	Type *string `json:"type,omitempty"` // 识别的实体类型
+
+	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
+}
+
+type KvEntityBuilder struct {
+	type_    string // 识别的实体类型
+	typeFlag bool
+
+	value     string // 识别出字段的文本信息
+	valueFlag bool
+}
+
+func NewKvEntityBuilder() *KvEntityBuilder {
+	builder := &KvEntityBuilder{}
+	return builder
+}
+
+// 识别的实体类型
+//
+// 示例值：entry_name
+func (builder *KvEntityBuilder) Type(type_ string) *KvEntityBuilder {
+	builder.type_ = type_
+	builder.typeFlag = true
+	return builder
+}
+
+// 识别出字段的文本信息
+//
+// 示例值：餐饮服务
+func (builder *KvEntityBuilder) Value(value string) *KvEntityBuilder {
+	builder.value = value
+	builder.valueFlag = true
+	return builder
+}
+
+func (builder *KvEntityBuilder) Build() *KvEntity {
+	req := &KvEntity{}
+	if builder.typeFlag {
+		req.Type = &builder.type_
+
+	}
+	if builder.valueFlag {
+		req.Value = &builder.value
+
+	}
+	return req
+}
+
 type LlmConfig struct {
 	Model *string `json:"model,omitempty"` // 模型名称
 
@@ -4342,6 +4392,8 @@ type VatEntity struct {
 	Type *string `json:"type,omitempty"` // 识别的实体类型
 
 	Value *string `json:"value,omitempty"` // 识别出字段的文本信息
+
+	Items [][]*KvEntity `json:"items,omitempty"` // 识别出的票据详细信息
 }
 
 type VatEntityBuilder struct {
@@ -4350,6 +4402,9 @@ type VatEntityBuilder struct {
 
 	value     string // 识别出字段的文本信息
 	valueFlag bool
+
+	items     [][]*KvEntity // 识别出的票据详细信息
+	itemsFlag bool
 }
 
 func NewVatEntityBuilder() *VatEntityBuilder {
@@ -4375,6 +4430,15 @@ func (builder *VatEntityBuilder) Value(value string) *VatEntityBuilder {
 	return builder
 }
 
+// 识别出的票据详细信息
+//
+// 示例值：
+func (builder *VatEntityBuilder) Items(items [][]*KvEntity) *VatEntityBuilder {
+	builder.items = items
+	builder.itemsFlag = true
+	return builder
+}
+
 func (builder *VatEntityBuilder) Build() *VatEntity {
 	req := &VatEntity{}
 	if builder.typeFlag {
@@ -4384,6 +4448,9 @@ func (builder *VatEntityBuilder) Build() *VatEntity {
 	if builder.valueFlag {
 		req.Value = &builder.value
 
+	}
+	if builder.itemsFlag {
+		req.Items = builder.items
 	}
 	return req
 }

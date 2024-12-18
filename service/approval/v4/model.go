@@ -102,8 +102,9 @@ const (
 )
 
 const (
-	ApprovalMethodEnumOrSign  = 1 // 或签
-	ApprovalMethodEnumAddSign = 2 // 会签
+	ApprovalMethodEnumOrSign         = 1 // 或签
+	ApprovalMethodEnumAddSign        = 2 // 会签
+	ApprovalMethodEnumSequentialSign = 3 // 依次审批
 
 )
 
@@ -11921,6 +11922,8 @@ type WidgetInstance struct {
 	IsRevertApproval *bool `json:"is_revert_approval,omitempty"` // 是否是撤销已通过审批的流程
 
 	FormContent *string `json:"form_content,omitempty"` // 表单数据，仅包含自定义控件内的数据
+
+	SerialId *string `json:"serial_id,omitempty"` // 审批编号
 }
 
 type WidgetInstanceBuilder struct {
@@ -11938,6 +11941,9 @@ type WidgetInstanceBuilder struct {
 
 	formContent     string // 表单数据，仅包含自定义控件内的数据
 	formContentFlag bool
+
+	serialId     string // 审批编号
+	serialIdFlag bool
 }
 
 func NewWidgetInstanceBuilder() *WidgetInstanceBuilder {
@@ -11990,6 +11996,15 @@ func (builder *WidgetInstanceBuilder) FormContent(formContent string) *WidgetIns
 	return builder
 }
 
+// 审批编号
+//
+// 示例值：2024082614387
+func (builder *WidgetInstanceBuilder) SerialId(serialId string) *WidgetInstanceBuilder {
+	builder.serialId = serialId
+	builder.serialIdFlag = true
+	return builder
+}
+
 func (builder *WidgetInstanceBuilder) Build() *WidgetInstance {
 	req := &WidgetInstance{}
 	if builder.instanceCodeFlag {
@@ -12010,6 +12025,10 @@ func (builder *WidgetInstanceBuilder) Build() *WidgetInstance {
 	}
 	if builder.formContentFlag {
 		req.FormContent = &builder.formContent
+
+	}
+	if builder.serialIdFlag {
+		req.SerialId = &builder.serialId
 
 	}
 	return req

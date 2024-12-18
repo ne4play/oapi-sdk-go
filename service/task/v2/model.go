@@ -15,7 +15,7 @@ package larktask
 
 import (
 	"io"
-		
+
 	"fmt"
 
 	"context"
@@ -1130,8 +1130,6 @@ func NewDepartmentIdBuilder() *DepartmentIdBuilder {
 	return builder
 }
 
-//
-//
 // 示例值：
 func (builder *DepartmentIdBuilder) DepartmentId(departmentId string) *DepartmentIdBuilder {
 	builder.departmentId = departmentId
@@ -1139,8 +1137,6 @@ func (builder *DepartmentIdBuilder) DepartmentId(departmentId string) *Departmen
 	return builder
 }
 
-//
-//
 // 示例值：
 func (builder *DepartmentIdBuilder) OpenDepartmentId(openDepartmentId string) *DepartmentIdBuilder {
 	builder.openDepartmentId = openDepartmentId
@@ -4800,7 +4796,6 @@ func (builder *UploadAttachmentReqBuilder) UserIdType(userIdType string) *Upload
 	return builder
 }
 
-//
 func (builder *UploadAttachmentReqBuilder) InputAttachment(inputAttachment *InputAttachment) *UploadAttachmentReqBuilder {
 	builder.inputAttachment = inputAttachment
 	return builder
@@ -4855,7 +4850,6 @@ func (builder *CreateCommentReqBuilder) UserIdType(userIdType string) *CreateCom
 	return builder
 }
 
-//
 func (builder *CreateCommentReqBuilder) InputComment(inputComment *InputComment) *CreateCommentReqBuilder {
 	builder.inputComment = inputComment
 	return builder
@@ -5099,7 +5093,7 @@ func NewPatchCommentReqBodyBuilder() *PatchCommentReqBodyBuilder {
 
 // 要更新的评论数据，支持更新content, md_content
 //
-//示例值：
+// 示例值：
 func (builder *PatchCommentReqBodyBuilder) Comment(comment *InputComment) *PatchCommentReqBodyBuilder {
 	builder.comment = comment
 	builder.commentFlag = true
@@ -5108,7 +5102,7 @@ func (builder *PatchCommentReqBodyBuilder) Comment(comment *InputComment) *Patch
 
 // 要更新的字段
 //
-//示例值：
+// 示例值：
 func (builder *PatchCommentReqBodyBuilder) UpdateFields(updateFields []string) *PatchCommentReqBodyBuilder {
 	builder.updateFields = updateFields
 	builder.updateFieldsFlag = true
@@ -5197,7 +5191,6 @@ func (builder *PatchCommentReqBuilder) UserIdType(userIdType string) *PatchComme
 	return builder
 }
 
-//
 func (builder *PatchCommentReqBuilder) Body(body *PatchCommentReqBody) *PatchCommentReqBuilder {
 	builder.body = body
 	return builder
@@ -5252,7 +5245,7 @@ func NewAddCustomFieldReqBodyBuilder() *AddCustomFieldReqBodyBuilder {
 
 // 要将自定义字段添加到一个资源的资源类型。目前只支持tasklist
 //
-//示例值：tasklist
+// 示例值：tasklist
 func (builder *AddCustomFieldReqBodyBuilder) ResourceType(resourceType string) *AddCustomFieldReqBodyBuilder {
 	builder.resourceType = resourceType
 	builder.resourceTypeFlag = true
@@ -5261,7 +5254,7 @@ func (builder *AddCustomFieldReqBodyBuilder) ResourceType(resourceType string) *
 
 // 要将自定义字段添加到的资源id，目前只支持tasklist_guid
 //
-//示例值：0110a4bd-f24b-4a93-8c1a-1732b94f9593
+// 示例值：0110a4bd-f24b-4a93-8c1a-1732b94f9593
 func (builder *AddCustomFieldReqBodyBuilder) ResourceId(resourceId string) *AddCustomFieldReqBodyBuilder {
 	builder.resourceId = resourceId
 	builder.resourceIdFlag = true
@@ -5342,7 +5335,6 @@ func (builder *AddCustomFieldReqBuilder) CustomFieldGuid(customFieldGuid string)
 	return builder
 }
 
-//
 func (builder *AddCustomFieldReqBuilder) Body(body *AddCustomFieldReqBody) *AddCustomFieldReqBuilder {
 	builder.body = body
 	return builder
@@ -5398,7 +5390,6 @@ func (builder *CreateCustomFieldReqBuilder) UserIdType(userIdType string) *Creat
 	return builder
 }
 
-//
 func (builder *CreateCustomFieldReqBuilder) InputCustomField(inputCustomField *InputCustomField) *CreateCustomFieldReqBuilder {
 	builder.inputCustomField = inputCustomField
 	return builder
@@ -5593,7 +5584,7 @@ func NewPatchCustomFieldReqBodyBuilder() *PatchCustomFieldReqBodyBuilder {
 
 // 要修改的自定义字段数据
 //
-//示例值：
+// 示例值：
 func (builder *PatchCustomFieldReqBodyBuilder) CustomField(customField *InputCustomField) *PatchCustomFieldReqBodyBuilder {
 	builder.customField = customField
 	builder.customFieldFlag = true
@@ -5602,7 +5593,7 @@ func (builder *PatchCustomFieldReqBodyBuilder) CustomField(customField *InputCus
 
 // 要修改的自定义字段类型，支持name, member_setting, number_setting, datetime_setting, single_select_setting, multi_select_setting
 //
-//示例值：
+// 示例值：
 func (builder *PatchCustomFieldReqBodyBuilder) UpdateFields(updateFields []string) *PatchCustomFieldReqBodyBuilder {
 	builder.updateFields = updateFields
 	builder.updateFieldsFlag = true
@@ -5691,7 +5682,6 @@ func (builder *PatchCustomFieldReqBuilder) UserIdType(userIdType string) *PatchC
 	return builder
 }
 
-//
 func (builder *PatchCustomFieldReqBuilder) Body(body *PatchCustomFieldReqBody) *PatchCustomFieldReqBuilder {
 	builder.body = body
 	return builder
@@ -5746,7 +5736,7 @@ func NewRemoveCustomFieldReqBodyBuilder() *RemoveCustomFieldReqBodyBuilder {
 
 // 要从某个资源移除自定义字段的资源类型，目前只支持清单"tasklist"。
 //
-//示例值：tasklist
+// 示例值：tasklist
 func (builder *RemoveCustomFieldReqBodyBuilder) ResourceType(resourceType string) *RemoveCustomFieldReqBodyBuilder {
 	builder.resourceType = resourceType
 	builder.resourceTypeFlag = true
@@ -5755,7 +5745,7 @@ func (builder *RemoveCustomFieldReqBodyBuilder) ResourceType(resourceType string
 
 // 要从某个资源移除自定义字段的资源id，`resource_type`为"tasklist"时，需填写清单的GUID
 //
-//示例值：0110a4bd-f24b-4a93-8c1a-1732b94f9593
+// 示例值：0110a4bd-f24b-4a93-8c1a-1732b94f9593
 func (builder *RemoveCustomFieldReqBodyBuilder) ResourceId(resourceId string) *RemoveCustomFieldReqBodyBuilder {
 	builder.resourceId = resourceId
 	builder.resourceIdFlag = true
@@ -5836,7 +5826,6 @@ func (builder *RemoveCustomFieldReqBuilder) CustomFieldGuid(customFieldGuid stri
 	return builder
 }
 
-//
 func (builder *RemoveCustomFieldReqBuilder) Body(body *RemoveCustomFieldReqBody) *RemoveCustomFieldReqBuilder {
 	builder.body = body
 	return builder
@@ -5892,7 +5881,6 @@ func (builder *CreateCustomFieldOptionReqBuilder) CustomFieldGuid(customFieldGui
 	return builder
 }
 
-//
 func (builder *CreateCustomFieldOptionReqBuilder) InputOption(inputOption *InputOption) *CreateCustomFieldOptionReqBuilder {
 	builder.inputOption = inputOption
 	return builder
@@ -5940,7 +5928,7 @@ func NewPatchCustomFieldOptionReqBodyBuilder() *PatchCustomFieldOptionReqBodyBui
 
 // 要更新的option数据
 //
-//示例值：
+// 示例值：
 func (builder *PatchCustomFieldOptionReqBodyBuilder) Option(option *InputOption) *PatchCustomFieldOptionReqBodyBuilder {
 	builder.option = option
 	builder.optionFlag = true
@@ -5949,7 +5937,7 @@ func (builder *PatchCustomFieldOptionReqBodyBuilder) Option(option *InputOption)
 
 // 要更新的字段名，支持name,color,is_hidden,insert_before,insert_after
 //
-//示例值：
+// 示例值：
 func (builder *PatchCustomFieldOptionReqBodyBuilder) UpdateFields(updateFields []string) *PatchCustomFieldOptionReqBodyBuilder {
 	builder.updateFields = updateFields
 	builder.updateFieldsFlag = true
@@ -6038,7 +6026,6 @@ func (builder *PatchCustomFieldOptionReqBuilder) OptionGuid(optionGuid string) *
 	return builder
 }
 
-//
 func (builder *PatchCustomFieldOptionReqBuilder) Body(body *PatchCustomFieldOptionReqBody) *PatchCustomFieldOptionReqBuilder {
 	builder.body = body
 	return builder
@@ -6099,7 +6086,6 @@ func (builder *CreateSectionReqBuilder) UserIdType(userIdType string) *CreateSec
 	return builder
 }
 
-//
 func (builder *CreateSectionReqBuilder) InputSection(inputSection *InputSection) *CreateSectionReqBuilder {
 	builder.inputSection = inputSection
 	return builder
@@ -6335,7 +6321,7 @@ func NewPatchSectionReqBodyBuilder() *PatchSectionReqBodyBuilder {
 
 // 要更新的自定义分组的数据，仅支持name, insert_after, insert_before
 //
-//示例值：
+// 示例值：
 func (builder *PatchSectionReqBodyBuilder) Section(section *InputSection) *PatchSectionReqBodyBuilder {
 	builder.section = section
 	builder.sectionFlag = true
@@ -6344,7 +6330,7 @@ func (builder *PatchSectionReqBodyBuilder) Section(section *InputSection) *Patch
 
 // 要更新的字段名
 //
-//示例值：
+// 示例值：
 func (builder *PatchSectionReqBodyBuilder) UpdateFields(updateFields []string) *PatchSectionReqBodyBuilder {
 	builder.updateFields = updateFields
 	builder.updateFieldsFlag = true
@@ -6433,7 +6419,6 @@ func (builder *PatchSectionReqBuilder) UserIdType(userIdType string) *PatchSecti
 	return builder
 }
 
-//
 func (builder *PatchSectionReqBuilder) Body(body *PatchSectionReqBody) *PatchSectionReqBuilder {
 	builder.body = body
 	return builder
@@ -6594,7 +6579,7 @@ func NewAddDependenciesTaskReqBodyBuilder() *AddDependenciesTaskReqBodyBuilder {
 
 // 要添加的依赖
 //
-//示例值：
+// 示例值：
 func (builder *AddDependenciesTaskReqBodyBuilder) Dependencies(dependencies []*TaskDependency) *AddDependenciesTaskReqBodyBuilder {
 	builder.dependencies = dependencies
 	builder.dependenciesFlag = true
@@ -6658,7 +6643,6 @@ func (builder *AddDependenciesTaskReqBuilder) TaskGuid(taskGuid string) *AddDepe
 	return builder
 }
 
-//
 func (builder *AddDependenciesTaskReqBuilder) Body(body *AddDependenciesTaskReqBody) *AddDependenciesTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -6710,7 +6694,7 @@ func NewAddMembersTaskReqBodyBuilder() *AddMembersTaskReqBodyBuilder {
 
 // 要添加的members列表
 //
-//示例值：
+// 示例值：
 func (builder *AddMembersTaskReqBodyBuilder) Members(members []*Member) *AddMembersTaskReqBodyBuilder {
 	builder.members = members
 	builder.membersFlag = true
@@ -6719,7 +6703,7 @@ func (builder *AddMembersTaskReqBodyBuilder) Members(members []*Member) *AddMemb
 
 // 幂等token，如果提供则实现幂等行为
 //
-//示例值：6d99f59c-4d7d-4452-98d6-3d0556393cf6
+// 示例值：6d99f59c-4d7d-4452-98d6-3d0556393cf6
 func (builder *AddMembersTaskReqBodyBuilder) ClientToken(clientToken string) *AddMembersTaskReqBodyBuilder {
 	builder.clientToken = clientToken
 	builder.clientTokenFlag = true
@@ -6808,7 +6792,6 @@ func (builder *AddMembersTaskReqBuilder) UserIdType(userIdType string) *AddMembe
 	return builder
 }
 
-//
 func (builder *AddMembersTaskReqBuilder) Body(body *AddMembersTaskReqBody) *AddMembersTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -6860,7 +6843,7 @@ func NewAddRemindersTaskReqBodyBuilder() *AddRemindersTaskReqBodyBuilder {
 
 // 要添加的reminder的列表
 //
-//示例值：
+// 示例值：
 func (builder *AddRemindersTaskReqBodyBuilder) Reminders(reminders []*Reminder) *AddRemindersTaskReqBodyBuilder {
 	builder.reminders = reminders
 	builder.remindersFlag = true
@@ -6932,7 +6915,6 @@ func (builder *AddRemindersTaskReqBuilder) UserIdType(userIdType string) *AddRem
 	return builder
 }
 
-//
 func (builder *AddRemindersTaskReqBuilder) Body(body *AddRemindersTaskReqBody) *AddRemindersTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -6985,7 +6967,7 @@ func NewAddTasklistTaskReqBodyBuilder() *AddTasklistTaskReqBodyBuilder {
 
 // 要添加到的清单的全局唯一ID
 //
-//示例值：d300a75f-c56a-4be9-80d1-e47653028ceb
+// 示例值：d300a75f-c56a-4be9-80d1-e47653028ceb
 func (builder *AddTasklistTaskReqBodyBuilder) TasklistGuid(tasklistGuid string) *AddTasklistTaskReqBodyBuilder {
 	builder.tasklistGuid = tasklistGuid
 	builder.tasklistGuidFlag = true
@@ -6994,7 +6976,7 @@ func (builder *AddTasklistTaskReqBodyBuilder) TasklistGuid(tasklistGuid string) 
 
 // 要添加到清单的自定义分组全局唯一ID，如不填写表示添加到默认分组
 //
-//示例值：d300a75f-c56a-4be9-80d1-e47653028ceb
+// 示例值：d300a75f-c56a-4be9-80d1-e47653028ceb
 func (builder *AddTasklistTaskReqBodyBuilder) SectionGuid(sectionGuid string) *AddTasklistTaskReqBodyBuilder {
 	builder.sectionGuid = sectionGuid
 	builder.sectionGuidFlag = true
@@ -7083,7 +7065,6 @@ func (builder *AddTasklistTaskReqBuilder) UserIdType(userIdType string) *AddTask
 	return builder
 }
 
-//
 func (builder *AddTasklistTaskReqBuilder) Body(body *AddTasklistTaskReqBody) *AddTasklistTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -7145,7 +7126,6 @@ func (builder *CreateTaskReqBuilder) UserIdType(userIdType string) *CreateTaskRe
 	return builder
 }
 
-//
 func (builder *CreateTaskReqBuilder) InputTask(inputTask *InputTask) *CreateTaskReqBuilder {
 	builder.inputTask = inputTask
 	return builder
@@ -7381,7 +7361,7 @@ func NewPatchTaskReqBodyBuilder() *PatchTaskReqBodyBuilder {
 
 // 要更新的任务数据，只需要写明要更新的字段
 //
-//示例值：
+// 示例值：
 func (builder *PatchTaskReqBodyBuilder) Task(task *InputTask) *PatchTaskReqBodyBuilder {
 	builder.task = task
 	builder.taskFlag = true
@@ -7390,7 +7370,7 @@ func (builder *PatchTaskReqBodyBuilder) Task(task *InputTask) *PatchTaskReqBodyB
 
 // 要更新的字段名称。支持summary, description, due, start, completed_at, extra, repeat_rule, custom_complete, mode, is_milestone, custom_fields。
 //
-//示例值：
+// 示例值：
 func (builder *PatchTaskReqBodyBuilder) UpdateFields(updateFields []string) *PatchTaskReqBodyBuilder {
 	builder.updateFields = updateFields
 	builder.updateFieldsFlag = true
@@ -7479,7 +7459,6 @@ func (builder *PatchTaskReqBuilder) UserIdType(userIdType string) *PatchTaskReqB
 	return builder
 }
 
-//
 func (builder *PatchTaskReqBuilder) Body(body *PatchTaskReqBody) *PatchTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -7531,7 +7510,7 @@ func NewRemoveDependenciesTaskReqBodyBuilder() *RemoveDependenciesTaskReqBodyBui
 
 // 要移除的依赖
 //
-//示例值：
+// 示例值：
 func (builder *RemoveDependenciesTaskReqBodyBuilder) Dependencies(dependencies []*TaskDependency) *RemoveDependenciesTaskReqBodyBuilder {
 	builder.dependencies = dependencies
 	builder.dependenciesFlag = true
@@ -7595,7 +7574,6 @@ func (builder *RemoveDependenciesTaskReqBuilder) TaskGuid(taskGuid string) *Remo
 	return builder
 }
 
-//
 func (builder *RemoveDependenciesTaskReqBuilder) Body(body *RemoveDependenciesTaskReqBody) *RemoveDependenciesTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -7644,7 +7622,7 @@ func NewRemoveMembersTaskReqBodyBuilder() *RemoveMembersTaskReqBodyBuilder {
 
 // 要移除的member列表
 //
-//示例值：
+// 示例值：
 func (builder *RemoveMembersTaskReqBodyBuilder) Members(members []*Member) *RemoveMembersTaskReqBodyBuilder {
 	builder.members = members
 	builder.membersFlag = true
@@ -7716,7 +7694,6 @@ func (builder *RemoveMembersTaskReqBuilder) UserIdType(userIdType string) *Remov
 	return builder
 }
 
-//
 func (builder *RemoveMembersTaskReqBuilder) Body(body *RemoveMembersTaskReqBody) *RemoveMembersTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -7766,7 +7743,7 @@ func NewRemoveRemindersTaskReqBodyBuilder() *RemoveRemindersTaskReqBodyBuilder {
 
 // 要移除的reminder的id列表
 //
-//示例值：
+// 示例值：
 func (builder *RemoveRemindersTaskReqBodyBuilder) ReminderIds(reminderIds []string) *RemoveRemindersTaskReqBodyBuilder {
 	builder.reminderIds = reminderIds
 	builder.reminderIdsFlag = true
@@ -7838,7 +7815,6 @@ func (builder *RemoveRemindersTaskReqBuilder) UserIdType(userIdType string) *Rem
 	return builder
 }
 
-//
 func (builder *RemoveRemindersTaskReqBuilder) Body(body *RemoveRemindersTaskReqBody) *RemoveRemindersTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -7888,7 +7864,7 @@ func NewRemoveTasklistTaskReqBodyBuilder() *RemoveTasklistTaskReqBodyBuilder {
 
 // 要移除的清单的全局唯一ID
 //
-//示例值：d300a75f-c56a-4be9-80d1-e47653028ceb
+// 示例值：d300a75f-c56a-4be9-80d1-e47653028ceb
 func (builder *RemoveTasklistTaskReqBodyBuilder) TasklistGuid(tasklistGuid string) *RemoveTasklistTaskReqBodyBuilder {
 	builder.tasklistGuid = tasklistGuid
 	builder.tasklistGuidFlag = true
@@ -7960,7 +7936,6 @@ func (builder *RemoveTasklistTaskReqBuilder) UserIdType(userIdType string) *Remo
 	return builder
 }
 
-//
 func (builder *RemoveTasklistTaskReqBuilder) Body(body *RemoveTasklistTaskReqBody) *RemoveTasklistTaskReqBuilder {
 	builder.body = body
 	return builder
@@ -8074,7 +8049,6 @@ func (builder *CreateTaskSubtaskReqBuilder) UserIdType(userIdType string) *Creat
 	return builder
 }
 
-//
 func (builder *CreateTaskSubtaskReqBuilder) InputTask(inputTask *InputTask) *CreateTaskSubtaskReqBuilder {
 	builder.inputTask = inputTask
 	return builder
@@ -8205,7 +8179,7 @@ func NewAddMembersTasklistReqBodyBuilder() *AddMembersTasklistReqBodyBuilder {
 
 // 要添加的成员列表
 //
-//示例值：
+// 示例值：
 func (builder *AddMembersTasklistReqBodyBuilder) Members(members []*Member) *AddMembersTasklistReqBodyBuilder {
 	builder.members = members
 	builder.membersFlag = true
@@ -8277,7 +8251,6 @@ func (builder *AddMembersTasklistReqBuilder) UserIdType(userIdType string) *AddM
 	return builder
 }
 
-//
 func (builder *AddMembersTasklistReqBuilder) Body(body *AddMembersTasklistReqBody) *AddMembersTasklistReqBuilder {
 	builder.body = body
 	return builder
@@ -8337,7 +8310,6 @@ func (builder *CreateTasklistReqBuilder) UserIdType(userIdType string) *CreateTa
 	return builder
 }
 
-//
 func (builder *CreateTasklistReqBuilder) InputTasklist(inputTasklist *InputTasklist) *CreateTasklistReqBuilder {
 	builder.inputTasklist = inputTasklist
 	return builder
@@ -8560,7 +8532,7 @@ func NewPatchTasklistReqBodyBuilder() *PatchTasklistReqBodyBuilder {
 
 // 要更新清单的数据
 //
-//示例值：
+// 示例值：
 func (builder *PatchTasklistReqBodyBuilder) Tasklist(tasklist *InputTasklist) *PatchTasklistReqBodyBuilder {
 	builder.tasklist = tasklist
 	builder.tasklistFlag = true
@@ -8569,7 +8541,7 @@ func (builder *PatchTasklistReqBodyBuilder) Tasklist(tasklist *InputTasklist) *P
 
 // 要更新的字段名，只支持更新"owner", "name"两个字段
 //
-//示例值：
+// 示例值：
 func (builder *PatchTasklistReqBodyBuilder) UpdateFields(updateFields []string) *PatchTasklistReqBodyBuilder {
 	builder.updateFields = updateFields
 	builder.updateFieldsFlag = true
@@ -8578,7 +8550,7 @@ func (builder *PatchTasklistReqBodyBuilder) UpdateFields(updateFields []string) 
 
 // 该字段表示如果更新了新的负责人，则将原负责人设为指定的协作人角色。仅在update_fields包含owner字段时生效。根据清单的角色设计方式，不允许提前为清单的负责人添加其他角色，但负责人更新后，原有负责人会无法访问该清单。该字段可以帮助避免原负责人彻底退出清单。
 //
-//示例值：editor
+// 示例值：editor
 func (builder *PatchTasklistReqBodyBuilder) OriginOwnerToRole(originOwnerToRole string) *PatchTasklistReqBodyBuilder {
 	builder.originOwnerToRole = originOwnerToRole
 	builder.originOwnerToRoleFlag = true
@@ -8684,7 +8656,6 @@ func (builder *PatchTasklistReqBuilder) UserIdType(userIdType string) *PatchTask
 	return builder
 }
 
-//
 func (builder *PatchTasklistReqBuilder) Body(body *PatchTasklistReqBody) *PatchTasklistReqBuilder {
 	builder.body = body
 	return builder
@@ -8738,7 +8709,7 @@ func NewRemoveMembersTasklistReqBodyBuilder() *RemoveMembersTasklistReqBodyBuild
 
 // 要移除的member列表
 //
-//示例值：
+// 示例值：
 func (builder *RemoveMembersTasklistReqBodyBuilder) Members(members []*Member) *RemoveMembersTasklistReqBodyBuilder {
 	builder.members = members
 	builder.membersFlag = true
@@ -8810,7 +8781,6 @@ func (builder *RemoveMembersTasklistReqBuilder) UserIdType(userIdType string) *R
 	return builder
 }
 
-//
 func (builder *RemoveMembersTasklistReqBuilder) Body(body *RemoveMembersTasklistReqBody) *RemoveMembersTasklistReqBuilder {
 	builder.body = body
 	return builder
@@ -8977,7 +8947,6 @@ func (builder *CreateTasklistActivitySubscriptionReqBuilder) UserIdType(userIdTy
 	return builder
 }
 
-//
 func (builder *CreateTasklistActivitySubscriptionReqBuilder) TasklistActivitySubscription(tasklistActivitySubscription *TasklistActivitySubscription) *CreateTasklistActivitySubscriptionReqBuilder {
 	builder.tasklistActivitySubscription = tasklistActivitySubscription
 	return builder
@@ -9201,7 +9170,7 @@ func NewPatchTasklistActivitySubscriptionReqBodyBuilder() *PatchTasklistActivity
 
 // 要更新的订阅数据
 //
-//示例值：
+// 示例值：
 func (builder *PatchTasklistActivitySubscriptionReqBodyBuilder) ActivitySubscription(activitySubscription *TasklistActivitySubscription) *PatchTasklistActivitySubscriptionReqBodyBuilder {
 	builder.activitySubscription = activitySubscription
 	builder.activitySubscriptionFlag = true
@@ -9210,7 +9179,7 @@ func (builder *PatchTasklistActivitySubscriptionReqBodyBuilder) ActivitySubscrip
 
 // 要更新的字段
 //
-//示例值：
+// 示例值：
 func (builder *PatchTasklistActivitySubscriptionReqBodyBuilder) UpdateFields(updateFields []string) *PatchTasklistActivitySubscriptionReqBodyBuilder {
 	builder.updateFields = updateFields
 	builder.updateFieldsFlag = true
@@ -9307,7 +9276,6 @@ func (builder *PatchTasklistActivitySubscriptionReqBuilder) UserIdType(userIdTyp
 	return builder
 }
 
-//
 func (builder *PatchTasklistActivitySubscriptionReqBuilder) Body(body *PatchTasklistActivitySubscriptionReqBody) *PatchTasklistActivitySubscriptionReqBuilder {
 	builder.body = body
 	return builder

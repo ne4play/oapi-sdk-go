@@ -739,6 +739,32 @@ func (u *userDailyShift) BatchCreate(ctx context.Context, req *BatchCreateUserDa
 	return resp, err
 }
 
+// BatchCreateTemp
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batch_create_temp&project=attendance&resource=user_daily_shift&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/attendancev1/batchCreateTemp_userDailyShift.go
+func (u *userDailyShift) BatchCreateTemp(ctx context.Context, req *BatchCreateTempUserDailyShiftReq, options ...larkcore.RequestOptionFunc) (*BatchCreateTempUserDailyShiftResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/attendance/v1/user_daily_shifts/batch_create_temp"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, u.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchCreateTempUserDailyShiftResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, u.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Query 查询班表信息
 //
 // - 支持查询多个用户的排班情况，查询的时间跨度不能超过 30 天。

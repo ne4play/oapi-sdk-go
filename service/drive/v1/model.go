@@ -322,33 +322,37 @@ const (
 )
 
 const (
-	ParentTypeUploadAllMediaDocImage            = "doc_image"             // docs图片
-	ParentTypeUploadAllMediaDocxImage           = "docx_image"            // docx图片
-	ParentTypeUploadAllMediaSheetImage          = "sheet_image"           // sheet图片
-	ParentTypeUploadAllMediaDocFile             = "doc_file"              // doc文件
-	ParentTypeUploadAllMediaDocxFile            = "docx_file"             // docx文件
-	ParentTypeUploadAllMediaSheetFile           = "sheet_file"            // sheet文件
-	ParentTypeUploadAllMediaVcVirtualBackground = "vc_virtual_background" // vc虚拟背景
-	ParentTypeUploadAllMediaBitableImage        = "bitable_image"         // 多维表格图片
-	ParentTypeUploadAllMediaBitableFile         = "bitable_file"          // 多维表格文件
-	ParentTypeUploadAllMediaMoments             = "moments"               // 同事圈
-	ParentTypeUploadAllMediaCcmImportOpen       = "ccm_import_open"       // 云文档导入文件
-	ParentTypeUploadAllMediaCalendar            = "calendar"              // 日历文件
+	ParentTypeUploadAllMediaDocImage            = "doc_image"              // docs图片
+	ParentTypeUploadAllMediaDocxImage           = "docx_image"             // docx图片
+	ParentTypeUploadAllMediaSheetImage          = "sheet_image"            // sheet图片
+	ParentTypeUploadAllMediaDocFile             = "doc_file"               // doc文件
+	ParentTypeUploadAllMediaDocxFile            = "docx_file"              // docx文件
+	ParentTypeUploadAllMediaSheetFile           = "sheet_file"             // sheet文件
+	ParentTypeUploadAllMediaVcVirtualBackground = "vc_virtual_background"  // vc虚拟背景
+	ParentTypeUploadAllMediaBitableImage        = "bitable_image"          // 多维表格图片
+	ParentTypeUploadAllMediaBitableFile         = "bitable_file"           // 多维表格文件
+	ParentTypeUploadAllMediaMoments             = "moments"                // 同事圈
+	ParentTypeUploadAllMediaCcmImportOpen       = "ccm_import_open"        // 云文档导入文件
+	ParentTypeUploadAllMediaCalendar            = "calendar"               // 日历文件
+	ParentTypeUploadAllMediaBaseGlobal          = "base_global"            // base文件
+	ParentTypeUploadAllMediaLarkAiMediaAnalysis = "lark_ai_media_analysis" // ai素材
 )
 
 const (
-	ParentTypeUploadPrepareMediaDocImage            = "doc_image"             // docs图片
-	ParentTypeUploadPrepareMediaDocxImage           = "docx_image"            // docx图片
-	ParentTypeUploadPrepareMediaSheetImage          = "sheet_image"           // sheet图片
-	ParentTypeUploadPrepareMediaDocFile             = "doc_file"              // doc文件
-	ParentTypeUploadPrepareMediaDocxFile            = "docx_file"             // docx文件
-	ParentTypeUploadPrepareMediaSheetFile           = "sheet_file"            // sheet文件
-	ParentTypeUploadPrepareMediaVcVirtualBackground = "vc_virtual_background" // vc虚拟背景
-	ParentTypeUploadPrepareMediaBitableImage        = "bitable_image"         // bitable图片
-	ParentTypeUploadPrepareMediaBitableFile         = "bitable_file"          // bitable文件
-	ParentTypeUploadPrepareMediaMoments             = "moments"               // 同事圈
-	ParentTypeUploadPrepareMediaCcmImportOpen       = "ccm_import_open"       // 云文档导入文件
-	ParentTypeUploadPrepareMediaCalendar            = "calendar"              // 日历文件
+	ParentTypeUploadPrepareMediaDocImage            = "doc_image"              // docs图片
+	ParentTypeUploadPrepareMediaDocxImage           = "docx_image"             // docx图片
+	ParentTypeUploadPrepareMediaSheetImage          = "sheet_image"            // sheet图片
+	ParentTypeUploadPrepareMediaDocFile             = "doc_file"               // doc文件
+	ParentTypeUploadPrepareMediaDocxFile            = "docx_file"              // docx文件
+	ParentTypeUploadPrepareMediaSheetFile           = "sheet_file"             // sheet文件
+	ParentTypeUploadPrepareMediaVcVirtualBackground = "vc_virtual_background"  // vc虚拟背景
+	ParentTypeUploadPrepareMediaBitableImage        = "bitable_image"          // bitable图片
+	ParentTypeUploadPrepareMediaBitableFile         = "bitable_file"           // bitable文件
+	ParentTypeUploadPrepareMediaMoments             = "moments"                // 同事圈
+	ParentTypeUploadPrepareMediaCcmImportOpen       = "ccm_import_open"        // 云文档导入文件
+	ParentTypeUploadPrepareMediaCalendar            = "calendar"               // 日历文件
+	ParentTypeUploadPrepareMediaBaseGlobal          = "base_global"            // base文件
+	ParentTypeUploadPrepareMediaLarkAiMediaAnalysis = "lark_ai_media_analysis" // ai素材
 )
 
 const (

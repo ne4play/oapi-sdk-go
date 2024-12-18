@@ -2182,6 +2182,74 @@ func (builder *UserIdBuilder) Build() *UserId {
 	return req
 }
 
+type UserInfo struct {
+	Type *string `json:"type,omitempty"` // 个人邮箱还是公共邮箱
+
+	OwnerUserId *string `json:"owner_user_id,omitempty"` // 卡片owner的ID，卡片owner为个人邮箱时非空
+
+	PublicMailboxId *string `json:"public_mailbox_id,omitempty"` // 公共邮箱唯一标识
+}
+
+type UserInfoBuilder struct {
+	type_    string // 个人邮箱还是公共邮箱
+	typeFlag bool
+
+	ownerUserId     string // 卡片owner的ID，卡片owner为个人邮箱时非空
+	ownerUserIdFlag bool
+
+	publicMailboxId     string // 公共邮箱唯一标识
+	publicMailboxIdFlag bool
+}
+
+func NewUserInfoBuilder() *UserInfoBuilder {
+	builder := &UserInfoBuilder{}
+	return builder
+}
+
+// 个人邮箱还是公共邮箱
+//
+// 示例值：user 或 public_mailbox
+func (builder *UserInfoBuilder) Type(type_ string) *UserInfoBuilder {
+	builder.type_ = type_
+	builder.typeFlag = true
+	return builder
+}
+
+// 卡片owner的ID，卡片owner为个人邮箱时非空
+//
+// 示例值：ou_7dab8a3d3cdcc9da365777c7ad115d62
+func (builder *UserInfoBuilder) OwnerUserId(ownerUserId string) *UserInfoBuilder {
+	builder.ownerUserId = ownerUserId
+	builder.ownerUserIdFlag = true
+	return builder
+}
+
+// 公共邮箱唯一标识
+//
+// 示例值：xxxxxxxxxx
+func (builder *UserInfoBuilder) PublicMailboxId(publicMailboxId string) *UserInfoBuilder {
+	builder.publicMailboxId = publicMailboxId
+	builder.publicMailboxIdFlag = true
+	return builder
+}
+
+func (builder *UserInfoBuilder) Build() *UserInfo {
+	req := &UserInfo{}
+	if builder.typeFlag {
+		req.Type = &builder.type_
+
+	}
+	if builder.ownerUserIdFlag {
+		req.OwnerUserId = &builder.ownerUserId
+
+	}
+	if builder.publicMailboxIdFlag {
+		req.PublicMailboxId = &builder.publicMailboxId
+
+	}
+	return req
+}
+
 type CreateMailgroupReqBuilder struct {
 	apiReq    *larkcore.ApiReq
 	mailgroup *Mailgroup

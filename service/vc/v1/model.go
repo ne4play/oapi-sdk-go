@@ -2972,6 +2972,74 @@ func (builder *MeetingInviteStatusBuilder) Build() *MeetingInviteStatus {
 	return req
 }
 
+type MeetingNamedUser struct {
+	Id *string `json:"id,omitempty"` // 用户ID
+
+	UserType *int `json:"user_type,omitempty"` // 用户类型
+
+	InMeetingName *string `json:"in_meeting_name,omitempty"` // 会中修改的名字
+}
+
+type MeetingNamedUserBuilder struct {
+	id     string // 用户ID
+	idFlag bool
+
+	userType     int // 用户类型
+	userTypeFlag bool
+
+	inMeetingName     string // 会中修改的名字
+	inMeetingNameFlag bool
+}
+
+func NewMeetingNamedUserBuilder() *MeetingNamedUserBuilder {
+	builder := &MeetingNamedUserBuilder{}
+	return builder
+}
+
+// 用户ID
+//
+// 示例值：ou_3ec3f6a28a0d08c45d895276e8e5e19b
+func (builder *MeetingNamedUserBuilder) Id(id string) *MeetingNamedUserBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 用户类型
+//
+// 示例值：1
+func (builder *MeetingNamedUserBuilder) UserType(userType int) *MeetingNamedUserBuilder {
+	builder.userType = userType
+	builder.userTypeFlag = true
+	return builder
+}
+
+// 会中修改的名字
+//
+// 示例值：指挥官
+func (builder *MeetingNamedUserBuilder) InMeetingName(inMeetingName string) *MeetingNamedUserBuilder {
+	builder.inMeetingName = inMeetingName
+	builder.inMeetingNameFlag = true
+	return builder
+}
+
+func (builder *MeetingNamedUserBuilder) Build() *MeetingNamedUser {
+	req := &MeetingNamedUser{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.userTypeFlag {
+		req.UserType = &builder.userType
+
+	}
+	if builder.inMeetingNameFlag {
+		req.InMeetingName = &builder.inMeetingName
+
+	}
+	return req
+}
+
 type MeetingParticipant struct {
 	Id *string `json:"id,omitempty"` // 用户ID
 
