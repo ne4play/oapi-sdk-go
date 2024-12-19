@@ -283,6 +283,7 @@ func (c *Client) getConnURL(ctx context.Context) (url string, err error) {
 	endpoint := endpointResp.Data
 	if endpoint == nil || endpoint.Url == "" {
 		err = NewServerError(http.StatusInternalServerError, "endpoint is null")
+		return
 	}
 
 	url = endpoint.Url
