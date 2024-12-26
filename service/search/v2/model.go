@@ -3777,6 +3777,8 @@ type ScenarioContextExtra struct {
 	ButtonSendMessageInfo *string `json:"button_send_message_info,omitempty"` // 点击按钮发送消息时所携带的参数信息
 
 	ButtonRegenerateMessage *string `json:"button_regenerate_message,omitempty"` // 点击重新生成按钮时携带的参数信息
+
+	EnterpriseQaChannelInfo *string `json:"enterprise_qa_channel_info,omitempty"` // 主会话链路前端透传给后端的参数
 }
 
 type ScenarioContextExtraBuilder struct {
@@ -3797,6 +3799,9 @@ type ScenarioContextExtraBuilder struct {
 
 	buttonRegenerateMessage     string // 点击重新生成按钮时携带的参数信息
 	buttonRegenerateMessageFlag bool
+
+	enterpriseQaChannelInfo     string // 主会话链路前端透传给后端的参数
+	enterpriseQaChannelInfoFlag bool
 }
 
 func NewScenarioContextExtraBuilder() *ScenarioContextExtraBuilder {
@@ -3858,6 +3863,15 @@ func (builder *ScenarioContextExtraBuilder) ButtonRegenerateMessage(buttonRegene
 	return builder
 }
 
+// 主会话链路前端透传给后端的参数
+//
+// 示例值：1
+func (builder *ScenarioContextExtraBuilder) EnterpriseQaChannelInfo(enterpriseQaChannelInfo string) *ScenarioContextExtraBuilder {
+	builder.enterpriseQaChannelInfo = enterpriseQaChannelInfo
+	builder.enterpriseQaChannelInfoFlag = true
+	return builder
+}
+
 func (builder *ScenarioContextExtraBuilder) Build() *ScenarioContextExtra {
 	req := &ScenarioContextExtra{}
 	if builder.groundingIdFlag {
@@ -3882,6 +3896,10 @@ func (builder *ScenarioContextExtraBuilder) Build() *ScenarioContextExtra {
 	}
 	if builder.buttonRegenerateMessageFlag {
 		req.ButtonRegenerateMessage = &builder.buttonRegenerateMessage
+
+	}
+	if builder.enterpriseQaChannelInfoFlag {
+		req.EnterpriseQaChannelInfo = &builder.enterpriseQaChannelInfo
 
 	}
 	return req

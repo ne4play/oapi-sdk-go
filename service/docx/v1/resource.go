@@ -9,21 +9,36 @@ import (
 )
 
 type V1 struct {
-	Document                *document                // 文档
-	DocumentBlock           *documentBlock           // 块
-	DocumentBlockChildren   *documentBlockChildren   // document.block.children
-	DocumentBlockDescendant *documentBlockDescendant // document.block.descendant
+	ChatAnnouncement              *chatAnnouncement              // chat.announcement
+	ChatAnnouncementBlock         *chatAnnouncementBlock         // chat.announcement.block
+	ChatAnnouncementBlockChildren *chatAnnouncementBlockChildren // chat.announcement.block.children
+	Document                      *document                      // 文档
+	DocumentBlock                 *documentBlock                 // 块
+	DocumentBlockChildren         *documentBlockChildren         // document.block.children
+	DocumentBlockDescendant       *documentBlockDescendant       // document.block.descendant
 }
 
 func New(config *larkcore.Config) *V1 {
 	return &V1{
-		Document:                &document{config: config},
-		DocumentBlock:           &documentBlock{config: config},
-		DocumentBlockChildren:   &documentBlockChildren{config: config},
-		DocumentBlockDescendant: &documentBlockDescendant{config: config},
+		ChatAnnouncement:              &chatAnnouncement{config: config},
+		ChatAnnouncementBlock:         &chatAnnouncementBlock{config: config},
+		ChatAnnouncementBlockChildren: &chatAnnouncementBlockChildren{config: config},
+		Document:                      &document{config: config},
+		DocumentBlock:                 &documentBlock{config: config},
+		DocumentBlockChildren:         &documentBlockChildren{config: config},
+		DocumentBlockDescendant:       &documentBlockDescendant{config: config},
 	}
 }
 
+type chatAnnouncement struct {
+	config *larkcore.Config
+}
+type chatAnnouncementBlock struct {
+	config *larkcore.Config
+}
+type chatAnnouncementBlockChildren struct {
+	config *larkcore.Config
+}
 type document struct {
 	config *larkcore.Config
 }
@@ -35,6 +50,196 @@ type documentBlockChildren struct {
 }
 type documentBlockDescendant struct {
 	config *larkcore.Config
+}
+
+// Get
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=get&project=docx&resource=chat.announcement&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/docxv1/get_chatAnnouncement.go
+func (c *chatAnnouncement) Get(ctx context.Context, req *GetChatAnnouncementReq, options ...larkcore.RequestOptionFunc) (*GetChatAnnouncementResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/docx/v1/chats/:chat_id/announcement"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &GetChatAnnouncementResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// BatchUpdate
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batch_update&project=docx&resource=chat.announcement.block&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/docxv1/batchUpdate_chatAnnouncementBlock.go
+func (c *chatAnnouncementBlock) BatchUpdate(ctx context.Context, req *BatchUpdateChatAnnouncementBlockReq, options ...larkcore.RequestOptionFunc) (*BatchUpdateChatAnnouncementBlockResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/docx/v1/chats/:chat_id/announcement/blocks/batch_update"
+	apiReq.HttpMethod = http.MethodPatch
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchUpdateChatAnnouncementBlockResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Get
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=get&project=docx&resource=chat.announcement.block&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/docxv1/get_chatAnnouncementBlock.go
+func (c *chatAnnouncementBlock) Get(ctx context.Context, req *GetChatAnnouncementBlockReq, options ...larkcore.RequestOptionFunc) (*GetChatAnnouncementBlockResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/docx/v1/chats/:chat_id/announcement/blocks/:block_id"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &GetChatAnnouncementBlockResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// List
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=docx&resource=chat.announcement.block&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/docxv1/list_chatAnnouncementBlock.go
+func (c *chatAnnouncementBlock) List(ctx context.Context, req *ListChatAnnouncementBlockReq, options ...larkcore.RequestOptionFunc) (*ListChatAnnouncementBlockResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/docx/v1/chats/:chat_id/announcement/blocks"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListChatAnnouncementBlockResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (c *chatAnnouncementBlock) ListByIterator(ctx context.Context, req *ListChatAnnouncementBlockReq, options ...larkcore.RequestOptionFunc) (*ListChatAnnouncementBlockIterator, error) {
+	return &ListChatAnnouncementBlockIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: c.List,
+		options:  options,
+		limit:    req.Limit}, nil
+}
+
+// BatchDelete
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batch_delete&project=docx&resource=chat.announcement.block.children&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/docxv1/batchDelete_chatAnnouncementBlockChildren.go
+func (c *chatAnnouncementBlockChildren) BatchDelete(ctx context.Context, req *BatchDeleteChatAnnouncementBlockChildrenReq, options ...larkcore.RequestOptionFunc) (*BatchDeleteChatAnnouncementBlockChildrenResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/docx/v1/chats/:chat_id/announcement/blocks/:block_id/children/batch_delete"
+	apiReq.HttpMethod = http.MethodDelete
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchDeleteChatAnnouncementBlockChildrenResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Create
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=create&project=docx&resource=chat.announcement.block.children&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/docxv1/create_chatAnnouncementBlockChildren.go
+func (c *chatAnnouncementBlockChildren) Create(ctx context.Context, req *CreateChatAnnouncementBlockChildrenReq, options ...larkcore.RequestOptionFunc) (*CreateChatAnnouncementBlockChildrenResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/docx/v1/chats/:chat_id/announcement/blocks/:block_id/children"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &CreateChatAnnouncementBlockChildrenResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Get
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=get&project=docx&resource=chat.announcement.block.children&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/docxv1/get_chatAnnouncementBlockChildren.go
+func (c *chatAnnouncementBlockChildren) Get(ctx context.Context, req *GetChatAnnouncementBlockChildrenReq, options ...larkcore.RequestOptionFunc) (*GetChatAnnouncementBlockChildrenResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/docx/v1/chats/:chat_id/announcement/blocks/:block_id/children"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &GetChatAnnouncementBlockChildrenResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
 }
 
 // Create 创建文档

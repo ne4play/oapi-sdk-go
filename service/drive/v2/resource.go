@@ -9,17 +9,56 @@ import (
 )
 
 type V2 struct {
+	FileLike         *fileLike         // file.like
 	PermissionPublic *permissionPublic // permission.public
 }
 
 func New(config *larkcore.Config) *V2 {
 	return &V2{
+		FileLike:         &fileLike{config: config},
 		PermissionPublic: &permissionPublic{config: config},
 	}
 }
 
+type fileLike struct {
+	config *larkcore.Config
+}
 type permissionPublic struct {
 	config *larkcore.Config
+}
+
+// List
+//
+// - 获取指定文件的点赞者列表并分页返回。
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=list&project=drive&resource=file.like&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/drivev2/list_fileLike.go
+func (f *fileLike) List(ctx context.Context, req *ListFileLikeReq, options ...larkcore.RequestOptionFunc) (*ListFileLikeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/drive/v2/files/:file_token/likes"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, f.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &ListFileLikeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, f.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+func (f *fileLike) ListByIterator(ctx context.Context, req *ListFileLikeReq, options ...larkcore.RequestOptionFunc) (*ListFileLikeIterator, error) {
+	return &ListFileLikeIterator{
+		ctx:      ctx,
+		req:      req,
+		listFunc: f.List,
+		options:  options,
+		limit:    req.Limit}, nil
 }
 
 // Get

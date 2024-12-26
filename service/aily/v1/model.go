@@ -22,6 +22,14 @@ import (
 	"github.com/larksuite/oapi-sdk-go/v3/core"
 )
 
+const (
+	AilyMessageContentTypeContentTypeMDX       = "MDX"       // MDX
+	AilyMessageContentTypeContentTypeText      = "TEXT"      // TEXT
+	AilyMessageContentTypeContentTypeClip      = "CLIP"      // GUI 卡片
+	AilyMessageContentTypeContentTypeSmartCard = "SmartCard" // SmartCard
+	AilyMessageContentTypeContentTypeJSON      = "JSON"      // JSON
+)
+
 type AilyKnowledgeAskProcessData struct {
 	ChartDsls []string `json:"chart_dsls,omitempty"` // 有数据分析时，根据数据生成的图表描述，按markdown语义描述
 
@@ -1856,6 +1864,109 @@ func (builder *DataAssetBuilder) Build() *DataAsset {
 	}
 	if builder.updatedTimeFlag {
 		req.UpdatedTime = &builder.updatedTime
+
+	}
+	return req
+}
+
+type DataAssetChunk struct {
+	Content *string `json:"content,omitempty"` // 切片内容
+
+	DataAssetId *string `json:"data_asset_id,omitempty"` // 切片所属的数据知识ID
+
+	Score *float64 `json:"score,omitempty"` // 相关性分数
+
+	DataAssetLabel map[string]string `json:"data_asset_label,omitempty"` // 切片所归属的数据知识名称
+
+	DataAssetSourceUrl *string `json:"data_asset_source_url,omitempty"` // 归属数据知识的源链接。如云文档链接、文件链接等
+}
+
+type DataAssetChunkBuilder struct {
+	content     string // 切片内容
+	contentFlag bool
+
+	dataAssetId     string // 切片所属的数据知识ID
+	dataAssetIdFlag bool
+
+	score     float64 // 相关性分数
+	scoreFlag bool
+
+	dataAssetLabel     map[string]string // 切片所归属的数据知识名称
+	dataAssetLabelFlag bool
+
+	dataAssetSourceUrl     string // 归属数据知识的源链接。如云文档链接、文件链接等
+	dataAssetSourceUrlFlag bool
+}
+
+func NewDataAssetChunkBuilder() *DataAssetChunkBuilder {
+	builder := &DataAssetChunkBuilder{}
+	return builder
+}
+
+// 切片内容
+//
+// 示例值：这是一段数据切片内容
+func (builder *DataAssetChunkBuilder) Content(content string) *DataAssetChunkBuilder {
+	builder.content = content
+	builder.contentFlag = true
+	return builder
+}
+
+// 切片所属的数据知识ID
+//
+// 示例值：asset_id_casdfh1
+func (builder *DataAssetChunkBuilder) DataAssetId(dataAssetId string) *DataAssetChunkBuilder {
+	builder.dataAssetId = dataAssetId
+	builder.dataAssetIdFlag = true
+	return builder
+}
+
+// 相关性分数
+//
+// 示例值：0.74
+func (builder *DataAssetChunkBuilder) Score(score float64) *DataAssetChunkBuilder {
+	builder.score = score
+	builder.scoreFlag = true
+	return builder
+}
+
+// 切片所归属的数据知识名称
+//
+// 示例值：
+func (builder *DataAssetChunkBuilder) DataAssetLabel(dataAssetLabel map[string]string) *DataAssetChunkBuilder {
+	builder.dataAssetLabel = dataAssetLabel
+	builder.dataAssetLabelFlag = true
+	return builder
+}
+
+// 归属数据知识的源链接。如云文档链接、文件链接等
+//
+// 示例值：https://doclink.com/1
+func (builder *DataAssetChunkBuilder) DataAssetSourceUrl(dataAssetSourceUrl string) *DataAssetChunkBuilder {
+	builder.dataAssetSourceUrl = dataAssetSourceUrl
+	builder.dataAssetSourceUrlFlag = true
+	return builder
+}
+
+func (builder *DataAssetChunkBuilder) Build() *DataAssetChunk {
+	req := &DataAssetChunk{}
+	if builder.contentFlag {
+		req.Content = &builder.content
+
+	}
+	if builder.dataAssetIdFlag {
+		req.DataAssetId = &builder.dataAssetId
+
+	}
+	if builder.scoreFlag {
+		req.Score = &builder.score
+
+	}
+	if builder.dataAssetLabelFlag {
+		req.DataAssetLabel = builder.dataAssetLabel
+	}
+	if builder.dataAssetSourceUrlFlag {
+		req.DataAssetSourceUrl = &builder.dataAssetSourceUrl
 
 	}
 	return req

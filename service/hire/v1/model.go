@@ -12997,6 +12997,8 @@ type CombinedJob struct {
 	OnboardRegistrationSchemaId *string `json:"onboard_registration_schema_id,omitempty"` // 入职登记表ID
 
 	TargetMajorIdList []string `json:"target_major_id_list,omitempty"` // 目标专业ID List
+
+	PortalWebsiteApplyFormSchemaId *string `json:"portal_website_apply_form_schema_id,omitempty"` // 官网申请表ID
 }
 
 type CombinedJobBuilder struct {
@@ -13095,6 +13097,9 @@ type CombinedJobBuilder struct {
 
 	targetMajorIdList     []string // 目标专业ID List
 	targetMajorIdListFlag bool
+
+	portalWebsiteApplyFormSchemaId     string // 官网申请表ID
+	portalWebsiteApplyFormSchemaIdFlag bool
 }
 
 func NewCombinedJobBuilder() *CombinedJobBuilder {
@@ -13390,6 +13395,15 @@ func (builder *CombinedJobBuilder) TargetMajorIdList(targetMajorIdList []string)
 	return builder
 }
 
+// 官网申请表ID
+//
+// 示例值：7397638158859323692
+func (builder *CombinedJobBuilder) PortalWebsiteApplyFormSchemaId(portalWebsiteApplyFormSchemaId string) *CombinedJobBuilder {
+	builder.portalWebsiteApplyFormSchemaId = portalWebsiteApplyFormSchemaId
+	builder.portalWebsiteApplyFormSchemaIdFlag = true
+	return builder
+}
+
 func (builder *CombinedJobBuilder) Build() *CombinedJob {
 	req := &CombinedJob{}
 	if builder.idFlag {
@@ -13515,6 +13529,10 @@ func (builder *CombinedJobBuilder) Build() *CombinedJob {
 	if builder.targetMajorIdListFlag {
 		req.TargetMajorIdList = builder.targetMajorIdList
 	}
+	if builder.portalWebsiteApplyFormSchemaIdFlag {
+		req.PortalWebsiteApplyFormSchemaId = &builder.portalWebsiteApplyFormSchemaId
+
+	}
 	return req
 }
 
@@ -13580,6 +13598,8 @@ type CombinedJobResult struct {
 	OnboardRegistrationSchemaInfo *RegistrationSchemaInfo `json:"onboard_registration_schema_info,omitempty"` // 入职登记表
 
 	TargetMajorList []*TargetMajorInfo `json:"target_major_list,omitempty"` // 目标专业
+
+	PortalWebsiteApplyFormSchemaInfo *RegistrationSchemaInfo `json:"portal_website_apply_form_schema_info,omitempty"` // 官网申请表
 }
 
 type CombinedJobResultBuilder struct {
@@ -13600,6 +13620,9 @@ type CombinedJobResultBuilder struct {
 
 	targetMajorList     []*TargetMajorInfo // 目标专业
 	targetMajorListFlag bool
+
+	portalWebsiteApplyFormSchemaInfo     *RegistrationSchemaInfo // 官网申请表
+	portalWebsiteApplyFormSchemaInfoFlag bool
 }
 
 func NewCombinedJobResultBuilder() *CombinedJobResultBuilder {
@@ -13661,6 +13684,15 @@ func (builder *CombinedJobResultBuilder) TargetMajorList(targetMajorList []*Targ
 	return builder
 }
 
+// 官网申请表
+//
+// 示例值：
+func (builder *CombinedJobResultBuilder) PortalWebsiteApplyFormSchemaInfo(portalWebsiteApplyFormSchemaInfo *RegistrationSchemaInfo) *CombinedJobResultBuilder {
+	builder.portalWebsiteApplyFormSchemaInfo = portalWebsiteApplyFormSchemaInfo
+	builder.portalWebsiteApplyFormSchemaInfoFlag = true
+	return builder
+}
+
 func (builder *CombinedJobResultBuilder) Build() *CombinedJobResult {
 	req := &CombinedJobResult{}
 	if builder.defaultJobPostFlag {
@@ -13680,6 +13712,9 @@ func (builder *CombinedJobResultBuilder) Build() *CombinedJobResult {
 	}
 	if builder.targetMajorListFlag {
 		req.TargetMajorList = builder.targetMajorList
+	}
+	if builder.portalWebsiteApplyFormSchemaInfoFlag {
+		req.PortalWebsiteApplyFormSchemaInfo = builder.portalWebsiteApplyFormSchemaInfo
 	}
 	return req
 }
@@ -24487,6 +24522,8 @@ type Interviewer struct {
 	UserId *string `json:"user_id,omitempty"` // 面试官userID
 
 	VerifyStatus *int `json:"verify_status,omitempty"` // 认证状态
+
+	TagIdList []string `json:"tag_id_list,omitempty"` // 面试官标签ID
 }
 
 type InterviewerBuilder struct {
@@ -24495,6 +24532,9 @@ type InterviewerBuilder struct {
 
 	verifyStatus     int // 认证状态
 	verifyStatusFlag bool
+
+	tagIdList     []string // 面试官标签ID
+	tagIdListFlag bool
 }
 
 func NewInterviewerBuilder() *InterviewerBuilder {
@@ -24520,6 +24560,15 @@ func (builder *InterviewerBuilder) VerifyStatus(verifyStatus int) *InterviewerBu
 	return builder
 }
 
+// 面试官标签ID
+//
+// 示例值：
+func (builder *InterviewerBuilder) TagIdList(tagIdList []string) *InterviewerBuilder {
+	builder.tagIdList = tagIdList
+	builder.tagIdListFlag = true
+	return builder
+}
+
 func (builder *InterviewerBuilder) Build() *Interviewer {
 	req := &Interviewer{}
 	if builder.userIdFlag {
@@ -24528,6 +24577,148 @@ func (builder *InterviewerBuilder) Build() *Interviewer {
 	}
 	if builder.verifyStatusFlag {
 		req.VerifyStatus = &builder.verifyStatus
+
+	}
+	if builder.tagIdListFlag {
+		req.TagIdList = builder.tagIdList
+	}
+	return req
+}
+
+type InterviewerTag struct {
+	Id *string `json:"id,omitempty"` // 标签 ID
+
+	Name *I18n `json:"name,omitempty"` // 标签名称
+
+	ActiveStatus *int `json:"active_status,omitempty"` // 停启用状态
+
+	CreatorId *string `json:"creator_id,omitempty"` // 创建人UserID
+
+	UpdaterId *string `json:"updater_id,omitempty"` // 修改人UserID
+
+	CreateTime *string `json:"create_time,omitempty"` // 创建时间
+
+	UpdateTime *string `json:"update_time,omitempty"` // 更新时间
+}
+
+type InterviewerTagBuilder struct {
+	id     string // 标签 ID
+	idFlag bool
+
+	name     *I18n // 标签名称
+	nameFlag bool
+
+	activeStatus     int // 停启用状态
+	activeStatusFlag bool
+
+	creatorId     string // 创建人UserID
+	creatorIdFlag bool
+
+	updaterId     string // 修改人UserID
+	updaterIdFlag bool
+
+	createTime     string // 创建时间
+	createTimeFlag bool
+
+	updateTime     string // 更新时间
+	updateTimeFlag bool
+}
+
+func NewInterviewerTagBuilder() *InterviewerTagBuilder {
+	builder := &InterviewerTagBuilder{}
+	return builder
+}
+
+// 标签 ID
+//
+// 示例值：6949805467799537964
+func (builder *InterviewerTagBuilder) Id(id string) *InterviewerTagBuilder {
+	builder.id = id
+	builder.idFlag = true
+	return builder
+}
+
+// 标签名称
+//
+// 示例值：
+func (builder *InterviewerTagBuilder) Name(name *I18n) *InterviewerTagBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+// 停启用状态
+//
+// 示例值：1
+func (builder *InterviewerTagBuilder) ActiveStatus(activeStatus int) *InterviewerTagBuilder {
+	builder.activeStatus = activeStatus
+	builder.activeStatusFlag = true
+	return builder
+}
+
+// 创建人UserID
+//
+// 示例值：ou_7dab8a3d3cdcc9da365777c7ad535d62
+func (builder *InterviewerTagBuilder) CreatorId(creatorId string) *InterviewerTagBuilder {
+	builder.creatorId = creatorId
+	builder.creatorIdFlag = true
+	return builder
+}
+
+// 修改人UserID
+//
+// 示例值：ou_7dab8a3d3cdcc9da365777c7ad535d62
+func (builder *InterviewerTagBuilder) UpdaterId(updaterId string) *InterviewerTagBuilder {
+	builder.updaterId = updaterId
+	builder.updaterIdFlag = true
+	return builder
+}
+
+// 创建时间
+//
+// 示例值：1733729032000
+func (builder *InterviewerTagBuilder) CreateTime(createTime string) *InterviewerTagBuilder {
+	builder.createTime = createTime
+	builder.createTimeFlag = true
+	return builder
+}
+
+// 更新时间
+//
+// 示例值：1733993842000
+func (builder *InterviewerTagBuilder) UpdateTime(updateTime string) *InterviewerTagBuilder {
+	builder.updateTime = updateTime
+	builder.updateTimeFlag = true
+	return builder
+}
+
+func (builder *InterviewerTagBuilder) Build() *InterviewerTag {
+	req := &InterviewerTag{}
+	if builder.idFlag {
+		req.Id = &builder.id
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	if builder.activeStatusFlag {
+		req.ActiveStatus = &builder.activeStatus
+
+	}
+	if builder.creatorIdFlag {
+		req.CreatorId = &builder.creatorId
+
+	}
+	if builder.updaterIdFlag {
+		req.UpdaterId = &builder.updaterId
+
+	}
+	if builder.createTimeFlag {
+		req.CreateTime = &builder.createTime
+
+	}
+	if builder.updateTimeFlag {
+		req.UpdateTime = &builder.updateTime
 
 	}
 	return req
@@ -25596,6 +25787,8 @@ type JobConfig struct {
 	RelatedJobIdList []string `json:"related_job_id_list,omitempty"` // 关联职位列表，如职位为实体职位则关联虚拟职位id，如职位为虚拟职位则关联实体职位id
 
 	InterviewAppointmentConfig *InterviewAppointmentConfig `json:"interview_appointment_config,omitempty"` // 自助约面配置
+
+	PortalWebsiteApplyFormSchemaId *string `json:"portal_website_apply_form_schema_id,omitempty"` // 官网申请表ID
 }
 
 type JobConfigBuilder struct {
@@ -25634,6 +25827,9 @@ type JobConfigBuilder struct {
 
 	interviewAppointmentConfig     *InterviewAppointmentConfig // 自助约面配置
 	interviewAppointmentConfigFlag bool
+
+	portalWebsiteApplyFormSchemaId     string // 官网申请表ID
+	portalWebsiteApplyFormSchemaIdFlag bool
 }
 
 func NewJobConfigBuilder() *JobConfigBuilder {
@@ -25749,6 +25945,15 @@ func (builder *JobConfigBuilder) InterviewAppointmentConfig(interviewAppointment
 	return builder
 }
 
+// 官网申请表ID
+//
+// 示例值：6930815272790114324
+func (builder *JobConfigBuilder) PortalWebsiteApplyFormSchemaId(portalWebsiteApplyFormSchemaId string) *JobConfigBuilder {
+	builder.portalWebsiteApplyFormSchemaId = portalWebsiteApplyFormSchemaId
+	builder.portalWebsiteApplyFormSchemaIdFlag = true
+	return builder
+}
+
 func (builder *JobConfigBuilder) Build() *JobConfig {
 	req := &JobConfig{}
 	if builder.offerApplySchemaIdFlag {
@@ -25791,6 +25996,10 @@ func (builder *JobConfigBuilder) Build() *JobConfig {
 	}
 	if builder.interviewAppointmentConfigFlag {
 		req.InterviewAppointmentConfig = builder.interviewAppointmentConfig
+	}
+	if builder.portalWebsiteApplyFormSchemaIdFlag {
+		req.PortalWebsiteApplyFormSchemaId = &builder.portalWebsiteApplyFormSchemaId
+
 	}
 	return req
 }
@@ -26156,6 +26365,8 @@ type JobConfigResult struct {
 	JobAttribute *int `json:"job_attribute,omitempty"` // 职位属性，1是实体职位，2是虚拟职位
 
 	InterviewAppointmentConfig *InterviewAppointmentConfig `json:"interview_appointment_config,omitempty"` // 面试官安排面试配置
+
+	PortalWebsiteApplyFormSchemaInfo *RegistrationInfo `json:"portal_website_apply_form_schema_info,omitempty"` // 官网申请表
 }
 
 type JobConfigResultBuilder struct {
@@ -26197,6 +26408,9 @@ type JobConfigResultBuilder struct {
 
 	interviewAppointmentConfig     *InterviewAppointmentConfig // 面试官安排面试配置
 	interviewAppointmentConfigFlag bool
+
+	portalWebsiteApplyFormSchemaInfo     *RegistrationInfo // 官网申请表
+	portalWebsiteApplyFormSchemaInfoFlag bool
 }
 
 func NewJobConfigResultBuilder() *JobConfigResultBuilder {
@@ -26321,6 +26535,15 @@ func (builder *JobConfigResultBuilder) InterviewAppointmentConfig(interviewAppoi
 	return builder
 }
 
+// 官网申请表
+//
+// 示例值：
+func (builder *JobConfigResultBuilder) PortalWebsiteApplyFormSchemaInfo(portalWebsiteApplyFormSchemaInfo *RegistrationInfo) *JobConfigResultBuilder {
+	builder.portalWebsiteApplyFormSchemaInfo = portalWebsiteApplyFormSchemaInfo
+	builder.portalWebsiteApplyFormSchemaInfoFlag = true
+	return builder
+}
+
 func (builder *JobConfigResultBuilder) Build() *JobConfigResult {
 	req := &JobConfigResult{}
 	if builder.offerApplySchemaFlag {
@@ -26363,6 +26586,9 @@ func (builder *JobConfigResultBuilder) Build() *JobConfigResult {
 	}
 	if builder.interviewAppointmentConfigFlag {
 		req.InterviewAppointmentConfig = builder.interviewAppointmentConfig
+	}
+	if builder.portalWebsiteApplyFormSchemaInfoFlag {
+		req.PortalWebsiteApplyFormSchemaInfo = builder.portalWebsiteApplyFormSchemaInfo
 	}
 	return req
 }
@@ -48283,6 +48509,10 @@ type Test struct {
 
 	ApplicationId *string `json:"application_id,omitempty"` // 投递 ID
 
+	TalentId *string `json:"talent_id,omitempty"` // 人才 ID
+
+	JobId *string `json:"job_id,omitempty"` // 职位 ID
+
 	TestPaperId *string `json:"test_paper_id,omitempty"` // 试卷 ID
 
 	TestPaperName *string `json:"test_paper_name,omitempty"` // 试卷名称
@@ -48311,6 +48541,8 @@ type Test struct {
 
 	Reviewer *string `json:"reviewer,omitempty"` // 阅卷人，值类型由 user_id_type 查询参数决定
 
+	ReviewCreatedAt *string `json:"review_created_at,omitempty"` // 阅卷安排时间
+
 	CreatedAt *string `json:"created_at,omitempty"` // 笔试创建时间
 }
 
@@ -48320,6 +48552,12 @@ type TestBuilder struct {
 
 	applicationId     string // 投递 ID
 	applicationIdFlag bool
+
+	talentId     string // 人才 ID
+	talentIdFlag bool
+
+	jobId     string // 职位 ID
+	jobIdFlag bool
 
 	testPaperId     string // 试卷 ID
 	testPaperIdFlag bool
@@ -48363,6 +48601,9 @@ type TestBuilder struct {
 	reviewer     string // 阅卷人，值类型由 user_id_type 查询参数决定
 	reviewerFlag bool
 
+	reviewCreatedAt     string // 阅卷安排时间
+	reviewCreatedAtFlag bool
+
 	createdAt     string // 笔试创建时间
 	createdAtFlag bool
 }
@@ -48387,6 +48628,24 @@ func (builder *TestBuilder) TestId(testId string) *TestBuilder {
 func (builder *TestBuilder) ApplicationId(applicationId string) *TestBuilder {
 	builder.applicationId = applicationId
 	builder.applicationIdFlag = true
+	return builder
+}
+
+// 人才 ID
+//
+// 示例值：6830437484509675522
+func (builder *TestBuilder) TalentId(talentId string) *TestBuilder {
+	builder.talentId = talentId
+	builder.talentIdFlag = true
+	return builder
+}
+
+// 职位 ID
+//
+// 示例值：6920544531948800269
+func (builder *TestBuilder) JobId(jobId string) *TestBuilder {
+	builder.jobId = jobId
+	builder.jobIdFlag = true
 	return builder
 }
 
@@ -48516,6 +48775,15 @@ func (builder *TestBuilder) Reviewer(reviewer string) *TestBuilder {
 	return builder
 }
 
+// 阅卷安排时间
+//
+// 示例值：1608725989000
+func (builder *TestBuilder) ReviewCreatedAt(reviewCreatedAt string) *TestBuilder {
+	builder.reviewCreatedAt = reviewCreatedAt
+	builder.reviewCreatedAtFlag = true
+	return builder
+}
+
 // 笔试创建时间
 //
 // 示例值：1608725989000
@@ -48533,6 +48801,14 @@ func (builder *TestBuilder) Build() *Test {
 	}
 	if builder.applicationIdFlag {
 		req.ApplicationId = &builder.applicationId
+
+	}
+	if builder.talentIdFlag {
+		req.TalentId = &builder.talentId
+
+	}
+	if builder.jobIdFlag {
+		req.JobId = &builder.jobId
 
 	}
 	if builder.testPaperIdFlag {
@@ -48585,6 +48861,10 @@ func (builder *TestBuilder) Build() *Test {
 	}
 	if builder.reviewerFlag {
 		req.Reviewer = &builder.reviewer
+
+	}
+	if builder.reviewCreatedAtFlag {
+		req.ReviewCreatedAt = &builder.reviewCreatedAt
 
 	}
 	if builder.createdAtFlag {
@@ -60626,6 +60906,8 @@ type CombinedCreateJobRespData struct {
 	OnboardRegistrationSchemaInfo *RegistrationSchemaInfo `json:"onboard_registration_schema_info,omitempty"` // 入职登记表
 
 	TargetMajorList []*TargetMajorInfo `json:"target_major_list,omitempty"` // 目标专业
+
+	PortalWebsiteApplyFormSchemaInfo *RegistrationSchemaInfo `json:"portal_website_apply_form_schema_info,omitempty"` // 官网申请表
 }
 
 type CombinedCreateJobResp struct {
@@ -60724,6 +61006,8 @@ type CombinedUpdateJobRespData struct {
 	OnboardRegistrationSchemaInfo *RegistrationSchemaInfo `json:"onboard_registration_schema_info,omitempty"` // 入职登记表
 
 	TargetMajorList []*TargetMajorInfo `json:"target_major_list,omitempty"` // 目标专业
+
+	PortalWebsiteApplyFormSchemaInfo *RegistrationSchemaInfo `json:"portal_website_apply_form_schema_info,omitempty"` // 官网申请表
 }
 
 type CombinedUpdateJobResp struct {

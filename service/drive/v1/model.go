@@ -514,6 +514,7 @@ const (
 	TokenTypeTransferOwnerPermissionMemberMindnote = "mindnote" // 思维笔记
 	TokenTypeTransferOwnerPermissionMemberMinutes  = "minutes"  // 妙记
 	TokenTypeTransferOwnerPermissionMemberSlides   = "slides"   // 幻灯片
+	TokenTypeTransferOwnerPermissionMemberFolder   = "folder"   // 文件夹
 )
 
 const (

@@ -11,3 +11,4 @@ modules.txt
 *.sh
 test.go
 sensitive_info_result.txt
+.env

@@ -20,110 +20,110 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-
-	"github.com/larksuite/oapi-sdk-go/v3/core"
+	
+	"github.com/larksuite/oapi-sdk-go/v3/service/hire"
+	"github.com/larksuite/oapi-sdk-go/v3/service/report"
+	"github.com/larksuite/oapi-sdk-go/v3/service/mdm"
 	"github.com/larksuite/oapi-sdk-go/v3/service/acs"
-	"github.com/larksuite/oapi-sdk-go/v3/service/admin"
-	"github.com/larksuite/oapi-sdk-go/v3/service/aily"
-	"github.com/larksuite/oapi-sdk-go/v3/service/application"
-	"github.com/larksuite/oapi-sdk-go/v3/service/approval"
 	"github.com/larksuite/oapi-sdk-go/v3/service/attendance"
 	"github.com/larksuite/oapi-sdk-go/v3/service/auth"
+	"github.com/larksuite/oapi-sdk-go/v3/service/block"
+	"github.com/larksuite/oapi-sdk-go/v3/service/document_ai"
+	"github.com/larksuite/oapi-sdk-go/v3/service/event"
+	"github.com/larksuite/oapi-sdk-go/v3/service/mail"
+	"github.com/larksuite/oapi-sdk-go/v3/service/tenant"
+	"github.com/larksuite/oapi-sdk-go/v3/service/application"
 	"github.com/larksuite/oapi-sdk-go/v3/service/authen"
 	"github.com/larksuite/oapi-sdk-go/v3/service/baike"
-	"github.com/larksuite/oapi-sdk-go/v3/service/bitable"
-	"github.com/larksuite/oapi-sdk-go/v3/service/block"
-	"github.com/larksuite/oapi-sdk-go/v3/service/board"
-	"github.com/larksuite/oapi-sdk-go/v3/service/calendar"
+	"github.com/larksuite/oapi-sdk-go/v3/service/docx"
+	"github.com/larksuite/oapi-sdk-go/v3/service/optical_char_recognition"
+	"github.com/larksuite/oapi-sdk-go/v3/service/sheets"
+	"github.com/larksuite/oapi-sdk-go/v3/service/admin"
 	"github.com/larksuite/oapi-sdk-go/v3/service/compensation"
 	"github.com/larksuite/oapi-sdk-go/v3/service/contact"
 	"github.com/larksuite/oapi-sdk-go/v3/service/corehr"
-	"github.com/larksuite/oapi-sdk-go/v3/service/docs"
-	"github.com/larksuite/oapi-sdk-go/v3/service/document_ai"
-	"github.com/larksuite/oapi-sdk-go/v3/service/docx"
-	"github.com/larksuite/oapi-sdk-go/v3/service/drive"
-	"github.com/larksuite/oapi-sdk-go/v3/service/ehr"
-	"github.com/larksuite/oapi-sdk-go/v3/service/event"
-	"github.com/larksuite/oapi-sdk-go/v3/service/ext"
-	"github.com/larksuite/oapi-sdk-go/v3/service/gray_test_open_sg"
-	"github.com/larksuite/oapi-sdk-go/v3/service/helpdesk"
-	"github.com/larksuite/oapi-sdk-go/v3/service/hire"
-	"github.com/larksuite/oapi-sdk-go/v3/service/human_authentication"
-	"github.com/larksuite/oapi-sdk-go/v3/service/im"
-	"github.com/larksuite/oapi-sdk-go/v3/service/lingo"
-	"github.com/larksuite/oapi-sdk-go/v3/service/mail"
-	"github.com/larksuite/oapi-sdk-go/v3/service/mdm"
 	"github.com/larksuite/oapi-sdk-go/v3/service/meeting_room"
 	"github.com/larksuite/oapi-sdk-go/v3/service/moments"
-	"github.com/larksuite/oapi-sdk-go/v3/service/okr"
-	"github.com/larksuite/oapi-sdk-go/v3/service/optical_char_recognition"
-	"github.com/larksuite/oapi-sdk-go/v3/service/passport"
-	"github.com/larksuite/oapi-sdk-go/v3/service/personal_settings"
-	"github.com/larksuite/oapi-sdk-go/v3/service/report"
-	"github.com/larksuite/oapi-sdk-go/v3/service/search"
 	"github.com/larksuite/oapi-sdk-go/v3/service/security_and_compliance"
-	"github.com/larksuite/oapi-sdk-go/v3/service/sheets"
+	"github.com/larksuite/oapi-sdk-go/v3/service/calendar"
+	"github.com/larksuite/oapi-sdk-go/v3/service/gray_test_open_sg"
+	"github.com/larksuite/oapi-sdk-go/v3/service/im"
+	"github.com/larksuite/oapi-sdk-go/v3/service/passport"
 	"github.com/larksuite/oapi-sdk-go/v3/service/speech_to_text"
-	"github.com/larksuite/oapi-sdk-go/v3/service/task"
-	"github.com/larksuite/oapi-sdk-go/v3/service/tenant"
+	"github.com/larksuite/oapi-sdk-go/v3/service/workplace"
+	"github.com/larksuite/oapi-sdk-go/v3/service/bitable"
+	"github.com/larksuite/oapi-sdk-go/v3/service/drive"
+	"github.com/larksuite/oapi-sdk-go/v3/service/lingo"
 	"github.com/larksuite/oapi-sdk-go/v3/service/translation"
+	"github.com/larksuite/oapi-sdk-go/v3/service/task"
+	"github.com/larksuite/oapi-sdk-go/v3/service/aily"
+	"github.com/larksuite/oapi-sdk-go/v3/service/board"
+	"github.com/larksuite/oapi-sdk-go/v3/service/docs"
+	"github.com/larksuite/oapi-sdk-go/v3/service/ehr"
+	"github.com/larksuite/oapi-sdk-go/v3/service/helpdesk"
+	"github.com/larksuite/oapi-sdk-go/v3/service/personal_settings"
+	"github.com/larksuite/oapi-sdk-go/v3/service/search"
 	"github.com/larksuite/oapi-sdk-go/v3/service/vc"
+	"github.com/larksuite/oapi-sdk-go/v3/service/approval"
+	"github.com/larksuite/oapi-sdk-go/v3/service/human_authentication"
+	"github.com/larksuite/oapi-sdk-go/v3/service/okr"
 	"github.com/larksuite/oapi-sdk-go/v3/service/verification"
 	"github.com/larksuite/oapi-sdk-go/v3/service/wiki"
-	"github.com/larksuite/oapi-sdk-go/v3/service/workplace"
-)
+	"github.com/larksuite/oapi-sdk-go/v3/service/ext"
+	"github.com/larksuite/oapi-sdk-go/v3/core"
+	)
 
 type Client struct {
-	config                 *larkcore.Config
-	Docs                   *docs.Service
-	Helpdesk               *helpdesk.Service
-	Hire                   *hire.Service
-	Mail                   *mail.Service
-	PersonalSettings       *personal_settings.Service
-	Acs                    *acs.Service
-	Authen                 *authen.Service
-	Block                  *block.Service
-	Task                   *task.Service
-	Workplace              *workplace.Service
-	Translation            *translation.Service
-	Application            *application.Service
-	Lingo                  *lingo.Service
-	MeetingRoom            *meeting_room.Service
+	config *larkcore.Config
+	Hire *hire.Service
+	Report *report.Service
+	Mdm *mdm.Service
+	Acs *acs.Service
+	Attendance *attendance.Service
+	Auth *auth.Service
+	Block *block.Service
+	DocumentAi *document_ai.Service
+	Event *event.Service
+	Mail *mail.Service
+	Tenant *tenant.Service
+	Application *application.Service
+	Authen *authen.Service
+	Baike *baike.Service
+	Docx *docx.Service
 	OpticalCharRecognition *optical_char_recognition.Service
-	Tenant                 *tenant.Service
-	Board                  *board.Service
-	Corehr                 *corehr.Service
-	HumanAuthentication    *human_authentication.Service
-	DocumentAi             *document_ai.Service
-	Drive                  *drive.Service
-	Mdm                    *mdm.Service
-	Aily                   *aily.Service
-	Auth                   *auth.Service
-	Contact                *contact.Service
-	GrayTestOpenSg         *gray_test_open_sg.Service
-	Sheets                 *sheets.Service
-	Approval               *approval.Service
-	Attendance             *attendance.Service
-	Docx                   *docx.Service
-	Moments                *moments.Service
-	Wiki                   *wiki.Service
-	Admin                  *admin.Service
-	Bitable                *bitable.Service
-	Calendar               *calendar.Service
-	Verification           *verification.Service
-	Passport               *passport.Service
-	SecurityAndCompliance  *security_and_compliance.Service
-	SpeechToText           *speech_to_text.Service
-	Event                  *event.Service
-	Im                     *im.Service
-	Okr                    *okr.Service
-	Report                 *report.Service
-	Search                 *search.Service
-	Baike                  *baike.Service
-	Compensation           *compensation.Service
-	Ehr                    *ehr.Service
-	Vc                     *vc.Service
-	Ext                    *larkext.ExtService
+	Sheets *sheets.Service
+	Admin *admin.Service
+	Compensation *compensation.Service
+	Contact *contact.Service
+	Corehr *corehr.Service
+	MeetingRoom *meeting_room.Service
+	Moments *moments.Service
+	SecurityAndCompliance *security_and_compliance.Service
+	Calendar *calendar.Service
+	GrayTestOpenSg *gray_test_open_sg.Service
+	Im *im.Service
+	Passport *passport.Service
+	SpeechToText *speech_to_text.Service
+	Workplace *workplace.Service
+	Bitable *bitable.Service
+	Drive *drive.Service
+	Lingo *lingo.Service
+	Translation *translation.Service
+	Task *task.Service
+	Aily *aily.Service
+	Board *board.Service
+	Docs *docs.Service
+	Ehr *ehr.Service
+	Helpdesk *helpdesk.Service
+	PersonalSettings *personal_settings.Service
+	Search *search.Service
+	Vc *vc.Service
+	Approval *approval.Service
+	HumanAuthentication *human_authentication.Service
+	Okr *okr.Service
+	Verification *verification.Service
+	Wiki *wiki.Service
+	Ext *larkext.ExtService
 }
 
 type ClientOptionFunc func(config *larkcore.Config)
@@ -170,6 +170,7 @@ func WithTokenCache(cache larkcore.Cache) ClientOptionFunc {
 	}
 }
 
+
 func WithLogReqAtDebug(printReqRespLog bool) ClientOptionFunc {
 	return func(config *larkcore.Config) {
 		config.LogReqAtDebug = printReqRespLog
@@ -214,26 +215,26 @@ func WithHeaders(header http.Header) ClientOptionFunc {
 func NewClient(appId, appSecret string, options ...ClientOptionFunc) *Client {
 	// 构建配置
 	config := &larkcore.Config{
-		BaseUrl:          FeishuBaseUrl,
-		AppId:            appId,
-		AppSecret:        appSecret,
+		BaseUrl: FeishuBaseUrl,
+		AppId:	 appId,
+		AppSecret: appSecret,
 		EnableTokenCache: true,
-		AppType:          larkcore.AppTypeSelfBuilt,
+		AppType: larkcore.AppTypeSelfBuilt,
 	}
 	for _, option := range options {
 		option(config)
 	}
 
-	// 构建日志器
-	larkcore.NewLogger(config)
+ 	// 构建日志器
+ 	larkcore.NewLogger(config)
 
-	// 构建缓存
-	larkcore.NewCache(config)
+ 	// 构建缓存
+ 	larkcore.NewCache(config)
 
 	// 创建序列化器
 	larkcore.NewSerialization(config)
 
-	// 创建httpclient
+ 	// 创建httpclient
 	larkcore.NewHttpClient(config)
 
 	// 创建sdk-client，并初始化服务
@@ -246,56 +247,57 @@ func NewClient(appId, appSecret string, options ...ClientOptionFunc) *Client {
 }
 
 func initService(client *Client, config *larkcore.Config) {
-	client.Docs = docs.NewService(config)
-	client.Helpdesk = helpdesk.NewService(config)
 	client.Hire = hire.NewService(config)
-	client.Mail = mail.NewService(config)
-	client.PersonalSettings = personal_settings.NewService(config)
-	client.Acs = acs.NewService(config)
-	client.Authen = authen.NewService(config)
-	client.Block = block.NewService(config)
-	client.Task = task.NewService(config)
-	client.Workplace = workplace.NewService(config)
-	client.Translation = translation.NewService(config)
-	client.Application = application.NewService(config)
-	client.Lingo = lingo.NewService(config)
-	client.MeetingRoom = meeting_room.NewService(config)
-	client.OpticalCharRecognition = optical_char_recognition.NewService(config)
-	client.Tenant = tenant.NewService(config)
-	client.Board = board.NewService(config)
-	client.Corehr = corehr.NewService(config)
-	client.HumanAuthentication = human_authentication.NewService(config)
-	client.DocumentAi = document_ai.NewService(config)
-	client.Drive = drive.NewService(config)
-	client.Mdm = mdm.NewService(config)
-	client.Aily = aily.NewService(config)
-	client.Auth = auth.NewService(config)
-	client.Contact = contact.NewService(config)
-	client.GrayTestOpenSg = gray_test_open_sg.NewService(config)
-	client.Sheets = sheets.NewService(config)
-	client.Approval = approval.NewService(config)
-	client.Attendance = attendance.NewService(config)
-	client.Docx = docx.NewService(config)
-	client.Moments = moments.NewService(config)
-	client.Wiki = wiki.NewService(config)
-	client.Admin = admin.NewService(config)
-	client.Bitable = bitable.NewService(config)
-	client.Calendar = calendar.NewService(config)
-	client.Verification = verification.NewService(config)
-	client.Passport = passport.NewService(config)
-	client.SecurityAndCompliance = security_and_compliance.NewService(config)
-	client.SpeechToText = speech_to_text.NewService(config)
-	client.Event = event.NewService(config)
-	client.Im = im.NewService(config)
-	client.Okr = okr.NewService(config)
 	client.Report = report.NewService(config)
-	client.Search = search.NewService(config)
+	client.Mdm = mdm.NewService(config)
+	client.Acs = acs.NewService(config)
+	client.Attendance = attendance.NewService(config)
+	client.Auth = auth.NewService(config)
+	client.Block = block.NewService(config)
+	client.DocumentAi = document_ai.NewService(config)
+	client.Event = event.NewService(config)
+	client.Mail = mail.NewService(config)
+	client.Tenant = tenant.NewService(config)
+	client.Application = application.NewService(config)
+	client.Authen = authen.NewService(config)
 	client.Baike = baike.NewService(config)
+	client.Docx = docx.NewService(config)
+	client.OpticalCharRecognition = optical_char_recognition.NewService(config)
+	client.Sheets = sheets.NewService(config)
+	client.Admin = admin.NewService(config)
 	client.Compensation = compensation.NewService(config)
+	client.Contact = contact.NewService(config)
+	client.Corehr = corehr.NewService(config)
+	client.MeetingRoom = meeting_room.NewService(config)
+	client.Moments = moments.NewService(config)
+	client.SecurityAndCompliance = security_and_compliance.NewService(config)
+	client.Calendar = calendar.NewService(config)
+	client.GrayTestOpenSg = gray_test_open_sg.NewService(config)
+	client.Im = im.NewService(config)
+	client.Passport = passport.NewService(config)
+	client.SpeechToText = speech_to_text.NewService(config)
+	client.Workplace = workplace.NewService(config)
+	client.Bitable = bitable.NewService(config)
+	client.Drive = drive.NewService(config)
+	client.Lingo = lingo.NewService(config)
+	client.Translation = translation.NewService(config)
+	client.Task = task.NewService(config)
+	client.Aily = aily.NewService(config)
+	client.Board = board.NewService(config)
+	client.Docs = docs.NewService(config)
 	client.Ehr = ehr.NewService(config)
+	client.Helpdesk = helpdesk.NewService(config)
+	client.PersonalSettings = personal_settings.NewService(config)
+	client.Search = search.NewService(config)
 	client.Vc = vc.NewService(config)
+	client.Approval = approval.NewService(config)
+	client.HumanAuthentication = human_authentication.NewService(config)
+	client.Okr = okr.NewService(config)
+	client.Verification = verification.NewService(config)
+	client.Wiki = wiki.NewService(config)
 	client.Ext = larkext.NewService(config)
 }
+
 
 func resendAppTicketIfNeed(client *Client) {
 	defer func() {
@@ -307,7 +309,7 @@ func resendAppTicketIfNeed(client *Client) {
 	if client.config.AppType == larkcore.AppTypeMarketplace {
 		ctx := context.Background()
 		resp, err := client.ResendAppTicket(ctx, &larkcore.ResendAppTicketReq{
-			AppID:     client.config.AppId,
+			AppID:	 client.config.AppId,
 			AppSecret: client.config.AppSecret,
 		})
 		if err != nil {
@@ -319,11 +321,12 @@ func resendAppTicketIfNeed(client *Client) {
 	}
 }
 
+
 func (cli *Client) Post(ctx context.Context, httpPath string, body interface{}, accessTokeType larkcore.AccessTokenType, options ...larkcore.RequestOptionFunc) (*larkcore.ApiResp, error) {
 	return cli.Do(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodPost,
-		ApiPath:                   httpPath,
-		Body:                      body,
+		HttpMethod:				http.MethodPost,
+		ApiPath:				   httpPath,
+		Body:					  body,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{accessTokeType},
 	}, options...)
 }
@@ -333,45 +336,46 @@ func (cli *Client) Do(ctx context.Context, apiReq *larkcore.ApiReq, options ...l
 }
 func (cli *Client) Get(ctx context.Context, httpPath string, body interface{}, accessTokeType larkcore.AccessTokenType, options ...larkcore.RequestOptionFunc) (*larkcore.ApiResp, error) {
 	return cli.Do(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodGet,
-		ApiPath:                   httpPath,
-		Body:                      body,
+		HttpMethod:				http.MethodGet,
+		ApiPath:				   httpPath,
+		Body:					  body,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{accessTokeType},
 	}, options...)
 }
 
 func (cli *Client) Delete(ctx context.Context, httpPath string, body interface{}, accessTokeType larkcore.AccessTokenType, options ...larkcore.RequestOptionFunc) (*larkcore.ApiResp, error) {
 	return cli.Do(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodDelete,
-		ApiPath:                   httpPath,
-		Body:                      body,
+		HttpMethod:				http.MethodDelete,
+		ApiPath:				   httpPath,
+		Body:					  body,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{accessTokeType},
 	}, options...)
 }
 
 func (cli *Client) Put(ctx context.Context, httpPath string, body interface{}, accessTokeType larkcore.AccessTokenType, options ...larkcore.RequestOptionFunc) (*larkcore.ApiResp, error) {
 	return cli.Do(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodPut,
-		ApiPath:                   httpPath,
-		Body:                      body,
+		HttpMethod:				http.MethodPut,
+		ApiPath:				   httpPath,
+		Body:					  body,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{accessTokeType},
 	}, options...)
 }
 
 func (cli *Client) Patch(ctx context.Context, httpPath string, body interface{}, accessTokeType larkcore.AccessTokenType, options ...larkcore.RequestOptionFunc) (*larkcore.ApiResp, error) {
 	return cli.Do(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodPatch,
-		ApiPath:                   httpPath,
-		Body:                      body,
+		HttpMethod:				http.MethodPatch,
+		ApiPath:				   httpPath,
+		Body:					  body,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{accessTokeType},
 	}, options...)
 }
 
+
 func (cli *Client) GetAppAccessTokenBySelfBuiltApp(ctx context.Context, req *larkcore.SelfBuiltAppAccessTokenReq) (*larkcore.AppAccessTokenResp, error) {
 	rawResp, err := larkcore.Request(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodPost,
-		ApiPath:                   larkcore.AppAccessTokenInternalUrlPath,
-		Body:                      req,
+		HttpMethod:				http.MethodPost,
+		ApiPath:				   larkcore.AppAccessTokenInternalUrlPath,
+		Body:					  req,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{larkcore.AccessTokenTypeNone},
 	}, cli.config)
 
@@ -390,9 +394,9 @@ func (cli *Client) GetAppAccessTokenBySelfBuiltApp(ctx context.Context, req *lar
 
 func (cli *Client) GetAppAccessTokenByMarketplaceApp(ctx context.Context, req *larkcore.MarketplaceAppAccessTokenReq) (*larkcore.AppAccessTokenResp, error) {
 	rawResp, err := larkcore.Request(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodPost,
-		ApiPath:                   larkcore.AppAccessTokenUrlPath,
-		Body:                      req,
+		HttpMethod:				http.MethodPost,
+		ApiPath:				   larkcore.AppAccessTokenUrlPath,
+		Body:					  req,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{larkcore.AccessTokenTypeNone},
 	}, cli.config)
 
@@ -411,9 +415,9 @@ func (cli *Client) GetAppAccessTokenByMarketplaceApp(ctx context.Context, req *l
 
 func (cli *Client) GetTenantAccessTokenBySelfBuiltApp(ctx context.Context, req *larkcore.SelfBuiltTenantAccessTokenReq) (*larkcore.TenantAccessTokenResp, error) {
 	rawResp, err := larkcore.Request(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodPost,
-		ApiPath:                   larkcore.TenantAccessTokenInternalUrlPath,
-		Body:                      req,
+		HttpMethod:				http.MethodPost,
+		ApiPath:				   larkcore.TenantAccessTokenInternalUrlPath,
+		Body:					  req,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{larkcore.AccessTokenTypeNone},
 	}, cli.config)
 
@@ -432,9 +436,9 @@ func (cli *Client) GetTenantAccessTokenBySelfBuiltApp(ctx context.Context, req *
 
 func (cli *Client) GetTenantAccessTokenByMarketplaceApp(ctx context.Context, req *larkcore.MarketplaceTenantAccessTokenReq) (*larkcore.TenantAccessTokenResp, error) {
 	rawResp, err := larkcore.Request(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodPost,
-		ApiPath:                   larkcore.TenantAccessTokenUrlPath,
-		Body:                      req,
+		HttpMethod:				http.MethodPost,
+		ApiPath:				   larkcore.TenantAccessTokenUrlPath,
+		Body:					  req,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{larkcore.AccessTokenTypeNone},
 	}, cli.config)
 
@@ -453,9 +457,9 @@ func (cli *Client) GetTenantAccessTokenByMarketplaceApp(ctx context.Context, req
 
 func (cli *Client) ResendAppTicket(ctx context.Context, req *larkcore.ResendAppTicketReq) (*larkcore.ResendAppTicketResp, error) {
 	rawResp, err := larkcore.Request(ctx, &larkcore.ApiReq{
-		HttpMethod:                http.MethodPost,
-		ApiPath:                   larkcore.ApplyAppTicketPath,
-		Body:                      req,
+		HttpMethod:				http.MethodPost,
+		ApiPath:				   larkcore.ApplyAppTicketPath,
+		Body:					  req,
 		SupportedAccessTokenTypes: []larkcore.AccessTokenType{larkcore.AccessTokenTypeNone},
 	}, cli.config)
 
@@ -471,6 +475,7 @@ func (cli *Client) ResendAppTicket(ctx context.Context, req *larkcore.ResendAppT
 
 	return resp, nil
 }
+
 
 var FeishuBaseUrl = "https://open.feishu.cn"
 var LarkBaseUrl = "https://open.larksuite.com"

@@ -1193,6 +1193,32 @@ func (d *department) QueryMultiTimeline(ctx context.Context, req *QueryMultiTime
 	return resp, err
 }
 
+// QueryOperationLogs
+//
+// - 查询操作日志
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=query_operation_logs&project=corehr&resource=department&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/queryOperationLogs_department.go
+func (d *department) QueryOperationLogs(ctx context.Context, req *QueryOperationLogsDepartmentReq, options ...larkcore.RequestOptionFunc) (*QueryOperationLogsDepartmentResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/departments/query_operation_logs"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, d.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &QueryOperationLogsDepartmentResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, d.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // QueryRecentChange
 //
 // -
@@ -2299,6 +2325,32 @@ func (p *preHire) QueryByIterator(ctx context.Context, req *QueryPreHireReq, opt
 		limit:    req.Limit}, nil
 }
 
+// RestoreFlowInstance
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=restore_flow_instance&project=corehr&resource=pre_hire&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/restoreFlowInstance_preHire.go
+func (p *preHire) RestoreFlowInstance(ctx context.Context, req *RestoreFlowInstancePreHireReq, options ...larkcore.RequestOptionFunc) (*RestoreFlowInstancePreHireResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/pre_hires/restore_flow_instance"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, p.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &RestoreFlowInstancePreHireResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Search
 //
 // - 根据部门 ID，上级部门查询部门列表
@@ -2352,6 +2404,32 @@ func (p *preHire) TransitTask(ctx context.Context, req *TransitTaskPreHireReq, o
 	}
 	// 反序列响应结果
 	resp := &TransitTaskPreHireResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, p.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// WithdrawOnboarding
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=withdraw_onboarding&project=corehr&resource=pre_hire&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/withdrawOnboarding_preHire.go
+func (p *preHire) WithdrawOnboarding(ctx context.Context, req *WithdrawOnboardingPreHireReq, options ...larkcore.RequestOptionFunc) (*WithdrawOnboardingPreHireResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/pre_hires/withdraw_onboarding"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, p.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &WithdrawOnboardingPreHireResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, p.config)
 	if err != nil {
 		return nil, err

@@ -2216,6 +2216,8 @@ type AppScope struct {
 	Description *string `json:"description,omitempty"` // 应用权限的国际化描述
 
 	Level *int `json:"level,omitempty"` // 权限等级描述
+
+	TokenTypes []string `json:"token_types,omitempty"` // 返回用户身份类型user、应用身份类型tenant。如果两种类型都支持，则同时返回两个。
 }
 
 type AppScopeBuilder struct {
@@ -2227,6 +2229,9 @@ type AppScopeBuilder struct {
 
 	level     int // 权限等级描述
 	levelFlag bool
+
+	tokenTypes     []string // 返回用户身份类型user、应用身份类型tenant。如果两种类型都支持，则同时返回两个。
+	tokenTypesFlag bool
 }
 
 func NewAppScopeBuilder() *AppScopeBuilder {
@@ -2261,6 +2266,15 @@ func (builder *AppScopeBuilder) Level(level int) *AppScopeBuilder {
 	return builder
 }
 
+// 返回用户身份类型user、应用身份类型tenant。如果两种类型都支持，则同时返回两个。
+//
+// 示例值：
+func (builder *AppScopeBuilder) TokenTypes(tokenTypes []string) *AppScopeBuilder {
+	builder.tokenTypes = tokenTypes
+	builder.tokenTypesFlag = true
+	return builder
+}
+
 func (builder *AppScopeBuilder) Build() *AppScope {
 	req := &AppScope{}
 	if builder.scopeFlag {
@@ -2274,6 +2288,9 @@ func (builder *AppScopeBuilder) Build() *AppScope {
 	if builder.levelFlag {
 		req.Level = &builder.level
 
+	}
+	if builder.tokenTypesFlag {
+		req.TokenTypes = builder.tokenTypes
 	}
 	return req
 }

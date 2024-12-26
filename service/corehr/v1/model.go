@@ -9834,6 +9834,8 @@ type JobData struct {
 	EmployeeSubtypeId *string `json:"employee_subtype_id,omitempty"` // 人员子类型 ID
 
 	PositionId *string `json:"position_id,omitempty"` // 岗位 ID，枚举值及详细信息可通过【查询单个岗位】接口查询获得
+
+	JobDataReason *Enum `json:"job_data_reason,omitempty"` // 任职原因;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name = "job_data";  - custom_api_name = "job_data_reason"
 }
 
 type JobDataBuilder struct {
@@ -9929,6 +9931,9 @@ type JobDataBuilder struct {
 
 	positionId     string // 岗位 ID，枚举值及详细信息可通过【查询单个岗位】接口查询获得
 	positionIdFlag bool
+
+	jobDataReason     *Enum // 任职原因;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name = "job_data";  - custom_api_name = "job_data_reason"
+	jobDataReasonFlag bool
 }
 
 func NewJobDataBuilder() *JobDataBuilder {
@@ -10215,6 +10220,15 @@ func (builder *JobDataBuilder) PositionId(positionId string) *JobDataBuilder {
 	return builder
 }
 
+// 任职原因;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name = "job_data";  - custom_api_name = "job_data_reason"
+//
+// 示例值：
+func (builder *JobDataBuilder) JobDataReason(jobDataReason *Enum) *JobDataBuilder {
+	builder.jobDataReason = jobDataReason
+	builder.jobDataReasonFlag = true
+	return builder
+}
+
 func (builder *JobDataBuilder) Build() *JobData {
 	req := &JobData{}
 	if builder.idFlag {
@@ -10333,6 +10347,9 @@ func (builder *JobDataBuilder) Build() *JobData {
 	if builder.positionIdFlag {
 		req.PositionId = &builder.positionId
 
+	}
+	if builder.jobDataReasonFlag {
+		req.JobDataReason = builder.jobDataReason
 	}
 	return req
 }

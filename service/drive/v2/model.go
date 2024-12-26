@@ -16,7 +16,22 @@ package larkdrive
 import (
 	"fmt"
 
+	"context"
+	"errors"
+
 	"github.com/larksuite/oapi-sdk-go/v3/core"
+)
+
+const (
+	FileTypeDoc  = "doc"  // 旧版文档
+	FileTypeDocX = "docx" // 新版文档
+	FileTypeFile = "file" // 文件
+)
+
+const (
+	UserIdTypeUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
@@ -950,6 +965,99 @@ func (builder *SecureLabelBuilder) Build() *SecureLabel {
 	return req
 }
 
+type ListFileLikeReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListFileLikeReqBuilder() *ListFileLikeReqBuilder {
+	builder := &ListFileLikeReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListFileLikeReqBuilder) Limit(limit int) *ListFileLikeReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// 需要查询点赞列表的文件 token
+//
+// 示例值：J6Lddz22AovnqkxWEXBcUJIingx
+func (builder *ListFileLikeReqBuilder) FileToken(fileToken string) *ListFileLikeReqBuilder {
+	builder.apiReq.PathParams.Set("file_token", fmt.Sprint(fileToken))
+	return builder
+}
+
+// 文件类型，如果该值为空或者与文件实际类型不匹配，接口会返回失败。
+//
+// 示例值：doc
+func (builder *ListFileLikeReqBuilder) FileType(fileType string) *ListFileLikeReqBuilder {
+	builder.apiReq.QueryParams.Set("file_type", fmt.Sprint(fileType))
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：10
+func (builder *ListFileLikeReqBuilder) PageSize(pageSize int) *ListFileLikeReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：aw7DoMKBFMOGwqHCrcO8w6jCmMOvw6ILeADCvsKNw57Di8O5XGV3LG4_w5HCqhFxSnDCrCzCn0BgZcOYUg85EMOYcEAcwqYOw4ojw5QFwofCu8KoIMO3K8Ktw4IuNMOBBHNYw4bCgCV3U1zDu8K-J8KSR8Kgw7Y0fsKZdsKvW3d9w53DnkHDrcO5bDkYwrvDisOEPcOtVFJ-I03CnsOILMOoAmLDknd6dsKqG1bClAjDuS3CvcOTwo7Dg8OrwovDsRdqIcKxw5HDohTDtXN9w5rCkWo
+func (builder *ListFileLikeReqBuilder) PageToken(pageToken string) *ListFileLikeReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *ListFileLikeReqBuilder) UserIdType(userIdType string) *ListFileLikeReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *ListFileLikeReqBuilder) Build() *ListFileLikeReq {
+	req := &ListFileLikeReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListFileLikeReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListFileLikeRespData struct {
+	Items []*FileLike `json:"items,omitempty"` // 文件的点赞者列表
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多点赞记录
+}
+
+type ListFileLikeResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListFileLikeRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListFileLikeResp) Success() bool {
+	return resp.Code == 0
+}
+
 type GetPermissionPublicReqBuilder struct {
 	apiReq *larkcore.ApiReq
 }
@@ -1066,4 +1174,58 @@ type PatchPermissionPublicResp struct {
 
 func (resp *PatchPermissionPublicResp) Success() bool {
 	return resp.Code == 0
+}
+
+type ListFileLikeIterator struct {
+	nextPageToken *string
+	items         []*FileLike
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListFileLikeReq
+	listFunc      func(ctx context.Context, req *ListFileLikeReq, options ...larkcore.RequestOptionFunc) (*ListFileLikeResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListFileLikeIterator) Next() (bool, *FileLike, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Items) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Items
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListFileLikeIterator) NextPageToken() *string {
+	return iterator.nextPageToken
 }

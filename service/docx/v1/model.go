@@ -23,6 +23,42 @@ import (
 )
 
 const (
+	UserIdTypeUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
+	UserIdTypeBatchUpdateChatAnnouncementBlockUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeBatchUpdateChatAnnouncementBlockUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeBatchUpdateChatAnnouncementBlockOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
+	UserIdTypeGetChatAnnouncementBlockUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeGetChatAnnouncementBlockUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeGetChatAnnouncementBlockOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
+	UserIdTypeListChatAnnouncementBlockUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeListChatAnnouncementBlockUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeListChatAnnouncementBlockOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
+	UserIdTypeCreateChatAnnouncementBlockChildrenUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeCreateChatAnnouncementBlockChildrenUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeCreateChatAnnouncementBlockChildrenOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
+	UserIdTypeGetChatAnnouncementBlockChildrenUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeGetChatAnnouncementBlockChildrenUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeGetChatAnnouncementBlockChildrenOpenId  = "open_id"  // 以open_id来识别用户
+)
+
+const (
 	LangZH = 0 // 中文
 	LangEN = 1 // 英文
 	LangJP = 2 // 日文
@@ -30,9 +66,9 @@ const (
 )
 
 const (
-	UserIdTypeUserId  = "user_id"  // 以user_id来识别用户
-	UserIdTypeUnionId = "union_id" // 以union_id来识别用户
-	UserIdTypeOpenId  = "open_id"  // 以open_id来识别用户
+	UserIdTypeBatchUpdateDocumentBlockUserId  = "user_id"  // 以user_id来识别用户
+	UserIdTypeBatchUpdateDocumentBlockUnionId = "union_id" // 以union_id来识别用户
+	UserIdTypeBatchUpdateDocumentBlockOpenId  = "open_id"  // 以open_id来识别用户
 )
 
 const (
@@ -5855,6 +5891,821 @@ func (builder *WikiCatalogBuilder) Build() *WikiCatalog {
 	return req
 }
 
+type GetChatAnnouncementReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewGetChatAnnouncementReqBuilder() *GetChatAnnouncementReqBuilder {
+	builder := &GetChatAnnouncementReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 群公告对应的群 ID
+//
+// 示例值：oc_5ad11d72b830411d72b836c20
+func (builder *GetChatAnnouncementReqBuilder) ChatId(chatId string) *GetChatAnnouncementReqBuilder {
+	builder.apiReq.PathParams.Set("chat_id", fmt.Sprint(chatId))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *GetChatAnnouncementReqBuilder) UserIdType(userIdType string) *GetChatAnnouncementReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *GetChatAnnouncementReqBuilder) Build() *GetChatAnnouncementReq {
+	req := &GetChatAnnouncementReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type GetChatAnnouncementReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type GetChatAnnouncementRespData struct {
+	RevisionId *int `json:"revision_id,omitempty"` // 当前版本号
+
+	CreateTime *string `json:"create_time,omitempty"` // 群公告生成的时间戳（秒）
+
+	UpdateTime *string `json:"update_time,omitempty"` // 群公告更新的时间戳（秒）
+
+	OwnerId *string `json:"owner_id,omitempty"` // 群公告所有者 ID，ID 值与 owner_id_type 中的ID类型对应
+
+	OwnerIdType *string `json:"owner_id_type,omitempty"` // 群公告所有者的 ID 类型
+
+	ModifierId *string `json:"modifier_id,omitempty"` // 群公告最新修改者 ID，ID 值与 modifier_id_type 中的ID类型对应
+
+	ModifierIdType *string `json:"modifier_id_type,omitempty"` // 群公告最新修改者 id 类型
+
+	AnnouncementType *string `json:"announcement_type,omitempty"` // 群公告类型
+}
+
+type GetChatAnnouncementResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *GetChatAnnouncementRespData `json:"data"` // 业务数据
+}
+
+func (resp *GetChatAnnouncementResp) Success() bool {
+	return resp.Code == 0
+}
+
+type BatchUpdateChatAnnouncementBlockReqBodyBuilder struct {
+	requests     []*UpdateBlockRequest // 批量更新 Block
+	requestsFlag bool
+}
+
+func NewBatchUpdateChatAnnouncementBlockReqBodyBuilder() *BatchUpdateChatAnnouncementBlockReqBodyBuilder {
+	builder := &BatchUpdateChatAnnouncementBlockReqBodyBuilder{}
+	return builder
+}
+
+// 批量更新 Block
+//
+// 示例值：
+func (builder *BatchUpdateChatAnnouncementBlockReqBodyBuilder) Requests(requests []*UpdateBlockRequest) *BatchUpdateChatAnnouncementBlockReqBodyBuilder {
+	builder.requests = requests
+	builder.requestsFlag = true
+	return builder
+}
+
+func (builder *BatchUpdateChatAnnouncementBlockReqBodyBuilder) Build() *BatchUpdateChatAnnouncementBlockReqBody {
+	req := &BatchUpdateChatAnnouncementBlockReqBody{}
+	if builder.requestsFlag {
+		req.Requests = builder.requests
+	}
+	return req
+}
+
+type BatchUpdateChatAnnouncementBlockPathReqBodyBuilder struct {
+	requests     []*UpdateBlockRequest
+	requestsFlag bool
+}
+
+func NewBatchUpdateChatAnnouncementBlockPathReqBodyBuilder() *BatchUpdateChatAnnouncementBlockPathReqBodyBuilder {
+	builder := &BatchUpdateChatAnnouncementBlockPathReqBodyBuilder{}
+	return builder
+}
+
+// 批量更新 Block
+//
+// 示例值：
+func (builder *BatchUpdateChatAnnouncementBlockPathReqBodyBuilder) Requests(requests []*UpdateBlockRequest) *BatchUpdateChatAnnouncementBlockPathReqBodyBuilder {
+	builder.requests = requests
+	builder.requestsFlag = true
+	return builder
+}
+
+func (builder *BatchUpdateChatAnnouncementBlockPathReqBodyBuilder) Build() (*BatchUpdateChatAnnouncementBlockReqBody, error) {
+	req := &BatchUpdateChatAnnouncementBlockReqBody{}
+	if builder.requestsFlag {
+		req.Requests = builder.requests
+	}
+	return req, nil
+}
+
+type BatchUpdateChatAnnouncementBlockReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *BatchUpdateChatAnnouncementBlockReqBody
+}
+
+func NewBatchUpdateChatAnnouncementBlockReqBuilder() *BatchUpdateChatAnnouncementBlockReqBuilder {
+	builder := &BatchUpdateChatAnnouncementBlockReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 群公告对应的群 ID
+//
+// 示例值：oc_5ad11d72b830411d72b836c20
+func (builder *BatchUpdateChatAnnouncementBlockReqBuilder) ChatId(chatId string) *BatchUpdateChatAnnouncementBlockReqBuilder {
+	builder.apiReq.PathParams.Set("chat_id", fmt.Sprint(chatId))
+	return builder
+}
+
+// 要操作的群公告版本。-1 表示群公告最新版本。群公告创建后，版本为 1。你需确保你已拥有群公告的编辑权限。
+//
+// 示例值：-1
+func (builder *BatchUpdateChatAnnouncementBlockReqBuilder) RevisionId(revisionId int) *BatchUpdateChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("revision_id", fmt.Sprint(revisionId))
+	return builder
+}
+
+// 操作的唯一标识，与接口返回值的 client_token 相对应，用于幂等的进行更新操作。此值为空表示将发起一次新的请求，此值非空表示幂等的进行更新操作。
+//
+// 示例值：0e2633a3-aa1a-4171-af9e-0768ff863566
+func (builder *BatchUpdateChatAnnouncementBlockReqBuilder) ClientToken(clientToken string) *BatchUpdateChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *BatchUpdateChatAnnouncementBlockReqBuilder) UserIdType(userIdType string) *BatchUpdateChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *BatchUpdateChatAnnouncementBlockReqBuilder) Body(body *BatchUpdateChatAnnouncementBlockReqBody) *BatchUpdateChatAnnouncementBlockReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *BatchUpdateChatAnnouncementBlockReqBuilder) Build() *BatchUpdateChatAnnouncementBlockReq {
+	req := &BatchUpdateChatAnnouncementBlockReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type BatchUpdateChatAnnouncementBlockReqBody struct {
+	Requests []*UpdateBlockRequest `json:"requests,omitempty"` // 批量更新 Block
+}
+
+type BatchUpdateChatAnnouncementBlockReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *BatchUpdateChatAnnouncementBlockReqBody `body:""`
+}
+
+type BatchUpdateChatAnnouncementBlockRespData struct {
+	Blocks []*Block `json:"blocks,omitempty"` // 批量更新的 Block
+
+	RevisionId *int `json:"revision_id,omitempty"` // 当前更新成功后群公告的版本号
+
+	ClientToken *string `json:"client_token,omitempty"` // 操作的唯一标识，更新请求中使用此值表示幂等的进行此次更新
+}
+
+type BatchUpdateChatAnnouncementBlockResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *BatchUpdateChatAnnouncementBlockRespData `json:"data"` // 业务数据
+}
+
+func (resp *BatchUpdateChatAnnouncementBlockResp) Success() bool {
+	return resp.Code == 0
+}
+
+type GetChatAnnouncementBlockReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewGetChatAnnouncementBlockReqBuilder() *GetChatAnnouncementBlockReqBuilder {
+	builder := &GetChatAnnouncementBlockReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 群公告对应的群 ID
+//
+// 示例值：oc_5ad11d72b830411d72b836c20
+func (builder *GetChatAnnouncementBlockReqBuilder) ChatId(chatId string) *GetChatAnnouncementBlockReqBuilder {
+	builder.apiReq.PathParams.Set("chat_id", fmt.Sprint(chatId))
+	return builder
+}
+
+// Block 的唯一标识
+//
+// 示例值：doxcnO6UW6wAw2qIcYf4hZabcef
+func (builder *GetChatAnnouncementBlockReqBuilder) BlockId(blockId string) *GetChatAnnouncementBlockReqBuilder {
+	builder.apiReq.PathParams.Set("block_id", fmt.Sprint(blockId))
+	return builder
+}
+
+// 查询的群公告版本，-1 表示群公告最新版本。群公告创建后，版本为 1。若查询的版本为群公告最新版本，则需要持有群公告的阅读权限；若查询的版本为群公告的历史版本，则需要持有群公告的更新权限
+//
+// 示例值：-1
+func (builder *GetChatAnnouncementBlockReqBuilder) RevisionId(revisionId int) *GetChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("revision_id", fmt.Sprint(revisionId))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *GetChatAnnouncementBlockReqBuilder) UserIdType(userIdType string) *GetChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *GetChatAnnouncementBlockReqBuilder) Build() *GetChatAnnouncementBlockReq {
+	req := &GetChatAnnouncementBlockReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type GetChatAnnouncementBlockReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type GetChatAnnouncementBlockRespData struct {
+	Block *Block `json:"block,omitempty"` // 查询的 Block 的信息
+}
+
+type GetChatAnnouncementBlockResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *GetChatAnnouncementBlockRespData `json:"data"` // 业务数据
+}
+
+func (resp *GetChatAnnouncementBlockResp) Success() bool {
+	return resp.Code == 0
+}
+
+type ListChatAnnouncementBlockReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	limit  int // 最大返回多少记录，当使用迭代器访问时才有效
+}
+
+func NewListChatAnnouncementBlockReqBuilder() *ListChatAnnouncementBlockReqBuilder {
+	builder := &ListChatAnnouncementBlockReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 最大返回多少记录，当使用迭代器访问时才有效
+func (builder *ListChatAnnouncementBlockReqBuilder) Limit(limit int) *ListChatAnnouncementBlockReqBuilder {
+	builder.limit = limit
+	return builder
+}
+
+// 群公告对应的群 ID
+//
+// 示例值：oc_5ad11d72b830411d72b836c20
+func (builder *ListChatAnnouncementBlockReqBuilder) ChatId(chatId string) *ListChatAnnouncementBlockReqBuilder {
+	builder.apiReq.PathParams.Set("chat_id", fmt.Sprint(chatId))
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：500
+func (builder *ListChatAnnouncementBlockReqBuilder) PageSize(pageSize int) *ListChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：aw7DoMKBFMOGwqHCrcO8w6jCmMOvw6ILeADCvsKNw57Di8O5XGV3LG4_w5HCqhFxSnDCrCzCn0BgZcOYUg85EMOYcEAcwqYOw4ojw5QFwofCu8KoIMO3K8Ktw4IuNMOBBHNYw4bCgCV3U1zDu8K-J8KSR8Kgw7Y0fsKZdsKvW3d9w53DnkHDrcO5bDkYwrvDisOEPcOtVFJ-I03CnsOILMOoAmLDknd6dsKqG1bClAjDuS3CvcOTwo7Dg8OrwovDsRdqIcKxw5HDohTDtXN9w5rCkWo
+func (builder *ListChatAnnouncementBlockReqBuilder) PageToken(pageToken string) *ListChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 查询的群公告版本，-1 表示群公告最新版本。群公告创建后，版本为 1。若查询的版本为群公告最新版本，则需要持有群公告的阅读权限；若查询的版本为群公告的历史版本，则需要持有群公告的编辑权限。
+//
+// 示例值：-1
+func (builder *ListChatAnnouncementBlockReqBuilder) RevisionId(revisionId int) *ListChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("revision_id", fmt.Sprint(revisionId))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *ListChatAnnouncementBlockReqBuilder) UserIdType(userIdType string) *ListChatAnnouncementBlockReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *ListChatAnnouncementBlockReqBuilder) Build() *ListChatAnnouncementBlockReq {
+	req := &ListChatAnnouncementBlockReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.Limit = builder.limit
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type ListChatAnnouncementBlockReq struct {
+	apiReq *larkcore.ApiReq
+	Limit  int // 最多返回多少记录，只有在使用迭代器访问时，才有效
+
+}
+
+type ListChatAnnouncementBlockRespData struct {
+	Items []*Block `json:"items,omitempty"` // 群公告的 Block 信息
+
+	PageToken *string `json:"page_token,omitempty"` // 分页标记，当 has_more 为 true 时，会同时返回新的 page_token，否则不返回 page_token
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有更多项
+}
+
+type ListChatAnnouncementBlockResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *ListChatAnnouncementBlockRespData `json:"data"` // 业务数据
+}
+
+func (resp *ListChatAnnouncementBlockResp) Success() bool {
+	return resp.Code == 0
+}
+
+type BatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder struct {
+	startIndex     int // 删除的起始索引（操作区间左闭右开）
+	startIndexFlag bool
+
+	endIndex     int // 删除的末尾索引（操作区间左闭右开）
+	endIndexFlag bool
+}
+
+func NewBatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder() *BatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder {
+	builder := &BatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder{}
+	return builder
+}
+
+// 删除的起始索引（操作区间左闭右开）
+//
+// 示例值：0
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder) StartIndex(startIndex int) *BatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder {
+	builder.startIndex = startIndex
+	builder.startIndexFlag = true
+	return builder
+}
+
+// 删除的末尾索引（操作区间左闭右开）
+//
+// 示例值：1
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder) EndIndex(endIndex int) *BatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder {
+	builder.endIndex = endIndex
+	builder.endIndexFlag = true
+	return builder
+}
+
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBodyBuilder) Build() *BatchDeleteChatAnnouncementBlockChildrenReqBody {
+	req := &BatchDeleteChatAnnouncementBlockChildrenReqBody{}
+	if builder.startIndexFlag {
+		req.StartIndex = &builder.startIndex
+	}
+	if builder.endIndexFlag {
+		req.EndIndex = &builder.endIndex
+	}
+	return req
+}
+
+type BatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder struct {
+	startIndex     int
+	startIndexFlag bool
+	endIndex       int
+	endIndexFlag   bool
+}
+
+func NewBatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder() *BatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder {
+	builder := &BatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder{}
+	return builder
+}
+
+// 删除的起始索引（操作区间左闭右开）
+//
+// 示例值：0
+func (builder *BatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder) StartIndex(startIndex int) *BatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder {
+	builder.startIndex = startIndex
+	builder.startIndexFlag = true
+	return builder
+}
+
+// 删除的末尾索引（操作区间左闭右开）
+//
+// 示例值：1
+func (builder *BatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder) EndIndex(endIndex int) *BatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder {
+	builder.endIndex = endIndex
+	builder.endIndexFlag = true
+	return builder
+}
+
+func (builder *BatchDeleteChatAnnouncementBlockChildrenPathReqBodyBuilder) Build() (*BatchDeleteChatAnnouncementBlockChildrenReqBody, error) {
+	req := &BatchDeleteChatAnnouncementBlockChildrenReqBody{}
+	if builder.startIndexFlag {
+		req.StartIndex = &builder.startIndex
+	}
+	if builder.endIndexFlag {
+		req.EndIndex = &builder.endIndex
+	}
+	return req, nil
+}
+
+type BatchDeleteChatAnnouncementBlockChildrenReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *BatchDeleteChatAnnouncementBlockChildrenReqBody
+}
+
+func NewBatchDeleteChatAnnouncementBlockChildrenReqBuilder() *BatchDeleteChatAnnouncementBlockChildrenReqBuilder {
+	builder := &BatchDeleteChatAnnouncementBlockChildrenReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 群公告对应的群 ID
+//
+// 示例值：oc_5ad11d72b830411d72b836c20
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBuilder) ChatId(chatId string) *BatchDeleteChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.PathParams.Set("chat_id", fmt.Sprint(chatId))
+	return builder
+}
+
+// Block 的唯一标识
+//
+// 示例值：doxcnO6UW6wAw2qIcYf4hZpFIth
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBuilder) BlockId(blockId string) *BatchDeleteChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.PathParams.Set("block_id", fmt.Sprint(blockId))
+	return builder
+}
+
+// 要操作的群公告版本。-1 表示群公告最新版本。群公告创建后，版本为 1。你需确保你已拥有群公告的编辑权限
+//
+// 示例值：-1
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBuilder) RevisionId(revisionId int) *BatchDeleteChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("revision_id", fmt.Sprint(revisionId))
+	return builder
+}
+
+// 操作的唯一标识，与接口返回值的 client_token 相对应，用于幂等的进行更新操作。此值为空表示将发起一次新的请求，此值非空表示幂等的进行更新操作。
+//
+// 示例值：fe599b60-450f-46ff-b2ef-9f6675625b97
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBuilder) ClientToken(clientToken string) *BatchDeleteChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBuilder) Body(body *BatchDeleteChatAnnouncementBlockChildrenReqBody) *BatchDeleteChatAnnouncementBlockChildrenReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *BatchDeleteChatAnnouncementBlockChildrenReqBuilder) Build() *BatchDeleteChatAnnouncementBlockChildrenReq {
+	req := &BatchDeleteChatAnnouncementBlockChildrenReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type BatchDeleteChatAnnouncementBlockChildrenReqBody struct {
+	StartIndex *int `json:"start_index,omitempty"` // 删除的起始索引（操作区间左闭右开）
+
+	EndIndex *int `json:"end_index,omitempty"` // 删除的末尾索引（操作区间左闭右开）
+}
+
+type BatchDeleteChatAnnouncementBlockChildrenReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *BatchDeleteChatAnnouncementBlockChildrenReqBody `body:""`
+}
+
+type BatchDeleteChatAnnouncementBlockChildrenRespData struct {
+	RevisionId *int `json:"revision_id,omitempty"` // 当前删除操作成功后群公告的版本号
+
+	ClientToken *string `json:"client_token,omitempty"` // 操作的唯一标识，更新请求中使用此值表示幂等的进行此次更新
+}
+
+type BatchDeleteChatAnnouncementBlockChildrenResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *BatchDeleteChatAnnouncementBlockChildrenRespData `json:"data"` // 业务数据
+}
+
+func (resp *BatchDeleteChatAnnouncementBlockChildrenResp) Success() bool {
+	return resp.Code == 0
+}
+
+type CreateChatAnnouncementBlockChildrenReqBodyBuilder struct {
+	children     []*Block // 添加的孩子列表。
+	childrenFlag bool
+
+	index     int // 当前 block 在 children 中的插入位置，起始值为 0，最大值为原 children 长度
+	indexFlag bool
+}
+
+func NewCreateChatAnnouncementBlockChildrenReqBodyBuilder() *CreateChatAnnouncementBlockChildrenReqBodyBuilder {
+	builder := &CreateChatAnnouncementBlockChildrenReqBodyBuilder{}
+	return builder
+}
+
+// 添加的孩子列表。
+//
+// 示例值：
+func (builder *CreateChatAnnouncementBlockChildrenReqBodyBuilder) Children(children []*Block) *CreateChatAnnouncementBlockChildrenReqBodyBuilder {
+	builder.children = children
+	builder.childrenFlag = true
+	return builder
+}
+
+// 当前 block 在 children 中的插入位置，起始值为 0，最大值为原 children 长度
+//
+// 示例值：0
+func (builder *CreateChatAnnouncementBlockChildrenReqBodyBuilder) Index(index int) *CreateChatAnnouncementBlockChildrenReqBodyBuilder {
+	builder.index = index
+	builder.indexFlag = true
+	return builder
+}
+
+func (builder *CreateChatAnnouncementBlockChildrenReqBodyBuilder) Build() *CreateChatAnnouncementBlockChildrenReqBody {
+	req := &CreateChatAnnouncementBlockChildrenReqBody{}
+	if builder.childrenFlag {
+		req.Children = builder.children
+	}
+	if builder.indexFlag {
+		req.Index = &builder.index
+	}
+	return req
+}
+
+type CreateChatAnnouncementBlockChildrenPathReqBodyBuilder struct {
+	children     []*Block
+	childrenFlag bool
+	index        int
+	indexFlag    bool
+}
+
+func NewCreateChatAnnouncementBlockChildrenPathReqBodyBuilder() *CreateChatAnnouncementBlockChildrenPathReqBodyBuilder {
+	builder := &CreateChatAnnouncementBlockChildrenPathReqBodyBuilder{}
+	return builder
+}
+
+// 添加的孩子列表。
+//
+// 示例值：
+func (builder *CreateChatAnnouncementBlockChildrenPathReqBodyBuilder) Children(children []*Block) *CreateChatAnnouncementBlockChildrenPathReqBodyBuilder {
+	builder.children = children
+	builder.childrenFlag = true
+	return builder
+}
+
+// 当前 block 在 children 中的插入位置，起始值为 0，最大值为原 children 长度
+//
+// 示例值：0
+func (builder *CreateChatAnnouncementBlockChildrenPathReqBodyBuilder) Index(index int) *CreateChatAnnouncementBlockChildrenPathReqBodyBuilder {
+	builder.index = index
+	builder.indexFlag = true
+	return builder
+}
+
+func (builder *CreateChatAnnouncementBlockChildrenPathReqBodyBuilder) Build() (*CreateChatAnnouncementBlockChildrenReqBody, error) {
+	req := &CreateChatAnnouncementBlockChildrenReqBody{}
+	if builder.childrenFlag {
+		req.Children = builder.children
+	}
+	if builder.indexFlag {
+		req.Index = &builder.index
+	}
+	return req, nil
+}
+
+type CreateChatAnnouncementBlockChildrenReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *CreateChatAnnouncementBlockChildrenReqBody
+}
+
+func NewCreateChatAnnouncementBlockChildrenReqBuilder() *CreateChatAnnouncementBlockChildrenReqBuilder {
+	builder := &CreateChatAnnouncementBlockChildrenReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 群公告对应的群 ID
+//
+// 示例值：oc_5ad11d72b830411d72b836c20
+func (builder *CreateChatAnnouncementBlockChildrenReqBuilder) ChatId(chatId string) *CreateChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.PathParams.Set("chat_id", fmt.Sprint(chatId))
+	return builder
+}
+
+// Block 的唯一标识
+//
+// 示例值：doxcnO6UW6wAw2qIcYf4hZpFIth
+func (builder *CreateChatAnnouncementBlockChildrenReqBuilder) BlockId(blockId string) *CreateChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.PathParams.Set("block_id", fmt.Sprint(blockId))
+	return builder
+}
+
+// 要操作的群公告版本。-1 表示群公告最新版本。群公告创建后，版本为 1。你需确保你已拥有群公告的编辑权限
+//
+// 示例值：-1
+func (builder *CreateChatAnnouncementBlockChildrenReqBuilder) RevisionId(revisionId int) *CreateChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("revision_id", fmt.Sprint(revisionId))
+	return builder
+}
+
+// 操作的唯一标识，与接口返回值的 client_token 相对应，用于幂等的进行更新操作。此值为空表示将发起一次新的请求，此值非空表示幂等的进行更新操作。
+//
+// 示例值：fe599b60-450f-46ff-b2ef-9f6675625b97
+func (builder *CreateChatAnnouncementBlockChildrenReqBuilder) ClientToken(clientToken string) *CreateChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("client_token", fmt.Sprint(clientToken))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *CreateChatAnnouncementBlockChildrenReqBuilder) UserIdType(userIdType string) *CreateChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *CreateChatAnnouncementBlockChildrenReqBuilder) Body(body *CreateChatAnnouncementBlockChildrenReqBody) *CreateChatAnnouncementBlockChildrenReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *CreateChatAnnouncementBlockChildrenReqBuilder) Build() *CreateChatAnnouncementBlockChildrenReq {
+	req := &CreateChatAnnouncementBlockChildrenReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type CreateChatAnnouncementBlockChildrenReqBody struct {
+	Children []*Block `json:"children,omitempty"` // 添加的孩子列表。
+
+	Index *int `json:"index,omitempty"` // 当前 block 在 children 中的插入位置，起始值为 0，最大值为原 children 长度
+}
+
+type CreateChatAnnouncementBlockChildrenReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *CreateChatAnnouncementBlockChildrenReqBody `body:""`
+}
+
+type CreateChatAnnouncementBlockChildrenRespData struct {
+	Children []*Block `json:"children,omitempty"` // 所添加的孩子的 Block 信息
+
+	RevisionId *int `json:"revision_id,omitempty"` // 当前 Block Children 创建成功后群公告的版本号
+
+	ClientToken *string `json:"client_token,omitempty"` // 操作的唯一标识，更新请求中使用此值表示幂等的进行此次更新
+}
+
+type CreateChatAnnouncementBlockChildrenResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *CreateChatAnnouncementBlockChildrenRespData `json:"data"` // 业务数据
+}
+
+func (resp *CreateChatAnnouncementBlockChildrenResp) Success() bool {
+	return resp.Code == 0
+}
+
+type GetChatAnnouncementBlockChildrenReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewGetChatAnnouncementBlockChildrenReqBuilder() *GetChatAnnouncementBlockChildrenReqBuilder {
+	builder := &GetChatAnnouncementBlockChildrenReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 群公告对应的群 ID
+//
+// 示例值：oc_5ad11d72b830411d72b836c20
+func (builder *GetChatAnnouncementBlockChildrenReqBuilder) ChatId(chatId string) *GetChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.PathParams.Set("chat_id", fmt.Sprint(chatId))
+	return builder
+}
+
+// Block 的唯一标识
+//
+// 示例值：doxcnO6UW6wAw2qIcYf4hZpFIth
+func (builder *GetChatAnnouncementBlockChildrenReqBuilder) BlockId(blockId string) *GetChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.PathParams.Set("block_id", fmt.Sprint(blockId))
+	return builder
+}
+
+// 查询的群公告版本，-1 表示群公告最新版本。群公告创建后，版本为 1。若查询的版本为群公告最新版本，则需要持有群公告的阅读权限；若查询的版本为群公告的历史版本，则需要持有群公告的更新权限。
+//
+// 示例值：-1
+func (builder *GetChatAnnouncementBlockChildrenReqBuilder) RevisionId(revisionId int) *GetChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("revision_id", fmt.Sprint(revisionId))
+	return builder
+}
+
+// 分页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：aw7DoMKBFMOGwqHCrcO8w6jCmMOvw6ILeADCvsKNw57Di8O5XGV3LG4_w5HCqhFxSnDCrCzCn0BgZcOYUg85EMOYcEAcwqYOw4ojw5QFwofCu8KoIMO3K8Ktw4IuNMOBBHNYw4bCgCV3U1zDu8K-J8KSR8Kgw7Y0fsKZdsKvW3d9w53DnkHDrcO5bDkYwrvDisOEPcOtVFJ-I03CnsOILMOoAmLDknd6dsKqG1bClAjDuS3CvcOTwo7Dg8OrwovDsRdqIcKxw5HDohTDtXN9w5rCkWo
+func (builder *GetChatAnnouncementBlockChildrenReqBuilder) PageToken(pageToken string) *GetChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 分页大小
+//
+// 示例值：500
+func (builder *GetChatAnnouncementBlockChildrenReqBuilder) PageSize(pageSize int) *GetChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 此次调用中使用的用户ID的类型
+//
+// 示例值：
+func (builder *GetChatAnnouncementBlockChildrenReqBuilder) UserIdType(userIdType string) *GetChatAnnouncementBlockChildrenReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *GetChatAnnouncementBlockChildrenReqBuilder) Build() *GetChatAnnouncementBlockChildrenReq {
+	req := &GetChatAnnouncementBlockChildrenReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type GetChatAnnouncementBlockChildrenReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type GetChatAnnouncementBlockChildrenRespData struct {
+	Items []*Block `json:"items,omitempty"` // Block 的 Children 列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一个分页的分页标记
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否还有下一个分页
+}
+
+type GetChatAnnouncementBlockChildrenResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *GetChatAnnouncementBlockChildrenRespData `json:"data"` // 业务数据
+}
+
+func (resp *GetChatAnnouncementBlockChildrenResp) Success() bool {
+	return resp.Code == 0
+}
+
 type CreateDocumentReqBodyBuilder struct {
 	folderToken     string // 文件夹 token，获取方式见云文档接口快速入门；空表示根目录，tenant_access_token应用权限仅允许操作应用创建的目录
 	folderTokenFlag bool
@@ -7153,6 +8004,60 @@ type CreateDocumentBlockDescendantResp struct {
 
 func (resp *CreateDocumentBlockDescendantResp) Success() bool {
 	return resp.Code == 0
+}
+
+type ListChatAnnouncementBlockIterator struct {
+	nextPageToken *string
+	items         []*Block
+	index         int
+	limit         int
+	ctx           context.Context
+	req           *ListChatAnnouncementBlockReq
+	listFunc      func(ctx context.Context, req *ListChatAnnouncementBlockReq, options ...larkcore.RequestOptionFunc) (*ListChatAnnouncementBlockResp, error)
+	options       []larkcore.RequestOptionFunc
+	curlNum       int
+}
+
+func (iterator *ListChatAnnouncementBlockIterator) Next() (bool, *Block, error) {
+	// 达到最大量，则返回
+	if iterator.limit > 0 && iterator.curlNum >= iterator.limit {
+		return false, nil, nil
+	}
+
+	// 为0则拉取数据
+	if iterator.index == 0 || iterator.index >= len(iterator.items) {
+		if iterator.index != 0 && iterator.nextPageToken == nil {
+			return false, nil, nil
+		}
+		if iterator.nextPageToken != nil {
+			iterator.req.apiReq.QueryParams.Set("page_token", *iterator.nextPageToken)
+		}
+		resp, err := iterator.listFunc(iterator.ctx, iterator.req, iterator.options...)
+		if err != nil {
+			return false, nil, err
+		}
+
+		if resp.Code != 0 {
+			return false, nil, errors.New(fmt.Sprintf("Code:%d,Msg:%s", resp.Code, resp.Msg))
+		}
+
+		if len(resp.Data.Items) == 0 {
+			return false, nil, nil
+		}
+
+		iterator.nextPageToken = resp.Data.PageToken
+		iterator.items = resp.Data.Items
+		iterator.index = 0
+	}
+
+	block := iterator.items[iterator.index]
+	iterator.index++
+	iterator.curlNum++
+	return true, block, nil
+}
+
+func (iterator *ListChatAnnouncementBlockIterator) NextPageToken() *string {
+	return iterator.nextPageToken
 }
 
 type ListDocumentBlockIterator struct {
