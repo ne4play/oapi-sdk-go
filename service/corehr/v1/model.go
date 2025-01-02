@@ -1670,13 +1670,13 @@ type BankAccount struct {
 
 	Bank *Enum `json:"bank,omitempty"` // 银行枚举，常见的银行枚举如：bank-5（交通银行）、bank-6（中国银行）、bank-7（中国建设银行）、bank-8（中国农业银行）、bank-9（中国工商银行）、bank-10（中国邮政储蓄银行）、bank-11（中国光大银行）、bank-12（中国民生银行）、bank-13（招商银行）、bank-14（中信银行）、bank-15（华夏银行）
 
-	BankIdentificationCode *string `json:"bank_identification_code,omitempty"` // 银行识别码（该字段待作废，请勿使用）
+	BankIdentificationCode *string `json:"bank_identification_code,omitempty"` // 银行识别码
 
 	BranchName *string `json:"branch_name,omitempty"` // 支行名称
 
-	BankId *string `json:"bank_id,omitempty"` // 银行 ID，该字段已作废，请使用 bank_id_v2
+	BankId *string `json:"bank_id,omitempty"` // 银行 ID
 
-	BranchId *string `json:"branch_id,omitempty"` // 支行 ID，该字段已作废，请使用 branch_id_v2
+	BranchId *string `json:"branch_id,omitempty"` // 支行 ID
 
 	BankIdV2 *string `json:"bank_id_v2,omitempty"` // 银行 ID，详细信息可通过【查询银行信息】接口查询获得
 
@@ -1706,16 +1706,16 @@ type BankAccountBuilder struct {
 	bank     *Enum // 银行枚举，常见的银行枚举如：bank-5（交通银行）、bank-6（中国银行）、bank-7（中国建设银行）、bank-8（中国农业银行）、bank-9（中国工商银行）、bank-10（中国邮政储蓄银行）、bank-11（中国光大银行）、bank-12（中国民生银行）、bank-13（招商银行）、bank-14（中信银行）、bank-15（华夏银行）
 	bankFlag bool
 
-	bankIdentificationCode     string // 银行识别码（该字段待作废，请勿使用）
+	bankIdentificationCode     string // 银行识别码
 	bankIdentificationCodeFlag bool
 
 	branchName     string // 支行名称
 	branchNameFlag bool
 
-	bankId     string // 银行 ID，该字段已作废，请使用 bank_id_v2
+	bankId     string // 银行 ID
 	bankIdFlag bool
 
-	branchId     string // 支行 ID，该字段已作废，请使用 branch_id_v2
+	branchId     string // 支行 ID
 	branchIdFlag bool
 
 	bankIdV2     string // 银行 ID，详细信息可通过【查询银行信息】接口查询获得
@@ -1781,7 +1781,7 @@ func (builder *BankAccountBuilder) Bank(bank *Enum) *BankAccountBuilder {
 	return builder
 }
 
-// 银行识别码（该字段待作废，请勿使用）
+// 银行识别码
 //
 // 示例值：1234
 func (builder *BankAccountBuilder) BankIdentificationCode(bankIdentificationCode string) *BankAccountBuilder {
@@ -1799,7 +1799,7 @@ func (builder *BankAccountBuilder) BranchName(branchName string) *BankAccountBui
 	return builder
 }
 
-// 银行 ID，该字段已作废，请使用 bank_id_v2
+// 银行 ID
 //
 // 示例值：8
 func (builder *BankAccountBuilder) BankId(bankId string) *BankAccountBuilder {
@@ -1808,7 +1808,7 @@ func (builder *BankAccountBuilder) BankId(bankId string) *BankAccountBuilder {
 	return builder
 }
 
-// 支行 ID，该字段已作废，请使用 branch_id_v2
+// 支行 ID
 //
 // 示例值：12
 func (builder *BankAccountBuilder) BranchId(branchId string) *BankAccountBuilder {
@@ -1941,6 +1941,142 @@ func (builder *BankAccountBuilder) Build() *BankAccount {
 	return req
 }
 
+type BatchCheckFormInstanceI18nResult struct {
+	Success *bool `json:"success,omitempty"` // 是否成功
+
+	FieldValidateErrorMessages *string `json:"field_validate_error_messages,omitempty"` // 当出现某个控件校验不通过时，会用此字段返回校验结果，map格式
+
+	FormValidateErrorMessages []*BpmDataengineI18n `json:"form_validate_error_messages,omitempty"` // 当出现配置了表单提交校验，且校验不通过时，会用此字段返回校验结果。
+
+	SystemErrorMessage *BpmFormErrorMessage `json:"system_error_message,omitempty"` // 申请人未填写
+
+	AdvancedFieldCheckResultList *string `json:"advanced_field_check_result_list,omitempty"` // 明细控件、高级控件校验不通过时，会用此字段返回校验结果。
+
+	ErrMessageForExport []*BpmDataengineI18n `json:"err_message_for_export,omitempty"` // 用于多维表格导出场景的校验文案返回
+
+	NoPermissonApis [][]string `json:"no_permisson_apis,omitempty"` // 业务传入的变量在表单中无权限
+}
+
+type BatchCheckFormInstanceI18nResultBuilder struct {
+	success     bool // 是否成功
+	successFlag bool
+
+	fieldValidateErrorMessages     string // 当出现某个控件校验不通过时，会用此字段返回校验结果，map格式
+	fieldValidateErrorMessagesFlag bool
+
+	formValidateErrorMessages     []*BpmDataengineI18n // 当出现配置了表单提交校验，且校验不通过时，会用此字段返回校验结果。
+	formValidateErrorMessagesFlag bool
+
+	systemErrorMessage     *BpmFormErrorMessage // 申请人未填写
+	systemErrorMessageFlag bool
+
+	advancedFieldCheckResultList     string // 明细控件、高级控件校验不通过时，会用此字段返回校验结果。
+	advancedFieldCheckResultListFlag bool
+
+	errMessageForExport     []*BpmDataengineI18n // 用于多维表格导出场景的校验文案返回
+	errMessageForExportFlag bool
+
+	noPermissonApis     [][]string // 业务传入的变量在表单中无权限
+	noPermissonApisFlag bool
+}
+
+func NewBatchCheckFormInstanceI18nResultBuilder() *BatchCheckFormInstanceI18nResultBuilder {
+	builder := &BatchCheckFormInstanceI18nResultBuilder{}
+	return builder
+}
+
+// 是否成功
+//
+// 示例值：false
+func (builder *BatchCheckFormInstanceI18nResultBuilder) Success(success bool) *BatchCheckFormInstanceI18nResultBuilder {
+	builder.success = success
+	builder.successFlag = true
+	return builder
+}
+
+// 当出现某个控件校验不通过时，会用此字段返回校验结果，map格式
+//
+// 示例值：null
+func (builder *BatchCheckFormInstanceI18nResultBuilder) FieldValidateErrorMessages(fieldValidateErrorMessages string) *BatchCheckFormInstanceI18nResultBuilder {
+	builder.fieldValidateErrorMessages = fieldValidateErrorMessages
+	builder.fieldValidateErrorMessagesFlag = true
+	return builder
+}
+
+// 当出现配置了表单提交校验，且校验不通过时，会用此字段返回校验结果。
+//
+// 示例值：
+func (builder *BatchCheckFormInstanceI18nResultBuilder) FormValidateErrorMessages(formValidateErrorMessages []*BpmDataengineI18n) *BatchCheckFormInstanceI18nResultBuilder {
+	builder.formValidateErrorMessages = formValidateErrorMessages
+	builder.formValidateErrorMessagesFlag = true
+	return builder
+}
+
+// 申请人未填写
+//
+// 示例值：map
+func (builder *BatchCheckFormInstanceI18nResultBuilder) SystemErrorMessage(systemErrorMessage *BpmFormErrorMessage) *BatchCheckFormInstanceI18nResultBuilder {
+	builder.systemErrorMessage = systemErrorMessage
+	builder.systemErrorMessageFlag = true
+	return builder
+}
+
+// 明细控件、高级控件校验不通过时，会用此字段返回校验结果。
+//
+// 示例值：null
+func (builder *BatchCheckFormInstanceI18nResultBuilder) AdvancedFieldCheckResultList(advancedFieldCheckResultList string) *BatchCheckFormInstanceI18nResultBuilder {
+	builder.advancedFieldCheckResultList = advancedFieldCheckResultList
+	builder.advancedFieldCheckResultListFlag = true
+	return builder
+}
+
+// 用于多维表格导出场景的校验文案返回
+//
+// 示例值：
+func (builder *BatchCheckFormInstanceI18nResultBuilder) ErrMessageForExport(errMessageForExport []*BpmDataengineI18n) *BatchCheckFormInstanceI18nResultBuilder {
+	builder.errMessageForExport = errMessageForExport
+	builder.errMessageForExportFlag = true
+	return builder
+}
+
+// 业务传入的变量在表单中无权限
+//
+// 示例值：
+func (builder *BatchCheckFormInstanceI18nResultBuilder) NoPermissonApis(noPermissonApis [][]string) *BatchCheckFormInstanceI18nResultBuilder {
+	builder.noPermissonApis = noPermissonApis
+	builder.noPermissonApisFlag = true
+	return builder
+}
+
+func (builder *BatchCheckFormInstanceI18nResultBuilder) Build() *BatchCheckFormInstanceI18nResult {
+	req := &BatchCheckFormInstanceI18nResult{}
+	if builder.successFlag {
+		req.Success = &builder.success
+
+	}
+	if builder.fieldValidateErrorMessagesFlag {
+		req.FieldValidateErrorMessages = &builder.fieldValidateErrorMessages
+
+	}
+	if builder.formValidateErrorMessagesFlag {
+		req.FormValidateErrorMessages = builder.formValidateErrorMessages
+	}
+	if builder.systemErrorMessageFlag {
+		req.SystemErrorMessage = builder.systemErrorMessage
+	}
+	if builder.advancedFieldCheckResultListFlag {
+		req.AdvancedFieldCheckResultList = &builder.advancedFieldCheckResultList
+
+	}
+	if builder.errMessageForExportFlag {
+		req.ErrMessageForExport = builder.errMessageForExport
+	}
+	if builder.noPermissonApisFlag {
+		req.NoPermissonApis = builder.noPermissonApis
+	}
+	return req
+}
+
 type BpRoleOrganization struct {
 	RoleKey *string `json:"role_key,omitempty"` // 角色类型的唯一标识;- HRBP：与部门有关，role_key 固定为 「hrbp」;- 属地 BP：与部门、工作地点有关，role_key 固定为 「location_bp」
 
@@ -2054,6 +2190,56 @@ func (builder *BpmDataengineI18nBuilder) Build() *BpmDataengineI18n {
 	}
 	if builder.enUsFlag {
 		req.EnUs = &builder.enUs
+
+	}
+	return req
+}
+
+type BpmFormErrorMessage struct {
+	Code *string `json:"code,omitempty"` // 错误码
+
+	Message *string `json:"message,omitempty"` // 错误信息
+}
+
+type BpmFormErrorMessageBuilder struct {
+	code     string // 错误码
+	codeFlag bool
+
+	message     string // 错误信息
+	messageFlag bool
+}
+
+func NewBpmFormErrorMessageBuilder() *BpmFormErrorMessageBuilder {
+	builder := &BpmFormErrorMessageBuilder{}
+	return builder
+}
+
+// 错误码
+//
+// 示例值：0
+func (builder *BpmFormErrorMessageBuilder) Code(code string) *BpmFormErrorMessageBuilder {
+	builder.code = code
+	builder.codeFlag = true
+	return builder
+}
+
+// 错误信息
+//
+// 示例值：申请人未填写
+func (builder *BpmFormErrorMessageBuilder) Message(message string) *BpmFormErrorMessageBuilder {
+	builder.message = message
+	builder.messageFlag = true
+	return builder
+}
+
+func (builder *BpmFormErrorMessageBuilder) Build() *BpmFormErrorMessage {
+	req := &BpmFormErrorMessage{}
+	if builder.codeFlag {
+		req.Code = &builder.code
+
+	}
+	if builder.messageFlag {
+		req.Message = &builder.message
 
 	}
 	return req
@@ -10996,6 +11182,74 @@ func (builder *LeaveBalanceBuilder) Build() *LeaveBalance {
 	return req
 }
 
+type LeaveDuration struct {
+	Duration *string `json:"duration,omitempty"` // 休假时长
+
+	Unit *string `json:"unit,omitempty"` // 休假时长单位
+
+	DurationPerDay *string `json:"duration_per_day,omitempty"` // 每日休假时长
+}
+
+type LeaveDurationBuilder struct {
+	duration     string // 休假时长
+	durationFlag bool
+
+	unit     string // 休假时长单位
+	unitFlag bool
+
+	durationPerDay     string // 每日休假时长
+	durationPerDayFlag bool
+}
+
+func NewLeaveDurationBuilder() *LeaveDurationBuilder {
+	builder := &LeaveDurationBuilder{}
+	return builder
+}
+
+// 休假时长
+//
+// 示例值：1
+func (builder *LeaveDurationBuilder) Duration(duration string) *LeaveDurationBuilder {
+	builder.duration = duration
+	builder.durationFlag = true
+	return builder
+}
+
+// 休假时长单位
+//
+// 示例值：hour
+func (builder *LeaveDurationBuilder) Unit(unit string) *LeaveDurationBuilder {
+	builder.unit = unit
+	builder.unitFlag = true
+	return builder
+}
+
+// 每日休假时长
+//
+// 示例值：1
+func (builder *LeaveDurationBuilder) DurationPerDay(durationPerDay string) *LeaveDurationBuilder {
+	builder.durationPerDay = durationPerDay
+	builder.durationPerDayFlag = true
+	return builder
+}
+
+func (builder *LeaveDurationBuilder) Build() *LeaveDuration {
+	req := &LeaveDuration{}
+	if builder.durationFlag {
+		req.Duration = &builder.duration
+
+	}
+	if builder.unitFlag {
+		req.Unit = &builder.unit
+
+	}
+	if builder.durationPerDayFlag {
+		req.DurationPerDay = &builder.durationPerDay
+
+	}
+	return req
+}
+
 type LeaveGrantingRecord struct {
 	Id *string `json:"id,omitempty"` // 假期授予记录 ID
 
@@ -11857,6 +12111,512 @@ func (builder *LeaveRequestBuilder) Build() *LeaveRequest {
 	return req
 }
 
+type LeaveRequestCreated struct {
+	EmploymentId *string `json:"employment_id,omitempty"` // 员工ID
+
+	LeaveTypeId *string `json:"leave_type_id,omitempty"` // 假期类型ID
+
+	StartTime *LeaveTime `json:"start_time,omitempty"` // 请假开始时间
+
+	EndTime *LeaveTime `json:"end_time,omitempty"` // 请假结束时间
+
+	TimeZone *string `json:"time_zone,omitempty"` // 时区
+
+	DailyLeaveMode *string `json:"daily_leave_mode,omitempty"` // 每日休假方式
+
+	ArriveLateMinutes *int `json:"arrive_late_minutes,omitempty"` // 上班晚到时长（分钟）
+
+	LeaveEarlyMinutes *int `json:"leave_early_minutes,omitempty"` // 下班早走时长（分钟）
+
+	Notes *string `json:"notes,omitempty"` // 备注
+
+	DateOfMarriageCertificate *string `json:"date_of_marriage_certificate,omitempty"` // 领证日期
+
+	ProvidePremaritalExaminationMaterials *bool `json:"provide_premarital_examination_materials,omitempty"` // 是否可提供婚前检查材料
+
+	IsCoupleLiveApart *bool `json:"is_couple_live_apart,omitempty"` // 是否夫妻两地分居
+
+	DifficultyGivingBirth *bool `json:"difficulty_giving_birth,omitempty"` // 是否难产
+
+	PregnantMonths *int `json:"pregnant_months,omitempty"` // 怀孕月数
+
+	DueDate *string `json:"due_date,omitempty"` // 预产期
+
+	ChildDateOfBirth *string `json:"child_date_of_birth,omitempty"` // 子女出生日期
+
+	NumberOfNewborns *int `json:"number_of_newborns,omitempty"` // 新生儿数量
+
+	ApplicableScenarios *string `json:"applicable_scenarios,omitempty"` // 申请场景
+}
+
+type LeaveRequestCreatedBuilder struct {
+	employmentId     string // 员工ID
+	employmentIdFlag bool
+
+	leaveTypeId     string // 假期类型ID
+	leaveTypeIdFlag bool
+
+	startTime     *LeaveTime // 请假开始时间
+	startTimeFlag bool
+
+	endTime     *LeaveTime // 请假结束时间
+	endTimeFlag bool
+
+	timeZone     string // 时区
+	timeZoneFlag bool
+
+	dailyLeaveMode     string // 每日休假方式
+	dailyLeaveModeFlag bool
+
+	arriveLateMinutes     int // 上班晚到时长（分钟）
+	arriveLateMinutesFlag bool
+
+	leaveEarlyMinutes     int // 下班早走时长（分钟）
+	leaveEarlyMinutesFlag bool
+
+	notes     string // 备注
+	notesFlag bool
+
+	dateOfMarriageCertificate     string // 领证日期
+	dateOfMarriageCertificateFlag bool
+
+	providePremaritalExaminationMaterials     bool // 是否可提供婚前检查材料
+	providePremaritalExaminationMaterialsFlag bool
+
+	isCoupleLiveApart     bool // 是否夫妻两地分居
+	isCoupleLiveApartFlag bool
+
+	difficultyGivingBirth     bool // 是否难产
+	difficultyGivingBirthFlag bool
+
+	pregnantMonths     int // 怀孕月数
+	pregnantMonthsFlag bool
+
+	dueDate     string // 预产期
+	dueDateFlag bool
+
+	childDateOfBirth     string // 子女出生日期
+	childDateOfBirthFlag bool
+
+	numberOfNewborns     int // 新生儿数量
+	numberOfNewbornsFlag bool
+
+	applicableScenarios     string // 申请场景
+	applicableScenariosFlag bool
+}
+
+func NewLeaveRequestCreatedBuilder() *LeaveRequestCreatedBuilder {
+	builder := &LeaveRequestCreatedBuilder{}
+	return builder
+}
+
+// 员工ID
+//
+// 示例值：7442604019808519724
+func (builder *LeaveRequestCreatedBuilder) EmploymentId(employmentId string) *LeaveRequestCreatedBuilder {
+	builder.employmentId = employmentId
+	builder.employmentIdFlag = true
+	return builder
+}
+
+// 假期类型ID
+//
+// 示例值：7444819921379313196
+func (builder *LeaveRequestCreatedBuilder) LeaveTypeId(leaveTypeId string) *LeaveRequestCreatedBuilder {
+	builder.leaveTypeId = leaveTypeId
+	builder.leaveTypeIdFlag = true
+	return builder
+}
+
+// 请假开始时间
+//
+// 示例值：
+func (builder *LeaveRequestCreatedBuilder) StartTime(startTime *LeaveTime) *LeaveRequestCreatedBuilder {
+	builder.startTime = startTime
+	builder.startTimeFlag = true
+	return builder
+}
+
+// 请假结束时间
+//
+// 示例值：
+func (builder *LeaveRequestCreatedBuilder) EndTime(endTime *LeaveTime) *LeaveRequestCreatedBuilder {
+	builder.endTime = endTime
+	builder.endTimeFlag = true
+	return builder
+}
+
+// 时区
+//
+// 示例值：Asia/Shanghai
+func (builder *LeaveRequestCreatedBuilder) TimeZone(timeZone string) *LeaveRequestCreatedBuilder {
+	builder.timeZone = timeZone
+	builder.timeZoneFlag = true
+	return builder
+}
+
+// 每日休假方式
+//
+// 示例值：arrive_late:上班晚到, leave_early:上班晚到, arrive_late_and_leave_early:上班晚到 + 下班早走
+func (builder *LeaveRequestCreatedBuilder) DailyLeaveMode(dailyLeaveMode string) *LeaveRequestCreatedBuilder {
+	builder.dailyLeaveMode = dailyLeaveMode
+	builder.dailyLeaveModeFlag = true
+	return builder
+}
+
+// 上班晚到时长（分钟）
+//
+// 示例值：10
+func (builder *LeaveRequestCreatedBuilder) ArriveLateMinutes(arriveLateMinutes int) *LeaveRequestCreatedBuilder {
+	builder.arriveLateMinutes = arriveLateMinutes
+	builder.arriveLateMinutesFlag = true
+	return builder
+}
+
+// 下班早走时长（分钟）
+//
+// 示例值：10
+func (builder *LeaveRequestCreatedBuilder) LeaveEarlyMinutes(leaveEarlyMinutes int) *LeaveRequestCreatedBuilder {
+	builder.leaveEarlyMinutes = leaveEarlyMinutes
+	builder.leaveEarlyMinutesFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：休息
+func (builder *LeaveRequestCreatedBuilder) Notes(notes string) *LeaveRequestCreatedBuilder {
+	builder.notes = notes
+	builder.notesFlag = true
+	return builder
+}
+
+// 领证日期
+//
+// 示例值：2023-11-07
+func (builder *LeaveRequestCreatedBuilder) DateOfMarriageCertificate(dateOfMarriageCertificate string) *LeaveRequestCreatedBuilder {
+	builder.dateOfMarriageCertificate = dateOfMarriageCertificate
+	builder.dateOfMarriageCertificateFlag = true
+	return builder
+}
+
+// 是否可提供婚前检查材料
+//
+// 示例值：fasle
+func (builder *LeaveRequestCreatedBuilder) ProvidePremaritalExaminationMaterials(providePremaritalExaminationMaterials bool) *LeaveRequestCreatedBuilder {
+	builder.providePremaritalExaminationMaterials = providePremaritalExaminationMaterials
+	builder.providePremaritalExaminationMaterialsFlag = true
+	return builder
+}
+
+// 是否夫妻两地分居
+//
+// 示例值：false
+func (builder *LeaveRequestCreatedBuilder) IsCoupleLiveApart(isCoupleLiveApart bool) *LeaveRequestCreatedBuilder {
+	builder.isCoupleLiveApart = isCoupleLiveApart
+	builder.isCoupleLiveApartFlag = true
+	return builder
+}
+
+// 是否难产
+//
+// 示例值：false
+func (builder *LeaveRequestCreatedBuilder) DifficultyGivingBirth(difficultyGivingBirth bool) *LeaveRequestCreatedBuilder {
+	builder.difficultyGivingBirth = difficultyGivingBirth
+	builder.difficultyGivingBirthFlag = true
+	return builder
+}
+
+// 怀孕月数
+//
+// 示例值：10
+func (builder *LeaveRequestCreatedBuilder) PregnantMonths(pregnantMonths int) *LeaveRequestCreatedBuilder {
+	builder.pregnantMonths = pregnantMonths
+	builder.pregnantMonthsFlag = true
+	return builder
+}
+
+// 预产期
+//
+// 示例值：2023-11-07
+func (builder *LeaveRequestCreatedBuilder) DueDate(dueDate string) *LeaveRequestCreatedBuilder {
+	builder.dueDate = dueDate
+	builder.dueDateFlag = true
+	return builder
+}
+
+// 子女出生日期
+//
+// 示例值：2023-11-07
+func (builder *LeaveRequestCreatedBuilder) ChildDateOfBirth(childDateOfBirth string) *LeaveRequestCreatedBuilder {
+	builder.childDateOfBirth = childDateOfBirth
+	builder.childDateOfBirthFlag = true
+	return builder
+}
+
+// 新生儿数量
+//
+// 示例值：1
+func (builder *LeaveRequestCreatedBuilder) NumberOfNewborns(numberOfNewborns int) *LeaveRequestCreatedBuilder {
+	builder.numberOfNewborns = numberOfNewborns
+	builder.numberOfNewbornsFlag = true
+	return builder
+}
+
+// 申请场景
+//
+// 示例值：父母/配偶父母患病需陪护:parent_accompany, 配偶患病需陪护:spouse_accompany, 子女患病需陪护:child_accompany
+func (builder *LeaveRequestCreatedBuilder) ApplicableScenarios(applicableScenarios string) *LeaveRequestCreatedBuilder {
+	builder.applicableScenarios = applicableScenarios
+	builder.applicableScenariosFlag = true
+	return builder
+}
+
+func (builder *LeaveRequestCreatedBuilder) Build() *LeaveRequestCreated {
+	req := &LeaveRequestCreated{}
+	if builder.employmentIdFlag {
+		req.EmploymentId = &builder.employmentId
+
+	}
+	if builder.leaveTypeIdFlag {
+		req.LeaveTypeId = &builder.leaveTypeId
+
+	}
+	if builder.startTimeFlag {
+		req.StartTime = builder.startTime
+	}
+	if builder.endTimeFlag {
+		req.EndTime = builder.endTime
+	}
+	if builder.timeZoneFlag {
+		req.TimeZone = &builder.timeZone
+
+	}
+	if builder.dailyLeaveModeFlag {
+		req.DailyLeaveMode = &builder.dailyLeaveMode
+
+	}
+	if builder.arriveLateMinutesFlag {
+		req.ArriveLateMinutes = &builder.arriveLateMinutes
+
+	}
+	if builder.leaveEarlyMinutesFlag {
+		req.LeaveEarlyMinutes = &builder.leaveEarlyMinutes
+
+	}
+	if builder.notesFlag {
+		req.Notes = &builder.notes
+
+	}
+	if builder.dateOfMarriageCertificateFlag {
+		req.DateOfMarriageCertificate = &builder.dateOfMarriageCertificate
+
+	}
+	if builder.providePremaritalExaminationMaterialsFlag {
+		req.ProvidePremaritalExaminationMaterials = &builder.providePremaritalExaminationMaterials
+
+	}
+	if builder.isCoupleLiveApartFlag {
+		req.IsCoupleLiveApart = &builder.isCoupleLiveApart
+
+	}
+	if builder.difficultyGivingBirthFlag {
+		req.DifficultyGivingBirth = &builder.difficultyGivingBirth
+
+	}
+	if builder.pregnantMonthsFlag {
+		req.PregnantMonths = &builder.pregnantMonths
+
+	}
+	if builder.dueDateFlag {
+		req.DueDate = &builder.dueDate
+
+	}
+	if builder.childDateOfBirthFlag {
+		req.ChildDateOfBirth = &builder.childDateOfBirth
+
+	}
+	if builder.numberOfNewbornsFlag {
+		req.NumberOfNewborns = &builder.numberOfNewborns
+
+	}
+	if builder.applicableScenariosFlag {
+		req.ApplicableScenarios = &builder.applicableScenarios
+
+	}
+	return req
+}
+
+type LeaveRequestCreatedErrorMessage struct {
+	EmploymentId *string `json:"employment_id,omitempty"` // 员工ID
+
+	LeaveTypeId *string `json:"leave_type_id,omitempty"` // 假期类型ID
+
+	StartTime *string `json:"start_time,omitempty"` // 请假开始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 请假结束时间
+
+	Code *int `json:"code,omitempty"` // 错误码
+
+	Msg *string `json:"msg,omitempty"` // 错误信息
+}
+
+type LeaveRequestCreatedErrorMessageBuilder struct {
+	employmentId     string // 员工ID
+	employmentIdFlag bool
+
+	leaveTypeId     string // 假期类型ID
+	leaveTypeIdFlag bool
+
+	startTime     string // 请假开始时间
+	startTimeFlag bool
+
+	endTime     string // 请假结束时间
+	endTimeFlag bool
+
+	code     int // 错误码
+	codeFlag bool
+
+	msg     string // 错误信息
+	msgFlag bool
+}
+
+func NewLeaveRequestCreatedErrorMessageBuilder() *LeaveRequestCreatedErrorMessageBuilder {
+	builder := &LeaveRequestCreatedErrorMessageBuilder{}
+	return builder
+}
+
+// 员工ID
+//
+// 示例值：7402162852704831020
+func (builder *LeaveRequestCreatedErrorMessageBuilder) EmploymentId(employmentId string) *LeaveRequestCreatedErrorMessageBuilder {
+	builder.employmentId = employmentId
+	builder.employmentIdFlag = true
+	return builder
+}
+
+// 假期类型ID
+//
+// 示例值：7437402643576571436
+func (builder *LeaveRequestCreatedErrorMessageBuilder) LeaveTypeId(leaveTypeId string) *LeaveRequestCreatedErrorMessageBuilder {
+	builder.leaveTypeId = leaveTypeId
+	builder.leaveTypeIdFlag = true
+	return builder
+}
+
+// 请假开始时间
+//
+// 示例值：2024-11-01
+func (builder *LeaveRequestCreatedErrorMessageBuilder) StartTime(startTime string) *LeaveRequestCreatedErrorMessageBuilder {
+	builder.startTime = startTime
+	builder.startTimeFlag = true
+	return builder
+}
+
+// 请假结束时间
+//
+// 示例值：2024-11-01
+func (builder *LeaveRequestCreatedErrorMessageBuilder) EndTime(endTime string) *LeaveRequestCreatedErrorMessageBuilder {
+	builder.endTime = endTime
+	builder.endTimeFlag = true
+	return builder
+}
+
+// 错误码
+//
+// 示例值：0
+func (builder *LeaveRequestCreatedErrorMessageBuilder) Code(code int) *LeaveRequestCreatedErrorMessageBuilder {
+	builder.code = code
+	builder.codeFlag = true
+	return builder
+}
+
+// 错误信息
+//
+// 示例值：成功
+func (builder *LeaveRequestCreatedErrorMessageBuilder) Msg(msg string) *LeaveRequestCreatedErrorMessageBuilder {
+	builder.msg = msg
+	builder.msgFlag = true
+	return builder
+}
+
+func (builder *LeaveRequestCreatedErrorMessageBuilder) Build() *LeaveRequestCreatedErrorMessage {
+	req := &LeaveRequestCreatedErrorMessage{}
+	if builder.employmentIdFlag {
+		req.EmploymentId = &builder.employmentId
+
+	}
+	if builder.leaveTypeIdFlag {
+		req.LeaveTypeId = &builder.leaveTypeId
+
+	}
+	if builder.startTimeFlag {
+		req.StartTime = &builder.startTime
+
+	}
+	if builder.endTimeFlag {
+		req.EndTime = &builder.endTime
+
+	}
+	if builder.codeFlag {
+		req.Code = &builder.code
+
+	}
+	if builder.msgFlag {
+		req.Msg = &builder.msg
+
+	}
+	return req
+}
+
+type LeaveRequestCreatedResult struct {
+	ErrorMessages []*LeaveRequestCreatedErrorMessage `json:"error_messages,omitempty"` // 请假记录创建错误信息
+
+	LeaveRequestResults []*LeaveRequest `json:"leave_request_results,omitempty"` // 请假记录列表
+}
+
+type LeaveRequestCreatedResultBuilder struct {
+	errorMessages     []*LeaveRequestCreatedErrorMessage // 请假记录创建错误信息
+	errorMessagesFlag bool
+
+	leaveRequestResults     []*LeaveRequest // 请假记录列表
+	leaveRequestResultsFlag bool
+}
+
+func NewLeaveRequestCreatedResultBuilder() *LeaveRequestCreatedResultBuilder {
+	builder := &LeaveRequestCreatedResultBuilder{}
+	return builder
+}
+
+// 请假记录创建错误信息
+//
+// 示例值：
+func (builder *LeaveRequestCreatedResultBuilder) ErrorMessages(errorMessages []*LeaveRequestCreatedErrorMessage) *LeaveRequestCreatedResultBuilder {
+	builder.errorMessages = errorMessages
+	builder.errorMessagesFlag = true
+	return builder
+}
+
+// 请假记录列表
+//
+// 示例值：
+func (builder *LeaveRequestCreatedResultBuilder) LeaveRequestResults(leaveRequestResults []*LeaveRequest) *LeaveRequestCreatedResultBuilder {
+	builder.leaveRequestResults = leaveRequestResults
+	builder.leaveRequestResultsFlag = true
+	return builder
+}
+
+func (builder *LeaveRequestCreatedResultBuilder) Build() *LeaveRequestCreatedResult {
+	req := &LeaveRequestCreatedResult{}
+	if builder.errorMessagesFlag {
+		req.ErrorMessages = builder.errorMessages
+	}
+	if builder.leaveRequestResultsFlag {
+		req.LeaveRequestResults = builder.leaveRequestResults
+	}
+	return req
+}
+
 type LeaveRequestDetail struct {
 	LeaveRequestId *string `json:"leave_request_id,omitempty"` // 请假记录id
 
@@ -12006,6 +12766,74 @@ func (builder *LeaveSubtypeBuilder) Build() *LeaveSubtype {
 	}
 	if builder.leaveTypeNameFlag {
 		req.LeaveTypeName = builder.leaveTypeName
+	}
+	return req
+}
+
+type LeaveTime struct {
+	Date *string `json:"date,omitempty"` // 日期
+
+	Time *string `json:"time,omitempty"` // 时间
+
+	HalfDay *string `json:"half_day,omitempty"` // morning:上午, afternoon:下午
+}
+
+type LeaveTimeBuilder struct {
+	date     string // 日期
+	dateFlag bool
+
+	time     string // 时间
+	timeFlag bool
+
+	halfDay     string // morning:上午, afternoon:下午
+	halfDayFlag bool
+}
+
+func NewLeaveTimeBuilder() *LeaveTimeBuilder {
+	builder := &LeaveTimeBuilder{}
+	return builder
+}
+
+// 日期
+//
+// 示例值：2006-01-02
+func (builder *LeaveTimeBuilder) Date(date string) *LeaveTimeBuilder {
+	builder.date = date
+	builder.dateFlag = true
+	return builder
+}
+
+// 时间
+//
+// 示例值：12:00
+func (builder *LeaveTimeBuilder) Time(time string) *LeaveTimeBuilder {
+	builder.time = time
+	builder.timeFlag = true
+	return builder
+}
+
+// morning:上午, afternoon:下午
+//
+// 示例值：morning
+func (builder *LeaveTimeBuilder) HalfDay(halfDay string) *LeaveTimeBuilder {
+	builder.halfDay = halfDay
+	builder.halfDayFlag = true
+	return builder
+}
+
+func (builder *LeaveTimeBuilder) Build() *LeaveTime {
+	req := &LeaveTime{}
+	if builder.dateFlag {
+		req.Date = &builder.date
+
+	}
+	if builder.timeFlag {
+		req.Time = &builder.time
+
+	}
+	if builder.halfDayFlag {
+		req.HalfDay = &builder.halfDay
+
 	}
 	return req
 }

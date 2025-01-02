@@ -30534,7 +30534,7 @@ type PersonInfoBt struct {
 
 	DateOfBirth *string `json:"date_of_birth,omitempty"` // 出生日期
 
-	NationalityId *string `json:"nationality_id,omitempty"` // 国籍 ID - 可通过[查询国籍信息](/ssl:ttdoc/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-nationality/search)查询
+	NationalityId *string `json:"nationality_id,omitempty"` // 国籍 ID;- 可通过[查询国籍信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-nationality/search)查询
 
 	NationalityIdV2 *string `json:"nationality_id_v2,omitempty"` // 国籍 ID;- 可通过[查询国籍信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-nationality/search)查询
 
@@ -30647,7 +30647,7 @@ type PersonInfoBtBuilder struct {
 	dateOfBirth     string // 出生日期
 	dateOfBirthFlag bool
 
-	nationalityId     string // 国籍 ID - 可通过[查询国籍信息](/ssl:ttdoc/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-nationality/search)查询
+	nationalityId     string // 国籍 ID;- 可通过[查询国籍信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-nationality/search)查询
 	nationalityIdFlag bool
 
 	nationalityIdV2     string // 国籍 ID;- 可通过[查询国籍信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-nationality/search)查询
@@ -30860,7 +30860,7 @@ func (builder *PersonInfoBtBuilder) DateOfBirth(dateOfBirth string) *PersonInfoB
 	return builder
 }
 
-// 国籍 ID - 可通过[查询国籍信息](/ssl:ttdoc/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-nationality/search)查询
+// 国籍 ID;- 可通过[查询国籍信息](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/corehr-v2/basic_info-nationality/search)查询
 //
 // 示例值：6862995757234914811
 func (builder *PersonInfoBtBuilder) NationalityId(nationalityId string) *PersonInfoBtBuilder {
@@ -55926,7 +55926,7 @@ type SearchDepartmentReqBodyBuilder struct {
 	codeList     []string // 部门 code 列表
 	codeListFlag bool
 
-	getAllVersion     bool // 是否获取所有部门记录，true 为获取部门所有版本记录，false 为仅获取当前生效的部门记录，默认为 false **字段权限要求：查询历史版本 (corehr:department.version.search:read) **
+	getAllVersion     bool // 是否获取所有部门记录，true 为获取部门所有版本记录，false 为仅获取当前生效的部门记录，默认为 false;**字段权限要求：查询历史版本 (corehr:department.version.search:read) **
 	getAllVersionFlag bool
 
 	fields     []string // 返回数据的字段列表
@@ -56249,7 +56249,7 @@ type SearchDepartmentReqBody struct {
 
 	CodeList []string `json:"code_list,omitempty"` // 部门 code 列表
 
-	GetAllVersion *bool `json:"get_all_version,omitempty"` // 是否获取所有部门记录，true 为获取部门所有版本记录，false 为仅获取当前生效的部门记录，默认为 false **字段权限要求：查询历史版本 (corehr:department.version.search:read) **
+	GetAllVersion *bool `json:"get_all_version,omitempty"` // 是否获取所有部门记录，true 为获取部门所有版本记录，false 为仅获取当前生效的部门记录，默认为 false;**字段权限要求：查询历史版本 (corehr:department.version.search:read) **
 
 	Fields []string `json:"fields,omitempty"` // 返回数据的字段列表
 }

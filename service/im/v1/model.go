@@ -5673,7 +5673,7 @@ type CreateChatReqBodyBuilder struct {
 	chatType     string // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
 	chatTypeFlag bool
 
-	external     bool // 是否是外部群
+	external     bool // 是否是外部群；若群组需要邀请不同租户的用户或机器人，请指定为外部群；
 	externalFlag bool
 
 	joinMessageVisibility     string // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
@@ -6287,7 +6287,7 @@ type CreateChatReqBody struct {
 
 	ChatType *string `json:"chat_type,omitempty"` // 群类型;;**可选值有**：;- `private`：私有群;- `public`：公开群
 
-	External *bool `json:"external,omitempty"` // 是否是外部群
+	External *bool `json:"external,omitempty"` // 是否是外部群；若群组需要邀请不同租户的用户或机器人，请指定为外部群；
 
 	JoinMessageVisibility *string `json:"join_message_visibility,omitempty"` // 入群消息可见性;;**可选值有**：;- `only_owner`：仅群主和管理员可见;- `all_members`：所有成员可见;- `not_anyone`：任何人均不可见
 

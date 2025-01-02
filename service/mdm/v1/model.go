@@ -903,7 +903,7 @@ type CostCenter struct {
 
 	CoAreaCode *string `json:"co_area_code,omitempty"` // 控制范围编码
 
-	CompanyCode *string `json:"company_code,omitempty"` // 公司编码
+	CompanyCode *string `json:"company_code,omitempty"` // 公司唯一ID
 
 	ProfitCenterCode *string `json:"profit_center_code,omitempty"` // 利润中心编码
 
@@ -934,7 +934,7 @@ type CostCenterBuilder struct {
 	coAreaCode     string // 控制范围编码
 	coAreaCodeFlag bool
 
-	companyCode     string // 公司编码
+	companyCode     string // 公司唯一ID
 	companyCodeFlag bool
 
 	profitCenterCode     string // 利润中心编码
@@ -1006,9 +1006,9 @@ func (builder *CostCenterBuilder) CoAreaCode(coAreaCode string) *CostCenterBuild
 	return builder
 }
 
-// 公司编码
+// 公司唯一ID
 //
-// 示例值：1001
+// 示例值：U1404700185187065856
 func (builder *CostCenterBuilder) CompanyCode(companyCode string) *CostCenterBuilder {
 	builder.companyCode = companyCode
 	builder.companyCodeFlag = true
