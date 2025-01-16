@@ -1706,6 +1706,8 @@ type AppTableFieldProperty struct {
 	CurrencyCode *string `json:"currency_code,omitempty"` // 货币币种
 
 	Rating *Rating `json:"rating,omitempty"` // 评分字段的相关设置
+
+	Type *AppTableFieldPropertyType `json:"type,omitempty"` // 公式字段数据类型
 }
 
 type AppTableFieldPropertyBuilder struct {
@@ -1759,6 +1761,9 @@ type AppTableFieldPropertyBuilder struct {
 
 	rating     *Rating // 评分字段的相关设置
 	ratingFlag bool
+
+	type_    *AppTableFieldPropertyType // 公式字段数据类型
+	typeFlag bool
 }
 
 func NewAppTableFieldPropertyBuilder() *AppTableFieldPropertyBuilder {
@@ -1919,6 +1924,15 @@ func (builder *AppTableFieldPropertyBuilder) Rating(rating *Rating) *AppTableFie
 	return builder
 }
 
+// 公式字段数据类型
+//
+// 示例值：
+func (builder *AppTableFieldPropertyBuilder) Type(type_ *AppTableFieldPropertyType) *AppTableFieldPropertyBuilder {
+	builder.type_ = type_
+	builder.typeFlag = true
+	return builder
+}
+
 func (builder *AppTableFieldPropertyBuilder) Build() *AppTableFieldProperty {
 	req := &AppTableFieldProperty{}
 	if builder.optionsFlag {
@@ -1983,6 +1997,9 @@ func (builder *AppTableFieldPropertyBuilder) Build() *AppTableFieldProperty {
 	}
 	if builder.ratingFlag {
 		req.Rating = builder.rating
+	}
+	if builder.typeFlag {
+		req.Type = builder.type_
 	}
 	return req
 }
@@ -2051,6 +2068,212 @@ func (builder *AppTableFieldPropertyOptionBuilder) Build() *AppTableFieldPropert
 	if builder.colorFlag {
 		req.Color = &builder.color
 
+	}
+	return req
+}
+
+type AppTableFieldPropertyType struct {
+	DataType *int `json:"data_type,omitempty"` // 公式字段对应的数据类型
+
+	UiProperty *AppTableFieldPropertyTypeUiProperty `json:"ui_property,omitempty"` // 公式数据属性
+
+	UiType *string `json:"ui_type,omitempty"` // 公式字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+}
+
+type AppTableFieldPropertyTypeBuilder struct {
+	dataType     int // 公式字段对应的数据类型
+	dataTypeFlag bool
+
+	uiProperty     *AppTableFieldPropertyTypeUiProperty // 公式数据属性
+	uiPropertyFlag bool
+
+	uiType     string // 公式字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+	uiTypeFlag bool
+}
+
+func NewAppTableFieldPropertyTypeBuilder() *AppTableFieldPropertyTypeBuilder {
+	builder := &AppTableFieldPropertyTypeBuilder{}
+	return builder
+}
+
+// 公式字段对应的数据类型
+//
+// 示例值：1
+func (builder *AppTableFieldPropertyTypeBuilder) DataType(dataType int) *AppTableFieldPropertyTypeBuilder {
+	builder.dataType = dataType
+	builder.dataTypeFlag = true
+	return builder
+}
+
+// 公式数据属性
+//
+// 示例值：
+func (builder *AppTableFieldPropertyTypeBuilder) UiProperty(uiProperty *AppTableFieldPropertyTypeUiProperty) *AppTableFieldPropertyTypeBuilder {
+	builder.uiProperty = uiProperty
+	builder.uiPropertyFlag = true
+	return builder
+}
+
+// 公式字段在界面上的展示类型，例如进度字段是数字的一种展示形态
+//
+// 示例值：Progress
+func (builder *AppTableFieldPropertyTypeBuilder) UiType(uiType string) *AppTableFieldPropertyTypeBuilder {
+	builder.uiType = uiType
+	builder.uiTypeFlag = true
+	return builder
+}
+
+func (builder *AppTableFieldPropertyTypeBuilder) Build() *AppTableFieldPropertyType {
+	req := &AppTableFieldPropertyType{}
+	if builder.dataTypeFlag {
+		req.DataType = &builder.dataType
+
+	}
+	if builder.uiPropertyFlag {
+		req.UiProperty = builder.uiProperty
+	}
+	if builder.uiTypeFlag {
+		req.UiType = &builder.uiType
+
+	}
+	return req
+}
+
+type AppTableFieldPropertyTypeUiProperty struct {
+	CurrencyCode *string `json:"currency_code,omitempty"` // 货币币种
+
+	Formatter *string `json:"formatter,omitempty"` // 数字、公式字段的显示格式
+
+	RangeCustomize *bool `json:"range_customize,omitempty"` // 进度等字段是否支持自定义范围
+
+	Min *float64 `json:"min,omitempty"` // 进度、评分等字段的数据范围最小值
+
+	Max *float64 `json:"max,omitempty"` // 进度、评分等字段的数据范围最大值
+
+	DateFormatter *string `json:"date_formatter,omitempty"` // 日期、创建时间、最后更新时间字段的显示格式
+
+	Rating *Rating `json:"rating,omitempty"` // 评分字段的相关设置
+}
+
+type AppTableFieldPropertyTypeUiPropertyBuilder struct {
+	currencyCode     string // 货币币种
+	currencyCodeFlag bool
+
+	formatter     string // 数字、公式字段的显示格式
+	formatterFlag bool
+
+	rangeCustomize     bool // 进度等字段是否支持自定义范围
+	rangeCustomizeFlag bool
+
+	min     float64 // 进度、评分等字段的数据范围最小值
+	minFlag bool
+
+	max     float64 // 进度、评分等字段的数据范围最大值
+	maxFlag bool
+
+	dateFormatter     string // 日期、创建时间、最后更新时间字段的显示格式
+	dateFormatterFlag bool
+
+	rating     *Rating // 评分字段的相关设置
+	ratingFlag bool
+}
+
+func NewAppTableFieldPropertyTypeUiPropertyBuilder() *AppTableFieldPropertyTypeUiPropertyBuilder {
+	builder := &AppTableFieldPropertyTypeUiPropertyBuilder{}
+	return builder
+}
+
+// 货币币种
+//
+// 示例值：CNY
+func (builder *AppTableFieldPropertyTypeUiPropertyBuilder) CurrencyCode(currencyCode string) *AppTableFieldPropertyTypeUiPropertyBuilder {
+	builder.currencyCode = currencyCode
+	builder.currencyCodeFlag = true
+	return builder
+}
+
+// 数字、公式字段的显示格式
+//
+// 示例值：0
+func (builder *AppTableFieldPropertyTypeUiPropertyBuilder) Formatter(formatter string) *AppTableFieldPropertyTypeUiPropertyBuilder {
+	builder.formatter = formatter
+	builder.formatterFlag = true
+	return builder
+}
+
+// 进度等字段是否支持自定义范围
+//
+// 示例值：true
+func (builder *AppTableFieldPropertyTypeUiPropertyBuilder) RangeCustomize(rangeCustomize bool) *AppTableFieldPropertyTypeUiPropertyBuilder {
+	builder.rangeCustomize = rangeCustomize
+	builder.rangeCustomizeFlag = true
+	return builder
+}
+
+// 进度、评分等字段的数据范围最小值
+//
+// 示例值：1
+func (builder *AppTableFieldPropertyTypeUiPropertyBuilder) Min(min float64) *AppTableFieldPropertyTypeUiPropertyBuilder {
+	builder.min = min
+	builder.minFlag = true
+	return builder
+}
+
+// 进度、评分等字段的数据范围最大值
+//
+// 示例值：100
+func (builder *AppTableFieldPropertyTypeUiPropertyBuilder) Max(max float64) *AppTableFieldPropertyTypeUiPropertyBuilder {
+	builder.max = max
+	builder.maxFlag = true
+	return builder
+}
+
+// 日期、创建时间、最后更新时间字段的显示格式
+//
+// 示例值：yyyy/MM/dd
+func (builder *AppTableFieldPropertyTypeUiPropertyBuilder) DateFormatter(dateFormatter string) *AppTableFieldPropertyTypeUiPropertyBuilder {
+	builder.dateFormatter = dateFormatter
+	builder.dateFormatterFlag = true
+	return builder
+}
+
+// 评分字段的相关设置
+//
+// 示例值：
+func (builder *AppTableFieldPropertyTypeUiPropertyBuilder) Rating(rating *Rating) *AppTableFieldPropertyTypeUiPropertyBuilder {
+	builder.rating = rating
+	builder.ratingFlag = true
+	return builder
+}
+
+func (builder *AppTableFieldPropertyTypeUiPropertyBuilder) Build() *AppTableFieldPropertyTypeUiProperty {
+	req := &AppTableFieldPropertyTypeUiProperty{}
+	if builder.currencyCodeFlag {
+		req.CurrencyCode = &builder.currencyCode
+
+	}
+	if builder.formatterFlag {
+		req.Formatter = &builder.formatter
+
+	}
+	if builder.rangeCustomizeFlag {
+		req.RangeCustomize = &builder.rangeCustomize
+
+	}
+	if builder.minFlag {
+		req.Min = &builder.min
+
+	}
+	if builder.maxFlag {
+		req.Max = &builder.max
+
+	}
+	if builder.dateFormatterFlag {
+		req.DateFormatter = &builder.dateFormatter
+
+	}
+	if builder.ratingFlag {
+		req.Rating = builder.rating
 	}
 	return req
 }
@@ -3498,6 +3721,10 @@ type DisplayApp struct {
 	IsAdvanced *bool `json:"is_advanced,omitempty"` // 多维表格是否开启了高级权限。取值包括：;- true：表示开启了高级权限;- false：表示关闭了高级权限;;[了解更多：使用多维表格高级权限](https://www.feishu.cn/hc/zh-CN/articles/588604550568)
 
 	TimeZone *string `json:"time_zone,omitempty"` // 文档时区
+
+	FormulaType *int `json:"formula_type,omitempty"` // 文档公式字段类型
+
+	AdvanceVersion *string `json:"advance_version,omitempty"` // 文档高级权限版本
 }
 
 type DisplayAppBuilder struct {
@@ -3515,6 +3742,12 @@ type DisplayAppBuilder struct {
 
 	timeZone     string // 文档时区
 	timeZoneFlag bool
+
+	formulaType     int // 文档公式字段类型
+	formulaTypeFlag bool
+
+	advanceVersion     string // 文档高级权限版本
+	advanceVersionFlag bool
 }
 
 func NewDisplayAppBuilder() *DisplayAppBuilder {
@@ -3567,6 +3800,24 @@ func (builder *DisplayAppBuilder) TimeZone(timeZone string) *DisplayAppBuilder {
 	return builder
 }
 
+// 文档公式字段类型
+//
+// 示例值：
+func (builder *DisplayAppBuilder) FormulaType(formulaType int) *DisplayAppBuilder {
+	builder.formulaType = formulaType
+	builder.formulaTypeFlag = true
+	return builder
+}
+
+// 文档高级权限版本
+//
+// 示例值：
+func (builder *DisplayAppBuilder) AdvanceVersion(advanceVersion string) *DisplayAppBuilder {
+	builder.advanceVersion = advanceVersion
+	builder.advanceVersionFlag = true
+	return builder
+}
+
 func (builder *DisplayAppBuilder) Build() *DisplayApp {
 	req := &DisplayApp{}
 	if builder.appTokenFlag {
@@ -3587,6 +3838,14 @@ func (builder *DisplayAppBuilder) Build() *DisplayApp {
 	}
 	if builder.timeZoneFlag {
 		req.TimeZone = &builder.timeZone
+
+	}
+	if builder.formulaTypeFlag {
+		req.FormulaType = &builder.formulaType
+
+	}
+	if builder.advanceVersionFlag {
+		req.AdvanceVersion = &builder.advanceVersion
 
 	}
 	return req

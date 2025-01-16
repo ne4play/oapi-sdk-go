@@ -2428,6 +2428,87 @@ func (builder *ImageDetailBuilder) Build() *ImageDetail {
 	return req
 }
 
+type Kie struct {
+	Kies []*KieEntity `json:"kies,omitempty"` // 目标信息识别结果
+}
+
+type KieBuilder struct {
+	kies     []*KieEntity // 目标信息识别结果
+	kiesFlag bool
+}
+
+func NewKieBuilder() *KieBuilder {
+	builder := &KieBuilder{}
+	return builder
+}
+
+// 目标信息识别结果
+//
+// 示例值：
+func (builder *KieBuilder) Kies(kies []*KieEntity) *KieBuilder {
+	builder.kies = kies
+	builder.kiesFlag = true
+	return builder
+}
+
+func (builder *KieBuilder) Build() *Kie {
+	req := &Kie{}
+	if builder.kiesFlag {
+		req.Kies = builder.kies
+	}
+	return req
+}
+
+type KieEntity struct {
+	Key *string `json:"key,omitempty"` // 识别信息的key
+
+	Value *string `json:"value,omitempty"` // 识别信息的值
+}
+
+type KieEntityBuilder struct {
+	key     string // 识别信息的key
+	keyFlag bool
+
+	value     string // 识别信息的值
+	valueFlag bool
+}
+
+func NewKieEntityBuilder() *KieEntityBuilder {
+	builder := &KieEntityBuilder{}
+	return builder
+}
+
+// 识别信息的key
+//
+// 示例值：取样地点
+func (builder *KieEntityBuilder) Key(key string) *KieEntityBuilder {
+	builder.key = key
+	builder.keyFlag = true
+	return builder
+}
+
+// 识别信息的值
+//
+// 示例值：库房
+func (builder *KieEntityBuilder) Value(value string) *KieEntityBuilder {
+	builder.value = value
+	builder.valueFlag = true
+	return builder
+}
+
+func (builder *KieEntityBuilder) Build() *KieEntity {
+	req := &KieEntity{}
+	if builder.keyFlag {
+		req.Key = &builder.key
+
+	}
+	if builder.valueFlag {
+		req.Value = &builder.value
+
+	}
+	return req
+}
+
 type KvEntity struct {
 	Type *string `json:"type,omitempty"` // 识别的实体类型
 

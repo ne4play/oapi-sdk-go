@@ -62,6 +62,7 @@ func main() {
 			InterviewRegistrationSchemaId("6930815272790114324").
 			OnboardRegistrationSchemaId("6930815272790114325").
 			TargetMajorIdList([]string{}).
+			PortalWebsiteApplyFormSchemaId("7397638158859323692").
 			Build()).
 		Build()
 	// 发起请求

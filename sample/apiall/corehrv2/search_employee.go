@@ -57,6 +57,21 @@ func main() {
 			AdditionalNationalIdNumberList([]string{}).
 			CitizenshipStatusList([]string{}).
 			CostCenterIdList([]string{}).
+			ServiceCompanyList([]string{}).
+			ServiceCompanyListIncludeSub([]string{}).
+			JobFamilyIdList([]string{}).
+			JobFamilyIdListIncludeSub([]string{}).
+			JobLevelIdList([]string{}).
+			JobGradeIdList([]string{}).
+			JobIdList([]string{}).
+			PositionIdList([]string{}).
+			PositionIdListIncludeSub([]string{}).
+			WorkingHoursTypeIdList([]string{}).
+			NationalityIdList([]string{}).
+			PayGroupIdList([]string{}).
+			AssignmentPayGroupIdList([]string{}).
+			ContractTypeList([]string{}).
+			ArchiveCpstPlanIdList([]string{}).
 			Build()).
 		Build()
 	// 发起请求

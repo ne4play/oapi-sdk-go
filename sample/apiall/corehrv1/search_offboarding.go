@@ -34,6 +34,8 @@ func main() {
 			EmploymentIds([]string{}).
 			ApplyInitiatingTimeStart("2022-01-01 11:22:33").
 			ApplyInitiatingTimeEnd("2022-01-01 11:22:33").
+			ApplyFinishedTimeStart("1641007353").
+			ApplyFinishedTimeEnd("1641007353").
 			ExpectedOffboardingDateStart("2022-01-01").
 			ExpectedOffboardingDateEnd("2022-01-01").
 			OffboardingDateStart("2022-01-01").

@@ -42,6 +42,7 @@ func main() {
 			InterviewRoundTypeConfList([]*larkhire.JobConfigRoundType{larkhire.NewJobConfigRoundTypeBuilder().Build()}).
 			RelatedJobIdList([]string{}).
 			InterviewAppointmentConfig(larkhire.NewInterviewAppointmentConfigBuilder().Build()).
+			PortalWebsiteApplyFormSchemaId("6930815272790114324").
 			Build()).
 		Build()
 	// 发起请求

@@ -1879,6 +1879,12 @@ type DataAssetChunk struct {
 	DataAssetLabel map[string]string `json:"data_asset_label,omitempty"` // 切片所归属的数据知识名称
 
 	DataAssetSourceUrl *string `json:"data_asset_source_url,omitempty"` // 归属数据知识的源链接。如云文档链接、文件链接等
+
+	DataAssetDataSourceType *string `json:"data_asset_data_source_type,omitempty"` // 归属数据知识的数据资源类型
+
+	DataAssetConnectType *string `json:"data_asset_connect_type,omitempty"` // 归属数据知识的数据连接类型
+
+	SourceInfo *DataAssetChunkSourceInfo `json:"source_info,omitempty"` // 切片所归属数据源信息
 }
 
 type DataAssetChunkBuilder struct {
@@ -1896,6 +1902,15 @@ type DataAssetChunkBuilder struct {
 
 	dataAssetSourceUrl     string // 归属数据知识的源链接。如云文档链接、文件链接等
 	dataAssetSourceUrlFlag bool
+
+	dataAssetDataSourceType     string // 归属数据知识的数据资源类型
+	dataAssetDataSourceTypeFlag bool
+
+	dataAssetConnectType     string // 归属数据知识的数据连接类型
+	dataAssetConnectTypeFlag bool
+
+	sourceInfo     *DataAssetChunkSourceInfo // 切片所归属数据源信息
+	sourceInfoFlag bool
 }
 
 func NewDataAssetChunkBuilder() *DataAssetChunkBuilder {
@@ -1948,6 +1963,33 @@ func (builder *DataAssetChunkBuilder) DataAssetSourceUrl(dataAssetSourceUrl stri
 	return builder
 }
 
+// 归属数据知识的数据资源类型
+//
+// 示例值：excel
+func (builder *DataAssetChunkBuilder) DataAssetDataSourceType(dataAssetDataSourceType string) *DataAssetChunkBuilder {
+	builder.dataAssetDataSourceType = dataAssetDataSourceType
+	builder.dataAssetDataSourceTypeFlag = true
+	return builder
+}
+
+// 归属数据知识的数据连接类型
+//
+// 示例值：direct
+func (builder *DataAssetChunkBuilder) DataAssetConnectType(dataAssetConnectType string) *DataAssetChunkBuilder {
+	builder.dataAssetConnectType = dataAssetConnectType
+	builder.dataAssetConnectTypeFlag = true
+	return builder
+}
+
+// 切片所归属数据源信息
+//
+// 示例值：
+func (builder *DataAssetChunkBuilder) SourceInfo(sourceInfo *DataAssetChunkSourceInfo) *DataAssetChunkBuilder {
+	builder.sourceInfo = sourceInfo
+	builder.sourceInfoFlag = true
+	return builder
+}
+
 func (builder *DataAssetChunkBuilder) Build() *DataAssetChunk {
 	req := &DataAssetChunk{}
 	if builder.contentFlag {
@@ -1967,6 +2009,67 @@ func (builder *DataAssetChunkBuilder) Build() *DataAssetChunk {
 	}
 	if builder.dataAssetSourceUrlFlag {
 		req.DataAssetSourceUrl = &builder.dataAssetSourceUrl
+
+	}
+	if builder.dataAssetDataSourceTypeFlag {
+		req.DataAssetDataSourceType = &builder.dataAssetDataSourceType
+
+	}
+	if builder.dataAssetConnectTypeFlag {
+		req.DataAssetConnectType = &builder.dataAssetConnectType
+
+	}
+	if builder.sourceInfoFlag {
+		req.SourceInfo = builder.sourceInfo
+	}
+	return req
+}
+
+type DataAssetChunkSourceInfo struct {
+	Title *string `json:"title,omitempty"` // 数据源标题
+
+	Url *string `json:"url,omitempty"` // 数据源链接
+}
+
+type DataAssetChunkSourceInfoBuilder struct {
+	title     string // 数据源标题
+	titleFlag bool
+
+	url     string // 数据源链接
+	urlFlag bool
+}
+
+func NewDataAssetChunkSourceInfoBuilder() *DataAssetChunkSourceInfoBuilder {
+	builder := &DataAssetChunkSourceInfoBuilder{}
+	return builder
+}
+
+// 数据源标题
+//
+// 示例值：文档标题
+func (builder *DataAssetChunkSourceInfoBuilder) Title(title string) *DataAssetChunkSourceInfoBuilder {
+	builder.title = title
+	builder.titleFlag = true
+	return builder
+}
+
+// 数据源链接
+//
+// 示例值：https://mydoc.com/1
+func (builder *DataAssetChunkSourceInfoBuilder) Url(url string) *DataAssetChunkSourceInfoBuilder {
+	builder.url = url
+	builder.urlFlag = true
+	return builder
+}
+
+func (builder *DataAssetChunkSourceInfoBuilder) Build() *DataAssetChunkSourceInfo {
+	req := &DataAssetChunkSourceInfo{}
+	if builder.titleFlag {
+		req.Title = &builder.title
+
+	}
+	if builder.urlFlag {
+		req.Url = &builder.url
 
 	}
 	return req

@@ -4970,6 +4970,142 @@ func (builder *SeperatePassageBuilder) Build() *SeperatePassage {
 	return req
 }
 
+type SimpleGetRelatedUsersRequest struct {
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	TopK *int `json:"top_k,omitempty"` // 获取相关用户的最大人数
+
+	StartTimeFilter *string `json:"start_time_filter,omitempty"` // 最早的交互时间，闭区间，默认不限制，ms
+
+	EndTimeFilter *string `json:"end_time_filter,omitempty"` // 最晚交互时间，闭区间，默认不限制，ms
+}
+
+type SimpleGetRelatedUsersRequestBuilder struct {
+	userId     string // 用户id
+	userIdFlag bool
+
+	topK     int // 获取相关用户的最大人数
+	topKFlag bool
+
+	startTimeFilter     string // 最早的交互时间，闭区间，默认不限制，ms
+	startTimeFilterFlag bool
+
+	endTimeFilter     string // 最晚交互时间，闭区间，默认不限制，ms
+	endTimeFilterFlag bool
+}
+
+func NewSimpleGetRelatedUsersRequestBuilder() *SimpleGetRelatedUsersRequestBuilder {
+	builder := &SimpleGetRelatedUsersRequestBuilder{}
+	return builder
+}
+
+// 用户id
+//
+// 示例值：7075326257193287699
+func (builder *SimpleGetRelatedUsersRequestBuilder) UserId(userId string) *SimpleGetRelatedUsersRequestBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// 获取相关用户的最大人数
+//
+// 示例值：100
+func (builder *SimpleGetRelatedUsersRequestBuilder) TopK(topK int) *SimpleGetRelatedUsersRequestBuilder {
+	builder.topK = topK
+	builder.topKFlag = true
+	return builder
+}
+
+// 最早的交互时间，闭区间，默认不限制，ms
+//
+// 示例值：1704768318000
+func (builder *SimpleGetRelatedUsersRequestBuilder) StartTimeFilter(startTimeFilter string) *SimpleGetRelatedUsersRequestBuilder {
+	builder.startTimeFilter = startTimeFilter
+	builder.startTimeFilterFlag = true
+	return builder
+}
+
+// 最晚交互时间，闭区间，默认不限制，ms
+//
+// 示例值：1736390718000
+func (builder *SimpleGetRelatedUsersRequestBuilder) EndTimeFilter(endTimeFilter string) *SimpleGetRelatedUsersRequestBuilder {
+	builder.endTimeFilter = endTimeFilter
+	builder.endTimeFilterFlag = true
+	return builder
+}
+
+func (builder *SimpleGetRelatedUsersRequestBuilder) Build() *SimpleGetRelatedUsersRequest {
+	req := &SimpleGetRelatedUsersRequest{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.topKFlag {
+		req.TopK = &builder.topK
+
+	}
+	if builder.startTimeFilterFlag {
+		req.StartTimeFilter = &builder.startTimeFilter
+
+	}
+	if builder.endTimeFilterFlag {
+		req.EndTimeFilter = &builder.endTimeFilter
+
+	}
+	return req
+}
+
+type SimpleRelatedUser struct {
+	UserId *string `json:"user_id,omitempty"` // 用户id
+
+	Score *float64 `json:"score,omitempty"` // ci分数
+}
+
+type SimpleRelatedUserBuilder struct {
+	userId     string // 用户id
+	userIdFlag bool
+
+	score     float64 // ci分数
+	scoreFlag bool
+}
+
+func NewSimpleRelatedUserBuilder() *SimpleRelatedUserBuilder {
+	builder := &SimpleRelatedUserBuilder{}
+	return builder
+}
+
+// 用户id
+//
+// 示例值：
+func (builder *SimpleRelatedUserBuilder) UserId(userId string) *SimpleRelatedUserBuilder {
+	builder.userId = userId
+	builder.userIdFlag = true
+	return builder
+}
+
+// ci分数
+//
+// 示例值：0.9
+func (builder *SimpleRelatedUserBuilder) Score(score float64) *SimpleRelatedUserBuilder {
+	builder.score = score
+	builder.scoreFlag = true
+	return builder
+}
+
+func (builder *SimpleRelatedUserBuilder) Build() *SimpleRelatedUser {
+	req := &SimpleRelatedUser{}
+	if builder.userIdFlag {
+		req.UserId = &builder.userId
+
+	}
+	if builder.scoreFlag {
+		req.Score = &builder.score
+
+	}
+	return req
+}
+
 type Status struct {
 	FromStatus *string `json:"from_status,omitempty"` // from_status
 

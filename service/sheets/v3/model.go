@@ -3066,7 +3066,9 @@ type MentionDocument struct {
 
 	Token *string `json:"token,omitempty"` // 文档token
 
-	SegmentStyle *SegmentStyle `json:"segment_style,omitempty"` //
+	SegmentStyle *SegmentStyle `json:"segment_style,omitempty"` // 局部样式
+
+	Link *string `json:"link,omitempty"` // mention 链接
 }
 
 type MentionDocumentBuilder struct {
@@ -3079,8 +3081,11 @@ type MentionDocumentBuilder struct {
 	token     string // 文档token
 	tokenFlag bool
 
-	segmentStyle     *SegmentStyle //
+	segmentStyle     *SegmentStyle // 局部样式
 	segmentStyleFlag bool
+
+	link     string // mention 链接
+	linkFlag bool
 }
 
 func NewMentionDocumentBuilder() *MentionDocumentBuilder {
@@ -3115,10 +3120,21 @@ func (builder *MentionDocumentBuilder) Token(token string) *MentionDocumentBuild
 	return builder
 }
 
+// 局部样式
+//
 // 示例值：
 func (builder *MentionDocumentBuilder) SegmentStyle(segmentStyle *SegmentStyle) *MentionDocumentBuilder {
 	builder.segmentStyle = segmentStyle
 	builder.segmentStyleFlag = true
+	return builder
+}
+
+// mention 链接
+//
+// 示例值：https://example.feishu.cn/sheets/TLLKdcpDro9ijQxA33ycNMabcef
+func (builder *MentionDocumentBuilder) Link(link string) *MentionDocumentBuilder {
+	builder.link = link
+	builder.linkFlag = true
 	return builder
 }
 
@@ -3138,6 +3154,10 @@ func (builder *MentionDocumentBuilder) Build() *MentionDocument {
 	}
 	if builder.segmentStyleFlag {
 		req.SegmentStyle = builder.segmentStyle
+	}
+	if builder.linkFlag {
+		req.Link = &builder.link
+
 	}
 	return req
 }

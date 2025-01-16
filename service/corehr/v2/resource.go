@@ -31,6 +31,7 @@ type V2 struct {
 	EmployeesAdditionalJob            *employeesAdditionalJob            // employees.additional_job
 	EmployeesBp                       *employeesBp                       // employees.bp
 	EmployeesJobData                  *employeesJobData                  // employees.job_data
+	Enum                              *enum                              // enum
 	Job                               *job                               // job
 	JobChange                         *jobChange                         // job_change
 	JobFamily                         *jobFamily                         // job_family
@@ -83,6 +84,7 @@ func New(config *larkcore.Config) *V2 {
 		EmployeesAdditionalJob:            &employeesAdditionalJob{config: config},
 		EmployeesBp:                       &employeesBp{config: config},
 		EmployeesJobData:                  &employeesJobData{config: config},
+		Enum:                              &enum{config: config},
 		Job:                               &job{config: config},
 		JobChange:                         &jobChange{config: config},
 		JobFamily:                         &jobFamily{config: config},
@@ -176,6 +178,9 @@ type employeesBp struct {
 	config *larkcore.Config
 }
 type employeesJobData struct {
+	config *larkcore.Config
+}
+type enum struct {
 	config *larkcore.Config
 }
 type job struct {
@@ -959,6 +964,32 @@ func (c *costCenter) Patch(ctx context.Context, req *PatchCostCenterReq, options
 	return resp, err
 }
 
+// QueryRecentChange
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=query_recent_change&project=corehr&resource=cost_center&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/queryRecentChange_costCenter.go
+func (c *costCenter) QueryRecentChange(ctx context.Context, req *QueryRecentChangeCostCenterReq, options ...larkcore.RequestOptionFunc) (*QueryRecentChangeCostCenterResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/cost_centers/query_recent_change"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, c.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &QueryRecentChangeCostCenterResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, c.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Search
 //
 // - 查询成本中心信息
@@ -1607,6 +1638,32 @@ func (e *employeesJobData) Query(ctx context.Context, req *QueryEmployeesJobData
 	return resp, err
 }
 
+// Search
+//
+// - 通过apiname批量获取枚举信息
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=search&project=corehr&resource=enum&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/search_enum.go
+func (e *enum) Search(ctx context.Context, req *SearchEnumReq, options ...larkcore.RequestOptionFunc) (*SearchEnumResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/enums/search"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, e.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &SearchEnumResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, e.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Get
 //
 // - 根据 ID 查询单个职务。
@@ -1771,6 +1828,32 @@ func (j *jobFamily) BatchGet(ctx context.Context, req *BatchGetJobFamilyReq, opt
 	return resp, err
 }
 
+// QueryRecentChange
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=query_recent_change&project=corehr&resource=job_family&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/queryRecentChange_jobFamily.go
+func (j *jobFamily) QueryRecentChange(ctx context.Context, req *QueryRecentChangeJobFamilyReq, options ...larkcore.RequestOptionFunc) (*QueryRecentChangeJobFamilyResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/job_families/query_recent_change"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, j.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &QueryRecentChangeJobFamilyResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, j.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Create
 //
 // - 创建职等数据
@@ -1875,6 +1958,32 @@ func (j *jobGrade) Query(ctx context.Context, req *QueryJobGradeReq, options ...
 	return resp, err
 }
 
+// QueryRecentChange
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=query_recent_change&project=corehr&resource=job_grade&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/queryRecentChange_jobGrade.go
+func (j *jobGrade) QueryRecentChange(ctx context.Context, req *QueryRecentChangeJobGradeReq, options ...larkcore.RequestOptionFunc) (*QueryRecentChangeJobGradeResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/job_grades/query_recent_change"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, j.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &QueryRecentChangeJobGradeResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, j.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // BatchGet
 //
 // - 通过职级 ID 批量获取职级信息
@@ -1894,6 +2003,32 @@ func (j *jobLevel) BatchGet(ctx context.Context, req *BatchGetJobLevelReq, optio
 	}
 	// 反序列响应结果
 	resp := &BatchGetJobLevelResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, j.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// QueryRecentChange
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=query_recent_change&project=corehr&resource=job_level&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/queryRecentChange_jobLevel.go
+func (j *jobLevel) QueryRecentChange(ctx context.Context, req *QueryRecentChangeJobLevelReq, options ...larkcore.RequestOptionFunc) (*QueryRecentChangeJobLevelResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/job_levels/query_recent_change"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, j.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &QueryRecentChangeJobLevelResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, j.config)
 	if err != nil {
 		return nil, err
@@ -1972,6 +2107,32 @@ func (l *location) Patch(ctx context.Context, req *PatchLocationReq, options ...
 	}
 	// 反序列响应结果
 	resp := &PatchLocationResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, l.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// QueryRecentChange
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=query_recent_change&project=corehr&resource=location&version=v2
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/corehrv2/queryRecentChange_location.go
+func (l *location) QueryRecentChange(ctx context.Context, req *QueryRecentChangeLocationReq, options ...larkcore.RequestOptionFunc) (*QueryRecentChangeLocationResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/corehr/v2/locations/query_recent_change"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, l.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &QueryRecentChangeLocationResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, l.config)
 	if err != nil {
 		return nil, err

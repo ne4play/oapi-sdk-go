@@ -47,6 +47,7 @@ func main() {
 			ShiftAttendanceTimeConfig(larkattendance.NewShiftAttendanceTimeConfigBuilder().Build()).
 			LateOffLateOnSetting(larkattendance.NewLateOffLateOnSettingBuilder().Build()).
 			Id("6919358778597097404").
+			RestTimeFlexibleConfigs([]*larkattendance.RestTimeFlexibleConfig{larkattendance.NewRestTimeFlexibleConfigBuilder().Build()}).
 			Build()).
 		Build()
 	// 发起请求

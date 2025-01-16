@@ -3494,6 +3494,8 @@ type BasicInfo struct {
 
 	LegalName *Name `json:"legal_name,omitempty"` // 法定姓名
 
+	AdditionalName *Name `json:"additional_name,omitempty"` // 别名
+
 	ResidentTaxList []*ResidentTaxForUpdate `json:"resident_tax_list,omitempty"` // 纳税身份信息
 
 	BornCountryRegion *string `json:"born_country_region,omitempty"` // 出生国家/地区
@@ -3533,6 +3535,8 @@ type BasicInfo struct {
 	HukouLocation *string `json:"hukou_location,omitempty"` // 户口所在地
 
 	CustomFields []*ObjectFieldData `json:"custom_fields,omitempty"` // 自定义字段
+
+	ExpectedGraduateDate *string `json:"expected_graduate_date,omitempty"` // 预计毕业日期
 }
 
 type BasicInfoBuilder struct {
@@ -3586,6 +3590,9 @@ type BasicInfoBuilder struct {
 
 	legalName     *Name // 法定姓名
 	legalNameFlag bool
+
+	additionalName     *Name // 别名
+	additionalNameFlag bool
 
 	residentTaxList     []*ResidentTaxForUpdate // 纳税身份信息
 	residentTaxListFlag bool
@@ -3646,6 +3653,9 @@ type BasicInfoBuilder struct {
 
 	customFields     []*ObjectFieldData // 自定义字段
 	customFieldsFlag bool
+
+	expectedGraduateDate     string // 预计毕业日期
+	expectedGraduateDateFlag bool
 }
 
 func NewBasicInfoBuilder() *BasicInfoBuilder {
@@ -3803,6 +3813,15 @@ func (builder *BasicInfoBuilder) UserGeo(userGeo string) *BasicInfoBuilder {
 func (builder *BasicInfoBuilder) LegalName(legalName *Name) *BasicInfoBuilder {
 	builder.legalName = legalName
 	builder.legalNameFlag = true
+	return builder
+}
+
+// 别名
+//
+// 示例值：
+func (builder *BasicInfoBuilder) AdditionalName(additionalName *Name) *BasicInfoBuilder {
+	builder.additionalName = additionalName
+	builder.additionalNameFlag = true
 	return builder
 }
 
@@ -3986,6 +4005,15 @@ func (builder *BasicInfoBuilder) CustomFields(customFields []*ObjectFieldData) *
 	return builder
 }
 
+// 预计毕业日期
+//
+// 示例值：2023-01-10
+func (builder *BasicInfoBuilder) ExpectedGraduateDate(expectedGraduateDate string) *BasicInfoBuilder {
+	builder.expectedGraduateDate = expectedGraduateDate
+	builder.expectedGraduateDateFlag = true
+	return builder
+}
+
 func (builder *BasicInfoBuilder) Build() *BasicInfo {
 	req := &BasicInfo{}
 	if builder.nameFlag {
@@ -4051,6 +4079,9 @@ func (builder *BasicInfoBuilder) Build() *BasicInfo {
 	}
 	if builder.legalNameFlag {
 		req.LegalName = builder.legalName
+	}
+	if builder.additionalNameFlag {
+		req.AdditionalName = builder.additionalName
 	}
 	if builder.residentTaxListFlag {
 		req.ResidentTaxList = builder.residentTaxList
@@ -4124,6 +4155,10 @@ func (builder *BasicInfoBuilder) Build() *BasicInfo {
 	if builder.customFieldsFlag {
 		req.CustomFields = builder.customFields
 	}
+	if builder.expectedGraduateDateFlag {
+		req.ExpectedGraduateDate = &builder.expectedGraduateDate
+
+	}
 	return req
 }
 
@@ -4177,6 +4212,20 @@ type BasicInfoUpdate struct {
 	HukouType *string `json:"hukou_type,omitempty"` // 户口类型
 
 	HukouLocation *string `json:"hukou_location,omitempty"` // 户口所在地
+
+	GenderId *string `json:"gender_id,omitempty"` // 性别
+
+	DateOfBirth *string `json:"date_of_birth,omitempty"` // 生日
+
+	DateEnteredWorkforce *string `json:"date_entered_workforce,omitempty"` // 参加工作日期
+
+	ExpectedGraduateDate *string `json:"expected_graduate_date,omitempty"` // 预计毕业日期
+
+	CitizenshipStatusIdList []string `json:"citizenship_status_id_list,omitempty"` // 公民身份
+
+	WorkExperience []*WorkExperienceForUpdate `json:"work_experience,omitempty"` // 工作履历
+
+	EducationInfo []*EducationInfoForUpdate `json:"education_info,omitempty"` // 教育经历
 }
 
 type BasicInfoUpdateBuilder struct {
@@ -4254,6 +4303,27 @@ type BasicInfoUpdateBuilder struct {
 
 	hukouLocation     string // 户口所在地
 	hukouLocationFlag bool
+
+	genderId     string // 性别
+	genderIdFlag bool
+
+	dateOfBirth     string // 生日
+	dateOfBirthFlag bool
+
+	dateEnteredWorkforce     string // 参加工作日期
+	dateEnteredWorkforceFlag bool
+
+	expectedGraduateDate     string // 预计毕业日期
+	expectedGraduateDateFlag bool
+
+	citizenshipStatusIdList     []string // 公民身份
+	citizenshipStatusIdListFlag bool
+
+	workExperience     []*WorkExperienceForUpdate // 工作履历
+	workExperienceFlag bool
+
+	educationInfo     []*EducationInfoForUpdate // 教育经历
+	educationInfoFlag bool
 }
 
 func NewBasicInfoUpdateBuilder() *BasicInfoUpdateBuilder {
@@ -4486,6 +4556,69 @@ func (builder *BasicInfoUpdateBuilder) HukouLocation(hukouLocation string) *Basi
 	return builder
 }
 
+// 性别
+//
+// 示例值：male
+func (builder *BasicInfoUpdateBuilder) GenderId(genderId string) *BasicInfoUpdateBuilder {
+	builder.genderId = genderId
+	builder.genderIdFlag = true
+	return builder
+}
+
+// 生日
+//
+// 示例值：2011-99-99
+func (builder *BasicInfoUpdateBuilder) DateOfBirth(dateOfBirth string) *BasicInfoUpdateBuilder {
+	builder.dateOfBirth = dateOfBirth
+	builder.dateOfBirthFlag = true
+	return builder
+}
+
+// 参加工作日期
+//
+// 示例值：2100-09-09
+func (builder *BasicInfoUpdateBuilder) DateEnteredWorkforce(dateEnteredWorkforce string) *BasicInfoUpdateBuilder {
+	builder.dateEnteredWorkforce = dateEnteredWorkforce
+	builder.dateEnteredWorkforceFlag = true
+	return builder
+}
+
+// 预计毕业日期
+//
+// 示例值：2023-01-10
+func (builder *BasicInfoUpdateBuilder) ExpectedGraduateDate(expectedGraduateDate string) *BasicInfoUpdateBuilder {
+	builder.expectedGraduateDate = expectedGraduateDate
+	builder.expectedGraduateDateFlag = true
+	return builder
+}
+
+// 公民身份
+//
+// 示例值：[6862995757234914824]
+func (builder *BasicInfoUpdateBuilder) CitizenshipStatusIdList(citizenshipStatusIdList []string) *BasicInfoUpdateBuilder {
+	builder.citizenshipStatusIdList = citizenshipStatusIdList
+	builder.citizenshipStatusIdListFlag = true
+	return builder
+}
+
+// 工作履历
+//
+// 示例值：
+func (builder *BasicInfoUpdateBuilder) WorkExperience(workExperience []*WorkExperienceForUpdate) *BasicInfoUpdateBuilder {
+	builder.workExperience = workExperience
+	builder.workExperienceFlag = true
+	return builder
+}
+
+// 教育经历
+//
+// 示例值：
+func (builder *BasicInfoUpdateBuilder) EducationInfo(educationInfo []*EducationInfoForUpdate) *BasicInfoUpdateBuilder {
+	builder.educationInfo = educationInfo
+	builder.educationInfoFlag = true
+	return builder
+}
+
 func (builder *BasicInfoUpdateBuilder) Build() *BasicInfoUpdate {
 	req := &BasicInfoUpdate{}
 	if builder.namesFlag {
@@ -4575,6 +4708,31 @@ func (builder *BasicInfoUpdateBuilder) Build() *BasicInfoUpdate {
 	if builder.hukouLocationFlag {
 		req.HukouLocation = &builder.hukouLocation
 
+	}
+	if builder.genderIdFlag {
+		req.GenderId = &builder.genderId
+
+	}
+	if builder.dateOfBirthFlag {
+		req.DateOfBirth = &builder.dateOfBirth
+
+	}
+	if builder.dateEnteredWorkforceFlag {
+		req.DateEnteredWorkforce = &builder.dateEnteredWorkforce
+
+	}
+	if builder.expectedGraduateDateFlag {
+		req.ExpectedGraduateDate = &builder.expectedGraduateDate
+
+	}
+	if builder.citizenshipStatusIdListFlag {
+		req.CitizenshipStatusIdList = builder.citizenshipStatusIdList
+	}
+	if builder.workExperienceFlag {
+		req.WorkExperience = builder.workExperience
+	}
+	if builder.educationInfoFlag {
+		req.EducationInfo = builder.educationInfo
 	}
 	return req
 }
@@ -11217,6 +11375,127 @@ func (builder *EducationInfoBuilder) Build() *EducationInfo {
 	return req
 }
 
+type EducationInfoForUpdate struct {
+	SchoolName *string `json:"school_name,omitempty"` // 学校名称
+
+	Education *string `json:"education,omitempty"` // 学历
+
+	StartTime *string `json:"start_time,omitempty"` // 开始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 结束时间
+
+	FieldOfStudy *string `json:"field_of_study,omitempty"` // 专业
+
+	CustomFields []*ObjectFieldData `json:"custom_fields,omitempty"` // 自定义字段
+}
+
+type EducationInfoForUpdateBuilder struct {
+	schoolName     string // 学校名称
+	schoolNameFlag bool
+
+	education     string // 学历
+	educationFlag bool
+
+	startTime     string // 开始时间
+	startTimeFlag bool
+
+	endTime     string // 结束时间
+	endTimeFlag bool
+
+	fieldOfStudy     string // 专业
+	fieldOfStudyFlag bool
+
+	customFields     []*ObjectFieldData // 自定义字段
+	customFieldsFlag bool
+}
+
+func NewEducationInfoForUpdateBuilder() *EducationInfoForUpdateBuilder {
+	builder := &EducationInfoForUpdateBuilder{}
+	return builder
+}
+
+// 学校名称
+//
+// 示例值：长安大学
+func (builder *EducationInfoForUpdateBuilder) SchoolName(schoolName string) *EducationInfoForUpdateBuilder {
+	builder.schoolName = schoolName
+	builder.schoolNameFlag = true
+	return builder
+}
+
+// 学历
+//
+// 示例值：phd
+func (builder *EducationInfoForUpdateBuilder) Education(education string) *EducationInfoForUpdateBuilder {
+	builder.education = education
+	builder.educationFlag = true
+	return builder
+}
+
+// 开始时间
+//
+// 示例值：2017-04-01
+func (builder *EducationInfoForUpdateBuilder) StartTime(startTime string) *EducationInfoForUpdateBuilder {
+	builder.startTime = startTime
+	builder.startTimeFlag = true
+	return builder
+}
+
+// 结束时间
+//
+// 示例值：2018-04-01
+func (builder *EducationInfoForUpdateBuilder) EndTime(endTime string) *EducationInfoForUpdateBuilder {
+	builder.endTime = endTime
+	builder.endTimeFlag = true
+	return builder
+}
+
+// 专业
+//
+// 示例值：医学影像技术
+func (builder *EducationInfoForUpdateBuilder) FieldOfStudy(fieldOfStudy string) *EducationInfoForUpdateBuilder {
+	builder.fieldOfStudy = fieldOfStudy
+	builder.fieldOfStudyFlag = true
+	return builder
+}
+
+// 自定义字段
+//
+// 示例值：
+func (builder *EducationInfoForUpdateBuilder) CustomFields(customFields []*ObjectFieldData) *EducationInfoForUpdateBuilder {
+	builder.customFields = customFields
+	builder.customFieldsFlag = true
+	return builder
+}
+
+func (builder *EducationInfoForUpdateBuilder) Build() *EducationInfoForUpdate {
+	req := &EducationInfoForUpdate{}
+	if builder.schoolNameFlag {
+		req.SchoolName = &builder.schoolName
+
+	}
+	if builder.educationFlag {
+		req.Education = &builder.education
+
+	}
+	if builder.startTimeFlag {
+		req.StartTime = &builder.startTime
+
+	}
+	if builder.endTimeFlag {
+		req.EndTime = &builder.endTime
+
+	}
+	if builder.fieldOfStudyFlag {
+		req.FieldOfStudy = &builder.fieldOfStudy
+
+	}
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
+	}
+	return req
+}
+
 type Email struct {
 	Email *string `json:"email,omitempty"` // 邮箱地址
 
@@ -11406,6 +11685,8 @@ type EmergencyContact struct {
 	Address *Address `json:"address,omitempty"` // 联系地址
 
 	Email *Email `json:"email,omitempty"` // 邮箱
+
+	IsPrimary *bool `json:"is_primary,omitempty"` // 主要联系人,若有多个联系人，只能有一个联系人的「is_primary」为true
 }
 
 type EmergencyContactBuilder struct {
@@ -11435,6 +11716,9 @@ type EmergencyContactBuilder struct {
 
 	email     *Email // 邮箱
 	emailFlag bool
+
+	isPrimary     bool // 主要联系人,若有多个联系人，只能有一个联系人的「is_primary」为true
+	isPrimaryFlag bool
 }
 
 func NewEmergencyContactBuilder() *EmergencyContactBuilder {
@@ -11523,6 +11807,15 @@ func (builder *EmergencyContactBuilder) Email(email *Email) *EmergencyContactBui
 	return builder
 }
 
+// 主要联系人,若有多个联系人，只能有一个联系人的「is_primary」为true
+//
+// 示例值：true
+func (builder *EmergencyContactBuilder) IsPrimary(isPrimary bool) *EmergencyContactBuilder {
+	builder.isPrimary = isPrimary
+	builder.isPrimaryFlag = true
+	return builder
+}
+
 func (builder *EmergencyContactBuilder) Build() *EmergencyContact {
 	req := &EmergencyContact{}
 	if builder.idFlag {
@@ -11554,6 +11847,10 @@ func (builder *EmergencyContactBuilder) Build() *EmergencyContact {
 	if builder.emailFlag {
 		req.Email = builder.email
 	}
+	if builder.isPrimaryFlag {
+		req.IsPrimary = &builder.isPrimary
+
+	}
 	return req
 }
 
@@ -11567,6 +11864,8 @@ type EmergencyContactForUpdate struct {
 	Address *AddressForUpdate `json:"address,omitempty"` // 地址
 
 	Email *EmailForUpdate `json:"email,omitempty"` // 邮箱
+
+	IsPrimary *bool `json:"is_primary,omitempty"` // 主要联系人,若有多个联系人，只能有一个联系人的「is_primary」为true
 }
 
 type EmergencyContactForUpdateBuilder struct {
@@ -11584,6 +11883,9 @@ type EmergencyContactForUpdateBuilder struct {
 
 	email     *EmailForUpdate // 邮箱
 	emailFlag bool
+
+	isPrimary     bool // 主要联系人,若有多个联系人，只能有一个联系人的「is_primary」为true
+	isPrimaryFlag bool
 }
 
 func NewEmergencyContactForUpdateBuilder() *EmergencyContactForUpdateBuilder {
@@ -11636,6 +11938,15 @@ func (builder *EmergencyContactForUpdateBuilder) Email(email *EmailForUpdate) *E
 	return builder
 }
 
+// 主要联系人,若有多个联系人，只能有一个联系人的「is_primary」为true
+//
+// 示例值：true
+func (builder *EmergencyContactForUpdateBuilder) IsPrimary(isPrimary bool) *EmergencyContactForUpdateBuilder {
+	builder.isPrimary = isPrimary
+	builder.isPrimaryFlag = true
+	return builder
+}
+
 func (builder *EmergencyContactForUpdateBuilder) Build() *EmergencyContactForUpdate {
 	req := &EmergencyContactForUpdate{}
 	if builder.legalNameFlag {
@@ -11654,6 +11965,10 @@ func (builder *EmergencyContactForUpdateBuilder) Build() *EmergencyContactForUpd
 	}
 	if builder.emailFlag {
 		req.Email = builder.email
+	}
+	if builder.isPrimaryFlag {
+		req.IsPrimary = &builder.isPrimary
+
 	}
 	return req
 }
@@ -19130,6 +19445,8 @@ type FieldVariableValueToRecord struct {
 	VariableApiName *string `json:"variable_api_name,omitempty"` // 变量唯一标识
 
 	SubValueKey *string `json:"sub_value_key,omitempty"` // 变量值，对应subValues中的key
+
+	RecordId *string `json:"record_id,omitempty"` // 记录唯一ID
 }
 
 type FieldVariableValueToRecordBuilder struct {
@@ -19138,6 +19455,9 @@ type FieldVariableValueToRecordBuilder struct {
 
 	subValueKey     string // 变量值，对应subValues中的key
 	subValueKeyFlag bool
+
+	recordId     string // 记录唯一ID
+	recordIdFlag bool
 }
 
 func NewFieldVariableValueToRecordBuilder() *FieldVariableValueToRecordBuilder {
@@ -19163,6 +19483,15 @@ func (builder *FieldVariableValueToRecordBuilder) SubValueKey(subValueKey string
 	return builder
 }
 
+// 记录唯一ID
+//
+// 示例值：6863326263210149383
+func (builder *FieldVariableValueToRecordBuilder) RecordId(recordId string) *FieldVariableValueToRecordBuilder {
+	builder.recordId = recordId
+	builder.recordIdFlag = true
+	return builder
+}
+
 func (builder *FieldVariableValueToRecordBuilder) Build() *FieldVariableValueToRecord {
 	req := &FieldVariableValueToRecord{}
 	if builder.variableApiNameFlag {
@@ -19171,6 +19500,10 @@ func (builder *FieldVariableValueToRecordBuilder) Build() *FieldVariableValueToR
 	}
 	if builder.subValueKeyFlag {
 		req.SubValueKey = &builder.subValueKey
+
+	}
+	if builder.recordIdFlag {
+		req.RecordId = &builder.recordId
 
 	}
 	return req
@@ -25796,6 +26129,8 @@ type Name struct {
 	CustomLocalName *string `json:"custom_local_name,omitempty"` // 本地文字的自定义姓名
 
 	CustomWesternName *string `json:"custom_western_name,omitempty"` // 西方文字的自定义姓名
+
+	AdditionalName *string `json:"additional_name,omitempty"` // 别名
 }
 
 type NameBuilder struct {
@@ -25828,6 +26163,9 @@ type NameBuilder struct {
 
 	customWesternName     string // 西方文字的自定义姓名
 	customWesternNameFlag bool
+
+	additionalName     string // 别名
+	additionalNameFlag bool
 }
 
 func NewNameBuilder() *NameBuilder {
@@ -25925,6 +26263,15 @@ func (builder *NameBuilder) CustomWesternName(customWesternName string) *NameBui
 	return builder
 }
 
+// 别名
+//
+// 示例值：别名
+func (builder *NameBuilder) AdditionalName(additionalName string) *NameBuilder {
+	builder.additionalName = additionalName
+	builder.additionalNameFlag = true
+	return builder
+}
+
 func (builder *NameBuilder) Build() *Name {
 	req := &Name{}
 	if builder.fullNameFlag {
@@ -25967,6 +26314,10 @@ func (builder *NameBuilder) Build() *Name {
 		req.CustomWesternName = &builder.customWesternName
 
 	}
+	if builder.additionalNameFlag {
+		req.AdditionalName = &builder.additionalName
+
+	}
 	return req
 }
 
@@ -25992,6 +26343,8 @@ type NameForUpdate struct {
 	CountryRegion *string `json:"country_region,omitempty"` // 国家/地区
 
 	NameType *string `json:"name_type,omitempty"` // 姓名类型，枚举值
+
+	AdditionalName *string `json:"additional_name,omitempty"` // 别名
 }
 
 type NameForUpdateBuilder struct {
@@ -26027,6 +26380,9 @@ type NameForUpdateBuilder struct {
 
 	nameType     string // 姓名类型，枚举值
 	nameTypeFlag bool
+
+	additionalName     string // 别名
+	additionalNameFlag bool
 }
 
 func NewNameForUpdateBuilder() *NameForUpdateBuilder {
@@ -26126,10 +26482,19 @@ func (builder *NameForUpdateBuilder) CountryRegion(countryRegion string) *NameFo
 
 // 姓名类型，枚举值
 //
-// 示例值：legal_name，preferred_name
+// 示例值：legal_name，preferred_name，additional_name
 func (builder *NameForUpdateBuilder) NameType(nameType string) *NameForUpdateBuilder {
 	builder.nameType = nameType
 	builder.nameTypeFlag = true
+	return builder
+}
+
+// 别名
+//
+// 示例值：别名
+func (builder *NameForUpdateBuilder) AdditionalName(additionalName string) *NameForUpdateBuilder {
+	builder.additionalName = additionalName
+	builder.additionalNameFlag = true
 	return builder
 }
 
@@ -26177,6 +26542,10 @@ func (builder *NameForUpdateBuilder) Build() *NameForUpdate {
 	}
 	if builder.nameTypeFlag {
 		req.NameType = &builder.nameType
+
+	}
+	if builder.additionalNameFlag {
+		req.AdditionalName = &builder.additionalName
 
 	}
 	return req
@@ -26582,6 +26951,91 @@ func (builder *NationalityBuilder) Build() *Nationality {
 	return req
 }
 
+type NoticePeriodDetail struct {
+	WkId *string `json:"wk_id,omitempty"` // ID
+
+	Value *int `json:"value,omitempty"` // 数值
+
+	ValueUnit *string `json:"value_unit,omitempty"` // 单位
+
+	Name *I18n `json:"name,omitempty"` // 名称
+}
+
+type NoticePeriodDetailBuilder struct {
+	wkId     string // ID
+	wkIdFlag bool
+
+	value     int // 数值
+	valueFlag bool
+
+	valueUnit     string // 单位
+	valueUnitFlag bool
+
+	name     *I18n // 名称
+	nameFlag bool
+}
+
+func NewNoticePeriodDetailBuilder() *NoticePeriodDetailBuilder {
+	builder := &NoticePeriodDetailBuilder{}
+	return builder
+}
+
+// ID
+//
+// 示例值：4698019107896524633
+func (builder *NoticePeriodDetailBuilder) WkId(wkId string) *NoticePeriodDetailBuilder {
+	builder.wkId = wkId
+	builder.wkIdFlag = true
+	return builder
+}
+
+// 数值
+//
+// 示例值：1
+func (builder *NoticePeriodDetailBuilder) Value(value int) *NoticePeriodDetailBuilder {
+	builder.value = value
+	builder.valueFlag = true
+	return builder
+}
+
+// 单位
+//
+// 示例值：月
+func (builder *NoticePeriodDetailBuilder) ValueUnit(valueUnit string) *NoticePeriodDetailBuilder {
+	builder.valueUnit = valueUnit
+	builder.valueUnitFlag = true
+	return builder
+}
+
+// 名称
+//
+// 示例值：
+func (builder *NoticePeriodDetailBuilder) Name(name *I18n) *NoticePeriodDetailBuilder {
+	builder.name = name
+	builder.nameFlag = true
+	return builder
+}
+
+func (builder *NoticePeriodDetailBuilder) Build() *NoticePeriodDetail {
+	req := &NoticePeriodDetail{}
+	if builder.wkIdFlag {
+		req.WkId = &builder.wkId
+
+	}
+	if builder.valueFlag {
+		req.Value = &builder.value
+
+	}
+	if builder.valueUnitFlag {
+		req.ValueUnit = &builder.valueUnit
+
+	}
+	if builder.nameFlag {
+		req.Name = builder.name
+	}
+	return req
+}
+
 type ObjectFieldData struct {
 	FieldName *string `json:"field_name,omitempty"` // 字段名
 
@@ -26728,6 +27182,24 @@ type OfferInfo struct {
 	SeniorityDate *string `json:"seniority_date,omitempty"` // 司龄起算日期
 
 	SeniorityAdjustInformationList []*PrehireSeniorityAdjustInformation `json:"seniority_adjust_information_list,omitempty"` // 司龄调整信息
+
+	NoticePeriodProbationVoluntary *NoticePeriodDetail `json:"notice_period_probation_voluntary,omitempty"` // 试用期内通知期（主动离职)
+
+	NoticePeriodProbationInvoluntary *NoticePeriodDetail `json:"notice_period_probation_involuntary,omitempty"` // 试用期内通知期（被动离职）
+
+	NoticePeriodPositiveVoluntary *NoticePeriodDetail `json:"notice_period_positive_voluntary,omitempty"` // 转正后通知期（主动离职）
+
+	NoticePeriodPositiveInvoluntary *NoticePeriodDetail `json:"notice_period_positive_involuntary,omitempty"` // 转正后通知期（被动离职）
+
+	ConditionWorker *bool `json:"condition_worker,omitempty"` // 是否外部人员
+
+	NonCompeteCovenant *bool `json:"non_compete_covenant,omitempty"` // 是否包含竞业条款
+
+	CompanySponsoredVisa *bool `json:"company_sponsored_visa,omitempty"` // 需要公司办理签证
+
+	HasOfferSalary *bool `json:"has_offer_salary,omitempty"` // 是否有 Offer 薪酬
+
+	WorkStation *string `json:"work_station,omitempty"` // 工位
 }
 
 type OfferInfoBuilder struct {
@@ -26874,6 +27346,33 @@ type OfferInfoBuilder struct {
 
 	seniorityAdjustInformationList     []*PrehireSeniorityAdjustInformation // 司龄调整信息
 	seniorityAdjustInformationListFlag bool
+
+	noticePeriodProbationVoluntary     *NoticePeriodDetail // 试用期内通知期（主动离职)
+	noticePeriodProbationVoluntaryFlag bool
+
+	noticePeriodProbationInvoluntary     *NoticePeriodDetail // 试用期内通知期（被动离职）
+	noticePeriodProbationInvoluntaryFlag bool
+
+	noticePeriodPositiveVoluntary     *NoticePeriodDetail // 转正后通知期（主动离职）
+	noticePeriodPositiveVoluntaryFlag bool
+
+	noticePeriodPositiveInvoluntary     *NoticePeriodDetail // 转正后通知期（被动离职）
+	noticePeriodPositiveInvoluntaryFlag bool
+
+	conditionWorker     bool // 是否外部人员
+	conditionWorkerFlag bool
+
+	nonCompeteCovenant     bool // 是否包含竞业条款
+	nonCompeteCovenantFlag bool
+
+	companySponsoredVisa     bool // 需要公司办理签证
+	companySponsoredVisaFlag bool
+
+	hasOfferSalary     bool // 是否有 Offer 薪酬
+	hasOfferSalaryFlag bool
+
+	workStation     string // 工位
+	workStationFlag bool
 }
 
 func NewOfferInfoBuilder() *OfferInfoBuilder {
@@ -27313,6 +27812,87 @@ func (builder *OfferInfoBuilder) SeniorityAdjustInformationList(seniorityAdjustI
 	return builder
 }
 
+// 试用期内通知期（主动离职)
+//
+// 示例值：xxx
+func (builder *OfferInfoBuilder) NoticePeriodProbationVoluntary(noticePeriodProbationVoluntary *NoticePeriodDetail) *OfferInfoBuilder {
+	builder.noticePeriodProbationVoluntary = noticePeriodProbationVoluntary
+	builder.noticePeriodProbationVoluntaryFlag = true
+	return builder
+}
+
+// 试用期内通知期（被动离职）
+//
+// 示例值：xxx
+func (builder *OfferInfoBuilder) NoticePeriodProbationInvoluntary(noticePeriodProbationInvoluntary *NoticePeriodDetail) *OfferInfoBuilder {
+	builder.noticePeriodProbationInvoluntary = noticePeriodProbationInvoluntary
+	builder.noticePeriodProbationInvoluntaryFlag = true
+	return builder
+}
+
+// 转正后通知期（主动离职）
+//
+// 示例值：xxx
+func (builder *OfferInfoBuilder) NoticePeriodPositiveVoluntary(noticePeriodPositiveVoluntary *NoticePeriodDetail) *OfferInfoBuilder {
+	builder.noticePeriodPositiveVoluntary = noticePeriodPositiveVoluntary
+	builder.noticePeriodPositiveVoluntaryFlag = true
+	return builder
+}
+
+// 转正后通知期（被动离职）
+//
+// 示例值：xxx
+func (builder *OfferInfoBuilder) NoticePeriodPositiveInvoluntary(noticePeriodPositiveInvoluntary *NoticePeriodDetail) *OfferInfoBuilder {
+	builder.noticePeriodPositiveInvoluntary = noticePeriodPositiveInvoluntary
+	builder.noticePeriodPositiveInvoluntaryFlag = true
+	return builder
+}
+
+// 是否外部人员
+//
+// 示例值：true
+func (builder *OfferInfoBuilder) ConditionWorker(conditionWorker bool) *OfferInfoBuilder {
+	builder.conditionWorker = conditionWorker
+	builder.conditionWorkerFlag = true
+	return builder
+}
+
+// 是否包含竞业条款
+//
+// 示例值：true
+func (builder *OfferInfoBuilder) NonCompeteCovenant(nonCompeteCovenant bool) *OfferInfoBuilder {
+	builder.nonCompeteCovenant = nonCompeteCovenant
+	builder.nonCompeteCovenantFlag = true
+	return builder
+}
+
+// 需要公司办理签证
+//
+// 示例值：true
+func (builder *OfferInfoBuilder) CompanySponsoredVisa(companySponsoredVisa bool) *OfferInfoBuilder {
+	builder.companySponsoredVisa = companySponsoredVisa
+	builder.companySponsoredVisaFlag = true
+	return builder
+}
+
+// 是否有 Offer 薪酬
+//
+// 示例值：true
+func (builder *OfferInfoBuilder) HasOfferSalary(hasOfferSalary bool) *OfferInfoBuilder {
+	builder.hasOfferSalary = hasOfferSalary
+	builder.hasOfferSalaryFlag = true
+	return builder
+}
+
+// 工位
+//
+// 示例值：5-1-2
+func (builder *OfferInfoBuilder) WorkStation(workStation string) *OfferInfoBuilder {
+	builder.workStation = workStation
+	builder.workStationFlag = true
+	return builder
+}
+
 func (builder *OfferInfoBuilder) Build() *OfferInfo {
 	req := &OfferInfo{}
 	if builder.offerIdFlag {
@@ -27504,6 +28084,38 @@ func (builder *OfferInfoBuilder) Build() *OfferInfo {
 	if builder.seniorityAdjustInformationListFlag {
 		req.SeniorityAdjustInformationList = builder.seniorityAdjustInformationList
 	}
+	if builder.noticePeriodProbationVoluntaryFlag {
+		req.NoticePeriodProbationVoluntary = builder.noticePeriodProbationVoluntary
+	}
+	if builder.noticePeriodProbationInvoluntaryFlag {
+		req.NoticePeriodProbationInvoluntary = builder.noticePeriodProbationInvoluntary
+	}
+	if builder.noticePeriodPositiveVoluntaryFlag {
+		req.NoticePeriodPositiveVoluntary = builder.noticePeriodPositiveVoluntary
+	}
+	if builder.noticePeriodPositiveInvoluntaryFlag {
+		req.NoticePeriodPositiveInvoluntary = builder.noticePeriodPositiveInvoluntary
+	}
+	if builder.conditionWorkerFlag {
+		req.ConditionWorker = &builder.conditionWorker
+
+	}
+	if builder.nonCompeteCovenantFlag {
+		req.NonCompeteCovenant = &builder.nonCompeteCovenant
+
+	}
+	if builder.companySponsoredVisaFlag {
+		req.CompanySponsoredVisa = &builder.companySponsoredVisa
+
+	}
+	if builder.hasOfferSalaryFlag {
+		req.HasOfferSalary = &builder.hasOfferSalary
+
+	}
+	if builder.workStationFlag {
+		req.WorkStation = &builder.workStation
+
+	}
 	return req
 }
 
@@ -27595,6 +28207,28 @@ type OfferInfoUpdate struct {
 	SeniorityDate *string `json:"seniority_date,omitempty"` // 司龄起算日期
 
 	SeniorityAdjustInformationList []*PrehireSeniorityAdjustInformationUpdate `json:"seniority_adjust_information_list,omitempty"` // 司龄调整信息
+
+	NoticePeriodProbationVoluntary *NoticePeriodDetail `json:"notice_period_probation_voluntary,omitempty"` // 试用期内通知期（主动离职)
+
+	NoticePeriodProbationInvoluntary *NoticePeriodDetail `json:"notice_period_probation_involuntary,omitempty"` // 试用期内通知期（被动离职）
+
+	NoticePeriodPositiveVoluntary *NoticePeriodDetail `json:"notice_period_positive_voluntary,omitempty"` // 转正后通知期（主动离职）
+
+	NoticePeriodPositiveInvoluntary *NoticePeriodDetail `json:"notice_period_positive_involuntary,omitempty"` // 转正后通知期（被动离职）
+
+	ConditionWorker *bool `json:"condition_worker,omitempty"` // 是否外部人员
+
+	CompanySponsoredVisa *bool `json:"company_sponsored_visa,omitempty"` // 需要公司办理签证
+
+	WeeklyWorkingHoursV2 *float64 `json:"weekly_working_hours_v2,omitempty"` // 周工作时长（单位：小时）
+
+	WorkStation *string `json:"work_station,omitempty"` // 工位
+
+	HasOfferSalary *bool `json:"has_offer_salary,omitempty"` // 是否有 Offer 薪酬
+
+	ServiceCompany *string `json:"service_company,omitempty"` // 任职公司
+
+	NonCompeteCovenant *bool `json:"non_compete_covenant,omitempty"` // 是否包含竞业条款
 }
 
 type OfferInfoUpdateBuilder struct {
@@ -27729,6 +28363,39 @@ type OfferInfoUpdateBuilder struct {
 
 	seniorityAdjustInformationList     []*PrehireSeniorityAdjustInformationUpdate // 司龄调整信息
 	seniorityAdjustInformationListFlag bool
+
+	noticePeriodProbationVoluntary     *NoticePeriodDetail // 试用期内通知期（主动离职)
+	noticePeriodProbationVoluntaryFlag bool
+
+	noticePeriodProbationInvoluntary     *NoticePeriodDetail // 试用期内通知期（被动离职）
+	noticePeriodProbationInvoluntaryFlag bool
+
+	noticePeriodPositiveVoluntary     *NoticePeriodDetail // 转正后通知期（主动离职）
+	noticePeriodPositiveVoluntaryFlag bool
+
+	noticePeriodPositiveInvoluntary     *NoticePeriodDetail // 转正后通知期（被动离职）
+	noticePeriodPositiveInvoluntaryFlag bool
+
+	conditionWorker     bool // 是否外部人员
+	conditionWorkerFlag bool
+
+	companySponsoredVisa     bool // 需要公司办理签证
+	companySponsoredVisaFlag bool
+
+	weeklyWorkingHoursV2     float64 // 周工作时长（单位：小时）
+	weeklyWorkingHoursV2Flag bool
+
+	workStation     string // 工位
+	workStationFlag bool
+
+	hasOfferSalary     bool // 是否有 Offer 薪酬
+	hasOfferSalaryFlag bool
+
+	serviceCompany     string // 任职公司
+	serviceCompanyFlag bool
+
+	nonCompeteCovenant     bool // 是否包含竞业条款
+	nonCompeteCovenantFlag bool
 }
 
 func NewOfferInfoUpdateBuilder() *OfferInfoUpdateBuilder {
@@ -28132,6 +28799,105 @@ func (builder *OfferInfoUpdateBuilder) SeniorityAdjustInformationList(seniorityA
 	return builder
 }
 
+// 试用期内通知期（主动离职)
+//
+// 示例值：xxx
+func (builder *OfferInfoUpdateBuilder) NoticePeriodProbationVoluntary(noticePeriodProbationVoluntary *NoticePeriodDetail) *OfferInfoUpdateBuilder {
+	builder.noticePeriodProbationVoluntary = noticePeriodProbationVoluntary
+	builder.noticePeriodProbationVoluntaryFlag = true
+	return builder
+}
+
+// 试用期内通知期（被动离职）
+//
+// 示例值：xxx
+func (builder *OfferInfoUpdateBuilder) NoticePeriodProbationInvoluntary(noticePeriodProbationInvoluntary *NoticePeriodDetail) *OfferInfoUpdateBuilder {
+	builder.noticePeriodProbationInvoluntary = noticePeriodProbationInvoluntary
+	builder.noticePeriodProbationInvoluntaryFlag = true
+	return builder
+}
+
+// 转正后通知期（主动离职）
+//
+// 示例值：xxx
+func (builder *OfferInfoUpdateBuilder) NoticePeriodPositiveVoluntary(noticePeriodPositiveVoluntary *NoticePeriodDetail) *OfferInfoUpdateBuilder {
+	builder.noticePeriodPositiveVoluntary = noticePeriodPositiveVoluntary
+	builder.noticePeriodPositiveVoluntaryFlag = true
+	return builder
+}
+
+// 转正后通知期（被动离职）
+//
+// 示例值：xxx
+func (builder *OfferInfoUpdateBuilder) NoticePeriodPositiveInvoluntary(noticePeriodPositiveInvoluntary *NoticePeriodDetail) *OfferInfoUpdateBuilder {
+	builder.noticePeriodPositiveInvoluntary = noticePeriodPositiveInvoluntary
+	builder.noticePeriodPositiveInvoluntaryFlag = true
+	return builder
+}
+
+// 是否外部人员
+//
+// 示例值：true
+func (builder *OfferInfoUpdateBuilder) ConditionWorker(conditionWorker bool) *OfferInfoUpdateBuilder {
+	builder.conditionWorker = conditionWorker
+	builder.conditionWorkerFlag = true
+	return builder
+}
+
+// 需要公司办理签证
+//
+// 示例值：true
+func (builder *OfferInfoUpdateBuilder) CompanySponsoredVisa(companySponsoredVisa bool) *OfferInfoUpdateBuilder {
+	builder.companySponsoredVisa = companySponsoredVisa
+	builder.companySponsoredVisaFlag = true
+	return builder
+}
+
+// 周工作时长（单位：小时）
+//
+// 示例值：8.5
+func (builder *OfferInfoUpdateBuilder) WeeklyWorkingHoursV2(weeklyWorkingHoursV2 float64) *OfferInfoUpdateBuilder {
+	builder.weeklyWorkingHoursV2 = weeklyWorkingHoursV2
+	builder.weeklyWorkingHoursV2Flag = true
+	return builder
+}
+
+// 工位
+//
+// 示例值：5-1-2
+func (builder *OfferInfoUpdateBuilder) WorkStation(workStation string) *OfferInfoUpdateBuilder {
+	builder.workStation = workStation
+	builder.workStationFlag = true
+	return builder
+}
+
+// 是否有 Offer 薪酬
+//
+// 示例值：true
+func (builder *OfferInfoUpdateBuilder) HasOfferSalary(hasOfferSalary bool) *OfferInfoUpdateBuilder {
+	builder.hasOfferSalary = hasOfferSalary
+	builder.hasOfferSalaryFlag = true
+	return builder
+}
+
+// 任职公司
+//
+// 示例值：6738317738688661772
+func (builder *OfferInfoUpdateBuilder) ServiceCompany(serviceCompany string) *OfferInfoUpdateBuilder {
+	builder.serviceCompany = serviceCompany
+	builder.serviceCompanyFlag = true
+	return builder
+}
+
+// 是否包含竞业条款
+//
+// 示例值：true
+func (builder *OfferInfoUpdateBuilder) NonCompeteCovenant(nonCompeteCovenant bool) *OfferInfoUpdateBuilder {
+	builder.nonCompeteCovenant = nonCompeteCovenant
+	builder.nonCompeteCovenantFlag = true
+	return builder
+}
+
 func (builder *OfferInfoUpdateBuilder) Build() *OfferInfoUpdate {
 	req := &OfferInfoUpdate{}
 	if builder.onboardingDateFlag {
@@ -28305,6 +29071,46 @@ func (builder *OfferInfoUpdateBuilder) Build() *OfferInfoUpdate {
 	}
 	if builder.seniorityAdjustInformationListFlag {
 		req.SeniorityAdjustInformationList = builder.seniorityAdjustInformationList
+	}
+	if builder.noticePeriodProbationVoluntaryFlag {
+		req.NoticePeriodProbationVoluntary = builder.noticePeriodProbationVoluntary
+	}
+	if builder.noticePeriodProbationInvoluntaryFlag {
+		req.NoticePeriodProbationInvoluntary = builder.noticePeriodProbationInvoluntary
+	}
+	if builder.noticePeriodPositiveVoluntaryFlag {
+		req.NoticePeriodPositiveVoluntary = builder.noticePeriodPositiveVoluntary
+	}
+	if builder.noticePeriodPositiveInvoluntaryFlag {
+		req.NoticePeriodPositiveInvoluntary = builder.noticePeriodPositiveInvoluntary
+	}
+	if builder.conditionWorkerFlag {
+		req.ConditionWorker = &builder.conditionWorker
+
+	}
+	if builder.companySponsoredVisaFlag {
+		req.CompanySponsoredVisa = &builder.companySponsoredVisa
+
+	}
+	if builder.weeklyWorkingHoursV2Flag {
+		req.WeeklyWorkingHoursV2 = &builder.weeklyWorkingHoursV2
+
+	}
+	if builder.workStationFlag {
+		req.WorkStation = &builder.workStation
+
+	}
+	if builder.hasOfferSalaryFlag {
+		req.HasOfferSalary = &builder.hasOfferSalary
+
+	}
+	if builder.serviceCompanyFlag {
+		req.ServiceCompany = &builder.serviceCompany
+
+	}
+	if builder.nonCompeteCovenantFlag {
+		req.NonCompeteCovenant = &builder.nonCompeteCovenant
+
 	}
 	return req
 }
@@ -29473,6 +30279,8 @@ type PersonInfo struct {
 
 	PreferredName *string `json:"preferred_name,omitempty"` // 常用名
 
+	AdditionalName *string `json:"additional_name,omitempty"` // 别名
+
 	PreferredLocalFullName *string `json:"preferred_local_full_name,omitempty"` // 常用本地全名
 
 	PreferredEnglishFullName *string `json:"preferred_english_full_name,omitempty"` // 常用英文全名
@@ -29596,6 +30404,9 @@ type PersonInfoBuilder struct {
 
 	preferredName     string // 常用名
 	preferredNameFlag bool
+
+	additionalName     string // 别名
+	additionalNameFlag bool
 
 	preferredLocalFullName     string // 常用本地全名
 	preferredLocalFullNameFlag bool
@@ -29801,6 +30612,15 @@ func (builder *PersonInfoBuilder) LegalName(legalName string) *PersonInfoBuilder
 func (builder *PersonInfoBuilder) PreferredName(preferredName string) *PersonInfoBuilder {
 	builder.preferredName = preferredName
 	builder.preferredNameFlag = true
+	return builder
+}
+
+// 别名
+//
+// 示例值：梓新
+func (builder *PersonInfoBuilder) AdditionalName(additionalName string) *PersonInfoBuilder {
+	builder.additionalName = additionalName
+	builder.additionalNameFlag = true
 	return builder
 }
 
@@ -30317,6 +31137,10 @@ func (builder *PersonInfoBuilder) Build() *PersonInfo {
 		req.PreferredName = &builder.preferredName
 
 	}
+	if builder.additionalNameFlag {
+		req.AdditionalName = &builder.additionalName
+
+	}
 	if builder.preferredLocalFullNameFlag {
 		req.PreferredLocalFullName = &builder.preferredLocalFullName
 
@@ -30522,6 +31346,8 @@ type PersonInfoBt struct {
 
 	LegalName *string `json:"legal_name,omitempty"` // 法定姓名
 
+	AdditionalName *string `json:"additional_name,omitempty"` // 别名
+
 	PreferredName *string `json:"preferred_name,omitempty"` // 常用名
 
 	PreferredLocalFullName *string `json:"preferred_local_full_name,omitempty"` // 常用本地全名
@@ -30628,6 +31454,9 @@ type PersonInfoBtBuilder struct {
 
 	legalName     string // 法定姓名
 	legalNameFlag bool
+
+	additionalName     string // 别名
+	additionalNameFlag bool
 
 	preferredName     string // 常用名
 	preferredNameFlag bool
@@ -30803,6 +31632,15 @@ func (builder *PersonInfoBtBuilder) PhoneNumber(phoneNumber string) *PersonInfoB
 func (builder *PersonInfoBtBuilder) LegalName(legalName string) *PersonInfoBtBuilder {
 	builder.legalName = legalName
 	builder.legalNameFlag = true
+	return builder
+}
+
+// 别名
+//
+// 示例值：张三
+func (builder *PersonInfoBtBuilder) AdditionalName(additionalName string) *PersonInfoBtBuilder {
+	builder.additionalName = additionalName
+	builder.additionalNameFlag = true
 	return builder
 }
 
@@ -31252,6 +32090,10 @@ func (builder *PersonInfoBtBuilder) Build() *PersonInfoBt {
 		req.LegalName = &builder.legalName
 
 	}
+	if builder.additionalNameFlag {
+		req.AdditionalName = &builder.additionalName
+
+	}
 	if builder.preferredNameFlag {
 		req.PreferredName = &builder.preferredName
 
@@ -31557,6 +32399,8 @@ type PersonName struct {
 
 	LocalPrimary2 *string `json:"local_primary_2,omitempty"` // 姓 - 第二本地文字
 
+	AdditionalName *string `json:"additional_name,omitempty"` // 别名
+
 	AdditionalNameType *Enum `json:"additional_name_type,omitempty"` // 补充姓名类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：additional_name_type
 
 	FirstName *string `json:"first_name,omitempty"` // 名
@@ -31610,6 +32454,9 @@ type PersonNameBuilder struct {
 
 	localPrimary2     string // 姓 - 第二本地文字
 	localPrimary2Flag bool
+
+	additionalName     string // 别名
+	additionalNameFlag bool
 
 	additionalNameType     *Enum // 补充姓名类型;- 可通过[【获取字段详情】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/custom_field/get_by_param)接口查询，查询参数如下：;  - object_api_name：person_name;  - custom_api_name：additional_name_type
 	additionalNameTypeFlag bool
@@ -31719,6 +32566,15 @@ func (builder *PersonNameBuilder) LocalFirstName2(localFirstName2 string) *Perso
 func (builder *PersonNameBuilder) LocalPrimary2(localPrimary2 string) *PersonNameBuilder {
 	builder.localPrimary2 = localPrimary2
 	builder.localPrimary2Flag = true
+	return builder
+}
+
+// 别名
+//
+// 示例值：别名
+func (builder *PersonNameBuilder) AdditionalName(additionalName string) *PersonNameBuilder {
+	builder.additionalName = additionalName
+	builder.additionalNameFlag = true
 	return builder
 }
 
@@ -31898,6 +32754,10 @@ func (builder *PersonNameBuilder) Build() *PersonName {
 	}
 	if builder.localPrimary2Flag {
 		req.LocalPrimary2 = &builder.localPrimary2
+
+	}
+	if builder.additionalNameFlag {
+		req.AdditionalName = &builder.additionalName
 
 	}
 	if builder.additionalNameTypeFlag {
@@ -34442,6 +35302,8 @@ type PreHireEmploymentInfo struct {
 
 	SuspectedRehiring *bool `json:"suspected_rehiring,omitempty"` // 是否疑似重聘
 
+	ConditionWorker *bool `json:"condition_worker,omitempty"` // 是否外部人员
+
 	CustomFields []*CustomFieldData `json:"custom_fields,omitempty"` // 自定义字段
 
 	PositionId *string `json:"position_id,omitempty"` // 岗位 ID
@@ -34487,6 +35349,24 @@ type PreHireEmploymentInfo struct {
 	BackgroundCheckOrderStatus *Enum `json:"background_check_order_status,omitempty"` // -| 背调状态，枚举值可查询【获取字段详情】接口获取，按如下参数查询即可： - custom_api_name：background_check_order_status - object_api_name：pre_hire
 
 	SeniorityAdjustInformationList []*PrehireSeniorityAdjustInformationQuery `json:"seniority_adjust_information_list,omitempty"` // 司龄调整信息
+
+	NoticePeriodPositiveVoluntary *NoticePeriodDetail `json:"notice_period_positive_voluntary,omitempty"` // 转正后通知期（主动离职）
+
+	NoticePeriodProbationInvoluntary *NoticePeriodDetail `json:"notice_period_probation_involuntary,omitempty"` // 试用期内通知期（被动离职）
+
+	NoticePeriodPositiveInvoluntary *NoticePeriodDetail `json:"notice_period_positive_involuntary,omitempty"` // 转正后通知期（被动离职）
+
+	NoticePeriodProbationVoluntary *NoticePeriodDetail `json:"notice_period_probation_voluntary,omitempty"` // 试用期内通知期（主动离职)
+
+	WorkingHoursTypeManualUpdated *bool `json:"working_hours_type_manual_updated,omitempty"` // 工时制度是否被手动修改
+
+	IsOverDue *bool `json:"is_over_due,omitempty"` // 入职任务是否逾期
+
+	TaskCompleted *bool `json:"task_completed,omitempty"` // 入职任务是否完成
+
+	ExpectedGraduateDate *string `json:"expected_graduate_date,omitempty"` // 预计毕业日期
+
+	ServiceCompany *string `json:"service_company,omitempty"` // 任职公司 ID , 详细信息可通过【批量查询公司】接口获得
 }
 
 type PreHireEmploymentInfoBuilder struct {
@@ -34580,6 +35460,9 @@ type PreHireEmploymentInfoBuilder struct {
 	suspectedRehiring     bool // 是否疑似重聘
 	suspectedRehiringFlag bool
 
+	conditionWorker     bool // 是否外部人员
+	conditionWorkerFlag bool
+
 	customFields     []*CustomFieldData // 自定义字段
 	customFieldsFlag bool
 
@@ -34648,6 +35531,33 @@ type PreHireEmploymentInfoBuilder struct {
 
 	seniorityAdjustInformationList     []*PrehireSeniorityAdjustInformationQuery // 司龄调整信息
 	seniorityAdjustInformationListFlag bool
+
+	noticePeriodPositiveVoluntary     *NoticePeriodDetail // 转正后通知期（主动离职）
+	noticePeriodPositiveVoluntaryFlag bool
+
+	noticePeriodProbationInvoluntary     *NoticePeriodDetail // 试用期内通知期（被动离职）
+	noticePeriodProbationInvoluntaryFlag bool
+
+	noticePeriodPositiveInvoluntary     *NoticePeriodDetail // 转正后通知期（被动离职）
+	noticePeriodPositiveInvoluntaryFlag bool
+
+	noticePeriodProbationVoluntary     *NoticePeriodDetail // 试用期内通知期（主动离职)
+	noticePeriodProbationVoluntaryFlag bool
+
+	workingHoursTypeManualUpdated     bool // 工时制度是否被手动修改
+	workingHoursTypeManualUpdatedFlag bool
+
+	isOverDue     bool // 入职任务是否逾期
+	isOverDueFlag bool
+
+	taskCompleted     bool // 入职任务是否完成
+	taskCompletedFlag bool
+
+	expectedGraduateDate     string // 预计毕业日期
+	expectedGraduateDateFlag bool
+
+	serviceCompany     string // 任职公司 ID , 详细信息可通过【批量查询公司】接口获得
+	serviceCompanyFlag bool
 }
 
 func NewPreHireEmploymentInfoBuilder() *PreHireEmploymentInfoBuilder {
@@ -34925,6 +35835,15 @@ func (builder *PreHireEmploymentInfoBuilder) SuspectedRehiring(suspectedRehiring
 	return builder
 }
 
+// 是否外部人员
+//
+// 示例值：false
+func (builder *PreHireEmploymentInfoBuilder) ConditionWorker(conditionWorker bool) *PreHireEmploymentInfoBuilder {
+	builder.conditionWorker = conditionWorker
+	builder.conditionWorkerFlag = true
+	return builder
+}
+
 // 自定义字段
 //
 // 示例值：
@@ -35132,6 +36051,87 @@ func (builder *PreHireEmploymentInfoBuilder) SeniorityAdjustInformationList(seni
 	return builder
 }
 
+// 转正后通知期（主动离职）
+//
+// 示例值：
+func (builder *PreHireEmploymentInfoBuilder) NoticePeriodPositiveVoluntary(noticePeriodPositiveVoluntary *NoticePeriodDetail) *PreHireEmploymentInfoBuilder {
+	builder.noticePeriodPositiveVoluntary = noticePeriodPositiveVoluntary
+	builder.noticePeriodPositiveVoluntaryFlag = true
+	return builder
+}
+
+// 试用期内通知期（被动离职）
+//
+// 示例值：
+func (builder *PreHireEmploymentInfoBuilder) NoticePeriodProbationInvoluntary(noticePeriodProbationInvoluntary *NoticePeriodDetail) *PreHireEmploymentInfoBuilder {
+	builder.noticePeriodProbationInvoluntary = noticePeriodProbationInvoluntary
+	builder.noticePeriodProbationInvoluntaryFlag = true
+	return builder
+}
+
+// 转正后通知期（被动离职）
+//
+// 示例值：
+func (builder *PreHireEmploymentInfoBuilder) NoticePeriodPositiveInvoluntary(noticePeriodPositiveInvoluntary *NoticePeriodDetail) *PreHireEmploymentInfoBuilder {
+	builder.noticePeriodPositiveInvoluntary = noticePeriodPositiveInvoluntary
+	builder.noticePeriodPositiveInvoluntaryFlag = true
+	return builder
+}
+
+// 试用期内通知期（主动离职)
+//
+// 示例值：
+func (builder *PreHireEmploymentInfoBuilder) NoticePeriodProbationVoluntary(noticePeriodProbationVoluntary *NoticePeriodDetail) *PreHireEmploymentInfoBuilder {
+	builder.noticePeriodProbationVoluntary = noticePeriodProbationVoluntary
+	builder.noticePeriodProbationVoluntaryFlag = true
+	return builder
+}
+
+// 工时制度是否被手动修改
+//
+// 示例值：true
+func (builder *PreHireEmploymentInfoBuilder) WorkingHoursTypeManualUpdated(workingHoursTypeManualUpdated bool) *PreHireEmploymentInfoBuilder {
+	builder.workingHoursTypeManualUpdated = workingHoursTypeManualUpdated
+	builder.workingHoursTypeManualUpdatedFlag = true
+	return builder
+}
+
+// 入职任务是否逾期
+//
+// 示例值：true
+func (builder *PreHireEmploymentInfoBuilder) IsOverDue(isOverDue bool) *PreHireEmploymentInfoBuilder {
+	builder.isOverDue = isOverDue
+	builder.isOverDueFlag = true
+	return builder
+}
+
+// 入职任务是否完成
+//
+// 示例值：true
+func (builder *PreHireEmploymentInfoBuilder) TaskCompleted(taskCompleted bool) *PreHireEmploymentInfoBuilder {
+	builder.taskCompleted = taskCompleted
+	builder.taskCompletedFlag = true
+	return builder
+}
+
+// 预计毕业日期
+//
+// 示例值：2023-01-10
+func (builder *PreHireEmploymentInfoBuilder) ExpectedGraduateDate(expectedGraduateDate string) *PreHireEmploymentInfoBuilder {
+	builder.expectedGraduateDate = expectedGraduateDate
+	builder.expectedGraduateDateFlag = true
+	return builder
+}
+
+// 任职公司 ID , 详细信息可通过【批量查询公司】接口获得
+//
+// 示例值：6738317738688661772
+func (builder *PreHireEmploymentInfoBuilder) ServiceCompany(serviceCompany string) *PreHireEmploymentInfoBuilder {
+	builder.serviceCompany = serviceCompany
+	builder.serviceCompanyFlag = true
+	return builder
+}
+
 func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 	req := &PreHireEmploymentInfo{}
 	if builder.departmentIdFlag {
@@ -35251,6 +36251,10 @@ func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 		req.SuspectedRehiring = &builder.suspectedRehiring
 
 	}
+	if builder.conditionWorkerFlag {
+		req.ConditionWorker = &builder.conditionWorker
+
+	}
 	if builder.customFieldsFlag {
 		req.CustomFields = builder.customFields
 	}
@@ -35336,6 +36340,38 @@ func (builder *PreHireEmploymentInfoBuilder) Build() *PreHireEmploymentInfo {
 	}
 	if builder.seniorityAdjustInformationListFlag {
 		req.SeniorityAdjustInformationList = builder.seniorityAdjustInformationList
+	}
+	if builder.noticePeriodPositiveVoluntaryFlag {
+		req.NoticePeriodPositiveVoluntary = builder.noticePeriodPositiveVoluntary
+	}
+	if builder.noticePeriodProbationInvoluntaryFlag {
+		req.NoticePeriodProbationInvoluntary = builder.noticePeriodProbationInvoluntary
+	}
+	if builder.noticePeriodPositiveInvoluntaryFlag {
+		req.NoticePeriodPositiveInvoluntary = builder.noticePeriodPositiveInvoluntary
+	}
+	if builder.noticePeriodProbationVoluntaryFlag {
+		req.NoticePeriodProbationVoluntary = builder.noticePeriodProbationVoluntary
+	}
+	if builder.workingHoursTypeManualUpdatedFlag {
+		req.WorkingHoursTypeManualUpdated = &builder.workingHoursTypeManualUpdated
+
+	}
+	if builder.isOverDueFlag {
+		req.IsOverDue = &builder.isOverDue
+
+	}
+	if builder.taskCompletedFlag {
+		req.TaskCompleted = &builder.taskCompleted
+
+	}
+	if builder.expectedGraduateDateFlag {
+		req.ExpectedGraduateDate = &builder.expectedGraduateDate
+
+	}
+	if builder.serviceCompanyFlag {
+		req.ServiceCompany = &builder.serviceCompany
+
 	}
 	return req
 }
@@ -42098,6 +43134,8 @@ type ProfileSettingPersonalBasicInfo struct {
 
 	PreferredName *ProfileSettingName `json:"preferred_name,omitempty"` // 常用姓名
 
+	AdditionalName *string `json:"additional_name,omitempty"` // 别名
+
 	Gender *string `json:"gender,omitempty"` // 性别，枚举值 。可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "gender"
 
 	NationalityV2 *string `json:"nationality_v2,omitempty"` // 国籍ID
@@ -42145,6 +43183,9 @@ type ProfileSettingPersonalBasicInfoBuilder struct {
 
 	preferredName     *ProfileSettingName // 常用姓名
 	preferredNameFlag bool
+
+	additionalName     string // 别名
+	additionalNameFlag bool
 
 	gender     string // 性别，枚举值 。可选项可通过【获取字段详情】接口查询，查询参数如下： object_api_name = "person" custom_api_name = "gender"
 	genderFlag bool
@@ -42227,6 +43268,15 @@ func (builder *ProfileSettingPersonalBasicInfoBuilder) LegalName(legalName *Prof
 func (builder *ProfileSettingPersonalBasicInfoBuilder) PreferredName(preferredName *ProfileSettingName) *ProfileSettingPersonalBasicInfoBuilder {
 	builder.preferredName = preferredName
 	builder.preferredNameFlag = true
+	return builder
+}
+
+// 别名
+//
+// 示例值：王帅
+func (builder *ProfileSettingPersonalBasicInfoBuilder) AdditionalName(additionalName string) *ProfileSettingPersonalBasicInfoBuilder {
+	builder.additionalName = additionalName
+	builder.additionalNameFlag = true
 	return builder
 }
 
@@ -42417,6 +43467,10 @@ func (builder *ProfileSettingPersonalBasicInfoBuilder) Build() *ProfileSettingPe
 	}
 	if builder.preferredNameFlag {
 		req.PreferredName = builder.preferredName
+	}
+	if builder.additionalNameFlag {
+		req.AdditionalName = &builder.additionalName
+
 	}
 	if builder.genderFlag {
 		req.Gender = &builder.gender
@@ -47452,7 +48506,7 @@ type StartProcessParam struct {
 
 	InitiatorId *string `json:"initiator_id,omitempty"` // 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
 
-	SystemInitiator *bool `json:"system_initiator,omitempty"` // 是否为系统身份发起流程
+	SystemInitiator *bool `json:"system_initiator,omitempty"` // 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
 
 	FlowData []*ProcessFormVariableV2 `json:"flow_data,omitempty"` // 业务数据
 }
@@ -47464,7 +48518,7 @@ type StartProcessParamBuilder struct {
 	initiatorId     string // 发起人用户ID，按user_id_type类型传递。如果system_initiator为false，则必填；为true时非必填。
 	initiatorIdFlag bool
 
-	systemInitiator     bool // 是否为系统身份发起流程
+	systemInitiator     bool // 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
 	systemInitiatorFlag bool
 
 	flowData     []*ProcessFormVariableV2 // 业务数据
@@ -47494,7 +48548,7 @@ func (builder *StartProcessParamBuilder) InitiatorId(initiatorId string) *StartP
 	return builder
 }
 
-// 是否为系统身份发起流程
+// 是否为系统身份发起流程。 true - 使用系统身份发起，若使用系统身份；false - 按照所传的人员身份审批
 //
 // 示例值：true
 func (builder *StartProcessParamBuilder) SystemInitiator(systemInitiator bool) *StartProcessParamBuilder {
@@ -49529,6 +50583,145 @@ func (builder *WorkExperienceBuilder) CustomFields(customFields []*ObjectFieldDa
 
 func (builder *WorkExperienceBuilder) Build() *WorkExperience {
 	req := &WorkExperience{}
+	if builder.companyNameFlag {
+		req.CompanyName = &builder.companyName
+
+	}
+	if builder.startTimeFlag {
+		req.StartTime = &builder.startTime
+
+	}
+	if builder.endTimeFlag {
+		req.EndTime = &builder.endTime
+
+	}
+	if builder.jobTitleFlag {
+		req.JobTitle = &builder.jobTitle
+
+	}
+	if builder.descriptionFlag {
+		req.Description = &builder.description
+
+	}
+	if builder.departmentFlag {
+		req.Department = &builder.department
+
+	}
+	if builder.customFieldsFlag {
+		req.CustomFields = builder.customFields
+	}
+	return req
+}
+
+type WorkExperienceForUpdate struct {
+	CompanyName *string `json:"company_name,omitempty"` // 公司名称
+
+	StartTime *string `json:"start_time,omitempty"` // 开始时间
+
+	EndTime *string `json:"end_time,omitempty"` // 结束时间
+
+	JobTitle *string `json:"job_title,omitempty"` // 岗位
+
+	Description *string `json:"description,omitempty"` // 工作描述
+
+	Department *string `json:"department,omitempty"` // 部门
+
+	CustomFields []*ObjectFieldData `json:"custom_fields,omitempty"` // 自定义字段
+}
+
+type WorkExperienceForUpdateBuilder struct {
+	companyName     string // 公司名称
+	companyNameFlag bool
+
+	startTime     string // 开始时间
+	startTimeFlag bool
+
+	endTime     string // 结束时间
+	endTimeFlag bool
+
+	jobTitle     string // 岗位
+	jobTitleFlag bool
+
+	description     string // 工作描述
+	descriptionFlag bool
+
+	department     string // 部门
+	departmentFlag bool
+
+	customFields     []*ObjectFieldData // 自定义字段
+	customFieldsFlag bool
+}
+
+func NewWorkExperienceForUpdateBuilder() *WorkExperienceForUpdateBuilder {
+	builder := &WorkExperienceForUpdateBuilder{}
+	return builder
+}
+
+// 公司名称
+//
+// 示例值：猎豹
+func (builder *WorkExperienceForUpdateBuilder) CompanyName(companyName string) *WorkExperienceForUpdateBuilder {
+	builder.companyName = companyName
+	builder.companyNameFlag = true
+	return builder
+}
+
+// 开始时间
+//
+// 示例值：2015-02-01
+func (builder *WorkExperienceForUpdateBuilder) StartTime(startTime string) *WorkExperienceForUpdateBuilder {
+	builder.startTime = startTime
+	builder.startTimeFlag = true
+	return builder
+}
+
+// 结束时间
+//
+// 示例值：2017-02-01
+func (builder *WorkExperienceForUpdateBuilder) EndTime(endTime string) *WorkExperienceForUpdateBuilder {
+	builder.endTime = endTime
+	builder.endTimeFlag = true
+	return builder
+}
+
+// 岗位
+//
+// 示例值：产品经理
+func (builder *WorkExperienceForUpdateBuilder) JobTitle(jobTitle string) *WorkExperienceForUpdateBuilder {
+	builder.jobTitle = jobTitle
+	builder.jobTitleFlag = true
+	return builder
+}
+
+// 工作描述
+//
+// 示例值：app
+func (builder *WorkExperienceForUpdateBuilder) Description(description string) *WorkExperienceForUpdateBuilder {
+	builder.description = description
+	builder.descriptionFlag = true
+	return builder
+}
+
+// 部门
+//
+// 示例值：部门名称
+func (builder *WorkExperienceForUpdateBuilder) Department(department string) *WorkExperienceForUpdateBuilder {
+	builder.department = department
+	builder.departmentFlag = true
+	return builder
+}
+
+// 自定义字段
+//
+// 示例值：
+func (builder *WorkExperienceForUpdateBuilder) CustomFields(customFields []*ObjectFieldData) *WorkExperienceForUpdateBuilder {
+	builder.customFields = customFields
+	builder.customFieldsFlag = true
+	return builder
+}
+
+func (builder *WorkExperienceForUpdateBuilder) Build() *WorkExperienceForUpdate {
+	req := &WorkExperienceForUpdate{}
 	if builder.companyNameFlag {
 		req.CompanyName = &builder.companyName
 
@@ -54064,6 +55257,82 @@ type PatchCostCenterResp struct {
 }
 
 func (resp *PatchCostCenterResp) Success() bool {
+	return resp.Code == 0
+}
+
+type QueryRecentChangeCostCenterReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewQueryRecentChangeCostCenterReqBuilder() *QueryRecentChangeCostCenterReqBuilder {
+	builder := &QueryRecentChangeCostCenterReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 分页大小，最大 2000
+//
+// 示例值：100
+func (builder *QueryRecentChangeCostCenterReqBuilder) PageSize(pageSize int) *QueryRecentChangeCostCenterReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：6891251722631890445
+func (builder *QueryRecentChangeCostCenterReqBuilder) PageToken(pageToken string) *QueryRecentChangeCostCenterReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 查询的开始时间，支持"yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *QueryRecentChangeCostCenterReqBuilder) StartDate(startDate string) *QueryRecentChangeCostCenterReqBuilder {
+	builder.apiReq.QueryParams.Set("start_date", fmt.Sprint(startDate))
+	return builder
+}
+
+// 查询的结束时间，格式 "yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-04-01 00:00:00
+func (builder *QueryRecentChangeCostCenterReqBuilder) EndDate(endDate string) *QueryRecentChangeCostCenterReqBuilder {
+	builder.apiReq.QueryParams.Set("end_date", fmt.Sprint(endDate))
+	return builder
+}
+
+func (builder *QueryRecentChangeCostCenterReqBuilder) Build() *QueryRecentChangeCostCenterReq {
+	req := &QueryRecentChangeCostCenterReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type QueryRecentChangeCostCenterReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type QueryRecentChangeCostCenterRespData struct {
+	CostCenterIds []string `json:"cost_center_ids,omitempty"` // 成本中心 ID 列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页页码
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
+
+	DeletedCostCenterIds []string `json:"deleted_cost_center_ids,omitempty"` // 删除的成本中心 ID 列表
+}
+
+type QueryRecentChangeCostCenterResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *QueryRecentChangeCostCenterRespData `json:"data"` // 业务数据
+}
+
+func (resp *QueryRecentChangeCostCenterResp) Success() bool {
 	return resp.Code == 0
 }
 
@@ -59608,6 +60877,110 @@ func (resp *QueryEmployeesJobDataResp) Success() bool {
 	return resp.Code == 0
 }
 
+type SearchEnumReqBodyBuilder struct {
+	enumApinameLists     []string // 枚举apiname列表
+	enumApinameListsFlag bool
+}
+
+func NewSearchEnumReqBodyBuilder() *SearchEnumReqBodyBuilder {
+	builder := &SearchEnumReqBodyBuilder{}
+	return builder
+}
+
+// 枚举apiname列表
+//
+// 示例值：
+func (builder *SearchEnumReqBodyBuilder) EnumApinameLists(enumApinameLists []string) *SearchEnumReqBodyBuilder {
+	builder.enumApinameLists = enumApinameLists
+	builder.enumApinameListsFlag = true
+	return builder
+}
+
+func (builder *SearchEnumReqBodyBuilder) Build() *SearchEnumReqBody {
+	req := &SearchEnumReqBody{}
+	if builder.enumApinameListsFlag {
+		req.EnumApinameLists = builder.enumApinameLists
+	}
+	return req
+}
+
+type SearchEnumPathReqBodyBuilder struct {
+	enumApinameLists     []string
+	enumApinameListsFlag bool
+}
+
+func NewSearchEnumPathReqBodyBuilder() *SearchEnumPathReqBodyBuilder {
+	builder := &SearchEnumPathReqBodyBuilder{}
+	return builder
+}
+
+// 枚举apiname列表
+//
+// 示例值：
+func (builder *SearchEnumPathReqBodyBuilder) EnumApinameLists(enumApinameLists []string) *SearchEnumPathReqBodyBuilder {
+	builder.enumApinameLists = enumApinameLists
+	builder.enumApinameListsFlag = true
+	return builder
+}
+
+func (builder *SearchEnumPathReqBodyBuilder) Build() (*SearchEnumReqBody, error) {
+	req := &SearchEnumReqBody{}
+	if builder.enumApinameListsFlag {
+		req.EnumApinameLists = builder.enumApinameLists
+	}
+	return req, nil
+}
+
+type SearchEnumReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *SearchEnumReqBody
+}
+
+func NewSearchEnumReqBuilder() *SearchEnumReqBuilder {
+	builder := &SearchEnumReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 通过apiname批量获取枚举信息
+func (builder *SearchEnumReqBuilder) Body(body *SearchEnumReqBody) *SearchEnumReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *SearchEnumReqBuilder) Build() *SearchEnumReq {
+	req := &SearchEnumReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type SearchEnumReqBody struct {
+	EnumApinameLists []string `json:"enum_apiname_lists,omitempty"` // 枚举apiname列表
+}
+
+type SearchEnumReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *SearchEnumReqBody `body:""`
+}
+
+type SearchEnumRespData struct {
+	Enums []*Enums `json:"enums,omitempty"` // 查询的枚举信息
+}
+
+type SearchEnumResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *SearchEnumRespData `json:"data"` // 业务数据
+}
+
+func (resp *SearchEnumResp) Success() bool {
+	return resp.Code == 0
+}
+
 type GetJobReqBuilder struct {
 	apiReq *larkcore.ApiReq
 }
@@ -60704,6 +62077,82 @@ func (resp *BatchGetJobFamilyResp) Success() bool {
 	return resp.Code == 0
 }
 
+type QueryRecentChangeJobFamilyReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewQueryRecentChangeJobFamilyReqBuilder() *QueryRecentChangeJobFamilyReqBuilder {
+	builder := &QueryRecentChangeJobFamilyReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 分页大小，最大 2000
+//
+// 示例值：100
+func (builder *QueryRecentChangeJobFamilyReqBuilder) PageSize(pageSize int) *QueryRecentChangeJobFamilyReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：6891251722631890445
+func (builder *QueryRecentChangeJobFamilyReqBuilder) PageToken(pageToken string) *QueryRecentChangeJobFamilyReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 查询的开始时间，支持"yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *QueryRecentChangeJobFamilyReqBuilder) StartDate(startDate string) *QueryRecentChangeJobFamilyReqBuilder {
+	builder.apiReq.QueryParams.Set("start_date", fmt.Sprint(startDate))
+	return builder
+}
+
+// 查询的结束时间，格式 "yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-04-01 00:00:00
+func (builder *QueryRecentChangeJobFamilyReqBuilder) EndDate(endDate string) *QueryRecentChangeJobFamilyReqBuilder {
+	builder.apiReq.QueryParams.Set("end_date", fmt.Sprint(endDate))
+	return builder
+}
+
+func (builder *QueryRecentChangeJobFamilyReqBuilder) Build() *QueryRecentChangeJobFamilyReq {
+	req := &QueryRecentChangeJobFamilyReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type QueryRecentChangeJobFamilyReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type QueryRecentChangeJobFamilyRespData struct {
+	JobFamilyIds []string `json:"job_family_ids,omitempty"` // 序列 ID 列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页页码
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
+
+	DeletedJobFamilyIds []string `json:"deleted_job_family_ids,omitempty"` // 删除的序列 ID 列表
+}
+
+type QueryRecentChangeJobFamilyResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *QueryRecentChangeJobFamilyRespData `json:"data"` // 业务数据
+}
+
+func (resp *QueryRecentChangeJobFamilyResp) Success() bool {
+	return resp.Code == 0
+}
+
 type CreateJobGradeReqBuilder struct {
 	apiReq         *larkcore.ApiReq
 	jobGradeCreate *JobGradeCreate
@@ -61046,6 +62495,82 @@ func (resp *QueryJobGradeResp) Success() bool {
 	return resp.Code == 0
 }
 
+type QueryRecentChangeJobGradeReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewQueryRecentChangeJobGradeReqBuilder() *QueryRecentChangeJobGradeReqBuilder {
+	builder := &QueryRecentChangeJobGradeReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 分页大小，最大 2000
+//
+// 示例值：100
+func (builder *QueryRecentChangeJobGradeReqBuilder) PageSize(pageSize int) *QueryRecentChangeJobGradeReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：6891251722631890445
+func (builder *QueryRecentChangeJobGradeReqBuilder) PageToken(pageToken string) *QueryRecentChangeJobGradeReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 查询的开始时间，支持"yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *QueryRecentChangeJobGradeReqBuilder) StartDate(startDate string) *QueryRecentChangeJobGradeReqBuilder {
+	builder.apiReq.QueryParams.Set("start_date", fmt.Sprint(startDate))
+	return builder
+}
+
+// 查询的结束时间，格式 "yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-04-01 00:00:00
+func (builder *QueryRecentChangeJobGradeReqBuilder) EndDate(endDate string) *QueryRecentChangeJobGradeReqBuilder {
+	builder.apiReq.QueryParams.Set("end_date", fmt.Sprint(endDate))
+	return builder
+}
+
+func (builder *QueryRecentChangeJobGradeReqBuilder) Build() *QueryRecentChangeJobGradeReq {
+	req := &QueryRecentChangeJobGradeReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type QueryRecentChangeJobGradeReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type QueryRecentChangeJobGradeRespData struct {
+	JobGradeIds []string `json:"job_grade_ids,omitempty"` // 职等 ID 列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页页码
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
+
+	DeletedJobGradeIds []string `json:"deleted_job_grade_ids,omitempty"` // 删除的职等 ID 列表
+}
+
+type QueryRecentChangeJobGradeResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *QueryRecentChangeJobGradeRespData `json:"data"` // 业务数据
+}
+
+func (resp *QueryRecentChangeJobGradeResp) Success() bool {
+	return resp.Code == 0
+}
+
 type BatchGetJobLevelReqBodyBuilder struct {
 	jobLevelIds     []string // 职级 ID 列表
 	jobLevelIdsFlag bool
@@ -61147,6 +62672,82 @@ type BatchGetJobLevelResp struct {
 }
 
 func (resp *BatchGetJobLevelResp) Success() bool {
+	return resp.Code == 0
+}
+
+type QueryRecentChangeJobLevelReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewQueryRecentChangeJobLevelReqBuilder() *QueryRecentChangeJobLevelReqBuilder {
+	builder := &QueryRecentChangeJobLevelReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 分页大小，最大 2000
+//
+// 示例值：100
+func (builder *QueryRecentChangeJobLevelReqBuilder) PageSize(pageSize int) *QueryRecentChangeJobLevelReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：6891251722631890445
+func (builder *QueryRecentChangeJobLevelReqBuilder) PageToken(pageToken string) *QueryRecentChangeJobLevelReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 查询的开始时间，支持"yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *QueryRecentChangeJobLevelReqBuilder) StartDate(startDate string) *QueryRecentChangeJobLevelReqBuilder {
+	builder.apiReq.QueryParams.Set("start_date", fmt.Sprint(startDate))
+	return builder
+}
+
+// 查询的结束时间，格式 "yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-04-01 00:00:00
+func (builder *QueryRecentChangeJobLevelReqBuilder) EndDate(endDate string) *QueryRecentChangeJobLevelReqBuilder {
+	builder.apiReq.QueryParams.Set("end_date", fmt.Sprint(endDate))
+	return builder
+}
+
+func (builder *QueryRecentChangeJobLevelReqBuilder) Build() *QueryRecentChangeJobLevelReq {
+	req := &QueryRecentChangeJobLevelReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type QueryRecentChangeJobLevelReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type QueryRecentChangeJobLevelRespData struct {
+	JobLevelIds []string `json:"job_level_ids,omitempty"` // 职级 ID 列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页页码
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
+
+	DeletedJobLevelIds []string `json:"deleted_job_level_ids,omitempty"` // 删除的职级 ID 列表
+}
+
+type QueryRecentChangeJobLevelResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *QueryRecentChangeJobLevelRespData `json:"data"` // 业务数据
+}
+
+func (resp *QueryRecentChangeJobLevelResp) Success() bool {
 	return resp.Code == 0
 }
 
@@ -61502,6 +63103,82 @@ type PatchLocationResp struct {
 }
 
 func (resp *PatchLocationResp) Success() bool {
+	return resp.Code == 0
+}
+
+type QueryRecentChangeLocationReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewQueryRecentChangeLocationReqBuilder() *QueryRecentChangeLocationReqBuilder {
+	builder := &QueryRecentChangeLocationReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 分页大小，最大 2000
+//
+// 示例值：100
+func (builder *QueryRecentChangeLocationReqBuilder) PageSize(pageSize int) *QueryRecentChangeLocationReqBuilder {
+	builder.apiReq.QueryParams.Set("page_size", fmt.Sprint(pageSize))
+	return builder
+}
+
+// 页标记，第一次请求不填，表示从头开始遍历；分页查询结果还有更多项时会同时返回新的 page_token，下次遍历可采用该 page_token 获取查询结果
+//
+// 示例值：6891251722631890445
+func (builder *QueryRecentChangeLocationReqBuilder) PageToken(pageToken string) *QueryRecentChangeLocationReqBuilder {
+	builder.apiReq.QueryParams.Set("page_token", fmt.Sprint(pageToken))
+	return builder
+}
+
+// 查询的开始时间，支持"yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *QueryRecentChangeLocationReqBuilder) StartDate(startDate string) *QueryRecentChangeLocationReqBuilder {
+	builder.apiReq.QueryParams.Set("start_date", fmt.Sprint(startDate))
+	return builder
+}
+
+// 查询的结束时间，格式 "yyyy-MM-dd HH:MM:SS"
+//
+// 示例值：2024-04-01 00:00:00
+func (builder *QueryRecentChangeLocationReqBuilder) EndDate(endDate string) *QueryRecentChangeLocationReqBuilder {
+	builder.apiReq.QueryParams.Set("end_date", fmt.Sprint(endDate))
+	return builder
+}
+
+func (builder *QueryRecentChangeLocationReqBuilder) Build() *QueryRecentChangeLocationReq {
+	req := &QueryRecentChangeLocationReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type QueryRecentChangeLocationReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type QueryRecentChangeLocationRespData struct {
+	LocationIds []string `json:"location_ids,omitempty"` // 地点 ID 列表
+
+	PageToken *string `json:"page_token,omitempty"` // 下一页页码
+
+	HasMore *bool `json:"has_more,omitempty"` // 是否有下一页
+
+	DeletedLocationIds []string `json:"deleted_location_ids,omitempty"` // 删除的地点 ID 列表
+}
+
+type QueryRecentChangeLocationResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *QueryRecentChangeLocationRespData `json:"data"` // 业务数据
+}
+
+func (resp *QueryRecentChangeLocationResp) Success() bool {
 	return resp.Code == 0
 }
 

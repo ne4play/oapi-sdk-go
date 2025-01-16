@@ -35,6 +35,7 @@ func main() {
 		PageSize(10).
 		PageToken("2").
 		TargetGeo("cn").
+		WithProductVersion(true).
 		Build()
 	// 发起请求
 	resp, err := client.Admin.V1.AdminDeptStat.List(context.Background(), req)

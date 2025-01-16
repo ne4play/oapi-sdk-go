@@ -29402,6 +29402,8 @@ type P2CommonDataMetaDataUpdatedV1Data struct {
 	FieldChanges []string `json:"field_changes,omitempty"` // 变更的字段
 
 	MetadataType *string `json:"metadata_type,omitempty"` // 变更的元数据类型
+
+	EnumValueChanges []string `json:"enum_value_changes,omitempty"` // 变更的枚举
 }
 
 type P2CommonDataMetaDataUpdatedV1 struct {

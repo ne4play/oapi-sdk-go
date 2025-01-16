@@ -56,8 +56,6 @@ func main() {
 			WorkShift(larkcorehr.NewEnumBuilder().Build()).
 			CompensationType(larkcorehr.NewEnumBuilder().Build()).
 			ServiceCompany("6890452208593372680").
-			EmployeeSubtypeId("6890452208593372680").
-			PositionId("6890452208593372679").
 			Build()).
 		Build()
 	// 发起请求

@@ -35,6 +35,7 @@ func main() {
 	req := larkcorehr.NewUploadPersonReqBuilder().
 		Body(larkcorehr.NewUploadPersonReqBodyBuilder().
 			FileContent(file).
+			FileName("filename.ext").
 			FileName("个人信息").
 			Build()).
 		Build()
