@@ -5642,6 +5642,8 @@ type ApplicationOfferBasicInfo struct {
 	PositionId *string `json:"position_id,omitempty"` // 岗位 ID
 
 	JobOffered *string `json:"job_offered,omitempty"` // 入职职位
+
+	JobGradeId *string `json:"job_grade_id,omitempty"` // 职等 ID
 }
 
 type ApplicationOfferBasicInfoBuilder struct {
@@ -5710,6 +5712,9 @@ type ApplicationOfferBasicInfoBuilder struct {
 
 	jobOffered     string // 入职职位
 	jobOfferedFlag bool
+
+	jobGradeId     string // 职等 ID
+	jobGradeIdFlag bool
 }
 
 func NewApplicationOfferBasicInfoBuilder() *ApplicationOfferBasicInfoBuilder {
@@ -5915,6 +5920,15 @@ func (builder *ApplicationOfferBasicInfoBuilder) JobOffered(jobOffered string) *
 	return builder
 }
 
+// 职等 ID
+//
+// 示例值：123
+func (builder *ApplicationOfferBasicInfoBuilder) JobGradeId(jobGradeId string) *ApplicationOfferBasicInfoBuilder {
+	builder.jobGradeId = jobGradeId
+	builder.jobGradeIdFlag = true
+	return builder
+}
+
 func (builder *ApplicationOfferBasicInfoBuilder) Build() *ApplicationOfferBasicInfo {
 	req := &ApplicationOfferBasicInfo{}
 	if builder.offerTypeFlag {
@@ -5994,6 +6008,10 @@ func (builder *ApplicationOfferBasicInfoBuilder) Build() *ApplicationOfferBasicI
 	}
 	if builder.jobOfferedFlag {
 		req.JobOffered = &builder.jobOffered
+
+	}
+	if builder.jobGradeIdFlag {
+		req.JobGradeId = &builder.jobGradeId
 
 	}
 	return req
@@ -9693,6 +9711,92 @@ func (builder *ApplicationWebsiteResumeSourceBuilder) Build() *ApplicationWebsit
 	}
 	if builder.channelFlag {
 		req.Channel = builder.channel
+	}
+	return req
+}
+
+type AssessInterviewOption struct {
+	IgnoreMinutes *bool `json:"ignore_minutes,omitempty"` // 忽略面评草稿中的面试速记信息
+
+	IgnoreCodingQuestion *bool `json:"ignore_coding_question,omitempty"` // 忽略面评草稿中的代码考核题
+
+	IgnoreInterviewQuestion *bool `json:"ignore_interview_question,omitempty"` // 忽略面评草稿中的面试题
+
+	IgnoreImage *bool `json:"ignore_image,omitempty"` // 忽略面评草稿中的图片
+}
+
+type AssessInterviewOptionBuilder struct {
+	ignoreMinutes     bool // 忽略面评草稿中的面试速记信息
+	ignoreMinutesFlag bool
+
+	ignoreCodingQuestion     bool // 忽略面评草稿中的代码考核题
+	ignoreCodingQuestionFlag bool
+
+	ignoreInterviewQuestion     bool // 忽略面评草稿中的面试题
+	ignoreInterviewQuestionFlag bool
+
+	ignoreImage     bool // 忽略面评草稿中的图片
+	ignoreImageFlag bool
+}
+
+func NewAssessInterviewOptionBuilder() *AssessInterviewOptionBuilder {
+	builder := &AssessInterviewOptionBuilder{}
+	return builder
+}
+
+// 忽略面评草稿中的面试速记信息
+//
+// 示例值：false
+func (builder *AssessInterviewOptionBuilder) IgnoreMinutes(ignoreMinutes bool) *AssessInterviewOptionBuilder {
+	builder.ignoreMinutes = ignoreMinutes
+	builder.ignoreMinutesFlag = true
+	return builder
+}
+
+// 忽略面评草稿中的代码考核题
+//
+// 示例值：false
+func (builder *AssessInterviewOptionBuilder) IgnoreCodingQuestion(ignoreCodingQuestion bool) *AssessInterviewOptionBuilder {
+	builder.ignoreCodingQuestion = ignoreCodingQuestion
+	builder.ignoreCodingQuestionFlag = true
+	return builder
+}
+
+// 忽略面评草稿中的面试题
+//
+// 示例值：false
+func (builder *AssessInterviewOptionBuilder) IgnoreInterviewQuestion(ignoreInterviewQuestion bool) *AssessInterviewOptionBuilder {
+	builder.ignoreInterviewQuestion = ignoreInterviewQuestion
+	builder.ignoreInterviewQuestionFlag = true
+	return builder
+}
+
+// 忽略面评草稿中的图片
+//
+// 示例值：false
+func (builder *AssessInterviewOptionBuilder) IgnoreImage(ignoreImage bool) *AssessInterviewOptionBuilder {
+	builder.ignoreImage = ignoreImage
+	builder.ignoreImageFlag = true
+	return builder
+}
+
+func (builder *AssessInterviewOptionBuilder) Build() *AssessInterviewOption {
+	req := &AssessInterviewOption{}
+	if builder.ignoreMinutesFlag {
+		req.IgnoreMinutes = &builder.ignoreMinutes
+
+	}
+	if builder.ignoreCodingQuestionFlag {
+		req.IgnoreCodingQuestion = &builder.ignoreCodingQuestion
+
+	}
+	if builder.ignoreInterviewQuestionFlag {
+		req.IgnoreInterviewQuestion = &builder.ignoreInterviewQuestion
+
+	}
+	if builder.ignoreImageFlag {
+		req.IgnoreImage = &builder.ignoreImage
+
 	}
 	return req
 }
@@ -15414,6 +15518,127 @@ func (builder *DimensionAssessmentBuilder) Build() *DimensionAssessment {
 	}
 	if builder.questionAssessmentsFlag {
 		req.QuestionAssessments = builder.questionAssessments
+	}
+	return req
+}
+
+type DimensionAssessmentRequest struct {
+	DimensionId *string `json:"dimension_id,omitempty"` // 评价维度ID
+
+	Content *string `json:"content,omitempty"` // 内容评价，描述题、系统预置-记录维度使用
+
+	OptionIds []string `json:"option_ids,omitempty"` // 选项评价，单选题、多选题、打分题(单选)、系统预置-结论、系统预置-得分 维度使用
+
+	ScoreValue *int `json:"score_value,omitempty"` // 得分评价，打分题(填空)维度使用
+
+	MinJobLevelId *string `json:"min_job_level_id,omitempty"` // 职级建议下限，职级建议维度使用，「无法判断」时，值为-1.  职级ID可从【获取租户职级列表】接口获取
+
+	MaxJobLevelId *string `json:"max_job_level_id,omitempty"` // 职级建议上限，职级建议维度使用，「无法判断」时，值为-1.  职级ID可从【获取租户职级列表】接口获取
+}
+
+type DimensionAssessmentRequestBuilder struct {
+	dimensionId     string // 评价维度ID
+	dimensionIdFlag bool
+
+	content     string // 内容评价，描述题、系统预置-记录维度使用
+	contentFlag bool
+
+	optionIds     []string // 选项评价，单选题、多选题、打分题(单选)、系统预置-结论、系统预置-得分 维度使用
+	optionIdsFlag bool
+
+	scoreValue     int // 得分评价，打分题(填空)维度使用
+	scoreValueFlag bool
+
+	minJobLevelId     string // 职级建议下限，职级建议维度使用，「无法判断」时，值为-1.  职级ID可从【获取租户职级列表】接口获取
+	minJobLevelIdFlag bool
+
+	maxJobLevelId     string // 职级建议上限，职级建议维度使用，「无法判断」时，值为-1.  职级ID可从【获取租户职级列表】接口获取
+	maxJobLevelIdFlag bool
+}
+
+func NewDimensionAssessmentRequestBuilder() *DimensionAssessmentRequestBuilder {
+	builder := &DimensionAssessmentRequestBuilder{}
+	return builder
+}
+
+// 评价维度ID
+//
+// 示例值：7484008015926434905
+func (builder *DimensionAssessmentRequestBuilder) DimensionId(dimensionId string) *DimensionAssessmentRequestBuilder {
+	builder.dimensionId = dimensionId
+	builder.dimensionIdFlag = true
+	return builder
+}
+
+// 内容评价，描述题、系统预置-记录维度使用
+//
+// 示例值：面试评价
+func (builder *DimensionAssessmentRequestBuilder) Content(content string) *DimensionAssessmentRequestBuilder {
+	builder.content = content
+	builder.contentFlag = true
+	return builder
+}
+
+// 选项评价，单选题、多选题、打分题(单选)、系统预置-结论、系统预置-得分 维度使用
+//
+// 示例值：
+func (builder *DimensionAssessmentRequestBuilder) OptionIds(optionIds []string) *DimensionAssessmentRequestBuilder {
+	builder.optionIds = optionIds
+	builder.optionIdsFlag = true
+	return builder
+}
+
+// 得分评价，打分题(填空)维度使用
+//
+// 示例值：20
+func (builder *DimensionAssessmentRequestBuilder) ScoreValue(scoreValue int) *DimensionAssessmentRequestBuilder {
+	builder.scoreValue = scoreValue
+	builder.scoreValueFlag = true
+	return builder
+}
+
+// 职级建议下限，职级建议维度使用，「无法判断」时，值为-1.  职级ID可从【获取租户职级列表】接口获取
+//
+// 示例值：7484008015926434905
+func (builder *DimensionAssessmentRequestBuilder) MinJobLevelId(minJobLevelId string) *DimensionAssessmentRequestBuilder {
+	builder.minJobLevelId = minJobLevelId
+	builder.minJobLevelIdFlag = true
+	return builder
+}
+
+// 职级建议上限，职级建议维度使用，「无法判断」时，值为-1.  职级ID可从【获取租户职级列表】接口获取
+//
+// 示例值：7484008015926434905
+func (builder *DimensionAssessmentRequestBuilder) MaxJobLevelId(maxJobLevelId string) *DimensionAssessmentRequestBuilder {
+	builder.maxJobLevelId = maxJobLevelId
+	builder.maxJobLevelIdFlag = true
+	return builder
+}
+
+func (builder *DimensionAssessmentRequestBuilder) Build() *DimensionAssessmentRequest {
+	req := &DimensionAssessmentRequest{}
+	if builder.dimensionIdFlag {
+		req.DimensionId = &builder.dimensionId
+
+	}
+	if builder.contentFlag {
+		req.Content = &builder.content
+
+	}
+	if builder.optionIdsFlag {
+		req.OptionIds = builder.optionIds
+	}
+	if builder.scoreValueFlag {
+		req.ScoreValue = &builder.scoreValue
+
+	}
+	if builder.minJobLevelIdFlag {
+		req.MinJobLevelId = &builder.minJobLevelId
+
+	}
+	if builder.maxJobLevelIdFlag {
+		req.MaxJobLevelId = &builder.maxJobLevelId
+
 	}
 	return req
 }
@@ -33948,6 +34173,8 @@ type OfferBasicInfo struct {
 	PositionId *string `json:"position_id,omitempty"` // 岗位 ID
 
 	JobOffered *string `json:"job_offered,omitempty"` // 入职职位
+
+	JobGradeId *string `json:"job_grade_id,omitempty"` // 职等 ID
 }
 
 type OfferBasicInfoBuilder struct {
@@ -34013,6 +34240,9 @@ type OfferBasicInfoBuilder struct {
 
 	jobOffered     string // 入职职位
 	jobOfferedFlag bool
+
+	jobGradeId     string // 职等 ID
+	jobGradeIdFlag bool
 }
 
 func NewOfferBasicInfoBuilder() *OfferBasicInfoBuilder {
@@ -34209,6 +34439,15 @@ func (builder *OfferBasicInfoBuilder) JobOffered(jobOffered string) *OfferBasicI
 	return builder
 }
 
+// 职等 ID
+//
+// 示例值：6897079709306259720
+func (builder *OfferBasicInfoBuilder) JobGradeId(jobGradeId string) *OfferBasicInfoBuilder {
+	builder.jobGradeId = jobGradeId
+	builder.jobGradeIdFlag = true
+	return builder
+}
+
 func (builder *OfferBasicInfoBuilder) Build() *OfferBasicInfo {
 	req := &OfferBasicInfo{}
 	if builder.departmentIdFlag {
@@ -34291,6 +34530,10 @@ func (builder *OfferBasicInfoBuilder) Build() *OfferBasicInfo {
 	}
 	if builder.jobOfferedFlag {
 		req.JobOffered = &builder.jobOffered
+
+	}
+	if builder.jobGradeIdFlag {
+		req.JobGradeId = &builder.jobGradeId
 
 	}
 	return req

@@ -4975,9 +4975,9 @@ type SimpleGetRelatedUsersRequest struct {
 
 	TopK *int `json:"top_k,omitempty"` // 获取相关用户的最大人数
 
-	StartTimeFilter *string `json:"start_time_filter,omitempty"` // 最早的交互时间，闭区间，默认不限制，ms
+	StartTimeFilter *string `json:"start_time_filter,omitempty"` // 最早的交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
 
-	EndTimeFilter *string `json:"end_time_filter,omitempty"` // 最晚交互时间，闭区间，默认不限制，ms
+	EndTimeFilter *string `json:"end_time_filter,omitempty"` // 最晚交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
 }
 
 type SimpleGetRelatedUsersRequestBuilder struct {
@@ -4987,10 +4987,10 @@ type SimpleGetRelatedUsersRequestBuilder struct {
 	topK     int // 获取相关用户的最大人数
 	topKFlag bool
 
-	startTimeFilter     string // 最早的交互时间，闭区间，默认不限制，ms
+	startTimeFilter     string // 最早的交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
 	startTimeFilterFlag bool
 
-	endTimeFilter     string // 最晚交互时间，闭区间，默认不限制，ms
+	endTimeFilter     string // 最晚交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
 	endTimeFilterFlag bool
 }
 
@@ -5001,7 +5001,7 @@ func NewSimpleGetRelatedUsersRequestBuilder() *SimpleGetRelatedUsersRequestBuild
 
 // 用户id
 //
-// 示例值：7075326257193287699
+// 示例值：fdsfds2
 func (builder *SimpleGetRelatedUsersRequestBuilder) UserId(userId string) *SimpleGetRelatedUsersRequestBuilder {
 	builder.userId = userId
 	builder.userIdFlag = true
@@ -5017,7 +5017,7 @@ func (builder *SimpleGetRelatedUsersRequestBuilder) TopK(topK int) *SimpleGetRel
 	return builder
 }
 
-// 最早的交互时间，闭区间，默认不限制，ms
+// 最早的交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
 //
 // 示例值：1704768318000
 func (builder *SimpleGetRelatedUsersRequestBuilder) StartTimeFilter(startTimeFilter string) *SimpleGetRelatedUsersRequestBuilder {
@@ -5026,7 +5026,7 @@ func (builder *SimpleGetRelatedUsersRequestBuilder) StartTimeFilter(startTimeFil
 	return builder
 }
 
-// 最晚交互时间，闭区间，默认不限制，ms
+// 最晚交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
 //
 // 示例值：1736390718000
 func (builder *SimpleGetRelatedUsersRequestBuilder) EndTimeFilter(endTimeFilter string) *SimpleGetRelatedUsersRequestBuilder {

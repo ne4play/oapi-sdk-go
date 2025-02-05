@@ -5424,6 +5424,8 @@ type FileRiskDetectionRecordResult struct {
 	Status *string `json:"status,omitempty"` // 检测状态
 
 	RiskTag *string `json:"risk_tag,omitempty"` // 风险类型
+
+	NeedBotNotify *bool `json:"need_bot_notify,omitempty"` // 是否需要机器人通知
 }
 
 type FileRiskDetectionRecordResultBuilder struct {
@@ -5432,6 +5434,9 @@ type FileRiskDetectionRecordResultBuilder struct {
 
 	riskTag     string // 风险类型
 	riskTagFlag bool
+
+	needBotNotify     bool // 是否需要机器人通知
+	needBotNotifyFlag bool
 }
 
 func NewFileRiskDetectionRecordResultBuilder() *FileRiskDetectionRecordResultBuilder {
@@ -5457,6 +5462,15 @@ func (builder *FileRiskDetectionRecordResultBuilder) RiskTag(riskTag string) *Fi
 	return builder
 }
 
+// 是否需要机器人通知
+//
+// 示例值：true
+func (builder *FileRiskDetectionRecordResultBuilder) NeedBotNotify(needBotNotify bool) *FileRiskDetectionRecordResultBuilder {
+	builder.needBotNotify = needBotNotify
+	builder.needBotNotifyFlag = true
+	return builder
+}
+
 func (builder *FileRiskDetectionRecordResultBuilder) Build() *FileRiskDetectionRecordResult {
 	req := &FileRiskDetectionRecordResult{}
 	if builder.statusFlag {
@@ -5465,6 +5479,10 @@ func (builder *FileRiskDetectionRecordResultBuilder) Build() *FileRiskDetectionR
 	}
 	if builder.riskTagFlag {
 		req.RiskTag = &builder.riskTag
+
+	}
+	if builder.needBotNotifyFlag {
+		req.NeedBotNotify = &builder.needBotNotify
 
 	}
 	return req

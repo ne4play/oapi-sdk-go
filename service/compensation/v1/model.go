@@ -210,6 +210,10 @@ type ArchiveDetail struct {
 
 	SalaryLevelId *string `json:"salary_level_id,omitempty"` // 薪级薪等ID
 
+	CreatedTime *string `json:"created_time,omitempty"` // 创建时间
+
+	UpdatedTime *string `json:"updated_time,omitempty"` // 更新时间
+
 	ArchiveItems []*ArchiveItem `json:"archive_items,omitempty"` // 档案关联的薪资项
 
 	ArchiveIndicators []*ArchiveIndicator `json:"archive_indicators,omitempty"` // 档案关联的薪资指标
@@ -248,6 +252,12 @@ type ArchiveDetailBuilder struct {
 
 	salaryLevelId     string // 薪级薪等ID
 	salaryLevelIdFlag bool
+
+	createdTime     string // 创建时间
+	createdTimeFlag bool
+
+	updatedTime     string // 更新时间
+	updatedTimeFlag bool
 
 	archiveItems     []*ArchiveItem // 档案关联的薪资项
 	archiveItemsFlag bool
@@ -360,6 +370,24 @@ func (builder *ArchiveDetailBuilder) SalaryLevelId(salaryLevelId string) *Archiv
 	return builder
 }
 
+// 创建时间
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *ArchiveDetailBuilder) CreatedTime(createdTime string) *ArchiveDetailBuilder {
+	builder.createdTime = createdTime
+	builder.createdTimeFlag = true
+	return builder
+}
+
+// 更新时间
+//
+// 示例值：2024-01-01 00:00:00
+func (builder *ArchiveDetailBuilder) UpdatedTime(updatedTime string) *ArchiveDetailBuilder {
+	builder.updatedTime = updatedTime
+	builder.updatedTimeFlag = true
+	return builder
+}
+
 // 档案关联的薪资项
 //
 // 示例值：
@@ -422,6 +450,14 @@ func (builder *ArchiveDetailBuilder) Build() *ArchiveDetail {
 	}
 	if builder.salaryLevelIdFlag {
 		req.SalaryLevelId = &builder.salaryLevelId
+
+	}
+	if builder.createdTimeFlag {
+		req.CreatedTime = &builder.createdTime
+
+	}
+	if builder.updatedTimeFlag {
+		req.UpdatedTime = &builder.updatedTime
 
 	}
 	if builder.archiveItemsFlag {
