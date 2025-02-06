@@ -54,7 +54,7 @@ type CardActionTriggerResponse struct {
 type Toast struct {
 	Type        string            `json:"type,omitempty"`
 	Content     string            `json:"content,omitempty"`
-	I18nContent map[string]string `json:"i_18_n_content,omitempty"`
+	I18nContent map[string]string `json:"i18n,omitempty"`
 }
 
 type Card struct {
