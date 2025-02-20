@@ -220,6 +220,146 @@ const (
 	EmployeeTypeQueryUserAllowedRemedysUserTaskRemedyEmployeeNo = "employee_no" // 员工工号
 )
 
+type AntiCheatPunch struct {
+	InterceptSuspectedCheatPunch *bool `json:"intercept_suspected_cheat_punch,omitempty"` // 拦截疑似作弊打卡
+
+	CheckCheatSoftwarePunch *bool `json:"check_cheat_software_punch,omitempty"` // 是否校验疑似作弊软件打卡
+
+	CheckBuddyPunch *bool `json:"check_buddy_punch,omitempty"` // 是否校验疑似他人代打卡
+
+	CheckSimulateWifiPunch *bool `json:"check_simulate_wifi_punch,omitempty"` // 是否校验疑似模拟 WI-FI 打卡
+
+	CheckChangeDevicePunch *bool `json:"check_change_device_punch,omitempty"` // 是否校验更换设备打卡
+
+	AllowChangeDeviceNum *int `json:"allow_change_device_num,omitempty"` // 同一考勤人员最多可绑定打卡设备数量上限，开启校验更换设备打卡时必填，默认为 2
+
+	SuspectedCheatHandleMethod *int `json:"suspected_cheat_handle_method,omitempty"` // 疑似作弊打卡时的处理方式
+}
+
+type AntiCheatPunchBuilder struct {
+	interceptSuspectedCheatPunch     bool // 拦截疑似作弊打卡
+	interceptSuspectedCheatPunchFlag bool
+
+	checkCheatSoftwarePunch     bool // 是否校验疑似作弊软件打卡
+	checkCheatSoftwarePunchFlag bool
+
+	checkBuddyPunch     bool // 是否校验疑似他人代打卡
+	checkBuddyPunchFlag bool
+
+	checkSimulateWifiPunch     bool // 是否校验疑似模拟 WI-FI 打卡
+	checkSimulateWifiPunchFlag bool
+
+	checkChangeDevicePunch     bool // 是否校验更换设备打卡
+	checkChangeDevicePunchFlag bool
+
+	allowChangeDeviceNum     int // 同一考勤人员最多可绑定打卡设备数量上限，开启校验更换设备打卡时必填，默认为 2
+	allowChangeDeviceNumFlag bool
+
+	suspectedCheatHandleMethod     int // 疑似作弊打卡时的处理方式
+	suspectedCheatHandleMethodFlag bool
+}
+
+func NewAntiCheatPunchBuilder() *AntiCheatPunchBuilder {
+	builder := &AntiCheatPunchBuilder{}
+	return builder
+}
+
+// 拦截疑似作弊打卡
+//
+// 示例值：true
+func (builder *AntiCheatPunchBuilder) InterceptSuspectedCheatPunch(interceptSuspectedCheatPunch bool) *AntiCheatPunchBuilder {
+	builder.interceptSuspectedCheatPunch = interceptSuspectedCheatPunch
+	builder.interceptSuspectedCheatPunchFlag = true
+	return builder
+}
+
+// 是否校验疑似作弊软件打卡
+//
+// 示例值：false
+func (builder *AntiCheatPunchBuilder) CheckCheatSoftwarePunch(checkCheatSoftwarePunch bool) *AntiCheatPunchBuilder {
+	builder.checkCheatSoftwarePunch = checkCheatSoftwarePunch
+	builder.checkCheatSoftwarePunchFlag = true
+	return builder
+}
+
+// 是否校验疑似他人代打卡
+//
+// 示例值：false
+func (builder *AntiCheatPunchBuilder) CheckBuddyPunch(checkBuddyPunch bool) *AntiCheatPunchBuilder {
+	builder.checkBuddyPunch = checkBuddyPunch
+	builder.checkBuddyPunchFlag = true
+	return builder
+}
+
+// 是否校验疑似模拟 WI-FI 打卡
+//
+// 示例值：false
+func (builder *AntiCheatPunchBuilder) CheckSimulateWifiPunch(checkSimulateWifiPunch bool) *AntiCheatPunchBuilder {
+	builder.checkSimulateWifiPunch = checkSimulateWifiPunch
+	builder.checkSimulateWifiPunchFlag = true
+	return builder
+}
+
+// 是否校验更换设备打卡
+//
+// 示例值：false
+func (builder *AntiCheatPunchBuilder) CheckChangeDevicePunch(checkChangeDevicePunch bool) *AntiCheatPunchBuilder {
+	builder.checkChangeDevicePunch = checkChangeDevicePunch
+	builder.checkChangeDevicePunchFlag = true
+	return builder
+}
+
+// 同一考勤人员最多可绑定打卡设备数量上限，开启校验更换设备打卡时必填，默认为 2
+//
+// 示例值：2
+func (builder *AntiCheatPunchBuilder) AllowChangeDeviceNum(allowChangeDeviceNum int) *AntiCheatPunchBuilder {
+	builder.allowChangeDeviceNum = allowChangeDeviceNum
+	builder.allowChangeDeviceNumFlag = true
+	return builder
+}
+
+// 疑似作弊打卡时的处理方式
+//
+// 示例值：1
+func (builder *AntiCheatPunchBuilder) SuspectedCheatHandleMethod(suspectedCheatHandleMethod int) *AntiCheatPunchBuilder {
+	builder.suspectedCheatHandleMethod = suspectedCheatHandleMethod
+	builder.suspectedCheatHandleMethodFlag = true
+	return builder
+}
+
+func (builder *AntiCheatPunchBuilder) Build() *AntiCheatPunch {
+	req := &AntiCheatPunch{}
+	if builder.interceptSuspectedCheatPunchFlag {
+		req.InterceptSuspectedCheatPunch = &builder.interceptSuspectedCheatPunch
+
+	}
+	if builder.checkCheatSoftwarePunchFlag {
+		req.CheckCheatSoftwarePunch = &builder.checkCheatSoftwarePunch
+
+	}
+	if builder.checkBuddyPunchFlag {
+		req.CheckBuddyPunch = &builder.checkBuddyPunch
+
+	}
+	if builder.checkSimulateWifiPunchFlag {
+		req.CheckSimulateWifiPunch = &builder.checkSimulateWifiPunch
+
+	}
+	if builder.checkChangeDevicePunchFlag {
+		req.CheckChangeDevicePunch = &builder.checkChangeDevicePunch
+
+	}
+	if builder.allowChangeDeviceNumFlag {
+		req.AllowChangeDeviceNum = &builder.allowChangeDeviceNum
+
+	}
+	if builder.suspectedCheatHandleMethodFlag {
+		req.SuspectedCheatHandleMethod = &builder.suspectedCheatHandleMethod
+
+	}
+	return req
+}
+
 type ApprovalDailyDetail struct {
 	Date *string `json:"date,omitempty"` // 日期
 
@@ -1627,6 +1767,8 @@ type Group struct {
 
 	ReplaceBasicPic *bool `json:"replace_basic_pic,omitempty"` // 人脸识别失败时是否允许替换基准图片
 
+	AntiCheatPunchCfg *AntiCheatPunch `json:"anti_cheat_punch_cfg,omitempty"` // 防作弊打卡配置
+
 	Machines []*Machine `json:"machines,omitempty"` // 考勤机列表
 
 	GpsRange *int `json:"gps_range,omitempty"` // GPS 打卡的有效范围（不建议使用）
@@ -1803,6 +1945,9 @@ type GroupBuilder struct {
 
 	replaceBasicPic     bool // 人脸识别失败时是否允许替换基准图片
 	replaceBasicPicFlag bool
+
+	antiCheatPunchCfg     *AntiCheatPunch // 防作弊打卡配置
+	antiCheatPunchCfgFlag bool
 
 	machines     []*Machine // 考勤机列表
 	machinesFlag bool
@@ -2227,6 +2372,15 @@ func (builder *GroupBuilder) FaceDowngrade(faceDowngrade bool) *GroupBuilder {
 func (builder *GroupBuilder) ReplaceBasicPic(replaceBasicPic bool) *GroupBuilder {
 	builder.replaceBasicPic = replaceBasicPic
 	builder.replaceBasicPicFlag = true
+	return builder
+}
+
+// 防作弊打卡配置
+//
+// 示例值：
+func (builder *GroupBuilder) AntiCheatPunchCfg(antiCheatPunchCfg *AntiCheatPunch) *GroupBuilder {
+	builder.antiCheatPunchCfg = antiCheatPunchCfg
+	builder.antiCheatPunchCfgFlag = true
 	return builder
 }
 
@@ -2680,6 +2834,9 @@ func (builder *GroupBuilder) Build() *Group {
 	if builder.replaceBasicPicFlag {
 		req.ReplaceBasicPic = &builder.replaceBasicPic
 
+	}
+	if builder.antiCheatPunchCfgFlag {
+		req.AntiCheatPunchCfg = builder.antiCheatPunchCfg
 	}
 	if builder.machinesFlag {
 		req.Machines = builder.machines
@@ -11510,6 +11667,8 @@ type GetGroupRespData struct {
 
 	ReplaceBasicPic *bool `json:"replace_basic_pic,omitempty"` // 是否允许替换基准图片
 
+	AntiCheatPunchCfg *AntiCheatPunch `json:"anti_cheat_punch_cfg,omitempty"` // 防作弊打卡配置
+
 	Machines []*Machine `json:"machines,omitempty"` // 考勤机信息
 
 	GpsRange *int `json:"gps_range,omitempty"` // GPS打卡的地址范围
@@ -13758,6 +13917,112 @@ type BatchCreateUserFlowResp struct {
 }
 
 func (resp *BatchCreateUserFlowResp) Success() bool {
+	return resp.Code == 0
+}
+
+type BatchDelUserFlowReqBodyBuilder struct {
+	recordIds     []string // 流水记录ID
+	recordIdsFlag bool
+}
+
+func NewBatchDelUserFlowReqBodyBuilder() *BatchDelUserFlowReqBodyBuilder {
+	builder := &BatchDelUserFlowReqBodyBuilder{}
+	return builder
+}
+
+// 流水记录ID
+//
+// 示例值：
+func (builder *BatchDelUserFlowReqBodyBuilder) RecordIds(recordIds []string) *BatchDelUserFlowReqBodyBuilder {
+	builder.recordIds = recordIds
+	builder.recordIdsFlag = true
+	return builder
+}
+
+func (builder *BatchDelUserFlowReqBodyBuilder) Build() *BatchDelUserFlowReqBody {
+	req := &BatchDelUserFlowReqBody{}
+	if builder.recordIdsFlag {
+		req.RecordIds = builder.recordIds
+	}
+	return req
+}
+
+type BatchDelUserFlowPathReqBodyBuilder struct {
+	recordIds     []string
+	recordIdsFlag bool
+}
+
+func NewBatchDelUserFlowPathReqBodyBuilder() *BatchDelUserFlowPathReqBodyBuilder {
+	builder := &BatchDelUserFlowPathReqBodyBuilder{}
+	return builder
+}
+
+// 流水记录ID
+//
+// 示例值：
+func (builder *BatchDelUserFlowPathReqBodyBuilder) RecordIds(recordIds []string) *BatchDelUserFlowPathReqBodyBuilder {
+	builder.recordIds = recordIds
+	builder.recordIdsFlag = true
+	return builder
+}
+
+func (builder *BatchDelUserFlowPathReqBodyBuilder) Build() (*BatchDelUserFlowReqBody, error) {
+	req := &BatchDelUserFlowReqBody{}
+	if builder.recordIdsFlag {
+		req.RecordIds = builder.recordIds
+	}
+	return req, nil
+}
+
+type BatchDelUserFlowReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *BatchDelUserFlowReqBody
+}
+
+func NewBatchDelUserFlowReqBuilder() *BatchDelUserFlowReqBuilder {
+	builder := &BatchDelUserFlowReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 批量删除流水
+func (builder *BatchDelUserFlowReqBuilder) Body(body *BatchDelUserFlowReqBody) *BatchDelUserFlowReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *BatchDelUserFlowReqBuilder) Build() *BatchDelUserFlowReq {
+	req := &BatchDelUserFlowReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type BatchDelUserFlowReqBody struct {
+	RecordIds []string `json:"record_ids,omitempty"` // 流水记录ID
+}
+
+type BatchDelUserFlowReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *BatchDelUserFlowReqBody `body:""`
+}
+
+type BatchDelUserFlowRespData struct {
+	SuccessRecordIds []string `json:"success_record_ids,omitempty"` // 删除成功的流水记录ID列表
+
+	FailRecordIds []string `json:"fail_record_ids,omitempty"` // 删除失败的流水记录ID列表
+}
+
+type BatchDelUserFlowResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *BatchDelUserFlowRespData `json:"data"` // 业务数据
+}
+
+func (resp *BatchDelUserFlowResp) Success() bool {
 	return resp.Code == 0
 }
 

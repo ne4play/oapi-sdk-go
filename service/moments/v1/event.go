@@ -58,46 +58,6 @@ func (h *P2CommentDeletedV1Handler) Handle(ctx context.Context, event interface{
 }
 
 // 消息处理器定义
-type P2DislikeCreatedV1Handler struct {
-	handler func(context.Context, *P2DislikeCreatedV1) error
-}
-
-func NewP2DislikeCreatedV1Handler(handler func(context.Context, *P2DislikeCreatedV1) error) *P2DislikeCreatedV1Handler {
-	h := &P2DislikeCreatedV1Handler{handler: handler}
-	return h
-}
-
-// 返回事件的消息体的实例，用于反序列化用
-func (h *P2DislikeCreatedV1Handler) Event() interface{} {
-	return &P2DislikeCreatedV1{}
-}
-
-// 回调开发者注册的handle
-func (h *P2DislikeCreatedV1Handler) Handle(ctx context.Context, event interface{}) error {
-	return h.handler(ctx, event.(*P2DislikeCreatedV1))
-}
-
-// 消息处理器定义
-type P2DislikeDeletedV1Handler struct {
-	handler func(context.Context, *P2DislikeDeletedV1) error
-}
-
-func NewP2DislikeDeletedV1Handler(handler func(context.Context, *P2DislikeDeletedV1) error) *P2DislikeDeletedV1Handler {
-	h := &P2DislikeDeletedV1Handler{handler: handler}
-	return h
-}
-
-// 返回事件的消息体的实例，用于反序列化用
-func (h *P2DislikeDeletedV1Handler) Event() interface{} {
-	return &P2DislikeDeletedV1{}
-}
-
-// 回调开发者注册的handle
-func (h *P2DislikeDeletedV1Handler) Handle(ctx context.Context, event interface{}) error {
-	return h.handler(ctx, event.(*P2DislikeDeletedV1))
-}
-
-// 消息处理器定义
 type P2PostCreatedV1Handler struct {
 	handler func(context.Context, *P2PostCreatedV1) error
 }

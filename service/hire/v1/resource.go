@@ -615,6 +615,32 @@ func (a *agency) Query(ctx context.Context, req *QueryAgencyReq, options ...lark
 	return resp, err
 }
 
+// CancelOnboard 取消候选人入职
+//
+// - 操作候选人取消入职
+//
+// - 官网API文档链接:https://open.feishu.cn/document/ukTMukTMukTM/uMzM1YjLzMTN24yMzUjN/hire-v1/application/cancel_onboard
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/hirev1/cancelOnboard_application.go
+func (a *application) CancelOnboard(ctx context.Context, req *CancelOnboardApplicationReq, options ...larkcore.RequestOptionFunc) (*CancelOnboardApplicationResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/hire/v1/applications/:application_id/cancel_onboard"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &CancelOnboardApplicationResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Create 创建投递
 //
 // - 根据人才 ID 和职位 ID 创建投递

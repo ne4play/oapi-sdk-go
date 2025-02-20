@@ -1433,8 +1433,6 @@ type LumpSumPayment struct {
 
 	IssuanceFrequency *int `json:"issuance_frequency,omitempty"` // 发放次数
 
-	GrantDate *string `json:"grant_date,omitempty"` // 授予日期
-
 	ItemId *string `json:"item_id,omitempty"` // 薪酬项id
 
 	Remark *string `json:"remark,omitempty"` // 备注
@@ -1442,6 +1440,12 @@ type LumpSumPayment struct {
 	IssuanceDetailText *I18n `json:"issuance_detail_text,omitempty"` // 发放规则描述文本
 
 	ApplySource *int `json:"apply_source,omitempty"` // 申请来源
+
+	ReturnAmountBeforeTax *string `json:"return_amount_before_tax,omitempty"` // 应退回金额（税前）
+
+	ReturnAmountAfterTax *string `json:"return_amount_after_tax,omitempty"` // 应退回金额（税后）
+
+	BindingPeriodOffboardingType *string `json:"binding_period_offboarding_type,omitempty"` // 绑定期内离职类型
 
 	CreateTime *string `json:"create_time,omitempty"` // 创建时间
 
@@ -1472,9 +1476,6 @@ type LumpSumPaymentBuilder struct {
 	issuanceFrequency     int // 发放次数
 	issuanceFrequencyFlag bool
 
-	grantDate     string // 授予日期
-	grantDateFlag bool
-
 	itemId     string // 薪酬项id
 	itemIdFlag bool
 
@@ -1486,6 +1487,15 @@ type LumpSumPaymentBuilder struct {
 
 	applySource     int // 申请来源
 	applySourceFlag bool
+
+	returnAmountBeforeTax     string // 应退回金额（税前）
+	returnAmountBeforeTaxFlag bool
+
+	returnAmountAfterTax     string // 应退回金额（税后）
+	returnAmountAfterTaxFlag bool
+
+	bindingPeriodOffboardingType     string // 绑定期内离职类型
+	bindingPeriodOffboardingTypeFlag bool
 
 	createTime     string // 创建时间
 	createTimeFlag bool
@@ -1565,15 +1575,6 @@ func (builder *LumpSumPaymentBuilder) IssuanceFrequency(issuanceFrequency int) *
 	return builder
 }
 
-// 授予日期
-//
-// 示例值：2024-08-01
-func (builder *LumpSumPaymentBuilder) GrantDate(grantDate string) *LumpSumPaymentBuilder {
-	builder.grantDate = grantDate
-	builder.grantDateFlag = true
-	return builder
-}
-
 // 薪酬项id
 //
 // 示例值：7411039006180312620
@@ -1607,6 +1608,33 @@ func (builder *LumpSumPaymentBuilder) IssuanceDetailText(issuanceDetailText *I18
 func (builder *LumpSumPaymentBuilder) ApplySource(applySource int) *LumpSumPaymentBuilder {
 	builder.applySource = applySource
 	builder.applySourceFlag = true
+	return builder
+}
+
+// 应退回金额（税前）
+//
+// 示例值：2000.00
+func (builder *LumpSumPaymentBuilder) ReturnAmountBeforeTax(returnAmountBeforeTax string) *LumpSumPaymentBuilder {
+	builder.returnAmountBeforeTax = returnAmountBeforeTax
+	builder.returnAmountBeforeTaxFlag = true
+	return builder
+}
+
+// 应退回金额（税后）
+//
+// 示例值：2000.00
+func (builder *LumpSumPaymentBuilder) ReturnAmountAfterTax(returnAmountAfterTax string) *LumpSumPaymentBuilder {
+	builder.returnAmountAfterTax = returnAmountAfterTax
+	builder.returnAmountAfterTaxFlag = true
+	return builder
+}
+
+// 绑定期内离职类型
+//
+// 示例值：
+func (builder *LumpSumPaymentBuilder) BindingPeriodOffboardingType(bindingPeriodOffboardingType string) *LumpSumPaymentBuilder {
+	builder.bindingPeriodOffboardingType = bindingPeriodOffboardingType
+	builder.bindingPeriodOffboardingTypeFlag = true
 	return builder
 }
 
@@ -1667,10 +1695,6 @@ func (builder *LumpSumPaymentBuilder) Build() *LumpSumPayment {
 		req.IssuanceFrequency = &builder.issuanceFrequency
 
 	}
-	if builder.grantDateFlag {
-		req.GrantDate = &builder.grantDate
-
-	}
 	if builder.itemIdFlag {
 		req.ItemId = &builder.itemId
 
@@ -1684,6 +1708,18 @@ func (builder *LumpSumPaymentBuilder) Build() *LumpSumPayment {
 	}
 	if builder.applySourceFlag {
 		req.ApplySource = &builder.applySource
+
+	}
+	if builder.returnAmountBeforeTaxFlag {
+		req.ReturnAmountBeforeTax = &builder.returnAmountBeforeTax
+
+	}
+	if builder.returnAmountAfterTaxFlag {
+		req.ReturnAmountAfterTax = &builder.returnAmountAfterTax
+
+	}
+	if builder.bindingPeriodOffboardingTypeFlag {
+		req.BindingPeriodOffboardingType = &builder.bindingPeriodOffboardingType
 
 	}
 	if builder.createTimeFlag {
@@ -1713,9 +1749,11 @@ type LumpSumPaymentDetail struct {
 
 	IssuanceWay *string `json:"issuance_way,omitempty"` // 发放方式
 
-	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放时间
+	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放日期
 
 	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
+
+	BelongTime *string `json:"belong_time,omitempty"` // 申请发放日期
 
 	CreateTime *string `json:"create_time,omitempty"` // 创建时间
 
@@ -1741,11 +1779,14 @@ type LumpSumPaymentDetailBuilder struct {
 	issuanceWay     string // 发放方式
 	issuanceWayFlag bool
 
-	issuanceTime     string // 发放时间
+	issuanceTime     string // 发放日期
 	issuanceTimeFlag bool
 
 	currencyId     string // 币种id
 	currencyIdFlag bool
+
+	belongTime     string // 申请发放日期
+	belongTimeFlag bool
 
 	createTime     string // 创建时间
 	createTimeFlag bool
@@ -1813,7 +1854,7 @@ func (builder *LumpSumPaymentDetailBuilder) IssuanceWay(issuanceWay string) *Lum
 	return builder
 }
 
-// 发放时间
+// 发放日期
 //
 // 示例值：2024-08-01
 func (builder *LumpSumPaymentDetailBuilder) IssuanceTime(issuanceTime string) *LumpSumPaymentDetailBuilder {
@@ -1828,6 +1869,15 @@ func (builder *LumpSumPaymentDetailBuilder) IssuanceTime(issuanceTime string) *L
 func (builder *LumpSumPaymentDetailBuilder) CurrencyId(currencyId string) *LumpSumPaymentDetailBuilder {
 	builder.currencyId = currencyId
 	builder.currencyIdFlag = true
+	return builder
+}
+
+// 申请发放日期
+//
+// 示例值：2025-01-20
+func (builder *LumpSumPaymentDetailBuilder) BelongTime(belongTime string) *LumpSumPaymentDetailBuilder {
+	builder.belongTime = belongTime
+	builder.belongTimeFlag = true
 	return builder
 }
 
@@ -1883,6 +1933,10 @@ func (builder *LumpSumPaymentDetailBuilder) Build() *LumpSumPaymentDetail {
 		req.CurrencyId = &builder.currencyId
 
 	}
+	if builder.belongTimeFlag {
+		req.BelongTime = &builder.belongTime
+
+	}
 	if builder.createTimeFlag {
 		req.CreateTime = &builder.createTime
 
@@ -1901,7 +1955,9 @@ type LumpSumPaymentDetailForCreate struct {
 
 	IssuanceWay *string `json:"issuance_way,omitempty"` // 发放方式
 
-	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放时间
+	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放日期
+
+	BelongTime *string `json:"belong_time,omitempty"` // 申请发放日期
 }
 
 type LumpSumPaymentDetailForCreateBuilder struct {
@@ -1914,8 +1970,11 @@ type LumpSumPaymentDetailForCreateBuilder struct {
 	issuanceWay     string // 发放方式
 	issuanceWayFlag bool
 
-	issuanceTime     string // 发放时间
+	issuanceTime     string // 发放日期
 	issuanceTimeFlag bool
+
+	belongTime     string // 申请发放日期
+	belongTimeFlag bool
 }
 
 func NewLumpSumPaymentDetailForCreateBuilder() *LumpSumPaymentDetailForCreateBuilder {
@@ -1950,12 +2009,21 @@ func (builder *LumpSumPaymentDetailForCreateBuilder) IssuanceWay(issuanceWay str
 	return builder
 }
 
-// 发放时间
+// 发放日期
 //
 // 示例值：2024-08-01
 func (builder *LumpSumPaymentDetailForCreateBuilder) IssuanceTime(issuanceTime string) *LumpSumPaymentDetailForCreateBuilder {
 	builder.issuanceTime = issuanceTime
 	builder.issuanceTimeFlag = true
+	return builder
+}
+
+// 申请发放日期
+//
+// 示例值：2025-01-20
+func (builder *LumpSumPaymentDetailForCreateBuilder) BelongTime(belongTime string) *LumpSumPaymentDetailForCreateBuilder {
+	builder.belongTime = belongTime
+	builder.belongTimeFlag = true
 	return builder
 }
 
@@ -1977,6 +2045,10 @@ func (builder *LumpSumPaymentDetailForCreateBuilder) Build() *LumpSumPaymentDeta
 		req.IssuanceTime = &builder.issuanceTime
 
 	}
+	if builder.belongTimeFlag {
+		req.BelongTime = &builder.belongTime
+
+	}
 	return req
 }
 
@@ -1989,7 +2061,9 @@ type LumpSumPaymentDetailForUpdate struct {
 
 	IssuanceWay *string `json:"issuance_way,omitempty"` // 发放方式
 
-	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放时间
+	IssuanceTime *string `json:"issuance_time,omitempty"` // 发放日期
+
+	BelongTime *string `json:"belong_time,omitempty"` // 申请发放日期
 }
 
 type LumpSumPaymentDetailForUpdateBuilder struct {
@@ -2005,8 +2079,11 @@ type LumpSumPaymentDetailForUpdateBuilder struct {
 	issuanceWay     string // 发放方式
 	issuanceWayFlag bool
 
-	issuanceTime     string // 发放时间
+	issuanceTime     string // 发放日期
 	issuanceTimeFlag bool
+
+	belongTime     string // 申请发放日期
+	belongTimeFlag bool
 }
 
 func NewLumpSumPaymentDetailForUpdateBuilder() *LumpSumPaymentDetailForUpdateBuilder {
@@ -2050,12 +2127,21 @@ func (builder *LumpSumPaymentDetailForUpdateBuilder) IssuanceWay(issuanceWay str
 	return builder
 }
 
-// 发放时间
+// 发放日期
 //
-// 示例值：2024-08-01
+// 示例值：2024-08-20
 func (builder *LumpSumPaymentDetailForUpdateBuilder) IssuanceTime(issuanceTime string) *LumpSumPaymentDetailForUpdateBuilder {
 	builder.issuanceTime = issuanceTime
 	builder.issuanceTimeFlag = true
+	return builder
+}
+
+// 申请发放日期
+//
+// 示例值：2025-01-20
+func (builder *LumpSumPaymentDetailForUpdateBuilder) BelongTime(belongTime string) *LumpSumPaymentDetailForUpdateBuilder {
+	builder.belongTime = belongTime
+	builder.belongTimeFlag = true
 	return builder
 }
 
@@ -2081,6 +2167,10 @@ func (builder *LumpSumPaymentDetailForUpdateBuilder) Build() *LumpSumPaymentDeta
 		req.IssuanceTime = &builder.issuanceTime
 
 	}
+	if builder.belongTimeFlag {
+		req.BelongTime = &builder.belongTime
+
+	}
 	return req
 }
 
@@ -2096,8 +2186,6 @@ type LumpSumPaymentForCreate struct {
 	CurrencyId *string `json:"currency_id,omitempty"` // 币种id
 
 	IssuanceFrequency *int `json:"issuance_frequency,omitempty"` // 发放次数，必须与 details 的长度一致
-
-	GrantDate *string `json:"grant_date,omitempty"` // 授予日期
 
 	ItemId *string `json:"item_id,omitempty"` // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
 
@@ -2124,9 +2212,6 @@ type LumpSumPaymentForCreateBuilder struct {
 
 	issuanceFrequency     int // 发放次数，必须与 details 的长度一致
 	issuanceFrequencyFlag bool
-
-	grantDate     string // 授予日期
-	grantDateFlag bool
 
 	itemId     string // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
 	itemIdFlag bool
@@ -2197,15 +2282,6 @@ func (builder *LumpSumPaymentForCreateBuilder) IssuanceFrequency(issuanceFrequen
 	return builder
 }
 
-// 授予日期
-//
-// 示例值：2024-08-01
-func (builder *LumpSumPaymentForCreateBuilder) GrantDate(grantDate string) *LumpSumPaymentForCreateBuilder {
-	builder.grantDate = grantDate
-	builder.grantDateFlag = true
-	return builder
-}
-
 // 薪酬项id（可通过 https://open.larkoffice.com/document/uAjLw4CM/ukTMukTMukTM/compensation-v1/item/list?appId=cli_a3077e2bb03c100d 进行查询）
 //
 // 示例值：7411039006180312620
@@ -2257,10 +2333,6 @@ func (builder *LumpSumPaymentForCreateBuilder) Build() *LumpSumPaymentForCreate 
 	}
 	if builder.issuanceFrequencyFlag {
 		req.IssuanceFrequency = &builder.issuanceFrequency
-
-	}
-	if builder.grantDateFlag {
-		req.GrantDate = &builder.grantDate
 
 	}
 	if builder.itemIdFlag {

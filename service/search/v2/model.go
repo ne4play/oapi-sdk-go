@@ -4975,9 +4975,9 @@ type SimpleGetRelatedUsersRequest struct {
 
 	TopK *int `json:"top_k,omitempty"` // 获取相关用户的最大人数
 
-	StartTimeFilter *string `json:"start_time_filter,omitempty"` // 最早的交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
+	StartTimeFilter *string `json:"start_time_filter,omitempty"` // 方式一：传入时间范围枚举值，“1”代表近一个月，“2”代表近两个月，“3”代表近三个月，“4”代表近六个月，“5”代表近一年，推荐采取该方式。若采用方式一，则end_time_filter无需传入。若start_time_filter和end_time_filter都不传入，则默认搜索范围为半年。 方式二：传入最早的交互时间，毫秒级时间戳。若采用方式二，建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年。
 
-	EndTimeFilter *string `json:"end_time_filter,omitempty"` // 最晚交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
+	EndTimeFilter *string `json:"end_time_filter,omitempty"` // 最晚交互时间，毫秒级时间戳。
 }
 
 type SimpleGetRelatedUsersRequestBuilder struct {
@@ -4987,10 +4987,10 @@ type SimpleGetRelatedUsersRequestBuilder struct {
 	topK     int // 获取相关用户的最大人数
 	topKFlag bool
 
-	startTimeFilter     string // 最早的交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
+	startTimeFilter     string // 方式一：传入时间范围枚举值，“1”代表近一个月，“2”代表近两个月，“3”代表近三个月，“4”代表近六个月，“5”代表近一年，推荐采取该方式。若采用方式一，则end_time_filter无需传入。若start_time_filter和end_time_filter都不传入，则默认搜索范围为半年。 方式二：传入最早的交互时间，毫秒级时间戳。若采用方式二，建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年。
 	startTimeFilterFlag bool
 
-	endTimeFilter     string // 最晚交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
+	endTimeFilter     string // 最晚交互时间，毫秒级时间戳。
 	endTimeFilterFlag bool
 }
 
@@ -5017,16 +5017,16 @@ func (builder *SimpleGetRelatedUsersRequestBuilder) TopK(topK int) *SimpleGetRel
 	return builder
 }
 
-// 最早的交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
+// 方式一：传入时间范围枚举值，“1”代表近一个月，“2”代表近两个月，“3”代表近三个月，“4”代表近六个月，“5”代表近一年，推荐采取该方式。若采用方式一，则end_time_filter无需传入。若start_time_filter和end_time_filter都不传入，则默认搜索范围为半年。 方式二：传入最早的交互时间，毫秒级时间戳。若采用方式二，建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年。
 //
-// 示例值：1704768318000
+// 示例值：5
 func (builder *SimpleGetRelatedUsersRequestBuilder) StartTimeFilter(startTimeFilter string) *SimpleGetRelatedUsersRequestBuilder {
 	builder.startTimeFilter = startTimeFilter
 	builder.startTimeFilterFlag = true
 	return builder
 }
 
-// 最晚交互时间，毫秒级时间戳。建议start_time_filter和end_time_filter都传入，若不传入，则默认搜索范围为半年
+// 最晚交互时间，毫秒级时间戳。
 //
 // 示例值：1736390718000
 func (builder *SimpleGetRelatedUsersRequestBuilder) EndTimeFilter(endTimeFilter string) *SimpleGetRelatedUsersRequestBuilder {

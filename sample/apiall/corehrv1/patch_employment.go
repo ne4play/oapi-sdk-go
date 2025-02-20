@@ -37,6 +37,7 @@ func main() {
 			EmploymentType(larkcorehr.NewEnumBuilder().Build()).
 			PersonId("6919733936050406926").
 			PrimaryEmployment(true).
+			ConditionWorker(true).
 			CustomFields([]*larkcorehr.ObjectFieldData{larkcorehr.NewObjectFieldDataBuilder().Build()}).
 			WorkEmailList([]*larkcorehr.Email{larkcorehr.NewEmailBuilder().Build()}).
 			ReasonForOffboarding(larkcorehr.NewEnumBuilder().Build()).

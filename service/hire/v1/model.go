@@ -75,6 +75,13 @@ const (
 )
 
 const (
+	TerminationType我们拒绝了候选人 = 1  // 我们拒绝了候选人
+	TerminationType候选人拒绝了我们 = 22 // 候选人拒绝了我们
+	TerminationType其他       = 27 // 其他
+
+)
+
+const (
 	UserIdTypeCreateApplicationUserId  = "user_id"  // 以user_id来识别用户
 	UserIdTypeCreateApplicationUnionId = "union_id" // 以union_id来识别用户
 	UserIdTypeCreateApplicationOpenId  = "open_id"  // 以open_id来识别用户
@@ -140,9 +147,9 @@ const (
 )
 
 const (
-	TerminationType我们拒绝了候选人 = 1  // 我们拒绝了候选人
-	TerminationType候选人拒绝了我们 = 22 // 候选人拒绝了我们
-	TerminationType其他       = 27 // 其他
+	TerminationTypeTerminateApplication我们拒绝了候选人 = 1  // 我们拒绝了候选人
+	TerminationTypeTerminateApplication候选人拒绝了我们 = 22 // 候选人拒绝了我们
+	TerminationTypeTerminateApplication其他       = 27 // 其他
 
 )
 
@@ -291,6 +298,7 @@ const (
 const (
 	OperationConvert   = 1 // 转正
 	OperationOverboard = 2 // 离职
+	OperationCancel    = 3 // 恢复至待入职
 
 )
 
@@ -15599,7 +15607,7 @@ func (builder *DimensionAssessmentRequestBuilder) ScoreValue(scoreValue int) *Di
 
 // 职级建议下限，职级建议维度使用，「无法判断」时，值为-1.  职级ID可从【获取租户职级列表】接口获取
 //
-// 示例值：7484008015926434905
+// 示例值：1z3278jv8apy9yb
 func (builder *DimensionAssessmentRequestBuilder) MinJobLevelId(minJobLevelId string) *DimensionAssessmentRequestBuilder {
 	builder.minJobLevelId = minJobLevelId
 	builder.minJobLevelIdFlag = true
@@ -15608,7 +15616,7 @@ func (builder *DimensionAssessmentRequestBuilder) MinJobLevelId(minJobLevelId st
 
 // 职级建议上限，职级建议维度使用，「无法判断」时，值为-1.  职级ID可从【获取租户职级列表】接口获取
 //
-// 示例值：7484008015926434905
+// 示例值：1z3278jv8apy9yb
 func (builder *DimensionAssessmentRequestBuilder) MaxJobLevelId(maxJobLevelId string) *DimensionAssessmentRequestBuilder {
 	builder.maxJobLevelId = maxJobLevelId
 	builder.maxJobLevelIdFlag = true
@@ -45653,12 +45661,17 @@ func (builder *TalentCustomizedDataChildBuilder) Build() *TalentCustomizedDataCh
 type TalentCustomizedDataObjectValue struct {
 	ObjectId *string `json:"object_id,omitempty"` // 自定义字段 ID
 
+	Value *string `json:"value,omitempty"` // 自定义字段 value
+
 	Children []*TalentCustomizedDataObjectValueChild `json:"children,omitempty"` // 子字段列表
 }
 
 type TalentCustomizedDataObjectValueBuilder struct {
 	objectId     string // 自定义字段 ID
 	objectIdFlag bool
+
+	value     string // 自定义字段 value
+	valueFlag bool
 
 	children     []*TalentCustomizedDataObjectValueChild // 子字段列表
 	childrenFlag bool
@@ -45678,6 +45691,15 @@ func (builder *TalentCustomizedDataObjectValueBuilder) ObjectId(objectId string)
 	return builder
 }
 
+// 自定义字段 value
+//
+// 示例值：自定字段值
+func (builder *TalentCustomizedDataObjectValueBuilder) Value(value string) *TalentCustomizedDataObjectValueBuilder {
+	builder.value = value
+	builder.valueFlag = true
+	return builder
+}
+
 // 子字段列表
 //
 // 示例值：
@@ -45691,6 +45713,10 @@ func (builder *TalentCustomizedDataObjectValueBuilder) Build() *TalentCustomized
 	req := &TalentCustomizedDataObjectValue{}
 	if builder.objectIdFlag {
 		req.ObjectId = &builder.objectId
+
+	}
+	if builder.valueFlag {
+		req.Value = &builder.value
 
 	}
 	if builder.childrenFlag {
@@ -54530,6 +54556,176 @@ type QueryAgencyResp struct {
 }
 
 func (resp *QueryAgencyResp) Success() bool {
+	return resp.Code == 0
+}
+
+type CancelOnboardApplicationReqBodyBuilder struct {
+	terminationType     int // 终止类型
+	terminationTypeFlag bool
+
+	terminationReasonIdList     []string // 终止原因 ID 列表
+	terminationReasonIdListFlag bool
+
+	terminationReasonNotes     string // 备注
+	terminationReasonNotesFlag bool
+}
+
+func NewCancelOnboardApplicationReqBodyBuilder() *CancelOnboardApplicationReqBodyBuilder {
+	builder := &CancelOnboardApplicationReqBodyBuilder{}
+	return builder
+}
+
+// 终止类型
+//
+// 示例值：1
+func (builder *CancelOnboardApplicationReqBodyBuilder) TerminationType(terminationType int) *CancelOnboardApplicationReqBodyBuilder {
+	builder.terminationType = terminationType
+	builder.terminationTypeFlag = true
+	return builder
+}
+
+// 终止原因 ID 列表
+//
+// 示例值：11111
+func (builder *CancelOnboardApplicationReqBodyBuilder) TerminationReasonIdList(terminationReasonIdList []string) *CancelOnboardApplicationReqBodyBuilder {
+	builder.terminationReasonIdList = terminationReasonIdList
+	builder.terminationReasonIdListFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：测试
+func (builder *CancelOnboardApplicationReqBodyBuilder) TerminationReasonNotes(terminationReasonNotes string) *CancelOnboardApplicationReqBodyBuilder {
+	builder.terminationReasonNotes = terminationReasonNotes
+	builder.terminationReasonNotesFlag = true
+	return builder
+}
+
+func (builder *CancelOnboardApplicationReqBodyBuilder) Build() *CancelOnboardApplicationReqBody {
+	req := &CancelOnboardApplicationReqBody{}
+	if builder.terminationTypeFlag {
+		req.TerminationType = &builder.terminationType
+	}
+	if builder.terminationReasonIdListFlag {
+		req.TerminationReasonIdList = builder.terminationReasonIdList
+	}
+	if builder.terminationReasonNotesFlag {
+		req.TerminationReasonNotes = &builder.terminationReasonNotes
+	}
+	return req
+}
+
+type CancelOnboardApplicationPathReqBodyBuilder struct {
+	terminationType             int
+	terminationTypeFlag         bool
+	terminationReasonIdList     []string
+	terminationReasonIdListFlag bool
+	terminationReasonNotes      string
+	terminationReasonNotesFlag  bool
+}
+
+func NewCancelOnboardApplicationPathReqBodyBuilder() *CancelOnboardApplicationPathReqBodyBuilder {
+	builder := &CancelOnboardApplicationPathReqBodyBuilder{}
+	return builder
+}
+
+// 终止类型
+//
+// 示例值：1
+func (builder *CancelOnboardApplicationPathReqBodyBuilder) TerminationType(terminationType int) *CancelOnboardApplicationPathReqBodyBuilder {
+	builder.terminationType = terminationType
+	builder.terminationTypeFlag = true
+	return builder
+}
+
+// 终止原因 ID 列表
+//
+// 示例值：11111
+func (builder *CancelOnboardApplicationPathReqBodyBuilder) TerminationReasonIdList(terminationReasonIdList []string) *CancelOnboardApplicationPathReqBodyBuilder {
+	builder.terminationReasonIdList = terminationReasonIdList
+	builder.terminationReasonIdListFlag = true
+	return builder
+}
+
+// 备注
+//
+// 示例值：测试
+func (builder *CancelOnboardApplicationPathReqBodyBuilder) TerminationReasonNotes(terminationReasonNotes string) *CancelOnboardApplicationPathReqBodyBuilder {
+	builder.terminationReasonNotes = terminationReasonNotes
+	builder.terminationReasonNotesFlag = true
+	return builder
+}
+
+func (builder *CancelOnboardApplicationPathReqBodyBuilder) Build() (*CancelOnboardApplicationReqBody, error) {
+	req := &CancelOnboardApplicationReqBody{}
+	if builder.terminationTypeFlag {
+		req.TerminationType = &builder.terminationType
+	}
+	if builder.terminationReasonIdListFlag {
+		req.TerminationReasonIdList = builder.terminationReasonIdList
+	}
+	if builder.terminationReasonNotesFlag {
+		req.TerminationReasonNotes = &builder.terminationReasonNotes
+	}
+	return req, nil
+}
+
+type CancelOnboardApplicationReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *CancelOnboardApplicationReqBody
+}
+
+func NewCancelOnboardApplicationReqBuilder() *CancelOnboardApplicationReqBuilder {
+	builder := &CancelOnboardApplicationReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 投递 ID
+//
+// 示例值：1111111111
+func (builder *CancelOnboardApplicationReqBuilder) ApplicationId(applicationId string) *CancelOnboardApplicationReqBuilder {
+	builder.apiReq.PathParams.Set("application_id", fmt.Sprint(applicationId))
+	return builder
+}
+
+// 操作候选人取消入职
+func (builder *CancelOnboardApplicationReqBuilder) Body(body *CancelOnboardApplicationReqBody) *CancelOnboardApplicationReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *CancelOnboardApplicationReqBuilder) Build() *CancelOnboardApplicationReq {
+	req := &CancelOnboardApplicationReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type CancelOnboardApplicationReqBody struct {
+	TerminationType *int `json:"termination_type,omitempty"` // 终止类型
+
+	TerminationReasonIdList []string `json:"termination_reason_id_list,omitempty"` // 终止原因 ID 列表
+
+	TerminationReasonNotes *string `json:"termination_reason_notes,omitempty"` // 备注
+}
+
+type CancelOnboardApplicationReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *CancelOnboardApplicationReqBody `body:""`
+}
+
+type CancelOnboardApplicationResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *CancelOnboardApplicationResp) Success() bool {
 	return resp.Code == 0
 }
 

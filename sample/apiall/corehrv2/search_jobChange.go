@@ -40,6 +40,9 @@ func main() {
 			UpdatedTimeStart("1704084635000").
 			UpdatedTimeEnd("1704084635000").
 			TargetDepartmentIds([]string{}).
+			TransferTypeUniqueIdentifier([]string{}).
+			TransferReasonUniqueIdentifier([]string{}).
+			ExceptionStatuses([]string{}).
 			Build()).
 		Build()
 	// 发起请求

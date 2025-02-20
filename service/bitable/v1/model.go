@@ -408,6 +408,145 @@ func (builder *AppBuilder) Build() *App {
 	return req
 }
 
+type AppConnector struct {
+	Token *string `json:"token,omitempty"` // 目标文档token
+
+	TableId *string `json:"table_id,omitempty"` // 目标表id
+
+	SrcTablePath *string `json:"src_table_path,omitempty"` // 数据源路径
+
+	SourceType *int `json:"source_type,omitempty"` // 数据源类型
+
+	SyncType *int `json:"sync_type,omitempty"` // 同步频率
+
+	FieldSyncType *int `json:"field_sync_type,omitempty"` // 字段同步方式
+
+	SyncFields []string `json:"sync_fields,omitempty"` // 同步字段信息，当 field_sync_type = 2 时才有值
+}
+
+type AppConnectorBuilder struct {
+	token     string // 目标文档token
+	tokenFlag bool
+
+	tableId     string // 目标表id
+	tableIdFlag bool
+
+	srcTablePath     string // 数据源路径
+	srcTablePathFlag bool
+
+	sourceType     int // 数据源类型
+	sourceTypeFlag bool
+
+	syncType     int // 同步频率
+	syncTypeFlag bool
+
+	fieldSyncType     int // 字段同步方式
+	fieldSyncTypeFlag bool
+
+	syncFields     []string // 同步字段信息，当 field_sync_type = 2 时才有值
+	syncFieldsFlag bool
+}
+
+func NewAppConnectorBuilder() *AppConnectorBuilder {
+	builder := &AppConnectorBuilder{}
+	return builder
+}
+
+// 目标文档token
+//
+// 示例值：OqfIbgJYkaECb7sECGSb9Wbqc7g
+func (builder *AppConnectorBuilder) Token(token string) *AppConnectorBuilder {
+	builder.token = token
+	builder.tokenFlag = true
+	return builder
+}
+
+// 目标表id
+//
+// 示例值：tbljrm2jMSJdR9gf
+func (builder *AppConnectorBuilder) TableId(tableId string) *AppConnectorBuilder {
+	builder.tableId = tableId
+	builder.tableIdFlag = true
+	return builder
+}
+
+// 数据源路径
+//
+// 示例值：{"token": "YqM2b5VJ3aAx88sXFaYbsYsyctb", "table_id": "tblRcDVB4WhKfxAp", "view_id": "vewJj1D366"}
+func (builder *AppConnectorBuilder) SrcTablePath(srcTablePath string) *AppConnectorBuilder {
+	builder.srcTablePath = srcTablePath
+	builder.srcTablePathFlag = true
+	return builder
+}
+
+// 数据源类型
+//
+// 示例值：1
+func (builder *AppConnectorBuilder) SourceType(sourceType int) *AppConnectorBuilder {
+	builder.sourceType = sourceType
+	builder.sourceTypeFlag = true
+	return builder
+}
+
+// 同步频率
+//
+// 示例值：2
+func (builder *AppConnectorBuilder) SyncType(syncType int) *AppConnectorBuilder {
+	builder.syncType = syncType
+	builder.syncTypeFlag = true
+	return builder
+}
+
+// 字段同步方式
+//
+// 示例值：2
+func (builder *AppConnectorBuilder) FieldSyncType(fieldSyncType int) *AppConnectorBuilder {
+	builder.fieldSyncType = fieldSyncType
+	builder.fieldSyncTypeFlag = true
+	return builder
+}
+
+// 同步字段信息，当 field_sync_type = 2 时才有值
+//
+// 示例值：["fld9PBu621"]
+func (builder *AppConnectorBuilder) SyncFields(syncFields []string) *AppConnectorBuilder {
+	builder.syncFields = syncFields
+	builder.syncFieldsFlag = true
+	return builder
+}
+
+func (builder *AppConnectorBuilder) Build() *AppConnector {
+	req := &AppConnector{}
+	if builder.tokenFlag {
+		req.Token = &builder.token
+
+	}
+	if builder.tableIdFlag {
+		req.TableId = &builder.tableId
+
+	}
+	if builder.srcTablePathFlag {
+		req.SrcTablePath = &builder.srcTablePath
+
+	}
+	if builder.sourceTypeFlag {
+		req.SourceType = &builder.sourceType
+
+	}
+	if builder.syncTypeFlag {
+		req.SyncType = &builder.syncType
+
+	}
+	if builder.fieldSyncTypeFlag {
+		req.FieldSyncType = &builder.fieldSyncType
+
+	}
+	if builder.syncFieldsFlag {
+		req.SyncFields = builder.syncFields
+	}
+	return req
+}
+
 type AppDashboard struct {
 	BlockId *string `json:"block_id,omitempty"` // 仪表盘 ID
 

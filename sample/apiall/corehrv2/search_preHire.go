@@ -47,6 +47,7 @@ func main() {
 			EmployeeSubtypeIds([]string{}).
 			JobFamilyIds([]string{}).
 			KeyWord("张三").
+			ConditionWorker(true).
 			Rehire("张三").
 			Fields([]string{}).
 			Build()).

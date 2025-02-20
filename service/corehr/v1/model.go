@@ -6210,6 +6210,8 @@ type Employment struct {
 
 	PrimaryEmployment *bool `json:"primary_employment,omitempty"` // 是否是主雇佣信息
 
+	ConditionWorker *bool `json:"condition_worker,omitempty"` // 是否是外部人员
+
 	EmploymentStatus *Enum `json:"employment_status,omitempty"` // 雇员状态，枚举值可通过文档[【飞书人事枚举常量】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/feishu-people-enum-constant)雇员状态（employment_status）枚举定义获得
 
 	CustomFields []*ObjectFieldData `json:"custom_fields,omitempty"` // 自定义字段
@@ -6298,6 +6300,9 @@ type EmploymentBuilder struct {
 
 	primaryEmployment     bool // 是否是主雇佣信息
 	primaryEmploymentFlag bool
+
+	conditionWorker     bool // 是否是外部人员
+	conditionWorkerFlag bool
 
 	employmentStatus     *Enum // 雇员状态，枚举值可通过文档[【飞书人事枚举常量】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/feishu-people-enum-constant)雇员状态（employment_status）枚举定义获得
 	employmentStatusFlag bool
@@ -6530,6 +6535,15 @@ func (builder *EmploymentBuilder) PrimaryEmployment(primaryEmployment bool) *Emp
 	return builder
 }
 
+// 是否是外部人员
+//
+// 示例值：true
+func (builder *EmploymentBuilder) ConditionWorker(conditionWorker bool) *EmploymentBuilder {
+	builder.conditionWorker = conditionWorker
+	builder.conditionWorkerFlag = true
+	return builder
+}
+
 // 雇员状态，枚举值可通过文档[【飞书人事枚举常量】](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/corehr-v1/feishu-people-enum-constant)雇员状态（employment_status）枚举定义获得
 //
 // 示例值：
@@ -6721,6 +6735,10 @@ func (builder *EmploymentBuilder) Build() *Employment {
 	}
 	if builder.primaryEmploymentFlag {
 		req.PrimaryEmployment = &builder.primaryEmployment
+
+	}
+	if builder.conditionWorkerFlag {
+		req.ConditionWorker = &builder.conditionWorker
 
 	}
 	if builder.employmentStatusFlag {

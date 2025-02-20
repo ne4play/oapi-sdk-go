@@ -198,7 +198,7 @@ func (a *archiveRule) UploadReport(ctx context.Context, req *UploadReportArchive
 	apiReq := req.apiReq
 	apiReq.ApiPath = "/open-apis/attendance/v1/archive_rule/upload_report"
 	apiReq.HttpMethod = http.MethodPost
-	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
 	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
 	if err != nil {
 		return nil, err
@@ -812,6 +812,32 @@ func (u *userFlow) BatchCreate(ctx context.Context, req *BatchCreateUserFlowReq,
 	}
 	// 反序列响应结果
 	resp := &BatchCreateUserFlowResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, u.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// BatchDel
+//
+// - 批量删除流水
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=batch_del&project=attendance&resource=user_flow&version=v1
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/attendancev1/batchDel_userFlow.go
+func (u *userFlow) BatchDel(ctx context.Context, req *BatchDelUserFlowReq, options ...larkcore.RequestOptionFunc) (*BatchDelUserFlowResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/attendance/v1/user_flows/batch_del"
+	apiReq.HttpMethod = http.MethodPost
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant}
+	apiResp, err := larkcore.Request(ctx, apiReq, u.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &BatchDelUserFlowResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, u.config)
 	if err != nil {
 		return nil, err

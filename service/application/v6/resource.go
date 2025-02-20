@@ -11,12 +11,14 @@ import (
 type V6 struct {
 	AppBadge                 *appBadge                 // 应用红点
 	AppRecommendRule         *appRecommendRule         // 我的常用推荐规则
-	Application              *application              // 应用
+	Application              *application              // 应用管理
 	ApplicationAppUsage      *applicationAppUsage      // 应用使用情况
 	ApplicationAppVersion    *applicationAppVersion    // 事件
+	ApplicationCollaborators *applicationCollaborators // application.collaborators
 	ApplicationContactsRange *applicationContactsRange // application.contacts_range
 	ApplicationFeedback      *applicationFeedback      // 应用反馈
 	ApplicationManagement    *applicationManagement    // application.management
+	ApplicationOwner         *applicationOwner         // application.owner
 	ApplicationVisibility    *applicationVisibility    // 事件
 	Bot                      *bot                      // 事件
 	Scope                    *scope                    // scope
@@ -29,9 +31,11 @@ func New(config *larkcore.Config) *V6 {
 		Application:              &application{config: config},
 		ApplicationAppUsage:      &applicationAppUsage{config: config},
 		ApplicationAppVersion:    &applicationAppVersion{config: config},
+		ApplicationCollaborators: &applicationCollaborators{config: config},
 		ApplicationContactsRange: &applicationContactsRange{config: config},
 		ApplicationFeedback:      &applicationFeedback{config: config},
 		ApplicationManagement:    &applicationManagement{config: config},
+		ApplicationOwner:         &applicationOwner{config: config},
 		ApplicationVisibility:    &applicationVisibility{config: config},
 		Bot:                      &bot{config: config},
 		Scope:                    &scope{config: config},
@@ -53,6 +57,9 @@ type applicationAppUsage struct {
 type applicationAppVersion struct {
 	config *larkcore.Config
 }
+type applicationCollaborators struct {
+	config *larkcore.Config
+}
 type applicationContactsRange struct {
 	config *larkcore.Config
 }
@@ -60,6 +67,9 @@ type applicationFeedback struct {
 	config *larkcore.Config
 }
 type applicationManagement struct {
+	config *larkcore.Config
+}
+type applicationOwner struct {
 	config *larkcore.Config
 }
 type applicationVisibility struct {
@@ -474,6 +484,58 @@ func (a *applicationAppVersion) Patch(ctx context.Context, req *PatchApplication
 	return resp, err
 }
 
+// Get
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=get&project=application&resource=application.collaborators&version=v6
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/applicationv6/get_applicationCollaborators.go
+func (a *applicationCollaborators) Get(ctx context.Context, req *GetApplicationCollaboratorsReq, options ...larkcore.RequestOptionFunc) (*GetApplicationCollaboratorsResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/application/v6/applications/:app_id/collaborators"
+	apiReq.HttpMethod = http.MethodGet
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &GetApplicationCollaboratorsResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Update
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=update&project=application&resource=application.collaborators&version=v6
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/applicationv6/update_applicationCollaborators.go
+func (a *applicationCollaborators) Update(ctx context.Context, req *UpdateApplicationCollaboratorsReq, options ...larkcore.RequestOptionFunc) (*UpdateApplicationCollaboratorsResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/application/v6/applications/:app_id/collaborators"
+	apiReq.HttpMethod = http.MethodPut
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &UpdateApplicationCollaboratorsResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
 // Patch
 //
 // -
@@ -571,6 +633,32 @@ func (a *applicationManagement) Update(ctx context.Context, req *UpdateApplicati
 	}
 	// 反序列响应结果
 	resp := &UpdateApplicationManagementResp{ApiResp: apiResp}
+	err = apiResp.JSONUnmarshalBody(resp, a.config)
+	if err != nil {
+		return nil, err
+	}
+	return resp, err
+}
+
+// Update
+//
+// -
+//
+// - 官网API文档链接:https://open.feishu.cn/api-explorer?from=op_doc_tab&apiName=update&project=application&resource=application.owner&version=v6
+//
+// - 使用Demo链接:https://github.com/larksuite/oapi-sdk-go/tree/v3_main/sample/apiall/applicationv6/update_applicationOwner.go
+func (a *applicationOwner) Update(ctx context.Context, req *UpdateApplicationOwnerReq, options ...larkcore.RequestOptionFunc) (*UpdateApplicationOwnerResp, error) {
+	// 发起请求
+	apiReq := req.apiReq
+	apiReq.ApiPath = "/open-apis/application/v6/applications/:app_id/owner"
+	apiReq.HttpMethod = http.MethodPut
+	apiReq.SupportedAccessTokenTypes = []larkcore.AccessTokenType{larkcore.AccessTokenTypeTenant, larkcore.AccessTokenTypeUser}
+	apiResp, err := larkcore.Request(ctx, apiReq, a.config, options...)
+	if err != nil {
+		return nil, err
+	}
+	// 反序列响应结果
+	resp := &UpdateApplicationOwnerResp{ApiResp: apiResp}
 	err = apiResp.JSONUnmarshalBody(resp, a.config)
 	if err != nil {
 		return nil, err

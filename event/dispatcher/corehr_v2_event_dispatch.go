@@ -113,6 +113,32 @@ func ( dispatcher * EventDispatcher ) OnP2CostCenterUpdatedV2(handler func(ctx c
 // - 
 //
 // - 事件描述文档链接:
+func ( dispatcher * EventDispatcher ) OnP2DepartmentCreatedV2(handler func(ctx context.Context, event *larkcorehr.P2DepartmentCreatedV2) error) * EventDispatcher{
+	_, existed := dispatcher.eventType2EventHandler["corehr.department.created_v2"]
+	if existed {
+		panic("event: multiple handler registrations for " + "corehr.department.created_v2")
+	}
+	dispatcher.eventType2EventHandler["corehr.department.created_v2"] = larkcorehr.NewP2DepartmentCreatedV2Handler(handler)
+	return dispatcher
+}
+// 
+//
+// - 
+//
+// - 事件描述文档链接:
+func ( dispatcher * EventDispatcher ) OnP2DepartmentUpdatedV2(handler func(ctx context.Context, event *larkcorehr.P2DepartmentUpdatedV2) error) * EventDispatcher{
+	_, existed := dispatcher.eventType2EventHandler["corehr.department.updated_v2"]
+	if existed {
+		panic("event: multiple handler registrations for " + "corehr.department.updated_v2")
+	}
+	dispatcher.eventType2EventHandler["corehr.department.updated_v2"] = larkcorehr.NewP2DepartmentUpdatedV2Handler(handler)
+	return dispatcher
+}
+// 
+//
+// - 
+//
+// - 事件描述文档链接:
 func ( dispatcher * EventDispatcher ) OnP2EmployeeDomainEventV2(handler func(ctx context.Context, event *larkcorehr.P2EmployeeDomainEventV2) error) * EventDispatcher{
 	_, existed := dispatcher.eventType2EventHandler["corehr.employee.domain_event_v2"]
 	if existed {

@@ -191,6 +191,18 @@ const (
 )
 
 const (
+	GetApplicationCollaboratorsUserIDTypeOpenId  = "open_id"  // 用户 open_id
+	GetApplicationCollaboratorsUserIDTypeUnionId = "union_id" // 用户 union_id
+	GetApplicationCollaboratorsUserIDTypeUserId  = "user_id"  // 用户 user_id
+)
+
+const (
+	UpdateApplicationCollaboratorsUserIDTypeOpenId  = "open_id"  // 用户 open_id
+	UpdateApplicationCollaboratorsUserIDTypeUnionId = "union_id" // 用户 union_id
+	UpdateApplicationCollaboratorsUserIDTypeUserId  = "user_id"  // 用户 user_id
+)
+
+const (
 	PatchApplicationContactsRangeContactsRangeTypeEqualToAvailability = "equal_to_availability" // 与应用可用范围一致
 	PatchApplicationContactsRangeContactsRangeTypeSome                = "some"                  // 修改部分成员
 	PatchApplicationContactsRangeContactsRangeTypeAll                 = "all"                   // 全部成员范围
@@ -239,6 +251,12 @@ const (
 	OpenMarkStatusPatchApplicationFeedbackProcessing = 2 // 反馈处理中
 	OpenMarkStatusPatchApplicationFeedbackClosed     = 3 // 反馈已关闭
 
+)
+
+const (
+	UpdateApplicationOwnerUserIDTypeOpenId  = "open_id"  // 以open_id 标识用户
+	UpdateApplicationOwnerUserIDTypeUserId  = "user_id"  // 以user_id 标识用户
+	UpdateApplicationOwnerUserIDTypeUnionId = "union_id" // 以union_id 标识用户
 )
 
 const (
@@ -8546,6 +8564,208 @@ func (resp *PatchApplicationAppVersionResp) Success() bool {
 	return resp.Code == 0
 }
 
+type GetApplicationCollaboratorsReqBuilder struct {
+	apiReq *larkcore.ApiReq
+}
+
+func NewGetApplicationCollaboratorsReqBuilder() *GetApplicationCollaboratorsReqBuilder {
+	builder := &GetApplicationCollaboratorsReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 应用ID
+//
+// 示例值：cli_a5002df1b6f8d01c
+func (builder *GetApplicationCollaboratorsReqBuilder) AppId(appId string) *GetApplicationCollaboratorsReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：open_id
+func (builder *GetApplicationCollaboratorsReqBuilder) UserIdType(userIdType string) *GetApplicationCollaboratorsReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *GetApplicationCollaboratorsReqBuilder) Build() *GetApplicationCollaboratorsReq {
+	req := &GetApplicationCollaboratorsReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	return req
+}
+
+type GetApplicationCollaboratorsReq struct {
+	apiReq *larkcore.ApiReq
+}
+
+type GetApplicationCollaboratorsRespData struct {
+	Collaborators []*AppCollaborator `json:"collaborators,omitempty"` // 协作者
+}
+
+type GetApplicationCollaboratorsResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+	Data *GetApplicationCollaboratorsRespData `json:"data"` // 业务数据
+}
+
+func (resp *GetApplicationCollaboratorsResp) Success() bool {
+	return resp.Code == 0
+}
+
+type UpdateApplicationCollaboratorsReqBodyBuilder struct {
+	adds     []*AppCollaborator // 添加人员
+	addsFlag bool
+
+	removes     []string // 移除人员
+	removesFlag bool
+}
+
+func NewUpdateApplicationCollaboratorsReqBodyBuilder() *UpdateApplicationCollaboratorsReqBodyBuilder {
+	builder := &UpdateApplicationCollaboratorsReqBodyBuilder{}
+	return builder
+}
+
+// 添加人员
+//
+// 示例值：
+func (builder *UpdateApplicationCollaboratorsReqBodyBuilder) Adds(adds []*AppCollaborator) *UpdateApplicationCollaboratorsReqBodyBuilder {
+	builder.adds = adds
+	builder.addsFlag = true
+	return builder
+}
+
+// 移除人员
+//
+// 示例值：
+func (builder *UpdateApplicationCollaboratorsReqBodyBuilder) Removes(removes []string) *UpdateApplicationCollaboratorsReqBodyBuilder {
+	builder.removes = removes
+	builder.removesFlag = true
+	return builder
+}
+
+func (builder *UpdateApplicationCollaboratorsReqBodyBuilder) Build() *UpdateApplicationCollaboratorsReqBody {
+	req := &UpdateApplicationCollaboratorsReqBody{}
+	if builder.addsFlag {
+		req.Adds = builder.adds
+	}
+	if builder.removesFlag {
+		req.Removes = builder.removes
+	}
+	return req
+}
+
+type UpdateApplicationCollaboratorsPathReqBodyBuilder struct {
+	adds        []*AppCollaborator
+	addsFlag    bool
+	removes     []string
+	removesFlag bool
+}
+
+func NewUpdateApplicationCollaboratorsPathReqBodyBuilder() *UpdateApplicationCollaboratorsPathReqBodyBuilder {
+	builder := &UpdateApplicationCollaboratorsPathReqBodyBuilder{}
+	return builder
+}
+
+// 添加人员
+//
+// 示例值：
+func (builder *UpdateApplicationCollaboratorsPathReqBodyBuilder) Adds(adds []*AppCollaborator) *UpdateApplicationCollaboratorsPathReqBodyBuilder {
+	builder.adds = adds
+	builder.addsFlag = true
+	return builder
+}
+
+// 移除人员
+//
+// 示例值：
+func (builder *UpdateApplicationCollaboratorsPathReqBodyBuilder) Removes(removes []string) *UpdateApplicationCollaboratorsPathReqBodyBuilder {
+	builder.removes = removes
+	builder.removesFlag = true
+	return builder
+}
+
+func (builder *UpdateApplicationCollaboratorsPathReqBodyBuilder) Build() (*UpdateApplicationCollaboratorsReqBody, error) {
+	req := &UpdateApplicationCollaboratorsReqBody{}
+	if builder.addsFlag {
+		req.Adds = builder.adds
+	}
+	if builder.removesFlag {
+		req.Removes = builder.removes
+	}
+	return req, nil
+}
+
+type UpdateApplicationCollaboratorsReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *UpdateApplicationCollaboratorsReqBody
+}
+
+func NewUpdateApplicationCollaboratorsReqBuilder() *UpdateApplicationCollaboratorsReqBuilder {
+	builder := &UpdateApplicationCollaboratorsReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 应用ID
+//
+// 示例值：cli_a5002df1b6f8d01c
+func (builder *UpdateApplicationCollaboratorsReqBuilder) AppId(appId string) *UpdateApplicationCollaboratorsReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 用户 ID 类型
+//
+// 示例值：open_id
+func (builder *UpdateApplicationCollaboratorsReqBuilder) UserIdType(userIdType string) *UpdateApplicationCollaboratorsReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *UpdateApplicationCollaboratorsReqBuilder) Body(body *UpdateApplicationCollaboratorsReqBody) *UpdateApplicationCollaboratorsReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *UpdateApplicationCollaboratorsReqBuilder) Build() *UpdateApplicationCollaboratorsReq {
+	req := &UpdateApplicationCollaboratorsReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type UpdateApplicationCollaboratorsReqBody struct {
+	Adds []*AppCollaborator `json:"adds,omitempty"` // 添加人员
+
+	Removes []string `json:"removes,omitempty"` // 移除人员
+}
+
+type UpdateApplicationCollaboratorsReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *UpdateApplicationCollaboratorsReqBody `body:""`
+}
+
+type UpdateApplicationCollaboratorsResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *UpdateApplicationCollaboratorsResp) Success() bool {
+	return resp.Code == 0
+}
+
 type PatchApplicationContactsRangeReqBodyBuilder struct {
 	contactsRangeType     string // 更新范围方式
 	contactsRangeTypeFlag bool
@@ -9013,6 +9233,122 @@ type UpdateApplicationManagementResp struct {
 }
 
 func (resp *UpdateApplicationManagementResp) Success() bool {
+	return resp.Code == 0
+}
+
+type UpdateApplicationOwnerReqBodyBuilder struct {
+	ownerId     string // 新的拥有者用户ID，类型由查询参数中的user_id_type确定
+	ownerIdFlag bool
+}
+
+func NewUpdateApplicationOwnerReqBodyBuilder() *UpdateApplicationOwnerReqBodyBuilder {
+	builder := &UpdateApplicationOwnerReqBodyBuilder{}
+	return builder
+}
+
+// 新的拥有者用户ID，类型由查询参数中的user_id_type确定
+//
+// 示例值：ou_84aad35d084aa403a838cf73ee184670
+func (builder *UpdateApplicationOwnerReqBodyBuilder) OwnerId(ownerId string) *UpdateApplicationOwnerReqBodyBuilder {
+	builder.ownerId = ownerId
+	builder.ownerIdFlag = true
+	return builder
+}
+
+func (builder *UpdateApplicationOwnerReqBodyBuilder) Build() *UpdateApplicationOwnerReqBody {
+	req := &UpdateApplicationOwnerReqBody{}
+	if builder.ownerIdFlag {
+		req.OwnerId = &builder.ownerId
+	}
+	return req
+}
+
+type UpdateApplicationOwnerPathReqBodyBuilder struct {
+	ownerId     string
+	ownerIdFlag bool
+}
+
+func NewUpdateApplicationOwnerPathReqBodyBuilder() *UpdateApplicationOwnerPathReqBodyBuilder {
+	builder := &UpdateApplicationOwnerPathReqBodyBuilder{}
+	return builder
+}
+
+// 新的拥有者用户ID，类型由查询参数中的user_id_type确定
+//
+// 示例值：ou_84aad35d084aa403a838cf73ee184670
+func (builder *UpdateApplicationOwnerPathReqBodyBuilder) OwnerId(ownerId string) *UpdateApplicationOwnerPathReqBodyBuilder {
+	builder.ownerId = ownerId
+	builder.ownerIdFlag = true
+	return builder
+}
+
+func (builder *UpdateApplicationOwnerPathReqBodyBuilder) Build() (*UpdateApplicationOwnerReqBody, error) {
+	req := &UpdateApplicationOwnerReqBody{}
+	if builder.ownerIdFlag {
+		req.OwnerId = &builder.ownerId
+	}
+	return req, nil
+}
+
+type UpdateApplicationOwnerReqBuilder struct {
+	apiReq *larkcore.ApiReq
+	body   *UpdateApplicationOwnerReqBody
+}
+
+func NewUpdateApplicationOwnerReqBuilder() *UpdateApplicationOwnerReqBuilder {
+	builder := &UpdateApplicationOwnerReqBuilder{}
+	builder.apiReq = &larkcore.ApiReq{
+		PathParams:  larkcore.PathParams{},
+		QueryParams: larkcore.QueryParams{},
+	}
+	return builder
+}
+
+// 应用ID
+//
+// 示例值：cli_a306c5476fb8d00c
+func (builder *UpdateApplicationOwnerReqBuilder) AppId(appId string) *UpdateApplicationOwnerReqBuilder {
+	builder.apiReq.PathParams.Set("app_id", fmt.Sprint(appId))
+	return builder
+}
+
+// 用户ID类型
+//
+// 示例值：open_id
+func (builder *UpdateApplicationOwnerReqBuilder) UserIdType(userIdType string) *UpdateApplicationOwnerReqBuilder {
+	builder.apiReq.QueryParams.Set("user_id_type", fmt.Sprint(userIdType))
+	return builder
+}
+
+func (builder *UpdateApplicationOwnerReqBuilder) Body(body *UpdateApplicationOwnerReqBody) *UpdateApplicationOwnerReqBuilder {
+	builder.body = body
+	return builder
+}
+
+func (builder *UpdateApplicationOwnerReqBuilder) Build() *UpdateApplicationOwnerReq {
+	req := &UpdateApplicationOwnerReq{}
+	req.apiReq = &larkcore.ApiReq{}
+	req.apiReq.PathParams = builder.apiReq.PathParams
+	req.apiReq.QueryParams = builder.apiReq.QueryParams
+	req.apiReq.Body = builder.body
+	return req
+}
+
+type UpdateApplicationOwnerReqBody struct {
+	OwnerId *string `json:"owner_id,omitempty"` // 新的拥有者用户ID，类型由查询参数中的user_id_type确定
+}
+
+type UpdateApplicationOwnerReq struct {
+	apiReq *larkcore.ApiReq
+	Body   *UpdateApplicationOwnerReqBody `body:""`
+}
+
+type UpdateApplicationOwnerResp struct {
+	*larkcore.ApiResp `json:"-"`
+	larkcore.CodeError
+}
+
+func (resp *UpdateApplicationOwnerResp) Success() bool {
 	return resp.Code == 0
 }
 

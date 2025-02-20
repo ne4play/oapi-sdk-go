@@ -1221,48 +1221,6 @@ func (m *P2CommentDeletedV1) RawReq(req *larkevent.EventReq) {
 	m.EventReq = req
 }
 
-type P2DislikeCreatedV1Data struct {
-	EntityType *int `json:"entity_type,omitempty"` // 点踩所属实体类型
-
-	EntityId *string `json:"entity_id,omitempty"` // 点踩所属实体ID
-
-	CreateTime *string `json:"create_time,omitempty"` // 点踩时间
-
-	UserId *UserId `json:"user_id,omitempty"` // 点踩人ID
-
-	Id *string `json:"id,omitempty"` // Dislike的ID
-}
-
-type P2DislikeCreatedV1 struct {
-	*larkevent.EventV2Base                         // 事件基础数据
-	*larkevent.EventReq                            // 请求原生数据
-	Event                  *P2DislikeCreatedV1Data `json:"event"` // 事件内容
-}
-
-func (m *P2DislikeCreatedV1) RawReq(req *larkevent.EventReq) {
-	m.EventReq = req
-}
-
-type P2DislikeDeletedV1Data struct {
-	EntityType *int `json:"entity_type,omitempty"` // 点踩所属实体类型
-
-	EntityId *string `json:"entity_id,omitempty"` // 点踩所属实体ID
-
-	UserId *UserId `json:"user_id,omitempty"` // 点踩人ID
-
-	Id *string `json:"id,omitempty"` // Dislike的ID
-}
-
-type P2DislikeDeletedV1 struct {
-	*larkevent.EventV2Base                         // 事件基础数据
-	*larkevent.EventReq                            // 请求原生数据
-	Event                  *P2DislikeDeletedV1Data `json:"event"` // 事件内容
-}
-
-func (m *P2DislikeDeletedV1) RawReq(req *larkevent.EventReq) {
-	m.EventReq = req
-}
-
 type P2PostCreatedV1Data struct {
 	Id *string `json:"id,omitempty"` // 帖子ID
 

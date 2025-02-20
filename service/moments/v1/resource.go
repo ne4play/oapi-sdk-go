@@ -10,7 +10,6 @@ import (
 
 type V1 struct {
 	Comment        *comment        // comment
-	Dislike        *dislike        // dislike
 	Post           *post           // post
 	PostStatistics *postStatistics // post_statistics
 	Reaction       *reaction       // reaction
@@ -19,7 +18,6 @@ type V1 struct {
 func New(config *larkcore.Config) *V1 {
 	return &V1{
 		Comment:        &comment{config: config},
-		Dislike:        &dislike{config: config},
 		Post:           &post{config: config},
 		PostStatistics: &postStatistics{config: config},
 		Reaction:       &reaction{config: config},
@@ -27,9 +25,6 @@ func New(config *larkcore.Config) *V1 {
 }
 
 type comment struct {
-	config *larkcore.Config
-}
-type dislike struct {
 	config *larkcore.Config
 }
 type post struct {
